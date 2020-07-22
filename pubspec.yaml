@@ -1,0 +1,138 @@
+name: hcslzapp
+description: The Harley Club Slz Project
+
+# The following defines the version and build number for your application.
+# A version number is three numbers separated by dots, like 1.2.43
+# followed by an optional build number separated by a +.
+# Both the version and the builder number may be overridden in flutter
+# build by specifying --build-name and --build-number, respectively.
+# In Android, build-name is used as versionName while build-number used as versionCode.
+# Read more about Android versioning at https://developer.android.com/studio/publish/versioning
+# In iOS, build-name is used as CFBundleShortVersionString while build-number used as CFBundleVersion.
+# Read more about iOS versioning at
+# https://developer.apple.com/library/archive/documentation/General/Reference/InfoPlistKeyReference/Articles/CoreFoundationKeys.html
+version: 1.0.0+1
+
+environment:
+  sdk: ">=2.1.0 <3.0.0"
+
+dependencies:
+  flutter:
+    sdk: flutter
+  path:
+  http:
+  http_interceptor:
+  cached_network_image: ^2.0.0
+  url_launcher: ^5.5.0
+  location: ^3.0.2
+  location_permissions: ^3.0.0+1
+  table_calendar: ^2.2.3
+  intl: ^0.16.1
+  google_maps_flutter: ^0.5.25+1
+
+  # The following adds the Cupertino Icons font to your application.
+  # Use with the CupertinoIcons class for iOS style icons.
+  cupertino_icons: ^0.1.2
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+
+
+# For information on the generic Dart part of this file, see the
+# following page: https://dart.dev/tools/pub/pubspec
+
+# The following section is specific to Flutter.
+flutter:
+
+  # The following line ensures that the Material Icons font is
+  # included with your application, so that you can use the icons in
+  # the material Icons class.
+  uses-material-design: true
+
+  assets:
+    - assets/imgs/noImage.png
+    - assets/imgs/user.png
+    - assets/imgs/FRENTE_INDISPONIVEL.png
+    - assets/imgs/logo.png
+    - assets/imgs/backlogo.png
+    - assets/imgs/hdlogo.png
+    - assets/imgs/docs.png
+    - assets/imgs/eventos.png
+    - assets/imgs/financeiro.png
+    - assets/imgs/identidade.png
+    - assets/imgs/parcerias.png
+    - assets/imgs/boutique.png
+    - assets/imgs/classificados.png
+    - assets/imgs/passeio.jpg
+    - assets/imgs/passeio2.jpg
+    - assets/imgs/oficina.png
+    - assets/imgs/codigosdtc.png
+    - assets/imgs/maps.png
+    - assets/imgs/info.png
+    - assets/imgs/sobre.jpeg
+    - assets/imgs/logo_sobre.png
+
+    #
+    - assets/icons/digital-logo.png
+    - assets/icons/clube-parceria-logo.jpeg
+    - assets/icons/instagram-logo.png
+    - assets/icons/instagram-logo-disabled.png
+    - assets/icons/mail-logo.png
+    - assets/icons/mail-logo-disabled.png
+    - assets/icons/telephone-logo-1.png
+    - assets/icons/telephone-logo-1-disabled.png
+    - assets/icons/telephone-logo-2.png
+    - assets/icons/telephone-logo-2-disabled.png
+    - assets/icons/facebook-logo.png
+    - assets/icons/facebook-logo-disabled.png
+    - assets/icons/whatsapp-logo.png
+    - assets/icons/whatsapp-logo-disabled.png
+    - assets/icons/google-maps-logo.png
+    - assets/icons/google-maps-logo-disabled.png
+    - assets/icons/site-institucional-logo.png
+    - assets/icons/site-institucional-logo-disabled.png
+    - assets/icons/pdf-logo.png
+    - assets/icons/pdf-logo_v2.png
+    - assets/icons/pdf-logo_v2-disabled.png
+    - assets/icons/info-icon.png
+    - assets/icons/discount.png
+    - assets/icons/guardiao-logo.png
+    - assets/icons/guardiao-icon.png
+    - assets/icons/clube-parceria-logo_v2.png
+
+
+
+
+
+
+  # To add assets to your application, add an assets section, like this:
+  # assets:
+  #  - images/a_dot_burr.jpeg
+  #  - images/a_dot_ham.jpeg
+
+  # An image asset can refer to one or more resolution-specific "variants", see
+  # https://flutter.dev/assets-and-images/#resolution-aware.
+
+  # For details regarding adding assets from package dependencies, see
+  # https://flutter.dev/assets-and-images/#from-packages
+
+  # To add custom fonts to your application, add a fonts section here,
+  # in this "flutter" section. Each entry in this list should have a
+  # "family" key with the font family name, and a "fonts" key with a
+  # list giving the asset and other descriptors for the font. For
+  # example:
+  # fonts:
+  #   - family: Schyler
+  #     fonts:
+  #       - asset: fonts/Schyler-Regular.ttf
+  #       - asset: fonts/Schyler-Italic.ttf
+  #         style: italic
+  #   - family: Trajan Pro
+  #     fonts:
+  #       - asset: fonts/TrajanPro.ttf
+  #       - asset: fonts/TrajanPro_Bold.ttf
+  #         weight: 700
+  #
+  # For details regarding fonts from package dependencies,
+  # see https://flutter.dev/custom-fonts/#from-packages
