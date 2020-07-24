@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
-import 'package:hcslzapp/components/appBar.dart';
 import 'package:hcslzapp/components/text_field.dart';
 
 class MeuRole extends StatefulWidget {
@@ -19,23 +18,51 @@ class _MeuRoleState extends State<MeuRole> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: MyAppBar("Meu Role"),
-      body: Container(
-        decoration: BoxDecoration(
-          gradient: LinearGradient(
-            colors: [Colors.white30, Colors.deepOrange],
-            begin: FractionalOffset.topLeft,
-            end: FractionalOffset.bottomRight,
-          ),
+      appBar: AppBar(
+        backgroundColor: Colors.black,
+        centerTitle: true,
+        title: Text(
+          "Meu Role",
+          style: TextStyle(color: Colors.orange),
         ),
+        actions: <Widget>[_buildButtons()],
+      ),
+      body: Container(
         height: MediaQuery.of(context).size.height,
         child: Column(
           children: <Widget>[
             _buildMap(),
-            _buildTextsAndButtons(),
+            _buildInfoTexts(),
           ],
         ),
       ),
+    );
+  }
+
+  Row _buildButtons() {
+    return Row(
+      children: <Widget>[
+        Container(
+          child: FloatingActionButton(
+            heroTag: "btnStart",
+            mini: true,
+            foregroundColor: Colors.black,
+            backgroundColor: Colors.orange,
+            child: Icon(Icons.play_circle_outline),
+            onPressed: () {},
+          ),
+        ),
+        Container(
+          child: FloatingActionButton(
+            heroTag: "btnStop",
+            mini: true,
+            foregroundColor: Colors.black,
+            backgroundColor: Colors.orange,
+            child: Icon(Icons.stop),
+            onPressed: () {},
+          ),
+        ),
+      ],
     );
   }
 
@@ -57,7 +84,7 @@ class _MeuRoleState extends State<MeuRole> {
     );
   }
 
-  Container _buildTextsAndButtons() {
+  Container _buildInfoTexts() {
     return Container(
       child: Column(
         children: <Widget>[
@@ -66,55 +93,39 @@ class _MeuRoleState extends State<MeuRole> {
               Expanded(
                 child: Editor(
                   //controlador: _controladorDefeito,
-                  rotulo: "Distancia Percorrida: ", //_rotuloDefeito,
+                  rotulo: "Distancia: ", //_rotuloDefeito,
                   inputType: TextInputType.text,
                   desabilitado: true,
+                  nLinhas: 1,
                 ),
               ),
               Expanded(
                 child: Editor(
                   //controlador: _controladorDefeito,
-                  rotulo: "Velocidade Max: ", //_rotuloDefeito,
+                  rotulo: "Velocidade: ", //_rotuloDefeito,
                   inputType: TextInputType.text,
                   desabilitado: true,
-                ),
-              ),
-              Expanded(
-                child: FloatingActionButton(
-                  heroTag: "btnStart",
-                  backgroundColor: Colors.black,
-                  child: Icon(Icons.play_circle_outline),
-                  onPressed: () {},
-                ),
-              )
-            ],
-          ),
-          Row(
-            children: <Widget>[
-              Expanded(
-                child: Editor(
-                  //controlador: _controladorDefeito,
-                  rotulo: "Tempo gasto: ", //_rotuloDefeito,
-                  inputType: TextInputType.text,
-                  desabilitado: true,
+                  nLinhas: 1,
                 ),
               ),
               Expanded(
                 child: Editor(
                   //controlador: _controladorDefeito,
-                  rotulo: "Angulo de Inclinaçao: ", //_rotuloDefeito,
+                  rotulo: "Tempo: ", //_rotuloDefeito,
                   inputType: TextInputType.text,
                   desabilitado: true,
+                  nLinhas: 1,
                 ),
               ),
               Expanded(
-                child: FloatingActionButton(
-                  heroTag: "btnStop",
-                  backgroundColor: Colors.black,
-                  child: Icon(Icons.stop),
-                  onPressed: () {},
+                child: Editor(
+                  //controlador: _controladorDefeito,
+                  rotulo: "Inclinaçao: ", //_rotuloDefeito,
+                  inputType: TextInputType.text,
+                  desabilitado: true,
+                  nLinhas: 1,
                 ),
-              )
+              ),
             ],
           ),
         ],

@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:hcslzapp/components/text_field.dart';
 
-const _rotuloModelo = 'Modelo *';
-const _rotuloAno = 'Ano *';
+const _rotuloModelo = 'Motocicleta *';
+const _rotuloAno = 'Ano de Fabricaçao*';
 const _rotuloDefeito = 'Defeito *';
 const _rotuloSolucao = 'Solucao *';
-const _rotuloProprietario = 'Proprietario da motocicleta que apresentou o defeito';
-const _rotuloTelefone = 'Telefone do proprietario';
+const _rotuloProprietario = 'Proprietario';
+const _rotuloTelefone = 'Telefone';
 
 class OficinaCadastrarDefeitos extends StatelessWidget {
   final TextEditingController _controladorModelo = TextEditingController();

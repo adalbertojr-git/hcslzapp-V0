@@ -6,7 +6,7 @@ import 'package:hcslzapp/screens/associado/solicitar_acesso_associado.dart';
 import 'login.dart';
 
 const _rotuloSouAssociado = 'Membros HCSlz';
-const _rotuloNaoSouAssociado = 'Primeira vez? Solicite acesso';
+const _rotuloNaoSouAssociado = 'Primeiro acesso? Solicite liberaçao';
 
 class Preview extends StatelessWidget {
   //@override

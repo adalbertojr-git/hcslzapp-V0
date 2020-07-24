@@ -13,7 +13,7 @@ administracao do App e nao podem ser alteradas pelo associado
 import 'package:flutter/material.dart';
 import 'package:hcslzapp/components/appBar.dart';
 import 'package:hcslzapp/components/blood_types.dart';
-import 'package:hcslzapp/components/botao.dart';
+import 'package:hcslzapp/components/button.dart';
 import 'package:hcslzapp/components/centered_message.dart';
 import 'package:hcslzapp/components/progress.dart';
 import 'package:hcslzapp/components/text_field.dart';
