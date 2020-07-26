@@ -11,32 +11,31 @@ administracao do App e nao podem ser alteradas pelo associado
 
 */
 import 'package:flutter/material.dart';
-import 'package:hcslzapp/components/appBar.dart';
-import 'package:hcslzapp/components/blood.types.dart';
+import 'package:hcslzapp/components/my.appbar.dart';
+import 'package:hcslzapp/enums/blood.types.dart';
 import 'package:hcslzapp/components/button.dart';
 import 'package:hcslzapp/components/centered.message.dart';
 import 'package:hcslzapp/components/progress.dart';
-import 'package:hcslzapp/components/text.field.dart';
+import 'package:hcslzapp/components/input.textfield.dart';
 import 'package:hcslzapp/http/webclients/associated.webclient.dart';
 import 'package:hcslzapp/models/associated.dart';
 import 'package:hcslzapp/models/dependent.dart';
 import 'package:hcslzapp/pages/dependent/dependent.list.dart';
 import 'package:hcslzapp/pages/motorcycle/motorcycle.list.dart';
 
-const _tituloAppBar = 'Atualizar Meus Dados';
-const _rotuloNome = 'Nome *';
-const _rotuloTelefone = 'Telefone *';
-const _rotuloEmail = 'Email *';
-const _rotuloPadrinho = 'Padrinho';
-const _rotuloApelido = 'Apelido';
-const _rotuloTipoAssociado = 'Tipo de Associado';
-const _rotuloCnh = 'CNH';
-const _rotuloCpf = 'CPF';
-const _rotuloRg = 'RG';
-const _rotuloTipoSanguineo = 'Tipo Sanguineo';
-const _rotuloDataNascimento = 'Data Nascimento';
-const _rotuloDataEscudamento = 'Data Escudamento';
-const _dicaData = 'dd/mm/yyyy';
+const _titleAppBar = 'Atualizar Meus Dados';
+const _labelName = 'Nome *';
+const _labelPhone = 'Telefone *';
+const _labelEmail = 'Email *';
+const _labelSponsor = 'Padrinho';
+const _labelNickname = 'Apelido';
+const _labelAssociatedType = 'Tipo de Associado';
+const _labelCNH = 'CNH';
+const _labelCPF = 'CPF';
+const _labelRG = 'RG';
+const _labelDateBirth = 'Data Nascimento';
+const _labelDateShield = 'Data Escudamento';
+const _tipDate = 'dd/mm/yyyy';
 
 class AssociatedUpdate extends StatefulWidget {
   @override
@@ -44,53 +43,51 @@ class AssociatedUpdate extends StatefulWidget {
 }
 
 class _AssociatedUpdateState extends State<AssociatedUpdate> {
-  final TextEditingController _controladorNome = TextEditingController();
-  final TextEditingController _controladorTelefone = TextEditingController();
-  final TextEditingController _controladorEmail = TextEditingController();
-  final TextEditingController _controladorPadrinho = TextEditingController();
-  final TextEditingController _controladorApelido = TextEditingController();
-  final TextEditingController _controladorTipoAssociado = TextEditingController();
-  final TextEditingController _controladorCnh = TextEditingController();
-  final TextEditingController _controladorCpf = TextEditingController();
-  final TextEditingController _controladorRg = TextEditingController();
-  final TextEditingController _controladorTipoSanguineo =
+  final TextEditingController _controllerName = TextEditingController();
+  final TextEditingController _controllerPhone = TextEditingController();
+  final TextEditingController _controllerEmail = TextEditingController();
+  final TextEditingController _controlllerSponsor = TextEditingController();
+  final TextEditingController _controlllerNickName = TextEditingController();
+  final TextEditingController _controlllerAssociatedType =
       TextEditingController();
-  final TextEditingController _controladorDataNascimento =
-      TextEditingController();
-  final TextEditingController _controladorDataEscudamento =
-      TextEditingController();
+  final TextEditingController _controlllerCNH = TextEditingController();
+  final TextEditingController _controlllerCPF = TextEditingController();
+  final TextEditingController _controlllerRG = TextEditingController();
+  final TextEditingController _controlllerBloodType = TextEditingController();
+  final TextEditingController _controlllerDateBirth = TextEditingController();
+  final TextEditingController _controlllerDateShield = TextEditingController();
   String _nome;
-  List _tiposSanguineos = List();
-  List<DropdownMenuItem<String>> _dropDownTiposSanguineos;
-  String _currentTipoSanguineo;
+  List _bloodTypes = List();
+  List<DropdownMenuItem<String>> _dropDownBloodTypes;
+  String _currentBloodType;
   int _radioValue1 = -1;
-  final AssociadoWebClient _webClient = AssociadoWebClient();
+  final AssociatedWebClient _webClient = AssociatedWebClient();
 
   @override
   void initState() {
-    _dropDownTiposSanguineos = getTiposSanguineos();
+    _dropDownBloodTypes = _getBloodTypes();
     super.initState();
   }
 
   // here we are creating the list needed for the DropDownButton
-  List<DropdownMenuItem<String>> getTiposSanguineos() {
-    List<DropdownMenuItem<String>> tipos = new List();
+  List<DropdownMenuItem<String>> _getBloodTypes() {
+    List<DropdownMenuItem<String>> types = new List();
     //TipoSanguineo.values.forEach((v) => print('value: $v, index: ${v.index}'));
     //TipoSanguineo.values.forEach((v) => print(v.descricao));
-    TipoSanguineo.values.forEach((v) => _tiposSanguineos.add(v.descricao));
-    print(_tiposSanguineos);
-    for (String tipo in _tiposSanguineos) {
+    TipoSanguineo.values.forEach((v) => _bloodTypes.add(v.descricao));
+    print(_bloodTypes);
+    for (String type in _bloodTypes) {
       // here we are creating the drop down menu items, you can customize the item right here
       // but I'll just use a simple text for this
-      tipos.add(new DropdownMenuItem(value: tipo, child: new Text(tipo)));
+      types.add(new DropdownMenuItem(value: type, child: new Text(type)));
     }
-    return tipos;
+    return types;
   }
 
   //@override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: MyAppBar(_tituloAppBar),
+      appBar: MyAppBar(_titleAppBar),
       body: FutureBuilder<List<Associado>>(
         /*
         carrega JSON com dados da api
@@ -110,8 +107,8 @@ class _AssociatedUpdateState extends State<AssociatedUpdate> {
               break;
             case ConnectionState.done:
               if (snapshot.hasData) {
-                final List<Associado> associados = snapshot.data;
-                if (associados.isNotEmpty) {
+                final List<Associado> associateds = snapshot.data;
+                if (associateds.isNotEmpty) {
                   return Container(
                     padding: EdgeInsets.fromLTRB(5.0, 5.0, 5.0, 0.0),
                     decoration: BoxDecoration(
@@ -124,7 +121,7 @@ class _AssociatedUpdateState extends State<AssociatedUpdate> {
                     height: MediaQuery.of(context).size.height,
                     child: Form(
                       child: SingleChildScrollView(
-                        child: camposAssociado(associados),
+                        child: associatedWidgets(associateds),
                       ),
                     ),
                   );
@@ -151,77 +148,55 @@ class _AssociatedUpdateState extends State<AssociatedUpdate> {
     );
   }
 
-  Column camposAssociado(List<Associado> associados) {
-    final Associado associado = associados[0];
-    _currentTipoSanguineo = associado.tipoSanguineo;
+  Column associatedWidgets(List<Associado> associateds) {
+    final Associado associated = associateds[0];
+    _currentBloodType = associated.tipoSanguineo;
     return Column(
       children: <Widget>[
-        Editor(
-          controlador: _controladorNome,
-          rotulo: _rotuloNome,
-          icone: Icons.person,
+        InputTextField(
+          controlller: _controllerName,
+          label: _labelName,
+          icon: Icons.person,
           inputType: TextInputType.text,
-          valor: associado.nome,
+          valor: associated.nome,
         ),
-        Editor(
-          controlador: _controladorEmail,
-          rotulo: _rotuloEmail,
-          icone: Icons.email,
+        InputTextField(
+          controlller: _controllerEmail,
+          label: _labelEmail,
+          icon: Icons.email,
           inputType: TextInputType.emailAddress,
-          valor: associado.email,
+          valor: associated.email,
         ),
-        Editor(
-          controlador: _controladorTelefone,
-          rotulo: _rotuloTelefone,
-          icone: Icons.phone,
+        InputTextField(
+          controlller: _controllerPhone,
+          label: _labelPhone,
+          icon: Icons.phone,
           inputType: TextInputType.phone,
-          valor: associado.telefone,
+          valor: associated.telefone,
         ),
-        Editor(
-          controlador: _controladorPadrinho,
-          rotulo: _rotuloPadrinho,
-          icone: Icons.person_pin,
-          valor: associado.padrinho == null ? null : associado.padrinho.nome,
-          desabilitado: true,
+        InputTextField(
+          controlller: _controlllerSponsor,
+          label: _labelSponsor,
+          icon: Icons.person_pin,
+          valor: associated.padrinho == null ? null : associated.padrinho.nome,
+          disabled: true,
         ),
         Row(
           children: <Widget>[
             Expanded(
-              child: Editor(
-                controlador: _controladorApelido,
-                rotulo: _rotuloApelido,
+              child: InputTextField(
+                controlller: _controlllerNickName,
+                label: _labelNickname,
                 inputType: TextInputType.text,
-                valor: associado.apelido,
+                valor: associated.apelido,
               ),
             ),
             Expanded(
-              child: Editor(
-                controlador: _controladorTipoAssociado,
-                rotulo: _rotuloTipoAssociado,
-                valor: associado.tipoAssociado,
-                desabilitado: true,
-              ),
-
-            ),
-          ],
-        ),
-        Row(
-          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-          children: <Widget>[
-            Expanded(
-              child: Editor(
-                controlador: _controladorCnh,
-                rotulo: _rotuloCnh,
-                inputType: TextInputType.number,
-                valor: associado.cnh,
-              ),
-            ),
-            Expanded(
-              child: Editor(
-                controlador: _controladorCpf,
-                rotulo: _rotuloCpf,
-                inputType: TextInputType.number,
-                valor: associado.cpf,
+              child: InputTextField(
+                controlller: _controlllerAssociatedType,
+                label: _labelAssociatedType,
+                valor: associated.tipoAssociado,
+                disabled: true,
               ),
             ),
           ],
@@ -230,11 +205,32 @@ class _AssociatedUpdateState extends State<AssociatedUpdate> {
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: <Widget>[
             Expanded(
-              child: Editor(
-                controlador: _controladorRg,
-                rotulo: _rotuloRg,
+              child: InputTextField(
+                controlller: _controlllerCNH,
+                label: _labelCNH,
                 inputType: TextInputType.number,
-                valor: associado.rg,
+                valor: associated.cnh,
+              ),
+            ),
+            Expanded(
+              child: InputTextField(
+                controlller: _controlllerCPF,
+                label: _labelCPF,
+                inputType: TextInputType.number,
+                valor: associated.cpf,
+              ),
+            ),
+          ],
+        ),
+        Row(
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          children: <Widget>[
+            Expanded(
+              child: InputTextField(
+                controlller: _controlllerRG,
+                label: _labelRG,
+                inputType: TextInputType.number,
+                valor: associated.rg,
               ),
             ),
             Expanded(
@@ -253,8 +249,8 @@ class _AssociatedUpdateState extends State<AssociatedUpdate> {
                     size: 28,
                   ),
                   style: TextStyle(fontSize: 15.0, color: Colors.black),
-                  value: _currentTipoSanguineo,
-                  items: _dropDownTiposSanguineos,
+                  value: _currentBloodType,
+                  items: _dropDownBloodTypes,
                   onChanged: changedDropDownItem,
                 ),
               ),
@@ -265,88 +261,43 @@ class _AssociatedUpdateState extends State<AssociatedUpdate> {
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: <Widget>[
             Expanded(
-              child: Editor(
-                controlador: _controladorDataNascimento,
-                rotulo: _rotuloDataNascimento,
-                icone: Icons.calendar_today,
-                dica: _dicaData,
+              child: InputTextField(
+                controlller: _controlllerDateBirth,
+                label: _labelDateBirth,
+                icon: Icons.calendar_today,
+                tip: _tipDate,
                 inputType: TextInputType.datetime,
-                valor: associado.dataNascimento,
+                valor: associated.dataNascimento,
               ),
             ),
             Expanded(
-              child: Editor(
-                controlador: _controladorDataEscudamento,
-                rotulo: _rotuloDataEscudamento,
-                icone: Icons.calendar_today,
-                dica: _dicaData,
+              child: InputTextField(
+                controlller: _controlllerDateShield,
+                label: _labelDateShield,
+                icon: Icons.calendar_today,
+                tip: _tipDate,
                 inputType: TextInputType.datetime,
-                valor: associado.dataEscudamento,
+                valor: associated.dataEscudamento,
               ),
             ),
           ],
         ),
-
-        /*       Container(
-          alignment: Alignment.centerLeft,
-          child: Text(
-            'Sexo:',
-            style: new TextStyle(
-              fontSize: 15.0,
-            ),
-          ),
-        ),
-        Container(
-          height: 58.0,
-          decoration: BoxDecoration(
-            border: Border.all(color: Colors.black12),
-            borderRadius: BorderRadius.all(
-              Radius.circular(5.0),
-            ),
-          ),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: <Widget>[
-              Radio(
-                value: 0,
-                groupValue: _radioValue1,
-                onChanged: _handleRadioValueChange1,
-              ),
-              Text(
-                'Masculino',
-                style: TextStyle(fontSize: 16.0),
-              ),
-              Radio(
-                value: 1,
-                groupValue: _radioValue1,
-                onChanged: _handleRadioValueChange1,
-              ),
-              Text(
-                'Feminino',
-                style: TextStyle(
-                  fontSize: 16.0,
-                ),
-              ),
-            ],
-          ),
-        ),
- */
         Padding(
           padding: EdgeInsets.all(5.0),
         ),
-        dependentes(associado.dependentes),
+        dependentWidgets(associated.dependentes),
         Padding(
           padding: EdgeInsets.all(5.0),
         ),
-        motocicletas(),
+        motorcycleWidgets(),
         Padding(
           padding: EdgeInsets.all(5.0),
         ),
-        Botao(
+        Button(
           'ATUALIZAR',
           Icons.update,
           onClick: () {
-            _atualizar(context);
+            _update(context);
           },
         ),
         Padding(
@@ -356,7 +307,7 @@ class _AssociatedUpdateState extends State<AssociatedUpdate> {
     );
   }
 
-  Widget dependentes(List<Dependente> dependentes) {
+  Widget dependentWidgets(List<Dependente> dependentes) {
     return Column(
       children: <Widget>[
         Card(
@@ -403,7 +354,7 @@ class _AssociatedUpdateState extends State<AssociatedUpdate> {
     );
   }
 
-  Column motocicletas() {
+  Column motorcycleWidgets() {
     return Column(
       children: <Widget>[
         Card(
@@ -451,7 +402,7 @@ class _AssociatedUpdateState extends State<AssociatedUpdate> {
 
   void changedDropDownItem(String selected) {
     setState(() {
-      _currentTipoSanguineo = selected;
+      _currentBloodType = selected;
     });
   }
 
@@ -461,7 +412,7 @@ class _AssociatedUpdateState extends State<AssociatedUpdate> {
     });
   }
 
-  String _validaNome(String value) {
+  String _validateName(String value) {
     if (value.isEmpty) return 'Nome é obrigatório.';
     final RegExp nomeExp = RegExp(r'^[A-Za-z ]+$');
     if (!nomeExp.hasMatch(value))
@@ -469,5 +420,5 @@ class _AssociatedUpdateState extends State<AssociatedUpdate> {
     return null;
   }
 
-  void _atualizar(BuildContext context) {}
+  void _update(BuildContext context) {}
 }

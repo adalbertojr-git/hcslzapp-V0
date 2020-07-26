@@ -8,7 +8,7 @@ Descriçao: classe que lista todos os produtos a venda do inventario do Harley C
 
 */
 import 'package:flutter/material.dart';
-import 'package:hcslzapp/components/appBar.dart';
+import 'package:hcslzapp/components/my.appbar.dart';
 
 const _tituloAppBar = 'Boutique - Lista de Itens';
 

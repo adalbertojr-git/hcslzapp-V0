@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:hcslzapp/components/appBar.dart';
+import 'package:hcslzapp/components/my.appbar.dart';
 
 const _tituloAppBar = 'Lista de Parcerias';
 

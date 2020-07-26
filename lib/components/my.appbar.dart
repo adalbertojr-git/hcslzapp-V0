@@ -10,9 +10,9 @@ Descriçao: classe que cria um objeto AppBar padrao
 import 'package:flutter/material.dart';
 
 class MyAppBar extends StatelessWidget with PreferredSizeWidget {
-  final String _tituloAppBar;
+  final String _titleAppBar;
 
-  MyAppBar(this._tituloAppBar);
+  MyAppBar(this._titleAppBar);
 
   @override
   Widget build(BuildContext context) {
@@ -20,7 +20,7 @@ class MyAppBar extends StatelessWidget with PreferredSizeWidget {
       backgroundColor: Colors.black,
       centerTitle: true,
       title: Text(
-        _tituloAppBar,
+        _titleAppBar,
         style: TextStyle(color: Colors.orange),
       ),
     );

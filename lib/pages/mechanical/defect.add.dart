@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:hcslzapp/components/text.field.dart';
+import 'package:hcslzapp/components/input.textfield.dart';
 
 const _rotuloModelo = 'Motocicleta *';
 const _rotuloAno = 'Ano de Fabricaçao*';
@@ -38,45 +38,45 @@ class DefectAdd extends StatelessWidget {
                 Row(
                   children: <Widget>[
                     Expanded(
-                      child: Editor(
-                        controlador: _controladorModelo,
-                        rotulo: _rotuloModelo,
-                        icone: Icons.motorcycle,
+                      child: InputTextField(
+                        controlller: _controladorModelo,
+                        label: _rotuloModelo,
+                        icon: Icons.motorcycle,
                         inputType: TextInputType.text,
                       ),
                     ),
                     Expanded(
-                      child: Editor(
-                        controlador: _controladorAno,
-                        icone: Icons.calendar_today,
-                        rotulo: _rotuloAno,
+                      child: InputTextField(
+                        controlller: _controladorAno,
+                        icon: Icons.calendar_today,
+                        label: _rotuloAno,
                         inputType: TextInputType.number,
                       ),
                     ),
                   ],
                 ),
-                Editor(
-                  controlador: _controladorDefeito,
-                  rotulo: _rotuloDefeito,
+                InputTextField(
+                  controlller: _controladorDefeito,
+                  label: _rotuloDefeito,
                   inputType: TextInputType.text,
-                  nLinhas: 2,
+                  nLines: 2,
                 ),
-                Editor(
-                  controlador: _controladorSolucao,
-                  rotulo: _rotuloSolucao,
+                InputTextField(
+                  controlller: _controladorSolucao,
+                  label: _rotuloSolucao,
                   inputType: TextInputType.text,
-                  nLinhas: 5,
+                  nLines: 5,
                 ),
-                Editor(
-                  controlador: _controladorProprietario,
-                  rotulo: _rotuloProprietario,
-                  icone: Icons.person,
+                InputTextField(
+                  controlller: _controladorProprietario,
+                  label: _rotuloProprietario,
+                  icon: Icons.person,
                   inputType: TextInputType.text,
                 ),
-                Editor(
-                  controlador: _controladorTelefone,
-                  rotulo: _rotuloTelefone,
-                  icone: Icons.phone,
+                InputTextField(
+                  controlller: _controladorTelefone,
+                  label: _rotuloTelefone,
+                  icon: Icons.phone,
                   inputType: TextInputType.phone,
                 ),
 

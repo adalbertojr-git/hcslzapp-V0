@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:hcslzapp/components/appBar.dart';
+import 'package:hcslzapp/components/my.appbar.dart';
 import 'package:hcslzapp/components/button.dart';
-import 'package:hcslzapp/components/logo.dart';
-import 'package:hcslzapp/components/text.field.dart';
+import 'package:hcslzapp/components/hc.logo.dart';
+import 'package:hcslzapp/components/input.textfield.dart';
 import 'package:hcslzapp/pages/dashboard/dashboard.dart';
 
 const _tituloAppBar = 'HCSlz App';
@@ -32,32 +32,32 @@ class Login extends StatelessWidget {
           child: SingleChildScrollView(
             child: Column(
               children: <Widget>[
-                Editor(
-                  controlador: _controladorUser,
-                  rotulo: _rotuloUser,
-                  dica: _dicaUser,
-                  icone: Icons.person,
+                InputTextField(
+                  controlller: _controladorUser,
+                  label: _rotuloUser,
+                  tip: _dicaUser,
+                  icon: Icons.person,
                   inputType: TextInputType.text,
                 ),
-                Editor(
-                  controlador: _controladorPsw,
-                  rotulo: _rotuloPsw,
-                  dica: _dicaPsw,
-                  icone: Icons.vpn_key,
+                InputTextField(
+                  controlller: _controladorPsw,
+                  label: _rotuloPsw,
+                  tip: _dicaPsw,
+                  icon: Icons.vpn_key,
                   inputType: TextInputType.text,
-                  oculto: true,
+                  hidden: true,
                 ),
                 Padding(
                   padding: EdgeInsets.all(5.0),
                 ),
-                Botao(
+                Button(
                   'LOGIN',
                   Icons.add_to_home_screen,
                   onClick: () {
                     _showDashboardPage(context);
                   },
                 ),
-                Logo(0.0),
+                HcLogo(0.0),
               ],
             ),
           ),

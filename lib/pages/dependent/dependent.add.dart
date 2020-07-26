@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:hcslzapp/components/appBar.dart';
-import 'package:hcslzapp/components/blood.types.dart';
-import 'package:hcslzapp/components/text.field.dart';
+import 'package:hcslzapp/components/my.appbar.dart';
+import 'package:hcslzapp/enums/blood.types.dart';
+import 'package:hcslzapp/components/input.textfield.dart';
 import 'package:hcslzapp/models/dependent.dart';
 
 const _tituloAppBar = 'Dependente';
@@ -75,27 +75,27 @@ class _DependentAddState extends State<DependentAdd> {
           child: SingleChildScrollView(
             child: Column(
               children: <Widget>[
-                Editor(
-                  controlador: _controladorNome,
-                  rotulo: _rotuloNome,
-                  icone: Icons.person,
+                InputTextField(
+                  controlller: _controladorNome,
+                  label: _rotuloNome,
+                  icon: Icons.person,
                   inputType: TextInputType.text,
                   valor:
                       widget.dependente != null ? widget.dependente.nome : null,
                 ),
-                Editor(
-                  controlador: _controladorEmail,
-                  rotulo: _rotuloEmail,
-                  icone: Icons.email,
+                InputTextField(
+                  controlller: _controladorEmail,
+                  label: _rotuloEmail,
+                  icon: Icons.email,
                   inputType: TextInputType.emailAddress,
                   valor: widget.dependente != null
                       ? widget.dependente.email
                       : null,
                 ),
-                Editor(
-                  controlador: _controladorTelefone,
-                  rotulo: _rotuloTelefone,
-                  icone: Icons.phone,
+                InputTextField(
+                  controlller: _controladorTelefone,
+                  label: _rotuloTelefone,
+                  icon: Icons.phone,
                   inputType: TextInputType.phone,
                   valor: widget.dependente != null
                       ? widget.dependente.telefone
@@ -105,11 +105,11 @@ class _DependentAddState extends State<DependentAdd> {
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: <Widget>[
                     Expanded(
-                      child: Editor(
-                        controlador: _controladorDataNascimento,
-                        rotulo: _rotuloDataNascimento,
-                        icone: Icons.calendar_today,
-                        dica: _dicaData,
+                      child: InputTextField(
+                        controlller: _controladorDataNascimento,
+                        label: _rotuloDataNascimento,
+                        icon: Icons.calendar_today,
+                        tip: _dicaData,
                         inputType: TextInputType.datetime,
                         valor: widget.dependente != null
                             ? widget.dependente.dataNascimento

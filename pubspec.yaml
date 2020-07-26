@@ -29,10 +29,16 @@ dependencies:
   table_calendar: ^2.2.3
   intl: ^0.16.1
   google_maps_flutter: ^0.5.25+1
+  flutter_launcher_icons: ^0.7.5
+
+flutter_icons:
+  image_path: "assets/icons/logo.png"
+  android: true
+  ios: true
 
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
-  cupertino_icons: ^0.1.2
+  # cupertino_icons: ^0.1.2
 
 dev_dependencies:
   flutter_test:
@@ -75,7 +81,6 @@ flutter:
 
     #
     - assets/icons/digital-logo.png
-    - assets/icons/clube-parceria-logo.jpeg
     - assets/icons/instagram-logo.png
     - assets/icons/instagram-logo-disabled.png
     - assets/icons/mail-logo.png
@@ -97,9 +102,7 @@ flutter:
     - assets/icons/pdf-logo_v2-disabled.png
     - assets/icons/info-icon.png
     - assets/icons/discount.png
-    - assets/icons/guardiao-logo.png
-    - assets/icons/guardiao-icon.png
-    - assets/icons/clube-parceria-logo_v2.png
+    - assets/icons/logo.png
 
 
 

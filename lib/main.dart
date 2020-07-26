@@ -20,15 +20,19 @@ Ctrl + N = navega entre todas as classes do projeto
 Shift Shift (pressionar 2x) = navega entre todos os objetos do projeto
 */
 
-/*
-executar emulador via terminal:
-N
+/* TERMINAL
+
+>>>> executar emulador:
 flutter emulators --launch Nexus_5X_API_29_x86
+
+>>>> criar icone da aplicaçao:
+flutter pub run flutter_launcher_icons:main
+
 */
 
-const _tituloAppBar = 'HCSlz App';
-final AssociadoWebClient _webClient1 = AssociadoWebClient();
-final MensalidadeWebClient _webClient2 = MensalidadeWebClient();
+const _titleAppBar = 'HCSlz App';
+final AssociatedWebClient _webClient1 = AssociatedWebClient();
+final PaymentWebClient _webClient2 = PaymentWebClient();
 
 void main() => runApp(HCSlzApp());
 
@@ -40,10 +44,10 @@ class HCSlzApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       home: Preview(),
-      title: _tituloAppBar,
+      title: _titleAppBar,
       theme: ThemeData(
         primaryColor: Colors.orange[900],
-        hintColor: Colors.black,//grey,
+        hintColor: Colors.black,
 /*
         accentColor: Colors.orange[700],
         buttonTheme: ButtonThemeData(

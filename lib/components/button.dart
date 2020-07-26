@@ -9,12 +9,12 @@ Descriçao: classe que cria um objeto RaisedButton padrao
 */
 import 'package:flutter/material.dart';
 
-class Botao extends StatelessWidget {
-  final String _rotulo;
-  final IconData _icone;
+class Button extends StatelessWidget {
+  final String _label;
+  final IconData _icon;
   final Function onClick;
 
-  Botao(this._rotulo, this._icone, {@required this.onClick});
+  Button(this._label, this._icon, {@required this.onClick});
 
   @override
   Widget build(BuildContext context) {
@@ -23,8 +23,8 @@ class Botao extends StatelessWidget {
       height: 50.0,
       child: RaisedButton(
         padding: EdgeInsets.all(0.0),
-        shape: new RoundedRectangleBorder(
-          borderRadius: new BorderRadius.circular(20.0),
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(20.0),
           side: BorderSide(color: Colors.white30),
         ),
         child: Container(
@@ -44,11 +44,11 @@ class Botao extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
               Text(
-                _rotulo + "  ",
+                _label + "  ",
                 style: TextStyle(color: Colors.black, fontSize: 17.0),
               ),
               Icon(
-                _icone,
+                _icon,
                 color: Colors.white30,
                 size: 30,
               ),

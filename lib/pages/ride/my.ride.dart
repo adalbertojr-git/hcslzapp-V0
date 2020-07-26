@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
-import 'package:hcslzapp/components/text.field.dart';
+import 'package:hcslzapp/components/input.textfield.dart';
 
 class MyRide extends StatefulWidget {
   const MyRide({Key key, this.title}) : super(key: key);
@@ -52,6 +52,7 @@ class _MyRideState extends State<MyRide> {
             onPressed: () {},
           ),
         ),
+        SizedBox(width: 5),
         Container(
           child: FloatingActionButton(
             heroTag: "btnStop",
@@ -91,39 +92,39 @@ class _MyRideState extends State<MyRide> {
           Row(
             children: <Widget>[
               Expanded(
-                child: Editor(
+                child: InputTextField(
                   //controlador: _controladorDefeito,
-                  rotulo: "Distancia: ", //_rotuloDefeito,
+                  label: "Distancia: ", //_rotuloDefeito,
                   inputType: TextInputType.text,
-                  desabilitado: true,
-                  nLinhas: 1,
+                  disabled: true,
+                  nLines: 1,
                 ),
               ),
               Expanded(
-                child: Editor(
+                child: InputTextField(
                   //controlador: _controladorDefeito,
-                  rotulo: "Velocidade: ", //_rotuloDefeito,
+                  label: "Velocidade: ", //_rotuloDefeito,
                   inputType: TextInputType.text,
-                  desabilitado: true,
-                  nLinhas: 1,
+                  disabled: true,
+                  nLines: 1,
                 ),
               ),
               Expanded(
-                child: Editor(
+                child: InputTextField(
                   //controlador: _controladorDefeito,
-                  rotulo: "Tempo: ", //_rotuloDefeito,
+                  label: "Tempo: ", //_rotuloDefeito,
                   inputType: TextInputType.text,
-                  desabilitado: true,
-                  nLinhas: 1,
+                  disabled: true,
+                  nLines: 1,
                 ),
               ),
               Expanded(
-                child: Editor(
+                child: InputTextField(
                   //controlador: _controladorDefeito,
-                  rotulo: "Inclinaçao: ", //_rotuloDefeito,
+                  label: "Inclinaçao: ", //_rotuloDefeito,
                   inputType: TextInputType.text,
-                  desabilitado: true,
-                  nLinhas: 1,
+                  disabled: true,
+                  nLines: 1,
                 ),
               ),
             ],

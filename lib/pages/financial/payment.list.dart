@@ -5,10 +5,10 @@ Todos os direitos reservados ao Harley Club de Sao Luis
 2020
 */
 import 'package:flutter/material.dart';
-import 'package:hcslzapp/components/appBar.dart';
+import 'package:hcslzapp/components/my.appbar.dart';
 import 'package:hcslzapp/components/centered.message.dart';
 import 'package:hcslzapp/components/progress.dart';
-import 'package:hcslzapp/components/text.field.dart';
+import 'package:hcslzapp/components/input.textfield.dart';
 import 'package:hcslzapp/http/webclients/payment.webclient.dart';
 import 'package:hcslzapp/models/payment.dart';
 import 'package:hcslzapp/models/payment.months.dart';
@@ -16,7 +16,7 @@ import 'package:hcslzapp/models/payment.months.dart';
 const _tituloAppBar = 'Mensalidades';
 
 class PaymentList extends StatelessWidget {
-  final MensalidadeWebClient _webClient = MensalidadeWebClient();
+  final PaymentWebClient _webClient = PaymentWebClient();
 
   @override
   Widget build(BuildContext context) {
@@ -57,12 +57,12 @@ class PaymentList extends StatelessWidget {
                     height: MediaQuery.of(context).size.height,
                     child: Column(
                       children: <Widget>[
-                        Editor(
+                        InputTextField(
                           //controlador: _controladorPadrinho,
-                          rotulo: 'Situaçao', //_rotuloPadrinho,
-                          icone: Icons.attach_money,
+                          label: 'Situaçao', //_rotuloPadrinho,
+                          icon: Icons.attach_money,
                           valor: 'ADIMPLENTE', //mensalidades[i].,
-                          desabilitado: true,
+                          disabled: true,
                         ),
                         Padding(
                           padding: EdgeInsets.all(5.0),

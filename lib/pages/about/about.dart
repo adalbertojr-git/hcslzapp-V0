@@ -9,15 +9,15 @@ Descriçao: classe que exibe infos sobre o Harley Club
 */
 import 'package:flutter/material.dart';
 import 'package:flutter/painting.dart';
-import 'package:hcslzapp/components/appBar.dart';
+import 'package:hcslzapp/components/my.appbar.dart';
 
-const _tituloAppBar = 'Sobre o Harley Club';
+const _titleAppBar = 'Sobre o Harley Club';
 
 class About extends StatelessWidget {
   //@override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: MyAppBar(_tituloAppBar),
+      appBar: MyAppBar(_titleAppBar),
       body: Container(
         padding: EdgeInsets.fromLTRB(5.0, 0.0, 5.0, 0.0),
         decoration: BoxDecoration(
@@ -40,7 +40,7 @@ class About extends StatelessWidget {
                 padding: EdgeInsets.fromLTRB(00.0, 00.0, 00.0, 10.0),
                 child: Image.asset('assets/imgs/sobre.jpeg'),
               ),
-              _buildTexto(),
+              _buildText(),
             ],
           )),
         ),
@@ -48,7 +48,7 @@ class About extends StatelessWidget {
     );
   }
 
-  Widget _buildTexto() {
+  Widget _buildText() {
     return RichText(
       text: TextSpan(
         text:

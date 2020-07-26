@@ -9,19 +9,17 @@ Descriçao: classe que cria uma tela de mensagem padrao
 */
 import 'package:flutter/material.dart';
 
-import 'logo.dart';
+import 'hc.logo.dart';
 
 class CenteredMessage extends StatelessWidget {
   final String _message;
   final IconData icon;
-  final double iconSize;
-  final double fontSize;
+  final double _iconSize = 64;
+  final double _fontSize = 20;
 
   CenteredMessage(
     this._message, {
     this.icon,
-    this.iconSize = 64,
-    this.fontSize = 20,
   });
 
   @override
@@ -31,14 +29,14 @@ class CenteredMessage extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.center,
         crossAxisAlignment: CrossAxisAlignment.center,
         children: <Widget>[
-          Logo(0.0),
+          HcLogo(0.0),
           /*
           permite configurar se o Widget sera visivel ou nao
           */
           Visibility(
             child: Icon(
               icon,
-              size: iconSize,
+              size: _iconSize,
             ),
             visible: icon != null,
           ),
@@ -46,7 +44,7 @@ class CenteredMessage extends StatelessWidget {
             padding: const EdgeInsets.only(top: 24.0),
             child: Text(
               _message,
-              style: TextStyle(fontSize: fontSize),
+              style: TextStyle(fontSize: _fontSize),
             ),
           ),
         ],

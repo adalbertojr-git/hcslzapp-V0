@@ -17,15 +17,15 @@ import 'webclient.dart';
 /*
 endereço URL da classe alvo
 */
-const String moduloUrl = '/mensalidades';
+const String _paymentUrl = '/mensalidades';
 
-class MensalidadeWebClient {
+class PaymentWebClient {
 /*
 retorna lista de todos as mensalidades pagas
 */
   Future<List<Mensalidade>> findAll() async {
     final Response response =
-        await client.get(baseUrl + moduloUrl).timeout(Duration(seconds: 10));
+        await client.get(mainUrl + _paymentUrl).timeout(Duration(seconds: 10));
     final List<dynamic> decodedJson = jsonDecode(response.body);
     return decodedJson
         .map((dynamic json) => Mensalidade.fromJson(json))
@@ -39,7 +39,7 @@ codigo: codigo do associado
 */
   Future<List<Mensalidade>> findByAssociado_Codigo(int codigo) async {
     final Response response = await client
-        .get(baseUrl + moduloUrl + '/' + codigo.toString())
+        .get(mainUrl + _paymentUrl + '/' + codigo.toString())
         .timeout(Duration(seconds: 10));
     final List<dynamic> decodedJson = jsonDecode(response.body);
     return decodedJson

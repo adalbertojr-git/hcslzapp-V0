@@ -9,26 +9,26 @@ solicitar a liberacao do seu acesso a administracao do App
 
 */
 import 'package:flutter/material.dart';
-import 'package:hcslzapp/components/appBar.dart';
+import 'package:hcslzapp/components/my.appbar.dart';
 import 'package:hcslzapp/components/button.dart';
-import 'package:hcslzapp/components/text.field.dart';
+import 'package:hcslzapp/components/input.textfield.dart';
 
-const _tituloAppBar = 'Solicitar Acesso';
-const _rotuloNome = 'Nome *';
-const _rotuloTelefone = 'Telefone *';
-const _rotuloEmail = 'Email *';
-const _rotuloPadrinho = 'Padrinho';
+const _titleAppBar = 'Solicitar Acesso';
+const _labelName = 'Nome *';
+const _labelPhone = 'Telefone *';
+const _labelEmail = 'Email *';
+const _labelSponsor = 'Padrinho';
 
 class AssociatedRequestAccess extends StatelessWidget {
-  final TextEditingController _controladorNome = TextEditingController();
-  final TextEditingController _controladorTelefone = TextEditingController();
-  final TextEditingController _controladorEmail = TextEditingController();
-  final TextEditingController _controladorPadrinho = TextEditingController();
+  final TextEditingController _controllerName = TextEditingController();
+  final TextEditingController _controllerPhone = TextEditingController();
+  final TextEditingController _controllerEmail = TextEditingController();
+  final TextEditingController _controllerSponsor = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: MyAppBar(_tituloAppBar),
+      appBar: MyAppBar(_titleAppBar),
       body: Container(
         decoration: BoxDecoration(
           gradient: LinearGradient(
@@ -41,39 +41,39 @@ class AssociatedRequestAccess extends StatelessWidget {
         child: SingleChildScrollView(
           child: Column(
             children: <Widget>[
-              Editor(
-                controlador: _controladorNome,
-                rotulo: _rotuloNome,
-                icone: Icons.person,
+              InputTextField(
+                controlller: _controllerName,
+                label: _labelName,
+                icon: Icons.person,
                 inputType: TextInputType.text,
               ),
-              Editor(
-                controlador: _controladorEmail,
-                rotulo: _rotuloEmail,
-                icone: Icons.email,
+              InputTextField(
+                controlller: _controllerEmail,
+                label: _labelEmail,
+                icon: Icons.email,
                 inputType: TextInputType.emailAddress,
               ),
-              Editor(
-                controlador: _controladorTelefone,
-                rotulo: _rotuloTelefone,
-                icone: Icons.phone,
+              InputTextField(
+                controlller: _controllerPhone,
+                label: _labelPhone,
+                icon: Icons.phone,
                 inputType: TextInputType.phone,
               ),
-              Editor(
-                controlador: _controladorPadrinho,
-                rotulo: _rotuloPadrinho,
-                icone: Icons.person_pin,
+              InputTextField(
+                controlller: _controllerSponsor,
+                label: _labelSponsor,
+                icon: Icons.person_pin,
                 //inputType: TextInputType.text,
-                desabilitado: true,
+                disabled: true,
               ),
               Padding(
                 padding: EdgeInsets.all(5.0),
               ),
-              Botao(
+              Button(
                 'ENVIAR',
                 Icons.send,
                 onClick: () {
-                  _solicitarCadastro(context);
+                  _sendRequest(context);
                 },
               ),
               //Info(),
@@ -84,7 +84,7 @@ class AssociatedRequestAccess extends StatelessWidget {
     );
   }
 
-  void _solicitarCadastro(BuildContext context) {}
+  void _sendRequest(BuildContext context) {}
 }
 
 class Info extends StatelessWidget {

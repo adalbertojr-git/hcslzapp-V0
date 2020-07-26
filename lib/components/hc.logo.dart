@@ -9,11 +9,11 @@ S
 */
 import 'package:flutter/material.dart';
 
-class Logo extends StatelessWidget {
+class HcLogo extends StatelessWidget {
 
   final double _top;
 
-  Logo(this._top);
+  HcLogo(this._top);
 
   @override
   Widget build(BuildContext context) {

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:hcslzapp/components/appBar.dart';
-import 'package:hcslzapp/components/text.field.dart';
+import 'package:hcslzapp/components/my.appbar.dart';
+import 'package:hcslzapp/components/input.textfield.dart';
 import 'package:hcslzapp/models/motorcycle.dart';
 
 const _tituloAppBar = 'Motocicleta';
@@ -41,28 +41,28 @@ class MotorcycleAdd extends StatelessWidget {
           child: SingleChildScrollView(
             child: Column(
               children: <Widget>[
-                Editor(
-                  controlador: _controladorModelo,
-                  rotulo: _rotuloModelo,
-                  icone: Icons.motorcycle,
+                InputTextField(
+                  controlller: _controladorModelo,
+                  label: _rotuloModelo,
+                  icon: Icons.motorcycle,
                   inputType: TextInputType.text,
                 ),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: <Widget>[
                     Expanded(
-                      child: Editor(
-                        controlador: _controladorAno,
-                        icone: Icons.calendar_today,
-                        rotulo: _rotuloAno,
+                      child: InputTextField(
+                        controlller: _controladorAno,
+                        icon: Icons.calendar_today,
+                        label: _rotuloAno,
                         inputType: TextInputType.number,
                       ),
                     ),
                     Expanded(
-                      child: Editor(
-                        controlador: _controladorCor,
-                        icone: Icons.color_lens,
-                        rotulo: _rotuloCor,
+                      child: InputTextField(
+                        controlller: _controladorCor,
+                        icon: Icons.color_lens,
+                        label: _rotuloCor,
                         inputType: TextInputType.text,
                       ),
                     ),
@@ -72,29 +72,29 @@ class MotorcycleAdd extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: <Widget>[
                     Expanded(
-                      child: Editor(
-                        controlador: _controladorPlaca,
-                        rotulo: _rotuloPlaca,
+                      child: InputTextField(
+                        controlller: _controladorPlaca,
+                        label: _rotuloPlaca,
                         inputType: TextInputType.text,
                       ),
                     ),
                     Expanded(
-                      child: Editor(
-                        controlador: _controladorApelido,
-                        rotulo: _rotuloApelido,
+                      child: InputTextField(
+                        controlller: _controladorApelido,
+                        label: _rotuloApelido,
                         inputType: TextInputType.text,
                       ),
                     ),
                   ],
                 ),
-                Editor(
-                  controlador: _controladorChassi,
-                  rotulo: _rotuloChassi,
+                InputTextField(
+                  controlller: _controladorChassi,
+                  label: _rotuloChassi,
                   inputType: TextInputType.text,
                 ),
-                Editor(
-                  controlador: _controladorRenavam,
-                  rotulo: _rotuloRenavam,
+                InputTextField(
+                  controlller: _controladorRenavam,
+                  label: _rotuloRenavam,
                   inputType: TextInputType.text,
                 ),
                 Padding(

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:hcslzapp/components/button.dart';
-import 'package:hcslzapp/components/logo.dart';
+import 'package:hcslzapp/components/hc.logo.dart';
 import 'package:hcslzapp/pages/associated/associated.request.access.dart';
 
 import 'login.dart';
@@ -22,7 +22,7 @@ class Preview extends StatelessWidget {
               child: SingleChildScrollView(
                 child: Column(
                   children: <Widget>[
-                    Logo(40.0),
+                    HcLogo(40.0),
                     Padding(
                       padding: EdgeInsets.all(20.0),
                     ),
@@ -33,7 +33,7 @@ class Preview extends StatelessWidget {
                         style: TextStyle(color: Colors.black),
                       ),
                     ),
-                    Botao(
+                    Button(
                       'ACESSAR',
                       Icons.play_arrow,
                       onClick: () {
@@ -50,7 +50,7 @@ class Preview extends StatelessWidget {
                         style: TextStyle(color: Colors.black),
                       ),
                     ),
-                    Botao(
+                    Button(
                       'SOLICITAR',
                       Icons.device_unknown,
                       onClick: () {
