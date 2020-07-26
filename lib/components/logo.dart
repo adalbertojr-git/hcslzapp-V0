@@ -5,10 +5,7 @@ Todos os direitos reservados ao Harley Club de Sao Luis
 2020
 
 Descriçao: classe que insere o logotipo do Harley Club padrao
-
-Params:
-_top: distancia do topo da tela (obrigatorio)
-
+S
 */
 import 'package:flutter/material.dart';
 

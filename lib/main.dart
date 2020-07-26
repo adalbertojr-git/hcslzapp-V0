@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:hcslzapp/http/webclients/associado_webclient.dart';
-import 'package:hcslzapp/screens/login/preview.dart';
+import 'package:hcslzapp/http/webclients/associated.webclient.dart';
+import 'package:hcslzapp/pages/login/preview.dart';
 
-import 'http/webclients/mensalidade_webclient.dart';
+import 'http/webclients/payment.webclient.dart';
 /*
 Atalhos uteis:
 

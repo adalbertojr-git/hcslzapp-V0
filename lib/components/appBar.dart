@@ -6,9 +6,6 @@ Todos os direitos reservados ao Harley Club de Sao Luis
 
 Descriçao: classe que cria um objeto AppBar padrao
 
-Params:
-_tituloAppBar: titulo exibido na AppBar (obrigatorio)
-
 */
 import 'package:flutter/material.dart';
 

@@ -6,12 +6,6 @@ Todos os direitos reservados ao Harley Club de Sao Luis
 
 Descriçao: classe que cria um objeto RaisedButton padrao
 
-Params:
-_rotulo: label exibido no objeto (obrigatorio)
-_icone: icone exibido no objeto (obrigatorio)
-onClick: callback referente a cada botao (executa a funcao especifica de cada
-funcao, determinada na tela que cria o objeto) (requerido)
-
 */
 import 'package:flutter/material.dart';
 

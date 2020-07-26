@@ -6,9 +6,6 @@ Todos os direitos reservados ao Harley Club de Sao Luis
 
 Descriçao: classe que exibe um circulo de progresso padrao
 
-Params:
-message: mensagem exibida durante o progresso (opcional)
-
 */
 import 'package:flutter/material.dart';
 
