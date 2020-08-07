@@ -7,41 +7,41 @@ Todos os direitos reservados ao Harley Club de Sao Luis
 Descriçao: classe do objeto Dependente
 
 */
-class Dependente {
-  final int codigo;
-  final String nome;
+class Dependent {
+  final int code;
+  final String name;
   final String email;
-  final String telefone;
-  final String tipoSanguineo;
-  final String dataNascimento;
-  final String membroHc;
+  final String phone;
+  final String bloodType;
+  final String dateBirth;
+  final String isAssociated;
 
-  Dependente(this.codigo, this.nome, this.email, this.telefone,
-      this.tipoSanguineo, this.dataNascimento, this.membroHc);
+  Dependent(this.code, this.name, this.email, this.phone,
+      this.bloodType, this.dateBirth, this.isAssociated);
 
-  Dependente.fromJson(Map<String, dynamic> json)
-      : codigo = json['codigo'],
-        nome = json['nome'],
+  Dependent.fromJson(Map<String, dynamic> json)
+      : code = json['codigo'],
+        name = json['nome'],
         email = json['email'],
-        telefone = json['telefone'],
-        tipoSanguineo = json['tipoSanguineo'],
-        dataNascimento = json['dataNascimento'],
-        membroHc = json['membroHc'];
+        phone = json['telefone'],
+        bloodType = json['tipoSanguineo'],
+        dateBirth = json['dataNascimento'],
+        isAssociated = json['membroHc'];
 
   Map<String, dynamic> toJson() => {
-        'codigo': codigo,
-        'nome': nome,
+        'codigo': code,
+        'nome': name,
         'email': email,
-        'telefone': telefone,
-        'tipoSanguineo': tipoSanguineo,
-        'dataNascimento': dataNascimento,
-        'membroHc': membroHc,
+        'telefone': phone,
+        'tipoSanguineo': bloodType,
+        'dataNascimento': dateBirth,
+        'membroHc': isAssociated,
       };
 
   @override
   String toString() {
-    return 'Dependente{codigo: $codigo, nome: $nome, email: $email, telefone: $telefone, '
-        'tipoSanguineo: $tipoSanguineo, dataNascimento: $dataNascimento, '
-        'membroHc: $membroHc}';
+    return 'Dependente{codigo: $code, nome: $name, email: $email, telefone: $phone, '
+        'tipoSanguineo: $bloodType, dataNascimento: $dateBirth, '
+        'membroHc: $isAssociated}';
   }
 }

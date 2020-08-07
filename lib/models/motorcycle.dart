@@ -7,44 +7,44 @@ Todos os direitos reservados ao Harley Club de Sao Luis
 Descriçao: classe do objeto Motocicleta
 
 */
-class Motocicleta {
-  final int codigo;
-  final String modelo;
-  final String ano;
-  final String cor;
-  final String placa;
-  final String apelido;
-  final String chassi;
+class Motorcycle {
+  final int code;
+  final String model;
+  final String year;
+  final String color;
+  final String licencePlate;
+  final String nickname;
+  final String chassis;
   final String renavam;
 
-  Motocicleta(this.codigo, this.modelo, this.ano, this.cor, this.placa,
-      this.apelido, this.chassi, this.renavam);
+  Motorcycle(this.code, this.model, this.year, this.color, this.licencePlate,
+      this.nickname, this.chassis, this.renavam);
 
-  Motocicleta.fromJson(Map<String, dynamic> json)
-      : codigo = json['codigo'],
-        modelo = json['modelo'],
-        ano = json['ano'],
-        cor = json['cor'],
-        placa = json['placa'],
-        apelido = json['apelido'],
-        chassi = json['chassi'],
+  Motorcycle.fromJson(Map<String, dynamic> json)
+      : code = json['codigo'],
+        model = json['modelo'],
+        year = json['ano'],
+        color = json['cor'],
+        licencePlate = json['placa'],
+        nickname = json['apelido'],
+        chassis = json['chassi'],
         renavam = json['renavam'];
 
   Map<String, dynamic> toJson() => {
-    'codigo': codigo,
-    'modelo': modelo,
-    'ano': ano,
-    'cor': cor,
-    'placa': placa,
-    'apelido': apelido,
-    'chassi': chassi,
+    'codigo': code,
+    'modelo': model,
+    'ano': year,
+    'cor': color,
+    'placa': licencePlate,
+    'apelido': nickname,
+    'chassi': chassis,
     'renavam': renavam,
   };
 
   @override
   String toString() {
-    return 'Motocicleta{codigo: $codigo, modelo: $modelo, ano: $ano, cor: $cor, '
-        'placa: $placa, apelido: $apelido, '
-        'chassi: $chassi, renavam: $renavam}';
+    return 'Motocicleta{codigo: $code, modelo: $model, ano: $year, cor: $color, '
+        'placa: $licencePlate, apelido: $nickname, '
+        'chassi: $chassis, renavam: $renavam}';
   }
 }

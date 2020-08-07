@@ -13,7 +13,7 @@ const _rotuloDataNascimento = 'Data de Nascimento';
 const _dicaData = 'dd/mm/yyyy';
 
 class DependentAdd extends StatefulWidget {
-  final Dependente dependente;
+  final Dependent dependente;
 
   DependentAdd(this.dependente);
 
@@ -46,7 +46,7 @@ class _DependentAddState extends State<DependentAdd> {
     List<DropdownMenuItem<String>> tipos = new List();
     //TipoSanguineo.values.forEach((v) => print('value: $v, index: ${v.index}'));
     //TipoSanguineo.values.forEach((v) => print(v.descricao));
-    TipoSanguineo.values.forEach((v) => _tiposSanguineos.add(v.descricao));
+    BloodType.values.forEach((v) => _tiposSanguineos.add(v.description));
     print(_tiposSanguineos);
     for (String tipo in _tiposSanguineos) {
       // here we are creating the drop down menu items, you can customize the item right here
@@ -58,7 +58,7 @@ class _DependentAddState extends State<DependentAdd> {
 
   //@override
   Widget build(BuildContext context) {
-    _currentTipoSanguineo = widget.dependente != null ? widget.dependente.tipoSanguineo : null;
+    _currentTipoSanguineo = widget.dependente != null ? widget.dependente.bloodType : null;
     return Scaffold(
       appBar: MyAppBar(_tituloAppBar),
       body: Container(
@@ -81,7 +81,7 @@ class _DependentAddState extends State<DependentAdd> {
                   icon: Icons.person,
                   inputType: TextInputType.text,
                   valor:
-                      widget.dependente != null ? widget.dependente.nome : null,
+                      widget.dependente != null ? widget.dependente.name : null,
                 ),
                 InputTextField(
                   controlller: _controladorEmail,
@@ -98,7 +98,7 @@ class _DependentAddState extends State<DependentAdd> {
                   icon: Icons.phone,
                   inputType: TextInputType.phone,
                   valor: widget.dependente != null
-                      ? widget.dependente.telefone
+                      ? widget.dependente.phone
                       : null,
                 ),
                 Row(
@@ -112,7 +112,7 @@ class _DependentAddState extends State<DependentAdd> {
                         tip: _dicaData,
                         inputType: TextInputType.datetime,
                         valor: widget.dependente != null
-                            ? widget.dependente.dataNascimento
+                            ? widget.dependente.dateBirth
                             : null,
                       ),
                     ),
@@ -172,7 +172,7 @@ class _DependentAddState extends State<DependentAdd> {
                   ),
                   child: Switch(
                     value: (widget.dependente != null
-                        ? (widget.dependente.membroHc == 'S' ? true : false)
+                        ? (widget.dependente.isAssociated == 'S' ? true : false)
                         : false),
                     onChanged: (value) {
                       setState(
@@ -267,7 +267,7 @@ class _DependentAddState extends State<DependentAdd> {
     final String membroHC = (ehMembro == true ? 'S' : 'N');
 
     if (nome != '' && email != '' && telefone != '') {
-      final dependenteCriado = Dependente(
+      final dependenteCriado = Dependent(
           0, nome, email, telefone, tipoSanguineo, dataNascimento, membroHC);
       debugPrint('Criando dependente...');
       debugPrint('$dependenteCriado');

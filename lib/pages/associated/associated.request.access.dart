@@ -28,7 +28,7 @@ class AssociatedRequestAccess extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: MyAppBar(_titleAppBar),
+      //appBar: MyAppBar(_titleAppBar),
       body: Container(
         decoration: BoxDecoration(
           gradient: LinearGradient(
@@ -41,6 +41,9 @@ class AssociatedRequestAccess extends StatelessWidget {
         child: SingleChildScrollView(
           child: Column(
             children: <Widget>[
+              SizedBox(
+                height: 30.0,
+              ),
               InputTextField(
                 controlller: _controllerName,
                 label: _labelName,

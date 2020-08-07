@@ -6,7 +6,7 @@ import 'package:hcslzapp/pages/motorcycle/motorcycle.add.dart';
 const _tituloAppBar = 'Lista de Eventos';
 
 class EventList extends StatefulWidget {
-  final List<Motocicleta> _listMotocicletas = List();
+  final List<Motorcycle> _listMotocicletas = List();
 
   @override
   State<StatefulWidget> createState() {
@@ -39,7 +39,7 @@ class EventListState extends State<EventList> {
         backgroundColor: Colors.black,
         child: Icon(Icons.add),
         onPressed: () {
-          final Future<Motocicleta> future = Navigator.push(
+          final Future<Motorcycle> future = Navigator.push(
             context,
             MaterialPageRoute(
               builder: (context) {
@@ -57,7 +57,7 @@ class EventListState extends State<EventList> {
     );
   }
 
-  void _atualiza(Motocicleta motocicletaRecebida) {
+  void _atualiza(Motorcycle motocicletaRecebida) {
     if (motocicletaRecebida != null) {
       setState(
         () {
@@ -69,7 +69,7 @@ class EventListState extends State<EventList> {
 }
 
 class ItemList extends StatelessWidget {
-  final Motocicleta _motocicleta;
+  final Motorcycle _motocicleta;
 
   ItemList(this._motocicleta);
 
@@ -128,19 +128,19 @@ class ItemList extends StatelessWidget {
       alignment: Alignment.centerLeft,
       child: RichText(
         text: TextSpan(
-          text: _motocicleta.modelo.toString(),
+          text: _motocicleta.model.toString(),
           style: TextStyle(
               fontWeight: FontWeight.bold, color: Colors.black, fontSize: 16),
           children: <TextSpan>[
             TextSpan(
-              text: '\n' + _motocicleta.ano.toString(),
+              text: '\n' + _motocicleta.year.toString(),
               style: TextStyle(
                   color: Colors.grey,
                   fontSize: 12,
                   fontWeight: FontWeight.bold),
             ),
             TextSpan(
-              text: '\n' + _motocicleta.cor.toString(),
+              text: '\n' + _motocicleta.color.toString(),
               style: TextStyle(
                   color: Colors.grey,
                   fontSize: 10,
@@ -162,7 +162,7 @@ class ItemList extends StatelessWidget {
             RichText(
               textAlign: TextAlign.left,
               text: TextSpan(
-                text: _motocicleta.placa.toString(),
+                text: _motocicleta.licencePlate.toString(),
                 style: TextStyle(
                     color: Colors.grey,
                     fontSize: 20,

@@ -18,7 +18,7 @@ class Login extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: MyAppBar(_tituloAppBar),
+     // appBar: MyAppBar(_tituloAppBar),
       body: Container(
         decoration: BoxDecoration(
           gradient: LinearGradient(
@@ -32,6 +32,7 @@ class Login extends StatelessWidget {
           child: SingleChildScrollView(
             child: Column(
               children: <Widget>[
+                HcLogo(40.0),
                 InputTextField(
                   controlller: _controladorUser,
                   label: _rotuloUser,
@@ -47,17 +48,14 @@ class Login extends StatelessWidget {
                   inputType: TextInputType.text,
                   hidden: true,
                 ),
-                Padding(
-                  padding: EdgeInsets.all(5.0),
-                ),
                 Button(
                   'LOGIN',
-                  Icons.add_to_home_screen,
+                  Icons.arrow_forward,
                   onClick: () {
                     _showDashboardPage(context);
                   },
                 ),
-                HcLogo(0.0),
+
               ],
             ),
           ),

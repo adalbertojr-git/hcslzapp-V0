@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:hcslzapp/components/button.dart';
 import 'package:hcslzapp/components/input.textfield.dart';
 
 const _rotuloModelo = 'Motocicleta *';
@@ -83,46 +84,11 @@ class DefectAdd extends StatelessWidget {
                 Padding(
                   padding: EdgeInsets.all(5.0),
                 ),
-                Container(
-                  width: MediaQuery.of(context).size.width - 30,
-                  height: 50.0,
-                  child: RaisedButton(
-                    padding: EdgeInsets.all(0.0),
-                    shape: new RoundedRectangleBorder(
-                      borderRadius: new BorderRadius.circular(20.0),
-                      side: BorderSide(color: Colors.white30),
-                    ),
-                    child: Container(
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.all(
-                          Radius.circular(20.0),
-                        ),
-                        gradient: LinearGradient(
-                          colors: [Colors.white, Colors.deepOrange],
-                          begin: FractionalOffset.topLeft,
-                          end: FractionalOffset.bottomRight,
-                        ),
-                      ),
-                      height: MediaQuery.of(context).size.height,
-                      width: MediaQuery.of(context).size.width,
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: <Widget>[
-                          Text(
-                            'CADASTRAR' + "  ",
-                            style:
-                                TextStyle(color: Colors.black, fontSize: 17.0),
-                          ),
-                          Icon(
-                            Icons.add_circle,
-                            color: Colors.white30,
-                          ),
-                        ],
-                      ),
-                    ),
-                    onPressed: () {
-                    },
-                  ),
+                Button(
+                  'Cadastrar',
+                  Icons.play_arrow,
+                  onClick: () {
+                  },
                 ),
               ],
             ),

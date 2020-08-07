@@ -5,10 +5,9 @@ import 'package:hcslzapp/pages/associated/associated.request.access.dart';
 
 import 'login.dart';
 
-const _rotuloSouAssociado = 'Membros HCSlz';
-const _rotuloNaoSouAssociado = 'Primeiro acesso? Solicite liberaçao';
+const _rotuloNaoSouAssociado = 'Primeiro acesso?';
 
-class Preview extends StatelessWidget {
+class Splash extends StatelessWidget {
   //@override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -17,43 +16,41 @@ class Preview extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.center,
           children: <Widget>[
             Container(
-              color: Colors.white,
+              decoration: BoxDecoration(
+                gradient: LinearGradient(
+                  colors: [Colors.white30, Colors.deepOrange],
+                  begin: FractionalOffset.topLeft,
+                  end: FractionalOffset.bottomRight,
+                ),
+              ),
               height: MediaQuery.of(context).size.height,
+              width: MediaQuery.of(context).size.width,
               child: SingleChildScrollView(
                 child: Column(
                   children: <Widget>[
                     HcLogo(40.0),
-                    Padding(
-                      padding: EdgeInsets.all(20.0),
+                    Text(
+                      'Versao: 1.0.0'
                     ),
-                    Padding(
-                      padding: EdgeInsets.all(00.0),
-                      child: Text(
-                        _rotuloSouAssociado,
-                        style: TextStyle(color: Colors.black),
-                      ),
+                    SizedBox(
+                      height: 30.0,
                     ),
                     Button(
                       'ACESSAR',
-                      Icons.play_arrow,
+                      Icons.arrow_forward,
                       onClick: () {
                         _showLoginPage(context);
                       },
                     ),
                     Padding(
-                      padding: EdgeInsets.all(15.0),
+                      padding: EdgeInsets.all(10.0),
                     ),
-                    Padding(
-                      padding: EdgeInsets.all(00.0),
+                    FlatButton(
                       child: Text(
                         _rotuloNaoSouAssociado,
-                        style: TextStyle(color: Colors.black),
+                        style: TextStyle(color: Colors.blue),
                       ),
-                    ),
-                    Button(
-                      'SOLICITAR',
-                      Icons.device_unknown,
-                      onClick: () {
+                      onPressed: () {
                         _showSolicitarAcessoAssociadoPage(context);
                       },
                     ),

@@ -9,28 +9,28 @@ Descriçao: classe do objeto Mensalidade
 */
 import 'payment.months.dart';
 
-class Mensalidade {
-  final int codigo;
-  final String ano;
-  final List<MesesMensalidade> mesesMensalidades;
+class Payment {
+  final int code;
+  final String year;
+  final List<PaymentMonths> paymentMonths;
 
-  Mensalidade(this.codigo, this.ano, this.mesesMensalidades);
+  Payment(this.code, this.year, this.paymentMonths);
 
-  Mensalidade.fromJson(Map<String, dynamic> json)
-      : codigo = json['codigo'],
-        ano = json['ano'],
-        mesesMensalidades = List.from((json['mesesMensalidades'] as List)
-            .map((mesesMensalidades) => MesesMensalidade.fromJson(mesesMensalidades)));
+  Payment.fromJson(Map<String, dynamic> json)
+      : code = json['codigo'],
+        year = json['ano'],
+        paymentMonths = List.from((json['mesesMensalidades'] as List)
+            .map((mesesMensalidades) => PaymentMonths.fromJson(mesesMensalidades)));
 
   Map<String, dynamic> toJson() => {
-    'codigo': codigo,
-    'ano': ano,
+    'codigo': code,
+    'ano': year,
     'mesesMensalidades': List<dynamic>.from(
-        mesesMensalidades.map((mesesMensalidades) => mesesMensalidades.toJson())),
+        paymentMonths.map((mesesMensalidades) => mesesMensalidades.toJson())),
   };
 
   @override
   String toString() {
-    return 'Mensalidade{codigo: $codigo, ano: $ano, mesesMensalidades: $mesesMensalidades}';
+    return 'Mensalidade{codigo: $code, ano: $year, mesesMensalidades: $paymentMonths}';
   }
 }

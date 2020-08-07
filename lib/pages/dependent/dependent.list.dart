@@ -6,7 +6,7 @@ import 'package:hcslzapp/pages/dependent/dependent.add.dart';
 const _tituloAppBar = 'Lista de Dependentes';
 
 class DependentList extends StatefulWidget {
-  List<Dependente> listDependentes;
+  List<Dependent> listDependentes;
 
   DependentList(this.listDependentes);
 
@@ -50,7 +50,7 @@ class DependentListState extends State<DependentList> {
         backgroundColor: Colors.black,
         child: Icon(Icons.add),
         onPressed: () {
-          final Future<Dependente> future = Navigator.push(
+          final Future<Dependent> future = Navigator.push(
             context,
             MaterialPageRoute(
               builder: (context) {
@@ -68,7 +68,7 @@ class DependentListState extends State<DependentList> {
     );
   }
 
-  void _atualiza(Dependente dependenteRecebido) {
+  void _atualiza(Dependent dependenteRecebido) {
     if (dependenteRecebido != null) {
       setState(
         () {
@@ -80,7 +80,7 @@ class DependentListState extends State<DependentList> {
 }
 
 class ItemList extends StatelessWidget {
-  final Dependente _dependente;
+  final Dependent _dependente;
   final Function onClick;
 
   ItemList(
@@ -101,7 +101,7 @@ class ItemList extends StatelessWidget {
             size: 50,
           ),
           title: Text(
-            _dependente.nome.toString(),
+            _dependente.name.toString(),
             style: TextStyle(
               fontSize: 15.0,
               color: Colors.deepOrange,

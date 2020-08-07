@@ -21,4 +21,4 @@ final Client client = HttpClientWithInterceptor.build(
 /*
 URL base de acesso, a partir da qual sao chamadas as demais URls
 */
-const String mainUrl = 'http://192.168.0.17:8080';
+const String mainUrl = 'http://192.168.0.21:8080';

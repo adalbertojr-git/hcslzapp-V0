@@ -74,7 +74,7 @@ class _AssociatedUpdateState extends State<AssociatedUpdate> {
     List<DropdownMenuItem<String>> types = new List();
     //TipoSanguineo.values.forEach((v) => print('value: $v, index: ${v.index}'));
     //TipoSanguineo.values.forEach((v) => print(v.descricao));
-    TipoSanguineo.values.forEach((v) => _bloodTypes.add(v.descricao));
+    BloodType.values.forEach((v) => _bloodTypes.add(v.description));
     print(_bloodTypes);
     for (String type in _bloodTypes) {
       // here we are creating the drop down menu items, you can customize the item right here
@@ -88,7 +88,7 @@ class _AssociatedUpdateState extends State<AssociatedUpdate> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: MyAppBar(_titleAppBar),
-      body: FutureBuilder<List<Associado>>(
+      body: FutureBuilder<List<Associated>>(
         /*
         carrega JSON com dados da api
         */
@@ -107,7 +107,7 @@ class _AssociatedUpdateState extends State<AssociatedUpdate> {
               break;
             case ConnectionState.done:
               if (snapshot.hasData) {
-                final List<Associado> associateds = snapshot.data;
+                final List<Associated> associateds = snapshot.data;
                 if (associateds.isNotEmpty) {
                   return Container(
                     padding: EdgeInsets.fromLTRB(5.0, 5.0, 5.0, 0.0),
@@ -148,9 +148,9 @@ class _AssociatedUpdateState extends State<AssociatedUpdate> {
     );
   }
 
-  Column associatedWidgets(List<Associado> associateds) {
-    final Associado associated = associateds[0];
-    _currentBloodType = associated.tipoSanguineo;
+  Column associatedWidgets(List<Associated> associateds) {
+    final Associated associated = associateds[0];
+    _currentBloodType = associated.bloodType;
     return Column(
       children: <Widget>[
         InputTextField(
@@ -158,7 +158,7 @@ class _AssociatedUpdateState extends State<AssociatedUpdate> {
           label: _labelName,
           icon: Icons.person,
           inputType: TextInputType.text,
-          valor: associated.nome,
+          valor: associated.name,
         ),
         InputTextField(
           controlller: _controllerEmail,
@@ -172,13 +172,13 @@ class _AssociatedUpdateState extends State<AssociatedUpdate> {
           label: _labelPhone,
           icon: Icons.phone,
           inputType: TextInputType.phone,
-          valor: associated.telefone,
+          valor: associated.phone,
         ),
         InputTextField(
           controlller: _controlllerSponsor,
           label: _labelSponsor,
           icon: Icons.person_pin,
-          valor: associated.padrinho == null ? null : associated.padrinho.nome,
+          valor: associated.sponsor == null ? null : associated.sponsor.name,
           disabled: true,
         ),
         Row(
@@ -188,14 +188,14 @@ class _AssociatedUpdateState extends State<AssociatedUpdate> {
                 controlller: _controlllerNickName,
                 label: _labelNickname,
                 inputType: TextInputType.text,
-                valor: associated.apelido,
+                valor: associated.nickname,
               ),
             ),
             Expanded(
               child: InputTextField(
                 controlller: _controlllerAssociatedType,
                 label: _labelAssociatedType,
-                valor: associated.tipoAssociado,
+                valor: associated.associatedType,
                 disabled: true,
               ),
             ),
@@ -267,7 +267,7 @@ class _AssociatedUpdateState extends State<AssociatedUpdate> {
                 icon: Icons.calendar_today,
                 tip: _tipDate,
                 inputType: TextInputType.datetime,
-                valor: associated.dataNascimento,
+                valor: associated.dateBirth,
               ),
             ),
             Expanded(
@@ -277,7 +277,7 @@ class _AssociatedUpdateState extends State<AssociatedUpdate> {
                 icon: Icons.calendar_today,
                 tip: _tipDate,
                 inputType: TextInputType.datetime,
-                valor: associated.dataEscudamento,
+                valor: associated.dateShield,
               ),
             ),
           ],
@@ -285,7 +285,7 @@ class _AssociatedUpdateState extends State<AssociatedUpdate> {
         Padding(
           padding: EdgeInsets.all(5.0),
         ),
-        dependentWidgets(associated.dependentes),
+        dependentWidgets(associated.dependents),
         Padding(
           padding: EdgeInsets.all(5.0),
         ),
@@ -307,7 +307,7 @@ class _AssociatedUpdateState extends State<AssociatedUpdate> {
     );
   }
 
-  Widget dependentWidgets(List<Dependente> dependentes) {
+  Widget dependentWidgets(List<Dependent> dependentes) {
     return Column(
       children: <Widget>[
         Card(

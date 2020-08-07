@@ -170,7 +170,7 @@ class MotorcycleAdd extends StatelessWidget {
 
     if (modelo != '') {
       final motocicletaCriada =
-          Motocicleta(codigo, modelo, ano, cor, placa, apelido, chassi, renavam);
+          Motorcycle(codigo, modelo, ano, cor, placa, apelido, chassi, renavam);
       debugPrint('Criando motocicleta...');
       debugPrint('$motocicletaCriada');
       /*

@@ -7,23 +7,23 @@ Todos os direitos reservados ao Harley Club de Sao Luis
 Descriçao: classe do objeto MesesMensalidade
 
 */
-class MesesMensalidade {
-  final int codigo;
-  final int mes;
+class PaymentMonths {
+  final int code;
+  final int month;
 
-  MesesMensalidade(this.codigo, this.mes);
+  PaymentMonths(this.code, this.month);
 
-  MesesMensalidade.fromJson(Map<String, dynamic> json)
-      : codigo = json['codigo'],
-        mes = json['mes'];
+  PaymentMonths.fromJson(Map<String, dynamic> json)
+      : code = json['codigo'],
+        month = json['mes'];
 
   Map<String, dynamic> toJson() => {
-    'codigo': codigo,
-    'mes': mes,
+    'codigo': code,
+    'mes': month,
   };
 
   @override
   String toString() {
-    return 'MesesMensalidade{codigo: $codigo, mes: $mes}';
+    return 'MesesMensalidade{codigo: $code, mes: $month}';
   }
 }

@@ -22,7 +22,7 @@ class PaymentList extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: MyAppBar(_tituloAppBar),
-      body: FutureBuilder<List<Mensalidade>>(
+      body: FutureBuilder<List<Payment>>(
         /*
         carrega JSON com dados da api
         */
@@ -41,7 +41,7 @@ class PaymentList extends StatelessWidget {
               break;
             case ConnectionState.done:
               if (snapshot.hasData) {
-                final List<Mensalidade> mensalidades = snapshot.data;
+                final List<Payment> mensalidades = snapshot.data;
                 print('mensalidades');
                 print(mensalidades);
                 if (mensalidades.isNotEmpty) {
@@ -105,11 +105,11 @@ class PaymentList extends StatelessWidget {
     );
   }
 
-  ExpansionTile buildExpansionTile(List<Mensalidade> mensalidades, int i) {
+  ExpansionTile buildExpansionTile(List<Payment> mensalidades, int i) {
     return ExpansionTile(
       backgroundColor: Colors.black12,
       title: Text(
-        'Ano: ' + mensalidades[i].ano,
+        'Ano: ' + mensalidades[i].year,
         style: TextStyle(
           fontSize: 30.0,
           fontWeight: FontWeight.bold,
@@ -119,13 +119,13 @@ class PaymentList extends StatelessWidget {
       children: <Widget>[
         Column(
           children:
-              mensalidades[i].mesesMensalidades.map(buildListTile).toList(),
+              mensalidades[i].paymentMonths.map(buildListTile).toList(),
         ),
       ],
     );
   }
 
-  ListTile buildListTile(MesesMensalidade mesesMensalidade) {
+  ListTile buildListTile(PaymentMonths mesesMensalidade) {
     return ListTile(
       dense: true,
       leading: Icon(
@@ -134,7 +134,7 @@ class PaymentList extends StatelessWidget {
         size: 30,
       ),
       title: Text(
-        'Mes: ' + mesesMensalidade.mes.toString(),
+        'Mes: ' + mesesMensalidade.month.toString(),
         style: TextStyle(
           fontSize: 15.0,
           fontWeight: FontWeight.bold,

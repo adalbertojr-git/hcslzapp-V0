@@ -23,11 +23,11 @@ class AssociatedWebClient {
 /*
 retorna lista de todos os associados
 */
-  Future<List<Associado>> findAll() async {
+  Future<List<Associated>> findAll() async {
     final Response response =
         await client.get(mainUrl + _associatedUrl).timeout(Duration(seconds: 10));
     final List<dynamic> decodedJson = jsonDecode(response.body);
-    return decodedJson.map((dynamic json) => Associado.fromJson(json)).toList();
+    return decodedJson.map((dynamic json) => Associated.fromJson(json)).toList();
   }
 
 /*
@@ -35,11 +35,11 @@ retorna lista com o associado especificado
 params:
 codigo: codigo do associado
 */
-  Future<List<Associado>> findByCodigo(int codigo) async {
+  Future<List<Associated>> findByCodigo(int codigo) async {
     final Response response = await client
         .get(mainUrl + _associatedUrl + '/' + codigo.toString())
         .timeout(Duration(seconds: 10));
     final List<dynamic> decodedJson = jsonDecode(response.body);
-    return decodedJson.map((dynamic json) => Associado.fromJson(json)).toList();
+    return decodedJson.map((dynamic json) => Associated.fromJson(json)).toList();
   }
 }

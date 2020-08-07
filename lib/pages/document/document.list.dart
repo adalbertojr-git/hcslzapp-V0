@@ -38,7 +38,7 @@ class DocumentListState extends State<DocumentList> {
     );
   }
 
-  void _atualiza(Dependente dependenteRecebido) {
+  void _atualiza(Dependent dependenteRecebido) {
     if (dependenteRecebido != null) {
       setState(
         () {
@@ -50,7 +50,7 @@ class DocumentListState extends State<DocumentList> {
 }
 
 class ItemList extends StatelessWidget {
-  final Dependente _dependente;
+  final Dependent _dependente;
   final Function onClick;
 
   ItemList(

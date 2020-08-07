@@ -7,34 +7,34 @@ Todos os direitos reservados ao Harley Club de Sao Luis
 Descriçao: enum com tipos sanguineos
 
 */
-enum TipoSanguineo {
-  A_POSITIVO,
-  A_NEGATIVO,
-  B_POSITIVO,
-  B_NEGATIVO,
-  O_POSITIVO,
-  O_NEGATIVO,
-  AB_POSITIVO,
-  AB_NEGATIVO,
+enum BloodType {
+  A_POSITIVE,
+  A_NEGATIVE,
+  B_POSITIVE,
+  B_NEGATIVE,
+  O_POSITIVE,
+  O_NEGATIVE,
+  AB_POSITIVE,
+  AB_NEGATIVE,
 }
 
-extension TipoSanguineoExt on TipoSanguineo {
-  static const tiposSanguineosMap = {
-    TipoSanguineo.A_NEGATIVO: "A-",
-    TipoSanguineo.A_POSITIVO: "A+",
-    TipoSanguineo.B_NEGATIVO: "B-",
-    TipoSanguineo.B_POSITIVO: "B+",
-    TipoSanguineo.O_NEGATIVO: "O-",
-    TipoSanguineo.O_POSITIVO: "O+",
-    TipoSanguineo.AB_NEGATIVO: "AB-",
-    TipoSanguineo.AB_POSITIVO: "AB+",
+extension BloodTypeExt on BloodType {
+  static const bloodTypesMap = {
+    BloodType.A_NEGATIVE: "A-",
+    BloodType.A_POSITIVE: "A+",
+    BloodType.B_NEGATIVE: "B-",
+    BloodType.B_POSITIVE: "B+",
+    BloodType.O_NEGATIVE: "O-",
+    BloodType.O_POSITIVE: "O+",
+    BloodType.AB_NEGATIVE: "AB-",
+    BloodType.AB_POSITIVE: "AB+",
   };
 
   //prints enum index and custom message
-  void tipoSanguineoToString() {
-    print("${this.index} ${this.descricao}");
+  void bloodTypeToString() {
+    print("${this.index} ${this.description}");
   }
 
   //about property returns the custom message
-  String get descricao => tiposSanguineosMap[this];
+  String get description => bloodTypesMap[this];
 }

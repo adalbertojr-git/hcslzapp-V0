@@ -10,84 +10,84 @@ Descriçao: classe do objeto Associado
 import 'package:hcslzapp/models/dependent.dart';
 import 'package:hcslzapp/models/motorcycle.dart';
 
-class Associado {
-  final int codigo;
-  final String nome;
+class Associated {
+  final int code;
+  final String name;
   final String email;
-  final String telefone;
-  final Associado padrinho;
-  final String apelido;
+  final String phone;
+  final Associated sponsor;
+  final String nickname;
   final String cnh;
   final String cpf;
   final String rg;
-  final String tipoSanguineo;
-  final String tipoAssociado;
-  final String dataNascimento;
-  final String dataEscudamento;
-  final List<Dependente> dependentes;
-  final List<Motocicleta> motocicletas;
+  final String bloodType;
+  final String associatedType;
+  final String dateBirth;
+  final String dateShield;
+  final List<Dependent> dependents;
+  final List<Motorcycle> motorcycles;
 
-  Associado(
-      this.codigo,
-      this.nome,
+  Associated(
+      this.code,
+      this.name,
       this.email,
-      this.telefone,
-      this.padrinho,
-      this.apelido,
+      this.phone,
+      this.sponsor,
+      this.nickname,
       this.cnh,
       this.cpf,
       this.rg,
-      this.tipoSanguineo,
-      this.tipoAssociado,
-      this.dataNascimento,
-      this.dataEscudamento,
-      this.dependentes,
-      this.motocicletas);
+      this.bloodType,
+      this.associatedType,
+      this.dateBirth,
+      this.dateShield,
+      this.dependents,
+      this.motorcycles);
 
-  Associado.fromJson(Map<String, dynamic> json)
-      : codigo = json['codigo'],
-        nome = json['nome'],
+  Associated.fromJson(Map<String, dynamic> json)
+      : code = json['codigo'],
+        name = json['nome'],
         email = json['email'],
-        telefone = json['telefone'],
-        padrinho = json["padrinho"] == null ? null : Associado.fromJson(json["padrinho"]),
-        apelido = json['apelido'],
+        phone = json['telefone'],
+        sponsor = json["padrinho"] == null ? null : Associated.fromJson(json["padrinho"]),
+        nickname = json['apelido'],
         cnh = json['cnh'],
         cpf = json['cpf'],
         rg = json['rg'],
-        tipoSanguineo = json['tipoSanguineo'],
-        tipoAssociado = json['tipoAssociado'],
-        dataNascimento = json['dataNascimento'],
-        dataEscudamento = json['dataEscudamento'],
-        dependentes = List.from((json['dependentes'] as List)
-            .map((dependentes) => Dependente.fromJson(dependentes))),
-        motocicletas = List.from((json['motocicletas'] as List)
-            .map((motocicletas) => Motocicleta.fromJson(motocicletas)));
+        bloodType = json['tipoSanguineo'],
+        associatedType = json['tipoAssociado'],
+        dateBirth = json['dataNascimento'],
+        dateShield = json['dataEscudamento'],
+        dependents = List.from((json['dependentes'] as List)
+            .map((dependentes) => Dependent.fromJson(dependentes))),
+        motorcycles = List.from((json['motocicletas'] as List)
+            .map((motocicletas) => Motorcycle.fromJson(motocicletas)));
 
   Map<String, dynamic> toJson() => {
-        'codigo': codigo,
-        'nome': nome,
+        'codigo': code,
+        'nome': name,
         'email': email,
-        'telefone': telefone,
-        'padrinho': padrinho == null ? null : padrinho.toJson(),
-        'apelido': apelido,
+        'telefone': phone,
+        'padrinho': sponsor == null ? null : sponsor.toJson(),
+        'apelido': nickname,
         'cnh': cnh,
         'cpf': cpf,
         'rg': rg,
-        'tipoSanguineo': tipoSanguineo,
-        'tipoAssociado': tipoAssociado,
-        'dataNascimento': dataNascimento,
-        'dataEscudamento': dataEscudamento,
+        'tipoSanguineo': bloodType,
+        'tipoAssociado': associatedType,
+        'dataNascimento': dateBirth,
+        'dataEscudamento': dateShield,
         'dependentes': List<dynamic>.from(
-            dependentes.map((depedentes) => depedentes.toJson())),
+            dependents.map((depedentes) => depedentes.toJson())),
         'motocicletas': List<dynamic>.from(
-            motocicletas.map((motocicletas) => motocicletas.toJson())),
+            motorcycles.map((motocicletas) => motocicletas.toJson())),
       };
 
   @override
   String toString() {
-    return 'Associado{codigo: $codigo, nome: $nome, email: $email, telefone: $telefone, '
-        'apelido: $apelido, cnh: $cnh, cpf: $cpf, rg: $rg, '
-        'tipoSanguineo: $tipoSanguineo, dataNascimento: $dataNascimento, '
-        'dataEscudamento: $dataEscudamento}';
+    return 'Associado{codigo: $code, nome: $name, email: $email, telefone: $phone, '
+        'apelido: $nickname, cnh: $cnh, cpf: $cpf, rg: $rg, '
+        'tipoSanguineo: $bloodType, dataNascimento: $dateBirth, '
+        'dataEscudamento: $dateShield}';
   }
 }

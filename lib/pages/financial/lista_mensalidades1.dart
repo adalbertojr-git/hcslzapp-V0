@@ -102,7 +102,7 @@ class ListaMensalidades1State extends State<ListaMensalidades1> {
 
 
 class ItemList extends StatelessWidget {
-  final Dependente _dependente;
+  final Dependent _dependente;
   final Function onClick;
 
   ItemList(this._dependente, {
