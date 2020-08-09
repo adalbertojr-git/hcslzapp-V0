@@ -20,7 +20,7 @@ class DependentListState extends State<DependentList> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: MyAppBar(_tituloAppBar),
+      //appBar: MyAppBar(_tituloAppBar),
       body: Container(
         decoration: BoxDecoration(
           gradient: LinearGradient(

@@ -85,7 +85,6 @@ class DefectAdd extends StatelessWidget {
                   padding: EdgeInsets.all(5.0),
                 ),
                 Button(
-                  'Cadastrar',
                   Icons.play_arrow,
                   onClick: () {
                   },

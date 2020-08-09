@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:hcslzapp/components/button.dart';
 import 'package:hcslzapp/components/my.appbar.dart';
 import 'package:hcslzapp/components/input.textfield.dart';
+import 'package:hcslzapp/components/top.space.dart';
 import 'package:hcslzapp/models/motorcycle.dart';
 
 const _tituloAppBar = 'Motocicleta';
@@ -26,7 +28,7 @@ class MotorcycleAdd extends StatelessWidget {
   //@override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: MyAppBar(_tituloAppBar),
+      //appBar: MyAppBar(_tituloAppBar),
       body: Container(
         padding: EdgeInsets.fromLTRB(5.0, 0.0, 5.0, 0.0),
         decoration: BoxDecoration(
@@ -41,6 +43,7 @@ class MotorcycleAdd extends StatelessWidget {
           child: SingleChildScrollView(
             child: Column(
               children: <Widget>[
+                TopSpace(),
                 InputTextField(
                   controlller: _controladorModelo,
                   label: _rotuloModelo,
@@ -100,47 +103,11 @@ class MotorcycleAdd extends StatelessWidget {
                 Padding(
                   padding: EdgeInsets.all(5.0),
                 ),
-                Container(
-                  width: MediaQuery.of(context).size.width - 30,
-                  height: 50.0,
-                  child: RaisedButton(
-                    padding: EdgeInsets.all(0.0),
-                    shape: new RoundedRectangleBorder(
-                      borderRadius: new BorderRadius.circular(20.0),
-                      side: BorderSide(color: Colors.white30),
-                    ),
-                    child: Container(
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.all(
-                          Radius.circular(20.0),
-                        ),
-                        gradient: LinearGradient(
-                          colors: [Colors.white, Colors.deepOrange],
-                          begin: FractionalOffset.topLeft,
-                          end: FractionalOffset.bottomRight,
-                        ),
-                      ),
-                      height: MediaQuery.of(context).size.height,
-                      width: MediaQuery.of(context).size.width,
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: <Widget>[
-                          Text(
-                            'CADASTRAR' + "  ",
-                            style:
-                                TextStyle(color: Colors.black, fontSize: 17.0),
-                          ),
-                          Icon(
-                            Icons.add_circle,
-                            color: Colors.white30,
-                          ),
-                        ],
-                      ),
-                    ),
-                    onPressed: () {
-                      _criaMotocicleta(context);
-                    },
-                  ),
+                Button(
+                  Icons.save,
+                  onClick: () {
+                    _save(context);
+                  },
                 ),
               ],
             ),
@@ -158,7 +125,7 @@ class MotorcycleAdd extends StatelessWidget {
     return null;
   }
 
-  void _criaMotocicleta(BuildContext context) {
+  void _save(BuildContext context) {
     final int codigo = int.parse(_controladorCodigo.text);
     final String modelo = _controladorModelo.text;
     final String ano = _controladorAno.text;

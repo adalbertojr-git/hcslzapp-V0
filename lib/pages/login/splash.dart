@@ -5,7 +5,9 @@ import 'package:hcslzapp/pages/associated/associated.request.access.dart';
 
 import 'login.dart';
 
-const _rotuloNaoSouAssociado = 'Primeiro acesso?';
+const _labelFirstAccess = 'Primeiro acesso?';
+const _labelAppTitle = 'HCSlz App';
+const _labelAppVersion = 'Versao: 1.0.0';
 
 class Splash extends StatelessWidget {
   //@override
@@ -28,15 +30,21 @@ class Splash extends StatelessWidget {
               child: SingleChildScrollView(
                 child: Column(
                   children: <Widget>[
-                    HcLogo(40.0),
+                    HcLogo(30.0),
                     Text(
-                      'Versao: 1.0.0'
+                      _labelAppTitle,
+                      style: TextStyle(
+                        fontSize: 30,
+                        fontWeight: FontWeight.bold
+                      ),
+                    ),
+                    Text(
+                      _labelAppVersion
                     ),
                     SizedBox(
-                      height: 30.0,
+                      height: 20.0,
                     ),
                     Button(
-                      'ACESSAR',
                       Icons.arrow_forward,
                       onClick: () {
                         _showLoginPage(context);
@@ -47,11 +55,11 @@ class Splash extends StatelessWidget {
                     ),
                     FlatButton(
                       child: Text(
-                        _rotuloNaoSouAssociado,
-                        style: TextStyle(color: Colors.blue),
+                        _labelFirstAccess,
+                        style: TextStyle(color: Colors.white),
                       ),
                       onPressed: () {
-                        _showSolicitarAcessoAssociadoPage(context);
+                        _showAssociatedRequestAccessPage(context);
                       },
                     ),
                   ],
@@ -73,7 +81,7 @@ class Splash extends StatelessWidget {
     );
   }
 
-  void _showSolicitarAcessoAssociadoPage(BuildContext context) {
+  void _showAssociatedRequestAccessPage(BuildContext context) {
     Navigator.push(
       context,
       MaterialPageRoute(builder: (context) {

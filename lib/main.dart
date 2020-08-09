@@ -27,7 +27,6 @@ flutter emulators --launch Nexus_5X_API_29_x86
 
 >>>> criar icone da aplicaçao:
 flutter pub run flutter_launcher_icons:main
-
 */
 
 const _titleAppBar = 'HCSlz App';

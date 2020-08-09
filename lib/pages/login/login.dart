@@ -32,7 +32,7 @@ class Login extends StatelessWidget {
           child: SingleChildScrollView(
             child: Column(
               children: <Widget>[
-                HcLogo(40.0),
+                HcLogo(30.0),
                 InputTextField(
                   controlller: _controladorUser,
                   label: _rotuloUser,
@@ -49,7 +49,6 @@ class Login extends StatelessWidget {
                   hidden: true,
                 ),
                 Button(
-                  'LOGIN',
                   Icons.arrow_forward,
                   onClick: () {
                     _showDashboardPage(context);

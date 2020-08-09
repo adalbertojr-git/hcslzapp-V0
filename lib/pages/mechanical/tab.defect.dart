@@ -19,10 +19,10 @@ class TabDefect extends StatelessWidget {
         appBar: AppBar(
           backgroundColor: Colors.black,
           centerTitle: true,
-          title: Text(
+/*          title: Text(
             _tituloAppBar,
             style: TextStyle(color: Colors.orange),
-          ),
+          ),*/
           // If `TabController controller` is not provided, then a
           // DefaultTabController ancestor must be provided instead.
           // Another way is to use a self-defined controller, c.f. "Bottom tab

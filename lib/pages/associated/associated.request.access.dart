@@ -12,6 +12,7 @@ import 'package:flutter/material.dart';
 import 'package:hcslzapp/components/my.appbar.dart';
 import 'package:hcslzapp/components/button.dart';
 import 'package:hcslzapp/components/input.textfield.dart';
+import 'package:hcslzapp/components/top.space.dart';
 
 const _titleAppBar = 'Solicitar Acesso';
 const _labelName = 'Nome *';
@@ -41,9 +42,7 @@ class AssociatedRequestAccess extends StatelessWidget {
         child: SingleChildScrollView(
           child: Column(
             children: <Widget>[
-              SizedBox(
-                height: 30.0,
-              ),
+              TopSpace(),
               InputTextField(
                 controlller: _controllerName,
                 label: _labelName,
@@ -73,7 +72,6 @@ class AssociatedRequestAccess extends StatelessWidget {
                 padding: EdgeInsets.all(5.0),
               ),
               Button(
-                'ENVIAR',
                 Icons.send,
                 onClick: () {
                   _sendRequest(context);

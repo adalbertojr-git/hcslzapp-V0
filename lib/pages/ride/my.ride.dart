@@ -21,10 +21,10 @@ class _MyRideState extends State<MyRide> {
       appBar: AppBar(
         backgroundColor: Colors.black,
         centerTitle: true,
-        title: Text(
+/*        title: Text(
           "Meu Role",
           style: TextStyle(color: Colors.orange),
-        ),
+        ),*/
         actions: <Widget>[_buildButtons()],
       ),
       body: Container(

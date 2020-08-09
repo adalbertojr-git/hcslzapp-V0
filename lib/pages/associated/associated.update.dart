@@ -12,6 +12,7 @@ administracao do App e nao podem ser alteradas pelo associado
 */
 import 'package:flutter/material.dart';
 import 'package:hcslzapp/components/my.appbar.dart';
+import 'package:hcslzapp/components/top.space.dart';
 import 'package:hcslzapp/enums/blood.types.dart';
 import 'package:hcslzapp/components/button.dart';
 import 'package:hcslzapp/components/centered.message.dart';
@@ -87,7 +88,7 @@ class _AssociatedUpdateState extends State<AssociatedUpdate> {
   //@override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: MyAppBar(_titleAppBar),
+      //appBar: MyAppBar(_titleAppBar),
       body: FutureBuilder<List<Associated>>(
         /*
         carrega JSON com dados da api
@@ -153,6 +154,7 @@ class _AssociatedUpdateState extends State<AssociatedUpdate> {
     _currentBloodType = associated.bloodType;
     return Column(
       children: <Widget>[
+        TopSpace(),
         InputTextField(
           controlller: _controllerName,
           label: _labelName,
@@ -290,18 +292,14 @@ class _AssociatedUpdateState extends State<AssociatedUpdate> {
           padding: EdgeInsets.all(5.0),
         ),
         motorcycleWidgets(),
-        Padding(
+/*        Padding(
           padding: EdgeInsets.all(5.0),
-        ),
+        ),*/
         Button(
-          'ATUALIZAR',
-          Icons.update,
+          Icons.save,
           onClick: () {
             _update(context);
           },
-        ),
-        Padding(
-          padding: EdgeInsets.all(5.0),
         ),
       ],
     );

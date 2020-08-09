@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:hcslzapp/components/button.dart';
 import 'package:hcslzapp/components/my.appbar.dart';
+import 'package:hcslzapp/components/top.space.dart';
 import 'package:hcslzapp/enums/blood.types.dart';
 import 'package:hcslzapp/components/input.textfield.dart';
 import 'package:hcslzapp/models/dependent.dart';
@@ -58,9 +60,10 @@ class _DependentAddState extends State<DependentAdd> {
 
   //@override
   Widget build(BuildContext context) {
-    _currentTipoSanguineo = widget.dependente != null ? widget.dependente.bloodType : null;
+    _currentTipoSanguineo =
+        widget.dependente != null ? widget.dependente.bloodType : null;
     return Scaffold(
-      appBar: MyAppBar(_tituloAppBar),
+      //appBar: MyAppBar(_tituloAppBar),
       body: Container(
         padding: EdgeInsets.fromLTRB(5.0, 0.0, 5.0, 0.0),
         decoration: BoxDecoration(
@@ -75,6 +78,7 @@ class _DependentAddState extends State<DependentAdd> {
           child: SingleChildScrollView(
             child: Column(
               children: <Widget>[
+                TopSpace(),
                 InputTextField(
                   controlller: _controladorNome,
                   label: _rotuloNome,
@@ -188,47 +192,11 @@ class _DependentAddState extends State<DependentAdd> {
                 Padding(
                   padding: EdgeInsets.all(5.0),
                 ),
-                Container(
-                  width: MediaQuery.of(context).size.width - 30,
-                  height: 50.0,
-                  child: RaisedButton(
-                    padding: EdgeInsets.all(0.0),
-                    shape: new RoundedRectangleBorder(
-                      borderRadius: new BorderRadius.circular(20.0),
-                      side: BorderSide(color: Colors.white30),
-                    ),
-                    child: Container(
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.all(
-                          Radius.circular(20.0),
-                        ),
-                        gradient: LinearGradient(
-                          colors: [Colors.white, Colors.deepOrange],
-                          begin: FractionalOffset.topLeft,
-                          end: FractionalOffset.bottomRight,
-                        ),
-                      ),
-                      height: MediaQuery.of(context).size.height,
-                      width: MediaQuery.of(context).size.width,
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: <Widget>[
-                          Text(
-                            'CADASTRAR' + "  ",
-                            style:
-                                TextStyle(color: Colors.black, fontSize: 17.0),
-                          ),
-                          Icon(
-                            Icons.add_circle,
-                            color: Colors.white30,
-                          ),
-                        ],
-                      ),
-                    ),
-                    onPressed: () {
-                      _criaDependente(context);
-                    },
-                  ),
+                Button(
+                  Icons.save,
+                  onClick: () {
+                    _save(context);
+                  },
                 ),
               ],
             ),
@@ -254,7 +222,7 @@ class _DependentAddState extends State<DependentAdd> {
     return null;
   }
 
-  void _criaDependente(BuildContext context) {
+  void _save(BuildContext context) {
     //final int codigo = int.parse(_controladorCodigo.text);
     final String nome = _controladorNome.text;
     final String email = _controladorEmail.text;
