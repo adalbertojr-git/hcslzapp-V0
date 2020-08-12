@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:hcslzapp/components/button.dart';
 import 'package:hcslzapp/components/my.appbar.dart';
 import 'package:hcslzapp/models/dependent.dart';
 import 'package:hcslzapp/pages/dependent/dependent.add.dart';
@@ -46,10 +47,9 @@ class DependentListState extends State<DependentList> {
           },
         ),
       ),
-      floatingActionButton: FloatingActionButton(
-        backgroundColor: Colors.black,
-        child: Icon(Icons.add),
-        onPressed: () {
+      floatingActionButton: Button(
+        Icons.add,
+        onClick: () {
           final Future<Dependent> future = Navigator.push(
             context,
             MaterialPageRoute(

@@ -79,6 +79,8 @@ flutter:
     - assets/imgs/info.png
     - assets/imgs/sobre.jpeg
     - assets/imgs/logo_sobre.png
+    - assets/imgs/dependentes.png
+    - assets/imgs/motocicletas.png
 
     #
     - assets/icons/digital-logo.png

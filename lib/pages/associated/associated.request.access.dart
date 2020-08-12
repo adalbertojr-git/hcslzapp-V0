@@ -68,16 +68,16 @@ class AssociatedRequestAccess extends StatelessWidget {
                 //inputType: TextInputType.text,
                 disabled: true,
               ),
-              Padding(
-                padding: EdgeInsets.all(5.0),
-              ),
               Button(
                 Icons.send,
                 onClick: () {
                   _sendRequest(context);
                 },
               ),
-              //Info(),
+              Padding(
+                padding: EdgeInsets.all(2.0),
+              ),
+              Info(),
             ],
           ),
         ),
@@ -92,13 +92,11 @@ class Info extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: EdgeInsets.fromLTRB(0.0, 10.0, 0.0, 0.0),
       width: MediaQuery.of(context).size.width - 15,
-      height: MediaQuery.of(context).size.height - 360,
       child: Card(
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(15.0),
-          side: BorderSide(color: Colors.orangeAccent),
+          side: BorderSide(color: Colors.black),
         ),
         color: Colors.white,
         elevation: 10,
@@ -106,17 +104,22 @@ class Info extends StatelessWidget {
           mainAxisSize: MainAxisSize.min,
           children: <Widget>[
             Padding(
-              padding: EdgeInsets.fromLTRB(00.0, 5.0, 00.0, 0.0),
-              child: new Image.asset('assets/imgs/info.png'),
+              padding: EdgeInsets.only(top: 5.0),
+              child: Image.asset(
+                'assets/imgs/info.png',
+                height: 50.0,
+              ),
             ),
             const ListTile(
               title: Text(
-                'Aviso:',
-                style: TextStyle(color: Colors.black, fontSize: 20.0),
+                'Atenção:',
+                style: TextStyle(
+                  color: Colors.black,
+                  fontSize: 20.0,
+                ),
               ),
               subtitle: Text(
-                'Assim que sua solicitacao for aprovada pela Diretoria, voce '
-                'recebera um email com dados para acesso. '
+                'Voce recebera um email com instruçoes de acesso. '
                 'Verifique tambem sua caixa de spam.',
                 style: TextStyle(color: Colors.black),
               ),

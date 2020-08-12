@@ -7,7 +7,7 @@ import 'login.dart';
 
 const _labelFirstAccess = 'Primeiro acesso?';
 const _labelAppTitle = 'HCSlz App';
-const _labelAppVersion = 'Versao: 1.0.0';
+const _labelAppVersion = 'Versão: 1.0.0';
 
 class Splash extends StatelessWidget {
   //@override
@@ -39,7 +39,10 @@ class Splash extends StatelessWidget {
                       ),
                     ),
                     Text(
-                      _labelAppVersion
+                      _labelAppVersion,
+                      style: TextStyle(
+                          fontSize: 10,
+                      ),
                     ),
                     SizedBox(
                       height: 20.0,

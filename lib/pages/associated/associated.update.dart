@@ -21,6 +21,7 @@ import 'package:hcslzapp/components/input.textfield.dart';
 import 'package:hcslzapp/http/webclients/associated.webclient.dart';
 import 'package:hcslzapp/models/associated.dart';
 import 'package:hcslzapp/models/dependent.dart';
+import 'package:hcslzapp/models/motorcycle.dart';
 import 'package:hcslzapp/pages/dependent/dependent.list.dart';
 import 'package:hcslzapp/pages/motorcycle/motorcycle.list.dart';
 
@@ -146,6 +147,12 @@ class _AssociatedUpdateState extends State<AssociatedUpdate> {
           );
         },
       ),
+      floatingActionButton: Button(
+        Icons.save,
+        onClick: () {
+          _update(context);
+        },
+      ),
     );
   }
 
@@ -155,6 +162,11 @@ class _AssociatedUpdateState extends State<AssociatedUpdate> {
     return Column(
       children: <Widget>[
         TopSpace(),
+        SizedBox(
+          height: 10.0,
+          width: double.infinity,
+        ),
+        _photo(),
         InputTextField(
           controlller: _controllerName,
           label: _labelName,
@@ -287,24 +299,59 @@ class _AssociatedUpdateState extends State<AssociatedUpdate> {
         Padding(
           padding: EdgeInsets.all(5.0),
         ),
-        dependentWidgets(associated.dependents),
+        Container(
+          height: 350,
+          child: DependentsAndMotorcycles(
+            associated.dependents,
+            associated.motorcycles,
+          ),
+        ),
+
+/*        dependentWidgets(associated.dependents),
         Padding(
           padding: EdgeInsets.all(5.0),
         ),
         motorcycleWidgets(),
+        */
+
 /*        Padding(
           padding: EdgeInsets.all(5.0),
-        ),*/
+        ),
         Button(
           Icons.save,
           onClick: () {
             _update(context);
           },
-        ),
+        ),*/
       ],
     );
   }
 
+  Container _photo() {
+    return Container(
+      height: 200.0,
+      width: 200.0,
+      padding: EdgeInsets.all(10.0),
+      decoration: BoxDecoration(
+        color: Colors.black.withOpacity(0.2),
+        borderRadius: BorderRadius.circular(100.0),
+      ),
+      child: Container(
+        height: 100.0,
+        width: 100.0,
+        decoration: BoxDecoration(
+          color: Colors.black,
+          borderRadius: BorderRadius.circular(100.0),
+          image: DecorationImage(
+            image: AssetImage('assets/imgs/noImage.png'),
+            fit: BoxFit.fill,
+          ),
+        ),
+      ),
+    );
+  }
+
+/*
   Widget dependentWidgets(List<Dependent> dependentes) {
     return Column(
       children: <Widget>[
@@ -396,7 +443,7 @@ class _AssociatedUpdateState extends State<AssociatedUpdate> {
         )
       ],
     );
-  }
+  }*/
 
   void changedDropDownItem(String selected) {
     setState(() {
@@ -419,4 +466,123 @@ class _AssociatedUpdateState extends State<AssociatedUpdate> {
   }
 
   void _update(BuildContext context) {}
+}
+
+class DependentsAndMotorcycles extends StatelessWidget {
+  List<Dependent> dependents;
+  List<Motorcycle> motorcycles;
+
+  DependentsAndMotorcycles(this.dependents, this.motorcycles);
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      child: ListView(
+        scrollDirection: Axis.horizontal,
+        children: <Widget>[
+          Cards(
+            title: "Dependentes",
+            image: "assets/imgs/dependentes.png",
+            count: this.dependents.length,
+            onClick: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) {
+                    return DependentList(this.dependents);
+                  },
+                ),
+              );
+            },
+          ),
+          Cards(
+            title: "Motocicletas",
+            image: "assets/imgs/motocicletas.png",
+            count: this.motorcycles.length,
+            onClick: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) {
+                    return MotorcycleList();
+                  },
+                ),
+              );
+            },
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+class Cards extends StatelessWidget {
+  final String image;
+  final String title;
+  final int count;
+  final Function onClick;
+
+  Cards({
+    @required this.image,
+    @required this.title,
+    @required this.count,
+    @required this.onClick,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      padding: EdgeInsets.all(10),
+      margin: EdgeInsets.all(5),
+      width: (MediaQuery.of(context).size.width / 2) - 15,
+      color: Colors.black12,
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: <Widget>[
+          GestureDetector(
+            onTap: () {
+              onClick();
+            },
+            child: Hero(
+              tag: image,
+              child: Image.asset(
+                image,
+                width: 170,
+                height: 170,
+                fit: BoxFit.cover,
+              ),
+            ),
+          ),
+          SizedBox(
+            height: 10,
+          ),
+          Container(
+            height: 70,
+            child: Text(
+              title,
+              style: TextStyle(
+                fontSize: 18,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+          ),
+          Text(
+            "Quantidade: " + this.count.toString(),
+            style: TextStyle(
+              fontSize: 16,
+            ),
+          ),
+          SizedBox(
+            height: 5,
+          ),
+          Text(
+            "Click na imagem para detalhes...",
+            style: TextStyle(
+              fontSize: 9.0,
+            ),
+          ),
+        ],
+      ),
+    );
+  }
 }

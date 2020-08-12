@@ -9,6 +9,7 @@ import 'package:hcslzapp/components/my.appbar.dart';
 import 'package:hcslzapp/components/centered.message.dart';
 import 'package:hcslzapp/components/progress.dart';
 import 'package:hcslzapp/components/input.textfield.dart';
+import 'package:hcslzapp/components/top.space.dart';
 import 'package:hcslzapp/http/webclients/payment.webclient.dart';
 import 'package:hcslzapp/models/payment.dart';
 import 'package:hcslzapp/models/payment.months.dart';
@@ -21,7 +22,7 @@ class PaymentList extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: MyAppBar(_tituloAppBar),
+      //appBar: MyAppBar(_tituloAppBar),
       body: FutureBuilder<List<Payment>>(
         /*
         carrega JSON com dados da api
@@ -57,6 +58,7 @@ class PaymentList extends StatelessWidget {
                     height: MediaQuery.of(context).size.height,
                     child: Column(
                       children: <Widget>[
+                        TopSpace(),
                         InputTextField(
                           //controlador: _controladorPadrinho,
                           label: 'Situaçao', //_rotuloPadrinho,
@@ -107,14 +109,9 @@ class PaymentList extends StatelessWidget {
 
   ExpansionTile buildExpansionTile(List<Payment> mensalidades, int i) {
     return ExpansionTile(
-      backgroundColor: Colors.black12,
+      backgroundColor: Colors.white54,
       title: Text(
         'Ano: ' + mensalidades[i].year,
-        style: TextStyle(
-          fontSize: 30.0,
-          fontWeight: FontWeight.bold,
-          fontStyle: FontStyle.italic,
-        ),
       ),
       children: <Widget>[
         Column(
