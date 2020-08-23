@@ -12,7 +12,6 @@ administracao do App e nao podem ser alteradas pelo associado
 */
 import 'package:flutter/material.dart';
 import 'package:hcslzapp/components/my.appbar.dart';
-import 'package:hcslzapp/components/top.space.dart';
 import 'package:hcslzapp/enums/blood.types.dart';
 import 'package:hcslzapp/components/button.dart';
 import 'package:hcslzapp/components/centered.message.dart';
@@ -62,45 +61,53 @@ class _AssociatedUpdateState extends State<AssociatedUpdate> {
   List _bloodTypes = List();
   List<DropdownMenuItem<String>> _dropDownBloodTypes;
   String _currentBloodType;
-  int _radioValue1 = -1;
   final AssociatedWebClient _webClient = AssociatedWebClient();
+  Future<List<Associated>> _future;
+  bool isLoading = true;
+
+/*
+  @override
+  void initState() {
+    _dropDownBloodTypes = _getBloodTypes();
+    _future = getFuture();
+    super.initState();
+  }*/
 
   @override
   void initState() {
+    getFuture().then((value) {
+      setState(() {
+        _future = getFuture();
+        isLoading = false;
+      });
+    });
     _dropDownBloodTypes = _getBloodTypes();
     super.initState();
   }
 
-  // here we are creating the list needed for the DropDownButton
-  List<DropdownMenuItem<String>> _getBloodTypes() {
-    List<DropdownMenuItem<String>> types = new List();
-    //TipoSanguineo.values.forEach((v) => print('value: $v, index: ${v.index}'));
-    //TipoSanguineo.values.forEach((v) => print(v.descricao));
-    BloodType.values.forEach((v) => _bloodTypes.add(v.description));
-    print(_bloodTypes);
-    for (String type in _bloodTypes) {
-      // here we are creating the drop down menu items, you can customize the item right here
-      // but I'll just use a simple text for this
-      types.add(new DropdownMenuItem(value: type, child: new Text(type)));
-    }
-    return types;
+  Future<List<Associated>> getFuture() async {
+    return _webClient.findByCodigo(1);
   }
 
-  //@override
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
-      //appBar: MyAppBar(_titleAppBar),
+      //appBar: MyAppBar(_titleAppBar)
       body: FutureBuilder<List<Associated>>(
         /*
         carrega JSON com dados da api
         */
-        future: _webClient.findByCodigo(1),
+        future: _future, //_webClient.findByCodigo(1),
         /*
         -------------------------------
         */
         builder: (context, snapshot) {
           switch (snapshot.connectionState) {
             case ConnectionState.none:
+              return CenteredMessage(
+                'Sem conexao com o servidor.',
+                icon: Icons.error,
+              );
               break;
             case ConnectionState.waiting:
               return Progress();
@@ -109,8 +116,8 @@ class _AssociatedUpdateState extends State<AssociatedUpdate> {
               break;
             case ConnectionState.done:
               if (snapshot.hasData) {
-                final List<Associated> associateds = snapshot.data;
-                if (associateds.isNotEmpty) {
+                final List<Associated> associatedList = snapshot.data;
+                if (associatedList.isNotEmpty) {
                   return Container(
                     padding: EdgeInsets.fromLTRB(5.0, 5.0, 5.0, 0.0),
                     decoration: BoxDecoration(
@@ -123,18 +130,19 @@ class _AssociatedUpdateState extends State<AssociatedUpdate> {
                     height: MediaQuery.of(context).size.height,
                     child: Form(
                       child: SingleChildScrollView(
-                        child: associatedWidgets(associateds),
+                        child: associatedWidgets(associatedList),
                       ),
                     ),
                   );
                 }
-              }
+              } //if (snapshot.hasData)
               return CenteredMessage(
                 'Associado nao encontrado.',
                 icon: Icons.warning,
               );
               break;
-          }
+          } //switch (snapshot.connectionState)
+
           /*
             este codigo na pratica nao e alcançado (todos os cenarios possiveis ja
             foram tratados acima), podendo assi retornar Null, mas
@@ -147,23 +155,24 @@ class _AssociatedUpdateState extends State<AssociatedUpdate> {
           );
         },
       ),
-      floatingActionButton: Button(
-        Icons.save,
-        onClick: () {
-          _update(context);
-        },
-      ),
+      floatingActionButton: isLoading
+          ? null
+          : Button(
+              Icons.save,
+              onClick: () {
+                _update(context);
+              },
+            ),
     );
   }
 
-  Column associatedWidgets(List<Associated> associateds) {
-    final Associated associated = associateds[0];
+  Column associatedWidgets(List<Associated> associatedList) {
+    final Associated associated = associatedList[0];
     _currentBloodType = associated.bloodType;
     return Column(
       children: <Widget>[
-        TopSpace(),
         SizedBox(
-          height: 10.0,
+          height: 30.0,
           width: double.infinity,
         ),
         _photo(),
@@ -262,7 +271,10 @@ class _AssociatedUpdateState extends State<AssociatedUpdate> {
                     Icons.arrow_downward,
                     size: 28,
                   ),
-                  style: TextStyle(fontSize: 15.0, color: Colors.black),
+                  style: TextStyle(
+                    fontSize: 15.0,
+                    color: Colors.black,
+                  ),
                   value: _currentBloodType,
                   items: _dropDownBloodTypes,
                   onChanged: changedDropDownItem,
@@ -300,29 +312,15 @@ class _AssociatedUpdateState extends State<AssociatedUpdate> {
           padding: EdgeInsets.all(5.0),
         ),
         Container(
-          height: 350,
+          height: 300,
           child: DependentsAndMotorcycles(
             associated.dependents,
             associated.motorcycles,
           ),
         ),
-
-/*        dependentWidgets(associated.dependents),
-        Padding(
-          padding: EdgeInsets.all(5.0),
+        SizedBox(
+          height: 60.0,
         ),
-        motorcycleWidgets(),
-        */
-
-/*        Padding(
-          padding: EdgeInsets.all(5.0),
-        ),
-        Button(
-          Icons.save,
-          onClick: () {
-            _update(context);
-          },
-        ),*/
       ],
     );
   }
@@ -351,109 +349,24 @@ class _AssociatedUpdateState extends State<AssociatedUpdate> {
     );
   }
 
-/*
-  Widget dependentWidgets(List<Dependent> dependentes) {
-    return Column(
-      children: <Widget>[
-        Card(
-          elevation: 7,
-          color: Colors.deepOrange,
-          child: Row(
-            children: <Widget>[
-              Container(
-                padding: EdgeInsets.all(10.0),
-                alignment: Alignment.centerLeft,
-                child: Text(
-                  'Dependentes',
-                  style: new TextStyle(
-                      fontSize: 18.0,
-                      fontWeight: FontWeight.bold,
-                      color: Colors.black),
-                ),
-              ),
-              Spacer(),
-              Ink(
-                decoration: const ShapeDecoration(
-                  color: Colors.white12,
-                  shape: CircleBorder(),
-                ),
-                child: IconButton(
-                  icon: Icon(Icons.find_in_page, size: 35),
-                  color: Colors.black,
-                  onPressed: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) {
-                          return DependentList(dependentes);
-                        },
-                      ),
-                    );
-                  },
-                ),
-              ),
-            ],
-          ),
-        ),
-      ],
-    );
+  // here we are creating the list needed for the DropDownButton
+  List<DropdownMenuItem<String>> _getBloodTypes() {
+    List<DropdownMenuItem<String>> types = new List();
+    //TipoSanguineo.values.forEach((v) => print('value: $v, index: ${v.index}'));
+    //TipoSanguineo.values.forEach((v) => print(v.descricao));
+    BloodType.values.forEach((v) => _bloodTypes.add(v.description));
+    print(_bloodTypes);
+    for (String type in _bloodTypes) {
+      // here we are creating the drop down menu items, you can customize the item right here
+      // but I'll just use a simple text for this
+      types.add(new DropdownMenuItem(value: type, child: new Text(type)));
+    }
+    return types;
   }
-
-  Column motorcycleWidgets() {
-    return Column(
-      children: <Widget>[
-        Card(
-          color: Colors.deepOrangeAccent,
-          child: Row(
-            children: <Widget>[
-              Container(
-                padding: EdgeInsets.all(10.0),
-                alignment: Alignment.centerLeft,
-                child: Text(
-                  'Motocicletas',
-                  style: new TextStyle(
-                      fontSize: 18.0,
-                      fontWeight: FontWeight.bold,
-                      color: Colors.black),
-                ),
-              ),
-              Spacer(),
-              Ink(
-                decoration: const ShapeDecoration(
-                  color: Colors.white12,
-                  shape: CircleBorder(),
-                ),
-                child: IconButton(
-                  icon: Icon(Icons.find_in_page, size: 35),
-                  color: Colors.black,
-                  onPressed: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) {
-                          return MotorcycleList();
-                        },
-                      ),
-                    );
-                  },
-                ),
-              ),
-            ],
-          ),
-        )
-      ],
-    );
-  }*/
 
   void changedDropDownItem(String selected) {
     setState(() {
       _currentBloodType = selected;
-    });
-  }
-
-  void _handleRadioValueChange1(int value) {
-    setState(() {
-      _radioValue1 = value;
     });
   }
 
@@ -547,9 +460,9 @@ class Cards extends StatelessWidget {
               tag: image,
               child: Image.asset(
                 image,
-                width: 170,
-                height: 170,
-                fit: BoxFit.cover,
+                //width: 170,
+                //height: 170,
+                fit: BoxFit.fill, //cover,
               ),
             ),
           ),
@@ -557,7 +470,7 @@ class Cards extends StatelessWidget {
             height: 10,
           ),
           Container(
-            height: 70,
+            height: 50,
             child: Text(
               title,
               style: TextStyle(
@@ -569,14 +482,14 @@ class Cards extends StatelessWidget {
           Text(
             "Quantidade: " + this.count.toString(),
             style: TextStyle(
-              fontSize: 16,
+              fontSize: 14,
             ),
           ),
           SizedBox(
             height: 5,
           ),
           Text(
-            "Click na imagem para detalhes...",
+            "Clique na imagem para detalhes...",
             style: TextStyle(
               fontSize: 9.0,
             ),

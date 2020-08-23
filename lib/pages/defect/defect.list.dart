@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:hcslzapp/components/button.dart';
+import 'package:hcslzapp/pages/defect/defect.add.dart';
 
 class DefectList extends StatefulWidget {
   @override
@@ -58,6 +60,9 @@ class DefectListState extends State<DefectList> {
         height: MediaQuery.of(context).size.height,
         child: Column(
           children: <Widget>[
+            SizedBox (
+              height: 20.0,
+            ),
             Padding(
               padding: const EdgeInsets.all(8.0),
               child: TextField(
@@ -66,7 +71,7 @@ class DefectListState extends State<DefectList> {
                 },
                 controller: editingController,
                 decoration: InputDecoration(
-                  labelText: "Pesquisar Outros Defeitos",
+                  labelText: "Pesquisar ",
                   prefixIcon: Icon(Icons.search),
                   border: OutlineInputBorder(
                     borderRadius: BorderRadius.all(
@@ -89,6 +94,19 @@ class DefectListState extends State<DefectList> {
             ),
           ],
         ),
+      ),
+      floatingActionButton: Button(
+        Icons.add,
+        onClick: () {
+          Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (context) {
+                return DefectAdd();
+              },
+            ),
+          );
+        },
       ),
     );
   }

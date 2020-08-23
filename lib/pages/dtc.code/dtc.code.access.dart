@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:hcslzapp/components/button.dart';
+import 'package:hcslzapp/pages/dtc.code/dtc.code.list.dart';
 
 class DtcCodeAccess extends StatelessWidget {
   //@override
@@ -16,9 +18,37 @@ class DtcCodeAccess extends StatelessWidget {
         height: MediaQuery.of(context).size.height,
         child: Form(
           child: SingleChildScrollView(
-            child: _buildTexto()
-          ),
+              child: Column(
+            children: <Widget>[
+              SizedBox (
+                height: 20.0,
+              ),
+              Text(
+                'Como acessar?',
+                style: TextStyle(
+                  fontSize: 20.0,
+                ),
+              ),
+              SizedBox(
+                height: 10.0,
+              ),
+              _buildTexto(),
+            ],
+          )),
         ),
+      ),
+      floatingActionButton: Button(
+        Icons.search,
+        onClick: () {
+          Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (context) {
+                return DtcCodeList();
+              },
+            ),
+          );
+        },
       ),
     );
   }
@@ -26,46 +56,45 @@ class DtcCodeAccess extends StatelessWidget {
   Widget _buildTexto() {
     return RichText(
       text: TextSpan(
-        text:
-            'Android Popup Menu displays the menu below the anchor text if '
-                'space is available otherwise above the anchor text. It '
-                'space is available otherwise above the anchor text. It '
-                'space is available otherwise above the anchor text. It '
-                'space is available otherwise above the anchor text. It '
-                'space is available otherwise above the anchor text. It '
-                'space is available otherwise above the anchor text. It '
-                'space is available otherwise above the anchor text. It '
-                'space is available otherwise above the anchor text. It '
-                'space is available otherwise above the anchor text. It '
-                'space is available otherwise above the anchor text. It '
-                'space is available otherwise above the anchor text. It '
-                'space is available otherwise above the anchor text. It '
-                'space is available otherwise above the anchor text. It '
-                'space is available otherwise above the anchor text. It '
-                'space is available otherwise above the anchor text. It '
-                'space is available otherwise above the anchor text. It '
-                'space is available otherwise above the anchor text. It '
-                'space is available otherwise above the anchor text. It '
-                'space is available otherwise above the anchor text. It '
-                'space is available otherwise above the anchor text. It '
-                'space is available otherwise above the anchor text. It '
-                'space is available otherwise above the anchor text. It '
-                'space is available otherwise above the anchor text. It '
-                'space is available otherwise above the anchor text. It '
-                'space is available otherwise above the anchor text. It '
-                'space is available otherwise above the anchor text. It '
-                'space is available otherwise above the anchor text. It '
-                'space is available otherwise above the anchor text. It '
-                'space is available otherwise above the anchor text. It '
-                'space is available otherwise above the anchor text. It '
-                'space is available otherwise above the anchor text. It '
-                'space is available otherwise above the anchor text. It '
-                'space is available otherwise above the anchor text. It '
-                'space is available otherwise above the anchor text. It '
-                'space is available otherwise above the anchor text. It '
-                'space is available otherwise above the anchor text. It '
-                'space is available otherwise above the anchor text. It '
-                'disappears if you click outside the popup menu.\n\n',
+        text: 'Android Popup Menu displays the menu below the anchor text if '
+            'space is available otherwise above the anchor text. It '
+            'space is available otherwise above the anchor text. It '
+            'space is available otherwise above the anchor text. It '
+            'space is available otherwise above the anchor text. It '
+            'space is available otherwise above the anchor text. It '
+            'space is available otherwise above the anchor text. It '
+            'space is available otherwise above the anchor text. It '
+            'space is available otherwise above the anchor text. It '
+            'space is available otherwise above the anchor text. It '
+            'space is available otherwise above the anchor text. It '
+            'space is available otherwise above the anchor text. It '
+            'space is available otherwise above the anchor text. It '
+            'space is available otherwise above the anchor text. It '
+            'space is available otherwise above the anchor text. It '
+            'space is available otherwise above the anchor text. It '
+            'space is available otherwise above the anchor text. It '
+            'space is available otherwise above the anchor text. It '
+            'space is available otherwise above the anchor text. It '
+            'space is available otherwise above the anchor text. It '
+            'space is available otherwise above the anchor text. It '
+            'space is available otherwise above the anchor text. It '
+            'space is available otherwise above the anchor text. It '
+            'space is available otherwise above the anchor text. It '
+            'space is available otherwise above the anchor text. It '
+            'space is available otherwise above the anchor text. It '
+            'space is available otherwise above the anchor text. It '
+            'space is available otherwise above the anchor text. It '
+            'space is available otherwise above the anchor text. It '
+            'space is available otherwise above the anchor text. It '
+            'space is available otherwise above the anchor text. It '
+            'space is available otherwise above the anchor text. It '
+            'space is available otherwise above the anchor text. It '
+            'space is available otherwise above the anchor text. It '
+            'space is available otherwise above the anchor text. It '
+            'space is available otherwise above the anchor text. It '
+            'space is available otherwise above the anchor text. It '
+            'space is available otherwise above the anchor text. It '
+            'disappears if you click outside the popup menu.\n\n',
         style: const TextStyle(color: Colors.black87),
         children: <TextSpan>[
           const TextSpan(text: 'The app was developed with '),

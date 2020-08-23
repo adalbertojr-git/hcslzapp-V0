@@ -60,8 +60,8 @@ flutter:
   assets:
     - assets/imgs/noImage.png
     - assets/imgs/user.png
-    - assets/imgs/FRENTE_INDISPONIVEL.png
     - assets/imgs/logo.png
+    - assets/imgs/logo_carteirinha.png
     - assets/imgs/backlogo.png
     - assets/imgs/hdlogo.png
     - assets/imgs/docs.png
@@ -72,15 +72,14 @@ flutter:
     - assets/imgs/boutique.png
     - assets/imgs/classificados.png
     - assets/imgs/passeio.jpg
-    - assets/imgs/passeio2.jpg
+    - assets/imgs/ladies.jpg
     - assets/imgs/oficina.png
     - assets/imgs/codigosdtc.png
     - assets/imgs/maps.png
-    - assets/imgs/info.png
     - assets/imgs/sobre.jpeg
-    - assets/imgs/logo_sobre.png
     - assets/imgs/dependentes.png
     - assets/imgs/motocicletas.png
+    - assets/imgs/eu.jpg
 
     #
     - assets/icons/digital-logo.png

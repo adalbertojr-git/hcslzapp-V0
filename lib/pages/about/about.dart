@@ -17,7 +17,7 @@ class About extends StatelessWidget {
   //@override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: MyAppBar(_titleAppBar),
+      //appBar: MyAppBar(_titleAppBar),
       body: Container(
         padding: EdgeInsets.fromLTRB(5.0, 0.0, 5.0, 0.0),
         decoration: BoxDecoration(
@@ -32,9 +32,12 @@ class About extends StatelessWidget {
           child: SingleChildScrollView(
               child: Column(
             children: <Widget>[
-              Padding(
-                padding: EdgeInsets.all(0.0),
-                child: Image.asset('assets/imgs/logo_sobre.png'),
+              SizedBox (
+                height: 20.0,
+              ),
+              SizedBox(
+                height: 180.0,
+                child: Image.asset('assets/imgs/logo.png'),
               ),
               Padding(
                 padding: EdgeInsets.fromLTRB(00.0, 00.0, 00.0, 10.0),

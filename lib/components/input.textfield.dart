@@ -20,6 +20,7 @@ class InputTextField extends StatelessWidget {
   final String prefix;
   final int nLines;
   String valor;
+  final double size;
 
   InputTextField(
       {this.controlller,
@@ -31,7 +32,8 @@ class InputTextField extends StatelessWidget {
       this.disabled,
       this.prefix,
       this.valor,
-      this.nLines});
+      this.nLines,
+      this.size});
 
   @override
   Widget build(BuildContext context) {
@@ -44,7 +46,7 @@ class InputTextField extends StatelessWidget {
           readOnly: disabled != null ? disabled : false,
           controller: controlller,
           style: TextStyle(
-            fontSize: 15.0,
+            fontSize: size != null ? size : 15.0,
           ),
           decoration: InputDecoration(
             filled: nLines != null ? true : false,

@@ -18,8 +18,8 @@ class Button extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      //width: 70.0,
-      //height: 70.0,
+      width: 70.0,
+      height: 70.0,
       //padding: EdgeInsets.only(bottom: 3.0),
       //alignment: Alignment.bottomRight,
       child: FloatingActionButton(

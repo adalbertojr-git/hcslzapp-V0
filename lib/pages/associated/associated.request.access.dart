@@ -12,7 +12,6 @@ import 'package:flutter/material.dart';
 import 'package:hcslzapp/components/my.appbar.dart';
 import 'package:hcslzapp/components/button.dart';
 import 'package:hcslzapp/components/input.textfield.dart';
-import 'package:hcslzapp/components/top.space.dart';
 
 const _titleAppBar = 'Solicitar Acesso';
 const _labelName = 'Nome *';
@@ -42,7 +41,9 @@ class AssociatedRequestAccess extends StatelessWidget {
         child: SingleChildScrollView(
           child: Column(
             children: <Widget>[
-              TopSpace(),
+              SizedBox (
+                height: 20.0,
+              ),
               InputTextField(
                 controlller: _controllerName,
                 label: _labelName,
@@ -75,7 +76,7 @@ class AssociatedRequestAccess extends StatelessWidget {
                 },
               ),
               Padding(
-                padding: EdgeInsets.all(2.0),
+                padding: EdgeInsets.all(10.0),
               ),
               Info(),
             ],
@@ -96,20 +97,12 @@ class Info extends StatelessWidget {
       child: Card(
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(15.0),
-          side: BorderSide(color: Colors.black),
         ),
-        color: Colors.white,
+        color: Colors.white54,
         elevation: 10,
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: <Widget>[
-            Padding(
-              padding: EdgeInsets.only(top: 5.0),
-              child: Image.asset(
-                'assets/imgs/info.png',
-                height: 50.0,
-              ),
-            ),
             const ListTile(
               title: Text(
                 'Atenção:',

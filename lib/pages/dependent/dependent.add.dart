@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:hcslzapp/components/button.dart';
 import 'package:hcslzapp/components/my.appbar.dart';
-import 'package:hcslzapp/components/top.space.dart';
 import 'package:hcslzapp/enums/blood.types.dart';
 import 'package:hcslzapp/components/input.textfield.dart';
 import 'package:hcslzapp/models/dependent.dart';
@@ -78,7 +77,9 @@ class _DependentAddState extends State<DependentAdd> {
           child: SingleChildScrollView(
             child: Column(
               children: <Widget>[
-                TopSpace(),
+                SizedBox (
+                  height: 20.0,
+                ),
                 InputTextField(
                   controlller: _controladorNome,
                   label: _rotuloNome,
@@ -189,7 +190,7 @@ class _DependentAddState extends State<DependentAdd> {
                     activeColor: Colors.orange,
                   ),
                 ),
-                Padding(
+/*                Padding(
                   padding: EdgeInsets.all(5.0),
                 ),
                 Button(
@@ -197,11 +198,17 @@ class _DependentAddState extends State<DependentAdd> {
                   onClick: () {
                     _save(context);
                   },
-                ),
+                ),*/
               ],
             ),
           ),
         ),
+      ),
+      floatingActionButton: Button(
+        Icons.save,
+        onClick: () {
+          _save(context);
+        },
       ),
     );
   }

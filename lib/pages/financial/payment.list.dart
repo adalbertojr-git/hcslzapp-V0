@@ -9,7 +9,6 @@ import 'package:hcslzapp/components/my.appbar.dart';
 import 'package:hcslzapp/components/centered.message.dart';
 import 'package:hcslzapp/components/progress.dart';
 import 'package:hcslzapp/components/input.textfield.dart';
-import 'package:hcslzapp/components/top.space.dart';
 import 'package:hcslzapp/http/webclients/payment.webclient.dart';
 import 'package:hcslzapp/models/payment.dart';
 import 'package:hcslzapp/models/payment.months.dart';
@@ -58,7 +57,9 @@ class PaymentList extends StatelessWidget {
                     height: MediaQuery.of(context).size.height,
                     child: Column(
                       children: <Widget>[
-                        TopSpace(),
+                        SizedBox (
+                          height: 20.0,
+                        ),
                         InputTextField(
                           //controlador: _controladorPadrinho,
                           label: 'Situaçao', //_rotuloPadrinho,

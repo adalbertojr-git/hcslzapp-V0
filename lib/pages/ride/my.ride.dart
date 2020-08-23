@@ -19,12 +19,7 @@ class _MyRideState extends State<MyRide> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Colors.black,
-        centerTitle: true,
-/*        title: Text(
-          "Meu Role",
-          style: TextStyle(color: Colors.orange),
-        ),*/
+        backgroundColor: Colors.white,
         actions: <Widget>[_buildButtons()],
       ),
       body: Container(
@@ -52,7 +47,7 @@ class _MyRideState extends State<MyRide> {
             onPressed: () {},
           ),
         ),
-        SizedBox(width: 5),
+        SizedBox(width: 20),
         Container(
           child: FloatingActionButton(
             heroTag: "btnStop",

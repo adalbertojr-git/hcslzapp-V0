@@ -60,7 +60,7 @@ class DependentListState extends State<DependentList> {
           );
           future.then(
             (dependenteRecebido) {
-              _atualiza(dependenteRecebido);
+              _save(dependenteRecebido);
             },
           );
         },
@@ -68,7 +68,7 @@ class DependentListState extends State<DependentList> {
     );
   }
 
-  void _atualiza(Dependent dependenteRecebido) {
+  void _save(Dependent dependenteRecebido) {
     if (dependenteRecebido != null) {
       setState(
         () {
@@ -80,11 +80,11 @@ class DependentListState extends State<DependentList> {
 }
 
 class ItemList extends StatelessWidget {
-  final Dependent _dependente;
+  final Dependent _dependent;
   final Function onClick;
 
   ItemList(
-    this._dependente, {
+    this._dependent, {
     @required this.onClick,
   });
 
@@ -101,14 +101,14 @@ class ItemList extends StatelessWidget {
             size: 50,
           ),
           title: Text(
-            _dependente.name.toString(),
+            _dependent.name.toString(),
             style: TextStyle(
               fontSize: 15.0,
               color: Colors.deepOrange,
             ),
           ),
           subtitle: Text(
-            _dependente.email.toString(),
+            _dependent.email.toString(),
             style: TextStyle(
               fontSize: 10.0,
               color: Colors.white70,

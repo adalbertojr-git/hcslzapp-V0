@@ -4,11 +4,11 @@ import 'package:flutter/material.dart';
 import 'package:hcslzapp/pages/associated/associated.update.dart';
 import 'package:hcslzapp/pages/boutique/boutique.list.dart';
 import 'package:hcslzapp/pages/digital.identity/digital.identity.dart';
-import 'package:hcslzapp/pages/dtc.code/tab.dtc.code.dart';
+import 'package:hcslzapp/pages/dtc.code/dtc.code.access.dart';
 import 'package:hcslzapp/pages/document/document.list.dart';
 import 'package:hcslzapp/pages/event/events.calendar.dart';
 import 'package:hcslzapp/pages/financial/payment.list.dart';
-import 'package:hcslzapp/pages/mechanical/tab.defect.dart';
+import 'package:hcslzapp/pages/defect/defect.list.dart';
 import 'package:hcslzapp/pages/partnership/partnership.list.dart';
 import 'package:hcslzapp/pages/ride/my.ride.dart';
 import 'package:hcslzapp/pages/about/about.dart';
@@ -26,6 +26,7 @@ class Dashboard extends StatelessWidget {
       drawer: Drawer(
         child: ListView(
           children: <Widget>[
+            Text('Ladies Harley Club', textAlign: TextAlign.center,),
             UserAccountsDrawerHeader(
               accountName: Text(
                 "Adalberto Jr.",
@@ -33,7 +34,7 @@ class Dashboard extends StatelessWidget {
               accountEmail: Text("user@harleyclub.com"),
               decoration: BoxDecoration(
                 image: DecorationImage(
-                  image: ExactAssetImage('assets/imgs/passeio.jpg'),
+                  image: ExactAssetImage('assets/imgs/ladies.jpg'),
                   fit: BoxFit.fill,
                 ),
               ),
@@ -61,7 +62,7 @@ class Dashboard extends StatelessWidget {
             pinned: this._pinned,
             snap: this._snap,
             floating: this._floating,
-            expandedHeight: 130.0,
+            expandedHeight: 100.0,
             backgroundColor: Colors.black,
             flexibleSpace: FlexibleSpaceBar(
               centerTitle: true,
@@ -71,7 +72,7 @@ class Dashboard extends StatelessWidget {
                     new TextStyle(fontSize: 14.0, color: Colors.orangeAccent),
               ),
               background: Image.asset(
-                'assets/imgs/passeio2.jpg',
+                'assets/imgs/passeio.jpg',
                 fit: BoxFit.fill,
               ),
             ),
@@ -216,7 +217,7 @@ class Dashboard extends StatelessWidget {
                               context,
                               MaterialPageRoute(
                                 builder: (context) {
-                                  return TabDtcCode();
+                                  return DtcCodeAccess();
                                 },
                               ),
                             );
@@ -233,7 +234,7 @@ class Dashboard extends StatelessWidget {
                               context,
                               MaterialPageRoute(
                                 builder: (context) {
-                                  return TabDefect();
+                                  return DefectList();
                                 },
                               ),
                             );

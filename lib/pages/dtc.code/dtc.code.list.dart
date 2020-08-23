@@ -57,6 +57,9 @@ class DtcCodeListState extends State<DtcCodeList> {
         height: MediaQuery.of(context).size.height,
         child: Column(
           children: <Widget>[
+            SizedBox (
+              height: 20.0,
+            ),
             Padding(
               padding: const EdgeInsets.all(8.0),
               child: TextField(

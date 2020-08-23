@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:hcslzapp/components/button.dart';
 import 'package:hcslzapp/components/my.appbar.dart';
 import 'package:hcslzapp/models/motorcycle.dart';
 import 'package:hcslzapp/pages/motorcycle/motorcycle.add.dart';
@@ -35,10 +36,9 @@ class MotorcycleListState extends State<MotorcycleList> {
           },
         ),
       ),
-      floatingActionButton: FloatingActionButton(
-        backgroundColor: Colors.black,
-        child: Icon(Icons.add),
-        onPressed: () {
+      floatingActionButton: Button(
+        Icons.add,
+        onClick: () {
           final Future<Motorcycle> future = Navigator.push(
             context,
             MaterialPageRoute(

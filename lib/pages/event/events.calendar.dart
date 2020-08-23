@@ -142,7 +142,7 @@ class EventCalendarState extends State<EventCalendar>
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: MyAppBar(_tituloAppBar),
+      //appBar: MyAppBar(_tituloAppBar),
       body: Container(
         decoration: BoxDecoration(
           gradient: LinearGradient(
@@ -154,7 +154,14 @@ class EventCalendarState extends State<EventCalendar>
         height: MediaQuery.of(context).size.height,
         child: Form(
           child: SingleChildScrollView(
-            child: _buildTableCalendar(),
+            child: Column(
+              children: <Widget>[
+                SizedBox(
+                  height: 20.0,
+                ),
+                _buildTableCalendar(),
+              ],
+            ),
           ),
         ),
 

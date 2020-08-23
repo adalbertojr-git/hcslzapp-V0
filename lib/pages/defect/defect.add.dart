@@ -36,6 +36,9 @@ class DefectAdd extends StatelessWidget {
           child: SingleChildScrollView(
             child: Column(
               children: <Widget>[
+                SizedBox (
+                  height: 20.0,
+                ),
                 Row(
                   children: <Widget>[
                     Expanded(
@@ -84,15 +87,15 @@ class DefectAdd extends StatelessWidget {
                 Padding(
                   padding: EdgeInsets.all(5.0),
                 ),
-                Button(
-                  Icons.play_arrow,
-                  onClick: () {
-                  },
-                ),
+
               ],
             ),
           ),
         ),
+      ),
+      floatingActionButton: Button(
+        Icons.save,
+        onClick: () {},
       ),
     );
   }

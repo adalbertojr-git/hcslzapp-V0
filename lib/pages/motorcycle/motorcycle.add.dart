@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:hcslzapp/components/button.dart';
 import 'package:hcslzapp/components/my.appbar.dart';
 import 'package:hcslzapp/components/input.textfield.dart';
-import 'package:hcslzapp/components/top.space.dart';
 import 'package:hcslzapp/models/motorcycle.dart';
 
 const _tituloAppBar = 'Motocicleta';
@@ -43,7 +42,9 @@ class MotorcycleAdd extends StatelessWidget {
           child: SingleChildScrollView(
             child: Column(
               children: <Widget>[
-                TopSpace(),
+                SizedBox (
+                  height: 20.0,
+                ),
                 InputTextField(
                   controlller: _controladorModelo,
                   label: _rotuloModelo,
@@ -100,7 +101,7 @@ class MotorcycleAdd extends StatelessWidget {
                   label: _rotuloRenavam,
                   inputType: TextInputType.text,
                 ),
-                Padding(
+/*                Padding(
                   padding: EdgeInsets.all(5.0),
                 ),
                 Button(
@@ -108,11 +109,17 @@ class MotorcycleAdd extends StatelessWidget {
                   onClick: () {
                     _save(context);
                   },
-                ),
+                ),*/
               ],
             ),
           ),
         ),
+      ),
+      floatingActionButton: Button(
+        Icons.save,
+        onClick: () {
+          _save(context);
+        },
       ),
     );
   }
