@@ -31,6 +31,7 @@ dependencies:
   intl: ^0.16.1
   google_maps_flutter: ^0.5.25+1
   flutter_launcher_icons: ^0.7.5
+  flare_flutter: ^2.0.6
 
 flutter_icons:
   image_path: "assets/icons/logo.png"
@@ -61,13 +62,13 @@ flutter:
     - assets/imgs/noImage.png
     - assets/imgs/user.png
     - assets/imgs/logo.png
-    - assets/imgs/logo_carteirinha.png
+    - assets/imgs/logo_carteirad.png
     - assets/imgs/backlogo.png
     - assets/imgs/hdlogo.png
     - assets/imgs/docs.png
     - assets/imgs/eventos.png
     - assets/imgs/financeiro.png
-    - assets/imgs/identidade.png
+    - assets/imgs/carteirad.png
     - assets/imgs/parcerias.png
     - assets/imgs/boutique.png
     - assets/imgs/classificados.png
@@ -106,7 +107,8 @@ flutter:
     - assets/icons/discount.png
     - assets/icons/logo.png
 
-
+    #
+    - assets/anims/splash.flr
 
 
 

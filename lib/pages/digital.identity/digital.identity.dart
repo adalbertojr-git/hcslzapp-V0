@@ -11,8 +11,110 @@ class DigitalIdentity extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      body: Stack(
+        children: <Widget>[
+          Center(
+            child: SizedBox(
+              height: 370.0,
+              child: Padding(
+                padding: EdgeInsets.fromLTRB(00.0, 10.0, 00.0, 0.0),
+                child: Image.asset('assets/imgs/logo_carteirad.png'),
+              ),
+            ),
+          ),
+          Center(
+            child: Container(
+              //padding: EdgeInsets.only(left: 10.0),
+              decoration: BoxDecoration(
+                gradient: LinearGradient(
+                  colors: [Colors.black54, Colors.deepOrange],
+                  begin: FractionalOffset.topLeft,
+                  end: FractionalOffset.bottomRight,
+                ),
+              ),
+              //width: MediaQuery.of(context).size.width,
+              child: Column(
+                children: <Widget>[
+                   SizedBox (
+                     height: 30.0,
+                   ),
+                  Center(
+                    child: _photo(),
+                  ),
+                  SizedBox (
+                    height: 80.0,
+                  ),
+                  InputTextField(
+                    label: _labelName,
+                    valor: 'Adalberto Jr', //associated.name,
+                    disabled: true,
+                    size: 20.0,
+                  ),
+                  Row(
+                    children: <Widget>[
+                      Expanded(
+                        child: InputTextField(
+                          label: _labelDateBirth,
+                          valor: '28/09/1976', //associated.name,
+                          disabled: true,
+                          size: 17.0,
+                        ),
+                      ),
+                      Expanded(
+                        child: InputTextField(
+                          label: _labelDateShield,
+                          valor: '27/07/2019', //associated.name,
+                          disabled: true,
+                          size: 17.0,
+                        ),
+                      ),
+                      Expanded(
+                        child: InputTextField(
+                          label: _labelBloodType,
+                          valor: 'A-', //associated.name,
+                          disabled: true,
+                          size: 17.0,
+                        ),
+                      ),
+                    ],
+                  ),
+                  SizedBox (
+                    height: 20.0,
+                  ),
+                  Center(
+                    child: Text (
+                        'Carteira digital de membro do Harley Club de Sao Luis - MA',
+                      style: TextStyle(
+                        fontSize: 9.0,
+                      ),
+                    ),
+                  ),
+                  SizedBox(
+                    height: 10.0,
+                  ),
+                  Center(
+                    child: Text(
+                      'Valida ate 31/12/2020',
+                      style: TextStyle(
+                        fontSize: 9.0,
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          )
+        ],
+      ),
+    );
+  }
+/*
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
       body: RotatedBox(
-        quarterTurns: 1,
+        quarterTurns: 0,
         child: Stack(
           children: <Widget>[
             Center(
@@ -42,7 +144,7 @@ class DigitalIdentity extends StatelessWidget {
                     ),
                     InputTextField(
                       label: _labelName,
-                      valor: 'Adalberto Jr',//associated.name,
+                      valor: 'Adalberto Jr', //associated.name,
                       disabled: true,
                       size: 18.0,
                     ),
@@ -51,7 +153,7 @@ class DigitalIdentity extends StatelessWidget {
                         Expanded(
                           child: InputTextField(
                             label: _labelDateBirth,
-                            valor: '28/09/1976',//associated.name,
+                            valor: '28/09/1976', //associated.name,
                             disabled: true,
                             size: 15.0,
                           ),
@@ -59,7 +161,7 @@ class DigitalIdentity extends StatelessWidget {
                         Expanded(
                           child: InputTextField(
                             label: _labelDateShield,
-                            valor: '27/07/2019',//associated.name,
+                            valor: '27/07/2019', //associated.name,
                             disabled: true,
                             size: 15.0,
                           ),
@@ -67,7 +169,7 @@ class DigitalIdentity extends StatelessWidget {
                         Expanded(
                           child: InputTextField(
                             label: _labelBloodType,
-                            valor: 'A-',//associated.name,
+                            valor: 'A-', //associated.name,
                             disabled: true,
                             size: 15.0,
                           ),
@@ -78,17 +180,17 @@ class DigitalIdentity extends StatelessWidget {
                 ),
               ),
             )
-
           ],
         ),
       ),
     );
   }
+*/
 
   Container _photo() {
     return Container(
-      height: 140.0,
-      width: 140.0,
+      height: 200.0,
+      width: 200.0,
       padding: EdgeInsets.all(10.0),
       decoration: BoxDecoration(
         color: Colors.black.withOpacity(0.2),

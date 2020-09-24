@@ -3,6 +3,7 @@ import 'package:hcslzapp/components/my.appbar.dart';
 import 'package:hcslzapp/components/button.dart';
 import 'package:hcslzapp/components/hc.logo.dart';
 import 'package:hcslzapp/components/input.textfield.dart';
+import 'package:hcslzapp/pages/associated/associated.request.access.dart';
 import 'package:hcslzapp/pages/dashboard/dashboard.dart';
 
 const _tituloAppBar = 'HCSlz App';
@@ -54,6 +55,32 @@ class Login extends StatelessWidget {
                     _showDashboardPage(context);
                   },
                 ),
+                Container(
+                  child: Row(
+                    children: <Widget>[
+                      Expanded(
+                        child: FlatButton(
+                          child: Text(
+                            'Meu primeiro acesso',
+                          ),
+                          onPressed: () {
+                            _showAssociatedRequestAccessPage(context);
+                          },
+                        ),
+                      ),
+                      Expanded(
+                        child: FlatButton(
+                          child: Text(
+                            'Esqueci minha senha',
+                          ),
+                          onPressed: () {
+                            //_showAssociatedRequestAccessPage(context);
+                          },
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
               ],
             ),
           ),
@@ -67,6 +94,15 @@ class Login extends StatelessWidget {
       context,
       MaterialPageRoute(builder: (context) {
         return Dashboard();
+      }),
+    );
+  }
+
+  void _showAssociatedRequestAccessPage(BuildContext context) {
+    Navigator.push(
+      context,
+      MaterialPageRoute(builder: (context) {
+        return AssociatedRequestAccess();
       }),
     );
   }

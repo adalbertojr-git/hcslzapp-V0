@@ -62,7 +62,7 @@ class Dashboard extends StatelessWidget {
             pinned: this._pinned,
             snap: this._snap,
             floating: this._floating,
-            expandedHeight: 100.0,
+            expandedHeight: 140.0,
             backgroundColor: Colors.black,
             flexibleSpace: FlexibleSpaceBar(
               centerTitle: true,
@@ -157,7 +157,7 @@ class Dashboard extends StatelessWidget {
                         ),
                         GridButton(
                           title: "Carteira Harley Club",
-                          image: "assets/imgs/identidade.png",
+                          image: "assets/imgs/carteirad.png",
                           index: 4,
                           context: context,
                           color: Colors.white10,
