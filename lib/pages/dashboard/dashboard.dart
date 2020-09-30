@@ -26,7 +26,10 @@ class Dashboard extends StatelessWidget {
       drawer: Drawer(
         child: ListView(
           children: <Widget>[
-            Text('Ladies Harley Club', textAlign: TextAlign.center,),
+            Text(
+              'Ladies Harley Club',
+              textAlign: TextAlign.center,
+            ),
             UserAccountsDrawerHeader(
               accountName: Text(
                 "Adalberto Jr.",
@@ -62,14 +65,14 @@ class Dashboard extends StatelessWidget {
             pinned: this._pinned,
             snap: this._snap,
             floating: this._floating,
-            expandedHeight: 140.0,
+            expandedHeight: 170.0,
             backgroundColor: Colors.black,
             flexibleSpace: FlexibleSpaceBar(
               centerTitle: true,
               title: Text(
-                "Ola, Adalberto Jr",
+                "Ola, Adalberto",
                 style:
-                    new TextStyle(fontSize: 14.0, color: Colors.orangeAccent),
+                    new TextStyle(fontSize: 20.0, color: Colors.orangeAccent),
               ),
               background: Image.asset(
                 'assets/imgs/passeio.jpg',
@@ -105,11 +108,9 @@ class Dashboard extends StatelessWidget {
                       mainAxisSpacing: 20.0,
                       children: <Widget>[
                         GridButton(
-                          title: "Meus Dados",
+                          title: "Associado",
                           image: "assets/imgs/user.png",
-                          index: 1,
                           context: context,
-                          color: Colors.white10,
                           onClick: () {
                             Navigator.push(
                               context,
@@ -122,28 +123,9 @@ class Dashboard extends StatelessWidget {
                           },
                         ),
                         GridButton(
-                          title: "Meu Role",
-                          image: "assets/imgs/maps.png",
-                          index: 2,
-                          context: context,
-                          color: Colors.white10,
-                          onClick: () {
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                builder: (context) {
-                                  return MyRide();
-                                },
-                              ),
-                            );
-                          },
-                        ),
-                        GridButton(
                           title: "Financeiro",
                           image: "assets/imgs/financeiro.png",
-                          index: 3,
                           context: context,
-                          color: Colors.white10,
                           onClick: () {
                             Navigator.push(
                               context,
@@ -158,9 +140,7 @@ class Dashboard extends StatelessWidget {
                         GridButton(
                           title: "Carteira Harley Club",
                           image: "assets/imgs/carteirad.png",
-                          index: 4,
                           context: context,
-                          color: Colors.white10,
                           onClick: () {
                             Navigator.push(
                               context,
@@ -175,9 +155,7 @@ class Dashboard extends StatelessWidget {
                         GridButton(
                           title: "Parcerias",
                           image: "assets/imgs/parcerias.png",
-                          index: 5,
                           context: context,
-                          color: Colors.white10,
                           onClick: () {
                             Navigator.push(
                               context,
@@ -192,9 +170,7 @@ class Dashboard extends StatelessWidget {
                         GridButton(
                           title: "Eventos",
                           image: "assets/imgs/eventos.png",
-                          index: 6,
                           context: context,
-                          color: Colors.white10,
                           onClick: () {
                             Navigator.push(
                               context,
@@ -207,11 +183,24 @@ class Dashboard extends StatelessWidget {
                           },
                         ),
                         GridButton(
+                          title: "Documentos",
+                          image: "assets/imgs/docs.png",
+                          context: context,
+                          onClick: () {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) {
+                                  return DocumentList();
+                                },
+                              ),
+                            );
+                          },
+                        ),
+                        GridButton(
                           title: "Codigos DTC",
                           image: "assets/imgs/codigosdtc.png",
-                          index: 7,
                           context: context,
-                          color: Colors.white10,
                           onClick: () {
                             Navigator.push(
                               context,
@@ -226,9 +215,7 @@ class Dashboard extends StatelessWidget {
                         GridButton(
                           title: "Oficina",
                           image: "assets/imgs/oficina.png",
-                          index: 8,
                           context: context,
-                          color: Colors.white10,
                           onClick: () {
                             Navigator.push(
                               context,
@@ -243,9 +230,7 @@ class Dashboard extends StatelessWidget {
                         GridButton(
                           title: "Boutique",
                           image: "assets/imgs/boutique.png",
-                          index: 9,
                           context: context,
-                          color: Colors.white10,
                           onClick: () {
                             Navigator.push(
                               context,
@@ -260,9 +245,7 @@ class Dashboard extends StatelessWidget {
                         GridButton(
                           title: "Classificados",
                           image: "assets/imgs/classificados.png",
-                          index: 10,
                           context: context,
-                          color: Colors.white10,
                           onClick: () {
 /*                            Navigator.push(
                               context,
@@ -275,17 +258,15 @@ class Dashboard extends StatelessWidget {
                           },
                         ),
                         GridButton(
-                          title: "Documentos",
-                          image: "assets/imgs/docs.png",
-                          index: 11,
+                          title: "Meu Role",
+                          image: "assets/imgs/maps.png",
                           context: context,
-                          color: Colors.white10,
                           onClick: () {
                             Navigator.push(
                               context,
                               MaterialPageRoute(
                                 builder: (context) {
-                                  return DocumentList();
+                                  return MyRide();
                                 },
                               ),
                             );
@@ -294,9 +275,7 @@ class Dashboard extends StatelessWidget {
                         GridButton(
                           title: "O Harley Club",
                           image: "assets/imgs/logo.png",
-                          index: 12,
                           context: context,
-                          color: Colors.white10,
                           onClick: () {
                             Navigator.push(
                               context,
@@ -322,19 +301,12 @@ class Dashboard extends StatelessWidget {
 }
 
 class GridButton extends StatelessWidget {
-  GridButton(
-      {this.title,
-      this.image,
-      this.index,
-      this.context,
-      this.color,
-      this.onClick});
+  GridButton({this.title, this.image, this.context, this.onClick});
 
   final String title;
   final String image;
-  final int index;
   final BuildContext context;
-  final Color color;
+  final Color color = Colors.white10;
   final Function onClick;
 
   @override
@@ -345,7 +317,6 @@ class GridButton extends StatelessWidget {
       child: InkWell(
         onTap: () {
           onClick();
-          //getItem(this.index);
         },
         splashColor: Colors.orange,
         child: Container(

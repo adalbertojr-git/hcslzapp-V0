@@ -27,7 +27,7 @@ class DigitalIdentity extends StatelessWidget {
               //padding: EdgeInsets.only(left: 10.0),
               decoration: BoxDecoration(
                 gradient: LinearGradient(
-                  colors: [Colors.black54, Colors.deepOrange],
+                  colors: [Colors.white30, Colors.deepOrange],
                   begin: FractionalOffset.topLeft,
                   end: FractionalOffset.bottomRight,
                 ),
@@ -48,7 +48,7 @@ class DigitalIdentity extends StatelessWidget {
                     label: _labelName,
                     valor: 'Adalberto Jr', //associated.name,
                     disabled: true,
-                    size: 20.0,
+                    size: 25.0,
                   ),
                   Row(
                     children: <Widget>[
@@ -57,7 +57,7 @@ class DigitalIdentity extends StatelessWidget {
                           label: _labelDateBirth,
                           valor: '28/09/1976', //associated.name,
                           disabled: true,
-                          size: 17.0,
+                          size: 25.0,
                         ),
                       ),
                       Expanded(
@@ -65,7 +65,7 @@ class DigitalIdentity extends StatelessWidget {
                           label: _labelDateShield,
                           valor: '27/07/2019', //associated.name,
                           disabled: true,
-                          size: 17.0,
+                          size: 25.0,
                         ),
                       ),
                       Expanded(
@@ -73,19 +73,19 @@ class DigitalIdentity extends StatelessWidget {
                           label: _labelBloodType,
                           valor: 'A-', //associated.name,
                           disabled: true,
-                          size: 17.0,
+                          size: 25.0,
                         ),
                       ),
                     ],
                   ),
                   SizedBox (
-                    height: 20.0,
+                    height: 40.0,
                   ),
                   Center(
                     child: Text (
                         'Carteira digital de membro do Harley Club de Sao Luis - MA',
                       style: TextStyle(
-                        fontSize: 9.0,
+                        fontSize: 12.0,
                       ),
                     ),
                   ),
@@ -96,7 +96,7 @@ class DigitalIdentity extends StatelessWidget {
                     child: Text(
                       'Valida ate 31/12/2020',
                       style: TextStyle(
-                        fontSize: 9.0,
+                        fontSize: 12.0,
                       ),
                     ),
                   ),
@@ -108,98 +108,20 @@ class DigitalIdentity extends StatelessWidget {
       ),
     );
   }
-/*
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      body: RotatedBox(
-        quarterTurns: 0,
-        child: Stack(
-          children: <Widget>[
-            Center(
-              child: SizedBox(
-                height: 370.0,
-                child: Padding(
-                  padding: EdgeInsets.fromLTRB(00.0, 10.0, 00.0, 0.0),
-                  child: Image.asset('assets/imgs/logo_carteirinha.png'),
-                ),
-              ),
-            ),
-            Center(
-              child: Container(
-                padding: EdgeInsets.only(left: 20.0),
-                decoration: BoxDecoration(
-                  gradient: LinearGradient(
-                    colors: [Colors.white30, Colors.deepOrange],
-                    begin: FractionalOffset.topLeft,
-                    end: FractionalOffset.bottomRight,
-                  ),
-                ),
-                //width: MediaQuery.of(context).size.width,
-                child: Column(
-                  children: <Widget>[
-                    Center(
-                      child: _photo(),
-                    ),
-                    InputTextField(
-                      label: _labelName,
-                      valor: 'Adalberto Jr', //associated.name,
-                      disabled: true,
-                      size: 18.0,
-                    ),
-                    Row(
-                      children: <Widget>[
-                        Expanded(
-                          child: InputTextField(
-                            label: _labelDateBirth,
-                            valor: '28/09/1976', //associated.name,
-                            disabled: true,
-                            size: 15.0,
-                          ),
-                        ),
-                        Expanded(
-                          child: InputTextField(
-                            label: _labelDateShield,
-                            valor: '27/07/2019', //associated.name,
-                            disabled: true,
-                            size: 15.0,
-                          ),
-                        ),
-                        Expanded(
-                          child: InputTextField(
-                            label: _labelBloodType,
-                            valor: 'A-', //associated.name,
-                            disabled: true,
-                            size: 15.0,
-                          ),
-                        ),
-                      ],
-                    ),
-                  ],
-                ),
-              ),
-            )
-          ],
-        ),
-      ),
-    );
-  }
-*/
 
   Container _photo() {
     return Container(
-      height: 200.0,
-      width: 200.0,
+      height: 250.0,
+      width: 250.0,
       padding: EdgeInsets.all(10.0),
       decoration: BoxDecoration(
         color: Colors.black.withOpacity(0.2),
-        borderRadius: BorderRadius.circular(100.0),
+        borderRadius: BorderRadius.circular(150.0),
       ),
       child: Container(
         decoration: BoxDecoration(
           color: Colors.black,
-          borderRadius: BorderRadius.circular(100.0),
+          borderRadius: BorderRadius.circular(150.0),
           image: DecorationImage(
             image: AssetImage('assets/imgs/eu.jpg'),
             fit: BoxFit.fill,
