@@ -65,14 +65,6 @@ class _AssociatedUpdateState extends State<AssociatedUpdate> {
   Future<List<Associated>> _future;
   bool isLoading = true;
 
-/*
-  @override
-  void initState() {
-    _dropDownBloodTypes = _getBloodTypes();
-    _future = getFuture();
-    super.initState();
-  }*/
-
   @override
   void initState() {
     getFuture().then((value) {
@@ -92,15 +84,65 @@ class _AssociatedUpdateState extends State<AssociatedUpdate> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      body: FutureBuilder<List<Associated>>(
+          future: _future,
+          builder: (context, snapshot) {
+            if (snapshot.hasData) {
+              final List<Associated> associatedList = snapshot.data;
+              if (associatedList.isNotEmpty) {
+                return Container(
+                  padding: EdgeInsets.fromLTRB(5.0, 5.0, 5.0, 0.0),
+                  decoration: BoxDecoration(
+                    gradient: LinearGradient(
+                      colors: [Colors.white30, Colors.deepOrange],
+                      begin: FractionalOffset.topLeft,
+                      end: FractionalOffset.bottomRight,
+                    ),
+                  ),
+                  height: MediaQuery.of(context).size.height,
+                  child: Form(
+                    child: SingleChildScrollView(
+                      child: associatedWidgets(associatedList),
+                    ),
+                  ),
+                );
+              } //if (associatedList.isNotEmpty) {
+/*
+              else if (snapshot.hasError){
+                return CenteredMessage(
+                  'Erro na consulta. Verifique a conexao.',
+                  icon: Icons.error,
+                );
+              }
+*/
+              else {
+                return CenteredMessage(
+                  'Dados nao encontrados.',
+                  icon: Icons.warning,
+                );
+              }
+            } //if (snapshot.hasData)
+            else {
+              return Progress();
+            }
+          }),
+      floatingActionButton: isLoading
+          ? null
+          : Button(
+              Icons.save,
+              onClick: () {
+                _update(context);
+              },
+            ),
+    );
+  }
+
+  /* @override
+  Widget buildx(BuildContext context) {
+    return Scaffold(
       //appBar: MyAppBar(_titleAppBar)
       body: FutureBuilder<List<Associated>>(
-        /*
-        carrega JSON com dados da api
-        */
-        future: _future, //_webClient.findByCodigo(1),
-        /*
-        -------------------------------
-        */
+        future: _future,
         builder: (context, snapshot) {
           switch (snapshot.connectionState) {
             case ConnectionState.none:
@@ -143,12 +185,12 @@ class _AssociatedUpdateState extends State<AssociatedUpdate> {
               break;
           } //switch (snapshot.connectionState)
 
-          /*
+          */ /*
             este codigo na pratica nao e alcançado (todos os cenarios possiveis ja
             foram tratados acima), podendo assi retornar Null, mas
             deve-se sempre evitar essa situacao
             Envia-se uma msg generica
-          */
+          */ /*
           return CenteredMessage(
             'Erro desconhecido.',
             icon: Icons.error,
@@ -165,7 +207,7 @@ class _AssociatedUpdateState extends State<AssociatedUpdate> {
             ),
     );
   }
-
+*/
   Column associatedWidgets(List<Associated> associatedList) {
     final Associated associated = associatedList[0];
     _currentBloodType = associated.bloodType;
@@ -311,15 +353,12 @@ class _AssociatedUpdateState extends State<AssociatedUpdate> {
         Padding(
           padding: EdgeInsets.all(5.0),
         ),
-        Container(
-          height: 300,
-          child: DependentsAndMotorcycles(
-            associated.dependents,
-            associated.motorcycles,
-          ),
+        DependentsAndMotorcycles(
+          associated.dependents,
+          associated.motorcycles,
         ),
         SizedBox(
-          height: 60.0,
+          height: 20.0,
         ),
       ],
     );
@@ -389,113 +428,103 @@ class DependentsAndMotorcycles extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      child: ListView(
-        scrollDirection: Axis.horizontal,
-        children: <Widget>[
-          Cards(
-            title: "Dependentes",
-            image: "assets/imgs/dependentes.png",
-            count: this.dependents.length,
-            onClick: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(
-                  builder: (context) {
-                    return DependentList(this.dependents);
-                  },
+    return Card(
+      elevation: 5.0,
+      color: Colors.white10,
+      child: DefaultTabController(
+        length: 2,
+        child: Builder(
+          builder: (BuildContext context) => Padding(
+            padding: const EdgeInsets.all(10.0),
+            child: Column(
+              children: <Widget>[
+                Container(
+                  width: double.infinity,
+                  height: 220,
+                  child: IconTheme(
+                    data: IconThemeData(
+                      size: 128.0,
+                    ),
+                    child: TabBarView(
+                      children: <Widget>[
+                        Tabs(
+                          image: "assets/imgs/dependentes.png",
+                          title: "Lista de Dependentes",
+                          onClick: () {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) {
+                                  return DependentList(this.dependents);
+                                },
+                              ),
+                            );
+                          },
+                        ),
+                        Tabs(
+                          image: "assets/imgs/motocicletas.png",
+                          title: "Lista de Motocicletas",
+                          onClick: () {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) {
+                                  return MotorcycleList();
+                                },
+                              ),
+                            );
+                          },
+                        ),
+                      ],
+                    ),
+                  ),
                 ),
-              );
-            },
+                TabPageSelector(),
+              ],
+            ),
           ),
-          Cards(
-            title: "Motocicletas",
-            image: "assets/imgs/motocicletas.png",
-            count: this.motorcycles.length,
-            onClick: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(
-                  builder: (context) {
-                    return MotorcycleList();
-                  },
-                ),
-              );
-            },
-          ),
-        ],
+        ),
       ),
     );
   }
 }
 
-class Cards extends StatelessWidget {
+class Tabs extends StatelessWidget {
   final String image;
   final String title;
-  final int count;
   final Function onClick;
 
-  Cards({
+  Tabs({
     @required this.image,
     @required this.title,
-    @required this.count,
     @required this.onClick,
   });
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      padding: EdgeInsets.all(10),
-      margin: EdgeInsets.all(5),
-      width: (MediaQuery.of(context).size.width / 2) - 15,
-      color: Colors.black12,
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: <Widget>[
-          GestureDetector(
-            onTap: () {
-              onClick();
-            },
-            child: Hero(
-              tag: image,
-              child: Image.asset(
-                image,
-                //width: 170,
-                //height: 170,
-                fit: BoxFit.fill, //cover,
-              ),
+    return Column(
+      children: <Widget>[
+        GestureDetector(
+          child: Hero(
+            tag: image,
+            child: Image.asset(
+              image,
+              fit: BoxFit.fill,
             ),
           ),
-          SizedBox(
-            height: 10,
-          ),
-          Container(
-            height: 50,
-            child: Text(
-              title,
-              style: TextStyle(
-                fontSize: 18,
-                fontWeight: FontWeight.bold,
-              ),
-            ),
-          ),
-          Text(
-            "Quantidade: " + this.count.toString(),
-            style: TextStyle(
-              fontSize: 14,
-            ),
-          ),
-          SizedBox(
-            height: 5,
-          ),
-          Text(
-            "Clique na imagem para detalhes...",
-            style: TextStyle(
-              fontSize: 9.0,
-            ),
-          ),
-        ],
-      ),
+          onTap: () {
+            onClick();
+          },
+        ),
+        Text(
+          title,
+          style: TextStyle(fontSize: 16.0),
+        ),
+        Text(
+          "Clique para ver detalhes",
+          style: TextStyle(fontSize: 12.0),
+        )
+      ],
     );
   }
 }
