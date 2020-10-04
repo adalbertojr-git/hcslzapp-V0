@@ -1,7 +1,7 @@
+import 'package:flare_flutter/flare_actor.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:hcslzapp/components/button.dart';
-import 'package:hcslzapp/components/hc.logo.dart';
 import 'package:hcslzapp/components/input.textfield.dart';
 import 'package:hcslzapp/pages/dashboard/dashboard.dart';
 import 'dart:async';
@@ -14,11 +14,20 @@ const _labelName = 'Nome *';
 const _labelPhone = 'Telefone *';
 const _labelEmail = 'Email *';
 
-class Login extends StatelessWidget {
+class Login extends StatefulWidget {
+  @override
+  _LoginState createState() => _LoginState();
+}
+
+class _LoginState extends State<Login> {
   final TextEditingController _controllerUser = TextEditingController();
+
   final TextEditingController _controllerPsw = TextEditingController();
+
   final TextEditingController _controllerName = TextEditingController();
+
   final TextEditingController _controllerPhone = TextEditingController();
+
   final TextEditingController _controllerEmail = TextEditingController();
 
   @override
@@ -37,7 +46,24 @@ class Login extends StatelessWidget {
           child: SingleChildScrollView(
             child: Column(
               children: <Widget>[
-                HcLogo(0.0),
+/*                SizedBox (
+                  height: 30.0,
+                ),
+                SizedBox(
+                  height: 180.0,
+                  child: Image.asset('assets/imgs/logo.png'),
+                ),*/
+                Container(
+                  width: MediaQuery.of(context).size.width, //double.infinity,
+                  height: 210,
+                  child: FlareActor(
+                    'assets/anims/splash.flr',
+                    alignment: Alignment.center,
+                    fit: BoxFit.fitWidth,
+                    isPaused: false,
+                    animation: 'animation-hc',
+                  ),
+                ),
                 Tabs(context),
               ],
             ),
@@ -48,9 +74,19 @@ class Login extends StatelessWidget {
   }
 
   Widget Tabs(BuildContext context) {
-    return Card(
-      elevation: 5.0,
-      color: Colors.white10,
+    return Container(
+      decoration: BoxDecoration(
+        border: Border.all(
+          color: Colors.black26,
+          width: 5,
+        ),
+        borderRadius: BorderRadius.circular(12),
+        gradient: LinearGradient(
+          colors: [Colors.white30, Colors.deepOrange],
+          begin: FractionalOffset.topLeft,
+          end: FractionalOffset.bottomRight,
+        ),
+      ),
       child: DefaultTabController(
         length: 3,
         child: Builder(
@@ -60,7 +96,7 @@ class Login extends StatelessWidget {
               children: <Widget>[
                 Container(
                   width: double.infinity,
-                  height: 335,
+                  height: MediaQuery.of(context).size.height - 260, //330,
                   child: IconTheme(
                     data: IconThemeData(
                       size: 128.0,
@@ -74,7 +110,9 @@ class Login extends StatelessWidget {
                     ),
                   ),
                 ),
-                TabPageSelector(),
+                TabPageSelector(
+                  selectedColor: Colors.black,
+                ),
               ],
             ),
           ),
@@ -91,7 +129,7 @@ class Login extends StatelessWidget {
             child: Text(
               'Login',
               style: TextStyle(
-                fontSize: 30.0,
+                fontSize: 20.0,
                 fontWeight: FontWeight.bold,
               ),
             ),
@@ -130,7 +168,7 @@ class Login extends StatelessWidget {
             child: Text(
               'Solicitar cadastro',
               style: TextStyle(
-                fontSize: 30.0,
+                fontSize: 20.0,
                 fontWeight: FontWeight.bold,
               ),
             ),
@@ -167,7 +205,7 @@ class Login extends StatelessWidget {
             child: Text(
               'Esqueci minha senha',
               style: TextStyle(
-                fontSize: 30.0,
+                fontSize: 20.0,
                 fontWeight: FontWeight.bold,
               ),
             ),
@@ -178,7 +216,7 @@ class Login extends StatelessWidget {
             icon: Icons.email,
             inputType: TextInputType.emailAddress,
           ),
-          SnackBarWidget(),
+          //SnackBarWidget(),
         ],
       ),
     );
@@ -201,7 +239,7 @@ class SnackBarWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return Button(Icons.send, onClick: () {
       final snackBar = SnackBar(
-        content: Text('Solicitaçao enviada. '
+        content: Text('Cadastro enviado para apreciaçao. \n'
             'Aguarde email com instruçoes de acesso.'),
         backgroundColor: Colors.black,
         duration: Duration(seconds: 5),

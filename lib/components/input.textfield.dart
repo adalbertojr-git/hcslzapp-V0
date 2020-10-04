@@ -39,37 +39,35 @@ class InputTextField extends StatelessWidget {
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.all(5.0),
-      child: SingleChildScrollView(
-        child: TextFormField(
-          textCapitalization: TextCapitalization.words,
-          obscureText: hidden != null ? hidden : false,
-          readOnly: disabled != null ? disabled : false,
-          controller: controlller,
-          style: TextStyle(
-            fontSize: size != null ? size : 15.0,
-          ),
-          decoration: InputDecoration(
-            filled: nLines != null ? true : false,
-            icon: icon != null
-                ? Icon(
-                    icon,
-                    color: Colors.orange,
-                  )
-                : null,
-            labelText: valor,
-            hintText: tip,
-            prefixText: prefix,
-            helperText: label,
-            helperStyle: TextStyle(fontSize: 9.0, color: Colors.indigo),
-          ),
-          keyboardType: inputType,
-          onSaved: (String value) {
-            valor = value;
-            print('name=$valor');
-          },
-          validator: (value) {},
-          maxLines: nLines != null ? nLines : 1,
+      child: TextFormField(
+        textCapitalization: TextCapitalization.words,
+        obscureText: hidden != null ? hidden : false,
+        readOnly: disabled != null ? disabled : false,
+        controller: controlller,
+        style: TextStyle(
+          fontSize: size != null ? size : 15.0,
         ),
+        decoration: InputDecoration(
+          filled: nLines != null ? true : false,
+          icon: icon != null
+              ? Icon(
+                  icon,
+                  color: Colors.orange,
+                )
+              : null,
+          labelText: valor,
+          hintText: tip,
+          prefixText: prefix,
+          helperText: label,
+          helperStyle: TextStyle(fontSize: 9.0, color: Colors.indigo),
+        ),
+        keyboardType: inputType,
+        onSaved: (String value) {
+          valor = value;
+          print('name=$valor');
+        },
+        validator: (value) {},
+        maxLines: nLines != null ? nLines : 1,
       ),
     );
   }

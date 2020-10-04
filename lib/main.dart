@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:hcslzapp/http/webclients/associated.webclient.dart';
+import 'package:hcslzapp/pages/login/login.dart';
 import 'package:hcslzapp/pages/login/splash.dart';
 
 import 'http/webclients/payment.webclient.dart';
@@ -42,10 +43,10 @@ class HCSlzApp extends StatelessWidget {
 //    Intl.defaultLocale = 'pt_BR';
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      home: Splash(),
+      home: Login(),//Splash(),
       title: _titleAppBar,
       theme: ThemeData(
-        primaryColor: Colors.orange[900],
+        primaryColor: Colors.blue,//orange[900],
         hintColor: Colors.black,
 /*
         accentColor: Colors.orange[700],

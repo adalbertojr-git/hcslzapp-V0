@@ -36,13 +36,17 @@ class Splash extends StatelessWidget {
             Container(
               width: double.infinity,
               height: 300,
-              child: FlareActor(
+              child: Text('Teste'),
+
+/*
+              FlareActor(
                   'assets/anims/splash.flr',
                 alignment: Alignment.center,
                 fit: BoxFit.contain,
                 isPaused: false,
                 animation: 'animation-hc',
               ),
+*/
             ),
           ],
         ),

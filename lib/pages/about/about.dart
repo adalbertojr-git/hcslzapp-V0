@@ -33,7 +33,7 @@ class About extends StatelessWidget {
               child: Column(
             children: <Widget>[
               SizedBox (
-                height: 20.0,
+                height: 30.0,
               ),
               SizedBox(
                 height: 180.0,
