@@ -32,6 +32,7 @@ dependencies:
   google_maps_flutter: ^0.5.25+1
   flutter_launcher_icons: ^0.7.5
   flare_flutter: ^2.0.6
+  splashscreen: ^1.2.0
 
 flutter_icons:
   image_path: "assets/icons/logo.png"

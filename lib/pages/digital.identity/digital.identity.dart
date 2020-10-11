@@ -24,7 +24,6 @@ class DigitalIdentity extends StatelessWidget {
           ),
           Center(
             child: Container(
-              //padding: EdgeInsets.only(left: 10.0),
               decoration: BoxDecoration(
                 gradient: LinearGradient(
                   colors: [Colors.white30, Colors.deepOrange],
@@ -32,75 +31,77 @@ class DigitalIdentity extends StatelessWidget {
                   end: FractionalOffset.bottomRight,
                 ),
               ),
-              //width: MediaQuery.of(context).size.width,
-              child: Column(
-                children: <Widget>[
-                   SizedBox (
-                     height: 30.0,
-                   ),
-                  Center(
-                    child: _photo(),
-                  ),
-                  SizedBox (
-                    height: 80.0,
-                  ),
-                  InputTextField(
-                    label: _labelName,
-                    valor: 'Adalberto Jr', //associated.name,
-                    disabled: true,
-                    size: 25.0,
-                  ),
-                  Row(
-                    children: <Widget>[
-                      Expanded(
-                        child: InputTextField(
-                          label: _labelDateBirth,
-                          valor: '28/09/1976', //associated.name,
-                          disabled: true,
-                          size: 25.0,
+              height: MediaQuery.of(context).size.height,
+              child: SingleChildScrollView(
+                child: Column(
+                  children: <Widget>[
+                     SizedBox (
+                       height: 30.0,
+                     ),
+                    Center(
+                      child: _photo(),
+                    ),
+                    SizedBox (
+                      height: 50.0,
+                    ),
+                    InputTextField(
+                      label: _labelName,
+                      valor: 'Adalberto Jr', //associated.name,
+                      disabled: true,
+                      size: 20.0,
+                    ),
+                    Row(
+                      children: <Widget>[
+                        Expanded(
+                          child: InputTextField(
+                            label: _labelDateBirth,
+                            valor: '28/09/1976', //associated.name,
+                            disabled: true,
+                            size: 15.0,
+                          ),
                         ),
-                      ),
-                      Expanded(
-                        child: InputTextField(
-                          label: _labelDateShield,
-                          valor: '27/07/2019', //associated.name,
-                          disabled: true,
-                          size: 25.0,
+                        Expanded(
+                          child: InputTextField(
+                            label: _labelDateShield,
+                            valor: '27/07/2019', //associated.name,
+                            disabled: true,
+                            size: 15.0,
+                          ),
                         ),
-                      ),
-                      Expanded(
-                        child: InputTextField(
-                          label: _labelBloodType,
-                          valor: 'A-', //associated.name,
-                          disabled: true,
-                          size: 25.0,
+                        Expanded(
+                          child: InputTextField(
+                            label: _labelBloodType,
+                            valor: 'A-', //associated.name,
+                            disabled: true,
+                            size: 15.0,
+                          ),
                         ),
-                      ),
-                    ],
-                  ),
-                  SizedBox (
-                    height: 40.0,
-                  ),
-                  Center(
-                    child: Text (
-                        'Carteira digital de membro do Harley Club de Sao Luis - MA',
-                      style: TextStyle(
-                        fontSize: 12.0,
+                      ],
+                    ),
+                    SizedBox (
+                      height: 40.0,
+                    ),
+                    Center(
+                      child: Text (
+                          'Carteira digital de membro do Harley Club de Sao Luis - MA',
+                        style: TextStyle(
+                          fontSize: 10.0,
+                        ),
                       ),
                     ),
-                  ),
-                  SizedBox(
-                    height: 10.0,
-                  ),
-                  Center(
-                    child: Text(
-                      'Valida ate 31/12/2020',
-                      style: TextStyle(
-                        fontSize: 12.0,
+                    SizedBox(
+                      height: 10.0,
+                    ),
+                    Center(
+                      child: Text(
+                        'Valida ate 31/12/2020',
+                        style: TextStyle(
+                          fontSize: 10.0,
+                        ),
                       ),
                     ),
-                  ),
-                ],
+                  ],
+                ),
               ),
             ),
           )

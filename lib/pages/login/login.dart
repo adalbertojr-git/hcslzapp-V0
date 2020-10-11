@@ -14,107 +14,65 @@ const _labelName = 'Nome *';
 const _labelPhone = 'Telefone *';
 const _labelEmail = 'Email *';
 
-class Login extends StatefulWidget {
-  @override
-  _LoginState createState() => _LoginState();
-}
-
-class _LoginState extends State<Login> {
+class Login extends StatelessWidget {
   final TextEditingController _controllerUser = TextEditingController();
-
   final TextEditingController _controllerPsw = TextEditingController();
-
   final TextEditingController _controllerName = TextEditingController();
-
   final TextEditingController _controllerPhone = TextEditingController();
-
   final TextEditingController _controllerEmail = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Container(
-        decoration: BoxDecoration(
-          gradient: LinearGradient(
-            colors: [Colors.white30, Colors.deepOrange],
-            begin: FractionalOffset.topLeft,
-            end: FractionalOffset.bottomRight,
-          ),
-        ),
-        height: MediaQuery.of(context).size.height,
-        child: Form(
-          child: SingleChildScrollView(
-            child: Column(
-              children: <Widget>[
-/*                SizedBox (
-                  height: 30.0,
-                ),
-                SizedBox(
-                  height: 180.0,
-                  child: Image.asset('assets/imgs/logo.png'),
-                ),*/
-                Container(
-                  width: MediaQuery.of(context).size.width, //double.infinity,
-                  height: 210,
-                  child: FlareActor(
-                    'assets/anims/splash.flr',
-                    alignment: Alignment.center,
-                    fit: BoxFit.fitWidth,
-                    isPaused: false,
-                    animation: 'animation-hc',
-                  ),
-                ),
-                Tabs(context),
-              ],
-            ),
-          ),
-        ),
-      ),
-    );
-  }
-
-  Widget Tabs(BuildContext context) {
-    return Container(
-      decoration: BoxDecoration(
-        border: Border.all(
-          color: Colors.black26,
-          width: 5,
-        ),
-        borderRadius: BorderRadius.circular(12),
-        gradient: LinearGradient(
-          colors: [Colors.white30, Colors.deepOrange],
-          begin: FractionalOffset.topLeft,
-          end: FractionalOffset.bottomRight,
-        ),
-      ),
-      child: DefaultTabController(
+      body: DefaultTabController(
         length: 3,
-        child: Builder(
-          builder: (BuildContext context) => Padding(
-            padding: const EdgeInsets.all(10.0),
-            child: Column(
-              children: <Widget>[
-                Container(
-                  width: double.infinity,
-                  height: MediaQuery.of(context).size.height - 260, //330,
-                  child: IconTheme(
-                    data: IconThemeData(
-                      size: 128.0,
-                    ),
-                    child: TabBarView(
-                      children: <Widget>[
-                        TabLogin(context),
-                        TabRequestAccess(context),
-                        TabForgotPassword(context),
-                      ],
-                    ),
+        initialIndex: 1,
+        child: Scaffold(
+          appBar: AppBar(
+            bottom: TabBar(
+              indicatorColor: Colors.black,
+              indicatorWeight: 5.0,
+              labelColor: Colors.black,
+              tabs: [
+                Tab(
+                  child: Text(
+                    'Solicitar Cadastro',
+                    style: TextStyle(fontSize: 11.0),
                   ),
                 ),
-                TabPageSelector(
-                  selectedColor: Colors.black,
+                Tab(
+                  child: Text(
+                    'Login',
+                    style: TextStyle(fontSize: 11.0),
+                  ),
+                ),
+                Tab(
+                  child: Text(
+                    'Esqueci a senha',
+                    style: TextStyle(fontSize: 11.0),
+                  ),
                 ),
               ],
             ),
+            title: Text(
+              'HCSlz App',
+              style: TextStyle(
+                color: Colors.black,
+                fontSize: 40.0,
+              ),
+            ),
+            centerTitle: true,
+            backgroundColor: Colors.deepOrange[300],
+            toolbarHeight: 150.0,
+            elevation: 30.0,
+            shadowColor: Colors.deepOrange,
+          ),
+          body: TabBarView(
+            children: [
+              TabRequestAccess(context),
+              TabLogin(context),
+              TabForgotPassword(context),
+            ],
           ),
         ),
       ),
@@ -123,101 +81,113 @@ class _LoginState extends State<Login> {
 
   Widget TabLogin(BuildContext context) {
     return Container(
-      child: Column(
-        children: <Widget>[
-          Center(
-            child: Text(
-              'Login',
-              style: TextStyle(
-                fontSize: 20.0,
-                fontWeight: FontWeight.bold,
-              ),
+      decoration: BoxDecoration(
+        gradient: LinearGradient(
+          colors: [Colors.white30, Colors.deepOrange],
+          begin: FractionalOffset.topLeft,
+          end: FractionalOffset.bottomRight,
+        ),
+      ),
+      height: MediaQuery.of(context).size.height,
+      child: SingleChildScrollView(
+        child: Column(
+          children: <Widget>[
+            SizedBox(
+              height: 10.0,
             ),
-          ),
-          InputTextField(
-            controlller: _controllerUser,
-            label: _labelUser,
-            tip: _tipUser,
-            icon: Icons.person,
-            inputType: TextInputType.text,
-          ),
-          InputTextField(
-            controlller: _controllerPsw,
-            label: _labelPsw,
-            tip: _tipPsw,
-            icon: Icons.vpn_key,
-            inputType: TextInputType.text,
-            hidden: true,
-          ),
-          Button(
-            Icons.arrow_forward,
-            onClick: () {
-              _showDashboardPage(context);
-            },
-          ),
-        ],
+            InputTextField(
+              controlller: _controllerUser,
+              label: _labelUser,
+              tip: _tipUser,
+              icon: Icons.person,
+              inputType: TextInputType.text,
+            ),
+            InputTextField(
+              controlller: _controllerPsw,
+              label: _labelPsw,
+              tip: _tipPsw,
+              icon: Icons.vpn_key,
+              inputType: TextInputType.text,
+              hidden: true,
+            ),
+            Button(
+              Icons.arrow_forward,
+              onClick: () {
+                _showDashboardPage(context);
+              },
+            ),
+          ],
+        ),
       ),
     );
   }
 
   Widget TabRequestAccess(BuildContext context) {
     return Container(
-      child: Column(
-        children: <Widget>[
-          Center(
-            child: Text(
-              'Solicitar cadastro',
-              style: TextStyle(
-                fontSize: 20.0,
-                fontWeight: FontWeight.bold,
-              ),
+      decoration: BoxDecoration(
+        gradient: LinearGradient(
+          colors: [Colors.white30, Colors.deepOrange],
+          begin: FractionalOffset.topLeft,
+          end: FractionalOffset.bottomRight,
+        ),
+      ),
+      height: MediaQuery.of(context).size.height,
+      child: SingleChildScrollView(
+        child: Column(
+          children: <Widget>[
+            SizedBox(
+              height: 10.0,
             ),
-          ),
-          InputTextField(
-            controlller: _controllerName,
-            label: _labelName,
-            icon: Icons.person,
-            inputType: TextInputType.text,
-          ),
-          InputTextField(
-            controlller: _controllerEmail,
-            label: _labelEmail,
-            icon: Icons.email,
-            inputType: TextInputType.emailAddress,
-          ),
-          InputTextField(
-            controlller: _controllerPhone,
-            label: _labelPhone,
-            icon: Icons.phone,
-            inputType: TextInputType.phone,
-          ),
-          SnackBarWidget(),
-        ],
+            InputTextField(
+              controlller: _controllerName,
+              label: _labelName,
+              icon: Icons.person,
+              inputType: TextInputType.text,
+            ),
+            InputTextField(
+              controlller: _controllerEmail,
+              label: _labelEmail,
+              icon: Icons.email,
+              inputType: TextInputType.emailAddress,
+            ),
+            InputTextField(
+              controlller: _controllerPhone,
+              label: _labelPhone,
+              icon: Icons.phone,
+              inputType: TextInputType.phone,
+            ),
+            SnackBarWidget(),
+          ],
+        ),
       ),
     );
   }
 
   Widget TabForgotPassword(BuildContext context) {
     return Container(
-      child: Column(
-        children: <Widget>[
-          Center(
-            child: Text(
-              'Esqueci minha senha',
-              style: TextStyle(
-                fontSize: 20.0,
-                fontWeight: FontWeight.bold,
-              ),
+      decoration: BoxDecoration(
+        gradient: LinearGradient(
+          colors: [Colors.white30, Colors.deepOrange],
+          begin: FractionalOffset.topLeft,
+          end: FractionalOffset.bottomRight,
+        ),
+      ),
+      height: MediaQuery.of(context).size.height,
+      child: SingleChildScrollView(
+        child: Column(
+          children: <Widget>[
+            SizedBox(
+              height: 10.0,
             ),
-          ),
-          InputTextField(
-            controlller: _controllerEmail,
-            label: _labelEmail,
-            icon: Icons.email,
-            inputType: TextInputType.emailAddress,
-          ),
-          //SnackBarWidget(),
-        ],
+            InputTextField(
+              controlller: _controllerEmail,
+              label: _labelEmail,
+              icon: Icons.email,
+              inputType: TextInputType.emailAddress,
+            ),
+            SnackBarWidget(),
+          ],
+        ),
       ),
     );
   }
@@ -237,7 +207,7 @@ class SnackBarWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Button(Icons.send, onClick: () {
+    return Button(Icons.email_rounded, onClick: () {
       final snackBar = SnackBar(
         content: Text('Cadastro enviado para apreciaçao. \n'
             'Aguarde email com instruçoes de acesso.'),

@@ -95,13 +95,6 @@ class Dashboard extends StatelessWidget {
                 Center(
                   child: Container(
                     color: Colors.black12,
-/*                    decoration: new BoxDecoration(
-                      gradient: new LinearGradient(
-                        colors: [Colors.white30, Colors.deepOrange],
-                        begin: FractionalOffset.topLeft,
-                        end: FractionalOffset.bottomRight,
-                      ),
-                    ),*/
                     child: GridView.count(
                       crossAxisCount: 2,
                       crossAxisSpacing: 30.0,

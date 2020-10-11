@@ -21,7 +21,9 @@ import 'package:hcslzapp/http/webclients/associated.webclient.dart';
 import 'package:hcslzapp/models/associated.dart';
 import 'package:hcslzapp/models/dependent.dart';
 import 'package:hcslzapp/models/motorcycle.dart';
+import 'package:hcslzapp/pages/dependent/dependent.add.dart';
 import 'package:hcslzapp/pages/dependent/dependent.list.dart';
+import 'package:hcslzapp/pages/motorcycle/motorcycle.add.dart';
 import 'package:hcslzapp/pages/motorcycle/motorcycle.list.dart';
 
 const _titleAppBar = 'Atualizar Meus Dados';
@@ -102,7 +104,7 @@ class _AssociatedUpdateState extends State<AssociatedUpdate> {
                   height: MediaQuery.of(context).size.height,
                   child: Form(
                     child: SingleChildScrollView(
-                      child: associatedWidgets(associatedList),
+                      child: associatedWidgets(context, associatedList),
                     ),
                   ),
                 );
@@ -199,16 +201,17 @@ class _AssociatedUpdateState extends State<AssociatedUpdate> {
       ),
       floatingActionButton: isLoading
           ? null
-          : Button(
+          : Button(: () {
+                _upd
               Icons.save,
-              onClick: () {
-                _update(context);
+              onClickate(context);
               },
             ),
     );
   }
 */
-  Column associatedWidgets(List<Associated> associatedList) {
+  Column associatedWidgets(
+      BuildContext context, List<Associated> associatedList) {
     final Associated associated = associatedList[0];
     _currentBloodType = associated.bloodType;
     return Column(
@@ -350,15 +353,20 @@ class _AssociatedUpdateState extends State<AssociatedUpdate> {
             ),
           ],
         ),
-        Padding(
-          padding: EdgeInsets.all(5.0),
-        ),
-        DependentsAndMotorcycles(
-          associated.dependents,
-          associated.motorcycles,
+        Divider(),
+        DependentsAndMotorcyclesListWidget(
+          'Dependentes',
+          dependents: associated.dependents,
         ),
         SizedBox(
-          height: 20.0,
+          height: 10.0,
+        ),
+        DependentsAndMotorcyclesListWidget(
+          'Motocicletas',
+          motorcycles: associated.motorcycles,
+        ),
+        SizedBox(
+          height: 100.0,
         ),
       ],
     );
@@ -384,6 +392,80 @@ class _AssociatedUpdateState extends State<AssociatedUpdate> {
             fit: BoxFit.fill,
           ),
         ),
+      ),
+    );
+  }
+
+  Container DependentsAndMotorcyclesListWidget(String title,
+      {List<Dependent> dependents, List<Motorcycle> motorcycles}) {
+    return Container(
+      padding: EdgeInsets.all(10.0),
+      decoration: BoxDecoration(
+        color: Colors.white12,
+        shape: BoxShape.rectangle,
+        borderRadius: BorderRadius.circular(8.0),
+      ),
+      child: Column(
+        children: [
+          Text(
+            title,
+            style: TextStyle(
+              fontWeight: FontWeight.bold,
+            ),
+          ),
+          ListView.separated(
+            shrinkWrap: true,
+            itemCount:
+                dependents != null ? dependents.length : motorcycles.length,
+            itemBuilder: (BuildContext context, int i) {
+              return Container(
+                decoration: BoxDecoration(
+                  color: Colors.white30,
+                  shape: BoxShape.rectangle,
+                  borderRadius: BorderRadius.circular(8.0),
+                  boxShadow: <BoxShadow>[
+                    BoxShadow(
+                      color: Colors.black12,
+                      blurRadius: 10.0,
+                      offset: Offset(0.0, 5.0),
+                    ),
+                  ],
+                ),
+                child: ListTile(
+                  leading: Container(
+                    width: 48,
+                    height: 48,
+                    alignment: Alignment.center,
+                    child: CircleAvatar(
+                      child: dependents != null
+                          ? Icon(Icons.person)
+                          : Icon(Icons.motorcycle),
+                      backgroundColor: Colors.white,
+                    ),
+                  ),
+                  trailing: Icon(Icons.arrow_forward),
+                  title: dependents != null
+                      ? Text(dependents[i].name)
+                      : Text(motorcycles[i].model),
+                  onTap: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) {
+                          return dependents != null
+                              ? DependentAdd(dependents[i])
+                              : MotorcycleAdd();
+                        },
+                      ),
+                    );
+                  },
+                ),
+              );
+            },
+            separatorBuilder: (BuildContext context, int index) =>
+                const Divider(),
+          ),
+        ],
       ),
     );
   }
@@ -420,7 +502,7 @@ class _AssociatedUpdateState extends State<AssociatedUpdate> {
   void _update(BuildContext context) {}
 }
 
-class DependentsAndMotorcycles extends StatelessWidget {
+/*class DependentsAndMotorcycles extends StatelessWidget {
   List<Dependent> dependents;
   List<Motorcycle> motorcycles;
 
@@ -527,4 +609,4 @@ class Tabs extends StatelessWidget {
       ],
     );
   }
-}
+}*/

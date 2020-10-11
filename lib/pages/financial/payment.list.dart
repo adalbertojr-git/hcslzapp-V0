@@ -110,7 +110,7 @@ class PaymentList extends StatelessWidget {
 
   ExpansionTile buildExpansionTile(List<Payment> mensalidades, int i) {
     return ExpansionTile(
-      backgroundColor: Colors.white54,
+      backgroundColor: Colors.white30,
       title: Text(
         'Ano: ' + mensalidades[i].year,
       ),
