@@ -64,6 +64,7 @@ flutter:
     - assets/imgs/user.png
     - assets/imgs/logo.png
     - assets/imgs/logo_carteirad.png
+    - assets/imgs/logo_login.png
     - assets/imgs/backlogo.png
     - assets/imgs/hdlogo.png
     - assets/imgs/docs.png

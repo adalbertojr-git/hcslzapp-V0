@@ -247,7 +247,7 @@ class _AssociatedUpdateState extends State<AssociatedUpdate> {
           label: _labelSponsor,
           icon: Icons.person_pin,
           valor: associated.sponsor == null ? null : associated.sponsor.name,
-          disabled: true,
+          inputType: TextInputType.text,
         ),
         Row(
           children: <Widget>[

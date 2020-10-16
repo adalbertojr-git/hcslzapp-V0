@@ -2,6 +2,7 @@ import 'package:flare_flutter/flare_actor.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:hcslzapp/components/button.dart';
+import 'package:hcslzapp/components/hc.logo.dart';
 import 'package:hcslzapp/components/input.textfield.dart';
 import 'package:hcslzapp/pages/dashboard/dashboard.dart';
 import 'dart:async';
@@ -80,45 +81,58 @@ class Login extends StatelessWidget {
   }
 
   Widget TabLogin(BuildContext context) {
-    return Container(
-      decoration: BoxDecoration(
-        gradient: LinearGradient(
-          colors: [Colors.white30, Colors.deepOrange],
-          begin: FractionalOffset.topLeft,
-          end: FractionalOffset.bottomRight,
+    return Stack(
+      children: [
+        Center(
+          child: SizedBox(
+            height: 300.0,
+            child: Image.asset('assets/imgs/logo_login.png'),
+          ),
         ),
-      ),
-      height: MediaQuery.of(context).size.height,
-      child: SingleChildScrollView(
-        child: Column(
-          children: <Widget>[
-            SizedBox(
-              height: 10.0,
+        Container(
+          decoration: BoxDecoration(
+            gradient: LinearGradient(
+              colors: [Colors.white30, Colors.deepOrange],
+              begin: FractionalOffset.topLeft,
+              end: FractionalOffset.bottomRight,
             ),
-            InputTextField(
-              controlller: _controllerUser,
-              label: _labelUser,
-              tip: _tipUser,
-              icon: Icons.person,
-              inputType: TextInputType.text,
+          ),
+          height: MediaQuery.of(context).size.height,
+          child: SingleChildScrollView(
+            child: Column(
+              children: <Widget>[
+                SizedBox(
+                  height: 10.0,
+                ),
+                InputTextField(
+                  controlller: _controllerUser,
+                  label: _labelUser,
+                  //tip: _tipUser,
+                  icon: Icons.person,
+                  inputType: TextInputType.text,
+                ),
+                InputTextField(
+                  controlller: _controllerPsw,
+                  label: _labelPsw,
+                  //tip: _tipPsw,
+                  icon: Icons.vpn_key,
+                  inputType: TextInputType.text,
+                  hidden: true,
+                ),
+                SizedBox(
+                  height: 50.0,
+                ),
+                Button(
+                  Icons.arrow_forward,
+                  onClick: () {
+                    _showDashboardPage(context);
+                  },
+                ),
+              ],
             ),
-            InputTextField(
-              controlller: _controllerPsw,
-              label: _labelPsw,
-              tip: _tipPsw,
-              icon: Icons.vpn_key,
-              inputType: TextInputType.text,
-              hidden: true,
-            ),
-            Button(
-              Icons.arrow_forward,
-              onClick: () {
-                _showDashboardPage(context);
-              },
-            ),
-          ],
+          ),
         ),
-      ),
+      ],
     );
   }
 
