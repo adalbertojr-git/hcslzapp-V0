@@ -24,10 +24,10 @@ class Button extends StatelessWidget {
       //alignment: Alignment.bottomRight,
       child: FloatingActionButton(
         backgroundColor: Colors.deepOrangeAccent[100],
-        shape: RoundedRectangleBorder(
+/*        shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(40.0),
           side: BorderSide(color: Colors.white30),
-        ),
+        ),*/
         child: Icon(
           _icon,
           color: Colors.black,

@@ -10,6 +10,7 @@ OBS: o padrinho, o tipo de membro e a data de escudamento sao definidas pela
 administracao do App e nao podem ser alteradas pelo associado
 
 */
+import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:hcslzapp/components/my.appbar.dart';
 import 'package:hcslzapp/enums/blood.types.dart';
@@ -25,6 +26,7 @@ import 'package:hcslzapp/pages/dependent/dependent.add.dart';
 import 'package:hcslzapp/pages/dependent/dependent.list.dart';
 import 'package:hcslzapp/pages/motorcycle/motorcycle.add.dart';
 import 'package:hcslzapp/pages/motorcycle/motorcycle.list.dart';
+import 'package:image_picker/image_picker.dart';
 
 const _titleAppBar = 'Atualizar Meus Dados';
 const _labelName = 'Nome *';
@@ -66,6 +68,8 @@ class _AssociatedUpdateState extends State<AssociatedUpdate> {
   final AssociatedWebClient _webClient = AssociatedWebClient();
   Future<List<Associated>> _future;
   bool isLoading = true;
+  File _image;
+  final picker = ImagePicker();
 
   @override
   void initState() {
@@ -81,6 +85,31 @@ class _AssociatedUpdateState extends State<AssociatedUpdate> {
 
   Future<List<Associated>> getFuture() async {
     return _webClient.findByCodigo(1);
+  }
+
+  Future getImageFromCamera() async {
+    final pickedFile = await picker.getImage(source: ImageSource.camera);
+    setState(() {
+      if (pickedFile != null) {
+        _image = File(pickedFile.path);
+        setState(() {
+          //photo(_image.path.toString());
+        });
+      } else {
+        print('No image selected.');
+      }
+    });
+  }
+
+  Future getImageFromGallery() async {
+    final pickedFile = await picker.getImage(source: ImageSource.gallery);
+    setState(() {
+      if (pickedFile != null) {
+        _image = File(pickedFile.path);
+      } else {
+        print('No image selected.');
+      }
+    });
   }
 
   @override
@@ -220,7 +249,28 @@ class _AssociatedUpdateState extends State<AssociatedUpdate> {
           height: 30.0,
           width: double.infinity,
         ),
-        _photo(),
+        _photo('assets/imgs/noImage.png'),
+        Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            IconButton(
+              icon: Icon(
+                Icons.add_photo_alternate,
+                color: Colors.black,
+                size: 33.0,
+              ),
+              onPressed: getImageFromGallery,
+            ),
+            IconButton(
+              icon: Icon(
+                Icons.add_a_photo,
+                color: Colors.black,
+                size: 30.0,
+              ),
+              onPressed: getImageFromCamera,
+            )
+          ],
+        ),
         InputTextField(
           controlller: _controllerName,
           label: _labelName,
@@ -372,7 +422,7 @@ class _AssociatedUpdateState extends State<AssociatedUpdate> {
     );
   }
 
-  Container _photo() {
+  Container _photo(String fileName) {
     return Container(
       height: 200.0,
       width: 200.0,
@@ -388,7 +438,7 @@ class _AssociatedUpdateState extends State<AssociatedUpdate> {
           color: Colors.black,
           borderRadius: BorderRadius.circular(100.0),
           image: DecorationImage(
-            image: AssetImage('assets/imgs/noImage.png'),
+            image: AssetImage(fileName),
             fit: BoxFit.fill,
           ),
         ),
@@ -464,6 +514,32 @@ class _AssociatedUpdateState extends State<AssociatedUpdate> {
             },
             separatorBuilder: (BuildContext context, int index) =>
                 const Divider(),
+          ),
+          Container(
+            padding: EdgeInsets.only(top: 20.0),
+            //alignment: Alignment.bottomRight,
+            child: FloatingActionButton(
+              heroTag: title,
+              mini: true,
+              backgroundColor: Colors.deepOrangeAccent[100],
+              child: Icon(
+                Icons.add,
+                color: Colors.black,
+                size: 25,
+              ),
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) {
+                      return dependents != null
+                          ? DependentAdd(null)
+                          : MotorcycleAdd();
+                    },
+                  ),
+                );
+              },
+            ),
           ),
         ],
       ),

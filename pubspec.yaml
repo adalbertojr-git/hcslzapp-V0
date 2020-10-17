@@ -33,6 +33,7 @@ dependencies:
   flutter_launcher_icons: ^0.7.5
   flare_flutter: ^2.0.6
   splashscreen: ^1.2.0
+  image_picker: ^0.6.7+12
 
 flutter_icons:
   image_path: "assets/icons/logo.png"
