@@ -46,7 +46,7 @@ class MotorcycleAdd extends StatelessWidget {
                   height: 20.0,
                 ),
                 InputTextField(
-                  controlller: _controladorModelo,
+                  controller: _controladorModelo,
                   label: _rotuloModelo,
                   icon: Icons.motorcycle,
                   inputType: TextInputType.text,
@@ -56,7 +56,7 @@ class MotorcycleAdd extends StatelessWidget {
                   children: <Widget>[
                     Expanded(
                       child: InputTextField(
-                        controlller: _controladorAno,
+                        controller: _controladorAno,
                         icon: Icons.calendar_today,
                         label: _rotuloAno,
                         inputType: TextInputType.number,
@@ -64,7 +64,7 @@ class MotorcycleAdd extends StatelessWidget {
                     ),
                     Expanded(
                       child: InputTextField(
-                        controlller: _controladorCor,
+                        controller: _controladorCor,
                         icon: Icons.color_lens,
                         label: _rotuloCor,
                         inputType: TextInputType.text,
@@ -77,14 +77,14 @@ class MotorcycleAdd extends StatelessWidget {
                   children: <Widget>[
                     Expanded(
                       child: InputTextField(
-                        controlller: _controladorPlaca,
+                        controller: _controladorPlaca,
                         label: _rotuloPlaca,
                         inputType: TextInputType.text,
                       ),
                     ),
                     Expanded(
                       child: InputTextField(
-                        controlller: _controladorApelido,
+                        controller: _controladorApelido,
                         label: _rotuloApelido,
                         inputType: TextInputType.text,
                       ),
@@ -92,12 +92,12 @@ class MotorcycleAdd extends StatelessWidget {
                   ],
                 ),
                 InputTextField(
-                  controlller: _controladorChassi,
+                  controller: _controladorChassi,
                   label: _rotuloChassi,
                   inputType: TextInputType.text,
                 ),
                 InputTextField(
-                  controlller: _controladorRenavam,
+                  controller: _controladorRenavam,
                   label: _rotuloRenavam,
                   inputType: TextInputType.text,
                 ),

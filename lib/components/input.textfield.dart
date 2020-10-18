@@ -10,7 +10,7 @@ Descriçao: classe que cria um TextFormField padrao
 import 'package:flutter/material.dart';
 
 class InputTextField extends StatelessWidget {
-  final TextEditingController controlller;
+  final TextEditingController controller;
   final String label;
   final String tip;
   final IconData icon;
@@ -23,7 +23,7 @@ class InputTextField extends StatelessWidget {
   final double size;
 
   InputTextField(
-      {this.controlller,
+      {this.controller,
       this.label,
       this.tip,
       this.icon,
@@ -43,7 +43,7 @@ class InputTextField extends StatelessWidget {
         textCapitalization: TextCapitalization.words,
         obscureText: hidden != null ? hidden : false,
         readOnly: disabled != null ? disabled : false,
-        controller: controlller,
+        controller: controller,
         style: TextStyle(
           fontSize: size != null ? size : 15.0,
         ),

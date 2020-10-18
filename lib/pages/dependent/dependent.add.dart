@@ -77,11 +77,11 @@ class _DependentAddState extends State<DependentAdd> {
           child: SingleChildScrollView(
             child: Column(
               children: <Widget>[
-                SizedBox (
+                SizedBox(
                   height: 20.0,
                 ),
                 InputTextField(
-                  controlller: _controladorNome,
+                  controller: _controladorNome,
                   label: _rotuloNome,
                   icon: Icons.person,
                   inputType: TextInputType.text,
@@ -89,7 +89,7 @@ class _DependentAddState extends State<DependentAdd> {
                       widget.dependente != null ? widget.dependente.name : null,
                 ),
                 InputTextField(
-                  controlller: _controladorEmail,
+                  controller: _controladorEmail,
                   label: _rotuloEmail,
                   icon: Icons.email,
                   inputType: TextInputType.emailAddress,
@@ -98,7 +98,7 @@ class _DependentAddState extends State<DependentAdd> {
                       : null,
                 ),
                 InputTextField(
-                  controlller: _controladorTelefone,
+                  controller: _controladorTelefone,
                   label: _rotuloTelefone,
                   icon: Icons.phone,
                   inputType: TextInputType.phone,
@@ -111,7 +111,7 @@ class _DependentAddState extends State<DependentAdd> {
                   children: <Widget>[
                     Expanded(
                       child: InputTextField(
-                        controlller: _controladorDataNascimento,
+                        controller: _controladorDataNascimento,
                         label: _rotuloDataNascimento,
                         icon: Icons.calendar_today,
                         tip: _dicaData,
@@ -190,24 +190,15 @@ class _DependentAddState extends State<DependentAdd> {
                     activeColor: Colors.orange,
                   ),
                 ),
-/*                Padding(
-                  padding: EdgeInsets.all(5.0),
-                ),
-                Button(
-                  Icons.save,
-                  onClick: () {
-                    _save(context);
-                  },
-                ),*/
               ],
             ),
           ),
         ),
       ),
       floatingActionButton: Button(
-        Icons.save,
+        Icons.playlist_add,
         onClick: () {
-          _save(context);
+          _add(context);
         },
       ),
     );
@@ -229,12 +220,13 @@ class _DependentAddState extends State<DependentAdd> {
     return null;
   }
 
-  void _save(BuildContext context) {
+  void _add(BuildContext context) {
     //final int codigo = int.parse(_controladorCodigo.text);
     debugPrint('Criando dependente...');
     final String nome = _controladorNome.text;
     final String email = _controladorEmail.text;
     final String telefone = _controladorTelefone.text;
+
     final String tipoSanguineo =
         (_tiposSanguineos.indexOf(_currentTipoSanguineo) != 0
             ? _currentTipoSanguineo.toString()
@@ -245,7 +237,6 @@ class _DependentAddState extends State<DependentAdd> {
     if (nome != '' && email != '' && telefone != '') {
       final dependenteCriado = Dependent(
           0, nome, email, telefone, tipoSanguineo, dataNascimento, membroHC);
-      debugPrint('Criando dependente...');
       debugPrint('$dependenteCriado');
       /*
       pop = manda resposta para o push (then)

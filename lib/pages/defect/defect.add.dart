@@ -43,7 +43,7 @@ class DefectAdd extends StatelessWidget {
                   children: <Widget>[
                     Expanded(
                       child: InputTextField(
-                        controlller: _controladorModelo,
+                        controller: _controladorModelo,
                         label: _rotuloModelo,
                         icon: Icons.motorcycle,
                         inputType: TextInputType.text,
@@ -51,7 +51,7 @@ class DefectAdd extends StatelessWidget {
                     ),
                     Expanded(
                       child: InputTextField(
-                        controlller: _controladorAno,
+                        controller: _controladorAno,
                         icon: Icons.calendar_today,
                         label: _rotuloAno,
                         inputType: TextInputType.number,
@@ -60,25 +60,25 @@ class DefectAdd extends StatelessWidget {
                   ],
                 ),
                 InputTextField(
-                  controlller: _controladorDefeito,
+                  controller: _controladorDefeito,
                   label: _rotuloDefeito,
                   inputType: TextInputType.text,
                   nLines: 2,
                 ),
                 InputTextField(
-                  controlller: _controladorSolucao,
+                  controller: _controladorSolucao,
                   label: _rotuloSolucao,
                   inputType: TextInputType.text,
                   nLines: 5,
                 ),
                 InputTextField(
-                  controlller: _controladorProprietario,
+                  controller: _controladorProprietario,
                   label: _rotuloProprietario,
                   icon: Icons.person,
                   inputType: TextInputType.text,
                 ),
                 InputTextField(
-                  controlller: _controladorTelefone,
+                  controller: _controladorTelefone,
                   label: _rotuloTelefone,
                   icon: Icons.phone,
                   inputType: TextInputType.phone,

@@ -272,28 +272,28 @@ class _AssociatedUpdateState extends State<AssociatedUpdate> {
           ],
         ),
         InputTextField(
-          controlller: _controllerName,
+          controller: _controllerName,
           label: _labelName,
           icon: Icons.person,
           inputType: TextInputType.text,
           valor: associated.name,
         ),
         InputTextField(
-          controlller: _controllerEmail,
+          controller: _controllerEmail,
           label: _labelEmail,
           icon: Icons.email,
           inputType: TextInputType.emailAddress,
           valor: associated.email,
         ),
         InputTextField(
-          controlller: _controllerPhone,
+          controller: _controllerPhone,
           label: _labelPhone,
           icon: Icons.phone,
           inputType: TextInputType.phone,
           valor: associated.phone,
         ),
         InputTextField(
-          controlller: _controlllerSponsor,
+          controller: _controlllerSponsor,
           label: _labelSponsor,
           icon: Icons.person_pin,
           valor: associated.sponsor == null ? null : associated.sponsor.name,
@@ -303,7 +303,7 @@ class _AssociatedUpdateState extends State<AssociatedUpdate> {
           children: <Widget>[
             Expanded(
               child: InputTextField(
-                controlller: _controlllerNickName,
+                controller: _controlllerNickName,
                 label: _labelNickname,
                 inputType: TextInputType.text,
                 valor: associated.nickname,
@@ -311,7 +311,7 @@ class _AssociatedUpdateState extends State<AssociatedUpdate> {
             ),
             Expanded(
               child: InputTextField(
-                controlller: _controlllerAssociatedType,
+                controller: _controlllerAssociatedType,
                 label: _labelAssociatedType,
                 valor: associated.associatedType,
                 disabled: true,
@@ -324,7 +324,7 @@ class _AssociatedUpdateState extends State<AssociatedUpdate> {
           children: <Widget>[
             Expanded(
               child: InputTextField(
-                controlller: _controlllerCNH,
+                controller: _controlllerCNH,
                 label: _labelCNH,
                 inputType: TextInputType.number,
                 valor: associated.cnh,
@@ -332,7 +332,7 @@ class _AssociatedUpdateState extends State<AssociatedUpdate> {
             ),
             Expanded(
               child: InputTextField(
-                controlller: _controlllerCPF,
+                controller: _controlllerCPF,
                 label: _labelCPF,
                 inputType: TextInputType.number,
                 valor: associated.cpf,
@@ -345,7 +345,7 @@ class _AssociatedUpdateState extends State<AssociatedUpdate> {
           children: <Widget>[
             Expanded(
               child: InputTextField(
-                controlller: _controlllerRG,
+                controller: _controlllerRG,
                 label: _labelRG,
                 inputType: TextInputType.number,
                 valor: associated.rg,
@@ -383,7 +383,7 @@ class _AssociatedUpdateState extends State<AssociatedUpdate> {
           children: <Widget>[
             Expanded(
               child: InputTextField(
-                controlller: _controlllerDateBirth,
+                controller: _controlllerDateBirth,
                 label: _labelDateBirth,
                 icon: Icons.calendar_today,
                 tip: _tipDate,
@@ -393,7 +393,7 @@ class _AssociatedUpdateState extends State<AssociatedUpdate> {
             ),
             Expanded(
               child: InputTextField(
-                controlller: _controlllerDateShield,
+                controller: _controlllerDateShield,
                 label: _labelDateShield,
                 icon: Icons.calendar_today,
                 tip: _tipDate,
@@ -497,8 +497,11 @@ class _AssociatedUpdateState extends State<AssociatedUpdate> {
                   title: dependents != null
                       ? Text(dependents[i].name)
                       : Text(motorcycles[i].model),
+                  subtitle: dependents != null
+                      ? Text(dependents[i].email)
+                      : Text(motorcycles[i].year),
                   onTap: () {
-                    Navigator.push(
+                    final Future<Dependent> future = Navigator.push(
                       context,
                       MaterialPageRoute(
                         builder: (context) {
@@ -508,6 +511,13 @@ class _AssociatedUpdateState extends State<AssociatedUpdate> {
                         },
                       ),
                     );
+                    if (dependents != null) {
+                      future.then(
+                            (dependenteRecebido) {
+                          _add(dependents, dependenteRecebido);
+                        },
+                      );
+                    }
                   },
                 ),
               );
@@ -528,7 +538,7 @@ class _AssociatedUpdateState extends State<AssociatedUpdate> {
                 size: 25,
               ),
               onPressed: () {
-                Navigator.push(
+                final Future<Dependent> future = Navigator.push(
                   context,
                   MaterialPageRoute(
                     builder: (context) {
@@ -538,12 +548,29 @@ class _AssociatedUpdateState extends State<AssociatedUpdate> {
                     },
                   ),
                 );
+                if (dependents != null) {
+                  future.then(
+                        (dependenteRecebido) {
+                      _add(dependents, dependenteRecebido);
+                    },
+                  );
+                }
               },
             ),
           ),
         ],
       ),
     );
+  }
+
+  void _add(List<Dependent> dependents, Dependent dependenteRecebido) {
+    if (dependenteRecebido != null) {
+      setState(
+            () {
+          dependents.add(dependenteRecebido);
+        },
+      );
+    }
   }
 
   // here we are creating the list needed for the DropDownButton

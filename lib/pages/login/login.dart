@@ -106,14 +106,14 @@ class Login extends StatelessWidget {
                   height: 10.0,
                 ),
                 InputTextField(
-                  controlller: _controllerUser,
+                  controller: _controllerUser,
                   label: _labelUser,
                   //tip: _tipUser,
                   icon: Icons.person,
                   inputType: TextInputType.text,
                 ),
                 InputTextField(
-                  controlller: _controllerPsw,
+                  controller: _controllerPsw,
                   label: _labelPsw,
                   //tip: _tipPsw,
                   icon: Icons.vpn_key,
@@ -154,19 +154,19 @@ class Login extends StatelessWidget {
               height: 10.0,
             ),
             InputTextField(
-              controlller: _controllerName,
+              controller: _controllerName,
               label: _labelName,
               icon: Icons.person,
               inputType: TextInputType.text,
             ),
             InputTextField(
-              controlller: _controllerEmail,
+              controller: _controllerEmail,
               label: _labelEmail,
               icon: Icons.email,
               inputType: TextInputType.emailAddress,
             ),
             InputTextField(
-              controlller: _controllerPhone,
+              controller: _controllerPhone,
               label: _labelPhone,
               icon: Icons.phone,
               inputType: TextInputType.phone,
@@ -195,7 +195,7 @@ class Login extends StatelessWidget {
               height: 10.0,
             ),
             InputTextField(
-              controlller: _controllerEmail,
+              controller: _controllerEmail,
               label: _labelEmail,
               icon: Icons.email,
               inputType: TextInputType.emailAddress,
