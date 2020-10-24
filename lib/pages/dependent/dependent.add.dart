@@ -39,6 +39,7 @@ class _DependentAddState extends State<DependentAdd> {
   @override
   void initState() {
     _dropDownTiposSanguineos = getTiposSanguineos();
+    _controladorNome.text = widget.dependente != null ? widget.dependente.name : null;
     super.initState();
   }
 
@@ -226,6 +227,8 @@ class _DependentAddState extends State<DependentAdd> {
     final String nome = _controladorNome.text;
     final String email = _controladorEmail.text;
     final String telefone = _controladorTelefone.text;
+
+    debugPrint('nome $nome');
 
     final String tipoSanguineo =
         (_tiposSanguineos.indexOf(_currentTipoSanguineo) != 0

@@ -1,29 +1,33 @@
-import 'dart:ui';
-
 import 'package:flutter/material.dart';
+import 'package:hcslzapp/pages/about/about.dart';
 import 'package:hcslzapp/pages/associated/associated.update.dart';
 import 'package:hcslzapp/pages/boutique/boutique.list.dart';
+import 'package:hcslzapp/pages/defect/defect.list.dart';
 import 'package:hcslzapp/pages/digital.identity/digital.identity.dart';
-import 'package:hcslzapp/pages/dtc.code/dtc.code.access.dart';
 import 'package:hcslzapp/pages/document/document.list.dart';
+import 'package:hcslzapp/pages/dtc.code/dtc.code.access.dart';
 import 'package:hcslzapp/pages/event/events.calendar.dart';
 import 'package:hcslzapp/pages/financial/payment.list.dart';
-import 'package:hcslzapp/pages/defect/defect.list.dart';
 import 'package:hcslzapp/pages/partnership/partnership.list.dart';
 import 'package:hcslzapp/pages/ride/my.ride.dart';
-import 'package:hcslzapp/pages/about/about.dart';
 
 class Dashboard extends StatelessWidget {
-  final bool _pinned = true;
-  final bool _snap = false;
-  final bool _floating = false;
+
+  BuildContext gContext;
 
   @override
   Widget build(BuildContext context) {
-    Size size = MediaQuery.of(context).size;
-
+    gContext = context;
     return Scaffold(
-      drawer: Drawer(
+      drawer: drawr,
+      body: Stack(
+        children: <Widget>[dashBg, content],
+      ),
+    );
+  }
+
+  get drawr =>
+      Drawer(
         child: ListView(
           children: <Widget>[
             Text(
@@ -46,251 +50,257 @@ class Dashboard extends StatelessWidget {
               leading: Icon(Icons.info),
               title: Text("Sobre o HCSlz App"),
               onTap: () {
-                Navigator.pop(context);
+                Navigator.pop(gContext);
               },
             ),
             ListTile(
               leading: Icon(Icons.power_settings_new),
               title: Text("Logout"),
               onTap: () {
-                Navigator.pop(context);
+                Navigator.pop(gContext);
               },
             ),
           ],
         ),
-      ),
-      body: CustomScrollView(
-        slivers: <Widget>[
-          SliverAppBar(
-            pinned: this._pinned,
-            snap: this._snap,
-            floating: this._floating,
-            expandedHeight: 140.0,
-            backgroundColor: Colors.black,
-            flexibleSpace: FlexibleSpaceBar(
-              centerTitle: true,
-              title: Text(
-                "Ola, Adalberto",
-                style:
-                    new TextStyle(fontSize: 20.0, color: Colors.orangeAccent),
-              ),
-              background: Image.asset(
-                'assets/imgs/passeio.jpg',
-                fit: BoxFit.fill,
-              ),
-            ),
-          ),
+      );
 
-          // If the main content is a list, use SliverList instead.
-          SliverFillRemaining(
-            child: Stack(
-              children: <Widget>[
-                Center(
-                  child: Image.asset(
-                    'assets/imgs/hdlogo.png',
-                    width: size.width,
-                    height: size.height,
-                  ),
-                ),
-                Center(
-                  child: Container(
-                    color: Colors.black12,
-                    child: GridView.count(
-                      crossAxisCount: 2,
-                      crossAxisSpacing: 30.0,
-                      mainAxisSpacing: 20.0,
-                      children: <Widget>[
-                        GridButton(
-                          title: "Associado",
-                          image: "assets/imgs/user.png",
-                          context: context,
-                          onClick: () {
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                builder: (context) {
-                                  return AssociatedUpdate();
-                                },
-                              ),
-                            );
-                          },
-                        ),
-                        GridButton(
-                          title: "Financeiro",
-                          image: "assets/imgs/financeiro.png",
-                          context: context,
-                          onClick: () {
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                builder: (context) {
-                                  return PaymentList();
-                                },
-                              ),
-                            );
-                          },
-                        ),
-                        GridButton(
-                          title: "Carteira Harley Club",
-                          image: "assets/imgs/carteirad.png",
-                          context: context,
-                          onClick: () {
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                builder: (context) {
-                                  return DigitalIdentity();
-                                },
-                              ),
-                            );
-                          },
-                        ),
-                        GridButton(
-                          title: "Parcerias",
-                          image: "assets/imgs/parcerias.png",
-                          context: context,
-                          onClick: () {
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                builder: (context) {
-                                  return PartnershipList();
-                                },
-                              ),
-                            );
-                          },
-                        ),
-                        GridButton(
-                          title: "Eventos",
-                          image: "assets/imgs/eventos.png",
-                          context: context,
-                          onClick: () {
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                builder: (context) {
-                                  return EventCalendar();
-                                },
-                              ),
-                            );
-                          },
-                        ),
-                        GridButton(
-                          title: "Documentos",
-                          image: "assets/imgs/docs.png",
-                          context: context,
-                          onClick: () {
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                builder: (context) {
-                                  return DocumentList();
-                                },
-                              ),
-                            );
-                          },
-                        ),
-                        GridButton(
-                          title: "Codigos DTC",
-                          image: "assets/imgs/codigosdtc.png",
-                          context: context,
-                          onClick: () {
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                builder: (context) {
-                                  return DtcCodeAccess();
-                                },
-                              ),
-                            );
-                          },
-                        ),
-                        GridButton(
-                          title: "Oficina",
-                          image: "assets/imgs/oficina.png",
-                          context: context,
-                          onClick: () {
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                builder: (context) {
-                                  return DefectList();
-                                },
-                              ),
-                            );
-                          },
-                        ),
-                        GridButton(
-                          title: "Boutique",
-                          image: "assets/imgs/boutique.png",
-                          context: context,
-                          onClick: () {
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                builder: (context) {
-                                  return BoutiqueList();
-                                },
-                              ),
-                            );
-                          },
-                        ),
-                        GridButton(
-                          title: "Classificados",
-                          image: "assets/imgs/classificados.png",
-                          context: context,
-                          onClick: () {
+  get dashBg =>
+      Column(
+        children: <Widget>[
+          Expanded(
+            child: Container(color: Colors.deepOrange[300]),
+            flex: 2,
+          ),
+          Expanded(
+            child: Container(color: Colors.transparent),
+            flex: 5,
+          ),
+        ],
+      );
+
+  get content =>
+      Container(
+        child: Column(
+          children: <Widget>[
+            header,
+            grid,
+          ],
+        ),
+      );
+
+  get header =>
+      ListTile(
+        contentPadding: EdgeInsets.only(left: 40, right: 20, top: 30),
+        title: Text(
+          'Ola, Adalberto',
+          style: TextStyle(color: Colors.white, fontSize: 25.0),
+        ),
+        subtitle: Text(
+          '10 items',
+          style: TextStyle(color: Colors.blue),
+        ),
+        trailing: CircleAvatar(
+          backgroundColor: Colors.white,
+          radius: 30.0,
+          backgroundImage: AssetImage('assets/imgs/eu.jpg'),
+        ),
+      );
+
+  get grid =>
+      Expanded(
+        child: Container(
+          padding: EdgeInsets.only(left: 16, right: 16, bottom: 16),
+          child: GridView.count(
+            crossAxisSpacing: 10,
+            mainAxisSpacing: 40,
+            crossAxisCount: 2,
+            childAspectRatio: .90,
+            children: <Widget>[
+              GridButton(
+                title: "Associado",
+                image: "assets/imgs/user.png",
+                context: gContext,
+                  onClick: () {
+                    Navigator.push(
+                      gContext,
+                      MaterialPageRoute(
+                        builder: (gContext) {
+                          return AssociatedUpdate();
+                        },
+                      ),
+                    );
+                  },
+              ),
+              GridButton(
+                title: "Financeiro",
+                image: "assets/imgs/financeiro.png",
+                context: gContext,
+                onClick: () {
+                  Navigator.push(
+                    gContext,
+                    MaterialPageRoute(
+                      builder: (gContext) {
+                        return PaymentList();
+                      },
+                    ),
+                  );
+                },
+              ),
+              GridButton(
+                title: "Carteira Harley Club",
+                image: "assets/imgs/carteirad.png",
+                context: gContext,
+                onClick: () {
+                  Navigator.push(
+                    gContext,
+                    MaterialPageRoute(
+                      builder: (gContext) {
+                        return DigitalIdentity();
+                      },
+                    ),
+                  );
+                },
+              ),
+              GridButton(
+                title: "Parcerias",
+                image: "assets/imgs/parcerias.png",
+                context: gContext,
+                onClick: () {
+                  Navigator.push(
+                    gContext,
+                    MaterialPageRoute(
+                      builder: (gContext) {
+                        return PartnershipList();
+                      },
+                    ),
+                  );
+                },
+              ),
+              GridButton(
+                title: "Eventos",
+                image: "assets/imgs/eventos.png",
+                context: gContext,
+                onClick: () {
+                  Navigator.push(
+                    gContext,
+                    MaterialPageRoute(
+                      builder: (gContext) {
+                        return EventCalendar();
+                      },
+                    ),
+                  );
+                },
+              ),
+              GridButton(
+                title: "Documentos",
+                image: "assets/imgs/docs.png",
+                context: gContext,
+                onClick: () {
+                  Navigator.push(
+                    gContext,
+                    MaterialPageRoute(
+                      builder: (gContext) {
+                        return DocumentList();
+                      },
+                    ),
+                  );
+                },
+              ),
+              GridButton(
+                title: "Codigos DTC",
+                image: "assets/imgs/codigosdtc.png",
+                context: gContext,
+                onClick: () {
+                  Navigator.push(
+                    gContext,
+                    MaterialPageRoute(
+                      builder: (context) {
+                        return DtcCodeAccess();
+                      },
+                    ),
+                  );
+                },
+              ),
+              GridButton(
+                title: "Oficina",
+                image: "assets/imgs/oficina.png",
+                context: gContext,
+                onClick: () {
+                  Navigator.push(
+                    gContext,
+                    MaterialPageRoute(
+                      builder: (gContext) {
+                        return DefectList();
+                      },
+                    ),
+                  );
+                },
+              ),
+              GridButton(
+                title: "Boutique",
+                image: "assets/imgs/boutique.png",
+                context: gContext,
+                onClick: () {
+                  Navigator.push(
+                    gContext,
+                    MaterialPageRoute(
+                      builder: (gContext) {
+                        return BoutiqueList();
+                      },
+                    ),
+                  );
+                },
+              ),
+              GridButton(
+                title: "Classificados",
+                image: "assets/imgs/classificados.png",
+                context: gContext,
+                onClick: () {
 /*                            Navigator.push(
-                              context,
+                              gContext,
                               MaterialPageRoute(
-                                builder: (context) {
+                                builder: (gContext) {
                                   return Classificados();
                                 },
                               ),
                             );*/
-                          },
-                        ),
-                        GridButton(
-                          title: "Meu Role",
-                          image: "assets/imgs/maps.png",
-                          context: context,
-                          onClick: () {
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                builder: (context) {
-                                  return MyRide();
-                                },
-                              ),
-                            );
-                          },
-                        ),
-                        GridButton(
-                          title: "O Harley Club",
-                          image: "assets/imgs/logo.png",
-                          context: context,
-                          onClick: () {
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                builder: (context) {
-                                  return About();
-                                },
-                              ),
-                            );
-                          },
-                        ),
-                      ],
+                },
+              ),
+              GridButton(
+                title: "Meu Role",
+                image: "assets/imgs/maps.png",
+                context: gContext,
+                onClick: () {
+                  Navigator.push(
+                    gContext,
+                    MaterialPageRoute(
+                      builder: (gContext) {
+                        return MyRide();
+                      },
                     ),
-                  ),
-                ),
-              ],
-            ),
+                  );
+                },
+              ),
+              GridButton(
+                title: "O Harley Club",
+                image: "assets/imgs/logo.png",
+                context: gContext,
+                onClick: () {
+                  Navigator.push(
+                    gContext,
+                    MaterialPageRoute(
+                      builder: (gContext) {
+                        return About();
+                      },
+                    ),
+                  );
+                },
+              ),
+            ],
           ),
-        ],
-      ),
-    );
-  }
+        ),
+      );
+
 }
 
 class GridButton extends StatelessWidget {
@@ -306,7 +316,6 @@ class GridButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return Card(
       elevation: 0,
-      color: this.color,
       child: InkWell(
         onTap: () {
           onClick();
@@ -314,7 +323,6 @@ class GridButton extends StatelessWidget {
         splashColor: Colors.orange,
         child: Container(
           decoration: BoxDecoration(
-              color: this.color,
               image: DecorationImage(
                 image: AssetImage(image),
                 fit: BoxFit.contain,

@@ -4,8 +4,10 @@ import 'package:flutter/services.dart';
 import 'package:hcslzapp/components/button.dart';
 import 'package:hcslzapp/components/hc.logo.dart';
 import 'package:hcslzapp/components/input.textfield.dart';
-import 'package:hcslzapp/pages/dashboard/dashboard.dart';
+import 'package:hcslzapp/pages/dashboard/dashboard_old.dart';
 import 'dart:async';
+
+import 'package:hcslzapp/pages/dashboard/dashboard.dart';
 
 const _labelUser = 'Usuario ou email';
 const _tipUser = 'Digite seu usuario ou email';

@@ -16,7 +16,6 @@ class Associated {
   final String email;
   final String phone;
   final Associated sponsor;
-  final String nickname;
   final String cnh;
   final String cpf;
   final String rg;
@@ -33,7 +32,6 @@ class Associated {
       this.email,
       this.phone,
       this.sponsor,
-      this.nickname,
       this.cnh,
       this.cpf,
       this.rg,
@@ -50,7 +48,6 @@ class Associated {
         email = json['email'],
         phone = json['telefone'],
         sponsor = json["padrinho"] == null ? null : Associated.fromJson(json["padrinho"]),
-        nickname = json['apelido'],
         cnh = json['cnh'],
         cpf = json['cpf'],
         rg = json['rg'],
@@ -69,7 +66,6 @@ class Associated {
         'email': email,
         'telefone': phone,
         'padrinho': sponsor == null ? null : sponsor.toJson(),
-        'apelido': nickname,
         'cnh': cnh,
         'cpf': cpf,
         'rg': rg,
@@ -86,7 +82,7 @@ class Associated {
   @override
   String toString() {
     return 'Associado{codigo: $code, nome: $name, email: $email, telefone: $phone, '
-        'apelido: $nickname, cnh: $cnh, cpf: $cpf, rg: $rg, '
+        'cnh: $cnh, cpf: $cpf, rg: $rg, '
         'tipoSanguineo: $bloodType, dataNascimento: $dateBirth, '
         'dataEscudamento: $dateShield}';
   }

@@ -33,7 +33,6 @@ const _labelName = 'Nome *';
 const _labelPhone = 'Telefone *';
 const _labelEmail = 'Email *';
 const _labelSponsor = 'Padrinho';
-const _labelNickname = 'Apelido';
 const _labelAssociatedType = 'Tipo de Associado';
 const _labelCNH = 'CNH';
 const _labelCPF = 'CPF';
@@ -52,7 +51,6 @@ class _AssociatedUpdateState extends State<AssociatedUpdate> {
   final TextEditingController _controllerPhone = TextEditingController();
   final TextEditingController _controllerEmail = TextEditingController();
   final TextEditingController _controlllerSponsor = TextEditingController();
-  final TextEditingController _controlllerNickName = TextEditingController();
   final TextEditingController _controlllerAssociatedType =
       TextEditingController();
   final TextEditingController _controlllerCNH = TextEditingController();
@@ -261,6 +259,9 @@ class _AssociatedUpdateState extends State<AssociatedUpdate> {
               ),
               onPressed: getImageFromGallery,
             ),
+            SizedBox(
+              width: 50.0,
+            ),
             IconButton(
               icon: Icon(
                 Icons.add_a_photo,
@@ -299,25 +300,11 @@ class _AssociatedUpdateState extends State<AssociatedUpdate> {
           valor: associated.sponsor == null ? null : associated.sponsor.name,
           inputType: TextInputType.text,
         ),
-        Row(
-          children: <Widget>[
-            Expanded(
-              child: InputTextField(
-                controller: _controlllerNickName,
-                label: _labelNickname,
-                inputType: TextInputType.text,
-                valor: associated.nickname,
-              ),
-            ),
-            Expanded(
-              child: InputTextField(
-                controller: _controlllerAssociatedType,
-                label: _labelAssociatedType,
-                valor: associated.associatedType,
-                disabled: true,
-              ),
-            ),
-          ],
+        InputTextField(
+          controller: _controlllerAssociatedType,
+          label: _labelAssociatedType,
+          valor: associated.associatedType,
+          disabled: true,
         ),
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
