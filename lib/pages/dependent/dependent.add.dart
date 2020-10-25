@@ -1,15 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:hcslzapp/components/button.dart';
-import 'package:hcslzapp/components/my.appbar.dart';
 import 'package:hcslzapp/enums/blood.types.dart';
 import 'package:hcslzapp/components/input.textfield.dart';
 import 'package:hcslzapp/models/dependent.dart';
 
-const _tituloAppBar = 'Dependente';
 const _rotuloNome = 'Nome *';
 const _rotuloTelefone = 'Telefone *';
 const _rotuloEmail = 'Email *';
-const _rotuloTipoSanguineo = 'Tipo Sanguineo';
+const _labelCPF = 'CPF';
 const _rotuloDataNascimento = 'Data de Nascimento';
 const _dicaData = 'dd/mm/yyyy';
 
@@ -27,43 +25,28 @@ class _DependentAddState extends State<DependentAdd> {
   final TextEditingController _controladorNome = TextEditingController();
   final TextEditingController _controladorTelefone = TextEditingController();
   final TextEditingController _controladorEmail = TextEditingController();
+  final TextEditingController _controlllerCPF = TextEditingController();
   final TextEditingController _controladorDataNascimento =
       TextEditingController();
   final TextEditingController _controladorMembroHC = TextEditingController();
   String _nome;
-  List _tiposSanguineos = List();
-  List<DropdownMenuItem<String>> _dropDownTiposSanguineos;
-  String _currentTipoSanguineo;
+  List _bloodTypes = List();
+  List<DropdownMenuItem<String>> _dropDownBloodTypes;
+  String _currentBloodType;
   bool ehMembro = false;
 
   @override
   void initState() {
-    _dropDownTiposSanguineos = getTiposSanguineos();
+    _dropDownBloodTypes = _getBloodTypes();
     _controladorNome.text = widget.dependente != null ? widget.dependente.name : null;
     super.initState();
   }
 
-  // here we are creating the list needed for the DropDownButton
-  List<DropdownMenuItem<String>> getTiposSanguineos() {
-    List<DropdownMenuItem<String>> tipos = new List();
-    //TipoSanguineo.values.forEach((v) => print('value: $v, index: ${v.index}'));
-    //TipoSanguineo.values.forEach((v) => print(v.descricao));
-    BloodType.values.forEach((v) => _tiposSanguineos.add(v.description));
-    print(_tiposSanguineos);
-    for (String tipo in _tiposSanguineos) {
-      // here we are creating the drop down menu items, you can customize the item right here
-      // but I'll just use a simple text for this
-      tipos.add(new DropdownMenuItem(value: tipo, child: new Text(tipo)));
-    }
-    return tipos;
-  }
-
   //@override
   Widget build(BuildContext context) {
-    _currentTipoSanguineo =
+    _currentBloodType =
         widget.dependente != null ? widget.dependente.bloodType : null;
     return Scaffold(
-      //appBar: MyAppBar(_tituloAppBar),
       body: Container(
         padding: EdgeInsets.fromLTRB(5.0, 0.0, 5.0, 0.0),
         decoration: BoxDecoration(
@@ -86,8 +69,8 @@ class _DependentAddState extends State<DependentAdd> {
                   label: _rotuloNome,
                   icon: Icons.person,
                   inputType: TextInputType.text,
-                  valor:
-                      widget.dependente != null ? widget.dependente.name : null,
+                  //valor:
+                      //widget.dependente != null ? widget.dependente.name : null,
                 ),
                 InputTextField(
                   controller: _controladorEmail,
@@ -108,8 +91,16 @@ class _DependentAddState extends State<DependentAdd> {
                       : null,
                 ),
                 Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  crossAxisAlignment: CrossAxisAlignment.baseline,
                   children: <Widget>[
+                    Expanded(
+                      child: InputTextField(
+                        controller: _controlllerCPF,
+                        label: _labelCPF,
+                        inputType: TextInputType.number,
+                        //valor: associated.cpf,
+                      ),
+                    ),
                     Expanded(
                       child: InputTextField(
                         controller: _controladorDataNascimento,
@@ -122,36 +113,31 @@ class _DependentAddState extends State<DependentAdd> {
                             : null,
                       ),
                     ),
+                  ],
+                ),
+                Row(
+                  crossAxisAlignment: CrossAxisAlignment.baseline,
+                  children: <Widget>[
+                    Expanded(
+                      child: Text(
+                        'Tipo Sanguineo:',
+                        textAlign: TextAlign.center,
+                      ),
+                    ),
                     Expanded(
                       child: Container(
-                        padding: EdgeInsets.fromLTRB(5.0, 0.0, 0.0, 0.0),
                         height: 58.0,
-//                        decoration: BoxDecoration(
-//                          border: Border.all(color: Colors.black12),
-//                          borderRadius: BorderRadius.all(
-//                            Radius.circular(5.0),
-//                          ),
-//                        ),
-                        child: Container(
-                          height: 58.0,
-                          alignment: Alignment.center,
-                          child: DropdownButton(
-                            hint: Text(
-                              "Tipo Sanguineo",
-                              style: TextStyle(
-                                color: Colors.black,
+                        child: DropdownButtonFormField(
+                          decoration: const InputDecoration(
+                            enabledBorder: OutlineInputBorder(
+                              borderSide: BorderSide(
+                                color: Colors.white70,
                               ),
                             ),
-                            icon: Icon(
-                              Icons.arrow_downward,
-                              size: 28,
-                            ),
-                            style:
-                                TextStyle(fontSize: 15.0, color: Colors.black),
-                            value: _currentTipoSanguineo,
-                            items: _dropDownTiposSanguineos,
-                            onChanged: changedDropDownItem,
                           ),
+                          value: _currentBloodType,
+                          items: _dropDownBloodTypes,
+                          onChanged: changedDropDownItem,
                         ),
                       ),
                     ),
@@ -171,7 +157,7 @@ class _DependentAddState extends State<DependentAdd> {
                   height: 58.0,
                   alignment: Alignment.center,
                   decoration: BoxDecoration(
-                    border: Border.all(color: Colors.black12),
+                    border: Border.all(color: Colors.white70),
                     borderRadius: BorderRadius.all(
                       Radius.circular(5.0),
                     ),
@@ -187,7 +173,7 @@ class _DependentAddState extends State<DependentAdd> {
                         },
                       );
                     },
-                    activeTrackColor: Colors.black,
+                    activeTrackColor: Colors.blue,
                     activeColor: Colors.orange,
                   ),
                 ),
@@ -205,10 +191,20 @@ class _DependentAddState extends State<DependentAdd> {
     );
   }
 
+  List<DropdownMenuItem<String>> _getBloodTypes() {
+    List<DropdownMenuItem<String>> types = new List();
+    BloodType.values.forEach((v) => _bloodTypes.add(v.description));
+    print(_bloodTypes);
+    for (String type in _bloodTypes) {
+      types.add(new DropdownMenuItem(value: type, child: new Text(type)));
+    }
+    return types;
+  }
+
   void changedDropDownItem(String selected) {
     setState(
       () {
-        _currentTipoSanguineo = selected;
+        _currentBloodType = selected;
       },
     );
   }
@@ -231,8 +227,8 @@ class _DependentAddState extends State<DependentAdd> {
     debugPrint('nome $nome');
 
     final String tipoSanguineo =
-        (_tiposSanguineos.indexOf(_currentTipoSanguineo) != 0
-            ? _currentTipoSanguineo.toString()
+        (_bloodTypes.indexOf(_currentBloodType) != 0
+            ? _currentBloodType.toString()
             : '');
     final String dataNascimento = _controladorDataNascimento.text;
     final String membroHC = (ehMembro == true ? 'S' : 'N');

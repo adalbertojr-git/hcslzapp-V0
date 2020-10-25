@@ -1,10 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:hcslzapp/http/webclients/associated.webclient.dart';
-import 'package:hcslzapp/pages/login/login.dart';
 import 'package:hcslzapp/pages/login/splash.dart';
-import 'package:hcslzapp/pages/login/splash.dart';
+import 'package:intl/date_symbol_data_file.dart';
+import 'package:intl/intl.dart';
 
-import 'http/webclients/payment.webclient.dart';
 /*
 Atalhos uteis:
 
@@ -32,19 +30,17 @@ flutter pub run flutter_launcher_icons:main
 */
 
 const _titleAppBar = 'HCSlz App';
-final AssociatedWebClient _webClient1 = AssociatedWebClient();
-final PaymentWebClient _webClient2 = PaymentWebClient();
 
 void main() => runApp(HCSlzApp());
 
 class HCSlzApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    //_webClient2.findByAssociado_Codigo(1);
-//    Intl.defaultLocale = 'pt_BR';
+    Intl.defaultLocale = 'pt_BR';
+    //initializeDateFormatting('pt_BR');
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      home: Splash(), //Login(), //Splash(),
+      home: Splash(),
       title: _titleAppBar,
       theme: ThemeData(
         primaryColor: Colors.blue,//orange[900],

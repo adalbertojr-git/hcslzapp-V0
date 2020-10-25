@@ -36,7 +36,6 @@ const _labelSponsor = 'Padrinho';
 const _labelAssociatedType = 'Tipo de Associado';
 const _labelCNH = 'CNH';
 const _labelCPF = 'CPF';
-const _labelRG = 'RG';
 const _labelDateBirth = 'Data Nascimento';
 const _labelDateShield = 'Data Escudamento';
 const _tipDate = 'dd/mm/yyyy';
@@ -55,7 +54,6 @@ class _AssociatedUpdateState extends State<AssociatedUpdate> {
       TextEditingController();
   final TextEditingController _controlllerCNH = TextEditingController();
   final TextEditingController _controlllerCPF = TextEditingController();
-  final TextEditingController _controlllerRG = TextEditingController();
   final TextEditingController _controlllerBloodType = TextEditingController();
   final TextEditingController _controlllerDateBirth = TextEditingController();
   final TextEditingController _controlllerDateShield = TextEditingController();
@@ -332,44 +330,6 @@ class _AssociatedUpdateState extends State<AssociatedUpdate> {
           children: <Widget>[
             Expanded(
               child: InputTextField(
-                controller: _controlllerRG,
-                label: _labelRG,
-                inputType: TextInputType.number,
-                valor: associated.rg,
-              ),
-            ),
-            Expanded(
-              child: Container(
-                height: 58.0,
-                alignment: Alignment.center,
-                child: DropdownButton(
-                  hint: Text(
-                    "Tipo Sanguineo",
-                    style: TextStyle(
-                      color: Colors.black,
-                    ),
-                  ),
-                  icon: Icon(
-                    Icons.arrow_downward,
-                    size: 28,
-                  ),
-                  style: TextStyle(
-                    fontSize: 15.0,
-                    color: Colors.black,
-                  ),
-                  value: _currentBloodType,
-                  items: _dropDownBloodTypes,
-                  onChanged: changedDropDownItem,
-                ),
-              ),
-            ),
-          ],
-        ),
-        Row(
-          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-          children: <Widget>[
-            Expanded(
-              child: InputTextField(
                 controller: _controlllerDateBirth,
                 label: _labelDateBirth,
                 icon: Icons.calendar_today,
@@ -386,6 +346,34 @@ class _AssociatedUpdateState extends State<AssociatedUpdate> {
                 tip: _tipDate,
                 inputType: TextInputType.datetime,
                 valor: associated.dateShield,
+              ),
+            ),
+          ],
+        ),
+        Row(
+          crossAxisAlignment: CrossAxisAlignment.baseline,
+          children: <Widget>[
+            Expanded(
+              child: Text(
+                'Tipo Sanguineo:',
+                textAlign: TextAlign.center,
+              ),
+            ),
+            Expanded(
+              child: Container(
+                height: 58.0,
+                child: DropdownButtonFormField(
+                  decoration: const InputDecoration(
+                    enabledBorder: OutlineInputBorder(
+                      borderSide: BorderSide(
+                        color: Colors.white70,
+                      ),
+                    ),
+                  ),
+                  value: _currentBloodType,
+                  items: _dropDownBloodTypes,
+                  onChanged: changedDropDownItem,
+                ),
               ),
             ),
           ],
@@ -500,7 +488,7 @@ class _AssociatedUpdateState extends State<AssociatedUpdate> {
                     );
                     if (dependents != null) {
                       future.then(
-                            (dependenteRecebido) {
+                        (dependenteRecebido) {
                           _add(dependents, dependenteRecebido);
                         },
                       );
@@ -537,7 +525,7 @@ class _AssociatedUpdateState extends State<AssociatedUpdate> {
                 );
                 if (dependents != null) {
                   future.then(
-                        (dependenteRecebido) {
+                    (dependenteRecebido) {
                       _add(dependents, dependenteRecebido);
                     },
                   );
@@ -553,23 +541,18 @@ class _AssociatedUpdateState extends State<AssociatedUpdate> {
   void _add(List<Dependent> dependents, Dependent dependenteRecebido) {
     if (dependenteRecebido != null) {
       setState(
-            () {
+        () {
           dependents.add(dependenteRecebido);
         },
       );
     }
   }
 
-  // here we are creating the list needed for the DropDownButton
   List<DropdownMenuItem<String>> _getBloodTypes() {
     List<DropdownMenuItem<String>> types = new List();
-    //TipoSanguineo.values.forEach((v) => print('value: $v, index: ${v.index}'));
-    //TipoSanguineo.values.forEach((v) => print(v.descricao));
     BloodType.values.forEach((v) => _bloodTypes.add(v.description));
     print(_bloodTypes);
     for (String type in _bloodTypes) {
-      // here we are creating the drop down menu items, you can customize the item right here
-      // but I'll just use a simple text for this
       types.add(new DropdownMenuItem(value: type, child: new Text(type)));
     }
     return types;

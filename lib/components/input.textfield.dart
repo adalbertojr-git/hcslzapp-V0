@@ -48,18 +48,28 @@ class InputTextField extends StatelessWidget {
           fontSize: size != null ? size : 15.0,
         ),
         decoration: InputDecoration(
-          filled: nLines != null ? true : false,
+          focusedBorder: OutlineInputBorder(
+            borderSide: BorderSide(
+              color: Colors.blue,
+            ),
+          ),
+          enabledBorder: OutlineInputBorder(
+            borderSide: BorderSide(
+              color: Colors.white70,
+            ),
+          ),
           icon: icon != null
               ? Icon(
                   icon,
                   color: Colors.orange,
                 )
               : null,
+          filled: true,
           labelText: valor,
           hintText: tip,
           prefixText: prefix,
           helperText: label,
-          helperStyle: TextStyle(fontSize: 9.0, color: Colors.indigo),
+          helperStyle: TextStyle(fontSize: 10.0, color: Colors.black54),
         ),
         keyboardType: inputType,
         onSaved: (String value) {

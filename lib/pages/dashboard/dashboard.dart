@@ -69,7 +69,7 @@ class Dashboard extends StatelessWidget {
         children: <Widget>[
           Expanded(
             child: Container(color: Colors.deepOrange[300]),
-            flex: 2,
+            flex: 3,
           ),
           Expanded(
             child: Container(color: Colors.transparent),
@@ -96,8 +96,8 @@ class Dashboard extends StatelessWidget {
           style: TextStyle(color: Colors.white, fontSize: 25.0),
         ),
         subtitle: Text(
-          '10 items',
-          style: TextStyle(color: Colors.blue),
+          'AJ102030',
+          style: TextStyle(color: Colors.white60),
         ),
         trailing: CircleAvatar(
           backgroundColor: Colors.white,
