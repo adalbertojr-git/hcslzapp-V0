@@ -49,14 +49,14 @@ class _AssociatedUpdateState extends State<AssociatedUpdate> {
   final TextEditingController _controllerName = TextEditingController();
   final TextEditingController _controllerPhone = TextEditingController();
   final TextEditingController _controllerEmail = TextEditingController();
-  final TextEditingController _controlllerSponsor = TextEditingController();
-  final TextEditingController _controlllerAssociatedType =
+  final TextEditingController _controllerSponsor = TextEditingController();
+  final TextEditingController _controllerAssociatedType =
       TextEditingController();
-  final TextEditingController _controlllerCNH = TextEditingController();
-  final TextEditingController _controlllerCPF = TextEditingController();
-  final TextEditingController _controlllerBloodType = TextEditingController();
-  final TextEditingController _controlllerDateBirth = TextEditingController();
-  final TextEditingController _controlllerDateShield = TextEditingController();
+  final TextEditingController _controllerCNH = TextEditingController();
+  final TextEditingController _controllerCPF = TextEditingController();
+  final TextEditingController _controllerBloodType = TextEditingController();
+  final TextEditingController _controllerDateBirth = TextEditingController();
+  final TextEditingController _controllerDateShield = TextEditingController();
   String _nome;
   List _bloodTypes = List();
   List<DropdownMenuItem<String>> _dropDownBloodTypes;
@@ -292,14 +292,14 @@ class _AssociatedUpdateState extends State<AssociatedUpdate> {
           valor: associated.phone,
         ),
         InputTextField(
-          controller: _controlllerSponsor,
+          controller: _controllerSponsor,
           label: _labelSponsor,
           icon: Icons.person_pin,
           valor: associated.sponsor == null ? null : associated.sponsor.name,
           inputType: TextInputType.text,
         ),
         InputTextField(
-          controller: _controlllerAssociatedType,
+          controller: _controllerAssociatedType,
           label: _labelAssociatedType,
           valor: associated.associatedType,
           disabled: true,
@@ -309,7 +309,7 @@ class _AssociatedUpdateState extends State<AssociatedUpdate> {
           children: <Widget>[
             Expanded(
               child: InputTextField(
-                controller: _controlllerCNH,
+                controller: _controllerCNH,
                 label: _labelCNH,
                 inputType: TextInputType.number,
                 valor: associated.cnh,
@@ -317,7 +317,7 @@ class _AssociatedUpdateState extends State<AssociatedUpdate> {
             ),
             Expanded(
               child: InputTextField(
-                controller: _controlllerCPF,
+                controller: _controllerCPF,
                 label: _labelCPF,
                 inputType: TextInputType.number,
                 valor: associated.cpf,
@@ -330,7 +330,7 @@ class _AssociatedUpdateState extends State<AssociatedUpdate> {
           children: <Widget>[
             Expanded(
               child: InputTextField(
-                controller: _controlllerDateBirth,
+                controller: _controllerDateBirth,
                 label: _labelDateBirth,
                 icon: Icons.calendar_today,
                 tip: _tipDate,
@@ -340,7 +340,7 @@ class _AssociatedUpdateState extends State<AssociatedUpdate> {
             ),
             Expanded(
               child: InputTextField(
-                controller: _controlllerDateShield,
+                controller: _controllerDateShield,
                 label: _labelDateShield,
                 icon: Icons.calendar_today,
                 tip: _tipDate,

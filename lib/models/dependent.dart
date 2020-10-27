@@ -12,11 +12,12 @@ class Dependent {
   final String name;
   final String email;
   final String phone;
+  final String cpf;
   final String bloodType;
   final String dateBirth;
   final String isAssociated;
 
-  Dependent(this.code, this.name, this.email, this.phone,
+  Dependent(this.code, this.name, this.email, this.phone, this.cpf,
       this.bloodType, this.dateBirth, this.isAssociated);
 
   Dependent.fromJson(Map<String, dynamic> json)
@@ -24,6 +25,7 @@ class Dependent {
         name = json['nome'],
         email = json['email'],
         phone = json['telefone'],
+        cpf = json['cpf'],
         bloodType = json['tipoSanguineo'],
         dateBirth = json['dataNascimento'],
         isAssociated = json['membroHc'];
@@ -33,6 +35,7 @@ class Dependent {
         'nome': name,
         'email': email,
         'telefone': phone,
+        'cpf': cpf,
         'tipoSanguineo': bloodType,
         'dataNascimento': dateBirth,
         'membroHc': isAssociated,
@@ -41,7 +44,7 @@ class Dependent {
   @override
   String toString() {
     return 'Dependente{codigo: $code, nome: $name, email: $email, telefone: $phone, '
-        'tipoSanguineo: $bloodType, dataNascimento: $dateBirth, '
+        'cpf: $cpf, tipoSanguineo: $bloodType, dataNascimento: $dateBirth, '
         'membroHc: $isAssociated}';
   }
 }

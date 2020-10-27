@@ -173,8 +173,6 @@ class _DependentAddState extends State<DependentAdd> {
                         },
                       );
                     },
-                    activeTrackColor: Colors.blue,
-                    activeColor: Colors.orange,
                   ),
                 ),
               ],
@@ -223,6 +221,7 @@ class _DependentAddState extends State<DependentAdd> {
     final String nome = _controladorNome.text;
     final String email = _controladorEmail.text;
     final String telefone = _controladorTelefone.text;
+    final String cpf = _controladorTelefone.text;
 
     debugPrint('nome $nome');
 
@@ -235,7 +234,7 @@ class _DependentAddState extends State<DependentAdd> {
 
     if (nome != '' && email != '' && telefone != '') {
       final dependenteCriado = Dependent(
-          0, nome, email, telefone, tipoSanguineo, dataNascimento, membroHC);
+          0, nome, email, telefone, cpf, tipoSanguineo, dataNascimento, membroHC);
       debugPrint('$dependenteCriado');
       /*
       pop = manda resposta para o push (then)

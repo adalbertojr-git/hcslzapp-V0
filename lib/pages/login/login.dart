@@ -210,7 +210,7 @@ class Login extends StatelessWidget {
   }
 
   void _showDashboardPage(BuildContext context) {
-    Navigator.push(
+    Navigator.pushReplacement(
       context,
       MaterialPageRoute(builder: (context) {
         return Dashboard();

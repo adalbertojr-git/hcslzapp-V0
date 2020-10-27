@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:hcslzapp/controllers/app.controller.dart';
 import 'package:hcslzapp/pages/login/splash.dart';
 import 'package:intl/date_symbol_data_file.dart';
 import 'package:intl/intl.dart';
@@ -36,23 +37,30 @@ void main() => runApp(HCSlzApp());
 class HCSlzApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    Intl.defaultLocale = 'pt_BR';
-    //initializeDateFormatting('pt_BR');
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      home: Splash(),
-      title: _titleAppBar,
-      theme: ThemeData(
-        primaryColor: Colors.blue,//orange[900],
-        hintColor: Colors.black,
+    //Intl.defaultLocale = 'pt_BR';
+    return AnimatedBuilder(
+      animation: AppController.instance,
+      builder: (context, child) {
+        return MaterialApp(
+          debugShowCheckedModeBanner: false,
+          home: Splash(),
+          title: _titleAppBar,
+          theme: ThemeData(
+            brightness: AppController.instance.isDarkTheme
+                ? Brightness.dark
+                : Brightness.light,
+            //primaryColor: Colors.blue,//orange[900],
+            //hintColor: Colors.black,
 /*
-        accentColor: Colors.orange[700],
-        buttonTheme: ButtonThemeData(
-          buttonColor: Colors.white,
-          textTheme: ButtonTextTheme.primary,
-        ),
+          accentColor: Colors.orange[700],
+          buttonTheme: ButtonThemeData(
+            buttonColor: Colors.white,
+            textTheme: ButtonTextTheme.primary,
+          ),
 */
-      ),
+          ),
+        );
+      },
     );
   }
 }

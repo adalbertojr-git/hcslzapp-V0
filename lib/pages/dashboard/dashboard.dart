@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:hcslzapp/controllers/app.controller.dart';
 import 'package:hcslzapp/pages/about/about.dart';
 import 'package:hcslzapp/pages/associated/associated.update.dart';
 import 'package:hcslzapp/pages/boutique/boutique.list.dart';
@@ -12,22 +13,20 @@ import 'package:hcslzapp/pages/partnership/partnership.list.dart';
 import 'package:hcslzapp/pages/ride/my.ride.dart';
 
 class Dashboard extends StatelessWidget {
-
   BuildContext gContext;
 
   @override
   Widget build(BuildContext context) {
     gContext = context;
     return Scaffold(
-      drawer: drawr,
       body: Stack(
         children: <Widget>[dashBg, content],
       ),
+      drawer: drawr,
     );
   }
 
-  get drawr =>
-      Drawer(
+  get drawr => Drawer(
         child: ListView(
           children: <Widget>[
             Text(
@@ -53,6 +52,22 @@ class Dashboard extends StatelessWidget {
                 Navigator.pop(gContext);
               },
             ),
+            Row(
+              children: [
+                SizedBox(
+                  width: 20.0,
+                ),
+                Text('Tema Escuro:'),
+                Container(
+                  child: Switch(
+                    value: AppController.instance.isDarkTheme,
+                    onChanged: (value) {
+                      AppController.instance.changeTheme();
+                    },
+                  ),
+                ),
+              ],
+            ),
             ListTile(
               leading: Icon(Icons.power_settings_new),
               title: Text("Logout"),
@@ -64,8 +79,7 @@ class Dashboard extends StatelessWidget {
         ),
       );
 
-  get dashBg =>
-      Column(
+  get dashBg => Column(
         children: <Widget>[
           Expanded(
             child: Container(color: Colors.deepOrange[300]),
@@ -78,8 +92,7 @@ class Dashboard extends StatelessWidget {
         ],
       );
 
-  get content =>
-      Container(
+  get content => Container(
         child: Column(
           children: <Widget>[
             header,
@@ -88,8 +101,7 @@ class Dashboard extends StatelessWidget {
         ),
       );
 
-  get header =>
-      ListTile(
+  get header => ListTile(
         contentPadding: EdgeInsets.only(left: 40, right: 20, top: 30),
         title: Text(
           'Ola, Adalberto',
@@ -106,8 +118,7 @@ class Dashboard extends StatelessWidget {
         ),
       );
 
-  get grid =>
-      Expanded(
+  get grid => Expanded(
         child: Container(
           padding: EdgeInsets.only(left: 16, right: 16, bottom: 16),
           child: GridView.count(
@@ -120,16 +131,16 @@ class Dashboard extends StatelessWidget {
                 title: "Associado",
                 image: "assets/imgs/user.png",
                 context: gContext,
-                  onClick: () {
-                    Navigator.push(
-                      gContext,
-                      MaterialPageRoute(
-                        builder: (gContext) {
-                          return AssociatedUpdate();
-                        },
-                      ),
-                    );
-                  },
+                onClick: () {
+                  Navigator.push(
+                    gContext,
+                    MaterialPageRoute(
+                      builder: (gContext) {
+                        return AssociatedUpdate();
+                      },
+                    ),
+                  );
+                },
               ),
               GridButton(
                 title: "Financeiro",
@@ -300,7 +311,6 @@ class Dashboard extends StatelessWidget {
           ),
         ),
       );
-
 }
 
 class GridButton extends StatelessWidget {
