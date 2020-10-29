@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:hcslzapp/controllers/app.controller.dart';
+import 'package:hcslzapp/blocs/app.bloc.dart';
 import 'package:hcslzapp/pages/login/splash.dart';
 import 'package:intl/date_symbol_data_file.dart';
 import 'package:intl/intl.dart';
@@ -39,14 +39,14 @@ class HCSlzApp extends StatelessWidget {
   Widget build(BuildContext context) {
     //Intl.defaultLocale = 'pt_BR';
     return AnimatedBuilder(
-      animation: AppController.instance,
+      animation: AppBloc.instance,
       builder: (context, child) {
         return MaterialApp(
           debugShowCheckedModeBanner: false,
           home: Splash(),
           title: _titleAppBar,
           theme: ThemeData(
-            brightness: AppController.instance.isDarkTheme
+            brightness: AppBloc.instance.isDarkTheme
                 ? Brightness.dark
                 : Brightness.light,
             //primaryColor: Colors.blue,//orange[900],

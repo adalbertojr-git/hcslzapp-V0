@@ -8,18 +8,16 @@ Descriçao: classe que faz as chamadas aos metodos da Web API
 
 */
 import 'dart:convert';
-
 import 'package:hcslzapp/models/payment.dart';
 import 'package:http/http.dart';
-
-import 'webclient.dart';
+import '../settings.dart';
 
 /*
 endereço URL da classe alvo
 */
 const String _paymentUrl = '/mensalidades';
 
-class PaymentWebClient {
+class PaymentRepo {
 /*
 retorna lista de todos as mensalidades pagas
 */

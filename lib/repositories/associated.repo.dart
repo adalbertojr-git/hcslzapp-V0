@@ -10,14 +10,14 @@ Descriçao: classe que faz as chamadas aos metodos da Web API
 import 'dart:convert';
 import 'package:hcslzapp/models/associated.dart';
 import 'package:http/http.dart';
-import 'webclient.dart';
+import '../settings.dart';
 
 /*
 endereço URL da classe alvo
 */
 const String _associatedUrl = '/associados';
 
-class AssociatedWebClient {
+class AssociatedRepo {
 /*
 retorna lista de todos os associados
 */

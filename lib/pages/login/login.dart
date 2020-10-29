@@ -1,12 +1,8 @@
-import 'package:flare_flutter/flare_actor.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:hcslzapp/components/button.dart';
-import 'package:hcslzapp/components/hc.logo.dart';
 import 'package:hcslzapp/components/input.textfield.dart';
-import 'package:hcslzapp/pages/dashboard/dashboard_old.dart';
 import 'dart:async';
-
 import 'package:hcslzapp/pages/dashboard/dashboard.dart';
 
 const _labelUser = 'Usuario ou email';
@@ -31,45 +27,7 @@ class Login extends StatelessWidget {
         length: 3,
         initialIndex: 1,
         child: Scaffold(
-          appBar: AppBar(
-            bottom: TabBar(
-              indicatorColor: Colors.black,
-              indicatorWeight: 5.0,
-              labelColor: Colors.black,
-              tabs: [
-                Tab(
-                  child: Text(
-                    'Solicitar Cadastro',
-                    style: TextStyle(fontSize: 11.0),
-                  ),
-                ),
-                Tab(
-                  child: Text(
-                    'Login',
-                    style: TextStyle(fontSize: 11.0),
-                  ),
-                ),
-                Tab(
-                  child: Text(
-                    'Esqueci a senha',
-                    style: TextStyle(fontSize: 11.0),
-                  ),
-                ),
-              ],
-            ),
-            title: Text(
-              'HCSlz App',
-              style: TextStyle(
-                color: Colors.black,
-                fontSize: 40.0,
-              ),
-            ),
-            centerTitle: true,
-            backgroundColor: Colors.deepOrange[300],
-            toolbarHeight: 150.0,
-            elevation: 30.0,
-            shadowColor: Colors.deepOrange,
-          ),
+          appBar: appBar,
           body: TabBarView(
             children: [
               TabRequestAccess(context),
@@ -81,6 +39,48 @@ class Login extends StatelessWidget {
       ),
     );
   }
+
+  get appBar => AppBar(
+        title: Text(
+          'HCSlz App',
+          style: TextStyle(
+            color: Colors.black,
+            fontSize: 40.0,
+          ),
+        ),
+        centerTitle: true,
+        backgroundColor: Colors.deepOrange[300],
+        toolbarHeight: 150.0,
+        elevation: 30.0,
+        shadowColor: Colors.deepOrange,
+        bottom: tabBar,
+      );
+
+  get tabBar => TabBar(
+        indicatorColor: Colors.black,
+        indicatorWeight: 5.0,
+        labelColor: Colors.black,
+        tabs: [
+          Tab(
+            child: Text(
+              'Solicitar Cadastro',
+              style: TextStyle(fontSize: 11.0),
+            ),
+          ),
+          Tab(
+            child: Text(
+              'Login',
+              style: TextStyle(fontSize: 11.0),
+            ),
+          ),
+          Tab(
+            child: Text(
+              'Esqueci a senha',
+              style: TextStyle(fontSize: 11.0),
+            ),
+          ),
+        ],
+      );
 
   Widget TabLogin(BuildContext context) {
     return Stack(
@@ -209,7 +209,7 @@ class Login extends StatelessWidget {
     );
   }
 
-  void _showDashboardPage(BuildContext context) {
+  _showDashboardPage(BuildContext context) {
     Navigator.pushReplacement(
       context,
       MaterialPageRoute(builder: (context) {
@@ -237,7 +237,7 @@ class SnackBarWidget extends StatelessWidget {
     });
   }
 
-  void _setTimer(BuildContext context) {
+  _setTimer(BuildContext context) {
     _timer = Timer.periodic(const Duration(seconds: 1), (timer) {
       Navigator.pop(context);
     });

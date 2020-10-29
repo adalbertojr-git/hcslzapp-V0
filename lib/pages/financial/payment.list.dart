@@ -5,23 +5,21 @@ Todos os direitos reservados ao Harley Club de Sao Luis
 2020
 */
 import 'package:flutter/material.dart';
-import 'package:hcslzapp/components/my.appbar.dart';
 import 'package:hcslzapp/components/centered.message.dart';
 import 'package:hcslzapp/components/progress.dart';
 import 'package:hcslzapp/components/input.textfield.dart';
-import 'package:hcslzapp/http/webclients/payment.webclient.dart';
 import 'package:hcslzapp/models/payment.dart';
 import 'package:hcslzapp/models/payment.months.dart';
+import 'package:hcslzapp/repositories/payment.repo.dart';
 
 const _tituloAppBar = 'Mensalidades';
 
 class PaymentList extends StatelessWidget {
-  final PaymentWebClient _webClient = PaymentWebClient();
+  final PaymentRepo _webClient = PaymentRepo();
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      //appBar: MyAppBar(_tituloAppBar),
       body: FutureBuilder<List<Payment>>(
         /*
         carrega JSON com dados da api

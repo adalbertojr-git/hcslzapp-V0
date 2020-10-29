@@ -9,8 +9,7 @@ Descriçao: classe que faz as chamadas aos metodos da Web API
 */
 import 'package:http/http.dart';
 import 'package:http_interceptor/http_interceptor.dart';
-
-import '../interceptors/logging.Interceptor.dart';
+import 'http/logging.Interceptor.dart';
 
 final Client client = HttpClientWithInterceptor.build(
   interceptors: [

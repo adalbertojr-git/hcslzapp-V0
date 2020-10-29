@@ -12,23 +12,19 @@ administracao do App e nao podem ser alteradas pelo associado
 */
 import 'dart:io';
 import 'package:flutter/material.dart';
-import 'package:hcslzapp/components/my.appbar.dart';
 import 'package:hcslzapp/enums/blood.types.dart';
 import 'package:hcslzapp/components/button.dart';
 import 'package:hcslzapp/components/centered.message.dart';
 import 'package:hcslzapp/components/progress.dart';
 import 'package:hcslzapp/components/input.textfield.dart';
-import 'package:hcslzapp/http/webclients/associated.webclient.dart';
 import 'package:hcslzapp/models/associated.dart';
 import 'package:hcslzapp/models/dependent.dart';
 import 'package:hcslzapp/models/motorcycle.dart';
 import 'package:hcslzapp/pages/dependent/dependent.add.dart';
-import 'package:hcslzapp/pages/dependent/dependent.list.dart';
 import 'package:hcslzapp/pages/motorcycle/motorcycle.add.dart';
-import 'package:hcslzapp/pages/motorcycle/motorcycle.list.dart';
+import 'package:hcslzapp/repositories/associated.repo.dart';
 import 'package:image_picker/image_picker.dart';
 
-const _titleAppBar = 'Atualizar Meus Dados';
 const _labelName = 'Nome *';
 const _labelPhone = 'Telefone *';
 const _labelEmail = 'Email *';
@@ -57,11 +53,10 @@ class _AssociatedUpdateState extends State<AssociatedUpdate> {
   final TextEditingController _controllerBloodType = TextEditingController();
   final TextEditingController _controllerDateBirth = TextEditingController();
   final TextEditingController _controllerDateShield = TextEditingController();
-  String _nome;
   List _bloodTypes = List();
   List<DropdownMenuItem<String>> _dropDownBloodTypes;
   String _currentBloodType;
-  final AssociatedWebClient _webClient = AssociatedWebClient();
+  final AssociatedRepo _associatedRepo = AssociatedRepo();
   Future<List<Associated>> _future;
   bool isLoading = true;
   File _image;
@@ -80,7 +75,7 @@ class _AssociatedUpdateState extends State<AssociatedUpdate> {
   }
 
   Future<List<Associated>> getFuture() async {
-    return _webClient.findByCodigo(1);
+    return _associatedRepo.findByCodigo(1);
   }
 
   Future getImageFromCamera() async {
@@ -564,122 +559,5 @@ class _AssociatedUpdateState extends State<AssociatedUpdate> {
     });
   }
 
-  String _validateName(String value) {
-    if (value.isEmpty) return 'Nome é obrigatório.';
-    final RegExp nomeExp = RegExp(r'^[A-Za-z ]+$');
-    if (!nomeExp.hasMatch(value))
-      return 'Favor digitar somente caracteres alfabeticos.';
-    return null;
-  }
-
   void _update(BuildContext context) {}
 }
-
-/*class DependentsAndMotorcycles extends StatelessWidget {
-  List<Dependent> dependents;
-  List<Motorcycle> motorcycles;
-
-  DependentsAndMotorcycles(this.dependents, this.motorcycles);
-
-  @override
-  Widget build(BuildContext context) {
-    return Card(
-      elevation: 5.0,
-      color: Colors.white10,
-      child: DefaultTabController(
-        length: 2,
-        child: Builder(
-          builder: (BuildContext context) => Padding(
-            padding: const EdgeInsets.all(10.0),
-            child: Column(
-              children: <Widget>[
-                Container(
-                  width: double.infinity,
-                  height: 220,
-                  child: IconTheme(
-                    data: IconThemeData(
-                      size: 128.0,
-                    ),
-                    child: TabBarView(
-                      children: <Widget>[
-                        Tabs(
-                          image: "assets/imgs/dependentes.png",
-                          title: "Lista de Dependentes",
-                          onClick: () {
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                builder: (context) {
-                                  return DependentList(this.dependents);
-                                },
-                              ),
-                            );
-                          },
-                        ),
-                        Tabs(
-                          image: "assets/imgs/motocicletas.png",
-                          title: "Lista de Motocicletas",
-                          onClick: () {
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                builder: (context) {
-                                  return MotorcycleList();
-                                },
-                              ),
-                            );
-                          },
-                        ),
-                      ],
-                    ),
-                  ),
-                ),
-                TabPageSelector(),
-              ],
-            ),
-          ),
-        ),
-      ),
-    );
-  }
-}
-
-class Tabs extends StatelessWidget {
-  final String image;
-  final String title;
-  final Function onClick;
-
-  Tabs({
-    @required this.image,
-    @required this.title,
-    @required this.onClick,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    return Column(
-      children: <Widget>[
-        GestureDetector(
-          child: Hero(
-            tag: image,
-            child: Image.asset(
-              image,
-              fit: BoxFit.fill,
-            ),
-          ),
-          onTap: () {
-            onClick();
-          },
-        ),
-        Text(
-          title,
-          style: TextStyle(fontSize: 16.0),
-        ),
-        Text(
-          "Clique para ver detalhes",
-          style: TextStyle(fontSize: 12.0),
-        )
-      ],
-    );
-  }
-}*/

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:hcslzapp/controllers/app.controller.dart';
+import 'package:hcslzapp/blocs/app.bloc.dart';
 import 'package:hcslzapp/pages/about/about.dart';
 import 'package:hcslzapp/pages/associated/associated.update.dart';
 import 'package:hcslzapp/pages/boutique/boutique.list.dart';
@@ -19,10 +19,10 @@ class Dashboard extends StatelessWidget {
   Widget build(BuildContext context) {
     gContext = context;
     return Scaffold(
+      drawer: drawr,
       body: Stack(
         children: <Widget>[dashBg, content],
       ),
-      drawer: drawr,
     );
   }
 
@@ -60,9 +60,9 @@ class Dashboard extends StatelessWidget {
                 Text('Tema Escuro:'),
                 Container(
                   child: Switch(
-                    value: AppController.instance.isDarkTheme,
+                    value: AppBloc.instance.isDarkTheme,
                     onChanged: (value) {
-                      AppController.instance.changeTheme();
+                      AppBloc.instance.changeTheme();
                     },
                   ),
                 ),
