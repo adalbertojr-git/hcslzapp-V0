@@ -12,6 +12,7 @@ administracao do App e nao podem ser alteradas pelo associado
 */
 import 'dart:io';
 import 'package:flutter/material.dart';
+import 'package:hcslzapp/blocs/associated.bloc.dart';
 import 'package:hcslzapp/enums/blood.types.dart';
 import 'package:hcslzapp/components/button.dart';
 import 'package:hcslzapp/components/centered.message.dart';
@@ -22,8 +23,8 @@ import 'package:hcslzapp/models/dependent.dart';
 import 'package:hcslzapp/models/motorcycle.dart';
 import 'package:hcslzapp/pages/dependent/dependent.add.dart';
 import 'package:hcslzapp/pages/motorcycle/motorcycle.add.dart';
-import 'package:hcslzapp/repositories/associated.repo.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:provider/provider.dart';
 
 const _labelName = 'Nome *';
 const _labelPhone = 'Telefone *';
@@ -42,40 +43,28 @@ class AssociatedUpdate extends StatefulWidget {
 }
 
 class _AssociatedUpdateState extends State<AssociatedUpdate> {
-  final TextEditingController _controllerName = TextEditingController();
-  final TextEditingController _controllerPhone = TextEditingController();
-  final TextEditingController _controllerEmail = TextEditingController();
-  final TextEditingController _controllerSponsor = TextEditingController();
-  final TextEditingController _controllerAssociatedType =
-      TextEditingController();
-  final TextEditingController _controllerCNH = TextEditingController();
-  final TextEditingController _controllerCPF = TextEditingController();
-  final TextEditingController _controllerBloodType = TextEditingController();
-  final TextEditingController _controllerDateBirth = TextEditingController();
-  final TextEditingController _controllerDateShield = TextEditingController();
   List _bloodTypes = List();
   List<DropdownMenuItem<String>> _dropDownBloodTypes;
   String _currentBloodType;
-  final AssociatedRepo _associatedRepo = AssociatedRepo();
-  Future<List<Associated>> _future;
-  bool isLoading = true;
+  bool _hideButton = true;
   File _image;
   final picker = ImagePicker();
 
   @override
   void initState() {
-    getFuture().then((value) {
-      setState(() {
-        _future = getFuture();
-        isLoading = false;
-      });
+    Provider.of<AssociatedBloc>(context, listen: false)
+        .findByCode()
+        .then((value) {
+          if(value != null) {
+            if (value.isNotEmpty) {
+              setState(() {
+                _hideButton = false;
+              });
+            }
+          }
     });
     _dropDownBloodTypes = _getBloodTypes();
     super.initState();
-  }
-
-  Future<List<Associated>> getFuture() async {
-    return _associatedRepo.findByCodigo(1);
   }
 
   Future getImageFromCamera() async {
@@ -105,81 +94,29 @@ class _AssociatedUpdateState extends State<AssociatedUpdate> {
 
   @override
   Widget build(BuildContext context) {
+    AssociatedBloc associatedBloc = Provider.of<AssociatedBloc>(context);
     return Scaffold(
       body: FutureBuilder<List<Associated>>(
-          future: _future,
-          builder: (context, snapshot) {
-            if (snapshot.hasData) {
-              final List<Associated> associatedList = snapshot.data;
-              if (associatedList.isNotEmpty) {
-                return Container(
-                  padding: EdgeInsets.fromLTRB(5.0, 5.0, 5.0, 0.0),
-                  decoration: BoxDecoration(
-                    gradient: LinearGradient(
-                      colors: [Colors.white30, Colors.deepOrange],
-                      begin: FractionalOffset.topLeft,
-                      end: FractionalOffset.bottomRight,
-                    ),
-                  ),
-                  height: MediaQuery.of(context).size.height,
-                  child: Form(
-                    child: SingleChildScrollView(
-                      child: associatedWidgets(context, associatedList),
-                    ),
-                  ),
-                );
-              } //if (associatedList.isNotEmpty) {
-/*
-              else if (snapshot.hasError){
-                return CenteredMessage(
-                  'Erro na consulta. Verifique a conexao.',
-                  icon: Icons.error,
-                );
-              }
-*/
-              else {
-                return CenteredMessage(
-                  'Dados nao encontrados.',
-                  icon: Icons.warning,
-                );
-              }
-            } //if (snapshot.hasData)
-            else {
-              return Progress();
-            }
-          }),
-      floatingActionButton: isLoading
-          ? null
-          : Button(
-              Icons.save,
-              onClick: () {
-                _update(context);
-              },
-            ),
-    );
-  }
-
-  /* @override
-  Widget buildx(BuildContext context) {
-    return Scaffold(
-      //appBar: MyAppBar(_titleAppBar)
-      body: FutureBuilder<List<Associated>>(
-        future: _future,
+        future: associatedBloc.findByCode(),
         builder: (context, snapshot) {
           switch (snapshot.connectionState) {
             case ConnectionState.none:
-              return CenteredMessage(
-                'Sem conexao com o servidor.',
-                icon: Icons.error,
-              );
               break;
             case ConnectionState.waiting:
               return Progress();
-              break;
-            case ConnectionState.active:
-              break;
-            case ConnectionState.done:
-              if (snapshot.hasData) {
+            default:
+              if (snapshot.hasError) {
+                return CenteredMessage(
+                  'Erro critico: ${snapshot.error}.',
+                  icon: Icons.error,
+                );
+              } else {
+                if(snapshot.data == null) {
+                  return CenteredMessage(
+                    'Erro na requisiçao dos dados.',
+                    icon: Icons.error,
+                  );
+                }
                 final List<Associated> associatedList = snapshot.data;
                 if (associatedList.isNotEmpty) {
                   return Container(
@@ -194,44 +131,37 @@ class _AssociatedUpdateState extends State<AssociatedUpdate> {
                     height: MediaQuery.of(context).size.height,
                     child: Form(
                       child: SingleChildScrollView(
-                        child: associatedWidgets(associatedList),
+                        child: associatedWidgets(
+                            associatedBloc, context, associatedList),
                       ),
                     ),
                   );
                 }
-              } //if (snapshot.hasData)
-              return CenteredMessage(
-                'Associado nao encontrado.',
-                icon: Icons.warning,
-              );
-              break;
+                return CenteredMessage(
+                  'Associado nao encontrado.',
+                  icon: Icons.warning,
+                );
+              } //else
           } //switch (snapshot.connectionState)
-
-          */ /*
-            este codigo na pratica nao e alcançado (todos os cenarios possiveis ja
-            foram tratados acima), podendo assi retornar Null, mas
-            deve-se sempre evitar essa situacao
-            Envia-se uma msg generica
-          */ /*
           return CenteredMessage(
             'Erro desconhecido.',
             icon: Icons.error,
           );
         },
       ),
-      floatingActionButton: isLoading
+      floatingActionButton: _hideButton
           ? null
-          : Button(: () {
-                _upd
+          : Button(
               Icons.save,
-              onClickate(context);
+              onClick: () {
+                _update(context);
               },
             ),
     );
   }
-*/
-  Column associatedWidgets(
-      BuildContext context, List<Associated> associatedList) {
+
+  Column associatedWidgets(AssociatedBloc associatedBloc, BuildContext context,
+      List<Associated> associatedList) {
     final Associated associated = associatedList[0];
     _currentBloodType = associated.bloodType;
     return Column(
@@ -266,35 +196,35 @@ class _AssociatedUpdateState extends State<AssociatedUpdate> {
           ],
         ),
         InputTextField(
-          controller: _controllerName,
+          controller: associatedBloc.nameCtrl,
           label: _labelName,
           icon: Icons.person,
           inputType: TextInputType.text,
           valor: associated.name,
         ),
         InputTextField(
-          controller: _controllerEmail,
+          controller: associatedBloc.emailCtrl,
           label: _labelEmail,
           icon: Icons.email,
           inputType: TextInputType.emailAddress,
           valor: associated.email,
         ),
         InputTextField(
-          controller: _controllerPhone,
+          controller: associatedBloc.phoneCtrl,
           label: _labelPhone,
           icon: Icons.phone,
           inputType: TextInputType.phone,
           valor: associated.phone,
         ),
         InputTextField(
-          controller: _controllerSponsor,
+          controller: associatedBloc.sponsorCtrl,
           label: _labelSponsor,
           icon: Icons.person_pin,
           valor: associated.sponsor == null ? null : associated.sponsor.name,
           inputType: TextInputType.text,
         ),
         InputTextField(
-          controller: _controllerAssociatedType,
+          controller: associatedBloc.associatedTypeCtrl,
           label: _labelAssociatedType,
           valor: associated.associatedType,
           disabled: true,
@@ -304,7 +234,7 @@ class _AssociatedUpdateState extends State<AssociatedUpdate> {
           children: <Widget>[
             Expanded(
               child: InputTextField(
-                controller: _controllerCNH,
+                controller: associatedBloc.cnhCtrl,
                 label: _labelCNH,
                 inputType: TextInputType.number,
                 valor: associated.cnh,
@@ -312,7 +242,7 @@ class _AssociatedUpdateState extends State<AssociatedUpdate> {
             ),
             Expanded(
               child: InputTextField(
-                controller: _controllerCPF,
+                controller: associatedBloc.cpfCtrl,
                 label: _labelCPF,
                 inputType: TextInputType.number,
                 valor: associated.cpf,
@@ -325,7 +255,7 @@ class _AssociatedUpdateState extends State<AssociatedUpdate> {
           children: <Widget>[
             Expanded(
               child: InputTextField(
-                controller: _controllerDateBirth,
+                controller: associatedBloc.dateBirthCtrl,
                 label: _labelDateBirth,
                 icon: Icons.calendar_today,
                 tip: _tipDate,
@@ -335,7 +265,7 @@ class _AssociatedUpdateState extends State<AssociatedUpdate> {
             ),
             Expanded(
               child: InputTextField(
-                controller: _controllerDateShield,
+                controller: associatedBloc.dateShieldCtrl,
                 label: _labelDateShield,
                 icon: Icons.calendar_today,
                 tip: _tipDate,
