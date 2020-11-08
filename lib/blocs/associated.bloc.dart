@@ -16,8 +16,8 @@ class AssociatedBloc extends ChangeNotifier {
   TextEditingController dateShieldCtrl = TextEditingController();
   final AssociatedRepo _associatedRepo = AssociatedRepo();
 
-  Future<List<Associated>> findByCode() async {
-    return _associatedRepo.findByCode(1).catchError((e) {
+  Future<List<Associated>> findByCode(int code) async {
+    return _associatedRepo.findByCode(code).catchError((e) {
       print('TimeOutException: ${e.toString()}');
     }, test: (e) => e is TimeoutException).catchError((e) {
       print('Exception: ${e.toString()}');

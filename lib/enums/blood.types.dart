@@ -1,12 +1,5 @@
-/*
-Autor: Adalberto Jr.
-App: HCSlz
-Todos os direitos reservados ao Harley Club de Sao Luis
-2020
+import 'package:flutter/material.dart';
 
-Descriçao: enum com tipos sanguineos
-
-*/
 enum BloodType {
   A_POSITIVE,
   A_NEGATIVE,
@@ -37,4 +30,14 @@ extension BloodTypeExt on BloodType {
 
   //about property returns the custom message
   String get description => bloodTypesMap[this];
+}
+
+List<DropdownMenuItem<String>> getBloodTypes() {
+  List _bloodTypes = List();
+  List<DropdownMenuItem<String>> types = new List();
+  BloodType.values.forEach((v) => _bloodTypes.add(v.description));
+  for (String type in _bloodTypes) {
+    types.add(new DropdownMenuItem(value: type, child: new Text(type)));
+  }
+  return types;
 }

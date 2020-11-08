@@ -37,7 +37,7 @@ class _DependentAddState extends State<DependentAdd> {
 
   @override
   void initState() {
-    _dropDownBloodTypes = _getBloodTypes();
+    _dropDownBloodTypes = getBloodTypes();
     _controladorNome.text = widget.dependente != null ? widget.dependente.name : null;
     super.initState();
   }
@@ -187,16 +187,6 @@ class _DependentAddState extends State<DependentAdd> {
         },
       ),
     );
-  }
-
-  List<DropdownMenuItem<String>> _getBloodTypes() {
-    List<DropdownMenuItem<String>> types = new List();
-    BloodType.values.forEach((v) => _bloodTypes.add(v.description));
-    print(_bloodTypes);
-    for (String type in _bloodTypes) {
-      types.add(new DropdownMenuItem(value: type, child: new Text(type)));
-    }
-    return types;
   }
 
   void changedDropDownItem(String selected) {

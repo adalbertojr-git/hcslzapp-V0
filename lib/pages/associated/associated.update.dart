@@ -1,15 +1,3 @@
-/*
-Autor: Adalberto Jr.
-App: HCSlz
-Todos os direitos reservados ao Harley Club de Sao Luis
-2020
-
-Descriçao: classe que permite ao associado logado atualizar seus dados cadastrais
-
-OBS: o padrinho, o tipo de membro e a data de escudamento sao definidas pela
-administracao do App e nao podem ser alteradas pelo associado
-
-*/
 import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:hcslzapp/blocs/associated.bloc.dart';
@@ -43,27 +31,26 @@ class AssociatedUpdate extends StatefulWidget {
 }
 
 class _AssociatedUpdateState extends State<AssociatedUpdate> {
-  List _bloodTypes = List();
+  //List _bloodTypes = List();
   List<DropdownMenuItem<String>> _dropDownBloodTypes;
   String _currentBloodType;
   bool _hideButton = true;
   File _image;
   final picker = ImagePicker();
+  int _associatedCode = 1;
 
   @override
   void initState() {
     Provider.of<AssociatedBloc>(context, listen: false)
-        .findByCode()
+        .findByCode(_associatedCode)
         .then((value) {
-          if(value != null) {
-            if (value.isNotEmpty) {
-              setState(() {
-                _hideButton = false;
-              });
-            }
-          }
+      if (value != null && value.isNotEmpty) {
+        setState(() {
+          _hideButton = false;
+        });
+      }
     });
-    _dropDownBloodTypes = _getBloodTypes();
+    _dropDownBloodTypes = getBloodTypes();
     super.initState();
   }
 
@@ -94,24 +81,26 @@ class _AssociatedUpdateState extends State<AssociatedUpdate> {
 
   @override
   Widget build(BuildContext context) {
-    AssociatedBloc associatedBloc = Provider.of<AssociatedBloc>(context);
+    AssociatedBloc _associatedBloc = Provider.of<AssociatedBloc>(context);
     return Scaffold(
       body: FutureBuilder<List<Associated>>(
-        future: associatedBloc.findByCode(),
+        future: _associatedBloc.findByCode(_associatedCode),
         builder: (context, snapshot) {
           switch (snapshot.connectionState) {
             case ConnectionState.none:
               break;
             case ConnectionState.waiting:
               return Progress();
+            case ConnectionState.active:
+              break;
             default:
               if (snapshot.hasError) {
                 return CenteredMessage(
-                  'Erro critico: ${snapshot.error}.',
+                  'Erro: ${snapshot.error}.',
                   icon: Icons.error,
                 );
               } else {
-                if(snapshot.data == null) {
+                if (snapshot.data == null) {
                   return CenteredMessage(
                     'Erro na requisiçao dos dados.',
                     icon: Icons.error,
@@ -119,24 +108,9 @@ class _AssociatedUpdateState extends State<AssociatedUpdate> {
                 }
                 final List<Associated> associatedList = snapshot.data;
                 if (associatedList.isNotEmpty) {
-                  return Container(
-                    padding: EdgeInsets.fromLTRB(5.0, 5.0, 5.0, 0.0),
-                    decoration: BoxDecoration(
-                      gradient: LinearGradient(
-                        colors: [Colors.white30, Colors.deepOrange],
-                        begin: FractionalOffset.topLeft,
-                        end: FractionalOffset.bottomRight,
-                      ),
-                    ),
-                    height: MediaQuery.of(context).size.height,
-                    child: Form(
-                      child: SingleChildScrollView(
-                        child: associatedWidgets(
-                            associatedBloc, context, associatedList),
-                      ),
-                    ),
-                  );
-                }
+                  return _associatedWidgets(
+                      _associatedBloc, context, associatedList);
+                } //if (associatedList.isNotEmpty)
                 return CenteredMessage(
                   'Associado nao encontrado.',
                   icon: Icons.warning,
@@ -154,171 +128,187 @@ class _AssociatedUpdateState extends State<AssociatedUpdate> {
           : Button(
               Icons.save,
               onClick: () {
-                _update(context);
+                _save(context);
               },
             ),
     );
   }
 
-  Column associatedWidgets(AssociatedBloc associatedBloc, BuildContext context,
-      List<Associated> associatedList) {
+  Container _associatedWidgets(AssociatedBloc associatedBloc,
+      BuildContext context, List<Associated> associatedList) {
     final Associated associated = associatedList[0];
     _currentBloodType = associated.bloodType;
-    return Column(
-      children: <Widget>[
-        SizedBox(
-          height: 30.0,
-          width: double.infinity,
+    return Container(
+      padding: EdgeInsets.fromLTRB(5.0, 5.0, 5.0, 0.0),
+      decoration: BoxDecoration(
+        gradient: LinearGradient(
+          colors: [Colors.white30, Colors.deepOrange],
+          begin: FractionalOffset.topLeft,
+          end: FractionalOffset.bottomRight,
         ),
-        _photo('assets/imgs/noImage.png'),
-        Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            IconButton(
-              icon: Icon(
-                Icons.add_photo_alternate,
-                color: Colors.black,
-                size: 33.0,
+      ),
+      height: MediaQuery.of(context).size.height,
+      child: Form(
+        child: SingleChildScrollView(
+          child: Column(
+            children: <Widget>[
+              SizedBox(
+                height: 30.0,
+                width: double.infinity,
               ),
-              onPressed: getImageFromGallery,
-            ),
-            SizedBox(
-              width: 50.0,
-            ),
-            IconButton(
-              icon: Icon(
-                Icons.add_a_photo,
-                color: Colors.black,
-                size: 30.0,
+              _photo('assets/imgs/noImage.png'),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  IconButton(
+                    icon: Icon(
+                      Icons.add_photo_alternate,
+                      color: Colors.black,
+                      size: 33.0,
+                    ),
+                    onPressed: getImageFromGallery,
+                  ),
+                  SizedBox(
+                    width: 50.0,
+                  ),
+                  IconButton(
+                    icon: Icon(
+                      Icons.add_a_photo,
+                      color: Colors.black,
+                      size: 30.0,
+                    ),
+                    onPressed: getImageFromCamera,
+                  )
+                ],
               ),
-              onPressed: getImageFromCamera,
-            )
-          ],
-        ),
-        InputTextField(
-          controller: associatedBloc.nameCtrl,
-          label: _labelName,
-          icon: Icons.person,
-          inputType: TextInputType.text,
-          valor: associated.name,
-        ),
-        InputTextField(
-          controller: associatedBloc.emailCtrl,
-          label: _labelEmail,
-          icon: Icons.email,
-          inputType: TextInputType.emailAddress,
-          valor: associated.email,
-        ),
-        InputTextField(
-          controller: associatedBloc.phoneCtrl,
-          label: _labelPhone,
-          icon: Icons.phone,
-          inputType: TextInputType.phone,
-          valor: associated.phone,
-        ),
-        InputTextField(
-          controller: associatedBloc.sponsorCtrl,
-          label: _labelSponsor,
-          icon: Icons.person_pin,
-          valor: associated.sponsor == null ? null : associated.sponsor.name,
-          inputType: TextInputType.text,
-        ),
-        InputTextField(
-          controller: associatedBloc.associatedTypeCtrl,
-          label: _labelAssociatedType,
-          valor: associated.associatedType,
-          disabled: true,
-        ),
-        Row(
-          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-          children: <Widget>[
-            Expanded(
-              child: InputTextField(
-                controller: associatedBloc.cnhCtrl,
-                label: _labelCNH,
-                inputType: TextInputType.number,
-                valor: associated.cnh,
+              InputTextField(
+                controller: associatedBloc.nameCtrl,
+                label: _labelName,
+                icon: Icons.person,
+                inputType: TextInputType.text,
+                valor: associated.name,
               ),
-            ),
-            Expanded(
-              child: InputTextField(
-                controller: associatedBloc.cpfCtrl,
-                label: _labelCPF,
-                inputType: TextInputType.number,
-                valor: associated.cpf,
+              InputTextField(
+                controller: associatedBloc.emailCtrl,
+                label: _labelEmail,
+                icon: Icons.email,
+                inputType: TextInputType.emailAddress,
+                valor: associated.email,
               ),
-            ),
-          ],
-        ),
-        Row(
-          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-          children: <Widget>[
-            Expanded(
-              child: InputTextField(
-                controller: associatedBloc.dateBirthCtrl,
-                label: _labelDateBirth,
-                icon: Icons.calendar_today,
-                tip: _tipDate,
-                inputType: TextInputType.datetime,
-                valor: associated.dateBirth,
+              InputTextField(
+                controller: associatedBloc.phoneCtrl,
+                label: _labelPhone,
+                icon: Icons.phone,
+                inputType: TextInputType.phone,
+                valor: associated.phone,
               ),
-            ),
-            Expanded(
-              child: InputTextField(
-                controller: associatedBloc.dateShieldCtrl,
-                label: _labelDateShield,
-                icon: Icons.calendar_today,
-                tip: _tipDate,
-                inputType: TextInputType.datetime,
-                valor: associated.dateShield,
+              InputTextField(
+                controller: associatedBloc.sponsorCtrl,
+                label: _labelSponsor,
+                icon: Icons.person_pin,
+                valor:
+                    associated.sponsor == null ? null : associated.sponsor.name,
+                inputType: TextInputType.text,
               ),
-            ),
-          ],
-        ),
-        Row(
-          crossAxisAlignment: CrossAxisAlignment.baseline,
-          children: <Widget>[
-            Expanded(
-              child: Text(
-                'Tipo Sanguineo:',
-                textAlign: TextAlign.center,
+              InputTextField(
+                controller: associatedBloc.associatedTypeCtrl,
+                label: _labelAssociatedType,
+                valor: associated.associatedType,
+                disabled: true,
               ),
-            ),
-            Expanded(
-              child: Container(
-                height: 58.0,
-                child: DropdownButtonFormField(
-                  decoration: const InputDecoration(
-                    enabledBorder: OutlineInputBorder(
-                      borderSide: BorderSide(
-                        color: Colors.white70,
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: <Widget>[
+                  Expanded(
+                    child: InputTextField(
+                      controller: associatedBloc.cnhCtrl,
+                      label: _labelCNH,
+                      inputType: TextInputType.number,
+                      valor: associated.cnh,
+                    ),
+                  ),
+                  Expanded(
+                    child: InputTextField(
+                      controller: associatedBloc.cpfCtrl,
+                      label: _labelCPF,
+                      inputType: TextInputType.number,
+                      valor: associated.cpf,
+                    ),
+                  ),
+                ],
+              ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: <Widget>[
+                  Expanded(
+                    child: InputTextField(
+                      controller: associatedBloc.dateBirthCtrl,
+                      label: _labelDateBirth,
+                      icon: Icons.calendar_today,
+                      tip: _tipDate,
+                      inputType: TextInputType.datetime,
+                      valor: associated.dateBirth,
+                    ),
+                  ),
+                  Expanded(
+                    child: InputTextField(
+                      controller: associatedBloc.dateShieldCtrl,
+                      label: _labelDateShield,
+                      icon: Icons.calendar_today,
+                      tip: _tipDate,
+                      inputType: TextInputType.datetime,
+                      valor: associated.dateShield,
+                    ),
+                  ),
+                ],
+              ),
+              Row(
+                crossAxisAlignment: CrossAxisAlignment.baseline,
+                children: <Widget>[
+                  Expanded(
+                    child: Text(
+                      'Tipo Sanguineo:',
+                      textAlign: TextAlign.center,
+                    ),
+                  ),
+                  Expanded(
+                    child: Container(
+                      height: 58.0,
+                      child: DropdownButtonFormField(
+                        decoration: const InputDecoration(
+                          enabledBorder: OutlineInputBorder(
+                            borderSide: BorderSide(
+                              color: Colors.white70,
+                            ),
+                          ),
+                        ),
+                        value: _currentBloodType,
+                        items: _dropDownBloodTypes,
+                        onChanged: _changedDropDownItem,
                       ),
                     ),
                   ),
-                  value: _currentBloodType,
-                  items: _dropDownBloodTypes,
-                  onChanged: changedDropDownItem,
-                ),
+                ],
               ),
-            ),
-          ],
+              Divider(),
+              _dependentsAndMotorcyclesListWidget(
+                'Dependentes',
+                dependents: associated.dependents,
+              ),
+              SizedBox(
+                height: 10.0,
+              ),
+              _dependentsAndMotorcyclesListWidget(
+                'Motocicletas',
+                motorcycles: associated.motorcycles,
+              ),
+              SizedBox(
+                height: 100.0,
+              ),
+            ],
+          ),
         ),
-        Divider(),
-        DependentsAndMotorcyclesListWidget(
-          'Dependentes',
-          dependents: associated.dependents,
-        ),
-        SizedBox(
-          height: 10.0,
-        ),
-        DependentsAndMotorcyclesListWidget(
-          'Motocicletas',
-          motorcycles: associated.motorcycles,
-        ),
-        SizedBox(
-          height: 100.0,
-        ),
-      ],
+      ),
     );
   }
 
@@ -346,7 +336,7 @@ class _AssociatedUpdateState extends State<AssociatedUpdate> {
     );
   }
 
-  Container DependentsAndMotorcyclesListWidget(String title,
+  Container _dependentsAndMotorcyclesListWidget(String title,
       {List<Dependent> dependents, List<Motorcycle> motorcycles}) {
     return Container(
       padding: EdgeInsets.all(10.0),
@@ -472,22 +462,12 @@ class _AssociatedUpdateState extends State<AssociatedUpdate> {
       );
     }
   }
-
-  List<DropdownMenuItem<String>> _getBloodTypes() {
-    List<DropdownMenuItem<String>> types = new List();
-    BloodType.values.forEach((v) => _bloodTypes.add(v.description));
-    print(_bloodTypes);
-    for (String type in _bloodTypes) {
-      types.add(new DropdownMenuItem(value: type, child: new Text(type)));
-    }
-    return types;
-  }
-
-  void changedDropDownItem(String selected) {
+  
+  void _changedDropDownItem(String selected) {
     setState(() {
       _currentBloodType = selected;
     });
   }
 
-  void _update(BuildContext context) {}
+  void _save(BuildContext context) {}
 }

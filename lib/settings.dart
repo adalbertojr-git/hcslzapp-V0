@@ -1,12 +1,3 @@
-/*
-Autor: Adalberto Jr.
-App: HCSlz
-Todos os direitos reservados ao Harley Club de Sao Luis
-2020
-
-Descriçao: classe que faz as chamadas aos metodos da Web API
-
-*/
 import 'package:http/http.dart';
 import 'package:http_interceptor/http_interceptor.dart';
 import 'http/logging.Interceptor.dart';

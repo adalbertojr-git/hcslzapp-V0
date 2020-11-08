@@ -18,10 +18,11 @@ class AssociatedRepo {
         .toList();
   }
 
-  Future<List<Associated>> findByCode(int codigo) async {
+  Future<List<Associated>> findByCode(int code) async {
     final Response response = await client
-        .get(mainUrl + _associatedUrl + '/' + codigo.toString())
+        .get(mainUrl + _associatedUrl + '/' + code.toString())
         .timeout(Duration(seconds: 5));
+
     if (response.statusCode == 200) {
       final List<dynamic> decodedJson = jsonDecode(response.body);
       return decodedJson

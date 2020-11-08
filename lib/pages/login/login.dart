@@ -12,6 +12,7 @@ const _tipPsw = 'Digite sua senha';
 const _labelName = 'Nome *';
 const _labelPhone = 'Telefone *';
 const _labelEmail = 'Email *';
+const _labelSponsor = 'Padrinho *';
 
 class Login extends StatelessWidget {
   final TextEditingController _controllerUser = TextEditingController();
@@ -57,26 +58,25 @@ class Login extends StatelessWidget {
       );
 
   get tabBar => TabBar(
-        indicatorColor: Colors.black,
-        indicatorWeight: 5.0,
-        labelColor: Colors.black,
+        indicatorColor: Colors.white,
+        labelPadding: EdgeInsets.only(bottom: 5.0),
         tabs: [
           Tab(
-            child: Text(
-              'Solicitar Cadastro',
-              style: TextStyle(fontSize: 11.0),
+            icon: Image(
+              image: AssetImage('assets/imgs/create_account.png'),
+              fit: BoxFit.fill,
             ),
           ),
           Tab(
-            child: Text(
-              'Login',
-              style: TextStyle(fontSize: 11.0),
+            icon: Image(
+              image: AssetImage('assets/imgs/login.png'),
+              fit: BoxFit.fill,
             ),
           ),
           Tab(
-            child: Text(
-              'Esqueci a senha',
-              style: TextStyle(fontSize: 11.0),
+            icon: Image(
+              image: AssetImage('assets/imgs/forgot_password.png'),
+              fit: BoxFit.fill,
             ),
           ),
         ],
@@ -104,6 +104,13 @@ class Login extends StatelessWidget {
           child: SingleChildScrollView(
             child: Column(
               children: <Widget>[
+                SizedBox(
+                  height: 10.0,
+                ),
+                Text(
+                  'Login',
+                  style: TextStyle(fontSize: 20.0),
+                ),
                 SizedBox(
                   height: 10.0,
                 ),
@@ -155,23 +162,37 @@ class Login extends StatelessWidget {
             SizedBox(
               height: 10.0,
             ),
+            Text(
+              'Solicitar Cadastro',
+              style: TextStyle(fontSize: 20.0),
+            ),
+            SizedBox(
+              height: 10.0,
+            ),
             InputTextField(
               controller: _controllerName,
-              label: _labelName,
+              tip: _labelName,
+              valor: _labelName,
               icon: Icons.person,
               inputType: TextInputType.text,
             ),
             InputTextField(
               controller: _controllerEmail,
-              label: _labelEmail,
+              tip: _labelEmail,
               icon: Icons.email,
               inputType: TextInputType.emailAddress,
             ),
             InputTextField(
               controller: _controllerPhone,
-              label: _labelPhone,
+              tip: _labelPhone,
               icon: Icons.phone,
               inputType: TextInputType.phone,
+            ),
+            InputTextField(
+              //controller: associatedBloc.sponsorCtrl,
+              tip: _labelSponsor,
+              icon: Icons.person_pin,
+              inputType: TextInputType.text,
             ),
             SnackBarWidget(),
           ],
@@ -193,6 +214,13 @@ class Login extends StatelessWidget {
       child: SingleChildScrollView(
         child: Column(
           children: <Widget>[
+            SizedBox(
+              height: 10.0,
+            ),
+            Text(
+              'Esqueci minha senha',
+              style: TextStyle(fontSize: 20.0),
+            ),
             SizedBox(
               height: 10.0,
             ),
