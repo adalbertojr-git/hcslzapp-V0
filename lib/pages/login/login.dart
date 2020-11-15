@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:hcslzapp/common/labels.hints.dart';
+import 'package:hcslzapp/common/labels.and.hints.dart';
 import 'package:hcslzapp/components/button.dart';
 import 'package:hcslzapp/components/input.textfield.dart';
 import 'dart:async';

@@ -1,7 +1,7 @@
 import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:hcslzapp/blocs/associated.bloc.dart';
-import 'package:hcslzapp/common/labels.hints.dart';
+import 'package:hcslzapp/common/labels.and.hints.dart';
 import 'package:hcslzapp/enums/blood.types.dart';
 import 'package:hcslzapp/components/button.dart';
 import 'package:hcslzapp/components/centered.message.dart';
@@ -202,33 +202,36 @@ class _AssociatedUpdateState extends State<AssociatedUpdate> {
                 icon: Icons.person_pin,
                 inputType: TextInputType.text,
               ),
-              Row(
-                crossAxisAlignment: CrossAxisAlignment.baseline,
-                children: <Widget>[
-                  Expanded(
-                    child: Text(
-                      'Tipo Sanguineo:',
-                      textAlign: TextAlign.center,
-                    ),
-                  ),
-                  Expanded(
-                    child: Container(
-                      height: 58.0,
-                      child: DropdownButtonFormField(
-                        decoration: const InputDecoration(
-                          enabledBorder: OutlineInputBorder(
-                            borderSide: BorderSide(
-                              color: Colors.white70,
-                            ),
-                          ),
-                        ),
-                        value: _currentBloodType,
-                        items: _dropDownBloodTypes,
-                        onChanged: _changedDropDownItem,
+              Padding(
+                padding: const EdgeInsets.fromLTRB(0.0, 3.0, 2.0, 3.0),
+                child: Row(
+                  crossAxisAlignment: CrossAxisAlignment.baseline,
+                  children: <Widget>[
+                    Expanded(
+                      child: Text(
+                        'Tipo Sanguineo:',
+                        textAlign: TextAlign.center,
                       ),
                     ),
-                  ),
-                ],
+                    Expanded(
+                      child: Container(
+                        height: 55.0,
+                        child: DropdownButtonFormField(
+                          decoration: const InputDecoration(
+                            enabledBorder: OutlineInputBorder(
+                              borderSide: BorderSide(
+                                color: Colors.white70,
+                              ),
+                            ),
+                          ),
+                          value: _currentBloodType,
+                          items: _dropDownBloodTypes,
+                          onChanged: _changedDropDownItem,
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
               ),
               InputTextField(
                 controller: _associatedBloc.associatedTypeCtrl,

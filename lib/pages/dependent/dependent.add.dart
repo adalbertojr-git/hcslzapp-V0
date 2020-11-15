@@ -1,35 +1,23 @@
 import 'package:flutter/material.dart';
+import 'package:hcslzapp/blocs/dependent.bloc.dart';
+import 'package:hcslzapp/common/labels.and.hints.dart';
 import 'package:hcslzapp/components/button.dart';
 import 'package:hcslzapp/enums/blood.types.dart';
 import 'package:hcslzapp/components/input.textfield.dart';
 import 'package:hcslzapp/models/dependent.dart';
-
-const _rotuloNome = 'Nome *';
-const _rotuloTelefone = 'Telefone *';
-const _rotuloEmail = 'Email *';
-const _labelCPF = 'CPF';
-const _rotuloDataNascimento = 'Data de Nascimento';
-const _dicaData = 'dd/mm/yyyy';
+import 'package:provider/provider.dart';
 
 class DependentAdd extends StatefulWidget {
-  final Dependent dependente;
+  final Dependent dependent;
 
-  DependentAdd(this.dependente);
+  DependentAdd(this.dependent);
 
   @override
   _DependentAddState createState() => _DependentAddState();
 }
 
 class _DependentAddState extends State<DependentAdd> {
-  final TextEditingController _controladorCodigo = TextEditingController();
-  final TextEditingController _controladorNome = TextEditingController();
-  final TextEditingController _controladorTelefone = TextEditingController();
-  final TextEditingController _controladorEmail = TextEditingController();
-  final TextEditingController _controlllerCPF = TextEditingController();
-  final TextEditingController _controladorDataNascimento =
-      TextEditingController();
-  final TextEditingController _controladorMembroHC = TextEditingController();
-  String _nome;
+  DependentBloc _dependentBloc;
   List _bloodTypes = List();
   List<DropdownMenuItem<String>> _dropDownBloodTypes;
   String _currentBloodType;
@@ -37,15 +25,16 @@ class _DependentAddState extends State<DependentAdd> {
 
   @override
   void initState() {
+    _dependentBloc = Provider.of<DependentBloc>(context, listen: false);
+    _dependentBloc.nameCtrl.text = widget.dependent != null ? widget.dependent.name : null;
     _dropDownBloodTypes = getBloodTypes();
-    _controladorNome.text = widget.dependente != null ? widget.dependente.name : null;
     super.initState();
   }
 
   //@override
   Widget build(BuildContext context) {
     _currentBloodType =
-        widget.dependente != null ? widget.dependente.bloodType : null;
+        widget.dependent != null ? widget.dependent.bloodType : null;
     return Scaffold(
       body: Container(
         padding: EdgeInsets.fromLTRB(5.0, 0.0, 5.0, 0.0),
@@ -65,80 +54,81 @@ class _DependentAddState extends State<DependentAdd> {
                   height: 20.0,
                 ),
                 InputTextField(
-                  controller: _controladorNome,
-                  label: _rotuloNome,
+                  controller: _dependentBloc.nameCtrl,
+                  label: labelNameDependent,
+                  hint: hintNameDependent,
                   icon: Icons.person,
                   inputType: TextInputType.text,
-                  //valor:
-                      //widget.dependente != null ? widget.dependente.name : null,
                 ),
                 InputTextField(
-                  controller: _controladorEmail,
-                  helper: _rotuloEmail,
+                  controller: _dependentBloc.emailCtrl,
+                  label: labelEmail,
+                  hint: hintEmail,
                   icon: Icons.email,
                   inputType: TextInputType.emailAddress,
-                  label: widget.dependente != null
-                      ? widget.dependente.email
-                      : null,
                 ),
                 InputTextField(
-                  controller: _controladorTelefone,
-                  helper: _rotuloTelefone,
+                  controller: _dependentBloc.phoneCtrl,
+                  label: labelPhone,
+                  hint: hintPhone,
                   icon: Icons.phone,
                   inputType: TextInputType.phone,
-                  label: widget.dependente != null
-                      ? widget.dependente.phone
-                      : null,
+/*                  label: widget.dependent != null
+                      ? widget.dependent.phone
+                      : null,*/
                 ),
-                Row(
-                  crossAxisAlignment: CrossAxisAlignment.baseline,
-                  children: <Widget>[
-                    Expanded(
-                      child: Text(
-                        'Tipo Sanguineo:',
-                        textAlign: TextAlign.center,
-                      ),
-                    ),
-                    Expanded(
-                      child: Container(
-                        height: 58.0,
-                        child: DropdownButtonFormField(
-                          decoration: const InputDecoration(
-                            enabledBorder: OutlineInputBorder(
-                              borderSide: BorderSide(
-                                color: Colors.white70,
-                              ),
-                            ),
-                          ),
-                          value: _currentBloodType,
-                          items: _dropDownBloodTypes,
-                          onChanged: changedDropDownItem,
+                Padding(
+                  padding: const EdgeInsets.fromLTRB(0.0, 3.0, 2.0, 3.0),
+                  child: Row(
+                    crossAxisAlignment: CrossAxisAlignment.baseline,
+                    children: <Widget>[
+                      Expanded(
+                        child: Text(
+                          'Tipo Sanguineo:',
+                          textAlign: TextAlign.center,
                         ),
                       ),
-                    ),
-                  ],
+                      Expanded(
+                        child: Container(
+                          height: 58.0,
+                          child: DropdownButtonFormField(
+                            decoration: const InputDecoration(
+                              enabledBorder: OutlineInputBorder(
+                                borderSide: BorderSide(
+                                  color: Colors.white70,
+                                ),
+                              ),
+                            ),
+                            value: _currentBloodType,
+                            items: _dropDownBloodTypes,
+                            onChanged: changedDropDownItem,
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
                 ),
                 Row(
                   crossAxisAlignment: CrossAxisAlignment.baseline,
                   children: <Widget>[
                     Expanded(
                       child: InputTextField(
-                        controller: _controlllerCPF,
-                        helper: _labelCPF,
+                        controller: _dependentBloc.cpfCtrl,
+                        label: labelCPF,
+                        hint: hintCPF,
                         inputType: TextInputType.number,
-                        //valor: associated.cpf,
                       ),
                     ),
                     Expanded(
                       child: InputTextField(
-                        controller: _controladorDataNascimento,
-                        helper: _rotuloDataNascimento,
+                        controller: _dependentBloc.dateBirthCtrl,
+                        label: labelDateBirth,
+                        hint: hintDate,
                         icon: Icons.calendar_today,
-                        hint: _dicaData,
                         inputType: TextInputType.datetime,
-                        label: widget.dependente != null
-                            ? widget.dependente.dateBirth
-                            : null,
+/*                        label: widget.dependent != null
+                            ? widget.dependent.dateBirth
+                            : null,*/
                       ),
                     ),
                   ],
@@ -164,8 +154,8 @@ class _DependentAddState extends State<DependentAdd> {
                     ),
                   ),
                   child: Switch(
-                    value: (widget.dependente != null
-                        ? (widget.dependente.isAssociated == 'S' ? true : false)
+                    value: (widget.dependent != null
+                        ? (widget.dependent.isAssociated == 'S' ? true : false)
                         : false),
                     onChanged: (value) {
                       setState(
@@ -207,12 +197,12 @@ class _DependentAddState extends State<DependentAdd> {
   }
 
   void _add(BuildContext context) {
-    //final int codigo = int.parse(_controladorCodigo.text);
     debugPrint('Criando dependente...');
-    final String nome = _controladorNome.text;
-    final String email = _controladorEmail.text;
-    final String telefone = _controladorTelefone.text;
-    final String cpf = _controladorTelefone.text;
+    final int codigo = int.parse(_dependentBloc.idCtrl.text);
+    final String nome = _dependentBloc.nameCtrl.text;
+    final String email = _dependentBloc.emailCtrl.text;
+    final String telefone = _dependentBloc.phoneCtrl.text;
+    final String cpf = _dependentBloc.cpfCtrl.text;
 
     debugPrint('nome $nome');
 
@@ -220,7 +210,7 @@ class _DependentAddState extends State<DependentAdd> {
         (_bloodTypes.indexOf(_currentBloodType) != 0
             ? _currentBloodType.toString()
             : '');
-    final String dataNascimento = _controladorDataNascimento.text;
+    final String dataNascimento = _dependentBloc.dateBirthCtrl.text;
     final String membroHC = (ehMembro == true ? 'S' : 'N');
 
     if (nome != '' && email != '' && telefone != '') {

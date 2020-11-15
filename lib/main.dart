@@ -5,6 +5,8 @@ import 'package:hcslzapp/pages/login/splash.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 
+import 'blocs/dependent.bloc.dart';
+
 const _titleAppBar = 'HCSlz App';
 
 void main() => runApp(HCSlzApp());
@@ -18,6 +20,7 @@ class HCSlzApp extends StatelessWidget {
     return MultiProvider(
       providers: [
         ChangeNotifierProvider<AssociatedBloc>.value(value: AssociatedBloc()),
+        ChangeNotifierProvider<DependentBloc>.value(value: DependentBloc()),
       ],
       child: AnimatedBuilder(
         animation: AppBloc.instance,

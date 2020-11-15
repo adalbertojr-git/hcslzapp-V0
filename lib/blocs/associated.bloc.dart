@@ -4,6 +4,7 @@ import 'package:hcslzapp/models/associated.dart';
 import 'package:hcslzapp/repositories/associated.repo.dart';
 
 class AssociatedBloc extends ChangeNotifier {
+  TextEditingController idCtrl = TextEditingController();
   TextEditingController nameCtrl = TextEditingController();
   TextEditingController phoneCtrl = TextEditingController();
   TextEditingController emailCtrl = TextEditingController();
@@ -11,7 +12,7 @@ class AssociatedBloc extends ChangeNotifier {
   TextEditingController associatedTypeCtrl = TextEditingController();
   TextEditingController cnhCtrl = TextEditingController();
   TextEditingController cpfCtrl = TextEditingController();
-  TextEditingController bloodTyoeCtrl = TextEditingController();
+  TextEditingController bloodTypeCtrl = TextEditingController();
   TextEditingController dateBirthCtrl = TextEditingController();
   TextEditingController dateShieldCtrl = TextEditingController();
   final AssociatedRepo _associatedRepo = AssociatedRepo();

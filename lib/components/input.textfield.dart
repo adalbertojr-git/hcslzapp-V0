@@ -29,7 +29,7 @@ class InputTextField extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.fromLTRB(0.0, 3.0, 0.0, 3.0), //all(3.0),
+      padding: const EdgeInsets.fromLTRB(2.0, 3.0, 2.0, 3.0),
       child: TextFormField(
         textCapitalization: TextCapitalization.words,
         obscureText: hidden != null ? hidden : false,
@@ -55,7 +55,7 @@ class InputTextField extends StatelessWidget {
                   color: Colors.orange,
                 )
               : null,
-          filled: true,
+          //filled: true,
           labelText: label,
           labelStyle: TextStyle(fontSize: 13.0),
           hintText: hint,
