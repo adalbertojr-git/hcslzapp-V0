@@ -1,18 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:hcslzapp/common/labels.hints.dart';
 import 'package:hcslzapp/components/button.dart';
 import 'package:hcslzapp/components/input.textfield.dart';
 import 'dart:async';
 import 'package:hcslzapp/pages/dashboard/dashboard.dart';
-
-const _labelUser = 'Usuario ou email';
-const _tipUser = 'Digite seu usuario ou email';
-const _labelPsw = 'Senha';
-const _tipPsw = 'Digite sua senha';
-const _labelName = 'Nome *';
-const _labelPhone = 'Telefone *';
-const _labelEmail = 'Email *';
-const _labelSponsor = 'Padrinho *';
 
 class Login extends StatelessWidget {
   final TextEditingController _controllerUser = TextEditingController();
@@ -59,6 +51,7 @@ class Login extends StatelessWidget {
 
   get tabBar => TabBar(
         indicatorColor: Colors.white,
+        indicatorWeight: 3.0,
         labelPadding: EdgeInsets.only(bottom: 5.0),
         tabs: [
           Tab(
@@ -116,21 +109,21 @@ class Login extends StatelessWidget {
                 ),
                 InputTextField(
                   controller: _controllerUser,
-                  label: _labelUser,
-                  //tip: _tipUser,
+                  label: labelUser,
+                  hint: hintUser,
                   icon: Icons.person,
                   inputType: TextInputType.text,
                 ),
                 InputTextField(
                   controller: _controllerPsw,
-                  label: _labelPsw,
-                  //tip: _tipPsw,
+                  label: labelPsw,
+                  hint: hintPsw,
                   icon: Icons.vpn_key,
                   inputType: TextInputType.text,
                   hidden: true,
                 ),
                 SizedBox(
-                  height: 50.0,
+                  height: 10.0,
                 ),
                 Button(
                   Icons.arrow_forward,
@@ -171,28 +164,34 @@ class Login extends StatelessWidget {
             ),
             InputTextField(
               controller: _controllerName,
-              tip: _labelName,
-              valor: _labelName,
+              hint: hintName,
+              label: labelName,
               icon: Icons.person,
               inputType: TextInputType.text,
             ),
             InputTextField(
               controller: _controllerEmail,
-              tip: _labelEmail,
+              hint: hintEmail,
+              label: labelEmail,
               icon: Icons.email,
               inputType: TextInputType.emailAddress,
             ),
             InputTextField(
               controller: _controllerPhone,
-              tip: _labelPhone,
+              hint: hintPhone,
+              label: labelPhone,
               icon: Icons.phone,
               inputType: TextInputType.phone,
             ),
             InputTextField(
               //controller: associatedBloc.sponsorCtrl,
-              tip: _labelSponsor,
+              hint: hintSponsor,
+              label: labelSponsor,
               icon: Icons.person_pin,
               inputType: TextInputType.text,
+            ),
+            SizedBox(
+              height: 10.0,
             ),
             SnackBarWidget(),
           ],
@@ -226,9 +225,13 @@ class Login extends StatelessWidget {
             ),
             InputTextField(
               controller: _controllerEmail,
-              label: _labelEmail,
+              hint: hintEmail,
+              label: labelEmail,
               icon: Icons.email,
               inputType: TextInputType.emailAddress,
+            ),
+            SizedBox(
+              height: 10.0,
             ),
             SnackBarWidget(),
           ],

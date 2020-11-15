@@ -1,36 +1,27 @@
-/*
-Autor: Adalberto Jr.
-App: HCSlz
-Todos os direitos reservados ao Harley Club de Sao Luis
-2020
-
-Descriçao: classe do objeto Mensalidade
-
-*/
 import 'payment.months.dart';
 
 class Payment {
-  final int code;
+  final int id;
   final String year;
   final List<PaymentMonths> paymentMonths;
 
-  Payment(this.code, this.year, this.paymentMonths);
+  Payment(this.id, this.year, this.paymentMonths);
 
   Payment.fromJson(Map<String, dynamic> json)
-      : code = json['codigo'],
-        year = json['ano'],
-        paymentMonths = List.from((json['mesesMensalidades'] as List)
-            .map((mesesMensalidades) => PaymentMonths.fromJson(mesesMensalidades)));
+      : id = json['id'],
+        year = json['year'],
+        paymentMonths = List.from((json['paymentMonths'] as List)
+            .map((paymentMonths) => PaymentMonths.fromJson(paymentMonths)));
 
   Map<String, dynamic> toJson() => {
-    'codigo': code,
-    'ano': year,
-    'mesesMensalidades': List<dynamic>.from(
-        paymentMonths.map((mesesMensalidades) => mesesMensalidades.toJson())),
+    'id': id,
+    'year': year,
+    'paymentMonths': List<dynamic>.from(
+        paymentMonths.map((paymentMonths) => paymentMonths.toJson())),
   };
 
   @override
   String toString() {
-    return 'Mensalidade{codigo: $code, ano: $year, mesesMensalidades: $paymentMonths}';
+    return 'Mensalidade{codigo: $id, ano: $year, mesesMensalidades: $paymentMonths}';
   }
 }

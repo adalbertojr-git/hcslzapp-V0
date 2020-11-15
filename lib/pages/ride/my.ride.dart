@@ -89,7 +89,7 @@ class _MyRideState extends State<MyRide> {
               Expanded(
                 child: InputTextField(
                   //controlador: _controladorDefeito,
-                  label: "Distancia: ", //_rotuloDefeito,
+                  helper: "Distancia: ", //_rotuloDefeito,
                   inputType: TextInputType.text,
                   disabled: true,
                   nLines: 1,
@@ -98,7 +98,7 @@ class _MyRideState extends State<MyRide> {
               Expanded(
                 child: InputTextField(
                   //controlador: _controladorDefeito,
-                  label: "Velocidade: ", //_rotuloDefeito,
+                  helper: "Velocidade: ", //_rotuloDefeito,
                   inputType: TextInputType.text,
                   disabled: true,
                   nLines: 1,
@@ -107,7 +107,7 @@ class _MyRideState extends State<MyRide> {
               Expanded(
                 child: InputTextField(
                   //controlador: _controladorDefeito,
-                  label: "Tempo: ", //_rotuloDefeito,
+                  helper: "Tempo: ", //_rotuloDefeito,
                   inputType: TextInputType.text,
                   disabled: true,
                   nLines: 1,
@@ -116,7 +116,7 @@ class _MyRideState extends State<MyRide> {
               Expanded(
                 child: InputTextField(
                   //controlador: _controladorDefeito,
-                  label: "Inclinaçao: ", //_rotuloDefeito,
+                  helper: "Inclinaçao: ", //_rotuloDefeito,
                   inputType: TextInputType.text,
                   disabled: true,
                   nLines: 1,

@@ -10,7 +10,7 @@ Descriçao: classe que faz as chamadas aos metodos da Web API
 import 'dart:convert';
 import 'package:hcslzapp/models/payment.dart';
 import 'package:http/http.dart';
-import '../settings.dart';
+import '../common/settings.dart';
 
 /*
 endereço URL da classe alvo

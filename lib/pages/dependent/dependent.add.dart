@@ -74,46 +74,21 @@ class _DependentAddState extends State<DependentAdd> {
                 ),
                 InputTextField(
                   controller: _controladorEmail,
-                  label: _rotuloEmail,
+                  helper: _rotuloEmail,
                   icon: Icons.email,
                   inputType: TextInputType.emailAddress,
-                  valor: widget.dependente != null
+                  label: widget.dependente != null
                       ? widget.dependente.email
                       : null,
                 ),
                 InputTextField(
                   controller: _controladorTelefone,
-                  label: _rotuloTelefone,
+                  helper: _rotuloTelefone,
                   icon: Icons.phone,
                   inputType: TextInputType.phone,
-                  valor: widget.dependente != null
+                  label: widget.dependente != null
                       ? widget.dependente.phone
                       : null,
-                ),
-                Row(
-                  crossAxisAlignment: CrossAxisAlignment.baseline,
-                  children: <Widget>[
-                    Expanded(
-                      child: InputTextField(
-                        controller: _controlllerCPF,
-                        label: _labelCPF,
-                        inputType: TextInputType.number,
-                        //valor: associated.cpf,
-                      ),
-                    ),
-                    Expanded(
-                      child: InputTextField(
-                        controller: _controladorDataNascimento,
-                        label: _rotuloDataNascimento,
-                        icon: Icons.calendar_today,
-                        tip: _dicaData,
-                        inputType: TextInputType.datetime,
-                        valor: widget.dependente != null
-                            ? widget.dependente.dateBirth
-                            : null,
-                      ),
-                    ),
-                  ],
                 ),
                 Row(
                   crossAxisAlignment: CrossAxisAlignment.baseline,
@@ -143,6 +118,32 @@ class _DependentAddState extends State<DependentAdd> {
                     ),
                   ],
                 ),
+                Row(
+                  crossAxisAlignment: CrossAxisAlignment.baseline,
+                  children: <Widget>[
+                    Expanded(
+                      child: InputTextField(
+                        controller: _controlllerCPF,
+                        helper: _labelCPF,
+                        inputType: TextInputType.number,
+                        //valor: associated.cpf,
+                      ),
+                    ),
+                    Expanded(
+                      child: InputTextField(
+                        controller: _controladorDataNascimento,
+                        helper: _rotuloDataNascimento,
+                        icon: Icons.calendar_today,
+                        hint: _dicaData,
+                        inputType: TextInputType.datetime,
+                        label: widget.dependente != null
+                            ? widget.dependente.dateBirth
+                            : null,
+                      ),
+                    ),
+                  ],
+                ),
+
                 Container(
                   alignment: Alignment.centerLeft,
                   padding: EdgeInsets.fromLTRB(0.0, 15.0, 0.0, 0.0),

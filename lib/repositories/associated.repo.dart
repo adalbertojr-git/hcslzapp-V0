@@ -3,9 +3,9 @@ import 'dart:convert';
 import 'package:hcslzapp/http/http.exception.dart';
 import 'package:hcslzapp/models/associated.dart';
 import 'package:http/http.dart';
-import '../settings.dart';
+import '../common/settings.dart';
 
-const String _associatedUrl = '/associados';
+const String _associatedUrl = '/associateds';
 
 class AssociatedRepo {
   Future<List<Associated>> findAll() async {
@@ -18,9 +18,9 @@ class AssociatedRepo {
         .toList();
   }
 
-  Future<List<Associated>> findByCode(int code) async {
+  Future<List<Associated>> findByIdAssociatedToList(int id) async {
     final Response response = await client
-        .get(mainUrl + _associatedUrl + '/' + code.toString())
+        .get(mainUrl + _associatedUrl + '/list/' + id.toString())
         .timeout(Duration(seconds: 5));
 
     if (response.statusCode == 200) {

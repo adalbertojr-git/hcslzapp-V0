@@ -60,9 +60,9 @@ class PaymentList extends StatelessWidget {
                         ),
                         InputTextField(
                           //controlador: _controladorPadrinho,
-                          label: 'Situaçao', //_rotuloPadrinho,
+                          helper: 'Situaçao', //_rotuloPadrinho,
                           icon: Icons.attach_money,
-                          valor: 'ADIMPLENTE', //mensalidades[i].,
+                          label: 'ADIMPLENTE', //mensalidades[i].,
                           disabled: true,
                         ),
                         Padding(

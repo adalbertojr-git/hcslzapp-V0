@@ -47,7 +47,7 @@ class MotorcycleAdd extends StatelessWidget {
                 ),
                 InputTextField(
                   controller: _controladorModelo,
-                  label: _rotuloModelo,
+                  helper: _rotuloModelo,
                   icon: Icons.motorcycle,
                   inputType: TextInputType.text,
                 ),
@@ -58,7 +58,7 @@ class MotorcycleAdd extends StatelessWidget {
                       child: InputTextField(
                         controller: _controladorAno,
                         icon: Icons.calendar_today,
-                        label: _rotuloAno,
+                        helper: _rotuloAno,
                         inputType: TextInputType.number,
                       ),
                     ),
@@ -66,7 +66,7 @@ class MotorcycleAdd extends StatelessWidget {
                       child: InputTextField(
                         controller: _controladorCor,
                         icon: Icons.color_lens,
-                        label: _rotuloCor,
+                        helper: _rotuloCor,
                         inputType: TextInputType.text,
                       ),
                     ),
@@ -78,14 +78,14 @@ class MotorcycleAdd extends StatelessWidget {
                     Expanded(
                       child: InputTextField(
                         controller: _controladorPlaca,
-                        label: _rotuloPlaca,
+                        helper: _rotuloPlaca,
                         inputType: TextInputType.text,
                       ),
                     ),
                     Expanded(
                       child: InputTextField(
                         controller: _controladorApelido,
-                        label: _rotuloApelido,
+                        helper: _rotuloApelido,
                         inputType: TextInputType.text,
                       ),
                     ),
@@ -93,12 +93,12 @@ class MotorcycleAdd extends StatelessWidget {
                 ),
                 InputTextField(
                   controller: _controladorChassi,
-                  label: _rotuloChassi,
+                  helper: _rotuloChassi,
                   inputType: TextInputType.text,
                 ),
                 InputTextField(
                   controller: _controladorRenavam,
-                  label: _rotuloRenavam,
+                  helper: _rotuloRenavam,
                   inputType: TextInputType.text,
                 ),
 /*                Padding(

@@ -2,46 +2,46 @@ import 'package:flutter/material.dart';
 
 class InputTextField extends StatelessWidget {
   final TextEditingController controller;
-  final String label;
-  final String tip;
+  final String helper;
+  final String hint;
   final IconData icon;
   final TextInputType inputType;
   final bool hidden;
   final bool disabled;
   final String prefix;
   final int nLines;
-  String valor;
+  final String label;
   final double size;
 
   InputTextField(
       {this.controller,
-      this.label,
-      this.tip,
+      this.helper,
+      this.hint,
       this.icon,
       this.inputType,
       this.hidden,
       this.disabled,
       this.prefix,
-      this.valor,
+      this.label,
       this.nLines,
       this.size});
 
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.all(2.0),
+      padding: const EdgeInsets.fromLTRB(0.0, 3.0, 0.0, 3.0), //all(3.0),
       child: TextFormField(
         textCapitalization: TextCapitalization.words,
         obscureText: hidden != null ? hidden : false,
         readOnly: disabled != null ? disabled : false,
-        controller: controller,
+
         style: TextStyle(
           fontSize: size != null ? size : 15.0,
         ),
         decoration: InputDecoration(
           focusedBorder: OutlineInputBorder(
             borderSide: BorderSide(
-              color: Colors.blue,
+              color: Colors.lightBlueAccent,
             ),
           ),
           enabledBorder: OutlineInputBorder(
@@ -56,19 +56,19 @@ class InputTextField extends StatelessWidget {
                 )
               : null,
           filled: true,
-          labelText: valor,
-          hintText: tip,
+          labelText: label,
+          labelStyle: TextStyle(fontSize: 13.0),
+          hintText: hint,
+          hintStyle: TextStyle(fontSize: 12.0, color: Colors.black54),
           prefixText: prefix,
-          helperText: label,
+          helperText: helper,
           helperStyle: TextStyle(fontSize: 10.0, color: Colors.black54),
         ),
         keyboardType: inputType,
-        onSaved: (String value) {
-          valor = value;
-          print('name=$valor');
-        },
-        validator: (value) {},
+        onSaved: (String value) {},
+        validator: (String value) {},
         maxLines: nLines != null ? nLines : 1,
+        controller: controller,
       ),
     );
   }

@@ -1,14 +1,5 @@
-/*
-Autor: Adalberto Jr.
-App: HCSlz
-Todos os direitos reservados ao Harley Club de Sao Luis
-2020
-
-Descriçao: classe do objeto Motocicleta
-
-*/
 class Motorcycle {
-  final int code;
+  final int id;
   final String model;
   final String year;
   final String color;
@@ -17,33 +8,33 @@ class Motorcycle {
   final String chassis;
   final String renavam;
 
-  Motorcycle(this.code, this.model, this.year, this.color, this.licencePlate,
+  Motorcycle(this.id, this.model, this.year, this.color, this.licencePlate,
       this.nickname, this.chassis, this.renavam);
 
   Motorcycle.fromJson(Map<String, dynamic> json)
-      : code = json['codigo'],
-        model = json['modelo'],
-        year = json['ano'],
-        color = json['cor'],
-        licencePlate = json['placa'],
-        nickname = json['apelido'],
-        chassis = json['chassi'],
+      : id = json['id'],
+        model = json['model'],
+        year = json['year'],
+        color = json['color'],
+        licencePlate = json['licencePlate'],
+        nickname = json['nickname'],
+        chassis = json['chassis'],
         renavam = json['renavam'];
 
   Map<String, dynamic> toJson() => {
-    'codigo': code,
-    'modelo': model,
-    'ano': year,
-    'cor': color,
-    'placa': licencePlate,
-    'apelido': nickname,
-    'chassi': chassis,
+    'id': id,
+    'model': model,
+    'year': year,
+    'color': color,
+    'licencePlate': licencePlate,
+    'nickname': nickname,
+    'chassis': chassis,
     'renavam': renavam,
   };
 
   @override
   String toString() {
-    return 'Motocicleta{codigo: $code, modelo: $model, ano: $year, cor: $color, '
+    return 'Motocicleta{codigo: $id, modelo: $model, ano: $year, cor: $color, '
         'placa: $licencePlate, apelido: $nickname, '
         'chassi: $chassis, renavam: $renavam}';
   }

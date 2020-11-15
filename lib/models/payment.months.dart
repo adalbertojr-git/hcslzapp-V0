@@ -1,29 +1,20 @@
-/*
-Autor: Adalberto Jr.
-App: HCSlz
-Todos os direitos reservados ao Harley Club de Sao Luis
-2020
-
-Descriçao: classe do objeto MesesMensalidade
-
-*/
 class PaymentMonths {
-  final int code;
+  final int id;
   final int month;
 
-  PaymentMonths(this.code, this.month);
+  PaymentMonths(this.id, this.month);
 
   PaymentMonths.fromJson(Map<String, dynamic> json)
-      : code = json['codigo'],
-        month = json['mes'];
+      : id = json['id'],
+        month = json['month'];
 
   Map<String, dynamic> toJson() => {
-    'codigo': code,
-    'mes': month,
+    'id': id,
+    'month': month,
   };
 
   @override
   String toString() {
-    return 'MesesMensalidade{codigo: $code, mes: $month}';
+    return 'MesesMensalidade{codigo: $id, mes: $month}';
   }
 }

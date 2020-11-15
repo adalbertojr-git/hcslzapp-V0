@@ -1,14 +1,5 @@
-/*
-Autor: Adalberto Jr.
-App: HCSlz
-Todos os direitos reservados ao Harley Club de Sao Luis
-2020
-
-Descriçao: classe do objeto Dependente
-
-*/
 class Dependent {
-  final int code;
+  final int id;
   final String name;
   final String email;
   final String phone;
@@ -17,33 +8,33 @@ class Dependent {
   final String dateBirth;
   final String isAssociated;
 
-  Dependent(this.code, this.name, this.email, this.phone, this.cpf,
+  Dependent(this.id, this.name, this.email, this.phone, this.cpf,
       this.bloodType, this.dateBirth, this.isAssociated);
 
   Dependent.fromJson(Map<String, dynamic> json)
-      : code = json['codigo'],
-        name = json['nome'],
+      : id = json['id'],
+        name = json['name'],
         email = json['email'],
-        phone = json['telefone'],
+        phone = json['phone'],
         cpf = json['cpf'],
-        bloodType = json['tipoSanguineo'],
-        dateBirth = json['dataNascimento'],
-        isAssociated = json['membroHc'];
+        bloodType = json['bloodType'],
+        dateBirth = json['dateBirthToString'],
+        isAssociated = json['isAssociated'];
 
   Map<String, dynamic> toJson() => {
-        'codigo': code,
-        'nome': name,
+        'id': id,
+        'name': name,
         'email': email,
-        'telefone': phone,
+        'phone': phone,
         'cpf': cpf,
-        'tipoSanguineo': bloodType,
-        'dataNascimento': dateBirth,
-        'membroHc': isAssociated,
+        'bloodType': bloodType,
+        'dateBirthToString': dateBirth,
+        'isAssociated': isAssociated,
       };
 
   @override
   String toString() {
-    return 'Dependente{codigo: $code, nome: $name, email: $email, telefone: $phone, '
+    return 'Dependente{codigo: $id, nome: $name, email: $email, telefone: $phone, '
         'cpf: $cpf, tipoSanguineo: $bloodType, dataNascimento: $dateBirth, '
         'membroHc: $isAssociated}';
   }

@@ -10,6 +10,8 @@ const _titleAppBar = 'HCSlz App';
 void main() => runApp(HCSlzApp());
 
 class HCSlzApp extends StatelessWidget {
+
+
   @override
   Widget build(BuildContext context) {
     //Intl.defaultLocale = 'pt_BR';

@@ -299,7 +299,7 @@ class _ListenLocationState extends State<ListenLocationWidget> {
     _locationSubscription =
         location.onLocationChanged.handleError((dynamic err) {
           setState(() {
-            _error = err.code;
+            _error = err.id;
           });
           _locationSubscription.cancel();
         }).listen((LocationData currentLocation) {

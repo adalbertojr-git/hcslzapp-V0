@@ -44,7 +44,7 @@ class DefectAdd extends StatelessWidget {
                     Expanded(
                       child: InputTextField(
                         controller: _controladorModelo,
-                        label: _rotuloModelo,
+                        helper: _rotuloModelo,
                         icon: Icons.motorcycle,
                         inputType: TextInputType.text,
                       ),
@@ -53,7 +53,7 @@ class DefectAdd extends StatelessWidget {
                       child: InputTextField(
                         controller: _controladorAno,
                         icon: Icons.calendar_today,
-                        label: _rotuloAno,
+                        helper: _rotuloAno,
                         inputType: TextInputType.number,
                       ),
                     ),
@@ -61,25 +61,25 @@ class DefectAdd extends StatelessWidget {
                 ),
                 InputTextField(
                   controller: _controladorDefeito,
-                  label: _rotuloDefeito,
+                  helper: _rotuloDefeito,
                   inputType: TextInputType.text,
                   nLines: 2,
                 ),
                 InputTextField(
                   controller: _controladorSolucao,
-                  label: _rotuloSolucao,
+                  helper: _rotuloSolucao,
                   inputType: TextInputType.text,
                   nLines: 5,
                 ),
                 InputTextField(
                   controller: _controladorProprietario,
-                  label: _rotuloProprietario,
+                  helper: _rotuloProprietario,
                   icon: Icons.person,
                   inputType: TextInputType.text,
                 ),
                 InputTextField(
                   controller: _controladorTelefone,
-                  label: _rotuloTelefone,
+                  helper: _rotuloTelefone,
                   icon: Icons.phone,
                   inputType: TextInputType.phone,
                 ),

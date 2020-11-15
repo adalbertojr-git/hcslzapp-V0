@@ -45,8 +45,8 @@ class DigitalIdentity extends StatelessWidget {
                       height: 50.0,
                     ),
                     InputTextField(
-                      label: _labelName,
-                      valor: 'Adalberto Jr', //associated.name,
+                      helper: _labelName,
+                      label: 'Adalberto Jr', //associated.name,
                       disabled: true,
                       size: 20.0,
                     ),
@@ -54,24 +54,24 @@ class DigitalIdentity extends StatelessWidget {
                       children: <Widget>[
                         Expanded(
                           child: InputTextField(
-                            label: _labelDateBirth,
-                            valor: '28/09/1976', //associated.name,
+                            helper: _labelDateBirth,
+                            label: '28/09/1976', //associated.name,
                             disabled: true,
                             size: 15.0,
                           ),
                         ),
                         Expanded(
                           child: InputTextField(
-                            label: _labelDateShield,
-                            valor: '27/07/2019', //associated.name,
+                            helper: _labelDateShield,
+                            label: '27/07/2019', //associated.name,
                             disabled: true,
                             size: 15.0,
                           ),
                         ),
                         Expanded(
                           child: InputTextField(
-                            label: _labelBloodType,
-                            valor: 'A-', //associated.name,
+                            helper: _labelBloodType,
+                            label: 'A-', //associated.name,
                             disabled: true,
                             size: 15.0,
                           ),
