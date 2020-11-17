@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:hcslzapp/blocs/app.bloc.dart';
-import 'package:hcslzapp/blocs/associated.bloc.dart';
+import 'package:hcslzapp/controllers/app.controller.dart';
+import 'package:hcslzapp/controllers/associated.controller.dart';
 import 'package:hcslzapp/pages/login/splash.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 
-import 'blocs/dependent.bloc.dart';
+import 'controllers/dependent.controller.dart';
 
 const _titleAppBar = 'HCSlz App';
 
@@ -19,18 +19,18 @@ class HCSlzApp extends StatelessWidget {
     //Intl.defaultLocale = 'pt_BR';
     return MultiProvider(
       providers: [
-        ChangeNotifierProvider<AssociatedBloc>.value(value: AssociatedBloc()),
-        ChangeNotifierProvider<DependentBloc>.value(value: DependentBloc()),
+        ChangeNotifierProvider<AssociatedController>.value(value: AssociatedController()),
+        ChangeNotifierProvider<DependentController>.value(value: DependentController()),
       ],
       child: AnimatedBuilder(
-        animation: AppBloc.instance,
+        animation: AppController.instance,
         builder: (context, child) {
           return MaterialApp(
             debugShowCheckedModeBanner: false,
             home: Splash(),
             title: _titleAppBar,
             theme: ThemeData(
-              brightness: AppBloc.instance.isDarkTheme
+              brightness: AppController.instance.isDarkTheme
                   ? Brightness.dark
                   : Brightness.light,
               //primaryColor: Colors.blue,//orange[900],

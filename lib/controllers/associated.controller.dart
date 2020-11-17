@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:hcslzapp/models/associated.dart';
 import 'package:hcslzapp/repositories/associated.repo.dart';
 
-class AssociatedBloc extends ChangeNotifier {
+class AssociatedController extends ChangeNotifier {
   TextEditingController idCtrl = TextEditingController();
   TextEditingController nameCtrl = TextEditingController();
   TextEditingController phoneCtrl = TextEditingController();

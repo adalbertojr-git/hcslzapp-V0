@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:hcslzapp/blocs/dependent.bloc.dart';
 import 'package:hcslzapp/common/labels.and.hints.dart';
 import 'package:hcslzapp/components/button.dart';
+import 'package:hcslzapp/controllers/dependent.controller.dart';
 import 'package:hcslzapp/enums/blood.types.dart';
 import 'package:hcslzapp/components/input.textfield.dart';
 import 'package:hcslzapp/models/dependent.dart';
@@ -17,7 +17,7 @@ class DependentAdd extends StatefulWidget {
 }
 
 class _DependentAddState extends State<DependentAdd> {
-  DependentBloc _dependentBloc;
+  DependentController _dependentController;
   List _bloodTypes = List();
   List<DropdownMenuItem<String>> _dropDownBloodTypes;
   String _currentBloodType;
@@ -25,8 +25,8 @@ class _DependentAddState extends State<DependentAdd> {
 
   @override
   void initState() {
-    _dependentBloc = Provider.of<DependentBloc>(context, listen: false);
-    _dependentBloc.nameCtrl.text = widget.dependent != null ? widget.dependent.name : null;
+    _dependentController = Provider.of<DependentController>(context, listen: false);
+    _dependentController.nameCtrl.text = widget.dependent != null ? widget.dependent.name : null;
     _dropDownBloodTypes = getBloodTypes();
     super.initState();
   }
@@ -54,21 +54,21 @@ class _DependentAddState extends State<DependentAdd> {
                   height: 20.0,
                 ),
                 InputTextField(
-                  controller: _dependentBloc.nameCtrl,
+                  controller: _dependentController.nameCtrl,
                   label: labelNameDependent,
                   hint: hintNameDependent,
                   icon: Icons.person,
                   inputType: TextInputType.text,
                 ),
                 InputTextField(
-                  controller: _dependentBloc.emailCtrl,
+                  controller: _dependentController.emailCtrl,
                   label: labelEmail,
                   hint: hintEmail,
                   icon: Icons.email,
                   inputType: TextInputType.emailAddress,
                 ),
                 InputTextField(
-                  controller: _dependentBloc.phoneCtrl,
+                  controller: _dependentController.phoneCtrl,
                   label: labelPhone,
                   hint: hintPhone,
                   icon: Icons.phone,
@@ -113,7 +113,7 @@ class _DependentAddState extends State<DependentAdd> {
                   children: <Widget>[
                     Expanded(
                       child: InputTextField(
-                        controller: _dependentBloc.cpfCtrl,
+                        controller: _dependentController.cpfCtrl,
                         label: labelCPF,
                         hint: hintCPF,
                         inputType: TextInputType.number,
@@ -121,7 +121,7 @@ class _DependentAddState extends State<DependentAdd> {
                     ),
                     Expanded(
                       child: InputTextField(
-                        controller: _dependentBloc.dateBirthCtrl,
+                        controller: _dependentController.dateBirthCtrl,
                         label: labelDateBirth,
                         hint: hintDate,
                         icon: Icons.calendar_today,
@@ -188,21 +188,13 @@ class _DependentAddState extends State<DependentAdd> {
     );
   }
 
-  String _validaNome(String value) {
-    if (value.isEmpty) return 'Nome is obrigatorio.';
-    final RegExp nomeExp = RegExp(r'^[A-Za-z ]+$');
-    if (!nomeExp.hasMatch(value))
-      return 'Favor digitar somente caracteres alfabeticos.';
-    return null;
-  }
-
   void _add(BuildContext context) {
     debugPrint('Criando dependente...');
-    final int codigo = int.parse(_dependentBloc.idCtrl.text);
-    final String nome = _dependentBloc.nameCtrl.text;
-    final String email = _dependentBloc.emailCtrl.text;
-    final String telefone = _dependentBloc.phoneCtrl.text;
-    final String cpf = _dependentBloc.cpfCtrl.text;
+    final int codigo = int.parse(_dependentController.idCtrl.text);
+    final String nome = _dependentController.nameCtrl.text;
+    final String email = _dependentController.emailCtrl.text;
+    final String telefone = _dependentController.phoneCtrl.text;
+    final String cpf = _dependentController.cpfCtrl.text;
 
     debugPrint('nome $nome');
 
@@ -210,7 +202,7 @@ class _DependentAddState extends State<DependentAdd> {
         (_bloodTypes.indexOf(_currentBloodType) != 0
             ? _currentBloodType.toString()
             : '');
-    final String dataNascimento = _dependentBloc.dateBirthCtrl.text;
+    final String dataNascimento = _dependentController.dateBirthCtrl.text;
     final String membroHC = (ehMembro == true ? 'S' : 'N');
 
     if (nome != '' && email != '' && telefone != '') {

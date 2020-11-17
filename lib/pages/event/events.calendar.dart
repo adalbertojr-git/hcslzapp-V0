@@ -1,9 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:hcslzapp/components/my.appbar.dart';
 import 'package:hcslzapp/pages/event/event.list.dart';
 import 'package:table_calendar/table_calendar.dart';
-
-const _tituloAppBar = 'Calendario de Eventos';
 
 // Example holidays
 final Map<DateTime, List> _holidays = {

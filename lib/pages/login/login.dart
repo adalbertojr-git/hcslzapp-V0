@@ -23,9 +23,9 @@ class Login extends StatelessWidget {
           appBar: appBar,
           body: TabBarView(
             children: [
-              TabRequestAccess(context),
-              TabLogin(context),
-              TabForgotPassword(context),
+              _tabRequestAccess(context),
+              _tabLogin(context),
+              _tabForgotPassword(context),
             ],
           ),
         ),
@@ -75,7 +75,7 @@ class Login extends StatelessWidget {
         ],
       );
 
-  Widget TabLogin(BuildContext context) {
+  Widget _tabLogin(BuildContext context) {
     return Stack(
       children: [
         Center(
@@ -139,7 +139,7 @@ class Login extends StatelessWidget {
     );
   }
 
-  Widget TabRequestAccess(BuildContext context) {
+  Widget _tabRequestAccess(BuildContext context) {
     return Container(
       decoration: BoxDecoration(
         gradient: LinearGradient(
@@ -200,7 +200,7 @@ class Login extends StatelessWidget {
     );
   }
 
-  Widget TabForgotPassword(BuildContext context) {
+  Widget _tabForgotPassword(BuildContext context) {
     return Container(
       decoration: BoxDecoration(
         gradient: LinearGradient(

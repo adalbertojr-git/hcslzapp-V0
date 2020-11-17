@@ -9,9 +9,6 @@ Descriçao: classe que exibe infos sobre o Harley Club
 */
 import 'package:flutter/material.dart';
 import 'package:flutter/painting.dart';
-import 'package:hcslzapp/components/my.appbar.dart';
-
-const _titleAppBar = 'Sobre o Harley Club';
 
 class About extends StatelessWidget {
   //@override

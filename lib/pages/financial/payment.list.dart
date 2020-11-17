@@ -12,8 +12,6 @@ import 'package:hcslzapp/models/payment.dart';
 import 'package:hcslzapp/models/payment.months.dart';
 import 'package:hcslzapp/repositories/payment.repo.dart';
 
-const _tituloAppBar = 'Mensalidades';
-
 class PaymentList extends StatelessWidget {
   final PaymentRepo _webClient = PaymentRepo();
 

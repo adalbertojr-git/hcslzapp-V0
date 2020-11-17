@@ -23,10 +23,10 @@ dependencies:
   path:
   http:
   http_interceptor:
-  cached_network_image: ^2.0.0
+  #cached_network_image: ^2.0.0
   url_launcher: ^5.7.2
   location: ^3.0.2
-  location_permissions: ^3.0.0+1
+  #location_permissions: ^3.0.0+1
   table_calendar: ^2.2.3
   intl: ^0.16.1
   google_maps_flutter: ^0.5.25+1

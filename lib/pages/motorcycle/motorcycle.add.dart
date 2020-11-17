@@ -1,10 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:hcslzapp/components/button.dart';
-import 'package:hcslzapp/components/my.appbar.dart';
 import 'package:hcslzapp/components/input.textfield.dart';
 import 'package:hcslzapp/models/motorcycle.dart';
 
-const _tituloAppBar = 'Motocicleta';
 const _rotuloModelo = 'Modelo *';
 const _rotuloAno = 'Ano';
 const _rotuloCor = 'Cor';
@@ -22,12 +20,10 @@ class MotorcycleAdd extends StatelessWidget {
   final TextEditingController _controladorApelido = TextEditingController();
   final TextEditingController _controladorChassi = TextEditingController();
   final TextEditingController _controladorRenavam = TextEditingController();
-  String _nome;
 
   //@override
   Widget build(BuildContext context) {
     return Scaffold(
-      //appBar: MyAppBar(_tituloAppBar),
       body: Container(
         padding: EdgeInsets.fromLTRB(5.0, 0.0, 5.0, 0.0),
         decoration: BoxDecoration(
@@ -122,14 +118,6 @@ class MotorcycleAdd extends StatelessWidget {
         },
       ),
     );
-  }
-
-  String _validaNome(String value) {
-    if (value.isEmpty) return 'Nome is obrigatorio.';
-    final RegExp nomeExp = RegExp(r'^[A-Za-z ]+$');
-    if (!nomeExp.hasMatch(value))
-      return 'Favor digitar somente caracteres alfabeticos.';
-    return null;
   }
 
   void _save(BuildContext context) {

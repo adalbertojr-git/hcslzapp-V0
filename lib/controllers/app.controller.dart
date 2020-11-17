@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 
-class AppBloc extends ChangeNotifier {
+class AppController extends ChangeNotifier {
 
-  static AppBloc instance = AppBloc();
+  static AppController instance = AppController();
   bool isDarkTheme = false;
 
   changeTheme () {

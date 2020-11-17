@@ -1,10 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:hcslzapp/components/button.dart';
-import 'package:hcslzapp/components/my.appbar.dart';
 import 'package:hcslzapp/models/motorcycle.dart';
 import 'package:hcslzapp/pages/motorcycle/motorcycle.add.dart';
-
-const _tituloAppBar = 'Lista de Motocicletas';
 
 class MotorcycleList extends StatefulWidget {
   final List<Motorcycle> _listMotocicletas = List();
@@ -19,7 +16,6 @@ class MotorcycleListState extends State<MotorcycleList> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      //appBar: MyAppBar(_tituloAppBar),
       body: Container(
         decoration: BoxDecoration(
           gradient: LinearGradient(

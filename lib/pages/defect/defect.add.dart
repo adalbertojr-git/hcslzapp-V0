@@ -17,8 +17,6 @@ class DefectAdd extends StatelessWidget {
   final TextEditingController _controladorProprietario = TextEditingController();
   final TextEditingController _controladorTelefone = TextEditingController();
 
-  String _nome;
-
   //@override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -98,14 +96,6 @@ class DefectAdd extends StatelessWidget {
         onClick: () {},
       ),
     );
-  }
-
-  String _validaNome(String value) {
-    if (value.isEmpty) return 'Nome is obrigatorio.';
-    final RegExp nomeExp = RegExp(r'^[A-Za-z ]+$');
-    if (!nomeExp.hasMatch(value))
-      return 'Favor digitar somente caracteres alfabeticos.';
-    return null;
   }
 
 }

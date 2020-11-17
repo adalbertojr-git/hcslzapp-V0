@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:hcslzapp/blocs/app.bloc.dart';
+import 'package:hcslzapp/controllers/app.controller.dart';
 import 'package:hcslzapp/pages/about/about.dart';
 import 'package:hcslzapp/pages/associated/associated.update.dart';
 import 'package:hcslzapp/pages/boutique/boutique.list.dart';
@@ -12,6 +12,7 @@ import 'package:hcslzapp/pages/financial/payment.list.dart';
 import 'package:hcslzapp/pages/partnership/partnership.list.dart';
 import 'package:hcslzapp/pages/ride/my.ride.dart';
 
+// ignore: must_be_immutable
 class Dashboard extends StatelessWidget {
   BuildContext gContext;
 
@@ -60,9 +61,9 @@ class Dashboard extends StatelessWidget {
                 Text('Tema Escuro:'),
                 Container(
                   child: Switch(
-                    value: AppBloc.instance.isDarkTheme,
+                    value: AppController.instance.isDarkTheme,
                     onChanged: (value) {
-                      AppBloc.instance.changeTheme();
+                      AppController.instance.changeTheme();
                     },
                   ),
                 ),

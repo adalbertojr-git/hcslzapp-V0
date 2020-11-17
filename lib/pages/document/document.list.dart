@@ -30,7 +30,7 @@ class DocumentListState extends State<DocumentList> {
           itemBuilder: (context, indice) {
             //final dependente = widget.listDependentes[indice];
             return ItemList(
-              null, //dependente,
+              null, onClick: null, //dependente,
             );
           },
         ),

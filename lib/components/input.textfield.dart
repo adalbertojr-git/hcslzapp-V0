@@ -66,18 +66,12 @@ class InputTextField extends StatelessWidget {
         ),
         keyboardType: inputType,
         onSaved: (String value) {},
-        validator: (String value) {},
+        validator: (String value) {
+          return value;
+        },
         maxLines: nLines != null ? nLines : 1,
         controller: controller,
       ),
     );
-  }
-
-  String _validateName(String value) {
-    if (value.isEmpty) return 'Nome is obrigatorio.';
-    final RegExp nomeExp = RegExp(r'^[A-Za-z ]+$');
-    if (!nomeExp.hasMatch(value))
-      return 'Favor digitar somente caracteres alfabeticos.';
-    return null;
   }
 }

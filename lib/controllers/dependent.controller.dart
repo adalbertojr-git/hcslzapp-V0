@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-class DependentBloc extends ChangeNotifier {
+class DependentController extends ChangeNotifier {
   TextEditingController idCtrl = TextEditingController();
   TextEditingController nameCtrl = TextEditingController();
   TextEditingController phoneCtrl = TextEditingController();

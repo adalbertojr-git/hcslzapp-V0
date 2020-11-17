@@ -1,7 +1,7 @@
 import 'dart:io';
 import 'package:flutter/material.dart';
-import 'package:hcslzapp/blocs/associated.bloc.dart';
 import 'package:hcslzapp/common/labels.and.hints.dart';
+import 'package:hcslzapp/controllers/associated.controller.dart';
 import 'package:hcslzapp/enums/blood.types.dart';
 import 'package:hcslzapp/components/button.dart';
 import 'package:hcslzapp/components/centered.message.dart';
@@ -26,13 +26,13 @@ class _AssociatedUpdateState extends State<AssociatedUpdate> {
   bool _hideButton = true;
   File _image;
   final picker = ImagePicker();
-  AssociatedBloc _associatedBloc;
+  AssociatedController _associatedController;
   Future<List<Associated>> _future;
   int _associatedId = 1;
 
   @override
   void initState() {
-    _associatedBloc = Provider.of<AssociatedBloc>(context, listen: false);
+    _associatedController = Provider.of<AssociatedController>(context, listen: false);
     _getFuture().then((value) {
       if (value != null && value.isNotEmpty) {
         setState(() {
@@ -45,7 +45,7 @@ class _AssociatedUpdateState extends State<AssociatedUpdate> {
   }
 
   Future<List<Associated>> _getFuture() {
-    _future = _associatedBloc.findByIdAssociatedToList(_associatedId);
+    _future = _associatedController.findByIdAssociatedToList(_associatedId);
     return _future;
   }
 
@@ -175,28 +175,28 @@ class _AssociatedUpdateState extends State<AssociatedUpdate> {
                 ],
               ),
               InputTextField(
-                controller: _associatedBloc.nameCtrl,
+                controller: _associatedController.nameCtrl,
                 label: labelName,
                 hint: hintName,
                 icon: Icons.person,
                 inputType: TextInputType.text,
               ),
               InputTextField(
-                controller: _associatedBloc.emailCtrl,
+                controller: _associatedController.emailCtrl,
                 label: labelEmail,
                 hint: hintEmail,
                 icon: Icons.email,
                 inputType: TextInputType.emailAddress,
               ),
               InputTextField(
-                controller: _associatedBloc.phoneCtrl,
+                controller: _associatedController.phoneCtrl,
                 label: labelPhone,
                 hint: hintPhone,
                 icon: Icons.phone,
                 inputType: TextInputType.phone,
               ),
               InputTextField(
-                controller: _associatedBloc.sponsorCtrl,
+                controller: _associatedController.sponsorCtrl,
                 label: labelSponsor,
                 hint: hintSponsor,
                 icon: Icons.person_pin,
@@ -234,7 +234,7 @@ class _AssociatedUpdateState extends State<AssociatedUpdate> {
                 ),
               ),
               InputTextField(
-                controller: _associatedBloc.associatedTypeCtrl,
+                controller: _associatedController.associatedTypeCtrl,
                 label: labelAssociatedType,
                 disabled: true,
               ),
@@ -243,7 +243,7 @@ class _AssociatedUpdateState extends State<AssociatedUpdate> {
                 children: <Widget>[
                   Expanded(
                     child: InputTextField(
-                      controller: _associatedBloc.cnhCtrl,
+                      controller: _associatedController.cnhCtrl,
                       label: labelCNH,
                       hint: hintCNH,
                       inputType: TextInputType.number,
@@ -254,7 +254,7 @@ class _AssociatedUpdateState extends State<AssociatedUpdate> {
                   ),
                   Expanded(
                     child: InputTextField(
-                      controller: _associatedBloc.cpfCtrl,
+                      controller: _associatedController.cpfCtrl,
                       label: labelCPF,
                       hint: hintCPF,
                       inputType: TextInputType.number,
@@ -267,7 +267,7 @@ class _AssociatedUpdateState extends State<AssociatedUpdate> {
                 children: <Widget>[
                   Expanded(
                     child: InputTextField(
-                      controller: _associatedBloc.dateBirthCtrl,
+                      controller: _associatedController.dateBirthCtrl,
                       label: labelDateBirth,
                       hint: hintDate,
                       icon: Icons.calendar_today,
@@ -279,7 +279,7 @@ class _AssociatedUpdateState extends State<AssociatedUpdate> {
                   ),
                   Expanded(
                     child: InputTextField(
-                      controller: _associatedBloc.dateShieldCtrl,
+                      controller: _associatedController.dateShieldCtrl,
                       label: labelDateShield,
                       hint: hintDate,
                       icon: Icons.calendar_today,

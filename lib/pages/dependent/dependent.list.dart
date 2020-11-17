@@ -1,10 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:hcslzapp/components/button.dart';
-import 'package:hcslzapp/components/my.appbar.dart';
 import 'package:hcslzapp/models/dependent.dart';
 import 'package:hcslzapp/pages/dependent/dependent.add.dart';
-
-const _tituloAppBar = 'Lista de Dependentes';
 
 class DependentList extends StatefulWidget {
   List<Dependent> listDependentes;
