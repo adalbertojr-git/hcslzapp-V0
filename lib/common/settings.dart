@@ -24,7 +24,8 @@ String getMessage(int statusCode) {
 }
 
 final Map<int, String> _statusCodeResponses = {
-  400: 'there was an error submitting transaction',
-  401: 'authentication failed',
-  409: 'transaction already exists'
+  400: 'Houve um erro ao submeter a transaçao',
+  401: 'Falha de autenticaçao',
+  404: 'Pagina web nao encontrada',
+  409: 'Arquivo ja existe'
 };

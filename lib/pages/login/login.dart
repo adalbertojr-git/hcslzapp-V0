@@ -51,7 +51,6 @@ class Login extends StatelessWidget {
 
   get tabBar => TabBar(
         indicatorColor: Colors.white,
-        indicatorWeight: 3.0,
         labelPadding: EdgeInsets.only(bottom: 5.0),
         tabs: [
           Tab(
@@ -243,9 +242,8 @@ class Login extends StatelessWidget {
   _showDashboardPage(BuildContext context) {
     Navigator.pushReplacement(
       context,
-      MaterialPageRoute(builder: (context) {
-        return Dashboard();
-      }),
+      MaterialPageRoute(builder: (context) => Dashboard()
+      ),
     );
   }
 }

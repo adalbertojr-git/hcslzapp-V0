@@ -2,6 +2,7 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:hcslzapp/common/labels.and.hints.dart';
+import 'package:hcslzapp/components/top.margin.dart';
 import 'package:hcslzapp/controllers/associated.controller.dart';
 import 'package:hcslzapp/enums/blood.types.dart';
 import 'package:hcslzapp/components/button.dart';
@@ -24,8 +25,6 @@ class AssociatedUpdate extends StatefulWidget {
 class _AssociatedUpdateState extends State<AssociatedUpdate> {
   List<DropdownMenuItem<String>> _dropDownBloodTypes;
   String _currentBloodType;
-
-  //bool _hideButton = true;
   File _image;
   final picker = ImagePicker();
   AssociatedController _associatedController;
@@ -36,23 +35,19 @@ class _AssociatedUpdateState extends State<AssociatedUpdate> {
   void initState() {
     _associatedController =
         Provider.of<AssociatedController>(context, listen: false);
+
     _getFuture().then((value) {
       if (value != null && value.isNotEmpty) {
-/*        setState(() {
-          _hideButton = false;
-        });*/
         _associatedController.hideButton(false);
       }
     });
-    _associatedController.setTextControllers();
+
     _dropDownBloodTypes = getBloodTypes();
     super.initState();
   }
 
-  Future<List<Associated>> _getFuture() {
-    _future = _associatedController.fetchAssociated(_associatedId);
-    return _future;
-  }
+  Future<List<Associated>> _getFuture() =>
+      _future = _associatedController.fetchAssociated(_associatedId);
 
   Future getImageFromCamera() async {
     final pickedFile = await picker.getImage(source: ImageSource.camera);
@@ -96,28 +91,28 @@ class _AssociatedUpdateState extends State<AssociatedUpdate> {
               default:
                 if (snapshot.hasError) {
                   return CenteredMessage(
-                    'Erro: ${snapshot.error}.',
+                    'Oops!!! + ${snapshot.error}.',
                     icon: Icons.error,
                   );
                 } else {
-                  if (snapshot.data == null) {
+                  if (snapshot.data != null) {
+                    final List<Associated> associatedList = snapshot.data;
+                    if (associatedList.isNotEmpty)
+                      return _associatedWidgets(context, associatedList);
+                    else
+                      return CenteredMessage(
+                        'Atenção: Associado nao encontrado.',
+                        icon: Icons.warning,
+                      );
+                  } else
                     return CenteredMessage(
-                      'Erro na requisiçao dos dados.',
+                      'Oops!!! ' + _associatedController.errorMsg,
                       icon: Icons.error,
                     );
-                  }
-                  final List<Associated> associatedList = snapshot.data;
-                  if (associatedList.isNotEmpty) {
-                    return _associatedWidgets(context, associatedList);
-                  } //if (associatedList.isNotEmpty)
-                  return CenteredMessage(
-                    'Associado nao encontrado.',
-                    icon: Icons.warning,
-                  );
                 } //else
             } //switch (snapshot.connectionState)
             return CenteredMessage(
-              'Erro desconhecido.',
+              'Oops!!! Um erro desconhecido ocorreu.',
               icon: Icons.error,
             );
           },
@@ -127,63 +122,10 @@ class _AssociatedUpdateState extends State<AssociatedUpdate> {
             : Button(
                 Icons.save,
                 onClick: () {
-                  _save(context);
+                  _update(context);
                 },
               ),
       ),
-    );
-  }
-
-  @override
-  Widget buildxx(BuildContext context) {
-    return Scaffold(
-      body: FutureBuilder<List<Associated>>(
-        future: _future,
-        builder: (context, snapshot) {
-          switch (snapshot.connectionState) {
-            case ConnectionState.none:
-              break;
-            case ConnectionState.waiting:
-              return Progress();
-            case ConnectionState.active:
-              break;
-            default:
-              if (snapshot.hasError) {
-                return CenteredMessage(
-                  'Erro: ${snapshot.error}.',
-                  icon: Icons.error,
-                );
-              } else {
-                if (snapshot.data == null) {
-                  return CenteredMessage(
-                    'Erro na requisiçao dos dados.',
-                    icon: Icons.error,
-                  );
-                }
-                final List<Associated> associatedList = snapshot.data;
-                if (associatedList.isNotEmpty) {
-                  return _associatedWidgets(context, associatedList);
-                } //if (associatedList.isNotEmpty)
-                return CenteredMessage(
-                  'Associado nao encontrado.',
-                  icon: Icons.warning,
-                );
-              } //else
-          } //switch (snapshot.connectionState)
-          return CenteredMessage(
-            'Erro desconhecido.',
-            icon: Icons.error,
-          );
-        },
-      ),
-      floatingActionButton: _associatedController.isHideButton
-          ? null
-          : Button(
-              Icons.save,
-              onClick: () {
-                _save(context);
-              },
-            ),
     );
   }
 
@@ -205,10 +147,7 @@ class _AssociatedUpdateState extends State<AssociatedUpdate> {
         child: SingleChildScrollView(
           child: Column(
             children: <Widget>[
-              SizedBox(
-                height: 20.0,
-                width: double.infinity,
-              ),
+              TopMargin(),
               _photo('assets/imgs/noImage.png'),
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
@@ -236,6 +175,8 @@ class _AssociatedUpdateState extends State<AssociatedUpdate> {
               ),
               InputTextField(
                 controller: _associatedController.nameCtrl,
+                controllerText:
+                    associated.name != null ? associated.name : null,
                 label: labelName,
                 hint: hintName,
                 icon: Icons.person,
@@ -243,6 +184,8 @@ class _AssociatedUpdateState extends State<AssociatedUpdate> {
               ),
               InputTextField(
                 controller: _associatedController.emailCtrl,
+                controllerText:
+                    associated.email != null ? associated.email : null,
                 label: labelEmail,
                 hint: hintEmail,
                 icon: Icons.email,
@@ -250,6 +193,8 @@ class _AssociatedUpdateState extends State<AssociatedUpdate> {
               ),
               InputTextField(
                 controller: _associatedController.phoneCtrl,
+                controllerText:
+                    associated.phone != null ? associated.phone : null,
                 label: labelPhone,
                 hint: hintPhone,
                 icon: Icons.phone,
@@ -257,6 +202,8 @@ class _AssociatedUpdateState extends State<AssociatedUpdate> {
               ),
               InputTextField(
                 controller: _associatedController.sponsorCtrl,
+                controllerText:
+                    associated.sponsor != null ? associated.sponsor : null,
                 label: labelSponsor,
                 hint: hintSponsor,
                 icon: Icons.person_pin,
@@ -295,6 +242,9 @@ class _AssociatedUpdateState extends State<AssociatedUpdate> {
               ),
               InputTextField(
                 controller: _associatedController.associatedTypeCtrl,
+                controllerText: associated.associatedType != null
+                    ? associated.associatedType
+                    : null,
                 label: labelAssociatedType,
                 disabled: true,
               ),
@@ -304,6 +254,8 @@ class _AssociatedUpdateState extends State<AssociatedUpdate> {
                   Expanded(
                     child: InputTextField(
                       controller: _associatedController.cnhCtrl,
+                      controllerText:
+                          associated.cnh != null ? associated.cnh : null,
                       label: labelCNH,
                       hint: hintCNH,
                       inputType: TextInputType.number,
@@ -315,6 +267,8 @@ class _AssociatedUpdateState extends State<AssociatedUpdate> {
                   Expanded(
                     child: InputTextField(
                       controller: _associatedController.cpfCtrl,
+                      controllerText:
+                          associated.cpf != null ? associated.cpf : null,
                       label: labelCPF,
                       hint: hintCPF,
                       inputType: TextInputType.number,
@@ -328,6 +282,9 @@ class _AssociatedUpdateState extends State<AssociatedUpdate> {
                   Expanded(
                     child: InputTextField(
                       controller: _associatedController.dateBirthCtrl,
+                      controllerText: associated.dateBirth != null
+                          ? associated.dateBirth
+                          : null,
                       label: labelDateBirth,
                       hint: hintDate,
                       icon: Icons.calendar_today,
@@ -340,6 +297,9 @@ class _AssociatedUpdateState extends State<AssociatedUpdate> {
                   Expanded(
                     child: InputTextField(
                       controller: _associatedController.dateShieldCtrl,
+                      controllerText: associated.dateShield != null
+                          ? associated.dateShield
+                          : null,
                       label: labelDateShield,
                       hint: hintDate,
                       icon: Icons.calendar_today,
@@ -527,5 +487,5 @@ class _AssociatedUpdateState extends State<AssociatedUpdate> {
     });
   }
 
-  void _save(BuildContext context) {}
+  void _update(BuildContext context) {}
 }

@@ -12,6 +12,7 @@ class InputTextField extends StatelessWidget {
   final int nLines;
   final String label;
   final double size;
+  final String controllerText;
 
   InputTextField(
       {this.controller,
@@ -24,29 +25,30 @@ class InputTextField extends StatelessWidget {
       this.prefix,
       this.label,
       this.nLines,
-      this.size});
+      this.size,
+      this.controllerText});
 
   @override
   Widget build(BuildContext context) {
+    _setController(controller, controllerText);
     return Padding(
       padding: const EdgeInsets.fromLTRB(2.0, 3.0, 2.0, 3.0),
       child: TextFormField(
         textCapitalization: TextCapitalization.words,
         obscureText: hidden != null ? hidden : false,
         readOnly: disabled != null ? disabled : false,
-
         style: TextStyle(
-          fontSize: size != null ? size : 15.0,
+          fontSize: size != null ? size : 17.0,
         ),
         decoration: InputDecoration(
           focusedBorder: OutlineInputBorder(
             borderSide: BorderSide(
-              color: Colors.lightBlueAccent,
+              color: Colors.lightBlue,
             ),
           ),
           enabledBorder: OutlineInputBorder(
             borderSide: BorderSide(
-              color: Colors.white70,
+              color: Colors.white,
             ),
           ),
           icon: icon != null
@@ -57,12 +59,12 @@ class InputTextField extends StatelessWidget {
               : null,
           //filled: true,
           labelText: label,
-          labelStyle: TextStyle(fontSize: 13.0),
+          labelStyle: TextStyle(fontSize: 15.0, color: Colors.black26),
           hintText: hint,
-          hintStyle: TextStyle(fontSize: 12.0, color: Colors.black54),
+          hintStyle: TextStyle(fontSize: 15.0, color: Colors.black26),
           prefixText: prefix,
           helperText: helper,
-          helperStyle: TextStyle(fontSize: 10.0, color: Colors.black54),
+          helperStyle: TextStyle(fontSize: 11.0, color: Colors.black26),
         ),
         keyboardType: inputType,
         onSaved: (String value) {},
@@ -74,4 +76,7 @@ class InputTextField extends StatelessWidget {
       ),
     );
   }
+
+  _setController(TextEditingController controller, String controllerText) =>
+      this.controller.text = controllerText;
 }

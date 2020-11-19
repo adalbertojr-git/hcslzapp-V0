@@ -39,20 +39,202 @@ mixin _$AssociatedController on AssociatedControllerBase, Store {
     });
   }
 
-  final _$laodTextControllersAsyncAction =
-      AsyncAction('AssociatedControllerBase.laodTextControllers');
+  final _$phoneCtrlAtom = Atom(name: 'AssociatedControllerBase.phoneCtrl');
 
   @override
-  Future setTextControllers() {
-    return _$laodTextControllersAsyncAction
-        .run(() => super.setTextControllers());
+  TextEditingController get phoneCtrl {
+    _$phoneCtrlAtom.reportRead();
+    return super.phoneCtrl;
+  }
+
+  @override
+  set phoneCtrl(TextEditingController value) {
+    _$phoneCtrlAtom.reportWrite(value, super.phoneCtrl, () {
+      super.phoneCtrl = value;
+    });
+  }
+
+  final _$emailCtrlAtom = Atom(name: 'AssociatedControllerBase.emailCtrl');
+
+  @override
+  TextEditingController get emailCtrl {
+    _$emailCtrlAtom.reportRead();
+    return super.emailCtrl;
+  }
+
+  @override
+  set emailCtrl(TextEditingController value) {
+    _$emailCtrlAtom.reportWrite(value, super.emailCtrl, () {
+      super.emailCtrl = value;
+    });
+  }
+
+  final _$sponsorCtrlAtom = Atom(name: 'AssociatedControllerBase.sponsorCtrl');
+
+  @override
+  TextEditingController get sponsorCtrl {
+    _$sponsorCtrlAtom.reportRead();
+    return super.sponsorCtrl;
+  }
+
+  @override
+  set sponsorCtrl(TextEditingController value) {
+    _$sponsorCtrlAtom.reportWrite(value, super.sponsorCtrl, () {
+      super.sponsorCtrl = value;
+    });
+  }
+
+  final _$associatedTypeCtrlAtom =
+      Atom(name: 'AssociatedControllerBase.associatedTypeCtrl');
+
+  @override
+  TextEditingController get associatedTypeCtrl {
+    _$associatedTypeCtrlAtom.reportRead();
+    return super.associatedTypeCtrl;
+  }
+
+  @override
+  set associatedTypeCtrl(TextEditingController value) {
+    _$associatedTypeCtrlAtom.reportWrite(value, super.associatedTypeCtrl, () {
+      super.associatedTypeCtrl = value;
+    });
+  }
+
+  final _$cnhCtrlAtom = Atom(name: 'AssociatedControllerBase.cnhCtrl');
+
+  @override
+  TextEditingController get cnhCtrl {
+    _$cnhCtrlAtom.reportRead();
+    return super.cnhCtrl;
+  }
+
+  @override
+  set cnhCtrl(TextEditingController value) {
+    _$cnhCtrlAtom.reportWrite(value, super.cnhCtrl, () {
+      super.cnhCtrl = value;
+    });
+  }
+
+  final _$cpfCtrlAtom = Atom(name: 'AssociatedControllerBase.cpfCtrl');
+
+  @override
+  TextEditingController get cpfCtrl {
+    _$cpfCtrlAtom.reportRead();
+    return super.cpfCtrl;
+  }
+
+  @override
+  set cpfCtrl(TextEditingController value) {
+    _$cpfCtrlAtom.reportWrite(value, super.cpfCtrl, () {
+      super.cpfCtrl = value;
+    });
+  }
+
+  final _$bloodTypeCtrlAtom =
+      Atom(name: 'AssociatedControllerBase.bloodTypeCtrl');
+
+  @override
+  TextEditingController get bloodTypeCtrl {
+    _$bloodTypeCtrlAtom.reportRead();
+    return super.bloodTypeCtrl;
+  }
+
+  @override
+  set bloodTypeCtrl(TextEditingController value) {
+    _$bloodTypeCtrlAtom.reportWrite(value, super.bloodTypeCtrl, () {
+      super.bloodTypeCtrl = value;
+    });
+  }
+
+  final _$dateBirthCtrlAtom =
+      Atom(name: 'AssociatedControllerBase.dateBirthCtrl');
+
+  @override
+  TextEditingController get dateBirthCtrl {
+    _$dateBirthCtrlAtom.reportRead();
+    return super.dateBirthCtrl;
+  }
+
+  @override
+  set dateBirthCtrl(TextEditingController value) {
+    _$dateBirthCtrlAtom.reportWrite(value, super.dateBirthCtrl, () {
+      super.dateBirthCtrl = value;
+    });
+  }
+
+  final _$isHideButtonAtom =
+      Atom(name: 'AssociatedControllerBase.isHideButton');
+
+  @override
+  bool get isHideButton {
+    _$isHideButtonAtom.reportRead();
+    return super.isHideButton;
+  }
+
+  @override
+  set isHideButton(bool value) {
+    _$isHideButtonAtom.reportWrite(value, super.isHideButton, () {
+      super.isHideButton = value;
+    });
+  }
+
+  final _$associatedListFutureAtom =
+      Atom(name: 'AssociatedControllerBase.associatedListFuture');
+
+  @override
+  ObservableFuture<List<Associated>> get associatedListFuture {
+    _$associatedListFutureAtom.reportRead();
+    return super.associatedListFuture;
+  }
+
+  @override
+  set associatedListFuture(ObservableFuture<List<Associated>> value) {
+    _$associatedListFutureAtom.reportWrite(value, super.associatedListFuture,
+        () {
+      super.associatedListFuture = value;
+    });
+  }
+
+  final _$AssociatedControllerBaseActionController =
+      ActionController(name: 'AssociatedControllerBase');
+
+  @override
+  dynamic hideButton(bool yesNo) {
+    final _$actionInfo = _$AssociatedControllerBaseActionController.startAction(
+        name: 'AssociatedControllerBase.hideButton');
+    try {
+      return super.hideButton(yesNo);
+    } finally {
+      _$AssociatedControllerBaseActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
+  Future<dynamic> fetchAssociated(int id) {
+    final _$actionInfo = _$AssociatedControllerBaseActionController.startAction(
+        name: 'AssociatedControllerBase.fetchAssociated');
+    try {
+      return super.fetchAssociated(id);
+    } finally {
+      _$AssociatedControllerBaseActionController.endAction(_$actionInfo);
+    }
   }
 
   @override
   String toString() {
     return '''
 idCtrl: ${idCtrl},
-nameCtrl: ${nameCtrl}
+nameCtrl: ${nameCtrl},
+phoneCtrl: ${phoneCtrl},
+emailCtrl: ${emailCtrl},
+sponsorCtrl: ${sponsorCtrl},
+associatedTypeCtrl: ${associatedTypeCtrl},
+cnhCtrl: ${cnhCtrl},
+cpfCtrl: ${cpfCtrl},
+bloodTypeCtrl: ${bloodTypeCtrl},
+dateBirthCtrl: ${dateBirthCtrl},
+isHideButton: ${isHideButton},
+associatedListFuture: ${associatedListFuture}
     ''';
   }
 }

@@ -136,10 +136,7 @@ class Dashboard extends StatelessWidget {
                   Navigator.push(
                     gContext,
                     MaterialPageRoute(
-                      builder: (gContext) {
-                        return AssociatedUpdate();
-                      },
-                    ),
+                        builder: (gContext) => AssociatedUpdate()),
                   );
                 },
               ),
@@ -150,11 +147,7 @@ class Dashboard extends StatelessWidget {
                 onClick: () {
                   Navigator.push(
                     gContext,
-                    MaterialPageRoute(
-                      builder: (gContext) {
-                        return PaymentList();
-                      },
-                    ),
+                    MaterialPageRoute(builder: (gContext) => PaymentList()),
                   );
                 },
               ),
@@ -165,11 +158,7 @@ class Dashboard extends StatelessWidget {
                 onClick: () {
                   Navigator.push(
                     gContext,
-                    MaterialPageRoute(
-                      builder: (gContext) {
-                        return DigitalIdentity();
-                      },
-                    ),
+                    MaterialPageRoute(builder: (gContext) => DigitalIdentity()),
                   );
                 },
               ),
@@ -180,11 +169,7 @@ class Dashboard extends StatelessWidget {
                 onClick: () {
                   Navigator.push(
                     gContext,
-                    MaterialPageRoute(
-                      builder: (gContext) {
-                        return PartnershipList();
-                      },
-                    ),
+                    MaterialPageRoute(builder: (gContext) => PartnershipList()),
                   );
                 },
               ),
@@ -195,11 +180,7 @@ class Dashboard extends StatelessWidget {
                 onClick: () {
                   Navigator.push(
                     gContext,
-                    MaterialPageRoute(
-                      builder: (gContext) {
-                        return EventCalendar();
-                      },
-                    ),
+                    MaterialPageRoute(builder: (gContext) => EventCalendar()),
                   );
                 },
               ),
@@ -210,11 +191,7 @@ class Dashboard extends StatelessWidget {
                 onClick: () {
                   Navigator.push(
                     gContext,
-                    MaterialPageRoute(
-                      builder: (gContext) {
-                        return DocumentList();
-                      },
-                    ),
+                    MaterialPageRoute(builder: (gContext) => DocumentList()),
                   );
                 },
               ),
@@ -225,11 +202,7 @@ class Dashboard extends StatelessWidget {
                 onClick: () {
                   Navigator.push(
                     gContext,
-                    MaterialPageRoute(
-                      builder: (context) {
-                        return DtcCodeAccess();
-                      },
-                    ),
+                    MaterialPageRoute(builder: (context) => DtcCodeAccess()),
                   );
                 },
               ),
@@ -240,11 +213,7 @@ class Dashboard extends StatelessWidget {
                 onClick: () {
                   Navigator.push(
                     gContext,
-                    MaterialPageRoute(
-                      builder: (gContext) {
-                        return DefectList();
-                      },
-                    ),
+                    MaterialPageRoute(builder: (gContext) => DefectList()),
                   );
                 },
               ),
@@ -255,11 +224,7 @@ class Dashboard extends StatelessWidget {
                 onClick: () {
                   Navigator.push(
                     gContext,
-                    MaterialPageRoute(
-                      builder: (gContext) {
-                        return BoutiqueList();
-                      },
-                    ),
+                    MaterialPageRoute(builder: (gContext) => BoutiqueList()),
                   );
                 },
               ),
@@ -285,11 +250,7 @@ class Dashboard extends StatelessWidget {
                 onClick: () {
                   Navigator.push(
                     gContext,
-                    MaterialPageRoute(
-                      builder: (gContext) {
-                        return MyRide();
-                      },
-                    ),
+                    MaterialPageRoute(builder: (gContext) => MyRide()),
                   );
                 },
               ),
@@ -300,11 +261,7 @@ class Dashboard extends StatelessWidget {
                 onClick: () {
                   Navigator.push(
                     gContext,
-                    MaterialPageRoute(
-                      builder: (gContext) {
-                        return About();
-                      },
-                    ),
+                    MaterialPageRoute(builder: (gContext) => About()),
                   );
                 },
               ),

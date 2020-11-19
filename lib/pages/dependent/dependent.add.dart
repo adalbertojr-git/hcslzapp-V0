@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:hcslzapp/common/labels.and.hints.dart';
 import 'package:hcslzapp/components/button.dart';
+import 'package:hcslzapp/components/top.margin.dart';
 import 'package:hcslzapp/controllers/dependent.controller.dart';
 import 'package:hcslzapp/enums/blood.types.dart';
 import 'package:hcslzapp/components/input.textfield.dart';
@@ -50,9 +51,7 @@ class _DependentAddState extends State<DependentAdd> {
           child: SingleChildScrollView(
             child: Column(
               children: <Widget>[
-                SizedBox(
-                  height: 20.0,
-                ),
+                TopMargin(),
                 InputTextField(
                   controller: _dependentController.nameCtrl,
                   label: labelNameDependent,

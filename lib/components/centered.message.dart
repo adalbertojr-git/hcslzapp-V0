@@ -1,21 +1,11 @@
-/*
-Autor: Adalberto Jr.
-App: HCSlz
-Todos os direitos reservados ao Harley Club de Sao Luis
-2020
-
-Descriçao: classe que cria uma tela de mensagem padrao
-
-*/
 import 'package:flutter/material.dart';
-
 import 'hc.logo.dart';
 
 class CenteredMessage extends StatelessWidget {
   final String _message;
   final IconData icon;
   final double _iconSize = 64;
-  final double _fontSize = 20;
+  final double _fontSize = 16;
 
   CenteredMessage(
     this._message, {
@@ -24,30 +14,45 @@ class CenteredMessage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Center(
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        crossAxisAlignment: CrossAxisAlignment.center,
-        children: <Widget>[
-          HcLogo(0.0),
-          /*
-          permite configurar se o Widget sera visivel ou nao
-          */
-          Visibility(
-            child: Icon(
-              icon,
-              size: _iconSize,
+    return Container(
+      decoration: BoxDecoration(
+        gradient: LinearGradient(
+          colors: [Colors.red[100], Colors.red[900]],
+          begin: FractionalOffset.topLeft,
+          end: FractionalOffset.bottomRight,
+        ),
+      ),
+      //color: Colors.red[400],
+      child: Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: <Widget>[
+            HcLogo(0.0),
+            /*
+            permite configurar se o Widget sera visivel ou nao
+            */
+            Visibility(
+              child: Icon(
+                icon,
+                size: _iconSize,
+                color: Colors.white,
+              ),
+              visible: icon != null,
             ),
-            visible: icon != null,
-          ),
-          Padding(
-            padding: const EdgeInsets.only(top: 24.0),
-            child: Text(
-              _message,
-              style: TextStyle(fontSize: _fontSize),
+            Padding(
+              padding: const EdgeInsets.only(top: 20.0),
+              child: Text(
+                _message,
+                style: TextStyle(
+                  fontSize: _fontSize,
+                  color: Colors.white,
+                ),
+                textAlign: TextAlign.center,
+              ),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }

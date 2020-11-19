@@ -1,12 +1,3 @@
-/*
-Autor: Adalberto Jr.
-App: HCSlz
-Todos os direitos reservados ao Harley Club de Sao Luis
-2020
-
-Descriçao: classe que insere o logotipo do Harley Club padrao
-S
-*/
 import 'package:flutter/material.dart';
 
 class HcLogo extends StatelessWidget {
