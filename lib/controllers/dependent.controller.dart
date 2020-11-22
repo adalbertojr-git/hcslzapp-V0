@@ -32,10 +32,16 @@ abstract class DependentControllerBase with Store {
   var dateBirthCtrl = TextEditingController();
 
   @observable
-  var isMemberCtrl = TextEditingController();
+  var isAssociatedCtrl = TextEditingController();
 
   @observable
   String currentBloodType;
+
+  @observable
+  bool isAssociated = false;
+
+  @action
+  associated() => isAssociated = !isAssociated;
 
   @action
   changedDropDownItem(String selected) {

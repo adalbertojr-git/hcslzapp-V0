@@ -18,6 +18,7 @@ import 'package:image_picker/image_picker.dart';
 import 'package:provider/provider.dart';
 
 class AssociatedUpdate extends StatefulWidget {
+
   @override
   _AssociatedUpdateState createState() => _AssociatedUpdateState();
 }
@@ -28,7 +29,7 @@ class _AssociatedUpdateState extends State<AssociatedUpdate> {
   final picker = ImagePicker();
   AssociatedController _controller;
   Future<List<Associated>> _future;
-  int _associatedId = 2;
+  int _associatedId = 1;
 
   @override
   void initState() {
@@ -74,6 +75,7 @@ class _AssociatedUpdateState extends State<AssociatedUpdate> {
 
   @override
   Widget build(BuildContext context) {
+    print("build Associated");
     return Observer(
       builder: (_) => Scaffold(
         body: FutureBuilder<List<Associated>>(

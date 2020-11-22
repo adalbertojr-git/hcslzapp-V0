@@ -23,6 +23,7 @@ class MotorcycleAdd extends StatelessWidget {
 
   //@override
   Widget build(BuildContext context) {
+    print('build Motorcycle');
     return Scaffold(
       body: Container(
         padding: EdgeInsets.fromLTRB(5.0, 0.0, 5.0, 0.0),
