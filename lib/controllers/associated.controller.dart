@@ -1,6 +1,8 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:hcslzapp/models/associated.dart';
+import 'package:hcslzapp/models/dependent.dart';
+import 'package:hcslzapp/models/motorcycle.dart';
 import 'package:hcslzapp/repositories/associated.repo.dart';
 import 'package:mobx/mobx.dart';
 
@@ -40,6 +42,7 @@ abstract class AssociatedControllerBase with Store {
   @observable
   var dateBirthCtrl = TextEditingController();
 
+  @observable
   var dateShieldCtrl = TextEditingController();
 
   @observable
@@ -48,11 +51,20 @@ abstract class AssociatedControllerBase with Store {
   @observable
   ObservableFuture<List<Associated>> associatedListFuture;
 
+  @observable
+  ObservableList dependents = [].asObservable();
+
+  @observable
+  ObservableList motorcycles = [].asObservable();
+
+  @observable
+  String currentBloodType;
+
   final AssociatedRepo _associatedRepo = AssociatedRepo();
   String errorMsg;
 
   @action
-  hideButton(bool yesNo) => isHideButton = yesNo;
+  hideButton() => isHideButton = !isHideButton;
 
   @action
   Future fetchAssociated(int id) =>
@@ -63,4 +75,20 @@ abstract class AssociatedControllerBase with Store {
       }, test: (e) => e is TimeoutException).catchError((e) {
         this.errorMsg = "Exception: ${e.toString()}";
       }, test: (e) => e is Exception);
+
+  @action
+  dependentsAdd(Dependent dependent) {
+    dependents.add(dependent);
+  }
+
+  @action
+  motorcyclesAdd(Motorcycle motorcycle) {
+    motorcycles.add(motorcycle);
+  }
+
+  @action
+  changedDropDownItem(String selected) {
+    currentBloodType = selected;
+  }
+
 }

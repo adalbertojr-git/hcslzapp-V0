@@ -162,6 +162,22 @@ mixin _$AssociatedController on AssociatedControllerBase, Store {
     });
   }
 
+  final _$dateShieldCtrlAtom =
+      Atom(name: 'AssociatedControllerBase.dateShieldCtrl');
+
+  @override
+  TextEditingController get dateShieldCtrl {
+    _$dateShieldCtrlAtom.reportRead();
+    return super.dateShieldCtrl;
+  }
+
+  @override
+  set dateShieldCtrl(TextEditingController value) {
+    _$dateShieldCtrlAtom.reportWrite(value, super.dateShieldCtrl, () {
+      super.dateShieldCtrl = value;
+    });
+  }
+
   final _$isHideButtonAtom =
       Atom(name: 'AssociatedControllerBase.isHideButton');
 
@@ -195,15 +211,61 @@ mixin _$AssociatedController on AssociatedControllerBase, Store {
     });
   }
 
+  final _$dependentsAtom = Atom(name: 'AssociatedControllerBase.dependents');
+
+  @override
+  ObservableList<dynamic> get dependents {
+    _$dependentsAtom.reportRead();
+    return super.dependents;
+  }
+
+  @override
+  set dependents(ObservableList<dynamic> value) {
+    _$dependentsAtom.reportWrite(value, super.dependents, () {
+      super.dependents = value;
+    });
+  }
+
+  final _$motorcyclesAtom = Atom(name: 'AssociatedControllerBase.motorcycles');
+
+  @override
+  ObservableList<dynamic> get motorcycles {
+    _$motorcyclesAtom.reportRead();
+    return super.motorcycles;
+  }
+
+  @override
+  set motorcycles(ObservableList<dynamic> value) {
+    _$motorcyclesAtom.reportWrite(value, super.motorcycles, () {
+      super.motorcycles = value;
+    });
+  }
+
+  final _$currentBloodTypeAtom =
+      Atom(name: 'AssociatedControllerBase.currentBloodType');
+
+  @override
+  String get currentBloodType {
+    _$currentBloodTypeAtom.reportRead();
+    return super.currentBloodType;
+  }
+
+  @override
+  set currentBloodType(String value) {
+    _$currentBloodTypeAtom.reportWrite(value, super.currentBloodType, () {
+      super.currentBloodType = value;
+    });
+  }
+
   final _$AssociatedControllerBaseActionController =
       ActionController(name: 'AssociatedControllerBase');
 
   @override
-  dynamic hideButton(bool yesNo) {
+  dynamic hideButton() {
     final _$actionInfo = _$AssociatedControllerBaseActionController.startAction(
         name: 'AssociatedControllerBase.hideButton');
     try {
-      return super.hideButton(yesNo);
+      return super.hideButton();
     } finally {
       _$AssociatedControllerBaseActionController.endAction(_$actionInfo);
     }
@@ -215,6 +277,39 @@ mixin _$AssociatedController on AssociatedControllerBase, Store {
         name: 'AssociatedControllerBase.fetchAssociated');
     try {
       return super.fetchAssociated(id);
+    } finally {
+      _$AssociatedControllerBaseActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
+  dynamic dependentsAdd(Dependent dependent) {
+    final _$actionInfo = _$AssociatedControllerBaseActionController.startAction(
+        name: 'AssociatedControllerBase.dependentsAdd');
+    try {
+      return super.dependentsAdd(dependent);
+    } finally {
+      _$AssociatedControllerBaseActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
+  dynamic motorcyclesAdd(Motorcycle motorcycle) {
+    final _$actionInfo = _$AssociatedControllerBaseActionController.startAction(
+        name: 'AssociatedControllerBase.motorcyclesAdd');
+    try {
+      return super.motorcyclesAdd(motorcycle);
+    } finally {
+      _$AssociatedControllerBaseActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
+  dynamic changedDropDownItem(String selected) {
+    final _$actionInfo = _$AssociatedControllerBaseActionController.startAction(
+        name: 'AssociatedControllerBase.changedDropDownItem');
+    try {
+      return super.changedDropDownItem(selected);
     } finally {
       _$AssociatedControllerBaseActionController.endAction(_$actionInfo);
     }
@@ -233,8 +328,12 @@ cnhCtrl: ${cnhCtrl},
 cpfCtrl: ${cpfCtrl},
 bloodTypeCtrl: ${bloodTypeCtrl},
 dateBirthCtrl: ${dateBirthCtrl},
+dateShieldCtrl: ${dateShieldCtrl},
 isHideButton: ${isHideButton},
-associatedListFuture: ${associatedListFuture}
+associatedListFuture: ${associatedListFuture},
+dependents: ${dependents},
+motorcycles: ${motorcycles},
+currentBloodType: ${currentBloodType}
     ''';
   }
 }

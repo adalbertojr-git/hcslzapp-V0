@@ -11,6 +11,7 @@ class Login extends StatelessWidget {
   final TextEditingController _controllerPsw = TextEditingController();
   final TextEditingController _controllerName = TextEditingController();
   final TextEditingController _controllerPhone = TextEditingController();
+  final TextEditingController _controllerSponsor = TextEditingController();
   final TextEditingController _controllerEmail = TextEditingController();
 
   @override
@@ -183,7 +184,7 @@ class Login extends StatelessWidget {
               inputType: TextInputType.phone,
             ),
             InputTextField(
-              //controller: associatedBloc.sponsorCtrl,
+              controller: _controllerSponsor,
               hint: hintSponsor,
               label: labelSponsor,
               icon: Icons.person_pin,

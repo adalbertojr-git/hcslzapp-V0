@@ -18,7 +18,7 @@ class HCSlzApp extends StatelessWidget {
       providers: [
         Provider<AssociatedController>.value(
             value: AssociatedController()),
-        ChangeNotifierProvider<DependentController>.value(
+        Provider<DependentController>.value(
             value: DependentController()),
       ],
       child: AnimatedBuilder(

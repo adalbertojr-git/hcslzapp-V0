@@ -24,21 +24,19 @@ class AssociatedUpdate extends StatefulWidget {
 
 class _AssociatedUpdateState extends State<AssociatedUpdate> {
   List<DropdownMenuItem<String>> _dropDownBloodTypes;
-  String _currentBloodType;
   File _image;
   final picker = ImagePicker();
-  AssociatedController _associatedController;
+  AssociatedController _controller;
   Future<List<Associated>> _future;
-  int _associatedId = 1;
+  int _associatedId = 2;
 
   @override
   void initState() {
-    _associatedController =
-        Provider.of<AssociatedController>(context, listen: false);
+    _controller = Provider.of<AssociatedController>(context, listen: false);
 
     _getFuture().then((value) {
       if (value != null && value.isNotEmpty) {
-        _associatedController.hideButton(false);
+        _controller.hideButton();
       }
     });
 
@@ -47,7 +45,7 @@ class _AssociatedUpdateState extends State<AssociatedUpdate> {
   }
 
   Future<List<Associated>> _getFuture() =>
-      _future = _associatedController.fetchAssociated(_associatedId);
+      _future = _controller.fetchAssociated(_associatedId);
 
   Future getImageFromCamera() async {
     final pickedFile = await picker.getImage(source: ImageSource.camera);
@@ -106,7 +104,7 @@ class _AssociatedUpdateState extends State<AssociatedUpdate> {
                       );
                   } else
                     return CenteredMessage(
-                      'Oops!!! ' + _associatedController.errorMsg,
+                      'Oops!!! ' + _controller.errorMsg,
                       icon: Icons.error,
                     );
                 } //else
@@ -117,7 +115,7 @@ class _AssociatedUpdateState extends State<AssociatedUpdate> {
             );
           },
         ),
-        floatingActionButton: _associatedController.isHideButton
+        floatingActionButton: _controller.isHideButton
             ? null
             : Button(
                 Icons.save,
@@ -132,7 +130,7 @@ class _AssociatedUpdateState extends State<AssociatedUpdate> {
   Container _associatedWidgets(
       BuildContext context, List<Associated> associatedList) {
     final Associated associated = associatedList[0];
-    _currentBloodType = associated.bloodType;
+    _controller.currentBloodType = associated.bloodType;
     return Container(
       padding: EdgeInsets.fromLTRB(5.0, 5.0, 5.0, 0.0),
       decoration: BoxDecoration(
@@ -174,7 +172,7 @@ class _AssociatedUpdateState extends State<AssociatedUpdate> {
                 ],
               ),
               InputTextField(
-                controller: _associatedController.nameCtrl,
+                controller: _controller.nameCtrl,
                 controllerText:
                     associated.name != null ? associated.name : null,
                 label: labelName,
@@ -183,7 +181,7 @@ class _AssociatedUpdateState extends State<AssociatedUpdate> {
                 inputType: TextInputType.text,
               ),
               InputTextField(
-                controller: _associatedController.emailCtrl,
+                controller: _controller.emailCtrl,
                 controllerText:
                     associated.email != null ? associated.email : null,
                 label: labelEmail,
@@ -192,7 +190,7 @@ class _AssociatedUpdateState extends State<AssociatedUpdate> {
                 inputType: TextInputType.emailAddress,
               ),
               InputTextField(
-                controller: _associatedController.phoneCtrl,
+                controller: _controller.phoneCtrl,
                 controllerText:
                     associated.phone != null ? associated.phone : null,
                 label: labelPhone,
@@ -201,7 +199,7 @@ class _AssociatedUpdateState extends State<AssociatedUpdate> {
                 inputType: TextInputType.phone,
               ),
               InputTextField(
-                controller: _associatedController.sponsorCtrl,
+                controller: _controller.sponsorCtrl,
                 controllerText:
                     associated.sponsor != null ? associated.sponsor : null,
                 label: labelSponsor,
@@ -221,27 +219,31 @@ class _AssociatedUpdateState extends State<AssociatedUpdate> {
                       ),
                     ),
                     Expanded(
-                      child: Container(
-                        height: 55.0,
-                        child: DropdownButtonFormField(
-                          decoration: const InputDecoration(
-                            enabledBorder: OutlineInputBorder(
-                              borderSide: BorderSide(
-                                color: Colors.white70,
+                      child: Observer(
+                        builder: (_) {
+                          return Container(
+                            height: 55.0,
+                            child: DropdownButtonFormField(
+                              decoration: const InputDecoration(
+                                enabledBorder: OutlineInputBorder(
+                                  borderSide: BorderSide(
+                                    color: Colors.white70,
+                                  ),
+                                ),
                               ),
+                              value: _controller.currentBloodType,
+                              items: _dropDownBloodTypes,
+                              onChanged: _controller.changedDropDownItem,
                             ),
-                          ),
-                          value: _currentBloodType,
-                          items: _dropDownBloodTypes,
-                          onChanged: _changedDropDownItem,
-                        ),
+                          );
+                        },
                       ),
                     ),
                   ],
                 ),
               ),
               InputTextField(
-                controller: _associatedController.associatedTypeCtrl,
+                controller: _controller.associatedTypeCtrl,
                 controllerText: associated.associatedType != null
                     ? associated.associatedType
                     : null,
@@ -253,7 +255,7 @@ class _AssociatedUpdateState extends State<AssociatedUpdate> {
                 children: <Widget>[
                   Expanded(
                     child: InputTextField(
-                      controller: _associatedController.cnhCtrl,
+                      controller: _controller.cnhCtrl,
                       controllerText:
                           associated.cnh != null ? associated.cnh : null,
                       label: labelCNH,
@@ -266,7 +268,7 @@ class _AssociatedUpdateState extends State<AssociatedUpdate> {
                   ),
                   Expanded(
                     child: InputTextField(
-                      controller: _associatedController.cpfCtrl,
+                      controller: _controller.cpfCtrl,
                       controllerText:
                           associated.cpf != null ? associated.cpf : null,
                       label: labelCPF,
@@ -281,7 +283,7 @@ class _AssociatedUpdateState extends State<AssociatedUpdate> {
                 children: <Widget>[
                   Expanded(
                     child: InputTextField(
-                      controller: _associatedController.dateBirthCtrl,
+                      controller: _controller.dateBirthCtrl,
                       controllerText: associated.dateBirth != null
                           ? associated.dateBirth
                           : null,
@@ -296,7 +298,7 @@ class _AssociatedUpdateState extends State<AssociatedUpdate> {
                   ),
                   Expanded(
                     child: InputTextField(
-                      controller: _associatedController.dateShieldCtrl,
+                      controller: _controller.dateShieldCtrl,
                       controllerText: associated.dateShield != null
                           ? associated.dateShield
                           : null,
@@ -311,14 +313,12 @@ class _AssociatedUpdateState extends State<AssociatedUpdate> {
               Divider(),
               _dependentsAndMotorcyclesListWidget(
                 'Dependentes',
-                dependents: associated.dependents,
               ),
               SizedBox(
                 height: 10.0,
               ),
               _dependentsAndMotorcyclesListWidget(
                 'Motocicletas',
-                motorcycles: associated.motorcycles,
               ),
               SizedBox(
                 height: 100.0,
@@ -354,8 +354,7 @@ class _AssociatedUpdateState extends State<AssociatedUpdate> {
     );
   }
 
-  Container _dependentsAndMotorcyclesListWidget(String title,
-      {List<Dependent> dependents, List<Motorcycle> motorcycles}) {
+  Container _dependentsAndMotorcyclesListWidget(String _listTitle) {
     return Container(
       padding: EdgeInsets.all(10.0),
       decoration: BoxDecoration(
@@ -366,78 +365,82 @@ class _AssociatedUpdateState extends State<AssociatedUpdate> {
       child: Column(
         children: [
           Text(
-            title,
+            _listTitle,
             style: TextStyle(
               fontWeight: FontWeight.bold,
             ),
           ),
-          ListView.separated(
-            shrinkWrap: true,
-            itemCount:
-                dependents != null ? dependents.length : motorcycles.length,
-            itemBuilder: (BuildContext context, int i) {
-              return Container(
-                decoration: BoxDecoration(
-                  color: Colors.white30,
-                  shape: BoxShape.rectangle,
-                  borderRadius: BorderRadius.circular(8.0),
-                  boxShadow: <BoxShadow>[
-                    BoxShadow(
-                      color: Colors.black12,
-                      blurRadius: 10.0,
-                      offset: Offset(0.0, 5.0),
-                    ),
-                  ],
-                ),
-                child: ListTile(
-                  leading: Container(
-                    width: 48,
-                    height: 48,
-                    alignment: Alignment.center,
-                    child: CircleAvatar(
-                      child: dependents != null
-                          ? Icon(Icons.person)
-                          : Icon(Icons.motorcycle),
-                      backgroundColor: Colors.white,
-                    ),
-                  ),
-                  trailing: Icon(Icons.arrow_forward),
-                  title: dependents != null
-                      ? Text(dependents[i].name)
-                      : Text(motorcycles[i].model),
-                  subtitle: dependents != null
-                      ? Text(dependents[i].email)
-                      : Text(motorcycles[i].year),
-                  onTap: () {
-                    final Future<Dependent> future = Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) {
-                          return dependents != null
-                              ? DependentAdd(dependents[i])
-                              : MotorcycleAdd();
-                        },
+          Observer(
+            builder: (_) => ListView.separated(
+              shrinkWrap: true,
+              itemCount: _listTitle == "Dependentes"
+                  ? _controller.dependents.length
+                  : _controller.motorcycles.length,
+              itemBuilder: (BuildContext context, int i) {
+                return Container(
+                  decoration: BoxDecoration(
+                    color: Colors.white30,
+                    shape: BoxShape.rectangle,
+                    borderRadius: BorderRadius.circular(8.0),
+                    boxShadow: <BoxShadow>[
+                      BoxShadow(
+                        color: Colors.black12,
+                        blurRadius: 10.0,
+                        offset: Offset(0.0, 5.0),
                       ),
-                    );
-                    if (dependents != null) {
-                      future.then(
-                        (dependenteRecebido) {
-                          _add(dependents, dependenteRecebido);
-                        },
+                    ],
+                  ),
+                  child: ListTile(
+                    leading: Container(
+                      width: 48,
+                      height: 48,
+                      alignment: Alignment.center,
+                      child: CircleAvatar(
+                        child: _listTitle == "Dependentes"
+                            ? Icon(Icons.person)
+                            : Icon(Icons.motorcycle),
+                        backgroundColor: Colors.white,
+                      ),
+                    ),
+                    trailing: Icon(Icons.arrow_forward),
+                    title: _listTitle == "Dependentes"
+                        ? Text(_controller.dependents[i].name)
+                        : Text(_controller.motorcycles[i].model),
+                    subtitle: _listTitle == "Dependentes"
+                        ? Text(_controller.dependents[i].email)
+                        : Text(_controller.motorcycles[i].year),
+                    onTap: () {
+                      final Future<Dependent> future = Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) {
+                            return _listTitle == "Dependentes"
+                                ? DependentAdd(_controller.dependents[i])
+                                : MotorcycleAdd();
+                          },
+                        ),
                       );
-                    }
-                  },
-                ),
-              );
-            },
-            separatorBuilder: (BuildContext context, int index) =>
-                const Divider(),
+                      if (_listTitle == "Dependentes") {
+                        future.then(
+                          (dependent) {
+                            if (dependent != null) {
+                              _add(dependent);
+                            }
+                          },
+                        );
+                      }
+                    },
+                  ),
+                );
+              },
+              separatorBuilder: (BuildContext context, int index) =>
+                  const Divider(),
+            ),
           ),
           Container(
             padding: EdgeInsets.only(top: 20.0),
-            //alignment: Alignment.bottomRight,
             child: FloatingActionButton(
-              heroTag: title,
+              heroTag: _listTitle,
               mini: true,
               backgroundColor: Colors.deepOrangeAccent[100],
               child: Icon(
@@ -450,16 +453,18 @@ class _AssociatedUpdateState extends State<AssociatedUpdate> {
                   context,
                   MaterialPageRoute(
                     builder: (context) {
-                      return dependents != null
+                      return _listTitle == "Dependentes"
                           ? DependentAdd(null)
                           : MotorcycleAdd();
                     },
                   ),
                 );
-                if (dependents != null) {
+                if (_listTitle == "Dependentes") {
                   future.then(
-                    (dependenteRecebido) {
-                      _add(dependents, dependenteRecebido);
+                    (dependent) {
+                      if (dependent != null) {
+                        _add(dependent);
+                      }
                     },
                   );
                 }
@@ -471,21 +476,10 @@ class _AssociatedUpdateState extends State<AssociatedUpdate> {
     );
   }
 
-  void _add(List<Dependent> dependents, Dependent dependenteRecebido) {
-    if (dependenteRecebido != null) {
-      setState(
-        () {
-          dependents.add(dependenteRecebido);
-        },
-      );
-    }
+  _add(Dependent dependent) {
+    print('Recebido: $dependent');
+    _controller.dependentsAdd(dependent);
   }
 
-  void _changedDropDownItem(String selected) {
-    setState(() {
-      _currentBloodType = selected;
-    });
-  }
-
-  void _update(BuildContext context) {}
+  _update(BuildContext context) {}
 }
