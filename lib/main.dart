@@ -4,7 +4,6 @@ import 'package:hcslzapp/controllers/associated.controller.dart';
 import 'package:hcslzapp/pages/login/splash.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
-import 'controllers/dependent.controller.dart';
 
 const _titleAppBar = 'HCSlz App';
 

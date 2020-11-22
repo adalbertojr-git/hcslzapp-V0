@@ -1,9 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:hcslzapp/components/my.appbar.dart';
 import 'package:hcslzapp/models/motorcycle.dart';
 import 'package:hcslzapp/pages/motorcycle/motorcycle.add.dart';
-
-const _tituloAppBar = 'Lista de Eventos';
 
 class EventList extends StatefulWidget {
   final List<Motorcycle> _listMotocicletas = List();
@@ -18,7 +15,6 @@ class EventListState extends State<EventList> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: MyAppBar(_tituloAppBar),
       body: Container(
         decoration: BoxDecoration(
           gradient: LinearGradient(
@@ -43,15 +39,15 @@ class EventListState extends State<EventList> {
             context,
             MaterialPageRoute(
               builder: (context) {
-                return MotorcycleAdd();
+                //return MotorcycleAdd();
               },
             ),
           );
-          future.then(
+/*          future.then(
             (motocicletaRecebida) {
               _atualiza(motocicletaRecebida);
             },
-          );
+          );*/
         },
       ),
     );

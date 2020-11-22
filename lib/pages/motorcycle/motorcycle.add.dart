@@ -1,29 +1,25 @@
 import 'package:flutter/material.dart';
+import 'package:hcslzapp/common/labels.and.hints.dart';
 import 'package:hcslzapp/components/button.dart';
 import 'package:hcslzapp/components/input.textfield.dart';
+import 'package:hcslzapp/components/top.margin.dart';
+import 'package:hcslzapp/controllers/motorcycle.controller.dart';
 import 'package:hcslzapp/models/motorcycle.dart';
 
-const _rotuloModelo = 'Modelo *';
-const _rotuloAno = 'Ano';
-const _rotuloCor = 'Cor';
-const _rotuloPlaca = 'Placa';
-const _rotuloApelido = 'Apelido';
-const _rotuloChassi = 'Chassi';
-const _rotuloRenavam = 'Renavam';
+class MotorcycleAdd extends StatefulWidget {
+  final Motorcycle motorcycle;
 
-class MotorcycleAdd extends StatelessWidget {
-  final TextEditingController _controladorCodigo = TextEditingController();
-  final TextEditingController _controladorModelo = TextEditingController();
-  final TextEditingController _controladorAno = TextEditingController();
-  final TextEditingController _controladorCor = TextEditingController();
-  final TextEditingController _controladorPlaca = TextEditingController();
-  final TextEditingController _controladorApelido = TextEditingController();
-  final TextEditingController _controladorChassi = TextEditingController();
-  final TextEditingController _controladorRenavam = TextEditingController();
+  MotorcycleAdd(this.motorcycle);
 
-  //@override
+  @override
+  _MotorcycleAddState createState() => _MotorcycleAddState();
+}
+
+class _MotorcycleAddState extends State<MotorcycleAdd> {
+  MotorcycleController _controller = MotorcycleController();
+
+  @override
   Widget build(BuildContext context) {
-    print('build Motorcycle');
     return Scaffold(
       body: Container(
         padding: EdgeInsets.fromLTRB(5.0, 0.0, 5.0, 0.0),
@@ -35,113 +31,101 @@ class MotorcycleAdd extends StatelessWidget {
           ),
         ),
         height: MediaQuery.of(context).size.height,
-        child: Form(
-          child: SingleChildScrollView(
-            child: Column(
-              children: <Widget>[
-                SizedBox (
-                  height: 20.0,
-                ),
-                InputTextField(
-                  controller: _controladorModelo,
-                  helper: _rotuloModelo,
-                  icon: Icons.motorcycle,
-                  inputType: TextInputType.text,
-                ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  children: <Widget>[
-                    Expanded(
-                      child: InputTextField(
-                        controller: _controladorAno,
-                        icon: Icons.calendar_today,
-                        helper: _rotuloAno,
-                        inputType: TextInputType.number,
-                      ),
+        child: SingleChildScrollView(
+          child: Column(
+            children: <Widget>[
+              TopMargin(),
+              InputTextField(
+                controller: _controller.modelCtrl,
+                controllerText:
+                    widget.motorcycle != null ? widget.motorcycle.model : null,
+                label: labelModel,
+                hint: hintModel,
+                icon: Icons.motorcycle,
+                inputType: TextInputType.text,
+              ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: <Widget>[
+                  Expanded(
+                    child: InputTextField(
+                      controller: _controller.yearCtrl,
+                      icon: Icons.calendar_today,
+                      label: labelYear,
+                      hint: hintYear,
+                      inputType: TextInputType.number,
                     ),
-                    Expanded(
-                      child: InputTextField(
-                        controller: _controladorCor,
-                        icon: Icons.color_lens,
-                        helper: _rotuloCor,
-                        inputType: TextInputType.text,
-                      ),
+                  ),
+                  Expanded(
+                    child: InputTextField(
+                      controller: _controller.colorCtrl,
+                      icon: Icons.color_lens,
+                      label: labelColor,
+                      hint: hintColor,
+                      inputType: TextInputType.text,
                     ),
-                  ],
-                ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  children: <Widget>[
-                    Expanded(
-                      child: InputTextField(
-                        controller: _controladorPlaca,
-                        helper: _rotuloPlaca,
-                        inputType: TextInputType.text,
-                      ),
+                  ),
+                ],
+              ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: <Widget>[
+                  Expanded(
+                    child: InputTextField(
+                      controller: _controller.licencePlateCtrl,
+                      label: labelLicencePlate,
+                      hint: hintLicencePlate,
+                      inputType: TextInputType.text,
                     ),
-                    Expanded(
-                      child: InputTextField(
-                        controller: _controladorApelido,
-                        helper: _rotuloApelido,
-                        inputType: TextInputType.text,
-                      ),
+                  ),
+                  Expanded(
+                    child: InputTextField(
+                      controller: _controller.nicknameCtrl,
+                      label: labelNickname,
+                      hint: hintNickname,
+                      inputType: TextInputType.text,
                     ),
-                  ],
-                ),
-                InputTextField(
-                  controller: _controladorChassi,
-                  helper: _rotuloChassi,
-                  inputType: TextInputType.text,
-                ),
-                InputTextField(
-                  controller: _controladorRenavam,
-                  helper: _rotuloRenavam,
-                  inputType: TextInputType.text,
-                ),
-/*                Padding(
-                  padding: EdgeInsets.all(5.0),
-                ),
-                Button(
-                  Icons.save,
-                  onClick: () {
-                    _save(context);
-                  },
-                ),*/
-              ],
-            ),
+                  ),
+                ],
+              ),
+              InputTextField(
+                controller: _controller.chassisCtrl,
+                label: labelChassis,
+                hint: hintChassis,
+                inputType: TextInputType.text,
+              ),
+              InputTextField(
+                controller: _controller.renavamCtrl,
+                label: labelRenavam,
+                hint: hintRenavam,
+                inputType: TextInputType.text,
+              ),
+            ],
           ),
         ),
       ),
-      floatingActionButton: Button(
-        Icons.save,
-        onClick: () {
-          _save(context);
-        },
-      ),
+      floatingActionButton: Button(Icons.playlist_add, onClick: () => _add(context)),
     );
   }
 
-  void _save(BuildContext context) {
-    final int codigo = int.parse(_controladorCodigo.text);
-    final String modelo = _controladorModelo.text;
-    final String ano = _controladorAno.text;
-    final String cor = _controladorCor.text;
-    final String placa = _controladorPlaca.text;
-    final String apelido = _controladorApelido.text;
-    final String chassi = _controladorChassi.text;
-    final String renavam = _controladorRenavam.text;
-
-    if (modelo != '') {
-      final motocicletaCriada =
-          Motorcycle(codigo, modelo, ano, cor, placa, apelido, chassi, renavam);
-      debugPrint('Criando motocicleta...');
-      debugPrint('$motocicletaCriada');
+  _add(BuildContext context) {
+    final int id = int.parse(_controller.idCtrl.text);
+    final String model = _controller.modelCtrl.text;
+    final String year = _controller.yearCtrl.text;
+    final String color = _controller.colorCtrl.text;
+    final String licencePlate = _controller.licencePlateCtrl.text;
+    final String nickname = _controller.nicknameCtrl.text;
+    final String chassis = _controller.chassisCtrl.text;
+    final String renavam = _controller.renavamCtrl.text;
+    if (model != '') {
+      final motorcycle = Motorcycle(
+          id, model, year, color, licencePlate, nickname, chassis, renavam);
       /*
       pop = manda resposta para o push (then)
       remove a tela da pilha de navegação. Ou seja, o push() adiciona uma tela
       à pilha, e o pop() a remove.
       */
-      Navigator.pop(context, motocicletaCriada);
+      Navigator.pop(context, motorcycle);
     }
   }
 }

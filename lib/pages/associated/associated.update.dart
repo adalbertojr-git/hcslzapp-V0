@@ -11,14 +11,12 @@ import 'package:hcslzapp/components/progress.dart';
 import 'package:hcslzapp/components/input.textfield.dart';
 import 'package:hcslzapp/models/associated.dart';
 import 'package:hcslzapp/models/dependent.dart';
-import 'package:hcslzapp/models/motorcycle.dart';
 import 'package:hcslzapp/pages/dependent/dependent.add.dart';
 import 'package:hcslzapp/pages/motorcycle/motorcycle.add.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:provider/provider.dart';
 
 class AssociatedUpdate extends StatefulWidget {
-
   @override
   _AssociatedUpdateState createState() => _AssociatedUpdateState();
 }
@@ -75,7 +73,6 @@ class _AssociatedUpdateState extends State<AssociatedUpdate> {
 
   @override
   Widget build(BuildContext context) {
-    print("build Associated");
     return Observer(
       builder: (_) => Scaffold(
         body: FutureBuilder<List<Associated>>(
@@ -98,11 +95,12 @@ class _AssociatedUpdateState extends State<AssociatedUpdate> {
                   if (snapshot.data != null) {
                     final List<Associated> associatedList = snapshot.data;
                     if (associatedList.isNotEmpty)
-                      return _associatedWidgets(context, associatedList);
+                      return _associatedWidgets(context, associatedList.first);
                     else
                       return CenteredMessage(
                         'Atenção: Associado nao encontrado.',
                         icon: Icons.warning,
+                        backgroundColor: Colors.yellow,
                       );
                   } else
                     return CenteredMessage(
@@ -119,19 +117,12 @@ class _AssociatedUpdateState extends State<AssociatedUpdate> {
         ),
         floatingActionButton: _controller.isHideButton
             ? null
-            : Button(
-                Icons.save,
-                onClick: () {
-                  _update(context);
-                },
-              ),
+            : Button(Icons.save, onClick: () => _update()),
       ),
     );
   }
 
-  Container _associatedWidgets(
-      BuildContext context, List<Associated> associatedList) {
-    final Associated associated = associatedList[0];
+  Container _associatedWidgets(BuildContext context, Associated associated) {
     _controller.currentBloodType = associated.bloodType;
     return Container(
       padding: EdgeInsets.fromLTRB(5.0, 5.0, 5.0, 0.0),
@@ -404,34 +395,53 @@ class _AssociatedUpdateState extends State<AssociatedUpdate> {
                         backgroundColor: Colors.white,
                       ),
                     ),
-                    trailing: Icon(Icons.arrow_forward),
+                    trailing: Wrap(
+                      spacing: 10, // space between two icons
+                      children: <Widget>[
+                        GestureDetector(
+                          child: Icon(
+                            Icons.delete,
+                            size: 25.0,
+                          ),
+                          onTap: () {
+                            _controller.dependentRemoveAt(i);
+                          },
+                        ),
+                        GestureDetector(
+                          child: Icon(
+                            Icons.arrow_forward,
+                            size: 25.0,
+                          ),
+                          onTap: () {
+                            final Future<Dependent> future = Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) {
+                                  return _listTitle == "Dependentes"
+                                      ? DependentAdd(_controller.dependents[i])
+                                      : MotorcycleAdd(_controller.motorcycles[i]);
+                                },
+                              ),
+                            );
+                            if (_listTitle == "Dependentes") {
+                              future.then(
+                                (dependent) {
+                                  if (dependent != null) {
+                                    _controller.dependentAdd(dependent);
+                                  }
+                                },
+                              );
+                            }
+                          },
+                        ),
+                      ],
+                    ),
                     title: _listTitle == "Dependentes"
                         ? Text(_controller.dependents[i].name)
                         : Text(_controller.motorcycles[i].model),
                     subtitle: _listTitle == "Dependentes"
                         ? Text(_controller.dependents[i].email)
                         : Text(_controller.motorcycles[i].year),
-                    onTap: () {
-                      final Future<Dependent> future = Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) {
-                            return _listTitle == "Dependentes"
-                                ? DependentAdd(_controller.dependents[i])
-                                : MotorcycleAdd();
-                          },
-                        ),
-                      );
-                      if (_listTitle == "Dependentes") {
-                        future.then(
-                          (dependent) {
-                            if (dependent != null) {
-                              _add(dependent);
-                            }
-                          },
-                        );
-                      }
-                    },
                   ),
                 );
               },
@@ -457,7 +467,7 @@ class _AssociatedUpdateState extends State<AssociatedUpdate> {
                     builder: (context) {
                       return _listTitle == "Dependentes"
                           ? DependentAdd(null)
-                          : MotorcycleAdd();
+                          : MotorcycleAdd(null);
                     },
                   ),
                 );
@@ -465,7 +475,7 @@ class _AssociatedUpdateState extends State<AssociatedUpdate> {
                   future.then(
                     (dependent) {
                       if (dependent != null) {
-                        _add(dependent);
+                        _controller.dependentAdd(dependent);
                       }
                     },
                   );
@@ -478,10 +488,5 @@ class _AssociatedUpdateState extends State<AssociatedUpdate> {
     );
   }
 
-  _add(Dependent dependent) {
-    print('Recebido: $dependent');
-    _controller.dependentsAdd(dependent);
-  }
-
-  _update(BuildContext context) {}
+  _update() {}
 }

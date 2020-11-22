@@ -22,7 +22,6 @@ class AssociatedRepo {
     final Response response = await client
         .get(mainUrl + _associatedUrl + '/list/' + id.toString())
         .timeout(Duration(seconds: 5));
-    print(response.statusCode);
     if (response.statusCode == 200) {
       final List<dynamic> decodedJson = jsonDecode(response.body);
       return decodedJson

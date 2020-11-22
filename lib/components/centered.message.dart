@@ -5,11 +5,13 @@ class CenteredMessage extends StatelessWidget {
   final String _message;
   final IconData icon;
   final double _iconSize = 64;
-  final double _fontSize = 16;
+  final double _fontSize = 20;
+  final Color backgroundColor;
 
   CenteredMessage(
     this._message, {
     this.icon,
+    this.backgroundColor = Colors.red,
   });
 
   @override
@@ -17,7 +19,7 @@ class CenteredMessage extends StatelessWidget {
     return Container(
       decoration: BoxDecoration(
         gradient: LinearGradient(
-          colors: [Colors.red[100], Colors.red[900]],
+          colors: [Colors.white30,this.backgroundColor],
           begin: FractionalOffset.topLeft,
           end: FractionalOffset.bottomRight,
         ),

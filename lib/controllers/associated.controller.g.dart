@@ -283,22 +283,44 @@ mixin _$AssociatedController on AssociatedControllerBase, Store {
   }
 
   @override
-  dynamic dependentsAdd(Dependent dependent) {
+  dynamic dependentAdd(Dependent dependent) {
     final _$actionInfo = _$AssociatedControllerBaseActionController.startAction(
-        name: 'AssociatedControllerBase.dependentsAdd');
+        name: 'AssociatedControllerBase.dependentAdd');
     try {
-      return super.dependentsAdd(dependent);
+      return super.dependentAdd(dependent);
     } finally {
       _$AssociatedControllerBaseActionController.endAction(_$actionInfo);
     }
   }
 
   @override
-  dynamic motorcyclesAdd(Motorcycle motorcycle) {
+  dynamic dependentRemoveAt(int index) {
     final _$actionInfo = _$AssociatedControllerBaseActionController.startAction(
-        name: 'AssociatedControllerBase.motorcyclesAdd');
+        name: 'AssociatedControllerBase.dependentRemoveAt');
     try {
-      return super.motorcyclesAdd(motorcycle);
+      return super.dependentRemoveAt(index);
+    } finally {
+      _$AssociatedControllerBaseActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
+  dynamic motorcycleAdd(Motorcycle motorcycle) {
+    final _$actionInfo = _$AssociatedControllerBaseActionController.startAction(
+        name: 'AssociatedControllerBase.motorcycleAdd');
+    try {
+      return super.motorcycleAdd(motorcycle);
+    } finally {
+      _$AssociatedControllerBaseActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
+  dynamic motorcycleRemoveAt(int index) {
+    final _$actionInfo = _$AssociatedControllerBaseActionController.startAction(
+        name: 'AssociatedControllerBase.motorcycleRemoveAt');
+    try {
+      return super.motorcycleRemoveAt(index);
     } finally {
       _$AssociatedControllerBaseActionController.endAction(_$actionInfo);
     }

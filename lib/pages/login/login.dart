@@ -172,14 +172,14 @@ class Login extends StatelessWidget {
             InputTextField(
               controller: _controllerEmail,
               hint: hintEmail,
-              label: labelEmail,
+              label: labelEmail + " *",
               icon: Icons.email,
               inputType: TextInputType.emailAddress,
             ),
             InputTextField(
               controller: _controllerPhone,
               hint: hintPhone,
-              label: labelPhone,
+              label: labelPhone + " *",
               icon: Icons.phone,
               inputType: TextInputType.phone,
             ),
@@ -226,7 +226,7 @@ class Login extends StatelessWidget {
             InputTextField(
               controller: _controllerEmail,
               hint: hintEmail,
-              label: labelEmail,
+              label: labelEmail + " *",
               icon: Icons.email,
               inputType: TextInputType.emailAddress,
             ),

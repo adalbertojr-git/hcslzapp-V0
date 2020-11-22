@@ -77,13 +77,27 @@ abstract class AssociatedControllerBase with Store {
       }, test: (e) => e is Exception);
 
   @action
-  dependentsAdd(Dependent dependent) {
+  dependentAdd(Dependent dependent) {
     dependents.add(dependent);
+    print('Dependentes: $dependents');
   }
 
   @action
-  motorcyclesAdd(Motorcycle motorcycle) {
+  dependentRemoveAt(int index) {
+    dependents.removeAt(index);
+    print('Dependentes: $dependents');
+  }
+
+  @action
+  motorcycleAdd(Motorcycle motorcycle) {
     motorcycles.add(motorcycle);
+    print('Motocicletas: $motorcycles');
+  }
+
+  @action
+  motorcycleRemoveAt(int index) {
+    motorcycles.removeAt(index);
+    print('Motocicletas: $motorcycles');
   }
 
   @action

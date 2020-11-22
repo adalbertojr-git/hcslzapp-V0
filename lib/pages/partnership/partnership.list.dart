@@ -1,7 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:hcslzapp/components/my.appbar.dart';
-
-const _tituloAppBar = 'Lista de Parcerias';
 
 class PartnershipList extends StatelessWidget {
   @override
@@ -23,7 +20,6 @@ class PartnershipList extends StatelessWidget {
             'https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcTAydS3H3oWCCKWGIJdZnoqkTXEtYAzbrl-fQ&usqp=CAU'),
     ];
     return Scaffold(
-        appBar: MyAppBar(_tituloAppBar),
         body: Container(
           decoration: BoxDecoration(
             gradient: LinearGradient(

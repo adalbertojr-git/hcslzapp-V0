@@ -57,7 +57,7 @@ class InputTextField extends StatelessWidget {
                   color: Colors.orange,
                 )
               : null,
-          filled: true,
+          //filled: true,
           labelText: label,
           labelStyle: TextStyle(
             fontSize: 12.0,

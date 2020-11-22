@@ -1,8 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:hcslzapp/components/my.appbar.dart';
 import 'package:hcslzapp/models/dependent.dart';
-
-const _tituloAppBar = 'Lista de Documentos';
 
 class DocumentList extends StatefulWidget {
 
@@ -16,7 +13,6 @@ class DocumentListState extends State<DocumentList> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: MyAppBar(_tituloAppBar),
       body: Container(
         decoration: BoxDecoration(
           gradient: LinearGradient(

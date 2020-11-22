@@ -1,16 +1,4 @@
-/*
-Autor: Adalberto Jr.
-App: HCSlz
-Todos os direitos reservados ao Harley Club de Sao Luis
-2020
-
-Descriçao: classe que lista todos os produtos a venda do inventario do Harley Club
-
-*/
 import 'package:flutter/material.dart';
-import 'package:hcslzapp/components/my.appbar.dart';
-
-const _tituloAppBar = 'Boutique - Lista de Itens';
 
 class BoutiqueList extends StatelessWidget {
   @override
@@ -34,7 +22,6 @@ class BoutiqueList extends StatelessWidget {
 
     return MaterialApp(
       home: Scaffold(
-        appBar: MyAppBar(_tituloAppBar),
         body: Container(
           decoration: BoxDecoration(
             gradient: LinearGradient(
