@@ -11,6 +11,7 @@ import 'package:hcslzapp/components/progress.dart';
 import 'package:hcslzapp/components/input.textfield.dart';
 import 'package:hcslzapp/models/associated.dart';
 import 'package:hcslzapp/models/dependent.dart';
+import 'package:hcslzapp/models/motorcycle.dart';
 import 'package:hcslzapp/pages/dependent/dependent.add.dart';
 import 'package:hcslzapp/pages/motorcycle/motorcycle.add.dart';
 import 'package:image_picker/image_picker.dart';
@@ -27,7 +28,7 @@ class _AssociatedUpdateState extends State<AssociatedUpdate> {
   final picker = ImagePicker();
   AssociatedController _controller;
   Future<List<Associated>> _future;
-  int _associatedId = 1;
+  int _associatedId = 2;
 
   @override
   void initState() {
@@ -304,15 +305,11 @@ class _AssociatedUpdateState extends State<AssociatedUpdate> {
                 ],
               ),
               Divider(),
-              _dependentsAndMotorcyclesListWidget(
-                'Dependentes',
-              ),
+              _dependentsListWidget,
               SizedBox(
                 height: 10.0,
               ),
-              _dependentsAndMotorcyclesListWidget(
-                'Motocicletas',
-              ),
+              _motorcyclesListWidget,
               SizedBox(
                 height: 100.0,
               ),
@@ -347,8 +344,7 @@ class _AssociatedUpdateState extends State<AssociatedUpdate> {
     );
   }
 
-  Container _dependentsAndMotorcyclesListWidget(String _listTitle) {
-    return Container(
+  get _dependentsListWidget => Container(
       padding: EdgeInsets.all(10.0),
       decoration: BoxDecoration(
         color: Colors.white12,
@@ -358,7 +354,7 @@ class _AssociatedUpdateState extends State<AssociatedUpdate> {
       child: Column(
         children: [
           Text(
-            _listTitle,
+            "Dependentes",
             style: TextStyle(
               fontWeight: FontWeight.bold,
             ),
@@ -366,9 +362,7 @@ class _AssociatedUpdateState extends State<AssociatedUpdate> {
           Observer(
             builder: (_) => ListView.separated(
               shrinkWrap: true,
-              itemCount: _listTitle == "Dependentes"
-                  ? _controller.dependents.length
-                  : _controller.motorcycles.length,
+              itemCount: _controller.dependents.length,
               itemBuilder: (BuildContext context, int i) {
                 return Container(
                   decoration: BoxDecoration(
@@ -389,9 +383,7 @@ class _AssociatedUpdateState extends State<AssociatedUpdate> {
                       height: 48,
                       alignment: Alignment.center,
                       child: CircleAvatar(
-                        child: _listTitle == "Dependentes"
-                            ? Icon(Icons.person)
-                            : Icon(Icons.motorcycle),
+                        child: Icon(Icons.person),
                         backgroundColor: Colors.white,
                       ),
                     ),
@@ -416,32 +408,23 @@ class _AssociatedUpdateState extends State<AssociatedUpdate> {
                             final Future<Dependent> future = Navigator.push(
                               context,
                               MaterialPageRoute(
-                                builder: (context) {
-                                  return _listTitle == "Dependentes"
-                                      ? DependentAdd(_controller.dependents[i])
-                                      : MotorcycleAdd(_controller.motorcycles[i]);
-                                },
+                                builder: (context) =>
+                                    DependentAdd(_controller.dependents[i]),
                               ),
                             );
-                            if (_listTitle == "Dependentes") {
-                              future.then(
-                                (dependent) {
-                                  if (dependent != null) {
-                                    _controller.dependentAdd(dependent);
-                                  }
-                                },
-                              );
-                            }
+                            future.then(
+                              (dependent) {
+                                if (dependent != null) {
+                                  _controller.dependentAdd(dependent);
+                                }
+                              },
+                            );
                           },
                         ),
                       ],
                     ),
-                    title: _listTitle == "Dependentes"
-                        ? Text(_controller.dependents[i].name)
-                        : Text(_controller.motorcycles[i].model),
-                    subtitle: _listTitle == "Dependentes"
-                        ? Text(_controller.dependents[i].email)
-                        : Text(_controller.motorcycles[i].year),
+                    title: Text(_controller.dependents[i].name),
+                    subtitle: Text(_controller.dependents[i].email),
                   ),
                 );
               },
@@ -452,7 +435,7 @@ class _AssociatedUpdateState extends State<AssociatedUpdate> {
           Container(
             padding: EdgeInsets.only(top: 20.0),
             child: FloatingActionButton(
-              heroTag: _listTitle,
+              heroTag: "dependentes",
               mini: true,
               backgroundColor: Colors.deepOrangeAccent[100],
               child: Icon(
@@ -463,30 +446,139 @@ class _AssociatedUpdateState extends State<AssociatedUpdate> {
               onPressed: () {
                 final Future<Dependent> future = Navigator.push(
                   context,
-                  MaterialPageRoute(
-                    builder: (context) {
-                      return _listTitle == "Dependentes"
-                          ? DependentAdd(null)
-                          : MotorcycleAdd(null);
-                    },
-                  ),
+                  MaterialPageRoute(builder: (context) => DependentAdd(null)),
                 );
-                if (_listTitle == "Dependentes") {
-                  future.then(
-                    (dependent) {
-                      if (dependent != null) {
-                        _controller.dependentAdd(dependent);
-                      }
-                    },
-                  );
-                }
+                future.then(
+                  (dependent) {
+                    if (dependent != null) {
+                      _controller.dependentAdd(dependent);
+                    }
+                  },
+                );
               },
             ),
           ),
         ],
       ),
     );
-  }
+
+  get _motorcyclesListWidget => Container(
+      padding: EdgeInsets.all(10.0),
+      decoration: BoxDecoration(
+        color: Colors.white12,
+        shape: BoxShape.rectangle,
+        borderRadius: BorderRadius.circular(8.0),
+      ),
+      child: Column(
+        children: [
+          Text(
+            "Motocicletas",
+            style: TextStyle(
+              fontWeight: FontWeight.bold,
+            ),
+          ),
+          Observer(
+            builder: (_) => ListView.separated(
+              shrinkWrap: true,
+              itemCount: _controller.motorcycles.length,
+              itemBuilder: (BuildContext context, int i) {
+                return Container(
+                  decoration: BoxDecoration(
+                    color: Colors.white30,
+                    shape: BoxShape.rectangle,
+                    borderRadius: BorderRadius.circular(8.0),
+                    boxShadow: <BoxShadow>[
+                      BoxShadow(
+                        color: Colors.black12,
+                        blurRadius: 10.0,
+                        offset: Offset(0.0, 5.0),
+                      ),
+                    ],
+                  ),
+                  child: ListTile(
+                    leading: Container(
+                      width: 48,
+                      height: 48,
+                      alignment: Alignment.center,
+                      child: CircleAvatar(
+                        child: Icon(Icons.motorcycle),
+                        backgroundColor: Colors.white,
+                      ),
+                    ),
+                    trailing: Wrap(
+                      spacing: 10, // space between two icons
+                      children: <Widget>[
+                        GestureDetector(
+                          child: Icon(
+                            Icons.delete,
+                            size: 25.0,
+                          ),
+                          onTap: () {
+                            _controller.motorcycleRemoveAt(i);
+                          },
+                        ),
+                        GestureDetector(
+                          child: Icon(
+                            Icons.arrow_forward,
+                            size: 25.0,
+                          ),
+                          onTap: () {
+                            final Future<Motorcycle> future = Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) =>
+                                    MotorcycleAdd(_controller.motorcycles[i]),
+                              ),
+                            );
+                            future.then(
+                                  (motorcycle) {
+                                if (motorcycle != null) {
+                                  _controller.motorcycleAdd(motorcycle);
+                                }
+                              },
+                            );
+                          },
+                        ),
+                      ],
+                    ),
+                    title: Text(_controller.motorcycles[i].model),
+                    subtitle: Text(_controller.motorcycles[i].year),
+                  ),
+                );
+              },
+              separatorBuilder: (BuildContext context, int index) =>
+              const Divider(),
+            ),
+          ),
+          Container(
+            padding: EdgeInsets.only(top: 20.0),
+            child: FloatingActionButton(
+              heroTag: "motocicletas",
+              mini: true,
+              backgroundColor: Colors.deepOrangeAccent[100],
+              child: Icon(
+                Icons.add,
+                color: Colors.black,
+                size: 25,
+              ),
+              onPressed: () {
+                final Future<Motorcycle> future = Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => MotorcycleAdd(null)),
+                );
+                future.then(
+                      (motorcycle) {
+                    if (motorcycle != null) {
+                      _controller.motorcycleAdd(motorcycle);
+                    }
+                  },
+                );
+              },
+            ),
+          ),
+        ],
+      ),
+    );
 
   _update() {}
 }

@@ -109,6 +109,7 @@ class _MotorcycleAddState extends State<MotorcycleAdd> {
   }
 
   _add(BuildContext context) {
+    _controller.idCtrl.text = "0";
     final int id = int.parse(_controller.idCtrl.text);
     final String model = _controller.modelCtrl.text;
     final String year = _controller.yearCtrl.text;
