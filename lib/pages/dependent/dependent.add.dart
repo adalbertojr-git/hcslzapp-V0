@@ -157,6 +157,7 @@ class _DependentAddState extends State<DependentAdd> {
                     ),
                   ),
                   child: Switch(
+                    activeColor: Colors.orangeAccent,
                     value: _controller.isAssociated,
                     onChanged: (value) {
                       _controller.associated();

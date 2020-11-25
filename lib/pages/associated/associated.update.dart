@@ -1,4 +1,3 @@
-import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:hcslzapp/common/labels.and.hints.dart';
@@ -14,7 +13,6 @@ import 'package:hcslzapp/models/dependent.dart';
 import 'package:hcslzapp/models/motorcycle.dart';
 import 'package:hcslzapp/pages/dependent/dependent.add.dart';
 import 'package:hcslzapp/pages/motorcycle/motorcycle.add.dart';
-import 'package:image_picker/image_picker.dart';
 import 'package:provider/provider.dart';
 
 class AssociatedUpdate extends StatefulWidget {
@@ -23,53 +21,18 @@ class AssociatedUpdate extends StatefulWidget {
 }
 
 class _AssociatedUpdateState extends State<AssociatedUpdate> {
-  List<DropdownMenuItem<String>> _dropDownBloodTypes;
-  File _image;
-  final picker = ImagePicker();
   AssociatedController _controller;
-  Future<List<Associated>> _future;
-  int _associatedId = 2;
+  //int _associatedId = 1;
 
   @override
   void initState() {
     _controller = Provider.of<AssociatedController>(context, listen: false);
-
-    _getFuture().then((value) {
+    _controller.getFuture(1).then((value) {
       if (value != null && value.isNotEmpty) {
         _controller.hideButton();
       }
     });
-
-    _dropDownBloodTypes = getBloodTypes();
     super.initState();
-  }
-
-  Future<List<Associated>> _getFuture() =>
-      _future = _controller.fetchAssociated(_associatedId);
-
-  Future getImageFromCamera() async {
-    final pickedFile = await picker.getImage(source: ImageSource.camera);
-    setState(() {
-      if (pickedFile != null) {
-        _image = File(pickedFile.path);
-        setState(() {
-          //photo(_image.path.toString());
-        });
-      } else {
-        print('No image selected.');
-      }
-    });
-  }
-
-  Future getImageFromGallery() async {
-    final pickedFile = await picker.getImage(source: ImageSource.gallery);
-    setState(() {
-      if (pickedFile != null) {
-        _image = File(pickedFile.path);
-      } else {
-        print('No image selected.');
-      }
-    });
   }
 
   @override
@@ -77,7 +40,7 @@ class _AssociatedUpdateState extends State<AssociatedUpdate> {
     return Observer(
       builder: (_) => Scaffold(
         body: FutureBuilder<List<Associated>>(
-          future: _future,
+          future: _controller.future,
           builder: (context, snapshot) {
             switch (snapshot.connectionState) {
               case ConnectionState.none:
@@ -150,7 +113,7 @@ class _AssociatedUpdateState extends State<AssociatedUpdate> {
                       color: Colors.black,
                       size: 33.0,
                     ),
-                    onPressed: getImageFromGallery,
+                    onPressed: _controller.getImageFromGallery,
                   ),
                   SizedBox(
                     width: 30.0,
@@ -161,7 +124,7 @@ class _AssociatedUpdateState extends State<AssociatedUpdate> {
                       color: Colors.black,
                       size: 30.0,
                     ),
-                    onPressed: getImageFromCamera,
+                    onPressed: _controller.getImageFromCamera,
                   )
                 ],
               ),
@@ -226,7 +189,7 @@ class _AssociatedUpdateState extends State<AssociatedUpdate> {
                                 ),
                               ),
                               value: _controller.currentBloodType,
-                              items: _dropDownBloodTypes,
+                              items: getBloodTypes(),
                               onChanged: _controller.changedDropDownItem,
                             ),
                           );
@@ -435,7 +398,7 @@ class _AssociatedUpdateState extends State<AssociatedUpdate> {
           Container(
             padding: EdgeInsets.only(top: 20.0),
             child: FloatingActionButton(
-              heroTag: "dependentes",
+              heroTag: "btnDependentes",
               mini: true,
               backgroundColor: Colors.deepOrangeAccent[100],
               child: Icon(
@@ -553,7 +516,7 @@ class _AssociatedUpdateState extends State<AssociatedUpdate> {
           Container(
             padding: EdgeInsets.only(top: 20.0),
             child: FloatingActionButton(
-              heroTag: "motocicletas",
+              heroTag: "btnMotocicletas",
               mini: true,
               backgroundColor: Colors.deepOrangeAccent[100],
               child: Icon(

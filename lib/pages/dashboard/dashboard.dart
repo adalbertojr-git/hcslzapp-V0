@@ -61,6 +61,7 @@ class Dashboard extends StatelessWidget {
                 Text('Tema Escuro:'),
                 Container(
                   child: Switch(
+                    activeColor: Colors.orangeAccent,
                     value: AppController.instance.isDarkTheme,
                     onChanged: (value) {
                       AppController.instance.changeTheme();

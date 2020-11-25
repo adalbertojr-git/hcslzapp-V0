@@ -4,7 +4,9 @@ import 'package:hcslzapp/models/associated.dart';
 import 'package:hcslzapp/models/dependent.dart';
 import 'package:hcslzapp/models/motorcycle.dart';
 import 'package:hcslzapp/repositories/associated.repo.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:mobx/mobx.dart';
+import 'dart:io';
 
 part 'associated.controller.g.dart';
 
@@ -60,9 +62,20 @@ abstract class AssociatedControllerBase with Store {
   @observable
   String currentBloodType;
 
+  /*
+  vars nao observaveis
+  */
   final AssociatedRepo _associatedRepo = AssociatedRepo();
   String errorMsg;
+  Future<List<Associated>> future;
+  File _image;
+  final picker = ImagePicker();
 
+  /*
+  *
+  actions ----------------------------------------------------------------------
+  *
+  */
   @action
   hideButton() => isHideButton = !isHideButton;
 
@@ -105,4 +118,36 @@ abstract class AssociatedControllerBase with Store {
     currentBloodType = selected;
   }
 
+  /*
+  *
+  metodos nao observaveis-------------------------------------------------------
+  *
+  */
+  Future<List<Associated>> getFuture(int _associatedId) =>
+      future = fetchAssociated(_associatedId);
+
+  Future getImageFromCamera() async {
+    final pickedFile = await picker.getImage(source: ImageSource.camera);
+/*    setState(() {
+      if (pickedFile != null) {
+        _image = File(pickedFile.path);
+        setState(() {
+          //photo(_image.path.toString());
+        });
+      } else {
+        print('No image selected.');
+      }
+    });*/
+  }
+
+  Future getImageFromGallery() async {
+    final pickedFile = await picker.getImage(source: ImageSource.gallery);
+/*    setState(() {
+      if (pickedFile != null) {
+        _image = File(pickedFile.path);
+      } else {
+        print('No image selected.');
+      }
+    });*/
+  }
 }

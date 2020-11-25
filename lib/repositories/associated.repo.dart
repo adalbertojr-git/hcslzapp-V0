@@ -31,4 +31,12 @@ class AssociatedRepo {
       throw HttpException(getMessage(response.statusCode));
     }
   }
+
+  Future<Associated> save(Associated associated) async {
+    final String encodedJson = jsonEncode(associated.toJson());
+    final Response response = await client.post(mainUrl + _associatedUrl,
+        headers: {'Content-type': 'application/json'},
+        body: encodedJson);
+    return Associated.fromJson(jsonDecode(response.body));
+  }
 }
