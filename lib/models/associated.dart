@@ -43,9 +43,9 @@ class Associated {
         associatedType = json['associatedType'],
         dateBirth = json['dateBirthToString'],
         dateShield = json['dateShieldToString'],
-        dependents = List.from((json['associatedDependents'] as List)
+        dependents = List.from((json['dependents'] as List)
             .map((dependents) => Dependent.fromJson(dependents))),
-        motorcycles = List.from((json['associatedMotorcycles'] as List)
+        motorcycles = List.from((json['motorcycles'] as List)
             .map((motorcycles) => Motorcycle.fromJson(motorcycles)));
 
   Map<String, dynamic> toJson() => {
@@ -60,17 +60,18 @@ class Associated {
         'associatedType': associatedType,
         'dateBirthToString': dateBirth,
         'dateShieldToString': dateShield,
-        'associatedDependents': List<dynamic>.from(
+        'dependents': List<dynamic>.from(
             dependents.map((dependents) => dependents.toJson())),
-        'associatedMotorcycles': List<dynamic>.from(
+        'motorcycles': List<dynamic>.from(
             motorcycles.map((motorcycles) => motorcycles.toJson())),
       };
 
   @override
   String toString() {
-    return 'Associado{codigo: $id, nome: $name, email: $email, telefone: $phone, '
+    return 'Associated{id: $id, name: $name, email: $email, phone: $phone, '
         'cnh: $cnh, cpf: $cpf, '
-        'tipoSanguineo: $bloodType, dataNascimento: $dateBirth, '
-        'dataEscudamento: $dateShield}';
+        'bloodType: $bloodType, dateBirth: $dateBirth, '
+        'dateShield: $dateShield, dependents: $dependents, '
+        'motorcycles: $motorcycles}';
   }
 }

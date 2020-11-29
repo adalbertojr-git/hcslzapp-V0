@@ -34,8 +34,8 @@ class Motorcycle {
 
   @override
   String toString() {
-    return 'Motocicleta{codigo: $id, modelo: $model, ano: $year, cor: $color, '
-        'placa: $licencePlate, apelido: $nickname, '
-        'chassi: $chassis, renavam: $renavam}';
+    return 'Motorcycle{id: $id, model: $model, year: $year, color: $color, '
+        'licencePlate: $licencePlate, nickname: $nickname, '
+        'chassis: $chassis, renavam: $renavam}';
   }
 }

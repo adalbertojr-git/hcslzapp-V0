@@ -3,16 +3,12 @@ import 'package:flutter/services.dart';
 import 'package:hcslzapp/common/labels.and.hints.dart';
 import 'package:hcslzapp/components/button.dart';
 import 'package:hcslzapp/components/input.textfield.dart';
+import 'package:hcslzapp/controllers/login.controller.dart';
 import 'dart:async';
 import 'package:hcslzapp/pages/dashboard/dashboard.dart';
 
 class Login extends StatelessWidget {
-  final TextEditingController _controllerUser = TextEditingController();
-  final TextEditingController _controllerPsw = TextEditingController();
-  final TextEditingController _controllerName = TextEditingController();
-  final TextEditingController _controllerPhone = TextEditingController();
-  final TextEditingController _controllerSponsor = TextEditingController();
-  final TextEditingController _controllerEmail = TextEditingController();
+  LoginController _controller = LoginController();
 
   @override
   Widget build(BuildContext context) {
@@ -108,14 +104,14 @@ class Login extends StatelessWidget {
                   height: 10.0,
                 ),
                 InputTextField(
-                  controller: _controllerUser,
+                  controller: _controller.userLoginCtrl,
                   label: labelUser,
                   hint: hintUser,
                   icon: Icons.person,
                   inputType: TextInputType.text,
                 ),
                 InputTextField(
-                  controller: _controllerPsw,
+                  controller: _controller.pswLoginCtrl,
                   label: labelPsw,
                   hint: hintPsw,
                   icon: Icons.vpn_key,
@@ -163,32 +159,34 @@ class Login extends StatelessWidget {
               height: 10.0,
             ),
             InputTextField(
-              controller: _controllerName,
+              controller: _controller.nameReqAccessCtrl,
               hint: hintName,
               label: labelName,
               icon: Icons.person,
               inputType: TextInputType.text,
             ),
             InputTextField(
-              controller: _controllerEmail,
+              controller: _controller.emailReqAccessCtrl,
               hint: hintEmail,
               label: labelEmail + " *",
               icon: Icons.email,
               inputType: TextInputType.emailAddress,
             ),
             InputTextField(
-              controller: _controllerPhone,
-              hint: hintPhone,
-              label: labelPhone + " *",
-              icon: Icons.phone,
-              inputType: TextInputType.phone,
+              controller: _controller.pswReqAccessCtrl,
+              label: labelPswReqAccess,
+              hint: hintPswReqAccess,
+              icon: Icons.vpn_key,
+              inputType: TextInputType.text,
+              hidden: true,
             ),
             InputTextField(
-              controller: _controllerSponsor,
-              hint: hintSponsor,
-              label: labelSponsor,
-              icon: Icons.person_pin,
+              controller: _controller.confPswReqAccessCtrl,
+              label: labelConfPswReqAccess,
+              hint: hintConfPswReqAccess,
+              icon: Icons.vpn_key,
               inputType: TextInputType.text,
+              hidden: true,
             ),
             SizedBox(
               height: 10.0,
@@ -224,7 +222,7 @@ class Login extends StatelessWidget {
               height: 10.0,
             ),
             InputTextField(
-              controller: _controllerEmail,
+              controller: _controller.emailForgotPswCtrl,
               hint: hintEmail,
               label: labelEmail + " *",
               icon: Icons.email,
@@ -256,8 +254,8 @@ class SnackBarWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return Button(Icons.email_rounded, onClick: () {
       final snackBar = SnackBar(
-        content: Text('Cadastro enviado para apreciaçao. \n'
-            'Aguarde email com instruçoes de acesso.'),
+        content: Text('Cadastro enviado para apreciação. \n'
+            'Aguarde email com instruções de acesso.'),
         backgroundColor: Colors.black,
         duration: Duration(seconds: 5),
         //animation,

@@ -34,8 +34,8 @@ class Dependent {
 
   @override
   String toString() {
-    return 'Dependente{codigo: $id, nome: $name, email: $email, telefone: $phone, '
-        'cpf: $cpf, tipoSanguineo: $bloodType, dataNascimento: $dateBirth, '
-        'membroHc: $isAssociated}';
+    return 'Dependent{id: $id, name: $name, email: $email, phone: $phone, '
+        'cpf: $cpf, bloodType: $bloodType, dateBirth: $dateBirth, '
+        'isAssociated: $isAssociated}';
   }
 }

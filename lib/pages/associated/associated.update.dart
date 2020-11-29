@@ -13,6 +13,7 @@ import 'package:hcslzapp/models/dependent.dart';
 import 'package:hcslzapp/models/motorcycle.dart';
 import 'package:hcslzapp/pages/dependent/dependent.add.dart';
 import 'package:hcslzapp/pages/motorcycle/motorcycle.add.dart';
+import 'package:mobx/src/api/observable_collections.dart';
 import 'package:provider/provider.dart';
 
 class AssociatedUpdate extends StatefulWidget {
@@ -22,6 +23,7 @@ class AssociatedUpdate extends StatefulWidget {
 
 class _AssociatedUpdateState extends State<AssociatedUpdate> {
   AssociatedController _controller;
+
   //int _associatedId = 1;
 
   @override
@@ -58,11 +60,13 @@ class _AssociatedUpdateState extends State<AssociatedUpdate> {
                 } else {
                   if (snapshot.data != null) {
                     final List<Associated> associatedList = snapshot.data;
-                    if (associatedList.isNotEmpty)
+                    if (associatedList.isNotEmpty) {
+                      _controller.dependents = associatedList.first.dependents as ObservableList;
                       return _associatedWidgets(context, associatedList.first);
+                    }
                     else
                       return CenteredMessage(
-                        'Atenção: Associado nao encontrado.',
+                        'Atenção: Associado não encontrado.',
                         icon: Icons.warning,
                         backgroundColor: Colors.yellow,
                       );
@@ -81,7 +85,7 @@ class _AssociatedUpdateState extends State<AssociatedUpdate> {
         ),
         floatingActionButton: _controller.isHideButton
             ? null
-            : Button(Icons.save, onClick: () => _update()),
+            : Button(Icons.save, onClick: () => _controller.update()),
       ),
     );
   }
@@ -171,7 +175,7 @@ class _AssociatedUpdateState extends State<AssociatedUpdate> {
                   children: <Widget>[
                     Expanded(
                       child: Text(
-                        'Tipo Sanguineo:',
+                        'Tipo Sanguíneo:',
                         textAlign: TextAlign.center,
                       ),
                     ),
@@ -308,240 +312,241 @@ class _AssociatedUpdateState extends State<AssociatedUpdate> {
   }
 
   get _dependentsListWidget => Container(
-      padding: EdgeInsets.all(10.0),
-      decoration: BoxDecoration(
-        color: Colors.white12,
-        shape: BoxShape.rectangle,
-        borderRadius: BorderRadius.circular(8.0),
-      ),
-      child: Column(
-        children: [
-          Text(
-            "Dependentes",
-            style: TextStyle(
-              fontWeight: FontWeight.bold,
+        padding: EdgeInsets.all(10.0),
+        decoration: BoxDecoration(
+          color: Colors.white12,
+          shape: BoxShape.rectangle,
+          borderRadius: BorderRadius.circular(8.0),
+        ),
+        child: Column(
+          children: [
+            Text(
+              "Dependentes",
+              style: TextStyle(
+                fontWeight: FontWeight.bold,
+              ),
             ),
-          ),
-          Observer(
-            builder: (_) => ListView.separated(
-              shrinkWrap: true,
-              itemCount: _controller.dependents.length,
-              itemBuilder: (BuildContext context, int i) {
-                return Container(
-                  decoration: BoxDecoration(
-                    color: Colors.white30,
-                    shape: BoxShape.rectangle,
-                    borderRadius: BorderRadius.circular(8.0),
-                    boxShadow: <BoxShadow>[
-                      BoxShadow(
-                        color: Colors.black12,
-                        blurRadius: 10.0,
-                        offset: Offset(0.0, 5.0),
-                      ),
-                    ],
-                  ),
-                  child: ListTile(
-                    leading: Container(
-                      width: 48,
-                      height: 48,
-                      alignment: Alignment.center,
-                      child: CircleAvatar(
-                        child: Icon(Icons.person),
-                        backgroundColor: Colors.white,
-                      ),
-                    ),
-                    trailing: Wrap(
-                      spacing: 10, // space between two icons
-                      children: <Widget>[
-                        GestureDetector(
-                          child: Icon(
-                            Icons.delete,
-                            size: 25.0,
-                          ),
-                          onTap: () {
-                            _controller.dependentRemoveAt(i);
-                          },
-                        ),
-                        GestureDetector(
-                          child: Icon(
-                            Icons.arrow_forward,
-                            size: 25.0,
-                          ),
-                          onTap: () {
-                            final Future<Dependent> future = Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                builder: (context) =>
-                                    DependentAdd(_controller.dependents[i]),
-                              ),
-                            );
-                            future.then(
-                              (dependent) {
-                                if (dependent != null) {
-                                  _controller.dependentAdd(dependent);
-                                }
-                              },
-                            );
-                          },
+            Observer(
+              builder: (_) => ListView.separated(
+                shrinkWrap: true,
+                itemCount: _controller.dependents.length,
+                itemBuilder: (BuildContext context, int i) {
+                  return Container(
+                    decoration: BoxDecoration(
+                      color: Colors.white30,
+                      shape: BoxShape.rectangle,
+                      borderRadius: BorderRadius.circular(8.0),
+                      boxShadow: <BoxShadow>[
+                        BoxShadow(
+                          color: Colors.black12,
+                          blurRadius: 10.0,
+                          offset: Offset(0.0, 5.0),
                         ),
                       ],
                     ),
-                    title: Text(_controller.dependents[i].name),
-                    subtitle: Text(_controller.dependents[i].email),
-                  ),
-                );
-              },
-              separatorBuilder: (BuildContext context, int index) =>
-                  const Divider(),
-            ),
-          ),
-          Container(
-            padding: EdgeInsets.only(top: 20.0),
-            child: FloatingActionButton(
-              heroTag: "btnDependentes",
-              mini: true,
-              backgroundColor: Colors.deepOrangeAccent[100],
-              child: Icon(
-                Icons.add,
-                color: Colors.black,
-                size: 25,
+                    child: ListTile(
+                      leading: Container(
+                        width: 48,
+                        height: 48,
+                        alignment: Alignment.center,
+                        child: CircleAvatar(
+                          child: Icon(Icons.person),
+                          backgroundColor: Colors.white,
+                        ),
+                      ),
+                      trailing: Wrap(
+                        spacing: 10, // space between two icons
+                        children: <Widget>[
+                          GestureDetector(
+                            child: Icon(
+                              Icons.delete,
+                              size: 25.0,
+                            ),
+                            onTap: () {
+                              _controller.dependentRemoveAt(i);
+                            },
+                          ),
+                          GestureDetector(
+                            child: Icon(
+                              Icons.arrow_forward,
+                              size: 25.0,
+                            ),
+                            onTap: () {
+                              final Future<Dependent> future = Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) =>
+                                      DependentAdd(_controller.dependents[i]),
+                                ),
+                              );
+                              future.then(
+                                (dependent) {
+                                  if (dependent != null) {
+                                    _controller.dependentRemoveAt(i);
+                                    _controller.dependentAdd(dependent);
+                                  }
+                                },
+                              );
+                            },
+                          ),
+                        ],
+                      ),
+                      title: Text(_controller.dependents[i].name),
+                      subtitle: Text(_controller.dependents[i].email),
+                    ),
+                  );
+                },
+                separatorBuilder: (BuildContext context, int index) =>
+                    const Divider(),
               ),
-              onPressed: () {
-                final Future<Dependent> future = Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context) => DependentAdd(null)),
-                );
-                future.then(
-                  (dependent) {
-                    if (dependent != null) {
-                      _controller.dependentAdd(dependent);
-                    }
-                  },
-                );
-              },
             ),
-          ),
-        ],
-      ),
-    );
+            Container(
+              padding: EdgeInsets.only(top: 20.0),
+              child: FloatingActionButton(
+                heroTag: "btnDependentes",
+                mini: true,
+                backgroundColor: Colors.deepOrangeAccent[100],
+                child: Icon(
+                  Icons.add,
+                  color: Colors.black,
+                  size: 25,
+                ),
+                onPressed: () {
+                  final Future<Dependent> future = Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => DependentAdd(null)),
+                  );
+                  future.then(
+                    (dependent) {
+                      if (dependent != null) {
+                        _controller.dependentAdd(dependent);
+                      }
+                    },
+                  );
+                },
+              ),
+            ),
+          ],
+        ),
+      );
 
   get _motorcyclesListWidget => Container(
-      padding: EdgeInsets.all(10.0),
-      decoration: BoxDecoration(
-        color: Colors.white12,
-        shape: BoxShape.rectangle,
-        borderRadius: BorderRadius.circular(8.0),
-      ),
-      child: Column(
-        children: [
-          Text(
-            "Motocicletas",
-            style: TextStyle(
-              fontWeight: FontWeight.bold,
+        padding: EdgeInsets.all(10.0),
+        decoration: BoxDecoration(
+          color: Colors.white12,
+          shape: BoxShape.rectangle,
+          borderRadius: BorderRadius.circular(8.0),
+        ),
+        child: Column(
+          children: [
+            Text(
+              "Motocicletas",
+              style: TextStyle(
+                fontWeight: FontWeight.bold,
+              ),
             ),
-          ),
-          Observer(
-            builder: (_) => ListView.separated(
-              shrinkWrap: true,
-              itemCount: _controller.motorcycles.length,
-              itemBuilder: (BuildContext context, int i) {
-                return Container(
-                  decoration: BoxDecoration(
-                    color: Colors.white30,
-                    shape: BoxShape.rectangle,
-                    borderRadius: BorderRadius.circular(8.0),
-                    boxShadow: <BoxShadow>[
-                      BoxShadow(
-                        color: Colors.black12,
-                        blurRadius: 10.0,
-                        offset: Offset(0.0, 5.0),
-                      ),
-                    ],
-                  ),
-                  child: ListTile(
-                    leading: Container(
-                      width: 48,
-                      height: 48,
-                      alignment: Alignment.center,
-                      child: CircleAvatar(
-                        child: Icon(Icons.motorcycle),
-                        backgroundColor: Colors.white,
-                      ),
-                    ),
-                    trailing: Wrap(
-                      spacing: 10, // space between two icons
-                      children: <Widget>[
-                        GestureDetector(
-                          child: Icon(
-                            Icons.delete,
-                            size: 25.0,
-                          ),
-                          onTap: () {
-                            _controller.motorcycleRemoveAt(i);
-                          },
-                        ),
-                        GestureDetector(
-                          child: Icon(
-                            Icons.arrow_forward,
-                            size: 25.0,
-                          ),
-                          onTap: () {
-                            final Future<Motorcycle> future = Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                builder: (context) =>
-                                    MotorcycleAdd(_controller.motorcycles[i]),
-                              ),
-                            );
-                            future.then(
-                                  (motorcycle) {
-                                if (motorcycle != null) {
-                                  _controller.motorcycleAdd(motorcycle);
-                                }
-                              },
-                            );
-                          },
+            Observer(
+              builder: (_) => ListView.separated(
+                shrinkWrap: true,
+                itemCount: _controller.motorcycles.length,
+                itemBuilder: (BuildContext context, int i) {
+                  return Container(
+                    decoration: BoxDecoration(
+                      color: Colors.white30,
+                      shape: BoxShape.rectangle,
+                      borderRadius: BorderRadius.circular(8.0),
+                      boxShadow: <BoxShadow>[
+                        BoxShadow(
+                          color: Colors.black12,
+                          blurRadius: 10.0,
+                          offset: Offset(0.0, 5.0),
                         ),
                       ],
                     ),
-                    title: Text(_controller.motorcycles[i].model),
-                    subtitle: Text(_controller.motorcycles[i].year),
-                  ),
-                );
-              },
-              separatorBuilder: (BuildContext context, int index) =>
-              const Divider(),
-            ),
-          ),
-          Container(
-            padding: EdgeInsets.only(top: 20.0),
-            child: FloatingActionButton(
-              heroTag: "btnMotocicletas",
-              mini: true,
-              backgroundColor: Colors.deepOrangeAccent[100],
-              child: Icon(
-                Icons.add,
-                color: Colors.black,
-                size: 25,
+                    child: ListTile(
+                      leading: Container(
+                        width: 48,
+                        height: 48,
+                        alignment: Alignment.center,
+                        child: CircleAvatar(
+                          child: Icon(Icons.motorcycle),
+                          backgroundColor: Colors.white,
+                        ),
+                      ),
+                      trailing: Wrap(
+                        spacing: 10, // space between two icons
+                        children: <Widget>[
+                          GestureDetector(
+                            child: Icon(
+                              Icons.delete,
+                              size: 25.0,
+                            ),
+                            onTap: () {
+                              _controller.motorcycleRemoveAt(i);
+                            },
+                          ),
+                          GestureDetector(
+                            child: Icon(
+                              Icons.arrow_forward,
+                              size: 25.0,
+                            ),
+                            onTap: () {
+                              final Future<Motorcycle> future = Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) =>
+                                      MotorcycleAdd(_controller.motorcycles[i]),
+                                ),
+                              );
+                              future.then(
+                                (motorcycle) {
+                                  if (motorcycle != null) {
+                                    _controller.motorcycleRemoveAt(i);
+                                    _controller.motorcycleAdd(motorcycle);
+                                  }
+                                },
+                              );
+                            },
+                          ),
+                        ],
+                      ),
+                      title: Text(_controller.motorcycles[i].model),
+                      subtitle: Text(_controller.motorcycles[i].year),
+                    ),
+                  );
+                },
+                separatorBuilder: (BuildContext context, int index) =>
+                    const Divider(),
               ),
-              onPressed: () {
-                final Future<Motorcycle> future = Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context) => MotorcycleAdd(null)),
-                );
-                future.then(
-                      (motorcycle) {
-                    if (motorcycle != null) {
-                      _controller.motorcycleAdd(motorcycle);
-                    }
-                  },
-                );
-              },
             ),
-          ),
-        ],
-      ),
-    );
-
-  _update() {}
+            Container(
+              padding: EdgeInsets.only(top: 20.0),
+              child: FloatingActionButton(
+                heroTag: "btnMotocicletas",
+                mini: true,
+                backgroundColor: Colors.deepOrangeAccent[100],
+                child: Icon(
+                  Icons.add,
+                  color: Colors.black,
+                  size: 25,
+                ),
+                onPressed: () {
+                  final Future<Motorcycle> future = Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => MotorcycleAdd(null)),
+                  );
+                  future.then(
+                    (motorcycle) {
+                      if (motorcycle != null) {
+                        _controller.motorcycleAdd(motorcycle);
+                      }
+                    },
+                  );
+                },
+              ),
+            ),
+          ],
+        ),
+      );
 }

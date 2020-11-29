@@ -70,6 +70,7 @@ abstract class AssociatedControllerBase with Store {
   Future<List<Associated>> future;
   File _image;
   final picker = ImagePicker();
+  List<Dependent> dependentsDelete = List<Dependent>();
 
   /*
   *
@@ -92,13 +93,15 @@ abstract class AssociatedControllerBase with Store {
   @action
   dependentAdd(Dependent dependent) {
     dependents.add(dependent);
-    print('Dependentes: $dependents');
+    print('Dependents pós Add: $dependents');
   }
 
   @action
   dependentRemoveAt(int index) {
+    if (dependents[index].id != 0) dependentsDelete.add(dependents[index]);
     dependents.removeAt(index);
-    print('Dependentes: $dependents');
+    print('Dependents pós Delete: $dependents');
+    print('DependentsDelete: $dependentsDelete');
   }
 
   @action
@@ -123,6 +126,9 @@ abstract class AssociatedControllerBase with Store {
   metodos nao observaveis-------------------------------------------------------
   *
   */
+
+  update() {}
+
   Future<List<Associated>> getFuture(int _associatedId) =>
       future = fetchAssociated(_associatedId);
 

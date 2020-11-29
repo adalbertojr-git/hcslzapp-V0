@@ -15,6 +15,6 @@ class PaymentMonths {
 
   @override
   String toString() {
-    return 'MesesMensalidade{codigo: $id, mes: $month}';
+    return 'MesesMensalidade{id: $id, month: $month}';
   }
 }
