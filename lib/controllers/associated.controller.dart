@@ -127,6 +127,14 @@ abstract class AssociatedControllerBase with Store {
   *
   */
 
+  dependentsAddAll(List<Dependent> list) {
+    dependents.addAll(list);
+  }
+
+  motorcyclesAddAll(List<Motorcycle> list) {
+    motorcycles.addAll(list);
+  }
+
   update() {}
 
   Future<List<Associated>> getFuture(int _associatedId) =>

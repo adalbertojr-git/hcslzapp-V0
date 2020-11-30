@@ -61,7 +61,7 @@ class _AssociatedUpdateState extends State<AssociatedUpdate> {
                   if (snapshot.data != null) {
                     final List<Associated> associatedList = snapshot.data;
                     if (associatedList.isNotEmpty) {
-                      _controller.dependents = associatedList.first.dependents as ObservableList;
+                      _controller.dependentsAddAll(associatedList.first.dependents);
                       return _associatedWidgets(context, associatedList.first);
                     }
                     else
