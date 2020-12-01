@@ -16,6 +16,9 @@ abstract class LoginControllerBase with Store {
   var nameReqAccessCtrl = TextEditingController();
 
   @observable
+  var userReqAccessCtrl = TextEditingController();
+
+  @observable
   var emailReqAccessCtrl = TextEditingController();
 
   @observable

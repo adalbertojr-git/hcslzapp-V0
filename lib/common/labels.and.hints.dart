@@ -1,11 +1,13 @@
-const labelUser = 'Usuário ou email *';
-const hintUser = 'Usuário (ex: aj1234) ou email (ex: hc@email.com)';
+const labelUserOrEmail = 'Usuário ou email *';
+const hintUserOrEmail = 'Usuário (ex: aj1234) ou email (ex: hc@email.com)';
+const labelUser = 'Usuário *';
+const hintUser = 'Informe um código de usuário para acesso ';
 const labelPsw = 'Senha *';
 const hintPsw = 'Digite sua senha';
 const labelPswReqAccess = 'Senha *';
-const hintPswReqAccess = 'Informe uma senha para acesso';
+const hintPswReqAccess = 'Informe uma senha';
 const labelConfPswReqAccess = 'Confirme a Senha *';
-const hintConfPswReqAccess = 'Confirme a senha para acesso';
+const hintConfPswReqAccess = 'Repita a senha';
 const labelName = 'Nome *';
 const hintName = 'Informe seu nome completo, harleyro';
 const labelPhone = 'Telefone';

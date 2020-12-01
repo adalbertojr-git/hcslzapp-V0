@@ -1,19 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:hcslzapp/common/labels.and.hints.dart';
+import 'package:hcslzapp/components/button.dart';
+import 'package:hcslzapp/components/centered.message.dart';
+import 'package:hcslzapp/components/input.textfield.dart';
+import 'package:hcslzapp/components/progress.dart';
 import 'package:hcslzapp/components/top.margin.dart';
 import 'package:hcslzapp/controllers/associated.controller.dart';
 import 'package:hcslzapp/enums/blood.types.dart';
-import 'package:hcslzapp/components/button.dart';
-import 'package:hcslzapp/components/centered.message.dart';
-import 'package:hcslzapp/components/progress.dart';
-import 'package:hcslzapp/components/input.textfield.dart';
 import 'package:hcslzapp/models/associated.dart';
 import 'package:hcslzapp/models/dependent.dart';
 import 'package:hcslzapp/models/motorcycle.dart';
 import 'package:hcslzapp/pages/dependent/dependent.add.dart';
 import 'package:hcslzapp/pages/motorcycle/motorcycle.add.dart';
-import 'package:mobx/src/api/observable_collections.dart';
 import 'package:provider/provider.dart';
 
 class AssociatedUpdate extends StatefulWidget {
@@ -24,12 +23,12 @@ class AssociatedUpdate extends StatefulWidget {
 class _AssociatedUpdateState extends State<AssociatedUpdate> {
   AssociatedController _controller;
 
-  //int _associatedId = 1;
+  int _associatedId = 1;
 
   @override
   void initState() {
     _controller = Provider.of<AssociatedController>(context, listen: false);
-    _controller.getFuture(1).then((value) {
+    _controller.getFuture(_associatedId).then((value) {
       if (value != null && value.isNotEmpty) {
         _controller.hideButton();
       }
@@ -58,24 +57,25 @@ class _AssociatedUpdateState extends State<AssociatedUpdate> {
                     icon: Icons.error,
                   );
                 } else {
-                  if (snapshot.data != null) {
-                    final List<Associated> associatedList = snapshot.data;
-                    if (associatedList.isNotEmpty) {
-                      _controller.dependentsAddAll(associatedList.first.dependents);
-                      return _associatedWidgets(context, associatedList.first);
-                    }
-                    else
-                      return CenteredMessage(
-                        'Atenção: Associado não encontrado.',
-                        icon: Icons.warning,
-                        backgroundColor: Colors.yellow,
-                      );
-                  } else
+                  if (snapshot.data == null)
                     return CenteredMessage(
                       'Oops!!! ' + _controller.errorMsg,
                       icon: Icons.error,
                     );
-                } //else
+                  if (snapshot.data.length > 0) {
+                    final Associated associated = snapshot.data.first;
+                    _controller.dependents.clear();
+                    _controller.motorcycles.clear();
+                    _controller.dependentsAddAll(associated.dependents);
+                    _controller.motorcyclesAddAll(associated.motorcycles);
+                    return _associatedWidgets(context, associated);
+                  } else
+                    return CenteredMessage(
+                      'Atenção: Associado não encontrado.',
+                      icon: Icons.warning,
+                      backgroundColor: Colors.yellow,
+                    );
+                }
             } //switch (snapshot.connectionState)
             return CenteredMessage(
               'Oops!!! Um erro desconhecido ocorreu.',
@@ -180,24 +180,20 @@ class _AssociatedUpdateState extends State<AssociatedUpdate> {
                       ),
                     ),
                     Expanded(
-                      child: Observer(
-                        builder: (_) {
-                          return Container(
-                            height: 55.0,
-                            child: DropdownButtonFormField(
-                              decoration: const InputDecoration(
-                                enabledBorder: OutlineInputBorder(
-                                  borderSide: BorderSide(
-                                    color: Colors.white70,
-                                  ),
-                                ),
+                      child: Container(
+                        height: 55.0,
+                        child: DropdownButtonFormField(
+                          decoration: const InputDecoration(
+                            enabledBorder: OutlineInputBorder(
+                              borderSide: BorderSide(
+                                color: Colors.white70,
                               ),
-                              value: _controller.currentBloodType,
-                              items: getBloodTypes(),
-                              onChanged: _controller.changedDropDownItem,
                             ),
-                          );
-                        },
+                          ),
+                          value: _controller.currentBloodType,
+                          items: getBloodTypes(),
+                          onChanged: _controller.changedDropDownItem,
+                        ),
                       ),
                     ),
                   ],

@@ -241,22 +241,6 @@ mixin _$AssociatedController on AssociatedControllerBase, Store {
     });
   }
 
-  final _$currentBloodTypeAtom =
-      Atom(name: 'AssociatedControllerBase.currentBloodType');
-
-  @override
-  String get currentBloodType {
-    _$currentBloodTypeAtom.reportRead();
-    return super.currentBloodType;
-  }
-
-  @override
-  set currentBloodType(String value) {
-    _$currentBloodTypeAtom.reportWrite(value, super.currentBloodType, () {
-      super.currentBloodType = value;
-    });
-  }
-
   final _$AssociatedControllerBaseActionController =
       ActionController(name: 'AssociatedControllerBase');
 
@@ -327,17 +311,6 @@ mixin _$AssociatedController on AssociatedControllerBase, Store {
   }
 
   @override
-  dynamic changedDropDownItem(String selected) {
-    final _$actionInfo = _$AssociatedControllerBaseActionController.startAction(
-        name: 'AssociatedControllerBase.changedDropDownItem');
-    try {
-      return super.changedDropDownItem(selected);
-    } finally {
-      _$AssociatedControllerBaseActionController.endAction(_$actionInfo);
-    }
-  }
-
-  @override
   String toString() {
     return '''
 idCtrl: ${idCtrl},
@@ -354,8 +327,7 @@ dateShieldCtrl: ${dateShieldCtrl},
 isHideButton: ${isHideButton},
 associatedListFuture: ${associatedListFuture},
 dependents: ${dependents},
-motorcycles: ${motorcycles},
-currentBloodType: ${currentBloodType}
+motorcycles: ${motorcycles}
     ''';
   }
 }

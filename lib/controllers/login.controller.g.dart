@@ -55,6 +55,22 @@ mixin _$LoginController on LoginControllerBase, Store {
     });
   }
 
+  final _$userReqAccessCtrlAtom =
+      Atom(name: 'LoginControllerBase.userReqAccessCtrl');
+
+  @override
+  TextEditingController get userReqAccessCtrl {
+    _$userReqAccessCtrlAtom.reportRead();
+    return super.userReqAccessCtrl;
+  }
+
+  @override
+  set userReqAccessCtrl(TextEditingController value) {
+    _$userReqAccessCtrlAtom.reportWrite(value, super.userReqAccessCtrl, () {
+      super.userReqAccessCtrl = value;
+    });
+  }
+
   final _$emailReqAccessCtrlAtom =
       Atom(name: 'LoginControllerBase.emailReqAccessCtrl');
 
@@ -126,6 +142,7 @@ mixin _$LoginController on LoginControllerBase, Store {
 userLoginCtrl: ${userLoginCtrl},
 pswLoginCtrl: ${pswLoginCtrl},
 nameReqAccessCtrl: ${nameReqAccessCtrl},
+userReqAccessCtrl: ${userReqAccessCtrl},
 emailReqAccessCtrl: ${emailReqAccessCtrl},
 pswReqAccessCtrl: ${pswReqAccessCtrl},
 confPswReqAccessCtrl: ${confPswReqAccessCtrl},

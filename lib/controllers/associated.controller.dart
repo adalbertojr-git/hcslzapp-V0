@@ -59,9 +59,6 @@ abstract class AssociatedControllerBase with Store {
   @observable
   ObservableList motorcycles = [].asObservable();
 
-  @observable
-  String currentBloodType;
-
   /*
   vars nao observaveis
   */
@@ -71,6 +68,7 @@ abstract class AssociatedControllerBase with Store {
   File _image;
   final picker = ImagePicker();
   List<Dependent> dependentsDelete = List<Dependent>();
+  String currentBloodType;
 
   /*
   *
@@ -116,16 +114,15 @@ abstract class AssociatedControllerBase with Store {
     print('Motocicletas: $motorcycles');
   }
 
-  @action
-  changedDropDownItem(String selected) {
-    currentBloodType = selected;
-  }
-
   /*
   *
   metodos nao observaveis-------------------------------------------------------
   *
   */
+
+  changedDropDownItem(String selected) {
+    currentBloodType = selected;
+  }
 
   dependentsAddAll(List<Dependent> list) {
     dependents.addAll(list);

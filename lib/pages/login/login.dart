@@ -105,8 +105,8 @@ class Login extends StatelessWidget {
                 ),
                 InputTextField(
                   controller: _controller.userLoginCtrl,
-                  label: labelUser,
-                  hint: hintUser,
+                  label: labelUserOrEmail,
+                  hint: hintUserOrEmail,
                   icon: Icons.person,
                   inputType: TextInputType.text,
                 ),
@@ -166,27 +166,42 @@ class Login extends StatelessWidget {
               inputType: TextInputType.text,
             ),
             InputTextField(
+              controller: _controller.userReqAccessCtrl,
+              hint: hintUser,
+              label: labelUser,
+              icon: Icons.person,
+              inputType: TextInputType.text,
+            ),
+            InputTextField(
               controller: _controller.emailReqAccessCtrl,
               hint: hintEmail,
               label: labelEmail + " *",
               icon: Icons.email,
               inputType: TextInputType.emailAddress,
             ),
-            InputTextField(
-              controller: _controller.pswReqAccessCtrl,
-              label: labelPswReqAccess,
-              hint: hintPswReqAccess,
-              icon: Icons.vpn_key,
-              inputType: TextInputType.text,
-              hidden: true,
-            ),
-            InputTextField(
-              controller: _controller.confPswReqAccessCtrl,
-              label: labelConfPswReqAccess,
-              hint: hintConfPswReqAccess,
-              icon: Icons.vpn_key,
-              inputType: TextInputType.text,
-              hidden: true,
+            Row(
+              children: [
+                Expanded(
+                  child: InputTextField(
+                    controller: _controller.pswReqAccessCtrl,
+                    label: labelPswReqAccess,
+                    hint: hintPswReqAccess,
+                    icon: Icons.vpn_key,
+                    inputType: TextInputType.text,
+                    hidden: true,
+                  ),
+                ),
+                Expanded(
+                  child: InputTextField(
+                    controller: _controller.confPswReqAccessCtrl,
+                    label: labelConfPswReqAccess,
+                    hint: hintConfPswReqAccess,
+                    icon: Icons.vpn_key,
+                    inputType: TextInputType.text,
+                    hidden: true,
+                  ),
+                ),
+              ],
             ),
             SizedBox(
               height: 10.0,
