@@ -37,57 +37,61 @@ class _AssociatedUpdateState extends State<AssociatedUpdate> {
 
   @override
   Widget build(BuildContext context) => Observer(
-      builder: (_) => Scaffold(
-        body: FutureBuilder<List<Associated>>(
-          future: _controller.future,
-          builder: (context, snapshot) {
-            switch (snapshot.connectionState) {
-              case ConnectionState.none:
-                break;
-              case ConnectionState.waiting:
-                return Progress();
-              case ConnectionState.active:
-                break;
-              default:
-                if (snapshot.hasError) {
-                  return CenteredMessage(
-                    'Oops!!! + ${snapshot.error}.',
-                    icon: Icons.error,
-                  );
-                } else {
-                  if (snapshot.data == null)
+        builder: (_) => Scaffold(
+          body: FutureBuilder<List<Associated>>(
+            future: _controller.future,
+            builder: (context, snapshot) {
+              switch (snapshot.connectionState) {
+                case ConnectionState.none:
+                  break;
+                case ConnectionState.waiting:
+                  return Progress();
+                case ConnectionState.active:
+                  break;
+                default:
+                  if (snapshot.hasError) {
                     return CenteredMessage(
-                      'Oops!!! ' + _controller.errorMsg,
+                      'Oops!!! + ${snapshot.error}.',
                       icon: Icons.error,
                     );
-                  if (snapshot.data.length > 0) {
-                    _controller.associated = snapshot.data.first;
-                    _controller.dependents.clear();
-                    _controller.motorcycles.clear();
-                    _controller.dependentsAddAll(_controller.associated.dependents);
-                    _controller.motorcyclesAddAll(_controller.associated.motorcycles);
-                    _controller.currentBloodType = _controller.associated.bloodType;
-                    return _associatedWidgets(context);
-                  } else
-                    return CenteredMessage(
-                      'Atenção: Associado não encontrado.',
-                      icon: Icons.warning,
-                      backgroundColor: Colors.yellowAccent,
-                      fontColor: Colors.black,
-                    );
-                }
-            } //switch (snapshot.connectionState)
-            return CenteredMessage(
-              'Oops!!! Um erro desconhecido ocorreu.',
-              icon: Icons.error,
-            );
-          },
+                  } else {
+                    if (snapshot.data == null)
+                      return CenteredMessage(
+                        'Oops!!! ' + _controller.errorMsg,
+                        icon: Icons.error,
+                      );
+                    if (snapshot.data.length > 0) {
+                      _controller.associated = snapshot.data.first;
+                      _controller.dependents.clear();
+                      _controller.motorcycles.clear();
+                      _controller
+                          .dependentsAddAll(_controller.associated.dependents);
+                      _controller.motorcyclesAddAll(
+                          _controller.associated.motorcycles);
+                      _controller.currentBloodType =
+                          _controller.associated.bloodType;
+                      return _associatedWidgets(context);
+                    } else
+                      return CenteredMessage(
+                        'Atenção: Associado não encontrado.',
+                        icon: Icons.warning,
+                        backgroundColor: Colors.yellowAccent,
+                        fontColor: Colors.black,
+                      );
+                  }
+              } //switch (snapshot.connectionState)
+              return CenteredMessage(
+                'Oops!!! Um erro desconhecido ocorreu.',
+                icon: Icons.error,
+              );
+            },
+          ),
+          floatingActionButton: _controller.isHideButton
+              ? null
+              : Button(Icons.save,
+                  onClick: () => _controller.update(_controller.associated)),
         ),
-        floatingActionButton: _controller.isHideButton
-            ? null
-            : Button(Icons.save, onClick: () => _controller.update(_controller.associated)),
-      ),
-    );
+      );
 
   _associatedWidgets(BuildContext context) => Container(
         padding: EdgeInsets.fromLTRB(5.0, 5.0, 5.0, 0.0),
@@ -104,7 +108,6 @@ class _AssociatedUpdateState extends State<AssociatedUpdate> {
             child: Column(
               children: <Widget>[
                 TopMargin(),
-                _photo('assets/imgs/noImage.png'),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
@@ -116,9 +119,7 @@ class _AssociatedUpdateState extends State<AssociatedUpdate> {
                       ),
                       onPressed: _controller.getImageFromGallery,
                     ),
-                    SizedBox(
-                      width: 30.0,
-                    ),
+                    _photo('assets/imgs/noImage.png'),
                     IconButton(
                       icon: Icon(
                         Icons.add_a_photo,
@@ -129,10 +130,14 @@ class _AssociatedUpdateState extends State<AssociatedUpdate> {
                     )
                   ],
                 ),
+                SizedBox(
+                  height: 5.0,
+                ),
                 InputTextField(
                   controller: _controller.nameCtrl,
-                  controllerText:
-                  _controller.associated.name != null ? _controller.associated.name : null,
+                  controllerText: _controller.associated.name != null
+                      ? _controller.associated.name
+                      : null,
                   label: labelName,
                   hint: hintName,
                   icon: Icons.person,
@@ -140,8 +145,9 @@ class _AssociatedUpdateState extends State<AssociatedUpdate> {
                 ),
                 InputTextField(
                   controller: _controller.emailCtrl,
-                  controllerText:
-                  _controller.associated.email != null ? _controller.associated.email : null,
+                  controllerText: _controller.associated.email != null
+                      ? _controller.associated.email
+                      : null,
                   label: labelEmail,
                   hint: hintEmail,
                   icon: Icons.email,
@@ -149,8 +155,9 @@ class _AssociatedUpdateState extends State<AssociatedUpdate> {
                 ),
                 InputTextField(
                   controller: _controller.phoneCtrl,
-                  controllerText:
-                  _controller.associated.phone != null ? _controller.associated.phone : null,
+                  controllerText: _controller.associated.phone != null
+                      ? _controller.associated.phone
+                      : null,
                   label: labelPhone,
                   hint: hintPhone,
                   icon: Icons.phone,
@@ -158,8 +165,9 @@ class _AssociatedUpdateState extends State<AssociatedUpdate> {
                 ),
                 InputTextField(
                   controller: _controller.sponsorCtrl,
-                  controllerText:
-                  _controller.associated.sponsor != null ? _controller.associated.sponsor : null,
+                  controllerText: _controller.associated.sponsor != null
+                      ? _controller.associated.sponsor
+                      : null,
                   label: labelSponsor,
                   hint: hintSponsor,
                   icon: Icons.person_pin,
@@ -202,8 +210,9 @@ class _AssociatedUpdateState extends State<AssociatedUpdate> {
                     Expanded(
                       child: InputTextField(
                         controller: _controller.cnhCtrl,
-                        controllerText:
-                        _controller.associated.cnh != null ? _controller.associated.cnh : null,
+                        controllerText: _controller.associated.cnh != null
+                            ? _controller.associated.cnh
+                            : null,
                         label: labelCNH,
                         hint: hintCNH,
                         inputType: TextInputType.number,
@@ -215,8 +224,9 @@ class _AssociatedUpdateState extends State<AssociatedUpdate> {
                     Expanded(
                       child: InputTextField(
                         controller: _controller.cpfCtrl,
-                        controllerText:
-                        _controller.associated.cpf != null ? _controller.associated.cpf : null,
+                        controllerText: _controller.associated.cpf != null
+                            ? _controller.associated.cpf
+                            : null,
                         label: labelCPF,
                         hint: hintCPF,
                         inputType: TextInputType.number,
@@ -253,9 +263,10 @@ class _AssociatedUpdateState extends State<AssociatedUpdate> {
                     Expanded(
                       child: InputTextField(
                         controller: _controller.dateShieldCtrl,
-                        controllerText: _controller.associated.dateShield != null
-                            ? _controller.associated.dateShield
-                            : null,
+                        controllerText:
+                            _controller.associated.dateShield != null
+                                ? _controller.associated.dateShield
+                                : null,
                         label: labelDateShield,
                         hint: hintDate,
                         icon: Icons.calendar_today,

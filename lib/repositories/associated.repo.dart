@@ -34,11 +34,16 @@ class AssociatedRepo {
 
   Future<Associated> update(Associated associated) async {
     final String encodedJson = jsonEncode(associated.toJson());
-    final Response response = await client.put(mainUrl + _associatedUrl + "/1",
-        headers: {'Content-type': 'application/json'},
-        body: encodedJson);
+    final Response response = await client
+        .put(mainUrl + _associatedUrl + "/" + associated.id.toString(),
+            headers: {'Content-type': 'application/json'}, body: encodedJson)
+        .timeout(Duration(seconds: 5));
     print(associated);
     print(response.statusCode);
-    return Associated.fromJson(jsonDecode(response.body));
+    if (response.statusCode == 204) {
+      return Associated.fromJson(jsonDecode(response.body));
+    } else {
+      throw HttpException(getMessage(response.statusCode));
+    }
   }
 }

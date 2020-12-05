@@ -82,6 +82,14 @@ abstract class AssociatedControllerBase with Store {
   @action
   hideButton() => isHideButton = !isHideButton;
 
+/*  @action
+  setIdCtrl(String value) => idCtrl.text = value;
+
+  @action
+  setNameCtrl(String value) => nameCtrl.text = value;
+
+  controller.setIdCtrl("Meu valor")*/
+
   @action
   Future fetchAssociated(int id) =>
       associatedListFuture = ObservableFuture(_associatedRepo
@@ -95,7 +103,7 @@ abstract class AssociatedControllerBase with Store {
   @action
   Future update(Associated associated) =>
       associatedUpdate = ObservableFuture(_associatedRepo
-          .update(associated)
+          .update(setFieldsToUpdate())
           .then((associated) => associated)).catchError((e) {
         this.errorMsg = "TimeOutException: ${e.toString()}";
       }, test: (e) => e is TimeoutException).catchError((e) {
@@ -134,8 +142,23 @@ abstract class AssociatedControllerBase with Store {
   *
   */
 
+  Associated setFieldsToUpdate() {
+    this.associated.name = nameCtrl.text;
+    this.associated.phone = phoneCtrl.text;
+    this.associated.email = emailCtrl.text;
+    this.associated.sponsor = sponsorCtrl.text;
+    this.associated.associatedType = associatedTypeCtrl.text;
+    this.associated.cnh = cnhCtrl.text;
+    this.associated.cpf = cpfCtrl.text;
+    this.associated.bloodType = bloodTypeCtrl.text;
+    this.associated.dateBirth = dateBirthCtrl.text;
+    this.associated.dateShield = dateShieldCtrl.text;
+    return this.associated;
+  }
+
   changedDropDownItem(String selected) {
     currentBloodType = selected;
+    bloodTypeCtrl.text = currentBloodType;
   }
 
   dependentsAddAll(List<Dependent> list) {

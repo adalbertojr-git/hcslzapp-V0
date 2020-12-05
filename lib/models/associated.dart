@@ -3,18 +3,18 @@ import 'package:hcslzapp/models/motorcycle.dart';
 
 class Associated {
   final int id;
-  final String name;
-  final String email;
-  final String phone;
-  final String sponsor;
-  final String cnh;
-  final String cpf;
-  final String bloodType;
-  final String associatedType;
-  final String dateBirth;
-  final String dateShield;
-  final List<Dependent> dependents;
-  final List<Motorcycle> motorcycles;
+  String name;
+  String email;
+  String phone;
+  String sponsor;
+  String cnh;
+  String cpf;
+  String bloodType;
+  String associatedType;
+  String dateBirth;
+  String dateShield;
+  List<Dependent> dependents;
+  List<Motorcycle> motorcycles;
 
   Associated(
       this.id,

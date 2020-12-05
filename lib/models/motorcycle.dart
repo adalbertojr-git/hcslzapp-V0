@@ -1,12 +1,12 @@
 class Motorcycle {
   final int id;
-  final String model;
-  final String year;
-  final String color;
-  final String licencePlate;
-  final String nickname;
-  final String chassis;
-  final String renavam;
+  String model;
+  String year;
+  String color;
+  String licencePlate;
+  String nickname;
+  String chassis;
+  String renavam;
 
   Motorcycle(this.id, this.model, this.year, this.color, this.licencePlate,
       this.nickname, this.chassis, this.renavam);

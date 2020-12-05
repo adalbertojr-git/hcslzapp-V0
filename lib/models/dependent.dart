@@ -1,12 +1,12 @@
 class Dependent {
   final int id;
-  final String name;
-  final String email;
-  final String phone;
-  final String cpf;
-  final String bloodType;
-  final String dateBirth;
-  final String isAssociated;
+  String name;
+  String email;
+  String phone;
+  String cpf;
+  String bloodType;
+  String dateBirth;
+  String isAssociated;
 
   Dependent(this.id, this.name, this.email, this.phone, this.cpf,
       this.bloodType, this.dateBirth, this.isAssociated);
