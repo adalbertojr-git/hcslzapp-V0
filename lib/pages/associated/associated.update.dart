@@ -22,8 +22,7 @@ class AssociatedUpdate extends StatefulWidget {
 
 class _AssociatedUpdateState extends State<AssociatedUpdate> {
   AssociatedController _controller;
-
-  int _associatedId = 1;
+  int _associatedId = 2;
 
   @override
   void initState() {
@@ -37,8 +36,7 @@ class _AssociatedUpdateState extends State<AssociatedUpdate> {
   }
 
   @override
-  Widget build(BuildContext context) {
-    return Observer(
+  Widget build(BuildContext context) => Observer(
       builder: (_) => Scaffold(
         body: FutureBuilder<List<Associated>>(
           future: _controller.future,
@@ -63,17 +61,19 @@ class _AssociatedUpdateState extends State<AssociatedUpdate> {
                       icon: Icons.error,
                     );
                   if (snapshot.data.length > 0) {
-                    final Associated associated = snapshot.data.first;
+                    _controller.associated = snapshot.data.first;
                     _controller.dependents.clear();
                     _controller.motorcycles.clear();
-                    _controller.dependentsAddAll(associated.dependents);
-                    _controller.motorcyclesAddAll(associated.motorcycles);
-                    return _associatedWidgets(context, associated);
+                    _controller.dependentsAddAll(_controller.associated.dependents);
+                    _controller.motorcyclesAddAll(_controller.associated.motorcycles);
+                    _controller.currentBloodType = _controller.associated.bloodType;
+                    return _associatedWidgets(context);
                   } else
                     return CenteredMessage(
                       'Atenção: Associado não encontrado.',
                       icon: Icons.warning,
-                      backgroundColor: Colors.yellow,
+                      backgroundColor: Colors.yellowAccent,
+                      fontColor: Colors.black,
                     );
                 }
             } //switch (snapshot.connectionState)
@@ -85,227 +85,221 @@ class _AssociatedUpdateState extends State<AssociatedUpdate> {
         ),
         floatingActionButton: _controller.isHideButton
             ? null
-            : Button(Icons.save, onClick: () => _controller.update()),
+            : Button(Icons.save, onClick: () => _controller.update(_controller.associated)),
       ),
     );
-  }
 
-  Container _associatedWidgets(BuildContext context, Associated associated) {
-    _controller.currentBloodType = associated.bloodType;
-    return Container(
-      padding: EdgeInsets.fromLTRB(5.0, 5.0, 5.0, 0.0),
-      decoration: BoxDecoration(
-        gradient: LinearGradient(
-          colors: [Colors.white30, Colors.deepOrange],
-          begin: FractionalOffset.topLeft,
-          end: FractionalOffset.bottomRight,
+  _associatedWidgets(BuildContext context) => Container(
+        padding: EdgeInsets.fromLTRB(5.0, 5.0, 5.0, 0.0),
+        decoration: BoxDecoration(
+          gradient: LinearGradient(
+            colors: [Colors.white30, Colors.deepOrange],
+            begin: FractionalOffset.topLeft,
+            end: FractionalOffset.bottomRight,
+          ),
         ),
-      ),
-      height: MediaQuery.of(context).size.height,
-      child: Form(
-        child: SingleChildScrollView(
-          child: Column(
-            children: <Widget>[
-              TopMargin(),
-              _photo('assets/imgs/noImage.png'),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  IconButton(
-                    icon: Icon(
-                      Icons.add_photo_alternate,
-                      color: Colors.black,
-                      size: 33.0,
-                    ),
-                    onPressed: _controller.getImageFromGallery,
-                  ),
-                  SizedBox(
-                    width: 30.0,
-                  ),
-                  IconButton(
-                    icon: Icon(
-                      Icons.add_a_photo,
-                      color: Colors.black,
-                      size: 30.0,
-                    ),
-                    onPressed: _controller.getImageFromCamera,
-                  )
-                ],
-              ),
-              InputTextField(
-                controller: _controller.nameCtrl,
-                controllerText:
-                    associated.name != null ? associated.name : null,
-                label: labelName,
-                hint: hintName,
-                icon: Icons.person,
-                inputType: TextInputType.text,
-              ),
-              InputTextField(
-                controller: _controller.emailCtrl,
-                controllerText:
-                    associated.email != null ? associated.email : null,
-                label: labelEmail,
-                hint: hintEmail,
-                icon: Icons.email,
-                inputType: TextInputType.emailAddress,
-              ),
-              InputTextField(
-                controller: _controller.phoneCtrl,
-                controllerText:
-                    associated.phone != null ? associated.phone : null,
-                label: labelPhone,
-                hint: hintPhone,
-                icon: Icons.phone,
-                inputType: TextInputType.phone,
-              ),
-              InputTextField(
-                controller: _controller.sponsorCtrl,
-                controllerText:
-                    associated.sponsor != null ? associated.sponsor : null,
-                label: labelSponsor,
-                hint: hintSponsor,
-                icon: Icons.person_pin,
-                inputType: TextInputType.text,
-              ),
-              Padding(
-                padding: const EdgeInsets.fromLTRB(0.0, 3.0, 2.0, 3.0),
-                child: Row(
-                  crossAxisAlignment: CrossAxisAlignment.baseline,
-                  children: <Widget>[
-                    Expanded(
-                      child: Text(
-                        'Tipo Sanguíneo:',
-                        textAlign: TextAlign.center,
+        height: MediaQuery.of(context).size.height,
+        child: Form(
+          child: SingleChildScrollView(
+            child: Column(
+              children: <Widget>[
+                TopMargin(),
+                _photo('assets/imgs/noImage.png'),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    IconButton(
+                      icon: Icon(
+                        Icons.add_photo_alternate,
+                        color: Colors.black,
+                        size: 33.0,
                       ),
+                      onPressed: _controller.getImageFromGallery,
                     ),
-                    Expanded(
-                      child: Container(
-                        height: 55.0,
-                        child: DropdownButtonFormField(
-                          decoration: const InputDecoration(
-                            enabledBorder: OutlineInputBorder(
-                              borderSide: BorderSide(
-                                color: Colors.white70,
+                    SizedBox(
+                      width: 30.0,
+                    ),
+                    IconButton(
+                      icon: Icon(
+                        Icons.add_a_photo,
+                        color: Colors.black,
+                        size: 30.0,
+                      ),
+                      onPressed: _controller.getImageFromCamera,
+                    )
+                  ],
+                ),
+                InputTextField(
+                  controller: _controller.nameCtrl,
+                  controllerText:
+                  _controller.associated.name != null ? _controller.associated.name : null,
+                  label: labelName,
+                  hint: hintName,
+                  icon: Icons.person,
+                  inputType: TextInputType.text,
+                ),
+                InputTextField(
+                  controller: _controller.emailCtrl,
+                  controllerText:
+                  _controller.associated.email != null ? _controller.associated.email : null,
+                  label: labelEmail,
+                  hint: hintEmail,
+                  icon: Icons.email,
+                  inputType: TextInputType.emailAddress,
+                ),
+                InputTextField(
+                  controller: _controller.phoneCtrl,
+                  controllerText:
+                  _controller.associated.phone != null ? _controller.associated.phone : null,
+                  label: labelPhone,
+                  hint: hintPhone,
+                  icon: Icons.phone,
+                  inputType: TextInputType.phone,
+                ),
+                InputTextField(
+                  controller: _controller.sponsorCtrl,
+                  controllerText:
+                  _controller.associated.sponsor != null ? _controller.associated.sponsor : null,
+                  label: labelSponsor,
+                  hint: hintSponsor,
+                  icon: Icons.person_pin,
+                  inputType: TextInputType.text,
+                ),
+                Padding(
+                  padding: const EdgeInsets.fromLTRB(0.0, 3.0, 2.0, 3.0),
+                  child: Row(
+                    crossAxisAlignment: CrossAxisAlignment.baseline,
+                    children: <Widget>[
+                      Expanded(
+                        child: Text(
+                          'Tipo Sanguíneo:',
+                          textAlign: TextAlign.center,
+                        ),
+                      ),
+                      Expanded(
+                        child: Container(
+                          height: 55.0,
+                          child: DropdownButtonFormField(
+                            decoration: const InputDecoration(
+                              enabledBorder: OutlineInputBorder(
+                                borderSide: BorderSide(
+                                  color: Colors.white70,
+                                ),
                               ),
                             ),
+                            value: _controller.currentBloodType,
+                            items: getBloodTypes(),
+                            onChanged: _controller.changedDropDownItem,
                           ),
-                          value: _controller.currentBloodType,
-                          items: getBloodTypes(),
-                          onChanged: _controller.changedDropDownItem,
                         ),
+                      ),
+                    ],
+                  ),
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: <Widget>[
+                    Expanded(
+                      child: InputTextField(
+                        controller: _controller.cnhCtrl,
+                        controllerText:
+                        _controller.associated.cnh != null ? _controller.associated.cnh : null,
+                        label: labelCNH,
+                        hint: hintCNH,
+                        inputType: TextInputType.number,
+                      ),
+                    ),
+                    SizedBox(
+                      width: 5.0,
+                    ),
+                    Expanded(
+                      child: InputTextField(
+                        controller: _controller.cpfCtrl,
+                        controllerText:
+                        _controller.associated.cpf != null ? _controller.associated.cpf : null,
+                        label: labelCPF,
+                        hint: hintCPF,
+                        inputType: TextInputType.number,
                       ),
                     ),
                   ],
                 ),
-              ),
-              InputTextField(
-                controller: _controller.associatedTypeCtrl,
-                controllerText: associated.associatedType != null
-                    ? associated.associatedType
-                    : null,
-                label: labelAssociatedType,
-                disabled: true,
-              ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                children: <Widget>[
-                  Expanded(
-                    child: InputTextField(
-                      controller: _controller.cnhCtrl,
-                      controllerText:
-                          associated.cnh != null ? associated.cnh : null,
-                      label: labelCNH,
-                      hint: hintCNH,
-                      inputType: TextInputType.number,
+                InputTextField(
+                  controller: _controller.associatedTypeCtrl,
+                  controllerText: _controller.associated.associatedType != null
+                      ? _controller.associated.associatedType
+                      : null,
+                  label: labelAssociatedType,
+                  disabled: true,
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: <Widget>[
+                    Expanded(
+                      child: InputTextField(
+                        controller: _controller.dateBirthCtrl,
+                        controllerText: _controller.associated.dateBirth != null
+                            ? _controller.associated.dateBirth
+                            : null,
+                        label: labelDateBirth,
+                        hint: hintDate,
+                        icon: Icons.calendar_today,
+                        inputType: TextInputType.datetime,
+                      ),
                     ),
-                  ),
-                  SizedBox(
-                    width: 5.0,
-                  ),
-                  Expanded(
-                    child: InputTextField(
-                      controller: _controller.cpfCtrl,
-                      controllerText:
-                          associated.cpf != null ? associated.cpf : null,
-                      label: labelCPF,
-                      hint: hintCPF,
-                      inputType: TextInputType.number,
+                    SizedBox(
+                      width: 5.0,
                     ),
-                  ),
-                ],
-              ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                children: <Widget>[
-                  Expanded(
-                    child: InputTextField(
-                      controller: _controller.dateBirthCtrl,
-                      controllerText: associated.dateBirth != null
-                          ? associated.dateBirth
-                          : null,
-                      label: labelDateBirth,
-                      hint: hintDate,
-                      icon: Icons.calendar_today,
-                      inputType: TextInputType.datetime,
+                    Expanded(
+                      child: InputTextField(
+                        controller: _controller.dateShieldCtrl,
+                        controllerText: _controller.associated.dateShield != null
+                            ? _controller.associated.dateShield
+                            : null,
+                        label: labelDateShield,
+                        hint: hintDate,
+                        icon: Icons.calendar_today,
+                        inputType: TextInputType.datetime,
+                      ),
                     ),
-                  ),
-                  SizedBox(
-                    width: 5.0,
-                  ),
-                  Expanded(
-                    child: InputTextField(
-                      controller: _controller.dateShieldCtrl,
-                      controllerText: associated.dateShield != null
-                          ? associated.dateShield
-                          : null,
-                      label: labelDateShield,
-                      hint: hintDate,
-                      icon: Icons.calendar_today,
-                      inputType: TextInputType.datetime,
-                    ),
-                  ),
-                ],
-              ),
-              Divider(),
-              _dependentsListWidget,
-              SizedBox(
-                height: 10.0,
-              ),
-              _motorcyclesListWidget,
-              SizedBox(
-                height: 100.0,
-              ),
-            ],
+                  ],
+                ),
+                Divider(),
+                _dependentsListWidget,
+                SizedBox(
+                  height: 10.0,
+                ),
+                _motorcyclesListWidget,
+                SizedBox(
+                  height: 100.0,
+                ),
+              ],
+            ),
           ),
         ),
-      ),
-    );
-  }
+      );
 
-  Container _photo(String fileName) {
-    return Container(
-      height: 200.0,
-      width: 200.0,
-      padding: EdgeInsets.all(10.0),
-      decoration: BoxDecoration(
-        color: Colors.black.withOpacity(0.2),
-        borderRadius: BorderRadius.circular(100.0),
-      ),
-      child: Container(
-        height: 100.0,
-        width: 100.0,
+  _photo(String fileName) => Container(
+        height: 200.0,
+        width: 200.0,
+        padding: EdgeInsets.all(10.0),
         decoration: BoxDecoration(
-          color: Colors.black,
+          color: Colors.black.withOpacity(0.2),
           borderRadius: BorderRadius.circular(100.0),
-          image: DecorationImage(
-            image: AssetImage(fileName),
-            fit: BoxFit.fill,
+        ),
+        child: Container(
+          height: 100.0,
+          width: 100.0,
+          decoration: BoxDecoration(
+            color: Colors.black,
+            borderRadius: BorderRadius.circular(100.0),
+            image: DecorationImage(
+              image: AssetImage(fileName),
+              fit: BoxFit.fill,
+            ),
           ),
         ),
-      ),
-    );
-  }
+      );
 
   get _dependentsListWidget => Container(
         padding: EdgeInsets.all(10.0),

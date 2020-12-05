@@ -19,14 +19,12 @@ class DependentAdd extends StatefulWidget {
 
 class _DependentAddState extends State<DependentAdd> {
   DependentController _controller = DependentController();
-  List<DropdownMenuItem<String>> _dropDownBloodTypes;
 
   @override
   void initState() {
-    _dropDownBloodTypes = getBloodTypes();
     _controller.currentBloodType = widget.dependent != null
         ? widget.dependent.bloodType
-        : _dropDownBloodTypes.first.value;
+        : getBloodTypes().first.value;
     _controller.isAssociated = (widget.dependent != null
         ? (widget.dependent.isAssociated == 'S' ? true : false)
         : false);
@@ -101,7 +99,7 @@ class _DependentAddState extends State<DependentAdd> {
                               ),
                             ),
                             value: _controller.currentBloodType,
-                            items: _dropDownBloodTypes,
+                            items: getBloodTypes(),
                             onChanged: _controller.changedDropDownItem,
                           ),
                         ),

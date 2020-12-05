@@ -54,6 +54,9 @@ abstract class AssociatedControllerBase with Store {
   ObservableFuture<List<Associated>> associatedListFuture;
 
   @observable
+  ObservableFuture<Associated> associatedUpdate;
+
+  @observable
   ObservableList dependents = [].asObservable();
 
   @observable
@@ -62,6 +65,7 @@ abstract class AssociatedControllerBase with Store {
   /*
   vars nao observaveis
   */
+  Associated associated;
   final AssociatedRepo _associatedRepo = AssociatedRepo();
   String errorMsg;
   Future<List<Associated>> future;
@@ -82,6 +86,16 @@ abstract class AssociatedControllerBase with Store {
   Future fetchAssociated(int id) =>
       associatedListFuture = ObservableFuture(_associatedRepo
           .findByIdAssociatedToList(id)
+          .then((associated) => associated)).catchError((e) {
+        this.errorMsg = "TimeOutException: ${e.toString()}";
+      }, test: (e) => e is TimeoutException).catchError((e) {
+        this.errorMsg = "Exception: ${e.toString()}";
+      }, test: (e) => e is Exception);
+
+  @action
+  Future update(Associated associated) =>
+      associatedUpdate = ObservableFuture(_associatedRepo
+          .update(associated)
           .then((associated) => associated)).catchError((e) {
         this.errorMsg = "TimeOutException: ${e.toString()}";
       }, test: (e) => e is TimeoutException).catchError((e) {
@@ -131,8 +145,6 @@ abstract class AssociatedControllerBase with Store {
   motorcyclesAddAll(List<Motorcycle> list) {
     motorcycles.addAll(list);
   }
-
-  update() {}
 
   Future<List<Associated>> getFuture(int _associatedId) =>
       future = fetchAssociated(_associatedId);

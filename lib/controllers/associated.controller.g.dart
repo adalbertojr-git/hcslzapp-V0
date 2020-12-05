@@ -211,6 +211,22 @@ mixin _$AssociatedController on AssociatedControllerBase, Store {
     });
   }
 
+  final _$associatedUpdateAtom =
+      Atom(name: 'AssociatedControllerBase.associatedUpdate');
+
+  @override
+  ObservableFuture<Associated> get associatedUpdate {
+    _$associatedUpdateAtom.reportRead();
+    return super.associatedUpdate;
+  }
+
+  @override
+  set associatedUpdate(ObservableFuture<Associated> value) {
+    _$associatedUpdateAtom.reportWrite(value, super.associatedUpdate, () {
+      super.associatedUpdate = value;
+    });
+  }
+
   final _$dependentsAtom = Atom(name: 'AssociatedControllerBase.dependents');
 
   @override
@@ -261,6 +277,17 @@ mixin _$AssociatedController on AssociatedControllerBase, Store {
         name: 'AssociatedControllerBase.fetchAssociated');
     try {
       return super.fetchAssociated(id);
+    } finally {
+      _$AssociatedControllerBaseActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
+  Future<dynamic> update(Associated associated) {
+    final _$actionInfo = _$AssociatedControllerBaseActionController.startAction(
+        name: 'AssociatedControllerBase.update');
+    try {
+      return super.update(associated);
     } finally {
       _$AssociatedControllerBaseActionController.endAction(_$actionInfo);
     }
@@ -326,6 +353,7 @@ dateBirthCtrl: ${dateBirthCtrl},
 dateShieldCtrl: ${dateShieldCtrl},
 isHideButton: ${isHideButton},
 associatedListFuture: ${associatedListFuture},
+associatedUpdate: ${associatedUpdate},
 dependents: ${dependents},
 motorcycles: ${motorcycles}
     ''';

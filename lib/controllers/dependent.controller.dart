@@ -35,18 +35,28 @@ abstract class DependentControllerBase with Store {
   var isAssociatedCtrl = TextEditingController();
 
   @observable
-  String currentBloodType;
-
-  @observable
   bool isAssociated = false;
 
+  /*
+  vars nao observaveis
+  */
+  String currentBloodType;
+
+  /*
+  *
+  actions ----------------------------------------------------------------------
+  *
+  */
   @action
   associated() => isAssociated = !isAssociated;
 
-  @action
+  /*
+  *
+  metodos nao observaveis-------------------------------------------------------
+  *
+  */
   changedDropDownItem(String selected) {
     currentBloodType = selected;
   }
-
 
 }

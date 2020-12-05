@@ -71,8 +71,7 @@ class Login extends StatelessWidget {
         ],
       );
 
-  Widget _tabLogin(BuildContext context) {
-    return Stack(
+  _tabLogin(BuildContext context) => Stack(
       children: [
         Center(
           child: SizedBox(
@@ -124,7 +123,11 @@ class Login extends StatelessWidget {
                 Button(
                   Icons.arrow_forward,
                   onClick: () {
-                    _showDashboardPage(context);
+                    Navigator.pushReplacement(
+                      context,
+                      MaterialPageRoute(builder: (context) => Dashboard()
+                      ),
+                    );
                   },
                 ),
               ],
@@ -133,10 +136,8 @@ class Login extends StatelessWidget {
         ),
       ],
     );
-  }
 
-  Widget _tabRequestAccess(BuildContext context) {
-    return Container(
+  _tabRequestAccess(BuildContext context) => Container(
       decoration: BoxDecoration(
         gradient: LinearGradient(
           colors: [Colors.white30, Colors.deepOrange],
@@ -162,21 +163,21 @@ class Login extends StatelessWidget {
               controller: _controller.nameReqAccessCtrl,
               hint: hintName,
               label: labelName,
-              icon: Icons.person,
+              icon: Icons.person_add,
               inputType: TextInputType.text,
             ),
             InputTextField(
               controller: _controller.userReqAccessCtrl,
               hint: hintUser,
               label: labelUser,
-              icon: Icons.person,
+              icon: Icons.account_circle_outlined,
               inputType: TextInputType.text,
             ),
             InputTextField(
               controller: _controller.emailReqAccessCtrl,
               hint: hintEmail,
               label: labelEmail + " *",
-              icon: Icons.email,
+              icon: Icons.attach_email,
               inputType: TextInputType.emailAddress,
             ),
             Row(
@@ -186,7 +187,6 @@ class Login extends StatelessWidget {
                     controller: _controller.pswReqAccessCtrl,
                     label: labelPswReqAccess,
                     hint: hintPswReqAccess,
-                    icon: Icons.vpn_key,
                     inputType: TextInputType.text,
                     hidden: true,
                   ),
@@ -196,7 +196,6 @@ class Login extends StatelessWidget {
                     controller: _controller.confPswReqAccessCtrl,
                     label: labelConfPswReqAccess,
                     hint: hintConfPswReqAccess,
-                    icon: Icons.vpn_key,
                     inputType: TextInputType.text,
                     hidden: true,
                   ),
@@ -211,10 +210,8 @@ class Login extends StatelessWidget {
         ),
       ),
     );
-  }
 
-  Widget _tabForgotPassword(BuildContext context) {
-    return Container(
+  _tabForgotPassword(BuildContext context) => Container(
       decoration: BoxDecoration(
         gradient: LinearGradient(
           colors: [Colors.white30, Colors.deepOrange],
@@ -251,15 +248,6 @@ class Login extends StatelessWidget {
         ),
       ),
     );
-  }
-
-  _showDashboardPage(BuildContext context) {
-    Navigator.pushReplacement(
-      context,
-      MaterialPageRoute(builder: (context) => Dashboard()
-      ),
-    );
-  }
 }
 
 class SnackBarWidget extends StatelessWidget {

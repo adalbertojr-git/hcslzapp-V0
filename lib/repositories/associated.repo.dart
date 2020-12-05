@@ -32,11 +32,13 @@ class AssociatedRepo {
     }
   }
 
-  Future<Associated> save(Associated associated) async {
+  Future<Associated> update(Associated associated) async {
     final String encodedJson = jsonEncode(associated.toJson());
-    final Response response = await client.post(mainUrl + _associatedUrl,
+    final Response response = await client.put(mainUrl + _associatedUrl + "/1",
         headers: {'Content-type': 'application/json'},
         body: encodedJson);
+    print(associated);
+    print(response.statusCode);
     return Associated.fromJson(jsonDecode(response.body));
   }
 }

@@ -1,7 +1,7 @@
 const labelUserOrEmail = 'Usuário ou email *';
 const hintUserOrEmail = 'Usuário (ex: aj1234) ou email (ex: hc@email.com)';
 const labelUser = 'Usuário *';
-const hintUser = 'Informe um código de usuário para acesso ';
+const hintUser = 'Ex: seu primero nome, apelido, iniciais, etc.';
 const labelPsw = 'Senha *';
 const hintPsw = 'Digite sua senha';
 const labelPswReqAccess = 'Senha *';

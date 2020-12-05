@@ -7,11 +7,13 @@ class CenteredMessage extends StatelessWidget {
   final double _iconSize = 64;
   final double _fontSize = 20;
   final Color backgroundColor;
+  final Color fontColor;
 
   CenteredMessage(
     this._message, {
     this.icon,
     this.backgroundColor = Colors.red,
+    this.fontColor = Colors.white,
   });
 
   @override
@@ -48,7 +50,7 @@ class CenteredMessage extends StatelessWidget {
                 _message,
                 style: TextStyle(
                   fontSize: _fontSize,
-                  color: Colors.white,
+                  color: this.fontColor,
                 ),
                 textAlign: TextAlign.center,
               ),
