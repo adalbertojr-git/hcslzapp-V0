@@ -185,6 +185,7 @@ class Dashboard extends StatelessWidget {
                   );
                 },
               ),
+/*
               GridButton(
                 title: "Documentos",
                 image: "assets/imgs/docs.png",
@@ -196,6 +197,7 @@ class Dashboard extends StatelessWidget {
                   );
                 },
               ),
+*/
               GridButton(
                 title: "Codigos DTC",
                 image: "assets/imgs/codigosdtc.png",
@@ -207,6 +209,7 @@ class Dashboard extends StatelessWidget {
                   );
                 },
               ),
+/*
               GridButton(
                 title: "Oficina",
                 image: "assets/imgs/oficina.png",
@@ -218,6 +221,7 @@ class Dashboard extends StatelessWidget {
                   );
                 },
               ),
+*/
               GridButton(
                 title: "Boutique",
                 image: "assets/imgs/boutique.png",
@@ -229,11 +233,13 @@ class Dashboard extends StatelessWidget {
                   );
                 },
               ),
+/*
               GridButton(
                 title: "Classificados",
                 image: "assets/imgs/classificados.png",
                 context: gContext,
                 onClick: () {
+*/
 /*                            Navigator.push(
                               gContext,
                               MaterialPageRoute(
@@ -241,9 +247,12 @@ class Dashboard extends StatelessWidget {
                                   return Classificados();
                                 },
                               ),
-                            );*/
+                            );*//*
+
                 },
               ),
+*/
+/*
               GridButton(
                 title: "Meu Role",
                 image: "assets/imgs/maps.png",
@@ -255,6 +264,7 @@ class Dashboard extends StatelessWidget {
                   );
                 },
               ),
+*/
               GridButton(
                 title: "O Harley Club",
                 image: "assets/imgs/logo.png",

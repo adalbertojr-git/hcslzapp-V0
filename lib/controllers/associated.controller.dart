@@ -62,23 +62,22 @@ abstract class AssociatedControllerBase with Store {
   @observable
   ObservableList motorcycles = [].asObservable();
 
-  /*
-  vars nao observaveis
-  */
   Associated associated;
+
   final AssociatedRepo _associatedRepo = AssociatedRepo();
+
   String errorMsg;
+
   Future<List<Associated>> future;
+
   File _image;
+
   final picker = ImagePicker();
+
   List<Dependent> dependentsDelete = List<Dependent>();
+
   String currentBloodType;
 
-  /*
-  *
-  actions ----------------------------------------------------------------------
-  *
-  */
   @action
   hideButton() => isHideButton = !isHideButton;
 
@@ -103,7 +102,7 @@ abstract class AssociatedControllerBase with Store {
   @action
   Future update(Associated associated) =>
       associatedUpdate = ObservableFuture(_associatedRepo
-          .update(setFieldsToUpdate())
+          .update(_setFieldsToUpdate())
           .then((associated) => associated)).catchError((e) {
         this.errorMsg = "TimeOutException: ${e.toString()}";
       }, test: (e) => e is TimeoutException).catchError((e) {
@@ -136,13 +135,10 @@ abstract class AssociatedControllerBase with Store {
     print('Motocicletas: $motorcycles');
   }
 
-  /*
-  *
-  metodos nao observaveis-------------------------------------------------------
-  *
-  */
+  Future<List<Associated>> getFuture(int _associatedId) =>
+      future = fetchAssociated(_associatedId);
 
-  Associated setFieldsToUpdate() {
+  Associated _setFieldsToUpdate() {
     this.associated.name = nameCtrl.text;
     this.associated.phone = phoneCtrl.text;
     this.associated.email = emailCtrl.text;
@@ -168,9 +164,6 @@ abstract class AssociatedControllerBase with Store {
   motorcyclesAddAll(List<Motorcycle> list) {
     motorcycles.addAll(list);
   }
-
-  Future<List<Associated>> getFuture(int _associatedId) =>
-      future = fetchAssociated(_associatedId);
 
   Future getImageFromCamera() async {
     final pickedFile = await picker.getImage(source: ImageSource.camera);

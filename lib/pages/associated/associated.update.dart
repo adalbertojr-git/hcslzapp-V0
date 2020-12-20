@@ -22,7 +22,7 @@ class AssociatedUpdate extends StatefulWidget {
 
 class _AssociatedUpdateState extends State<AssociatedUpdate> {
   AssociatedController _controller;
-  int _associatedId = 2;
+  int _associatedId = 1;
 
   @override
   void initState() {
