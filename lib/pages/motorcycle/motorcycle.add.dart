@@ -50,6 +50,9 @@ class _MotorcycleAddState extends State<MotorcycleAdd> {
                   Expanded(
                     child: InputTextField(
                       controller: _controller.yearCtrl,
+                      controllerText: widget.motorcycle != null
+                          ? widget.motorcycle.year
+                          : null,
                       icon: Icons.calendar_today,
                       label: labelYear,
                       hint: hintYear,
@@ -59,6 +62,9 @@ class _MotorcycleAddState extends State<MotorcycleAdd> {
                   Expanded(
                     child: InputTextField(
                       controller: _controller.colorCtrl,
+                      controllerText: widget.motorcycle != null
+                          ? widget.motorcycle.color
+                          : null,
                       icon: Icons.color_lens,
                       label: labelColor,
                       hint: hintColor,
@@ -73,6 +79,9 @@ class _MotorcycleAddState extends State<MotorcycleAdd> {
                   Expanded(
                     child: InputTextField(
                       controller: _controller.licencePlateCtrl,
+                      controllerText: widget.motorcycle != null
+                          ? widget.motorcycle.licencePlate
+                          : null,
                       label: labelLicencePlate,
                       hint: hintLicencePlate,
                       inputType: TextInputType.text,
@@ -81,6 +90,9 @@ class _MotorcycleAddState extends State<MotorcycleAdd> {
                   Expanded(
                     child: InputTextField(
                       controller: _controller.nicknameCtrl,
+                      controllerText: widget.motorcycle != null
+                          ? widget.motorcycle.nickname
+                          : null,
                       label: labelNickname,
                       hint: hintNickname,
                       inputType: TextInputType.text,
@@ -90,12 +102,18 @@ class _MotorcycleAddState extends State<MotorcycleAdd> {
               ),
               InputTextField(
                 controller: _controller.chassisCtrl,
+                controllerText: widget.motorcycle != null
+                    ? widget.motorcycle.chassis
+                    : null,
                 label: labelChassis,
                 hint: hintChassis,
                 inputType: TextInputType.text,
               ),
               InputTextField(
                 controller: _controller.renavamCtrl,
+                controllerText: widget.motorcycle != null
+                    ? widget.motorcycle.renavam
+                    : null,
                 label: labelRenavam,
                 hint: hintRenavam,
                 inputType: TextInputType.text,
@@ -104,7 +122,8 @@ class _MotorcycleAddState extends State<MotorcycleAdd> {
           ),
         ),
       ),
-      floatingActionButton: Button(Icons.playlist_add, onClick: () => _add(context)),
+      floatingActionButton:
+          Button(Icons.playlist_add, onClick: () => _add(context)),
     );
   }
 

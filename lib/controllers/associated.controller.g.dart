@@ -130,22 +130,6 @@ mixin _$AssociatedController on AssociatedControllerBase, Store {
     });
   }
 
-  final _$bloodTypeCtrlAtom =
-      Atom(name: 'AssociatedControllerBase.bloodTypeCtrl');
-
-  @override
-  TextEditingController get bloodTypeCtrl {
-    _$bloodTypeCtrlAtom.reportRead();
-    return super.bloodTypeCtrl;
-  }
-
-  @override
-  set bloodTypeCtrl(TextEditingController value) {
-    _$bloodTypeCtrlAtom.reportWrite(value, super.bloodTypeCtrl, () {
-      super.bloodTypeCtrl = value;
-    });
-  }
-
   final _$dateBirthCtrlAtom =
       Atom(name: 'AssociatedControllerBase.dateBirthCtrl');
 
@@ -348,7 +332,6 @@ sponsorCtrl: ${sponsorCtrl},
 associatedTypeCtrl: ${associatedTypeCtrl},
 cnhCtrl: ${cnhCtrl},
 cpfCtrl: ${cpfCtrl},
-bloodTypeCtrl: ${bloodTypeCtrl},
 dateBirthCtrl: ${dateBirthCtrl},
 dateShieldCtrl: ${dateShieldCtrl},
 isHideButton: ${isHideButton},

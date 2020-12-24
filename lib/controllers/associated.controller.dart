@@ -39,9 +39,6 @@ abstract class AssociatedControllerBase with Store {
   var cpfCtrl = TextEditingController();
 
   @observable
-  var bloodTypeCtrl = TextEditingController();
-
-  @observable
   var dateBirthCtrl = TextEditingController();
 
   @observable
@@ -74,20 +71,10 @@ abstract class AssociatedControllerBase with Store {
 
   final picker = ImagePicker();
 
-  List<Dependent> dependentsDelete = List<Dependent>();
-
   String currentBloodType;
 
   @action
   hideButton() => isHideButton = !isHideButton;
-
-/*  @action
-  setIdCtrl(String value) => idCtrl.text = value;
-
-  @action
-  setNameCtrl(String value) => nameCtrl.text = value;
-
-  controller.setIdCtrl("Meu valor")*/
 
   @action
   Future fetchAssociated(int id) =>
@@ -117,10 +104,8 @@ abstract class AssociatedControllerBase with Store {
 
   @action
   dependentRemoveAt(int index) {
-    if (dependents[index].id != 0) dependentsDelete.add(dependents[index]);
     dependents.removeAt(index);
     print('Dependents pós Delete: $dependents');
-    print('DependentsDelete: $dependentsDelete');
   }
 
   @action
@@ -146,15 +131,16 @@ abstract class AssociatedControllerBase with Store {
     this.associated.associatedType = associatedTypeCtrl.text;
     this.associated.cnh = cnhCtrl.text;
     this.associated.cpf = cpfCtrl.text;
-    this.associated.bloodType = bloodTypeCtrl.text;
+    this.associated.bloodType = currentBloodType;
     this.associated.dateBirth = dateBirthCtrl.text;
     this.associated.dateShield = dateShieldCtrl.text;
+    this.associated.dependents = List<Dependent>.from(dependents);
+    this.associated.motorcycles = List<Motorcycle>.from(motorcycles);
     return this.associated;
   }
 
   changedDropDownItem(String selected) {
     currentBloodType = selected;
-    bloodTypeCtrl.text = currentBloodType;
   }
 
   dependentsAddAll(List<Dependent> list) {
