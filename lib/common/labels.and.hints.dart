@@ -1,7 +1,7 @@
 const labelUserOrEmail = 'Usuário ou email *';
 const hintUserOrEmail = 'Usuário (ex: aj1234) ou email (ex: hc@email.com)';
 const labelUser = 'Usuário *';
-const hintUser = 'Ex: seu primero nome, apelido, iniciais, etc.';
+const hintUser = 'Código usado para conectar no HCSlz App';
 const labelPsw = 'Senha *';
 const hintPsw = 'Digite sua senha';
 const labelPswReqAccess = 'Senha *';

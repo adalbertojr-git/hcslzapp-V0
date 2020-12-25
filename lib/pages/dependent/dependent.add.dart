@@ -166,33 +166,9 @@ class _DependentAddState extends State<DependentAdd> {
             ),
           ),
         ),
-        floatingActionButton: Button(
-          Icons.playlist_add,
-          onClick: () => _add(context)
-        ),
+        floatingActionButton:
+            Button(Icons.playlist_add, onClick: () => _controller.add(context)),
       ),
     );
-  }
-
-  _add(BuildContext context) {
-    _controller.idCtrl.text = "0";
-    final int id = int.parse(_controller.idCtrl.text);
-    final String name = _controller.nameCtrl.text;
-    final String email = _controller.emailCtrl.text;
-    final String phone = _controller.phoneCtrl.text;
-    final String cpf = _controller.cpfCtrl.text;
-    final String bloodType = _controller.currentBloodType;
-    final String dateBirth = _controller.dateBirthCtrl.text;
-    final String isAssociated = (_controller.isAssociated ? 'S' : 'N');
-    if (name != '') {
-      final dependent = Dependent(
-          id, name, email, phone, cpf, bloodType, dateBirth, isAssociated);
-      /*
-      pop = manda resposta para o push (then)
-      remove a tela da pilha de navegação. Ou seja, o push() adiciona uma tela
-      à pilha, e o pop() a remove.
-      */
-      Navigator.pop(context, dependent);
-    }
   }
 }

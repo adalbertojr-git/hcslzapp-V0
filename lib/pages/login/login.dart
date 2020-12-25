@@ -93,11 +93,11 @@ class Login extends StatelessWidget {
             child: Column(
               children: <Widget>[
                 SizedBox(
-                  height: 10.0,
+                  height: 20.0,
                 ),
                 Text(
                   'Login',
-                  style: TextStyle(fontSize: 20.0),
+                  style: TextStyle(fontSize: 15.0),
                 ),
                 SizedBox(
                   height: 10.0,
@@ -150,11 +150,11 @@ class Login extends StatelessWidget {
         child: Column(
           children: <Widget>[
             SizedBox(
-              height: 10.0,
+              height: 20.0,
             ),
             Text(
               'Solicitar Cadastro',
-              style: TextStyle(fontSize: 20.0),
+              style: TextStyle(fontSize: 15.0),
             ),
             SizedBox(
               height: 10.0,
@@ -224,11 +224,11 @@ class Login extends StatelessWidget {
         child: Column(
           children: <Widget>[
             SizedBox(
-              height: 10.0,
+              height: 20.0,
             ),
             Text(
               'Esqueci minha senha',
-              style: TextStyle(fontSize: 20.0),
+              style: TextStyle(fontSize: 15.0),
             ),
             SizedBox(
               height: 10.0,

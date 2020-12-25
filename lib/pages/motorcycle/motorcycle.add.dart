@@ -123,29 +123,7 @@ class _MotorcycleAddState extends State<MotorcycleAdd> {
         ),
       ),
       floatingActionButton:
-          Button(Icons.playlist_add, onClick: () => _add(context)),
+          Button(Icons.playlist_add, onClick: () => _controller.add(context)),
     );
-  }
-
-  _add(BuildContext context) {
-    _controller.idCtrl.text = "0";
-    final int id = int.parse(_controller.idCtrl.text);
-    final String model = _controller.modelCtrl.text;
-    final String year = _controller.yearCtrl.text;
-    final String color = _controller.colorCtrl.text;
-    final String licencePlate = _controller.licencePlateCtrl.text;
-    final String nickname = _controller.nicknameCtrl.text;
-    final String chassis = _controller.chassisCtrl.text;
-    final String renavam = _controller.renavamCtrl.text;
-    if (model != '') {
-      final motorcycle = Motorcycle(
-          id, model, year, color, licencePlate, nickname, chassis, renavam);
-      /*
-      pop = manda resposta para o push (then)
-      remove a tela da pilha de navegação. Ou seja, o push() adiciona uma tela
-      à pilha, e o pop() a remove.
-      */
-      Navigator.pop(context, motorcycle);
-    }
   }
 }
