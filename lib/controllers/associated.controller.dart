@@ -1,5 +1,6 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
+import 'package:hcslzapp/controllers/formerror.controller.dart';
 import 'package:hcslzapp/models/associated.dart';
 import 'package:hcslzapp/models/dependent.dart';
 import 'package:hcslzapp/models/motorcycle.dart';
@@ -14,6 +15,9 @@ class AssociatedController = AssociatedControllerBase
     with _$AssociatedController;
 
 abstract class AssociatedControllerBase with Store {
+
+  var formError = FormErrorController();
+
   @observable
   var idCtrl = TextEditingController();
 
@@ -118,6 +122,13 @@ abstract class AssociatedControllerBase with Store {
   motorcycleRemoveAt(int index) {
     motorcycles.removeAt(index);
     print('Motocicletas: $motorcycles');
+  }
+
+  String validateName() {
+    if(formError.name == null || formError.name.isEmpty) {
+      return "Nome não pode ser nulo!!!";
+    }
+    return null;
   }
 
   Future<List<Associated>> getFuture(int _associatedId) =>

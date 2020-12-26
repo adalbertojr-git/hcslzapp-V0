@@ -13,6 +13,8 @@ class InputTextField extends StatelessWidget {
   final String label;
   final double size;
   final String controllerText;
+  final onChanged;
+  final String errorText;
 
   InputTextField(
       {this.controller,
@@ -26,11 +28,13 @@ class InputTextField extends StatelessWidget {
       this.label,
       this.nLines,
       this.size,
-      this.controllerText});
+      this.controllerText,
+      this.onChanged,
+      this.errorText});
 
   @override
   Widget build(BuildContext context) {
-    _setController(controller, controllerText);
+    this.controller.text = this.controllerText;
     return Padding(
       padding: const EdgeInsets.fromLTRB(2.0, 3.0, 2.0, 3.0),
       child: TextFormField(
@@ -43,12 +47,22 @@ class InputTextField extends StatelessWidget {
         decoration: InputDecoration(
           focusedBorder: OutlineInputBorder(
             borderSide: BorderSide(
-              color: Colors.lightBlue,
+              color: Colors.orangeAccent,
             ),
           ),
           enabledBorder: OutlineInputBorder(
             borderSide: BorderSide(
               color: Colors.white,
+            ),
+          ),
+          errorBorder: OutlineInputBorder(
+            borderSide: BorderSide(
+              color: Colors.red,
+            ),
+          ),
+          focusedErrorBorder: OutlineInputBorder(
+            borderSide: BorderSide(
+              color: Colors.red,
             ),
           ),
           icon: icon != null
@@ -71,23 +85,17 @@ class InputTextField extends StatelessWidget {
             color: Colors.black45,
           ),
           prefixText: prefix,
-          helperText: helper,
-          helperStyle: TextStyle(
-            fontSize: 11.0,
-            color: Colors.black26,
+          errorText: this.errorText == null ? null : this.errorText,
+          errorStyle: TextStyle(
+            fontSize: 10.0,
+            color: Colors.red,
           ),
         ),
         keyboardType: inputType,
-        onSaved: (String value) {},
-        validator: (String value) {
-          return value;
-        },
         maxLines: nLines != null ? nLines : 1,
         controller: controller,
+        onChanged: this.onChanged,
       ),
     );
   }
-
-  _setController(TextEditingController controller, String controllerText) =>
-      this.controller.text = controllerText;
 }

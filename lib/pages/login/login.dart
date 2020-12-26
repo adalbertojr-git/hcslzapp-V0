@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:hcslzapp/common/labels.and.hints.dart';
 import 'package:hcslzapp/components/button.dart';
 import 'package:hcslzapp/components/input.textfield.dart';
@@ -159,12 +160,18 @@ class Login extends StatelessWidget {
             SizedBox(
               height: 10.0,
             ),
-            InputTextField(
-              controller: _controller.nameReqAccessCtrl,
-              hint: hintName,
-              label: labelName,
-              icon: Icons.person_add,
-              inputType: TextInputType.text,
+            Observer(
+              builder: (_) {
+                return InputTextField(
+                  controller: _controller.nameReqAccessCtrl,
+                  hint: hintName,
+                  label: labelName,
+                  icon: Icons.person_add,
+                  inputType: TextInputType.text,
+                  onChanged: _controller.formError.changeName,
+                  errorText: _controller.validateName(),
+                );
+              }
             ),
             InputTextField(
               controller: _controller.userReqAccessCtrl,
