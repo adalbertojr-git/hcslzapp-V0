@@ -41,7 +41,7 @@ class DefectAdd extends StatelessWidget {
                   children: <Widget>[
                     Expanded(
                       child: InputTextField(
-                        controller: _controladorModelo,
+                        textEditingController: _controladorModelo,
                         helper: _rotuloModelo,
                         icon: Icons.motorcycle,
                         inputType: TextInputType.text,
@@ -49,7 +49,7 @@ class DefectAdd extends StatelessWidget {
                     ),
                     Expanded(
                       child: InputTextField(
-                        controller: _controladorAno,
+                        textEditingController: _controladorAno,
                         icon: Icons.calendar_today,
                         helper: _rotuloAno,
                         inputType: TextInputType.number,
@@ -58,25 +58,25 @@ class DefectAdd extends StatelessWidget {
                   ],
                 ),
                 InputTextField(
-                  controller: _controladorDefeito,
+                  textEditingController: _controladorDefeito,
                   helper: _rotuloDefeito,
                   inputType: TextInputType.text,
                   nLines: 2,
                 ),
                 InputTextField(
-                  controller: _controladorSolucao,
+                  textEditingController: _controladorSolucao,
                   helper: _rotuloSolucao,
                   inputType: TextInputType.text,
                   nLines: 5,
                 ),
                 InputTextField(
-                  controller: _controladorProprietario,
+                  textEditingController: _controladorProprietario,
                   helper: _rotuloProprietario,
                   icon: Icons.person,
                   inputType: TextInputType.text,
                 ),
                 InputTextField(
-                  controller: _controladorTelefone,
+                  textEditingController: _controladorTelefone,
                   helper: _rotuloTelefone,
                   icon: Icons.phone,
                   inputType: TextInputType.phone,

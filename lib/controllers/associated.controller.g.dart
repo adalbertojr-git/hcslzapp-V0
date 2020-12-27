@@ -245,7 +245,7 @@ mixin _$AssociatedController on AssociatedControllerBase, Store {
       ActionController(name: 'AssociatedControllerBase');
 
   @override
-  dynamic hideButton() {
+  bool hideButton() {
     final _$actionInfo = _$AssociatedControllerBaseActionController.startAction(
         name: 'AssociatedControllerBase.hideButton');
     try {

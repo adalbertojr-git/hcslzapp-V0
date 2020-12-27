@@ -78,7 +78,7 @@ abstract class AssociatedControllerBase with Store {
   String currentBloodType;
 
   @action
-  hideButton() => isHideButton = !isHideButton;
+  bool hideButton() => isHideButton = !isHideButton;
 
   @action
   Future fetchAssociated(int id) =>

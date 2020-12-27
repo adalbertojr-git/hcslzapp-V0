@@ -36,8 +36,8 @@ class _MotorcycleAddState extends State<MotorcycleAdd> {
             children: <Widget>[
               TopMargin(),
               InputTextField(
-                controller: _controller.modelCtrl,
-                controllerText:
+                textEditingController: _controller.modelCtrl,
+                text:
                     widget.motorcycle != null ? widget.motorcycle.model : null,
                 label: labelModel,
                 hint: hintModel,
@@ -49,8 +49,8 @@ class _MotorcycleAddState extends State<MotorcycleAdd> {
                 children: <Widget>[
                   Expanded(
                     child: InputTextField(
-                      controller: _controller.yearCtrl,
-                      controllerText: widget.motorcycle != null
+                      textEditingController: _controller.yearCtrl,
+                      text: widget.motorcycle != null
                           ? widget.motorcycle.year
                           : null,
                       icon: Icons.calendar_today,
@@ -61,8 +61,8 @@ class _MotorcycleAddState extends State<MotorcycleAdd> {
                   ),
                   Expanded(
                     child: InputTextField(
-                      controller: _controller.colorCtrl,
-                      controllerText: widget.motorcycle != null
+                      textEditingController: _controller.colorCtrl,
+                      text: widget.motorcycle != null
                           ? widget.motorcycle.color
                           : null,
                       icon: Icons.color_lens,
@@ -78,8 +78,8 @@ class _MotorcycleAddState extends State<MotorcycleAdd> {
                 children: <Widget>[
                   Expanded(
                     child: InputTextField(
-                      controller: _controller.licencePlateCtrl,
-                      controllerText: widget.motorcycle != null
+                      textEditingController: _controller.licencePlateCtrl,
+                      text: widget.motorcycle != null
                           ? widget.motorcycle.licencePlate
                           : null,
                       label: labelLicencePlate,
@@ -89,8 +89,8 @@ class _MotorcycleAddState extends State<MotorcycleAdd> {
                   ),
                   Expanded(
                     child: InputTextField(
-                      controller: _controller.nicknameCtrl,
-                      controllerText: widget.motorcycle != null
+                      textEditingController: _controller.nicknameCtrl,
+                      text: widget.motorcycle != null
                           ? widget.motorcycle.nickname
                           : null,
                       label: labelNickname,
@@ -101,8 +101,8 @@ class _MotorcycleAddState extends State<MotorcycleAdd> {
                 ],
               ),
               InputTextField(
-                controller: _controller.chassisCtrl,
-                controllerText: widget.motorcycle != null
+                textEditingController: _controller.chassisCtrl,
+                text: widget.motorcycle != null
                     ? widget.motorcycle.chassis
                     : null,
                 label: labelChassis,
@@ -110,8 +110,8 @@ class _MotorcycleAddState extends State<MotorcycleAdd> {
                 inputType: TextInputType.text,
               ),
               InputTextField(
-                controller: _controller.renavamCtrl,
-                controllerText: widget.motorcycle != null
+                textEditingController: _controller.renavamCtrl,
+                text: widget.motorcycle != null
                     ? widget.motorcycle.renavam
                     : null,
                 label: labelRenavam,

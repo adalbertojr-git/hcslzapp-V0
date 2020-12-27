@@ -104,14 +104,14 @@ class Login extends StatelessWidget {
                   height: 10.0,
                 ),
                 InputTextField(
-                  controller: _controller.userLoginCtrl,
+                  textEditingController: _controller.userLoginCtrl,
                   label: labelUserOrEmail,
                   hint: hintUserOrEmail,
                   icon: Icons.person,
                   inputType: TextInputType.text,
                 ),
                 InputTextField(
-                  controller: _controller.pswLoginCtrl,
+                  textEditingController: _controller.pswLoginCtrl,
                   label: labelPsw,
                   hint: hintPsw,
                   icon: Icons.vpn_key,
@@ -163,7 +163,7 @@ class Login extends StatelessWidget {
             Observer(
               builder: (_) {
                 return InputTextField(
-                  controller: _controller.nameReqAccessCtrl,
+                  textEditingController: _controller.nameReqAccessCtrl,
                   hint: hintName,
                   label: labelName,
                   icon: Icons.person_add,
@@ -174,14 +174,14 @@ class Login extends StatelessWidget {
               }
             ),
             InputTextField(
-              controller: _controller.userReqAccessCtrl,
+              textEditingController: _controller.userReqAccessCtrl,
               hint: hintUser,
               label: labelUser,
               icon: Icons.account_circle_outlined,
               inputType: TextInputType.text,
             ),
             InputTextField(
-              controller: _controller.emailReqAccessCtrl,
+              textEditingController: _controller.emailReqAccessCtrl,
               hint: hintEmail,
               label: labelEmail + " *",
               icon: Icons.attach_email,
@@ -191,7 +191,7 @@ class Login extends StatelessWidget {
               children: [
                 Expanded(
                   child: InputTextField(
-                    controller: _controller.pswReqAccessCtrl,
+                    textEditingController: _controller.pswReqAccessCtrl,
                     label: labelPswReqAccess,
                     hint: hintPswReqAccess,
                     inputType: TextInputType.text,
@@ -200,7 +200,7 @@ class Login extends StatelessWidget {
                 ),
                 Expanded(
                   child: InputTextField(
-                    controller: _controller.confPswReqAccessCtrl,
+                    textEditingController: _controller.confPswReqAccessCtrl,
                     label: labelConfPswReqAccess,
                     hint: hintConfPswReqAccess,
                     inputType: TextInputType.text,
@@ -241,7 +241,7 @@ class Login extends StatelessWidget {
               height: 10.0,
             ),
             InputTextField(
-              controller: _controller.emailForgotPswCtrl,
+              textEditingController: _controller.emailForgotPswCtrl,
               hint: hintEmail,
               label: labelEmail + " *",
               icon: Icons.email,

@@ -36,6 +36,12 @@ class _AssociatedUpdateState extends State<AssociatedUpdate> {
   }
 
   @override
+  void dispose() {
+    if (!_controller.isHideButton) _controller.hideButton();
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) => Observer(
         builder: (_) => Scaffold(
           body: FutureBuilder<List<Associated>>(
@@ -135,8 +141,8 @@ class _AssociatedUpdateState extends State<AssociatedUpdate> {
               Observer(
                 builder: (_) {
                   return InputTextField(
-                    controller: _controller.nameCtrl,
-                    controllerText: _controller.associated.name != null
+                    textEditingController: _controller.nameCtrl,
+                    text: _controller.associated.name != null
                         ? _controller.associated.name
                         : null,
                     label: labelName,
@@ -149,8 +155,8 @@ class _AssociatedUpdateState extends State<AssociatedUpdate> {
                 },
               ),
               InputTextField(
-                controller: _controller.emailCtrl,
-                controllerText: _controller.associated.email != null
+                textEditingController: _controller.emailCtrl,
+                text: _controller.associated.email != null
                     ? _controller.associated.email
                     : null,
                 label: labelEmail,
@@ -159,8 +165,8 @@ class _AssociatedUpdateState extends State<AssociatedUpdate> {
                 inputType: TextInputType.emailAddress,
               ),
               InputTextField(
-                controller: _controller.phoneCtrl,
-                controllerText: _controller.associated.phone != null
+                textEditingController: _controller.phoneCtrl,
+                text: _controller.associated.phone != null
                     ? _controller.associated.phone
                     : null,
                 label: labelPhone,
@@ -169,8 +175,8 @@ class _AssociatedUpdateState extends State<AssociatedUpdate> {
                 inputType: TextInputType.phone,
               ),
               InputTextField(
-                controller: _controller.sponsorCtrl,
-                controllerText: _controller.associated.sponsor != null
+                textEditingController: _controller.sponsorCtrl,
+                text: _controller.associated.sponsor != null
                     ? _controller.associated.sponsor
                     : null,
                 label: labelSponsor,
@@ -214,8 +220,8 @@ class _AssociatedUpdateState extends State<AssociatedUpdate> {
                 children: <Widget>[
                   Expanded(
                     child: InputTextField(
-                      controller: _controller.cnhCtrl,
-                      controllerText: _controller.associated.cnh != null
+                      textEditingController: _controller.cnhCtrl,
+                      text: _controller.associated.cnh != null
                           ? _controller.associated.cnh
                           : null,
                       label: labelCNH,
@@ -228,8 +234,8 @@ class _AssociatedUpdateState extends State<AssociatedUpdate> {
                   ),
                   Expanded(
                     child: InputTextField(
-                      controller: _controller.cpfCtrl,
-                      controllerText: _controller.associated.cpf != null
+                      textEditingController: _controller.cpfCtrl,
+                      text: _controller.associated.cpf != null
                           ? _controller.associated.cpf
                           : null,
                       label: labelCPF,
@@ -240,8 +246,8 @@ class _AssociatedUpdateState extends State<AssociatedUpdate> {
                 ],
               ),
               InputTextField(
-                controller: _controller.associatedTypeCtrl,
-                controllerText: _controller.associated.associatedType != null
+                textEditingController: _controller.associatedTypeCtrl,
+                text: _controller.associated.associatedType != null
                     ? _controller.associated.associatedType
                     : null,
                 label: labelAssociatedType,
@@ -252,8 +258,8 @@ class _AssociatedUpdateState extends State<AssociatedUpdate> {
                 children: <Widget>[
                   Expanded(
                     child: InputTextField(
-                      controller: _controller.dateBirthCtrl,
-                      controllerText: _controller.associated.dateBirth != null
+                      textEditingController: _controller.dateBirthCtrl,
+                      text: _controller.associated.dateBirth != null
                           ? _controller.associated.dateBirth
                           : null,
                       label: labelDateBirth,
@@ -267,11 +273,10 @@ class _AssociatedUpdateState extends State<AssociatedUpdate> {
                   ),
                   Expanded(
                     child: InputTextField(
-                      controller: _controller.dateShieldCtrl,
-                      controllerText:
-                          _controller.associated.dateShield != null
-                              ? _controller.associated.dateShield
-                              : null,
+                      textEditingController: _controller.dateShieldCtrl,
+                      text: _controller.associated.dateShield != null
+                          ? _controller.associated.dateShield
+                          : null,
                       label: labelDateShield,
                       hint: hintDate,
                       icon: Icons.calendar_today,

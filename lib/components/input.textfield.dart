@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 class InputTextField extends StatelessWidget {
-  final TextEditingController controller;
+  final TextEditingController textEditingController;
   final String helper;
   final String hint;
   final IconData icon;
@@ -12,12 +12,12 @@ class InputTextField extends StatelessWidget {
   final int nLines;
   final String label;
   final double size;
-  final String controllerText;
+  final String text;
   final onChanged;
   final String errorText;
 
   InputTextField(
-      {this.controller,
+      {this.textEditingController,
       this.helper,
       this.hint,
       this.icon,
@@ -28,13 +28,13 @@ class InputTextField extends StatelessWidget {
       this.label,
       this.nLines,
       this.size,
-      this.controllerText,
+      this.text,
       this.onChanged,
       this.errorText});
 
   @override
   Widget build(BuildContext context) {
-    this.controller.text = this.controllerText;
+    this.textEditingController.text = this.text;
     return Padding(
       padding: const EdgeInsets.fromLTRB(2.0, 3.0, 2.0, 3.0),
       child: TextFormField(
@@ -42,7 +42,7 @@ class InputTextField extends StatelessWidget {
         obscureText: hidden != null ? hidden : false,
         readOnly: disabled != null ? disabled : false,
         style: TextStyle(
-          fontSize: size != null ? size : 17.0,
+          fontSize: size != null ? size : 15.0,
         ),
         decoration: InputDecoration(
           focusedBorder: OutlineInputBorder(
@@ -93,7 +93,7 @@ class InputTextField extends StatelessWidget {
         ),
         keyboardType: inputType,
         maxLines: nLines != null ? nLines : 1,
-        controller: controller,
+        controller: textEditingController,
         onChanged: this.onChanged,
       ),
     );

@@ -50,8 +50,8 @@ class _DependentAddState extends State<DependentAdd> {
               children: <Widget>[
                 TopMargin(),
                 InputTextField(
-                  controller: _controller.nameCtrl,
-                  controllerText:
+                  textEditingController: _controller.nameCtrl,
+                  text:
                       widget.dependent != null ? widget.dependent.name : null,
                   label: labelNameDependent,
                   hint: hintNameDependent,
@@ -59,8 +59,8 @@ class _DependentAddState extends State<DependentAdd> {
                   inputType: TextInputType.text,
                 ),
                 InputTextField(
-                  controller: _controller.emailCtrl,
-                  controllerText:
+                  textEditingController: _controller.emailCtrl,
+                  text:
                       widget.dependent != null ? widget.dependent.email : null,
                   label: labelEmail,
                   hint: hintEmail,
@@ -68,8 +68,8 @@ class _DependentAddState extends State<DependentAdd> {
                   inputType: TextInputType.emailAddress,
                 ),
                 InputTextField(
-                  controller: _controller.phoneCtrl,
-                  controllerText:
+                  textEditingController: _controller.phoneCtrl,
+                  text:
                       widget.dependent != null ? widget.dependent.phone : null,
                   label: labelPhone,
                   hint: hintPhone,
@@ -112,8 +112,8 @@ class _DependentAddState extends State<DependentAdd> {
                   children: <Widget>[
                     Expanded(
                       child: InputTextField(
-                        controller: _controller.cpfCtrl,
-                        controllerText: widget.dependent != null
+                        textEditingController: _controller.cpfCtrl,
+                        text: widget.dependent != null
                             ? widget.dependent.cpf
                             : null,
                         label: labelCPF,
@@ -123,8 +123,8 @@ class _DependentAddState extends State<DependentAdd> {
                     ),
                     Expanded(
                       child: InputTextField(
-                        controller: _controller.dateBirthCtrl,
-                        controllerText: widget.dependent != null
+                        textEditingController: _controller.dateBirthCtrl,
+                        text: widget.dependent != null
                             ? widget.dependent.dateBirth
                             : null,
                         label: labelDateBirth,
