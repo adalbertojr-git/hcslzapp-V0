@@ -34,11 +34,16 @@ abstract class LoginControllerBase with Store {
   @observable
   var emailForgotPswCtrl = TextEditingController();
 
-  String validateName() {
+/*
+  @computed
+  get isValid {
+    print('---------- isValid ----------');
+    print(formError.name);
     if(formError.name == null || formError.name.isEmpty) {
       return "Nome não pode ser nulo!!!";
     }
     return null;
   }
+*/
 
 }

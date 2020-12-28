@@ -1,20 +1,20 @@
 import 'package:flutter/material.dart';
 
 class InputTextField extends StatelessWidget {
-  final TextEditingController textEditingController;
-  final String helper;
-  final String hint;
-  final IconData icon;
-  final TextInputType inputType;
-  final bool hidden;
-  final bool disabled;
-  final String prefix;
-  final int nLines;
-  final String label;
-  final double size;
-  final String text;
-  final onChanged;
-  final String errorText;
+  TextEditingController textEditingController;
+  String helper;
+  String hint;
+  IconData icon;
+  TextInputType inputType;
+  bool hidden;
+  bool disabled;
+  String prefix;
+  int nLines;
+  String label;
+  double size;
+  String text;
+  Function onChanged;
+  String errorText;
 
   InputTextField(
       {this.textEditingController,
@@ -34,7 +34,10 @@ class InputTextField extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    this.textEditingController.text = this.text;
+    textEditingController.text = text;
+    textEditingController.selection = TextSelection.fromPosition(TextPosition(
+      offset: textEditingController.text.length,
+    ));
     return Padding(
       padding: const EdgeInsets.fromLTRB(2.0, 3.0, 2.0, 3.0),
       child: TextFormField(
@@ -85,7 +88,7 @@ class InputTextField extends StatelessWidget {
             color: Colors.black45,
           ),
           prefixText: prefix,
-          errorText: this.errorText == null ? null : this.errorText,
+          errorText: errorText == null ? null : errorText,
           errorStyle: TextStyle(
             fontSize: 10.0,
             color: Colors.red,
@@ -94,7 +97,7 @@ class InputTextField extends StatelessWidget {
         keyboardType: inputType,
         maxLines: nLines != null ? nLines : 1,
         controller: textEditingController,
-        onChanged: this.onChanged,
+        onChanged: onChanged,
       ),
     );
   }

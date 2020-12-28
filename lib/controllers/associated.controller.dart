@@ -91,14 +91,19 @@ abstract class AssociatedControllerBase with Store {
       }, test: (e) => e is Exception);
 
   @action
-  Future update(Associated associated) =>
-      associatedUpdate = ObservableFuture(_associatedRepo
+  Future update(Associated associated) {
+    print (hasErrors);
+    if (!hasErrors) {
+
+/*      associatedUpdate = ObservableFuture(_associatedRepo
           .update(_setFieldsToUpdate())
           .then((associated) => associated)).catchError((e) {
         this.errorMsg = "TimeOutException: ${e.toString()}";
       }, test: (e) => e is TimeoutException).catchError((e) {
         this.errorMsg = "Exception: ${e.toString()}";
-      }, test: (e) => e is Exception);
+      }, test: (e) => e is Exception);*/
+    }
+  }
 
   @action
   dependentAdd(Dependent dependent) {
@@ -124,15 +129,12 @@ abstract class AssociatedControllerBase with Store {
     print('Motocicletas: $motorcycles');
   }
 
-  String validateName() {
-    if(formError.name == null || formError.name.isEmpty) {
-      return "Nome não pode ser nulo!!!";
-    }
-    return null;
-  }
-
   Future<List<Associated>> getFuture(int _associatedId) =>
       future = fetchAssociated(_associatedId);
+
+  bool get hasErrors => hasErrorName;//|| email != null || password != null;
+
+  bool get hasErrorName => nameCtrl.text == null || nameCtrl.text.isEmpty;
 
   Associated _setFieldsToUpdate() {
     this.associated.name = nameCtrl.text;

@@ -149,8 +149,8 @@ class _AssociatedUpdateState extends State<AssociatedUpdate> {
                     hint: hintName,
                     icon: Icons.person,
                     inputType: TextInputType.text,
-                    onChanged: _controller.formError.changeName,
-                    errorText: _controller.validateName(),
+                    //onChanged: _controller.formError.changeName,
+                    //errorText: _controller.formError.isValid,
                   );
                 },
               ),

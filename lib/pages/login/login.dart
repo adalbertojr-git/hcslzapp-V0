@@ -168,8 +168,8 @@ class Login extends StatelessWidget {
                   label: labelName,
                   icon: Icons.person_add,
                   inputType: TextInputType.text,
-                  onChanged: _controller.formError.changeName,
-                  errorText: _controller.validateName(),
+                  //onChanged: _controller.formError.changeName,
+                  //errorText: _controller.formError.isValid,
                 );
               }
             ),

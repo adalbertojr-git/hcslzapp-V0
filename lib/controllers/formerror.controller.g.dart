@@ -16,6 +16,13 @@ mixin _$FormErrorController on FormErrorControllerBase, Store {
       (_$hasErrorsComputed ??= Computed<bool>(() => super.hasErrors,
               name: 'FormErrorControllerBase.hasErrors'))
           .value;
+  Computed<dynamic> _$isValidComputed;
+
+  @override
+  dynamic get isValid =>
+      (_$isValidComputed ??= Computed<dynamic>(() => super.isValid,
+              name: 'FormErrorControllerBase.isValid'))
+          .value;
 
   final _$nameAtom = Atom(name: 'FormErrorControllerBase.name');
 
@@ -29,36 +36,6 @@ mixin _$FormErrorController on FormErrorControllerBase, Store {
   set name(String value) {
     _$nameAtom.reportWrite(value, super.name, () {
       super.name = value;
-    });
-  }
-
-  final _$emailAtom = Atom(name: 'FormErrorControllerBase.email');
-
-  @override
-  String get email {
-    _$emailAtom.reportRead();
-    return super.email;
-  }
-
-  @override
-  set email(String value) {
-    _$emailAtom.reportWrite(value, super.email, () {
-      super.email = value;
-    });
-  }
-
-  final _$passwordAtom = Atom(name: 'FormErrorControllerBase.password');
-
-  @override
-  String get password {
-    _$passwordAtom.reportRead();
-    return super.password;
-  }
-
-  @override
-  set password(String value) {
-    _$passwordAtom.reportWrite(value, super.password, () {
-      super.password = value;
     });
   }
 
@@ -80,9 +57,8 @@ mixin _$FormErrorController on FormErrorControllerBase, Store {
   String toString() {
     return '''
 name: ${name},
-email: ${email},
-password: ${password},
-hasErrors: ${hasErrors}
+hasErrors: ${hasErrors},
+isValid: ${isValid}
     ''';
   }
 }

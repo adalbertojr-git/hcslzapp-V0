@@ -7,20 +7,31 @@ class FormErrorController = FormErrorControllerBase
 
 abstract class FormErrorControllerBase with Store {
   @observable
-  String name;
-
+  String name = '';
+/*
   @observable
   String email;
 
   @observable
-  String password;
+  String password;*/
 
   @computed
-  bool get hasErrors => name != null || email != null || password != null;
+  bool get hasErrors => name.isEmpty ;//|| email != null || password != null;
 
   @action
   changeName(String value) {
+    print('---------- changeName ----------');
     name = value;
     print('name: $name');
+  }
+
+  @computed
+  get isValid {
+    print('---------- isValid ----------');
+    print(name);
+    if(name == null || name.isEmpty) {
+      return "Nome não pode ser nulo!!!";
+    }
+    return null;
   }
 }
