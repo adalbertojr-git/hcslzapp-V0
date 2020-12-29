@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:mobx/mobx.dart';
-import 'formerror.controller.dart';
 
 part 'login.controller.g.dart';
 
@@ -8,7 +7,7 @@ class LoginController = LoginControllerBase with _$LoginController;
 
 abstract class LoginControllerBase with Store {
 
-  var formError = FormErrorController();
+  var formController;
 
   @observable
   var userLoginCtrl = TextEditingController();
@@ -34,16 +33,46 @@ abstract class LoginControllerBase with Store {
   @observable
   var emailForgotPswCtrl = TextEditingController();
 
-/*
-  @computed
-  get isValid {
-    print('---------- isValid ----------');
-    print(formError.name);
-    if(formError.name == null || formError.name.isEmpty) {
+  get init {
+    formController = FormController(name: '');
+  }
+
+  String validateName() {
+    print('---------- validateName ----------');
+    print(formController.name);
+    if(formController.name.isEmpty) {
       return "Nome não pode ser nulo!!!";
     }
     return null;
   }
-*/
+
+}
+
+class FormController extends FormControllerBase
+    with _$FormController {
+
+  FormController({String name}) {
+    super.name = name;
+  }
+
+}
+
+abstract class FormControllerBase with Store {
+  @observable
+  String name;
+
+/*
+  @observable
+  String email;
+
+  @observable
+  String password;*/
+
+  @action
+  changeName(String value) {
+    print('---------- changeName ----------');
+    name = value;
+    print('name: $name');
+  }
 
 }

@@ -13,6 +13,7 @@ class Login extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    _controller.init;
     return Scaffold(
       body: DefaultTabController(
         length: 3,
@@ -122,7 +123,8 @@ class Login extends StatelessWidget {
                   height: 10.0,
                 ),
                 Button(
-                  Icons.arrow_forward,
+                  icon: Icons.arrow_forward,
+                  heroTag: 'btnLogin',
                   onClick: () {
                     Navigator.pushReplacement(
                       context,
@@ -168,8 +170,8 @@ class Login extends StatelessWidget {
                   label: labelName,
                   icon: Icons.person_add,
                   inputType: TextInputType.text,
-                  //onChanged: _controller.formError.changeName,
-                  //errorText: _controller.formError.isValid,
+                  onChanged: _controller.formController.changeName,
+                  errorText: _controller.validateName(),
                 );
               }
             ),
@@ -212,7 +214,7 @@ class Login extends StatelessWidget {
             SizedBox(
               height: 10.0,
             ),
-            SnackBarWidget(),
+            SnackBarWidget('btnRequestAccess'),
           ],
         ),
       ),
@@ -250,7 +252,7 @@ class Login extends StatelessWidget {
             SizedBox(
               height: 10.0,
             ),
-            SnackBarWidget(),
+            SnackBarWidget('btnForgotPassword'),
           ],
         ),
       ),
@@ -259,10 +261,16 @@ class Login extends StatelessWidget {
 
 class SnackBarWidget extends StatelessWidget {
   Timer _timer;
+  String heroTag;
+
+  SnackBarWidget(this.heroTag);
 
   @override
   Widget build(BuildContext context) {
-    return Button(Icons.email_rounded, onClick: () {
+    return Button(
+        icon: Icons.email_rounded,
+        heroTag: heroTag,
+        onClick: () {
       final snackBar = SnackBar(
         content: Text('Cadastro enviado para apreciação. \n'
             'Aguarde email com instruções de acesso.'),

@@ -1,6 +1,5 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
-import 'package:hcslzapp/controllers/formerror.controller.dart';
 import 'package:hcslzapp/models/associated.dart';
 import 'package:hcslzapp/models/dependent.dart';
 import 'package:hcslzapp/models/motorcycle.dart';
@@ -16,7 +15,7 @@ class AssociatedController = AssociatedControllerBase
 
 abstract class AssociatedControllerBase with Store {
 
-  var formError = FormErrorController();
+  var formController;
 
   @observable
   var idCtrl = TextEditingController();
@@ -77,6 +76,24 @@ abstract class AssociatedControllerBase with Store {
 
   String currentBloodType;
 
+  get init {
+    _initLists;
+    _initTextFields;
+    currentBloodType = associated.bloodType;
+    formController = FormController(name: associated.name);
+  }
+
+  get _initLists {
+    dependents.clear();
+    motorcycles.clear();
+    dependents.addAll(associated.dependents);
+    motorcycles.addAll(associated.motorcycles);
+  }
+
+  get _initTextFields {
+    nameCtrl.text = associated.name;
+  }
+
   @action
   bool hideButton() => isHideButton = !isHideButton;
 
@@ -103,30 +120,25 @@ abstract class AssociatedControllerBase with Store {
         this.errorMsg = "Exception: ${e.toString()}";
       }, test: (e) => e is Exception);*/
     }
+/*    else {
+      final snackBar = SnackBar(
+        content: Text('Cadastro enviado para apreciação. \n'
+            'Aguarde email com instruções de acesso.'),
+        backgroundColor: Colors.black,
+        duration: Duration(seconds: 5),
+        //animation,
+      );
+      Scaffold.of(context).showSnackBar(snackBar);
+    }*/
   }
 
-  @action
-  dependentAdd(Dependent dependent) {
-    dependents.add(dependent);
-    print('Dependents pós Add: $dependents');
-  }
-
-  @action
-  dependentRemoveAt(int index) {
-    dependents.removeAt(index);
-    print('Dependents pós Delete: $dependents');
-  }
-
-  @action
-  motorcycleAdd(Motorcycle motorcycle) {
-    motorcycles.add(motorcycle);
-    print('Motocicletas: $motorcycles');
-  }
-
-  @action
-  motorcycleRemoveAt(int index) {
-    motorcycles.removeAt(index);
-    print('Motocicletas: $motorcycles');
+  String validateName() {
+    print('---------- validateName ----------');
+    print(formController.name);
+    if(formController.name.isEmpty) {
+      return "Nome não pode ser nulo!!!";
+    }
+    return null;
   }
 
   Future<List<Associated>> getFuture(int _associatedId) =>
@@ -152,17 +164,7 @@ abstract class AssociatedControllerBase with Store {
     return this.associated;
   }
 
-  changedDropDownItem(String selected) {
-    currentBloodType = selected;
-  }
-
-  dependentsAddAll(List<Dependent> list) {
-    dependents.addAll(list);
-  }
-
-  motorcyclesAddAll(List<Motorcycle> list) {
-    motorcycles.addAll(list);
-  }
+  String changedDropDownItem (selected) => currentBloodType = selected;
 
   Future getImageFromCamera() async {
     final pickedFile = await picker.getImage(source: ImageSource.camera);
@@ -188,4 +190,33 @@ abstract class AssociatedControllerBase with Store {
       }
     });*/
   }
+}
+
+class FormController extends FormControllerBase
+    with _$FormController {
+
+  FormController({String name}) {
+    super.name = name;
+  }
+
+}
+
+abstract class FormControllerBase with Store {
+  @observable
+  String name;
+
+/*
+  @observable
+  String email;
+
+  @observable
+  String password;*/
+
+  @action
+  changeName(String value) {
+    print('---------- changeName ----------');
+    name = value;
+    print('name: $name');
+  }
+
 }

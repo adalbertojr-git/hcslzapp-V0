@@ -278,50 +278,6 @@ mixin _$AssociatedController on AssociatedControllerBase, Store {
   }
 
   @override
-  dynamic dependentAdd(Dependent dependent) {
-    final _$actionInfo = _$AssociatedControllerBaseActionController.startAction(
-        name: 'AssociatedControllerBase.dependentAdd');
-    try {
-      return super.dependentAdd(dependent);
-    } finally {
-      _$AssociatedControllerBaseActionController.endAction(_$actionInfo);
-    }
-  }
-
-  @override
-  dynamic dependentRemoveAt(int index) {
-    final _$actionInfo = _$AssociatedControllerBaseActionController.startAction(
-        name: 'AssociatedControllerBase.dependentRemoveAt');
-    try {
-      return super.dependentRemoveAt(index);
-    } finally {
-      _$AssociatedControllerBaseActionController.endAction(_$actionInfo);
-    }
-  }
-
-  @override
-  dynamic motorcycleAdd(Motorcycle motorcycle) {
-    final _$actionInfo = _$AssociatedControllerBaseActionController.startAction(
-        name: 'AssociatedControllerBase.motorcycleAdd');
-    try {
-      return super.motorcycleAdd(motorcycle);
-    } finally {
-      _$AssociatedControllerBaseActionController.endAction(_$actionInfo);
-    }
-  }
-
-  @override
-  dynamic motorcycleRemoveAt(int index) {
-    final _$actionInfo = _$AssociatedControllerBaseActionController.startAction(
-        name: 'AssociatedControllerBase.motorcycleRemoveAt');
-    try {
-      return super.motorcycleRemoveAt(index);
-    } finally {
-      _$AssociatedControllerBaseActionController.endAction(_$actionInfo);
-    }
-  }
-
-  @override
   String toString() {
     return '''
 idCtrl: ${idCtrl},
@@ -339,6 +295,44 @@ associatedListFuture: ${associatedListFuture},
 associatedUpdate: ${associatedUpdate},
 dependents: ${dependents},
 motorcycles: ${motorcycles}
+    ''';
+  }
+}
+
+mixin _$FormController on FormControllerBase, Store {
+  final _$nameAtom = Atom(name: 'FormControllerBase.name');
+
+  @override
+  String get name {
+    _$nameAtom.reportRead();
+    return super.name;
+  }
+
+  @override
+  set name(String value) {
+    _$nameAtom.reportWrite(value, super.name, () {
+      super.name = value;
+    });
+  }
+
+  final _$FormControllerBaseActionController =
+      ActionController(name: 'FormControllerBase');
+
+  @override
+  dynamic changeName(String value) {
+    final _$actionInfo = _$FormControllerBaseActionController.startAction(
+        name: 'FormControllerBase.changeName');
+    try {
+      return super.changeName(value);
+    } finally {
+      _$FormControllerBaseActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
+  String toString() {
+    return '''
+name: ${name}
     ''';
   }
 }

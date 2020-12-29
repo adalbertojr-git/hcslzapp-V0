@@ -96,7 +96,7 @@ class DefectListState extends State<DefectList> {
         ),
       ),
       floatingActionButton: Button(
-        Icons.add,
+        icon: Icons.add,
         onClick: () {
           Navigator.push(
             context,

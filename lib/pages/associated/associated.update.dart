@@ -68,14 +68,7 @@ class _AssociatedUpdateState extends State<AssociatedUpdate> {
                       );
                     if (snapshot.data.length > 0) {
                       _controller.associated = snapshot.data.first;
-                      _controller.dependents.clear();
-                      _controller.motorcycles.clear();
-                      _controller
-                          .dependentsAddAll(_controller.associated.dependents);
-                      _controller.motorcyclesAddAll(
-                          _controller.associated.motorcycles);
-                      _controller.currentBloodType =
-                          _controller.associated.bloodType;
+                      _controller.init;
                       return _associatedWidgets(context);
                     } else
                       return CenteredMessage(
@@ -94,7 +87,8 @@ class _AssociatedUpdateState extends State<AssociatedUpdate> {
           ),
           floatingActionButton: _controller.isHideButton
               ? null
-              : Button(Icons.save,
+              : Button(
+                  icon: Icons.save,
                   onClick: () => _controller.update(_controller.associated)),
         ),
       );
@@ -142,15 +136,12 @@ class _AssociatedUpdateState extends State<AssociatedUpdate> {
                 builder: (_) {
                   return InputTextField(
                     textEditingController: _controller.nameCtrl,
-                    text: _controller.associated.name != null
-                        ? _controller.associated.name
-                        : null,
                     label: labelName,
                     hint: hintName,
                     icon: Icons.person,
                     inputType: TextInputType.text,
-                    //onChanged: _controller.formError.changeName,
-                    //errorText: _controller.formError.isValid,
+                    onChanged: _controller.formController.changeName,
+                    errorText: _controller.validateName(),
                   );
                 },
               ),
@@ -373,7 +364,7 @@ class _AssociatedUpdateState extends State<AssociatedUpdate> {
                               size: 25.0,
                             ),
                             onTap: () {
-                              _controller.dependentRemoveAt(i);
+                              _controller.dependents.removeAt(i);
                             },
                           ),
                           GestureDetector(
@@ -392,8 +383,8 @@ class _AssociatedUpdateState extends State<AssociatedUpdate> {
                               future.then(
                                 (dependent) {
                                   if (dependent != null) {
-                                    _controller.dependentRemoveAt(i);
-                                    _controller.dependentAdd(dependent);
+                                    _controller.dependents.removeAt(i);
+                                    _controller.dependents.add(dependent);
                                   }
                                 },
                               );
@@ -429,7 +420,7 @@ class _AssociatedUpdateState extends State<AssociatedUpdate> {
                   future.then(
                     (dependent) {
                       if (dependent != null) {
-                        _controller.dependentAdd(dependent);
+                        _controller.dependents.add(dependent);
                       }
                     },
                   );
@@ -492,7 +483,7 @@ class _AssociatedUpdateState extends State<AssociatedUpdate> {
                               size: 25.0,
                             ),
                             onTap: () {
-                              _controller.motorcycleRemoveAt(i);
+                              _controller.motorcycles.removeAt(i);;
                             },
                           ),
                           GestureDetector(
@@ -511,8 +502,8 @@ class _AssociatedUpdateState extends State<AssociatedUpdate> {
                               future.then(
                                 (motorcycle) {
                                   if (motorcycle != null) {
-                                    _controller.motorcycleRemoveAt(i);
-                                    _controller.motorcycleAdd(motorcycle);
+                                    _controller.motorcycles.removeAt(i);
+                                    _controller.motorcycles.add(motorcycle);
                                   }
                                 },
                               );
@@ -549,7 +540,7 @@ class _AssociatedUpdateState extends State<AssociatedUpdate> {
                   future.then(
                     (motorcycle) {
                       if (motorcycle != null) {
-                        _controller.motorcycleAdd(motorcycle);
+                        _controller.motorcycles.add(motorcycle);
                       }
                     },
                   );

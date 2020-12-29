@@ -123,7 +123,8 @@ class _MotorcycleAddState extends State<MotorcycleAdd> {
         ),
       ),
       floatingActionButton:
-          Button(Icons.playlist_add, onClick: () => _controller.add(context)),
+          Button(icon: Icons.playlist_add,
+              onClick: () => _controller.add(context)),
     );
   }
 }

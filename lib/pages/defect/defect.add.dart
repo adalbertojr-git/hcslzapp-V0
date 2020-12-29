@@ -92,7 +92,7 @@ class DefectAdd extends StatelessWidget {
         ),
       ),
       floatingActionButton: Button(
-        Icons.save,
+        icon: Icons.save,
         onClick: () {},
       ),
     );

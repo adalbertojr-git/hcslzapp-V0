@@ -38,7 +38,7 @@ class DtcCodeAccess extends StatelessWidget {
         ),
       ),
       floatingActionButton: Button(
-        Icons.search,
+        icon: Icons.search,
         onClick: () {
           Navigator.push(
             context,
