@@ -91,21 +91,8 @@ class _AssociatedUpdateState extends State<AssociatedUpdate> {
               floatingActionButton: _controller.isHideButton
                   ? null
                   : Button(
-                icon: Icons.save,
-                onClick: () {
-                  if(_controller.hasErrors) {
-                    asuka.showSnackBar(SnackBar(
-                      content: Text(_controller.hasErrors.toString()),
-                    ));
-                  }
-                  else {
-                    asuka.showSnackBar(SnackBar(
-                      content: Text(_controller.hasErrors.toString()),
-                    ));
-                    Navigator.of(context).pop();
-                  }
-                //_controller.update(_controller.associated),
-                }
+                  icon: Icons.save,
+                  onClick: () => _update
               ),
             ),
       );
@@ -166,7 +153,20 @@ class _AssociatedUpdateState extends State<AssociatedUpdate> {
                   );
                 },
               ),
-              InputTextField(
+              Observer(
+                builder: (_) {
+                  return InputTextField(
+                    textEditingController: _controller.emailCtrl,
+                    label: labelEmail,
+                    hint: hintEmail,
+                    icon: Icons.email,
+                    inputType: TextInputType.emailAddress,
+                    onChanged: _controller.formController.changeEmail,
+                    errorText: _controller.validateEmail(),
+                  );
+                },
+              ),
+/*              InputTextField(
                 textEditingController: _controller.emailCtrl,
                 text: _controller.associated.email != null
                     ? _controller.associated.email
@@ -175,7 +175,7 @@ class _AssociatedUpdateState extends State<AssociatedUpdate> {
                 hint: hintEmail,
                 icon: Icons.email,
                 inputType: TextInputType.emailAddress,
-              ),
+              ),*/
               InputTextField(
                 textEditingController: _controller.phoneCtrl,
                 text: _controller.associated.phone != null
@@ -581,22 +581,33 @@ class _AssociatedUpdateState extends State<AssociatedUpdate> {
           ],
         ),
       );
-}
 
-class SnackBarWidget extends StatelessWidget {
-  String heroTag;
-
-  SnackBarWidget(this.heroTag);
-
-  @override
-  Widget build(BuildContext context) {
-    return Button(
-        icon: Icons.email_rounded,
-        heroTag: heroTag,
-        onClick: () {
-          asuka.showSnackBar(SnackBar(
-            content: Text("Hello World"),
-          ));
-        });
+  get _update {
+    if (_controller.hasErrors) {
+      asuka.showSnackBar(
+        SnackBar(
+          content: Text('Atenção: existem erros de validação no formulário.'),
+        ),
+      );
+    } else {
+      _controller.update(_controller.associated).then(
+            (value) {
+          if (value != null) {
+            asuka.showSnackBar(
+              SnackBar(
+                content: Text('Associado atualizado com sucesso.'),
+              ),
+            );
+            Navigator.of(context).pop();
+          } else {
+            asuka.showSnackBar(
+              SnackBar(
+                content: Text('Oops!!! Erro ao atualizar o Associado.'),
+              ),
+            );
+          }
+        },
+      );
+    }
   }
 }

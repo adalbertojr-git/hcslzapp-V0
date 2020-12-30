@@ -267,7 +267,7 @@ mixin _$AssociatedController on AssociatedControllerBase, Store {
   }
 
   @override
-  dynamic update(Associated associated) {
+  Future<dynamic> update(Associated associated) {
     final _$actionInfo = _$AssociatedControllerBaseActionController.startAction(
         name: 'AssociatedControllerBase.update');
     try {
@@ -315,6 +315,21 @@ mixin _$FormController on FormControllerBase, Store {
     });
   }
 
+  final _$emailAtom = Atom(name: 'FormControllerBase.email');
+
+  @override
+  String get email {
+    _$emailAtom.reportRead();
+    return super.email;
+  }
+
+  @override
+  set email(String value) {
+    _$emailAtom.reportWrite(value, super.email, () {
+      super.email = value;
+    });
+  }
+
   final _$FormControllerBaseActionController =
       ActionController(name: 'FormControllerBase');
 
@@ -330,9 +345,21 @@ mixin _$FormController on FormControllerBase, Store {
   }
 
   @override
+  dynamic changeEmail(String value) {
+    final _$actionInfo = _$FormControllerBaseActionController.startAction(
+        name: 'FormControllerBase.changeEmail');
+    try {
+      return super.changeEmail(value);
+    } finally {
+      _$FormControllerBaseActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
   String toString() {
     return '''
-name: ${name}
+name: ${name},
+email: ${email}
     ''';
   }
 }

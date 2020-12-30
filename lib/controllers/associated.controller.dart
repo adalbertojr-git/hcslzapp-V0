@@ -14,7 +14,6 @@ class AssociatedController = AssociatedControllerBase
     with _$AssociatedController;
 
 abstract class AssociatedControllerBase with Store {
-
   var formController;
 
   @observable
@@ -80,7 +79,10 @@ abstract class AssociatedControllerBase with Store {
     _initLists;
     _initTextFields;
     currentBloodType = associated.bloodType;
-    formController = FormController(name: associated.name);
+    formController = FormController(
+      name: associated.name,
+      email: associated.email,
+    );
   }
 
   get _initLists {
@@ -92,6 +94,7 @@ abstract class AssociatedControllerBase with Store {
 
   get _initTextFields {
     nameCtrl.text = associated.name;
+    emailCtrl.text = associated.email;
   }
 
   @action
@@ -108,25 +111,28 @@ abstract class AssociatedControllerBase with Store {
       }, test: (e) => e is Exception);
 
   @action
-  update(Associated associated) {
-    print (hasErrors);
-    if (!hasErrors) {
-
-/*      associatedUpdate = ObservableFuture(_associatedRepo
+  Future update(Associated associated) =>
+      associatedUpdate = ObservableFuture(_associatedRepo
           .update(_setFieldsToUpdate())
           .then((associated) => associated)).catchError((e) {
         this.errorMsg = "TimeOutException: ${e.toString()}";
       }, test: (e) => e is TimeoutException).catchError((e) {
         this.errorMsg = "Exception: ${e.toString()}";
-      }, test: (e) => e is Exception);*/
-    }
-  }
+      }, test: (e) => e is Exception);
 
   String validateName() {
-    print('---------- validateName ----------');
-    print(formController.name);
-    if(formController.name.isEmpty) {
+    if (formController.name.isEmpty) {
       return "Nome não pode ser nulo!!!";
+    }
+    return null;
+  }
+
+  String validateEmail() {
+    bool emailValid = RegExp(
+            r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+")
+        .hasMatch(formController.email);
+    if (!emailValid) {
+      return "Informe um email válido!!!";
     }
     return null;
   }
@@ -134,9 +140,10 @@ abstract class AssociatedControllerBase with Store {
   Future<List<Associated>> getFuture(int _associatedId) =>
       future = fetchAssociated(_associatedId);
 
-  bool get hasErrors => hasErrorName;//|| email != null || password != null;
+  bool get hasErrors => hasErrorName || hasErrorEmail != null;// || password != null;
 
   bool get hasErrorName => nameCtrl.text == null || nameCtrl.text.isEmpty;
+  bool get hasErrorEmail => emailCtrl.text == null || emailCtrl.text.isEmpty;
 
   Associated _setFieldsToUpdate() {
     this.associated.name = nameCtrl.text;
@@ -154,7 +161,7 @@ abstract class AssociatedControllerBase with Store {
     return this.associated;
   }
 
-  String changedDropDownItem (selected) => currentBloodType = selected;
+  String changedDropDownItem(selected) => currentBloodType = selected;
 
   Future getImageFromCamera() async {
     final pickedFile = await picker.getImage(source: ImageSource.camera);
@@ -182,31 +189,26 @@ abstract class AssociatedControllerBase with Store {
   }
 }
 
-class FormController extends FormControllerBase
-    with _$FormController {
-
-  FormController({String name}) {
+class FormController extends FormControllerBase with _$FormController {
+  FormController({String name, String email}) {
     super.name = name;
+    super.email = email;
   }
-
 }
 
 abstract class FormControllerBase with Store {
   @observable
   String name;
 
-/*
   @observable
   String email;
 
-  @observable
+  /* @observable
   String password;*/
 
   @action
-  changeName(String value) {
-    print('---------- changeName ----------');
-    name = value;
-    print('name: $name');
-  }
+  changeName(String value) => name = value;
 
+  @action
+  changeEmail(String value) => email = value;
 }

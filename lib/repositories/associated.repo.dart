@@ -40,7 +40,7 @@ class AssociatedRepo {
         .timeout(Duration(seconds: 5));
     print(associated);
     print(response.statusCode);
-    if (response.statusCode == 204) {
+    if (response.statusCode == 200) {
       return Associated.fromJson(jsonDecode(response.body));
     } else {
       throw HttpException(getMessage(response.statusCode));
