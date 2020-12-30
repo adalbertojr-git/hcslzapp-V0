@@ -108,7 +108,7 @@ abstract class AssociatedControllerBase with Store {
       }, test: (e) => e is Exception);
 
   @action
-  Future update(Associated associated) {
+  update(Associated associated) {
     print (hasErrors);
     if (!hasErrors) {
 
@@ -120,16 +120,6 @@ abstract class AssociatedControllerBase with Store {
         this.errorMsg = "Exception: ${e.toString()}";
       }, test: (e) => e is Exception);*/
     }
-/*    else {
-      final snackBar = SnackBar(
-        content: Text('Cadastro enviado para apreciação. \n'
-            'Aguarde email com instruções de acesso.'),
-        backgroundColor: Colors.black,
-        duration: Duration(seconds: 5),
-        //animation,
-      );
-      Scaffold.of(context).showSnackBar(snackBar);
-    }*/
   }
 
   String validateName() {

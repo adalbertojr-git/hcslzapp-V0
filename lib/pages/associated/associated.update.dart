@@ -14,6 +14,7 @@ import 'package:hcslzapp/models/motorcycle.dart';
 import 'package:hcslzapp/pages/dependent/dependent.add.dart';
 import 'package:hcslzapp/pages/motorcycle/motorcycle.add.dart';
 import 'package:provider/provider.dart';
+import 'package:asuka/asuka.dart' as asuka;
 
 class AssociatedUpdate extends StatefulWidget {
   @override
@@ -42,58 +43,75 @@ class _AssociatedUpdateState extends State<AssociatedUpdate> {
   }
 
   @override
-  Widget build(BuildContext context) => Observer(
-        builder: (_) => Scaffold(
-          body: FutureBuilder<List<Associated>>(
-            future: _controller.future,
-            builder: (context, snapshot) {
-              switch (snapshot.connectionState) {
-                case ConnectionState.none:
-                  break;
-                case ConnectionState.waiting:
-                  return Progress();
-                case ConnectionState.active:
-                  break;
-                default:
-                  if (snapshot.hasError) {
-                    return CenteredMessage(
-                      'Oops!!! + ${snapshot.error}.',
-                      icon: Icons.error,
-                    );
-                  } else {
-                    if (snapshot.data == null)
-                      return CenteredMessage(
-                        'Oops!!! ' + _controller.errorMsg,
-                        icon: Icons.error,
-                      );
-                    if (snapshot.data.length > 0) {
-                      _controller.associated = snapshot.data.first;
-                      _controller.init;
-                      return _associatedWidgets(context);
-                    } else
-                      return CenteredMessage(
-                        'Atenção: Associado não encontrado.',
-                        icon: Icons.warning,
-                        backgroundColor: Colors.yellowAccent,
-                        fontColor: Colors.black,
-                      );
+  Widget build(BuildContext context) =>
+      Observer(
+        builder: (_) =>
+            Scaffold(
+              body: FutureBuilder<List<Associated>>(
+                future: _controller.future,
+                builder: (context, snapshot) {
+                  switch (snapshot.connectionState) {
+                    case ConnectionState.none:
+                      break;
+                    case ConnectionState.waiting:
+                      return Progress();
+                    case ConnectionState.active:
+                      break;
+                    default:
+                      if (snapshot.hasError) {
+                        return CenteredMessage(
+                          'Oops!!! + ${snapshot.error}.',
+                          icon: Icons.error,
+                        );
+                      } else {
+                        if (snapshot.data == null)
+                          return CenteredMessage(
+                            'Oops!!! ' + _controller.errorMsg,
+                            icon: Icons.error,
+                          );
+                        if (snapshot.data.length > 0) {
+                          _controller.associated = snapshot.data.first;
+                          _controller.init;
+                          return _associatedWidgets(context);
+                        } else
+                          return CenteredMessage(
+                            'Atenção: Associado não encontrado.',
+                            icon: Icons.warning,
+                            backgroundColor: Colors.yellowAccent,
+                            fontColor: Colors.black,
+                          );
+                      }
+                  } //switch (snapshot.connectionState)
+                  return CenteredMessage(
+                    'Oops!!! Um erro desconhecido ocorreu.',
+                    icon: Icons.error,
+                  );
+                },
+              ),
+              floatingActionButton: _controller.isHideButton
+                  ? null
+                  : Button(
+                icon: Icons.save,
+                onClick: () {
+                  if(_controller.hasErrors) {
+                    asuka.showSnackBar(SnackBar(
+                      content: Text(_controller.hasErrors.toString()),
+                    ));
                   }
-              } //switch (snapshot.connectionState)
-              return CenteredMessage(
-                'Oops!!! Um erro desconhecido ocorreu.',
-                icon: Icons.error,
-              );
-            },
-          ),
-          floatingActionButton: _controller.isHideButton
-              ? null
-              : Button(
-                  icon: Icons.save,
-                  onClick: () => _controller.update(_controller.associated)),
-        ),
+                  else {
+                    asuka.showSnackBar(SnackBar(
+                      content: Text(_controller.hasErrors.toString()),
+                    ));
+                    Navigator.of(context).pop();
+                  }
+                //_controller.update(_controller.associated),
+                }
+              ),
+            ),
       );
 
-  _associatedWidgets(BuildContext context) => Container(
+  _associatedWidgets(BuildContext context) =>
+      Container(
         padding: EdgeInsets.fromLTRB(5.0, 5.0, 5.0, 0.0),
         decoration: BoxDecoration(
           gradient: LinearGradient(
@@ -102,7 +120,10 @@ class _AssociatedUpdateState extends State<AssociatedUpdate> {
             end: FractionalOffset.bottomRight,
           ),
         ),
-        height: MediaQuery.of(context).size.height,
+        height: MediaQuery
+            .of(context)
+            .size
+            .height,
         child: SingleChildScrollView(
           child: Column(
             children: <Widget>[
@@ -290,7 +311,8 @@ class _AssociatedUpdateState extends State<AssociatedUpdate> {
         ),
       );
 
-  _photo(String fileName) => Container(
+  _photo(String fileName) =>
+      Container(
         height: 200.0,
         width: 200.0,
         padding: EdgeInsets.all(10.0),
@@ -312,7 +334,8 @@ class _AssociatedUpdateState extends State<AssociatedUpdate> {
         ),
       );
 
-  get _dependentsListWidget => Container(
+  get _dependentsListWidget =>
+      Container(
         padding: EdgeInsets.all(10.0),
         decoration: BoxDecoration(
           color: Colors.white12,
@@ -328,78 +351,81 @@ class _AssociatedUpdateState extends State<AssociatedUpdate> {
               ),
             ),
             Observer(
-              builder: (_) => ListView.separated(
-                shrinkWrap: true,
-                itemCount: _controller.dependents.length,
-                itemBuilder: (BuildContext context, int i) {
-                  return Container(
-                    decoration: BoxDecoration(
-                      color: Colors.white30,
-                      shape: BoxShape.rectangle,
-                      borderRadius: BorderRadius.circular(8.0),
-                      boxShadow: <BoxShadow>[
-                        BoxShadow(
-                          color: Colors.black12,
-                          blurRadius: 10.0,
-                          offset: Offset(0.0, 5.0),
-                        ),
-                      ],
-                    ),
-                    child: ListTile(
-                      leading: Container(
-                        width: 48,
-                        height: 48,
-                        alignment: Alignment.center,
-                        child: CircleAvatar(
-                          child: Icon(Icons.person),
-                          backgroundColor: Colors.white,
-                        ),
-                      ),
-                      trailing: Wrap(
-                        spacing: 10, // space between two icons
-                        children: <Widget>[
-                          GestureDetector(
-                            child: Icon(
-                              Icons.delete,
-                              size: 25.0,
+              builder: (_) =>
+                  ListView.separated(
+                    shrinkWrap: true,
+                    itemCount: _controller.dependents.length,
+                    itemBuilder: (BuildContext context, int i) {
+                      return Container(
+                        decoration: BoxDecoration(
+                          color: Colors.white30,
+                          shape: BoxShape.rectangle,
+                          borderRadius: BorderRadius.circular(8.0),
+                          boxShadow: <BoxShadow>[
+                            BoxShadow(
+                              color: Colors.black12,
+                              blurRadius: 10.0,
+                              offset: Offset(0.0, 5.0),
                             ),
-                            onTap: () {
-                              _controller.dependents.removeAt(i);
-                            },
+                          ],
+                        ),
+                        child: ListTile(
+                          leading: Container(
+                            width: 48,
+                            height: 48,
+                            alignment: Alignment.center,
+                            child: CircleAvatar(
+                              child: Icon(Icons.person),
+                              backgroundColor: Colors.white,
+                            ),
                           ),
-                          GestureDetector(
-                            child: Icon(
-                              Icons.arrow_forward,
-                              size: 25.0,
-                            ),
-                            onTap: () {
-                              final Future<Dependent> future = Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                  builder: (context) =>
-                                      DependentAdd(_controller.dependents[i]),
+                          trailing: Wrap(
+                            spacing: 10, // space between two icons
+                            children: <Widget>[
+                              GestureDetector(
+                                child: Icon(
+                                  Icons.delete,
+                                  size: 25.0,
                                 ),
-                              );
-                              future.then(
-                                (dependent) {
-                                  if (dependent != null) {
-                                    _controller.dependents.removeAt(i);
-                                    _controller.dependents.add(dependent);
-                                  }
+                                onTap: () {
+                                  _controller.dependents.removeAt(i);
                                 },
-                              );
-                            },
+                              ),
+                              GestureDetector(
+                                child: Icon(
+                                  Icons.arrow_forward,
+                                  size: 25.0,
+                                ),
+                                onTap: () {
+                                  final Future<Dependent> future = Navigator
+                                      .push(
+                                    context,
+                                    MaterialPageRoute(
+                                      builder: (context) =>
+                                          DependentAdd(
+                                              _controller.dependents[i]),
+                                    ),
+                                  );
+                                  future.then(
+                                        (dependent) {
+                                      if (dependent != null) {
+                                        _controller.dependents.removeAt(i);
+                                        _controller.dependents.add(dependent);
+                                      }
+                                    },
+                                  );
+                                },
+                              ),
+                            ],
                           ),
-                        ],
-                      ),
-                      title: Text(_controller.dependents[i].name),
-                      subtitle: Text(_controller.dependents[i].email),
-                    ),
-                  );
-                },
-                separatorBuilder: (BuildContext context, int index) =>
+                          title: Text(_controller.dependents[i].name),
+                          subtitle: Text(_controller.dependents[i].email),
+                        ),
+                      );
+                    },
+                    separatorBuilder: (BuildContext context, int index) =>
                     const Divider(),
-              ),
+                  ),
             ),
             Container(
               padding: EdgeInsets.only(top: 20.0),
@@ -418,7 +444,7 @@ class _AssociatedUpdateState extends State<AssociatedUpdate> {
                     MaterialPageRoute(builder: (context) => DependentAdd(null)),
                   );
                   future.then(
-                    (dependent) {
+                        (dependent) {
                       if (dependent != null) {
                         _controller.dependents.add(dependent);
                       }
@@ -431,7 +457,8 @@ class _AssociatedUpdateState extends State<AssociatedUpdate> {
         ),
       );
 
-  get _motorcyclesListWidget => Container(
+  get _motorcyclesListWidget =>
+      Container(
         padding: EdgeInsets.all(10.0),
         decoration: BoxDecoration(
           color: Colors.white12,
@@ -447,78 +474,82 @@ class _AssociatedUpdateState extends State<AssociatedUpdate> {
               ),
             ),
             Observer(
-              builder: (_) => ListView.separated(
-                shrinkWrap: true,
-                itemCount: _controller.motorcycles.length,
-                itemBuilder: (BuildContext context, int i) {
-                  return Container(
-                    decoration: BoxDecoration(
-                      color: Colors.white30,
-                      shape: BoxShape.rectangle,
-                      borderRadius: BorderRadius.circular(8.0),
-                      boxShadow: <BoxShadow>[
-                        BoxShadow(
-                          color: Colors.black12,
-                          blurRadius: 10.0,
-                          offset: Offset(0.0, 5.0),
-                        ),
-                      ],
-                    ),
-                    child: ListTile(
-                      leading: Container(
-                        width: 48,
-                        height: 48,
-                        alignment: Alignment.center,
-                        child: CircleAvatar(
-                          child: Icon(Icons.motorcycle),
-                          backgroundColor: Colors.white,
-                        ),
-                      ),
-                      trailing: Wrap(
-                        spacing: 10, // space between two icons
-                        children: <Widget>[
-                          GestureDetector(
-                            child: Icon(
-                              Icons.delete,
-                              size: 25.0,
+              builder: (_) =>
+                  ListView.separated(
+                    shrinkWrap: true,
+                    itemCount: _controller.motorcycles.length,
+                    itemBuilder: (BuildContext context, int i) {
+                      return Container(
+                        decoration: BoxDecoration(
+                          color: Colors.white30,
+                          shape: BoxShape.rectangle,
+                          borderRadius: BorderRadius.circular(8.0),
+                          boxShadow: <BoxShadow>[
+                            BoxShadow(
+                              color: Colors.black12,
+                              blurRadius: 10.0,
+                              offset: Offset(0.0, 5.0),
                             ),
-                            onTap: () {
-                              _controller.motorcycles.removeAt(i);;
-                            },
+                          ],
+                        ),
+                        child: ListTile(
+                          leading: Container(
+                            width: 48,
+                            height: 48,
+                            alignment: Alignment.center,
+                            child: CircleAvatar(
+                              child: Icon(Icons.motorcycle),
+                              backgroundColor: Colors.white,
+                            ),
                           ),
-                          GestureDetector(
-                            child: Icon(
-                              Icons.arrow_forward,
-                              size: 25.0,
-                            ),
-                            onTap: () {
-                              final Future<Motorcycle> future = Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                  builder: (context) =>
-                                      MotorcycleAdd(_controller.motorcycles[i]),
+                          trailing: Wrap(
+                            spacing: 10, // space between two icons
+                            children: <Widget>[
+                              GestureDetector(
+                                child: Icon(
+                                  Icons.delete,
+                                  size: 25.0,
                                 ),
-                              );
-                              future.then(
-                                (motorcycle) {
-                                  if (motorcycle != null) {
-                                    _controller.motorcycles.removeAt(i);
-                                    _controller.motorcycles.add(motorcycle);
-                                  }
+                                onTap: () {
+                                  _controller.motorcycles.removeAt(i);
+                                  ;
                                 },
-                              );
-                            },
+                              ),
+                              GestureDetector(
+                                child: Icon(
+                                  Icons.arrow_forward,
+                                  size: 25.0,
+                                ),
+                                onTap: () {
+                                  final Future<Motorcycle> future = Navigator
+                                      .push(
+                                    context,
+                                    MaterialPageRoute(
+                                      builder: (context) =>
+                                          MotorcycleAdd(
+                                              _controller.motorcycles[i]),
+                                    ),
+                                  );
+                                  future.then(
+                                        (motorcycle) {
+                                      if (motorcycle != null) {
+                                        _controller.motorcycles.removeAt(i);
+                                        _controller.motorcycles.add(motorcycle);
+                                      }
+                                    },
+                                  );
+                                },
+                              ),
+                            ],
                           ),
-                        ],
-                      ),
-                      title: Text(_controller.motorcycles[i].model),
-                      subtitle: Text(_controller.motorcycles[i].year),
-                    ),
-                  );
-                },
-                separatorBuilder: (BuildContext context, int index) =>
+                          title: Text(_controller.motorcycles[i].model),
+                          subtitle: Text(_controller.motorcycles[i].year),
+                        ),
+                      );
+                    },
+                    separatorBuilder: (BuildContext context, int index) =>
                     const Divider(),
-              ),
+                  ),
             ),
             Container(
               padding: EdgeInsets.only(top: 20.0),
@@ -538,7 +569,7 @@ class _AssociatedUpdateState extends State<AssociatedUpdate> {
                         builder: (context) => MotorcycleAdd(null)),
                   );
                   future.then(
-                    (motorcycle) {
+                        (motorcycle) {
                       if (motorcycle != null) {
                         _controller.motorcycles.add(motorcycle);
                       }
@@ -550,4 +581,22 @@ class _AssociatedUpdateState extends State<AssociatedUpdate> {
           ],
         ),
       );
+}
+
+class SnackBarWidget extends StatelessWidget {
+  String heroTag;
+
+  SnackBarWidget(this.heroTag);
+
+  @override
+  Widget build(BuildContext context) {
+    return Button(
+        icon: Icons.email_rounded,
+        heroTag: heroTag,
+        onClick: () {
+          asuka.showSnackBar(SnackBar(
+            content: Text("Hello World"),
+          ));
+        });
+  }
 }

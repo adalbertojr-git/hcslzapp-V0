@@ -4,6 +4,7 @@ import 'package:hcslzapp/controllers/associated.controller.dart';
 import 'package:hcslzapp/pages/login/splash.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
+import 'package:asuka/asuka.dart' as asuka;
 
 const _titleAppBar = 'HCSlz App';
 
@@ -24,6 +25,7 @@ class HCSlzApp extends StatelessWidget {
         animation: AppController.instance,
         builder: (context, child) {
           return MaterialApp(
+            builder: asuka.builder,
             debugShowCheckedModeBanner: false,
             home: Splash(),
             title: _titleAppBar,

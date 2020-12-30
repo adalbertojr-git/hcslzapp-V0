@@ -7,6 +7,7 @@ import 'package:hcslzapp/components/input.textfield.dart';
 import 'package:hcslzapp/controllers/login.controller.dart';
 import 'dart:async';
 import 'package:hcslzapp/pages/dashboard/dashboard.dart';
+import 'package:asuka/asuka.dart' as asuka;
 
 class Login extends StatelessWidget {
   LoginController _controller = LoginController();
@@ -260,7 +261,6 @@ class Login extends StatelessWidget {
 }
 
 class SnackBarWidget extends StatelessWidget {
-  Timer _timer;
   String heroTag;
 
   SnackBarWidget(this.heroTag);
@@ -271,21 +271,9 @@ class SnackBarWidget extends StatelessWidget {
         icon: Icons.email_rounded,
         heroTag: heroTag,
         onClick: () {
-      final snackBar = SnackBar(
-        content: Text('Cadastro enviado para apreciação. \n'
-            'Aguarde email com instruções de acesso.'),
-        backgroundColor: Colors.black,
-        duration: Duration(seconds: 5),
-        //animation,
-      );
-      Scaffold.of(context).showSnackBar(snackBar);
-      //_setTimer(context);
-    });
-  }
-
-  _setTimer(BuildContext context) {
-    _timer = Timer.periodic(const Duration(seconds: 1), (timer) {
-      Navigator.pop(context);
-    });
+          asuka.showSnackBar(SnackBar(
+            content: Text("Hello World"),
+          ));
+        });
   }
 }

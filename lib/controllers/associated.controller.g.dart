@@ -267,7 +267,7 @@ mixin _$AssociatedController on AssociatedControllerBase, Store {
   }
 
   @override
-  Future<dynamic> update(Associated associated) {
+  dynamic update(Associated associated) {
     final _$actionInfo = _$AssociatedControllerBaseActionController.startAction(
         name: 'AssociatedControllerBase.update');
     try {
