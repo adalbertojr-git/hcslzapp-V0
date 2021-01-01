@@ -140,10 +140,9 @@ abstract class AssociatedControllerBase with Store {
   Future<List<Associated>> getFuture(int _associatedId) =>
       future = fetchAssociated(_associatedId);
 
-  bool get hasErrors => hasErrorName || hasErrorEmail != null;// || password != null;
-
-  bool get hasErrorName => nameCtrl.text == null || nameCtrl.text.isEmpty;
-  bool get hasErrorEmail => emailCtrl.text == null || emailCtrl.text.isEmpty;
+  bool get hasErrors => hasErrorName || hasErrorEmail;// || password != null;
+  bool get hasErrorName => validateName() != null;
+  bool get hasErrorEmail => validateEmail() != null;
 
   Associated _setFieldsToUpdate() {
     this.associated.name = nameCtrl.text;

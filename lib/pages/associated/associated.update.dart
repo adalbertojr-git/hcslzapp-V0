@@ -22,12 +22,12 @@ class AssociatedUpdate extends StatefulWidget {
 }
 
 class _AssociatedUpdateState extends State<AssociatedUpdate> {
-  AssociatedController _controller;
+  AssociatedController _controller = AssociatedController();
   int _associatedId = 1;
 
   @override
   void initState() {
-    _controller = Provider.of<AssociatedController>(context, listen: false);
+    //_controller = Provider.of<AssociatedController>(context, listen: false);
     _controller.getFuture(_associatedId).then((value) {
       if (value != null && value.isNotEmpty) {
         _controller.hideButton();
@@ -38,7 +38,7 @@ class _AssociatedUpdateState extends State<AssociatedUpdate> {
 
   @override
   void dispose() {
-    if (!_controller.isHideButton) _controller.hideButton();
+    //if (!_controller.isHideButton) _controller.hideButton();
     super.dispose();
   }
 
@@ -166,16 +166,6 @@ class _AssociatedUpdateState extends State<AssociatedUpdate> {
                   );
                 },
               ),
-/*              InputTextField(
-                textEditingController: _controller.emailCtrl,
-                text: _controller.associated.email != null
-                    ? _controller.associated.email
-                    : null,
-                label: labelEmail,
-                hint: hintEmail,
-                icon: Icons.email,
-                inputType: TextInputType.emailAddress,
-              ),*/
               InputTextField(
                 textEditingController: _controller.phoneCtrl,
                 text: _controller.associated.phone != null

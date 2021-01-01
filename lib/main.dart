@@ -14,12 +14,31 @@ class HCSlzApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     //Intl.defaultLocale = 'pt_BR';
+    return AnimatedBuilder(
+      animation: AppController.instance,
+      builder: (context, child) {
+        return MaterialApp(
+          builder: asuka.builder,
+          debugShowCheckedModeBanner: false,
+          home: Splash(),
+          title: _titleAppBar,
+          theme: ThemeData(
+            brightness: AppController.instance.isDarkTheme
+                ? Brightness.dark
+                : Brightness.light,
+          ),
+        );
+      },
+    );
+  }
+
+/*
+  @override
+  Widget build(BuildContext context) {
+    //Intl.defaultLocale = 'pt_BR';
     return MultiProvider(
       providers: [
-        Provider<AssociatedController>.value(
-            value: AssociatedController()),
-        //Provider<DependentController>.value(
-            //value: DependentController()),
+        Provider<AssociatedController>.value(value: AssociatedController()),
       ],
       child: AnimatedBuilder(
         animation: AppController.instance,
@@ -39,4 +58,5 @@ class HCSlzApp extends StatelessWidget {
       ),
     );
   }
+*/
 }
