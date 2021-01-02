@@ -69,22 +69,6 @@ mixin _$DependentController on DependentControllerBase, Store {
     });
   }
 
-  final _$associatedTypeCtrlAtom =
-      Atom(name: 'DependentControllerBase.associatedTypeCtrl');
-
-  @override
-  TextEditingController get associatedTypeCtrl {
-    _$associatedTypeCtrlAtom.reportRead();
-    return super.associatedTypeCtrl;
-  }
-
-  @override
-  set associatedTypeCtrl(TextEditingController value) {
-    _$associatedTypeCtrlAtom.reportWrite(value, super.associatedTypeCtrl, () {
-      super.associatedTypeCtrl = value;
-    });
-  }
-
   final _$cpfCtrlAtom = Atom(name: 'DependentControllerBase.cpfCtrl');
 
   @override
@@ -184,12 +168,76 @@ idCtrl: ${idCtrl},
 nameCtrl: ${nameCtrl},
 phoneCtrl: ${phoneCtrl},
 emailCtrl: ${emailCtrl},
-associatedTypeCtrl: ${associatedTypeCtrl},
 cpfCtrl: ${cpfCtrl},
 bloodTypeCtrl: ${bloodTypeCtrl},
 dateBirthCtrl: ${dateBirthCtrl},
 isAssociatedCtrl: ${isAssociatedCtrl},
 isAssociated: ${isAssociated}
+    ''';
+  }
+}
+
+mixin _$FormController on FormControllerBase, Store {
+  final _$nameAtom = Atom(name: 'FormControllerBase.name');
+
+  @override
+  String get name {
+    _$nameAtom.reportRead();
+    return super.name;
+  }
+
+  @override
+  set name(String value) {
+    _$nameAtom.reportWrite(value, super.name, () {
+      super.name = value;
+    });
+  }
+
+  final _$emailAtom = Atom(name: 'FormControllerBase.email');
+
+  @override
+  String get email {
+    _$emailAtom.reportRead();
+    return super.email;
+  }
+
+  @override
+  set email(String value) {
+    _$emailAtom.reportWrite(value, super.email, () {
+      super.email = value;
+    });
+  }
+
+  final _$FormControllerBaseActionController =
+      ActionController(name: 'FormControllerBase');
+
+  @override
+  dynamic changeName(String value) {
+    final _$actionInfo = _$FormControllerBaseActionController.startAction(
+        name: 'FormControllerBase.changeName');
+    try {
+      return super.changeName(value);
+    } finally {
+      _$FormControllerBaseActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
+  dynamic changeEmail(String value) {
+    final _$actionInfo = _$FormControllerBaseActionController.startAction(
+        name: 'FormControllerBase.changeEmail');
+    try {
+      return super.changeEmail(value);
+    } finally {
+      _$FormControllerBaseActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
+  String toString() {
+    return '''
+name: ${name},
+email: ${email}
     ''';
   }
 }

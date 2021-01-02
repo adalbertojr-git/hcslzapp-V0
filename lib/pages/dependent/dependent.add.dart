@@ -22,12 +22,14 @@ class _DependentAddState extends State<DependentAdd> {
 
   @override
   void initState() {
-    _controller.currentBloodType = widget.dependent != null
+/*    _controller.currentBloodType = widget.dependent != null
         ? widget.dependent.bloodType
         : getBloodTypes().first.value;
     _controller.isAssociated = (widget.dependent != null
         ? (widget.dependent.isAssociated == 'S' ? true : false)
-        : false);
+        : false);*/
+    _controller.dependent = widget.dependent != null ? widget.dependent : null;
+    _controller.init;
     super.initState();
   }
 
@@ -49,10 +51,35 @@ class _DependentAddState extends State<DependentAdd> {
             child: Column(
               children: <Widget>[
                 TopMargin(),
-                InputTextField(
+                Observer(
+                  builder: (_) {
+                    return InputTextField(
+                      textEditingController: _controller.nameCtrl,
+                      label: labelNameDependent,
+                      hint: hintNameDependent,
+                      icon: Icons.person,
+                      inputType: TextInputType.text,
+                      onChanged: _controller.formController.changeName,
+                      errorText: _controller.validateName(),
+                    );
+                  },
+                ),
+                Observer(
+                  builder: (_) {
+                    return InputTextField(
+                      textEditingController: _controller.emailCtrl,
+                      label: labelEmail,
+                      hint: hintEmail,
+                      icon: Icons.email,
+                      inputType: TextInputType.emailAddress,
+                      onChanged: _controller.formController.changeEmail,
+                      errorText: _controller.validateEmail(),
+                    );
+                  },
+                ),
+/*                InputTextField(
                   textEditingController: _controller.nameCtrl,
-                  text:
-                      widget.dependent != null ? widget.dependent.name : null,
+                  //text: widget.dependent != null ? widget.dependent.name : null,
                   label: labelNameDependent,
                   hint: hintNameDependent,
                   icon: Icons.person,
@@ -60,17 +87,17 @@ class _DependentAddState extends State<DependentAdd> {
                 ),
                 InputTextField(
                   textEditingController: _controller.emailCtrl,
-                  text:
-                      widget.dependent != null ? widget.dependent.email : null,
+                  */ /*           text:
+                      widget.dependent != null ? widget.dependent.email : null,*/ /*
                   label: labelEmail,
                   hint: hintEmail,
                   icon: Icons.email,
                   inputType: TextInputType.emailAddress,
-                ),
+                ),*/
                 InputTextField(
                   textEditingController: _controller.phoneCtrl,
-                  text:
-                      widget.dependent != null ? widget.dependent.phone : null,
+/*                  text:
+                      widget.dependent != null ? widget.dependent.phone : null,*/
                   label: labelPhone,
                   hint: hintPhone,
                   icon: Icons.phone,
@@ -113,9 +140,9 @@ class _DependentAddState extends State<DependentAdd> {
                     Expanded(
                       child: InputTextField(
                         textEditingController: _controller.cpfCtrl,
-                        text: widget.dependent != null
+/*                        text: widget.dependent != null
                             ? widget.dependent.cpf
-                            : null,
+                            : null,*/
                         label: labelCPF,
                         hint: hintCPF,
                         inputType: TextInputType.number,
@@ -124,9 +151,9 @@ class _DependentAddState extends State<DependentAdd> {
                     Expanded(
                       child: InputTextField(
                         textEditingController: _controller.dateBirthCtrl,
-                        text: widget.dependent != null
+/*                        text: widget.dependent != null
                             ? widget.dependent.dateBirth
-                            : null,
+                            : null,*/
                         label: labelDateBirth,
                         hint: hintDate,
                         icon: Icons.calendar_today,
@@ -166,9 +193,8 @@ class _DependentAddState extends State<DependentAdd> {
             ),
           ),
         ),
-        floatingActionButton:
-            Button(icon: Icons.playlist_add,
-                onClick: () => _controller.add(context)),
+        floatingActionButton: Button(
+            icon: Icons.playlist_add, onClick: () => _controller.add(context)),
       ),
     );
   }

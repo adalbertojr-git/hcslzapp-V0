@@ -1,13 +1,15 @@
 import 'package:flutter/material.dart';
+import 'package:hcslzapp/enums/blood.types.dart';
 import 'package:hcslzapp/models/dependent.dart';
 import 'package:mobx/mobx.dart';
 
 part 'dependent.controller.g.dart';
 
-class DependentController = DependentControllerBase
-    with _$DependentController;
+class DependentController = DependentControllerBase with _$DependentController;
 
 abstract class DependentControllerBase with Store {
+  var formController;
+
   @observable
   var idCtrl = TextEditingController();
 
@@ -19,9 +21,6 @@ abstract class DependentControllerBase with Store {
 
   @observable
   var emailCtrl = TextEditingController();
-
-  @observable
-  var associatedTypeCtrl = TextEditingController();
 
   @observable
   var cpfCtrl = TextEditingController();
@@ -40,12 +39,33 @@ abstract class DependentControllerBase with Store {
 
   String currentBloodType;
 
+  Dependent dependent;
+
   @action
   associated() => isAssociated = !isAssociated;
 
-  changedDropDownItem(String selected) {
-    currentBloodType = selected;
+  get init {
+    _initTextFields;
+    currentBloodType =
+        dependent != null ? dependent.bloodType : getBloodTypes().first.value;
+    isAssociated = (dependent != null
+        ? (dependent.isAssociated == 'S' ? true : false)
+        : false);
+    formController = FormController(
+      name: dependent != null ? dependent.name : '',
+      email: dependent != null ? dependent.email : '',
+    );
   }
+
+  get _initTextFields {
+    nameCtrl.text = dependent != null ? dependent.name : null;
+    emailCtrl.text = dependent != null ? dependent.email : null;
+    phoneCtrl.text = dependent != null ? dependent.phone : null;
+    cpfCtrl.text = dependent != null ? dependent.cpf : null;
+    dateBirthCtrl.text = dependent != null ? dependent.dateBirth : null;
+  }
+
+  String changedDropDownItem(selected) => currentBloodType = selected;
 
   add(BuildContext context) {
     idCtrl.text = "0";
@@ -69,4 +89,40 @@ abstract class DependentControllerBase with Store {
     }
   }
 
+  String validateName() {
+    if (formController.name.isEmpty) {
+      return "Nome não pode ser nulo!!!";
+    }
+    return null;
+  }
+
+  String validateEmail() {
+    if (!RegExp(
+            r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+")
+        .hasMatch(formController.email)) {
+      return "Informe um email válido!!!";
+    }
+    return null;
+  }
+}
+
+class FormController extends FormControllerBase with _$FormController {
+  FormController({String name, String email}) {
+    super.name = name;
+    super.email = email;
+  }
+}
+
+abstract class FormControllerBase with Store {
+  @observable
+  String name;
+
+  @observable
+  String email;
+
+  @action
+  changeName(String value) => name = value;
+
+  @action
+  changeEmail(String value) => email = value;
 }
