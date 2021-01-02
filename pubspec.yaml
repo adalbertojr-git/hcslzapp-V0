@@ -34,10 +34,11 @@ dependencies:
   flare_flutter: ^2.0.6
   splashscreen: ^1.2.0
   image_picker: ^0.6.7+12
-  provider: ^4.3.2+2
+  #provider: ^4.3.2+2
   mobx: ^1.2.1+4
   flutter_mobx: ^1.1.0+2
   asuka: ^1.0.4
+  mask_text_input_formatter: ^1.2.1
 
 flutter_icons:
   image_path: "assets/icons/logo.png"

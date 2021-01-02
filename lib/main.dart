@@ -3,7 +3,6 @@ import 'package:hcslzapp/controllers/app.controller.dart';
 import 'package:hcslzapp/controllers/associated.controller.dart';
 import 'package:hcslzapp/pages/login/splash.dart';
 import 'package:intl/intl.dart';
-import 'package:provider/provider.dart';
 import 'package:asuka/asuka.dart' as asuka;
 
 const _titleAppBar = 'HCSlz App';

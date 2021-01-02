@@ -44,6 +44,20 @@ class ForgotPassword extends StatelessWidget {
                 height: 10.0,
               ),
               SnackBarWidget('btnForgotPassword'),
+              Padding(
+                padding: const EdgeInsets.all(10.0),
+                child: RichText(
+                  text: TextSpan(
+                    text:
+                    'Atenção: para redefinir sua senha, informe seu email cadastrado. '
+                    'Você receberá uma senha provisória para posterior alteração.',
+                    style: const TextStyle(
+                      fontSize: 10.0,
+                      color: Colors.black87,
+                    ),
+                  ),
+                ),
+              ),
             ],
           ),
         ),
@@ -62,8 +76,9 @@ class SnackBarWidget extends StatelessWidget {
         heroTag: heroTag,
         onClick: () {
           asuka.showSnackBar(SnackBar(
-            content: Text("Hello World"),
+            content: Text("Senha provisória enviada."),
           ));
+          Navigator.of(context).pop();
         });
   }
 }

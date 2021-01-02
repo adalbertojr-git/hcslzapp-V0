@@ -5,6 +5,7 @@ import 'package:hcslzapp/models/dependent.dart';
 import 'package:hcslzapp/models/motorcycle.dart';
 import 'package:hcslzapp/repositories/associated.repo.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:intl/intl.dart';
 import 'package:mobx/mobx.dart';
 import 'dart:io';
 
@@ -95,10 +96,23 @@ abstract class AssociatedControllerBase with Store {
   get _initTextFields {
     nameCtrl.text = associated.name;
     emailCtrl.text = associated.email;
+    phoneCtrl.text = associated.phone;
+    sponsorCtrl.text = associated.sponsor;
+    cnhCtrl.text = associated.cnh;
+    cpfCtrl.text = associated.cpf;
+    associatedTypeCtrl.text = associated.associatedType;
+    dateBirthCtrl.text = associated.dateBirth;
+    dateShieldCtrl.text = associated.dateShield;
   }
 
   @action
   bool hideButton() => isHideButton = !isHideButton;
+
+  bool get hasErrors => hasErrorName || hasErrorEmail;
+
+  bool get hasErrorName => validateName() != null;
+
+  bool get hasErrorEmail => validateEmail() != null;
 
   @action
   Future fetchAssociated(int id) =>
@@ -128,10 +142,12 @@ abstract class AssociatedControllerBase with Store {
   }
 
   String validateEmail() {
-    bool emailValid = RegExp(
-            r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+")
-        .hasMatch(formController.email);
-    if (!emailValid) {
+    if (formController.email.isEmpty) {
+      return "Email não pode ser nulo!!!";
+    }
+    else if (!RegExp(
+           r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+")
+       .hasMatch(formController.email)) {
       return "Informe um email válido!!!";
     }
     return null;
@@ -139,10 +155,6 @@ abstract class AssociatedControllerBase with Store {
 
   Future<List<Associated>> getFuture(int _associatedId) =>
       future = fetchAssociated(_associatedId);
-
-  bool get hasErrors => hasErrorName || hasErrorEmail;// || password != null;
-  bool get hasErrorName => validateName() != null;
-  bool get hasErrorEmail => validateEmail() != null;
 
   Associated _setFieldsToUpdate() {
     this.associated.name = nameCtrl.text;
@@ -201,9 +213,6 @@ abstract class FormControllerBase with Store {
 
   @observable
   String email;
-
-  /* @observable
-  String password;*/
 
   @action
   changeName(String value) => name = value;

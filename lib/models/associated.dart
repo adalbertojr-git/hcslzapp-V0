@@ -1,5 +1,6 @@
 import 'package:hcslzapp/models/dependent.dart';
 import 'package:hcslzapp/models/motorcycle.dart';
+import 'package:intl/intl.dart';
 
 class Associated {
   final int id;
@@ -41,8 +42,8 @@ class Associated {
         cpf = json['cpf'],
         bloodType = json['bloodType'],
         associatedType = json['associatedType'],
-        dateBirth = json['dateBirthToString'],
-        dateShield = json['dateShieldToString'],
+        dateBirth = json['dateBirth'],
+        dateShield = json['dateShield'],
         dependents = List.from((json['dependents'] as List)
             .map((dependents) => Dependent.fromJson(dependents))),
         motorcycles = List.from((json['motorcycles'] as List)
@@ -58,8 +59,8 @@ class Associated {
         'cpf': cpf,
         'bloodType': bloodType,
         'associatedType': associatedType,
-        'dateBirthToString': dateBirth,
-        'dateShieldToString': dateShield,
+        'dateBirth': dateBirth,
+        'dateShield': dateShield,
         'dependents': List<dynamic>.from(
             dependents.map((dependents) => dependents.toJson())),
         'motorcycles': List<dynamic>.from(

@@ -20,8 +20,7 @@ class RequestAccess extends StatelessWidget {
     );
   }
 
-  _requestAccess(BuildContext context) =>
-      Container(
+  _requestAccess(BuildContext context) => Container(
         decoration: BoxDecoration(
           gradient: LinearGradient(
             colors: [Colors.white30, Colors.deepOrange],
@@ -29,10 +28,7 @@ class RequestAccess extends StatelessWidget {
             end: FractionalOffset.bottomRight,
           ),
         ),
-        height: MediaQuery
-            .of(context)
-            .size
-            .height,
+        height: MediaQuery.of(context).size.height,
         child: SingleChildScrollView(
           child: Column(
             children: <Widget>[
@@ -89,6 +85,21 @@ class RequestAccess extends StatelessWidget {
                 height: 10.0,
               ),
               SnackBarWidget('btnRequestAccess'),
+              Padding(
+                padding: const EdgeInsets.all(10.0),
+                child: RichText(
+                  text: TextSpan(
+                    text:
+                        'Atenção: seu cadastro será analisado e liberado pela Diretoria HC. Você '
+                        'receberá um email informando da liberação. Verifique sua caixa '
+                        'spam.',
+                    style: const TextStyle(
+                      fontSize: 10.0,
+                      color: Colors.black87,
+                    ),
+                  ),
+                ),
+              ),
             ],
           ),
         ),
@@ -107,8 +118,9 @@ class SnackBarWidget extends StatelessWidget {
         heroTag: heroTag,
         onClick: () {
           asuka.showSnackBar(SnackBar(
-            content: Text("Hello World"),
+            content: Text("Cadastro enviado para apreciação."),
           ));
+          Navigator.of(context).pop();
         });
   }
 }

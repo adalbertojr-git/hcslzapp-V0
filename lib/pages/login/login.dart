@@ -121,7 +121,7 @@ class Login extends StatelessWidget {
                           'Esqueci a senha',
                           style: TextStyle(
                             color: Colors.white,
-                            fontSize: 13.0,
+                            fontSize: 10.0,
                           ),
                         ),
                       ),
@@ -137,7 +137,7 @@ class Login extends StatelessWidget {
                           'Primeiro acesso?',
                           style: TextStyle(
                             color: Colors.white,
-                            fontSize: 13.0,
+                            fontSize: 10.0,
                           ),
                         ),
                       ),

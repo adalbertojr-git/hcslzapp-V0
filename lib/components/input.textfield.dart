@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:mask_text_input_formatter/mask_text_input_formatter.dart';
 
 class InputTextField extends StatelessWidget {
   TextEditingController textEditingController;
@@ -15,6 +16,7 @@ class InputTextField extends StatelessWidget {
   String text;
   Function onChanged;
   String errorText;
+  MaskTextInputFormatter maskTextInputFormatter;
 
   InputTextField(
       {this.textEditingController,
@@ -30,7 +32,8 @@ class InputTextField extends StatelessWidget {
       this.size,
       this.text,
       this.onChanged,
-      this.errorText});
+      this.errorText,
+      this.maskTextInputFormatter});
 
   @override
   Widget build(BuildContext context) {
@@ -98,6 +101,7 @@ class InputTextField extends StatelessWidget {
         maxLines: nLines != null ? nLines : 1,
         controller: textEditingController,
         onChanged: onChanged,
+        inputFormatters: maskTextInputFormatter == null ? null : [maskTextInputFormatter],
       ),
     );
   }
