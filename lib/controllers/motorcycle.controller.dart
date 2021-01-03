@@ -8,6 +8,9 @@ class MotorcycleController = MotorcycleControllerBase
     with _$MotorcycleController;
 
 abstract class MotorcycleControllerBase with Store {
+
+  var formController;
+
   @observable
   var idCtrl = TextEditingController();
 
@@ -32,6 +35,25 @@ abstract class MotorcycleControllerBase with Store {
   @observable
   var renavamCtrl = TextEditingController();
 
+  Motorcycle motorcycle;
+
+  get init {
+    _initTextFields;
+    formController = FormController(
+      model: motorcycle != null ? motorcycle.model : '',
+    );
+  }
+
+  get _initTextFields {
+    modelCtrl.text = motorcycle != null ? motorcycle.model : null;
+    yearCtrl.text = motorcycle != null ? motorcycle.year : null;
+    colorCtrl.text = motorcycle != null ? motorcycle.color : null;
+    licencePlateCtrl.text = motorcycle != null ? motorcycle.licencePlate : null;
+    nicknameCtrl.text = motorcycle != null ? motorcycle.nickname : null;
+    chassisCtrl.text = motorcycle != null ? motorcycle.chassis : null;
+    renavamCtrl.text = motorcycle != null ? motorcycle.renavam : null;
+  }
+
   add(BuildContext context) {
     idCtrl.text = "0";
     final int id = int.parse(idCtrl.text);
@@ -53,5 +75,27 @@ abstract class MotorcycleControllerBase with Store {
       Navigator.pop(context, motorcycle);
     }
   }
+
+  String validateModel() {
+    if (formController.model.isEmpty) {
+      return "Modelo não pode ser nulo!!!";
+    }
+    return null;
+  }
+
+}
+
+class FormController extends FormControllerBase with _$FormController {
+  FormController({String model}) {
+    super.model = model;
+  }
+}
+
+abstract class FormControllerBase with Store {
+  @observable
+  String model;
+
+  @action
+  changeModel(String value) => model = value;
 
 }

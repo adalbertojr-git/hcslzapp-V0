@@ -145,3 +145,41 @@ renavamCtrl: ${renavamCtrl}
     ''';
   }
 }
+
+mixin _$FormController on FormControllerBase, Store {
+  final _$modelAtom = Atom(name: 'FormControllerBase.model');
+
+  @override
+  String get model {
+    _$modelAtom.reportRead();
+    return super.model;
+  }
+
+  @override
+  set model(String value) {
+    _$modelAtom.reportWrite(value, super.model, () {
+      super.model = value;
+    });
+  }
+
+  final _$FormControllerBaseActionController =
+      ActionController(name: 'FormControllerBase');
+
+  @override
+  dynamic changeModel(String value) {
+    final _$actionInfo = _$FormControllerBaseActionController.startAction(
+        name: 'FormControllerBase.changeModel');
+    try {
+      return super.changeModel(value);
+    } finally {
+      _$FormControllerBaseActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
+  String toString() {
+    return '''
+model: ${model}
+    ''';
+  }
+}

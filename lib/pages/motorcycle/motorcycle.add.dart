@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:hcslzapp/common/labels.and.hints.dart';
 import 'package:hcslzapp/components/button.dart';
 import 'package:hcslzapp/components/input.textfield.dart';
 import 'package:hcslzapp/components/top.margin.dart';
 import 'package:hcslzapp/controllers/motorcycle.controller.dart';
 import 'package:hcslzapp/models/motorcycle.dart';
+import 'package:mask_text_input_formatter/mask_text_input_formatter.dart';
 
 class MotorcycleAdd extends StatefulWidget {
   final Motorcycle motorcycle;
@@ -17,6 +19,14 @@ class MotorcycleAdd extends StatefulWidget {
 
 class _MotorcycleAddState extends State<MotorcycleAdd> {
   MotorcycleController _controller = MotorcycleController();
+
+  @override
+  void initState() {
+    _controller.motorcycle =
+        widget.motorcycle != null ? widget.motorcycle : null;
+    _controller.init;
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -35,10 +45,21 @@ class _MotorcycleAddState extends State<MotorcycleAdd> {
           child: Column(
             children: <Widget>[
               TopMargin(),
+              Observer(
+                builder: (_) {
+                  return InputTextField(
+                    textEditingController: _controller.modelCtrl,
+                    label: labelModel,
+                    hint: hintModel,
+                    icon: Icons.motorcycle,
+                    inputType: TextInputType.text,
+                    onChanged: _controller.formController.changeModel,
+                    errorText: _controller.validateModel(),
+                  );
+                },
+              ),
               InputTextField(
                 textEditingController: _controller.modelCtrl,
-                text:
-                    widget.motorcycle != null ? widget.motorcycle.model : null,
                 label: labelModel,
                 hint: hintModel,
                 icon: Icons.motorcycle,
@@ -49,22 +70,18 @@ class _MotorcycleAddState extends State<MotorcycleAdd> {
                 children: <Widget>[
                   Expanded(
                     child: InputTextField(
-                      textEditingController: _controller.yearCtrl,
-                      text: widget.motorcycle != null
-                          ? widget.motorcycle.year
-                          : null,
-                      icon: Icons.calendar_today,
-                      label: labelYear,
-                      hint: hintYear,
-                      inputType: TextInputType.number,
+                          textEditingController: _controller.yearCtrl,
+                          icon: Icons.calendar_today,
+                          label: labelYear,
+                          hint: hintYear,
+                          inputType: TextInputType.number,
+                          maskTextInputFormatter:
+                              MaskTextInputFormatter(mask: "####"),
+                        ),
                     ),
-                  ),
                   Expanded(
                     child: InputTextField(
                       textEditingController: _controller.colorCtrl,
-                      text: widget.motorcycle != null
-                          ? widget.motorcycle.color
-                          : null,
                       icon: Icons.color_lens,
                       label: labelColor,
                       hint: hintColor,
@@ -79,9 +96,6 @@ class _MotorcycleAddState extends State<MotorcycleAdd> {
                   Expanded(
                     child: InputTextField(
                       textEditingController: _controller.licencePlateCtrl,
-                      text: widget.motorcycle != null
-                          ? widget.motorcycle.licencePlate
-                          : null,
                       label: labelLicencePlate,
                       hint: hintLicencePlate,
                       inputType: TextInputType.text,
@@ -90,9 +104,6 @@ class _MotorcycleAddState extends State<MotorcycleAdd> {
                   Expanded(
                     child: InputTextField(
                       textEditingController: _controller.nicknameCtrl,
-                      text: widget.motorcycle != null
-                          ? widget.motorcycle.nickname
-                          : null,
                       label: labelNickname,
                       hint: hintNickname,
                       inputType: TextInputType.text,
@@ -102,18 +113,12 @@ class _MotorcycleAddState extends State<MotorcycleAdd> {
               ),
               InputTextField(
                 textEditingController: _controller.chassisCtrl,
-                text: widget.motorcycle != null
-                    ? widget.motorcycle.chassis
-                    : null,
                 label: labelChassis,
                 hint: hintChassis,
                 inputType: TextInputType.text,
               ),
               InputTextField(
                 textEditingController: _controller.renavamCtrl,
-                text: widget.motorcycle != null
-                    ? widget.motorcycle.renavam
-                    : null,
                 label: labelRenavam,
                 hint: hintRenavam,
                 inputType: TextInputType.text,
@@ -122,9 +127,8 @@ class _MotorcycleAddState extends State<MotorcycleAdd> {
           ),
         ),
       ),
-      floatingActionButton:
-          Button(icon: Icons.playlist_add,
-              onClick: () => _controller.add(context)),
+      floatingActionButton: Button(
+          icon: Icons.playlist_add, onClick: () => _controller.add(context)),
     );
   }
 }
