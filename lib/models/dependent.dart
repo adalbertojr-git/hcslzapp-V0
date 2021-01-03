@@ -18,7 +18,7 @@ class Dependent {
         phone = json['phone'],
         cpf = json['cpf'],
         bloodType = json['bloodType'],
-        dateBirth = json['dateBirthToString'],
+        dateBirth = json['dateBirth'],
         isAssociated = json['isAssociated'];
 
   Map<String, dynamic> toJson() => {
@@ -28,7 +28,7 @@ class Dependent {
         'phone': phone,
         'cpf': cpf,
         'bloodType': bloodType,
-        'dateBirthToString': dateBirth,
+        'dateBirth': dateBirth,
         'isAssociated': isAssociated,
       };
 

@@ -52,7 +52,7 @@ class ForgotPassword extends StatelessWidget {
                     'Atenção: para redefinir sua senha, informe seu email cadastrado. '
                     'Você receberá uma senha provisória para posterior alteração.',
                     style: const TextStyle(
-                      fontSize: 10.0,
+                      fontSize: 12.0,
                       color: Colors.black87,
                     ),
                   ),

@@ -94,7 +94,7 @@ class RequestAccess extends StatelessWidget {
                         'receberá um email informando da liberação. Verifique sua caixa '
                         'spam.',
                     style: const TextStyle(
-                      fontSize: 10.0,
+                      fontSize: 12.0,
                       color: Colors.black87,
                     ),
                   ),

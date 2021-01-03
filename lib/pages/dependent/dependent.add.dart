@@ -7,6 +7,7 @@ import 'package:hcslzapp/controllers/dependent.controller.dart';
 import 'package:hcslzapp/enums/blood.types.dart';
 import 'package:hcslzapp/components/input.textfield.dart';
 import 'package:hcslzapp/models/dependent.dart';
+import 'package:mask_text_input_formatter/mask_text_input_formatter.dart';
 
 class DependentAdd extends StatefulWidget {
   final Dependent dependent;
@@ -22,12 +23,6 @@ class _DependentAddState extends State<DependentAdd> {
 
   @override
   void initState() {
-/*    _controller.currentBloodType = widget.dependent != null
-        ? widget.dependent.bloodType
-        : getBloodTypes().first.value;
-    _controller.isAssociated = (widget.dependent != null
-        ? (widget.dependent.isAssociated == 'S' ? true : false)
-        : false);*/
     _controller.dependent = widget.dependent != null ? widget.dependent : null;
     _controller.init;
     super.initState();
@@ -77,31 +72,14 @@ class _DependentAddState extends State<DependentAdd> {
                     );
                   },
                 ),
-/*                InputTextField(
-                  textEditingController: _controller.nameCtrl,
-                  //text: widget.dependent != null ? widget.dependent.name : null,
-                  label: labelNameDependent,
-                  hint: hintNameDependent,
-                  icon: Icons.person,
-                  inputType: TextInputType.text,
-                ),
-                InputTextField(
-                  textEditingController: _controller.emailCtrl,
-                  */ /*           text:
-                      widget.dependent != null ? widget.dependent.email : null,*/ /*
-                  label: labelEmail,
-                  hint: hintEmail,
-                  icon: Icons.email,
-                  inputType: TextInputType.emailAddress,
-                ),*/
                 InputTextField(
                   textEditingController: _controller.phoneCtrl,
-/*                  text:
-                      widget.dependent != null ? widget.dependent.phone : null,*/
                   label: labelPhone,
                   hint: hintPhone,
                   icon: Icons.phone,
                   inputType: TextInputType.phone,
+                  maskTextInputFormatter:
+                      MaskTextInputFormatter(mask: "(##) #####-####"),
                 ),
                 Padding(
                   padding: const EdgeInsets.fromLTRB(0.0, 3.0, 2.0, 3.0),
@@ -140,24 +118,22 @@ class _DependentAddState extends State<DependentAdd> {
                     Expanded(
                       child: InputTextField(
                         textEditingController: _controller.cpfCtrl,
-/*                        text: widget.dependent != null
-                            ? widget.dependent.cpf
-                            : null,*/
                         label: labelCPF,
                         hint: hintCPF,
                         inputType: TextInputType.number,
+                        maskTextInputFormatter:
+                            MaskTextInputFormatter(mask: "###.###.###-##"),
                       ),
                     ),
                     Expanded(
                       child: InputTextField(
                         textEditingController: _controller.dateBirthCtrl,
-/*                        text: widget.dependent != null
-                            ? widget.dependent.dateBirth
-                            : null,*/
                         label: labelDateBirth,
                         hint: hintDate,
                         icon: Icons.calendar_today,
                         inputType: TextInputType.datetime,
+                        maskTextInputFormatter:
+                            MaskTextInputFormatter(mask: "##/##/####"),
                       ),
                     ),
                   ],

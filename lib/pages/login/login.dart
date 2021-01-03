@@ -94,7 +94,7 @@ class Login extends StatelessWidget {
                     hidden: true,
                   ),
                   SizedBox(
-                    height: 10.0,
+                    height: 30.0,
                   ),
                   Button(
                     icon: Icons.arrow_forward,
@@ -123,8 +123,8 @@ class Login extends StatelessWidget {
                         child: Text(
                           'Esqueci a senha',
                           style: TextStyle(
-                            color: Colors.white,
-                            fontSize: 10.0,
+                            color: Colors.indigo,
+                            fontSize: 12.0,
                           ),
                         ),
                       ),
@@ -139,8 +139,8 @@ class Login extends StatelessWidget {
                         child: Text(
                           'Primeiro acesso?',
                           style: TextStyle(
-                            color: Colors.white,
-                            fontSize: 10.0,
+                            color: Colors.indigo,
+                            fontSize: 12.0,
                           ),
                         ),
                       ),

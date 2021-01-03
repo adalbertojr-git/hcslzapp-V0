@@ -5,7 +5,7 @@ class CenteredMessage extends StatelessWidget {
   final String _message;
   final IconData icon;
   final double _iconSize = 64;
-  final double _fontSize = 20;
+  final double _fontSize = 15;
   final Color backgroundColor;
   final Color fontColor;
 
