@@ -17,40 +17,46 @@ class Login extends StatelessWidget {
   Widget build(BuildContext context) {
     _controller.init;
     return Scaffold(
-      appBar: appBar,
-      body: _login(context),
+      body: _sliverAppBar(context),
     );
   }
 
-  get appBar =>
-      AppBar(
-        title: Text(
-          'HCSlz App',
-          style: TextStyle(
-            color: Colors.black,
-            fontSize: 40.0,
+  _sliverAppBar(BuildContext context) => CustomScrollView(
+    slivers: <Widget>[
+      SliverAppBar(
+        pinned: true,
+        snap: true,
+        floating: true,
+        elevation: 50,
+        expandedHeight: 180.0,
+        backgroundColor: Colors.black,
+        flexibleSpace: FlexibleSpaceBar(
+          centerTitle: true,
+          title: Text(
+            "HCSlz App",
+            style: new TextStyle(
+              fontSize: 30.0,
+              color: Colors.orangeAccent,
+            ),
+          ),
+          background: Image.asset(
+            'assets/imgs/passeio.jpg',
+            fit: BoxFit.fill,
           ),
         ),
-        centerTitle: true,
-        backgroundColor: Colors.deepOrange[300],
-        toolbarHeight: 150.0,
-        elevation: 30.0,
-        shadowColor: Colors.deepOrange,
-      );
+      ),
+      SliverFillRemaining(
+        child: _login(context),
+      ),
+    ],
+  );
 
-  _login(BuildContext context) =>
-      Stack(
+  _login(BuildContext context) => Stack(
         children: [
           Center(
             child: SizedBox(
-              height: MediaQuery
-                  .of(context)
-                  .size
-                  .height,
-              width: MediaQuery
-                  .of(context)
-                  .size
-                  .width,
+              height: MediaQuery.of(context).size.height,
+              width: MediaQuery.of(context).size.width,
               child: Image.asset('assets/imgs/logo_login.png'),
             ),
           ),
@@ -62,10 +68,7 @@ class Login extends StatelessWidget {
                 end: FractionalOffset.bottomRight,
               ),
             ),
-            height: MediaQuery
-                .of(context)
-                .size
-                .height,
+            height: MediaQuery.of(context).size.height,
             child: SingleChildScrollView(
               child: Column(
                 children: <Widget>[
