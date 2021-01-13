@@ -11,7 +11,7 @@ class AssociatedRepo {
   Future<List<Associated>> findAll() async {
     final Response response = await client
         .get(mainUrl + _associatedUrl)
-        .timeout(Duration(seconds: 5));
+        .timeout(Duration(seconds: 10));
     final List<dynamic> decodedJson = jsonDecode(response.body);
     return decodedJson
         .map((dynamic json) => Associated.fromJson(json))
@@ -21,7 +21,7 @@ class AssociatedRepo {
   Future<List<Associated>> findByIdAssociatedToList(int id) async {
     final Response response = await client
         .get(mainUrl + _associatedUrl + '/list/' + id.toString())
-        .timeout(Duration(seconds: 5));
+        .timeout(Duration(seconds: 10));
     if (response.statusCode == 200) {
       final List<dynamic> decodedJson = jsonDecode(response.body);
       return decodedJson
@@ -37,7 +37,7 @@ class AssociatedRepo {
     final Response response = await client
         .put(mainUrl + _associatedUrl + "/" + associated.id.toString(),
             headers: {'Content-type': 'application/json'}, body: encodedJson)
-        .timeout(Duration(seconds: 5));
+        .timeout(Duration(seconds: 10));
     print(associated);
     print(response.statusCode);
     if (response.statusCode == 200) {

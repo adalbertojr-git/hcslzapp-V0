@@ -28,7 +28,7 @@ class Login extends StatelessWidget {
         snap: true,
         floating: true,
         elevation: 50,
-        expandedHeight: 180.0,
+        expandedHeight: 150.0,
         backgroundColor: Colors.black,
         flexibleSpace: FlexibleSpaceBar(
           centerTitle: true,

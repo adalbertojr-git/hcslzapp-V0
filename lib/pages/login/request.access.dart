@@ -55,31 +55,35 @@ class RequestAccess extends StatelessWidget {
                 textEditingController: _controller.emailReqAccessCtrl,
                 hint: hintEmail,
                 label: labelEmail + " *",
-                icon: Icons.attach_email,
                 inputType: TextInputType.emailAddress,
               ),
               InputTextField(
                 textEditingController: _controller.emailReqAccessCtrl,
                 hint: hintEmail,
                 label: labelEmail + " *",
-                icon: Icons.check,
                 inputType: TextInputType.emailAddress,
               ),
-              InputTextField(
-                textEditingController: _controller.pswReqAccessCtrl,
-                label: labelPswReqAccess,
-                hint: hintPswReqAccess,
-                icon: Icons.vpn_key,
-                inputType: TextInputType.text,
-                hidden: true,
-              ),
-              InputTextField(
-                textEditingController: _controller.confPswReqAccessCtrl,
-                label: labelConfPswReqAccess,
-                hint: hintConfPswReqAccess,
-                icon: Icons.check,
-                inputType: TextInputType.text,
-                hidden: true,
+              Row(
+                children: [
+                  Expanded(
+                    child: InputTextField(
+                      textEditingController: _controller.pswReqAccessCtrl,
+                      label: labelPswReqAccess,
+                      hint: hintPswReqAccess,
+                      inputType: TextInputType.text,
+                      hidden: true,
+                    ),
+                  ),
+                  Expanded(
+                    child: InputTextField(
+                      textEditingController: _controller.confPswReqAccessCtrl,
+                      label: labelConfPswReqAccess,
+                      hint: hintConfPswReqAccess,
+                      inputType: TextInputType.text,
+                      hidden: true,
+                    ),
+                  ),
+                ],
               ),
               SizedBox(
                 height: 10.0,
