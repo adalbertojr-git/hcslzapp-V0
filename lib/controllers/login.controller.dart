@@ -1,4 +1,8 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
+import 'package:hcslzapp/models/token.dart';
+import 'package:hcslzapp/repositories/login.repo.dart';
 import 'package:mobx/mobx.dart';
 
 part 'login.controller.g.dart';
@@ -33,9 +37,26 @@ abstract class LoginControllerBase with Store {
   @observable
   var emailForgotPswCtrl = TextEditingController();
 
+  @observable
+  ObservableFuture<Token> token;
+
+  String errorMsg;
+
+  final LoginRepo _loginRepo = LoginRepo();
+
   get init {
     formController = FormController(name: '');
   }
+
+  @action
+  Future login(String username, String password) =>
+      token = ObservableFuture(_loginRepo
+          .login(username, password)
+          .then((token) => token)).catchError((e) {
+        this.errorMsg = "TimeOutException: ${e.toString()}";
+      }, test: (e) => e is TimeoutException).catchError((e) {
+        this.errorMsg = "Exception: ${e.toString()}";
+      }, test: (e) => e is Exception);
 
   String validateName() {
     print('---------- validateName ----------');

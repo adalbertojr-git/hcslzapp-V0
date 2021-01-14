@@ -136,6 +136,35 @@ mixin _$LoginController on LoginControllerBase, Store {
     });
   }
 
+  final _$tokenAtom = Atom(name: 'LoginControllerBase.token');
+
+  @override
+  ObservableFuture<Token> get token {
+    _$tokenAtom.reportRead();
+    return super.token;
+  }
+
+  @override
+  set token(ObservableFuture<Token> value) {
+    _$tokenAtom.reportWrite(value, super.token, () {
+      super.token = value;
+    });
+  }
+
+  final _$LoginControllerBaseActionController =
+      ActionController(name: 'LoginControllerBase');
+
+  @override
+  Future<dynamic> login(String username, String password) {
+    final _$actionInfo = _$LoginControllerBaseActionController.startAction(
+        name: 'LoginControllerBase.login');
+    try {
+      return super.login(username, password);
+    } finally {
+      _$LoginControllerBaseActionController.endAction(_$actionInfo);
+    }
+  }
+
   @override
   String toString() {
     return '''
@@ -146,7 +175,8 @@ userReqAccessCtrl: ${userReqAccessCtrl},
 emailReqAccessCtrl: ${emailReqAccessCtrl},
 pswReqAccessCtrl: ${pswReqAccessCtrl},
 confPswReqAccessCtrl: ${confPswReqAccessCtrl},
-emailForgotPswCtrl: ${emailForgotPswCtrl}
+emailForgotPswCtrl: ${emailForgotPswCtrl},
+token: ${token}
     ''';
   }
 }

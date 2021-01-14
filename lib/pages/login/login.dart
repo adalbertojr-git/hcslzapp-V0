@@ -5,6 +5,7 @@ import 'package:hcslzapp/common/labels.and.hints.dart';
 import 'package:hcslzapp/components/button.dart';
 import 'package:hcslzapp/components/input.textfield.dart';
 import 'package:hcslzapp/controllers/login.controller.dart';
+import 'package:hcslzapp/models/token.dart';
 import 'package:hcslzapp/pages/dashboard/dashboard.dart';
 import 'package:asuka/asuka.dart' as asuka;
 import 'package:hcslzapp/pages/login/request.access.dart';
@@ -21,42 +22,50 @@ class Login extends StatelessWidget {
     );
   }
 
-  _sliverAppBar(BuildContext context) => CustomScrollView(
-    slivers: <Widget>[
-      SliverAppBar(
-        pinned: true,
-        snap: true,
-        floating: true,
-        elevation: 50,
-        expandedHeight: 150.0,
-        backgroundColor: Colors.black,
-        flexibleSpace: FlexibleSpaceBar(
-          centerTitle: true,
-          title: Text(
-            "HCSlz App",
-            style: new TextStyle(
-              fontSize: 30.0,
-              color: Colors.orangeAccent,
+  _sliverAppBar(BuildContext context) =>
+      CustomScrollView(
+        slivers: <Widget>[
+          SliverAppBar(
+            pinned: true,
+            snap: true,
+            floating: true,
+            elevation: 50,
+            expandedHeight: 150.0,
+            backgroundColor: Colors.black,
+            flexibleSpace: FlexibleSpaceBar(
+              centerTitle: true,
+              title: Text(
+                "HCSlz App",
+                style: new TextStyle(
+                  fontSize: 30.0,
+                  color: Colors.orangeAccent,
+                ),
+              ),
+              background: Image.asset(
+                'assets/imgs/passeio.jpg',
+                fit: BoxFit.fill,
+              ),
             ),
           ),
-          background: Image.asset(
-            'assets/imgs/passeio.jpg',
-            fit: BoxFit.fill,
+          SliverFillRemaining(
+            child: _widgets(context),
           ),
-        ),
-      ),
-      SliverFillRemaining(
-        child: _login(context),
-      ),
-    ],
-  );
+        ],
+      );
 
-  _login(BuildContext context) => Stack(
+  _widgets(BuildContext context) =>
+      Stack(
         children: [
           Center(
             child: SizedBox(
-              height: MediaQuery.of(context).size.height,
-              width: MediaQuery.of(context).size.width,
+              height: MediaQuery
+                  .of(context)
+                  .size
+                  .height,
+              width: MediaQuery
+                  .of(context)
+                  .size
+                  .width,
               child: Image.asset('assets/imgs/logo_login.png'),
             ),
           ),
@@ -68,7 +77,10 @@ class Login extends StatelessWidget {
                 end: FractionalOffset.bottomRight,
               ),
             ),
-            height: MediaQuery.of(context).size.height,
+            height: MediaQuery
+                .of(context)
+                .size
+                .height,
             child: SingleChildScrollView(
               child: Column(
                 children: <Widget>[
@@ -100,10 +112,7 @@ class Login extends StatelessWidget {
                     icon: Icons.arrow_forward,
                     heroTag: 'btnLogin',
                     onClick: () {
-                      Navigator.pushReplacement(
-                        context,
-                        MaterialPageRoute(builder: (context) => Dashboard()),
-                      );
+                      _login;
                     },
                   ),
                   SizedBox(
@@ -152,6 +161,29 @@ class Login extends StatelessWidget {
           ),
         ],
       );
+
+  get _login {
+    _controller.login(_controller.userLoginCtrl.text,
+      _controller.pswLoginCtrl.text).then(
+        (token) {
+          if (token == null) {
+            asuka.showSnackBar(
+              SnackBar(
+                content: Text('Usuário e/ou senha inválidos.'),
+              ),
+            );
+          }
+          else {
+            Token t = token;
+            print(t.token);
+            /*Navigator.pushReplacement(
+      context,
+      MaterialPageRoute(builder: (context) => Dashboard()),
+    );*/
+          }
+        }
+    );
+  }
 }
 
 class SnackBarWidget extends StatelessWidget {
