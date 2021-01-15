@@ -1,6 +1,6 @@
 import 'dart:async';
 import 'dart:convert';
-import 'dart:io';
+import 'package:hcslzapp/http/http.exception.dart';
 import 'package:hcslzapp/models/token.dart';
 import 'package:http/http.dart';
 import '../common/settings.dart';
@@ -27,6 +27,7 @@ class LoginRepo {
         jsonDecode(response.body),
       );
     } else {
+      print(getMessage(response.statusCode));
       throw HttpException(getMessage(response.statusCode));
     }
   }

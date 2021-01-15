@@ -17,8 +17,12 @@ class Login extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     _controller.init;
-    return Scaffold(
-      body: _sliverAppBar(context),
+    return Observer(
+      builder: (_) {
+        return Scaffold(
+          body: _sliverAppBar(context),
+        );
+      },
     );
   }
 
@@ -163,26 +167,29 @@ class Login extends StatelessWidget {
       );
 
   get _login {
-    _controller.login(_controller.userLoginCtrl.text,
-      _controller.pswLoginCtrl.text).then(
-        (token) {
-          if (token == null) {
-            asuka.showSnackBar(
-              SnackBar(
-                content: Text('Usuário e/ou senha inválidos.'),
-              ),
-            );
-          }
-          else {
-            Token t = token;
-            print(t.token);
-            /*Navigator.pushReplacement(
+    _controller.errorMsg = null;
+    _controller.login().then((token) {
+      if (_controller.errorMsg.isNotEmpty) {
+        asuka.showSnackBar(
+          SnackBar(
+            content: Text(_controller.errorMsg),
+          ),
+        );
+      }else if (token == null) {
+          asuka.showSnackBar(
+            SnackBar(
+              content: Text('Usuário e/ou senha inválidos.'),
+            ),
+          );
+        } else {
+          Token t = token;
+          print(t.token);
+/*        Navigator.pushReplacement(
       context,
       MaterialPageRoute(builder: (context) => Dashboard()),
     );*/
-          }
         }
-    );
+    });
   }
 }
 

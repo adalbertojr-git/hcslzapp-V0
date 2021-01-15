@@ -155,11 +155,11 @@ mixin _$LoginController on LoginControllerBase, Store {
       ActionController(name: 'LoginControllerBase');
 
   @override
-  Future<dynamic> login(String username, String password) {
+  Future<dynamic> login() {
     final _$actionInfo = _$LoginControllerBaseActionController.startAction(
         name: 'LoginControllerBase.login');
     try {
-      return super.login(username, password);
+      return super.login();
     } finally {
       _$LoginControllerBaseActionController.endAction(_$actionInfo);
     }

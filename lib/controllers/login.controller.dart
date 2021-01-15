@@ -1,5 +1,5 @@
 import 'dart:async';
-
+import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:hcslzapp/models/token.dart';
 import 'package:hcslzapp/repositories/login.repo.dart';
@@ -48,15 +48,28 @@ abstract class LoginControllerBase with Store {
     formController = FormController(name: '');
   }
 
-  @action
-  Future login(String username, String password) =>
+/*  @action
+  Future login() =>
       token = ObservableFuture(_loginRepo
-          .login(username, password)
-          .then((token) => token)).catchError((e) {
+          .login(userLoginCtrl.text, pswLoginCtrl.text)
+          .then((value) => value)).catchError((e) {
+            print("1");
+        this.errorMsg = "HttpException: ${e.toString()}";
+      }, test: (e) => e is HttpException).catchError((e) {
+        print("2");
         this.errorMsg = "TimeOutException: ${e.toString()}";
       }, test: (e) => e is TimeoutException).catchError((e) {
-        this.errorMsg = "Exception: ${e.toString()}";
-      }, test: (e) => e is Exception);
+        print("3");
+        this.errorMsg = "${e.toString()}";
+      }, test: (e) => e is Exception);*/
+
+  @action
+  Future login() =>
+      token = ObservableFuture(_loginRepo
+          .login(userLoginCtrl.text, pswLoginCtrl.text)
+          .then((value) => value)).catchError((e) {
+        this.errorMsg = "${e.message}";
+      });
 
   String validateName() {
     print('---------- validateName ----------');
