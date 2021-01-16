@@ -1,5 +1,4 @@
 import 'dart:async';
-import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:hcslzapp/models/token.dart';
 import 'package:hcslzapp/repositories/login.repo.dart';
@@ -10,7 +9,6 @@ part 'login.controller.g.dart';
 class LoginController = LoginControllerBase with _$LoginController;
 
 abstract class LoginControllerBase with Store {
-
   var formController;
 
   @observable
@@ -19,7 +17,7 @@ abstract class LoginControllerBase with Store {
   @observable
   var pswLoginCtrl = TextEditingController();
 
-  @observable
+/*  @observable
   var nameReqAccessCtrl = TextEditingController();
 
   @observable
@@ -35,7 +33,7 @@ abstract class LoginControllerBase with Store {
   var confPswReqAccessCtrl = TextEditingController();
 
   @observable
-  var emailForgotPswCtrl = TextEditingController();
+  var emailForgotPswCtrl = TextEditingController();*/
 
   @observable
   ObservableFuture<Token> token;
@@ -45,68 +43,61 @@ abstract class LoginControllerBase with Store {
   final LoginRepo _loginRepo = LoginRepo();
 
   get init {
-    formController = FormController(name: '');
+    formController = FormController(user: '', password: '');
   }
-
-/*  @action
-  Future login() =>
-      token = ObservableFuture(_loginRepo
-          .login(userLoginCtrl.text, pswLoginCtrl.text)
-          .then((value) => value)).catchError((e) {
-            print("1");
-        this.errorMsg = "HttpException: ${e.toString()}";
-      }, test: (e) => e is HttpException).catchError((e) {
-        print("2");
-        this.errorMsg = "TimeOutException: ${e.toString()}";
-      }, test: (e) => e is TimeoutException).catchError((e) {
-        print("3");
-        this.errorMsg = "${e.toString()}";
-      }, test: (e) => e is Exception);*/
 
   @action
   Future login() =>
-      token = ObservableFuture(_loginRepo
-          .login(userLoginCtrl.text, pswLoginCtrl.text)
-          .then((value) => value)).catchError((e) {
-        this.errorMsg = "${e.message}";
-      });
+    token = ObservableFuture(_loginRepo
+        .login(userLoginCtrl.text, pswLoginCtrl.text)
+        .then((value) => value)).catchError((e) {
+      this.errorMsg = "${e.message}";
+    }, test: (e) => e is Exception);
 
-  String validateName() {
-    print('---------- validateName ----------');
-    print(formController.name);
-    if(formController.name.isEmpty) {
-      return "Nome não pode ser nulo!!!";
+  String validateUser() {
+    print('---------- validateUser ----------');
+    print(formController.user);
+    if (formController.user.isEmpty) {
+      return "Usuário não pode ser nulo!!!";
     }
     return null;
   }
 
+  String validatePassword() {
+    print('---------- validatePassword ----------');
+    print(formController.password);
+    if (formController.password.isEmpty) {
+      return "Password não pode ser nula!!!";
+    }
+    return null;
+  }
 }
 
-class FormController extends FormControllerBase
-    with _$FormController {
-
-  FormController({String name}) {
-    super.name = name;
+class FormController extends FormControllerBase with _$FormController {
+  FormController({String user, String password}) {
+    super.user = user;
+    super.password = password;
   }
-
 }
 
 abstract class FormControllerBase with Store {
   @observable
-  String name;
-
-/*
-  @observable
-  String email;
+  String user;
 
   @observable
-  String password;*/
+  String password;
 
   @action
-  changeName(String value) {
-    print('---------- changeName ----------');
-    name = value;
-    print('name: $name');
+  changeUser(String value) {
+    print('---------- changeUser ----------');
+    user = value;
+    print('user: $user');
   }
 
+  @action
+  changePassword(String value) {
+    print('---------- changePassword ----------');
+    password = value;
+    print('password: $password');
+  }
 }

@@ -10,11 +10,11 @@ import 'package:hcslzapp/pages/dashboard/dashboard.dart';
 import 'package:asuka/asuka.dart' as asuka;
 
 class RequestAccess extends StatelessWidget {
-  LoginController _controller = LoginController();
+  //LoginController _controller = LoginController();
 
   @override
   Widget build(BuildContext context) {
-    _controller.init;
+    //_controller.init;
     return Scaffold(
       body: _requestAccess(context),
     );
@@ -35,30 +35,30 @@ class RequestAccess extends StatelessWidget {
               TopMargin(),
               Observer(builder: (_) {
                 return InputTextField(
-                  textEditingController: _controller.nameReqAccessCtrl,
+                  //textEditingController: _controller.nameReqAccessCtrl,
                   hint: hintName,
                   label: labelName,
                   icon: Icons.person_add,
                   inputType: TextInputType.text,
-                  onChanged: _controller.formController.changeName,
-                  errorText: _controller.validateName(),
+/*                  onChanged: _controller.formController.changeName,
+                  errorText: _controller.validateName(),*/
                 );
               }),
               InputTextField(
-                textEditingController: _controller.userReqAccessCtrl,
+                //textEditingController: _controller.userReqAccessCtrl,
                 hint: hintUser,
                 label: labelUser,
                 icon: Icons.account_circle_outlined,
                 inputType: TextInputType.text,
               ),
               InputTextField(
-                textEditingController: _controller.emailReqAccessCtrl,
+                //textEditingController: _controller.emailReqAccessCtrl,
                 hint: hintEmail,
                 label: labelEmail + " *",
                 inputType: TextInputType.emailAddress,
               ),
               InputTextField(
-                textEditingController: _controller.emailReqAccessCtrl,
+                //textEditingController: _controller.emailReqAccessCtrl,
                 hint: hintEmail,
                 label: labelEmail + " *",
                 inputType: TextInputType.emailAddress,
@@ -67,7 +67,7 @@ class RequestAccess extends StatelessWidget {
                 children: [
                   Expanded(
                     child: InputTextField(
-                      textEditingController: _controller.pswReqAccessCtrl,
+                      //textEditingController: _controller.pswReqAccessCtrl,
                       label: labelPswReqAccess,
                       hint: hintPswReqAccess,
                       inputType: TextInputType.text,
@@ -76,7 +76,7 @@ class RequestAccess extends StatelessWidget {
                   ),
                   Expanded(
                     child: InputTextField(
-                      textEditingController: _controller.confPswReqAccessCtrl,
+                      //textEditingController: _controller.confPswReqAccessCtrl,
                       label: labelConfPswReqAccess,
                       hint: hintConfPswReqAccess,
                       inputType: TextInputType.text,

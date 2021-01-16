@@ -10,11 +10,11 @@ import 'package:hcslzapp/pages/dashboard/dashboard.dart';
 import 'package:asuka/asuka.dart' as asuka;
 
 class ForgotPassword extends StatelessWidget {
-  LoginController _controller = LoginController();
+  //LoginController _controller = LoginController();
 
   @override
   Widget build(BuildContext context) {
-    _controller.init;
+    //_controller.init;
     return Scaffold(
       body: _forgotPassword(context),
     );
@@ -34,7 +34,7 @@ class ForgotPassword extends StatelessWidget {
             children: <Widget>[
               TopMargin(),
               InputTextField(
-                textEditingController: _controller.emailForgotPswCtrl,
+                //textEditingController: _controller.emailForgotPswCtrl,
                 hint: hintEmail,
                 label: labelEmail + " *",
                 icon: Icons.email,

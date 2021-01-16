@@ -23,7 +23,7 @@ class AssociatedUpdate extends StatefulWidget {
 
 class _AssociatedUpdateState extends State<AssociatedUpdate> {
   AssociatedController _controller = AssociatedController();
-  int _associatedId = 1;
+  int _associatedId = 10;
 
   @override
   void initState() {
@@ -57,15 +57,11 @@ class _AssociatedUpdateState extends State<AssociatedUpdate> {
                   break;
                 default:
                   if (snapshot.hasError) {
-                    return CenteredMessage(
-                      'Oops!!! + ${snapshot.error}.',
-                      icon: Icons.error,
-                    );
+                    return CenteredMessage(snapshot.error);
                   } else {
                     if (snapshot.data == null)
                       return CenteredMessage(
-                        'Oops!!! ' + _controller.errorMsg,
-                        icon: Icons.error,
+                        _controller.errorMsg,
                       );
                     if (snapshot.data.length > 0) {
                       _controller.associated = snapshot.data.first;
@@ -73,16 +69,12 @@ class _AssociatedUpdateState extends State<AssociatedUpdate> {
                       return _associatedWidgets(context);
                     } else
                       return CenteredMessage(
-                        'Atenção: Associado não encontrado.',
-                        icon: Icons.warning,
-                        backgroundColor: Colors.yellowAccent,
-                        fontColor: Colors.black,
+                        'Dados do associado especificado não foram encontrados.',
                       );
                   }
               } //switch (snapshot.connectionState)
               return CenteredMessage(
-                'Oops!!! Um erro desconhecido ocorreu.',
-                icon: Icons.error,
+                'Houve um erro desconhecido ao executar a transação.',
               );
             },
           ),
@@ -573,31 +565,24 @@ class _AssociatedUpdateState extends State<AssociatedUpdate> {
       );
 
   get _update {
-    if (_controller.hasErrors) {
-      asuka.showSnackBar(
-        SnackBar(
-          content: Text('Atenção: existem erros de validação no formulário.'),
-        ),
-      );
-    } else {
-      _controller.update(_controller.associated).then(
-        (value) {
-          if (value != null) {
-            asuka.showSnackBar(
-              SnackBar(
-                content: Text('Associado atualizado com sucesso.'),
-              ),
-            );
-            Navigator.of(context).pop();
-          } else {
-            asuka.showSnackBar(
-              SnackBar(
-                content: Text('Oops!!! Erro ao atualizar o Associado.'),
-              ),
-            );
-          }
-        },
-      );
-    }
+    _controller.update(_controller.associated).then(
+      (value) {
+        if (value != null) {
+          asuka.showSnackBar(
+            SnackBar(
+              content: Text('Associado atualizado com sucesso.'),
+            ),
+          );
+          Navigator.of(context).pop();
+        } else {
+          asuka.showSnackBar(
+            SnackBar(
+              content: Text(_controller.errorMsg),
+            ),
+          );
+        }
+      },
+    );
+    //}
   }
 }

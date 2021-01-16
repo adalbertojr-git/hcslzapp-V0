@@ -85,7 +85,6 @@ class PaymentList extends StatelessWidget {
               }
               return CenteredMessage(
                 'Mensalidades nao encontradas.',
-                icon: Icons.warning,
               );
               break;
           }
@@ -97,7 +96,6 @@ class PaymentList extends StatelessWidget {
           */
           return CenteredMessage(
             'Erro desconhecido.',
-            icon: Icons.error,
           );
         },
       ),

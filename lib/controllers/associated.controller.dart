@@ -118,9 +118,7 @@ abstract class AssociatedControllerBase with Store {
       associatedListFuture = ObservableFuture(_associatedRepo
           .findByIdAssociatedToList(id)
           .then((associated) => associated)).catchError((e) {
-        this.errorMsg = "TimeOutException: ${e.toString()}";
-      }, test: (e) => e is TimeoutException).catchError((e) {
-        this.errorMsg = "Exception: ${e.toString()}";
+        this.errorMsg = "${e.message}";
       }, test: (e) => e is Exception);
 
   @action
@@ -128,9 +126,7 @@ abstract class AssociatedControllerBase with Store {
       associatedUpdate = ObservableFuture(_associatedRepo
           .update(_setFieldsToUpdate())
           .then((associated) => associated)).catchError((e) {
-        this.errorMsg = "TimeOutException: ${e.toString()}";
-      }, test: (e) => e is TimeoutException).catchError((e) {
-        this.errorMsg = "Exception: ${e.toString()}";
+        this.errorMsg = "${e.message}";
       }, test: (e) => e is Exception);
 
   String validateName() {
@@ -143,10 +139,9 @@ abstract class AssociatedControllerBase with Store {
   String validateEmail() {
     if (formController.email.isEmpty) {
       return "Email não pode ser nulo!!!";
-    }
-    else if (!RegExp(
-           r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+")
-       .hasMatch(formController.email)) {
+    } else if (!RegExp(
+            r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+")
+        .hasMatch(formController.email)) {
       return "Informe um email válido!!!";
     }
     return null;

@@ -1,27 +1,38 @@
 import 'package:flutter/material.dart';
+import 'button.dart';
 import 'hc.logo.dart';
+import 'package:asuka/asuka.dart' as asuka;
 
-class CenteredMessage extends StatelessWidget {
+class CenteredMessage extends StatefulWidget {
   final String _message;
-  final IconData icon;
-  final double _iconSize = 64;
-  final double _fontSize = 15;
-  final Color backgroundColor;
-  final Color fontColor;
 
-  CenteredMessage(
-    this._message, {
-    this.icon,
-    this.backgroundColor = Colors.red,
-    this.fontColor = Colors.white,
-  });
+  CenteredMessage(this._message);
+
+  @override
+  _CenteredMessageState createState() => _CenteredMessageState();
+}
+
+class _CenteredMessageState extends State<CenteredMessage> {
+  @override
+  void initState() {
+    super.initState();
+    WidgetsBinding.instance.addPostFrameCallback((_) => _showMessage);
+  }
+
+  get _showMessage {
+    asuka.showSnackBar(
+      SnackBar(
+        content: Text(widget._message),
+      ),
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
     return Container(
       decoration: BoxDecoration(
         gradient: LinearGradient(
-          colors: [Colors.white30,this.backgroundColor],
+          colors: [Colors.white30, Colors.deepOrange],
           begin: FractionalOffset.topLeft,
           end: FractionalOffset.bottomRight,
         ),
@@ -33,27 +44,24 @@ class CenteredMessage extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.center,
           children: <Widget>[
             HcLogo(0.0),
-            /*
-            permite configurar se o Widget sera visivel ou nao
-            */
-            Visibility(
-              child: Icon(
-                icon,
-                size: _iconSize,
-                color: Colors.white,
-              ),
-              visible: icon != null,
-            ),
             Padding(
-              padding: const EdgeInsets.only(top: 20.0),
+              padding: const EdgeInsets.only(top: 50.0),
               child: Text(
-                _message,
+                //widget._message,
+                "Oops!!! Houve um erro ao executar a transação!!!",
                 style: TextStyle(
-                  fontSize: _fontSize,
-                  color: this.fontColor,
+                  fontSize: 23.0,
+                  color: Colors.black,
                 ),
                 textAlign: TextAlign.center,
               ),
+            ),
+            SizedBox(
+              height: 30.0,
+            ),
+            Button(
+              icon: Icons.arrow_back,
+              onClick: () => Navigator.of(context).pop(),
             ),
           ],
         ),

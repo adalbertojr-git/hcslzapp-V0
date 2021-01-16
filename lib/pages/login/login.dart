@@ -11,12 +11,22 @@ import 'package:asuka/asuka.dart' as asuka;
 import 'package:hcslzapp/pages/login/request.access.dart';
 import 'forgot.password.dart';
 
-class Login extends StatelessWidget {
+class Login extends StatefulWidget {
+  @override
+  _LoginState createState() => _LoginState();
+}
+
+class _LoginState extends State<Login> {
   LoginController _controller = LoginController();
 
   @override
-  Widget build(BuildContext context) {
+  void initState() {
     _controller.init;
+    super.initState();
+  }
+
+  @override
+  Widget build(BuildContext context) {
     return Observer(
       builder: (_) {
         return Scaffold(
@@ -26,8 +36,7 @@ class Login extends StatelessWidget {
     );
   }
 
-  _sliverAppBar(BuildContext context) =>
-      CustomScrollView(
+  _sliverAppBar(BuildContext context) => CustomScrollView(
         slivers: <Widget>[
           SliverAppBar(
             pinned: true,
@@ -57,19 +66,12 @@ class Login extends StatelessWidget {
         ],
       );
 
-  _widgets(BuildContext context) =>
-      Stack(
+  _widgets(BuildContext context) => Stack(
         children: [
           Center(
             child: SizedBox(
-              height: MediaQuery
-                  .of(context)
-                  .size
-                  .height,
-              width: MediaQuery
-                  .of(context)
-                  .size
-                  .width,
+              height: MediaQuery.of(context).size.height,
+              width: MediaQuery.of(context).size.width,
               child: Image.asset('assets/imgs/logo_login.png'),
             ),
           ),
@@ -81,10 +83,7 @@ class Login extends StatelessWidget {
                 end: FractionalOffset.bottomRight,
               ),
             ),
-            height: MediaQuery
-                .of(context)
-                .size
-                .height,
+            height: MediaQuery.of(context).size.height,
             child: SingleChildScrollView(
               child: Column(
                 children: <Widget>[
@@ -96,10 +95,12 @@ class Login extends StatelessWidget {
                   ),
                   InputTextField(
                     textEditingController: _controller.userLoginCtrl,
-                    label: labelUserOrEmail,
-                    hint: hintUserOrEmail,
+                    label: labelUser,
+                    hint: hintUser,
                     icon: Icons.person,
                     inputType: TextInputType.text,
+                    onChanged: _controller.formController.changeUser,
+                    errorText: _controller.validateUser(),
                   ),
                   InputTextField(
                     textEditingController: _controller.pswLoginCtrl,
@@ -108,6 +109,8 @@ class Login extends StatelessWidget {
                     icon: Icons.vpn_key,
                     inputType: TextInputType.text,
                     hidden: true,
+                    onChanged: _controller.formController.changePassword,
+                    errorText: _controller.validatePassword(),
                   ),
                   SizedBox(
                     height: 30.0,
@@ -116,7 +119,7 @@ class Login extends StatelessWidget {
                     icon: Icons.arrow_forward,
                     heroTag: 'btnLogin',
                     onClick: () {
-                      _login;
+                      _login(context);
                     },
                   ),
                   SizedBox(
@@ -166,32 +169,38 @@ class Login extends StatelessWidget {
         ],
       );
 
-  get _login {
+  _login(BuildContext context) {
     _controller.errorMsg = null;
     _controller.login().then((token) {
-      if (_controller.errorMsg.isNotEmpty) {
+      if (_controller.errorMsg != null) {
         asuka.showSnackBar(
           SnackBar(
             content: Text(_controller.errorMsg),
           ),
         );
-      }else if (token == null) {
-          asuka.showSnackBar(
-            SnackBar(
-              content: Text('Usuário e/ou senha inválidos.'),
-            ),
-          );
-        } else {
-          Token t = token;
-          print(t.token);
-/*        Navigator.pushReplacement(
-      context,
-      MaterialPageRoute(builder: (context) => Dashboard()),
-    );*/
-        }
+      } else {
+        Token t = token;
+        print(t.token);
+        Navigator.pushReplacement(
+          context,
+          MaterialPageRoute(builder: (context) => Dashboard()),
+        );
+      }
     });
   }
 }
+
+/*-- Usuarios Login
+--{
+--	"username": "admin",
+--	"password": "hcslzapp"
+--}
+--
+--{
+--	"username": "atajr",
+--	"password": "1234"
+--	"associatedId": "1"
+--}*/
 
 class SnackBarWidget extends StatelessWidget {
   String heroTag;

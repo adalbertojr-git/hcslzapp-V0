@@ -12,9 +12,9 @@ URL base de acesso, a partir da qual sao chamadas as demais URls
 // no TRE
 //const String mainUrl = 'http://10.11.152.202:8080';
 // em casa
-const String mainUrl = 'http://192.168.0.21:8080';
+//const String mainUrl = 'http://192.168.0.21:8080';
 // via wifi celular
-//const String mainUrl = 'http://192.168.43.8:8080';
+const String mainUrl = 'http://192.168.43.8:8080';
 
 String getMessage(int statusCode) {
   if(_statusCodeResponses.containsKey(statusCode)){
@@ -24,8 +24,8 @@ String getMessage(int statusCode) {
 }
 
 final Map<int, String> _statusCodeResponses = {
-  400: 'Houve um erro ao submeter a transação',
-  401: 'Falha de autenticação',
+  400: 'Erro na transação devido a informações inválidas no formulário',
+  401: 'Falha na autenticação do usuário',
   404: 'Pagina web não encontrada',
-  409: 'Arquivo já existe'
+  409: 'Erro de conflito pois o arquivo já existe'
 };

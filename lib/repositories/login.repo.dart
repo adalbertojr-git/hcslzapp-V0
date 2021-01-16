@@ -21,13 +21,11 @@ class LoginRepo {
         .timeout(
           Duration(seconds: 10),
         );
-    print(response.statusCode);
     if (response.statusCode == 200) {
       return Token.fromJson(
         jsonDecode(response.body),
       );
     } else {
-      print(getMessage(response.statusCode));
       throw HttpException(getMessage(response.statusCode));
     }
   }

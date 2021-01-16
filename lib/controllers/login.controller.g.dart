@@ -39,103 +39,6 @@ mixin _$LoginController on LoginControllerBase, Store {
     });
   }
 
-  final _$nameReqAccessCtrlAtom =
-      Atom(name: 'LoginControllerBase.nameReqAccessCtrl');
-
-  @override
-  TextEditingController get nameReqAccessCtrl {
-    _$nameReqAccessCtrlAtom.reportRead();
-    return super.nameReqAccessCtrl;
-  }
-
-  @override
-  set nameReqAccessCtrl(TextEditingController value) {
-    _$nameReqAccessCtrlAtom.reportWrite(value, super.nameReqAccessCtrl, () {
-      super.nameReqAccessCtrl = value;
-    });
-  }
-
-  final _$userReqAccessCtrlAtom =
-      Atom(name: 'LoginControllerBase.userReqAccessCtrl');
-
-  @override
-  TextEditingController get userReqAccessCtrl {
-    _$userReqAccessCtrlAtom.reportRead();
-    return super.userReqAccessCtrl;
-  }
-
-  @override
-  set userReqAccessCtrl(TextEditingController value) {
-    _$userReqAccessCtrlAtom.reportWrite(value, super.userReqAccessCtrl, () {
-      super.userReqAccessCtrl = value;
-    });
-  }
-
-  final _$emailReqAccessCtrlAtom =
-      Atom(name: 'LoginControllerBase.emailReqAccessCtrl');
-
-  @override
-  TextEditingController get emailReqAccessCtrl {
-    _$emailReqAccessCtrlAtom.reportRead();
-    return super.emailReqAccessCtrl;
-  }
-
-  @override
-  set emailReqAccessCtrl(TextEditingController value) {
-    _$emailReqAccessCtrlAtom.reportWrite(value, super.emailReqAccessCtrl, () {
-      super.emailReqAccessCtrl = value;
-    });
-  }
-
-  final _$pswReqAccessCtrlAtom =
-      Atom(name: 'LoginControllerBase.pswReqAccessCtrl');
-
-  @override
-  TextEditingController get pswReqAccessCtrl {
-    _$pswReqAccessCtrlAtom.reportRead();
-    return super.pswReqAccessCtrl;
-  }
-
-  @override
-  set pswReqAccessCtrl(TextEditingController value) {
-    _$pswReqAccessCtrlAtom.reportWrite(value, super.pswReqAccessCtrl, () {
-      super.pswReqAccessCtrl = value;
-    });
-  }
-
-  final _$confPswReqAccessCtrlAtom =
-      Atom(name: 'LoginControllerBase.confPswReqAccessCtrl');
-
-  @override
-  TextEditingController get confPswReqAccessCtrl {
-    _$confPswReqAccessCtrlAtom.reportRead();
-    return super.confPswReqAccessCtrl;
-  }
-
-  @override
-  set confPswReqAccessCtrl(TextEditingController value) {
-    _$confPswReqAccessCtrlAtom.reportWrite(value, super.confPswReqAccessCtrl,
-        () {
-      super.confPswReqAccessCtrl = value;
-    });
-  }
-
-  final _$emailForgotPswCtrlAtom =
-      Atom(name: 'LoginControllerBase.emailForgotPswCtrl');
-
-  @override
-  TextEditingController get emailForgotPswCtrl {
-    _$emailForgotPswCtrlAtom.reportRead();
-    return super.emailForgotPswCtrl;
-  }
-
-  @override
-  set emailForgotPswCtrl(TextEditingController value) {
-    _$emailForgotPswCtrlAtom.reportWrite(value, super.emailForgotPswCtrl, () {
-      super.emailForgotPswCtrl = value;
-    });
-  }
-
   final _$tokenAtom = Atom(name: 'LoginControllerBase.token');
 
   @override
@@ -170,30 +73,39 @@ mixin _$LoginController on LoginControllerBase, Store {
     return '''
 userLoginCtrl: ${userLoginCtrl},
 pswLoginCtrl: ${pswLoginCtrl},
-nameReqAccessCtrl: ${nameReqAccessCtrl},
-userReqAccessCtrl: ${userReqAccessCtrl},
-emailReqAccessCtrl: ${emailReqAccessCtrl},
-pswReqAccessCtrl: ${pswReqAccessCtrl},
-confPswReqAccessCtrl: ${confPswReqAccessCtrl},
-emailForgotPswCtrl: ${emailForgotPswCtrl},
 token: ${token}
     ''';
   }
 }
 
 mixin _$FormController on FormControllerBase, Store {
-  final _$nameAtom = Atom(name: 'FormControllerBase.name');
+  final _$userAtom = Atom(name: 'FormControllerBase.user');
 
   @override
-  String get name {
-    _$nameAtom.reportRead();
-    return super.name;
+  String get user {
+    _$userAtom.reportRead();
+    return super.user;
   }
 
   @override
-  set name(String value) {
-    _$nameAtom.reportWrite(value, super.name, () {
-      super.name = value;
+  set user(String value) {
+    _$userAtom.reportWrite(value, super.user, () {
+      super.user = value;
+    });
+  }
+
+  final _$passwordAtom = Atom(name: 'FormControllerBase.password');
+
+  @override
+  String get password {
+    _$passwordAtom.reportRead();
+    return super.password;
+  }
+
+  @override
+  set password(String value) {
+    _$passwordAtom.reportWrite(value, super.password, () {
+      super.password = value;
     });
   }
 
@@ -201,11 +113,22 @@ mixin _$FormController on FormControllerBase, Store {
       ActionController(name: 'FormControllerBase');
 
   @override
-  dynamic changeName(String value) {
+  dynamic changeUser(String value) {
     final _$actionInfo = _$FormControllerBaseActionController.startAction(
-        name: 'FormControllerBase.changeName');
+        name: 'FormControllerBase.changeUser');
     try {
-      return super.changeName(value);
+      return super.changeUser(value);
+    } finally {
+      _$FormControllerBaseActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
+  dynamic changePassword(String value) {
+    final _$actionInfo = _$FormControllerBaseActionController.startAction(
+        name: 'FormControllerBase.changePassword');
+    try {
+      return super.changePassword(value);
     } finally {
       _$FormControllerBaseActionController.endAction(_$actionInfo);
     }
@@ -214,7 +137,8 @@ mixin _$FormController on FormControllerBase, Store {
   @override
   String toString() {
     return '''
-name: ${name}
+user: ${user},
+password: ${password}
     ''';
   }
 }
