@@ -47,16 +47,14 @@ abstract class LoginControllerBase with Store {
   }
 
   @action
-  Future login() =>
-    token = ObservableFuture(_loginRepo
-        .login(userLoginCtrl.text, pswLoginCtrl.text)
-        .then((value) => value)).catchError((e) {
-      this.errorMsg = "${e.message}";
-    }, test: (e) => e is Exception);
+  Future login() => token = ObservableFuture(_loginRepo
+          .login(userLoginCtrl.text, pswLoginCtrl.text)
+          .then((value) => value)).catchError((e) {
+        this.errorMsg = "${e.message}";
+      }, test: (e) => e is Exception);
 
   String validateUser() {
     print('---------- validateUser ----------');
-    print(formController.user);
     if (formController.user.isEmpty) {
       return "Usuário não pode ser nulo!!!";
     }
@@ -65,9 +63,8 @@ abstract class LoginControllerBase with Store {
 
   String validatePassword() {
     print('---------- validatePassword ----------');
-    print(formController.password);
     if (formController.password.isEmpty) {
-      return "Password não pode ser nula!!!";
+      return "Senha não pode ser nula!!!";
     }
     return null;
   }
@@ -88,16 +85,8 @@ abstract class FormControllerBase with Store {
   String password;
 
   @action
-  changeUser(String value) {
-    print('---------- changeUser ----------');
-    user = value;
-    print('user: $user');
-  }
+  changeUser(String value) => user = value;
 
   @action
-  changePassword(String value) {
-    print('---------- changePassword ----------');
-    password = value;
-    print('password: $password');
-  }
+  changePassword(String value) => password = value;
 }

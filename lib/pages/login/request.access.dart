@@ -5,22 +5,35 @@ import 'package:hcslzapp/common/labels.and.hints.dart';
 import 'package:hcslzapp/components/button.dart';
 import 'package:hcslzapp/components/input.textfield.dart';
 import 'package:hcslzapp/components/top.margin.dart';
-import 'package:hcslzapp/controllers/login.controller.dart';
-import 'package:hcslzapp/pages/dashboard/dashboard.dart';
+import 'package:hcslzapp/controllers/request.access.controller.dart';
 import 'package:asuka/asuka.dart' as asuka;
 
-class RequestAccess extends StatelessWidget {
-  //LoginController _controller = LoginController();
+class RequestAccess extends StatefulWidget {
+  @override
+  _RequestAccessState createState() => _RequestAccessState();
+}
+
+class _RequestAccessState extends State<RequestAccess> {
+  RequestAccessController _controller = RequestAccessController();
+
+  @override
+  void initState() {
+    _controller.init;
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
-    //_controller.init;
-    return Scaffold(
-      body: _requestAccess(context),
+    return Observer(
+      builder: (_) {
+        return Scaffold(
+          body: _widgets(context),
+        );
+      },
     );
   }
 
-  _requestAccess(BuildContext context) => Container(
+  _widgets(BuildContext context) => Container(
         decoration: BoxDecoration(
           gradient: LinearGradient(
             colors: [Colors.white30, Colors.deepOrange],
@@ -33,62 +46,67 @@ class RequestAccess extends StatelessWidget {
           child: Column(
             children: <Widget>[
               TopMargin(),
-              Observer(builder: (_) {
-                return InputTextField(
-                  //textEditingController: _controller.nameReqAccessCtrl,
-                  hint: hintName,
-                  label: labelName,
-                  icon: Icons.person_add,
-                  inputType: TextInputType.text,
-/*                  onChanged: _controller.formController.changeName,
-                  errorText: _controller.validateName(),*/
-                );
-              }),
               InputTextField(
-                //textEditingController: _controller.userReqAccessCtrl,
+                textEditingController: _controller.nameReqAccessCtrl,
+                hint: hintName,
+                label: labelName,
+                icon: Icons.person_add,
+                inputType: TextInputType.text,
+                onChanged: _controller.formController.changeName,
+                errorText: _controller.validateName(),
+              ),
+              InputTextField(
+                textEditingController: _controller.userReqAccessCtrl,
                 hint: hintUser,
                 label: labelUser,
                 icon: Icons.account_circle_outlined,
                 inputType: TextInputType.text,
+                onChanged: _controller.formController.changeUser,
+                errorText: _controller.validateUser(),
               ),
               InputTextField(
-                //textEditingController: _controller.emailReqAccessCtrl,
+                textEditingController: _controller.emailReqAccessCtrl,
                 hint: hintEmail,
                 label: labelEmail + " *",
                 inputType: TextInputType.emailAddress,
+                onChanged: _controller.formController.changeEmail,
+                errorText: _controller.validateEmail(),
               ),
               InputTextField(
-                //textEditingController: _controller.emailReqAccessCtrl,
-                hint: hintEmail,
-                label: labelEmail + " *",
+                textEditingController: _controller.confEmailReqAccessCtrl,
+                hint: hintConfEmail,
+                label: labelConfEmail,
                 inputType: TextInputType.emailAddress,
+                onChanged: _controller.formController.changeConfEmail,
+                errorText: _controller.validateConfEmail(),
               ),
-              Row(
-                children: [
-                  Expanded(
-                    child: InputTextField(
-                      //textEditingController: _controller.pswReqAccessCtrl,
-                      label: labelPswReqAccess,
-                      hint: hintPswReqAccess,
-                      inputType: TextInputType.text,
-                      hidden: true,
-                    ),
-                  ),
-                  Expanded(
-                    child: InputTextField(
-                      //textEditingController: _controller.confPswReqAccessCtrl,
-                      label: labelConfPswReqAccess,
-                      hint: hintConfPswReqAccess,
-                      inputType: TextInputType.text,
-                      hidden: true,
-                    ),
-                  ),
-                ],
+              InputTextField(
+                textEditingController: _controller.pswReqAccessCtrl,
+                label: labelPswReqAccess,
+                hint: hintPswReqAccess,
+                inputType: TextInputType.text,
+                hidden: true,
+                onChanged: _controller.formController.changePassword,
+                errorText: _controller.validatePassword(),
+              ),
+              InputTextField(
+                textEditingController: _controller.confPswReqAccessCtrl,
+                label: labelConfPswReqAccess,
+                hint: hintConfPswReqAccess,
+                inputType: TextInputType.text,
+                hidden: true,
+                onChanged: _controller.formController.changeConfPassword,
+                errorText: _controller.validateConfPassword(),
               ),
               SizedBox(
                 height: 10.0,
               ),
-              SnackBarWidget('btnRequestAccess'),
+              Button(
+                icon: Icons.app_registration,
+                onClick: () {
+                  //_login(context);
+                },
+              ),
               Padding(
                 padding: const EdgeInsets.all(10.0),
                 child: RichText(

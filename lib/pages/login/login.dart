@@ -40,9 +40,6 @@ class _LoginState extends State<Login> {
         slivers: <Widget>[
           SliverAppBar(
             pinned: true,
-            snap: true,
-            floating: true,
-            elevation: 50,
             expandedHeight: 150.0,
             backgroundColor: Colors.black,
             flexibleSpace: FlexibleSpaceBar(
@@ -50,7 +47,7 @@ class _LoginState extends State<Login> {
               title: Text(
                 "HCSlz App",
                 style: new TextStyle(
-                  fontSize: 30.0,
+                  fontSize: 25.0,
                   color: Colors.orangeAccent,
                 ),
               ),
@@ -117,7 +114,6 @@ class _LoginState extends State<Login> {
                   ),
                   Button(
                     icon: Icons.arrow_forward,
-                    heroTag: 'btnLogin',
                     onClick: () {
                       _login(context);
                     },
@@ -202,20 +198,3 @@ class _LoginState extends State<Login> {
 --	"associatedId": "1"
 --}*/
 
-class SnackBarWidget extends StatelessWidget {
-  String heroTag;
-
-  SnackBarWidget(this.heroTag);
-
-  @override
-  Widget build(BuildContext context) {
-    return Button(
-        icon: Icons.email_rounded,
-        heroTag: heroTag,
-        onClick: () {
-          asuka.showSnackBar(SnackBar(
-            content: Text("Hello World"),
-          ));
-        });
-  }
-}
