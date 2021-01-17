@@ -6,19 +6,34 @@ import 'package:hcslzapp/components/button.dart';
 import 'package:hcslzapp/components/input.textfield.dart';
 import 'package:hcslzapp/components/top.margin.dart';
 import 'package:asuka/asuka.dart' as asuka;
+import 'package:hcslzapp/controllers/forgot.password.controller.dart';
 
-class ForgotPassword extends StatelessWidget {
-  //LoginController _controller = LoginController();
+class ForgotPassword extends StatefulWidget {
+  @override
+  _ForgotPasswordState createState() => _ForgotPasswordState();
+}
+
+class _ForgotPasswordState extends State<ForgotPassword> {
+  ForgotPasswordController _controller = ForgotPasswordController();
+
+  @override
+  void initState() {
+    _controller.init;
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
-    //_controller.init;
-    return Scaffold(
-      body: _forgotPassword(context),
+    return Observer(
+      builder: (_) {
+        return Scaffold(
+          body: _widgets(context),
+        );
+      },
     );
   }
 
-  _forgotPassword(BuildContext context) => Container(
+  _widgets(BuildContext context) => Container(
         decoration: BoxDecoration(
           gradient: LinearGradient(
             colors: [Colors.white30, Colors.deepOrange],
@@ -32,16 +47,23 @@ class ForgotPassword extends StatelessWidget {
             children: <Widget>[
               TopMargin(),
               InputTextField(
-                //textEditingController: _controller.emailForgotPswCtrl,
+                textEditingController: _controller.emailForgotPswCtrl,
                 hint: hintEmail,
                 label: labelEmail + " *",
                 icon: Icons.email,
                 inputType: TextInputType.emailAddress,
+                onChanged: _controller.formController.changeEmail,
+                errorText: _controller.validateEmail(),
               ),
               SizedBox(
-                height: 10.0,
+                height: 20.0,
               ),
-              SnackBarWidget('btnForgotPassword'),
+              Button(
+                icon: Icons.email,
+                onClick: () {
+                  //_login(context);
+                },
+              ),
               Padding(
                 padding: const EdgeInsets.all(10.0),
                 child: RichText(
@@ -60,23 +82,4 @@ class ForgotPassword extends StatelessWidget {
           ),
         ),
       );
-}
-
-class SnackBarWidget extends StatelessWidget {
-  String heroTag;
-
-  SnackBarWidget(this.heroTag);
-
-  @override
-  Widget build(BuildContext context) {
-    return Button(
-        icon: Icons.email_rounded,
-        heroTag: heroTag,
-        onClick: () {
-          asuka.showSnackBar(SnackBar(
-            content: Text("Senha provisória enviada."),
-          ));
-          Navigator.of(context).pop();
-        });
-  }
 }
