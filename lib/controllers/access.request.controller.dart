@@ -1,5 +1,6 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
+import 'package:hcslzapp/models/access.request.dart';
 import 'package:hcslzapp/repositories/login.repo.dart';
 import 'package:mobx/mobx.dart';
 
@@ -12,22 +13,25 @@ abstract class AccessRequestControllerBase with Store {
   var formController;
 
   @observable
-  var nameAccessReqCtrl = TextEditingController();
+  var nameCtrl = TextEditingController();
 
   @observable
-  var userAccessReqCtrl = TextEditingController();
+  var userCtrl = TextEditingController();
 
   @observable
-  var emailAccessReqCtrl = TextEditingController();
+  var emailCtrl = TextEditingController();
 
   @observable
-  var confEmailAccessReqCtrl = TextEditingController();
+  var confEmailCtrl = TextEditingController();
 
   @observable
-  var pswAccessReqCtrl = TextEditingController();
+  var pswCtrl = TextEditingController();
 
   @observable
-  var confPswAccessReqCtrl = TextEditingController();
+  var confPswCtrl = TextEditingController();
+
+  @observable
+  ObservableFuture<AccessRequest> accessRequestPost;
 
   String errorMsg;
 
@@ -41,6 +45,23 @@ abstract class AccessRequestControllerBase with Store {
         confEmail: '',
         confPassword: '',
         password: '');
+  }
+
+  @action
+  Future save() => accessRequestPost = ObservableFuture(_loginRepo
+          .accessRequest(_setValues())
+          .then((accessRequest) => accessRequest)).catchError((e) {
+        this.errorMsg = "${e.message}";
+      }, test: (e) => e is Exception);
+
+  AccessRequest _setValues() {
+    return AccessRequest(
+      id: 0,
+      name: nameCtrl.text,
+      user: userCtrl.text,
+      email: emailCtrl.text,
+      password: pswCtrl.text,
+    );
   }
 
   String validateName() {
@@ -63,7 +84,7 @@ abstract class AccessRequestControllerBase with Store {
     if (formController.email.isEmpty) {
       return "Email não pode ser nulo!!!";
     } else if (!RegExp(
-        r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+")
+            r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+")
         .hasMatch(formController.email)) {
       return "Informe um email válido!!!";
     }
@@ -75,6 +96,9 @@ abstract class AccessRequestControllerBase with Store {
     if (formController.confEmail.isEmpty) {
       return "Confirmação do email não pode ser nulo!!!";
     }
+    if (formController.confEmail != formController.email) {
+      return "Emails não conferem!!!";
+    }
     return null;
   }
 
@@ -82,7 +106,8 @@ abstract class AccessRequestControllerBase with Store {
     print('---------- validatePassword ----------');
     if (formController.password.isEmpty) {
       return "Senha não pode ser nula!!!";
-    } if (formController.password.toString().length < 4) {
+    }
+    if (formController.password.toString().length < 4) {
       return "Senha deve ter no mínimo 4 caracteres!!!";
     }
     return null;
@@ -92,7 +117,8 @@ abstract class AccessRequestControllerBase with Store {
     print('---------- validateConfPassword ----------');
     if (formController.confPassword.isEmpty) {
       return "Confirmação da senha não pode ser nula!!!";
-    } if (formController.confPassword != formController.password) {
+    }
+    if (formController.confPassword != formController.password) {
       return "Senhas não conferem!!!";
     }
     return null;

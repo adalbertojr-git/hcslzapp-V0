@@ -17,7 +17,7 @@ class Associated {
   List<Dependent> dependents;
   List<Motorcycle> motorcycles;
 
-  Associated(
+  Associated({
       this.id,
       this.name,
       this.email,
@@ -30,7 +30,7 @@ class Associated {
       this.dateBirth,
       this.dateShield,
       this.dependents,
-      this.motorcycles);
+      this.motorcycles});
 
   Associated.fromJson(Map<String, dynamic> json)
       : id = json['id'],

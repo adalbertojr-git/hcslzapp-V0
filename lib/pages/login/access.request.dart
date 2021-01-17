@@ -47,7 +47,7 @@ class _AccessRequestState extends State<AccessRequest> {
             children: <Widget>[
               TopMargin(),
               InputTextField(
-                textEditingController: _controller.nameAccessReqCtrl,
+                textEditingController: _controller.nameCtrl,
                 hint: hintName,
                 label: labelName,
                 icon: Icons.person_add,
@@ -56,7 +56,7 @@ class _AccessRequestState extends State<AccessRequest> {
                 errorText: _controller.validateName(),
               ),
               InputTextField(
-                textEditingController: _controller.userAccessReqCtrl,
+                textEditingController: _controller.userCtrl,
                 hint: hintUser,
                 label: labelUser,
                 icon: Icons.account_circle_outlined,
@@ -65,7 +65,7 @@ class _AccessRequestState extends State<AccessRequest> {
                 errorText: _controller.validateUser(),
               ),
               InputTextField(
-                textEditingController: _controller.emailAccessReqCtrl,
+                textEditingController: _controller.emailCtrl,
                 hint: hintEmail,
                 label: labelEmail + " *",
                 inputType: TextInputType.emailAddress,
@@ -73,7 +73,7 @@ class _AccessRequestState extends State<AccessRequest> {
                 errorText: _controller.validateEmail(),
               ),
               InputTextField(
-                textEditingController: _controller.confEmailAccessReqCtrl,
+                textEditingController: _controller.confEmailCtrl,
                 hint: hintConfEmail,
                 label: labelConfEmail,
                 inputType: TextInputType.emailAddress,
@@ -81,7 +81,7 @@ class _AccessRequestState extends State<AccessRequest> {
                 errorText: _controller.validateConfEmail(),
               ),
               InputTextField(
-                textEditingController: _controller.pswAccessReqCtrl,
+                textEditingController: _controller.pswCtrl,
                 label: labelPswAccessReq,
                 hint: hintPswAccessReq,
                 inputType: TextInputType.text,
@@ -90,7 +90,7 @@ class _AccessRequestState extends State<AccessRequest> {
                 errorText: _controller.validatePassword(),
               ),
               InputTextField(
-                textEditingController: _controller.confPswAccessReqCtrl,
+                textEditingController: _controller.confPswCtrl,
                 label: labelConfPswAccessReq,
                 hint: hintConfPswAccessReq,
                 inputType: TextInputType.text,
@@ -104,7 +104,7 @@ class _AccessRequestState extends State<AccessRequest> {
               Button(
                 icon: Icons.send_to_mobile,
                 onClick: () {
-                  //_login(context);
+                  _save;
                 },
               ),
               Padding(
@@ -126,23 +126,25 @@ class _AccessRequestState extends State<AccessRequest> {
           ),
         ),
       );
-}
 
-class SnackBarWidget extends StatelessWidget {
-  String heroTag;
-
-  SnackBarWidget(this.heroTag);
-
-  @override
-  Widget build(BuildContext context) {
-    return Button(
-        icon: Icons.email_rounded,
-        heroTag: heroTag,
-        onClick: () {
-          asuka.showSnackBar(SnackBar(
-            content: Text("Cadastro enviado para apreciação."),
-          ));
+  get _save {
+    _controller.save().then(
+      (value) {
+        if (value != null) {
+          asuka.showSnackBar(
+            SnackBar(
+              content: Text('Requisição de acesso enviado com sucesso.'),
+            ),
+          );
           Navigator.of(context).pop();
-        });
+        } else {
+          asuka.showSnackBar(
+            SnackBar(
+              content: Text(_controller.errorMsg),
+            ),
+          );
+        }
+      },
+    );
   }
 }

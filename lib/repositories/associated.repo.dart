@@ -5,7 +5,7 @@ import 'package:hcslzapp/models/associated.dart';
 import 'package:http/http.dart';
 import '../common/settings.dart';
 
-const String _associatedUrl = '/associateds';
+const String _associatedUrl = '/associated';
 
 class AssociatedRepo {
   Future<List<Associated>> findAll() async {
@@ -46,8 +46,11 @@ class AssociatedRepo {
       associated.toJson(),
     );
     final Response response = await client
-        .put(mainUrl + _associatedUrl + "/" + associated.id.toString(),
-            headers: {'Content-type': 'application/json'}, body: encodedJson)
+        .put(
+          mainUrl + _associatedUrl + "/" + associated.id.toString(),
+          headers: {'Content-type': 'application/json'},
+          body: encodedJson,
+        )
         .timeout(
           Duration(seconds: 10),
         );

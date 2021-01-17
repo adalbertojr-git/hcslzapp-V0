@@ -124,10 +124,29 @@ abstract class AssociatedControllerBase with Store {
   @action
   Future update(Associated associated) =>
       associatedUpdate = ObservableFuture(_associatedRepo
-          .update(_setFieldsToUpdate())
+          .update(_setValues())
           .then((associated) => associated)).catchError((e) {
         this.errorMsg = "${e.message}";
       }, test: (e) => e is Exception);
+
+  Future<List<Associated>> getFuture(int _associatedId) =>
+      future = fetchAssociated(_associatedId);
+
+  Associated _setValues() {
+    this.associated.name = nameCtrl.text;
+    this.associated.phone = phoneCtrl.text;
+    this.associated.email = emailCtrl.text;
+    this.associated.sponsor = sponsorCtrl.text;
+    this.associated.associatedType = associatedTypeCtrl.text;
+    this.associated.cnh = cnhCtrl.text;
+    this.associated.cpf = cpfCtrl.text;
+    this.associated.bloodType = currentBloodType;
+    this.associated.dateBirth = dateBirthCtrl.text;
+    this.associated.dateShield = dateShieldCtrl.text;
+    this.associated.dependents = List<Dependent>.from(dependents);
+    this.associated.motorcycles = List<Motorcycle>.from(motorcycles);
+    return this.associated;
+  }
 
   String validateName() {
     if (formController.name.isEmpty) {
@@ -145,25 +164,6 @@ abstract class AssociatedControllerBase with Store {
       return "Informe um email válido!!!";
     }
     return null;
-  }
-
-  Future<List<Associated>> getFuture(int _associatedId) =>
-      future = fetchAssociated(_associatedId);
-
-  Associated _setFieldsToUpdate() {
-    this.associated.name = nameCtrl.text;
-    this.associated.phone = phoneCtrl.text;
-    this.associated.email = emailCtrl.text;
-    this.associated.sponsor = sponsorCtrl.text;
-    this.associated.associatedType = associatedTypeCtrl.text;
-    this.associated.cnh = cnhCtrl.text;
-    this.associated.cpf = cpfCtrl.text;
-    this.associated.bloodType = currentBloodType;
-    this.associated.dateBirth = dateBirthCtrl.text;
-    this.associated.dateShield = dateShieldCtrl.text;
-    this.associated.dependents = List<Dependent>.from(dependents);
-    this.associated.motorcycles = List<Motorcycle>.from(motorcycles);
-    return this.associated;
   }
 
   String changedDropDownItem(selected) => currentBloodType = selected;

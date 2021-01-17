@@ -30,7 +30,7 @@ abstract class LoginControllerBase with Store {
 
   @action
   Future login() => token = ObservableFuture(_loginRepo
-          .login(userLoginCtrl.text, pswLoginCtrl.text)
+          .authenticate(userLoginCtrl.text, pswLoginCtrl.text)
           .then((value) => value)).catchError((e) {
         this.errorMsg = "${e.message}";
       }, test: (e) => e is Exception);

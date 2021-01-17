@@ -9,113 +9,138 @@ part of 'access.request.controller.dart';
 // ignore_for_file: non_constant_identifier_names, unnecessary_brace_in_string_interps, unnecessary_lambdas, prefer_expression_function_bodies, lines_longer_than_80_chars, avoid_as, avoid_annotating_with_dynamic
 
 mixin _$AccessRequestController on AccessRequestControllerBase, Store {
-  final _$nameReqAccessCtrlAtom =
-      Atom(name: 'AccessRequestControllerBase.nameReqAccessCtrl');
+  final _$nameCtrlAtom = Atom(name: 'AccessRequestControllerBase.nameCtrl');
 
   @override
-  TextEditingController get nameAccessReqCtrl {
-    _$nameReqAccessCtrlAtom.reportRead();
-    return super.nameAccessReqCtrl;
+  TextEditingController get nameCtrl {
+    _$nameCtrlAtom.reportRead();
+    return super.nameCtrl;
   }
 
   @override
-  set nameAccessReqCtrl(TextEditingController value) {
-    _$nameReqAccessCtrlAtom.reportWrite(value, super.nameAccessReqCtrl, () {
-      super.nameAccessReqCtrl = value;
+  set nameCtrl(TextEditingController value) {
+    _$nameCtrlAtom.reportWrite(value, super.nameCtrl, () {
+      super.nameCtrl = value;
     });
   }
 
-  final _$userReqAccessCtrlAtom =
-      Atom(name: 'AccessRequestControllerBase.userReqAccessCtrl');
+  final _$userCtrlAtom = Atom(name: 'AccessRequestControllerBase.userCtrl');
 
   @override
-  TextEditingController get userAccessReqCtrl {
-    _$userReqAccessCtrlAtom.reportRead();
-    return super.userAccessReqCtrl;
+  TextEditingController get userCtrl {
+    _$userCtrlAtom.reportRead();
+    return super.userCtrl;
   }
 
   @override
-  set userAccessReqCtrl(TextEditingController value) {
-    _$userReqAccessCtrlAtom.reportWrite(value, super.userAccessReqCtrl, () {
-      super.userAccessReqCtrl = value;
+  set userCtrl(TextEditingController value) {
+    _$userCtrlAtom.reportWrite(value, super.userCtrl, () {
+      super.userCtrl = value;
     });
   }
 
-  final _$emailReqAccessCtrlAtom =
-      Atom(name: 'AccessRequestControllerBase.emailReqAccessCtrl');
+  final _$emailCtrlAtom = Atom(name: 'AccessRequestControllerBase.emailCtrl');
 
   @override
-  TextEditingController get emailAccessReqCtrl {
-    _$emailReqAccessCtrlAtom.reportRead();
-    return super.emailAccessReqCtrl;
+  TextEditingController get emailCtrl {
+    _$emailCtrlAtom.reportRead();
+    return super.emailCtrl;
   }
 
   @override
-  set emailAccessReqCtrl(TextEditingController value) {
-    _$emailReqAccessCtrlAtom.reportWrite(value, super.emailAccessReqCtrl, () {
-      super.emailAccessReqCtrl = value;
+  set emailCtrl(TextEditingController value) {
+    _$emailCtrlAtom.reportWrite(value, super.emailCtrl, () {
+      super.emailCtrl = value;
     });
   }
 
-  final _$confEmailReqAccessCtrlAtom =
-      Atom(name: 'AccessRequestControllerBase.confEmailReqAccessCtrl');
+  final _$confEmailCtrlAtom =
+      Atom(name: 'AccessRequestControllerBase.confEmailCtrl');
 
   @override
-  TextEditingController get confEmailAccessReqCtrl {
-    _$confEmailReqAccessCtrlAtom.reportRead();
-    return super.confEmailAccessReqCtrl;
+  TextEditingController get confEmailCtrl {
+    _$confEmailCtrlAtom.reportRead();
+    return super.confEmailCtrl;
   }
 
   @override
-  set confEmailAccessReqCtrl(TextEditingController value) {
-    _$confEmailReqAccessCtrlAtom
-        .reportWrite(value, super.confEmailAccessReqCtrl, () {
-      super.confEmailAccessReqCtrl = value;
+  set confEmailCtrl(TextEditingController value) {
+    _$confEmailCtrlAtom.reportWrite(value, super.confEmailCtrl, () {
+      super.confEmailCtrl = value;
     });
   }
 
-  final _$pswReqAccessCtrlAtom =
-      Atom(name: 'AccessRequestControllerBase.pswReqAccessCtrl');
+  final _$pswCtrlAtom = Atom(name: 'AccessRequestControllerBase.pswCtrl');
 
   @override
-  TextEditingController get pswAccessReqCtrl {
-    _$pswReqAccessCtrlAtom.reportRead();
-    return super.pswAccessReqCtrl;
+  TextEditingController get pswCtrl {
+    _$pswCtrlAtom.reportRead();
+    return super.pswCtrl;
   }
 
   @override
-  set pswAccessReqCtrl(TextEditingController value) {
-    _$pswReqAccessCtrlAtom.reportWrite(value, super.pswAccessReqCtrl, () {
-      super.pswAccessReqCtrl = value;
+  set pswCtrl(TextEditingController value) {
+    _$pswCtrlAtom.reportWrite(value, super.pswCtrl, () {
+      super.pswCtrl = value;
     });
   }
 
-  final _$confPswReqAccessCtrlAtom =
-      Atom(name: 'AccessRequestControllerBase.confPswReqAccessCtrl');
+  final _$confPswCtrlAtom =
+      Atom(name: 'AccessRequestControllerBase.confPswCtrl');
 
   @override
-  TextEditingController get confPswAccessReqCtrl {
-    _$confPswReqAccessCtrlAtom.reportRead();
-    return super.confPswAccessReqCtrl;
+  TextEditingController get confPswCtrl {
+    _$confPswCtrlAtom.reportRead();
+    return super.confPswCtrl;
   }
 
   @override
-  set confPswAccessReqCtrl(TextEditingController value) {
-    _$confPswReqAccessCtrlAtom.reportWrite(value, super.confPswAccessReqCtrl,
-        () {
-      super.confPswAccessReqCtrl = value;
+  set confPswCtrl(TextEditingController value) {
+    _$confPswCtrlAtom.reportWrite(value, super.confPswCtrl, () {
+      super.confPswCtrl = value;
     });
+  }
+
+  final _$accessRequestPostAtom =
+      Atom(name: 'AccessRequestControllerBase.accessRequestPost');
+
+  @override
+  ObservableFuture<AccessRequest> get accessRequestPost {
+    _$accessRequestPostAtom.reportRead();
+    return super.accessRequestPost;
+  }
+
+  @override
+  set accessRequestPost(ObservableFuture<AccessRequest> value) {
+    _$accessRequestPostAtom.reportWrite(value, super.accessRequestPost, () {
+      super.accessRequestPost = value;
+    });
+  }
+
+  final _$AccessRequestControllerBaseActionController =
+      ActionController(name: 'AccessRequestControllerBase');
+
+  @override
+  Future<dynamic> save() {
+    final _$actionInfo = _$AccessRequestControllerBaseActionController
+        .startAction(name: 'AccessRequestControllerBase.save');
+    try {
+      return super.save();
+    } finally {
+      _$AccessRequestControllerBaseActionController.endAction(_$actionInfo);
+    }
   }
 
   @override
   String toString() {
     return '''
-nameReqAccessCtrl: ${nameAccessReqCtrl},
-userReqAccessCtrl: ${userAccessReqCtrl},
-emailReqAccessCtrl: ${emailAccessReqCtrl},
-confEmailReqAccessCtrl: ${confEmailAccessReqCtrl},
-pswReqAccessCtrl: ${pswAccessReqCtrl},
-confPswReqAccessCtrl: ${confPswAccessReqCtrl}
+nameCtrl: ${nameCtrl},
+userCtrl: ${userCtrl},
+emailCtrl: ${emailCtrl},
+confEmailCtrl: ${confEmailCtrl},
+pswCtrl: ${pswCtrl},
+confPswCtrl: ${confPswCtrl},
+accessRequestPost: ${accessRequestPost}
     ''';
   }
 }
