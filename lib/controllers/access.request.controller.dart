@@ -3,34 +3,31 @@ import 'package:flutter/material.dart';
 import 'package:hcslzapp/repositories/login.repo.dart';
 import 'package:mobx/mobx.dart';
 
-part 'request.access.controller.g.dart';
+part 'access.request.controller.g.dart';
 
-class RequestAccessController = RequestAccessControllerBase
-    with _$RequestAccessController;
+class AccessRequestController = AccessRequestControllerBase
+    with _$AccessRequestController;
 
-abstract class RequestAccessControllerBase with Store {
+abstract class AccessRequestControllerBase with Store {
   var formController;
 
   @observable
-  var nameReqAccessCtrl = TextEditingController();
+  var nameAccessReqCtrl = TextEditingController();
 
   @observable
-  var userReqAccessCtrl = TextEditingController();
+  var userAccessReqCtrl = TextEditingController();
 
   @observable
-  var emailReqAccessCtrl = TextEditingController();
+  var emailAccessReqCtrl = TextEditingController();
 
   @observable
-  var confEmailReqAccessCtrl = TextEditingController();
+  var confEmailAccessReqCtrl = TextEditingController();
 
   @observable
-  var pswReqAccessCtrl = TextEditingController();
+  var pswAccessReqCtrl = TextEditingController();
 
   @observable
-  var confPswReqAccessCtrl = TextEditingController();
-
-/*  @observable
-  var emailForgotPswCtrl = TextEditingController();*/
+  var confPswAccessReqCtrl = TextEditingController();
 
   String errorMsg;
 

@@ -1,6 +1,6 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'request.access.controller.dart';
+part of 'access.request.controller.dart';
 
 // **************************************************************************
 // StoreGenerator
@@ -8,114 +8,114 @@ part of 'request.access.controller.dart';
 
 // ignore_for_file: non_constant_identifier_names, unnecessary_brace_in_string_interps, unnecessary_lambdas, prefer_expression_function_bodies, lines_longer_than_80_chars, avoid_as, avoid_annotating_with_dynamic
 
-mixin _$RequestAccessController on RequestAccessControllerBase, Store {
+mixin _$AccessRequestController on AccessRequestControllerBase, Store {
   final _$nameReqAccessCtrlAtom =
-      Atom(name: 'RequestAccessControllerBase.nameReqAccessCtrl');
+      Atom(name: 'AccessRequestControllerBase.nameReqAccessCtrl');
 
   @override
-  TextEditingController get nameReqAccessCtrl {
+  TextEditingController get nameAccessReqCtrl {
     _$nameReqAccessCtrlAtom.reportRead();
-    return super.nameReqAccessCtrl;
+    return super.nameAccessReqCtrl;
   }
 
   @override
-  set nameReqAccessCtrl(TextEditingController value) {
-    _$nameReqAccessCtrlAtom.reportWrite(value, super.nameReqAccessCtrl, () {
-      super.nameReqAccessCtrl = value;
+  set nameAccessReqCtrl(TextEditingController value) {
+    _$nameReqAccessCtrlAtom.reportWrite(value, super.nameAccessReqCtrl, () {
+      super.nameAccessReqCtrl = value;
     });
   }
 
   final _$userReqAccessCtrlAtom =
-      Atom(name: 'RequestAccessControllerBase.userReqAccessCtrl');
+      Atom(name: 'AccessRequestControllerBase.userReqAccessCtrl');
 
   @override
-  TextEditingController get userReqAccessCtrl {
+  TextEditingController get userAccessReqCtrl {
     _$userReqAccessCtrlAtom.reportRead();
-    return super.userReqAccessCtrl;
+    return super.userAccessReqCtrl;
   }
 
   @override
-  set userReqAccessCtrl(TextEditingController value) {
-    _$userReqAccessCtrlAtom.reportWrite(value, super.userReqAccessCtrl, () {
-      super.userReqAccessCtrl = value;
+  set userAccessReqCtrl(TextEditingController value) {
+    _$userReqAccessCtrlAtom.reportWrite(value, super.userAccessReqCtrl, () {
+      super.userAccessReqCtrl = value;
     });
   }
 
   final _$emailReqAccessCtrlAtom =
-      Atom(name: 'RequestAccessControllerBase.emailReqAccessCtrl');
+      Atom(name: 'AccessRequestControllerBase.emailReqAccessCtrl');
 
   @override
-  TextEditingController get emailReqAccessCtrl {
+  TextEditingController get emailAccessReqCtrl {
     _$emailReqAccessCtrlAtom.reportRead();
-    return super.emailReqAccessCtrl;
+    return super.emailAccessReqCtrl;
   }
 
   @override
-  set emailReqAccessCtrl(TextEditingController value) {
-    _$emailReqAccessCtrlAtom.reportWrite(value, super.emailReqAccessCtrl, () {
-      super.emailReqAccessCtrl = value;
+  set emailAccessReqCtrl(TextEditingController value) {
+    _$emailReqAccessCtrlAtom.reportWrite(value, super.emailAccessReqCtrl, () {
+      super.emailAccessReqCtrl = value;
     });
   }
 
   final _$confEmailReqAccessCtrlAtom =
-      Atom(name: 'RequestAccessControllerBase.confEmailReqAccessCtrl');
+      Atom(name: 'AccessRequestControllerBase.confEmailReqAccessCtrl');
 
   @override
-  TextEditingController get confEmailReqAccessCtrl {
+  TextEditingController get confEmailAccessReqCtrl {
     _$confEmailReqAccessCtrlAtom.reportRead();
-    return super.confEmailReqAccessCtrl;
+    return super.confEmailAccessReqCtrl;
   }
 
   @override
-  set confEmailReqAccessCtrl(TextEditingController value) {
+  set confEmailAccessReqCtrl(TextEditingController value) {
     _$confEmailReqAccessCtrlAtom
-        .reportWrite(value, super.confEmailReqAccessCtrl, () {
-      super.confEmailReqAccessCtrl = value;
+        .reportWrite(value, super.confEmailAccessReqCtrl, () {
+      super.confEmailAccessReqCtrl = value;
     });
   }
 
   final _$pswReqAccessCtrlAtom =
-      Atom(name: 'RequestAccessControllerBase.pswReqAccessCtrl');
+      Atom(name: 'AccessRequestControllerBase.pswReqAccessCtrl');
 
   @override
-  TextEditingController get pswReqAccessCtrl {
+  TextEditingController get pswAccessReqCtrl {
     _$pswReqAccessCtrlAtom.reportRead();
-    return super.pswReqAccessCtrl;
+    return super.pswAccessReqCtrl;
   }
 
   @override
-  set pswReqAccessCtrl(TextEditingController value) {
-    _$pswReqAccessCtrlAtom.reportWrite(value, super.pswReqAccessCtrl, () {
-      super.pswReqAccessCtrl = value;
+  set pswAccessReqCtrl(TextEditingController value) {
+    _$pswReqAccessCtrlAtom.reportWrite(value, super.pswAccessReqCtrl, () {
+      super.pswAccessReqCtrl = value;
     });
   }
 
   final _$confPswReqAccessCtrlAtom =
-      Atom(name: 'RequestAccessControllerBase.confPswReqAccessCtrl');
+      Atom(name: 'AccessRequestControllerBase.confPswReqAccessCtrl');
 
   @override
-  TextEditingController get confPswReqAccessCtrl {
+  TextEditingController get confPswAccessReqCtrl {
     _$confPswReqAccessCtrlAtom.reportRead();
-    return super.confPswReqAccessCtrl;
+    return super.confPswAccessReqCtrl;
   }
 
   @override
-  set confPswReqAccessCtrl(TextEditingController value) {
-    _$confPswReqAccessCtrlAtom.reportWrite(value, super.confPswReqAccessCtrl,
+  set confPswAccessReqCtrl(TextEditingController value) {
+    _$confPswReqAccessCtrlAtom.reportWrite(value, super.confPswAccessReqCtrl,
         () {
-      super.confPswReqAccessCtrl = value;
+      super.confPswAccessReqCtrl = value;
     });
   }
 
   @override
   String toString() {
     return '''
-nameReqAccessCtrl: ${nameReqAccessCtrl},
-userReqAccessCtrl: ${userReqAccessCtrl},
-emailReqAccessCtrl: ${emailReqAccessCtrl},
-confEmailReqAccessCtrl: ${confEmailReqAccessCtrl},
-pswReqAccessCtrl: ${pswReqAccessCtrl},
-confPswReqAccessCtrl: ${confPswReqAccessCtrl}
+nameReqAccessCtrl: ${nameAccessReqCtrl},
+userReqAccessCtrl: ${userAccessReqCtrl},
+emailReqAccessCtrl: ${emailAccessReqCtrl},
+confEmailReqAccessCtrl: ${confEmailAccessReqCtrl},
+pswReqAccessCtrl: ${pswAccessReqCtrl},
+confPswReqAccessCtrl: ${confPswAccessReqCtrl}
     ''';
   }
 }

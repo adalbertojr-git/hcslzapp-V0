@@ -8,7 +8,7 @@ import 'package:hcslzapp/controllers/login.controller.dart';
 import 'package:hcslzapp/models/token.dart';
 import 'package:hcslzapp/pages/dashboard/dashboard.dart';
 import 'package:asuka/asuka.dart' as asuka;
-import 'package:hcslzapp/pages/login/request.access.dart';
+import 'package:hcslzapp/pages/login/access.request.dart';
 import 'forgot.password.dart';
 
 class Login extends StatefulWidget {
@@ -133,10 +133,10 @@ class _LoginState extends State<Login> {
                           );
                         },
                         child: Text(
-                          'Esqueci a senha',
+                          'Esqueceu a senha?',
                           style: TextStyle(
                             color: Colors.indigo,
-                            fontSize: 12.0,
+                            fontSize: 14.0,
                           ),
                         ),
                       ),
@@ -145,14 +145,14 @@ class _LoginState extends State<Login> {
                           Navigator.push(
                             context,
                             MaterialPageRoute(
-                                builder: (context) => RequestAccess()),
+                                builder: (context) => AccessRequest()),
                           );
                         },
                         child: Text(
                           'Primeiro acesso?',
                           style: TextStyle(
                             color: Colors.indigo,
-                            fontSize: 12.0,
+                            fontSize: 14.0,
                           ),
                         ),
                       ),

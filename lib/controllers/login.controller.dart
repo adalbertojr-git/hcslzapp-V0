@@ -17,24 +17,6 @@ abstract class LoginControllerBase with Store {
   @observable
   var pswLoginCtrl = TextEditingController();
 
-/*  @observable
-  var nameReqAccessCtrl = TextEditingController();
-
-  @observable
-  var userReqAccessCtrl = TextEditingController();
-
-  @observable
-  var emailReqAccessCtrl = TextEditingController();
-
-  @observable
-  var pswReqAccessCtrl = TextEditingController();
-
-  @observable
-  var confPswReqAccessCtrl = TextEditingController();
-
-  @observable
-  var emailForgotPswCtrl = TextEditingController();*/
-
   @observable
   ObservableFuture<Token> token;
 

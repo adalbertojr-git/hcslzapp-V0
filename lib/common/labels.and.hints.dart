@@ -6,7 +6,7 @@ const hintUser = 'Código usado para conectar no HCSlz App';
 const labelPsw = 'Senha *';
 const hintPsw = 'Digite sua senha';
 /*
-Request Access
+Access Request
 */
 const labelName = 'Nome *';
 const hintName = 'Informe seu nome completo, harleyro';
@@ -14,10 +14,10 @@ const labelEmail = 'Email';
 const hintEmail = 'Informe o email (ex: hc@email.com) *';
 const labelConfEmail = 'Confirme o email *';
 const hintConfEmail = 'Repita o email para confirmação';
-const labelPswReqAccess = 'Senha *';
-const hintPswReqAccess = 'Informe uma senha';
-const labelConfPswReqAccess = 'Confirme a senha *';
-const hintConfPswReqAccess = 'Repita a senha para confirmação';
+const labelPswAccessReq = 'Senha *';
+const hintPswAccessReq = 'Informe uma senha';
+const labelConfPswAccessReq = 'Confirme a senha *';
+const hintConfPswAccessReq = 'Repita a senha para confirmação';
 /*
 Associated
 */

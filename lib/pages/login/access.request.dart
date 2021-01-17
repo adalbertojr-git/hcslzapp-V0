@@ -1,3 +1,4 @@
+import 'package:asuka/asuka.dart' as asuka;
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
@@ -5,16 +6,15 @@ import 'package:hcslzapp/common/labels.and.hints.dart';
 import 'package:hcslzapp/components/button.dart';
 import 'package:hcslzapp/components/input.textfield.dart';
 import 'package:hcslzapp/components/top.margin.dart';
-import 'package:hcslzapp/controllers/request.access.controller.dart';
-import 'package:asuka/asuka.dart' as asuka;
+import 'package:hcslzapp/controllers/access.request.controller.dart';
 
-class RequestAccess extends StatefulWidget {
+class AccessRequest extends StatefulWidget {
   @override
-  _RequestAccessState createState() => _RequestAccessState();
+  _AccessRequestState createState() => _AccessRequestState();
 }
 
-class _RequestAccessState extends State<RequestAccess> {
-  RequestAccessController _controller = RequestAccessController();
+class _AccessRequestState extends State<AccessRequest> {
+  AccessRequestController _controller = AccessRequestController();
 
   @override
   void initState() {
@@ -47,7 +47,7 @@ class _RequestAccessState extends State<RequestAccess> {
             children: <Widget>[
               TopMargin(),
               InputTextField(
-                textEditingController: _controller.nameReqAccessCtrl,
+                textEditingController: _controller.nameAccessReqCtrl,
                 hint: hintName,
                 label: labelName,
                 icon: Icons.person_add,
@@ -56,7 +56,7 @@ class _RequestAccessState extends State<RequestAccess> {
                 errorText: _controller.validateName(),
               ),
               InputTextField(
-                textEditingController: _controller.userReqAccessCtrl,
+                textEditingController: _controller.userAccessReqCtrl,
                 hint: hintUser,
                 label: labelUser,
                 icon: Icons.account_circle_outlined,
@@ -65,7 +65,7 @@ class _RequestAccessState extends State<RequestAccess> {
                 errorText: _controller.validateUser(),
               ),
               InputTextField(
-                textEditingController: _controller.emailReqAccessCtrl,
+                textEditingController: _controller.emailAccessReqCtrl,
                 hint: hintEmail,
                 label: labelEmail + " *",
                 inputType: TextInputType.emailAddress,
@@ -73,7 +73,7 @@ class _RequestAccessState extends State<RequestAccess> {
                 errorText: _controller.validateEmail(),
               ),
               InputTextField(
-                textEditingController: _controller.confEmailReqAccessCtrl,
+                textEditingController: _controller.confEmailAccessReqCtrl,
                 hint: hintConfEmail,
                 label: labelConfEmail,
                 inputType: TextInputType.emailAddress,
@@ -81,18 +81,18 @@ class _RequestAccessState extends State<RequestAccess> {
                 errorText: _controller.validateConfEmail(),
               ),
               InputTextField(
-                textEditingController: _controller.pswReqAccessCtrl,
-                label: labelPswReqAccess,
-                hint: hintPswReqAccess,
+                textEditingController: _controller.pswAccessReqCtrl,
+                label: labelPswAccessReq,
+                hint: hintPswAccessReq,
                 inputType: TextInputType.text,
                 hidden: true,
                 onChanged: _controller.formController.changePassword,
                 errorText: _controller.validatePassword(),
               ),
               InputTextField(
-                textEditingController: _controller.confPswReqAccessCtrl,
-                label: labelConfPswReqAccess,
-                hint: hintConfPswReqAccess,
+                textEditingController: _controller.confPswAccessReqCtrl,
+                label: labelConfPswAccessReq,
+                hint: hintConfPswAccessReq,
                 inputType: TextInputType.text,
                 hidden: true,
                 onChanged: _controller.formController.changeConfPassword,
@@ -102,7 +102,7 @@ class _RequestAccessState extends State<RequestAccess> {
                 height: 10.0,
               ),
               Button(
-                icon: Icons.app_registration,
+                icon: Icons.send_to_mobile,
                 onClick: () {
                   //_login(context);
                 },
