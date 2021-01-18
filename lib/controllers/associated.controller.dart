@@ -150,14 +150,14 @@ abstract class AssociatedControllerBase with Store {
 
   String validateName() {
     if (formController.name.isEmpty) {
-      return "Nome não pode ser nulo!!!";
+      return "Nome é obrigatório!!!";
     }
     return null;
   }
 
   String validateEmail() {
     if (formController.email.isEmpty) {
-      return "Email não pode ser nulo!!!";
+      return "Email é obrigatório!!!";
     } else if (!RegExp(
             r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+")
         .hasMatch(formController.email)) {

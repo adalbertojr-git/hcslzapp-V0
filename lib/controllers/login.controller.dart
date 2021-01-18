@@ -38,7 +38,7 @@ abstract class LoginControllerBase with Store {
   String validateUser() {
     print('---------- validateUser ----------');
     if (formController.user.isEmpty) {
-      return "Usuário não pode ser nulo!!!";
+      return "Usuário é obrigatório!!!";
     }
     return null;
   }
@@ -46,7 +46,7 @@ abstract class LoginControllerBase with Store {
   String validatePassword() {
     print('---------- validatePassword ----------');
     if (formController.password.isEmpty) {
-      return "Senha não pode ser nula!!!";
+      return "Senha é obrigatória!!!";
     }
     return null;
   }

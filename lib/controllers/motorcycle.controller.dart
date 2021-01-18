@@ -78,7 +78,7 @@ abstract class MotorcycleControllerBase with Store {
 
   String validateModel() {
     if (formController.model.isEmpty) {
-      return "Modelo não pode ser nulo!!!";
+      return "Modelo é obrigatório!!!";
     }
     return null;
   }

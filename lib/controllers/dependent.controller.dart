@@ -91,7 +91,7 @@ abstract class DependentControllerBase with Store {
 
   String validateName() {
     if (formController.name.isEmpty) {
-      return "Nome não pode ser nulo!!!";
+      return "Nome é obrigatório!!!";
     }
     return null;
   }

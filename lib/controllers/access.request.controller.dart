@@ -67,7 +67,7 @@ abstract class AccessRequestControllerBase with Store {
   String validateName() {
     print('---------- validateName ----------');
     if (formController.name.isEmpty) {
-      return "Nome não pode ser nulo!!!";
+      return "Nome é obrigatório!!!";
     }
     return null;
   }
@@ -75,14 +75,14 @@ abstract class AccessRequestControllerBase with Store {
   String validateUser() {
     print('---------- validateUser ----------');
     if (formController.user.isEmpty) {
-      return "Usuário não pode ser nulo!!!";
+      return "Usuário é obrigatório!!!";
     }
     return null;
   }
 
   String validateEmail() {
     if (formController.email.isEmpty) {
-      return "Email não pode ser nulo!!!";
+      return "Email é obrigatório!!!";
     } else if (!RegExp(
             r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+")
         .hasMatch(formController.email)) {
@@ -94,10 +94,10 @@ abstract class AccessRequestControllerBase with Store {
   String validateConfEmail() {
     print('---------- validateConfEmail ----------');
     if (formController.confEmail.isEmpty) {
-      return "Confirmação do email não pode ser nulo!!!";
+      return "Confirmação do email é obrigatória!!!";
     }
     if (formController.confEmail != formController.email) {
-      return "Emails não conferem!!!";
+      return "Emails informados não conferem!!!";
     }
     return null;
   }
@@ -105,7 +105,7 @@ abstract class AccessRequestControllerBase with Store {
   String validatePassword() {
     print('---------- validatePassword ----------');
     if (formController.password.isEmpty) {
-      return "Senha não pode ser nula!!!";
+      return "Senha é obrigatória!!!";
     }
     if (formController.password.toString().length < 4) {
       return "Senha deve ter no mínimo 4 caracteres!!!";
@@ -116,10 +116,10 @@ abstract class AccessRequestControllerBase with Store {
   String validateConfPassword() {
     print('---------- validateConfPassword ----------');
     if (formController.confPassword.isEmpty) {
-      return "Confirmação da senha não pode ser nula!!!";
+      return "Confirmação da senha é obrigatória!!!";
     }
     if (formController.confPassword != formController.password) {
-      return "Senhas não conferem!!!";
+      return "Senhas informadas não conferem!!!";
     }
     return null;
   }
