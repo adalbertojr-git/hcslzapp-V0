@@ -54,8 +54,6 @@ class AssociatedRepo {
         .timeout(
           Duration(seconds: 10),
         );
-    print(associated);
-    print(response.statusCode);
     if (response.statusCode == 200) {
       return Associated.fromJson(
         jsonDecode(response.body),

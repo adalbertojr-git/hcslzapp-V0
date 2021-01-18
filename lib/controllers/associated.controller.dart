@@ -117,7 +117,7 @@ abstract class AssociatedControllerBase with Store {
   Future fetchAssociated(int id) =>
       associatedListFuture = ObservableFuture(_associatedRepo
           .findByIdAssociatedToList(id)
-          .then((associated) => associated)).catchError((e) {
+          .then((value) => value)).catchError((e) {
         this.errorMsg = "${e.message}";
       }, test: (e) => e is Exception);
 
@@ -125,7 +125,7 @@ abstract class AssociatedControllerBase with Store {
   Future update(Associated associated) =>
       associatedUpdate = ObservableFuture(_associatedRepo
           .update(_setValues())
-          .then((associated) => associated)).catchError((e) {
+          .then((value) => value)).catchError((e) {
         this.errorMsg = "${e.message}";
       }, test: (e) => e is Exception);
 

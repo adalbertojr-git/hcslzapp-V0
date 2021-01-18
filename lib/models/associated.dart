@@ -1,6 +1,5 @@
 import 'package:hcslzapp/models/dependent.dart';
 import 'package:hcslzapp/models/motorcycle.dart';
-import 'package:intl/intl.dart';
 
 class Associated {
   final int id;

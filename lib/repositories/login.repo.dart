@@ -39,14 +39,15 @@ class LoginRepo {
     final Response response = await client
         .post(
           mainUrl + _accReqUrl,
-          headers: {'Content-type': 'application/json'},
+          headers: {
+            'Content-type': 'application/json',
+            'Accept': 'application/json'
+          },
           body: encodedJson,
         )
         .timeout(
           Duration(seconds: 10),
         );
-    print(accessRequest);
-    print(response.statusCode);
     if (response.statusCode == 201) {
       return AccessRequest.fromJson(
         jsonDecode(response.body),

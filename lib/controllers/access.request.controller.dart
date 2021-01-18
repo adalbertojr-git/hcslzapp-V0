@@ -48,15 +48,15 @@ abstract class AccessRequestControllerBase with Store {
   }
 
   @action
-  Future save() => accessRequestPost = ObservableFuture(_loginRepo
-          .accessRequest(_setValues())
-          .then((accessRequest) => accessRequest)).catchError((e) {
+  Future save() => accessRequestPost = ObservableFuture(
+              _loginRepo.accessRequest(_setValues()).then((value) => value))
+          .catchError((e) {
         this.errorMsg = "${e.message}";
       }, test: (e) => e is Exception);
 
   AccessRequest _setValues() {
     return AccessRequest(
-      id: 0,
+      id: int.parse('0'),
       name: nameCtrl.text,
       user: userCtrl.text,
       email: emailCtrl.text,

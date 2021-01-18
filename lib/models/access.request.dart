@@ -1,5 +1,5 @@
 class AccessRequest {
-  final int id;
+  int id;
   String name;
   String user;
   String email;
@@ -12,7 +12,7 @@ class AccessRequest {
         name = json['name'],
         user = json['user'],
         email = json['email'],
-        password = json["password"];
+        password = json['password'];
 
   Map<String, dynamic> toJson() => {
         'id': id,
