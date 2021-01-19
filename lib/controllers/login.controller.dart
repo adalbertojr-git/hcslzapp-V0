@@ -37,7 +37,7 @@ abstract class LoginControllerBase with Store {
 
   String validateUser() {
     print('---------- validateUser ----------');
-    if (formController._user.isEmpty) {
+    if (formController.user.isEmpty) {
       return "Usuário é obrigatório!!!";
     }
     return null;

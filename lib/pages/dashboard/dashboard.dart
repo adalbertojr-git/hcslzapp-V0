@@ -96,11 +96,11 @@ class Dashboard extends StatelessWidget {
         children: <Widget>[
           Expanded(
             child: Container(color: Colors.deepOrange[300]),
-            flex: 3,
+            //flex: 3,
           ),
           Expanded(
             child: Container(color: Colors.transparent),
-            flex: 5,
+            flex: 2,
           ),
         ],
       );
@@ -109,25 +109,7 @@ class Dashboard extends StatelessWidget {
         child: Column(
           children: <Widget>[
             header,
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: <Widget>[
-                _FeatureItem(
-                  'Requisições de Acesso',
-                  Icons.send_to_mobile,
-                  onClick: () {
-                    //_showContactsList(context);
-                  },
-                ),
-                _FeatureItem(
-                  'Documentos',
-                  Icons.file_copy_outlined,
-                  onClick: () {
-                    //_showContactsList(context);
-                  },
-                ),
-              ],
-            ),
+            bar,
             grid,
           ],
         ),
@@ -150,16 +132,37 @@ class Dashboard extends StatelessWidget {
         ),
       );
 
+  get bar => (this._user != 'admin' ? SizedBox() : Row(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: <Widget>[
+          _FeatureItem(
+            'Requisições de Acesso',
+            Icons.send_to_mobile,
+            onClick: () {
+              //_showContactsList(context);
+            },
+          ),
+          _FeatureItem(
+            'Documentos',
+            Icons.file_copy_outlined,
+            onClick: () {
+              //_showContactsList(context);
+            },
+          ),
+        ],
+      )
+  );
+
   get grid => (this._user == 'admin' ? gridAdm : gridAssociated);
 
   get gridAssociated => Expanded(
         child: Container(
           padding: EdgeInsets.only(left: 16, right: 16, bottom: 16),
           child: GridView.count(
-            crossAxisSpacing: 10,
-            mainAxisSpacing: 40,
+            //crossAxisSpacing: 10,
+            //mainAxisSpacing: 10,
             crossAxisCount: 2,
-            childAspectRatio: .90,
+            childAspectRatio: 0.9,
             children: <Widget>[
               GridButton(
                 title: "Associado",
@@ -384,7 +387,8 @@ class GridButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Card(
-      elevation: 0,
+      color: Colors.white,
+      elevation: 10,
       child: InkWell(
         onTap: () {
           onClick();
@@ -396,13 +400,14 @@ class GridButton extends StatelessWidget {
                 image: AssetImage(image),
                 fit: BoxFit.contain,
               ),
-              borderRadius: BorderRadius.all(Radius.circular(100.0)),
+/*              borderRadius: BorderRadius.all(Radius.circular(100.0)),
               boxShadow: [
                 BoxShadow(
                   blurRadius: 50.0,
                   color: Colors.deepOrange,
                 )
-              ]),
+              ],*/
+          ),
           child: Align(
             alignment: Alignment.bottomCenter,
             child: Text(
@@ -432,7 +437,7 @@ class _FeatureItem extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.all(5.0),
       child: Material(
-        color: Colors.white,
+        color: Colors.deepOrange[100],
         child: InkWell(
           onTap: () {
             onClick();
@@ -440,7 +445,8 @@ class _FeatureItem extends StatelessWidget {
           child: Container(
             padding: EdgeInsets.all(8),
             height: 100,
-            width: 180,
+            width: MediaQuery.of(context).size.width/2 - 15,
+            //width: 150,
             child: Column(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -448,12 +454,13 @@ class _FeatureItem extends StatelessWidget {
                 Icon(
                   icon,
                   color: Colors.orange,
-                  size: 50.0,
+                  size: 40.0,
                 ),
                 Text(name,
                     style: TextStyle(
                       color: Colors.black,
-                      fontSize: 14.0,
+                      fontSize: 12.0,
+                      fontWeight: FontWeight.bold,
                     )),
               ],
             ),
