@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:hcslzapp/models/access.request.dart';
+import 'package:hcslzapp/repositories/access.request.repo.dart';
 import 'package:hcslzapp/repositories/login.repo.dart';
 import 'package:mobx/mobx.dart';
 
@@ -35,7 +36,7 @@ abstract class AccessRequestControllerBase with Store {
 
   String errorMsg;
 
-  final LoginRepo _loginRepo = LoginRepo();
+  final AccessRequestRepo _accessRequestRepo = AccessRequestRepo();
 
   get init {
     formController = FormController(
@@ -49,7 +50,7 @@ abstract class AccessRequestControllerBase with Store {
 
   @action
   Future save() => accessRequestPost = ObservableFuture(
-              _loginRepo.accessRequest(_setValues()).then((value) => value))
+              _accessRequestRepo.save(_setValues()).then((value) => value))
           .catchError((e) {
         this.errorMsg = "${e.message}";
       }, test: (e) => e is Exception);

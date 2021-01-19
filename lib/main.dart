@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:hcslzapp/controllers/app.controller.dart';
 import 'package:hcslzapp/controllers/associated.controller.dart';
-import 'package:hcslzapp/pages/login/splash.page.dart';
+import 'package:hcslzapp/pages/splash/splash.page.dart';
 import 'package:intl/intl.dart';
 import 'package:asuka/asuka.dart' as asuka;
 import 'package:jwt_decode/jwt_decode.dart';

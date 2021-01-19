@@ -8,8 +8,8 @@ import 'package:hcslzapp/controllers/login.controller.dart';
 import 'package:hcslzapp/models/token.dart';
 import 'package:hcslzapp/pages/dashboard/dashboard.page.dart';
 import 'package:asuka/asuka.dart' as asuka;
-import 'package:hcslzapp/pages/login/access.request.page.dart';
-import 'forgot.password.page.dart';
+import 'package:hcslzapp/pages/access.request/access.request.page.dart';
+import '../forgot.password/forgot.password.page.dart';
 
 class Login extends StatefulWidget {
   @override

@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:hcslzapp/controllers/app.controller.dart';
 import 'package:hcslzapp/pages/about/about.page.dart';
+import 'package:hcslzapp/pages/access.request/access.request.list.page.dart';
+import 'package:hcslzapp/pages/associated/associated.list.page.dart';
 import 'package:hcslzapp/pages/associated/associated.update.page.dart';
 import 'package:hcslzapp/pages/boutique/boutique.list.page.dart';
 import 'package:hcslzapp/pages/defect/defect.list.page.dart';
@@ -14,9 +16,9 @@ import 'package:hcslzapp/pages/ride/my.ride.page.dart';
 
 // ignore: must_be_immutable
 class Dashboard extends StatelessWidget {
-  BuildContext gContext;
+  BuildContext _gContext;
   final String _user;
-  List<String> _listScreens = [
+  List<String> _listAdmScreens = [
     "Associados",
     "Financeiro",
     "Eventos",
@@ -28,7 +30,7 @@ class Dashboard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    gContext = context;
+    _gContext = context;
     return Scaffold(
       drawer: drawr,
       body: Stack(
@@ -60,7 +62,7 @@ class Dashboard extends StatelessWidget {
               leading: Icon(Icons.info),
               title: Text("Sobre o HCSlz App"),
               onTap: () {
-                Navigator.pop(gContext);
+                Navigator.pop(_gContext);
               },
             ),
             Row(
@@ -84,7 +86,7 @@ class Dashboard extends StatelessWidget {
               leading: Icon(Icons.power_settings_new),
               title: Text("Logout"),
               onTap: () {
-                Navigator.pop(gContext);
+                Navigator.pop(_gContext);
               },
             ),
           ],
@@ -117,11 +119,11 @@ class Dashboard extends StatelessWidget {
   get header => ListTile(
         contentPadding: EdgeInsets.only(left: 40, right: 20, top: 30),
         title: Text(
-          'Ola, Adalberto',
-          style: TextStyle(color: Colors.white, fontSize: 25.0),
+          this._user == 'admin' ? 'Olá, Administrador' : 'Olá, Harleyro',
+          style: TextStyle(color: Colors.white, fontSize: 22.0),
         ),
         subtitle: Text(
-          'AJ102030',
+          this._user == 'admin' ? '' : 'Adalberto Jr',
           style: TextStyle(color: Colors.white60),
         ),
         trailing: CircleAvatar(
@@ -140,7 +142,10 @@ class Dashboard extends StatelessWidget {
               'Requisições de Acesso',
               Icons.send_to_mobile,
               onClick: () {
-                //_showContactsList(context);
+                Navigator.push(
+                  _gContext,
+                  MaterialPageRoute(builder: (_gContext) => AccessRequestList()),
+                );
               },
             ),
             _BarButton(
@@ -167,10 +172,10 @@ class Dashboard extends StatelessWidget {
               _GridButton(
                 title: "Associado",
                 image: "assets/imgs/user.png",
-                context: gContext,
+                context: _gContext,
                 onClick: () {
                   Navigator.push(
-                    gContext,
+                    _gContext,
                     MaterialPageRoute(
                         builder: (gContext) => AssociatedUpdate()),
                   );
@@ -179,10 +184,10 @@ class Dashboard extends StatelessWidget {
               _GridButton(
                 title: "Financeiro",
                 image: "assets/imgs/financeiro.png",
-                context: gContext,
+                context: _gContext,
                 onClick: () {
                   Navigator.push(
-                    gContext,
+                    _gContext,
                     MaterialPageRoute(builder: (gContext) => PaymentList()),
                   );
                 },
@@ -190,10 +195,10 @@ class Dashboard extends StatelessWidget {
               _GridButton(
                 title: "Carteira Harley Club",
                 image: "assets/imgs/carteirad.png",
-                context: gContext,
+                context: _gContext,
                 onClick: () {
                   Navigator.push(
-                    gContext,
+                    _gContext,
                     MaterialPageRoute(builder: (gContext) => DigitalIdentity()),
                   );
                 },
@@ -201,10 +206,10 @@ class Dashboard extends StatelessWidget {
               _GridButton(
                 title: "Parcerias",
                 image: "assets/imgs/parcerias.png",
-                context: gContext,
+                context: _gContext,
                 onClick: () {
                   Navigator.push(
-                    gContext,
+                    _gContext,
                     MaterialPageRoute(builder: (gContext) => PartnershipList()),
                   );
                 },
@@ -212,10 +217,10 @@ class Dashboard extends StatelessWidget {
               _GridButton(
                 title: "Eventos",
                 image: "assets/imgs/eventos.png",
-                context: gContext,
+                context: _gContext,
                 onClick: () {
                   Navigator.push(
-                    gContext,
+                    _gContext,
                     MaterialPageRoute(builder: (gContext) => EventCalendar()),
                   );
                 },
@@ -236,10 +241,10 @@ class Dashboard extends StatelessWidget {
               _GridButton(
                 title: "Codigos DTC",
                 image: "assets/imgs/codigosdtc.png",
-                context: gContext,
+                context: _gContext,
                 onClick: () {
                   Navigator.push(
-                    gContext,
+                    _gContext,
                     MaterialPageRoute(builder: (context) => DtcCodeAccess()),
                   );
                 },
@@ -260,10 +265,10 @@ class Dashboard extends StatelessWidget {
               _GridButton(
                 title: "Boutique",
                 image: "assets/imgs/boutique.png",
-                context: gContext,
+                context: _gContext,
                 onClick: () {
                   Navigator.push(
-                    gContext,
+                    _gContext,
                     MaterialPageRoute(builder: (gContext) => BoutiqueList()),
                   );
                 },
@@ -303,10 +308,10 @@ class Dashboard extends StatelessWidget {
               _GridButton(
                 title: "O Harley Club",
                 image: "assets/imgs/logo.png",
-                context: gContext,
+                context: _gContext,
                 onClick: () {
                   Navigator.push(
-                    gContext,
+                    _gContext,
                     MaterialPageRoute(builder: (gContext) => About()),
                   );
                 },
@@ -320,7 +325,7 @@ class Dashboard extends StatelessWidget {
         child: Container(
           padding: EdgeInsets.only(left: 16, right: 16, bottom: 16),
           child: ListView.builder(
-            itemCount: _listScreens.length,
+            itemCount: _listAdmScreens.length,
             itemBuilder: _listItem,
           ),
         ),
@@ -339,7 +344,7 @@ class Dashboard extends StatelessWidget {
               width: 100.0,
             ),
             title: Text(
-              _listScreens[index],
+              _listAdmScreens[index],
               style: TextStyle(
                 fontSize: 14.0,
                 fontWeight: FontWeight.bold,
@@ -350,7 +355,7 @@ class Dashboard extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: <Widget>[
                 Text(
-                  _listScreens[index],
+                  _listAdmScreens[index],
                   style: TextStyle(
                     fontSize: 13.0,
                     fontWeight: FontWeight.normal,
@@ -366,7 +371,10 @@ class Dashboard extends StatelessWidget {
               ],
             ),
             onTap: () {
-              //_showSnackBar(context, _allCities[index]);
+              Navigator.push(
+                _gContext,
+                MaterialPageRoute(builder: (_gContext) => AssociatedList()),
+              );
             },
           )
         ],
@@ -393,7 +401,7 @@ class _GridButton extends StatelessWidget {
         onTap: () {
           onClick();
         },
-        splashColor: Colors.orange,
+        splashColor: Colors.black,
         child: Container(
           decoration: BoxDecoration(
             image: DecorationImage(
@@ -407,7 +415,7 @@ class _GridButton extends StatelessWidget {
               title,
               textAlign: TextAlign.center,
               style: TextStyle(
-                fontSize: 10,
+                fontSize: 9,
                 fontWeight: FontWeight.bold,
               ),
             ),
