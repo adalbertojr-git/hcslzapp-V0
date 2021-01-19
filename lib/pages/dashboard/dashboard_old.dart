@@ -1,17 +1,17 @@
 import 'dart:ui';
 
 import 'package:flutter/material.dart';
-import 'package:hcslzapp/pages/associated/associated.update.dart';
-import 'package:hcslzapp/pages/boutique/boutique.list.dart';
-import 'package:hcslzapp/pages/digital.identity/digital.identity.dart';
-import 'package:hcslzapp/pages/dtc.code/dtc.code.access.dart';
-import 'package:hcslzapp/pages/document/document.list.dart';
-import 'package:hcslzapp/pages/event/events.calendar.dart';
-import 'package:hcslzapp/pages/financial/payment.list.dart';
-import 'package:hcslzapp/pages/defect/defect.list.dart';
-import 'package:hcslzapp/pages/partnership/partnership.list.dart';
-import 'package:hcslzapp/pages/ride/my.ride.dart';
-import 'package:hcslzapp/pages/about/about.dart';
+import 'package:hcslzapp/pages/associated/associated.update.page.dart';
+import 'package:hcslzapp/pages/boutique/boutique.list.page.dart';
+import 'package:hcslzapp/pages/digital.identity/digital.identity.page.dart';
+import 'package:hcslzapp/pages/dtc.code/dtc.code.access.page.dart';
+import 'package:hcslzapp/pages/document/document.list.page.dart';
+import 'package:hcslzapp/pages/event/events.calendar.page.dart';
+import 'package:hcslzapp/pages/financial/payment.list.page.dart';
+import 'package:hcslzapp/pages/defect/defect.list.page.dart';
+import 'package:hcslzapp/pages/partnership/partnership.list.page.dart';
+import 'package:hcslzapp/pages/ride/my.ride.page.dart';
+import 'package:hcslzapp/pages/about/about.page.dart';
 
 class Dashboard_Old extends StatelessWidget {
   final bool _pinned = true;

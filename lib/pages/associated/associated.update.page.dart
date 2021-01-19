@@ -11,8 +11,8 @@ import 'package:hcslzapp/enums/blood.types.dart';
 import 'package:hcslzapp/models/associated.dart';
 import 'package:hcslzapp/models/dependent.dart';
 import 'package:hcslzapp/models/motorcycle.dart';
-import 'package:hcslzapp/pages/dependent/dependent.add.dart';
-import 'package:hcslzapp/pages/motorcycle/motorcycle.add.dart';
+import 'package:hcslzapp/pages/dependent/dependent.add.page.dart';
+import 'package:hcslzapp/pages/motorcycle/motorcycle.add.page.dart';
 import 'package:mask_text_input_formatter/mask_text_input_formatter.dart';
 import 'package:asuka/asuka.dart' as asuka;
 

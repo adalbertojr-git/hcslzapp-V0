@@ -6,10 +6,10 @@ import 'package:hcslzapp/components/button.dart';
 import 'package:hcslzapp/components/input.textfield.dart';
 import 'package:hcslzapp/controllers/login.controller.dart';
 import 'package:hcslzapp/models/token.dart';
-import 'package:hcslzapp/pages/dashboard/dashboard.dart';
+import 'package:hcslzapp/pages/dashboard/dashboard.page.dart';
 import 'package:asuka/asuka.dart' as asuka;
-import 'package:hcslzapp/pages/login/access.request.dart';
-import 'forgot.password.dart';
+import 'package:hcslzapp/pages/login/access.request.page.dart';
+import 'forgot.password.page.dart';
 
 class Login extends StatefulWidget {
   @override

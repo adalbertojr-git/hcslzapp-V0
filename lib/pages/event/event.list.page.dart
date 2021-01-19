@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:hcslzapp/models/motorcycle.dart';
-import 'package:hcslzapp/pages/motorcycle/motorcycle.add.dart';
+import 'package:hcslzapp/pages/motorcycle/motorcycle.add.page.dart';
 
 class EventList extends StatefulWidget {
   final List<Motorcycle> _listMotocicletas = List();

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:hcslzapp/pages/event/event.list.dart';
+import 'package:hcslzapp/pages/event/event.list.page.dart';
 import 'package:table_calendar/table_calendar.dart';
 
 // Example holidays

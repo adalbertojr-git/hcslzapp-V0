@@ -1,7 +1,7 @@
 import 'package:flare_flutter/flare_actor.dart';
 import 'package:flutter/material.dart';
 import 'package:splashscreen/splashscreen.dart';
-import 'login.dart';
+import 'login.page.dart';
 
 class Splash extends StatelessWidget {
   @override

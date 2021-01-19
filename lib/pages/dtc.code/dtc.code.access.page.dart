@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:hcslzapp/components/button.dart';
-import 'package:hcslzapp/pages/dtc.code/dtc.code.list.dart';
+import 'package:hcslzapp/pages/dtc.code/dtc.code.list.page.dart';
 
 class DtcCodeAccess extends StatelessWidget {
   //@override

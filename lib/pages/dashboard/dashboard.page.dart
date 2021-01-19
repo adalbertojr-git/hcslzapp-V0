@@ -1,17 +1,16 @@
 import 'package:flutter/material.dart';
-import 'package:hcslzapp/components/button.dart';
 import 'package:hcslzapp/controllers/app.controller.dart';
-import 'package:hcslzapp/pages/about/about.dart';
-import 'package:hcslzapp/pages/associated/associated.update.dart';
-import 'package:hcslzapp/pages/boutique/boutique.list.dart';
-import 'package:hcslzapp/pages/defect/defect.list.dart';
-import 'package:hcslzapp/pages/digital.identity/digital.identity.dart';
-import 'package:hcslzapp/pages/document/document.list.dart';
-import 'package:hcslzapp/pages/dtc.code/dtc.code.access.dart';
-import 'package:hcslzapp/pages/event/events.calendar.dart';
-import 'package:hcslzapp/pages/financial/payment.list.dart';
-import 'package:hcslzapp/pages/partnership/partnership.list.dart';
-import 'package:hcslzapp/pages/ride/my.ride.dart';
+import 'package:hcslzapp/pages/about/about.page.dart';
+import 'package:hcslzapp/pages/associated/associated.update.page.dart';
+import 'package:hcslzapp/pages/boutique/boutique.list.page.dart';
+import 'package:hcslzapp/pages/defect/defect.list.page.dart';
+import 'package:hcslzapp/pages/digital.identity/digital.identity.page.dart';
+import 'package:hcslzapp/pages/document/document.list.page.dart';
+import 'package:hcslzapp/pages/dtc.code/dtc.code.access.page.dart';
+import 'package:hcslzapp/pages/event/events.calendar.page.dart';
+import 'package:hcslzapp/pages/financial/payment.list.page.dart';
+import 'package:hcslzapp/pages/partnership/partnership.list.page.dart';
+import 'package:hcslzapp/pages/ride/my.ride.page.dart';
 
 // ignore: must_be_immutable
 class Dashboard extends StatelessWidget {
@@ -132,26 +131,27 @@ class Dashboard extends StatelessWidget {
         ),
       );
 
-  get bar => (this._user != 'admin' ? SizedBox() : Row(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: <Widget>[
-          _FeatureItem(
-            'Requisições de Acesso',
-            Icons.send_to_mobile,
-            onClick: () {
-              //_showContactsList(context);
-            },
-          ),
-          _FeatureItem(
-            'Documentos',
-            Icons.file_copy_outlined,
-            onClick: () {
-              //_showContactsList(context);
-            },
-          ),
-        ],
-      )
-  );
+  get bar => (this._user != 'admin'
+      ? SizedBox()
+      : Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: <Widget>[
+            _BarButton(
+              'Requisições de Acesso',
+              Icons.send_to_mobile,
+              onClick: () {
+                //_showContactsList(context);
+              },
+            ),
+            _BarButton(
+              'Documentos',
+              Icons.file_copy_outlined,
+              onClick: () {
+                //_showContactsList(context);
+              },
+            ),
+          ],
+        ));
 
   get grid => (this._user == 'admin' ? gridAdm : gridAssociated);
 
@@ -164,7 +164,7 @@ class Dashboard extends StatelessWidget {
             crossAxisCount: 2,
             childAspectRatio: 0.9,
             children: <Widget>[
-              GridButton(
+              _GridButton(
                 title: "Associado",
                 image: "assets/imgs/user.png",
                 context: gContext,
@@ -176,7 +176,7 @@ class Dashboard extends StatelessWidget {
                   );
                 },
               ),
-              GridButton(
+              _GridButton(
                 title: "Financeiro",
                 image: "assets/imgs/financeiro.png",
                 context: gContext,
@@ -187,7 +187,7 @@ class Dashboard extends StatelessWidget {
                   );
                 },
               ),
-              GridButton(
+              _GridButton(
                 title: "Carteira Harley Club",
                 image: "assets/imgs/carteirad.png",
                 context: gContext,
@@ -198,7 +198,7 @@ class Dashboard extends StatelessWidget {
                   );
                 },
               ),
-              GridButton(
+              _GridButton(
                 title: "Parcerias",
                 image: "assets/imgs/parcerias.png",
                 context: gContext,
@@ -209,7 +209,7 @@ class Dashboard extends StatelessWidget {
                   );
                 },
               ),
-              GridButton(
+              _GridButton(
                 title: "Eventos",
                 image: "assets/imgs/eventos.png",
                 context: gContext,
@@ -233,7 +233,7 @@ class Dashboard extends StatelessWidget {
                 },
               ),
 */
-              GridButton(
+              _GridButton(
                 title: "Codigos DTC",
                 image: "assets/imgs/codigosdtc.png",
                 context: gContext,
@@ -257,7 +257,7 @@ class Dashboard extends StatelessWidget {
                 },
               ),
 */
-              GridButton(
+              _GridButton(
                 title: "Boutique",
                 image: "assets/imgs/boutique.png",
                 context: gContext,
@@ -300,7 +300,7 @@ class Dashboard extends StatelessWidget {
                 },
               ),
 */
-              GridButton(
+              _GridButton(
                 title: "O Harley Club",
                 image: "assets/imgs/logo.png",
                 context: gContext,
@@ -375,8 +375,8 @@ class Dashboard extends StatelessWidget {
   }
 }
 
-class GridButton extends StatelessWidget {
-  GridButton({this.title, this.image, this.context, this.onClick});
+class _GridButton extends StatelessWidget {
+  _GridButton({this.title, this.image, this.context, this.onClick});
 
   final String title;
   final String image;
@@ -396,17 +396,10 @@ class GridButton extends StatelessWidget {
         splashColor: Colors.orange,
         child: Container(
           decoration: BoxDecoration(
-              image: DecorationImage(
-                image: AssetImage(image),
-                fit: BoxFit.contain,
-              ),
-/*              borderRadius: BorderRadius.all(Radius.circular(100.0)),
-              boxShadow: [
-                BoxShadow(
-                  blurRadius: 50.0,
-                  color: Colors.deepOrange,
-                )
-              ],*/
+            image: DecorationImage(
+              image: AssetImage(image),
+              fit: BoxFit.contain,
+            ),
           ),
           child: Align(
             alignment: Alignment.bottomCenter,
@@ -425,12 +418,12 @@ class GridButton extends StatelessWidget {
   } //build
 } //GridButton
 
-class _FeatureItem extends StatelessWidget {
+class _BarButton extends StatelessWidget {
   final String name;
   final IconData icon;
   final Function onClick; //callback
 
-  _FeatureItem(this.name, this.icon, {@required this.onClick});
+  _BarButton(this.name, this.icon, {@required this.onClick});
 
   @override
   Widget build(BuildContext context) {
@@ -445,7 +438,7 @@ class _FeatureItem extends StatelessWidget {
           child: Container(
             padding: EdgeInsets.all(8),
             height: 100,
-            width: MediaQuery.of(context).size.width/2 - 15,
+            width: MediaQuery.of(context).size.width / 2 - 15,
             //width: 150,
             child: Column(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -456,12 +449,14 @@ class _FeatureItem extends StatelessWidget {
                   color: Colors.orange,
                   size: 40.0,
                 ),
-                Text(name,
-                    style: TextStyle(
-                      color: Colors.black,
-                      fontSize: 12.0,
-                      fontWeight: FontWeight.bold,
-                    )),
+                Text(
+                  name,
+                  style: TextStyle(
+                    color: Colors.black,
+                    fontSize: 12.0,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
               ],
             ),
           ),
