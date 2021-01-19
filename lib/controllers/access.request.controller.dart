@@ -64,6 +64,26 @@ abstract class AccessRequestControllerBase with Store {
     );
   }
 
+  bool get hasErrors =>
+      hasErrorName ||
+      hasErrorUser ||
+      hasErrorEmail ||
+      hasErrorConfEmail ||
+      hasErrorPassword ||
+      hasErrorConfPassword;
+
+  bool get hasErrorName => validateName() != null;
+
+  bool get hasErrorUser => validateUser() != null;
+
+  bool get hasErrorEmail => validateEmail() != null;
+
+  bool get hasErrorConfEmail => validateConfEmail() != null;
+
+  bool get hasErrorPassword => validatePassword() != null;
+
+  bool get hasErrorConfPassword => validateConfPassword() != null;
+
   String validateName() {
     print('---------- validateName ----------');
     if (formController.name.isEmpty) {
@@ -74,7 +94,7 @@ abstract class AccessRequestControllerBase with Store {
 
   String validateUser() {
     print('---------- validateUser ----------');
-    if (formController.user.isEmpty) {
+    if (formController._user.isEmpty) {
       return "Usuário é obrigatório!!!";
     }
     return null;

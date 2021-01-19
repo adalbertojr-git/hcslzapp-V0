@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:hcslzapp/components/button.dart';
 import 'package:hcslzapp/controllers/app.controller.dart';
 import 'package:hcslzapp/pages/about/about.dart';
 import 'package:hcslzapp/pages/associated/associated.update.dart';
@@ -15,6 +16,16 @@ import 'package:hcslzapp/pages/ride/my.ride.dart';
 // ignore: must_be_immutable
 class Dashboard extends StatelessWidget {
   BuildContext gContext;
+  final String _user;
+  List<String> _listScreens = [
+    "Associados",
+    "Financeiro",
+    "Eventos",
+    "Parcerias",
+    "Boutique",
+  ];
+
+  Dashboard(this._user);
 
   @override
   Widget build(BuildContext context) {
@@ -98,6 +109,25 @@ class Dashboard extends StatelessWidget {
         child: Column(
           children: <Widget>[
             header,
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: <Widget>[
+                _FeatureItem(
+                  'Requisições de Acesso',
+                  Icons.send_to_mobile,
+                  onClick: () {
+                    //_showContactsList(context);
+                  },
+                ),
+                _FeatureItem(
+                  'Documentos',
+                  Icons.file_copy_outlined,
+                  onClick: () {
+                    //_showContactsList(context);
+                  },
+                ),
+              ],
+            ),
             grid,
           ],
         ),
@@ -120,7 +150,9 @@ class Dashboard extends StatelessWidget {
         ),
       );
 
-  get grid => Expanded(
+  get grid => (this._user == 'admin' ? gridAdm : gridAssociated);
+
+  get gridAssociated => Expanded(
         child: Container(
           padding: EdgeInsets.only(left: 16, right: 16, bottom: 16),
           child: GridView.count(
@@ -247,7 +279,7 @@ class Dashboard extends StatelessWidget {
                                   return Classificados();
                                 },
                               ),
-                            );*//*
+                            );*/ /*
 
                 },
               ),
@@ -280,6 +312,64 @@ class Dashboard extends StatelessWidget {
           ),
         ),
       );
+
+  get gridAdm => Expanded(
+        child: Container(
+          padding: EdgeInsets.only(left: 16, right: 16, bottom: 16),
+          child: ListView.builder(
+            itemCount: _listScreens.length,
+            itemBuilder: _listItem,
+          ),
+        ),
+      );
+
+  Widget _listItem(BuildContext context, int index) {
+    return Card(
+      color: Colors.deepOrange[100],
+      shadowColor: Colors.black,
+      child: Column(
+        children: <Widget>[
+          ListTile(
+            leading: Image.asset(
+              "assets/imgs/logo.png",
+              fit: BoxFit.fitHeight,
+              width: 100.0,
+            ),
+            title: Text(
+              _listScreens[index],
+              style: TextStyle(
+                fontSize: 14.0,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+            subtitle: Column(
+              mainAxisAlignment: MainAxisAlignment.start,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: <Widget>[
+                Text(
+                  _listScreens[index],
+                  style: TextStyle(
+                    fontSize: 13.0,
+                    fontWeight: FontWeight.normal,
+                  ),
+                ),
+/*                Text(
+                  'Population: 200}',
+                  style: TextStyle(
+                    fontSize: 11.0,
+                    fontWeight: FontWeight.normal,
+                  ),
+                ),*/
+              ],
+            ),
+            onTap: () {
+              //_showSnackBar(context, _allCities[index]);
+            },
+          )
+        ],
+      ),
+    );
+  }
 }
 
 class GridButton extends StatelessWidget {
@@ -329,3 +419,47 @@ class GridButton extends StatelessWidget {
     );
   } //build
 } //GridButton
+
+class _FeatureItem extends StatelessWidget {
+  final String name;
+  final IconData icon;
+  final Function onClick; //callback
+
+  _FeatureItem(this.name, this.icon, {@required this.onClick});
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.all(5.0),
+      child: Material(
+        color: Colors.white,
+        child: InkWell(
+          onTap: () {
+            onClick();
+          },
+          child: Container(
+            padding: EdgeInsets.all(8),
+            height: 100,
+            width: 180,
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: <Widget>[
+                Icon(
+                  icon,
+                  color: Colors.orange,
+                  size: 50.0,
+                ),
+                Text(name,
+                    style: TextStyle(
+                      color: Colors.black,
+                      fontSize: 14.0,
+                    )),
+              ],
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+}

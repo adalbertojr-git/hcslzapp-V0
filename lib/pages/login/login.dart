@@ -179,7 +179,7 @@ class _LoginState extends State<Login> {
         print(t.token);
         Navigator.pushReplacement(
           context,
-          MaterialPageRoute(builder: (context) => Dashboard()),
+          MaterialPageRoute(builder: (context) => Dashboard(_controller.userLoginCtrl.text)),
         );
       }
     });

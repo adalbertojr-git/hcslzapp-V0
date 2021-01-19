@@ -565,23 +565,32 @@ class _AssociatedUpdateState extends State<AssociatedUpdate> {
       );
 
   get _update {
-    _controller.update(_controller.associated).then(
-      (value) {
-        if (value != null) {
-          asuka.showSnackBar(
-            SnackBar(
-              content: Text('Associado atualizado com sucesso.'),
-            ),
-          );
-          Navigator.of(context).pop();
-        } else {
-          asuka.showSnackBar(
-            SnackBar(
-              content: Text(_controller.errorMsg),
-            ),
-          );
-        }
-      },
-    );
+    if (_controller.hasErrors) {
+      asuka.showSnackBar(
+        SnackBar(
+          content: Text('Atenção: Existem erros no formulário que devem '
+              'ser corrigidos antes de efetivar a transação.'),
+        ),
+      );
+    } else {
+      _controller.update(_controller.associated).then(
+        (value) {
+          if (value != null) {
+            asuka.showSnackBar(
+              SnackBar(
+                content: Text('Associado atualizado com sucesso.'),
+              ),
+            );
+            Navigator.of(context).pop();
+          } else {
+            asuka.showSnackBar(
+              SnackBar(
+                content: Text(_controller.errorMsg),
+              ),
+            );
+          }
+        },
+      );
+    }
   }
 }
