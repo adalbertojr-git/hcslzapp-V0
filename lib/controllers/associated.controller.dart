@@ -114,7 +114,7 @@ abstract class AssociatedControllerBase with Store {
   bool get hasErrorEmail => validateEmail() != null;
 
   @action
-  Future fetchAssociated(int id) =>
+  Future findOne(int id) =>
       associatedListFuture = ObservableFuture(_associatedRepo
           .findByIdAssociatedToList(id)
           .then((value) => value)).catchError((e) {
@@ -130,7 +130,7 @@ abstract class AssociatedControllerBase with Store {
       }, test: (e) => e is Exception);
 
   Future<List<Associated>> getFuture(int _associatedId) =>
-      future = fetchAssociated(_associatedId);
+      future = findOne(_associatedId);
 
   Associated _setValues() {
     this.associated.name = nameCtrl.text;

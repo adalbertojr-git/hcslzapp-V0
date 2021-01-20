@@ -256,11 +256,11 @@ mixin _$AssociatedController on AssociatedControllerBase, Store {
   }
 
   @override
-  Future<dynamic> fetchAssociated(int id) {
+  Future<dynamic> findOne(int id) {
     final _$actionInfo = _$AssociatedControllerBaseActionController.startAction(
         name: 'AssociatedControllerBase.fetchAssociated');
     try {
-      return super.fetchAssociated(id);
+      return super.findOne(id);
     } finally {
       _$AssociatedControllerBaseActionController.endAction(_$actionInfo);
     }

@@ -1,8 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_mobx/flutter_mobx.dart';
+import 'package:hcslzapp/components/centered.message.dart';
+import 'package:hcslzapp/components/progress.dart';
+import 'package:hcslzapp/controllers/access.request.controller.dart';
+import 'package:hcslzapp/models/access.request.dart';
 import 'package:hcslzapp/models/dependent.dart';
 
-class AccessRequestList extends StatefulWidget {
+import 'access.request.page.dart';
 
+class AccessRequestList extends StatefulWidget {
   @override
   State<StatefulWidget> createState() {
     return AccessRequestListState();
@@ -10,8 +16,54 @@ class AccessRequestList extends StatefulWidget {
 }
 
 class AccessRequestListState extends State<AccessRequestList> {
+  AccessRequestController _controller = AccessRequestController();
+  List<AccessRequest> _accessRequestList;
+
   @override
-  Widget build(BuildContext context) {
+  void initState() {
+    super.initState();
+  }
+
+  @override
+  Widget build(BuildContext context) => Scaffold(
+        body: FutureBuilder<List<AccessRequest>>(
+          future: _controller.findAll(),
+          builder: (context, snapshot) {
+            switch (snapshot.connectionState) {
+              case ConnectionState.none:
+                break;
+              case ConnectionState.waiting:
+                return Progress();
+              case ConnectionState.active:
+                break;
+              default:
+                if (snapshot.hasError) {
+                  return CenteredMessage(snapshot.error);
+                } else {
+                  if (snapshot.data == null)
+                    return CenteredMessage(
+                      _controller.errorMsg,
+                    );
+                  if (snapshot.data.length > 0) {
+                    _accessRequestList = snapshot.data;
+                    //_controller.associated = snapshot.data.first;
+                    //_controller.init;
+                    return buildListView();
+                  } else
+                    return CenteredMessage(
+                      'Dados do associado especificado não foram encontrados.',
+                    );
+                }
+            } //switch (snapshot.connectionState)
+            return CenteredMessage(
+              'Houve um erro desconhecido ao executar a transação.',
+            );
+          },
+        ),
+      );
+
+  @override
+  Widget buildxxx(BuildContext context) {
     return Scaffold(
       body: Container(
         decoration: BoxDecoration(
@@ -21,16 +73,21 @@ class AccessRequestListState extends State<AccessRequestList> {
             end: FractionalOffset.bottomRight,
           ),
         ),
-        child: ListView.builder(
-          itemCount: 5,//widget.listDependentes.length,
-          itemBuilder: (context, indice) {
-            //final dependente = widget.listDependentes[indice];
-            return ItemList(
-              null, onClick: null, //dependente,
-            );
-          },
-        ),
+        child: buildListView(),
       ),
+    );
+  }
+
+  ListView buildListView() {
+    return ListView.builder(
+      itemCount: this._accessRequestList.length,
+      itemBuilder: (context, indice) {
+        final accessRequest = this._accessRequestList[indice];
+        return ItemList(
+          accessRequest,
+          onClick: null,
+        );
+      },
     );
   }
 
@@ -46,11 +103,11 @@ class AccessRequestListState extends State<AccessRequestList> {
 }
 
 class ItemList extends StatelessWidget {
-  final Dependent _dependente;
+  final AccessRequest _accessRequest;
   final Function onClick;
 
   ItemList(
-    this._dependente, {
+    this._accessRequest, {
     @required this.onClick,
   });
 
@@ -67,14 +124,14 @@ class ItemList extends StatelessWidget {
             size: 50,
           ),
           title: Text(
-            'Teste',//_dependente.nome.toString(),
+            _accessRequest.name.toString(),
             style: TextStyle(
               fontSize: 15.0,
               color: Colors.deepOrange,
             ),
           ),
           subtitle: Text(
-            'Teste',//_dependente.email.toString(),
+            'Teste', //_dependente.email.toString(),
             style: TextStyle(
               fontSize: 10.0,
               color: Colors.white70,

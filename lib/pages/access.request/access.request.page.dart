@@ -8,12 +8,12 @@ import 'package:hcslzapp/components/input.textfield.dart';
 import 'package:hcslzapp/components/top.margin.dart';
 import 'package:hcslzapp/controllers/access.request.controller.dart';
 
-class AccessRequest extends StatefulWidget {
+class AccessRequestAdd extends StatefulWidget {
   @override
-  _AccessRequestState createState() => _AccessRequestState();
+  _AccessRequestAddState createState() => _AccessRequestAddState();
 }
 
-class _AccessRequestState extends State<AccessRequest> {
+class _AccessRequestAddState extends State<AccessRequestAdd> {
   AccessRequestController _controller = AccessRequestController();
 
   @override

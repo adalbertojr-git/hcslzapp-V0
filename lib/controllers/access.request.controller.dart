@@ -32,7 +32,12 @@ abstract class AccessRequestControllerBase with Store {
   var confPswCtrl = TextEditingController();
 
   @observable
+  ObservableFuture<List<AccessRequest>> accessRequestListFuture;
+
+  @observable
   ObservableFuture<AccessRequest> accessRequestPost;
+
+  //Future<List<Associated>> future;
 
   String errorMsg;
 
@@ -47,6 +52,14 @@ abstract class AccessRequestControllerBase with Store {
         confPassword: '',
         password: '');
   }
+
+  @action
+  Future findAll() =>
+      accessRequestListFuture = ObservableFuture(_accessRequestRepo
+          .findAll()
+          .then((value) => value)).catchError((e) {
+        this.errorMsg = "${e.message}";
+      }, test: (e) => e is Exception);
 
   @action
   Future save() => accessRequestPost = ObservableFuture(

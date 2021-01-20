@@ -32,4 +32,25 @@ class AccessRequestRepo {
       throw HttpException(getMessage(response.statusCode));
     }
   }
+
+  Future<List<AccessRequest>> findAll() async {
+    final Response response = await client
+        .get(
+          mainUrl + _accReqUrl,
+        )
+        .timeout(
+          Duration(seconds: 10),
+        );
+    print(response.body);
+    if (response.statusCode == 200) {
+      final List<dynamic> decodedJson = jsonDecode(response.body);
+      return decodedJson
+          .map(
+            (dynamic json) => AccessRequest.fromJson(json),
+          )
+          .toList();
+    } else {
+      throw HttpException(getMessage(response.statusCode));
+    }
+  }
 }
