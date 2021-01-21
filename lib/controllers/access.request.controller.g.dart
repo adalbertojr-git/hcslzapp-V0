@@ -101,6 +101,39 @@ mixin _$AccessRequestController on AccessRequestControllerBase, Store {
     });
   }
 
+  final _$isHideButtonAtom =
+      Atom(name: 'AccessRequestControllerBase.isHideButton');
+
+  @override
+  bool get isHideButton {
+    _$isHideButtonAtom.reportRead();
+    return super.isHideButton;
+  }
+
+  @override
+  set isHideButton(bool value) {
+    _$isHideButtonAtom.reportWrite(value, super.isHideButton, () {
+      super.isHideButton = value;
+    });
+  }
+
+  final _$accessRequestListFutureAtom =
+      Atom(name: 'AccessRequestControllerBase.accessRequestListFuture');
+
+  @override
+  ObservableFuture<List<AccessRequest>> get accessRequestListFuture {
+    _$accessRequestListFutureAtom.reportRead();
+    return super.accessRequestListFuture;
+  }
+
+  @override
+  set accessRequestListFuture(ObservableFuture<List<AccessRequest>> value) {
+    _$accessRequestListFutureAtom
+        .reportWrite(value, super.accessRequestListFuture, () {
+      super.accessRequestListFuture = value;
+    });
+  }
+
   final _$accessRequestPostAtom =
       Atom(name: 'AccessRequestControllerBase.accessRequestPost');
 
@@ -117,8 +150,35 @@ mixin _$AccessRequestController on AccessRequestControllerBase, Store {
     });
   }
 
+  final _$accessRequestsAtom =
+      Atom(name: 'AccessRequestControllerBase.accessRequests');
+
+  @override
+  ObservableList<dynamic> get accessRequests {
+    _$accessRequestsAtom.reportRead();
+    return super.accessRequests;
+  }
+
+  @override
+  set accessRequests(ObservableList<dynamic> value) {
+    _$accessRequestsAtom.reportWrite(value, super.accessRequests, () {
+      super.accessRequests = value;
+    });
+  }
+
   final _$AccessRequestControllerBaseActionController =
       ActionController(name: 'AccessRequestControllerBase');
+
+  @override
+  Future<dynamic> findAll() {
+    final _$actionInfo = _$AccessRequestControllerBaseActionController
+        .startAction(name: 'AccessRequestControllerBase.findAll');
+    try {
+      return super.findAll();
+    } finally {
+      _$AccessRequestControllerBaseActionController.endAction(_$actionInfo);
+    }
+  }
 
   @override
   Future<dynamic> save() {
@@ -126,6 +186,17 @@ mixin _$AccessRequestController on AccessRequestControllerBase, Store {
         .startAction(name: 'AccessRequestControllerBase.save');
     try {
       return super.save();
+    } finally {
+      _$AccessRequestControllerBaseActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
+  bool hideButton() {
+    final _$actionInfo = _$AccessRequestControllerBaseActionController
+        .startAction(name: 'AccessRequestControllerBase.hideButton');
+    try {
+      return super.hideButton();
     } finally {
       _$AccessRequestControllerBaseActionController.endAction(_$actionInfo);
     }
@@ -140,7 +211,10 @@ emailCtrl: ${emailCtrl},
 confEmailCtrl: ${confEmailCtrl},
 pswCtrl: ${pswCtrl},
 confPswCtrl: ${confPswCtrl},
-accessRequestPost: ${accessRequestPost}
+isHideButton: ${isHideButton},
+accessRequestListFuture: ${accessRequestListFuture},
+accessRequestPost: ${accessRequestPost},
+accessRequests: ${accessRequests}
     ''';
   }
 }
@@ -314,6 +388,44 @@ email: ${email},
 confEmail: ${confEmail},
 password: ${password},
 confPassword: ${confPassword}
+    ''';
+  }
+}
+
+mixin _$ListItemController on ListItemControllerBase, Store {
+  final _$checkAtom = Atom(name: 'ListItemControllerBase.check');
+
+  @override
+  bool get check {
+    _$checkAtom.reportRead();
+    return super.check;
+  }
+
+  @override
+  set check(bool value) {
+    _$checkAtom.reportWrite(value, super.check, () {
+      super.check = value;
+    });
+  }
+
+  final _$ListItemControllerBaseActionController =
+      ActionController(name: 'ListItemControllerBase');
+
+  @override
+  dynamic setCheck(bool value) {
+    final _$actionInfo = _$ListItemControllerBaseActionController.startAction(
+        name: 'ListItemControllerBase.setCheck');
+    try {
+      return super.setCheck(value);
+    } finally {
+      _$ListItemControllerBaseActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
+  String toString() {
+    return '''
+check: ${check}
     ''';
   }
 }

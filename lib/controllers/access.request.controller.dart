@@ -32,18 +32,25 @@ abstract class AccessRequestControllerBase with Store {
   var confPswCtrl = TextEditingController();
 
   @observable
+  bool isHideButton = true;
+
+  @observable
   ObservableFuture<List<AccessRequest>> accessRequestListFuture;
 
   @observable
   ObservableFuture<AccessRequest> accessRequestPost;
 
-  //Future<List<Associated>> future;
+  @observable
+  ObservableList accessRequests = [].asObservable();
 
   String errorMsg;
+
+  Future<List<AccessRequest>> future;
 
   final AccessRequestRepo _accessRequestRepo = AccessRequestRepo();
 
   get init {
+    accessRequests.clear();
     formController = FormController(
         name: '',
         user: '',
@@ -54,10 +61,9 @@ abstract class AccessRequestControllerBase with Store {
   }
 
   @action
-  Future findAll() =>
-      accessRequestListFuture = ObservableFuture(_accessRequestRepo
-          .findAll()
-          .then((value) => value)).catchError((e) {
+  Future findAll() => accessRequestListFuture =
+          ObservableFuture(_accessRequestRepo.findAll().then((value) => value))
+              .catchError((e) {
         this.errorMsg = "${e.message}";
       }, test: (e) => e is Exception);
 
@@ -67,6 +73,11 @@ abstract class AccessRequestControllerBase with Store {
           .catchError((e) {
         this.errorMsg = "${e.message}";
       }, test: (e) => e is Exception);
+
+  @action
+  bool hideButton() => isHideButton = !isHideButton;
+
+  Future<List<AccessRequest>> getFuture() => future = findAll();
 
   AccessRequest _setValues() {
     return AccessRequest(
@@ -212,4 +223,14 @@ abstract class FormControllerBase with Store {
 
   @action
   changeConfPassword(String value) => confPassword = value;
+}
+
+class ListItemController = ListItemControllerBase with _$ListItemController;
+
+abstract class ListItemControllerBase with Store {
+  @observable
+  bool check = false;
+
+  @action
+  setCheck(bool value) => check = value;
 }

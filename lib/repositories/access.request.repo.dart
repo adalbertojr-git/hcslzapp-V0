@@ -36,12 +36,11 @@ class AccessRequestRepo {
   Future<List<AccessRequest>> findAll() async {
     final Response response = await client
         .get(
-          mainUrl + _accReqUrl,
+          mainUrl + _accReqUrl + "/list",
         )
         .timeout(
           Duration(seconds: 10),
         );
-    print(response.body);
     if (response.statusCode == 200) {
       final List<dynamic> decodedJson = jsonDecode(response.body);
       return decodedJson

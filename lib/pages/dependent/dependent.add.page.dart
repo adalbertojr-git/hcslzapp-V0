@@ -161,7 +161,7 @@ class _DependentAddState extends State<DependentAdd> {
                     activeColor: Colors.orangeAccent,
                     value: _controller.isAssociated,
                     onChanged: (value) {
-                      _controller.associated();
+                      _controller.setAssociated();
                     },
                   ),
                 ),

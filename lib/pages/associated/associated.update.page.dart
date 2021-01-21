@@ -57,7 +57,7 @@ class _AssociatedUpdateState extends State<AssociatedUpdate> {
                   break;
                 default:
                   if (snapshot.hasError) {
-                    return CenteredMessage(snapshot.error);
+                    return CenteredMessage(snapshot.error.toString());
                   } else {
                     if (snapshot.data == null)
                       return CenteredMessage(
@@ -343,7 +343,7 @@ class _AssociatedUpdateState extends State<AssociatedUpdate> {
               builder: (_) => ListView.separated(
                 shrinkWrap: true,
                 itemCount: _controller.dependents.length,
-                itemBuilder: (BuildContext context, int i) {
+                itemBuilder: (_, int i) {
                   return Container(
                     decoration: BoxDecoration(
                       color: Colors.white30,
@@ -409,7 +409,7 @@ class _AssociatedUpdateState extends State<AssociatedUpdate> {
                     ),
                   );
                 },
-                separatorBuilder: (BuildContext context, int index) =>
+                separatorBuilder: (_, int index) =>
                     const Divider(),
               ),
             ),
@@ -462,7 +462,7 @@ class _AssociatedUpdateState extends State<AssociatedUpdate> {
               builder: (_) => ListView.separated(
                 shrinkWrap: true,
                 itemCount: _controller.motorcycles.length,
-                itemBuilder: (BuildContext context, int i) {
+                itemBuilder: (_, int i) {
                   return Container(
                     decoration: BoxDecoration(
                       color: Colors.white30,
@@ -529,7 +529,7 @@ class _AssociatedUpdateState extends State<AssociatedUpdate> {
                     ),
                   );
                 },
-                separatorBuilder: (BuildContext context, int index) =>
+                separatorBuilder: (_, int index) =>
                     const Divider(),
               ),
             ),

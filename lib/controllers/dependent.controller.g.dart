@@ -151,11 +151,11 @@ mixin _$DependentController on DependentControllerBase, Store {
       ActionController(name: 'DependentControllerBase');
 
   @override
-  dynamic associated() {
+  dynamic setAssociated() {
     final _$actionInfo = _$DependentControllerBaseActionController.startAction(
-        name: 'DependentControllerBase.associated');
+        name: 'DependentControllerBase.setAssociated');
     try {
-      return super.associated();
+      return super.setAssociated();
     } finally {
       _$DependentControllerBaseActionController.endAction(_$actionInfo);
     }

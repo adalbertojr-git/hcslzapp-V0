@@ -24,7 +24,10 @@ class AccessRequest {
 
   @override
   String toString() {
-    return 'AccessRequest{id: $id, name: $name, user: $user, email: $email, '
+    return 'AccessRequest{id: $id, '
+        'name: $name, '
+        'user: $user, '
+        'email: $email, '
         'password: $password}';
   }
 }

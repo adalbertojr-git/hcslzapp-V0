@@ -42,7 +42,7 @@ abstract class DependentControllerBase with Store {
   Dependent dependent;
 
   @action
-  associated() => isAssociated = !isAssociated;
+  setAssociated() => isAssociated = !isAssociated;
 
   get init {
     _initTextFields;
