@@ -21,7 +21,7 @@ class AssociatedRepo {
         .toList();
   }
 
-  Future<List<Associated>> findByIdAssociatedToList(int id) async {
+  Future<List<Associated>> findByIdToList(int id) async {
     final Response response = await client
         .get(
           mainUrl + _associatedUrl + '/list/' + id.toString(),

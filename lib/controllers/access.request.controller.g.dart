@@ -150,6 +150,22 @@ mixin _$AccessRequestController on AccessRequestControllerBase, Store {
     });
   }
 
+  final _$checkFutureAtom =
+      Atom(name: 'AccessRequestControllerBase.checkFuture');
+
+  @override
+  ObservableFuture<AccessRequest> get checkFuture {
+    _$checkFutureAtom.reportRead();
+    return super.checkFuture;
+  }
+
+  @override
+  set checkFuture(ObservableFuture<AccessRequest> value) {
+    _$checkFutureAtom.reportWrite(value, super.checkFuture, () {
+      super.checkFuture = value;
+    });
+  }
+
   final _$accessRequestsAtom =
       Atom(name: 'AccessRequestControllerBase.accessRequests');
 
@@ -192,6 +208,17 @@ mixin _$AccessRequestController on AccessRequestControllerBase, Store {
   }
 
   @override
+  Future<dynamic> check() {
+    final _$actionInfo = _$AccessRequestControllerBaseActionController
+        .startAction(name: 'AccessRequestControllerBase.check');
+    try {
+      return super.check();
+    } finally {
+      _$AccessRequestControllerBaseActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
   bool hideButton() {
     final _$actionInfo = _$AccessRequestControllerBaseActionController
         .startAction(name: 'AccessRequestControllerBase.hideButton');
@@ -214,6 +241,7 @@ confPswCtrl: ${confPswCtrl},
 isHideButton: ${isHideButton},
 accessRequestListFuture: ${accessRequestListFuture},
 accessRequestPost: ${accessRequestPost},
+checkFuture: ${checkFuture},
 accessRequests: ${accessRequests}
     ''';
   }
@@ -388,44 +416,6 @@ email: ${email},
 confEmail: ${confEmail},
 password: ${password},
 confPassword: ${confPassword}
-    ''';
-  }
-}
-
-mixin _$ListItemController on ListItemControllerBase, Store {
-  final _$checkAtom = Atom(name: 'ListItemControllerBase.check');
-
-  @override
-  bool get check {
-    _$checkAtom.reportRead();
-    return super.check;
-  }
-
-  @override
-  set check(bool value) {
-    _$checkAtom.reportWrite(value, super.check, () {
-      super.check = value;
-    });
-  }
-
-  final _$ListItemControllerBaseActionController =
-      ActionController(name: 'ListItemControllerBase');
-
-  @override
-  dynamic setCheck(bool value) {
-    final _$actionInfo = _$ListItemControllerBaseActionController.startAction(
-        name: 'ListItemControllerBase.setCheck');
-    try {
-      return super.setCheck(value);
-    } finally {
-      _$ListItemControllerBaseActionController.endAction(_$actionInfo);
-    }
-  }
-
-  @override
-  String toString() {
-    return '''
-check: ${check}
     ''';
   }
 }

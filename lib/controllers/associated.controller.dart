@@ -116,7 +116,7 @@ abstract class AssociatedControllerBase with Store {
   @action
   Future findOne(int id) =>
       associatedListFuture = ObservableFuture(_associatedRepo
-          .findByIdAssociatedToList(id)
+          .findByIdToList(id)
           .then((value) => value)).catchError((e) {
         this.errorMsg = "${e.message}";
       }, test: (e) => e is Exception);

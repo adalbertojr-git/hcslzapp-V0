@@ -5,6 +5,7 @@ import 'package:hcslzapp/components/centered.message.dart';
 import 'package:hcslzapp/components/progress.dart';
 import 'package:hcslzapp/controllers/access.request.controller.dart';
 import 'package:hcslzapp/models/access.request.dart';
+import 'package:asuka/asuka.dart' as asuka;
 
 class AccessRequestList extends StatefulWidget {
   @override
@@ -15,7 +16,6 @@ class AccessRequestList extends StatefulWidget {
 
 class AccessRequestListState extends State<AccessRequestList> {
   AccessRequestController _controller = AccessRequestController();
-  List<AccessRequest> _accessRequestList;
 
   @override
   void initState() {
@@ -55,7 +55,7 @@ class AccessRequestListState extends State<AccessRequestList> {
                       return _buildListView();
                     } else
                       return CenteredMessage(
-                        'Não existem requisições de acesso a serem efetivadas.',
+                        'Não existem requisições de acesso a serem aprovadas.',
                       );
                   }
               } //switch (snapshot.connectionState)
@@ -66,68 +66,84 @@ class AccessRequestListState extends State<AccessRequestList> {
           ),
           floatingActionButton: _controller.isHideButton
               ? null
-              : Button(icon: Icons.save, onClick: () => _save),
+              : Button(icon: Icons.check, onClick: () => _check),
         ),
       );
 
   _buildListView() => Container(
-          decoration: BoxDecoration(
-            gradient: LinearGradient(
-              colors: [Colors.white30, Colors.deepOrange],
-              begin: FractionalOffset.topLeft,
-              end: FractionalOffset.bottomRight,
-            ),
+        decoration: BoxDecoration(
+          gradient: LinearGradient(
+            colors: [Colors.white30, Colors.deepOrange],
+            begin: FractionalOffset.topLeft,
+            end: FractionalOffset.bottomRight,
           ),
-          height: MediaQuery.of(context).size.height,
-          child: ListView.separated(
-              shrinkWrap: true,
-              itemCount: _controller.accessRequests.length,
-              itemBuilder: (_, int i) {
-                ListItemController _listItemController = ListItemController();
-                return Container(
-                  decoration: BoxDecoration(
-                    color: Colors.white30,
-                    shape: BoxShape.rectangle,
-                    borderRadius: BorderRadius.circular(8.0),
-                    boxShadow: <BoxShadow>[
-                      BoxShadow(
-                        color: Colors.black12,
-                        blurRadius: 10.0,
-                        offset: Offset(0.0, 5.0),
+        ),
+        height: MediaQuery.of(context).size.height,
+        child: Observer(
+          builder: (_) => ListView.separated(
+            shrinkWrap: true,
+            itemCount: _controller.accessRequests.length,
+            itemBuilder: (_, int i) {
+              return Container(
+                decoration: BoxDecoration(
+                  color: Colors.white30,
+                  shape: BoxShape.rectangle,
+                  borderRadius: BorderRadius.circular(8.0),
+                  boxShadow: <BoxShadow>[
+                    BoxShadow(
+                      color: Colors.black12,
+                      blurRadius: 10.0,
+                      offset: Offset(0.0, 5.0),
+                    ),
+                  ],
+                ),
+                child: ListTile(
+                  title: Text(_controller.accessRequests[i].name),
+                  subtitle: Text(_controller.accessRequests[i].email),
+                  leading: CircleAvatar(
+                    child: Icon(Icons.person),
+                    backgroundColor: Colors.white,
+                  ),
+                  trailing: Wrap(
+                    spacing: 10, // space between two icons
+                    children: <Widget>[
+                      GestureDetector(
+                        child: Icon(
+                          Icons.delete,
+                          size: 25.0,
+                        ),
+                        onTap: () {
+                          _controller.accessRequests.removeAt(i);
+                        },
                       ),
                     ],
                   ),
-                  child: Observer(
-                    builder: (_) => ListTile(
-                      title: Text(_controller.accessRequests[i].name),
-                      subtitle: Text(_controller.accessRequests[i].email),
-                      leading: Checkbox(
-                          value: _listItemController.check,
-                          onChanged: _listItemController.setCheck,
-                          ),
-                      trailing: Wrap(
-                        spacing: 10, // space between two icons
-                        children: <Widget>[
-                          GestureDetector(
-                            child: Icon(
-                              Icons.delete,
-                              size: 25.0,
-                            ),
-                            onTap: () {
-                              print(i);
-                              _controller.accessRequests.removeAt(i);
-                            },
-                          ),
-                        ],
-                      ),
-                    ),
-                  ),
-                );
-              },
-              separatorBuilder: (_, int index) =>
-                  const Divider(),
+                ),
+              );
+            },
+            separatorBuilder: (_, int index) => const Divider(),
+          ),
+        ),
+      );
+
+  get _check {
+    _controller.check().then(
+          (value) {
+        if (value != null) {
+          asuka.showSnackBar(
+            SnackBar(
+              content: Text('Requisições de acesso autorizadas com sucesso.'),
             ),
           );
+          Navigator.of(context).pop();
+        } else {
+          asuka.showSnackBar(
+            SnackBar(
+              content: Text(_controller.errorMsg),
+            ),
+          );
+        }
+      },
+    );
+  }
 }
-
-class _save {}

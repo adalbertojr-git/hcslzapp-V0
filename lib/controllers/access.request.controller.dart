@@ -41,6 +41,9 @@ abstract class AccessRequestControllerBase with Store {
   ObservableFuture<AccessRequest> accessRequestPost;
 
   @observable
+  ObservableFuture<AccessRequest> checkFuture;
+
+  @observable
   ObservableList accessRequests = [].asObservable();
 
   String errorMsg;
@@ -71,6 +74,14 @@ abstract class AccessRequestControllerBase with Store {
   Future save() => accessRequestPost = ObservableFuture(
               _accessRequestRepo.save(_setValues()).then((value) => value))
           .catchError((e) {
+        this.errorMsg = "${e.message}";
+      }, test: (e) => e is Exception);
+
+  @action
+  Future check() =>
+      checkFuture = ObservableFuture(_accessRequestRepo
+          .check(List<AccessRequest>.from(accessRequests))
+          .then((value) => value)).catchError((e) {
         this.errorMsg = "${e.message}";
       }, test: (e) => e is Exception);
 
@@ -119,7 +130,7 @@ abstract class AccessRequestControllerBase with Store {
 
   String validateUser() {
     print('---------- validateUser ----------');
-    if (formController._user.isEmpty) {
+    if (formController.user.isEmpty) {
       return "Usuário é obrigatório!!!";
     }
     return null;
@@ -225,7 +236,7 @@ abstract class FormControllerBase with Store {
   changeConfPassword(String value) => confPassword = value;
 }
 
-class ListItemController = ListItemControllerBase with _$ListItemController;
+/*class ListItemController = ListItemControllerBase with _$ListItemController;
 
 abstract class ListItemControllerBase with Store {
   @observable
@@ -233,4 +244,4 @@ abstract class ListItemControllerBase with Store {
 
   @action
   setCheck(bool value) => check = value;
-}
+}*/

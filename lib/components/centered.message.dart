@@ -44,18 +44,6 @@ class _CenteredMessageState extends State<CenteredMessage> {
           crossAxisAlignment: CrossAxisAlignment.center,
           children: <Widget>[
             HcLogo(0.0),
-            Padding(
-              padding: const EdgeInsets.only(top: 50.0),
-              child: Text(
-                //widget._message,
-                "Oops!!! Houve um erro ao executar a transação!!!",
-                style: TextStyle(
-                  fontSize: 23.0,
-                  color: Colors.black,
-                ),
-                textAlign: TextAlign.center,
-              ),
-            ),
             SizedBox(
               height: 30.0,
             ),
