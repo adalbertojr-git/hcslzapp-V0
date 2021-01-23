@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:hcslzapp/common/labels.and.hints.dart';
+import 'package:hcslzapp/common/token.details.dart';
 import 'package:hcslzapp/components/button.dart';
 import 'package:hcslzapp/components/input.textfield.dart';
 import 'package:hcslzapp/controllers/login.controller.dart';
@@ -167,22 +168,31 @@ class _LoginState extends State<Login> {
 
   _login(BuildContext context) {
     _controller.errorMsg = null;
-    _controller.login().then((token) {
-      if (_controller.errorMsg != null) {
-        asuka.showSnackBar(
-          SnackBar(
-            content: Text(_controller.errorMsg),
-          ),
-        );
-      } else {
-        Token t = token;
-        print(t.token);
-        Navigator.pushReplacement(
-          context,
-          MaterialPageRoute(builder: (context) => Dashboard(_controller.userLoginCtrl.text)),
-        );
-      }
-    });
+    _controller.login().then(
+      (token) {
+        if (_controller.errorMsg != null) {
+          asuka.showSnackBar(
+            SnackBar(
+              content: Text(_controller.errorMsg),
+            ),
+          );
+        } else {
+          Token _t = token;
+          print(_t.token);
+          TokenDetails _tokenDetails = TokenDetails(_t.token);
+          Navigator.pushReplacement(
+            context,
+            MaterialPageRoute(
+              builder: (context) => Dashboard(
+                _controller.userLoginCtrl.text,
+                _tokenDetails.firstName(),
+                _tokenDetails.email(),
+              ),
+            ),
+          );
+        }
+      },
+    );
   }
 }
 
@@ -197,4 +207,3 @@ class _LoginState extends State<Login> {
 --	"password": "1234"
 --	"associatedId": "1"
 --}*/
-

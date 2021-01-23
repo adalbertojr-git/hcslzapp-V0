@@ -1,10 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:hcslzapp/controllers/app.controller.dart';
-import 'package:hcslzapp/controllers/associated.controller.dart';
 import 'package:hcslzapp/pages/splash/splash.page.dart';
 import 'package:intl/intl.dart';
 import 'package:asuka/asuka.dart' as asuka;
-import 'package:jwt_decode/jwt_decode.dart';
 
 const _titleAppBar = 'HCSlz App';
 
@@ -13,7 +11,6 @@ void main() => runApp(HCSlzApp());
 class HCSlzApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    testToken();
     //Intl.defaultLocale = 'pt_BR';
     return AnimatedBuilder(
       animation: AppController.instance,
@@ -33,7 +30,7 @@ class HCSlzApp extends StatelessWidget {
     );
   }
 
-  void testToken() {
+/*  void testToken() {
     String token =
         'eyJhbGciOiJIUzUxMiJ9.eyJhc3NvY2lhdGVkSWQiOjEsInN1YiI6ImF0YWpyIiwiZXhwIjoxNjEwNTg3NjUxLCJpYXQiOjE2MTA1Njk2NTF9.e8OIa6r6h4JuMJhxIilo3QO7LKGbCjlr32iyQWN4QnXW-2TFkwZSRvNbr6hwCVcbgP6bjjhpxI5pED3Qd608Wg';
     // To decode the token
@@ -59,7 +56,7 @@ class HCSlzApp extends StatelessWidget {
     } else {
       //   Token is expired
     }
-  }
+  }*/
 
 /*
   @override

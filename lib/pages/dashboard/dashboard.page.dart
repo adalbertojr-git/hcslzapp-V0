@@ -18,6 +18,8 @@ import 'package:hcslzapp/pages/ride/my.ride.page.dart';
 class Dashboard extends StatelessWidget {
   BuildContext _gContext;
   final String _user;
+  final String _firstName;
+  final String _email;
   List<String> _listAdmScreens = [
     "Associados",
     "Financeiro",
@@ -26,7 +28,7 @@ class Dashboard extends StatelessWidget {
     "Boutique",
   ];
 
-  Dashboard(this._user);
+  Dashboard(this._user, this._firstName, this._email);
 
   @override
   Widget build(BuildContext context) {
@@ -48,9 +50,9 @@ class Dashboard extends StatelessWidget {
             ),
             UserAccountsDrawerHeader(
               accountName: Text(
-                "Adalberto Jr.",
+                this._firstName,
               ),
-              accountEmail: Text("user@harleyclub.com"),
+              accountEmail: Text(this._email),
               decoration: BoxDecoration(
                 image: DecorationImage(
                   image: ExactAssetImage('assets/imgs/ladies.jpg'),
@@ -119,11 +121,11 @@ class Dashboard extends StatelessWidget {
   get header => ListTile(
         contentPadding: EdgeInsets.only(left: 40, right: 20, top: 30),
         title: Text(
-          this._user == 'admin' ? 'Olá, Administrador' : 'Olá, Harleyro',
+          this._user == 'admin' ? 'Olá, Administrador' : 'Olá, ${this._firstName}',
           style: TextStyle(color: Colors.white, fontSize: 22.0),
         ),
         subtitle: Text(
-          this._user == 'admin' ? '' : 'Adalberto Jr',
+          this._email,
           style: TextStyle(color: Colors.white60),
         ),
         trailing: CircleAvatar(
