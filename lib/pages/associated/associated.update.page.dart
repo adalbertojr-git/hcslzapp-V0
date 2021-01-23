@@ -7,6 +7,7 @@ import 'package:hcslzapp/components/input.textfield.dart';
 import 'package:hcslzapp/components/progress.dart';
 import 'package:hcslzapp/components/top.margin.dart';
 import 'package:hcslzapp/controllers/associated.controller.dart';
+import 'package:hcslzapp/enums/associated.types.dart';
 import 'package:hcslzapp/enums/blood.types.dart';
 import 'package:hcslzapp/models/associated.dart';
 import 'package:hcslzapp/models/dependent.dart';
@@ -27,7 +28,6 @@ class AssociatedUpdate extends StatefulWidget {
 
 class _AssociatedUpdateState extends State<AssociatedUpdate> {
   AssociatedController _controller = AssociatedController();
-
 
   @override
   void initState() {
@@ -155,11 +155,6 @@ class _AssociatedUpdateState extends State<AssociatedUpdate> {
               ),
               InputTextField(
                 textEditingController: _controller.phoneCtrl,
-/*
-                text: _controller.associated.phone != null
-                    ? _controller.associated.phone
-                    : null,
-*/
                 label: labelPhone,
                 hint: hintPhone,
                 icon: Icons.phone,
@@ -169,11 +164,6 @@ class _AssociatedUpdateState extends State<AssociatedUpdate> {
               ),
               InputTextField(
                 textEditingController: _controller.sponsorCtrl,
-/*
-                text: _controller.associated.sponsor != null
-                    ? _controller.associated.sponsor
-                    : null,
-*/
                 label: labelSponsor,
                 hint: hintSponsor,
                 icon: Icons.person_pin,
@@ -203,7 +193,7 @@ class _AssociatedUpdateState extends State<AssociatedUpdate> {
                           ),
                           value: _controller.currentBloodType,
                           items: getBloodTypes(),
-                          onChanged: _controller.changedDropDownItem,
+                          onChanged: _controller.changedBloodTypesDropDownItem,
                         ),
                       ),
                     ),
@@ -216,11 +206,6 @@ class _AssociatedUpdateState extends State<AssociatedUpdate> {
                   Expanded(
                     child: InputTextField(
                       textEditingController: _controller.cnhCtrl,
-/*
-                      text: _controller.associated.cnh != null
-                          ? _controller.associated.cnh
-                          : null,
-*/
                       label: labelCNH,
                       hint: hintCNH,
                       inputType: TextInputType.number,
@@ -232,11 +217,6 @@ class _AssociatedUpdateState extends State<AssociatedUpdate> {
                   Expanded(
                     child: InputTextField(
                       textEditingController: _controller.cpfCtrl,
-/*
-                      text: _controller.associated.cpf != null
-                          ? _controller.associated.cpf
-                          : null,
-*/
                       label: labelCPF,
                       hint: hintCPF,
                       inputType: TextInputType.number,
@@ -246,15 +226,37 @@ class _AssociatedUpdateState extends State<AssociatedUpdate> {
                   ),
                 ],
               ),
-              InputTextField(
-                textEditingController: _controller.associatedTypeCtrl,
-/*
-                text: _controller.associated.associatedType != null
-                    ? _controller.associated.associatedType
-                    : null,
-*/
-                label: labelAssociatedType,
-                disabled: true,
+              Padding(
+                padding: const EdgeInsets.fromLTRB(0.0, 3.0, 2.0, 3.0),
+                child: Row(
+                  crossAxisAlignment: CrossAxisAlignment.baseline,
+                  children: <Widget>[
+                    Expanded(
+                      child: Text(
+                        'Tipo de Associado:',
+                        textAlign: TextAlign.center,
+                      ),
+                    ),
+                    Expanded(
+                      child: Container(
+                        height: 55.0,
+                        child: DropdownButtonFormField(
+                          decoration: const InputDecoration(
+                            enabledBorder: OutlineInputBorder(
+                              borderSide: BorderSide(
+                                color: Colors.white70,
+                              ),
+                            ),
+                          ),
+                          value: _controller.currentAssociatedType,
+                          items: getAssociatedTypes(),
+                          onChanged:
+                              _controller.changedAssociatedTypesDropDownItem,
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
               ),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -262,9 +264,6 @@ class _AssociatedUpdateState extends State<AssociatedUpdate> {
                   Expanded(
                     child: InputTextField(
                       textEditingController: _controller.dateBirthCtrl,
-/*                      text: _controller.associated.dateBirth != null
-                          ? _controller.associated.dateBirth
-                          : null,*/
                       label: labelDateBirth,
                       hint: hintDate,
                       icon: Icons.calendar_today,
@@ -279,9 +278,6 @@ class _AssociatedUpdateState extends State<AssociatedUpdate> {
                   Expanded(
                     child: InputTextField(
                       textEditingController: _controller.dateShieldCtrl,
-/*                      text: _controller.associated.dateShield != null
-                          ? _controller.associated.dateShield
-                          : null,*/
                       label: labelDateShield,
                       hint: hintDate,
                       icon: Icons.calendar_today,
@@ -413,8 +409,7 @@ class _AssociatedUpdateState extends State<AssociatedUpdate> {
                     ),
                   );
                 },
-                separatorBuilder: (_, int index) =>
-                    const Divider(),
+                separatorBuilder: (_, int index) => const Divider(),
               ),
             ),
             Container(
@@ -533,8 +528,7 @@ class _AssociatedUpdateState extends State<AssociatedUpdate> {
                     ),
                   );
                 },
-                separatorBuilder: (_, int index) =>
-                    const Divider(),
+                separatorBuilder: (_, int index) => const Divider(),
               ),
             ),
             Container(

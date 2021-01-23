@@ -8,9 +8,9 @@ enum AssociatedType {
 
 extension AssociatedTypeExt on AssociatedType {
   static const associatedTypesMap = {
-    AssociatedType.MF: "MF - Membro Fundador",
-    AssociatedType.ME: "ME - Membro Efetivo",
-    AssociatedType.MB: "MB - Membro Benemérito",
+    AssociatedType.MF: "Fundador",
+    AssociatedType.ME: "Efetivo",
+    AssociatedType.MB: "Benemérito",
   };
 
   //prints enum index and custom message
@@ -20,4 +20,14 @@ extension AssociatedTypeExt on AssociatedType {
 
   //about property returns the custom message
   String get description => associatedTypesMap[this];
+}
+
+List<DropdownMenuItem<String>> getAssociatedTypes() {
+  List _associatedTypes = List();
+  List<DropdownMenuItem<String>> types = new List();
+  AssociatedType.values.forEach((v) => _associatedTypes.add(v.description));
+  for (String type in _associatedTypes) {
+    types.add(new DropdownMenuItem(value: type, child: new Text(type)));
+  }
+  return types;
 }

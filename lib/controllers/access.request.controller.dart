@@ -35,9 +35,6 @@ abstract class AccessRequestControllerBase with Store {
   bool isHideButton = true;
 
   @observable
-  bool isLoading = false;
-
-  @observable
   ObservableFuture<List<AccessRequest>> accessRequestListFuture;
 
   @observable
@@ -90,9 +87,6 @@ abstract class AccessRequestControllerBase with Store {
 
   @action
   bool hideButton() => isHideButton = !isHideButton;
-
-  @action
-  bool loading() => isLoading = !isHideButton;
 
   Future<List<AccessRequest>> getFuture() => future = findAll();
 

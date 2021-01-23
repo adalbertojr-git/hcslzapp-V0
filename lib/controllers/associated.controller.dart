@@ -74,11 +74,14 @@ abstract class AssociatedControllerBase with Store {
   final picker = ImagePicker();
 
   String currentBloodType;
+  
+  String currentAssociatedType;
 
   get init {
     _initLists;
     _initTextFields;
     currentBloodType = associated.bloodType;
+    currentAssociatedType = associated.associatedType;
     formController = FormController(
       name: associated.name,
       email: associated.email,
@@ -141,6 +144,7 @@ abstract class AssociatedControllerBase with Store {
     this.associated.cnh = cnhCtrl.text;
     this.associated.cpf = cpfCtrl.text;
     this.associated.bloodType = currentBloodType;
+    this.associated.associatedType = currentAssociatedType;
     this.associated.dateBirth = dateBirthCtrl.text;
     this.associated.dateShield = dateShieldCtrl.text;
     this.associated.dependents = List<Dependent>.from(dependents);
@@ -166,7 +170,9 @@ abstract class AssociatedControllerBase with Store {
     return null;
   }
 
-  String changedDropDownItem(selected) => currentBloodType = selected;
+  String changedBloodTypesDropDownItem(selected) => currentBloodType = selected;
+
+  String changedAssociatedTypesDropDownItem(selected) => currentAssociatedType = selected;
 
   Future getImageFromCamera() async {
     final pickedFile = await picker.getImage(source: ImageSource.camera);
