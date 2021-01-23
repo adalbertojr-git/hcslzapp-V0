@@ -20,6 +20,9 @@ abstract class LoginControllerBase with Store {
   @observable
   ObservableFuture<Token> token;
 
+  @observable
+  bool isLoading = false;
+
   String errorMsg;
 
   final LoginRepo _loginRepo = LoginRepo();
@@ -35,8 +38,10 @@ abstract class LoginControllerBase with Store {
         this.errorMsg = "${e.message}";
       }, test: (e) => e is Exception);
 
+  @action
+  bool setLoading(bool value) => isLoading = value;
+
   String validateUser() {
-    print('---------- validateUser ----------');
     if (formController.user.isEmpty) {
       return "Usuário é obrigatório!!!";
     }
@@ -44,7 +49,6 @@ abstract class LoginControllerBase with Store {
   }
 
   String validatePassword() {
-    print('---------- validatePassword ----------');
     if (formController.password.isEmpty) {
       return "Senha é obrigatória!!!";
     }

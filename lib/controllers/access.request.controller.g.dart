@@ -117,6 +117,21 @@ mixin _$AccessRequestController on AccessRequestControllerBase, Store {
     });
   }
 
+  final _$isLoadingAtom = Atom(name: 'AccessRequestControllerBase.isLoading');
+
+  @override
+  bool get isLoading {
+    _$isLoadingAtom.reportRead();
+    return super.isLoading;
+  }
+
+  @override
+  set isLoading(bool value) {
+    _$isLoadingAtom.reportWrite(value, super.isLoading, () {
+      super.isLoading = value;
+    });
+  }
+
   final _$accessRequestListFutureAtom =
       Atom(name: 'AccessRequestControllerBase.accessRequestListFuture');
 
@@ -230,6 +245,17 @@ mixin _$AccessRequestController on AccessRequestControllerBase, Store {
   }
 
   @override
+  bool loading() {
+    final _$actionInfo = _$AccessRequestControllerBaseActionController
+        .startAction(name: 'AccessRequestControllerBase.loading');
+    try {
+      return super.loading();
+    } finally {
+      _$AccessRequestControllerBaseActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
   String toString() {
     return '''
 nameCtrl: ${nameCtrl},
@@ -239,6 +265,7 @@ confEmailCtrl: ${confEmailCtrl},
 pswCtrl: ${pswCtrl},
 confPswCtrl: ${confPswCtrl},
 isHideButton: ${isHideButton},
+isLoading: ${isLoading},
 accessRequestListFuture: ${accessRequestListFuture},
 accessRequestPost: ${accessRequestPost},
 checkFuture: ${checkFuture},

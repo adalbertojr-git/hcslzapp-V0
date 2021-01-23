@@ -35,6 +35,9 @@ abstract class AccessRequestControllerBase with Store {
   bool isHideButton = true;
 
   @observable
+  bool isLoading = false;
+
+  @observable
   ObservableFuture<List<AccessRequest>> accessRequestListFuture;
 
   @observable
@@ -88,6 +91,9 @@ abstract class AccessRequestControllerBase with Store {
   @action
   bool hideButton() => isHideButton = !isHideButton;
 
+  @action
+  bool loading() => isLoading = !isHideButton;
+
   Future<List<AccessRequest>> getFuture() => future = findAll();
 
   AccessRequest _setValues() {
@@ -121,7 +127,6 @@ abstract class AccessRequestControllerBase with Store {
   bool get hasErrorConfPassword => validateConfPassword() != null;
 
   String validateName() {
-    print('---------- validateName ----------');
     if (formController.name.isEmpty) {
       return "Nome é obrigatório!!!";
     }
@@ -129,7 +134,6 @@ abstract class AccessRequestControllerBase with Store {
   }
 
   String validateUser() {
-    print('---------- validateUser ----------');
     if (formController.user.isEmpty) {
       return "Usuário é obrigatório!!!";
     }
@@ -148,7 +152,6 @@ abstract class AccessRequestControllerBase with Store {
   }
 
   String validateConfEmail() {
-    print('---------- validateConfEmail ----------');
     if (formController.confEmail.isEmpty) {
       return "Confirmação do email é obrigatória!!!";
     }
@@ -159,7 +162,6 @@ abstract class AccessRequestControllerBase with Store {
   }
 
   String validatePassword() {
-    print('---------- validatePassword ----------');
     if (formController.password.isEmpty) {
       return "Senha é obrigatória!!!";
     }
@@ -170,7 +172,6 @@ abstract class AccessRequestControllerBase with Store {
   }
 
   String validateConfPassword() {
-    print('---------- validateConfPassword ----------');
     if (formController.confPassword.isEmpty) {
       return "Confirmação da senha é obrigatória!!!";
     }

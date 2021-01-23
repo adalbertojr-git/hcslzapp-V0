@@ -17,18 +17,22 @@ import 'package:mask_text_input_formatter/mask_text_input_formatter.dart';
 import 'package:asuka/asuka.dart' as asuka;
 
 class AssociatedUpdate extends StatefulWidget {
+  final int associatedId;
+
+  AssociatedUpdate(this.associatedId);
+
   @override
   _AssociatedUpdateState createState() => _AssociatedUpdateState();
 }
 
 class _AssociatedUpdateState extends State<AssociatedUpdate> {
   AssociatedController _controller = AssociatedController();
-  int _associatedId = 1;
+
 
   @override
   void initState() {
     //_controller = Provider.of<AssociatedController>(context, listen: false);
-    _controller.getFuture(_associatedId).then((value) {
+    _controller.getFuture(widget.associatedId).then((value) {
       if (value != null && value.isNotEmpty) {
         _controller.hideButton();
       }

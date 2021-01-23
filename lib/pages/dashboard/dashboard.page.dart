@@ -20,6 +20,7 @@ class Dashboard extends StatelessWidget {
   final String _user;
   final String _firstName;
   final String _email;
+  final int _associatedId;
   List<String> _listAdmScreens = [
     "Associados",
     "Financeiro",
@@ -28,7 +29,7 @@ class Dashboard extends StatelessWidget {
     "Boutique",
   ];
 
-  Dashboard(this._user, this._firstName, this._email);
+  Dashboard(this._user, this._firstName, this._email, this._associatedId);
 
   @override
   Widget build(BuildContext context) {
@@ -179,7 +180,7 @@ class Dashboard extends StatelessWidget {
                   Navigator.push(
                     _gContext,
                     MaterialPageRoute(
-                        builder: (gContext) => AssociatedUpdate()),
+                        builder: (gContext) => AssociatedUpdate(this._associatedId)),
                   );
                 },
               ),
