@@ -113,7 +113,7 @@ class _AssociatedUpdateState extends State<AssociatedUpdate> {
                     ),
                     onPressed: _controller.getImageFromGallery,
                   ),
-                  _photo('assets/imgs/noImage.png'),
+                  _photo,
                   IconButton(
                     icon: Icon(
                       Icons.add_a_photo,
@@ -302,7 +302,7 @@ class _AssociatedUpdateState extends State<AssociatedUpdate> {
         ),
       );
 
-  _photo(String fileName) => Container(
+  get _photo => Container(
         height: 200.0,
         width: 200.0,
         padding: EdgeInsets.all(10.0),
@@ -310,15 +310,19 @@ class _AssociatedUpdateState extends State<AssociatedUpdate> {
           color: Colors.black.withOpacity(0.2),
           borderRadius: BorderRadius.circular(100.0),
         ),
-        child: Container(
-          height: 100.0,
-          width: 100.0,
-          decoration: BoxDecoration(
-            color: Colors.black,
-            borderRadius: BorderRadius.circular(100.0),
-            image: DecorationImage(
-              image: AssetImage(fileName),
-              fit: BoxFit.fill,
+        child: Observer (
+          builder: (_) => Container(
+            height: 100.0,
+            width: 100.0,
+            decoration: BoxDecoration(
+              color: Colors.black,
+              borderRadius: BorderRadius.circular(100.0),
+              image: DecorationImage(
+                image: AssetImage(_controller.filePath != null
+                    ? _controller.filePath
+                    : 'assets/imgs/noImage.png'),
+                fit: BoxFit.fill,
+              ),
             ),
           ),
         ),

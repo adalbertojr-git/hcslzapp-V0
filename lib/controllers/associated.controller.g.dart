@@ -241,6 +241,21 @@ mixin _$AssociatedController on AssociatedControllerBase, Store {
     });
   }
 
+  final _$filePathAtom = Atom(name: 'AssociatedControllerBase.filePath');
+
+  @override
+  String get filePath {
+    _$filePathAtom.reportRead();
+    return super.filePath;
+  }
+
+  @override
+  set filePath(String value) {
+    _$filePathAtom.reportWrite(value, super.filePath, () {
+      super.filePath = value;
+    });
+  }
+
   final _$AssociatedControllerBaseActionController =
       ActionController(name: 'AssociatedControllerBase');
 
@@ -278,6 +293,17 @@ mixin _$AssociatedController on AssociatedControllerBase, Store {
   }
 
   @override
+  String getFilePath(String value) {
+    final _$actionInfo = _$AssociatedControllerBaseActionController.startAction(
+        name: 'AssociatedControllerBase.getFilePath');
+    try {
+      return super.getFilePath(value);
+    } finally {
+      _$AssociatedControllerBaseActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
   String toString() {
     return '''
 idCtrl: ${idCtrl},
@@ -294,7 +320,8 @@ isHideButton: ${isHideButton},
 associatedListFuture: ${associatedListFuture},
 associatedUpdate: ${associatedUpdate},
 dependents: ${dependents},
-motorcycles: ${motorcycles}
+motorcycles: ${motorcycles},
+filePath: ${filePath}
     ''';
   }
 }

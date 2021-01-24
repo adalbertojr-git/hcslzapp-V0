@@ -61,6 +61,9 @@ abstract class AssociatedControllerBase with Store {
   @observable
   ObservableList motorcycles = [].asObservable();
 
+  @observable
+  String filePath;
+
   Associated associated;
 
   final AssociatedRepo _associatedRepo = AssociatedRepo();
@@ -69,12 +72,8 @@ abstract class AssociatedControllerBase with Store {
 
   Future<List<Associated>> future;
 
-  File _image;
-
-  final picker = ImagePicker();
-
   String currentBloodType;
-  
+
   String currentAssociatedType;
 
   get init {
@@ -117,18 +116,16 @@ abstract class AssociatedControllerBase with Store {
   bool get hasErrorEmail => validateEmail() != null;
 
   @action
-  Future findOne(int id) =>
-      associatedListFuture = ObservableFuture(_associatedRepo
-          .findByIdToList(id)
-          .then((value) => value)).catchError((e) {
+  Future findOne(int id) => associatedListFuture = ObservableFuture(
+              _associatedRepo.findByIdToList(id).then((value) => value))
+          .catchError((e) {
         this.errorMsg = "${e.message}";
       }, test: (e) => e is Exception);
 
   @action
-  Future update(Associated associated) =>
-      associatedUpdate = ObservableFuture(_associatedRepo
-          .update(_setValues())
-          .then((value) => value)).catchError((e) {
+  Future update(Associated associated) => associatedUpdate = ObservableFuture(
+              _associatedRepo.update(_setValues()).then((value) => value))
+          .catchError((e) {
         this.errorMsg = "${e.message}";
       }, test: (e) => e is Exception);
 
@@ -172,32 +169,31 @@ abstract class AssociatedControllerBase with Store {
 
   String changedBloodTypesDropDownItem(selected) => currentBloodType = selected;
 
-  String changedAssociatedTypesDropDownItem(selected) => currentAssociatedType = selected;
+  String changedAssociatedTypesDropDownItem(selected) =>
+      currentAssociatedType = selected;
 
   Future getImageFromCamera() async {
-    final pickedFile = await picker.getImage(source: ImageSource.camera);
-/*    setState(() {
-      if (pickedFile != null) {
-        _image = File(pickedFile.path);
-        setState(() {
-          //photo(_image.path.toString());
-        });
-      } else {
-        print('No image selected.');
-      }
-    });*/
+    final pickedFile = await ImagePicker().getImage(
+      source: ImageSource.camera,
+    );
+    if (pickedFile != null) {
+      File _image = File(pickedFile.path);
+      getFilePath(_image.path.toString());
+    }
   }
 
   Future getImageFromGallery() async {
-    final pickedFile = await picker.getImage(source: ImageSource.gallery);
-/*    setState(() {
-      if (pickedFile != null) {
-        _image = File(pickedFile.path);
-      } else {
-        print('No image selected.');
-      }
-    });*/
+    final pickedFile = await ImagePicker().getImage(
+      source: ImageSource.gallery,
+    );
+    if (pickedFile != null) {
+      File _image = File(pickedFile.path);
+      getFilePath(_image.path.toString());
+    }
   }
+
+  @action
+  String getFilePath(String value) => this.filePath = value;
 }
 
 class FormController extends FormControllerBase with _$FormController {
