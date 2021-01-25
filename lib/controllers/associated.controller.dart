@@ -7,6 +7,7 @@ import 'package:hcslzapp/repositories/associated.repo.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:mobx/mobx.dart';
 import 'dart:io';
+import 'package:glutton/glutton.dart';
 
 part 'associated.controller.g.dart';
 
@@ -85,6 +86,11 @@ abstract class AssociatedControllerBase with Store {
       name: associated.name,
       email: associated.email,
     );
+    getPhoto().then((value) => this.filePath = value);
+  }
+
+  Future<String> getPhoto() async {
+    return await Glutton.vomit("photoPath");
   }
 
   get _initLists {
@@ -146,6 +152,7 @@ abstract class AssociatedControllerBase with Store {
     this.associated.dateShield = dateShieldCtrl.text;
     this.associated.dependents = List<Dependent>.from(dependents);
     this.associated.motorcycles = List<Motorcycle>.from(motorcycles);
+    _savePhoto();
     return this.associated;
   }
 
@@ -190,6 +197,10 @@ abstract class AssociatedControllerBase with Store {
       File _image = File(pickedFile.path);
       getFilePath(_image.path.toString());
     }
+  }
+  
+  Future _savePhoto() async {
+    await Glutton.eat("photoPath", this.filePath);
   }
 
   @action

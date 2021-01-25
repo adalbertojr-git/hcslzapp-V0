@@ -132,7 +132,9 @@ class Dashboard extends StatelessWidget {
         trailing: CircleAvatar(
           backgroundColor: Colors.white,
           radius: 30.0,
-          backgroundImage: AssetImage('assets/imgs/eu.jpg'),
+/*          backgroundImage: AssetImage(_controller.filePath != null
+              ? _controller.filePath
+              : 'assets/imgs/noImage.png'),*/
         ),
       );
 

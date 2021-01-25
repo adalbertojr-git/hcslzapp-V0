@@ -1,5 +1,6 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
+import 'package:glutton/glutton.dart';
 import 'package:hcslzapp/models/token.dart';
 import 'package:hcslzapp/repositories/login.repo.dart';
 import 'package:mobx/mobx.dart';
@@ -53,6 +54,10 @@ abstract class LoginControllerBase with Store {
       return "Senha é obrigatória!!!";
     }
     return null;
+  }
+
+  Future saveToken(String token) async {
+    await Glutton.eat("token", token);
   }
 }
 

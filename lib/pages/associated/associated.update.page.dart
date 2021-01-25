@@ -16,6 +16,7 @@ import 'package:hcslzapp/pages/dependent/dependent.add.page.dart';
 import 'package:hcslzapp/pages/motorcycle/motorcycle.add.page.dart';
 import 'package:mask_text_input_formatter/mask_text_input_formatter.dart';
 import 'package:asuka/asuka.dart' as asuka;
+import 'dart:io';
 
 class AssociatedUpdate extends StatefulWidget {
   final int associatedId;
@@ -310,20 +311,25 @@ class _AssociatedUpdateState extends State<AssociatedUpdate> {
           color: Colors.black.withOpacity(0.2),
           borderRadius: BorderRadius.circular(100.0),
         ),
-        child: Observer (
+        child: Observer(
           builder: (_) => Container(
-            height: 100.0,
+            child: ClipOval(
+                child: Image.file(File(_controller.filePath != null
+                    ? _controller.filePath
+                    : null))
+            ),
+/*            height: 100.0,
             width: 100.0,
             decoration: BoxDecoration(
               color: Colors.black,
               borderRadius: BorderRadius.circular(100.0),
               image: DecorationImage(
-                image: AssetImage(_controller.filePath != null
+                image: ExactAssetImage(_controller.filePath != null
                     ? _controller.filePath
                     : 'assets/imgs/noImage.png'),
                 fit: BoxFit.fill,
               ),
-            ),
+            ),*/
           ),
         ),
       );

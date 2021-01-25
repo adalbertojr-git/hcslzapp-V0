@@ -182,6 +182,7 @@ class _LoginState extends State<Login> {
         } else {
           Token _t = token;
           print(_t.token);
+          _controller.saveToken(_t.token);
           TokenDetails _tokenDetails = TokenDetails(_t.token);
           Navigator.pushReplacement(
             context,
