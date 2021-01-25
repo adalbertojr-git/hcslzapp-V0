@@ -16,7 +16,7 @@ class Splash extends StatelessWidget {
   }
 
   get splashScreen => SplashScreen(
-        seconds: 6,
+        seconds: 5,
         gradientBackground: LinearGradient(
           begin: FractionalOffset.topLeft,
           end: FractionalOffset.bottomRight,

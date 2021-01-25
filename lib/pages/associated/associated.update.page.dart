@@ -313,26 +313,21 @@ class _AssociatedUpdateState extends State<AssociatedUpdate> {
         ),
         child: Observer(
           builder: (_) => Container(
-            child: ClipOval(
-                child: Image.file(File(_controller.filePath != null
-                    ? _controller.filePath
-                    : null))
-            ),
-/*            height: 100.0,
-            width: 100.0,
             decoration: BoxDecoration(
               color: Colors.black,
-              borderRadius: BorderRadius.circular(100.0),
+              borderRadius: BorderRadius.circular(150.0),
               image: DecorationImage(
-                image: ExactAssetImage(_controller.filePath != null
-                    ? _controller.filePath
-                    : 'assets/imgs/noImage.png'),
+                image: _getImageProvider(File(_controller.filePath)),
                 fit: BoxFit.fill,
               ),
-            ),*/
+            ),
           ),
         ),
       );
+
+  ImageProvider _getImageProvider(File f) => f.existsSync()
+      ? FileImage(f)
+      : const AssetImage('assets/imgs/noImage.png');
 
   get _dependentsListWidget => Container(
         padding: EdgeInsets.all(10.0),
