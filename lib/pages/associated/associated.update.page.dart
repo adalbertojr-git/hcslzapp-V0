@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:hcslzapp/common/labels.and.hints.dart';
+import 'package:hcslzapp/common/photo.image.provider.dart';
 import 'package:hcslzapp/components/button.dart';
 import 'package:hcslzapp/components/centered.message.dart';
 import 'package:hcslzapp/components/input.textfield.dart';
@@ -317,17 +318,19 @@ class _AssociatedUpdateState extends State<AssociatedUpdate> {
               color: Colors.black,
               borderRadius: BorderRadius.circular(150.0),
               image: DecorationImage(
-                image: _getImageProvider(File(_controller.filePath)),
+                image: PhotoImageProvider().getImageProvider(
+                  File(
+                    _controller.filePath != null
+                        ? _controller.filePath
+                        : 'assets/imgs/noImage.png',
+                  ),
+                ),
                 fit: BoxFit.fill,
               ),
             ),
           ),
         ),
       );
-
-  ImageProvider _getImageProvider(File f) => f.existsSync()
-      ? FileImage(f)
-      : const AssetImage('assets/imgs/noImage.png');
 
   get _dependentsListWidget => Container(
         padding: EdgeInsets.all(10.0),

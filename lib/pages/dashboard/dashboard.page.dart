@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
+import 'package:hcslzapp/common/photo.image.provider.dart';
 import 'package:hcslzapp/controllers/app.controller.dart';
 import 'package:hcslzapp/controllers/dashboard.controller.dart';
 import 'package:hcslzapp/pages/about/about.page.dart';
@@ -150,18 +151,22 @@ class _DashboardState extends State<Dashboard> {
           this.widget._email,
           style: TextStyle(color: Colors.white60),
         ),
-        trailing: Observer (
-          builder: (_) => CircleAvatar(
-            backgroundColor: Colors.white,
-            radius: 30.0,
-            backgroundImage: _getImageProvider(File(_controller.filePath)),
-          ),
-        ),
+        trailing: this.widget._user == 'admin'
+            ? null
+            : Observer(
+                builder: (_) => CircleAvatar(
+                  backgroundColor: Colors.white,
+                  radius: 30.0,
+                  backgroundImage: PhotoImageProvider().getImageProvider(
+                    File(
+                      _controller.filePath != null
+                          ? _controller.filePath
+                          : 'assets/imgs/noImage.png',
+                    ),
+                  ),
+                ),
+              ),
       );
-
-  ImageProvider _getImageProvider(File f) => f.existsSync()
-      ? FileImage(f)
-      : const AssetImage('assets/imgs/noImage.png');
 
   get bar => (this.widget._user != 'admin'
       ? SizedBox()
