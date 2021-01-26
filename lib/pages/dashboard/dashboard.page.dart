@@ -225,7 +225,7 @@ class _DashboardState extends State<Dashboard> {
                 onClick: () {
                   Navigator.push(
                     _gContext,
-                    MaterialPageRoute(builder: (gContext) => PaymentList()),
+                    MaterialPageRoute(builder: (gContext) => PaymentList(this.widget._associatedId)),
                   );
                 },
               ),

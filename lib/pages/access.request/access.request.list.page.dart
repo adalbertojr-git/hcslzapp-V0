@@ -42,7 +42,6 @@ class AccessRequestListState extends State<AccessRequestList> {
                   break;
                 default:
                   if (snapshot.hasError) {
-                    print(snapshot.error.toString());
                     return CenteredMessage(snapshot.error.toString());
                   } else {
                     if (snapshot.data == null)

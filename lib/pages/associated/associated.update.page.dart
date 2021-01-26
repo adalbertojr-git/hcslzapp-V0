@@ -503,7 +503,6 @@ class _AssociatedUpdateState extends State<AssociatedUpdate> {
                             ),
                             onTap: () {
                               _controller.motorcycles.removeAt(i);
-                              ;
                             },
                           ),
                           GestureDetector(

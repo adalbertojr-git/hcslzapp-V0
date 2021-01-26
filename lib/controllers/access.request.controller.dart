@@ -2,7 +2,6 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:hcslzapp/models/access.request.dart';
 import 'package:hcslzapp/repositories/access.request.repo.dart';
-import 'package:hcslzapp/repositories/login.repo.dart';
 import 'package:mobx/mobx.dart';
 
 part 'access.request.controller.g.dart';

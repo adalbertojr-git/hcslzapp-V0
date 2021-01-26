@@ -52,22 +52,23 @@ class AccessRequestRepo {
       throw HttpException(getMessage(response.statusCode));
     }
   }
+
   Future<AccessRequest> check(List<AccessRequest> accessRequests) async {
     final String encodedJson = jsonEncode(
       accessRequests,
     );
     final Response response = await client
         .post(
-      mainUrl + _accReqUrl + "/check",
-      headers: {
-        'Content-type': 'application/json',
-        'Accept': 'application/json'
-      },
-      body: encodedJson,
-    )
+          mainUrl + _accReqUrl + "/check",
+          headers: {
+            'Content-type': 'application/json',
+            'Accept': 'application/json'
+          },
+          body: encodedJson,
+        )
         .timeout(
-      Duration(seconds: 10),
-    );
+          Duration(seconds: 10),
+        );
     if (response.statusCode == 200) {
       return AccessRequest.fromJson(
         jsonDecode(response.body),
@@ -76,5 +77,4 @@ class AccessRequestRepo {
       throw HttpException(getMessage(response.statusCode));
     }
   }
-
 }
