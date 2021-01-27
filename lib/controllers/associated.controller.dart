@@ -57,6 +57,12 @@ abstract class AssociatedControllerBase with Store {
   ObservableFuture<Associated> associatedUpdate;
 
   @observable
+  ObservableFuture<List<Associated>> associatedListAllFuture;
+
+  @observable
+  ObservableList associateds = [].asObservable();
+
+  @observable
   ObservableList dependents = [].asObservable();
 
   @observable
@@ -96,6 +102,7 @@ abstract class AssociatedControllerBase with Store {
   get _initLists {
     dependents.clear();
     motorcycles.clear();
+    associateds.clear();
     dependents.addAll(associated.dependents);
     motorcycles.addAll(associated.motorcycles);
   }
@@ -135,8 +142,18 @@ abstract class AssociatedControllerBase with Store {
         this.errorMsg = "${e.message}";
       }, test: (e) => e is Exception);
 
+  @action
+  Future findAll() => associatedListAllFuture =
+      ObservableFuture(_associatedRepo.findAll().then((value) => value))
+          .catchError((e) {
+        this.errorMsg = "${e.message}";
+      }, test: (e) => e is Exception);
+
   Future<List<Associated>> getFuture(int _associatedId) =>
       future = findOne(_associatedId);
+
+  Future<List<Associated>> getFutureAssociatedList() =>
+      future = findAll();
 
   Associated _setValues() {
     this.associated.name = nameCtrl.text;

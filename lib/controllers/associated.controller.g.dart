@@ -211,6 +211,38 @@ mixin _$AssociatedController on AssociatedControllerBase, Store {
     });
   }
 
+  final _$associatedListAllFutureAtom =
+      Atom(name: 'AssociatedControllerBase.associatedListAllFuture');
+
+  @override
+  ObservableFuture<List<Associated>> get associatedListAllFuture {
+    _$associatedListAllFutureAtom.reportRead();
+    return super.associatedListAllFuture;
+  }
+
+  @override
+  set associatedListAllFuture(ObservableFuture<List<Associated>> value) {
+    _$associatedListAllFutureAtom
+        .reportWrite(value, super.associatedListAllFuture, () {
+      super.associatedListAllFuture = value;
+    });
+  }
+
+  final _$associatedsAtom = Atom(name: 'AssociatedControllerBase.associateds');
+
+  @override
+  ObservableList<dynamic> get associateds {
+    _$associatedsAtom.reportRead();
+    return super.associateds;
+  }
+
+  @override
+  set associateds(ObservableList<dynamic> value) {
+    _$associatedsAtom.reportWrite(value, super.associateds, () {
+      super.associateds = value;
+    });
+  }
+
   final _$dependentsAtom = Atom(name: 'AssociatedControllerBase.dependents');
 
   @override
@@ -293,6 +325,17 @@ mixin _$AssociatedController on AssociatedControllerBase, Store {
   }
 
   @override
+  Future<dynamic> findAll() {
+    final _$actionInfo = _$AssociatedControllerBaseActionController.startAction(
+        name: 'AssociatedControllerBase.findAll');
+    try {
+      return super.findAll();
+    } finally {
+      _$AssociatedControllerBaseActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
   String getFilePath(String value) {
     final _$actionInfo = _$AssociatedControllerBaseActionController.startAction(
         name: 'AssociatedControllerBase.getFilePath');
@@ -319,6 +362,8 @@ dateShieldCtrl: ${dateShieldCtrl},
 isHideButton: ${isHideButton},
 associatedListFuture: ${associatedListFuture},
 associatedUpdate: ${associatedUpdate},
+associatedListAllFuture: ${associatedListAllFuture},
+associateds: ${associateds},
 dependents: ${dependents},
 motorcycles: ${motorcycles},
 filePath: ${filePath}

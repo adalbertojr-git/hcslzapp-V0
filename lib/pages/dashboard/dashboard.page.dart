@@ -44,6 +44,18 @@ class _DashboardState extends State<Dashboard> {
     "Boutique",
   ];
 
+  List<IconData> _listAdmIcons = [
+    Icons.people_alt_rounded,
+    Icons.monetization_on,
+    Icons.event,
+    Icons.emoji_people,
+    Icons.wallet_giftcard,
+  ];
+
+  List<Widget> _listAdmWidgets = [
+    AssociatedList(),
+  ];
+
   @override
   void initState() {
     //_controller = Provider.of<AssociatedController>(context, listen: false);
@@ -225,7 +237,9 @@ class _DashboardState extends State<Dashboard> {
                 onClick: () {
                   Navigator.push(
                     _gContext,
-                    MaterialPageRoute(builder: (gContext) => PaymentList(this.widget._associatedId)),
+                    MaterialPageRoute(
+                        builder: (gContext) =>
+                            PaymentList(this.widget._associatedId)),
                   );
                 },
               ),
@@ -368,36 +382,39 @@ class _DashboardState extends State<Dashboard> {
         ),
       );
 
-  Widget _listItem(BuildContext context, int index) {
-    return Card(
-      color: Colors.deepOrange[100],
-      shadowColor: Colors.black,
-      child: Column(
-        children: <Widget>[
-          ListTile(
-            leading: Image.asset(
-              "assets/imgs/logo.png",
-              fit: BoxFit.fitHeight,
-              width: 100.0,
-            ),
-            title: Text(
-              _listAdmScreens[index],
-              style: TextStyle(
-                fontSize: 14.0,
-                fontWeight: FontWeight.bold,
+  Widget _listItem(BuildContext context, int index) => Card(
+        color: Colors.deepOrange[100],
+        shadowColor: Colors.black,
+        child: Column(
+          children: <Widget>[
+            ListTile(
+/*              leading: Image.asset(
+                "assets/imgs/logo.png",
+                fit: BoxFit.fitHeight,
+                width: 100.0,
+              ), */
+              leading: Icon(
+                _listAdmIcons[index],
+                size: 50,
               ),
-            ),
-            subtitle: Column(
-              mainAxisAlignment: MainAxisAlignment.start,
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: <Widget>[
-                Text(
-                  _listAdmScreens[index],
-                  style: TextStyle(
-                    fontSize: 13.0,
-                    fontWeight: FontWeight.normal,
-                  ),
+              title: Text(
+                _listAdmScreens[index],
+                style: TextStyle(
+                  fontSize: 14.0,
+                  fontWeight: FontWeight.bold,
                 ),
+              ),
+              subtitle: Column(
+                mainAxisAlignment: MainAxisAlignment.start,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: <Widget>[
+                  Text(
+                    _listAdmScreens[index],
+                    style: TextStyle(
+                      fontSize: 13.0,
+                      fontWeight: FontWeight.normal,
+                    ),
+                  ),
 /*                Text(
                   'Population: 200}',
                   style: TextStyle(
@@ -405,19 +422,18 @@ class _DashboardState extends State<Dashboard> {
                     fontWeight: FontWeight.normal,
                   ),
                 ),*/
-              ],
-            ),
-            onTap: () {
-              Navigator.push(
-                _gContext,
-                MaterialPageRoute(builder: (_gContext) => AssociatedList()),
-              );
-            },
-          )
-        ],
-      ),
-    );
-  }
+                ],
+              ),
+              onTap: () {
+                Navigator.push(
+                  _gContext,
+                  MaterialPageRoute(builder: (_gContext) => _listAdmWidgets[index]),
+                );
+              },
+            )
+          ],
+        ),
+      );
 }
 
 class _GridButton extends StatelessWidget {
@@ -492,7 +508,7 @@ class _BarButton extends StatelessWidget {
                 Icon(
                   icon,
                   color: Colors.orange,
-                  size: 40.0,
+                  size: 50.0,
                 ),
                 Text(
                   name,
