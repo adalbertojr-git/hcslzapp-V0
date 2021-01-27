@@ -35,6 +35,7 @@ abstract class MotorcycleControllerBase with Store {
   @observable
   var renavamCtrl = TextEditingController();
 
+  @observable
   Motorcycle motorcycle;
 
   get init {

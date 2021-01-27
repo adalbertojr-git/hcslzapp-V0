@@ -131,6 +131,21 @@ mixin _$MotorcycleController on MotorcycleControllerBase, Store {
     });
   }
 
+  final _$motorcycleAtom = Atom(name: 'MotorcycleControllerBase.motorcycle');
+
+  @override
+  Motorcycle get motorcycle {
+    _$motorcycleAtom.reportRead();
+    return super.motorcycle;
+  }
+
+  @override
+  set motorcycle(Motorcycle value) {
+    _$motorcycleAtom.reportWrite(value, super.motorcycle, () {
+      super.motorcycle = value;
+    });
+  }
+
   @override
   String toString() {
     return '''
@@ -141,7 +156,8 @@ colorCtrl: ${colorCtrl},
 licencePlateCtrl: ${licencePlateCtrl},
 nicknameCtrl: ${nicknameCtrl},
 chassisCtrl: ${chassisCtrl},
-renavamCtrl: ${renavamCtrl}
+renavamCtrl: ${renavamCtrl},
+motorcycle: ${motorcycle}
     ''';
   }
 }

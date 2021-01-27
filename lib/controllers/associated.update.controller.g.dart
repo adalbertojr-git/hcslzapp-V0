@@ -1,6 +1,6 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'associated.controller.dart';
+part of 'associated.update.controller.dart';
 
 // **************************************************************************
 // StoreGenerator
@@ -8,8 +8,8 @@ part of 'associated.controller.dart';
 
 // ignore_for_file: non_constant_identifier_names, unnecessary_brace_in_string_interps, unnecessary_lambdas, prefer_expression_function_bodies, lines_longer_than_80_chars, avoid_as, avoid_annotating_with_dynamic
 
-mixin _$AssociatedController on AssociatedControllerBase, Store {
-  final _$idCtrlAtom = Atom(name: 'AssociatedControllerBase.idCtrl');
+mixin _$AssociatedUpdateController on AssociatedUpdateControllerBase, Store {
+  final _$idCtrlAtom = Atom(name: 'AssociatedUpdateControllerBase.idCtrl');
 
   @override
   TextEditingController get idCtrl {
@@ -24,7 +24,7 @@ mixin _$AssociatedController on AssociatedControllerBase, Store {
     });
   }
 
-  final _$nameCtrlAtom = Atom(name: 'AssociatedControllerBase.nameCtrl');
+  final _$nameCtrlAtom = Atom(name: 'AssociatedUpdateControllerBase.nameCtrl');
 
   @override
   TextEditingController get nameCtrl {
@@ -39,7 +39,8 @@ mixin _$AssociatedController on AssociatedControllerBase, Store {
     });
   }
 
-  final _$phoneCtrlAtom = Atom(name: 'AssociatedControllerBase.phoneCtrl');
+  final _$phoneCtrlAtom =
+      Atom(name: 'AssociatedUpdateControllerBase.phoneCtrl');
 
   @override
   TextEditingController get phoneCtrl {
@@ -54,7 +55,8 @@ mixin _$AssociatedController on AssociatedControllerBase, Store {
     });
   }
 
-  final _$emailCtrlAtom = Atom(name: 'AssociatedControllerBase.emailCtrl');
+  final _$emailCtrlAtom =
+      Atom(name: 'AssociatedUpdateControllerBase.emailCtrl');
 
   @override
   TextEditingController get emailCtrl {
@@ -69,7 +71,8 @@ mixin _$AssociatedController on AssociatedControllerBase, Store {
     });
   }
 
-  final _$sponsorCtrlAtom = Atom(name: 'AssociatedControllerBase.sponsorCtrl');
+  final _$sponsorCtrlAtom =
+      Atom(name: 'AssociatedUpdateControllerBase.sponsorCtrl');
 
   @override
   TextEditingController get sponsorCtrl {
@@ -85,7 +88,7 @@ mixin _$AssociatedController on AssociatedControllerBase, Store {
   }
 
   final _$associatedTypeCtrlAtom =
-      Atom(name: 'AssociatedControllerBase.associatedTypeCtrl');
+      Atom(name: 'AssociatedUpdateControllerBase.associatedTypeCtrl');
 
   @override
   TextEditingController get associatedTypeCtrl {
@@ -100,7 +103,7 @@ mixin _$AssociatedController on AssociatedControllerBase, Store {
     });
   }
 
-  final _$cnhCtrlAtom = Atom(name: 'AssociatedControllerBase.cnhCtrl');
+  final _$cnhCtrlAtom = Atom(name: 'AssociatedUpdateControllerBase.cnhCtrl');
 
   @override
   TextEditingController get cnhCtrl {
@@ -115,7 +118,7 @@ mixin _$AssociatedController on AssociatedControllerBase, Store {
     });
   }
 
-  final _$cpfCtrlAtom = Atom(name: 'AssociatedControllerBase.cpfCtrl');
+  final _$cpfCtrlAtom = Atom(name: 'AssociatedUpdateControllerBase.cpfCtrl');
 
   @override
   TextEditingController get cpfCtrl {
@@ -131,7 +134,7 @@ mixin _$AssociatedController on AssociatedControllerBase, Store {
   }
 
   final _$dateBirthCtrlAtom =
-      Atom(name: 'AssociatedControllerBase.dateBirthCtrl');
+      Atom(name: 'AssociatedUpdateControllerBase.dateBirthCtrl');
 
   @override
   TextEditingController get dateBirthCtrl {
@@ -147,7 +150,7 @@ mixin _$AssociatedController on AssociatedControllerBase, Store {
   }
 
   final _$dateShieldCtrlAtom =
-      Atom(name: 'AssociatedControllerBase.dateShieldCtrl');
+      Atom(name: 'AssociatedUpdateControllerBase.dateShieldCtrl');
 
   @override
   TextEditingController get dateShieldCtrl {
@@ -163,7 +166,7 @@ mixin _$AssociatedController on AssociatedControllerBase, Store {
   }
 
   final _$isHideButtonAtom =
-      Atom(name: 'AssociatedControllerBase.isHideButton');
+      Atom(name: 'AssociatedUpdateControllerBase.isHideButton');
 
   @override
   bool get isHideButton {
@@ -178,72 +181,8 @@ mixin _$AssociatedController on AssociatedControllerBase, Store {
     });
   }
 
-  final _$associatedListFutureAtom =
-      Atom(name: 'AssociatedControllerBase.associatedListFuture');
-
-  @override
-  ObservableFuture<List<Associated>> get associatedListFuture {
-    _$associatedListFutureAtom.reportRead();
-    return super.associatedListFuture;
-  }
-
-  @override
-  set associatedListFuture(ObservableFuture<List<Associated>> value) {
-    _$associatedListFutureAtom.reportWrite(value, super.associatedListFuture,
-        () {
-      super.associatedListFuture = value;
-    });
-  }
-
-  final _$associatedUpdateAtom =
-      Atom(name: 'AssociatedControllerBase.associatedUpdate');
-
-  @override
-  ObservableFuture<Associated> get associatedUpdate {
-    _$associatedUpdateAtom.reportRead();
-    return super.associatedUpdate;
-  }
-
-  @override
-  set associatedUpdate(ObservableFuture<Associated> value) {
-    _$associatedUpdateAtom.reportWrite(value, super.associatedUpdate, () {
-      super.associatedUpdate = value;
-    });
-  }
-
-  final _$associatedListAllFutureAtom =
-      Atom(name: 'AssociatedControllerBase.associatedListAllFuture');
-
-  @override
-  ObservableFuture<List<Associated>> get associatedListAllFuture {
-    _$associatedListAllFutureAtom.reportRead();
-    return super.associatedListAllFuture;
-  }
-
-  @override
-  set associatedListAllFuture(ObservableFuture<List<Associated>> value) {
-    _$associatedListAllFutureAtom
-        .reportWrite(value, super.associatedListAllFuture, () {
-      super.associatedListAllFuture = value;
-    });
-  }
-
-  final _$associatedsAtom = Atom(name: 'AssociatedControllerBase.associateds');
-
-  @override
-  ObservableList<dynamic> get associateds {
-    _$associatedsAtom.reportRead();
-    return super.associateds;
-  }
-
-  @override
-  set associateds(ObservableList<dynamic> value) {
-    _$associatedsAtom.reportWrite(value, super.associateds, () {
-      super.associateds = value;
-    });
-  }
-
-  final _$dependentsAtom = Atom(name: 'AssociatedControllerBase.dependents');
+  final _$dependentsAtom =
+      Atom(name: 'AssociatedUpdateControllerBase.dependents');
 
   @override
   ObservableList<dynamic> get dependents {
@@ -258,7 +197,8 @@ mixin _$AssociatedController on AssociatedControllerBase, Store {
     });
   }
 
-  final _$motorcyclesAtom = Atom(name: 'AssociatedControllerBase.motorcycles');
+  final _$motorcyclesAtom =
+      Atom(name: 'AssociatedUpdateControllerBase.motorcycles');
 
   @override
   ObservableList<dynamic> get motorcycles {
@@ -273,7 +213,7 @@ mixin _$AssociatedController on AssociatedControllerBase, Store {
     });
   }
 
-  final _$filePathAtom = Atom(name: 'AssociatedControllerBase.filePath');
+  final _$filePathAtom = Atom(name: 'AssociatedUpdateControllerBase.filePath');
 
   @override
   String get filePath {
@@ -288,61 +228,145 @@ mixin _$AssociatedController on AssociatedControllerBase, Store {
     });
   }
 
-  final _$AssociatedControllerBaseActionController =
-      ActionController(name: 'AssociatedControllerBase');
+  final _$associatedAtom =
+      Atom(name: 'AssociatedUpdateControllerBase.associated');
+
+  @override
+  Associated get associated {
+    _$associatedAtom.reportRead();
+    return super.associated;
+  }
+
+  @override
+  set associated(Associated value) {
+    _$associatedAtom.reportWrite(value, super.associated, () {
+      super.associated = value;
+    });
+  }
+
+  final _$_associatedRepoAtom =
+      Atom(name: 'AssociatedUpdateControllerBase._associatedRepo');
+
+  @override
+  AssociatedRepo get _associatedRepo {
+    _$_associatedRepoAtom.reportRead();
+    return super._associatedRepo;
+  }
+
+  @override
+  set _associatedRepo(AssociatedRepo value) {
+    _$_associatedRepoAtom.reportWrite(value, super._associatedRepo, () {
+      super._associatedRepo = value;
+    });
+  }
+
+  final _$errorMsgAtom = Atom(name: 'AssociatedUpdateControllerBase.errorMsg');
+
+  @override
+  String get errorMsg {
+    _$errorMsgAtom.reportRead();
+    return super.errorMsg;
+  }
+
+  @override
+  set errorMsg(String value) {
+    _$errorMsgAtom.reportWrite(value, super.errorMsg, () {
+      super.errorMsg = value;
+    });
+  }
+
+  final _$futureAtom = Atom(name: 'AssociatedUpdateControllerBase.future');
+
+  @override
+  Future<List<Associated>> get future {
+    _$futureAtom.reportRead();
+    return super.future;
+  }
+
+  @override
+  set future(Future<List<Associated>> value) {
+    _$futureAtom.reportWrite(value, super.future, () {
+      super.future = value;
+    });
+  }
+
+  final _$currentBloodTypeAtom =
+      Atom(name: 'AssociatedUpdateControllerBase.currentBloodType');
+
+  @override
+  String get currentBloodType {
+    _$currentBloodTypeAtom.reportRead();
+    return super.currentBloodType;
+  }
+
+  @override
+  set currentBloodType(String value) {
+    _$currentBloodTypeAtom.reportWrite(value, super.currentBloodType, () {
+      super.currentBloodType = value;
+    });
+  }
+
+  final _$currentAssociatedTypeAtom =
+      Atom(name: 'AssociatedUpdateControllerBase.currentAssociatedType');
+
+  @override
+  String get currentAssociatedType {
+    _$currentAssociatedTypeAtom.reportRead();
+    return super.currentAssociatedType;
+  }
+
+  @override
+  set currentAssociatedType(String value) {
+    _$currentAssociatedTypeAtom.reportWrite(value, super.currentAssociatedType,
+        () {
+      super.currentAssociatedType = value;
+    });
+  }
+
+  final _$AssociatedUpdateControllerBaseActionController =
+      ActionController(name: 'AssociatedUpdateControllerBase');
 
   @override
   bool hideButton() {
-    final _$actionInfo = _$AssociatedControllerBaseActionController.startAction(
-        name: 'AssociatedControllerBase.hideButton');
+    final _$actionInfo = _$AssociatedUpdateControllerBaseActionController
+        .startAction(name: 'AssociatedUpdateControllerBase.hideButton');
     try {
       return super.hideButton();
     } finally {
-      _$AssociatedControllerBaseActionController.endAction(_$actionInfo);
+      _$AssociatedUpdateControllerBaseActionController.endAction(_$actionInfo);
     }
   }
 
   @override
   Future<dynamic> findOne(int id) {
-    final _$actionInfo = _$AssociatedControllerBaseActionController.startAction(
-        name: 'AssociatedControllerBase.findOne');
+    final _$actionInfo = _$AssociatedUpdateControllerBaseActionController
+        .startAction(name: 'AssociatedUpdateControllerBase.findOne');
     try {
       return super.findOne(id);
     } finally {
-      _$AssociatedControllerBaseActionController.endAction(_$actionInfo);
+      _$AssociatedUpdateControllerBaseActionController.endAction(_$actionInfo);
     }
   }
 
   @override
   Future<dynamic> update(Associated associated) {
-    final _$actionInfo = _$AssociatedControllerBaseActionController.startAction(
-        name: 'AssociatedControllerBase.update');
+    final _$actionInfo = _$AssociatedUpdateControllerBaseActionController
+        .startAction(name: 'AssociatedUpdateControllerBase.update');
     try {
       return super.update(associated);
     } finally {
-      _$AssociatedControllerBaseActionController.endAction(_$actionInfo);
-    }
-  }
-
-  @override
-  Future<dynamic> findAll() {
-    final _$actionInfo = _$AssociatedControllerBaseActionController.startAction(
-        name: 'AssociatedControllerBase.findAll');
-    try {
-      return super.findAll();
-    } finally {
-      _$AssociatedControllerBaseActionController.endAction(_$actionInfo);
+      _$AssociatedUpdateControllerBaseActionController.endAction(_$actionInfo);
     }
   }
 
   @override
   String getFilePath(String value) {
-    final _$actionInfo = _$AssociatedControllerBaseActionController.startAction(
-        name: 'AssociatedControllerBase.getFilePath');
+    final _$actionInfo = _$AssociatedUpdateControllerBaseActionController
+        .startAction(name: 'AssociatedUpdateControllerBase.getFilePath');
     try {
       return super.getFilePath(value);
     } finally {
-      _$AssociatedControllerBaseActionController.endAction(_$actionInfo);
+      _$AssociatedUpdateControllerBaseActionController.endAction(_$actionInfo);
     }
   }
 
@@ -360,13 +384,14 @@ cpfCtrl: ${cpfCtrl},
 dateBirthCtrl: ${dateBirthCtrl},
 dateShieldCtrl: ${dateShieldCtrl},
 isHideButton: ${isHideButton},
-associatedListFuture: ${associatedListFuture},
-associatedUpdate: ${associatedUpdate},
-associatedListAllFuture: ${associatedListAllFuture},
-associateds: ${associateds},
 dependents: ${dependents},
 motorcycles: ${motorcycles},
-filePath: ${filePath}
+filePath: ${filePath},
+associated: ${associated},
+errorMsg: ${errorMsg},
+future: ${future},
+currentBloodType: ${currentBloodType},
+currentAssociatedType: ${currentAssociatedType}
     ''';
   }
 }

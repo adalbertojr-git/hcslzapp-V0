@@ -9,12 +9,12 @@ import 'package:mobx/mobx.dart';
 import 'dart:io';
 import 'package:glutton/glutton.dart';
 
-part 'associated.controller.g.dart';
+part 'associated.update.controller.g.dart';
 
-class AssociatedController = AssociatedControllerBase
-    with _$AssociatedController;
+class AssociatedUpdateController = AssociatedUpdateControllerBase
+    with _$AssociatedUpdateController;
 
-abstract class AssociatedControllerBase with Store {
+abstract class AssociatedUpdateControllerBase with Store {
   var formController;
 
   @observable
@@ -51,18 +51,6 @@ abstract class AssociatedControllerBase with Store {
   bool isHideButton = true;
 
   @observable
-  ObservableFuture<List<Associated>> associatedListFuture;
-
-  @observable
-  ObservableFuture<Associated> associatedUpdate;
-
-  @observable
-  ObservableFuture<List<Associated>> associatedListAllFuture;
-
-  @observable
-  ObservableList associateds = [].asObservable();
-
-  @observable
   ObservableList dependents = [].asObservable();
 
   @observable
@@ -71,16 +59,22 @@ abstract class AssociatedControllerBase with Store {
   @observable
   String filePath;
 
+  @observable
   Associated associated;
 
-  final AssociatedRepo _associatedRepo = AssociatedRepo();
+  @observable
+  AssociatedRepo _associatedRepo = AssociatedRepo();
 
+  @observable
   String errorMsg;
 
+  @observable
   Future<List<Associated>> future;
 
+  @observable
   String currentBloodType;
 
+  @observable
   String currentAssociatedType;
 
   get init {
@@ -102,7 +96,6 @@ abstract class AssociatedControllerBase with Store {
   get _initLists {
     dependents.clear();
     motorcycles.clear();
-    associateds.clear();
     dependents.addAll(associated.dependents);
     motorcycles.addAll(associated.motorcycles);
   }
@@ -129,31 +122,21 @@ abstract class AssociatedControllerBase with Store {
   bool get hasErrorEmail => validateEmail() != null;
 
   @action
-  Future findOne(int id) => associatedListFuture = ObservableFuture(
+  Future findOne(int id) => ObservableFuture(
               _associatedRepo.findByIdToList(id).then((value) => value))
           .catchError((e) {
         this.errorMsg = "${e.message}";
       }, test: (e) => e is Exception);
 
   @action
-  Future update(Associated associated) => associatedUpdate = ObservableFuture(
+  Future update(Associated associated) => ObservableFuture(
               _associatedRepo.update(_setValues()).then((value) => value))
-          .catchError((e) {
-        this.errorMsg = "${e.message}";
-      }, test: (e) => e is Exception);
-
-  @action
-  Future findAll() => associatedListAllFuture =
-      ObservableFuture(_associatedRepo.findAll().then((value) => value))
           .catchError((e) {
         this.errorMsg = "${e.message}";
       }, test: (e) => e is Exception);
 
   Future<List<Associated>> getFuture(int _associatedId) =>
       future = findOne(_associatedId);
-
-  Future<List<Associated>> getFutureAssociatedList() =>
-      future = findAll();
 
   Associated _setValues() {
     this.associated.name = nameCtrl.text;
@@ -215,7 +198,7 @@ abstract class AssociatedControllerBase with Store {
       getFilePath(_image.path.toString());
     }
   }
-  
+
   Future _savePhoto() async {
     await Glutton.eat("photoPath", this.filePath);
   }

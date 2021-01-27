@@ -1,5 +1,4 @@
 import 'dart:async';
-import 'package:hcslzapp/models/associated.dart';
 import 'package:hcslzapp/models/payment.dart';
 import 'package:hcslzapp/repositories/payment.repo.dart';
 import 'package:mobx/mobx.dart';
@@ -12,20 +11,21 @@ abstract class PaymentControllerBase with Store {
   var formController;
 
   @observable
-  ObservableFuture<List<Payment>> paymentListFuture;
-
-  @observable
   bool isHideButton = true;
 
   @observable
   ObservableList payments = [].asObservable();
 
+  @observable
   Payment payment;
 
-  final PaymentRepo _paymentRepo = PaymentRepo();
+  @observable
+  PaymentRepo _paymentRepo = PaymentRepo();
 
+  @observable
   String errorMsg;
 
+  @observable
   Future<List<Payment>> future;
 
   get init {
@@ -36,8 +36,8 @@ abstract class PaymentControllerBase with Store {
   bool hideButton() => isHideButton = !isHideButton;
 
   @action
-  Future findOne(int id) => paymentListFuture = ObservableFuture(
-              _paymentRepo.findByIdToList(id).then((value) => value))
+  Future findOne(int id) =>
+      ObservableFuture(_paymentRepo.findByIdToList(id).then((value) => value))
           .catchError((e) {
         this.errorMsg = "${e.message}";
       }, test: (e) => e is Exception);

@@ -45,11 +45,14 @@ abstract class AccessRequestControllerBase with Store {
   @observable
   ObservableList accessRequests = [].asObservable();
 
+  @observable
   String errorMsg;
 
+  @observable
   Future<List<AccessRequest>> future;
 
-  final AccessRequestRepo _accessRequestRepo = AccessRequestRepo();
+  @observable
+  AccessRequestRepo _accessRequestRepo = AccessRequestRepo();
 
   get init {
     accessRequests.clear();

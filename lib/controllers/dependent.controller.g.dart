@@ -147,6 +147,37 @@ mixin _$DependentController on DependentControllerBase, Store {
     });
   }
 
+  final _$currentBloodTypeAtom =
+      Atom(name: 'DependentControllerBase.currentBloodType');
+
+  @override
+  String get currentBloodType {
+    _$currentBloodTypeAtom.reportRead();
+    return super.currentBloodType;
+  }
+
+  @override
+  set currentBloodType(String value) {
+    _$currentBloodTypeAtom.reportWrite(value, super.currentBloodType, () {
+      super.currentBloodType = value;
+    });
+  }
+
+  final _$dependentAtom = Atom(name: 'DependentControllerBase.dependent');
+
+  @override
+  Dependent get dependent {
+    _$dependentAtom.reportRead();
+    return super.dependent;
+  }
+
+  @override
+  set dependent(Dependent value) {
+    _$dependentAtom.reportWrite(value, super.dependent, () {
+      super.dependent = value;
+    });
+  }
+
   final _$DependentControllerBaseActionController =
       ActionController(name: 'DependentControllerBase');
 
@@ -172,7 +203,9 @@ cpfCtrl: ${cpfCtrl},
 bloodTypeCtrl: ${bloodTypeCtrl},
 dateBirthCtrl: ${dateBirthCtrl},
 isAssociatedCtrl: ${isAssociatedCtrl},
-isAssociated: ${isAssociated}
+isAssociated: ${isAssociated},
+currentBloodType: ${currentBloodType},
+dependent: ${dependent}
     ''';
   }
 }

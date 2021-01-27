@@ -24,8 +24,10 @@ abstract class LoginControllerBase with Store {
   @observable
   bool isLoading = false;
 
+  @observable
   String errorMsg;
 
+  @observable
   final LoginRepo _loginRepo = LoginRepo();
 
   get init {

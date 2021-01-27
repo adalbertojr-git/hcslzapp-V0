@@ -9,22 +9,6 @@ part of 'payment.controller.dart';
 // ignore_for_file: non_constant_identifier_names, unnecessary_brace_in_string_interps, unnecessary_lambdas, prefer_expression_function_bodies, lines_longer_than_80_chars, avoid_as, avoid_annotating_with_dynamic
 
 mixin _$PaymentController on PaymentControllerBase, Store {
-  final _$paymentListFutureAtom =
-      Atom(name: 'PaymentControllerBase.paymentListFuture');
-
-  @override
-  ObservableFuture<List<Payment>> get paymentListFuture {
-    _$paymentListFutureAtom.reportRead();
-    return super.paymentListFuture;
-  }
-
-  @override
-  set paymentListFuture(ObservableFuture<List<Payment>> value) {
-    _$paymentListFutureAtom.reportWrite(value, super.paymentListFuture, () {
-      super.paymentListFuture = value;
-    });
-  }
-
   final _$isHideButtonAtom = Atom(name: 'PaymentControllerBase.isHideButton');
 
   @override
@@ -52,6 +36,66 @@ mixin _$PaymentController on PaymentControllerBase, Store {
   set payments(ObservableList<dynamic> value) {
     _$paymentsAtom.reportWrite(value, super.payments, () {
       super.payments = value;
+    });
+  }
+
+  final _$paymentAtom = Atom(name: 'PaymentControllerBase.payment');
+
+  @override
+  Payment get payment {
+    _$paymentAtom.reportRead();
+    return super.payment;
+  }
+
+  @override
+  set payment(Payment value) {
+    _$paymentAtom.reportWrite(value, super.payment, () {
+      super.payment = value;
+    });
+  }
+
+  final _$_paymentRepoAtom = Atom(name: 'PaymentControllerBase._paymentRepo');
+
+  @override
+  PaymentRepo get _paymentRepo {
+    _$_paymentRepoAtom.reportRead();
+    return super._paymentRepo;
+  }
+
+  @override
+  set _paymentRepo(PaymentRepo value) {
+    _$_paymentRepoAtom.reportWrite(value, super._paymentRepo, () {
+      super._paymentRepo = value;
+    });
+  }
+
+  final _$errorMsgAtom = Atom(name: 'PaymentControllerBase.errorMsg');
+
+  @override
+  String get errorMsg {
+    _$errorMsgAtom.reportRead();
+    return super.errorMsg;
+  }
+
+  @override
+  set errorMsg(String value) {
+    _$errorMsgAtom.reportWrite(value, super.errorMsg, () {
+      super.errorMsg = value;
+    });
+  }
+
+  final _$futureAtom = Atom(name: 'PaymentControllerBase.future');
+
+  @override
+  Future<List<Payment>> get future {
+    _$futureAtom.reportRead();
+    return super.future;
+  }
+
+  @override
+  set future(Future<List<Payment>> value) {
+    _$futureAtom.reportWrite(value, super.future, () {
+      super.future = value;
     });
   }
 
@@ -83,9 +127,11 @@ mixin _$PaymentController on PaymentControllerBase, Store {
   @override
   String toString() {
     return '''
-paymentListFuture: ${paymentListFuture},
 isHideButton: ${isHideButton},
-payments: ${payments}
+payments: ${payments},
+payment: ${payment},
+errorMsg: ${errorMsg},
+future: ${future}
     ''';
   }
 }

@@ -7,7 +7,7 @@ import 'package:hcslzapp/components/centered.message.dart';
 import 'package:hcslzapp/components/input.textfield.dart';
 import 'package:hcslzapp/components/progress.dart';
 import 'package:hcslzapp/components/top.margin.dart';
-import 'package:hcslzapp/controllers/associated.controller.dart';
+import 'package:hcslzapp/controllers/associated.update.controller.dart';
 import 'package:hcslzapp/enums/associated.types.dart';
 import 'package:hcslzapp/enums/blood.types.dart';
 import 'package:hcslzapp/models/associated.dart';
@@ -29,7 +29,7 @@ class AssociatedUpdate extends StatefulWidget {
 }
 
 class _AssociatedUpdateState extends State<AssociatedUpdate> {
-  AssociatedController _controller = AssociatedController();
+  AssociatedUpdateController _controller = AssociatedUpdateController();
 
   @override
   void initState() {

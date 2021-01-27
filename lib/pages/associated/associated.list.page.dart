@@ -3,7 +3,7 @@ import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:hcslzapp/components/button.dart';
 import 'package:hcslzapp/components/centered.message.dart';
 import 'package:hcslzapp/components/progress.dart';
-import 'package:hcslzapp/controllers/associated.controller.dart';
+import 'package:hcslzapp/controllers/associated.list.controller.dart';
 import 'package:asuka/asuka.dart' as asuka;
 import 'package:hcslzapp/models/associated.dart';
 
@@ -15,11 +15,11 @@ class AssociatedList extends StatefulWidget {
 }
 
 class AssociatedListState extends State<AssociatedList> {
-  AssociatedController _controller = AssociatedController();
+  AssociatedListController _controller = AssociatedListController();
 
   @override
   void initState() {
-    _controller.getFutureAssociatedList().then((value) {
+    _controller.getFuture().then((value) {
       if (value != null && value.isNotEmpty) {
         _controller.hideButton();
       }
@@ -65,7 +65,7 @@ class AssociatedListState extends State<AssociatedList> {
       ),
       floatingActionButton: _controller.isHideButton
           ? null
-          : Button(icon: Icons.check, onClick: (){} ),
+          : Button(icon: Icons.arrow_back, onClick: (){} ),
     ),
   );
 

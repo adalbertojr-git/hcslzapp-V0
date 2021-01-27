@@ -182,6 +182,52 @@ mixin _$AccessRequestController on AccessRequestControllerBase, Store {
     });
   }
 
+  final _$errorMsgAtom = Atom(name: 'AccessRequestControllerBase.errorMsg');
+
+  @override
+  String get errorMsg {
+    _$errorMsgAtom.reportRead();
+    return super.errorMsg;
+  }
+
+  @override
+  set errorMsg(String value) {
+    _$errorMsgAtom.reportWrite(value, super.errorMsg, () {
+      super.errorMsg = value;
+    });
+  }
+
+  final _$futureAtom = Atom(name: 'AccessRequestControllerBase.future');
+
+  @override
+  Future<List<AccessRequest>> get future {
+    _$futureAtom.reportRead();
+    return super.future;
+  }
+
+  @override
+  set future(Future<List<AccessRequest>> value) {
+    _$futureAtom.reportWrite(value, super.future, () {
+      super.future = value;
+    });
+  }
+
+  final _$_accessRequestRepoAtom =
+      Atom(name: 'AccessRequestControllerBase._accessRequestRepo');
+
+  @override
+  AccessRequestRepo get _accessRequestRepo {
+    _$_accessRequestRepoAtom.reportRead();
+    return super._accessRequestRepo;
+  }
+
+  @override
+  set _accessRequestRepo(AccessRequestRepo value) {
+    _$_accessRequestRepoAtom.reportWrite(value, super._accessRequestRepo, () {
+      super._accessRequestRepo = value;
+    });
+  }
+
   final _$AccessRequestControllerBaseActionController =
       ActionController(name: 'AccessRequestControllerBase');
 
@@ -242,7 +288,9 @@ isHideButton: ${isHideButton},
 accessRequestListFuture: ${accessRequestListFuture},
 accessRequestPost: ${accessRequestPost},
 checkFuture: ${checkFuture},
-accessRequests: ${accessRequests}
+accessRequests: ${accessRequests},
+errorMsg: ${errorMsg},
+future: ${future}
     ''';
   }
 }

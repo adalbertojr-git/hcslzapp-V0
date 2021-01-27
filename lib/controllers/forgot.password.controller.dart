@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:hcslzapp/repositories/login.repo.dart';
 import 'package:mobx/mobx.dart';
 
 part 'forgot.password.controller.g.dart';
@@ -13,9 +12,8 @@ abstract class ForgotPasswordControllerBase with Store {
   @observable
   var emailForgotPswCtrl = TextEditingController();
 
+  @observable
   String errorMsg;
-
-  final LoginRepo _loginRepo = LoginRepo();
 
   get init {
     formController = FormController(email: '');

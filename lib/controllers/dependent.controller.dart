@@ -37,8 +37,10 @@ abstract class DependentControllerBase with Store {
   @observable
   bool isAssociated = false;
 
+  @observable
   String currentBloodType;
 
+  @observable
   Dependent dependent;
 
   @action

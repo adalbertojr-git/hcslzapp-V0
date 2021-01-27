@@ -25,10 +25,26 @@ mixin _$ForgotPasswordController on ForgotPasswordControllerBase, Store {
     });
   }
 
+  final _$errorMsgAtom = Atom(name: 'ForgotPasswordControllerBase.errorMsg');
+
+  @override
+  String get errorMsg {
+    _$errorMsgAtom.reportRead();
+    return super.errorMsg;
+  }
+
+  @override
+  set errorMsg(String value) {
+    _$errorMsgAtom.reportWrite(value, super.errorMsg, () {
+      super.errorMsg = value;
+    });
+  }
+
   @override
   String toString() {
     return '''
-emailForgotPswCtrl: ${emailForgotPswCtrl}
+emailForgotPswCtrl: ${emailForgotPswCtrl},
+errorMsg: ${errorMsg}
     ''';
   }
 }
