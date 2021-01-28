@@ -383,7 +383,7 @@ class _AssociatedUpdateState extends State<AssociatedUpdate> {
                           GestureDetector(
                             child: Icon(
                               Icons.delete,
-                              size: 25.0,
+                              size: 30.0,
                             ),
                             onTap: () {
                               _controller.dependents.removeAt(i);
@@ -392,7 +392,7 @@ class _AssociatedUpdateState extends State<AssociatedUpdate> {
                           GestureDetector(
                             child: Icon(
                               Icons.arrow_forward,
-                              size: 25.0,
+                              size: 30.0,
                             ),
                             onTap: () {
                               final Future<Dependent> future = Navigator.push(
@@ -431,7 +431,7 @@ class _AssociatedUpdateState extends State<AssociatedUpdate> {
                 child: Icon(
                   Icons.add,
                   color: Colors.black,
-                  size: 25,
+                  size: 30,
                 ),
                 onPressed: () {
                   final Future<Dependent> future = Navigator.push(
@@ -501,7 +501,7 @@ class _AssociatedUpdateState extends State<AssociatedUpdate> {
                           GestureDetector(
                             child: Icon(
                               Icons.delete,
-                              size: 25.0,
+                              size: 30.0,
                             ),
                             onTap: () {
                               _controller.motorcycles.removeAt(i);
@@ -510,7 +510,7 @@ class _AssociatedUpdateState extends State<AssociatedUpdate> {
                           GestureDetector(
                             child: Icon(
                               Icons.arrow_forward,
-                              size: 25.0,
+                              size: 30.0,
                             ),
                             onTap: () {
                               final Future<Motorcycle> future = Navigator.push(

@@ -80,8 +80,7 @@ abstract class AccessRequestControllerBase with Store {
       }, test: (e) => e is Exception);
 
   @action
-  Future check() =>
-      checkFuture = ObservableFuture(_accessRequestRepo
+  Future check() => checkFuture = ObservableFuture(_accessRequestRepo
           .check(List<AccessRequest>.from(accessRequests))
           .then((value) => value)).catchError((e) {
         this.errorMsg = "${e.message}";
@@ -125,6 +124,8 @@ abstract class AccessRequestControllerBase with Store {
   String validateName() {
     if (formController.name.isEmpty) {
       return "Nome é obrigatório!!!";
+    } else if (formController.password.toString().length < 4) {
+      return "Nome deve ter no mínimo 4 caracteres!!!";
     }
     return null;
   }
@@ -132,6 +133,12 @@ abstract class AccessRequestControllerBase with Store {
   String validateUser() {
     if (formController.user.isEmpty) {
       return "Usuário é obrigatório!!!";
+    } else if (formController.user == 'adm' ||
+        formController.user == 'admin' ||
+        formController.user == 'administrador') {
+      return "Usuário não pode ser igual a <adm>, <admin> ou <administrador>!!!";
+    } else if (formController.user.toString().length < 2) {
+      return "Usuário deve ter no mínimo 2 caracteres!!!";
     }
     return null;
   }
@@ -150,8 +157,7 @@ abstract class AccessRequestControllerBase with Store {
   String validateConfEmail() {
     if (formController.confEmail.isEmpty) {
       return "Confirmação do email é obrigatória!!!";
-    }
-    if (formController.confEmail != formController.email) {
+    } else if (formController.confEmail != formController.email) {
       return "Emails informados não conferem!!!";
     }
     return null;
@@ -160,8 +166,7 @@ abstract class AccessRequestControllerBase with Store {
   String validatePassword() {
     if (formController.password.isEmpty) {
       return "Senha é obrigatória!!!";
-    }
-    if (formController.password.toString().length < 4) {
+    } else if (formController.password.toString().length < 4) {
       return "Senha deve ter no mínimo 4 caracteres!!!";
     }
     return null;
@@ -170,8 +175,7 @@ abstract class AccessRequestControllerBase with Store {
   String validateConfPassword() {
     if (formController.confPassword.isEmpty) {
       return "Confirmação da senha é obrigatória!!!";
-    }
-    if (formController.confPassword != formController.password) {
+    } else if (formController.confPassword != formController.password) {
       return "Senhas informadas não conferem!!!";
     }
     return null;

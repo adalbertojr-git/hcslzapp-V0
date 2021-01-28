@@ -44,6 +44,14 @@ class _DashboardState extends State<Dashboard> {
     "Boutique",
   ];
 
+  List<String> _listAdmScreensDesc = [
+    "Lista de todos os associados Harley Club",
+    "Informações financeiras dos associados",
+    "Informações de eventos pertinentes ao Harley Club (viagens, encontros, passeios, etc)",
+    "Lista de parceiros com promoções oferecidas ao Harley Club",
+    "Produtos Harley Club (camisas, bonés, etc)",
+  ];
+
   List<IconData> _listAdmIcons = [
     Icons.people_alt_rounded,
     Icons.monetization_on,
@@ -388,14 +396,10 @@ class _DashboardState extends State<Dashboard> {
         child: Column(
           children: <Widget>[
             ListTile(
-/*              leading: Image.asset(
-                "assets/imgs/logo.png",
-                fit: BoxFit.fitHeight,
-                width: 100.0,
-              ), */
               leading: Icon(
                 _listAdmIcons[index],
                 size: 50,
+                color: Colors.orange,
               ),
               title: Text(
                 _listAdmScreens[index],
@@ -409,9 +413,9 @@ class _DashboardState extends State<Dashboard> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: <Widget>[
                   Text(
-                    _listAdmScreens[index],
+                    _listAdmScreensDesc[index],
                     style: TextStyle(
-                      fontSize: 13.0,
+                      fontSize: 12.0,
                       fontWeight: FontWeight.normal,
                     ),
                   ),
@@ -427,7 +431,8 @@ class _DashboardState extends State<Dashboard> {
               onTap: () {
                 Navigator.push(
                   _gContext,
-                  MaterialPageRoute(builder: (_gContext) => _listAdmWidgets[index]),
+                  MaterialPageRoute(
+                      builder: (_gContext) => _listAdmWidgets[index]),
                 );
               },
             )

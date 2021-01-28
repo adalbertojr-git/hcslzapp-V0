@@ -100,10 +100,14 @@ class AssociatedListState extends State<AssociatedList> {
                   ],
                 ),
                 child: ListTile(
+                  isThreeLine: true,
                   title: Text(_controller.associateds[i].name),
-                  subtitle: Text(_controller.associateds[i].phone != null
+                  subtitle: Text('Tel.:' + (_controller.associateds[i].phone != null
                       ? _controller.associateds[i].phone
-                      : ''),
+                      : 'Não informado') + '\n' +
+                      'Email:' + (_controller.associateds[i].email != null
+                      ? _controller.associateds[i].email
+                      : 'Não informado')),
                   leading: CircleAvatar(
                     child: Icon(Icons.person),
                     backgroundColor: Colors.white,
@@ -114,7 +118,7 @@ class AssociatedListState extends State<AssociatedList> {
                       GestureDetector(
                         child: Icon(
                           Icons.delete,
-                          size: 25.0,
+                          size: 30.0,
                         ),
                         onTap: () {
                           _controller.associateds.removeAt(i);
@@ -123,7 +127,7 @@ class AssociatedListState extends State<AssociatedList> {
                       GestureDetector(
                         child: Icon(
                           Icons.arrow_forward,
-                          size: 25.0,
+                          size: 30.0,
                         ),
                         onTap: () {
                           Navigator.push(
