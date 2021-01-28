@@ -5,7 +5,6 @@ import 'package:hcslzapp/common/labels.and.hints.dart';
 import 'package:hcslzapp/common/token.details.dart';
 import 'package:hcslzapp/components/button.dart';
 import 'package:hcslzapp/components/input.textfield.dart';
-import 'package:hcslzapp/components/progress.dart';
 import 'package:hcslzapp/controllers/login.controller.dart';
 import 'package:hcslzapp/models/token.dart';
 import 'package:hcslzapp/pages/dashboard/dashboard.page.dart';
@@ -41,6 +40,17 @@ class _LoginState extends State<Login> {
   _sliverAppBar(BuildContext context) => CustomScrollView(
         slivers: <Widget>[
           SliverAppBar(
+/*            title: Container(
+              alignment: Alignment.topLeft,
+              child: Text(
+                'HCSlz App',
+                style: TextStyle(
+                  fontSize: 25.0,
+                  color: Colors.white70,
+                ),
+              ),
+            ),
+            centerTitle: true,*/
             pinned: true,
             expandedHeight: 150.0,
             backgroundColor: Colors.black,
@@ -78,14 +88,18 @@ class _LoginState extends State<Login> {
             child: SingleChildScrollView(
               child: Column(
                 children: <Widget>[
-                  Observer(
-                    builder: (_) => Visibility(
-                      child: CircularProgressIndicator(),
-                      visible: _controller.isLoading,
+                  SizedBox(
+                    height: 5.0,
+                  ),
+                  Text(
+                    '<<< HCSlz App >>>',
+                    style: TextStyle(
+                      fontSize: 20.0,
+                      color: Colors.orangeAccent,
                     ),
                   ),
                   SizedBox(
-                    height: 10.0,
+                    height: 5.0,
                   ),
                   InputTextField(
                     textEditingController: _controller.userLoginCtrl,
@@ -188,11 +202,10 @@ class _LoginState extends State<Login> {
             context,
             MaterialPageRoute(
               builder: (context) => Dashboard(
-                _controller.userLoginCtrl.text,
-                _tokenDetails.firstName(),
-                _tokenDetails.email(),
-                _tokenDetails.associatedId()
-              ),
+                  _controller.userLoginCtrl.text,
+                  _tokenDetails.firstName(),
+                  _tokenDetails.email(),
+                  _tokenDetails.associatedId()),
             ),
           );
         }

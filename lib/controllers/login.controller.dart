@@ -28,7 +28,7 @@ abstract class LoginControllerBase with Store {
   String errorMsg;
 
   @observable
-  final LoginRepo _loginRepo = LoginRepo();
+  LoginRepo _loginRepo = LoginRepo();
 
   get init {
     formController = FormController(user: '', password: '');

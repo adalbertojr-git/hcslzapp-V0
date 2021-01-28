@@ -67,6 +67,8 @@ class _PaymentListState extends State<PaymentList> {
               );
             },
           ),
+          floatingActionButtonLocation:
+              FloatingActionButtonLocation.centerFloat,
           floatingActionButton: _controller.isHideButton
               ? null
               : Button(
@@ -75,53 +77,6 @@ class _PaymentListState extends State<PaymentList> {
                 ),
         ),
       );
-
-/*
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      body: FutureBuilder<List<Payment>>(
-        */ /*
-        carrega JSON com dados da api
-        */ /*
-        future: _webClient.findByAssociado_Codigo(2),
-        */ /*
-        -------------------------------
-        */ /*
-        builder: (context, snapshot) {
-          switch (snapshot.connectionState) {
-            case ConnectionState.none:
-              break;
-            case ConnectionState.waiting:
-              return Progress();
-              break;
-            case ConnectionState.active:
-              break;
-            case ConnectionState.done:
-              if (snapshot.hasData) {
-                final List<Payment> mensalidades = snapshot.data;
-                if (mensalidades.isNotEmpty) {
-                  return _buildListView(context, mensalidades);
-                }
-              }
-              return CenteredMessage(
-                'Mensalidades nao encontradas.',
-              );
-              break;
-          }
-          */ /*
-            este codigo na pratica nao e alcançado (todos os cenarios possiveis ja
-            foram tratados acima), podendo assi retornar Null, mas
-            deve-se sempre evitar essa situacao
-            Envia-se uma msg generica
-          */ /*
-          return CenteredMessage(
-            'Erro desconhecido.',
-          );
-        },
-      ),
-    );
-  }*/
 
   get _buildListView => Container(
         padding: EdgeInsets.fromLTRB(5.0, 5.0, 5.0, 0.0),
@@ -160,7 +115,8 @@ class _PaymentListState extends State<PaymentList> {
         ),
       );
 
-  ExpansionTile _buildExpansionTile(List<Payment> payments, int i) => ExpansionTile(
+  ExpansionTile _buildExpansionTile(List<Payment> payments, int i) =>
+      ExpansionTile(
         leading: Icon(
           Icons.calendar_today,
           color: Colors.orangeAccent,
@@ -177,19 +133,18 @@ class _PaymentListState extends State<PaymentList> {
       );
 
   ListTile _buildListTile(PaymentMonths paymentMonths) => ListTile(
-      leading: Icon(
-        Icons.check_circle,
-        color: Colors.green,
-        size: 25,
-      ),
-      title: Text(
-        'Mes: ' + paymentMonths.month.toString(),
-        style: TextStyle(
-          fontSize: 18.0,
-          fontWeight: FontWeight.bold,
+        leading: Icon(
+          Icons.check_circle,
+          color: Colors.green,
+          size: 25,
         ),
-      ),
-      subtitle: Text('Valor Pago: 25,00'),
-    );
-
+        title: Text(
+          'Mes: ' + paymentMonths.month.toString(),
+          style: TextStyle(
+            fontSize: 18.0,
+            fontWeight: FontWeight.bold,
+          ),
+        ),
+        subtitle: Text('Valor Pago: 25,00'),
+      );
 }

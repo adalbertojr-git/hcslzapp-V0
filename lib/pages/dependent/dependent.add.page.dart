@@ -169,6 +169,7 @@ class _DependentAddState extends State<DependentAdd> {
             ),
           ),
         ),
+        floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
         floatingActionButton: Button(
             icon: Icons.playlist_add, onClick: () => _controller.add(context)),
       ),

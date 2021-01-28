@@ -20,9 +20,9 @@ import 'package:asuka/asuka.dart' as asuka;
 import 'dart:io';
 
 class AssociatedUpdate extends StatefulWidget {
-  final int associatedId;
+  final int _associatedId;
 
-  AssociatedUpdate(this.associatedId);
+  AssociatedUpdate(this._associatedId);
 
   @override
   _AssociatedUpdateState createState() => _AssociatedUpdateState();
@@ -34,7 +34,7 @@ class _AssociatedUpdateState extends State<AssociatedUpdate> {
   @override
   void initState() {
     //_controller = Provider.of<AssociatedController>(context, listen: false);
-    _controller.getFuture(widget.associatedId).then((value) {
+    _controller.getFuture(widget._associatedId).then((value) {
       if (value != null && value.isNotEmpty) {
         _controller.hideButton();
       }
@@ -72,7 +72,7 @@ class _AssociatedUpdateState extends State<AssociatedUpdate> {
                     if (snapshot.data.length > 0) {
                       _controller.associated = snapshot.data.first;
                       _controller.init;
-                      return _associatedWidgets(context);
+                      return _widgets(context);
                     } else
                       return CenteredMessage(
                         'Dados do associado especificado não foram encontrados.',
@@ -84,13 +84,15 @@ class _AssociatedUpdateState extends State<AssociatedUpdate> {
               );
             },
           ),
+          floatingActionButtonLocation:
+              FloatingActionButtonLocation.centerFloat,
           floatingActionButton: _controller.isHideButton
               ? null
               : Button(icon: Icons.save, onClick: () => _update),
         ),
       );
 
-  _associatedWidgets(BuildContext context) => Container(
+  _widgets(BuildContext context) => Container(
         padding: EdgeInsets.fromLTRB(5.0, 5.0, 5.0, 0.0),
         decoration: BoxDecoration(
           gradient: LinearGradient(

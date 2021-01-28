@@ -63,6 +63,8 @@ class AccessRequestListState extends State<AccessRequestList> {
               );
             },
           ),
+          floatingActionButtonLocation:
+              FloatingActionButtonLocation.centerFloat,
           floatingActionButton: _controller.isHideButton
               ? null
               : Button(icon: Icons.check, onClick: () => _check),
@@ -127,7 +129,7 @@ class AccessRequestListState extends State<AccessRequestList> {
 
   get _check {
     _controller.check().then(
-          (value) {
+      (value) {
         if (value != null) {
           asuka.showSnackBar(
             SnackBar(
