@@ -45,11 +45,11 @@ class _DashboardState extends State<Dashboard> {
   ];
 
   List<String> _listAdmScreensDesc = [
-    "Lista de todos os associados Harley Club",
-    "Informações financeiras dos associados",
-    "Informações de eventos pertinentes ao Harley Club (viagens, encontros, passeios, etc)",
-    "Lista de parceiros com promoções oferecidas ao Harley Club",
-    "Produtos Harley Club (camisas, bonés, etc)",
+    "Harleyros associados ao Harley Club",
+    "Registro de pagamento das mensalidades dos associados",
+    "Informações sobre viagens, encontros, passeios, etc.",
+    "Empresas com promoções oferecidas ao Harley Club",
+    "Produtos da marca Harley Club (camisas, bonés, etc)",
   ];
 
   List<IconData> _listAdmIcons = [
@@ -194,7 +194,8 @@ class _DashboardState extends State<Dashboard> {
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
             _BarButton(
-              'Requisições de Acesso',
+              'Acesso',
+              'Requisições de acesso',
               Icons.send_to_mobile,
               onClick: () {
                 Navigator.push(
@@ -206,6 +207,7 @@ class _DashboardState extends State<Dashboard> {
             ),
             _BarButton(
               'Documentos',
+              'Atas, estatuto, etc',
               Icons.file_copy_outlined,
               onClick: () {
                 //_showContactsList(context);
@@ -415,7 +417,7 @@ class _DashboardState extends State<Dashboard> {
                   Text(
                     _listAdmScreensDesc[index],
                     style: TextStyle(
-                      fontSize: 12.0,
+                      fontSize: 11.0,
                       fontWeight: FontWeight.normal,
                     ),
                   ),
@@ -485,11 +487,12 @@ class _GridButton extends StatelessWidget {
 } //GridButton
 
 class _BarButton extends StatelessWidget {
-  final String name;
+  final String title;
+  final String subtitle;
   final IconData icon;
   final Function onClick; //callback
 
-  _BarButton(this.name, this.icon, {@required this.onClick});
+  _BarButton(this.title, this.subtitle, this.icon, {@required this.onClick});
 
   @override
   Widget build(BuildContext context) {
@@ -516,11 +519,18 @@ class _BarButton extends StatelessWidget {
                   size: 50.0,
                 ),
                 Text(
-                  name,
+                  title,
                   style: TextStyle(
                     color: Colors.black,
-                    fontSize: 12.0,
+                    fontSize: 14.0,
                     fontWeight: FontWeight.bold,
+                  ),
+                ),
+                Text(
+                  subtitle,
+                  style: TextStyle(
+                    color: Colors.black,
+                    fontSize: 11.0,
                   ),
                 ),
               ],
