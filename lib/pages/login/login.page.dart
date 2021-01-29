@@ -37,7 +37,8 @@ class _LoginState extends State<Login> {
     );
   }
 
-  _sliverAppBar(BuildContext context) => CustomScrollView(
+  _sliverAppBar(BuildContext context) =>
+      CustomScrollView(
         slivers: <Widget>[
           SliverAppBar(
 /*            title: Container(
@@ -67,12 +68,19 @@ class _LoginState extends State<Login> {
         ],
       );
 
-  _widgets(BuildContext context) => Stack(
+  _widgets(BuildContext context) =>
+      Stack(
         children: [
           Center(
             child: SizedBox(
-              height: MediaQuery.of(context).size.height,
-              width: MediaQuery.of(context).size.width,
+              height: MediaQuery
+                  .of(context)
+                  .size
+                  .height,
+              width: MediaQuery
+                  .of(context)
+                  .size
+                  .width,
               child: Image.asset('assets/imgs/logo_login.png'),
             ),
           ),
@@ -84,7 +92,10 @@ class _LoginState extends State<Login> {
                 end: FractionalOffset.bottomRight,
               ),
             ),
-            height: MediaQuery.of(context).size.height,
+            height: MediaQuery
+                .of(context)
+                .size
+                .height,
             child: SingleChildScrollView(
               child: Column(
                 children: <Widget>[
@@ -152,10 +163,11 @@ class _LoginState extends State<Login> {
                         ),
                       ),
                       Observer(
-                        builder: (_) => Visibility(
-                          child: CircularProgressIndicator(),
-                          visible: _controller.isLoading,
-                        ),
+                        builder: (_) =>
+                            Visibility(
+                              child: CircularProgressIndicator(),
+                              visible: _controller.isLoading,
+                            ),
                       ),
                       FlatButton(
                         onPressed: () {
@@ -186,13 +198,14 @@ class _LoginState extends State<Login> {
     _controller.setLoading(true);
     _controller.errorMsg = null;
     _controller.login().then(
-      (token) {
+          (token) {
         if (_controller.errorMsg != null) {
           asuka.showSnackBar(
-            SnackBar(
-              content: Text(_controller.errorMsg),
-            ),
+              SnackBar(
+                content: Text(_controller.errorMsg),
+              ),
           );
+          _controller.setLoading(false);
         } else {
           Token _t = token;
           print(_t.token);
@@ -201,16 +214,16 @@ class _LoginState extends State<Login> {
           Navigator.pushReplacement(
             context,
             MaterialPageRoute(
-              builder: (context) => Dashboard(
-                  _controller.userLoginCtrl.text,
-                  _tokenDetails.firstName(),
-                  _tokenDetails.email(),
-                  _tokenDetails.associatedId()),
+              builder: (context) =>
+                  Dashboard(
+                      _controller.userLoginCtrl.text,
+                      _tokenDetails.firstName(),
+                      _tokenDetails.email(),
+                      _tokenDetails.associatedId()),
             ),
           );
         }
       },
     );
-    _controller.setLoading(false);
   }
 }

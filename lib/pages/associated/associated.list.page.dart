@@ -101,13 +101,23 @@ class AssociatedListState extends State<AssociatedList> {
                 ),
                 child: ListTile(
                   isThreeLine: true,
-                  title: Text(_controller.associateds[i].name),
-                  subtitle: Text('Tel.:' + (_controller.associateds[i].phone != null
-                      ? _controller.associateds[i].phone
-                      : 'Não informado') + '\n' +
-                      'Email:' + (_controller.associateds[i].email != null
-                      ? _controller.associateds[i].email
-                      : 'Não informado')),
+                  title: Center(
+                    child: Text(
+                      _controller.associateds[i].name,
+                      style: TextStyle(
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                  ),
+                  subtitle: Text('Tel.:' +
+                      (_controller.associateds[i].phone != null
+                          ? _controller.associateds[i].phone
+                          : 'Não informado') +
+                      '\n' +
+                      'Email:' +
+                      (_controller.associateds[i].email != null
+                          ? _controller.associateds[i].email
+                          : 'Não informado')),
                   leading: CircleAvatar(
                     child: Icon(Icons.person),
                     backgroundColor: Colors.white,
