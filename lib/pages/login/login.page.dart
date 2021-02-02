@@ -158,7 +158,7 @@ class _LoginState extends State<Login> {
                           'Esqueceu a senha?',
                           style: TextStyle(
                             color: Colors.indigo,
-                            fontSize: 14.0,
+                            fontSize: 12.0,
                           ),
                         ),
                       ),
@@ -181,7 +181,7 @@ class _LoginState extends State<Login> {
                           'Primeiro acesso?',
                           style: TextStyle(
                             color: Colors.indigo,
-                            fontSize: 14.0,
+                            fontSize: 12.0,
                           ),
                         ),
                       ),

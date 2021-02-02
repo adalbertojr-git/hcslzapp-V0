@@ -4,15 +4,13 @@ class Button extends StatelessWidget {
   final IconData icon;
   final Function onClick;
   final String heroTag;
+  final bool mini;
 
-  Button({this.icon, this.heroTag, @required this.onClick});
+  Button({this.icon, this.heroTag, @required this.onClick, this.mini = false});
 
   @override
-  Widget build(BuildContext context) {
-    return Container(
-      width: 70.0,
-      height: 70.0,
-      child: FloatingActionButton(
+  Widget build(BuildContext context) => FloatingActionButton(
+        mini: mini,
         heroTag: heroTag,
         backgroundColor: Colors.black,
         //backgroundColor: Colors.deepOrangeAccent[100],
@@ -20,12 +18,10 @@ class Button extends StatelessWidget {
           icon,
           color: Colors.deepOrangeAccent[100],
           //color: Colors.black,
-          size: 40,
+          size: 30,
         ),
         onPressed: () async {
           onClick();
         },
-      ),
-    );
-  }
+      );
 }

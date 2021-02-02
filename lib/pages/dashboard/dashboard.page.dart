@@ -14,6 +14,7 @@ import 'package:hcslzapp/pages/document/document.list.page.dart';
 import 'package:hcslzapp/pages/dtc.code/dtc.code.access.page.dart';
 import 'package:hcslzapp/pages/event/events.calendar.page.dart';
 import 'package:hcslzapp/pages/financial/payment.list.page.dart';
+import 'package:hcslzapp/pages/financial/payment.table.page.dart';
 import 'package:hcslzapp/pages/partnership/partnership.list.page.dart';
 import 'package:hcslzapp/pages/ride/my.ride.page.dart';
 import 'dart:io';
@@ -62,6 +63,7 @@ class _DashboardState extends State<Dashboard> {
 
   List<Widget> _listAdmWidgets = [
     AssociatedList(),
+    PaymentTablePage(),
   ];
 
   @override

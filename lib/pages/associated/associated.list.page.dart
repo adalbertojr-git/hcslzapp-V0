@@ -101,12 +101,10 @@ class AssociatedListState extends State<AssociatedList> {
                 ),
                 child: ListTile(
                   isThreeLine: true,
-                  title: Center(
-                    child: Text(
-                      _controller.associateds[i].name,
-                      style: TextStyle(
-                        fontWeight: FontWeight.bold,
-                      ),
+                  title: Text(
+                    _controller.associateds[i].name,
+                    style: TextStyle(
+                      fontWeight: FontWeight.bold,
                     ),
                   ),
                   subtitle: Text('Tel.:' +
