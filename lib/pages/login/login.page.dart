@@ -106,6 +106,7 @@ class _LoginState extends State<Login> {
                     '<<< HCSlz App >>>',
                     style: TextStyle(
                       fontSize: 20.0,
+                      fontWeight: FontWeight.bold,
                       color: Colors.orangeAccent,
                     ),
                   ),

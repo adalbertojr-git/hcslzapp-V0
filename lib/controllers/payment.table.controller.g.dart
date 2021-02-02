@@ -9,6 +9,29 @@ part of 'payment.table.controller.dart';
 // ignore_for_file: non_constant_identifier_names, unnecessary_brace_in_string_interps, unnecessary_lambdas, prefer_expression_function_bodies, lines_longer_than_80_chars, avoid_as, avoid_annotating_with_dynamic
 
 mixin _$PaymentTableController on PaymentTableControllerBase, Store {
+  Computed<List<PaymentTable>> _$listFilteredComputed;
+
+  @override
+  List<PaymentTable> get listFiltered => (_$listFilteredComputed ??=
+          Computed<List<PaymentTable>>(() => super.listFiltered,
+              name: 'PaymentTableControllerBase.listFiltered'))
+      .value;
+
+  final _$nameCtrlAtom = Atom(name: 'PaymentTableControllerBase.nameCtrl');
+
+  @override
+  TextEditingController get nameCtrl {
+    _$nameCtrlAtom.reportRead();
+    return super.nameCtrl;
+  }
+
+  @override
+  set nameCtrl(TextEditingController value) {
+    _$nameCtrlAtom.reportWrite(value, super.nameCtrl, () {
+      super.nameCtrl = value;
+    });
+  }
+
   final _$paymentsAtom = Atom(name: 'PaymentTableControllerBase.payments');
 
   @override
@@ -70,6 +93,21 @@ mixin _$PaymentTableController on PaymentTableControllerBase, Store {
     });
   }
 
+  final _$filterAtom = Atom(name: 'PaymentTableControllerBase.filter');
+
+  @override
+  String get filter {
+    _$filterAtom.reportRead();
+    return super.filter;
+  }
+
+  @override
+  set filter(String value) {
+    _$filterAtom.reportWrite(value, super.filter, () {
+      super.filter = value;
+    });
+  }
+
   final _$PaymentTableControllerBaseActionController =
       ActionController(name: 'PaymentTableControllerBase');
 
@@ -85,76 +123,25 @@ mixin _$PaymentTableController on PaymentTableControllerBase, Store {
   }
 
   @override
+  dynamic setFilter(String value) {
+    final _$actionInfo = _$PaymentTableControllerBaseActionController
+        .startAction(name: 'PaymentTableControllerBase.setFilter');
+    try {
+      return super.setFilter(value);
+    } finally {
+      _$PaymentTableControllerBaseActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
   String toString() {
     return '''
+nameCtrl: ${nameCtrl},
 payments: ${payments},
 errorMsg: ${errorMsg},
-future: ${future}
-    ''';
-  }
-}
-
-mixin _$FormController on FormControllerBase, Store {
-  final _$nameAtom = Atom(name: 'FormControllerBase.name');
-
-  @override
-  String get name {
-    _$nameAtom.reportRead();
-    return super.name;
-  }
-
-  @override
-  set name(String value) {
-    _$nameAtom.reportWrite(value, super.name, () {
-      super.name = value;
-    });
-  }
-
-  final _$emailAtom = Atom(name: 'FormControllerBase.email');
-
-  @override
-  String get email {
-    _$emailAtom.reportRead();
-    return super.email;
-  }
-
-  @override
-  set email(String value) {
-    _$emailAtom.reportWrite(value, super.email, () {
-      super.email = value;
-    });
-  }
-
-  final _$FormControllerBaseActionController =
-      ActionController(name: 'FormControllerBase');
-
-  @override
-  dynamic changeName(String value) {
-    final _$actionInfo = _$FormControllerBaseActionController.startAction(
-        name: 'FormControllerBase.changeName');
-    try {
-      return super.changeName(value);
-    } finally {
-      _$FormControllerBaseActionController.endAction(_$actionInfo);
-    }
-  }
-
-  @override
-  dynamic changeEmail(String value) {
-    final _$actionInfo = _$FormControllerBaseActionController.startAction(
-        name: 'FormControllerBase.changeEmail');
-    try {
-      return super.changeEmail(value);
-    } finally {
-      _$FormControllerBaseActionController.endAction(_$actionInfo);
-    }
-  }
-
-  @override
-  String toString() {
-    return '''
-name: ${name},
-email: ${email}
+future: ${future},
+filter: ${filter},
+listFiltered: ${listFiltered}
     ''';
   }
 }

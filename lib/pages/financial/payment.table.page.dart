@@ -8,6 +8,7 @@ import 'package:hcslzapp/components/progress.dart';
 import 'package:hcslzapp/components/top.margin.dart';
 import 'package:hcslzapp/controllers/payment.table.controller.dart';
 import 'package:hcslzapp/models/payment.table.dart';
+import 'package:mask_text_input_formatter/mask_text_input_formatter.dart';
 
 class PaymentTablePage extends StatefulWidget {
   @override
@@ -16,11 +17,11 @@ class PaymentTablePage extends StatefulWidget {
 
 class _PaymentTablePageState extends State<PaymentTablePage> {
   PaymentTableController _controller = PaymentTableController();
-  int _rowsPerPage = 10;
 
   @override
   void initState() {
     //_controller = Provider.of<AssociatedController>(context, listen: false);
+    _controller.init;
     _controller.getFuture();
     super.initState();
   }
@@ -76,37 +77,19 @@ class _PaymentTablePageState extends State<PaymentTablePage> {
         child: Column(
           children: [
             TopMargin(),
-            Row(
-              children: [
-                Expanded(
-                  child: InputTextField(
-                    textEditingController: _controller.yearCtrl,
-                    label: labelYear,
-                    icon: Icons.calendar_today_outlined,
-                    inputType: TextInputType.number,
-                  ),
-                ),
-                Expanded(
-                  flex: 2,
-                  child: InputTextField(
-                    textEditingController: _controller.nameCtrl,
-                    label: labelName,
-                    icon: Icons.person,
-                    inputType: TextInputType.text,
-                  ),
-                ),
-                Button(
-                  icon: Icons.search,
-                  mini: true,
-                  onClick: null,
-                ),
-              ],
+            InputTextField(
+              textEditingController: _controller.nameCtrl,
+              label: labelNamePayment,
+              hint: hintNamePayment,
+              icon: Icons.person,
+              inputType: TextInputType.text,
+              onChanged: _controller.setFilter,
             ),
             Expanded(
               child: Observer(
                 builder: (_) => ListView.separated(
                   shrinkWrap: true,
-                  itemCount: _controller.payments.length,
+                  itemCount: _controller.listFiltered.length,
                   itemBuilder: (_, int i) {
                     return Container(
                       decoration: BoxDecoration(
@@ -123,13 +106,16 @@ class _PaymentTablePageState extends State<PaymentTablePage> {
                       ),
                       child: ListTile(
                         title: Text(
-                          _controller.payments[i].name,
+                          _controller.listFiltered[i].name,
                           style: TextStyle(
                             fontWeight: FontWeight.bold,
                           ),
                         ),
-                        subtitle: Text('Total:' +
-                            (_controller.payments[i].total.toString())),
+                        subtitle: Text('Ano: ' +
+                            (_controller.listFiltered[i].year) +
+                            '\n' +
+                            'Total: ' +
+                            (_controller.listFiltered[i].total.toString())),
                         leading: CircleAvatar(
                           child: Icon(Icons.person),
                           backgroundColor: Colors.white,

@@ -55,3 +55,8 @@ const labelChassis = 'Chassis';
 const hintChassis = 'Informe o chassis da sua Harley';
 const labelRenavam = 'Renavam';
 const hintRenavam = 'Informe o codigo Renavam da sua Harley';
+/*
+Payments
+*/
+const labelNamePayment = 'Nome';
+const hintNamePayment = 'Digite qualquer parte do nome para pesquisar';

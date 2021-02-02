@@ -10,11 +10,6 @@ class PaymentTableController = PaymentTableControllerBase
     with _$PaymentTableController;
 
 abstract class PaymentTableControllerBase with Store {
-  var formController;
-
-  @observable
-  var yearCtrl = TextEditingController();
-
   @observable
   var nameCtrl = TextEditingController();
 
@@ -30,6 +25,9 @@ abstract class PaymentTableControllerBase with Store {
   @observable
   Future<List<PaymentTable>> future;
 
+  @observable
+  String filter = '';
+
   get init {
     payments.clear();
   }
@@ -42,25 +40,17 @@ abstract class PaymentTableControllerBase with Store {
       }, test: (e) => e is Exception);
 
   Future<List<PaymentTable>> getFuture() => future = findAll();
-}
 
-class FormController extends FormControllerBase with _$FormController {
-  FormController({String name, String email}) {
-    super.name = name;
-    super.email = email;
+  @action
+  setFilter(String value) => filter = value;
+
+  @computed
+  List<PaymentTable> get listFiltered {
+    if (filter.isEmpty) {
+      return List<PaymentTable>.from(payments);
+    } else {
+      return List<PaymentTable>.from(payments
+          .where((element) => element.name.contains(filter)));
+    }
   }
-}
-
-abstract class FormControllerBase with Store {
-  @observable
-  String name;
-
-  @observable
-  String email;
-
-  @action
-  changeName(String value) => name = value;
-
-  @action
-  changeEmail(String value) => email = value;
 }
