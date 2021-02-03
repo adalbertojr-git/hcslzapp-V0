@@ -60,3 +60,15 @@ Payments
 */
 const labelNamePayment = 'Nome';
 const hintNamePayment = 'Digite qualquer parte do nome para pesquisar';
+const labelJan = 'Jan (R\$)';
+const labelFev = 'Fev (R\$)';
+const labelMar = 'Mar (R\$)';
+const labelAbr = 'Abr (R\$)';
+const labelMai = 'Mai (R\$)';
+const labelJun = 'Jun (R\$)';
+const labelJul = 'Jul (R\$)';
+const labelAgo = 'Ago (R\$)';
+const labelSet = 'Set (R\$)';
+const labelOut = 'Out (R\$)';
+const labelNov = 'Nov (R\$)';
+const labelDez = 'Dez (R\$)';

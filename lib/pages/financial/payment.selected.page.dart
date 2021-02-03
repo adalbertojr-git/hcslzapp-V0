@@ -3,12 +3,10 @@ import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:hcslzapp/components/button.dart';
 import 'package:hcslzapp/components/centered.message.dart';
 import 'package:hcslzapp/components/progress.dart';
-import 'package:hcslzapp/components/input.textfield.dart';
-import 'package:hcslzapp/controllers/payment.associated.controller.dart';
 import 'package:hcslzapp/controllers/payment.selected.controller.dart';
 import 'package:hcslzapp/models/payment.dart';
 import 'package:hcslzapp/models/payment.months.dart';
-import 'package:hcslzapp/repositories/payment.repo.dart';
+import 'package:hcslzapp/pages/financial/payment.add.page.dart';
 
 class PaymentSelected extends StatefulWidget {
   final int paymentId;
@@ -33,54 +31,50 @@ class _PaymentSelectedState extends State<PaymentSelected> {
   }
 
   @override
-  Widget build(BuildContext context) =>
-      Observer(
-        builder: (_) =>
-            Scaffold(
-              body: FutureBuilder<List<Payment>>(
-                future: _controller.future,
-                builder: (context, snapshot) {
-                  switch (snapshot.connectionState) {
-                    case ConnectionState.none:
-                      break;
-                    case ConnectionState.waiting:
-                      return Progress();
-                    case ConnectionState.active:
-                      break;
-                    default:
-                      if (snapshot.hasError) {
-                        return CenteredMessage(snapshot.error.toString());
-                      } else {
-                        if (snapshot.data == null)
-                          return CenteredMessage(
-                            _controller.errorMsg,
-                          );
-                        if (snapshot.data.length > 0) {
-                          _controller.init;
-                          print(snapshot.data);
-                          _controller.payments.addAll(snapshot.data);
-                          return _buildListView;
-                        } else {}
-                      }
-                  } //switch (snapshot.connectionState)
-                  return CenteredMessage(
-                    'Houve um erro desconhecido ao executar a transação.',
-                  );
-                },
-              ),
-              floatingActionButtonLocation:
+  Widget build(BuildContext context) => Observer(
+        builder: (_) => Scaffold(
+          body: FutureBuilder<List<Payment>>(
+            future: _controller.future,
+            builder: (context, snapshot) {
+              switch (snapshot.connectionState) {
+                case ConnectionState.none:
+                  break;
+                case ConnectionState.waiting:
+                  return Progress();
+                case ConnectionState.active:
+                  break;
+                default:
+                  if (snapshot.hasError) {
+                    return CenteredMessage(snapshot.error.toString());
+                  } else {
+                    if (snapshot.data == null)
+                      return CenteredMessage(
+                        _controller.errorMsg,
+                      );
+                    if (snapshot.data.length > 0) {
+                      _controller.init;
+                      _controller.payments.addAll(snapshot.data);
+                      return _buildListView;
+                    } else {}
+                  }
+              } //switch (snapshot.connectionState)
+              return CenteredMessage(
+                'Houve um erro desconhecido ao executar a transação.',
+              );
+            },
+          ),
+          floatingActionButtonLocation:
               FloatingActionButtonLocation.centerFloat,
-              floatingActionButton: _controller.isHideButton
-                  ? null
-                  : Button(
-                icon: Icons.arrow_back,
-                onClick: () => Navigator.of(context).pop(),
-              ),
-            ),
+          floatingActionButton: _controller.isHideButton
+              ? null
+              : Button(
+                  icon: Icons.arrow_back,
+                  onClick: () => Navigator.of(context).pop(),
+                ),
+        ),
       );
 
-  get _buildListView =>
-      Container(
+  get _buildListView => Container(
         padding: EdgeInsets.fromLTRB(5.0, 5.0, 5.0, 0.0),
         decoration: BoxDecoration(
           gradient: LinearGradient(
@@ -89,10 +83,7 @@ class _PaymentSelectedState extends State<PaymentSelected> {
             end: FractionalOffset.bottomRight,
           ),
         ),
-        height: MediaQuery
-            .of(context)
-            .size
-            .height,
+        height: MediaQuery.of(context).size.height,
         child: Column(
           children: <Widget>[
             Expanded(
@@ -128,6 +119,13 @@ class _PaymentSelectedState extends State<PaymentSelected> {
                 size: 30.0,
               ),
               onTap: () {
+                print(_controller.payments[i]);
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) => PaymentAdd(
+                          _controller.payments[i])),
+                );
               },
             ),
           ],
@@ -139,25 +137,24 @@ class _PaymentSelectedState extends State<PaymentSelected> {
         ],
       );
 
-  ListTile _buildListTile(PaymentMonths paymentMonths) =>
-      ListTile(
-          leading: Icon(
-            Icons.check_circle,
-            color: Colors.green,
-            size: 25,
+  ListTile _buildListTile(PaymentMonths paymentMonths) => ListTile(
+        leading: Icon(
+          Icons.check_circle,
+          color: Colors.green,
+          size: 25,
+        ),
+        title: Text(
+          'Mes: ' + paymentMonths.month.toString(),
+          style: TextStyle(
+            fontSize: 18.0,
+            fontWeight: FontWeight.bold,
           ),
-          title: Text(
-            'Mes: ' + paymentMonths.month.toString(),
-            style: TextStyle(
-              fontSize: 18.0,
-              fontWeight: FontWeight.bold,
-            ),
+        ),
+        subtitle: Text(
+          'Valor Pago: R\$ ' + paymentMonths.value.toString(),
+          style: TextStyle(
+            fontWeight: FontWeight.bold,
           ),
-          subtitle: Text(
-            'Valor Pago: R\$ ' + paymentMonths.value.toString(),
-            style: TextStyle(
-              fontWeight: FontWeight.bold,
-            ),
-          ),
+        ),
       );
 }
