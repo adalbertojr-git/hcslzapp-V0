@@ -27,7 +27,7 @@ class PaymentRepo {
     }
   }
 
-  Future<List<Payment>> findByIdToList(int id) async {
+  Future<List<Payment>> findByAssociatedIdToList(int id) async {
     final Response response = await client
         .get(
           mainUrl + _paymentUrl + '/list/' + id.toString(),

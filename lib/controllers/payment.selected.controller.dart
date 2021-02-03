@@ -3,11 +3,11 @@ import 'package:hcslzapp/models/payment.dart';
 import 'package:hcslzapp/repositories/payment.repo.dart';
 import 'package:mobx/mobx.dart';
 
-part 'payment.controller.g.dart';
+part 'payment.selected.controller.g.dart';
 
-class PaymentController = PaymentControllerBase with _$PaymentController;
+class PaymentSelectedController = PaymentSelectedControllerBase with _$PaymentSelectedController;
 
-abstract class PaymentControllerBase with Store {
+abstract class PaymentSelectedControllerBase with Store {
   var formController;
 
   @observable
@@ -37,7 +37,7 @@ abstract class PaymentControllerBase with Store {
 
   @action
   Future findOne(int id) =>
-      ObservableFuture(_paymentRepo.findByIdToList(id).then((value) => value))
+      ObservableFuture(_paymentRepo.findByAssociatedIdToList(id).then((value) => value))
           .catchError((e) {
         this.errorMsg = "${e.message}";
       }, test: (e) => e is Exception);

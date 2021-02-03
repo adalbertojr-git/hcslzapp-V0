@@ -1,6 +1,6 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'payment.table.controller.dart';
+part of 'payment.list.controller.dart';
 
 // **************************************************************************
 // StoreGenerator
@@ -8,16 +8,16 @@ part of 'payment.table.controller.dart';
 
 // ignore_for_file: non_constant_identifier_names, unnecessary_brace_in_string_interps, unnecessary_lambdas, prefer_expression_function_bodies, lines_longer_than_80_chars, avoid_as, avoid_annotating_with_dynamic
 
-mixin _$PaymentTableController on PaymentTableControllerBase, Store {
-  Computed<List<PaymentTable>> _$listFilteredComputed;
+mixin _$PaymentListController on PaymentListControllerBase, Store {
+  Computed<List<Associated>> _$listFilteredComputed;
 
   @override
-  List<PaymentTable> get listFiltered => (_$listFilteredComputed ??=
-          Computed<List<PaymentTable>>(() => super.listFiltered,
-              name: 'PaymentTableControllerBase.listFiltered'))
+  List<Associated> get listFiltered => (_$listFilteredComputed ??=
+          Computed<List<Associated>>(() => super.listFiltered,
+              name: 'PaymentListControllerBase.listFiltered'))
       .value;
 
-  final _$nameCtrlAtom = Atom(name: 'PaymentTableControllerBase.nameCtrl');
+  final _$nameCtrlAtom = Atom(name: 'PaymentListControllerBase.nameCtrl');
 
   @override
   TextEditingController get nameCtrl {
@@ -32,23 +32,23 @@ mixin _$PaymentTableController on PaymentTableControllerBase, Store {
     });
   }
 
-  final _$paymentsAtom = Atom(name: 'PaymentTableControllerBase.payments');
+  final _$associatedsAtom = Atom(name: 'PaymentListControllerBase.associateds');
 
   @override
-  ObservableList<dynamic> get payments {
-    _$paymentsAtom.reportRead();
-    return super.payments;
+  ObservableList<dynamic> get associateds {
+    _$associatedsAtom.reportRead();
+    return super.associateds;
   }
 
   @override
-  set payments(ObservableList<dynamic> value) {
-    _$paymentsAtom.reportWrite(value, super.payments, () {
-      super.payments = value;
+  set associateds(ObservableList<dynamic> value) {
+    _$associatedsAtom.reportWrite(value, super.associateds, () {
+      super.associateds = value;
     });
   }
 
   final _$_paymentTableRepoAtom =
-      Atom(name: 'PaymentTableControllerBase._paymentTableRepo');
+      Atom(name: 'PaymentListControllerBase._paymentTableRepo');
 
   @override
   PaymentTableRepo get _paymentTableRepo {
@@ -63,7 +63,23 @@ mixin _$PaymentTableController on PaymentTableControllerBase, Store {
     });
   }
 
-  final _$errorMsgAtom = Atom(name: 'PaymentTableControllerBase.errorMsg');
+  final _$_associatedRepoAtom =
+      Atom(name: 'PaymentListControllerBase._associatedRepo');
+
+  @override
+  AssociatedRepo get _associatedRepo {
+    _$_associatedRepoAtom.reportRead();
+    return super._associatedRepo;
+  }
+
+  @override
+  set _associatedRepo(AssociatedRepo value) {
+    _$_associatedRepoAtom.reportWrite(value, super._associatedRepo, () {
+      super._associatedRepo = value;
+    });
+  }
+
+  final _$errorMsgAtom = Atom(name: 'PaymentListControllerBase.errorMsg');
 
   @override
   String get errorMsg {
@@ -78,22 +94,22 @@ mixin _$PaymentTableController on PaymentTableControllerBase, Store {
     });
   }
 
-  final _$futureAtom = Atom(name: 'PaymentTableControllerBase.future');
+  final _$futureAtom = Atom(name: 'PaymentListControllerBase.future');
 
   @override
-  Future<List<PaymentTable>> get future {
+  Future<List<Associated>> get future {
     _$futureAtom.reportRead();
     return super.future;
   }
 
   @override
-  set future(Future<List<PaymentTable>> value) {
+  set future(Future<List<Associated>> value) {
     _$futureAtom.reportWrite(value, super.future, () {
       super.future = value;
     });
   }
 
-  final _$filterAtom = Atom(name: 'PaymentTableControllerBase.filter');
+  final _$filterAtom = Atom(name: 'PaymentListControllerBase.filter');
 
   @override
   String get filter {
@@ -108,28 +124,28 @@ mixin _$PaymentTableController on PaymentTableControllerBase, Store {
     });
   }
 
-  final _$PaymentTableControllerBaseActionController =
-      ActionController(name: 'PaymentTableControllerBase');
+  final _$PaymentListControllerBaseActionController =
+      ActionController(name: 'PaymentListControllerBase');
 
   @override
   Future<dynamic> findAll() {
-    final _$actionInfo = _$PaymentTableControllerBaseActionController
-        .startAction(name: 'PaymentTableControllerBase.findAll');
+    final _$actionInfo = _$PaymentListControllerBaseActionController
+        .startAction(name: 'PaymentListControllerBase.findAll');
     try {
       return super.findAll();
     } finally {
-      _$PaymentTableControllerBaseActionController.endAction(_$actionInfo);
+      _$PaymentListControllerBaseActionController.endAction(_$actionInfo);
     }
   }
 
   @override
   dynamic setFilter(String value) {
-    final _$actionInfo = _$PaymentTableControllerBaseActionController
-        .startAction(name: 'PaymentTableControllerBase.setFilter');
+    final _$actionInfo = _$PaymentListControllerBaseActionController
+        .startAction(name: 'PaymentListControllerBase.setFilter');
     try {
       return super.setFilter(value);
     } finally {
-      _$PaymentTableControllerBaseActionController.endAction(_$actionInfo);
+      _$PaymentListControllerBaseActionController.endAction(_$actionInfo);
     }
   }
 
@@ -137,7 +153,7 @@ mixin _$PaymentTableController on PaymentTableControllerBase, Store {
   String toString() {
     return '''
 nameCtrl: ${nameCtrl},
-payments: ${payments},
+associateds: ${associateds},
 errorMsg: ${errorMsg},
 future: ${future},
 filter: ${filter},

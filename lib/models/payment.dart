@@ -14,14 +14,14 @@ class Payment {
             .map((paymentMonths) => PaymentMonths.fromJson(paymentMonths)));
 
   Map<String, dynamic> toJson() => {
-    'id': id,
-    'year': year,
-    'paymentMonths': List<dynamic>.from(
-        paymentMonths.map((paymentMonths) => paymentMonths.toJson())),
-  };
+        'id': id,
+        'year': year,
+        'paymentMonths': List<dynamic>.from(
+            paymentMonths.map((paymentMonths) => paymentMonths.toJson())),
+      };
 
   @override
   String toString() {
-    return 'Mensalidade{id: $id, year: $year, paymentMonths: $paymentMonths}';
+    return 'Payment{id: $id, year: $year, paymentMonths: $paymentMonths}';
   }
 }
