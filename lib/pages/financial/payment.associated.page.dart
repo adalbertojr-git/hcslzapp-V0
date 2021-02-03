@@ -90,18 +90,6 @@ class _PaymentAssociatedState extends State<PaymentAssociated> {
         height: MediaQuery.of(context).size.height,
         child: Column(
           children: <Widget>[
-            SizedBox(
-              height: 20.0,
-            ),
-            Text(
-              'Pagamentos realizados:',
-              style: TextStyle(
-                fontSize: 18.0,
-              ),
-            ),
-            Padding(
-              padding: EdgeInsets.all(5.0),
-            ),
             Expanded(
               child: ListView.builder(
                 itemCount: _controller.payments.length,

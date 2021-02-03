@@ -24,6 +24,7 @@ class HCSlzApp extends StatelessWidget {
             brightness: AppController.instance.isDarkTheme
                 ? Brightness.dark
                 : Brightness.light,
+            accentColor: Colors.indigo,
           ),
         );
       },

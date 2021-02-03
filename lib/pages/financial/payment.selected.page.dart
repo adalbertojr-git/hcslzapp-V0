@@ -33,52 +33,54 @@ class _PaymentSelectedState extends State<PaymentSelected> {
   }
 
   @override
-  Widget build(BuildContext context) => Observer(
-        builder: (_) => Scaffold(
-          body: FutureBuilder<List<Payment>>(
-            future: _controller.future,
-            builder: (context, snapshot) {
-              switch (snapshot.connectionState) {
-                case ConnectionState.none:
-                  break;
-                case ConnectionState.waiting:
-                  return Progress();
-                case ConnectionState.active:
-                  break;
-                default:
-                  if (snapshot.hasError) {
-                    return CenteredMessage(snapshot.error.toString());
-                  } else {
-                    if (snapshot.data == null)
-                      return CenteredMessage(
-                        _controller.errorMsg,
-                      );
-                    if (snapshot.data.length > 0) {
-                      _controller.init;
-                      _controller.payments.addAll(snapshot.data);
-                      return _buildListView;
-                    } else {
-
-                    }
-                  }
-              } //switch (snapshot.connectionState)
-              return CenteredMessage(
-                'Houve um erro desconhecido ao executar a transação.',
-              );
-            },
-          ),
-          floatingActionButtonLocation:
+  Widget build(BuildContext context) =>
+      Observer(
+        builder: (_) =>
+            Scaffold(
+              body: FutureBuilder<List<Payment>>(
+                future: _controller.future,
+                builder: (context, snapshot) {
+                  switch (snapshot.connectionState) {
+                    case ConnectionState.none:
+                      break;
+                    case ConnectionState.waiting:
+                      return Progress();
+                    case ConnectionState.active:
+                      break;
+                    default:
+                      if (snapshot.hasError) {
+                        return CenteredMessage(snapshot.error.toString());
+                      } else {
+                        if (snapshot.data == null)
+                          return CenteredMessage(
+                            _controller.errorMsg,
+                          );
+                        if (snapshot.data.length > 0) {
+                          _controller.init;
+                          print(snapshot.data);
+                          _controller.payments.addAll(snapshot.data);
+                          return _buildListView;
+                        } else {}
+                      }
+                  } //switch (snapshot.connectionState)
+                  return CenteredMessage(
+                    'Houve um erro desconhecido ao executar a transação.',
+                  );
+                },
+              ),
+              floatingActionButtonLocation:
               FloatingActionButtonLocation.centerFloat,
-          floatingActionButton: _controller.isHideButton
-              ? null
-              : Button(
-                  icon: Icons.arrow_back,
-                  onClick: () => Navigator.of(context).pop(),
-                ),
-        ),
+              floatingActionButton: _controller.isHideButton
+                  ? null
+                  : Button(
+                icon: Icons.arrow_back,
+                onClick: () => Navigator.of(context).pop(),
+              ),
+            ),
       );
 
-  get _buildListView => Container(
+  get _buildListView =>
+      Container(
         padding: EdgeInsets.fromLTRB(5.0, 5.0, 5.0, 0.0),
         decoration: BoxDecoration(
           gradient: LinearGradient(
@@ -87,21 +89,12 @@ class _PaymentSelectedState extends State<PaymentSelected> {
             end: FractionalOffset.bottomRight,
           ),
         ),
-        height: MediaQuery.of(context).size.height,
+        height: MediaQuery
+            .of(context)
+            .size
+            .height,
         child: Column(
           children: <Widget>[
-            SizedBox(
-              height: 20.0,
-            ),
-            Text(
-              'Pagamentos realizados:',
-              style: TextStyle(
-                fontSize: 18.0,
-              ),
-            ),
-            Padding(
-              padding: EdgeInsets.all(5.0),
-            ),
             Expanded(
               child: ListView.builder(
                 itemCount: _controller.payments.length,
@@ -117,13 +110,27 @@ class _PaymentSelectedState extends State<PaymentSelected> {
 
   ExpansionTile _buildExpansionTile(List<Payment> payments, int i) =>
       ExpansionTile(
-        leading: Icon(
-          Icons.calendar_today,
-          color: Colors.orangeAccent,
-          size: 30,
-        ),
+        initiallyExpanded: true,
         title: Text(
           'Ano: ' + payments[i].year,
+          style: TextStyle(
+            fontSize: 18.0,
+            fontWeight: FontWeight.bold,
+          ),
+        ),
+        subtitle: Text('Total pago: R\$ '),
+        trailing: Wrap(
+          spacing: 10, // space between two icons
+          children: <Widget>[
+            GestureDetector(
+              child: Icon(
+                Icons.edit,
+                size: 30.0,
+              ),
+              onTap: () {
+              },
+            ),
+          ],
         ),
         children: <Widget>[
           Column(
@@ -132,19 +139,25 @@ class _PaymentSelectedState extends State<PaymentSelected> {
         ],
       );
 
-  ListTile _buildListTile(PaymentMonths paymentMonths) => ListTile(
-        leading: Icon(
-          Icons.check_circle,
-          color: Colors.green,
-          size: 25,
-        ),
-        title: Text(
-          'Mes: ' + paymentMonths.month.toString(),
-          style: TextStyle(
-            fontSize: 18.0,
-            fontWeight: FontWeight.bold,
+  ListTile _buildListTile(PaymentMonths paymentMonths) =>
+      ListTile(
+          leading: Icon(
+            Icons.check_circle,
+            color: Colors.green,
+            size: 25,
           ),
-        ),
-        subtitle: Text('Valor Pago: ' + paymentMonths.value.toString()),
+          title: Text(
+            'Mes: ' + paymentMonths.month.toString(),
+            style: TextStyle(
+              fontSize: 18.0,
+              fontWeight: FontWeight.bold,
+            ),
+          ),
+          subtitle: Text(
+            'Valor Pago: R\$ ' + paymentMonths.value.toString(),
+            style: TextStyle(
+              fontWeight: FontWeight.bold,
+            ),
+          ),
       );
 }

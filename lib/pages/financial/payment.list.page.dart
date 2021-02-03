@@ -10,6 +10,7 @@ import 'package:hcslzapp/controllers/payment.list.controller.dart';
 import 'package:hcslzapp/models/associated.dart';
 import 'package:hcslzapp/models/payment.table.dart';
 import 'package:hcslzapp/pages/financial/payment.associated.page.dart';
+import 'package:hcslzapp/pages/financial/payment.selected.page.dart';
 import 'package:mask_text_input_formatter/mask_text_input_formatter.dart';
 
 class PaymentListPage extends StatefulWidget {
@@ -143,7 +144,7 @@ class _PaymentListPageState extends State<PaymentListPage> {
                                 Navigator.push(
                                   context,
                                   MaterialPageRoute(
-                                      builder: (context) => PaymentAssociated(
+                                      builder: (context) => PaymentSelected(
                                           _controller.listFiltered[i].id)),
                                 );
                               },
