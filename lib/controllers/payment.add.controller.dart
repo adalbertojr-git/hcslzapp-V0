@@ -1,5 +1,6 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
+import 'package:hcslzapp/models/associated.dart';
 import 'package:hcslzapp/models/payment.dart';
 import 'package:hcslzapp/repositories/payment.repo.dart';
 import 'package:mobx/mobx.dart';
@@ -64,6 +65,9 @@ abstract class PaymentAddControllerBase with Store {
   Payment payment;
 
   @observable
+  Associated associated;
+
+  @observable
   PaymentRepo _paymentRepo = PaymentRepo();
 
   @observable
@@ -79,13 +83,10 @@ abstract class PaymentAddControllerBase with Store {
 
   get _initTextFields {
     idCtrl.text = payment != null ? payment.id.toString() : null;
-    nameCtrl.text = payment != null ? payment.associated.name : null;
+    nameCtrl.text = payment != null ? payment.associated.name : associated.name;
     yearCtrl.text = payment != null ? payment.year : null;
     if (payment != null) {
       payment.paymentMonths.forEach((element) {
-        if (element.month == 1) {
-          janCtrl.text = element.value.toString();
-        }
         switch (element.month) {
           case 1:
             janCtrl.text = element.value.toString();

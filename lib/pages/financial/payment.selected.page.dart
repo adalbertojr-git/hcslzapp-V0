@@ -4,14 +4,15 @@ import 'package:hcslzapp/components/button.dart';
 import 'package:hcslzapp/components/centered.message.dart';
 import 'package:hcslzapp/components/progress.dart';
 import 'package:hcslzapp/controllers/payment.selected.controller.dart';
+import 'package:hcslzapp/models/associated.dart';
 import 'package:hcslzapp/models/payment.dart';
 import 'package:hcslzapp/models/payment.months.dart';
 import 'package:hcslzapp/pages/financial/payment.add.page.dart';
 
 class PaymentSelected extends StatefulWidget {
-  final int paymentId;
+  final Associated _associated;
 
-  const PaymentSelected(this.paymentId);
+  const PaymentSelected(this._associated);
 
   @override
   _PaymentSelectedState createState() => _PaymentSelectedState();
@@ -22,7 +23,7 @@ class _PaymentSelectedState extends State<PaymentSelected> {
 
   @override
   void initState() {
-    _controller.getFuture(widget.paymentId).then((value) {
+    _controller.getFuture(widget._associated.id).then((value) {
       if (value != null) {
         _controller.setButtonVisibilty();
       }
@@ -69,7 +70,10 @@ class _PaymentSelectedState extends State<PaymentSelected> {
               ? null
               : Button(
                   icon: Icons.add,
-                  onClick: () => Navigator.of(context).pop(),
+                  onClick: () => Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => PaymentAdd(null, widget._associated))),
                 ),
         ),
       );
@@ -124,7 +128,7 @@ class _PaymentSelectedState extends State<PaymentSelected> {
                   context,
                   MaterialPageRoute(
                       builder: (context) =>
-                          PaymentAdd(_controller.payments[i])),
+                          PaymentAdd(_controller.payments[i], null)),
                 );
               },
             ),

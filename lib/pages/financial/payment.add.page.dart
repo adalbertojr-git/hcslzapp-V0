@@ -5,13 +5,15 @@ import 'package:hcslzapp/components/button.dart';
 import 'package:hcslzapp/components/input.textfield.dart';
 import 'package:hcslzapp/components/top.margin.dart';
 import 'package:hcslzapp/controllers/payment.add.controller.dart';
+import 'package:hcslzapp/models/associated.dart';
 import 'package:hcslzapp/models/payment.dart';
 import 'package:mask_text_input_formatter/mask_text_input_formatter.dart';
 
 class PaymentAdd extends StatefulWidget {
   final Payment _payment;
+  final Associated _associated;
 
-  PaymentAdd(this._payment);
+  PaymentAdd(this._payment, this._associated);
 
   @override
   _PaymentAddAddState createState() => _PaymentAddAddState();
@@ -22,8 +24,9 @@ class _PaymentAddAddState extends State<PaymentAdd> {
 
   @override
   void initState() {
-    _controller.payment =
-        widget._payment != null ? widget._payment : null;
+    _controller.payment = widget._payment != null ? widget._payment : null;
+    _controller.associated =
+        widget._associated != null ? widget._associated : null;
     _controller.init;
     super.initState();
   }
@@ -59,7 +62,7 @@ class _PaymentAddAddState extends State<PaymentAdd> {
                     child: InputTextField(
                       textEditingController: _controller.yearCtrl,
                       label: labelYear,
-                      disabled: true,
+                      disabled: widget._payment == null ? false : true,
                     ),
                   ),
                 ],

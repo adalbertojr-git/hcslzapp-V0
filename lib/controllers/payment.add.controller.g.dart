@@ -264,6 +264,21 @@ mixin _$PaymentAddController on PaymentAddControllerBase, Store {
     });
   }
 
+  final _$associatedAtom = Atom(name: 'PaymentAddControllerBase.associated');
+
+  @override
+  Associated get associated {
+    _$associatedAtom.reportRead();
+    return super.associated;
+  }
+
+  @override
+  set associated(Associated value) {
+    _$associatedAtom.reportWrite(value, super.associated, () {
+      super.associated = value;
+    });
+  }
+
   final _$_paymentRepoAtom =
       Atom(name: 'PaymentAddControllerBase._paymentRepo');
 
@@ -344,6 +359,7 @@ novCtrl: ${novCtrl},
 dezCtrl: ${dezCtrl},
 payments: ${payments},
 payment: ${payment},
+associated: ${associated},
 errorMsg: ${errorMsg},
 future: ${future}
     ''';

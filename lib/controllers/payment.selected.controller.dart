@@ -42,8 +42,8 @@ abstract class PaymentSelectedControllerBase with Store {
         this.errorMsg = "${e.message}";
       }, test: (e) => e is Exception);
 
-  Future<List<Payment>> getFuture(int _paymentId) =>
-      future = findByAssociatedIdToList(_paymentId);
+  Future<List<Payment>> getFuture(int id) =>
+      future = findByAssociatedIdToList(id);
 }
 
 class FormController extends FormControllerBase with _$FormController {
