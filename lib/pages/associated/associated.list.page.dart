@@ -22,7 +22,7 @@ class AssociatedListState extends State<AssociatedList> {
   void initState() {
     _controller.getFuture().then((value) {
       if (value != null && value.isNotEmpty) {
-        _controller.hideButton();
+        _controller.setButtonVisibilty();
       }
     });
     super.initState();
@@ -66,7 +66,7 @@ class AssociatedListState extends State<AssociatedList> {
           ),
           floatingActionButtonLocation:
               FloatingActionButtonLocation.centerFloat,
-          floatingActionButton: _controller.isHideButton
+          floatingActionButton: _controller.isHidedButton
               ? null
               : Button(icon: Icons.save, onClick: () {}),
         ),

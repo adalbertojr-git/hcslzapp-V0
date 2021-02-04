@@ -36,7 +36,7 @@ class _AssociatedUpdateState extends State<AssociatedUpdate> {
     //_controller = Provider.of<AssociatedController>(context, listen: false);
     _controller.getFuture(widget._associatedId).then((value) {
       if (value != null && value.isNotEmpty) {
-        _controller.hideButton();
+        _controller.setButtonVisibilty();
       }
     });
     super.initState();
@@ -86,7 +86,7 @@ class _AssociatedUpdateState extends State<AssociatedUpdate> {
           ),
           floatingActionButtonLocation:
               FloatingActionButtonLocation.centerFloat,
-          floatingActionButton: _controller.isHideButton
+          floatingActionButton: _controller.isHidedButton
               ? null
               : Button(icon: Icons.save, onClick: () => _update),
         ),

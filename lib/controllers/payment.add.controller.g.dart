@@ -114,6 +114,126 @@ mixin _$PaymentAddController on PaymentAddControllerBase, Store {
     });
   }
 
+  final _$maiCtrlAtom = Atom(name: 'PaymentAddControllerBase.maiCtrl');
+
+  @override
+  TextEditingController get maiCtrl {
+    _$maiCtrlAtom.reportRead();
+    return super.maiCtrl;
+  }
+
+  @override
+  set maiCtrl(TextEditingController value) {
+    _$maiCtrlAtom.reportWrite(value, super.maiCtrl, () {
+      super.maiCtrl = value;
+    });
+  }
+
+  final _$junCtrlAtom = Atom(name: 'PaymentAddControllerBase.junCtrl');
+
+  @override
+  TextEditingController get junCtrl {
+    _$junCtrlAtom.reportRead();
+    return super.junCtrl;
+  }
+
+  @override
+  set junCtrl(TextEditingController value) {
+    _$junCtrlAtom.reportWrite(value, super.junCtrl, () {
+      super.junCtrl = value;
+    });
+  }
+
+  final _$julCtrlAtom = Atom(name: 'PaymentAddControllerBase.julCtrl');
+
+  @override
+  TextEditingController get julCtrl {
+    _$julCtrlAtom.reportRead();
+    return super.julCtrl;
+  }
+
+  @override
+  set julCtrl(TextEditingController value) {
+    _$julCtrlAtom.reportWrite(value, super.julCtrl, () {
+      super.julCtrl = value;
+    });
+  }
+
+  final _$agoCtrlAtom = Atom(name: 'PaymentAddControllerBase.agoCtrl');
+
+  @override
+  TextEditingController get agoCtrl {
+    _$agoCtrlAtom.reportRead();
+    return super.agoCtrl;
+  }
+
+  @override
+  set agoCtrl(TextEditingController value) {
+    _$agoCtrlAtom.reportWrite(value, super.agoCtrl, () {
+      super.agoCtrl = value;
+    });
+  }
+
+  final _$setCtrlAtom = Atom(name: 'PaymentAddControllerBase.setCtrl');
+
+  @override
+  TextEditingController get setCtrl {
+    _$setCtrlAtom.reportRead();
+    return super.setCtrl;
+  }
+
+  @override
+  set setCtrl(TextEditingController value) {
+    _$setCtrlAtom.reportWrite(value, super.setCtrl, () {
+      super.setCtrl = value;
+    });
+  }
+
+  final _$outCtrlAtom = Atom(name: 'PaymentAddControllerBase.outCtrl');
+
+  @override
+  TextEditingController get outCtrl {
+    _$outCtrlAtom.reportRead();
+    return super.outCtrl;
+  }
+
+  @override
+  set outCtrl(TextEditingController value) {
+    _$outCtrlAtom.reportWrite(value, super.outCtrl, () {
+      super.outCtrl = value;
+    });
+  }
+
+  final _$novCtrlAtom = Atom(name: 'PaymentAddControllerBase.novCtrl');
+
+  @override
+  TextEditingController get novCtrl {
+    _$novCtrlAtom.reportRead();
+    return super.novCtrl;
+  }
+
+  @override
+  set novCtrl(TextEditingController value) {
+    _$novCtrlAtom.reportWrite(value, super.novCtrl, () {
+      super.novCtrl = value;
+    });
+  }
+
+  final _$dezCtrlAtom = Atom(name: 'PaymentAddControllerBase.dezCtrl');
+
+  @override
+  TextEditingController get dezCtrl {
+    _$dezCtrlAtom.reportRead();
+    return super.dezCtrl;
+  }
+
+  @override
+  set dezCtrl(TextEditingController value) {
+    _$dezCtrlAtom.reportWrite(value, super.dezCtrl, () {
+      super.dezCtrl = value;
+    });
+  }
+
   final _$paymentsAtom = Atom(name: 'PaymentAddControllerBase.payments');
 
   @override
@@ -194,11 +314,11 @@ mixin _$PaymentAddController on PaymentAddControllerBase, Store {
       ActionController(name: 'PaymentAddControllerBase');
 
   @override
-  Future<dynamic> findOne(int id) {
+  Future<dynamic> findByAssociatedIdToList(int id) {
     final _$actionInfo = _$PaymentAddControllerBaseActionController.startAction(
-        name: 'PaymentAddControllerBase.findOne');
+        name: 'PaymentAddControllerBase.findByAssociatedIdToList');
     try {
-      return super.findOne(id);
+      return super.findByAssociatedIdToList(id);
     } finally {
       _$PaymentAddControllerBaseActionController.endAction(_$actionInfo);
     }
@@ -214,6 +334,14 @@ janCtrl: ${janCtrl},
 fevCtrl: ${fevCtrl},
 marCtrl: ${marCtrl},
 abrCtrl: ${abrCtrl},
+maiCtrl: ${maiCtrl},
+junCtrl: ${junCtrl},
+julCtrl: ${julCtrl},
+agoCtrl: ${agoCtrl},
+setCtrl: ${setCtrl},
+outCtrl: ${outCtrl},
+novCtrl: ${novCtrl},
+dezCtrl: ${dezCtrl},
 payments: ${payments},
 payment: ${payment},
 errorMsg: ${errorMsg},

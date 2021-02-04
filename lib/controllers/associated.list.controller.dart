@@ -10,7 +10,7 @@ class AssociatedListController = AssociatedListControllerBase
 
 abstract class AssociatedListControllerBase with Store {
   @observable
-  bool isHideButton = true;
+  bool isHidedButton = true;
 
   @observable
   ObservableList associateds = [].asObservable();
@@ -36,7 +36,7 @@ abstract class AssociatedListControllerBase with Store {
   }
 
   @action
-  bool hideButton() => isHideButton = !isHideButton;
+  bool setButtonVisibilty() => isHidedButton = !isHidedButton;
 
   @action
   Future findAll() =>

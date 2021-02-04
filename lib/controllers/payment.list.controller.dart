@@ -37,22 +37,12 @@ abstract class PaymentListControllerBase with Store {
     associateds.clear();
   }
 
-/*  @action
-  Future findAll() =>
-      ObservableFuture(_paymentTableRepo.findAll().then((value) => value))
-          .catchError((e) {
-        this.errorMsg = "${e.message}";
-      }, test: (e) => e is Exception);*/
-
-
   @action
   Future findAll() =>
       ObservableFuture(_associatedRepo.findAll().then((value) => value))
           .catchError((e) {
         this.errorMsg = "${e.message}";
       }, test: (e) => e is Exception);
-
-  //Future<List<PaymentTable>> getFuture() => future = findAll();
 
   Future<List<Associated>> getFuture() => future = findAll();
 

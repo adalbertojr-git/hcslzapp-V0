@@ -23,8 +23,8 @@ class _PaymentSelectedState extends State<PaymentSelected> {
   @override
   void initState() {
     _controller.getFuture(widget.paymentId).then((value) {
-      if (value != null && value.isNotEmpty) {
-        _controller.hideButton();
+      if (value != null) {
+        _controller.setButtonVisibilty();
       }
     });
     super.initState();
@@ -51,11 +51,11 @@ class _PaymentSelectedState extends State<PaymentSelected> {
                       return CenteredMessage(
                         _controller.errorMsg,
                       );
+                    _controller.init;
                     if (snapshot.data.length > 0) {
-                      _controller.init;
                       _controller.payments.addAll(snapshot.data);
-                      return _buildListView;
-                    } else {}
+                    }
+                    return _buildListView;
                   }
               } //switch (snapshot.connectionState)
               return CenteredMessage(
@@ -65,10 +65,10 @@ class _PaymentSelectedState extends State<PaymentSelected> {
           ),
           floatingActionButtonLocation:
               FloatingActionButtonLocation.centerFloat,
-          floatingActionButton: _controller.isHideButton
+          floatingActionButton: _controller.isHidedButton
               ? null
               : Button(
-                  icon: Icons.arrow_back,
+                  icon: Icons.add,
                   onClick: () => Navigator.of(context).pop(),
                 ),
         ),
@@ -123,8 +123,8 @@ class _PaymentSelectedState extends State<PaymentSelected> {
                 Navigator.push(
                   context,
                   MaterialPageRoute(
-                      builder: (context) => PaymentAdd(
-                          _controller.payments[i])),
+                      builder: (context) =>
+                          PaymentAdd(_controller.payments[i])),
                 );
               },
             ),

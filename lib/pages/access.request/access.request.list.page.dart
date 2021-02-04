@@ -21,7 +21,7 @@ class AccessRequestListState extends State<AccessRequestList> {
   void initState() {
     _controller.getFuture().then((value) {
       if (value != null && value.isNotEmpty) {
-        _controller.hideButton();
+        _controller.setButtonVisibilty();
       }
     });
     super.initState();
@@ -65,7 +65,7 @@ class AccessRequestListState extends State<AccessRequestList> {
           ),
           floatingActionButtonLocation:
               FloatingActionButtonLocation.centerFloat,
-          floatingActionButton: _controller.isHideButton
+          floatingActionButton: _controller.isHidedButton
               ? null
               : Button(icon: Icons.check, onClick: () => _check),
         ),

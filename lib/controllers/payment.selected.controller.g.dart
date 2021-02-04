@@ -9,19 +9,19 @@ part of 'payment.selected.controller.dart';
 // ignore_for_file: non_constant_identifier_names, unnecessary_brace_in_string_interps, unnecessary_lambdas, prefer_expression_function_bodies, lines_longer_than_80_chars, avoid_as, avoid_annotating_with_dynamic
 
 mixin _$PaymentSelectedController on PaymentSelectedControllerBase, Store {
-  final _$isHideButtonAtom =
-      Atom(name: 'PaymentSelectedControllerBase.isHideButton');
+  final _$isHidedButtonAtom =
+      Atom(name: 'PaymentSelectedControllerBase.isHidedButton');
 
   @override
-  bool get isHideButton {
-    _$isHideButtonAtom.reportRead();
-    return super.isHideButton;
+  bool get isHidedButton {
+    _$isHidedButtonAtom.reportRead();
+    return super.isHidedButton;
   }
 
   @override
-  set isHideButton(bool value) {
-    _$isHideButtonAtom.reportWrite(value, super.isHideButton, () {
-      super.isHideButton = value;
+  set isHidedButton(bool value) {
+    _$isHidedButtonAtom.reportWrite(value, super.isHidedButton, () {
+      super.isHidedButton = value;
     });
   }
 
@@ -105,22 +105,23 @@ mixin _$PaymentSelectedController on PaymentSelectedControllerBase, Store {
       ActionController(name: 'PaymentSelectedControllerBase');
 
   @override
-  bool hideButton() {
+  bool setButtonVisibilty() {
     final _$actionInfo = _$PaymentSelectedControllerBaseActionController
-        .startAction(name: 'PaymentSelectedControllerBase.hideButton');
+        .startAction(name: 'PaymentSelectedControllerBase.setButtonVisibilty');
     try {
-      return super.hideButton();
+      return super.setButtonVisibilty();
     } finally {
       _$PaymentSelectedControllerBaseActionController.endAction(_$actionInfo);
     }
   }
 
   @override
-  Future<dynamic> findOne(int id) {
-    final _$actionInfo = _$PaymentSelectedControllerBaseActionController
-        .startAction(name: 'PaymentSelectedControllerBase.findOne');
+  Future<dynamic> findByAssociatedIdToList(int id) {
+    final _$actionInfo =
+        _$PaymentSelectedControllerBaseActionController.startAction(
+            name: 'PaymentSelectedControllerBase.findByAssociatedIdToList');
     try {
-      return super.findOne(id);
+      return super.findByAssociatedIdToList(id);
     } finally {
       _$PaymentSelectedControllerBaseActionController.endAction(_$actionInfo);
     }
@@ -129,7 +130,7 @@ mixin _$PaymentSelectedController on PaymentSelectedControllerBase, Store {
   @override
   String toString() {
     return '''
-isHideButton: ${isHideButton},
+isHidedButton: ${isHidedButton},
 payments: ${payments},
 payment: ${payment},
 errorMsg: ${errorMsg},

@@ -25,7 +25,7 @@ class _PaymentAssociatedState extends State<PaymentAssociated> {
   void initState() {
     _controller.getFuture(widget.paymentId).then((value) {
       if (value != null && value.isNotEmpty) {
-        _controller.hideButton();
+        _controller.setButtonVisibilty();
       }
     });
     super.initState();
@@ -69,7 +69,7 @@ class _PaymentAssociatedState extends State<PaymentAssociated> {
           ),
           floatingActionButtonLocation:
               FloatingActionButtonLocation.centerFloat,
-          floatingActionButton: _controller.isHideButton
+          floatingActionButton: _controller.isHidedButton
               ? null
               : Button(
                   icon: Icons.arrow_back,

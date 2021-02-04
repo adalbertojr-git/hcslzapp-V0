@@ -9,19 +9,19 @@ part of 'payment.associated.controller.dart';
 // ignore_for_file: non_constant_identifier_names, unnecessary_brace_in_string_interps, unnecessary_lambdas, prefer_expression_function_bodies, lines_longer_than_80_chars, avoid_as, avoid_annotating_with_dynamic
 
 mixin _$PaymentAssociatedController on PaymentAssociatedControllerBase, Store {
-  final _$isHideButtonAtom =
-      Atom(name: 'PaymentAssociatedControllerBase.isHideButton');
+  final _$isHidedButtonAtom =
+      Atom(name: 'PaymentAssociatedControllerBase.isHidedButton');
 
   @override
-  bool get isHideButton {
-    _$isHideButtonAtom.reportRead();
-    return super.isHideButton;
+  bool get isHidedButton {
+    _$isHidedButtonAtom.reportRead();
+    return super.isHidedButton;
   }
 
   @override
-  set isHideButton(bool value) {
-    _$isHideButtonAtom.reportWrite(value, super.isHideButton, () {
-      super.isHideButton = value;
+  set isHidedButton(bool value) {
+    _$isHidedButtonAtom.reportWrite(value, super.isHidedButton, () {
+      super.isHidedButton = value;
     });
   }
 
@@ -105,22 +105,24 @@ mixin _$PaymentAssociatedController on PaymentAssociatedControllerBase, Store {
       ActionController(name: 'PaymentAssociatedControllerBase');
 
   @override
-  bool hideButton() {
-    final _$actionInfo = _$PaymentAssociatedControllerBaseActionController
-        .startAction(name: 'PaymentAssociatedControllerBase.hideButton');
+  bool setButtonVisibilty() {
+    final _$actionInfo =
+        _$PaymentAssociatedControllerBaseActionController.startAction(
+            name: 'PaymentAssociatedControllerBase.setButtonVisibilty');
     try {
-      return super.hideButton();
+      return super.setButtonVisibilty();
     } finally {
       _$PaymentAssociatedControllerBaseActionController.endAction(_$actionInfo);
     }
   }
 
   @override
-  Future<dynamic> findOne(int id) {
-    final _$actionInfo = _$PaymentAssociatedControllerBaseActionController
-        .startAction(name: 'PaymentAssociatedControllerBase.findOne');
+  Future<dynamic> findByAssociatedIdToList(int id) {
+    final _$actionInfo =
+        _$PaymentAssociatedControllerBaseActionController.startAction(
+            name: 'PaymentAssociatedControllerBase.findByAssociatedIdToList');
     try {
-      return super.findOne(id);
+      return super.findByAssociatedIdToList(id);
     } finally {
       _$PaymentAssociatedControllerBaseActionController.endAction(_$actionInfo);
     }
@@ -129,7 +131,7 @@ mixin _$PaymentAssociatedController on PaymentAssociatedControllerBase, Store {
   @override
   String toString() {
     return '''
-isHideButton: ${isHideButton},
+isHidedButton: ${isHidedButton},
 payments: ${payments},
 payment: ${payment},
 errorMsg: ${errorMsg},

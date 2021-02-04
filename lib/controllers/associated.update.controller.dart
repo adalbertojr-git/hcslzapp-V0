@@ -48,7 +48,7 @@ abstract class AssociatedUpdateControllerBase with Store {
   var dateShieldCtrl = TextEditingController();
 
   @observable
-  bool isHideButton = true;
+  bool isHidedButton = true;
 
   @observable
   ObservableList dependents = [].asObservable();
@@ -113,7 +113,7 @@ abstract class AssociatedUpdateControllerBase with Store {
   }
 
   @action
-  bool hideButton() => isHideButton = !isHideButton;
+  bool setButtonVisibilty() => isHidedButton = !isHidedButton;
 
   bool get hasErrors => hasErrorName || hasErrorEmail;
 
@@ -122,7 +122,7 @@ abstract class AssociatedUpdateControllerBase with Store {
   bool get hasErrorEmail => validateEmail() != null;
 
   @action
-  Future findOne(int id) => ObservableFuture(
+  Future findByIdToList(int id) => ObservableFuture(
               _associatedRepo.findByIdToList(id).then((value) => value))
           .catchError((e) {
         this.errorMsg = "${e.message}";
@@ -136,7 +136,7 @@ abstract class AssociatedUpdateControllerBase with Store {
       }, test: (e) => e is Exception);
 
   Future<List<Associated>> getFuture(int _associatedId) =>
-      future = findOne(_associatedId);
+      future = findByIdToList(_associatedId);
 
   Associated _setValues() {
     this.associated.name = nameCtrl.text;

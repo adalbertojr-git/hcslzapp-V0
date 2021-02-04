@@ -31,7 +31,7 @@ abstract class AccessRequestControllerBase with Store {
   var confPswCtrl = TextEditingController();
 
   @observable
-  bool isHideButton = true;
+  bool isHidedButton = true;
 
   @observable
   ObservableFuture<List<AccessRequest>> accessRequestListFuture;
@@ -87,7 +87,7 @@ abstract class AccessRequestControllerBase with Store {
       }, test: (e) => e is Exception);
 
   @action
-  bool hideButton() => isHideButton = !isHideButton;
+  bool setButtonVisibilty() => isHidedButton = !isHidedButton;
 
   Future<List<AccessRequest>> getFuture() => future = findAll();
 

@@ -198,7 +198,7 @@ class _LoginState extends State<Login> {
   _login(BuildContext context) {
     _controller.setLoading(true);
     _controller.errorMsg = null;
-    _controller.login().then(
+    _controller.authenticate().then(
           (token) {
         if (_controller.errorMsg != null) {
           asuka.showSnackBar(

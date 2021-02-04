@@ -101,19 +101,19 @@ mixin _$AccessRequestController on AccessRequestControllerBase, Store {
     });
   }
 
-  final _$isHideButtonAtom =
-      Atom(name: 'AccessRequestControllerBase.isHideButton');
+  final _$isHidedButtonAtom =
+      Atom(name: 'AccessRequestControllerBase.isHidedButton');
 
   @override
-  bool get isHideButton {
-    _$isHideButtonAtom.reportRead();
-    return super.isHideButton;
+  bool get isHidedButton {
+    _$isHidedButtonAtom.reportRead();
+    return super.isHidedButton;
   }
 
   @override
-  set isHideButton(bool value) {
-    _$isHideButtonAtom.reportWrite(value, super.isHideButton, () {
-      super.isHideButton = value;
+  set isHidedButton(bool value) {
+    _$isHidedButtonAtom.reportWrite(value, super.isHidedButton, () {
+      super.isHidedButton = value;
     });
   }
 
@@ -265,11 +265,11 @@ mixin _$AccessRequestController on AccessRequestControllerBase, Store {
   }
 
   @override
-  bool hideButton() {
+  bool setButtonVisibilty() {
     final _$actionInfo = _$AccessRequestControllerBaseActionController
-        .startAction(name: 'AccessRequestControllerBase.hideButton');
+        .startAction(name: 'AccessRequestControllerBase.setButtonVisibilty');
     try {
-      return super.hideButton();
+      return super.setButtonVisibilty();
     } finally {
       _$AccessRequestControllerBaseActionController.endAction(_$actionInfo);
     }
@@ -284,7 +284,7 @@ emailCtrl: ${emailCtrl},
 confEmailCtrl: ${confEmailCtrl},
 pswCtrl: ${pswCtrl},
 confPswCtrl: ${confPswCtrl},
-isHideButton: ${isHideButton},
+isHidedButton: ${isHidedButton},
 accessRequestListFuture: ${accessRequestListFuture},
 accessRequestPost: ${accessRequestPost},
 checkFuture: ${checkFuture},

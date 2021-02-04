@@ -9,19 +9,19 @@ part of 'associated.list.controller.dart';
 // ignore_for_file: non_constant_identifier_names, unnecessary_brace_in_string_interps, unnecessary_lambdas, prefer_expression_function_bodies, lines_longer_than_80_chars, avoid_as, avoid_annotating_with_dynamic
 
 mixin _$AssociatedListController on AssociatedListControllerBase, Store {
-  final _$isHideButtonAtom =
-      Atom(name: 'AssociatedListControllerBase.isHideButton');
+  final _$isHidedButtonAtom =
+      Atom(name: 'AssociatedListControllerBase.isHidedButton');
 
   @override
-  bool get isHideButton {
-    _$isHideButtonAtom.reportRead();
-    return super.isHideButton;
+  bool get isHidedButton {
+    _$isHidedButtonAtom.reportRead();
+    return super.isHidedButton;
   }
 
   @override
-  set isHideButton(bool value) {
-    _$isHideButtonAtom.reportWrite(value, super.isHideButton, () {
-      super.isHideButton = value;
+  set isHidedButton(bool value) {
+    _$isHidedButtonAtom.reportWrite(value, super.isHidedButton, () {
+      super.isHidedButton = value;
     });
   }
 
@@ -107,11 +107,11 @@ mixin _$AssociatedListController on AssociatedListControllerBase, Store {
       ActionController(name: 'AssociatedListControllerBase');
 
   @override
-  bool hideButton() {
+  bool setButtonVisibilty() {
     final _$actionInfo = _$AssociatedListControllerBaseActionController
-        .startAction(name: 'AssociatedListControllerBase.hideButton');
+        .startAction(name: 'AssociatedListControllerBase.setButtonVisibilty');
     try {
-      return super.hideButton();
+      return super.setButtonVisibilty();
     } finally {
       _$AssociatedListControllerBaseActionController.endAction(_$actionInfo);
     }
@@ -131,7 +131,7 @@ mixin _$AssociatedListController on AssociatedListControllerBase, Store {
   @override
   String toString() {
     return '''
-isHideButton: ${isHideButton},
+isHidedButton: ${isHidedButton},
 associateds: ${associateds},
 associated: ${associated},
 errorMsg: ${errorMsg},

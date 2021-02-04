@@ -165,19 +165,19 @@ mixin _$AssociatedUpdateController on AssociatedUpdateControllerBase, Store {
     });
   }
 
-  final _$isHideButtonAtom =
-      Atom(name: 'AssociatedUpdateControllerBase.isHideButton');
+  final _$isHidedButtonAtom =
+      Atom(name: 'AssociatedUpdateControllerBase.isHidedButton');
 
   @override
-  bool get isHideButton {
-    _$isHideButtonAtom.reportRead();
-    return super.isHideButton;
+  bool get isHidedButton {
+    _$isHidedButtonAtom.reportRead();
+    return super.isHidedButton;
   }
 
   @override
-  set isHideButton(bool value) {
-    _$isHideButtonAtom.reportWrite(value, super.isHideButton, () {
-      super.isHideButton = value;
+  set isHidedButton(bool value) {
+    _$isHidedButtonAtom.reportWrite(value, super.isHidedButton, () {
+      super.isHidedButton = value;
     });
   }
 
@@ -327,22 +327,22 @@ mixin _$AssociatedUpdateController on AssociatedUpdateControllerBase, Store {
       ActionController(name: 'AssociatedUpdateControllerBase');
 
   @override
-  bool hideButton() {
+  bool setButtonVisibilty() {
     final _$actionInfo = _$AssociatedUpdateControllerBaseActionController
-        .startAction(name: 'AssociatedUpdateControllerBase.hideButton');
+        .startAction(name: 'AssociatedUpdateControllerBase.setButtonVisibilty');
     try {
-      return super.hideButton();
+      return super.setButtonVisibilty();
     } finally {
       _$AssociatedUpdateControllerBaseActionController.endAction(_$actionInfo);
     }
   }
 
   @override
-  Future<dynamic> findOne(int id) {
+  Future<dynamic> findByIdToList(int id) {
     final _$actionInfo = _$AssociatedUpdateControllerBaseActionController
-        .startAction(name: 'AssociatedUpdateControllerBase.findOne');
+        .startAction(name: 'AssociatedUpdateControllerBase.findByIdToList');
     try {
-      return super.findOne(id);
+      return super.findByIdToList(id);
     } finally {
       _$AssociatedUpdateControllerBaseActionController.endAction(_$actionInfo);
     }
@@ -383,7 +383,7 @@ cnhCtrl: ${cnhCtrl},
 cpfCtrl: ${cpfCtrl},
 dateBirthCtrl: ${dateBirthCtrl},
 dateShieldCtrl: ${dateShieldCtrl},
-isHideButton: ${isHideButton},
+isHidedButton: ${isHidedButton},
 dependents: ${dependents},
 motorcycles: ${motorcycles},
 filePath: ${filePath},

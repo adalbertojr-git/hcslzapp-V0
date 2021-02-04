@@ -11,7 +11,7 @@ abstract class PaymentSelectedControllerBase with Store {
   var formController;
 
   @observable
-  bool isHideButton = true;
+  bool isHidedButton = true;
 
   @observable
   ObservableList payments = [].asObservable();
@@ -33,17 +33,17 @@ abstract class PaymentSelectedControllerBase with Store {
   }
 
   @action
-  bool hideButton() => isHideButton = !isHideButton;
+  bool setButtonVisibilty() => isHidedButton = !isHidedButton;
 
   @action
-  Future findOne(int id) =>
+  Future findByAssociatedIdToList(int id) =>
       ObservableFuture(_paymentRepo.findByAssociatedIdToList(id).then((value) => value))
           .catchError((e) {
         this.errorMsg = "${e.message}";
       }, test: (e) => e is Exception);
 
   Future<List<Payment>> getFuture(int _paymentId) =>
-      future = findOne(_paymentId);
+      future = findByAssociatedIdToList(_paymentId);
 }
 
 class FormController extends FormControllerBase with _$FormController {
