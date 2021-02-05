@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:mask_text_input_formatter/mask_text_input_formatter.dart';
 
-class InputTextField extends StatelessWidget {
+class MyTextFormField extends StatelessWidget {
   TextEditingController textEditingController;
   String helper;
   String hint;
@@ -18,7 +18,7 @@ class InputTextField extends StatelessWidget {
   String errorText;
   MaskTextInputFormatter maskTextInputFormatter;
 
-  InputTextField(
+  MyTextFormField(
       {this.textEditingController,
       this.helper,
       this.hint,

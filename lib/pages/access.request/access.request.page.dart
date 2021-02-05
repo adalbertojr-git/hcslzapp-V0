@@ -4,7 +4,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:hcslzapp/common/labels.and.hints.dart';
 import 'package:hcslzapp/components/button.dart';
-import 'package:hcslzapp/components/input.textfield.dart';
+import 'package:hcslzapp/components/my.text.form.field.dart';
 import 'package:hcslzapp/components/top.margin.dart';
 import 'package:hcslzapp/controllers/access.request.controller.dart';
 
@@ -46,7 +46,7 @@ class _AccessRequestAddState extends State<AccessRequestAdd> {
           child: Column(
             children: <Widget>[
               TopMargin(),
-              InputTextField(
+              MyTextFormField(
                 textEditingController: _controller.nameCtrl,
                 hint: hintName,
                 label: labelName,
@@ -55,7 +55,7 @@ class _AccessRequestAddState extends State<AccessRequestAdd> {
                 onChanged: _controller.formController.changeName,
                 errorText: _controller.validateName(),
               ),
-              InputTextField(
+              MyTextFormField(
                 textEditingController: _controller.userCtrl,
                 hint: hintUser,
                 label: labelUser,
@@ -64,7 +64,7 @@ class _AccessRequestAddState extends State<AccessRequestAdd> {
                 onChanged: _controller.formController.changeUser,
                 errorText: _controller.validateUser(),
               ),
-              InputTextField(
+              MyTextFormField(
                 textEditingController: _controller.emailCtrl,
                 hint: hintEmail,
                 label: labelEmail + " *",
@@ -72,7 +72,7 @@ class _AccessRequestAddState extends State<AccessRequestAdd> {
                 onChanged: _controller.formController.changeEmail,
                 errorText: _controller.validateEmail(),
               ),
-              InputTextField(
+              MyTextFormField(
                 textEditingController: _controller.confEmailCtrl,
                 hint: hintConfEmail,
                 label: labelConfEmail,
@@ -80,7 +80,7 @@ class _AccessRequestAddState extends State<AccessRequestAdd> {
                 onChanged: _controller.formController.changeConfEmail,
                 errorText: _controller.validateConfEmail(),
               ),
-              InputTextField(
+              MyTextFormField(
                 textEditingController: _controller.pswCtrl,
                 label: labelPswAccessReq,
                 hint: hintPswAccessReq,
@@ -89,7 +89,7 @@ class _AccessRequestAddState extends State<AccessRequestAdd> {
                 onChanged: _controller.formController.changePassword,
                 errorText: _controller.validatePassword(),
               ),
-              InputTextField(
+              MyTextFormField(
                 textEditingController: _controller.confPswCtrl,
                 label: labelConfPswAccessReq,
                 hint: hintConfPswAccessReq,

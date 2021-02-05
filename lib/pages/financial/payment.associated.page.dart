@@ -3,7 +3,7 @@ import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:hcslzapp/components/button.dart';
 import 'package:hcslzapp/components/centered.message.dart';
 import 'package:hcslzapp/components/progress.dart';
-import 'package:hcslzapp/components/input.textfield.dart';
+import 'package:hcslzapp/components/my.text.form.field.dart';
 import 'package:hcslzapp/controllers/payment.associated.controller.dart';
 import 'package:hcslzapp/models/payment.dart';
 import 'package:hcslzapp/models/payment.months.dart';

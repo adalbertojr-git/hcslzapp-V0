@@ -4,7 +4,7 @@ import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:hcslzapp/common/labels.and.hints.dart';
 import 'package:hcslzapp/common/token.details.dart';
 import 'package:hcslzapp/components/button.dart';
-import 'package:hcslzapp/components/input.textfield.dart';
+import 'package:hcslzapp/components/my.text.form.field.dart';
 import 'package:hcslzapp/controllers/login.controller.dart';
 import 'package:hcslzapp/models/token.dart';
 import 'package:hcslzapp/pages/dashboard/dashboard.page.dart';
@@ -113,7 +113,7 @@ class _LoginState extends State<Login> {
                   SizedBox(
                     height: 5.0,
                   ),
-                  InputTextField(
+                  MyTextFormField(
                     textEditingController: _controller.userLoginCtrl,
                     label: labelUser,
                     hint: hintUser,
@@ -122,7 +122,7 @@ class _LoginState extends State<Login> {
                     onChanged: _controller.formController.changeUser,
                     errorText: _controller.validateUser(),
                   ),
-                  InputTextField(
+                  MyTextFormField(
                     textEditingController: _controller.pswLoginCtrl,
                     label: labelPsw,
                     hint: hintPsw,

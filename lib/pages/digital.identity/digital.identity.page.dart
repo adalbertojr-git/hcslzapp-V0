@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:hcslzapp/components/input.textfield.dart';
+import 'package:hcslzapp/components/my.text.form.field.dart';
 
 const _labelName = 'Nome';
 const _labelDateBirth = 'Data Nascimento';
@@ -44,7 +44,7 @@ class DigitalIdentity extends StatelessWidget {
                     SizedBox (
                       height: 50.0,
                     ),
-                    InputTextField(
+                    MyTextFormField(
                       helper: _labelName,
                       label: 'Adalberto Jr', //associated.name,
                       disabled: true,
@@ -53,7 +53,7 @@ class DigitalIdentity extends StatelessWidget {
                     Row(
                       children: <Widget>[
                         Expanded(
-                          child: InputTextField(
+                          child: MyTextFormField(
                             helper: _labelDateBirth,
                             label: '28/09/1976', //associated.name,
                             disabled: true,
@@ -61,7 +61,7 @@ class DigitalIdentity extends StatelessWidget {
                           ),
                         ),
                         Expanded(
-                          child: InputTextField(
+                          child: MyTextFormField(
                             helper: _labelDateShield,
                             label: '27/07/2019', //associated.name,
                             disabled: true,
@@ -69,7 +69,7 @@ class DigitalIdentity extends StatelessWidget {
                           ),
                         ),
                         Expanded(
-                          child: InputTextField(
+                          child: MyTextFormField(
                             helper: _labelBloodType,
                             label: 'A-', //associated.name,
                             disabled: true,

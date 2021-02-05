@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
-import 'package:hcslzapp/components/input.textfield.dart';
+import 'package:hcslzapp/components/my.text.form.field.dart';
 
 class MyRide extends StatefulWidget {
   const MyRide({Key key, this.title}) : super(key: key);
@@ -87,7 +87,7 @@ class _MyRideState extends State<MyRide> {
           Row(
             children: <Widget>[
               Expanded(
-                child: InputTextField(
+                child: MyTextFormField(
                   //controlador: _controladorDefeito,
                   helper: "Distancia: ", //_rotuloDefeito,
                   inputType: TextInputType.text,
@@ -96,7 +96,7 @@ class _MyRideState extends State<MyRide> {
                 ),
               ),
               Expanded(
-                child: InputTextField(
+                child: MyTextFormField(
                   //controlador: _controladorDefeito,
                   helper: "Velocidade: ", //_rotuloDefeito,
                   inputType: TextInputType.text,
@@ -105,7 +105,7 @@ class _MyRideState extends State<MyRide> {
                 ),
               ),
               Expanded(
-                child: InputTextField(
+                child: MyTextFormField(
                   //controlador: _controladorDefeito,
                   helper: "Tempo: ", //_rotuloDefeito,
                   inputType: TextInputType.text,
@@ -114,7 +114,7 @@ class _MyRideState extends State<MyRide> {
                 ),
               ),
               Expanded(
-                child: InputTextField(
+                child: MyTextFormField(
                   //controlador: _controladorDefeito,
                   helper: "Inclinaçao: ", //_rotuloDefeito,
                   inputType: TextInputType.text,

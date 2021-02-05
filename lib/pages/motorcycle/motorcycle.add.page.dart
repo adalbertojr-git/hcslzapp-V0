@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:hcslzapp/common/labels.and.hints.dart';
 import 'package:hcslzapp/components/button.dart';
-import 'package:hcslzapp/components/input.textfield.dart';
+import 'package:hcslzapp/components/my.text.form.field.dart';
 import 'package:hcslzapp/components/top.margin.dart';
 import 'package:hcslzapp/controllers/motorcycle.controller.dart';
 import 'package:hcslzapp/models/motorcycle.dart';
@@ -47,7 +47,7 @@ class _MotorcycleAddState extends State<MotorcycleAdd> {
               TopMargin(),
               Observer(
                 builder: (_) {
-                  return InputTextField(
+                  return MyTextFormField(
                     textEditingController: _controller.modelCtrl,
                     label: labelModel,
                     hint: hintModel,
@@ -58,7 +58,7 @@ class _MotorcycleAddState extends State<MotorcycleAdd> {
                   );
                 },
               ),
-              InputTextField(
+              MyTextFormField(
                 textEditingController: _controller.modelCtrl,
                 label: labelModel,
                 hint: hintModel,
@@ -69,7 +69,7 @@ class _MotorcycleAddState extends State<MotorcycleAdd> {
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: <Widget>[
                   Expanded(
-                    child: InputTextField(
+                    child: MyTextFormField(
                           textEditingController: _controller.yearCtrl,
                           icon: Icons.calendar_today,
                           label: labelYear,
@@ -80,7 +80,7 @@ class _MotorcycleAddState extends State<MotorcycleAdd> {
                         ),
                     ),
                   Expanded(
-                    child: InputTextField(
+                    child: MyTextFormField(
                       textEditingController: _controller.colorCtrl,
                       icon: Icons.color_lens,
                       label: labelColor,
@@ -94,7 +94,7 @@ class _MotorcycleAddState extends State<MotorcycleAdd> {
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: <Widget>[
                   Expanded(
-                    child: InputTextField(
+                    child: MyTextFormField(
                       textEditingController: _controller.licencePlateCtrl,
                       label: labelLicencePlate,
                       hint: hintLicencePlate,
@@ -102,7 +102,7 @@ class _MotorcycleAddState extends State<MotorcycleAdd> {
                     ),
                   ),
                   Expanded(
-                    child: InputTextField(
+                    child: MyTextFormField(
                       textEditingController: _controller.nicknameCtrl,
                       label: labelNickname,
                       hint: hintNickname,
@@ -111,13 +111,13 @@ class _MotorcycleAddState extends State<MotorcycleAdd> {
                   ),
                 ],
               ),
-              InputTextField(
+              MyTextFormField(
                 textEditingController: _controller.chassisCtrl,
                 label: labelChassis,
                 hint: hintChassis,
                 inputType: TextInputType.text,
               ),
-              InputTextField(
+              MyTextFormField(
                 textEditingController: _controller.renavamCtrl,
                 label: labelRenavam,
                 hint: hintRenavam,

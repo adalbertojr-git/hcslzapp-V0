@@ -4,7 +4,7 @@ import 'package:hcslzapp/common/labels.and.hints.dart';
 import 'package:hcslzapp/common/photo.image.provider.dart';
 import 'package:hcslzapp/components/button.dart';
 import 'package:hcslzapp/components/centered.message.dart';
-import 'package:hcslzapp/components/input.textfield.dart';
+import 'package:hcslzapp/components/my.text.form.field.dart';
 import 'package:hcslzapp/components/progress.dart';
 import 'package:hcslzapp/components/top.margin.dart';
 import 'package:hcslzapp/controllers/associated.update.controller.dart';
@@ -133,7 +133,7 @@ class _AssociatedUpdateState extends State<AssociatedUpdate> {
               ),
               Observer(
                 builder: (_) {
-                  return InputTextField(
+                  return MyTextFormField(
                     textEditingController: _controller.nameCtrl,
                     label: labelName,
                     hint: hintName,
@@ -146,7 +146,7 @@ class _AssociatedUpdateState extends State<AssociatedUpdate> {
               ),
               Observer(
                 builder: (_) {
-                  return InputTextField(
+                  return MyTextFormField(
                     textEditingController: _controller.emailCtrl,
                     label: labelEmail,
                     hint: hintEmail,
@@ -157,7 +157,7 @@ class _AssociatedUpdateState extends State<AssociatedUpdate> {
                   );
                 },
               ),
-              InputTextField(
+              MyTextFormField(
                 textEditingController: _controller.phoneCtrl,
                 label: labelPhone,
                 hint: hintPhone,
@@ -166,7 +166,7 @@ class _AssociatedUpdateState extends State<AssociatedUpdate> {
                 maskTextInputFormatter:
                     MaskTextInputFormatter(mask: "(##) #####-####"),
               ),
-              InputTextField(
+              MyTextFormField(
                 textEditingController: _controller.sponsorCtrl,
                 label: labelSponsor,
                 hint: hintSponsor,
@@ -208,7 +208,7 @@ class _AssociatedUpdateState extends State<AssociatedUpdate> {
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: <Widget>[
                   Expanded(
-                    child: InputTextField(
+                    child: MyTextFormField(
                       textEditingController: _controller.cnhCtrl,
                       label: labelCNH,
                       hint: hintCNH,
@@ -219,7 +219,7 @@ class _AssociatedUpdateState extends State<AssociatedUpdate> {
                     width: 5.0,
                   ),
                   Expanded(
-                    child: InputTextField(
+                    child: MyTextFormField(
                       textEditingController: _controller.cpfCtrl,
                       label: labelCPF,
                       hint: hintCPF,
@@ -266,7 +266,7 @@ class _AssociatedUpdateState extends State<AssociatedUpdate> {
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: <Widget>[
                   Expanded(
-                    child: InputTextField(
+                    child: MyTextFormField(
                       textEditingController: _controller.dateBirthCtrl,
                       label: labelDateBirth,
                       hint: hintDate,
@@ -280,7 +280,7 @@ class _AssociatedUpdateState extends State<AssociatedUpdate> {
                     width: 5.0,
                   ),
                   Expanded(
-                    child: InputTextField(
+                    child: MyTextFormField(
                       textEditingController: _controller.dateShieldCtrl,
                       label: labelDateShield,
                       hint: hintDate,

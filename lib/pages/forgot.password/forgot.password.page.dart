@@ -3,7 +3,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:hcslzapp/common/labels.and.hints.dart';
 import 'package:hcslzapp/components/button.dart';
-import 'package:hcslzapp/components/input.textfield.dart';
+import 'package:hcslzapp/components/my.text.form.field.dart';
 import 'package:hcslzapp/components/top.margin.dart';
 import 'package:asuka/asuka.dart' as asuka;
 import 'package:hcslzapp/controllers/forgot.password.controller.dart';
@@ -46,7 +46,7 @@ class _ForgotPasswordState extends State<ForgotPassword> {
           child: Column(
             children: <Widget>[
               TopMargin(),
-              InputTextField(
+              MyTextFormField(
                 textEditingController: _controller.emailForgotPswCtrl,
                 hint: hintEmail,
                 label: labelEmail + " *",

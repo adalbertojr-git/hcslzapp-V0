@@ -3,7 +3,7 @@ import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:hcslzapp/common/labels.and.hints.dart';
 import 'package:hcslzapp/components/button.dart';
 import 'package:hcslzapp/components/centered.message.dart';
-import 'package:hcslzapp/components/input.textfield.dart';
+import 'package:hcslzapp/components/my.text.form.field.dart';
 import 'package:hcslzapp/components/progress.dart';
 import 'package:hcslzapp/components/top.margin.dart';
 import 'package:hcslzapp/controllers/associated.list.controller.dart';
@@ -87,7 +87,7 @@ class AssociatedListState extends State<AssociatedList> {
         child: Column(
           children: [
             TopMargin(),
-            InputTextField(
+            MyTextFormField(
               textEditingController: _controller.nameCtrl,
               label: labelNamePayment,
               hint: hintNamePayment,

@@ -5,7 +5,7 @@ import 'package:hcslzapp/components/button.dart';
 import 'package:hcslzapp/components/top.margin.dart';
 import 'package:hcslzapp/controllers/dependent.controller.dart';
 import 'package:hcslzapp/enums/blood.types.dart';
-import 'package:hcslzapp/components/input.textfield.dart';
+import 'package:hcslzapp/components/my.text.form.field.dart';
 import 'package:hcslzapp/models/dependent.dart';
 import 'package:mask_text_input_formatter/mask_text_input_formatter.dart';
 
@@ -48,7 +48,7 @@ class _DependentAddState extends State<DependentAdd> {
                 TopMargin(),
                 Observer(
                   builder: (_) {
-                    return InputTextField(
+                    return MyTextFormField(
                       textEditingController: _controller.nameCtrl,
                       label: labelNameDependent,
                       hint: hintNameDependent,
@@ -61,7 +61,7 @@ class _DependentAddState extends State<DependentAdd> {
                 ),
                 Observer(
                   builder: (_) {
-                    return InputTextField(
+                    return MyTextFormField(
                       textEditingController: _controller.emailCtrl,
                       label: labelEmail,
                       hint: hintEmail,
@@ -72,7 +72,7 @@ class _DependentAddState extends State<DependentAdd> {
                     );
                   },
                 ),
-                InputTextField(
+                MyTextFormField(
                   textEditingController: _controller.phoneCtrl,
                   label: labelPhone,
                   hint: hintPhone,
@@ -116,7 +116,7 @@ class _DependentAddState extends State<DependentAdd> {
                   crossAxisAlignment: CrossAxisAlignment.baseline,
                   children: <Widget>[
                     Expanded(
-                      child: InputTextField(
+                      child: MyTextFormField(
                         textEditingController: _controller.cpfCtrl,
                         label: labelCPF,
                         hint: hintCPF,
@@ -126,7 +126,7 @@ class _DependentAddState extends State<DependentAdd> {
                       ),
                     ),
                     Expanded(
-                      child: InputTextField(
+                      child: MyTextFormField(
                         textEditingController: _controller.dateBirthCtrl,
                         label: labelDateBirth,
                         hint: hintDate,

@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:hcslzapp/common/labels.and.hints.dart';
 import 'package:hcslzapp/components/button.dart';
-import 'package:hcslzapp/components/input.textfield.dart';
+import 'package:hcslzapp/components/my.text.form.field.dart';
 import 'package:hcslzapp/components/top.margin.dart';
 import 'package:hcslzapp/controllers/payment.add.controller.dart';
 import 'package:hcslzapp/models/associated.dart';
@@ -52,14 +52,14 @@ class _PaymentAddAddState extends State<PaymentAdd> {
                 children: [
                   Expanded(
                     flex: 4,
-                    child: InputTextField(
+                    child: MyTextFormField(
                       textEditingController: _controller.nameCtrl,
                       label: labelNamePayment,
                       disabled: true,
                     ),
                   ),
                   Expanded(
-                    child: InputTextField(
+                    child: MyTextFormField(
                       textEditingController: _controller.yearCtrl,
                       label: labelYear,
                       disabled: widget._payment == null ? null : true,
@@ -76,7 +76,7 @@ class _PaymentAddAddState extends State<PaymentAdd> {
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: <Widget>[
                   Expanded(
-                    child: InputTextField(
+                    child: MyTextFormField(
                       textEditingController: _controller.janCtrl,
                       label: labelJan,
                       inputType: TextInputType.number,
@@ -85,7 +85,7 @@ class _PaymentAddAddState extends State<PaymentAdd> {
                     ),
                   ),
                   Expanded(
-                    child: InputTextField(
+                    child: MyTextFormField(
                       textEditingController: _controller.fevCtrl,
                       label: labelFev,
                       inputType: TextInputType.number,
@@ -94,7 +94,7 @@ class _PaymentAddAddState extends State<PaymentAdd> {
                     ),
                   ),
                   Expanded(
-                    child: InputTextField(
+                    child: MyTextFormField(
                       textEditingController: _controller.marCtrl,
                       label: labelMar,
                       inputType: TextInputType.number,
@@ -108,7 +108,7 @@ class _PaymentAddAddState extends State<PaymentAdd> {
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: <Widget>[
                   Expanded(
-                    child: InputTextField(
+                    child: MyTextFormField(
                       textEditingController: _controller.abrCtrl,
                       label: labelAbr,
                       inputType: TextInputType.number,
@@ -117,7 +117,7 @@ class _PaymentAddAddState extends State<PaymentAdd> {
                     ),
                   ),
                   Expanded(
-                    child: InputTextField(
+                    child: MyTextFormField(
                       textEditingController: _controller.maiCtrl,
                       label: labelMai,
                       inputType: TextInputType.number,
@@ -126,7 +126,7 @@ class _PaymentAddAddState extends State<PaymentAdd> {
                     ),
                   ),
                   Expanded(
-                    child: InputTextField(
+                    child: MyTextFormField(
                       textEditingController: _controller.junCtrl,
                       label: labelJun,
                       inputType: TextInputType.number,
@@ -145,7 +145,7 @@ class _PaymentAddAddState extends State<PaymentAdd> {
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: <Widget>[
                   Expanded(
-                    child: InputTextField(
+                    child: MyTextFormField(
                       textEditingController: _controller.julCtrl,
                       label: labelJul,
                       inputType: TextInputType.number,
@@ -154,7 +154,7 @@ class _PaymentAddAddState extends State<PaymentAdd> {
                     ),
                   ),
                   Expanded(
-                    child: InputTextField(
+                    child: MyTextFormField(
                       textEditingController: _controller.agoCtrl,
                       label: labelAgo,
                       inputType: TextInputType.number,
@@ -163,7 +163,7 @@ class _PaymentAddAddState extends State<PaymentAdd> {
                     ),
                   ),
                   Expanded(
-                    child: InputTextField(
+                    child: MyTextFormField(
                       textEditingController: _controller.setCtrl,
                       label: labelSet,
                       inputType: TextInputType.number,
@@ -177,7 +177,7 @@ class _PaymentAddAddState extends State<PaymentAdd> {
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: <Widget>[
                   Expanded(
-                    child: InputTextField(
+                    child: MyTextFormField(
                       textEditingController: _controller.outCtrl,
                       label: labelOut,
                       inputType: TextInputType.number,
@@ -186,7 +186,7 @@ class _PaymentAddAddState extends State<PaymentAdd> {
                     ),
                   ),
                   Expanded(
-                    child: InputTextField(
+                    child: MyTextFormField(
                       textEditingController: _controller.novCtrl,
                       label: labelNov,
                       inputType: TextInputType.number,
@@ -195,7 +195,7 @@ class _PaymentAddAddState extends State<PaymentAdd> {
                     ),
                   ),
                   Expanded(
-                    child: InputTextField(
+                    child: MyTextFormField(
                       textEditingController: _controller.dezCtrl,
                       label: labelDez,
                       inputType: TextInputType.number,

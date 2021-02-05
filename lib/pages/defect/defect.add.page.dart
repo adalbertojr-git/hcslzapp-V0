@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:hcslzapp/components/button.dart';
-import 'package:hcslzapp/components/input.textfield.dart';
+import 'package:hcslzapp/components/my.text.form.field.dart';
 
 const _rotuloModelo = 'Motocicleta *';
 const _rotuloAno = 'Ano de Fabricaçao*';
@@ -40,7 +40,7 @@ class DefectAdd extends StatelessWidget {
                 Row(
                   children: <Widget>[
                     Expanded(
-                      child: InputTextField(
+                      child: MyTextFormField(
                         textEditingController: _controladorModelo,
                         helper: _rotuloModelo,
                         icon: Icons.motorcycle,
@@ -48,7 +48,7 @@ class DefectAdd extends StatelessWidget {
                       ),
                     ),
                     Expanded(
-                      child: InputTextField(
+                      child: MyTextFormField(
                         textEditingController: _controladorAno,
                         icon: Icons.calendar_today,
                         helper: _rotuloAno,
@@ -57,25 +57,25 @@ class DefectAdd extends StatelessWidget {
                     ),
                   ],
                 ),
-                InputTextField(
+                MyTextFormField(
                   textEditingController: _controladorDefeito,
                   helper: _rotuloDefeito,
                   inputType: TextInputType.text,
                   nLines: 2,
                 ),
-                InputTextField(
+                MyTextFormField(
                   textEditingController: _controladorSolucao,
                   helper: _rotuloSolucao,
                   inputType: TextInputType.text,
                   nLines: 5,
                 ),
-                InputTextField(
+                MyTextFormField(
                   textEditingController: _controladorProprietario,
                   helper: _rotuloProprietario,
                   icon: Icons.person,
                   inputType: TextInputType.text,
                 ),
-                InputTextField(
+                MyTextFormField(
                   textEditingController: _controladorTelefone,
                   helper: _rotuloTelefone,
                   icon: Icons.phone,
