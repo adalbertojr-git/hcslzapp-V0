@@ -57,16 +57,15 @@ class _PaymentAddAddState extends State<PaymentAdd> {
                 width: 190.0,
                 child: Observer(
                   builder: (_) => MyTextFormField(
-                    textEditingController: _controller.yearCtrl,
-                    label: labelYear,
-                    inputType: TextInputType.number,
-                    disabled: widget._payment == null ? null : true,
-                    onChanged: _controller.formController.changeName,
-                    errorText: _controller.validateName(),
-                    maxLengh: 4,
-                    textAlign: TextAlign.center,
-                    size: 20.0
-                  ),
+                      textEditingController: _controller.yearCtrl,
+                      label: labelYear,
+                      inputType: TextInputType.number,
+                      disabled: widget._payment == null ? null : true,
+                      onChanged: _controller.formController.changeYear,
+                      errorText: _controller.validateYear(),
+                      maxLengh: 4,
+                      textAlign: TextAlign.center,
+                      size: 20.0),
                 ),
               ),
               Container(
@@ -214,6 +213,8 @@ class _PaymentAddAddState extends State<PaymentAdd> {
       floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
       floatingActionButton: Button(
         icon: Icons.save,
+        onClick: () =>
+            widget._payment == null ? _controller.save() : _controller.update(),
       ),
     );
   }

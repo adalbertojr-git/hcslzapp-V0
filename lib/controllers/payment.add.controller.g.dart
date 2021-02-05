@@ -340,6 +340,28 @@ mixin _$PaymentAddController on PaymentAddControllerBase, Store {
   }
 
   @override
+  Future<dynamic> update() {
+    final _$actionInfo = _$PaymentAddControllerBaseActionController.startAction(
+        name: 'PaymentAddControllerBase.update');
+    try {
+      return super.update();
+    } finally {
+      _$PaymentAddControllerBaseActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
+  Future<dynamic> save() {
+    final _$actionInfo = _$PaymentAddControllerBaseActionController.startAction(
+        name: 'PaymentAddControllerBase.save');
+    try {
+      return super.save();
+    } finally {
+      _$PaymentAddControllerBaseActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
   String toString() {
     return '''
 idCtrl: ${idCtrl},
@@ -367,33 +389,18 @@ future: ${future}
 }
 
 mixin _$FormController on FormControllerBase, Store {
-  final _$nameAtom = Atom(name: 'FormControllerBase.name');
+  final _$yearAtom = Atom(name: 'FormControllerBase.year');
 
   @override
-  String get name {
-    _$nameAtom.reportRead();
-    return super.name;
+  String get year {
+    _$yearAtom.reportRead();
+    return super.year;
   }
 
   @override
-  set name(String value) {
-    _$nameAtom.reportWrite(value, super.name, () {
-      super.name = value;
-    });
-  }
-
-  final _$emailAtom = Atom(name: 'FormControllerBase.email');
-
-  @override
-  String get email {
-    _$emailAtom.reportRead();
-    return super.email;
-  }
-
-  @override
-  set email(String value) {
-    _$emailAtom.reportWrite(value, super.email, () {
-      super.email = value;
+  set year(String value) {
+    _$yearAtom.reportWrite(value, super.year, () {
+      super.year = value;
     });
   }
 
@@ -401,22 +408,11 @@ mixin _$FormController on FormControllerBase, Store {
       ActionController(name: 'FormControllerBase');
 
   @override
-  dynamic changeName(String value) {
+  dynamic changeYear(String value) {
     final _$actionInfo = _$FormControllerBaseActionController.startAction(
-        name: 'FormControllerBase.changeName');
+        name: 'FormControllerBase.changeYear');
     try {
-      return super.changeName(value);
-    } finally {
-      _$FormControllerBaseActionController.endAction(_$actionInfo);
-    }
-  }
-
-  @override
-  dynamic changeEmail(String value) {
-    final _$actionInfo = _$FormControllerBaseActionController.startAction(
-        name: 'FormControllerBase.changeEmail');
-    try {
-      return super.changeEmail(value);
+      return super.changeYear(value);
     } finally {
       _$FormControllerBaseActionController.endAction(_$actionInfo);
     }
@@ -425,8 +421,7 @@ mixin _$FormController on FormControllerBase, Store {
   @override
   String toString() {
     return '''
-name: ${name},
-email: ${email}
+year: ${year}
     ''';
   }
 }

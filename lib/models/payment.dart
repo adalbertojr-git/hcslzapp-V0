@@ -2,12 +2,12 @@ import 'package:hcslzapp/models/associated.dart';
 import 'payment.months.dart';
 
 class Payment {
-  final int id;
-  final String year;
-  final Associated associated;
-  final List<PaymentMonths> paymentMonths;
+  int id;
+  String year;
+  Associated associated;
+  List<PaymentMonths> paymentMonths;
 
-  Payment(this.id, this.year, this.associated, this.paymentMonths);
+  Payment({this.id, this.year, this.associated, this.paymentMonths});
 
   Payment.fromJson(Map<String, dynamic> json)
       : id = json['id'],

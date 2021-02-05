@@ -1,9 +1,9 @@
 class PaymentMonths {
-  final int id;
-  final int month;
-  final double value;
+  int id;
+  int month;
+  double value;
 
-  PaymentMonths(this.id, this.month, this.value);
+  PaymentMonths({this.id, this.month, this.value});
 
   PaymentMonths.fromJson(Map<String, dynamic> json)
       : id = json['id'],

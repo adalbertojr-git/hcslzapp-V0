@@ -2,6 +2,7 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:hcslzapp/models/associated.dart';
 import 'package:hcslzapp/models/payment.dart';
+import 'package:hcslzapp/models/payment.months.dart';
 import 'package:hcslzapp/repositories/payment.repo.dart';
 import 'package:mobx/mobx.dart';
 
@@ -80,8 +81,7 @@ abstract class PaymentAddControllerBase with Store {
     _initTextFields;
     payments.clear();
     formController = FormController(
-      name: '',
-      email: '',
+      year: '',
     );
   }
 
@@ -134,8 +134,9 @@ abstract class PaymentAddControllerBase with Store {
   }
 
   @action
-  Future findByAssociatedIdToList(int id) => ObservableFuture(
-              _paymentRepo.findByAssociatedIdToList(id).then((value) => value))
+  Future findByAssociatedIdToList(int id) =>
+      ObservableFuture(
+          _paymentRepo.findByAssociatedIdToList(id).then((value) => value))
           .catchError((e) {
         this.errorMsg = "${e.message}";
       }, test: (e) => e is Exception);
@@ -143,34 +144,60 @@ abstract class PaymentAddControllerBase with Store {
   Future<List<Payment>> getFuture(int _paymentId) =>
       future = findByAssociatedIdToList(_paymentId);
 
-  String validateName() {
-    if (formController.name.isEmpty) {
+  @action
+  Future update() =>
+      ObservableFuture(_paymentRepo.update(_setValues()).then((value) => value))
+          .catchError((e) {
+        this.errorMsg = "${e.message}";
+      }, test: (e) => e is Exception);
+
+  @action
+  Future save() =>
+      ObservableFuture(_paymentRepo.save(_setValues()).then((value) => value))
+          .catchError((e) {
+        this.errorMsg = "${e.message}";
+      }, test: (e) => e is Exception);
+
+  Payment _setValues() {
+    return Payment(
+        id: int.parse('0'),
+        year: yearCtrl.text,
+        associated: this.associated,
+        paymentMonths: _setPaymentMonths());
+  }
+
+  List<PaymentMonths> _setPaymentMonths() {
+    List<PaymentMonths> paymentMonthsList = List<PaymentMonths>();
+    paymentMonthsList.add(
+      PaymentMonths(
+        id: int.parse('0'),
+        month: 1,
+        value: double.parse(janCtrl.text),
+      ),
+    );
+    return paymentMonthsList;
+  }
+
+  String validateYear() {
+    if (formController.year.isEmpty) {
       return "Ano é obrigatório!!!";
-    } else if (int.parse(formController.name) < 2014){
+    } else if (int.parse(formController.year) < 2014) {
       return "Ano deve ser maior que 2014";
     }
-    //DateTime.
     return null;
   }
 }
 
 class FormController extends FormControllerBase with _$FormController {
-  FormController({String name, String email}) {
-    super.name = name;
-    super.email = email;
+  FormController({String year}) {
+    super.year = year;
   }
 }
 
 abstract class FormControllerBase with Store {
   @observable
-  String name;
-
-  @observable
-  String email;
+  String year;
 
   @action
-  changeName(String value) => name = value;
-
-  @action
-  changeEmail(String value) => email = value;
+  changeYear(String value) => year = value;
 }

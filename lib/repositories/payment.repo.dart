@@ -46,4 +46,52 @@ class PaymentRepo {
       throw HttpException(getMessage(response.statusCode));
     }
   }
+
+  Future<Payment> save(Payment payment) async {
+    final String encodedJson = jsonEncode(
+      payment.toJson(),
+    );
+    final Response response = await client
+        .post(
+          mainUrl + _paymentUrl,
+          headers: {
+            'Content-type': 'application/json',
+          },
+          body: encodedJson,
+        )
+        .timeout(
+          Duration(seconds: 10),
+        );
+    if (response.statusCode == 200) {
+      return Payment.fromJson(
+        jsonDecode(response.body),
+      );
+    } else {
+      throw HttpException(getMessage(response.statusCode));
+    }
+  }
+
+  Future<Payment> update(Payment payment) async {
+    final String encodedJson = jsonEncode(
+      payment.toJson(),
+    );
+    final Response response = await client
+        .put(
+          mainUrl + _paymentUrl + "/" + payment.id.toString(),
+          headers: {
+            'Content-type': 'application/json',
+          },
+          body: encodedJson,
+        )
+        .timeout(
+          Duration(seconds: 10),
+        );
+    if (response.statusCode == 200) {
+      return Payment.fromJson(
+        jsonDecode(response.body),
+      );
+    } else {
+      throw HttpException(getMessage(response.statusCode));
+    }
+  }
 }

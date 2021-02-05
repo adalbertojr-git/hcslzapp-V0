@@ -55,7 +55,9 @@ class AssociatedRepo {
     final Response response = await client
         .put(
           mainUrl + _associatedUrl + "/" + associated.id.toString(),
-          headers: {'Content-type': 'application/json'},
+          headers: {
+            'Content-type': 'application/json',
+          },
           body: encodedJson,
         )
         .timeout(
