@@ -26,16 +26,16 @@ abstract class PaymentAddControllerBase with Store {
   var janCtrl = TextEditingController();
 
   @observable
-  var fevCtrl = TextEditingController();
+  var febCtrl = TextEditingController();
 
   @observable
   var marCtrl = TextEditingController();
 
   @observable
-  var abrCtrl = TextEditingController();
+  var aprCtrl = TextEditingController();
 
   @observable
-  var maiCtrl = TextEditingController();
+  var mayCtrl = TextEditingController();
 
   @observable
   var junCtrl = TextEditingController();
@@ -44,19 +44,19 @@ abstract class PaymentAddControllerBase with Store {
   var julCtrl = TextEditingController();
 
   @observable
-  var agoCtrl = TextEditingController();
+  var augCtrl = TextEditingController();
 
   @observable
-  var setCtrl = TextEditingController();
+  var sepCtrl = TextEditingController();
 
   @observable
-  var outCtrl = TextEditingController();
+  var octCtrl = TextEditingController();
 
   @observable
   var novCtrl = TextEditingController();
 
   @observable
-  var dezCtrl = TextEditingController();
+  var decCtrl = TextEditingController();
 
   @observable
   ObservableList payments = [].asObservable();
@@ -79,6 +79,10 @@ abstract class PaymentAddControllerBase with Store {
   get init {
     _initTextFields;
     payments.clear();
+    formController = FormController(
+      name: '',
+      email: '',
+    );
   }
 
   get _initTextFields {
@@ -92,16 +96,16 @@ abstract class PaymentAddControllerBase with Store {
             janCtrl.text = element.value.toString();
             break;
           case 2:
-            fevCtrl.text = element.value.toString();
+            febCtrl.text = element.value.toString();
             break;
           case 3:
             marCtrl.text = element.value.toString();
             break;
           case 4:
-            abrCtrl.text = element.value.toString();
+            aprCtrl.text = element.value.toString();
             break;
           case 5:
-            maiCtrl.text = element.value.toString();
+            mayCtrl.text = element.value.toString();
             break;
           case 6:
             junCtrl.text = element.value.toString();
@@ -110,19 +114,19 @@ abstract class PaymentAddControllerBase with Store {
             julCtrl.text = element.value.toString();
             break;
           case 8:
-            agoCtrl.text = element.value.toString();
+            augCtrl.text = element.value.toString();
             break;
           case 9:
-            setCtrl.text = element.value.toString();
+            sepCtrl.text = element.value.toString();
             break;
           case 10:
-            outCtrl.text = element.value.toString();
+            octCtrl.text = element.value.toString();
             break;
           case 11:
             novCtrl.text = element.value.toString();
             break;
           case 12:
-            dezCtrl.text = element.value.toString();
+            decCtrl.text = element.value.toString();
             break;
         }
       });
@@ -138,6 +142,16 @@ abstract class PaymentAddControllerBase with Store {
 
   Future<List<Payment>> getFuture(int _paymentId) =>
       future = findByAssociatedIdToList(_paymentId);
+
+  String validateName() {
+    if (formController.name.isEmpty) {
+      return "Ano é obrigatório!!!";
+    } else if (int.parse(formController.name) < 2014){
+      return "Ano deve ser maior que 2014";
+    }
+    //DateTime.
+    return null;
+  }
 }
 
 class FormController extends FormControllerBase with _$FormController {

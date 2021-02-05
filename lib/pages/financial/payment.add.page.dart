@@ -48,24 +48,26 @@ class _PaymentAddAddState extends State<PaymentAdd> {
           child: Column(
             children: <Widget>[
               TopMargin(),
-              Row(
-                children: [
-                  Expanded(
-                    flex: 4,
-                    child: MyTextFormField(
-                      textEditingController: _controller.nameCtrl,
-                      label: labelNamePayment,
-                      disabled: true,
-                    ),
+              MyTextFormField(
+                textEditingController: _controller.nameCtrl,
+                label: labelNamePayment,
+                disabled: true,
+              ),
+              Container(
+                width: 190.0,
+                child: Observer(
+                  builder: (_) => MyTextFormField(
+                    textEditingController: _controller.yearCtrl,
+                    label: labelYear,
+                    inputType: TextInputType.number,
+                    disabled: widget._payment == null ? null : true,
+                    onChanged: _controller.formController.changeName,
+                    errorText: _controller.validateName(),
+                    maxLengh: 4,
+                    textAlign: TextAlign.center,
+                    size: 20.0
                   ),
-                  Expanded(
-                    child: MyTextFormField(
-                      textEditingController: _controller.yearCtrl,
-                      label: labelYear,
-                      disabled: widget._payment == null ? null : true,
-                    ),
-                  ),
-                ],
+                ),
               ),
               Container(
                 alignment: Alignment.topLeft,
@@ -86,8 +88,8 @@ class _PaymentAddAddState extends State<PaymentAdd> {
                   ),
                   Expanded(
                     child: MyTextFormField(
-                      textEditingController: _controller.fevCtrl,
-                      label: labelFev,
+                      textEditingController: _controller.febCtrl,
+                      label: labelFeb,
                       inputType: TextInputType.number,
                       maskTextInputFormatter:
                           MaskTextInputFormatter(mask: "###.##"),
@@ -109,8 +111,8 @@ class _PaymentAddAddState extends State<PaymentAdd> {
                 children: <Widget>[
                   Expanded(
                     child: MyTextFormField(
-                      textEditingController: _controller.abrCtrl,
-                      label: labelAbr,
+                      textEditingController: _controller.aprCtrl,
+                      label: labelApr,
                       inputType: TextInputType.number,
                       maskTextInputFormatter:
                           MaskTextInputFormatter(mask: "###.##"),
@@ -118,8 +120,8 @@ class _PaymentAddAddState extends State<PaymentAdd> {
                   ),
                   Expanded(
                     child: MyTextFormField(
-                      textEditingController: _controller.maiCtrl,
-                      label: labelMai,
+                      textEditingController: _controller.mayCtrl,
+                      label: labelMay,
                       inputType: TextInputType.number,
                       maskTextInputFormatter:
                           MaskTextInputFormatter(mask: "###.##"),
@@ -155,8 +157,8 @@ class _PaymentAddAddState extends State<PaymentAdd> {
                   ),
                   Expanded(
                     child: MyTextFormField(
-                      textEditingController: _controller.agoCtrl,
-                      label: labelAgo,
+                      textEditingController: _controller.augCtrl,
+                      label: labelAug,
                       inputType: TextInputType.number,
                       maskTextInputFormatter:
                           MaskTextInputFormatter(mask: "###.##"),
@@ -164,8 +166,8 @@ class _PaymentAddAddState extends State<PaymentAdd> {
                   ),
                   Expanded(
                     child: MyTextFormField(
-                      textEditingController: _controller.setCtrl,
-                      label: labelSet,
+                      textEditingController: _controller.sepCtrl,
+                      label: labelSep,
                       inputType: TextInputType.number,
                       maskTextInputFormatter:
                           MaskTextInputFormatter(mask: "###.##"),
@@ -178,8 +180,8 @@ class _PaymentAddAddState extends State<PaymentAdd> {
                 children: <Widget>[
                   Expanded(
                     child: MyTextFormField(
-                      textEditingController: _controller.outCtrl,
-                      label: labelOut,
+                      textEditingController: _controller.octCtrl,
+                      label: labelOct,
                       inputType: TextInputType.number,
                       maskTextInputFormatter:
                           MaskTextInputFormatter(mask: "###.##"),
@@ -196,8 +198,8 @@ class _PaymentAddAddState extends State<PaymentAdd> {
                   ),
                   Expanded(
                     child: MyTextFormField(
-                      textEditingController: _controller.dezCtrl,
-                      label: labelDez,
+                      textEditingController: _controller.decCtrl,
+                      label: labelDec,
                       inputType: TextInputType.number,
                       maskTextInputFormatter:
                           MaskTextInputFormatter(mask: "###.##"),

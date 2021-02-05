@@ -17,6 +17,8 @@ class MyTextFormField extends StatelessWidget {
   Function onChanged;
   String errorText;
   MaskTextInputFormatter maskTextInputFormatter;
+  int maxLengh;
+  TextAlign textAlign;
 
   MyTextFormField(
       {this.textEditingController,
@@ -33,7 +35,9 @@ class MyTextFormField extends StatelessWidget {
       this.text,
       this.onChanged,
       this.errorText,
-      this.maskTextInputFormatter});
+      this.maskTextInputFormatter,
+      this.maxLengh,
+      this.textAlign});
 
   @override
   Widget build(BuildContext context) {
@@ -49,8 +53,9 @@ class MyTextFormField extends StatelessWidget {
         readOnly: disabled != null ? disabled : false,
         style: TextStyle(
           fontSize: size != null ? size : 15.0,
-          //color: disabled != null ? Colors.black38 : Colors.black,
         ),
+        textAlign: textAlign != null ? textAlign : TextAlign.left,
+        maxLength: maxLengh != null ? maxLengh : null,
         decoration: InputDecoration(
           focusedBorder: OutlineInputBorder(
             borderSide: BorderSide(
