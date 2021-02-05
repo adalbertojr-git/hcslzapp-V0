@@ -1,17 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:hcslzapp/common/labels.and.hints.dart';
-import 'package:hcslzapp/components/button.dart';
 import 'package:hcslzapp/components/centered.message.dart';
 import 'package:hcslzapp/components/input.textfield.dart';
 import 'package:hcslzapp/components/progress.dart';
 import 'package:hcslzapp/components/top.margin.dart';
 import 'package:hcslzapp/controllers/payment.list.controller.dart';
 import 'package:hcslzapp/models/associated.dart';
-import 'package:hcslzapp/models/payment.table.dart';
-import 'package:hcslzapp/pages/financial/payment.associated.page.dart';
 import 'package:hcslzapp/pages/financial/payment.selected.page.dart';
-import 'package:mask_text_input_formatter/mask_text_input_formatter.dart';
 
 class PaymentListPage extends StatefulWidget {
   @override
@@ -114,11 +110,6 @@ class _PaymentListPageState extends State<PaymentListPage> {
                             fontWeight: FontWeight.bold,
                           ),
                         ),
-/*                        subtitle: Text('Ano: ' +
-                            (_controller.listFiltered[i].year) +
-                            '\n' +
-                            'Total: ' +
-                            (_controller.listFiltered[i].total.toString())),*/
                         subtitle: Text('Tel.: ' +
                             (_controller.listFiltered[i].phone != null
                                 ? _controller.listFiltered[i].phone

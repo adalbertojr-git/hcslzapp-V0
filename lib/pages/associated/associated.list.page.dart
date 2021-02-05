@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
+import 'package:hcslzapp/common/labels.and.hints.dart';
 import 'package:hcslzapp/components/button.dart';
 import 'package:hcslzapp/components/centered.message.dart';
+import 'package:hcslzapp/components/input.textfield.dart';
 import 'package:hcslzapp/components/progress.dart';
+import 'package:hcslzapp/components/top.margin.dart';
 import 'package:hcslzapp/controllers/associated.list.controller.dart';
 import 'package:asuka/asuka.dart' as asuka;
 import 'package:hcslzapp/models/associated.dart';
@@ -81,77 +84,92 @@ class AssociatedListState extends State<AssociatedList> {
           ),
         ),
         height: MediaQuery.of(context).size.height,
-        child: Observer(
-          builder: (_) => ListView.separated(
-            shrinkWrap: true,
-            itemCount: _controller.associateds.length,
-            itemBuilder: (_, int i) {
-              return Container(
-                decoration: BoxDecoration(
-                  color: Colors.white30,
-                  shape: BoxShape.rectangle,
-                  borderRadius: BorderRadius.circular(8.0),
-                  boxShadow: <BoxShadow>[
-                    BoxShadow(
-                      color: Colors.black12,
-                      blurRadius: 10.0,
-                      offset: Offset(0.0, 5.0),
-                    ),
-                  ],
-                ),
-                child: ListTile(
-                  title: Text(
-                    _controller.associateds[i].name,
-                    style: TextStyle(
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
-                  subtitle: Text('Tel.: ' +
-                      (_controller.associateds[i].phone != null
-                          ? _controller.associateds[i].phone
-                          : 'Não informado') +
-                      '\n' +
-                      'Email: ' +
-                      (_controller.associateds[i].email != null
-                          ? _controller.associateds[i].email
-                          : 'Não informado')),
-                  leading: CircleAvatar(
-                    child: Icon(Icons.person),
-                    backgroundColor: Colors.white,
-                  ),
-                  trailing: Wrap(
-                    spacing: 10, // space between two icons
-                    children: <Widget>[
-                      GestureDetector(
-                        child: Icon(
-                          Icons.delete,
-                          size: 30.0,
-                        ),
-                        onTap: () {
-                          _controller.associateds.removeAt(i);
-                        },
+        child: Column(
+          children: [
+            TopMargin(),
+            InputTextField(
+              textEditingController: _controller.nameCtrl,
+              label: labelNamePayment,
+              hint: hintNamePayment,
+              icon: Icons.person,
+              inputType: TextInputType.text,
+              onChanged: _controller.setFilter,
+            ),
+            Expanded(
+              child: Observer(
+                builder: (_) => ListView.separated(
+                  shrinkWrap: true,
+                  itemCount: _controller.listFiltered.length,
+                  itemBuilder: (_, int i) {
+                    return Container(
+                      decoration: BoxDecoration(
+                        color: Colors.white30,
+                        shape: BoxShape.rectangle,
+                        borderRadius: BorderRadius.circular(8.0),
+                        boxShadow: <BoxShadow>[
+                          BoxShadow(
+                            color: Colors.black12,
+                            blurRadius: 10.0,
+                            offset: Offset(0.0, 5.0),
+                          ),
+                        ],
                       ),
-                      GestureDetector(
-                        child: Icon(
-                          Icons.arrow_forward,
-                          size: 30.0,
+                      child: ListTile(
+                        title: Text(
+                          _controller.listFiltered[i].name,
+                          style: TextStyle(
+                            fontWeight: FontWeight.bold,
+                          ),
                         ),
-                        onTap: () {
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => AssociatedUpdate(
-                                    _controller.associateds[i].id)),
-                          );
-                        },
+                        subtitle: Text('Tel.: ' +
+                            (_controller.listFiltered[i].phone != null
+                                ? _controller.listFiltered[i].phone
+                                : 'Não informado') +
+                            '\n' +
+                            'Email: ' +
+                            (_controller.listFiltered[i].email != null
+                                ? _controller.listFiltered[i].email
+                                : 'Não informado')),
+                        leading: CircleAvatar(
+                          child: Icon(Icons.person),
+                          backgroundColor: Colors.white,
+                        ),
+                        trailing: Wrap(
+                          spacing: 10, // space between two icons
+                          children: <Widget>[
+                            GestureDetector(
+                              child: Icon(
+                                Icons.delete,
+                                size: 30.0,
+                              ),
+                              onTap: () {
+                                _controller.associateds.removeAt(i);
+                              },
+                            ),
+                            GestureDetector(
+                              child: Icon(
+                                Icons.arrow_forward,
+                                size: 30.0,
+                              ),
+                              onTap: () {
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) => AssociatedUpdate(
+                                          _controller.listFiltered[i].id)),
+                                );
+                              },
+                            ),
+                          ],
+                        ),
                       ),
-                    ],
-                  ),
+                    );
+                  },
+                  separatorBuilder: (_, int index) => const Divider(),
                 ),
-              );
-            },
-            separatorBuilder: (_, int index) => const Divider(),
-          ),
+              ),
+            ),
+          ],
         ),
       );
 /*

@@ -62,7 +62,7 @@ class _PaymentAddAddState extends State<PaymentAdd> {
                     child: InputTextField(
                       textEditingController: _controller.yearCtrl,
                       label: labelYear,
-                      disabled: widget._payment == null ? false : true,
+                      disabled: widget._payment == null ? null : true,
                     ),
                   ),
                 ],

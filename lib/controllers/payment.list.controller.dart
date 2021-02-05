@@ -1,7 +1,6 @@
 import 'dart:async';
 import 'package:flutter/cupertino.dart';
 import 'package:hcslzapp/models/associated.dart';
-import 'package:hcslzapp/models/payment.table.dart';
 import 'package:hcslzapp/repositories/associated.repo.dart';
 import 'package:hcslzapp/repositories/payment.table.repo.dart';
 import 'package:mobx/mobx.dart';
@@ -48,16 +47,6 @@ abstract class PaymentListControllerBase with Store {
 
   @action
   setFilter(String value) => filter = value;
-
-/*  @computed
-  List<PaymentTable> get listFiltered {
-    if (filter.isEmpty) {
-      return List<PaymentTable>.from(payments);
-    } else {
-      return List<PaymentTable>.from(payments
-          .where((element) => element.name.contains(filter)));
-    }
-  }*/
 
   @computed
   List<Associated> get listFiltered {

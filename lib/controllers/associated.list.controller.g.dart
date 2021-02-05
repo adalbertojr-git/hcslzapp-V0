@@ -9,6 +9,29 @@ part of 'associated.list.controller.dart';
 // ignore_for_file: non_constant_identifier_names, unnecessary_brace_in_string_interps, unnecessary_lambdas, prefer_expression_function_bodies, lines_longer_than_80_chars, avoid_as, avoid_annotating_with_dynamic
 
 mixin _$AssociatedListController on AssociatedListControllerBase, Store {
+  Computed<List<Associated>> _$listFilteredComputed;
+
+  @override
+  List<Associated> get listFiltered => (_$listFilteredComputed ??=
+          Computed<List<Associated>>(() => super.listFiltered,
+              name: 'AssociatedListControllerBase.listFiltered'))
+      .value;
+
+  final _$nameCtrlAtom = Atom(name: 'AssociatedListControllerBase.nameCtrl');
+
+  @override
+  TextEditingController get nameCtrl {
+    _$nameCtrlAtom.reportRead();
+    return super.nameCtrl;
+  }
+
+  @override
+  set nameCtrl(TextEditingController value) {
+    _$nameCtrlAtom.reportWrite(value, super.nameCtrl, () {
+      super.nameCtrl = value;
+    });
+  }
+
   final _$isHidedButtonAtom =
       Atom(name: 'AssociatedListControllerBase.isHidedButton');
 
@@ -103,6 +126,21 @@ mixin _$AssociatedListController on AssociatedListControllerBase, Store {
     });
   }
 
+  final _$filterAtom = Atom(name: 'AssociatedListControllerBase.filter');
+
+  @override
+  String get filter {
+    _$filterAtom.reportRead();
+    return super.filter;
+  }
+
+  @override
+  set filter(String value) {
+    _$filterAtom.reportWrite(value, super.filter, () {
+      super.filter = value;
+    });
+  }
+
   final _$AssociatedListControllerBaseActionController =
       ActionController(name: 'AssociatedListControllerBase');
 
@@ -129,13 +167,27 @@ mixin _$AssociatedListController on AssociatedListControllerBase, Store {
   }
 
   @override
+  dynamic setFilter(String value) {
+    final _$actionInfo = _$AssociatedListControllerBaseActionController
+        .startAction(name: 'AssociatedListControllerBase.setFilter');
+    try {
+      return super.setFilter(value);
+    } finally {
+      _$AssociatedListControllerBaseActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
   String toString() {
     return '''
+nameCtrl: ${nameCtrl},
 isHidedButton: ${isHidedButton},
 associateds: ${associateds},
 associated: ${associated},
 errorMsg: ${errorMsg},
-future: ${future}
+future: ${future},
+filter: ${filter},
+listFiltered: ${listFiltered}
     ''';
   }
 }

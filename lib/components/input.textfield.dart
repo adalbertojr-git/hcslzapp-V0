@@ -49,6 +49,7 @@ class InputTextField extends StatelessWidget {
         readOnly: disabled != null ? disabled : false,
         style: TextStyle(
           fontSize: size != null ? size : 15.0,
+          //color: disabled != null ? Colors.black38 : Colors.black,
         ),
         decoration: InputDecoration(
           focusedBorder: OutlineInputBorder(
@@ -71,16 +72,17 @@ class InputTextField extends StatelessWidget {
               color: Colors.red,
             ),
           ),
+          fillColor: Colors.black12,
+          filled: disabled != null ? true : false,
           icon: icon != null
               ? Icon(
                   icon,
                   color: Colors.orange,
                 )
               : null,
-          //filled: true,
           labelText: label,
           labelStyle: TextStyle(
-            fontSize: 12.0,
+            fontSize: 14.0,
             fontStyle: FontStyle.italic,
             color: Colors.black45,
           ),
@@ -101,7 +103,8 @@ class InputTextField extends StatelessWidget {
         maxLines: nLines != null ? nLines : 1,
         controller: textEditingController,
         onChanged: onChanged,
-        inputFormatters: maskTextInputFormatter == null ? null : [maskTextInputFormatter],
+        inputFormatters:
+            maskTextInputFormatter == null ? null : [maskTextInputFormatter],
       ),
     );
   }

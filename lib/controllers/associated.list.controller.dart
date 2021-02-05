@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'package:flutter/cupertino.dart';
 import 'package:hcslzapp/models/associated.dart';
 import 'package:hcslzapp/repositories/associated.repo.dart';
 import 'package:mobx/mobx.dart';
@@ -9,6 +10,9 @@ class AssociatedListController = AssociatedListControllerBase
     with _$AssociatedListController;
 
 abstract class AssociatedListControllerBase with Store {
+  @observable
+  var nameCtrl = TextEditingController();
+
   @observable
   bool isHidedButton = true;
 
@@ -26,6 +30,9 @@ abstract class AssociatedListControllerBase with Store {
 
   @observable
   Future<List<Associated>> future;
+
+  @observable
+  String filter = '';
 
   get init {
     _initLists;
@@ -46,4 +53,17 @@ abstract class AssociatedListControllerBase with Store {
       }, test: (e) => e is Exception);
 
   Future<List<Associated>> getFuture() => future = findAll();
+
+  @action
+  setFilter(String value) => filter = value;
+
+  @computed
+  List<Associated> get listFiltered {
+    if (filter.isEmpty) {
+      return List<Associated>.from(associateds);
+    } else {
+      return List<Associated>.from(associateds
+          .where((element) => element.name.contains(filter)));
+    }
+  }
 }
