@@ -32,6 +32,22 @@ mixin _$PaymentListController on PaymentListControllerBase, Store {
     });
   }
 
+  final _$isHidedButtonAtom =
+      Atom(name: 'PaymentListControllerBase.isHidedButton');
+
+  @override
+  bool get isHidedButton {
+    _$isHidedButtonAtom.reportRead();
+    return super.isHidedButton;
+  }
+
+  @override
+  set isHidedButton(bool value) {
+    _$isHidedButtonAtom.reportWrite(value, super.isHidedButton, () {
+      super.isHidedButton = value;
+    });
+  }
+
   final _$associatedsAtom = Atom(name: 'PaymentListControllerBase.associateds');
 
   @override
@@ -128,6 +144,17 @@ mixin _$PaymentListController on PaymentListControllerBase, Store {
       ActionController(name: 'PaymentListControllerBase');
 
   @override
+  bool setButtonVisibilty() {
+    final _$actionInfo = _$PaymentListControllerBaseActionController
+        .startAction(name: 'PaymentListControllerBase.setButtonVisibilty');
+    try {
+      return super.setButtonVisibilty();
+    } finally {
+      _$PaymentListControllerBaseActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
   Future<dynamic> findAll() {
     final _$actionInfo = _$PaymentListControllerBaseActionController
         .startAction(name: 'PaymentListControllerBase.findAll');
@@ -153,6 +180,7 @@ mixin _$PaymentListController on PaymentListControllerBase, Store {
   String toString() {
     return '''
 nameCtrl: ${nameCtrl},
+isHidedButton: ${isHidedButton},
 associateds: ${associateds},
 errorMsg: ${errorMsg},
 future: ${future},

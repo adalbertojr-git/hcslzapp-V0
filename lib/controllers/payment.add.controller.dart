@@ -160,7 +160,7 @@ abstract class PaymentAddControllerBase with Store {
 
   Payment _setValues() {
     return Payment(
-        id: int.parse('0'),
+        id: payment != null ? payment.id : int.parse('0'),
         year: yearCtrl.text,
         associated: this.associated,
         paymentMonths: _setPaymentMonths());

@@ -58,7 +58,7 @@ class AssociatedListState extends State<AssociatedList> {
                       return _widgets();
                     } else
                       return CenteredMessage(
-                        'Não existem requisições de acesso a serem aprovadas.',
+                        'Não existem associados cadastrados. Confira as requisições de acesso.',
                       );
                   }
               } //switch (snapshot.connectionState)
@@ -71,7 +71,9 @@ class AssociatedListState extends State<AssociatedList> {
               FloatingActionButtonLocation.centerFloat,
           floatingActionButton: _controller.isHidedButton
               ? null
-              : Button(icon: Icons.save, onClick: () {}),
+              : Button(
+                  icon: Icons.arrow_back,
+                  onClick: () => Navigator.of(context).pop()),
         ),
       );
 
@@ -137,15 +139,6 @@ class AssociatedListState extends State<AssociatedList> {
                         trailing: Wrap(
                           spacing: 10, // space between two icons
                           children: <Widget>[
-                            GestureDetector(
-                              child: Icon(
-                                Icons.delete,
-                                size: 30.0,
-                              ),
-                              onTap: () {
-                                _controller.associateds.removeAt(i);
-                              },
-                            ),
                             GestureDetector(
                               child: Icon(
                                 Icons.arrow_forward,

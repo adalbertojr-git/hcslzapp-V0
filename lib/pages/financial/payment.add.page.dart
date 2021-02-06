@@ -28,6 +28,7 @@ class _PaymentAddAddState extends State<PaymentAdd> {
     _controller.associated =
         widget._associated != null ? widget._associated : null;
     _controller.init;
+    print(widget._associated);
     super.initState();
   }
 

@@ -15,6 +15,9 @@ abstract class PaymentListControllerBase with Store {
   var nameCtrl = TextEditingController();
 
   @observable
+  bool isHidedButton = true;
+
+  @observable
   ObservableList associateds = [].asObservable();
 
   @observable
@@ -36,6 +39,9 @@ abstract class PaymentListControllerBase with Store {
     associateds.clear();
   }
 
+  @action
+  bool setButtonVisibilty() => isHidedButton = !isHidedButton;
+  
   @action
   Future findAll() =>
       ObservableFuture(_associatedRepo.findAll().then((value) => value))

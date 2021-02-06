@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:hcslzapp/common/labels.and.hints.dart';
+import 'package:hcslzapp/components/button.dart';
 import 'package:hcslzapp/components/centered.message.dart';
 import 'package:hcslzapp/components/my.text.form.field.dart';
 import 'package:hcslzapp/components/progress.dart';
@@ -21,7 +22,11 @@ class _PaymentListPageState extends State<PaymentListPage> {
   void initState() {
     //_controller = Provider.of<AssociatedController>(context, listen: false);
     _controller.init;
-    _controller.getFuture();
+    _controller.getFuture().then((value) {
+      if (value != null && value.isNotEmpty) {
+        _controller.setButtonVisibilty();
+      }
+    });
     super.initState();
   }
 
@@ -52,7 +57,7 @@ class _PaymentListPageState extends State<PaymentListPage> {
                       return _widgets();
                     } else
                       return CenteredMessage(
-                        'Não existem requisições de acesso a serem aprovadas.',
+                        'Não existem associados cadastrados. Confira as requisições de acesso.',
                       );
                   }
               } //switch (snapshot.connectionState)
@@ -61,6 +66,13 @@ class _PaymentListPageState extends State<PaymentListPage> {
               );
             },
           ),
+          floatingActionButtonLocation:
+              FloatingActionButtonLocation.centerFloat,
+          floatingActionButton: _controller.isHidedButton
+              ? null
+              : Button(
+                  icon: Icons.arrow_back,
+                  onClick: () => Navigator.of(context).pop()),
         ),
       );
 
