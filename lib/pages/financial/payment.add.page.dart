@@ -8,6 +8,7 @@ import 'package:hcslzapp/controllers/payment.add.controller.dart';
 import 'package:hcslzapp/models/associated.dart';
 import 'package:hcslzapp/models/payment.dart';
 import 'package:mask_text_input_formatter/mask_text_input_formatter.dart';
+import 'package:asuka/asuka.dart' as asuka;
 
 class PaymentAdd extends StatefulWidget {
   final Payment _payment;
@@ -25,10 +26,8 @@ class _PaymentAddAddState extends State<PaymentAdd> {
   @override
   void initState() {
     _controller.payment = widget._payment != null ? widget._payment : null;
-    _controller.associated =
-        widget._associated != null ? widget._associated : null;
+    _controller.associated = widget._associated;
     _controller.init;
-    print(widget._associated);
     super.initState();
   }
 
@@ -214,9 +213,42 @@ class _PaymentAddAddState extends State<PaymentAdd> {
       floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
       floatingActionButton: Button(
         icon: Icons.save,
-        onClick: () =>
-            widget._payment == null ? _controller.save() : _controller.update(),
+        onClick: () => widget._payment == null ? _save : _update,
       ),
     );
+  }
+
+  get _save {
+/*    if (_controller.hasErrors) {
+      asuka.showSnackBar(
+        SnackBar(
+          content: Text('Atenção: Existem erros no formulário que devem '
+              'ser corrigidos antes de efetivar a transação.'), ''''
+        ),
+      );
+    } else {*/
+      _controller.save().then(
+        (payment) {
+          if (payment != null) {
+            asuka.showSnackBar(
+              SnackBar(
+                content: Text('Associado atualizado com sucesso.'),
+              ),
+            );
+            Navigator.of(context).pop(payment);
+          } else {
+            asuka.showSnackBar(
+              SnackBar(
+                content: Text(_controller.errorMsg),
+              ),
+            );
+          }
+        },
+      );
+    //}
+  }
+
+  get _update {
+
   }
 }

@@ -3,11 +3,13 @@ import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:hcslzapp/components/button.dart';
 import 'package:hcslzapp/components/centered.message.dart';
 import 'package:hcslzapp/components/progress.dart';
+import 'package:hcslzapp/components/transaction.auth.dialog.dart';
 import 'package:hcslzapp/controllers/payment.selected.controller.dart';
 import 'package:hcslzapp/models/associated.dart';
 import 'package:hcslzapp/models/payment.dart';
 import 'package:hcslzapp/models/payment.months.dart';
 import 'package:hcslzapp/pages/financial/payment.add.page.dart';
+import 'package:asuka/asuka.dart' as asuka;
 
 class PaymentSelected extends StatefulWidget {
   final Associated _associated;
@@ -70,10 +72,20 @@ class _PaymentSelectedState extends State<PaymentSelected> {
               ? null
               : Button(
                   icon: Icons.add,
-                  onClick: () => Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) => PaymentAdd(null, widget._associated))),
+                  onClick: () {
+                    final Future<Payment> future = Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) =>
+                                PaymentAdd(null, widget._associated)));
+                    future.then(
+                      (payment) {
+                        if (payment != null) {
+                          _controller.payments.add(payment);
+                        }
+                      },
+                    );
+                  },
                 ),
         ),
       );
@@ -105,7 +117,7 @@ class _PaymentSelectedState extends State<PaymentSelected> {
 
   ExpansionTile _buildExpansionTile(List<Payment> payments, int i) =>
       ExpansionTile(
-        initiallyExpanded: true,
+        //initiallyExpanded: true,
         title: Text(
           'Ano: ' + payments[i].year,
           style: TextStyle(
@@ -119,6 +131,15 @@ class _PaymentSelectedState extends State<PaymentSelected> {
           children: <Widget>[
             GestureDetector(
               child: Icon(
+                Icons.delete,
+                size: 30.0,
+              ),
+              onTap: () {
+                _delete(_controller.payments[i]);
+              },
+            ),
+            GestureDetector(
+              child: Icon(
                 Icons.edit,
                 size: 30.0,
               ),
@@ -127,8 +148,8 @@ class _PaymentSelectedState extends State<PaymentSelected> {
                 Navigator.push(
                   context,
                   MaterialPageRoute(
-                      builder: (context) =>
-                          PaymentAdd(_controller.payments[i], null)),
+                      builder: (context) => PaymentAdd(
+                          _controller.payments[i], widget._associated)),
                 );
               },
             ),
@@ -161,4 +182,29 @@ class _PaymentSelectedState extends State<PaymentSelected> {
           ),
         ),
       );
+
+  _delete(Payment payment) async {
+    var response = await showDialog(
+        context: context,
+        builder: (context) {
+          return TransactionAuthDialog();
+        });
+    if (response == true) {
+      _controller.deleteById(payment).then((value) {
+        if (value != null) {
+          asuka.showSnackBar(
+            SnackBar(
+              content: Text('Mensalidade excluída com sucesso.'),
+            ),
+          );
+        } else {
+          asuka.showSnackBar(
+            SnackBar(
+              content: Text(_controller.errorMsg),
+            ),
+          );
+        }
+      });
+    }
+  }
 }

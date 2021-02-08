@@ -96,4 +96,25 @@ class PaymentRepo {
       throw HttpException(getMessage(response.statusCode));
     }
   }
+
+  Future<Payment> deleteById(Payment payment) async {
+    final String encodedJson = jsonEncode(
+      payment.toJson(),
+    );
+    final Response response = await client.delete(
+      mainUrl + _paymentUrl + "/" + payment.id.toString(),
+      headers: {
+        'Content-type': 'application/json',
+      },
+    ).timeout(
+      Duration(seconds: 10),
+    );
+    if (response.statusCode == 200) {
+      return Payment.fromJson(
+        jsonDecode(response.body),
+      );
+    } else {
+      throw HttpException(getMessage(response.statusCode));
+    }
+  }
 }

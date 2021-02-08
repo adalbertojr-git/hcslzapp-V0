@@ -5,7 +5,8 @@ import 'package:mobx/mobx.dart';
 
 part 'payment.selected.controller.g.dart';
 
-class PaymentSelectedController = PaymentSelectedControllerBase with _$PaymentSelectedController;
+class PaymentSelectedController = PaymentSelectedControllerBase
+    with _$PaymentSelectedController;
 
 abstract class PaymentSelectedControllerBase with Store {
   var formController;
@@ -36,14 +37,21 @@ abstract class PaymentSelectedControllerBase with Store {
   bool setButtonVisibilty() => isHidedButton = !isHidedButton;
 
   @action
-  Future findByAssociatedIdToList(int id) =>
-      ObservableFuture(_paymentRepo.findByAssociatedIdToList(id).then((value) => value))
+  Future findByAssociatedIdToList(int id) => ObservableFuture(
+              _paymentRepo.findByAssociatedIdToList(id).then((value) => value))
           .catchError((e) {
         this.errorMsg = "${e.message}";
       }, test: (e) => e is Exception);
 
   Future<List<Payment>> getFuture(int id) =>
       future = findByAssociatedIdToList(id);
+
+  @action
+  Future deleteById(Payment payment) =>
+      ObservableFuture(_paymentRepo.deleteById(payment).then((value) => value))
+          .catchError((e) {
+        this.errorMsg = "${e.message}";
+      }, test: (e) => e is Exception);
 }
 
 class FormController extends FormControllerBase with _$FormController {
