@@ -1,5 +1,6 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
+import 'package:hcslzapp/controllers/payment.selected.controller.dart';
 import 'package:hcslzapp/models/associated.dart';
 import 'package:hcslzapp/models/payment.dart';
 import 'package:hcslzapp/models/payment.months.dart';
@@ -179,10 +180,14 @@ abstract class PaymentAddControllerBase with Store {
   }
 
   String validateYear() {
+    print(payments);
+    print(payments.contains(formController.year));
     if (formController.year.isEmpty) {
       return "Ano é obrigatório!!!";
     } else if (int.parse(formController.year) < 2014) {
       return "Ano deve ser maior que 2014";
+    } else if(payments.contains(formController.year)) {
+     return  "Ano já cadastrado";
     }
     return null;
   }

@@ -4,16 +4,15 @@ class TransactionAuthDialog extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return AlertDialog(
-      backgroundColor: Colors.black45,
       title: Icon(
         Icons.warning_amber_sharp,
-        size: 50.0,
+        size: 70.0,
         color: Colors.orangeAccent,
       ),
       content: Text(
         'Deseja excluir o registro selecionado?',
         style: TextStyle(
-          color: Colors.white,
+          color: Colors.black,
         ),
       ),
       actions: <Widget>[

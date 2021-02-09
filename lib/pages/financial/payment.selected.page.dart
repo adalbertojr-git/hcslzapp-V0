@@ -73,22 +73,25 @@ class _PaymentSelectedState extends State<PaymentSelected> {
               : Button(
                   icon: Icons.add,
                   onClick: () {
-                    final Future<Payment> future = Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) =>
-                                PaymentAdd(null, widget._associated)));
-                    future.then(
-                      (payment) {
-                        if (payment != null) {
-                          _controller.payments.add(payment);
-                        }
-                      },
-                    );
+                    _add;
                   },
                 ),
         ),
       );
+
+  get _add {
+    final Future<Payment> future = Navigator.push(
+        context,
+        MaterialPageRoute(
+            builder: (_) => PaymentAdd(null, widget._associated)));
+    future.then(
+      (payment) {
+        if (payment != null) {
+          _controller.addPayment(payment);
+        }
+      },
+    );
+  }
 
   get _buildListView => Container(
         padding: EdgeInsets.fromLTRB(5.0, 5.0, 5.0, 0.0),
@@ -100,24 +103,19 @@ class _PaymentSelectedState extends State<PaymentSelected> {
           ),
         ),
         height: MediaQuery.of(context).size.height,
-        child: Column(
-          children: <Widget>[
-            Expanded(
-              child: ListView.builder(
-                itemCount: _controller.payments.length,
-                itemBuilder: (_, i) {
-                  var payments = List<Payment>.from(_controller.payments);
-                  return _buildExpansionTile(payments, i);
-                },
-              ),
-            ),
-          ],
+        child: Observer(
+          builder: (_) => ListView.builder(
+            itemCount: _controller.payments.length,
+            itemBuilder: (_, i) {
+              var payments = List<Payment>.from(_controller.payments);
+              return _buildExpansionTile(payments, i);
+            },
+          ),
         ),
       );
 
   ExpansionTile _buildExpansionTile(List<Payment> payments, int i) =>
       ExpansionTile(
-        //initiallyExpanded: true,
         title: Text(
           'Ano: ' + payments[i].year,
           style: TextStyle(
@@ -135,7 +133,7 @@ class _PaymentSelectedState extends State<PaymentSelected> {
                 size: 30.0,
               ),
               onTap: () {
-                _delete(_controller.payments[i]);
+                _delete(i);
               },
             ),
             GestureDetector(
@@ -144,7 +142,6 @@ class _PaymentSelectedState extends State<PaymentSelected> {
                 size: 30.0,
               ),
               onTap: () {
-                print(_controller.payments[i]);
                 Navigator.push(
                   context,
                   MaterialPageRoute(
@@ -183,20 +180,21 @@ class _PaymentSelectedState extends State<PaymentSelected> {
         ),
       );
 
-  _delete(Payment payment) async {
+  _delete(int i) async {
     var response = await showDialog(
         context: context,
         builder: (context) {
           return TransactionAuthDialog();
         });
     if (response == true) {
-      _controller.deleteById(payment).then((value) {
+      _controller.deleteById(_controller.payments[i]).then((value) {
         if (value != null) {
           asuka.showSnackBar(
             SnackBar(
-              content: Text('Mensalidade excluída com sucesso.'),
+              content: Text('Mensalidade(s) excluída(s) com sucesso.'),
             ),
           );
+          _controller.payments.removeAt(i);
         } else {
           asuka.showSnackBar(
             SnackBar(

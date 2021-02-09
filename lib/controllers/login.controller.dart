@@ -10,8 +10,6 @@ part 'login.controller.g.dart';
 class LoginController = LoginControllerBase with _$LoginController;
 
 abstract class LoginControllerBase with Store {
-  var formController;
-
   @observable
   var userLoginCtrl = TextEditingController();
 
@@ -30,10 +28,6 @@ abstract class LoginControllerBase with Store {
   @observable
   LoginRepo _loginRepo = LoginRepo();
 
-  get init {
-    formController = FormController(user: '', password: '');
-  }
-
   @action
   Future authenticate() => token = ObservableFuture(_loginRepo
           .authenticate(userLoginCtrl.text, pswLoginCtrl.text)
@@ -44,42 +38,7 @@ abstract class LoginControllerBase with Store {
   @action
   bool setLoading(bool value) => isLoading = value;
 
-  String validateUser() {
-    if (formController.user.isEmpty) {
-      return "Usuário é obrigatório!!!";
-    }
-    return null;
-  }
-
-  String validatePassword() {
-    if (formController.password.isEmpty) {
-      return "Senha é obrigatória!!!";
-    }
-    return null;
-  }
-
   Future saveToken(String token) async {
     await Glutton.eat("token", token);
   }
-}
-
-class FormController extends FormControllerBase with _$FormController {
-  FormController({String user, String password}) {
-    super.user = user;
-    super.password = password;
-  }
-}
-
-abstract class FormControllerBase with Store {
-  @observable
-  String user;
-
-  @observable
-  String password;
-
-  @action
-  changeUser(String value) => user = value;
-
-  @action
-  changePassword(String value) => password = value;
 }

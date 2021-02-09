@@ -37,6 +37,9 @@ abstract class PaymentSelectedControllerBase with Store {
   bool setButtonVisibilty() => isHidedButton = !isHidedButton;
 
   @action
+  addPayment(Payment payment) => payments.add(payment);
+
+  @action
   Future findByAssociatedIdToList(int id) => ObservableFuture(
               _paymentRepo.findByAssociatedIdToList(id).then((value) => value))
           .catchError((e) {

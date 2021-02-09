@@ -97,7 +97,7 @@ class PaymentRepo {
     }
   }
 
-  Future<Payment> deleteById(Payment payment) async {
+  Future<Response> deleteById(Payment payment) async {
     final String encodedJson = jsonEncode(
       payment.toJson(),
     );
@@ -109,10 +109,8 @@ class PaymentRepo {
     ).timeout(
       Duration(seconds: 10),
     );
-    if (response.statusCode == 200) {
-      return Payment.fromJson(
-        jsonDecode(response.body),
-      );
+    if (response.statusCode == 204) {
+      return response;
     } else {
       throw HttpException(getMessage(response.statusCode));
     }

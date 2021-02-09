@@ -232,7 +232,7 @@ class _PaymentAddAddState extends State<PaymentAdd> {
           if (payment != null) {
             asuka.showSnackBar(
               SnackBar(
-                content: Text('Associado atualizado com sucesso.'),
+                content: Text('Mensalidades cadastradas com sucesso.'),
               ),
             );
             Navigator.of(context).pop(payment);
