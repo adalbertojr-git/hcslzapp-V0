@@ -135,9 +135,8 @@ abstract class PaymentAddControllerBase with Store {
   }
 
   @action
-  Future findByAssociatedIdToList(int id) =>
-      ObservableFuture(
-          _paymentRepo.findByAssociatedIdToList(id).then((value) => value))
+  Future findByAssociatedIdToList(int id) => ObservableFuture(
+              _paymentRepo.findByAssociatedIdToList(id).then((value) => value))
           .catchError((e) {
         this.errorMsg = "${e.message}";
       }, test: (e) => e is Exception);
@@ -169,14 +168,27 @@ abstract class PaymentAddControllerBase with Store {
 
   List<PaymentMonths> _setPaymentMonths() {
     List<PaymentMonths> paymentMonthsList = List<PaymentMonths>();
-    paymentMonthsList.add(
-      PaymentMonths(
-        id: int.parse('0'),
-        month: 1,
-        value: double.parse(janCtrl.text),
-      ),
-    );
+    paymentMonthsList.add(_setMonthsAndValues(1, janCtrl.text));
+    paymentMonthsList.add(_setMonthsAndValues(2, febCtrl.text));
+    paymentMonthsList.add(_setMonthsAndValues(3, marCtrl.text));
+    paymentMonthsList.add(_setMonthsAndValues(4, aprCtrl.text));
+    paymentMonthsList.add(_setMonthsAndValues(5, mayCtrl.text));
+    paymentMonthsList.add(_setMonthsAndValues(6, junCtrl.text));
+    paymentMonthsList.add(_setMonthsAndValues(7, julCtrl.text));
+    paymentMonthsList.add(_setMonthsAndValues(8, augCtrl.text));
+    paymentMonthsList.add(_setMonthsAndValues(9, sepCtrl.text));
+    paymentMonthsList.add(_setMonthsAndValues(10, octCtrl.text));
+    paymentMonthsList.add(_setMonthsAndValues(11, novCtrl.text));
+    paymentMonthsList.add(_setMonthsAndValues(12, decCtrl.text));
     return paymentMonthsList;
+  }
+
+  PaymentMonths _setMonthsAndValues(int month, String value) {
+    return PaymentMonths(
+      id: int.parse('0'),
+      month: month,
+      value: value.isNotEmpty ? double.parse(value) : null,
+    );
   }
 
   String validateYear() {
@@ -186,8 +198,8 @@ abstract class PaymentAddControllerBase with Store {
       return "Ano é obrigatório!!!";
     } else if (int.parse(formController.year) < 2014) {
       return "Ano deve ser maior que 2014";
-    } else if(payments.contains(formController.year)) {
-     return  "Ano já cadastrado";
+    } else if (payments.contains(formController.year)) {
+      return "Ano já cadastrado";
     }
     return null;
   }

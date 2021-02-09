@@ -78,7 +78,7 @@ class PaymentRepo {
     );
     final Response response = await client
         .put(
-          mainUrl + _paymentUrl + "/" + payment.id.toString(),
+          mainUrl + _paymentUrl + "/update/" + payment.id.toString(),
           headers: {
             'Content-type': 'application/json',
           },
@@ -103,6 +103,7 @@ class PaymentRepo {
     );
     final Response response = await client.delete(
       mainUrl + _paymentUrl + "/" + payment.id.toString(),
+      //mainUrl + _paymentUrl ,
       headers: {
         'Content-type': 'application/json',
       },
