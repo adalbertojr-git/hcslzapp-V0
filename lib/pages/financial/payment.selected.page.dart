@@ -87,7 +87,7 @@ class _PaymentSelectedState extends State<PaymentSelected> {
     future.then(
       (payment) {
         if (payment != null) {
-          _controller.addPayment(payment);
+          _controller.payments.add(payment);
         }
       },
     );

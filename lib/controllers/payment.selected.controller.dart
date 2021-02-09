@@ -9,8 +9,6 @@ class PaymentSelectedController = PaymentSelectedControllerBase
     with _$PaymentSelectedController;
 
 abstract class PaymentSelectedControllerBase with Store {
-  var formController;
-
   @observable
   bool isHidedButton = true;
 
@@ -37,9 +35,6 @@ abstract class PaymentSelectedControllerBase with Store {
   bool setButtonVisibilty() => isHidedButton = !isHidedButton;
 
   @action
-  addPayment(Payment payment) => payments.add(payment);
-
-  @action
   Future findByAssociatedIdToList(int id) => ObservableFuture(
               _paymentRepo.findByAssociatedIdToList(id).then((value) => value))
           .catchError((e) {
@@ -55,25 +50,4 @@ abstract class PaymentSelectedControllerBase with Store {
           .catchError((e) {
         this.errorMsg = "${e.message}";
       }, test: (e) => e is Exception);
-}
-
-class FormController extends FormControllerBase with _$FormController {
-  FormController({String name, String email}) {
-    super.name = name;
-    super.email = email;
-  }
-}
-
-abstract class FormControllerBase with Store {
-  @observable
-  String name;
-
-  @observable
-  String email;
-
-  @action
-  changeName(String value) => name = value;
-
-  @action
-  changeEmail(String value) => email = value;
 }

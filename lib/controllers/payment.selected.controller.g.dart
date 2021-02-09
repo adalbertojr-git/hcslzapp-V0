@@ -116,17 +116,6 @@ mixin _$PaymentSelectedController on PaymentSelectedControllerBase, Store {
   }
 
   @override
-  dynamic addPayment(Payment payment) {
-    final _$actionInfo = _$PaymentSelectedControllerBaseActionController
-        .startAction(name: 'PaymentSelectedControllerBase.addPayment');
-    try {
-      return super.addPayment(payment);
-    } finally {
-      _$PaymentSelectedControllerBaseActionController.endAction(_$actionInfo);
-    }
-  }
-
-  @override
   Future<dynamic> findByAssociatedIdToList(int id) {
     final _$actionInfo =
         _$PaymentSelectedControllerBaseActionController.startAction(
@@ -157,71 +146,6 @@ payments: ${payments},
 payment: ${payment},
 errorMsg: ${errorMsg},
 future: ${future}
-    ''';
-  }
-}
-
-mixin _$FormController on FormControllerBase, Store {
-  final _$nameAtom = Atom(name: 'FormControllerBase.name');
-
-  @override
-  String get name {
-    _$nameAtom.reportRead();
-    return super.name;
-  }
-
-  @override
-  set name(String value) {
-    _$nameAtom.reportWrite(value, super.name, () {
-      super.name = value;
-    });
-  }
-
-  final _$emailAtom = Atom(name: 'FormControllerBase.email');
-
-  @override
-  String get email {
-    _$emailAtom.reportRead();
-    return super.email;
-  }
-
-  @override
-  set email(String value) {
-    _$emailAtom.reportWrite(value, super.email, () {
-      super.email = value;
-    });
-  }
-
-  final _$FormControllerBaseActionController =
-      ActionController(name: 'FormControllerBase');
-
-  @override
-  dynamic changeName(String value) {
-    final _$actionInfo = _$FormControllerBaseActionController.startAction(
-        name: 'FormControllerBase.changeName');
-    try {
-      return super.changeName(value);
-    } finally {
-      _$FormControllerBaseActionController.endAction(_$actionInfo);
-    }
-  }
-
-  @override
-  dynamic changeEmail(String value) {
-    final _$actionInfo = _$FormControllerBaseActionController.startAction(
-        name: 'FormControllerBase.changeEmail');
-    try {
-      return super.changeEmail(value);
-    } finally {
-      _$FormControllerBaseActionController.endAction(_$actionInfo);
-    }
-  }
-
-  @override
-  String toString() {
-    return '''
-name: ${name},
-email: ${email}
     ''';
   }
 }
