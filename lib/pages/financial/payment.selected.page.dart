@@ -83,7 +83,8 @@ class _PaymentSelectedState extends State<PaymentSelected> {
     final Future<Payment> future = Navigator.push(
         context,
         MaterialPageRoute(
-            builder: (_) => PaymentAdd(null, widget._associated)));
+            builder: (_) =>
+                PaymentAdd(null, widget._associated, _controller.loadYears())));
     future.then(
       (payment) {
         if (payment != null) {
@@ -145,8 +146,8 @@ class _PaymentSelectedState extends State<PaymentSelected> {
                 Navigator.push(
                   context,
                   MaterialPageRoute(
-                      builder: (context) => PaymentAdd(
-                          _controller.payments[i], widget._associated)),
+                      builder: (context) => PaymentAdd(_controller.payments[i],
+                          widget._associated, _controller.loadYears())),
                 );
               },
             ),

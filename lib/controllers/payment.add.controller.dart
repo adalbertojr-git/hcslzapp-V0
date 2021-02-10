@@ -78,11 +78,14 @@ abstract class PaymentAddControllerBase with Store {
   @observable
   Future<List<Payment>> future;
 
+  @observable
+  List<String> years;
+
   get init {
     _initTextFields;
     payments.clear();
     formController = FormController(
-      year: '',
+      year: yearCtrl.text,
     );
   }
 
@@ -166,6 +169,9 @@ abstract class PaymentAddControllerBase with Store {
         paymentMonths: _setPaymentMonths());
   }
 
+  @action
+  setYears(List<String> years) => this.years = years;
+
   List<PaymentMonths> _setPaymentMonths() {
     List<PaymentMonths> paymentMonthsList = List<PaymentMonths>();
     paymentMonthsList.add(_setMonthsAndValues(1, janCtrl.text));
@@ -192,14 +198,12 @@ abstract class PaymentAddControllerBase with Store {
   }
 
   String validateYear() {
-    print(payments);
-    print(payments.contains(formController.year));
     if (formController.year.isEmpty) {
       return "Ano é obrigatório!!!";
-    } else if (int.parse(formController.year) < 2014) {
-      return "Ano deve ser maior que 2014";
-    } else if (payments.contains(formController.year)) {
-      return "Ano já cadastrado";
+    } else if (int.parse(formController.year) < 2018) {
+      return "Ano deve ser maior que 2018";
+    } else if (this.years.contains(formController.year)) {
+      return "Ano informado já cadastrado";
     }
     return null;
   }

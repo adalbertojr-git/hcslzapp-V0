@@ -50,4 +50,12 @@ abstract class PaymentSelectedControllerBase with Store {
           .catchError((e) {
         this.errorMsg = "${e.message}";
       }, test: (e) => e is Exception);
+
+  List<String> loadYears() {
+    List<String> years = List();
+    payments.forEach((element) {
+      years.add(element.year);
+    });
+    return years;
+  }
 }

@@ -13,8 +13,9 @@ import 'package:asuka/asuka.dart' as asuka;
 class PaymentAdd extends StatefulWidget {
   final Payment _payment;
   final Associated _associated;
+  final List<String> _years;
 
-  PaymentAdd(this._payment, this._associated);
+  PaymentAdd(this._payment, this._associated, this._years);
 
   @override
   _PaymentAddAddState createState() => _PaymentAddAddState();
@@ -28,6 +29,8 @@ class _PaymentAddAddState extends State<PaymentAdd> {
     _controller.payment = widget._payment != null ? widget._payment : null;
     _controller.associated = widget._associated;
     _controller.init;
+    print(widget._years);
+    _controller.setYears(widget._years);
     super.initState();
   }
 

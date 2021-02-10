@@ -325,6 +325,21 @@ mixin _$PaymentAddController on PaymentAddControllerBase, Store {
     });
   }
 
+  final _$yearsAtom = Atom(name: 'PaymentAddControllerBase.years');
+
+  @override
+  List<String> get years {
+    _$yearsAtom.reportRead();
+    return super.years;
+  }
+
+  @override
+  set years(List<String> value) {
+    _$yearsAtom.reportWrite(value, super.years, () {
+      super.years = value;
+    });
+  }
+
   final _$PaymentAddControllerBaseActionController =
       ActionController(name: 'PaymentAddControllerBase');
 
@@ -362,6 +377,17 @@ mixin _$PaymentAddController on PaymentAddControllerBase, Store {
   }
 
   @override
+  dynamic setYears(List<String> years) {
+    final _$actionInfo = _$PaymentAddControllerBaseActionController.startAction(
+        name: 'PaymentAddControllerBase.setYears');
+    try {
+      return super.setYears(years);
+    } finally {
+      _$PaymentAddControllerBaseActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
   String toString() {
     return '''
 idCtrl: ${idCtrl},
@@ -383,7 +409,8 @@ payments: ${payments},
 payment: ${payment},
 associated: ${associated},
 errorMsg: ${errorMsg},
-future: ${future}
+future: ${future},
+years: ${years}
     ''';
   }
 }
