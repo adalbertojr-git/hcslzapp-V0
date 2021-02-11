@@ -30,46 +30,47 @@ class _PaymentSelectedState extends State<PaymentSelected> {
         _controller.setButtonVisibilty();
       }
     });
+    _controller.init;
     super.initState();
   }
 
   @override
-  Widget build(BuildContext context) => Observer(
-        builder: (_) => Scaffold(
-          body: FutureBuilder<List<Payment>>(
-            future: _controller.future,
-            builder: (context, snapshot) {
-              switch (snapshot.connectionState) {
-                case ConnectionState.none:
-                  break;
-                case ConnectionState.waiting:
-                  return Progress();
-                case ConnectionState.active:
-                  break;
-                default:
-                  if (snapshot.hasError) {
-                    return CenteredMessage(snapshot.error.toString());
-                  } else {
-                    if (snapshot.data == null)
-                      return CenteredMessage(
-                        _controller.errorMsg,
-                      );
-                    _controller.init;
+  Widget build(BuildContext context) => Scaffold(
+        body: FutureBuilder<List<Payment>>(
+          future: _controller.future,
+          builder: (context, snapshot) {
+            switch (snapshot.connectionState) {
+              case ConnectionState.none:
+                break;
+              case ConnectionState.waiting:
+                return Progress();
+              case ConnectionState.active:
+                break;
+              default:
+                if (snapshot.hasError) {
+                  return CenteredMessage(snapshot.error.toString());
+                } else {
+                  if (snapshot.data == null)
+                    return CenteredMessage(
+                      _controller.errorMsg,
+                    );
+                  if (_controller.payments.isEmpty) {
                     if (snapshot.data.length > 0) {
                       _controller.payments.addAll(snapshot.data);
                     }
-                    return _buildListView;
                   }
-              } //switch (snapshot.connectionState)
-              return CenteredMessage(
-                'Houve um erro desconhecido ao executar a transação.',
-              );
-            },
-          ),
-          floatingActionButtonLocation:
-              FloatingActionButtonLocation.centerFloat,
-          floatingActionButton: _controller.isHidedButton
-              ? null
+                  return _buildListView;
+                }
+            } //switch (snapshot.connectionState)
+            return CenteredMessage(
+              'Houve um erro desconhecido ao executar a transação.',
+            );
+          },
+        ),
+        floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
+        floatingActionButton: Observer(
+          builder: (_) => _controller.isHidedButton
+              ? Container()
               : Button(
                   icon: Icons.add,
                   onClick: () {
@@ -79,19 +80,22 @@ class _PaymentSelectedState extends State<PaymentSelected> {
         ),
       );
 
-  get _add {
-    final Future<Payment> future = Navigator.push(
-        context,
-        MaterialPageRoute(
-            builder: (_) =>
-                PaymentAdd(null, widget._associated, _controller.loadYears())));
-    future.then(
-      (payment) {
-        if (payment != null) {
-          _controller.payments.add(payment);
-        }
-      },
+  get _add async {
+    var payment = await Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (_) => PaymentAdd(
+          null,
+          widget._associated,
+          _controller.loadYears(),
+        ),
+      ),
     );
+    if (payment != null) {
+      _controller.setPayments(payment);
+      print('Button:');
+      print((_controller.payments.length));
+    }
   }
 
   get _buildListView => Container(
@@ -196,6 +200,7 @@ class _PaymentSelectedState extends State<PaymentSelected> {
             ),
           );
           _controller.payments.removeAt(i);
+          print(_controller.payments.length);
         } else {
           asuka.showSnackBar(
             SnackBar(

@@ -62,7 +62,6 @@ class PaymentRepo {
         .timeout(
           Duration(seconds: 10),
         );
-    print(payment);
     if (response.statusCode == 200) {
       return Payment.fromJson(
         jsonDecode(response.body),
@@ -87,7 +86,6 @@ class PaymentRepo {
         .timeout(
           Duration(seconds: 10),
         );
-    print(payment);
     if (response.statusCode == 200) {
       return Payment.fromJson(
         jsonDecode(response.body),

@@ -29,7 +29,6 @@ class _PaymentAddAddState extends State<PaymentAdd> {
     _controller.payment = widget._payment != null ? widget._payment : null;
     _controller.associated = widget._associated;
     _controller.init;
-    print(widget._years);
     _controller.setYears(widget._years);
     super.initState();
   }
@@ -57,7 +56,7 @@ class _PaymentAddAddState extends State<PaymentAdd> {
                 disabled: true,
               ),
               Container(
-                width: 190.0,
+                width: 200.0,
                 child: Observer(
                   builder: (_) => MyTextFormField(
                       textEditingController: _controller.yearCtrl,

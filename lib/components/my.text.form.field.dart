@@ -100,7 +100,7 @@ class MyTextFormField extends StatelessWidget {
           prefixText: prefix,
           errorText: errorText == null ? null : errorText,
           errorStyle: TextStyle(
-            fontSize: 10.0,
+            fontSize: 11.0,
             color: Colors.red,
           ),
         ),
