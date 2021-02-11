@@ -172,6 +172,10 @@ abstract class PaymentAddControllerBase with Store {
   @action
   setYears(List<String> years) => this.years = years;
 
+  bool get hasErrors => hasErrorYear;
+
+  bool get hasErrorYear => validateYear() != null;
+
   List<PaymentMonths> _setPaymentMonths() {
     List<PaymentMonths> paymentMonthsList = List<PaymentMonths>();
     paymentMonthsList.add(_setMonthsAndValues(1, janCtrl.text));

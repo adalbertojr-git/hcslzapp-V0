@@ -221,62 +221,62 @@ class _PaymentAddAddState extends State<PaymentAdd> {
   }
 
   get _save {
-/*    if (_controller.hasErrors) {
+    if (_controller.hasErrors) {
       asuka.showSnackBar(
         SnackBar(
           content: Text('Atenção: Existem erros no formulário que devem '
-              'ser corrigidos antes de efetivar a transação.'), ''''
+              'ser corrigidos antes de efetivar a transação.'),
         ),
       );
-    } else {*/
-    _controller.save().then(
-      (payment) {
-        if (payment != null) {
-          asuka.showSnackBar(
-            SnackBar(
-              content: Text('Mensalidades cadastradas com sucesso.'),
-            ),
-          );
-          Navigator.of(context).pop(payment);
-        } else {
-          asuka.showSnackBar(
-            SnackBar(
-              content: Text(_controller.errorMsg),
-            ),
-          );
-        }
-      },
-    );
-    //}
+    } else {
+      _controller.save().then(
+        (payment) {
+          if (payment != null) {
+            asuka.showSnackBar(
+              SnackBar(
+                content: Text('Mensalidades cadastradas com sucesso.'),
+              ),
+            );
+            Navigator.of(context).pop(payment);
+          } else {
+            asuka.showSnackBar(
+              SnackBar(
+                content: Text(_controller.errorMsg),
+              ),
+            );
+          }
+        },
+      );
+    }
   }
 
   get _update {
-/*    if (_controller.hasErrors) {
+    if (_controller.hasErrors) {
       asuka.showSnackBar(
         SnackBar(
           content: Text('Atenção: Existem erros no formulário que devem '
-              'ser corrigidos antes de efetivar a transação.'), ''''
+              'ser corrigidos antes de efetivar a transação.'),
         ),
       );
-    } else {*/
-    _controller.update().then(
-      (payment) {
-        if (payment != null) {
-          asuka.showSnackBar(
-            SnackBar(
-              content: Text('Mensalidades atualizadas com sucesso.'),
-            ),
-          );
-          Navigator.of(context).pop(payment);
-        } else {
-          asuka.showSnackBar(
-            SnackBar(
-              content: Text(_controller.errorMsg),
-            ),
-          );
-        }
-      },
-    );
-    //}
+    } else {
+      _controller.update().then(
+        (payment) {
+          if (payment != null) {
+            asuka.showSnackBar(
+              SnackBar(
+                content: Text('Mensalidades atualizadas com sucesso.'),
+              ),
+            );
+            Navigator.of(context).pop(payment);
+          } else {
+            asuka.showSnackBar(
+              SnackBar(
+                content: Text(_controller.errorMsg),
+              ),
+            );
+          }
+        },
+      );
+    }
   }
 }

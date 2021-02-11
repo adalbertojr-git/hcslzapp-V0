@@ -37,7 +37,7 @@ class _PaymentSelectedState extends State<PaymentSelected> {
   @override
   Widget build(BuildContext context) => Scaffold(
         body: FutureBuilder<List<Payment>>(
-          future: _controller.future,
+          future: _controller.getFuture(widget._associated.id),//_controller.future,
           builder: (context, snapshot) {
             switch (snapshot.connectionState) {
               case ConnectionState.none:
