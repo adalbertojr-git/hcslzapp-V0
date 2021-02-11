@@ -165,6 +165,22 @@ mixin _$AssociatedUpdateController on AssociatedUpdateControllerBase, Store {
     });
   }
 
+  final _$statusCtrlAtom =
+      Atom(name: 'AssociatedUpdateControllerBase.statusCtrl');
+
+  @override
+  TextEditingController get statusCtrl {
+    _$statusCtrlAtom.reportRead();
+    return super.statusCtrl;
+  }
+
+  @override
+  set statusCtrl(TextEditingController value) {
+    _$statusCtrlAtom.reportWrite(value, super.statusCtrl, () {
+      super.statusCtrl = value;
+    });
+  }
+
   final _$isHidedButtonAtom =
       Atom(name: 'AssociatedUpdateControllerBase.isHidedButton');
 
@@ -323,6 +339,22 @@ mixin _$AssociatedUpdateController on AssociatedUpdateControllerBase, Store {
     });
   }
 
+  final _$currentStatusAtom =
+      Atom(name: 'AssociatedUpdateControllerBase.currentStatus');
+
+  @override
+  String get currentStatus {
+    _$currentStatusAtom.reportRead();
+    return super.currentStatus;
+  }
+
+  @override
+  set currentStatus(String value) {
+    _$currentStatusAtom.reportWrite(value, super.currentStatus, () {
+      super.currentStatus = value;
+    });
+  }
+
   final _$AssociatedUpdateControllerBaseActionController =
       ActionController(name: 'AssociatedUpdateControllerBase');
 
@@ -383,6 +415,7 @@ cnhCtrl: ${cnhCtrl},
 cpfCtrl: ${cpfCtrl},
 dateBirthCtrl: ${dateBirthCtrl},
 dateShieldCtrl: ${dateShieldCtrl},
+statusCtrl: ${statusCtrl},
 isHidedButton: ${isHidedButton},
 dependents: ${dependents},
 motorcycles: ${motorcycles},
@@ -391,7 +424,8 @@ associated: ${associated},
 errorMsg: ${errorMsg},
 future: ${future},
 currentBloodType: ${currentBloodType},
-currentAssociatedType: ${currentAssociatedType}
+currentAssociatedType: ${currentAssociatedType},
+currentStatus: ${currentStatus}
     ''';
   }
 }

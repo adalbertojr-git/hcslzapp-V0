@@ -1,6 +1,10 @@
 import 'package:flutter/material.dart';
 
 class TransactionAuthDialog extends StatelessWidget {
+  final String msg;
+
+  const TransactionAuthDialog({@required this.msg});
+
   @override
   Widget build(BuildContext context) {
     return AlertDialog(
@@ -10,7 +14,8 @@ class TransactionAuthDialog extends StatelessWidget {
         color: Colors.orangeAccent,
       ),
       content: Text(
-        'Deseja excluir o registro selecionado?',
+        //'Deseja excluir o registro selecionado?',
+        this.msg,
         style: TextStyle(
           color: Colors.black,
         ),

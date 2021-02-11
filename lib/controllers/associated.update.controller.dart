@@ -48,6 +48,9 @@ abstract class AssociatedUpdateControllerBase with Store {
   var dateShieldCtrl = TextEditingController();
 
   @observable
+  var statusCtrl = TextEditingController();
+
+  @observable
   bool isHidedButton = true;
 
   @observable
@@ -77,11 +80,15 @@ abstract class AssociatedUpdateControllerBase with Store {
   @observable
   String currentAssociatedType;
 
+  @observable
+  String currentStatus;
+
   get init {
     _initLists;
     _initTextFields;
     currentBloodType = associated.bloodType;
     currentAssociatedType = associated.associatedType;
+    currentStatus = associated.status;
     formController = FormController(
       name: associated.name,
       email: associated.email,
@@ -110,6 +117,7 @@ abstract class AssociatedUpdateControllerBase with Store {
     associatedTypeCtrl.text = associated.associatedType;
     dateBirthCtrl.text = associated.dateBirth;
     dateShieldCtrl.text = associated.dateShield;
+    statusCtrl.text = associated.status;
   }
 
   @action
@@ -148,6 +156,7 @@ abstract class AssociatedUpdateControllerBase with Store {
     this.associated.cpf = cpfCtrl.text;
     this.associated.bloodType = currentBloodType;
     this.associated.associatedType = currentAssociatedType;
+    this.associated.status = currentStatus;
     this.associated.dateBirth = dateBirthCtrl.text;
     this.associated.dateShield = dateShieldCtrl.text;
     this.associated.dependents = List<Dependent>.from(dependents);
@@ -178,6 +187,9 @@ abstract class AssociatedUpdateControllerBase with Store {
 
   String changedAssociatedTypesDropDownItem(selected) =>
       currentAssociatedType = selected;
+
+  String changedAssociatedStatusDropDownItem(selected) =>
+      currentStatus = selected;
 
   Future getImageFromCamera() async {
     final pickedFile = await ImagePicker().getImage(

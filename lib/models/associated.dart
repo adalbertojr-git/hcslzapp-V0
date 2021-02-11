@@ -13,11 +13,12 @@ class Associated {
   String associatedType;
   String dateBirth;
   String dateShield;
+  String status;
   List<Dependent> dependents;
   List<Motorcycle> motorcycles;
 
-  Associated({
-      this.id,
+  Associated(
+      {this.id,
       this.name,
       this.email,
       this.phone,
@@ -28,6 +29,7 @@ class Associated {
       this.associatedType,
       this.dateBirth,
       this.dateShield,
+      this.status,
       this.dependents,
       this.motorcycles});
 
@@ -43,6 +45,7 @@ class Associated {
         associatedType = json['associatedType'],
         dateBirth = json['dateBirth'],
         dateShield = json['dateShield'],
+        status = json['status'],
         dependents = List.from((json['dependents'] as List)
             .map((dependents) => Dependent.fromJson(dependents))),
         motorcycles = List.from((json['motorcycles'] as List)
@@ -60,6 +63,7 @@ class Associated {
         'associatedType': associatedType,
         'dateBirth': dateBirth,
         'dateShield': dateShield,
+        'status': status,
         'dependents': List<dynamic>.from(
             dependents.map((dependents) => dependents.toJson())),
         'motorcycles': List<dynamic>.from(
@@ -71,7 +75,7 @@ class Associated {
     return 'Associated{id: $id, name: $name, email: $email, phone: $phone, '
         'cnh: $cnh, cpf: $cpf, '
         'bloodType: $bloodType, dateBirth: $dateBirth, '
-        'dateShield: $dateShield, dependents: $dependents, '
-        'motorcycles: $motorcycles}';
+        'dateShield: $dateShield, status: $status, '
+        'dependents: $dependents, motorcycles: $motorcycles}';
   }
 }

@@ -189,7 +189,7 @@ class _PaymentSelectedState extends State<PaymentSelected> {
     var response = await showDialog(
         context: context,
         builder: (context) {
-          return TransactionAuthDialog();
+          return TransactionAuthDialog(msg: 'Deseja excluir o registro selecionado?');
         });
     if (response == true) {
       _controller.deleteById(_controller.payments[i]).then((value) {

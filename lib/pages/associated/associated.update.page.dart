@@ -7,7 +7,9 @@ import 'package:hcslzapp/components/centered.message.dart';
 import 'package:hcslzapp/components/my.text.form.field.dart';
 import 'package:hcslzapp/components/progress.dart';
 import 'package:hcslzapp/components/top.margin.dart';
+import 'package:hcslzapp/components/transaction.auth.dialog.dart';
 import 'package:hcslzapp/controllers/associated.update.controller.dart';
+import 'package:hcslzapp/enums/associated.status.dart';
 import 'package:hcslzapp/enums/associated.types.dart';
 import 'package:hcslzapp/enums/blood.types.dart';
 import 'package:hcslzapp/models/associated.dart';
@@ -299,6 +301,41 @@ class _AssociatedUpdateState extends State<AssociatedUpdate> {
               ),
               _motorcyclesListWidget,
               SizedBox(
+                height: 10.0,
+              ),
+              Padding(
+                padding: const EdgeInsets.fromLTRB(0.0, 3.0, 2.0, 3.0),
+                child: Row(
+                  crossAxisAlignment: CrossAxisAlignment.baseline,
+                  children: <Widget>[
+                    Expanded(
+                      child: Text(
+                        'Status:',
+                        textAlign: TextAlign.center,
+                      ),
+                    ),
+                    Expanded(
+                      child: Container(
+                        height: 55.0,
+                        child: DropdownButtonFormField(
+                          decoration: const InputDecoration(
+                            enabledBorder: OutlineInputBorder(
+                              borderSide: BorderSide(
+                                color: Colors.white70,
+                              ),
+                            ),
+                          ),
+                          value: _controller.currentStatus,
+                          items: getAssociatedStatus(),
+                          onChanged:
+                              _controller.changedAssociatedStatusDropDownItem,
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+              SizedBox(
                 height: 100.0,
               ),
             ],
@@ -571,7 +608,7 @@ class _AssociatedUpdateState extends State<AssociatedUpdate> {
         ),
       );
 
-  get _update {
+  get _update async {
     if (_controller.hasErrors) {
       asuka.showSnackBar(
         SnackBar(
@@ -580,24 +617,37 @@ class _AssociatedUpdateState extends State<AssociatedUpdate> {
         ),
       );
     } else {
-      _controller.update(_controller.associated).then(
-        (value) {
-          if (value != null) {
-            asuka.showSnackBar(
-              SnackBar(
-                content: Text('Associado atualizado com sucesso.'),
-              ),
-            );
-            Navigator.of(context).pop();
-          } else {
-            asuka.showSnackBar(
-              SnackBar(
-                content: Text(_controller.errorMsg),
-              ),
-            );
-          }
-        },
-      );
+      var response = true;
+      if (_controller.currentStatus == 'Inativo') {
+        response = await showDialog(
+            context: context,
+            builder: (context) {
+              return TransactionAuthDialog(
+                  msg: 'Inativar o associado acarreta perda de acesso ao App. ' +
+                      '\n\n' +
+                      'Confirma?');
+            });
+      }
+      if (response == true) {
+        _controller.update(_controller.associated).then(
+          (value) {
+            if (value != null) {
+              asuka.showSnackBar(
+                SnackBar(
+                  content: Text('Associado atualizado com sucesso.'),
+                ),
+              );
+              Navigator.of(context).pop();
+            } else {
+              asuka.showSnackBar(
+                SnackBar(
+                  content: Text(_controller.errorMsg),
+                ),
+              );
+            }
+          },
+        );
+      }
     }
   }
 }
