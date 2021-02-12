@@ -303,36 +303,43 @@ class _AssociatedUpdateState extends State<AssociatedUpdate> {
               SizedBox(
                 height: 10.0,
               ),
-              Padding(
-                padding: const EdgeInsets.fromLTRB(0.0, 3.0, 2.0, 3.0),
-                child: Row(
-                  crossAxisAlignment: CrossAxisAlignment.baseline,
-                  children: <Widget>[
-                    Expanded(
-                      child: Text(
-                        'Status:',
-                        textAlign: TextAlign.center,
-                      ),
-                    ),
-                    Expanded(
-                      child: Container(
-                        height: 55.0,
-                        child: DropdownButtonFormField(
-                          decoration: const InputDecoration(
-                            enabledBorder: OutlineInputBorder(
-                              borderSide: BorderSide(
-                                color: Colors.white70,
-                              ),
-                            ),
+              Container(
+                color: Colors.white70,
+                child: Padding(
+                  padding: const EdgeInsets.fromLTRB(0.0, 3.0, 2.0, 3.0),
+                  child: Row(
+                    crossAxisAlignment: CrossAxisAlignment.baseline,
+                    children: <Widget>[
+                      Expanded(
+                        child: Text(
+                          'Status:',
+                          textAlign: TextAlign.center,
+                          style: TextStyle(
+                            fontSize: 20.0,
+                            fontWeight: FontWeight.bold,
                           ),
-                          value: _controller.currentStatus,
-                          items: getAssociatedStatus(),
-                          onChanged:
-                              _controller.changedAssociatedStatusDropDownItem,
                         ),
                       ),
-                    ),
-                  ],
+                      Expanded(
+                        child: Container(
+                          height: 55.0,
+                          child: DropdownButtonFormField(
+                            decoration: const InputDecoration(
+                              enabledBorder: OutlineInputBorder(
+                                borderSide: BorderSide(
+                                  color: Colors.black,
+                                ),
+                              ),
+                            ),
+                            value: _controller.currentStatus,
+                            items: getAssociatedStatus(),
+                            onChanged:
+                                _controller.changedAssociatedStatusDropDownItem,
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
                 ),
               ),
               SizedBox(
@@ -623,9 +630,10 @@ class _AssociatedUpdateState extends State<AssociatedUpdate> {
             context: context,
             builder: (context) {
               return TransactionAuthDialog(
-                  msg: 'Inativar o associado acarreta perda de acesso ao App. ' +
-                      '\n\n' +
-                      'Confirma?');
+                  msg:
+                      'Inativar o associado acarreta perda de acesso ao App. ' +
+                          '\n\n' +
+                          'Confirma?');
             });
       }
       if (response == true) {
