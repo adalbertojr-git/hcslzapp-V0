@@ -1,3 +1,4 @@
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:hcslzapp/controllers/app.controller.dart';
 import 'package:hcslzapp/pages/splash/splash.page.dart';
@@ -6,7 +7,12 @@ import 'package:asuka/asuka.dart' as asuka;
 
 const _titleAppBar = 'HCSlz App';
 
-void main() => runApp(HCSlzApp());
+//void main() => runApp(HCSlzApp());
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp();
+  runApp(HCSlzApp());
+}
 
 class HCSlzApp extends StatelessWidget {
   @override

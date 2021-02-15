@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "993485069839",
+    "project_id": "hcslzapp",
+    "storage_bucket": "hcslzapp.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:993485069839:android:9d7ba23f55b34abd674d7a",
+        "android_client_info": {
+          "package_name": "com.example.hcslzapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "993485069839-lq7okhkeack9b53k74105ubdeqj23j2a.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBC1b4gjzYpmX8khyZ0dDXGT71LVBss0Ds"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "993485069839-lq7okhkeack9b53k74105ubdeqj23j2a.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

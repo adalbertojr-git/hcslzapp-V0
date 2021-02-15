@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:hcslzapp/models/associated.dart';
 import 'package:hcslzapp/models/dependent.dart';
@@ -8,6 +9,7 @@ import 'package:image_picker/image_picker.dart';
 import 'package:mobx/mobx.dart';
 import 'dart:io';
 import 'package:glutton/glutton.dart';
+import 'package:path/path.dart';
 
 part 'associated.update.controller.g.dart';
 
@@ -161,7 +163,8 @@ abstract class AssociatedUpdateControllerBase with Store {
     this.associated.dateShield = dateShieldCtrl.text;
     this.associated.dependents = List<Dependent>.from(dependents);
     this.associated.motorcycles = List<Motorcycle>.from(motorcycles);
-    _savePhoto();
+    //_savePhoto();
+    _uploadPic();
     return this.associated;
   }
 
@@ -217,6 +220,15 @@ abstract class AssociatedUpdateControllerBase with Store {
 
   @action
   String getFilePath(String value) => this.filePath = value;
+
+  Future _uploadPic() async{
+    FirebaseStorage storage = FirebaseStorage.instance;
+    Reference ref = storage.ref().child(this.filePath + DateTime.now().toString());
+    UploadTask uploadTask = ref.putFile(File(this.filePath));
+    uploadTask.then((res) {
+      res.ref.getDownloadURL();
+    });
+  }
 }
 
 class FormController extends FormControllerBase with _$FormController {
