@@ -65,6 +65,9 @@ abstract class AssociatedUpdateControllerBase with Store {
   String filePath;
 
   @observable
+  File _photo;
+
+  @observable
   Associated associated;
 
   @observable
@@ -95,12 +98,12 @@ abstract class AssociatedUpdateControllerBase with Store {
       name: associated.name,
       email: associated.email,
     );
-    getPhoto().then((value) => this.filePath = value);
+    _getPhoto().then((value) => this.filePath = value);
   }
 
-  Future<String> getPhoto() async {
+/*  Future<String> getPhoto() async {
     return await Glutton.vomit("photoPath");
-  }
+  }*/
 
   get _initLists {
     dependents.clear();
@@ -163,8 +166,7 @@ abstract class AssociatedUpdateControllerBase with Store {
     this.associated.dateShield = dateShieldCtrl.text;
     this.associated.dependents = List<Dependent>.from(dependents);
     this.associated.motorcycles = List<Motorcycle>.from(motorcycles);
-    //_savePhoto();
-    _uploadPic();
+    _uploadPhoto();
     return this.associated;
   }
 
@@ -199,8 +201,8 @@ abstract class AssociatedUpdateControllerBase with Store {
       source: ImageSource.camera,
     );
     if (pickedFile != null) {
-      File _image = File(pickedFile.path);
-      getFilePath(_image.path.toString());
+      this._photo = File(pickedFile.path);
+      getFilePath(this._photo.path.toString());
     }
   }
 
@@ -209,24 +211,31 @@ abstract class AssociatedUpdateControllerBase with Store {
       source: ImageSource.gallery,
     );
     if (pickedFile != null) {
-      File _image = File(pickedFile.path);
-      getFilePath(_image.path.toString());
+      this._photo = File(pickedFile.path);
+      getFilePath(this._photo.path.toString());
     }
   }
 
-  Future _savePhoto() async {
+/*  Future _savePhoto() async {
     await Glutton.eat("photoPath", this.filePath);
-  }
+  }*/
 
   @action
   String getFilePath(String value) => this.filePath = value;
 
-  Future _uploadPic() async{
+  _getPhoto() async {
     FirebaseStorage storage = FirebaseStorage.instance;
-    Reference ref = storage.ref().child(this.filePath + DateTime.now().toString());
-    UploadTask uploadTask = ref.putFile(File(this.filePath));
-    uploadTask.then((res) {
-      res.ref.getDownloadURL();
+    Reference ref = storage.ref().child("profilePhotos/${this.associated.id}");
+    var url = await ref.getDownloadURL();
+    return url;
+  }
+
+  Future _uploadPhoto() async {
+    FirebaseStorage storage = FirebaseStorage.instance;
+    Reference ref = storage.ref().child("profilePhotos/${this.associated.id}");
+    UploadTask uploadTask = ref.putFile(this._photo);
+    uploadTask.then((result) {
+      result.ref.getDownloadURL();
     });
   }
 }

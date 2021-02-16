@@ -7,7 +7,6 @@ import 'package:asuka/asuka.dart' as asuka;
 
 const _titleAppBar = 'HCSlz App';
 
-//void main() => runApp(HCSlzApp());
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();

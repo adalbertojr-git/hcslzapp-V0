@@ -244,6 +244,21 @@ mixin _$AssociatedUpdateController on AssociatedUpdateControllerBase, Store {
     });
   }
 
+  final _$_photoAtom = Atom(name: 'AssociatedUpdateControllerBase._photo');
+
+  @override
+  File get _photo {
+    _$_photoAtom.reportRead();
+    return super._photo;
+  }
+
+  @override
+  set _photo(File value) {
+    _$_photoAtom.reportWrite(value, super._photo, () {
+      super._photo = value;
+    });
+  }
+
   final _$associatedAtom =
       Atom(name: 'AssociatedUpdateControllerBase.associated');
 
