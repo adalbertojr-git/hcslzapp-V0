@@ -259,6 +259,21 @@ mixin _$AssociatedUpdateController on AssociatedUpdateControllerBase, Store {
     });
   }
 
+  final _$photo2Atom = Atom(name: 'AssociatedUpdateControllerBase.photo2');
+
+  @override
+  Uint8List get photo2 {
+    _$photo2Atom.reportRead();
+    return super.photo2;
+  }
+
+  @override
+  set photo2(Uint8List value) {
+    _$photo2Atom.reportWrite(value, super.photo2, () {
+      super.photo2 = value;
+    });
+  }
+
   final _$associatedAtom =
       Atom(name: 'AssociatedUpdateControllerBase.associated');
 
@@ -435,6 +450,7 @@ isHidedButton: ${isHidedButton},
 dependents: ${dependents},
 motorcycles: ${motorcycles},
 filePath: ${filePath},
+photo2: ${photo2},
 associated: ${associated},
 errorMsg: ${errorMsg},
 future: ${future},

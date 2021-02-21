@@ -363,22 +363,13 @@ class _AssociatedUpdateState extends State<AssociatedUpdate> {
             decoration: BoxDecoration(
               color: Colors.black,
               borderRadius: BorderRadius.circular(150.0),
-                //image: DecorationImage(image: NetworkImage(_controller.filePath),
-                image: DecorationImage(image: NetworkImage("gs://hcslzapp.appspot.com/profilePhotos/1"),
-                    fit: BoxFit.fill),
-/*
               image: DecorationImage(
-                image: PhotoImageProvider().getImageProvider(
-                  File(
-                    _controller.filePath != null
-                        ? _controller.filePath
-                        : 'assets/imgs/noImage.png',
-                  ),
-                ),
-              image:
-                fit: BoxFit.fill,
-              ),
-*/
+                  image: _controller.photo2 != null
+                      ? MemoryImage(_controller.photo2)
+                      : PhotoImageProvider().getImageProvider(
+                          File('assets/imgs/loadingImage.png'),
+                        ),
+                  fit: BoxFit.fill),
             ),
           ),
         ),

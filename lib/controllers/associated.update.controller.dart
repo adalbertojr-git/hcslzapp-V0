@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:typed_data';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:hcslzapp/models/associated.dart';
@@ -9,7 +10,6 @@ import 'package:image_picker/image_picker.dart';
 import 'package:mobx/mobx.dart';
 import 'dart:io';
 import 'package:glutton/glutton.dart';
-import 'package:path/path.dart';
 
 part 'associated.update.controller.g.dart';
 
@@ -68,6 +68,9 @@ abstract class AssociatedUpdateControllerBase with Store {
   File _photo;
 
   @observable
+  Uint8List photo2;
+
+  @observable
   Associated associated;
 
   @observable
@@ -98,7 +101,8 @@ abstract class AssociatedUpdateControllerBase with Store {
       name: associated.name,
       email: associated.email,
     );
-    _getPhoto().then((value) => this.filePath = value);
+    //_getPhoto().then((value) => this.filePath = value);
+    _getPhoto().then((value) => this.photo2 = value);
   }
 
 /*  Future<String> getPhoto() async {
@@ -225,9 +229,9 @@ abstract class AssociatedUpdateControllerBase with Store {
 
   _getPhoto() async {
     FirebaseStorage storage = FirebaseStorage.instance;
-    Reference ref = storage.ref().child("profilePhotos/${this.associated.id}");
-    var url = await ref.getDownloadURL();
-    return url;
+    storage.ref().child('profilePhotos/${this.associated.id}').getData(10000000).then((data) {
+       this.photo2 = data;
+     }).catchError((e) => this.errorMsg = "${e.message}");
   }
 
   Future _uploadPhoto() async {
