@@ -24,9 +24,11 @@ class Dashboard extends StatefulWidget {
   final String _user;
   final String _firstName;
   final String _email;
+  final String _photoUrl;
   final int _associatedId;
 
-  Dashboard(this._user, this._firstName, this._email, this._associatedId);
+  Dashboard(this._user, this._firstName, this._email, this._associatedId,
+      this._photoUrl);
 
   @override
   _DashboardState createState() => _DashboardState();
@@ -69,6 +71,7 @@ class _DashboardState extends State<Dashboard> {
   @override
   void initState() {
     //_controller = Provider.of<AssociatedController>(context, listen: false);
+    _controller.associatedId = this.widget._associatedId;
     _controller.init;
     super.initState();
   }
@@ -179,13 +182,11 @@ class _DashboardState extends State<Dashboard> {
                 builder: (_) => CircleAvatar(
                   backgroundColor: Colors.white,
                   radius: 30.0,
-                  backgroundImage: PhotoImageProvider().getImageProvider(
-                    File(
-                      _controller.filePath != null
-                          ? _controller.filePath
-                          : 'assets/imgs/noImage.png',
-                    ),
-                  ),
+                  backgroundImage: this.widget._photoUrl != null
+                      ? NetworkImage(this.widget._photoUrl)
+                      : PhotoImageProvider().getImageProvider(
+                          File('assets/imgs/noImage.png'),
+                        ),
                 ),
               ),
       );

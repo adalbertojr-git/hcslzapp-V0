@@ -364,10 +364,10 @@ class _AssociatedUpdateState extends State<AssociatedUpdate> {
               color: Colors.black,
               borderRadius: BorderRadius.circular(150.0),
               image: DecorationImage(
-                  image: _controller.photo2 != null
-                      ? MemoryImage(_controller.photo2)
+                  image: _controller.photoUrl != null
+                      ? NetworkImage(_controller.photoUrl)
                       : PhotoImageProvider().getImageProvider(
-                          File('assets/imgs/loadingImage.png'),
+                          File('assets/imgs/noImage.png'),
                         ),
                   fit: BoxFit.fill),
             ),

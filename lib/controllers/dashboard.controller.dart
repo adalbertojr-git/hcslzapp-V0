@@ -1,4 +1,6 @@
 import 'dart:async';
+import 'dart:typed_data';
+import 'package:firebase_storage/firebase_storage.dart';
 import 'package:glutton/glutton.dart';
 import 'package:mobx/mobx.dart';
 
@@ -10,14 +12,27 @@ class DashboardController = DashboardControllerBase
 abstract class DashboardControllerBase with Store {
 
   @observable
-  String filePath;
+  int associatedId;
+
+  @observable
+  Uint8List photo;
+
+  @observable
+  String errorMsg;
 
   get init {
-    getPhoto().then((value) => this.filePath = value);
+    _getPhoto();
   }
 
-  Future<String> getPhoto() async {
-    return await Glutton.vomit("photoPath");
+  _getPhoto() async {
+    FirebaseStorage storage = FirebaseStorage.instance;
+    storage
+        .ref()
+        .child('profilePhotos/${this.associatedId}')
+        .getData(10000000)
+        .then((data) {
+      this.photo = data;
+    }).catchError((e) => this.errorMsg = "${e.message}");
   }
 
 }

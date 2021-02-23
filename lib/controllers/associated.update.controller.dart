@@ -1,5 +1,4 @@
 import 'dart:async';
-import 'dart:typed_data';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:hcslzapp/models/associated.dart';
@@ -61,14 +60,14 @@ abstract class AssociatedUpdateControllerBase with Store {
   @observable
   ObservableList motorcycles = [].asObservable();
 
+/*  @observable
+  String filePath;*/
+
   @observable
-  String filePath;
+  String photoUrl;
 
   @observable
   File _photo;
-
-  @observable
-  Uint8List photo2;
 
   @observable
   Associated associated;
@@ -97,12 +96,11 @@ abstract class AssociatedUpdateControllerBase with Store {
     currentBloodType = associated.bloodType;
     currentAssociatedType = associated.associatedType;
     currentStatus = associated.status;
+    photoUrl = associated.photoUrl;
     formController = FormController(
       name: associated.name,
       email: associated.email,
     );
-    //_getPhoto().then((value) => this.filePath = value);
-    _getPhoto().then((value) => this.photo2 = value);
   }
 
 /*  Future<String> getPhoto() async {
@@ -170,7 +168,9 @@ abstract class AssociatedUpdateControllerBase with Store {
     this.associated.dateShield = dateShieldCtrl.text;
     this.associated.dependents = List<Dependent>.from(dependents);
     this.associated.motorcycles = List<Motorcycle>.from(motorcycles);
-    _uploadPhoto();
+    if (this._photo != null) { //se houve alteração de foto
+      _uploadPhoto(this.associated);
+    }
     return this.associated;
   }
 
@@ -206,7 +206,7 @@ abstract class AssociatedUpdateControllerBase with Store {
     );
     if (pickedFile != null) {
       this._photo = File(pickedFile.path);
-      getFilePath(this._photo.path.toString());
+      //getFilePath(this._photo.path.toString());
     }
   }
 
@@ -216,7 +216,7 @@ abstract class AssociatedUpdateControllerBase with Store {
     );
     if (pickedFile != null) {
       this._photo = File(pickedFile.path);
-      getFilePath(this._photo.path.toString());
+      //getFilePath(this._photo.path.toString());
     }
   }
 
@@ -224,23 +224,26 @@ abstract class AssociatedUpdateControllerBase with Store {
     await Glutton.eat("photoPath", this.filePath);
   }*/
 
-  @action
-  String getFilePath(String value) => this.filePath = value;
+/*  @action
+  String getFilePath(String value) => this.filePath = value;*/
 
-  _getPhoto() async {
+/*  _getPhoto() async {
     FirebaseStorage storage = FirebaseStorage.instance;
-    storage.ref().child('profilePhotos/${this.associated.id}').getData(10000000).then((data) {
-       this.photo2 = data;
-     }).catchError((e) => this.errorMsg = "${e.message}");
-  }
+    storage
+        .ref()
+        .child('profilePhotos/${this.associated.id}')
+        .getData(10000000)
+        .then((data) {
+      this.photo2 = data;
+    }).catchError((e) => this.errorMsg = "${e.message}");
+  }*/
 
-  Future _uploadPhoto() async {
+  _uploadPhoto(Associated associated) async {
     FirebaseStorage storage = FirebaseStorage.instance;
     Reference ref = storage.ref().child("profilePhotos/${this.associated.id}");
-    UploadTask uploadTask = ref.putFile(this._photo);
-    uploadTask.then((result) {
-      result.ref.getDownloadURL();
-    });
+    await ref.putFile(this._photo);
+    await ref.getDownloadURL().then((value) => associated.photoUrl = value);
+    print(this.photoUrl);
   }
 }
 

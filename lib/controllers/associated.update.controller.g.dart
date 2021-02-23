@@ -229,18 +229,18 @@ mixin _$AssociatedUpdateController on AssociatedUpdateControllerBase, Store {
     });
   }
 
-  final _$filePathAtom = Atom(name: 'AssociatedUpdateControllerBase.filePath');
+  final _$photoUrlAtom = Atom(name: 'AssociatedUpdateControllerBase.photoUrl');
 
   @override
-  String get filePath {
-    _$filePathAtom.reportRead();
-    return super.filePath;
+  String get photoUrl {
+    _$photoUrlAtom.reportRead();
+    return super.photoUrl;
   }
 
   @override
-  set filePath(String value) {
-    _$filePathAtom.reportWrite(value, super.filePath, () {
-      super.filePath = value;
+  set photoUrl(String value) {
+    _$photoUrlAtom.reportWrite(value, super.photoUrl, () {
+      super.photoUrl = value;
     });
   }
 
@@ -256,21 +256,6 @@ mixin _$AssociatedUpdateController on AssociatedUpdateControllerBase, Store {
   set _photo(File value) {
     _$_photoAtom.reportWrite(value, super._photo, () {
       super._photo = value;
-    });
-  }
-
-  final _$photo2Atom = Atom(name: 'AssociatedUpdateControllerBase.photo2');
-
-  @override
-  Uint8List get photo2 {
-    _$photo2Atom.reportRead();
-    return super.photo2;
-  }
-
-  @override
-  set photo2(Uint8List value) {
-    _$photo2Atom.reportWrite(value, super.photo2, () {
-      super.photo2 = value;
     });
   }
 
@@ -422,17 +407,6 @@ mixin _$AssociatedUpdateController on AssociatedUpdateControllerBase, Store {
   }
 
   @override
-  String getFilePath(String value) {
-    final _$actionInfo = _$AssociatedUpdateControllerBaseActionController
-        .startAction(name: 'AssociatedUpdateControllerBase.getFilePath');
-    try {
-      return super.getFilePath(value);
-    } finally {
-      _$AssociatedUpdateControllerBaseActionController.endAction(_$actionInfo);
-    }
-  }
-
-  @override
   String toString() {
     return '''
 idCtrl: ${idCtrl},
@@ -449,8 +423,7 @@ statusCtrl: ${statusCtrl},
 isHidedButton: ${isHidedButton},
 dependents: ${dependents},
 motorcycles: ${motorcycles},
-filePath: ${filePath},
-photo2: ${photo2},
+photoUrl: ${photoUrl},
 associated: ${associated},
 errorMsg: ${errorMsg},
 future: ${future},

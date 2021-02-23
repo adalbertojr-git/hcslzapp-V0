@@ -192,7 +192,8 @@ class Login extends StatelessWidget {
                   _controller.userLoginCtrl.text,
                   _tokenDetails.firstName(),
                   _tokenDetails.email(),
-                  _tokenDetails.associatedId()),
+                  _tokenDetails.associatedId(),
+                  _tokenDetails.photoUrl()),
             ),
           );
         }
