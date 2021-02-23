@@ -9,57 +9,39 @@ part of 'dashboard.controller.dart';
 // ignore_for_file: non_constant_identifier_names, unnecessary_brace_in_string_interps, unnecessary_lambdas, prefer_expression_function_bodies, lines_longer_than_80_chars, avoid_as, avoid_annotating_with_dynamic
 
 mixin _$DashboardController on DashboardControllerBase, Store {
-  final _$associatedIdAtom = Atom(name: 'DashboardControllerBase.associatedId');
+  final _$photoUrlAtom = Atom(name: 'DashboardControllerBase.photoUrl');
 
   @override
-  int get associatedId {
-    _$associatedIdAtom.reportRead();
-    return super.associatedId;
+  String get photoUrl {
+    _$photoUrlAtom.reportRead();
+    return super.photoUrl;
   }
 
   @override
-  set associatedId(int value) {
-    _$associatedIdAtom.reportWrite(value, super.associatedId, () {
-      super.associatedId = value;
+  set photoUrl(String value) {
+    _$photoUrlAtom.reportWrite(value, super.photoUrl, () {
+      super.photoUrl = value;
     });
   }
 
-  final _$photoAtom = Atom(name: 'DashboardControllerBase.photo');
+  final _$DashboardControllerBaseActionController =
+      ActionController(name: 'DashboardControllerBase');
 
   @override
-  Uint8List get photo {
-    _$photoAtom.reportRead();
-    return super.photo;
-  }
-
-  @override
-  set photo(Uint8List value) {
-    _$photoAtom.reportWrite(value, super.photo, () {
-      super.photo = value;
-    });
-  }
-
-  final _$errorMsgAtom = Atom(name: 'DashboardControllerBase.errorMsg');
-
-  @override
-  String get errorMsg {
-    _$errorMsgAtom.reportRead();
-    return super.errorMsg;
-  }
-
-  @override
-  set errorMsg(String value) {
-    _$errorMsgAtom.reportWrite(value, super.errorMsg, () {
-      super.errorMsg = value;
-    });
+  dynamic setPhotoUrl(String value) {
+    final _$actionInfo = _$DashboardControllerBaseActionController.startAction(
+        name: 'DashboardControllerBase.setPhotoUrl');
+    try {
+      return super.setPhotoUrl(value);
+    } finally {
+      _$DashboardControllerBaseActionController.endAction(_$actionInfo);
+    }
   }
 
   @override
   String toString() {
     return '''
-associatedId: ${associatedId},
-photo: ${photo},
-errorMsg: ${errorMsg}
+photoUrl: ${photoUrl}
     ''';
   }
 }

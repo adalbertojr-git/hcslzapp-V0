@@ -229,6 +229,22 @@ mixin _$AssociatedUpdateController on AssociatedUpdateControllerBase, Store {
     });
   }
 
+  final _$photoPathAtom =
+      Atom(name: 'AssociatedUpdateControllerBase.photoPath');
+
+  @override
+  String get photoPath {
+    _$photoPathAtom.reportRead();
+    return super.photoPath;
+  }
+
+  @override
+  set photoPath(String value) {
+    _$photoPathAtom.reportWrite(value, super.photoPath, () {
+      super.photoPath = value;
+    });
+  }
+
   final _$photoUrlAtom = Atom(name: 'AssociatedUpdateControllerBase.photoUrl');
 
   @override
@@ -244,18 +260,34 @@ mixin _$AssociatedUpdateController on AssociatedUpdateControllerBase, Store {
     });
   }
 
-  final _$_photoAtom = Atom(name: 'AssociatedUpdateControllerBase._photo');
+  final _$photoAtom = Atom(name: 'AssociatedUpdateControllerBase.photo');
 
   @override
-  File get _photo {
-    _$_photoAtom.reportRead();
-    return super._photo;
+  File get photo {
+    _$photoAtom.reportRead();
+    return super.photo;
   }
 
   @override
-  set _photo(File value) {
-    _$_photoAtom.reportWrite(value, super._photo, () {
-      super._photo = value;
+  set photo(File value) {
+    _$photoAtom.reportWrite(value, super.photo, () {
+      super.photo = value;
+    });
+  }
+
+  final _$changedPhotoAtom =
+      Atom(name: 'AssociatedUpdateControllerBase.changedPhoto');
+
+  @override
+  bool get changedPhoto {
+    _$changedPhotoAtom.reportRead();
+    return super.changedPhoto;
+  }
+
+  @override
+  set changedPhoto(bool value) {
+    _$changedPhotoAtom.reportWrite(value, super.changedPhoto, () {
+      super.changedPhoto = value;
     });
   }
 
@@ -370,6 +402,24 @@ mixin _$AssociatedUpdateController on AssociatedUpdateControllerBase, Store {
     });
   }
 
+  final _$getImageFromCameraAsyncAction =
+      AsyncAction('AssociatedUpdateControllerBase.getImageFromCamera');
+
+  @override
+  Future<dynamic> getImageFromCamera() {
+    return _$getImageFromCameraAsyncAction
+        .run(() => super.getImageFromCamera());
+  }
+
+  final _$getImageFromGalleryAsyncAction =
+      AsyncAction('AssociatedUpdateControllerBase.getImageFromGallery');
+
+  @override
+  Future<dynamic> getImageFromGallery() {
+    return _$getImageFromGalleryAsyncAction
+        .run(() => super.getImageFromGallery());
+  }
+
   final _$AssociatedUpdateControllerBaseActionController =
       ActionController(name: 'AssociatedUpdateControllerBase');
 
@@ -423,7 +473,10 @@ statusCtrl: ${statusCtrl},
 isHidedButton: ${isHidedButton},
 dependents: ${dependents},
 motorcycles: ${motorcycles},
+photoPath: ${photoPath},
 photoUrl: ${photoUrl},
+photo: ${photo},
+changedPhoto: ${changedPhoto},
 associated: ${associated},
 errorMsg: ${errorMsg},
 future: ${future},

@@ -71,8 +71,7 @@ class _DashboardState extends State<Dashboard> {
   @override
   void initState() {
     //_controller = Provider.of<AssociatedController>(context, listen: false);
-    _controller.associatedId = this.widget._associatedId;
-    _controller.init;
+    _controller.photoUrl = this.widget._photoUrl;
     super.initState();
   }
 
@@ -182,8 +181,8 @@ class _DashboardState extends State<Dashboard> {
                 builder: (_) => CircleAvatar(
                   backgroundColor: Colors.white,
                   radius: 30.0,
-                  backgroundImage: this.widget._photoUrl != null
-                      ? NetworkImage(this.widget._photoUrl)
+                  backgroundImage: _controller.photoUrl != null
+                      ? NetworkImage(_controller.photoUrl)
                       : PhotoImageProvider().getImageProvider(
                           File('assets/imgs/noImage.png'),
                         ),
@@ -234,13 +233,16 @@ class _DashboardState extends State<Dashboard> {
                 title: "Associado",
                 image: "assets/imgs/user.png",
                 context: _gContext,
-                onClick: () {
-                  Navigator.push(
+                onClick: () async {
+                  var photoUrl = await Navigator.push(
                     _gContext,
                     MaterialPageRoute(
                         builder: (gContext) =>
                             AssociatedUpdate(this.widget._associatedId)),
                   );
+                  if (photoUrl != null) {
+                    _controller.setPhotoUrl(photoUrl);
+                  }
                 },
               ),
               _GridButton(

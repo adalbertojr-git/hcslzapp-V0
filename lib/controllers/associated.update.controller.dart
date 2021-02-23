@@ -60,14 +60,17 @@ abstract class AssociatedUpdateControllerBase with Store {
   @observable
   ObservableList motorcycles = [].asObservable();
 
-/*  @observable
-  String filePath;*/
+  @observable
+  String photoPath;
 
   @observable
   String photoUrl;
 
   @observable
-  File _photo;
+  File photo;
+
+  @observable
+  bool changedPhoto = false;
 
   @observable
   Associated associated;
@@ -168,7 +171,7 @@ abstract class AssociatedUpdateControllerBase with Store {
     this.associated.dateShield = dateShieldCtrl.text;
     this.associated.dependents = List<Dependent>.from(dependents);
     this.associated.motorcycles = List<Motorcycle>.from(motorcycles);
-    if (this._photo != null) { //se houve alteração de foto
+    if (this.photo != null) { //se houve alteração de foto
       _uploadPhoto(this.associated);
     }
     return this.associated;
@@ -200,32 +203,33 @@ abstract class AssociatedUpdateControllerBase with Store {
   String changedAssociatedStatusDropDownItem(selected) =>
       currentStatus = selected;
 
+  @action
   Future getImageFromCamera() async {
     final pickedFile = await ImagePicker().getImage(
       source: ImageSource.camera,
     );
     if (pickedFile != null) {
-      this._photo = File(pickedFile.path);
-      //getFilePath(this._photo.path.toString());
+      this.photo = File(pickedFile.path);
+      this.changedPhoto = true;
+      this.photoPath = this.photo.path.toString();
     }
   }
 
+  @action
   Future getImageFromGallery() async {
     final pickedFile = await ImagePicker().getImage(
       source: ImageSource.gallery,
     );
     if (pickedFile != null) {
-      this._photo = File(pickedFile.path);
-      //getFilePath(this._photo.path.toString());
+      this.photo = File(pickedFile.path);
+      this.changedPhoto = true;
+      this.photoPath = this.photo.path.toString();
     }
   }
 
 /*  Future _savePhoto() async {
     await Glutton.eat("photoPath", this.filePath);
   }*/
-
-/*  @action
-  String getFilePath(String value) => this.filePath = value;*/
 
 /*  _getPhoto() async {
     FirebaseStorage storage = FirebaseStorage.instance;
@@ -241,7 +245,7 @@ abstract class AssociatedUpdateControllerBase with Store {
   _uploadPhoto(Associated associated) async {
     FirebaseStorage storage = FirebaseStorage.instance;
     Reference ref = storage.ref().child("profilePhotos/${this.associated.id}");
-    await ref.putFile(this._photo);
+    await ref.putFile(this.photo);
     await ref.getDownloadURL().then((value) => associated.photoUrl = value);
     print(this.photoUrl);
   }
