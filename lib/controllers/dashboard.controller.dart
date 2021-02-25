@@ -1,3 +1,4 @@
+import 'package:glutton/glutton.dart';
 import 'package:mobx/mobx.dart';
 
 part 'dashboard.controller.g.dart';
@@ -8,9 +9,17 @@ class DashboardController = DashboardControllerBase
 abstract class DashboardControllerBase with Store {
 
   @observable
-  String photoUrl;
+  String photoPath;
+
+  get init async {
+    photoPath = await getPhoto();
+  }
 
   @action
-  setPhotoUrl(String value) => photoUrl = value;
+  setPhoto(String value) => photoPath = value;
+
+  Future<String> getPhoto() async {
+    return await Glutton.vomit("photoPath");
+  }
 
 }

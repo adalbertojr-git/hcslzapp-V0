@@ -364,22 +364,24 @@ class _AssociatedUpdateState extends State<AssociatedUpdate> {
               color: Colors.black,
               borderRadius: BorderRadius.circular(150.0),
               image: DecorationImage(
+                  image: _controller.photoPath != null
+                      ? PhotoImageProvider().getImageProvider(
+                          File(_controller.photoPath),
+                        )
+                      : PhotoImageProvider().getImageProvider(
+                          File('assets/imgs/noImage.png'),
+                        ),
+                  fit: BoxFit.fill),
+/*              image: DecorationImage(
                   image: _controller.changedPhoto
                       ? PhotoImageProvider().getImageProvider(
                           File(_controller.photoPath),
                         )
-                      : _controller.photoUrl != null
-                          ? NetworkImage(_controller.photoUrl)
+                      : _controller.associated.photoUrl != null
+                          ? NetworkImage(_controller.associated.photoUrl)
                           : PhotoImageProvider().getImageProvider(
                               File('assets/imgs/noImage.png'),
                             ),
-                  fit: BoxFit.fill),
-/*              image: DecorationImage(
-                  image: _controller.photoUrl != null
-                      ? NetworkImage(_controller.photoUrl)
-                      : PhotoImageProvider().getImageProvider(
-                          File('assets/imgs/noImage.png'),
-                        ),
                   fit: BoxFit.fill),*/
             ),
           ),
@@ -653,7 +655,7 @@ class _AssociatedUpdateState extends State<AssociatedUpdate> {
                   content: Text('Associado atualizado com sucesso.'),
                 ),
               );
-              Navigator.of(context).pop(_controller.photoUrl);
+              Navigator.of(context).pop(_controller.photoPath);
             } else {
               asuka.showSnackBar(
                 SnackBar(

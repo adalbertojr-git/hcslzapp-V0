@@ -245,21 +245,6 @@ mixin _$AssociatedUpdateController on AssociatedUpdateControllerBase, Store {
     });
   }
 
-  final _$photoUrlAtom = Atom(name: 'AssociatedUpdateControllerBase.photoUrl');
-
-  @override
-  String get photoUrl {
-    _$photoUrlAtom.reportRead();
-    return super.photoUrl;
-  }
-
-  @override
-  set photoUrl(String value) {
-    _$photoUrlAtom.reportWrite(value, super.photoUrl, () {
-      super.photoUrl = value;
-    });
-  }
-
   final _$photoAtom = Atom(name: 'AssociatedUpdateControllerBase.photo');
 
   @override
@@ -474,7 +459,6 @@ isHidedButton: ${isHidedButton},
 dependents: ${dependents},
 motorcycles: ${motorcycles},
 photoPath: ${photoPath},
-photoUrl: ${photoUrl},
 photo: ${photo},
 changedPhoto: ${changedPhoto},
 associated: ${associated},

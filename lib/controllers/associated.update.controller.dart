@@ -63,8 +63,8 @@ abstract class AssociatedUpdateControllerBase with Store {
   @observable
   String photoPath;
 
-  @observable
-  String photoUrl;
+/*  @observable
+  String photoUrl;*/
 
   @observable
   File photo;
@@ -99,16 +99,13 @@ abstract class AssociatedUpdateControllerBase with Store {
     currentBloodType = associated.bloodType;
     currentAssociatedType = associated.associatedType;
     currentStatus = associated.status;
-    photoUrl = associated.photoUrl;
+    //photoUrl = associated.photoUrl;
+    _getPhoto();
     formController = FormController(
       name: associated.name,
       email: associated.email,
     );
   }
-
-/*  Future<String> getPhoto() async {
-    return await Glutton.vomit("photoPath");
-  }*/
 
   get _initLists {
     dependents.clear();
@@ -171,9 +168,11 @@ abstract class AssociatedUpdateControllerBase with Store {
     this.associated.dateShield = dateShieldCtrl.text;
     this.associated.dependents = List<Dependent>.from(dependents);
     this.associated.motorcycles = List<Motorcycle>.from(motorcycles);
-    if (this.photo != null) { //se houve alteração de foto
-      _uploadPhoto(this.associated);
-    }
+/*    if (this.photo != null) {
+      //se houve alteração de foto
+      this.associated.photoUrl = _uploadPhoto().toString();
+    }*/
+    _savePhoto();
     return this.associated;
   }
 
@@ -227,9 +226,13 @@ abstract class AssociatedUpdateControllerBase with Store {
     }
   }
 
-/*  Future _savePhoto() async {
-    await Glutton.eat("photoPath", this.filePath);
-  }*/
+  _getPhoto() async {
+    photoPath = await Glutton.vomit("photoPath");
+  }
+
+  Future _savePhoto() async {
+    await Glutton.eat("photoPath", photoPath);
+  }
 
 /*  _getPhoto() async {
     FirebaseStorage storage = FirebaseStorage.instance;
@@ -242,12 +245,13 @@ abstract class AssociatedUpdateControllerBase with Store {
     }).catchError((e) => this.errorMsg = "${e.message}");
   }*/
 
-  _uploadPhoto(Associated associated) async {
+  Future<String> _uploadPhoto() async {
     FirebaseStorage storage = FirebaseStorage.instance;
-    Reference ref = storage.ref().child("profilePhotos/${this.associated.id}");
+    Reference ref = storage.ref().child("photos/${this.associated.id}");
     await ref.putFile(this.photo);
-    await ref.getDownloadURL().then((value) => associated.photoUrl = value);
-    print(this.photoUrl);
+    var url = await ref.getDownloadURL();
+    print(url);
+    return url;
   }
 }
 

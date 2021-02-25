@@ -71,7 +71,7 @@ class _DashboardState extends State<Dashboard> {
   @override
   void initState() {
     //_controller = Provider.of<AssociatedController>(context, listen: false);
-    _controller.photoUrl = this.widget._photoUrl;
+    _controller.init;
     super.initState();
   }
 
@@ -181,11 +181,18 @@ class _DashboardState extends State<Dashboard> {
                 builder: (_) => CircleAvatar(
                   backgroundColor: Colors.white,
                   radius: 30.0,
-                  backgroundImage: _controller.photoUrl != null
-                      ? NetworkImage(_controller.photoUrl)
+                  backgroundImage: _controller.photoPath != null
+                      ? PhotoImageProvider().getImageProvider(
+                          File(_controller.photoPath),
+                        )
                       : PhotoImageProvider().getImageProvider(
                           File('assets/imgs/noImage.png'),
                         ),
+/*                  backgroundImage: _controller.photoPath != null
+                      ? NetworkImage(_controller.photoPath)
+                      : PhotoImageProvider().getImageProvider(
+                          File('assets/imgs/noImage.png'),
+                        ),*/
                 ),
               ),
       );
@@ -234,14 +241,14 @@ class _DashboardState extends State<Dashboard> {
                 image: "assets/imgs/user.png",
                 context: _gContext,
                 onClick: () async {
-                  var photoUrl = await Navigator.push(
+                  var photoPath = await Navigator.push(
                     _gContext,
                     MaterialPageRoute(
                         builder: (gContext) =>
                             AssociatedUpdate(this.widget._associatedId)),
                   );
-                  if (photoUrl != null) {
-                    _controller.setPhotoUrl(photoUrl);
+                  if (photoPath != null) {
+                    _controller.setPhoto(photoPath);
                   }
                 },
               ),

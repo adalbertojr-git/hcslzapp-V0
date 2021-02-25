@@ -9,18 +9,18 @@ part of 'dashboard.controller.dart';
 // ignore_for_file: non_constant_identifier_names, unnecessary_brace_in_string_interps, unnecessary_lambdas, prefer_expression_function_bodies, lines_longer_than_80_chars, avoid_as, avoid_annotating_with_dynamic
 
 mixin _$DashboardController on DashboardControllerBase, Store {
-  final _$photoUrlAtom = Atom(name: 'DashboardControllerBase.photoUrl');
+  final _$photoPathAtom = Atom(name: 'DashboardControllerBase.photoPath');
 
   @override
-  String get photoUrl {
-    _$photoUrlAtom.reportRead();
-    return super.photoUrl;
+  String get photoPath {
+    _$photoPathAtom.reportRead();
+    return super.photoPath;
   }
 
   @override
-  set photoUrl(String value) {
-    _$photoUrlAtom.reportWrite(value, super.photoUrl, () {
-      super.photoUrl = value;
+  set photoPath(String value) {
+    _$photoPathAtom.reportWrite(value, super.photoPath, () {
+      super.photoPath = value;
     });
   }
 
@@ -28,11 +28,11 @@ mixin _$DashboardController on DashboardControllerBase, Store {
       ActionController(name: 'DashboardControllerBase');
 
   @override
-  dynamic setPhotoUrl(String value) {
+  dynamic setPhoto(String value) {
     final _$actionInfo = _$DashboardControllerBaseActionController.startAction(
-        name: 'DashboardControllerBase.setPhotoUrl');
+        name: 'DashboardControllerBase.setPhoto');
     try {
-      return super.setPhotoUrl(value);
+      return super.setPhoto(value);
     } finally {
       _$DashboardControllerBaseActionController.endAction(_$actionInfo);
     }
@@ -41,7 +41,7 @@ mixin _$DashboardController on DashboardControllerBase, Store {
   @override
   String toString() {
     return '''
-photoUrl: ${photoUrl}
+photoPath: ${photoPath}
     ''';
   }
 }
