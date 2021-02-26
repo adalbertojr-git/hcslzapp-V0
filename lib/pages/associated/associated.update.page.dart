@@ -647,9 +647,15 @@ class _AssociatedUpdateState extends State<AssociatedUpdate> {
             });
       }
       if (response == true) {
+        asuka.showSnackBar(
+          SnackBar(
+            content: Text('Aguarde...'),
+          ),
+        );
         _controller.update(_controller.associated).then(
           (value) {
             if (value != null) {
+              asuka.hideCurrentSnackBar();
               asuka.showSnackBar(
                 SnackBar(
                   content: Text('Associado atualizado com sucesso.'),

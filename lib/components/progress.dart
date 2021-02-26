@@ -1,12 +1,3 @@
-/*
-Autor: Adalberto Jr.
-App: HCSlz
-Todos os direitos reservados ao Harley Club de Sao Luis
-2020
-
-Descriçao: classe que exibe um circulo de progresso padrao
-
-*/
 import 'package:flutter/material.dart';
 
 class Progress extends StatelessWidget {

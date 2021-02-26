@@ -143,20 +143,11 @@ abstract class AssociatedUpdateControllerBase with Store {
         this.errorMsg = "${e.message}";
       }, test: (e) => e is Exception);
 
-/*  @action
-  Future update2(Associated associated) => ObservableFuture(
-              _associatedRepo.update(_setValues()).then((value) => value))
-          .catchError((e) {
-        this.errorMsg = "${e.message}";
-      }, test: (e) => e is Exception);*/
-
   @action
-  Future update(Associated associated) async {
-    return
-        await _associatedRepo.update(await _setValues()).catchError((e) {
+  Future update(Associated associated) async =>
+    await _associatedRepo.update(await _setValues()).catchError((e) {
       this.errorMsg = "${e.message}";
     }, test: (e) => e is Exception);
-  }
 
   Future<List<Associated>> getFuture(int _associatedId) =>
       future = findByIdToList(_associatedId);
@@ -255,9 +246,11 @@ abstract class AssociatedUpdateControllerBase with Store {
 
   Future<String> _uploadPhoto() async {
     FirebaseStorage storage = FirebaseStorage.instance;
-    Reference ref = storage.ref().child("photos/${this.associated.id}");
-    await ref.putFile(this.photo);
-    return await ref.getDownloadURL().catchError((e) {
+    Reference reference = storage.ref().child(
+          "profilePhotos/${this.associated.id}",
+        );
+    await reference.putFile(this.photo);
+    return await reference.getDownloadURL().catchError((e) {
       this.errorMsg = "${e.message}";
     });
   }
