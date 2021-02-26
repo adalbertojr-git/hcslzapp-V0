@@ -245,6 +245,21 @@ mixin _$AssociatedUpdateController on AssociatedUpdateControllerBase, Store {
     });
   }
 
+  final _$photoUrlAtom = Atom(name: 'AssociatedUpdateControllerBase.photoUrl');
+
+  @override
+  String get photoUrl {
+    _$photoUrlAtom.reportRead();
+    return super.photoUrl;
+  }
+
+  @override
+  set photoUrl(String value) {
+    _$photoUrlAtom.reportWrite(value, super.photoUrl, () {
+      super.photoUrl = value;
+    });
+  }
+
   final _$photoAtom = Atom(name: 'AssociatedUpdateControllerBase.photo');
 
   @override
@@ -387,6 +402,14 @@ mixin _$AssociatedUpdateController on AssociatedUpdateControllerBase, Store {
     });
   }
 
+  final _$updateAsyncAction =
+      AsyncAction('AssociatedUpdateControllerBase.update');
+
+  @override
+  Future<dynamic> update(Associated associated) {
+    return _$updateAsyncAction.run(() => super.update(associated));
+  }
+
   final _$getImageFromCameraAsyncAction =
       AsyncAction('AssociatedUpdateControllerBase.getImageFromCamera');
 
@@ -431,17 +454,6 @@ mixin _$AssociatedUpdateController on AssociatedUpdateControllerBase, Store {
   }
 
   @override
-  Future<dynamic> update(Associated associated) {
-    final _$actionInfo = _$AssociatedUpdateControllerBaseActionController
-        .startAction(name: 'AssociatedUpdateControllerBase.update');
-    try {
-      return super.update(associated);
-    } finally {
-      _$AssociatedUpdateControllerBaseActionController.endAction(_$actionInfo);
-    }
-  }
-
-  @override
   String toString() {
     return '''
 idCtrl: ${idCtrl},
@@ -459,6 +471,7 @@ isHidedButton: ${isHidedButton},
 dependents: ${dependents},
 motorcycles: ${motorcycles},
 photoPath: ${photoPath},
+photoUrl: ${photoUrl},
 photo: ${photo},
 changedPhoto: ${changedPhoto},
 associated: ${associated},

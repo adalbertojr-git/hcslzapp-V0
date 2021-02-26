@@ -109,13 +109,13 @@ class _AssociatedUpdateState extends State<AssociatedUpdate> {
             children: <Widget>[
               TopMargin(),
               Row(
-                mainAxisAlignment: MainAxisAlignment.center,
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
                   IconButton(
                     icon: Icon(
                       Icons.add_photo_alternate,
                       color: Colors.black,
-                      size: 33.0,
+                      size: 43.0,
                     ),
                     onPressed: _controller.getImageFromGallery,
                   ),
@@ -124,7 +124,7 @@ class _AssociatedUpdateState extends State<AssociatedUpdate> {
                     icon: Icon(
                       Icons.add_a_photo,
                       color: Colors.black,
-                      size: 30.0,
+                      size: 40.0,
                     ),
                     onPressed: _controller.getImageFromCamera,
                   )

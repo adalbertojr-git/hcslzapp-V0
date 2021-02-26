@@ -63,8 +63,8 @@ abstract class AssociatedUpdateControllerBase with Store {
   @observable
   String photoPath;
 
-/*  @observable
-  String photoUrl;*/
+  @observable
+  String photoUrl;
 
   @observable
   File photo;
@@ -99,7 +99,7 @@ abstract class AssociatedUpdateControllerBase with Store {
     currentBloodType = associated.bloodType;
     currentAssociatedType = associated.associatedType;
     currentStatus = associated.status;
-    //photoUrl = associated.photoUrl;
+    photoUrl = associated.photoUrl;
     _getPhoto();
     formController = FormController(
       name: associated.name,
@@ -143,17 +143,25 @@ abstract class AssociatedUpdateControllerBase with Store {
         this.errorMsg = "${e.message}";
       }, test: (e) => e is Exception);
 
-  @action
-  Future update(Associated associated) => ObservableFuture(
+/*  @action
+  Future update2(Associated associated) => ObservableFuture(
               _associatedRepo.update(_setValues()).then((value) => value))
           .catchError((e) {
         this.errorMsg = "${e.message}";
-      }, test: (e) => e is Exception);
+      }, test: (e) => e is Exception);*/
+
+  @action
+  Future update(Associated associated) async {
+    return
+        await _associatedRepo.update(await _setValues()).catchError((e) {
+      this.errorMsg = "${e.message}";
+    }, test: (e) => e is Exception);
+  }
 
   Future<List<Associated>> getFuture(int _associatedId) =>
       future = findByIdToList(_associatedId);
 
-  Associated _setValues() {
+  Future<Associated> _setValues() async {
     this.associated.name = nameCtrl.text;
     this.associated.phone = phoneCtrl.text;
     this.associated.email = emailCtrl.text;
@@ -168,11 +176,11 @@ abstract class AssociatedUpdateControllerBase with Store {
     this.associated.dateShield = dateShieldCtrl.text;
     this.associated.dependents = List<Dependent>.from(dependents);
     this.associated.motorcycles = List<Motorcycle>.from(motorcycles);
-/*    if (this.photo != null) {
+    if (this.photo != null) {
       //se houve alteração de foto
-      this.associated.photoUrl = _uploadPhoto().toString();
-    }*/
-    _savePhoto();
+      _savePhoto();
+      await _uploadPhoto().then((value) => this.associated.photoUrl = value);
+    }
     return this.associated;
   }
 
@@ -249,9 +257,9 @@ abstract class AssociatedUpdateControllerBase with Store {
     FirebaseStorage storage = FirebaseStorage.instance;
     Reference ref = storage.ref().child("photos/${this.associated.id}");
     await ref.putFile(this.photo);
-    var url = await ref.getDownloadURL();
-    print(url);
-    return url;
+    return await ref.getDownloadURL().catchError((e) {
+      this.errorMsg = "${e.message}";
+    });
   }
 }
 
