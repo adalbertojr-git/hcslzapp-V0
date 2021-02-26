@@ -78,10 +78,17 @@ abstract class DependentControllerBase with Store {
     final String cpf = cpfCtrl.text;
     final String bloodType = currentBloodType;
     final String dateBirth = dateBirthCtrl.text;
-    final String isAssociated = (this.isAssociated ? 'S' : 'N');
     if (name != '') {
       final dependent = Dependent(
-          id, name, email, phone, cpf, bloodType, dateBirth, isAssociated);
+        id,
+        name,
+        email,
+        phone,
+        cpf,
+        bloodType,
+        dateBirth,
+        (isAssociated ? 'S' : 'N'),
+      );
       /*
       pop = manda resposta para o push (then)
       remove a tela da pilha de navegação. Ou seja, o push() adiciona uma tela

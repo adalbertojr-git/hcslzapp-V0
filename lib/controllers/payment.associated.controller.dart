@@ -37,7 +37,7 @@ abstract class PaymentAssociatedControllerBase with Store {
   Future findByAssociatedIdToList(int id) =>
       ObservableFuture(_paymentRepo.findByAssociatedIdToList(id).then((value) => value))
           .catchError((e) {
-        this.errorMsg = "${e.message}";
+        errorMsg = "${e.message}";
       }, test: (e) => e is Exception);
 
   Future<List<Payment>> getFuture(int _paymentId) =>

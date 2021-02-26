@@ -1,12 +1,3 @@
-/*
-Autor: Adalberto Jr.
-App: HCSlz
-Todos os direitos reservados ao Harley Club de Sao Luis
-2020
-
-Descriçao: classe que exibe infos sobre o Harley Club
-
-*/
 import 'package:flutter/material.dart';
 import 'package:flutter/painting.dart';
 

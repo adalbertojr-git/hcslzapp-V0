@@ -95,9 +95,9 @@ class _DashboardState extends State<Dashboard> {
             ),
             UserAccountsDrawerHeader(
               accountName: Text(
-                this.widget._firstName,
+                widget._firstName,
               ),
-              accountEmail: Text(this.widget._email),
+              accountEmail: Text(widget._email),
               decoration: BoxDecoration(
                 image: DecorationImage(
                   image: ExactAssetImage('assets/imgs/ladies.jpg'),
@@ -166,16 +166,16 @@ class _DashboardState extends State<Dashboard> {
   get header => ListTile(
         contentPadding: EdgeInsets.only(left: 40, right: 20, top: 30),
         title: Text(
-          this.widget._user == 'admin'
+          widget._user == 'admin'
               ? 'Olá, Administrador'
-              : 'Olá, ${this.widget._firstName}',
+              : 'Olá, ${widget._firstName}',
           style: TextStyle(color: Colors.white, fontSize: 22.0),
         ),
         subtitle: Text(
-          this.widget._email,
+          widget._email,
           style: TextStyle(color: Colors.white60),
         ),
-        trailing: this.widget._user == 'admin'
+        trailing: widget._user == 'admin'
             ? null
             : Observer(
                 builder: (_) => CircleAvatar(
@@ -197,7 +197,7 @@ class _DashboardState extends State<Dashboard> {
               ),
       );
 
-  get bar => (this.widget._user != 'admin'
+  get bar => (widget._user != 'admin'
       ? SizedBox()
       : Row(
           mainAxisAlignment: MainAxisAlignment.center,
@@ -225,7 +225,7 @@ class _DashboardState extends State<Dashboard> {
           ],
         ));
 
-  get grid => (this.widget._user == 'admin' ? gridAdm : gridAssociated);
+  get grid => (widget._user == 'admin' ? gridAdm : gridAssociated);
 
   get gridAssociated => Expanded(
         child: Container(
@@ -245,7 +245,7 @@ class _DashboardState extends State<Dashboard> {
                     _gContext,
                     MaterialPageRoute(
                         builder: (gContext) =>
-                            AssociatedUpdate(this.widget._associatedId)),
+                            AssociatedUpdate(widget._associatedId)),
                   );
                   if (photoPath != null) {
                     _controller.setPhoto(photoPath);
@@ -261,7 +261,7 @@ class _DashboardState extends State<Dashboard> {
                     _gContext,
                     MaterialPageRoute(
                         builder: (gContext) =>
-                            PaymentAssociated(this.widget._associatedId)),
+                            PaymentAssociated(widget._associatedId)),
                   );
                 },
               ),

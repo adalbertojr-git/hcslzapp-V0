@@ -69,21 +69,21 @@ abstract class AccessRequestControllerBase with Store {
   Future findAll() => accessRequestListFuture =
           ObservableFuture(_accessRequestRepo.findAll().then((value) => value))
               .catchError((e) {
-        this.errorMsg = "${e.message}";
+        errorMsg = "${e.message}";
       }, test: (e) => e is Exception);
 
   @action
   Future save() => accessRequestPost = ObservableFuture(
               _accessRequestRepo.save(_setValues()).then((value) => value))
           .catchError((e) {
-        this.errorMsg = "${e.message}";
+        errorMsg = "${e.message}";
       }, test: (e) => e is Exception);
 
   @action
   Future check() => checkFuture = ObservableFuture(_accessRequestRepo
           .check(List<AccessRequest>.from(accessRequests))
           .then((value) => value)).catchError((e) {
-        this.errorMsg = "${e.message}";
+        errorMsg = "${e.message}";
       }, test: (e) => e is Exception);
 
   @action

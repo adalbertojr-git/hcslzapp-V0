@@ -141,7 +141,7 @@ abstract class PaymentAddControllerBase with Store {
   Future findByAssociatedIdToList(int id) => ObservableFuture(
               _paymentRepo.findByAssociatedIdToList(id).then((value) => value))
           .catchError((e) {
-        this.errorMsg = "${e.message}";
+        errorMsg = "${e.message}";
       }, test: (e) => e is Exception);
 
   Future<List<Payment>> getFuture(int _paymentId) =>
@@ -151,26 +151,26 @@ abstract class PaymentAddControllerBase with Store {
   Future update() =>
       ObservableFuture(_paymentRepo.update(_setValues()).then((value) => value))
           .catchError((e) {
-        this.errorMsg = "${e.message}";
+        errorMsg = "${e.message}";
       }, test: (e) => e is Exception);
 
   @action
   Future save() =>
       ObservableFuture(_paymentRepo.save(_setValues()).then((value) => value))
           .catchError((e) {
-        this.errorMsg = "${e.message}";
+        errorMsg = "${e.message}";
       }, test: (e) => e is Exception);
 
   Payment _setValues() {
     return Payment(
         id: payment != null ? payment.id : int.parse('0'),
         year: yearCtrl.text,
-        associated: this.associated,
+        associated: associated,
         paymentMonths: _setPaymentMonths());
   }
 
   @action
-  setYears(List<String> years) => this.years = years;
+  setYears(List<String> value) => years = value;
 
   bool get hasErrors => hasErrorYear;
 

@@ -140,39 +140,39 @@ abstract class AssociatedUpdateControllerBase with Store {
   Future findByIdToList(int id) => ObservableFuture(
               _associatedRepo.findByIdToList(id).then((value) => value))
           .catchError((e) {
-        this.errorMsg = "${e.message}";
+        errorMsg = "${e.message}";
       }, test: (e) => e is Exception);
 
   @action
   Future update(Associated associated) async =>
     await _associatedRepo.update(await _setValues()).catchError((e) {
-      this.errorMsg = "${e.message}";
+      errorMsg = "${e.message}";
     }, test: (e) => e is Exception);
 
   Future<List<Associated>> getFuture(int _associatedId) =>
       future = findByIdToList(_associatedId);
 
   Future<Associated> _setValues() async {
-    this.associated.name = nameCtrl.text;
-    this.associated.phone = phoneCtrl.text;
-    this.associated.email = emailCtrl.text;
-    this.associated.sponsor = sponsorCtrl.text;
-    this.associated.associatedType = associatedTypeCtrl.text;
-    this.associated.cnh = cnhCtrl.text;
-    this.associated.cpf = cpfCtrl.text;
-    this.associated.bloodType = currentBloodType;
-    this.associated.associatedType = currentAssociatedType;
-    this.associated.status = currentStatus;
-    this.associated.dateBirth = dateBirthCtrl.text;
-    this.associated.dateShield = dateShieldCtrl.text;
-    this.associated.dependents = List<Dependent>.from(dependents);
-    this.associated.motorcycles = List<Motorcycle>.from(motorcycles);
-    if (this.photo != null) {
+    associated.name = nameCtrl.text;
+    associated.phone = phoneCtrl.text;
+    associated.email = emailCtrl.text;
+    associated.sponsor = sponsorCtrl.text;
+    associated.associatedType = associatedTypeCtrl.text;
+    associated.cnh = cnhCtrl.text;
+    associated.cpf = cpfCtrl.text;
+    associated.bloodType = currentBloodType;
+    associated.associatedType = currentAssociatedType;
+    associated.status = currentStatus;
+    associated.dateBirth = dateBirthCtrl.text;
+    associated.dateShield = dateShieldCtrl.text;
+    associated.dependents = List<Dependent>.from(dependents);
+    associated.motorcycles = List<Motorcycle>.from(motorcycles);
+    if (photo != null) {
       //se houve alteração de foto
       _savePhoto();
-      await _uploadPhoto().then((value) => this.associated.photoUrl = value);
+      await _uploadPhoto().then((value) => associated.photoUrl = value);
     }
-    return this.associated;
+    return associated;
   }
 
   String validateName() {
@@ -207,9 +207,9 @@ abstract class AssociatedUpdateControllerBase with Store {
       source: ImageSource.camera,
     );
     if (pickedFile != null) {
-      this.photo = File(pickedFile.path);
-      this.changedPhoto = true;
-      this.photoPath = this.photo.path.toString();
+      photo = File(pickedFile.path);
+      changedPhoto = true;
+      photoPath = photo.path.toString();
     }
   }
 
@@ -219,9 +219,9 @@ abstract class AssociatedUpdateControllerBase with Store {
       source: ImageSource.gallery,
     );
     if (pickedFile != null) {
-      this.photo = File(pickedFile.path);
-      this.changedPhoto = true;
-      this.photoPath = this.photo.path.toString();
+      photo = File(pickedFile.path);
+      changedPhoto = true;
+      photoPath = photo.path.toString();
     }
   }
 
@@ -247,11 +247,11 @@ abstract class AssociatedUpdateControllerBase with Store {
   Future<String> _uploadPhoto() async {
     FirebaseStorage storage = FirebaseStorage.instance;
     Reference reference = storage.ref().child(
-          "profilePhotos/${this.associated.id}",
+          "profilePhotos/${associated.id}",
         );
-    await reference.putFile(this.photo);
+    await reference.putFile(photo);
     return await reference.getDownloadURL().catchError((e) {
-      this.errorMsg = "${e.message}";
+      errorMsg = "${e.message}";
     });
   }
 }

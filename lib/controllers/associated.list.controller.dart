@@ -49,7 +49,7 @@ abstract class AssociatedListControllerBase with Store {
   Future findAll() =>
       ObservableFuture(_associatedRepo.findAll().then((value) => value))
           .catchError((e) {
-        this.errorMsg = "${e.message}";
+        errorMsg = "${e.message}";
       }, test: (e) => e is Exception);
 
   Future<List<Associated>> getFuture() => future = findAll();
