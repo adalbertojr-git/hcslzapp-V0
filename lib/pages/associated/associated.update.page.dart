@@ -23,8 +23,9 @@ import 'dart:io';
 
 class AssociatedUpdate extends StatefulWidget {
   final int _associatedId;
+  final String _user;
 
-  AssociatedUpdate(this._associatedId);
+  AssociatedUpdate(this._user, this._associatedId);
 
   @override
   _AssociatedUpdateState createState() => _AssociatedUpdateState();
@@ -111,23 +112,27 @@ class _AssociatedUpdateState extends State<AssociatedUpdate> {
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
-                  IconButton(
-                    icon: Icon(
-                      Icons.add_photo_alternate,
-                      color: Colors.black,
-                      size: 43.0,
-                    ),
-                    onPressed: _controller.getImageFromGallery,
-                  ),
+                  widget._user != 'admin'
+                      ? IconButton(
+                          icon: Icon(
+                            Icons.add_photo_alternate,
+                            color: Colors.black,
+                            size: 43.0,
+                          ),
+                          onPressed: _controller.getImageFromGallery,
+                        )
+                      : Container(),
                   _photo,
-                  IconButton(
-                    icon: Icon(
-                      Icons.add_a_photo,
-                      color: Colors.black,
-                      size: 40.0,
-                    ),
-                    onPressed: _controller.getImageFromCamera,
-                  )
+                  widget._user != 'admin'
+                      ? IconButton(
+                          icon: Icon(
+                            Icons.add_a_photo,
+                            color: Colors.black,
+                            size: 40.0,
+                          ),
+                          onPressed: _controller.getImageFromCamera,
+                        )
+                      : Container(),
                 ],
               ),
               SizedBox(

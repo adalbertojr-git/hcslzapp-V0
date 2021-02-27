@@ -93,14 +93,14 @@ abstract class AssociatedUpdateControllerBase with Store {
   @observable
   String currentStatus;
 
-  get init {
+  get init async {
     _initLists;
     _initTextFields;
     currentBloodType = associated.bloodType;
     currentAssociatedType = associated.associatedType;
     currentStatus = associated.status;
     photoUrl = associated.photoUrl;
-    _getPhoto();
+    photoPath = await _getPhotoFromDevice();
     formController = FormController(
       name: associated.name,
       email: associated.email,
@@ -225,8 +225,8 @@ abstract class AssociatedUpdateControllerBase with Store {
     }
   }
 
-  _getPhoto() async {
-    photoPath = await Glutton.vomit("photoPath");
+  Future<String> _getPhotoFromDevice() async {
+    return await Glutton.vomit("photoPath");
   }
 
   Future _savePhoto() async {

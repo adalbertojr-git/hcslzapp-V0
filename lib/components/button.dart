@@ -18,7 +18,7 @@ class Button extends StatelessWidget {
           icon,
           color: Colors.deepOrangeAccent[100],
           //color: Colors.black,
-          size: 30,
+          size: 35,
         ),
         onPressed: () async {
           onClick();

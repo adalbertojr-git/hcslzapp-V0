@@ -27,8 +27,7 @@ class Dashboard extends StatefulWidget {
   final String _photoUrl;
   final int _associatedId;
 
-  Dashboard(this._user, this._firstName, this._email, this._associatedId,
-      this._photoUrl);
+  Dashboard(this._user, this._firstName, this._email, this._associatedId, this._photoUrl);
 
   @override
   _DashboardState createState() => _DashboardState();
@@ -36,7 +35,6 @@ class Dashboard extends StatefulWidget {
 
 class _DashboardState extends State<Dashboard> {
   DashboardController _controller = DashboardController();
-
   BuildContext _gContext;
 
   List<String> _listAdmScreens = [
@@ -63,15 +61,16 @@ class _DashboardState extends State<Dashboard> {
     Icons.wallet_giftcard,
   ];
 
-  List<Widget> _listAdmWidgets = [
-    AssociatedList(),
-    PaymentListPage(),
-  ];
+  List<Widget> _listAdmWidgets;
 
   @override
   void initState() {
     //_controller = Provider.of<AssociatedController>(context, listen: false);
     _controller.init;
+    _listAdmWidgets = [
+      AssociatedList(widget._user),
+      PaymentListPage(),
+    ];
     super.initState();
   }
 
@@ -245,7 +244,7 @@ class _DashboardState extends State<Dashboard> {
                     _gContext,
                     MaterialPageRoute(
                         builder: (gContext) =>
-                            AssociatedUpdate(widget._associatedId)),
+                            AssociatedUpdate(widget._user, widget._associatedId)),
                   );
                   if (photoPath != null) {
                     _controller.setPhoto(photoPath);

@@ -12,6 +12,10 @@ import 'package:hcslzapp/models/associated.dart';
 import 'package:hcslzapp/pages/associated/associated.update.page.dart';
 
 class AssociatedList extends StatefulWidget {
+  final String _user;
+
+  const AssociatedList(this._user);
+
   @override
   State<StatefulWidget> createState() {
     return AssociatedListState();
@@ -148,7 +152,7 @@ class AssociatedListState extends State<AssociatedList> {
                                 Navigator.push(
                                   context,
                                   MaterialPageRoute(
-                                      builder: (context) => AssociatedUpdate(
+                                      builder: (context) => AssociatedUpdate(widget._user,
                                           _controller.listFiltered[i].id)),
                                 );
                               },

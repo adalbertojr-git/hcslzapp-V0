@@ -183,7 +183,8 @@ class Login extends StatelessWidget {
         } else {
           Token _t = token;
           print(_t.token);
-          _controller.saveToken(_t.token);
+          _controller.setTokenToDevice(_t.token);
+          _controller.setUserToDevice(_controller.userLoginCtrl.text);
           TokenDetails _tokenDetails = TokenDetails(_t.token);
           Navigator.pushReplacement(
             context,

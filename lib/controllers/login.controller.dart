@@ -30,7 +30,10 @@ abstract class LoginControllerBase with Store {
 
   @action
   Future authenticate() => token = ObservableFuture(_loginRepo
-          .authenticate(userLoginCtrl.text, pswLoginCtrl.text)
+          .authenticate(
+            userLoginCtrl.text,
+            pswLoginCtrl.text,
+          )
           .then((value) => value)).catchError((e) {
         errorMsg = "${e.message}";
       }, test: (e) => e is Exception);
@@ -38,7 +41,11 @@ abstract class LoginControllerBase with Store {
   @action
   bool setLoading(bool value) => isLoading = value;
 
-  Future saveToken(String token) async {
+  Future setTokenToDevice(String token) async {
     await Glutton.eat("token", token);
+  }
+
+  Future setUserToDevice(String user) async {
+    await Glutton.eat("user", user);
   }
 }

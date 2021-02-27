@@ -3,23 +3,20 @@ import 'package:mobx/mobx.dart';
 
 part 'dashboard.controller.g.dart';
 
-class DashboardController = DashboardControllerBase
-    with _$DashboardController;
+class DashboardController = DashboardControllerBase with _$DashboardController;
 
 abstract class DashboardControllerBase with Store {
-
   @observable
   String photoPath;
 
-  get init async {
-    photoPath = await getPhoto();
+  get init {
+    getPhotoFromDevice().then((value) => photoPath = value);
   }
 
   @action
   setPhoto(String value) => photoPath = value;
 
-  Future<String> getPhoto() async {
+  Future<String> getPhotoFromDevice() async {
     return await Glutton.vomit("photoPath");
   }
-
 }

@@ -377,11 +377,11 @@ mixin _$PaymentAddController on PaymentAddControllerBase, Store {
   }
 
   @override
-  dynamic setYears(List<String> years) {
+  dynamic setYears(List<String> value) {
     final _$actionInfo = _$PaymentAddControllerBaseActionController.startAction(
         name: 'PaymentAddControllerBase.setYears');
     try {
-      return super.setYears(years);
+      return super.setYears(value);
     } finally {
       _$PaymentAddControllerBaseActionController.endAction(_$actionInfo);
     }
