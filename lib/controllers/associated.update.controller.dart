@@ -100,11 +100,11 @@ abstract class AssociatedUpdateControllerBase with Store {
     currentAssociatedType = associated.associatedType;
     currentStatus = associated.status;
     photoUrl = associated.photoUrl;
-    photoPath = await _getPhotoFromDevice();
     formController = FormController(
       name: associated.name,
       email: associated.email,
     );
+    photoPath = await _getPhotoFromDevice();
   }
 
   get _initLists {
@@ -145,9 +145,9 @@ abstract class AssociatedUpdateControllerBase with Store {
 
   @action
   Future update(Associated associated) async =>
-    await _associatedRepo.update(await _setValues()).catchError((e) {
-      errorMsg = "${e.message}";
-    }, test: (e) => e is Exception);
+      await _associatedRepo.update(await _setValues()).catchError((e) {
+        errorMsg = "${e.message}";
+      }, test: (e) => e is Exception);
 
   Future<List<Associated>> getFuture(int _associatedId) =>
       future = findByIdToList(_associatedId);

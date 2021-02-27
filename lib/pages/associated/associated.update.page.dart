@@ -368,15 +368,16 @@ class _AssociatedUpdateState extends State<AssociatedUpdate> {
             decoration: BoxDecoration(
               color: Colors.black,
               borderRadius: BorderRadius.circular(150.0),
-              image: DecorationImage(
-                  image: _controller.photoPath != null
-                      ? PhotoImageProvider().getImageProvider(
-                          File(_controller.photoPath),
-                        )
-                      : PhotoImageProvider().getImageProvider(
-                          File('assets/imgs/noImage.png'),
-                        ),
-                  fit: BoxFit.fill),
+              image: _loadPhoto(),
+/*                  image: DecorationImage(
+                      image: _controller.photoPath != null
+                          ? PhotoImageProvider().getImageProvider(
+                        File(_controller.photoPath),
+                      )
+                          : PhotoImageProvider().getImageProvider(
+                        File('assets/imgs/noImage.png'),
+                      ),
+                      fit: BoxFit.fill),*/
 /*              image: DecorationImage(
                   image: _controller.changedPhoto
                       ? PhotoImageProvider().getImageProvider(
@@ -392,6 +393,24 @@ class _AssociatedUpdateState extends State<AssociatedUpdate> {
           ),
         ),
       );
+
+  DecorationImage _loadPhoto() => (widget._user == 'admin'
+      ? DecorationImage(
+          image: _controller.associated.photoUrl != null
+              ? NetworkImage(_controller.associated.photoUrl)
+              : PhotoImageProvider().getImageProvider(
+                  File('assets/imgs/noImage.png'),
+                ),
+          fit: BoxFit.fill)
+      : DecorationImage(
+          image: _controller.photoPath != null
+              ? PhotoImageProvider().getImageProvider(
+                  File(_controller.photoPath),
+                )
+              : PhotoImageProvider().getImageProvider(
+                  File('assets/imgs/noImage.png'),
+                ),
+          fit: BoxFit.fill));
 
   get _dependentsListWidget => Container(
         padding: EdgeInsets.all(10.0),
