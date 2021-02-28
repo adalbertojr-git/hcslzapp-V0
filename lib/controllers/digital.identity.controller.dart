@@ -1,5 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:glutton/glutton.dart';
+import 'package:hcslzapp/models/associated.dart';
+import 'package:hcslzapp/repositories/digital.identity.repo.dart';
 import 'package:mobx/mobx.dart';
 
 part 'digital.identity.controller.g.dart';
@@ -27,7 +29,25 @@ abstract class DigitalIdentityControllerBase with Store {
   var dateShieldCtrl = TextEditingController();
 
   @observable
+  var bloodTypeCtrl = TextEditingController();
+
+  @observable
+  Associated associated;
+
+  @observable
+  DigitalIdentityRepo _digitalIdentityRepo = DigitalIdentityRepo();
+
+  @observable
+  Future<List<Associated>> future;
+
+  @observable
+  bool isHidedButton = true;
+
+  @observable
   String photoPath;
+
+  @observable
+  String errorMsg;
 
   get init {
     _initTextFields;
@@ -35,13 +55,28 @@ abstract class DigitalIdentityControllerBase with Store {
   }
 
   get _initTextFields {
-    nameCtrl.text = 'Adalberto Jr';//associated.name;
-    cnhCtrl.text = '777777';//associated.cnh;
-    cpfCtrl.text = '8888888';//associated.cpf;
-    associatedTypeCtrl.text = 'membro Fundador';//associated.associatedType;
-    dateBirthCtrl.text =  '28/09/1976';//associated.dateBirth;
-    dateShieldCtrl.text = '27/07/2019';//associated.dateShield;
+    nameCtrl.text = associated.name;
+    cnhCtrl.text = associated.cnh;
+    cpfCtrl.text = associated.cpf;
+    associatedTypeCtrl.text = associated.associatedType;
+    dateBirthCtrl.text = associated.dateBirth;
+    dateShieldCtrl.text = associated.dateShield;
+    bloodTypeCtrl.text = associated.bloodType;
   }
+
+  @action
+  Future findAssociatedByIdToList(int id) =>
+      ObservableFuture(_digitalIdentityRepo
+          .findAssociatedByIdToList(id)
+          .then((value) => value)).catchError((e) {
+        errorMsg = "${e.message}";
+      }, test: (e) => e is Exception);
+
+  Future<List<Associated>> getFuture(int _associatedId) =>
+      future = findAssociatedByIdToList(_associatedId);
+
+  @action
+  bool setButtonVisibilty() => isHidedButton = !isHidedButton;
 
   @action
   setPhoto(String value) => photoPath = value;

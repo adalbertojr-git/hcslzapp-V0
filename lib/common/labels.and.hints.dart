@@ -1,6 +1,8 @@
 /*
 Login
 */
+import 'package:hcslzapp/pages/digital.identity/digital.identity.page.dart';
+
 const labelUser = 'Usuário *';
 const hintUser = 'Código usado para conectar no HCSlz App';
 const labelPsw = 'Senha *';
@@ -72,3 +74,8 @@ const labelSep = 'Set (R\$)';
 const labelOct = 'Out (R\$)';
 const labelNov = 'Nov (R\$)';
 const labelDec = 'Dez (R\$)';
+/*
+DigitalIdentity
+*/
+const labelNameDigitalPayment = 'Nome';
+const labelBloodType = 'Tipo Sanguíneo';

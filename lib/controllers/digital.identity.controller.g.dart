@@ -102,6 +102,86 @@ mixin _$DigitalIdentityController on DigitalIdentityControllerBase, Store {
     });
   }
 
+  final _$bloodTypeCtrlAtom =
+      Atom(name: 'DigitalIdentityControllerBase.bloodTypeCtrl');
+
+  @override
+  TextEditingController get bloodTypeCtrl {
+    _$bloodTypeCtrlAtom.reportRead();
+    return super.bloodTypeCtrl;
+  }
+
+  @override
+  set bloodTypeCtrl(TextEditingController value) {
+    _$bloodTypeCtrlAtom.reportWrite(value, super.bloodTypeCtrl, () {
+      super.bloodTypeCtrl = value;
+    });
+  }
+
+  final _$associatedAtom =
+      Atom(name: 'DigitalIdentityControllerBase.associated');
+
+  @override
+  Associated get associated {
+    _$associatedAtom.reportRead();
+    return super.associated;
+  }
+
+  @override
+  set associated(Associated value) {
+    _$associatedAtom.reportWrite(value, super.associated, () {
+      super.associated = value;
+    });
+  }
+
+  final _$_digitalIdentityRepoAtom =
+      Atom(name: 'DigitalIdentityControllerBase._digitalIdentityRepo');
+
+  @override
+  DigitalIdentityRepo get _digitalIdentityRepo {
+    _$_digitalIdentityRepoAtom.reportRead();
+    return super._digitalIdentityRepo;
+  }
+
+  @override
+  set _digitalIdentityRepo(DigitalIdentityRepo value) {
+    _$_digitalIdentityRepoAtom.reportWrite(value, super._digitalIdentityRepo,
+        () {
+      super._digitalIdentityRepo = value;
+    });
+  }
+
+  final _$futureAtom = Atom(name: 'DigitalIdentityControllerBase.future');
+
+  @override
+  Future<List<Associated>> get future {
+    _$futureAtom.reportRead();
+    return super.future;
+  }
+
+  @override
+  set future(Future<List<Associated>> value) {
+    _$futureAtom.reportWrite(value, super.future, () {
+      super.future = value;
+    });
+  }
+
+  final _$isHidedButtonAtom =
+      Atom(name: 'DigitalIdentityControllerBase.isHidedButton');
+
+  @override
+  bool get isHidedButton {
+    _$isHidedButtonAtom.reportRead();
+    return super.isHidedButton;
+  }
+
+  @override
+  set isHidedButton(bool value) {
+    _$isHidedButtonAtom.reportWrite(value, super.isHidedButton, () {
+      super.isHidedButton = value;
+    });
+  }
+
   final _$photoPathAtom = Atom(name: 'DigitalIdentityControllerBase.photoPath');
 
   @override
@@ -117,8 +197,46 @@ mixin _$DigitalIdentityController on DigitalIdentityControllerBase, Store {
     });
   }
 
+  final _$errorMsgAtom = Atom(name: 'DigitalIdentityControllerBase.errorMsg');
+
+  @override
+  String get errorMsg {
+    _$errorMsgAtom.reportRead();
+    return super.errorMsg;
+  }
+
+  @override
+  set errorMsg(String value) {
+    _$errorMsgAtom.reportWrite(value, super.errorMsg, () {
+      super.errorMsg = value;
+    });
+  }
+
   final _$DigitalIdentityControllerBaseActionController =
       ActionController(name: 'DigitalIdentityControllerBase');
+
+  @override
+  Future<dynamic> findAssociatedByIdToList(int id) {
+    final _$actionInfo =
+        _$DigitalIdentityControllerBaseActionController.startAction(
+            name: 'DigitalIdentityControllerBase.findAssociatedByIdToList');
+    try {
+      return super.findAssociatedByIdToList(id);
+    } finally {
+      _$DigitalIdentityControllerBaseActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
+  bool setButtonVisibilty() {
+    final _$actionInfo = _$DigitalIdentityControllerBaseActionController
+        .startAction(name: 'DigitalIdentityControllerBase.setButtonVisibilty');
+    try {
+      return super.setButtonVisibilty();
+    } finally {
+      _$DigitalIdentityControllerBaseActionController.endAction(_$actionInfo);
+    }
+  }
 
   @override
   dynamic setPhoto(String value) {
@@ -140,7 +258,12 @@ cnhCtrl: ${cnhCtrl},
 cpfCtrl: ${cpfCtrl},
 dateBirthCtrl: ${dateBirthCtrl},
 dateShieldCtrl: ${dateShieldCtrl},
-photoPath: ${photoPath}
+bloodTypeCtrl: ${bloodTypeCtrl},
+associated: ${associated},
+future: ${future},
+isHidedButton: ${isHidedButton},
+photoPath: ${photoPath},
+errorMsg: ${errorMsg}
     ''';
   }
 }

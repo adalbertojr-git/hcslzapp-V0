@@ -271,7 +271,7 @@ class _DashboardState extends State<Dashboard> {
                 onClick: () {
                   Navigator.push(
                     _gContext,
-                    MaterialPageRoute(builder: (gContext) => DigitalIdentity()),
+                    MaterialPageRoute(builder: (gContext) => DigitalIdentity(widget._associatedId)),
                   );
                 },
               ),
