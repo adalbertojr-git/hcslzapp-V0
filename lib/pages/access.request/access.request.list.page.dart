@@ -51,7 +51,7 @@ class AccessRequestListState extends State<AccessRequestList> {
                     if (snapshot.data.length > 0) {
                       _controller.init;
                       _controller.accessRequests.addAll(snapshot.data);
-                      return _buildListView();
+                      return _widgets;
                     } else
                       return CenteredMessage(
                         'Não existem requisições de acesso a serem aprovadas.',
@@ -71,7 +71,7 @@ class AccessRequestListState extends State<AccessRequestList> {
         ),
       );
 
-  _buildListView() => Container(
+  get _widgets => Container(
         decoration: BoxDecoration(
           gradient: LinearGradient(
             colors: [Colors.white30, Colors.deepOrange],

@@ -13,6 +13,7 @@ class DigitalIdentity extends StatefulWidget {
 
 class _DigitalIdentityState extends State<DigitalIdentity> {
   DigitalIdentityController _controller = DigitalIdentityController();
+  final double _fontSize = 16.0;
 
   @override
   void initState() {
@@ -64,45 +65,72 @@ class _DigitalIdentityState extends State<DigitalIdentity> {
                   MyTextFormField(
                     textEditingController: _controller.nameCtrl,
                     label: labelName,
-                    hint: hintName,
                     disabled: true,
-                    size: 20.0,
+                    size: _fontSize,
                   ),
                   Row(
                     children: <Widget>[
                       Expanded(
                         child: MyTextFormField(
-                          textEditingController: _controller.dateBirthCtrl,
-                          label: labelDateBirth,
-                          hint: hintDate,
+                          textEditingController: _controller.associatedTypeCtrl,
+                          label: labelAssociatedType,
                           disabled: true,
-                          size: 18.0,
+                          size: _fontSize,
                           textAlign: TextAlign.center,
                         ),
                       ),
                       Expanded(
                         child: MyTextFormField(
-                          textEditingController: _controller.dateShieldCtrl,
-                          label: labelDateShield,
-                          hint: hintDate,
+                          textEditingController: _controller.cnhCtrl,
+                          label: labelCNH,
                           disabled: true,
-                          size: 18.0,
+                          size: _fontSize,
                           textAlign: TextAlign.center,
                         ),
                       ),
                       Expanded(
                         child: MyTextFormField(
-                          textEditingController: _controller.nameCtrl,
-                          //helper: _labelBloodType,
-                          label: 'A-', //associated.name,
+                          textEditingController: _controller.cpfCtrl,
+                          label: labelCPF,
                           disabled: true,
-                          size: 18.0,
+                          size: _fontSize,
                           textAlign: TextAlign.center,
                         ),
                       ),
                     ],
                   ),
-                  SizedBox(
+                    Row(
+                      children: <Widget>[
+                        Expanded(
+                          child: MyTextFormField(
+                            textEditingController: _controller.dateBirthCtrl,
+                            label: labelDateBirth,
+                            disabled: true,
+                            size: _fontSize,
+                            textAlign: TextAlign.center,
+                          ),
+                        ),
+                        Expanded(
+                          child: MyTextFormField(
+                            textEditingController: _controller.dateShieldCtrl,
+                            label: labelDateShield,
+                            disabled: true,
+                            size: _fontSize,
+                            textAlign: TextAlign.center,
+                          ),
+                        ),
+                        Expanded(
+                          child: MyTextFormField(
+                            textEditingController: _controller.nameCtrl,
+                            label: 'A-',
+                            disabled: true,
+                            size: _fontSize,
+                            textAlign: TextAlign.center,
+                          ),
+                        ),
+                      ],
+                    ),
+                    SizedBox(
                     height: 40.0,
                   ),
                   Center(

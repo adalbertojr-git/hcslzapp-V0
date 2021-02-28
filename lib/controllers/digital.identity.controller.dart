@@ -12,9 +12,6 @@ abstract class DigitalIdentityControllerBase with Store {
   var nameCtrl = TextEditingController();
 
   @observable
-  var sponsorCtrl = TextEditingController();
-
-  @observable
   var associatedTypeCtrl = TextEditingController();
 
   @observable
@@ -30,9 +27,6 @@ abstract class DigitalIdentityControllerBase with Store {
   var dateShieldCtrl = TextEditingController();
 
   @observable
-  var statusCtrl = TextEditingController();
-
-  @observable
   String photoPath;
 
   get init {
@@ -42,13 +36,11 @@ abstract class DigitalIdentityControllerBase with Store {
 
   get _initTextFields {
     nameCtrl.text = 'Adalberto Jr';//associated.name;
-    //sponsorCtrl.text = associated.sponsor;
-    //cnhCtrl.text = associated.cnh;
-    //cpfCtrl.text = associated.cpf;
-    //associatedTypeCtrl.text = associated.associatedType;
+    cnhCtrl.text = '777777';//associated.cnh;
+    cpfCtrl.text = '8888888';//associated.cpf;
+    associatedTypeCtrl.text = 'membro Fundador';//associated.associatedType;
     dateBirthCtrl.text =  '28/09/1976';//associated.dateBirth;
     dateShieldCtrl.text = '27/07/2019';//associated.dateShield;
-    //statusCtrl.text = associated.status;
   }
 
   @action

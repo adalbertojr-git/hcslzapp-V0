@@ -24,22 +24,6 @@ mixin _$DigitalIdentityController on DigitalIdentityControllerBase, Store {
     });
   }
 
-  final _$sponsorCtrlAtom =
-      Atom(name: 'DigitalIdentityControllerBase.sponsorCtrl');
-
-  @override
-  TextEditingController get sponsorCtrl {
-    _$sponsorCtrlAtom.reportRead();
-    return super.sponsorCtrl;
-  }
-
-  @override
-  set sponsorCtrl(TextEditingController value) {
-    _$sponsorCtrlAtom.reportWrite(value, super.sponsorCtrl, () {
-      super.sponsorCtrl = value;
-    });
-  }
-
   final _$associatedTypeCtrlAtom =
       Atom(name: 'DigitalIdentityControllerBase.associatedTypeCtrl');
 
@@ -118,22 +102,6 @@ mixin _$DigitalIdentityController on DigitalIdentityControllerBase, Store {
     });
   }
 
-  final _$statusCtrlAtom =
-      Atom(name: 'DigitalIdentityControllerBase.statusCtrl');
-
-  @override
-  TextEditingController get statusCtrl {
-    _$statusCtrlAtom.reportRead();
-    return super.statusCtrl;
-  }
-
-  @override
-  set statusCtrl(TextEditingController value) {
-    _$statusCtrlAtom.reportWrite(value, super.statusCtrl, () {
-      super.statusCtrl = value;
-    });
-  }
-
   final _$photoPathAtom = Atom(name: 'DigitalIdentityControllerBase.photoPath');
 
   @override
@@ -167,13 +135,11 @@ mixin _$DigitalIdentityController on DigitalIdentityControllerBase, Store {
   String toString() {
     return '''
 nameCtrl: ${nameCtrl},
-sponsorCtrl: ${sponsorCtrl},
 associatedTypeCtrl: ${associatedTypeCtrl},
 cnhCtrl: ${cnhCtrl},
 cpfCtrl: ${cpfCtrl},
 dateBirthCtrl: ${dateBirthCtrl},
 dateShieldCtrl: ${dateShieldCtrl},
-statusCtrl: ${statusCtrl},
 photoPath: ${photoPath}
     ''';
   }
