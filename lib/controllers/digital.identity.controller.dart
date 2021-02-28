@@ -30,10 +30,25 @@ abstract class DigitalIdentityControllerBase with Store {
   var dateShieldCtrl = TextEditingController();
 
   @observable
+  var statusCtrl = TextEditingController();
+
+  @observable
   String photoPath;
 
   get init {
+    _initTextFields;
     getPhotoFromDevice().then((value) => photoPath = value);
+  }
+
+  get _initTextFields {
+    nameCtrl.text = 'Adalberto Jr';//associated.name;
+    //sponsorCtrl.text = associated.sponsor;
+    //cnhCtrl.text = associated.cnh;
+    //cpfCtrl.text = associated.cpf;
+    //associatedTypeCtrl.text = associated.associatedType;
+    dateBirthCtrl.text =  '28/09/1976';//associated.dateBirth;
+    dateShieldCtrl.text = '27/07/2019';//associated.dateShield;
+    //statusCtrl.text = associated.status;
   }
 
   @action

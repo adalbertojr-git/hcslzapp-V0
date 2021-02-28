@@ -118,6 +118,22 @@ mixin _$DigitalIdentityController on DigitalIdentityControllerBase, Store {
     });
   }
 
+  final _$statusCtrlAtom =
+      Atom(name: 'DigitalIdentityControllerBase.statusCtrl');
+
+  @override
+  TextEditingController get statusCtrl {
+    _$statusCtrlAtom.reportRead();
+    return super.statusCtrl;
+  }
+
+  @override
+  set statusCtrl(TextEditingController value) {
+    _$statusCtrlAtom.reportWrite(value, super.statusCtrl, () {
+      super.statusCtrl = value;
+    });
+  }
+
   final _$photoPathAtom = Atom(name: 'DigitalIdentityControllerBase.photoPath');
 
   @override
@@ -157,6 +173,7 @@ cnhCtrl: ${cnhCtrl},
 cpfCtrl: ${cpfCtrl},
 dateBirthCtrl: ${dateBirthCtrl},
 dateShieldCtrl: ${dateShieldCtrl},
+statusCtrl: ${statusCtrl},
 photoPath: ${photoPath}
     ''';
   }

@@ -1,14 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
+import 'package:hcslzapp/common/labels.and.hints.dart';
 import 'package:hcslzapp/common/photo.image.provider.dart';
 import 'package:hcslzapp/components/my.text.form.field.dart';
 import 'package:hcslzapp/controllers/digital.identity.controller.dart';
 import 'dart:io';
-
-const _labelName = 'Nome';
-const _labelDateBirth = 'Data Nascimento';
-const _labelDateShield = 'Data Escudamento';
-const _labelBloodType = 'Tipo Sanguineo';
 
 class DigitalIdentity extends StatefulWidget {
   @override
@@ -27,108 +23,114 @@ class _DigitalIdentityState extends State<DigitalIdentity> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Stack(
-        children: <Widget>[
-          Center(
-            child: SizedBox(
-              height: 370.0,
-              child: Padding(
-                padding: EdgeInsets.fromLTRB(00.0, 10.0, 00.0, 0.0),
-                child: Image.asset('assets/imgs/logo_carteirad.png'),
+      body: _widgets,
+    );
+  }
+
+  get _widgets =>
+    Stack(
+      children: <Widget>[
+        Center(
+          child: SizedBox(
+            height: 370.0,
+            child: Padding(
+              padding: EdgeInsets.fromLTRB(00.0, 10.0, 00.0, 0.0),
+              child: Image.asset('assets/imgs/logo_carteirad.png'),
+            ),
+          ),
+        ),
+        Center(
+          child: Container(
+            decoration: BoxDecoration(
+              gradient: LinearGradient(
+                colors: [Colors.white30, Colors.deepOrange],
+                begin: FractionalOffset.topLeft,
+                end: FractionalOffset.bottomRight,
+              ),
+            ),
+            height: MediaQuery.of(context).size.height,
+            child: SingleChildScrollView(
+              child: Column(
+                children: <Widget>[
+                  SizedBox(
+                    height: 30.0,
+                  ),
+                  Center(
+                    child: _photo,
+                  ),
+                  SizedBox(
+                    height: 50.0,
+                  ),
+                  MyTextFormField(
+                    textEditingController: _controller.nameCtrl,
+                    label: labelName,
+                    hint: hintName,
+                    disabled: true,
+                    size: 20.0,
+                  ),
+                  Row(
+                    children: <Widget>[
+                      Expanded(
+                        child: MyTextFormField(
+                          textEditingController: _controller.dateBirthCtrl,
+                          label: labelDateBirth,
+                          hint: hintDate,
+                          disabled: true,
+                          size: 18.0,
+                          textAlign: TextAlign.center,
+                        ),
+                      ),
+                      Expanded(
+                        child: MyTextFormField(
+                          textEditingController: _controller.dateShieldCtrl,
+                          label: labelDateShield,
+                          hint: hintDate,
+                          disabled: true,
+                          size: 18.0,
+                          textAlign: TextAlign.center,
+                        ),
+                      ),
+                      Expanded(
+                        child: MyTextFormField(
+                          textEditingController: _controller.nameCtrl,
+                          //helper: _labelBloodType,
+                          label: 'A-', //associated.name,
+                          disabled: true,
+                          size: 18.0,
+                          textAlign: TextAlign.center,
+                        ),
+                      ),
+                    ],
+                  ),
+                  SizedBox(
+                    height: 40.0,
+                  ),
+                  Center(
+                    child: Text(
+                      'Carteira digital de associado do Harley Club de São Luis - MA',
+                      style: TextStyle(
+                        fontSize: 12.0,
+                      ),
+                    ),
+                  ),
+                  SizedBox(
+                    height: 10.0,
+                  ),
+                  Center(
+                    child: Text(
+                      'Válida até 31/12/2020',
+                      style: TextStyle(
+                        fontSize: 11.0,
+                      ),
+                    ),
+                  ),
+                ],
               ),
             ),
           ),
-          Center(
-            child: Container(
-              decoration: BoxDecoration(
-                gradient: LinearGradient(
-                  colors: [Colors.white30, Colors.deepOrange],
-                  begin: FractionalOffset.topLeft,
-                  end: FractionalOffset.bottomRight,
-                ),
-              ),
-              height: MediaQuery.of(context).size.height,
-              child: SingleChildScrollView(
-                child: Column(
-                  children: <Widget>[
-                    SizedBox(
-                      height: 30.0,
-                    ),
-                    Center(
-                      child: _photo,
-                    ),
-                    SizedBox(
-                      height: 50.0,
-                    ),
-                    MyTextFormField(
-                      textEditingController: _controller.nameCtrl,
-                      helper: _labelName,
-                      label: 'Adalberto Jr', //associated.name,
-                      disabled: true,
-                      size: 20.0,
-                    ),
-                    Row(
-                      children: <Widget>[
-                        Expanded(
-                          child: MyTextFormField(
-                            textEditingController: _controller.dateBirthCtrl,
-                            helper: _labelDateBirth,
-                            label: '28/09/1976', //associated.name,
-                            disabled: true,
-                            size: 15.0,
-                          ),
-                        ),
-                        Expanded(
-                          child: MyTextFormField(
-                            textEditingController: _controller.dateShieldCtrl,
-                            helper: _labelDateShield,
-                            label: '27/07/2019', //associated.name,
-                            disabled: true,
-                            size: 15.0,
-                          ),
-                        ),
-                        Expanded(
-                          child: MyTextFormField(
-                            textEditingController: _controller.nameCtrl,
-                            helper: _labelBloodType,
-                            label: 'A-', //associated.name,
-                            disabled: true,
-                            size: 15.0,
-                          ),
-                        ),
-                      ],
-                    ),
-                    SizedBox(
-                      height: 40.0,
-                    ),
-                    Center(
-                      child: Text(
-                        'Carteira digital de membro do Harley Club de Sao Luis - MA',
-                        style: TextStyle(
-                          fontSize: 10.0,
-                        ),
-                      ),
-                    ),
-                    SizedBox(
-                      height: 10.0,
-                    ),
-                    Center(
-                      child: Text(
-                        'Valida ate 31/12/2020',
-                        style: TextStyle(
-                          fontSize: 10.0,
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-            ),
-          )
-        ],
-      ),
+        )
+      ],
     );
-  }
 
   get _photo => Container(
     height: 200.0,

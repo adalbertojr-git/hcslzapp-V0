@@ -89,7 +89,7 @@ class MyTextFormField extends StatelessWidget {
           labelStyle: TextStyle(
             fontSize: 14.0,
             fontStyle: FontStyle.italic,
-            color: Colors.black45,
+            color: Colors.black87,
           ),
           hintText: hint,
           hintStyle: TextStyle(
