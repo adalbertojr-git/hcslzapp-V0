@@ -1,8 +1,6 @@
 /*
 Login
 */
-import 'package:hcslzapp/pages/digital.identity/digital.identity.page.dart';
-
 const labelUser = 'Usuário *';
 const hintUser = 'Código usado para conectar no HCSlz App';
 const labelPsw = 'Senha *';

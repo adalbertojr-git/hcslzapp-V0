@@ -7,7 +7,6 @@ import 'package:hcslzapp/components/my.text.form.field.dart';
 import 'package:hcslzapp/components/progress.dart';
 import 'package:hcslzapp/components/top.margin.dart';
 import 'package:hcslzapp/controllers/associated.list.controller.dart';
-import 'package:asuka/asuka.dart' as asuka;
 import 'package:hcslzapp/models/associated.dart';
 import 'package:hcslzapp/pages/associated/associated.update.page.dart';
 

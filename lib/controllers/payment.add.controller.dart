@@ -1,6 +1,5 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
-import 'package:hcslzapp/controllers/payment.selected.controller.dart';
 import 'package:hcslzapp/models/associated.dart';
 import 'package:hcslzapp/models/payment.dart';
 import 'package:hcslzapp/models/payment.months.dart';
@@ -206,7 +205,7 @@ abstract class PaymentAddControllerBase with Store {
       return "Ano é obrigatório!!!";
     } else if (int.parse(formController.year) < 2018) {
       return "Ano deve ser maior que 2018";
-    } else if (this.years.contains(formController.year)) {
+    } else if (idCtrl.text == '' && this.years.contains(formController.year)) {
       return "Ano informado já cadastrado";
     }
     return null;
