@@ -9,16 +9,16 @@ import 'package:hcslzapp/models/payment.dart';
 import 'package:hcslzapp/models/payment.months.dart';
 import 'package:hcslzapp/repositories/payment.repo.dart';
 
-class PaymentAssociated extends StatefulWidget {
+class PaymentAssociatedPage extends StatefulWidget {
   final int paymentId;
 
-  const PaymentAssociated(this.paymentId);
+  const PaymentAssociatedPage(this.paymentId);
 
   @override
-  _PaymentAssociatedState createState() => _PaymentAssociatedState();
+  _PaymentAssociatedPageState createState() => _PaymentAssociatedPageState();
 }
 
-class _PaymentAssociatedState extends State<PaymentAssociated> {
+class _PaymentAssociatedPageState extends State<PaymentAssociatedPage> {
   PaymentAssociatedController _controller = PaymentAssociatedController();
 
   @override

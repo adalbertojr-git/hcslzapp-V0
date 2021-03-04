@@ -9,16 +9,16 @@ import 'package:hcslzapp/components/my.text.form.field.dart';
 import 'package:hcslzapp/models/dependent.dart';
 import 'package:mask_text_input_formatter/mask_text_input_formatter.dart';
 
-class DependentAdd extends StatefulWidget {
+class DependentAddPage extends StatefulWidget {
   final Dependent dependent;
 
-  DependentAdd(this.dependent);
+  DependentAddPage(this.dependent);
 
   @override
-  _DependentAddState createState() => _DependentAddState();
+  _DependentAddPageState createState() => _DependentAddPageState();
 }
 
-class _DependentAddState extends State<DependentAdd> {
+class _DependentAddPageState extends State<DependentAddPage> {
   DependentController _controller = DependentController();
 
   @override

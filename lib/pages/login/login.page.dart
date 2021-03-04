@@ -9,10 +9,10 @@ import 'package:hcslzapp/controllers/login.controller.dart';
 import 'package:hcslzapp/models/token.dart';
 import 'package:hcslzapp/pages/dashboard/dashboard.page.dart';
 import 'package:asuka/asuka.dart' as asuka;
-import 'package:hcslzapp/pages/access.request/access.request.page.dart';
+import 'package:hcslzapp/pages/access.request/access.request.add.page.dart';
 import '../forgot.password/forgot.password.page.dart';
 
-class Login extends StatelessWidget {
+class LoginPage extends StatelessWidget {
   LoginController _controller = LoginController();
 
   @override
@@ -126,7 +126,7 @@ class Login extends StatelessWidget {
                           Navigator.push(
                             context,
                             MaterialPageRoute(
-                                builder: (context) => ForgotPassword()),
+                                builder: (context) => ForgotPasswordPage()),
                           );
                         },
                         child: Text(
@@ -148,7 +148,7 @@ class Login extends StatelessWidget {
                           Navigator.push(
                             context,
                             MaterialPageRoute(
-                                builder: (context) => AccessRequestAdd()),
+                                builder: (context) => AccessRequestAddPage()),
                           );
                         },
                         child: Text(
@@ -189,7 +189,7 @@ class Login extends StatelessWidget {
           Navigator.pushReplacement(
             context,
             MaterialPageRoute(
-              builder: (context) => Dashboard(
+              builder: (context) => DashboardPage(
                   _controller.userLoginCtrl.text,
                   _tokenDetails.firstName(),
                   _tokenDetails.email(),

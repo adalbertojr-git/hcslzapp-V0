@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-class BoutiqueList extends StatelessWidget {
+class BoutiqueListPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     List choices = const [

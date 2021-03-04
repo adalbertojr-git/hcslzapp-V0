@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 
-class DtcCodeList extends StatefulWidget {
+class DtcCodeListPage extends StatefulWidget {
   @override
   State<StatefulWidget> createState() {
-    return DtcCodeListState();
+    return DtcCodeListPageState();
   }
 }
 
-class DtcCodeListState extends State<DtcCodeList> {
+class DtcCodeListPageState extends State<DtcCodeListPage> {
   TextEditingController editingController = TextEditingController();
 
   final duplicateItems =

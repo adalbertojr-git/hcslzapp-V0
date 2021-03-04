@@ -10,18 +10,18 @@ import 'package:hcslzapp/models/payment.dart';
 import 'package:mask_text_input_formatter/mask_text_input_formatter.dart';
 import 'package:asuka/asuka.dart' as asuka;
 
-class PaymentAdd extends StatefulWidget {
+class PaymentAddPage extends StatefulWidget {
   final Payment _payment;
   final Associated _associated;
   final List<String> _years;
 
-  PaymentAdd(this._payment, this._associated, this._years);
+  PaymentAddPage(this._payment, this._associated, this._years);
 
   @override
   _PaymentAddAddState createState() => _PaymentAddAddState();
 }
 
-class _PaymentAddAddState extends State<PaymentAdd> {
+class _PaymentAddAddState extends State<PaymentAddPage> {
   PaymentAddController _controller = PaymentAddController();
 
   @override

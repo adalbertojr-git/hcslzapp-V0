@@ -11,14 +11,14 @@ final Map<DateTime, List> _holidays = {
   DateTime(2019, 4, 22): ['Easter Monday'],
 };
 
-class EventCalendar extends StatefulWidget {
+class EventCalendarPage extends StatefulWidget {
   @override
   State<StatefulWidget> createState() {
-    return EventCalendarState();
+    return EventCalendarPageState();
   }
 }
 
-class EventCalendarState extends State<EventCalendar>
+class EventCalendarPageState extends State<EventCalendarPage>
     with SingleTickerProviderStateMixin {
   Map<DateTime, List> _events;
   List _selectedEvents;
@@ -111,7 +111,7 @@ class EventCalendarState extends State<EventCalendar>
       context,
       MaterialPageRoute(
         builder: (context) {
-          return EventList();
+          return EventListPage();
         },
       ),
     );

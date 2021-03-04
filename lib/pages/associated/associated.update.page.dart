@@ -21,17 +21,17 @@ import 'package:mask_text_input_formatter/mask_text_input_formatter.dart';
 import 'package:asuka/asuka.dart' as asuka;
 import 'dart:io';
 
-class AssociatedUpdate extends StatefulWidget {
+class AssociatedUpdatePage extends StatefulWidget {
   final int _associatedId;
   final String _user;
 
-  AssociatedUpdate(this._user, this._associatedId);
+  AssociatedUpdatePage(this._user, this._associatedId);
 
   @override
-  _AssociatedUpdateState createState() => _AssociatedUpdateState();
+  _AssociatedUpdatePageState createState() => _AssociatedUpdatePageState();
 }
 
-class _AssociatedUpdateState extends State<AssociatedUpdate> {
+class _AssociatedUpdatePageState extends State<AssociatedUpdatePage> {
   AssociatedUpdateController _controller = AssociatedUpdateController();
 
   @override
@@ -457,7 +457,7 @@ class _AssociatedUpdateState extends State<AssociatedUpdate> {
                                 context,
                                 MaterialPageRoute(
                                   builder: (context) =>
-                                      DependentAdd(_controller.dependents[i]),
+                                      DependentAddPage(_controller.dependents[i]),
                                 ),
                               );
                               future.then(
@@ -494,7 +494,7 @@ class _AssociatedUpdateState extends State<AssociatedUpdate> {
                 onPressed: () {
                   final Future<Dependent> future = Navigator.push(
                     context,
-                    MaterialPageRoute(builder: (context) => DependentAdd(null)),
+                    MaterialPageRoute(builder: (context) => DependentAddPage(null)),
                   );
                   future.then(
                     (dependent) {
@@ -575,7 +575,7 @@ class _AssociatedUpdateState extends State<AssociatedUpdate> {
                                 context,
                                 MaterialPageRoute(
                                   builder: (context) =>
-                                      MotorcycleAdd(_controller.motorcycles[i]),
+                                      MotorcycleAddPage(_controller.motorcycles[i]),
                                 ),
                               );
                               future.then(
@@ -613,7 +613,7 @@ class _AssociatedUpdateState extends State<AssociatedUpdate> {
                   final Future<Motorcycle> future = Navigator.push(
                     context,
                     MaterialPageRoute(
-                        builder: (context) => MotorcycleAdd(null)),
+                        builder: (context) => MotorcycleAddPage(null)),
                   );
                   future.then(
                     (motorcycle) {

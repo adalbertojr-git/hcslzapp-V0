@@ -10,18 +10,18 @@ import 'package:hcslzapp/controllers/associated.list.controller.dart';
 import 'package:hcslzapp/models/associated.dart';
 import 'package:hcslzapp/pages/associated/associated.update.page.dart';
 
-class AssociatedList extends StatefulWidget {
+class AssociatedListPage extends StatefulWidget {
   final String _user;
 
-  const AssociatedList(this._user);
+  const AssociatedListPage(this._user);
 
   @override
   State<StatefulWidget> createState() {
-    return AssociatedListState();
+    return AssociatedListPageState();
   }
 }
 
-class AssociatedListState extends State<AssociatedList> {
+class AssociatedListPageState extends State<AssociatedListPage> {
   AssociatedListController _controller = AssociatedListController();
 
   @override
@@ -151,7 +151,7 @@ class AssociatedListState extends State<AssociatedList> {
                                 Navigator.push(
                                   context,
                                   MaterialPageRoute(
-                                      builder: (context) => AssociatedUpdate(widget._user,
+                                      builder: (context) => AssociatedUpdatePage(widget._user,
                                           _controller.listFiltered[i].id)),
                                 );
                               },

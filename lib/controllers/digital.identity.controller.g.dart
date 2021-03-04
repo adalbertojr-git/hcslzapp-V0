@@ -118,19 +118,35 @@ mixin _$DigitalIdentityController on DigitalIdentityControllerBase, Store {
     });
   }
 
-  final _$associatedAtom =
-      Atom(name: 'DigitalIdentityControllerBase.associated');
+  final _$dueDateCtrlAtom =
+      Atom(name: 'DigitalIdentityControllerBase.dueDateCtrl');
 
   @override
-  Associated get associated {
-    _$associatedAtom.reportRead();
-    return super.associated;
+  TextEditingController get dueDateCtrl {
+    _$dueDateCtrlAtom.reportRead();
+    return super.dueDateCtrl;
   }
 
   @override
-  set associated(Associated value) {
-    _$associatedAtom.reportWrite(value, super.associated, () {
-      super.associated = value;
+  set dueDateCtrl(TextEditingController value) {
+    _$dueDateCtrlAtom.reportWrite(value, super.dueDateCtrl, () {
+      super.dueDateCtrl = value;
+    });
+  }
+
+  final _$digitalIdentityAtom =
+      Atom(name: 'DigitalIdentityControllerBase.digitalIdentity');
+
+  @override
+  DigitalIdentity get digitalIdentity {
+    _$digitalIdentityAtom.reportRead();
+    return super.digitalIdentity;
+  }
+
+  @override
+  set digitalIdentity(DigitalIdentity value) {
+    _$digitalIdentityAtom.reportWrite(value, super.digitalIdentity, () {
+      super.digitalIdentity = value;
     });
   }
 
@@ -154,13 +170,13 @@ mixin _$DigitalIdentityController on DigitalIdentityControllerBase, Store {
   final _$futureAtom = Atom(name: 'DigitalIdentityControllerBase.future');
 
   @override
-  Future<List<Associated>> get future {
+  Future<List<DigitalIdentity>> get future {
     _$futureAtom.reportRead();
     return super.future;
   }
 
   @override
-  set future(Future<List<Associated>> value) {
+  set future(Future<List<DigitalIdentity>> value) {
     _$futureAtom.reportWrite(value, super.future, () {
       super.future = value;
     });
@@ -259,7 +275,8 @@ cpfCtrl: ${cpfCtrl},
 dateBirthCtrl: ${dateBirthCtrl},
 dateShieldCtrl: ${dateShieldCtrl},
 bloodTypeCtrl: ${bloodTypeCtrl},
-associated: ${associated},
+dueDateCtrl: ${dueDateCtrl},
+digitalIdentity: ${digitalIdentity},
 future: ${future},
 isHidedButton: ${isHidedButton},
 photoPath: ${photoPath},

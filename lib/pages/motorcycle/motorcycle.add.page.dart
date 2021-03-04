@@ -8,16 +8,16 @@ import 'package:hcslzapp/controllers/motorcycle.controller.dart';
 import 'package:hcslzapp/models/motorcycle.dart';
 import 'package:mask_text_input_formatter/mask_text_input_formatter.dart';
 
-class MotorcycleAdd extends StatefulWidget {
+class MotorcycleAddPage extends StatefulWidget {
   final Motorcycle motorcycle;
 
-  MotorcycleAdd(this.motorcycle);
+  MotorcycleAddPage(this.motorcycle);
 
   @override
-  _MotorcycleAddState createState() => _MotorcycleAddState();
+  _MotorcycleAddPageState createState() => _MotorcycleAddPageState();
 }
 
-class _MotorcycleAddState extends State<MotorcycleAdd> {
+class _MotorcycleAddPageState extends State<MotorcycleAddPage> {
   MotorcycleController _controller = MotorcycleController();
 
   @override

@@ -1,15 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:hcslzapp/models/dependent.dart';
 
-class DocumentList extends StatefulWidget {
+class DocumentListPage extends StatefulWidget {
 
   @override
   State<StatefulWidget> createState() {
-    return DocumentListState();
+    return DocumentListPageState();
   }
 }
 
-class DocumentListState extends State<DocumentList> {
+class DocumentListPageState extends State<DocumentListPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(

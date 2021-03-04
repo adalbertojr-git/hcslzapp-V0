@@ -11,16 +11,16 @@ import 'package:hcslzapp/models/payment.months.dart';
 import 'package:hcslzapp/pages/financial/payment.add.page.dart';
 import 'package:asuka/asuka.dart' as asuka;
 
-class PaymentSelected extends StatefulWidget {
+class PaymentSelectedPage extends StatefulWidget {
   final Associated _associated;
 
-  const PaymentSelected(this._associated);
+  const PaymentSelectedPage(this._associated);
 
   @override
-  _PaymentSelectedState createState() => _PaymentSelectedState();
+  _PaymentSelectedPageState createState() => _PaymentSelectedPageState();
 }
 
-class _PaymentSelectedState extends State<PaymentSelected> {
+class _PaymentSelectedPageState extends State<PaymentSelectedPage> {
   PaymentSelectedController _controller = PaymentSelectedController();
 
   @override
@@ -84,7 +84,7 @@ class _PaymentSelectedState extends State<PaymentSelected> {
     var payment = await Navigator.push(
       context,
       MaterialPageRoute(
-        builder: (_) => PaymentAdd(
+        builder: (_) => PaymentAddPage(
           null,
           widget._associated,
           _controller.loadYears(),
@@ -150,7 +150,7 @@ class _PaymentSelectedState extends State<PaymentSelected> {
                 Navigator.push(
                   context,
                   MaterialPageRoute(
-                      builder: (context) => PaymentAdd(_controller.payments[i],
+                      builder: (context) => PaymentAddPage(_controller.payments[i],
                           widget._associated, _controller.loadYears())),
                 );
               },

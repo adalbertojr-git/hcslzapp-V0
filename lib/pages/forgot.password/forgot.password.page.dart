@@ -8,12 +8,12 @@ import 'package:hcslzapp/components/top.margin.dart';
 import 'package:asuka/asuka.dart' as asuka;
 import 'package:hcslzapp/controllers/forgot.password.controller.dart';
 
-class ForgotPassword extends StatefulWidget {
+class ForgotPasswordPage extends StatefulWidget {
   @override
-  _ForgotPasswordState createState() => _ForgotPasswordState();
+  _ForgotPasswordPageState createState() => _ForgotPasswordPageState();
 }
 
-class _ForgotPasswordState extends State<ForgotPassword> {
+class _ForgotPasswordPageState extends State<ForgotPasswordPage> {
   ForgotPasswordController _controller = ForgotPasswordController();
 
   @override

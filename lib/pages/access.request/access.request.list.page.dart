@@ -7,14 +7,14 @@ import 'package:hcslzapp/controllers/access.request.controller.dart';
 import 'package:hcslzapp/models/access.request.dart';
 import 'package:asuka/asuka.dart' as asuka;
 
-class AccessRequestList extends StatefulWidget {
+class AccessRequestListPage extends StatefulWidget {
   @override
   State<StatefulWidget> createState() {
-    return AccessRequestListState();
+    return AccessRequestListPageState();
   }
 }
 
-class AccessRequestListState extends State<AccessRequestList> {
+class AccessRequestListPageState extends State<AccessRequestListPage> {
   AccessRequestController _controller = AccessRequestController();
 
   @override

@@ -22,7 +22,7 @@ class Splash extends StatelessWidget {
           end: FractionalOffset.bottomRight,
           colors: [Colors.white30, Colors.deepOrange],
         ),
-        navigateAfterSeconds: Login(),
+        navigateAfterSeconds: LoginPage(),
         loaderColor: Colors.transparent,
       );
 

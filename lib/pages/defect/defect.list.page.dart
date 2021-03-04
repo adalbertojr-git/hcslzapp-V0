@@ -2,14 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:hcslzapp/components/button.dart';
 import 'package:hcslzapp/pages/defect/defect.add.page.dart';
 
-class DefectList extends StatefulWidget {
+class DefectListPage extends StatefulWidget {
   @override
   State<StatefulWidget> createState() {
-    return DefectListState();
+    return DefectListPageState();
   }
 }
 
-class DefectListState extends State<DefectList> {
+class DefectListPageState extends State<DefectListPage> {
   TextEditingController editingController = TextEditingController();
 
   final duplicateItems =
@@ -102,7 +102,7 @@ class DefectListState extends State<DefectList> {
             context,
             MaterialPageRoute(
               builder: (context) {
-                return DefectAdd();
+                return DefectAddPage();
               },
             ),
           );

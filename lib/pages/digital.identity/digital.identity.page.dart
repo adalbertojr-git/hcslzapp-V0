@@ -9,18 +9,16 @@ import 'package:hcslzapp/components/progress.dart';
 import 'package:hcslzapp/controllers/digital.identity.controller.dart';
 import 'dart:io';
 
-import 'package:hcslzapp/models/associated.dart';
-
-class DigitalIdentity extends StatefulWidget {
+class DigitalIdentityPage extends StatefulWidget {
   final int _associatedId;
 
-  DigitalIdentity(this._associatedId);
+  DigitalIdentityPage(this._associatedId);
 
   @override
-  _DigitalIdentityState createState() => _DigitalIdentityState();
+  _DigitalIdentityPageState createState() => _DigitalIdentityPageState();
 }
 
-class _DigitalIdentityState extends State<DigitalIdentity> {
+class _DigitalIdentityPageState extends State<DigitalIdentityPage> {
   DigitalIdentityController _controller = DigitalIdentityController();
   final double _fontSize = 16.0;
 
@@ -37,7 +35,7 @@ class _DigitalIdentityState extends State<DigitalIdentity> {
   @override
   Widget build(BuildContext context) => Observer(
         builder: (_) => Scaffold(
-          body: FutureBuilder<List<Associated>>(
+          body: FutureBuilder<List<DigitalIdentityPage>>(
             future: _controller.future,
             builder: (context, snapshot) {
               switch (snapshot.connectionState) {
@@ -56,7 +54,7 @@ class _DigitalIdentityState extends State<DigitalIdentity> {
                         _controller.errorMsg,
                       );
                     if (snapshot.data.length > 0) {
-                      _controller.associated = snapshot.data.first;
+                      _controller.digitalIdentity = snapshot.data.first;
                       _controller.init;
                       return _widgets;
                     } else

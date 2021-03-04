@@ -1,6 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:glutton/glutton.dart';
-import 'package:hcslzapp/models/associated.dart';
+import 'package:hcslzapp/models/digital.identity.dart';
 import 'package:hcslzapp/repositories/digital.identity.repo.dart';
 import 'package:mobx/mobx.dart';
 
@@ -32,13 +32,16 @@ abstract class DigitalIdentityControllerBase with Store {
   var bloodTypeCtrl = TextEditingController();
 
   @observable
-  Associated associated;
+  var dueDateCtrl = TextEditingController();
+
+  @observable
+  DigitalIdentity digitalIdentity;
 
   @observable
   DigitalIdentityRepo _digitalIdentityRepo = DigitalIdentityRepo();
 
   @observable
-  Future<List<Associated>> future;
+  Future<List<DigitalIdentity>> future;
 
   @observable
   bool isHidedButton = true;
@@ -55,13 +58,14 @@ abstract class DigitalIdentityControllerBase with Store {
   }
 
   get _initTextFields {
-    nameCtrl.text = associated.name;
-    cnhCtrl.text = associated.cnh;
-    cpfCtrl.text = associated.cpf;
-    associatedTypeCtrl.text = associated.associatedType;
-    dateBirthCtrl.text = associated.dateBirth;
-    dateShieldCtrl.text = associated.dateShield;
-    bloodTypeCtrl.text = associated.bloodType;
+    nameCtrl.text = digitalIdentity.name;
+    cnhCtrl.text = digitalIdentity.cnh;
+    cpfCtrl.text = digitalIdentity.cpf;
+    associatedTypeCtrl.text = digitalIdentity.associatedType;
+    dateBirthCtrl.text = digitalIdentity.dateBirth;
+    dateShieldCtrl.text = digitalIdentity.dateShield;
+    bloodTypeCtrl.text = digitalIdentity.bloodType;
+    dueDateCtrl.text = digitalIdentity.dueDate;
   }
 
   @action
@@ -72,7 +76,7 @@ abstract class DigitalIdentityControllerBase with Store {
         errorMsg = "${e.message}";
       }, test: (e) => e is Exception);
 
-  Future<List<Associated>> getFuture(int _associatedId) =>
+  Future<List<DigitalIdentity>> getFuture(int _associatedId) =>
       future = findAssociatedByIdToList(_associatedId);
 
   @action

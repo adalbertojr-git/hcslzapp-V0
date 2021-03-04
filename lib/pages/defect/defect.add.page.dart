@@ -9,7 +9,7 @@ const _rotuloSolucao = 'Solucao *';
 const _rotuloProprietario = 'Proprietario';
 const _rotuloTelefone = 'Telefone';
 
-class DefectAdd extends StatelessWidget {
+class DefectAddPage extends StatelessWidget {
   final TextEditingController _controladorModelo = TextEditingController();
   final TextEditingController _controladorAno = TextEditingController();
   final TextEditingController _controladorDefeito = TextEditingController();

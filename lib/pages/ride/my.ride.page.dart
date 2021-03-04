@@ -2,15 +2,15 @@ import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:hcslzapp/components/my.text.form.field.dart';
 
-class MyRide extends StatefulWidget {
-  const MyRide({Key key, this.title}) : super(key: key);
+class MyRidePage extends StatefulWidget {
+  const MyRidePage({Key key, this.title}) : super(key: key);
   final String title;
 
   @override
-  _MyRideState createState() => _MyRideState();
+  _MyRidePageState createState() => _MyRidePageState();
 }
 
-class _MyRideState extends State<MyRide> {
+class _MyRidePageState extends State<MyRidePage> {
   GoogleMapController mapController;
   double lat = -2.5152639;
   double long = -44.2329928;

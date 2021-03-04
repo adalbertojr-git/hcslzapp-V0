@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:hcslzapp/components/button.dart';
 import 'package:hcslzapp/pages/dtc.code/dtc.code.list.page.dart';
 
-class DtcCodeAccess extends StatelessWidget {
+class DtcCodeAccessPage extends StatelessWidget {
   //@override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -44,7 +44,7 @@ class DtcCodeAccess extends StatelessWidget {
             context,
             MaterialPageRoute(
               builder: (context) {
-                return DtcCodeList();
+                return DtcCodeListPage();
               },
             ),
           );

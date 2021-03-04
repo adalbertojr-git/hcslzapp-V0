@@ -2,16 +2,16 @@ import 'package:flutter/material.dart';
 import 'package:hcslzapp/models/motorcycle.dart';
 import 'package:hcslzapp/pages/motorcycle/motorcycle.add.page.dart';
 
-class EventList extends StatefulWidget {
+class EventListPage extends StatefulWidget {
   final List<Motorcycle> _listMotocicletas = List();
 
   @override
   State<StatefulWidget> createState() {
-    return EventListState();
+    return EventListPageState();
   }
 }
 
-class EventListState extends State<EventList> {
+class EventListPageState extends State<EventListPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(

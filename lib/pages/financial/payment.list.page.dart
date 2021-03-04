@@ -147,7 +147,7 @@ class _PaymentListPageState extends State<PaymentListPage> {
                                 Navigator.push(
                                   context,
                                   MaterialPageRoute(
-                                      builder: (context) => PaymentSelected(
+                                      builder: (context) => PaymentSelectedPage(
                                           _controller.listFiltered[i])),
                                 );
                               },

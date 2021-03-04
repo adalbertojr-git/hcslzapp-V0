@@ -20,20 +20,20 @@ import 'package:hcslzapp/pages/ride/my.ride.page.dart';
 import 'dart:io';
 
 // ignore: must_be_immutable
-class Dashboard extends StatefulWidget {
+class DashboardPage extends StatefulWidget {
   final String _user;
   final String _firstName;
   final String _email;
   final String _photoUrl;
   final int _associatedId;
 
-  Dashboard(this._user, this._firstName, this._email, this._associatedId, this._photoUrl);
+  DashboardPage(this._user, this._firstName, this._email, this._associatedId, this._photoUrl);
 
   @override
-  _DashboardState createState() => _DashboardState();
+  _DashboardPageState createState() => _DashboardPageState();
 }
 
-class _DashboardState extends State<Dashboard> {
+class _DashboardPageState extends State<DashboardPage> {
   DashboardController _controller = DashboardController();
   BuildContext _gContext;
 
@@ -68,7 +68,7 @@ class _DashboardState extends State<Dashboard> {
     //_controller = Provider.of<AssociatedController>(context, listen: false);
     _controller.init;
     _listAdmWidgets = [
-      AssociatedList(widget._user),
+      AssociatedListPage(widget._user),
       PaymentListPage(),
     ];
     super.initState();
@@ -209,7 +209,7 @@ class _DashboardState extends State<Dashboard> {
                 Navigator.push(
                   _gContext,
                   MaterialPageRoute(
-                      builder: (_gContext) => AccessRequestList()),
+                      builder: (_gContext) => AccessRequestListPage()),
                 );
               },
             ),
@@ -244,7 +244,7 @@ class _DashboardState extends State<Dashboard> {
                     _gContext,
                     MaterialPageRoute(
                         builder: (gContext) =>
-                            AssociatedUpdate(widget._user, widget._associatedId)),
+                            AssociatedUpdatePage(widget._user, widget._associatedId)),
                   );
                   if (photoPath != null) {
                     _controller.setPhoto(photoPath);
@@ -260,7 +260,7 @@ class _DashboardState extends State<Dashboard> {
                     _gContext,
                     MaterialPageRoute(
                         builder: (gContext) =>
-                            PaymentAssociated(widget._associatedId)),
+                            PaymentAssociatedPage(widget._associatedId)),
                   );
                 },
               ),
@@ -271,7 +271,7 @@ class _DashboardState extends State<Dashboard> {
                 onClick: () {
                   Navigator.push(
                     _gContext,
-                    MaterialPageRoute(builder: (gContext) => DigitalIdentity(widget._associatedId)),
+                    MaterialPageRoute(builder: (gContext) => DigitalIdentityPage(widget._associatedId)),
                   );
                 },
               ),
@@ -282,7 +282,7 @@ class _DashboardState extends State<Dashboard> {
                 onClick: () {
                   Navigator.push(
                     _gContext,
-                    MaterialPageRoute(builder: (gContext) => PartnershipList()),
+                    MaterialPageRoute(builder: (gContext) => PartnershipListPage()),
                   );
                 },
               ),
@@ -293,7 +293,7 @@ class _DashboardState extends State<Dashboard> {
                 onClick: () {
                   Navigator.push(
                     _gContext,
-                    MaterialPageRoute(builder: (gContext) => EventCalendar()),
+                    MaterialPageRoute(builder: (gContext) => EventCalendarPage()),
                   );
                 },
               ),
@@ -317,7 +317,7 @@ class _DashboardState extends State<Dashboard> {
                 onClick: () {
                   Navigator.push(
                     _gContext,
-                    MaterialPageRoute(builder: (context) => DtcCodeAccess()),
+                    MaterialPageRoute(builder: (context) => DtcCodeAccessPage()),
                   );
                 },
               ),
@@ -341,7 +341,7 @@ class _DashboardState extends State<Dashboard> {
                 onClick: () {
                   Navigator.push(
                     _gContext,
-                    MaterialPageRoute(builder: (gContext) => BoutiqueList()),
+                    MaterialPageRoute(builder: (gContext) => BoutiqueListPage()),
                   );
                 },
               ),
@@ -384,7 +384,7 @@ class _DashboardState extends State<Dashboard> {
                 onClick: () {
                   Navigator.push(
                     _gContext,
-                    MaterialPageRoute(builder: (gContext) => About()),
+                    MaterialPageRoute(builder: (gContext) => AboutPage()),
                   );
                 },
               ),
