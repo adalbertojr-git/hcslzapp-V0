@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:hcslzapp/pages/event/event.list.page.dart';
+import 'package:intl/date_symbol_data_file.dart';
 import 'package:table_calendar/table_calendar.dart';
 
 // Example holidays
@@ -195,7 +196,16 @@ class EventCalendarPageState extends State<EventCalendarPage>
 
   // Simple TableCalendar configuration (using Styles)
   Widget _buildTableCalendar() {
+/*    initializeDateFormatting("pt_BR", null).then((_) {
+      var now = DateTime.now();
+      var formatter = DateFormat.yMMMd('pt_BR');
+      print(formatter.locale);
+      String formatted = formatter.format(now);
+      print(formatted);
+    });*/
     return TableCalendar(
+
+      //locale: 'pt_BR',
       rowHeight: 65.0,
       calendarController: _calendarController,
       events: _events,

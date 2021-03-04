@@ -9,6 +9,8 @@ import 'package:hcslzapp/components/progress.dart';
 import 'package:hcslzapp/controllers/digital.identity.controller.dart';
 import 'dart:io';
 
+import 'package:hcslzapp/models/digital.identity.dart';
+
 class DigitalIdentityPage extends StatefulWidget {
   final int _associatedId;
 
@@ -35,7 +37,7 @@ class _DigitalIdentityPageState extends State<DigitalIdentityPage> {
   @override
   Widget build(BuildContext context) => Observer(
         builder: (_) => Scaffold(
-          body: FutureBuilder<List<DigitalIdentityPage>>(
+          body: FutureBuilder<List<DigitalIdentity>>(
             future: _controller.future,
             builder: (context, snapshot) {
               switch (snapshot.connectionState) {
@@ -59,7 +61,7 @@ class _DigitalIdentityPageState extends State<DigitalIdentityPage> {
                       return _widgets;
                     } else
                       return CenteredMessage(
-                        'Não existem requisições de acesso a serem aprovadas.',
+                        'Identidade Digital não disponível. Consulte suas mensalidades junto à Diretoria.',
                       );
                   }
               } //switch (snapshot.connectionState)
@@ -189,6 +191,7 @@ class _DigitalIdentityPageState extends State<DigitalIdentityPage> {
                         'Carteira digital de associado do Harley Club de São Luis - MA',
                         style: TextStyle(
                           fontSize: 12.0,
+                            fontWeight: FontWeight.bold
                         ),
                       ),
                     ),
@@ -197,9 +200,10 @@ class _DigitalIdentityPageState extends State<DigitalIdentityPage> {
                     ),
                     Center(
                       child: Text(
-                        'Válida até 31/12/2020',
+                        'Válida até ${_controller.dueDateCtrl.text}',
                         style: TextStyle(
-                          fontSize: 11.0,
+                          fontSize: 12.0,
+                          fontWeight: FontWeight.bold
                         ),
                       ),
                     ),

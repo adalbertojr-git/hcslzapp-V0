@@ -2,6 +2,7 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:hcslzapp/controllers/app.controller.dart';
 import 'package:hcslzapp/pages/splash/splash.page.dart';
+import 'package:intl/date_symbol_data_file.dart';
 import 'package:intl/intl.dart';
 import 'package:asuka/asuka.dart' as asuka;
 
@@ -16,7 +17,10 @@ void main() async {
 class HCSlzApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    //Intl.defaultLocale = 'pt_BR';
+/*    initializeDateFormatting("pt_BR", null).then((_) {
+      Intl.defaultLocale = 'pt_BR';
+    });*/
+
     return AnimatedBuilder(
       animation: AppController.instance,
       builder: (context, child) {
