@@ -12,6 +12,7 @@ import 'package:hcslzapp/pages/defect/defect.list.page.dart';
 import 'package:hcslzapp/pages/digital.identity/digital.identity.page.dart';
 import 'package:hcslzapp/pages/document/document.list.page.dart';
 import 'package:hcslzapp/pages/dtc.code/dtc.code.access.page.dart';
+import 'package:hcslzapp/pages/dtc.code/dtc.code.dashboard.page.dart';
 import 'package:hcslzapp/pages/event/events.calendar.page.dart';
 import 'package:hcslzapp/pages/financial/payment.associated.page.dart';
 import 'package:hcslzapp/pages/financial/payment.list.page.dart';
@@ -317,7 +318,8 @@ class _DashboardPageState extends State<DashboardPage> {
                 onClick: () {
                   Navigator.push(
                     _gContext,
-                    MaterialPageRoute(builder: (context) => DtcCodeAccessPage()),
+                    //MaterialPageRoute(builder: (context) => DtcCodeAccessPage()),
+                    MaterialPageRoute(builder: (context) => DtcCodeDashboardPage()),
                   );
                 },
               ),
