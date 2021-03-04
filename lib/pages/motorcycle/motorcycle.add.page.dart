@@ -58,13 +58,6 @@ class _MotorcycleAddPageState extends State<MotorcycleAddPage> {
                   );
                 },
               ),
-              MyTextFormField(
-                textEditingController: _controller.modelCtrl,
-                label: labelModel,
-                hint: hintModel,
-                icon: Icons.motorcycle,
-                inputType: TextInputType.text,
-              ),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: <Widget>[
