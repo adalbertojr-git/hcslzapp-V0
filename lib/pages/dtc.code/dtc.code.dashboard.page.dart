@@ -10,6 +10,26 @@ import 'dart:io';
 class DtcCodeDashboardPage extends StatelessWidget {
   BuildContext _gContext;
 
+  List<String> _listAdmScreens = [
+    "Códigos",
+    "Abreviaturas",
+  ];
+
+  List<String> _listAdmScreensDesc = [
+    "Lista de códigos de erro catalogados pela HD",
+    "Lista de siglas utilizadas",
+  ];
+
+  List<IconData> _listAdmIcons = [
+    Icons.search,
+    Icons.list_rounded,
+  ];
+
+  List<Widget> _listAdmWidgets = [
+    DtcCodeAccessPage(),
+    DtcCodeListPage(),
+  ];
+
   @override
   Widget build(BuildContext context) {
     _gContext = context;
@@ -42,6 +62,7 @@ class DtcCodeDashboardPage extends StatelessWidget {
         child: Column(
           children: <Widget>[
             header,
+            bar,
             grid,
           ],
         ),
@@ -64,7 +85,86 @@ class DtcCodeDashboardPage extends StatelessWidget {
         ),
       );
 
+  get bar => Row(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: <Widget>[
+          _BarButton(
+            'Modelos 2000-2004',
+            'Forma de acesso',
+            Icons.motorcycle_outlined,
+            onClick: () {
+              Navigator.push(
+                _gContext,
+                MaterialPageRoute(
+                    builder: (_gContext) => DtcCodeListPage()),
+              );
+            },
+          ),
+          _BarButton(
+            'Modelos > 2005',
+            'Forma de acesso',
+            Icons.motorcycle_sharp,
+            onClick: () {
+              //_showContactsList(context);
+            },
+          ),
+        ],
+      );
+
   get grid => Expanded(
+        child: Container(
+          padding: EdgeInsets.only(left: 16, right: 16, bottom: 16),
+          child: ListView.builder(
+            itemCount: _listAdmScreens.length,
+            itemBuilder: _listItem,
+          ),
+        ),
+      );
+
+  Widget _listItem(BuildContext context, int index) => Card(
+        color: Colors.deepOrange[100],
+        shadowColor: Colors.black,
+        child: Column(
+          children: <Widget>[
+            ListTile(
+              leading: Icon(
+                _listAdmIcons[index],
+                size: 50,
+                color: Colors.orange,
+              ),
+              title: Text(
+                _listAdmScreens[index],
+                style: TextStyle(
+                  fontSize: 14.0,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+              subtitle: Column(
+                mainAxisAlignment: MainAxisAlignment.start,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: <Widget>[
+                  Text(
+                    _listAdmScreensDesc[index],
+                    style: TextStyle(
+                      fontSize: 11.0,
+                      fontWeight: FontWeight.normal,
+                    ),
+                  ),
+                ],
+              ),
+              onTap: () {
+                Navigator.push(
+                  _gContext,
+                  MaterialPageRoute(
+                      builder: (_gContext) => _listAdmWidgets[index]),
+                );
+              },
+            )
+          ],
+        ),
+      );
+}
+/* get grid2 => Expanded(
         child: Container(
           padding: EdgeInsets.only(left: 16, right: 16, bottom: 16),
           child: GridView.count(
@@ -120,8 +220,8 @@ class DtcCodeDashboardPage extends StatelessWidget {
           ),
         ),
       );
-}
-
+}*/
+/*
 class _GridButton extends StatelessWidget {
   _GridButton({this.title, this.image, this.context, this.onClick});
 
@@ -163,4 +263,60 @@ class _GridButton extends StatelessWidget {
       ),
     );
   } //build
-} //GridButton
+} //GridButton*/
+
+class _BarButton extends StatelessWidget {
+  final String title;
+  final String subtitle;
+  final IconData icon;
+  final Function onClick; //callback
+
+  _BarButton(this.title, this.subtitle, this.icon, {@required this.onClick});
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.all(5.0),
+      child: Material(
+        color: Colors.deepOrange[100],
+        child: InkWell(
+          onTap: () {
+            onClick();
+          },
+          child: Container(
+            padding: EdgeInsets.all(8),
+            height: 100,
+            width: MediaQuery.of(context).size.width / 2 - 15,
+            //width: 150,
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: <Widget>[
+                Icon(
+                  icon,
+                  color: Colors.orange,
+                  size: 50.0,
+                ),
+                Text(
+                  title,
+                  style: TextStyle(
+                    color: Colors.black,
+                    fontSize: 14.0,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+                Text(
+                  subtitle,
+                  style: TextStyle(
+                    color: Colors.black,
+                    fontSize: 11.0,
+                  ),
+                ),
+              ],
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+}
