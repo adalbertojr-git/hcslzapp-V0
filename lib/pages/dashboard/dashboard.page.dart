@@ -144,7 +144,6 @@ class _DashboardPageState extends State<DashboardPage> {
         children: <Widget>[
           Expanded(
             child: Container(color: Colors.deepOrange[300]),
-            //flex: 3,
           ),
           Expanded(
             child: Container(color: Colors.transparent),
