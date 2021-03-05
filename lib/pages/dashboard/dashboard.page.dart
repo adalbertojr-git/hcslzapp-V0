@@ -433,13 +433,6 @@ class _DashboardPageState extends State<DashboardPage> {
                       fontWeight: FontWeight.normal,
                     ),
                   ),
-/*                Text(
-                  'Population: 200}',
-                  style: TextStyle(
-                    fontSize: 11.0,
-                    fontWeight: FontWeight.normal,
-                  ),
-                ),*/
                 ],
               ),
               onTap: () {

@@ -1,10 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:hcslzapp/common/photo.image.provider.dart';
 import 'package:hcslzapp/components/button.dart';
 import 'package:hcslzapp/pages/dtc.code/dtc.code.access.page.dart';
 import 'package:hcslzapp/pages/dtc.code/dtc.code.list.page.dart';
-import 'package:hcslzapp/pages/partnership/partnership.list.page.dart';
-import 'dart:io';
 
 // ignore: must_be_immutable
 class DtcCodeDashboardPage extends StatelessWidget {
@@ -21,12 +18,12 @@ class DtcCodeDashboardPage extends StatelessWidget {
   ];
 
   List<IconData> _listAdmIcons = [
-    Icons.search,
+    Icons.error_outline_rounded,
     Icons.list_rounded,
   ];
 
   List<Widget> _listAdmWidgets = [
-    DtcCodeAccessPage(),
+    DtcCodeListPage(),
     DtcCodeListPage(),
   ];
 
@@ -79,7 +76,7 @@ class DtcCodeDashboardPage extends StatelessWidget {
           style: TextStyle(color: Colors.white60),
         ),
         trailing: CircleAvatar(
-          backgroundColor: Colors.white,
+          backgroundColor: Colors.lightBlueAccent,
           radius: 30.0,
           backgroundImage: AssetImage('assets/imgs/codigosdtc.png'),
         ),
@@ -92,11 +89,12 @@ class DtcCodeDashboardPage extends StatelessWidget {
             'Modelos 2000-2004',
             'Forma de acesso',
             Icons.motorcycle_outlined,
+            Colors.orange,
             onClick: () {
               Navigator.push(
                 _gContext,
                 MaterialPageRoute(
-                    builder: (_gContext) => DtcCodeListPage()),
+                    builder: (_gContext) => DtcCodeAccessPage()),
               );
             },
           ),
@@ -104,8 +102,13 @@ class DtcCodeDashboardPage extends StatelessWidget {
             'Modelos > 2005',
             'Forma de acesso',
             Icons.motorcycle_sharp,
+            Colors.white,
             onClick: () {
-              //_showContactsList(context);
+              Navigator.push(
+                _gContext,
+                MaterialPageRoute(
+                    builder: (_gContext) => DtcCodeAccessPage()),
+              );
             },
           ),
         ],
@@ -164,114 +167,14 @@ class DtcCodeDashboardPage extends StatelessWidget {
         ),
       );
 }
-/* get grid2 => Expanded(
-        child: Container(
-          padding: EdgeInsets.only(left: 16, right: 16, bottom: 16),
-          child: GridView.count(
-            crossAxisCount: 2,
-            childAspectRatio: 0.9,
-            children: <Widget>[
-              _GridButton(
-                  title: "Modelos 2000-2004",
-                  image: "assets/imgs/user.png",
-                  context: _gContext,
-                  onClick: () {
-                    Navigator.push(
-                      _gContext,
-                      MaterialPageRoute(
-                          builder: (gContext) => DtcCodeAccessPage()),
-                    );
-                  }),
-              _GridButton(
-                title: "Modelos > 2005",
-                image: "assets/imgs/financeiro.png",
-                context: _gContext,
-                onClick: () {
-                  Navigator.push(
-                    _gContext,
-                    MaterialPageRoute(
-                        builder: (gContext) => DtcCodeAccessPage()),
-                  );
-                },
-              ),
-              _GridButton(
-                title: "Códigos",
-                image: "assets/imgs/carteirad.png",
-                context: _gContext,
-                onClick: () {
-                  Navigator.push(
-                    _gContext,
-                    MaterialPageRoute(builder: (gContext) => DtcCodeListPage()),
-                  );
-                },
-              ),
-              _GridButton(
-                title: "Abreviaturas",
-                image: "assets/imgs/parcerias.png",
-                context: _gContext,
-                onClick: () {
-                  Navigator.push(
-                    _gContext,
-                    MaterialPageRoute(builder: (gContext) => DtcCodeListPage()),
-                  );
-                },
-              ),
-            ],
-          ),
-        ),
-      );
-}*/
-/*
-class _GridButton extends StatelessWidget {
-  _GridButton({this.title, this.image, this.context, this.onClick});
-
-  final String title;
-  final String image;
-  final BuildContext context;
-  final Color color = Colors.white10;
-  final Function onClick;
-
-  @override
-  Widget build(BuildContext context) {
-    return Card(
-      color: Colors.white,
-      elevation: 10,
-      child: InkWell(
-        onTap: () {
-          onClick();
-        },
-        splashColor: Colors.black,
-        child: Container(
-          decoration: BoxDecoration(
-            image: DecorationImage(
-              image: AssetImage(image),
-              fit: BoxFit.contain,
-            ),
-          ),
-          child: Align(
-            alignment: Alignment.bottomCenter,
-            child: Text(
-              title,
-              textAlign: TextAlign.center,
-              style: TextStyle(
-                fontSize: 9,
-                fontWeight: FontWeight.bold,
-              ),
-            ),
-          ),
-        ),
-      ),
-    );
-  } //build
-} //GridButton*/
-
 class _BarButton extends StatelessWidget {
   final String title;
   final String subtitle;
   final IconData icon;
+  final Color iconColor;
   final Function onClick; //callback
 
-  _BarButton(this.title, this.subtitle, this.icon, {@required this.onClick});
+  _BarButton(this.title, this.subtitle, this.icon, this.iconColor, {@required this.onClick});
 
   @override
   Widget build(BuildContext context) {
@@ -294,7 +197,7 @@ class _BarButton extends StatelessWidget {
               children: <Widget>[
                 Icon(
                   icon,
-                  color: Colors.orange,
+                  color: iconColor,//Colors.orange,
                   size: 50.0,
                 ),
                 Text(

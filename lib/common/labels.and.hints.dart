@@ -77,3 +77,8 @@ DigitalIdentity
 */
 const labelNameDigitalPayment = 'Nome';
 const labelBloodType = 'Tipo Sanguíneo';
+/*
+DTC Codes
+*/
+const labelDtcCode = 'Código DTC';
+const hintDtcCode = 'Digite qualquer parte do código para pesquisar';
