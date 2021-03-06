@@ -4,6 +4,7 @@ import 'package:hcslzapp/pages/dtc.code/dtc.code.access.oldmodels.page.dart';
 import 'package:hcslzapp/pages/dtc.code/dtc.code.list.page.dart';
 
 import 'dtc.code.abbreviation.list.page.dart';
+import 'dtc.code.access.newmodels.page.dart';
 
 // ignore: must_be_immutable
 class DtcCodeDashboardPage extends StatelessWidget {
@@ -88,7 +89,7 @@ class DtcCodeDashboardPage extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.center,
         children: <Widget>[
           _BarButton(
-            'Modelos 2000-2004',
+            'Até 2004',
             'Forma de acesso',
             Icons.motorcycle_outlined,
             Colors.orange,
@@ -101,7 +102,7 @@ class DtcCodeDashboardPage extends StatelessWidget {
             },
           ),
           _BarButton(
-            'Modelos > 2005',
+            'A partir de 2005',
             'Forma de acesso',
             Icons.motorcycle_sharp,
             Colors.white,
@@ -109,7 +110,7 @@ class DtcCodeDashboardPage extends StatelessWidget {
               Navigator.push(
                 _gContext,
                 MaterialPageRoute(
-                    builder: (_gContext) => DtcCodeAccessOldModelsPage()),
+                    builder: (_gContext) => DtcCodeAccessNewModelsPage()),
               );
             },
           ),
