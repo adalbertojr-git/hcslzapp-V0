@@ -33,7 +33,7 @@ abstract class DtcCodeAbbreviationListControllerBase with Store {
   }
 
   @action
-  setFilter(String value) => filter = value;
+  setFilter(String value) => filter = value.toUpperCase();
 
   @computed
   List<Abbreviation> get listFiltered {

@@ -31,7 +31,7 @@ abstract class DtcCodeListControllerBase with Store {
   }
 
   @action
-  setFilter(String value) => filter = value;
+  setFilter(String value) => filter = value.toUpperCase();
 
   @computed
   List<DtcCode> get listFiltered {
