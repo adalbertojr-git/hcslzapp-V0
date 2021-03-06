@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:hcslzapp/components/button.dart';
-import 'package:hcslzapp/pages/dtc.code/dtc.code.list.page.dart';
+import 'package:hcslzapp/components/top.margin.dart';
 
-class DtcCodeAccessPage extends StatelessWidget {
+class DtcCodeAccessOldModelsPage extends StatelessWidget {
   //@override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -18,37 +18,19 @@ class DtcCodeAccessPage extends StatelessWidget {
         height: MediaQuery.of(context).size.height,
         child: Form(
           child: SingleChildScrollView(
-              child: Column(
-            children: <Widget>[
-              SizedBox (
-                height: 20.0,
-              ),
-              Text(
-                'Como acessar?',
-                style: TextStyle(
-                  fontSize: 20.0,
-                ),
-              ),
-              SizedBox(
-                height: 10.0,
-              ),
-              _buildTexto(),
-            ],
-          )),
+            child: Column(
+              children: <Widget>[
+                TopMargin(),
+                _buildTexto(),
+              ],
+            ),
+          ),
         ),
       ),
+      floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
       floatingActionButton: Button(
-        icon: Icons.search,
-        onClick: () {
-          Navigator.push(
-            context,
-            MaterialPageRoute(
-              builder: (context) {
-                return DtcCodeListPage();
-              },
-            ),
-          );
-        },
+        icon: Icons.arrow_back,
+        onClick: () => Navigator.of(context).pop(),
       ),
     );
   }

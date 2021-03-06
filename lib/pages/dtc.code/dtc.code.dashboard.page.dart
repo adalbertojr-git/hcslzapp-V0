@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:hcslzapp/components/button.dart';
-import 'package:hcslzapp/pages/dtc.code/dtc.code.access.page.dart';
+import 'package:hcslzapp/pages/dtc.code/dtc.code.access.oldmodels.page.dart';
 import 'package:hcslzapp/pages/dtc.code/dtc.code.list.page.dart';
 
 import 'dtc.code.abbreviation.list.page.dart';
@@ -96,7 +96,7 @@ class DtcCodeDashboardPage extends StatelessWidget {
               Navigator.push(
                 _gContext,
                 MaterialPageRoute(
-                    builder: (_gContext) => DtcCodeAccessPage()),
+                    builder: (_gContext) => DtcCodeAccessOldModelsPage()),
               );
             },
           ),
@@ -109,7 +109,7 @@ class DtcCodeDashboardPage extends StatelessWidget {
               Navigator.push(
                 _gContext,
                 MaterialPageRoute(
-                    builder: (_gContext) => DtcCodeAccessPage()),
+                    builder: (_gContext) => DtcCodeAccessOldModelsPage()),
               );
             },
           ),
