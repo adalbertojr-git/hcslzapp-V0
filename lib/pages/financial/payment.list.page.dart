@@ -92,7 +92,7 @@ class _PaymentListPageState extends State<PaymentListPage> {
               textEditingController: _controller.nameCtrl,
               label: labelNamePayment,
               hint: hintNamePayment,
-              icon: Icons.person,
+              icon: Icons.search,
               inputType: TextInputType.text,
               onChanged: _controller.setFilter,
             ),

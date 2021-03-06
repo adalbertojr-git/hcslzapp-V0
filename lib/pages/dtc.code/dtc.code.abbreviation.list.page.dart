@@ -4,17 +4,19 @@ import 'package:hcslzapp/common/labels.and.hints.dart';
 import 'package:hcslzapp/components/button.dart';
 import 'package:hcslzapp/components/my.text.form.field.dart';
 import 'package:hcslzapp/components/top.margin.dart';
-import 'package:hcslzapp/controllers/dtc.code.list.controller.dart';
+import 'package:hcslzapp/controllers/dtc.code.abbreviation.list.controller.dart';
 
-class DtcCodeListPage extends StatefulWidget {
+class DtcCodeAbbreviationListPage extends StatefulWidget {
   @override
   State<StatefulWidget> createState() {
-    return DtcCodeListPageState();
+    return DtcCodeAbbreviationListPageState();
   }
 }
 
-class DtcCodeListPageState extends State<DtcCodeListPage> {
-  DtcCodeListController _controller = DtcCodeListController();
+class DtcCodeAbbreviationListPageState
+    extends State<DtcCodeAbbreviationListPage> {
+  DtcCodeAbbreviationListController _controller =
+      DtcCodeAbbreviationListController();
 
   @override
   void initState() {
@@ -57,8 +59,8 @@ class DtcCodeListPageState extends State<DtcCodeListPage> {
             TopMargin(),
             MyTextFormField(
               textEditingController: _controller.codeCtrl,
-              label: labelDtcCode,
-              hint: hintDtcCode,
+              label: labelAbbreviation,
+              hint: hintAbbreviation,
               icon: Icons.search,
               inputType: TextInputType.text,
               onChanged: _controller.setFilter,
@@ -83,21 +85,16 @@ class DtcCodeListPageState extends State<DtcCodeListPage> {
                         ],
                       ),
                       child: ListTile(
-                        isThreeLine: true,
                         title: Text(
                           _controller.listFiltered[i].code,
                           style: TextStyle(
                             fontWeight: FontWeight.bold,
                           ),
                         ),
-                        subtitle: Text(
-                          _controller.listFiltered[i].description +
-                              '\n\n' +
-                              _controller.listFiltered[i].group,
-                        ),
+                        subtitle: Text(_controller.listFiltered[i].description),
                         leading: CircleAvatar(
-                          child: Icon(Icons.error_outline_rounded),
-                          backgroundColor: Colors.red,
+                          child: Icon(Icons.check),
+                          backgroundColor: Colors.white,
                         ),
                       ),
                     );

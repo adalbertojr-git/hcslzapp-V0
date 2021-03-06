@@ -82,3 +82,5 @@ DTC Codes
 */
 const labelDtcCode = 'Código DTC';
 const hintDtcCode = 'Digite qualquer parte do código para pesquisar';
+const labelAbbreviation = 'Abreviatura';
+const hintAbbreviation = 'Digite qualquer parte da abreviatura para pesquisar';

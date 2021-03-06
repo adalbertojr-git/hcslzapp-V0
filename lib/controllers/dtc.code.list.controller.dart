@@ -21,8 +21,8 @@ abstract class DtcCodeListControllerBase with Store {
 
   get init {
     codes.clear();
-    List<DtcCodes> dtcCodesList = [
-      DtcCodes(
+    List<DtcCode> dtcCodesList = [
+      DtcCode(
           code: 'POO51 ',
           description: 'Heater Control Circuit 02 Sensor Low',
           group: 'Sensors and motor'),
@@ -34,20 +34,20 @@ abstract class DtcCodeListControllerBase with Store {
   setFilter(String value) => filter = value;
 
   @computed
-  List<DtcCodes> get listFiltered {
+  List<DtcCode> get listFiltered {
     if (filter.isEmpty) {
-      return List<DtcCodes>.from(codes);
+      return List<DtcCode>.from(codes);
     } else {
-      return List<DtcCodes>.from(
+      return List<DtcCode>.from(
           codes.where((element) => element.code.contains(filter)));
     }
   }
 }
 
-class DtcCodes {
+class DtcCode {
   String code;
   String description;
   String group;
 
-  DtcCodes({this.code, this.description, this.group});
+  DtcCode({this.code, this.description, this.group});
 }

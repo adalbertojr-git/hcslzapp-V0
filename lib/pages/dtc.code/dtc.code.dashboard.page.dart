@@ -3,6 +3,8 @@ import 'package:hcslzapp/components/button.dart';
 import 'package:hcslzapp/pages/dtc.code/dtc.code.access.page.dart';
 import 'package:hcslzapp/pages/dtc.code/dtc.code.list.page.dart';
 
+import 'dtc.code.abbreviation.list.page.dart';
+
 // ignore: must_be_immutable
 class DtcCodeDashboardPage extends StatelessWidget {
   BuildContext _gContext;
@@ -24,7 +26,7 @@ class DtcCodeDashboardPage extends StatelessWidget {
 
   List<Widget> _listAdmWidgets = [
     DtcCodeListPage(),
-    DtcCodeListPage(),
+    DtcCodeAbbreviationListPage(),
   ];
 
   @override

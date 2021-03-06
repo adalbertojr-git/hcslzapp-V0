@@ -96,6 +96,7 @@ class AssociatedListPageState extends State<AssociatedListPage> {
               textEditingController: _controller.nameCtrl,
               label: labelNamePayment,
               hint: hintNamePayment,
+              icon: Icons.search,
               inputType: TextInputType.text,
               onChanged: _controller.setFilter,
             ),
