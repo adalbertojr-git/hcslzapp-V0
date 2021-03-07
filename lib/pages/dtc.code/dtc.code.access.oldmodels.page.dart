@@ -31,7 +31,7 @@ class DtcCodeAccessOldModelsPage extends StatelessWidget {
                   child: _paragraphs,
                 ),
                 SizedBox(
-                  height: 50.0,
+                  height: 70.0,
                 ),
               ],
             ),

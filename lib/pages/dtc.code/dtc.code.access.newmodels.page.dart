@@ -31,7 +31,7 @@ class DtcCodeAccessNewModelsPage extends StatelessWidget {
                   child: _paragraphs,
                 ),
                 SizedBox(
-                  height: 50.0,
+                  height: 70.0,
                 ),
               ],
             ),
@@ -69,69 +69,78 @@ class DtcCodeAccessNewModelsPage extends StatelessWidget {
           children: <TextSpan>[
             TextSpan(
                 text:
-                    '2- Pressione o botão de reset do hodômetro e mantenha-o pressionado.\n\n'),
+                    '2- Pressione o botão de reset do hodômetro e mantenha-o pressionado.'
+                    'Para os modelos de 2014 ou mais recentes, pressione'
+                    'o botão TRIP este é o botão de alternância e de seleção.\n\n'),
             TextSpan(
                 text:
-                    '3- Gire a chave de ignição para Ignição e solte o botão de '
-                    'reinicialização do hodômetro.  A iluminação de fundo deve '
+                    '3- Gire o interruptor de ignição para Ignition e solte o '
+                    'botão de reset do odômetro ou o TRIP. A iluminação de fundo deve '
                     'acender, a agulha do velocímetro deve percorrer todo o seu '
                     'alcance e as lâmpadas indicadoras (bateria, segurança, '
                     'combustível baixo, verificar motor e cruzeiro) devem acender.  '
-                    'A palavra "diag" deve então aparecer.\n\n '),
+                    'A palavra "DIAG" deve aparecer.\n\n '),
             TextSpan(
                 text:
-                    '4 - Pressione o botão de reset do hodômetro uma vez e você '
+                    '4 - Pressione o botão de reset do hodômetro ou o TRIP uma vez e você '
                     'verá o menu de seleção "PSSP +" com o primeiro P piscando.\n\n '),
             TextSpan(
                 text:
                     '5 - Cada letra representa uma área do módulo de diagnóstico.  '
                     'O módulo que está piscando é o que você vai verificar. Para '
-                    'passar de uma letra (módulo) para a próxima, você pressiona '
-                    'o botão de reinicialização do hodômetro uma vez.  '
-                    '(de P para S para SP para t e de volta para P, etc.) \n\n'),
+                    'passar de uma letra (módulo) para a próxima, pressione '
+                    'o botão de reset do hodômetro ou o TRIP uma vez.  '
+                    '(de P para S, para SP, para T e de volta para P, etc.) \n\n'),
             TextSpan(
-                text: 'P = ECM/ICM (Módulo de Controle Eletrônico [EFI]/'
-                    'Módulo de Controle de Ignição [Carburadas])\n'
-                    'S = TSM/TSSM (Turn Signal/Turn Signal Security Module)\n'
-                    'SP = velocímetro\n'
-                    'T = tacômetro. \n\n'),
+                text: '* P \n'
+                    'ECM/ICM (Módulo de Controle Eletrônico [EFI]/'
+                    'Módulo de Controle de Ignição [Carburadas])\n\n'
+                    '* S \n'
+                    'TSM/TSSM (Módulo de Sinal (Setas)/Segurança)\n\n'
+                    '* SP \n'
+                    'Velocímetro\n\n'
+                    '* T\n'
+                    'Tacômetro. \n\n'),
             TextSpan(
-                text: '6 - Para obter o DTC dentro de uma área de diagnóstico, '
-                    'pressione e segure o botão de reset do hodômetro por 5 '
+                text: '6 - Para obter o DTC em uma área de diagnóstico, '
+                    'pressione e segure o botão de reset do hodômetro ou o TRIP por 5 '
                     'segundos e solte.  Se houver qualquer DTC, o código será '
-                    'exibido ou a palavra "nenhum" aparecerá se não houver DTC.  '
-                    'Pressione o botão de reinicialização do hodômetro '
+                    'exibido ou a palavra "NONE" aparecerá se não houver DTC.  '
+                    'Pressione o botão de reset do hodômetro ou o TRIP '
                     'novamente para visualizar os códigos adicionais, se houver. \n\n'),
             TextSpan(
-              text: '7 - Registre os códigos.\n\n',
+              text: '7 - Anote os códigos.\n\n',
             ),
             TextSpan(
                 text: '8 - Se os DTCs não forem apagados, pressione e solte o '
-                    'botão de reset do odômetro.  O número da peça do módulo '
+                    'botão de reset do odômetro ou o TRIP.  O número da peça '
+                    '(Part Number) [PNxxxxx-xx] do módulo com problema '
                     'será exibido.\n\n'),
             TextSpan(
                 text:
                     'NOTA: Para determinar se um código é atual ou histórico, '
                     'limpe o código exibido pressionando e segurando o botão de '
-                    'reinicialização do hodômetro (mais de 5 segundos) até '
-                    'CLEAR aparecer.  Solte o botão de reinicialização do odômetro.  '
-                    'DESLIGUE a chave de ignição.  Ligue sua motocicleta e desligue-a, '
-                    'em seguida, verifique novamente os DTCs, repetindo as etapas 1 a 9. '
-                    'Se o código for atual, ele reaparecerá.\n\n'),
+                    'reset do hodômetro ou o TRIP (mais de 5 segundos) até '
+                    'a palavra "CLEAR" aparecer.  Solte o botão de reset do '
+                    'odômetro ou o TRIP. Desligui a chave de ignição.  Ligue sua'
+                    'motocicleta e desligue-a. Em seguida, verifique novamente os '
+                    'DTCs, repetindo as etapas 1 a 9. Se o código for atual, '
+                    'ele reaparecerá.\n\n'),
             TextSpan(
-                text: '9 - Pressione e solte o botão de reset do odômetro para '
-                    'passar para o próximo módulo.\n\n'),
+                text:
+                    '9 - Pressione e solte o botão de reset do odômetro ou o TRIP '
+                    'para passar para o próximo módulo.\n\n'),
             TextSpan(
               text: '10 - Gire a chave de ignição para OFF.\n\n',
             ),
             TextSpan(
-                text:
-                    'Nos modelos não equipados com tacômetro, "No Rsp" aparecerá '
-                    'quando o identificador do tacômetro for selecionado.\n\n'),
+                text: 'Nos modelos não equipados com tacômetro, "NO RSP" (sem '
+                    'resposta) aparecerá quando o identificador do tacômetro '
+                    'for selecionado.\n\n'),
             TextSpan(
                 text:
-                    '"No Rsp" também aparecerá se a chave liga / desliga estiver '
-                    'na posição desligada ao executar este procedimento.'),
+                    '"NO RSP" também aparecerá se a chave ON/OFF estiver '
+                    'na posição OFF ao executar este procedimento.'),
           ],
         ),
       );

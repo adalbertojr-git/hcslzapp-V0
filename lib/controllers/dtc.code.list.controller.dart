@@ -23,7 +23,7 @@ abstract class DtcCodeListControllerBase with Store {
     codes.clear();
     List<DtcCode> dtcCodesList = [
       DtcCode(
-          code: 'POO51 ',
+          code: 'POO51',
           description: 'Heater Control Circuit 02 Sensor Low',
           group: 'Sensors and motor'),
     ];
