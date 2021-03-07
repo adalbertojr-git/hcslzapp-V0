@@ -90,10 +90,21 @@ class DtcCodeListPageState extends State<DtcCodeListPage> {
                             fontWeight: FontWeight.bold,
                           ),
                         ),
-                        subtitle: Text(
-                          _controller.listFiltered[i].description +
-                              '\n\n' +
-                              _controller.listFiltered[i].group,
+                        subtitle: Column(
+                          children: [
+                            Text(
+                              _controller.listFiltered[i].description,
+                              textAlign: TextAlign.justify,
+                            ),
+                            Container(
+                              alignment: Alignment.centerRight,
+                              child: Text('\n' +
+                                _controller.listFiltered[i].group,
+                                textAlign: TextAlign.left,
+                                style: TextStyle(fontSize: 11.0),
+                              ),
+                            ),
+                          ],
                         ),
                         leading: CircleAvatar(
                           child: Icon(Icons.error_outline_rounded),

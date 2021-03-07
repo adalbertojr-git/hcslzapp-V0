@@ -23,9 +23,35 @@ abstract class DtcCodeListControllerBase with Store {
     codes.clear();
     List<DtcCode> dtcCodesList = [
       DtcCode(
-          code: 'POO51',
-          description: 'Heater Control Circuit 02 Sensor Low',
-          group: 'Sensors and motor'),
+          code: 'P0031',
+          description:
+              'SONDA LAMBDA DIANTEIRA HO2S DESCONECTADO OU COM TENSÃO ABAIXO DO NORMAL.',
+          group: 'Monitorado pelo ECM'),
+      DtcCode(
+          code: 'P0032',
+          description:
+              'SONDA LAMBDA DIANTEIRA HO2S EM CURTO OU COM TENSÃO ACIMA DO NORMAL..',
+          group: 'Monitorado pelo ECM'),
+      DtcCode(
+          code: 'P0051',
+          description:
+              'SONDA LAMBDA TRASEIRA HO2S DESCONECTADA OU COM TENSÃO ABAIXO DO NORMAL..',
+          group: 'Monitorado pelo ECM'),
+      DtcCode(
+          code: 'P0052',
+          description:
+              'SONDA LAMBDA TRASEIRA HO2S EM CURTO OU COM TENSÃO ACIMA DO NORMAL.',
+          group: 'Monitorado pelo ECM'),
+      DtcCode(
+          code: 'P0072',
+          description:
+              'SENSOR AAT COM TENSÃO ABAIXO DO NORMAL.',
+          group: 'Monitorado pelo ECM'),
+      DtcCode(
+          code: 'P0073',
+          description:
+              'SENSOR AAT COM TENSÃO ACIMA DO NORMAL OU DESCONECTADO.',
+          group: 'Monitorado pelo ECM'),
     ];
     codes.addAll(dtcCodesList);
   }

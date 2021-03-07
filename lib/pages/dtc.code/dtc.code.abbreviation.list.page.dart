@@ -91,7 +91,9 @@ class DtcCodeAbbreviationListPageState
                             fontWeight: FontWeight.bold,
                           ),
                         ),
-                        subtitle: Text(_controller.listFiltered[i].description),
+                        subtitle: Text(_controller.listFiltered[i].description +
+                            '\n' +
+                            _controller.listFiltered[i].translation),
                         leading: CircleAvatar(
                           child: Icon(Icons.check),
                           backgroundColor: Colors.white,
