@@ -25,32 +25,32 @@ abstract class DtcCodeListControllerBase with Store {
       DtcCode(
           code: 'P0031',
           description:
-              'SONDA LAMBDA DIANTEIRA HO2S DESCONECTADO OU COM TENSÃO ABAIXO DO NORMAL.',
+              'Sonda Lambda Dianteira HO2S Desconectado Ou Com Tensão Abaixo Do Normal',
           group: 'Monitorado pelo ECM'),
       DtcCode(
           code: 'P0032',
           description:
-              'SONDA LAMBDA DIANTEIRA HO2S EM CURTO OU COM TENSÃO ACIMA DO NORMAL..',
+              'Sonda Lambda Dianteira HO2S Em Curto Ou Com Tensão Acima Do Normal',
           group: 'Monitorado pelo ECM'),
       DtcCode(
           code: 'P0051',
           description:
-              'SONDA LAMBDA TRASEIRA HO2S DESCONECTADA OU COM TENSÃO ABAIXO DO NORMAL..',
+              'Sonda Lambda Traseira HO2S Desconectada Ou Com Tensão Abaixo Do Normal',
           group: 'Monitorado pelo ECM'),
       DtcCode(
           code: 'P0052',
           description:
-              'SONDA LAMBDA TRASEIRA HO2S EM CURTO OU COM TENSÃO ACIMA DO NORMAL.',
+              'Sonda Lambda Traseira HO2S Em Curto Ou Com Tensão Acima Do Normal',
           group: 'Monitorado pelo ECM'),
       DtcCode(
           code: 'P0072',
           description:
-              'SENSOR AAT COM TENSÃO ABAIXO DO NORMAL.',
+              'Sensor AAT Com Tensão Abaixo Do Normal',
           group: 'Monitorado pelo ECM'),
       DtcCode(
           code: 'P0073',
           description:
-              'SENSOR AAT COM TENSÃO ACIMA DO NORMAL OU DESCONECTADO.',
+              'Sensor AAT Com Tensão Acima Do Normal Ou Desconectado',
           group: 'Monitorado pelo ECM'),
     ];
     codes.addAll(dtcCodesList);

@@ -92,9 +92,13 @@ class DtcCodeListPageState extends State<DtcCodeListPage> {
                         ),
                         subtitle: Column(
                           children: [
-                            Text(
-                              _controller.listFiltered[i].description,
-                              textAlign: TextAlign.justify,
+                            Container(
+                              color: Colors.white54,
+                              alignment: Alignment.centerLeft,
+                              child: Text(
+                                _controller.listFiltered[i].description,
+                                textAlign: TextAlign.justify,
+                              ),
                             ),
                             Container(
                               alignment: Alignment.centerRight,

@@ -25,175 +25,175 @@ abstract class DtcCodeAbbreviationListControllerBase with Store {
       Abbreviation(
           code: 'ABS',
           description: 'Anti-Lock Braking System',
-          translation: 'SISTEMA DE FREIO ANTI-BLOQUEIO'),
+          translation: 'Sistema De Freio Anti-Bloqueio'),
       Abbreviation(
           code: 'ACR',
           description: 'Automatic Compression Release',
-          translation: 'LIBERAÇÃO AUTOMÁTICA DE COMPRESSÃO'),
+          translation: 'Liberação Automática de Compressão'),
       Abbreviation(
           code: 'AFR',
           description: 'Air Fuel Ratio',
-          translation: 'TAXA DE COMBUSTÍVEL DO AR'),
+          translation: 'Taxa De Combustível do Ar'),
       Abbreviation(
           code: 'AIS',
           description: 'Active Intake Solenoid',
-          translation: 'SOLENOIDE DE ADMISSÃO ATIVO'),
+          translation: 'Solenoide de Admissão Ativo'),
       Abbreviation(
           code: 'ATS',
           description: 'Air Temperature Sensor',
-          translation: 'SENSOR DE TEMPERATURA DO AR'),
+          translation: 'Sensor de Temperatura do Ar'),
       Abbreviation(
           code: 'BAS',
           description: 'Bank Angle Sensor',
-          translation: 'SENSOR DE ÂNGULO DO BANCO'),
+          translation: 'Sensor de Ângulo do Banco'),
       Abbreviation(
           code: 'BCM',
           description: 'Body Control Module',
-          translation: 'MÓDULO DE CONTROLE CORPORAL'),
+          translation: 'Módulo de Controle Corporal'),
       Abbreviation(
           code: 'CAN',
           description: 'Controller Area Network',
-          translation: 'REDE DA ÁREA DO CONTROLADOR'),
+          translation: 'Rede da Área do Controlador'),
       Abbreviation(
           code: 'CCM',
           description: 'Cruise Control Module',
-          translation: 'MÓDULO DE CONTROLE DE CRUZEIRO'),
+          translation: 'Módulo de Controle de Cruzeiro'),
       Abbreviation(
           code: 'CKP',
           description: 'Crank Position Sensor',
-          translation: 'SENSOR DE POSIÇÃO DE MANIVELA'),
+          translation: 'Sensor de Posição de Manivela'),
       Abbreviation(
           code: 'DLC',
           description: 'Datalink Connector',
-          translation: 'CONECTOR DATALINK'),
+          translation: 'Conector Datalink'),
       Abbreviation(
           code: 'DTC',
           description: 'Diagnostic Trouble Codes',
-          translation: 'CÓDIGOS DE PROBLEMAS DE DIAGNÓSTICO'),
+          translation: 'Códigos de Diagnóstico de Problemas'),
       Abbreviation(
           code: 'ECM',
           description: 'Electronic Control Module',
-          translation: 'MÓDULO DE CONTROLE ELETRÔNICO'),
+          translation: 'Módulo de Controle Eletrônico'),
       Abbreviation(
           code: 'ECT',
           description: 'Engine Coolant Temperature',
-          translation: 'TEMPERATURA DO LÍQUIDO DE ARREFECIMENTO DO MOTOR'),
+          translation: 'Temperatura do Líquido de Arrefecimento do Motor'),
       Abbreviation(
           code: 'ECU',
           description: 'Electronic Control Unit',
-          translation: 'UNIDADE DE CONTROLE ELETRÔNICO'),
+          translation: 'Unidade de Controle Eletrônico'),
       Abbreviation(
           code: 'EFI',
           description: 'Electronic Fuel Injection',
-          translation: 'INJEÇÃO ELETRÔNICA DE COMBUSTÍVEL'),
+          translation: 'Injeção Eletrônica de Combustível'),
       Abbreviation(
           code: 'EFP',
           description: 'Electronic Fuel Pump',
-          translation: 'BOMBA DE COMBUSTÍVEL ELETRÔNICA'),
+          translation: 'Bomba Eletrônica de Combustível'),
       Abbreviation(
           code: 'ET',
           description: 'Engine Temperature Sensor',
-          translation: 'SENSOR DE TEMPERATURA DO MOTOR'),
+          translation: 'Sensor de Temperatura do Motor'),
       Abbreviation(
           code: 'FI',
           description: 'Fuel Injectors',
-          translation: 'INJETORES DE COMBUSTÍVEL'),
+          translation: 'Injetores de Combustível'),
       Abbreviation(
           code: 'FPR',
           description: 'Fuel Pressure regulator',
-          translation: 'REGULADOR DE PRESSÃO DE COMBUSTÍVEL'),
+          translation: 'Regulador de Pressão de Combustível'),
       Abbreviation(
           code: 'H-DSSS',
           description: 'Harley-Davidson Smart Security System',
-          translation: 'SISTEMA DE SEGURANÇA INTELIGENTE HARLEY-DAVIDSON'),
+          translation: 'Sistema de Segurança Inteligente Harley-Davidson'),
       Abbreviation(
           code: 'HCU',
           description: 'Hydraulic Control Unit, ABS',
-          translation: 'UNIDADE DE CONTROLE HIDRÁULICA, ABS'),
+          translation: 'Unidade de Controle Hidráulica, ABS'),
       Abbreviation(
           code: 'HFSM',
           description: 'Hands Free Security Module',
-          translation: 'MÓDULO DE SEGURANÇA MÃOS LIVRES'),
+          translation: 'Módulo de Segurança Mãos Livres'),
       Abbreviation(
           code: 'HO2S',
           description: 'Heated Oxygen Sensor',
-          translation: 'SENSOR DE OXIGÊNIO AQUECIDO'),
+          translation: 'Sensor de Oxigênio Aquecido'),
       Abbreviation(
           code: 'IAC',
           description: 'Idle Air Control actuator',
-          translation: 'ATUADOR DE CONTROLE DE AR OCIOSO'),
+          translation: 'Atuador de Controle de Ar Ocioso'),
       Abbreviation(
           code: 'IAT',
           description: 'Intake Air Temperature sensor',
-          translation: 'SENSOR DE TEMPERATURA DO AR DE ADMISSÃO'),
+          translation: 'Sensor de Temperatura do Ar de Admissão'),
       Abbreviation(
           code: 'ICM',
           description: 'Ignition Control Module',
-          translation: 'MÓDULO DE CONTROLE DE IGNIÇÃO'),
+          translation: 'Módulo de Controle de Ignição'),
       Abbreviation(
           code: 'IMAP',
           description: 'MAP + IAT in one unit',
-          translation: 'MAP + IAT EM UMA UNIDADE'),
+          translation: 'MAP + IAT em uma Unidade'),
       Abbreviation(
           code: 'ISS',
           description: 'Ion Sensing System',
-          translation: 'SISTEMA ION SENSING'),
+          translation: 'Sistema Ion Sensing'),
       Abbreviation(
           code: 'JSS',
           description: 'Jiffy Stand Sensor',
-          translation: 'SENSOR DE SUPORTE DO PEZINHO'),
+          translation: 'Sensor de Suporte do Pezinho'),
       Abbreviation(
           code: 'LHCM',
           description: 'Left Hand Control Module',
-          translation: 'MÓDULO DE CONTROLE DA MÃO ESQUERDA'),
+          translation: 'Módulo de Controle da Mão Esquerda'),
       Abbreviation(
           code: 'MAP',
           description: 'Manifold Absolute Pressure Sensor',
-          translation: 'SENSOR DE PRESSÃO ABSOLUTA DO MANIFOLD'),
+          translation: 'Sensor de Pressão Absoluta do Manifold'),
       Abbreviation(
           code: 'MHR',
           description: 'Right Hand Control Module',
-          translation: 'MÓDULO DE CONTROLE DA MÃO DIREITA'),
+          translation: 'Módulo de Controle da Mão Direita'),
       Abbreviation(
           code: 'RCM',
           description: 'Reverse Control Module',
-          translation: 'MÓDULO DE CONTROLE REVERSO'),
+          translation: 'Módulo de Controle Reverso'),
       Abbreviation(
           code: 'TCA',
           description: 'Throttle Control Actuato',
-          translation: 'ATUADOR DE CONTROLE DE ACELERAÇÃO'),
+          translation: 'Atuador de Controle de Aceleração'),
       Abbreviation(
           code: 'TGS',
           description: 'Twist Grip Sensor',
-          translation: 'SENSOR TWIST GRIP'),
+          translation: 'Sensor Twist Grip'),
       Abbreviation(
           code: 'TMAP',
           description: 'Intake Air Temperature/Manifold Absolute Pressure equipment',
-          translation: 'EQUIPAMENTO DE PRESSÃO ABSOLUTA DO AR DE ADMISSÃO'),
+          translation: 'Equipamento de Pressão Absoluta do Ar de Admissão'),
       Abbreviation(
           code: 'TPS',
           description: 'Throttle Position Sensor',
-          translation: 'SENSOR DE POSIÇÃO DO ACELERADOR'),
+          translation: 'Sensor de Posição do Acelerador'),
       Abbreviation(
           code: 'TSM/TSSM',
           description: 'Turn Signal/Turn Signal Security Module',
-          translation: 'SETA/MÓDULO DE SEGURANÇA DE SINALIZAÇÃO (TRIANGULO)'),
+          translation: 'Seta/Módulo se Segurança De Sinalização (Triângulo)'),
       Abbreviation(
           code: 'VE',
           description: 'Volume Efficiency',
-          translation: 'EFICIÊNCIA DE VOLUME'),
+          translation: 'Eficiência de Volume'),
       Abbreviation(
           code: 'VIN',
           description: 'Vehicle identification number',
-          translation: 'NÚMERO DE IDENTIFICAÇÃO DO VEÍCULO (CHASSI)'),
+          translation: 'Número de Identificação do Veículo (Chassis)'),
       Abbreviation(
           code: 'VSS',
           description: 'Vehicle Speed Sensor',
-          translation: 'SENSOR DE VELOCIDADE DO VEÍCULO'),
+          translation: 'Sensor de Velocidade do Veículo'),
       Abbreviation(
           code: 'WSS',
           description: 'Wheel Speed Sensor',
-          translation: 'SENSOR DE VELOCIDADE DA RODA'),
+          translation: 'Sensor De Velocidade da Roda'),
     ];
     abbreviations.addAll(abbreviationsList);
   }

@@ -91,9 +91,23 @@ class DtcCodeAbbreviationListPageState
                             fontWeight: FontWeight.bold,
                           ),
                         ),
-                        subtitle: Text(_controller.listFiltered[i].description +
-                            '\n' +
-                            _controller.listFiltered[i].translation),
+                        subtitle: Column(
+                          children: [
+                            Container(
+                              alignment: Alignment.centerLeft,
+                              child: Text(
+                                _controller.listFiltered[i].description,
+                                style: TextStyle(fontStyle: FontStyle.italic),
+                              ),
+                            ),
+                            Container(
+                              color: Colors.white54,
+                              alignment: Alignment.centerLeft,
+                              child: Text(_controller.listFiltered[i].translation,
+                              ),
+                            ),
+                          ],
+                        ),
                         leading: CircleAvatar(
                           child: Icon(Icons.check),
                           backgroundColor: Colors.white,
