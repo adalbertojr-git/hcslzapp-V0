@@ -104,6 +104,7 @@ class DtcCodeAbbreviationListPageState
                               color: Colors.white54,
                               alignment: Alignment.centerLeft,
                               child: Text(_controller.listFiltered[i].translation,
+                                style: TextStyle(color: Colors.black),
                               ),
                             ),
                           ],

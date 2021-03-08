@@ -1,5 +1,5 @@
-import 'package:flutter/cupertino.dart';
-import 'package:hcslzapp/models/dtc.code.ecm.dart';
+import 'package:flutter/material.dart';
+import 'package:hcslzapp/models/dtc.code.dart';
 import 'package:mobx/mobx.dart';
 
 part 'dtc.code.list.controller.g.dart';
@@ -19,18 +19,20 @@ abstract class DtcCodeListControllerBase with Store {
 
   get init {
     codes.clear();
-    codes.addAll(DtcCodeECM().load);
+    codes.addAll(DtcCode().loadECMList);
+    codes.addAll(DtcCode().loadABSList);
+    codes.addAll(DtcCode().loadBCMList);
   }
 
   @action
   setFilter(String value) => filter = value.toUpperCase();
 
   @computed
-  List<DtcCodeECM> get listFiltered {
+  List<DtcCode> get listFiltered {
     if (filter.isEmpty) {
-      return List<DtcCodeECM>.from(codes);
+      return List<DtcCode>.from(codes);
     } else {
-      return List<DtcCodeECM>.from(
+      return List<DtcCode>.from(
           codes.where((element) => element.code.contains(filter)));
     }
   }

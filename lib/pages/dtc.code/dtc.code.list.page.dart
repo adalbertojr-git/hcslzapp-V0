@@ -83,7 +83,6 @@ class DtcCodeListPageState extends State<DtcCodeListPage> {
                         ],
                       ),
                       child: ListTile(
-                        isThreeLine: true,
                         title: Text(
                           _controller.listFiltered[i].code,
                           style: TextStyle(
@@ -98,6 +97,7 @@ class DtcCodeListPageState extends State<DtcCodeListPage> {
                               child: Text(
                                 _controller.listFiltered[i].description,
                                 textAlign: TextAlign.justify,
+                                style: TextStyle(color: Colors.black),
                               ),
                             ),
                             Container(
@@ -105,7 +105,7 @@ class DtcCodeListPageState extends State<DtcCodeListPage> {
                               child: Text('\n' +
                                 _controller.listFiltered[i].group,
                                 textAlign: TextAlign.left,
-                                style: TextStyle(fontSize: 11.0),
+
                               ),
                             ),
                           ],
