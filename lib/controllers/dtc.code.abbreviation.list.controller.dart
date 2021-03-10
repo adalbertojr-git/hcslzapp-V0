@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:hcslzapp/models/dtc.code.abbreviation.dart';
+import 'package:hcslzapp/repositories/dtc.code.abbreviation.repo.dart';
 import 'package:mobx/mobx.dart';
 
 part 'dtc.code.abbreviation.list.controller.g.dart';
@@ -12,15 +13,38 @@ abstract class DtcCodeAbbreviationListControllerBase with Store {
   var codeCtrl = TextEditingController();
 
   @observable
+  bool isHidedButton = true;
+
+  @observable
   ObservableList abbreviations = [].asObservable();
+
+  @observable
+  DtcCodeAbbreviationRepo _dtcCodeAbbreviationRepo = DtcCodeAbbreviationRepo();
+
+  @observable
+  String errorMsg;
+
+  @observable
+  Future<List<DtcCodeAbbreviation>> future;
 
   @observable
   String filter = '';
 
   get init {
     abbreviations.clear();
-    abbreviations.addAll(DtcCodeAbbreviation().load);
   }
+
+  @action
+  bool setButtonVisibilty() => isHidedButton = !isHidedButton;
+
+  @action
+  Future findAll() =>
+      ObservableFuture(_dtcCodeAbbreviationRepo.findAll().then((value) => value))
+          .catchError((e) {
+        errorMsg = "${e.message}";
+      }, test: (e) => e is Exception);
+
+  Future<List<DtcCodeAbbreviation>> getFuture() => future = findAll();
 
   @action
   setFilter(String value) => filter = value.toUpperCase();

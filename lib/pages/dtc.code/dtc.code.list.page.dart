@@ -2,9 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:hcslzapp/common/labels.and.hints.dart';
 import 'package:hcslzapp/components/button.dart';
+import 'package:hcslzapp/components/centered.message.dart';
 import 'package:hcslzapp/components/my.text.form.field.dart';
+import 'package:hcslzapp/components/progress.dart';
 import 'package:hcslzapp/components/top.margin.dart';
 import 'package:hcslzapp/controllers/dtc.code.list.controller.dart';
+import 'package:hcslzapp/models/dtc.code.dart';
 
 class DtcCodeListPage extends StatefulWidget {
   @override
@@ -18,30 +21,59 @@ class DtcCodeListPageState extends State<DtcCodeListPage> {
 
   @override
   void initState() {
-    _controller.init;
+    _controller.getFuture().then((value) {
+      if (value != null && value.isNotEmpty) {
+        _controller.setButtonVisibilty();
+      }
+    });
     super.initState();
   }
 
   @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      body: Container(
-          decoration: BoxDecoration(
-            gradient: LinearGradient(
-              colors: [Colors.white30, Colors.deepOrange],
-              begin: FractionalOffset.topLeft,
-              end: FractionalOffset.bottomRight,
-            ),
+  Widget build(BuildContext context) => Observer(
+        builder: (_) => Scaffold(
+          body: FutureBuilder<List<DtcCode>>(
+            future: _controller.future,
+            builder: (context, snapshot) {
+              switch (snapshot.connectionState) {
+                case ConnectionState.none:
+                  break;
+                case ConnectionState.waiting:
+                  return Progress();
+                case ConnectionState.active:
+                  break;
+                default:
+                  if (snapshot.hasError) {
+                    return CenteredMessage(snapshot.error.toString());
+                  } else {
+                    if (snapshot.data == null)
+                      return CenteredMessage(
+                        _controller.errorMsg,
+                      );
+                    if (snapshot.data.length > 0) {
+                      _controller.init;
+                      _controller.codes.addAll(snapshot.data);
+                      return _widgets();
+                    } else
+                      return CenteredMessage(
+                        'Não existem códigos DTC cadastrados.',
+                      );
+                  }
+              } //switch (snapshot.connectionState)
+              return CenteredMessage(
+                'Houve um erro desconhecido ao executar a transação.',
+              );
+            },
           ),
-          height: MediaQuery.of(context).size.height,
-          child: _widgets()),
-      floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
-      floatingActionButton: Button(
-        icon: Icons.arrow_back,
-        onClick: () => Navigator.of(context).pop(),
-      ),
-    );
-  }
+          floatingActionButtonLocation:
+              FloatingActionButtonLocation.centerFloat,
+          floatingActionButton: _controller.isHidedButton
+              ? null
+              : Button(
+                  icon: Icons.arrow_back,
+                  onClick: () => Navigator.of(context).pop()),
+        ),
+      );
 
   _widgets() => Container(
         decoration: BoxDecoration(
@@ -102,10 +134,10 @@ class DtcCodeListPageState extends State<DtcCodeListPage> {
                             ),
                             Container(
                               alignment: Alignment.centerRight,
-                              child: Text('\n' +
-                                _controller.listFiltered[i].group,
+                              child: Text(
+                                '\n' +
+                                    _getGroup(_controller.listFiltered[i].code),
                                 textAlign: TextAlign.left,
-
                               ),
                             ),
                           ],
@@ -124,4 +156,15 @@ class DtcCodeListPageState extends State<DtcCodeListPage> {
           ],
         ),
       );
+
+  String _getGroup(String code) {
+    if (code.startsWith('P'))
+      return 'Problema monitorado pela ECM';
+    else if (code.startsWith('C'))
+      return 'Problema com ABS';
+    else if (code.startsWith('B'))
+      return 'Problema definido por Rádio, Instrumentos e BCM';
+    else
+      return 'Problema de comunicação com os módulos';
+  }
 }

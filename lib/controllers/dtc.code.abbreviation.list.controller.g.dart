@@ -34,6 +34,22 @@ mixin _$DtcCodeAbbreviationListController
     });
   }
 
+  final _$isHidedButtonAtom =
+      Atom(name: 'DtcCodeAbbreviationListControllerBase.isHidedButton');
+
+  @override
+  bool get isHidedButton {
+    _$isHidedButtonAtom.reportRead();
+    return super.isHidedButton;
+  }
+
+  @override
+  set isHidedButton(bool value) {
+    _$isHidedButtonAtom.reportWrite(value, super.isHidedButton, () {
+      super.isHidedButton = value;
+    });
+  }
+
   final _$abbreviationsAtom =
       Atom(name: 'DtcCodeAbbreviationListControllerBase.abbreviations');
 
@@ -47,6 +63,55 @@ mixin _$DtcCodeAbbreviationListController
   set abbreviations(ObservableList<dynamic> value) {
     _$abbreviationsAtom.reportWrite(value, super.abbreviations, () {
       super.abbreviations = value;
+    });
+  }
+
+  final _$_dtcCodeAbbreviationRepoAtom = Atom(
+      name: 'DtcCodeAbbreviationListControllerBase._dtcCodeAbbreviationRepo');
+
+  @override
+  DtcCodeAbbreviationRepo get _dtcCodeAbbreviationRepo {
+    _$_dtcCodeAbbreviationRepoAtom.reportRead();
+    return super._dtcCodeAbbreviationRepo;
+  }
+
+  @override
+  set _dtcCodeAbbreviationRepo(DtcCodeAbbreviationRepo value) {
+    _$_dtcCodeAbbreviationRepoAtom
+        .reportWrite(value, super._dtcCodeAbbreviationRepo, () {
+      super._dtcCodeAbbreviationRepo = value;
+    });
+  }
+
+  final _$errorMsgAtom =
+      Atom(name: 'DtcCodeAbbreviationListControllerBase.errorMsg');
+
+  @override
+  String get errorMsg {
+    _$errorMsgAtom.reportRead();
+    return super.errorMsg;
+  }
+
+  @override
+  set errorMsg(String value) {
+    _$errorMsgAtom.reportWrite(value, super.errorMsg, () {
+      super.errorMsg = value;
+    });
+  }
+
+  final _$futureAtom =
+      Atom(name: 'DtcCodeAbbreviationListControllerBase.future');
+
+  @override
+  Future<List<DtcCodeAbbreviation>> get future {
+    _$futureAtom.reportRead();
+    return super.future;
+  }
+
+  @override
+  set future(Future<List<DtcCodeAbbreviation>> value) {
+    _$futureAtom.reportWrite(value, super.future, () {
+      super.future = value;
     });
   }
 
@@ -70,6 +135,31 @@ mixin _$DtcCodeAbbreviationListController
       ActionController(name: 'DtcCodeAbbreviationListControllerBase');
 
   @override
+  bool setButtonVisibilty() {
+    final _$actionInfo =
+        _$DtcCodeAbbreviationListControllerBaseActionController.startAction(
+            name: 'DtcCodeAbbreviationListControllerBase.setButtonVisibilty');
+    try {
+      return super.setButtonVisibilty();
+    } finally {
+      _$DtcCodeAbbreviationListControllerBaseActionController
+          .endAction(_$actionInfo);
+    }
+  }
+
+  @override
+  Future<dynamic> findAll() {
+    final _$actionInfo = _$DtcCodeAbbreviationListControllerBaseActionController
+        .startAction(name: 'DtcCodeAbbreviationListControllerBase.findAll');
+    try {
+      return super.findAll();
+    } finally {
+      _$DtcCodeAbbreviationListControllerBaseActionController
+          .endAction(_$actionInfo);
+    }
+  }
+
+  @override
   dynamic setFilter(String value) {
     final _$actionInfo = _$DtcCodeAbbreviationListControllerBaseActionController
         .startAction(name: 'DtcCodeAbbreviationListControllerBase.setFilter');
@@ -85,7 +175,10 @@ mixin _$DtcCodeAbbreviationListController
   String toString() {
     return '''
 codeCtrl: ${codeCtrl},
+isHidedButton: ${isHidedButton},
 abbreviations: ${abbreviations},
+errorMsg: ${errorMsg},
+future: ${future},
 filter: ${filter},
 listFiltered: ${listFiltered}
     ''';

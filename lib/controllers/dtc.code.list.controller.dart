@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:hcslzapp/models/dtc.code.dart';
+import 'package:hcslzapp/repositories/dtc.code.repo.dart';
 import 'package:mobx/mobx.dart';
 
 part 'dtc.code.list.controller.g.dart';
@@ -12,17 +13,38 @@ abstract class DtcCodeListControllerBase with Store {
   var codeCtrl = TextEditingController();
 
   @observable
+  bool isHidedButton = true;
+
+  @observable
   ObservableList codes = [].asObservable();
+
+  @observable
+  DtcCodeRepo _dtcCodeRepo = DtcCodeRepo();
+
+  @observable
+  String errorMsg;
+
+  @observable
+  Future<List<DtcCode>> future;
 
   @observable
   String filter = '';
 
   get init {
     codes.clear();
-    codes.addAll(DtcCode().loadECMList);
-    codes.addAll(DtcCode().loadABSList);
-    codes.addAll(DtcCode().loadBCMList);
   }
+
+  @action
+  bool setButtonVisibilty() => isHidedButton = !isHidedButton;
+
+  @action
+  Future findAll() =>
+      ObservableFuture(_dtcCodeRepo.findAll().then((value) => value))
+          .catchError((e) {
+        errorMsg = "${e.message}";
+      }, test: (e) => e is Exception);
+
+  Future<List<DtcCode>> getFuture() => future = findAll();
 
   @action
   setFilter(String value) => filter = value.toUpperCase();

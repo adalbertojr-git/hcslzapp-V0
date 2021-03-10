@@ -35,10 +35,6 @@ abstract class AssociatedListControllerBase with Store {
   String filter = '';
 
   get init {
-    _initLists;
-  }
-
-  get _initLists {
     associateds.clear();
   }
 

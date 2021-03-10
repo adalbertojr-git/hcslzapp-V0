@@ -32,6 +32,22 @@ mixin _$DtcCodeListController on DtcCodeListControllerBase, Store {
     });
   }
 
+  final _$isHidedButtonAtom =
+      Atom(name: 'DtcCodeListControllerBase.isHidedButton');
+
+  @override
+  bool get isHidedButton {
+    _$isHidedButtonAtom.reportRead();
+    return super.isHidedButton;
+  }
+
+  @override
+  set isHidedButton(bool value) {
+    _$isHidedButtonAtom.reportWrite(value, super.isHidedButton, () {
+      super.isHidedButton = value;
+    });
+  }
+
   final _$codesAtom = Atom(name: 'DtcCodeListControllerBase.codes');
 
   @override
@@ -44,6 +60,52 @@ mixin _$DtcCodeListController on DtcCodeListControllerBase, Store {
   set codes(ObservableList<dynamic> value) {
     _$codesAtom.reportWrite(value, super.codes, () {
       super.codes = value;
+    });
+  }
+
+  final _$_dtcCodeRepoAtom =
+      Atom(name: 'DtcCodeListControllerBase._dtcCodeRepo');
+
+  @override
+  DtcCodeRepo get _dtcCodeRepo {
+    _$_dtcCodeRepoAtom.reportRead();
+    return super._dtcCodeRepo;
+  }
+
+  @override
+  set _dtcCodeRepo(DtcCodeRepo value) {
+    _$_dtcCodeRepoAtom.reportWrite(value, super._dtcCodeRepo, () {
+      super._dtcCodeRepo = value;
+    });
+  }
+
+  final _$errorMsgAtom = Atom(name: 'DtcCodeListControllerBase.errorMsg');
+
+  @override
+  String get errorMsg {
+    _$errorMsgAtom.reportRead();
+    return super.errorMsg;
+  }
+
+  @override
+  set errorMsg(String value) {
+    _$errorMsgAtom.reportWrite(value, super.errorMsg, () {
+      super.errorMsg = value;
+    });
+  }
+
+  final _$futureAtom = Atom(name: 'DtcCodeListControllerBase.future');
+
+  @override
+  Future<List<DtcCode>> get future {
+    _$futureAtom.reportRead();
+    return super.future;
+  }
+
+  @override
+  set future(Future<List<DtcCode>> value) {
+    _$futureAtom.reportWrite(value, super.future, () {
+      super.future = value;
     });
   }
 
@@ -66,6 +128,28 @@ mixin _$DtcCodeListController on DtcCodeListControllerBase, Store {
       ActionController(name: 'DtcCodeListControllerBase');
 
   @override
+  bool setButtonVisibilty() {
+    final _$actionInfo = _$DtcCodeListControllerBaseActionController
+        .startAction(name: 'DtcCodeListControllerBase.setButtonVisibilty');
+    try {
+      return super.setButtonVisibilty();
+    } finally {
+      _$DtcCodeListControllerBaseActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
+  Future<dynamic> findAll() {
+    final _$actionInfo = _$DtcCodeListControllerBaseActionController
+        .startAction(name: 'DtcCodeListControllerBase.findAll');
+    try {
+      return super.findAll();
+    } finally {
+      _$DtcCodeListControllerBaseActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
   dynamic setFilter(String value) {
     final _$actionInfo = _$DtcCodeListControllerBaseActionController
         .startAction(name: 'DtcCodeListControllerBase.setFilter');
@@ -80,7 +164,10 @@ mixin _$DtcCodeListController on DtcCodeListControllerBase, Store {
   String toString() {
     return '''
 codeCtrl: ${codeCtrl},
+isHidedButton: ${isHidedButton},
 codes: ${codes},
+errorMsg: ${errorMsg},
+future: ${future},
 filter: ${filter},
 listFiltered: ${listFiltered}
     ''';
