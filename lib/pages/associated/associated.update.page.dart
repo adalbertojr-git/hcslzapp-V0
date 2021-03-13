@@ -320,7 +320,7 @@ class _AssociatedUpdatePageState extends State<AssociatedUpdatePage> {
                           'Status:',
                           textAlign: TextAlign.center,
                           style: TextStyle(
-                            fontSize: 20.0,
+                            fontSize: 18.0,
                             fontWeight: FontWeight.bold,
                           ),
                         ),
@@ -337,9 +337,9 @@ class _AssociatedUpdatePageState extends State<AssociatedUpdatePage> {
                               ),
                             ),
                             value: _controller.currentStatus,
-                            items: getAssociatedStatus(),
+                            items: getStatus(),
                             onChanged:
-                                _controller.changedAssociatedStatusDropDownItem,
+                                _controller.changedStatusDropDownItem,
                           ),
                         ),
                       ),

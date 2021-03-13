@@ -84,3 +84,12 @@ const labelDtcCode = 'Código DTC';
 const hintDtcCode = 'Digite qualquer parte do código para pesquisar';
 const labelAbbreviation = 'Abreviatura';
 const hintAbbreviation = 'Digite qualquer parte da abreviatura para pesquisar';
+/*
+Partnership
+*/
+const labelPartner = 'Parceiro';
+const hintPartner = 'Digite o nome da empresa parceira';
+const labelAddress = 'Endereço';
+const hintAddress = 'Digite o endereço do parceiro';
+const labelPromotion = 'Promoção';
+const hintPromotion = 'Digite a promoção oferecida aos associados do Harley Club';

@@ -1,30 +1,30 @@
 import 'package:flutter/material.dart';
 
-enum AssociatedStatus {
+enum Status {
   A,
   I,
 }
 
-extension AssociatedStatusExt on AssociatedStatus {
-  static const associatedStatusMap = {
-    AssociatedStatus.A: "Ativo",
-    AssociatedStatus.I: "Inativo",
+extension StatusExt on Status {
+  static const StatusMap = {
+    Status.A: "Ativo",
+    Status.I: "Inativo",
   };
 
   //prints enum index and custom message
-  void associatedStatusToString() {
+  void statusToString() {
     print("${this.index} ${this.description}");
   }
 
   //about property returns the custom message
-  String get description => associatedStatusMap[this];
+  String get description => StatusMap[this];
 }
 
-List<DropdownMenuItem<String>> getAssociatedStatus() {
-  List _associatedStatus = List();
+List<DropdownMenuItem<String>> getStatus() {
+  List status = List();
   List<DropdownMenuItem<String>> types = new List();
-  AssociatedStatus.values.forEach((v) => _associatedStatus.add(v.description));
-  for (String type in _associatedStatus) {
+  Status.values.forEach((v) => status.add(v.description));
+  for (String type in status) {
     types.add(new DropdownMenuItem(value: type, child: new Text(type)));
   }
   return types;

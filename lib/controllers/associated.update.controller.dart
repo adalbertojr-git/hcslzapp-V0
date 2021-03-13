@@ -198,7 +198,7 @@ abstract class AssociatedUpdateControllerBase with Store {
   String changedAssociatedTypesDropDownItem(selected) =>
       currentAssociatedType = selected;
 
-  String changedAssociatedStatusDropDownItem(selected) =>
+  String changedStatusDropDownItem(selected) =>
       currentStatus = selected;
 
   @action

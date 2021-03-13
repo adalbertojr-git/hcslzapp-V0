@@ -16,6 +16,7 @@ import 'package:hcslzapp/pages/dtc.code/dtc.code.dashboard.page.dart';
 import 'package:hcslzapp/pages/event/events.calendar.page.dart';
 import 'package:hcslzapp/pages/financial/payment.associated.page.dart';
 import 'package:hcslzapp/pages/financial/payment.list.page.dart';
+import 'package:hcslzapp/pages/partnership/partnership.add.page.dart';
 import 'package:hcslzapp/pages/partnership/partnership.list.page.dart';
 import 'package:hcslzapp/pages/ride/my.ride.page.dart';
 import 'dart:io';
@@ -71,6 +72,8 @@ class _DashboardPageState extends State<DashboardPage> {
     _listAdmWidgets = [
       AssociatedListPage(widget._user),
       PaymentListPage(),
+      PaymentListPage(),
+      PartnershipAddPage(null),
     ];
     super.initState();
   }
