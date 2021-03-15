@@ -135,6 +135,52 @@ mixin _$PartnershipAddController on PartnershipAddControllerBase, Store {
     });
   }
 
+  final _$photoPathAtom = Atom(name: 'PartnershipAddControllerBase.photoPath');
+
+  @override
+  String get photoPath {
+    _$photoPathAtom.reportRead();
+    return super.photoPath;
+  }
+
+  @override
+  set photoPath(String value) {
+    _$photoPathAtom.reportWrite(value, super.photoPath, () {
+      super.photoPath = value;
+    });
+  }
+
+  final _$photoAtom = Atom(name: 'PartnershipAddControllerBase.photo');
+
+  @override
+  File get photo {
+    _$photoAtom.reportRead();
+    return super.photo;
+  }
+
+  @override
+  set photo(File value) {
+    _$photoAtom.reportWrite(value, super.photo, () {
+      super.photo = value;
+    });
+  }
+
+  final _$changedPhotoAtom =
+      Atom(name: 'PartnershipAddControllerBase.changedPhoto');
+
+  @override
+  bool get changedPhoto {
+    _$changedPhotoAtom.reportRead();
+    return super.changedPhoto;
+  }
+
+  @override
+  set changedPhoto(bool value) {
+    _$changedPhotoAtom.reportWrite(value, super.changedPhoto, () {
+      super.changedPhoto = value;
+    });
+  }
+
   final _$isActiveAtom = Atom(name: 'PartnershipAddControllerBase.isActive');
 
   @override
@@ -182,6 +228,24 @@ mixin _$PartnershipAddController on PartnershipAddControllerBase, Store {
     });
   }
 
+  final _$getImageFromCameraAsyncAction =
+      AsyncAction('PartnershipAddControllerBase.getImageFromCamera');
+
+  @override
+  Future<dynamic> getImageFromCamera() {
+    return _$getImageFromCameraAsyncAction
+        .run(() => super.getImageFromCamera());
+  }
+
+  final _$getImageFromGalleryAsyncAction =
+      AsyncAction('PartnershipAddControllerBase.getImageFromGallery');
+
+  @override
+  Future<dynamic> getImageFromGallery() {
+    return _$getImageFromGalleryAsyncAction
+        .run(() => super.getImageFromGallery());
+  }
+
   final _$PartnershipAddControllerBaseActionController =
       ActionController(name: 'PartnershipAddControllerBase');
 
@@ -207,6 +271,9 @@ addressCtrl: ${addressCtrl},
 promotionCtrl: ${promotionCtrl},
 statusCtrl: ${statusCtrl},
 photoUrl: ${photoUrl},
+photoPath: ${photoPath},
+photo: ${photo},
+changedPhoto: ${changedPhoto},
 isActive: ${isActive},
 currentStatus: ${currentStatus},
 partnership: ${partnership}
@@ -215,18 +282,18 @@ partnership: ${partnership}
 }
 
 mixin _$FormController on FormControllerBase, Store {
-  final _$nameAtom = Atom(name: 'FormControllerBase.name');
+  final _$partnerAtom = Atom(name: 'FormControllerBase.partner');
 
   @override
-  String get name {
-    _$nameAtom.reportRead();
-    return super.name;
+  String get partner {
+    _$partnerAtom.reportRead();
+    return super.partner;
   }
 
   @override
-  set name(String value) {
-    _$nameAtom.reportWrite(value, super.name, () {
-      super.name = value;
+  set partner(String value) {
+    _$partnerAtom.reportWrite(value, super.partner, () {
+      super.partner = value;
     });
   }
 
@@ -234,11 +301,11 @@ mixin _$FormController on FormControllerBase, Store {
       ActionController(name: 'FormControllerBase');
 
   @override
-  dynamic changeName(String value) {
+  dynamic changePartner(String value) {
     final _$actionInfo = _$FormControllerBaseActionController.startAction(
-        name: 'FormControllerBase.changeName');
+        name: 'FormControllerBase.changePartner');
     try {
-      return super.changeName(value);
+      return super.changePartner(value);
     } finally {
       _$FormControllerBaseActionController.endAction(_$actionInfo);
     }
@@ -247,7 +314,7 @@ mixin _$FormController on FormControllerBase, Store {
   @override
   String toString() {
     return '''
-name: ${name}
+partner: ${partner}
     ''';
   }
 }

@@ -1,6 +1,9 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:hcslzapp/common/labels.and.hints.dart';
+import 'package:hcslzapp/common/photo.image.provider.dart';
 import 'package:hcslzapp/components/button.dart';
 import 'package:hcslzapp/components/top.margin.dart';
 import 'package:hcslzapp/controllers/dependent.controller.dart';
@@ -58,8 +61,8 @@ class _PartnershipAddPageState extends State<PartnershipAddPage> {
                       hint: hintPartner,
                       icon: Icons.emoji_people,
                       inputType: TextInputType.text,
-                      onChanged: _controller.formController.changeName,
-                      errorText: _controller.validateName(),
+                      onChanged: _controller.formController.changePartner,
+                      errorText: _controller.validatePartner(),
                     );
                   },
                 ),
@@ -83,7 +86,7 @@ class _PartnershipAddPageState extends State<PartnershipAddPage> {
                         label: labelPhone,
                         hint: hintPhone,
                         icon: Icons.phone,
-                        inputType: TextInputType.datetime,
+                        inputType: TextInputType.number,
                         maskTextInputFormatter:
                             MaskTextInputFormatter(mask: "(##) #####-####"),
                       ),
@@ -91,19 +94,40 @@ class _PartnershipAddPageState extends State<PartnershipAddPage> {
                   ],
                 ),
                 MyTextFormField(
-                  textEditingController: _controller.phone2Ctrl,
+                  textEditingController: _controller.addressCtrl,
                   label: labelAddress,
                   hint: hintAddress,
-                  inputType: TextInputType.datetime,
-                  maskTextInputFormatter:
-                      MaskTextInputFormatter(mask: "##/##/####"),
+                  inputType: TextInputType.text,
+                  nLines: 2,
                 ),
                 MyTextFormField(
-                  textEditingController: _controller.phone2Ctrl,
+                  textEditingController: _controller.promotionCtrl,
                   label: labelPromotion,
                   hint: hintPromotion,
                   inputType: TextInputType.text,
-                  nLines: 10,
+                  nLines: 4,
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: [
+                    IconButton(
+                      icon: Icon(
+                        Icons.add_photo_alternate,
+                        color: Colors.black,
+                        size: 43.0,
+                      ),
+                      onPressed: _controller.getImageFromGallery,
+                    ),
+                    _photo,
+                    IconButton(
+                      icon: Icon(
+                        Icons.add_a_photo,
+                        color: Colors.black,
+                        size: 40.0,
+                      ),
+                      onPressed: _controller.getImageFromCamera,
+                    ),
+                  ],
                 ),
                 SizedBox(
                   height: 10.0,
@@ -146,6 +170,9 @@ class _PartnershipAddPageState extends State<PartnershipAddPage> {
                     ),
                   ),
                 ),
+                SizedBox(
+                  height: 80.0,
+                ),
               ],
             ),
           ),
@@ -157,4 +184,31 @@ class _PartnershipAddPageState extends State<PartnershipAddPage> {
       ),
     );
   }
+
+  get _photo => Container(
+        height: 250.0,
+        width: 250.0,
+        padding: EdgeInsets.all(10.0),
+        decoration: BoxDecoration(
+          color: Colors.black.withOpacity(0.2),
+        ),
+        child: Observer(
+          builder: (_) => Container(
+            decoration: BoxDecoration(
+              color: Colors.black,
+              image: _loadPhoto(),
+            ),
+          ),
+        ),
+      );
+
+  DecorationImage _loadPhoto() => DecorationImage(
+      image: _controller.photoPath != null
+          ? PhotoImageProvider().getImageProvider(
+              File(_controller.photoPath),
+            )
+          : PhotoImageProvider().getImageProvider(
+              File('assets/imgs/noImage.png'),
+            ),
+      fit: BoxFit.fill);
 }

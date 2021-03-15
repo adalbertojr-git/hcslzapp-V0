@@ -1,7 +1,10 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:hcslzapp/enums/blood.types.dart';
 import 'package:hcslzapp/models/dependent.dart';
 import 'package:hcslzapp/models/partnership.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:mobx/mobx.dart';
 
 part 'partnership.add.controller.g.dart';
@@ -37,6 +40,15 @@ abstract class PartnershipAddControllerBase with Store {
   String photoUrl;
 
   @observable
+  String photoPath;
+
+  @observable
+  File photo;
+
+  @observable
+  bool changedPhoto = false;
+
+  @observable
   bool isActive = true;
 
   @observable
@@ -52,7 +64,7 @@ abstract class PartnershipAddControllerBase with Store {
     _initTextFields;
     currentStatus = statusCtrl.text;
     formController = FormController(
-      name: partnership != null ? partnership.partner : '',
+      partner: partnership != null ? partnership.partner : '',
     );
   }
 
@@ -68,24 +80,48 @@ abstract class PartnershipAddControllerBase with Store {
   String changedStatusDropDownItem(selected) =>
       currentStatus = selected;
 
-  String validateName() {
-    if (formController.name.isEmpty) {
-      return "Nome é obrigatório!!!";
+  String validatePartner() {
+    if (formController.partner.isEmpty) {
+      return "Parceiro é obrigatório!!!";
     }
     return null;
+  }
+
+  @action
+  Future getImageFromCamera() async {
+    final pickedFile = await ImagePicker().getImage(
+      source: ImageSource.camera,
+    );
+    if (pickedFile != null) {
+      photo = File(pickedFile.path);
+      changedPhoto = true;
+      photoPath = photo.path.toString();
+    }
+  }
+
+  @action
+  Future getImageFromGallery() async {
+    final pickedFile = await ImagePicker().getImage(
+      source: ImageSource.gallery,
+    );
+    if (pickedFile != null) {
+      photo = File(pickedFile.path);
+      changedPhoto = true;
+      photoPath = photo.path.toString();
+    }
   }
 }
 
 class FormController extends FormControllerBase with _$FormController {
-  FormController({String name}) {
-    super.name = name;
+  FormController({String partner}) {
+    super.partner = partner;
   }
 }
 
 abstract class FormControllerBase with Store {
   @observable
-  String name;
+  String partner;
 
   @action
-  changeName(String value) => name = value;
+  changePartner(String value) => partner = value;
 }
