@@ -53,6 +53,28 @@ class _PartnershipAddPageState extends State<PartnershipAddPage> {
             child: Column(
               children: <Widget>[
                 TopMargin(),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: [
+                    IconButton(
+                      icon: Icon(
+                        Icons.add_photo_alternate,
+                        color: Colors.black,
+                        size: 43.0,
+                      ),
+                      onPressed: _controller.getImageFromGallery,
+                    ),
+                    _photo,
+                    IconButton(
+                      icon: Icon(
+                        Icons.add_a_photo,
+                        color: Colors.black,
+                        size: 40.0,
+                      ),
+                      onPressed: _controller.getImageFromCamera,
+                    ),
+                  ],
+                ),
                 Observer(
                   builder: (_) {
                     return MyTextFormField(
@@ -106,31 +128,6 @@ class _PartnershipAddPageState extends State<PartnershipAddPage> {
                   hint: hintPromotion,
                   inputType: TextInputType.text,
                   nLines: 4,
-                ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  children: [
-                    IconButton(
-                      icon: Icon(
-                        Icons.add_photo_alternate,
-                        color: Colors.black,
-                        size: 43.0,
-                      ),
-                      onPressed: _controller.getImageFromGallery,
-                    ),
-                    _photo,
-                    IconButton(
-                      icon: Icon(
-                        Icons.add_a_photo,
-                        color: Colors.black,
-                        size: 40.0,
-                      ),
-                      onPressed: _controller.getImageFromCamera,
-                    ),
-                  ],
-                ),
-                SizedBox(
-                  height: 10.0,
                 ),
                 Container(
                   color: Colors.white70,
