@@ -1,19 +1,17 @@
 import 'dart:io';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:hcslzapp/common/labels.and.hints.dart';
 import 'package:hcslzapp/common/photo.image.provider.dart';
 import 'package:hcslzapp/components/button.dart';
 import 'package:hcslzapp/components/top.margin.dart';
-import 'package:hcslzapp/controllers/dependent.controller.dart';
+import 'package:hcslzapp/components/transaction.auth.dialog.dart';
 import 'package:hcslzapp/controllers/partnership.add.controller.dart';
 import 'package:hcslzapp/enums/associated.status.dart';
-import 'package:hcslzapp/enums/blood.types.dart';
 import 'package:hcslzapp/components/my.text.form.field.dart';
-import 'package:hcslzapp/models/dependent.dart';
 import 'package:hcslzapp/models/partnership.dart';
 import 'package:mask_text_input_formatter/mask_text_input_formatter.dart';
+import 'package:asuka/asuka.dart' as asuka;
 
 class PartnershipAddPage extends StatefulWidget {
   final Partnership partnership;
@@ -74,6 +72,9 @@ class _PartnershipAddPageState extends State<PartnershipAddPage> {
                       onPressed: _controller.getImageFromCamera,
                     ),
                   ],
+                ),
+                SizedBox(
+                  height: 5.0,
                 ),
                 Observer(
                   builder: (_) {
@@ -175,9 +176,7 @@ class _PartnershipAddPageState extends State<PartnershipAddPage> {
           ),
         ),
         floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
-        floatingActionButton: Button(
-          icon: Icons.save,
-        ),
+        floatingActionButton: Button(icon: Icons.save, onClick: () => _save),
       ),
     );
   }
@@ -185,7 +184,7 @@ class _PartnershipAddPageState extends State<PartnershipAddPage> {
   get _photo => Container(
         height: 250.0,
         width: 250.0,
-        padding: EdgeInsets.all(10.0),
+        padding: EdgeInsets.all(5.0),
         decoration: BoxDecoration(
           color: Colors.black.withOpacity(0.2),
         ),
@@ -208,4 +207,54 @@ class _PartnershipAddPageState extends State<PartnershipAddPage> {
               File('assets/imgs/noImage.png'),
             ),
       fit: BoxFit.fill);
+
+  get _save async {
+    if (_controller.hasErrors) {
+      asuka.showSnackBar(
+        SnackBar(
+          content: Text('Atenção: Existem erros no formulário que devem '
+              'ser corrigidos antes de efetivar a transação.'),
+        ),
+      );
+    } else {
+      var response = true;
+      if (_controller.currentStatus == 'Inativo') {
+        response = await showDialog(
+            context: context,
+            builder: (context) {
+              return TransactionAuthDialog(
+                  msg:
+                      'Inativar o parceiro faz com que não seja mais visto no App. ' +
+                          '\n\n' +
+                          'Confirma?');
+            });
+      }
+      if (response == true) {
+        asuka.showSnackBar(
+          SnackBar(
+            content: Text('Aguarde...'),
+          ),
+        );
+        _controller.save().then(
+          (value) {
+            if (value != null) {
+              asuka.hideCurrentSnackBar();
+              asuka.showSnackBar(
+                SnackBar(
+                  content: Text('Parceiro atualizado com sucesso.'),
+                ),
+              );
+              //Navigator.of(context).pop(_controller.photoPath);
+            } else {
+              asuka.showSnackBar(
+                SnackBar(
+                  content: Text(_controller.errorMsg),
+                ),
+              );
+            }
+          },
+        );
+      }
+    }
+  }
 }

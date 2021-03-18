@@ -228,6 +228,60 @@ mixin _$PartnershipAddController on PartnershipAddControllerBase, Store {
     });
   }
 
+  final _$_partnershipRepoAtom =
+      Atom(name: 'PartnershipAddControllerBase._partnershipRepo');
+
+  @override
+  PartnershipRepo get _partnershipRepo {
+    _$_partnershipRepoAtom.reportRead();
+    return super._partnershipRepo;
+  }
+
+  @override
+  set _partnershipRepo(PartnershipRepo value) {
+    _$_partnershipRepoAtom.reportWrite(value, super._partnershipRepo, () {
+      super._partnershipRepo = value;
+    });
+  }
+
+  final _$errorMsgAtom = Atom(name: 'PartnershipAddControllerBase.errorMsg');
+
+  @override
+  String get errorMsg {
+    _$errorMsgAtom.reportRead();
+    return super.errorMsg;
+  }
+
+  @override
+  set errorMsg(String value) {
+    _$errorMsgAtom.reportWrite(value, super.errorMsg, () {
+      super.errorMsg = value;
+    });
+  }
+
+  final _$findAllAsyncAction =
+      AsyncAction('PartnershipAddControllerBase.findAll');
+
+  @override
+  Future<dynamic> findAll() {
+    return _$findAllAsyncAction.run(() => super.findAll());
+  }
+
+  final _$saveAsyncAction = AsyncAction('PartnershipAddControllerBase.save');
+
+  @override
+  Future<dynamic> save() {
+    return _$saveAsyncAction.run(() => super.save());
+  }
+
+  final _$updateAsyncAction =
+      AsyncAction('PartnershipAddControllerBase.update');
+
+  @override
+  Future<dynamic> update(Partnership partnership) {
+    return _$updateAsyncAction.run(() => super.update(partnership));
+  }
+
   final _$getImageFromCameraAsyncAction =
       AsyncAction('PartnershipAddControllerBase.getImageFromCamera');
 
@@ -276,7 +330,8 @@ photo: ${photo},
 changedPhoto: ${changedPhoto},
 isActive: ${isActive},
 currentStatus: ${currentStatus},
-partnership: ${partnership}
+partnership: ${partnership},
+errorMsg: ${errorMsg}
     ''';
   }
 }

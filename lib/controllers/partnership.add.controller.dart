@@ -1,9 +1,8 @@
 import 'dart:io';
-
 import 'package:flutter/material.dart';
-import 'package:hcslzapp/enums/blood.types.dart';
-import 'package:hcslzapp/models/dependent.dart';
 import 'package:hcslzapp/models/partnership.dart';
+import 'package:hcslzapp/repositories/associated.repo.dart';
+import 'package:hcslzapp/repositories/partnership.repo.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:mobx/mobx.dart';
 
@@ -57,6 +56,12 @@ abstract class PartnershipAddControllerBase with Store {
   @observable
   Partnership partnership;
 
+  @observable
+  PartnershipRepo _partnershipRepo = PartnershipRepo();
+
+  @observable
+  String errorMsg;
+
   @action
   setStatus() => isActive = !isActive;
 
@@ -77,8 +82,58 @@ abstract class PartnershipAddControllerBase with Store {
     statusCtrl.text = partnership != null ? partnership.status : null;
   }
 
-  String changedStatusDropDownItem(selected) =>
-      currentStatus = selected;
+  @action
+  Future findAll() async =>
+      await _partnershipRepo.findAll().then((value) => value).catchError((e) {
+        errorMsg = "${e.message}";
+      }, test: (e) => e is Exception);
+
+  @action
+  Future save() async => await _partnershipRepo
+          .save(await _setValues())
+          .then((value) => value)
+          .catchError((e) {
+        errorMsg = "${e.message}";
+      }, test: (e) => e is Exception);
+
+  @action
+  Future update(Partnership partnership) async =>
+      await _partnershipRepo.update(await _setValues()).catchError((e) {
+        errorMsg = "${e.message}";
+      }, test: (e) => e is Exception);
+
+  Future<Partnership> _setValues2() async {
+    partnership.partner = partnerCtrl.text;
+    partnership.phone1 = phone1Ctrl.text;
+    partnership.phone2 = phone2Ctrl.text;
+    partnership.address = addressCtrl.text;
+    partnership.promotion = promotionCtrl.text;
+    partnership.status = statusCtrl.text;
+/*    if (photo != null) {
+      //se houve alteração de foto
+      _savePhoto();
+      await _uploadPhoto().then((value) => associated.photoUrl = value);
+    }*/
+    return partnership;
+  }
+
+  Future<Partnership> _setValues() async {
+    return Partnership(
+      id: int.parse('0'),
+      partner: partnerCtrl.text,
+      phone1: phone1Ctrl.text,
+      phone2: phone2Ctrl.text,
+      address: addressCtrl.text,
+      promotion: promotionCtrl.text,
+      status: statusCtrl.text,
+    );
+  }
+
+  bool get hasErrors => hasErrorPartner;
+
+  bool get hasErrorPartner => validatePartner() != null;
+
+  String changedStatusDropDownItem(selected) => currentStatus = selected;
 
   String validatePartner() {
     if (formController.partner.isEmpty) {

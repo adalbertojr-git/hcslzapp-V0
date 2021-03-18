@@ -31,7 +31,6 @@ class PartnershipListPage extends StatelessWidget {
           height: MediaQuery.of(context).size.height,
           child: ListView(
             shrinkWrap: true,
-            //padding: const EdgeInsets.all(0.0),
             children: List.generate(
               choices.length,
               (index) {
@@ -79,14 +78,14 @@ class ChoiceCard extends StatelessWidget {
       textStyle = textStyle.copyWith(color: Colors.lightGreenAccent[400]);
 
     return Card(
-      color: Colors.black12,
+      color: Colors.white30,
       margin: const EdgeInsets.all(15.0),
       child: Column(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Container(
-            padding: const EdgeInsets.all(15.0),
+            padding: const EdgeInsets.all(10.0),
             child: Image.network(choice.imglink),
             width: MediaQuery.of(context).size.width,
           ),

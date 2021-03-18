@@ -14,6 +14,7 @@ class Partnership {
       this.phone1,
       this.phone2,
       this.address,
+      this.promotion,
       this.status,
       this.photoUrl});
 
@@ -23,6 +24,7 @@ class Partnership {
         phone1 = json['phone1'],
         phone2 = json['phone2'],
         address = json["address"],
+        promotion = json["promotion"],
         status = json['status'],
         photoUrl = json['photoUrl'];
 
@@ -32,6 +34,7 @@ class Partnership {
         'phone1': phone1,
         'phone2': phone2,
         'address': address,
+        'promotion': promotion,
         'status': status,
         'photoUrl': photoUrl,
       };
@@ -39,6 +42,6 @@ class Partnership {
   @override
   String toString() {
     return 'Partnership{id: $id, partner: $partner, phone1: $phone1, phone2: $phone2, '
-        'address: $address, status: $status, photoUrl: $photoUrl}';
+        'address: $address, promotion: promotion, status: $status, photoUrl: $photoUrl}';
   }
 }
