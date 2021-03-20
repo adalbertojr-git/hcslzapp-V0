@@ -1,68 +1,83 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:hcslzapp/components/button.dart';
+import 'package:hcslzapp/pages/partnership/partnership.add.page.dart';
 
 class PartnershipListPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return Container(
-      padding: EdgeInsets.fromLTRB(5.0, 0.0, 5.0, 0.0),
-      decoration: BoxDecoration(
-        gradient: LinearGradient(
-          colors: [Colors.white30, Colors.deepOrange],
-          begin: FractionalOffset.topLeft,
-          end: FractionalOffset.bottomRight,
+    return Scaffold(
+      body: Container(
+        padding: EdgeInsets.fromLTRB(5.0, 0.0, 5.0, 0.0),
+        decoration: BoxDecoration(
+          gradient: LinearGradient(
+            colors: [Colors.white30, Colors.deepOrange],
+            begin: FractionalOffset.topLeft,
+            end: FractionalOffset.bottomRight,
+          ),
         ),
-      ),
-      height: MediaQuery.of(context).size.height,
-      //height: 400,
-      child: PageView.builder(
-        itemCount: 2,
-        itemBuilder: (context, index) {
-          return GestureDetector(
-            onTap: () {
-              Navigator.of(context).push(MaterialPageRoute(builder: (context) {
-                return DetailPage(index);
-              }));
-            },
-            child: Hero(
-              tag: index,
-              child: Card(
-                margin: EdgeInsets.fromLTRB(5, 30, 5, 10),
-                color: Colors.white38,
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(8),
-                ),
-                child: Container(
-                  padding: EdgeInsets.all(10),
-                  child: Stack(
-                    children: <Widget>[
-                      Positioned(
-                        top: 0,
-                        bottom: 20,
-                        child: Image.asset(
-                          'assets/imgs/hdlogo.png',
-                          fit: BoxFit.cover,
-                        ),
-                      ),
-                      Positioned(
-                        right: 10,
-                        bottom: 0,
-                        child: CircleAvatar(
-                          backgroundColor: Colors.red,
-                          child: Icon(
-                            Icons.arrow_forward,
-                            color: Colors.white,
-                            size: 24,
+        height: MediaQuery
+            .of(context)
+            .size
+            .height,
+        child: PageView.builder(
+          itemCount: 2,
+          itemBuilder: (context, index) {
+            return GestureDetector(
+              onTap: () {
+                Navigator.of(context).push(
+                    MaterialPageRoute(builder: (context) {
+                      return DetailPage(index);
+                    }));
+              },
+              child: Hero(
+                tag: index,
+                child: Card(
+                  margin: EdgeInsets.fromLTRB(5, 30, 5, 10),
+                  color: Colors.black26,
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(8),
+                  ),
+                  child: Container(
+                    padding: EdgeInsets.all(10),
+                    child: Stack(
+                      children: <Widget>[
+                        Positioned(
+                          top: 0,
+                          bottom: 20,
+                          child: Image.asset(
+                            'assets/imgs/noImage.png',
+                            fit: BoxFit.cover,
                           ),
                         ),
-                      )
-                    ],
+                        Positioned(
+                          right: 10,
+                          bottom: 0,
+                          child: CircleAvatar(
+                            backgroundColor: Colors.red,
+                            child: Icon(
+                              Icons.arrow_forward,
+                              color: Colors.white,
+                              size: 24,
+                            ),
+                          ),
+                        )
+                      ],
+                    ),
                   ),
                 ),
               ),
-            ),
-          );
-        },
+            );
+          },
+        ),
+      ),
+      floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
+      floatingActionButton: Button(icon: Icons.add, onClick: () =>
+          Navigator.push(
+            context,
+            MaterialPageRoute(
+                builder: (context) => PartnershipAddPage(null)),
+          ),
       ),
     );
   }
@@ -84,51 +99,68 @@ class _DetailPageState extends State<DetailPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Stack(
-        children: <Widget>[
-          CustomScrollView(
-            slivers: <Widget>[
-              buildSliverHead(),
-              SliverToBoxAdapter(child: buildDetail()),
-            ],
+      body: Container(
+        padding: EdgeInsets.fromLTRB(5.0, 0.0, 5.0, 0.0),
+        decoration: BoxDecoration(
+          gradient: LinearGradient(
+            colors: [Colors.white30, Colors.deepOrange],
+            begin: FractionalOffset.topLeft,
+            end: FractionalOffset.bottomRight,
           ),
-          Padding(
-            padding: EdgeInsets.only(
-              top: MediaQuery.of(context).padding.top,
+        ),
+        height: MediaQuery
+            .of(context)
+            .size
+            .height,
+        child: Stack(
+          children: <Widget>[
+            CustomScrollView(
+              slivers: <Widget>[
+                buildSliverHead(),
+                SliverToBoxAdapter(child: buildDetail()),
+              ],
             ),
-            child: SizedBox(
-              height: kToolbarHeight,
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: <Widget>[
-                  GestureDetector(
-                    onTap: () {
-                      Navigator.of(context).pop();
-                    },
-                    child: Padding(
+            Padding(
+              padding: EdgeInsets.only(
+                top: MediaQuery
+                    .of(context)
+                    .padding
+                    .top,
+              ),
+              child: SizedBox(
+                height: kToolbarHeight,
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: <Widget>[
+                    GestureDetector(
+                      onTap: () {
+                        Navigator.of(context).pop();
+                      },
+                      child: Padding(
+                        padding: EdgeInsets.symmetric(
+                          horizontal: 15,
+                        ),
+                        child: Icon(
+                          Icons.arrow_back,
+                          color: Colors.black,
+                        ),
+                      ),
+                    ),
+/*                  Padding(
                       padding: EdgeInsets.symmetric(
                         horizontal: 15,
                       ),
                       child: Icon(
-                        Icons.arrow_back,
+                        Icons.menu,
                         color: Colors.black,
                       ),
-                    ),
-                  ),
-                  Padding(
-                    padding: EdgeInsets.symmetric(
-                      horizontal: 15,
-                    ),
-                    child: Icon(
-                      Icons.menu,
-                      color: Colors.white,
-                    ),
-                  )
-                ],
+                    )*/
+                  ],
+                ),
               ),
-            ),
-          )
-        ],
+            )
+          ],
+        ),
       ),
     );
   }
@@ -145,7 +177,7 @@ class _DetailPageState extends State<DetailPage> {
 
   Widget buildDetail() {
     return Container(
-      //color: Colors.white,
+      color: Colors.black26,
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
@@ -157,9 +189,9 @@ class _DetailPageState extends State<DetailPage> {
             ),
             child: Text(
               'Creates insets with symmetrical vertical and horizontal offsets.' *
-                  2,
+                  20,
               style: TextStyle(
-                color: Colors.black26,
+                color: Colors.black,
                 height: 1.4,
                 fontSize: 16,
               ),
@@ -172,16 +204,16 @@ class _DetailPageState extends State<DetailPage> {
 
   Widget buildUserInfo() {
     return ListTile(
-      leading: CircleAvatar(
+/*      leading: CircleAvatar(
         backgroundColor: Colors.blue,
         radius: 24,
         backgroundImage: AssetImage(
           'assets/imgs/hdlogo.png',
         ),
-      ),
+      ),*/
       title: Text('siberian'),
       subtitle: Text('owl'),
-      trailing: Icon(Icons.share),
+      trailing: Icon(Icons.arrow_upward_rounded),
     );
   }
 }
@@ -191,12 +223,12 @@ class DetailSliverDelegate extends SliverPersistentHeaderDelegate {
   final double roundedContainerHeight;
   final index;
 
-  DetailSliverDelegate(
-      this.expandedHeight, this.roundedContainerHeight, this.index);
+  DetailSliverDelegate(this.expandedHeight, this.roundedContainerHeight,
+      this.index);
 
   @override
-  Widget build(
-      BuildContext context, double shrinkOffset, bool overlapsContent) {
+  Widget build(BuildContext context, double shrinkOffset,
+      bool overlapsContent) {
     return AnnotatedRegion<SystemUiOverlayStyle>(
       value: SystemUiOverlayStyle(
         statusBarColor: Colors.transparent,
@@ -208,18 +240,24 @@ class DetailSliverDelegate extends SliverPersistentHeaderDelegate {
         child: Stack(
           children: <Widget>[
             Image.asset(
-              'assets/imgs/hdlogo.png',
-              width: MediaQuery.of(context).size.width,
-              fit: BoxFit.cover,
+              'assets/imgs/noImage.png',
+              width: MediaQuery
+                  .of(context)
+                  .size
+                  .width,
+              fit: BoxFit.contain,
             ),
             Positioned(
               top: expandedHeight - roundedContainerHeight - shrinkOffset,
               left: 0,
               child: Container(
-                width: MediaQuery.of(context).size.width,
+                width: MediaQuery
+                    .of(context)
+                    .size
+                    .width,
                 height: roundedContainerHeight,
                 decoration: BoxDecoration(
-                  color: Colors.white,
+                  color: Colors.black26,
                   borderRadius: BorderRadius.only(
                     topLeft: Radius.circular(30),
                     topRight: Radius.circular(30),
@@ -227,7 +265,7 @@ class DetailSliverDelegate extends SliverPersistentHeaderDelegate {
                 ),
               ),
             ),
-            Positioned(
+/*            Positioned(
               top: expandedHeight - 120 - shrinkOffset,
               left: 30,
               child: Column(
@@ -236,20 +274,20 @@ class DetailSliverDelegate extends SliverPersistentHeaderDelegate {
                   Text(
                     'Flutter',
                     style: TextStyle(
-                      color: Colors.white,
+                      color: Colors.black,
                       fontSize: 30,
                     ),
                   ),
                   Text(
                     'owl',
                     style: TextStyle(
-                      color: Colors.white,
+                      color: Colors.black,
                       fontSize: 15,
                     ),
                   ),
                 ],
               ),
-            )
+            )*/
           ],
         ),
       ),

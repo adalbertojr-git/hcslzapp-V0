@@ -191,7 +191,7 @@ class _PartnershipAddPageState extends State<PartnershipAddPage> {
         child: Observer(
           builder: (_) => Container(
             decoration: BoxDecoration(
-              color: Colors.black,
+              color: Colors.black26,
               image: _loadPhoto(),
             ),
           ),
