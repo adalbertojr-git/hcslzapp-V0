@@ -1,112 +1,269 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
 class PartnershipListPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    List choices = const [
-      const Choice(
-          title: 'New Road Fortaleza',
-          date: '1 June 2019',
-          description:
-              'Descontos de 10% na compra de acessorios',
-          imglink:
-              'https://www.newroadhd.com.br/wp-content/uploads/2018/01/logo.jpg'),
-      const Choice(
-          title: 'Hangar Motos',
-          date: '1 June 2019',
-          description:
-          'Descontos de 10% na compra de motos',
-          imglink:
-            'https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcTAydS3H3oWCCKWGIJdZnoqkTXEtYAzbrl-fQ&usqp=CAU'),
-    ];
-    return Scaffold(
-        body: Container(
-          decoration: BoxDecoration(
-            gradient: LinearGradient(
-              colors: [Colors.white30, Colors.deepOrange],
-              begin: FractionalOffset.topLeft,
-              end: FractionalOffset.bottomRight,
-            ),
-          ),
-          height: MediaQuery.of(context).size.height,
-          child: ListView(
-            shrinkWrap: true,
-            children: List.generate(
-              choices.length,
-              (index) {
-                return Center(
-                  child: ChoiceCard(
-                    choice: choices[index],
-                    item: choices[index],
-                  ),
-                );
-              },
-            ),
-          ),
+    return Container(
+      padding: EdgeInsets.fromLTRB(5.0, 0.0, 5.0, 0.0),
+      decoration: BoxDecoration(
+        gradient: LinearGradient(
+          colors: [Colors.white30, Colors.deepOrange],
+          begin: FractionalOffset.topLeft,
+          end: FractionalOffset.bottomRight,
         ),
-      );
+      ),
+      height: MediaQuery.of(context).size.height,
+      //height: 400,
+      child: PageView.builder(
+        itemCount: 2,
+        itemBuilder: (context, index) {
+          return GestureDetector(
+            onTap: () {
+              Navigator.of(context).push(MaterialPageRoute(builder: (context) {
+                return DetailPage(index);
+              }));
+            },
+            child: Hero(
+              tag: index,
+              child: Card(
+                margin: EdgeInsets.fromLTRB(5, 30, 5, 10),
+                color: Colors.white38,
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(8),
+                ),
+                child: Container(
+                  padding: EdgeInsets.all(10),
+                  child: Stack(
+                    children: <Widget>[
+                      Positioned(
+                        top: 0,
+                        bottom: 20,
+                        child: Image.asset(
+                          'assets/imgs/hdlogo.png',
+                          fit: BoxFit.cover,
+                        ),
+                      ),
+                      Positioned(
+                        right: 10,
+                        bottom: 0,
+                        child: CircleAvatar(
+                          backgroundColor: Colors.red,
+                          child: Icon(
+                            Icons.arrow_forward,
+                            color: Colors.white,
+                            size: 24,
+                          ),
+                        ),
+                      )
+                    ],
+                  ),
+                ),
+              ),
+            ),
+          );
+        },
+      ),
+    );
   }
 }
 
-class Choice {
-  final String title;
-  final String date;
-  final String description;
-  final String imglink;
+class DetailPage extends StatefulWidget {
+  final index;
 
-  const Choice({this.title, this.date, this.description, this.imglink});
+  DetailPage(this.index);
+
+  @override
+  _DetailPageState createState() => _DetailPageState();
 }
 
-class ChoiceCard extends StatelessWidget {
-  const ChoiceCard(
-      {Key key,
-      this.choice,
-      this.onTap,
-      @required this.item,
-      this.selected: false})
-      : super(key: key);
-  final Choice choice;
-  final VoidCallback onTap;
-  final Choice item;
-  final bool selected;
+class _DetailPageState extends State<DetailPage> {
+  final double expandedHeight = 400;
+  final double roundedContainerHeight = 50;
 
   @override
   Widget build(BuildContext context) {
-    TextStyle textStyle = Theme.of(context).textTheme.display1;
-
-    if (selected)
-      textStyle = textStyle.copyWith(color: Colors.lightGreenAccent[400]);
-
-    return Card(
-      color: Colors.white30,
-      margin: const EdgeInsets.all(15.0),
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Container(
-            padding: const EdgeInsets.all(10.0),
-            child: Image.network(choice.imglink),
-            width: MediaQuery.of(context).size.width,
+    return Scaffold(
+      body: Stack(
+        children: <Widget>[
+          CustomScrollView(
+            slivers: <Widget>[
+              buildSliverHead(),
+              SliverToBoxAdapter(child: buildDetail()),
+            ],
           ),
-          Container(
-            padding: const EdgeInsets.all(10.0),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(choice.title, style: Theme.of(context).textTheme.title),
-                Text(
-                  choice.date,
-                  style: TextStyle(
-                    color: Colors.black.withOpacity(0.5),
+          Padding(
+            padding: EdgeInsets.only(
+              top: MediaQuery.of(context).padding.top,
+            ),
+            child: SizedBox(
+              height: kToolbarHeight,
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: <Widget>[
+                  GestureDetector(
+                    onTap: () {
+                      Navigator.of(context).pop();
+                    },
+                    child: Padding(
+                      padding: EdgeInsets.symmetric(
+                        horizontal: 15,
+                      ),
+                      child: Icon(
+                        Icons.arrow_back,
+                        color: Colors.black,
+                      ),
+                    ),
                   ),
-                ),
-                Text(choice.description),
-              ],
+                  Padding(
+                    padding: EdgeInsets.symmetric(
+                      horizontal: 15,
+                    ),
+                    child: Icon(
+                      Icons.menu,
+                      color: Colors.white,
+                    ),
+                  )
+                ],
+              ),
             ),
           )
         ],
       ),
     );
+  }
+
+  Widget buildSliverHead() {
+    return SliverPersistentHeader(
+      delegate: DetailSliverDelegate(
+        expandedHeight,
+        roundedContainerHeight,
+        widget.index,
+      ),
+    );
+  }
+
+  Widget buildDetail() {
+    return Container(
+      //color: Colors.white,
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: <Widget>[
+          buildUserInfo(),
+          Padding(
+            padding: EdgeInsets.symmetric(
+              vertical: 15,
+              horizontal: 15,
+            ),
+            child: Text(
+              'Creates insets with symmetrical vertical and horizontal offsets.' *
+                  2,
+              style: TextStyle(
+                color: Colors.black26,
+                height: 1.4,
+                fontSize: 16,
+              ),
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget buildUserInfo() {
+    return ListTile(
+      leading: CircleAvatar(
+        backgroundColor: Colors.blue,
+        radius: 24,
+        backgroundImage: AssetImage(
+          'assets/imgs/hdlogo.png',
+        ),
+      ),
+      title: Text('siberian'),
+      subtitle: Text('owl'),
+      trailing: Icon(Icons.share),
+    );
+  }
+}
+
+class DetailSliverDelegate extends SliverPersistentHeaderDelegate {
+  final double expandedHeight;
+  final double roundedContainerHeight;
+  final index;
+
+  DetailSliverDelegate(
+      this.expandedHeight, this.roundedContainerHeight, this.index);
+
+  @override
+  Widget build(
+      BuildContext context, double shrinkOffset, bool overlapsContent) {
+    return AnnotatedRegion<SystemUiOverlayStyle>(
+      value: SystemUiOverlayStyle(
+        statusBarColor: Colors.transparent,
+        statusBarIconBrightness: Brightness.dark,
+        statusBarBrightness: Brightness.dark,
+      ),
+      child: Hero(
+        tag: index,
+        child: Stack(
+          children: <Widget>[
+            Image.asset(
+              'assets/imgs/hdlogo.png',
+              width: MediaQuery.of(context).size.width,
+              fit: BoxFit.cover,
+            ),
+            Positioned(
+              top: expandedHeight - roundedContainerHeight - shrinkOffset,
+              left: 0,
+              child: Container(
+                width: MediaQuery.of(context).size.width,
+                height: roundedContainerHeight,
+                decoration: BoxDecoration(
+                  color: Colors.white,
+                  borderRadius: BorderRadius.only(
+                    topLeft: Radius.circular(30),
+                    topRight: Radius.circular(30),
+                  ),
+                ),
+              ),
+            ),
+            Positioned(
+              top: expandedHeight - 120 - shrinkOffset,
+              left: 30,
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: <Widget>[
+                  Text(
+                    'Flutter',
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontSize: 30,
+                    ),
+                  ),
+                  Text(
+                    'owl',
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontSize: 15,
+                    ),
+                  ),
+                ],
+              ),
+            )
+          ],
+        ),
+      ),
+    );
+  }
+
+  @override
+  double get maxExtent => expandedHeight;
+
+  @override
+  double get minExtent => 0;
+
+  @override
+  bool shouldRebuild(SliverPersistentHeaderDelegate oldDelegate) {
+    return true;
   }
 }
