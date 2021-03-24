@@ -15,8 +15,9 @@ import 'package:asuka/asuka.dart' as asuka;
 
 class PartnershipAddPage extends StatefulWidget {
   final Partnership partnership;
+  final String _user;
 
-  PartnershipAddPage(this.partnership);
+  PartnershipAddPage(this.partnership, this._user);
 
   @override
   _PartnershipAddPageState createState() => _PartnershipAddPageState();

@@ -73,7 +73,7 @@ class _DashboardPageState extends State<DashboardPage> {
       AssociatedListPage(widget._user),
       PaymentListPage(),
       PaymentListPage(),
-      PartnershipListPage(),
+      PartnershipListPage(widget._user),
     ];
     super.initState();
   }
@@ -285,7 +285,7 @@ class _DashboardPageState extends State<DashboardPage> {
                 onClick: () {
                   Navigator.push(
                     _gContext,
-                    MaterialPageRoute(builder: (gContext) => PartnershipListPage()),
+                    MaterialPageRoute(builder: (gContext) => PartnershipListPage(widget._user)),
                   );
                 },
               ),

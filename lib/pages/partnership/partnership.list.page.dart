@@ -1,9 +1,43 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
-import 'package:hcslzapp/components/button.dart';
-import 'package:hcslzapp/pages/partnership/partnership.add.page.dart';
+import 'dart:math';
 
-class PartnershipListPage extends StatelessWidget {
+const SCALE_FRACTION = 0.7;
+const FULL_SCALE = 1.0;
+const PAGER_HEIGHT = 200.0;
+
+class PartnershipListPage extends StatefulWidget {
+  final String _user;
+
+  PartnershipListPage(this._user);
+
+  @override
+  _PartnershipListPageState createState() => _PartnershipListPageState();
+}
+
+class _PartnershipListPageState extends State<PartnershipListPage> {
+  double viewPortFraction = 0.5;
+
+  PageController pageController;
+
+  int currentPage = 0;
+
+  List<Map<String, String>> listOfCharacters = [
+    {'image': "assets/richmond.png", 'name': "Richmond"},
+    {'image': "assets/roy.png", 'name': "Roy"},
+    {'image': "assets/moss.png", 'name': "Moss"},
+    {'image': "assets/douglas.png", 'name': "Douglas"},
+    {'image': "assets/jen.png", 'name': "Jen"}
+  ];
+
+  double page = 0.0;
+
+  @override
+  void initState() {
+    pageController = PageController(
+        initialPage: currentPage, viewportFraction: viewPortFraction);
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -20,288 +54,70 @@ class PartnershipListPage extends StatelessWidget {
             .of(context)
             .size
             .height,
-        child: PageView.builder(
-          itemCount: 2,
-          itemBuilder: (context, index) {
-            return GestureDetector(
-              onTap: () {
-                Navigator.of(context).push(
-                    MaterialPageRoute(builder: (context) {
-                      return DetailPage(index);
-                    }));
-              },
-              child: Hero(
-                tag: index,
-                child: Card(
-                  margin: EdgeInsets.fromLTRB(5, 30, 5, 10),
-                  color: Colors.black26,
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(8),
-                  ),
-                  child: Container(
-                    padding: EdgeInsets.all(10),
-                    child: Stack(
-                      children: <Widget>[
-                        Positioned(
-                          top: 0,
-                          bottom: 20,
-                          child: Image.asset(
-                            'assets/imgs/noImage.png',
-                            fit: BoxFit.cover,
-                          ),
-                        ),
-                        Positioned(
-                          right: 10,
-                          bottom: 0,
-                          child: CircleAvatar(
-                            backgroundColor: Colors.red,
-                            child: Icon(
-                              Icons.arrow_forward,
-                              color: Colors.white,
-                              size: 24,
-                            ),
-                          ),
-                        )
-                      ],
-                    ),
-                  ),
+        child: ListView(
+          children: <Widget>[
+            SizedBox(
+              height: 40,
+            ),
+            Container(
+              height: PAGER_HEIGHT,
+              child: NotificationListener<ScrollNotification>(
+                onNotification: (ScrollNotification notification) {
+                  if (notification is ScrollUpdateNotification) {
+                    setState(() {
+                      page = pageController.page;
+                    });
+                  }
+                },
+                child: PageView.builder(
+                  onPageChanged: (pos) {
+                    setState(() {
+                      currentPage = pos;
+                    });
+                  },
+                  physics: BouncingScrollPhysics(),
+                  controller: pageController,
+                  itemCount: listOfCharacters.length,
+                  itemBuilder: (context, index) {
+                    final scale = max(SCALE_FRACTION,
+                        (FULL_SCALE - (index - page).abs()) + viewPortFraction);
+                    return circleOffer(listOfCharacters[index]['image'], scale);
+                  },
                 ),
               ),
-            );
-          },
-        ),
-      ),
-      floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
-      floatingActionButton: Button(icon: Icons.add, onClick: () =>
-          Navigator.push(
-            context,
-            MaterialPageRoute(
-                builder: (context) => PartnershipAddPage(null)),
-          ),
-      ),
-    );
-  }
-}
-
-class DetailPage extends StatefulWidget {
-  final index;
-
-  DetailPage(this.index);
-
-  @override
-  _DetailPageState createState() => _DetailPageState();
-}
-
-class _DetailPageState extends State<DetailPage> {
-  final double expandedHeight = 400;
-  final double roundedContainerHeight = 50;
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      body: Container(
-        padding: EdgeInsets.fromLTRB(5.0, 0.0, 5.0, 0.0),
-        decoration: BoxDecoration(
-          gradient: LinearGradient(
-            colors: [Colors.white30, Colors.deepOrange],
-            begin: FractionalOffset.topLeft,
-            end: FractionalOffset.bottomRight,
-          ),
-        ),
-        height: MediaQuery
-            .of(context)
-            .size
-            .height,
-        child: Stack(
-          children: <Widget>[
-            CustomScrollView(
-              slivers: <Widget>[
-                buildSliverHead(),
-                SliverToBoxAdapter(child: buildDetail()),
-              ],
             ),
             Padding(
-              padding: EdgeInsets.only(
-                top: MediaQuery
-                    .of(context)
-                    .padding
-                    .top,
+              padding: const EdgeInsets.all(20.0),
+              child: Text(
+                listOfCharacters[currentPage]['name'],
+                textAlign: TextAlign.center,
+                style: TextStyle(fontSize: 20),
               ),
-              child: SizedBox(
-                height: kToolbarHeight,
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: <Widget>[
-                    GestureDetector(
-                      onTap: () {
-                        Navigator.of(context).pop();
-                      },
-                      child: Padding(
-                        padding: EdgeInsets.symmetric(
-                          horizontal: 15,
-                        ),
-                        child: Icon(
-                          Icons.arrow_back,
-                          color: Colors.black,
-                        ),
-                      ),
-                    ),
-/*                  Padding(
-                      padding: EdgeInsets.symmetric(
-                        horizontal: 15,
-                      ),
-                      child: Icon(
-                        Icons.menu,
-                        color: Colors.black,
-                      ),
-                    )*/
-                  ],
-                ),
-              ),
-            )
+            ),
           ],
         ),
       ),
     );
   }
 
-  Widget buildSliverHead() {
-    return SliverPersistentHeader(
-      delegate: DetailSliverDelegate(
-        expandedHeight,
-        roundedContainerHeight,
-        widget.index,
-      ),
-    );
-  }
-
-  Widget buildDetail() {
-    return Container(
-      color: Colors.black26,
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: <Widget>[
-          buildUserInfo(),
-          Padding(
-            padding: EdgeInsets.symmetric(
-              vertical: 15,
-              horizontal: 15,
-            ),
-            child: Text(
-              'Creates insets with symmetrical vertical and horizontal offsets.' *
-                  20,
-              style: TextStyle(
-                color: Colors.black,
-                height: 1.4,
-                fontSize: 16,
-              ),
-            ),
+  Widget circleOffer(String image, double scale) {
+    return Align(
+      alignment: Alignment.bottomCenter,
+      child: Container(
+        margin: EdgeInsets.only(bottom: 10),
+        height: PAGER_HEIGHT * scale,
+        width: PAGER_HEIGHT * scale,
+        child: Card(
+          elevation: 4,
+          clipBehavior: Clip.antiAlias,
+          shape: CircleBorder(
+              side: BorderSide(color: Colors.grey.shade200, width: 5)),
+          child: Image.asset(
+            image,
+            fit: BoxFit.cover,
           ),
-        ],
-      ),
-    );
-  }
-
-  Widget buildUserInfo() {
-    return ListTile(
-/*      leading: CircleAvatar(
-        backgroundColor: Colors.blue,
-        radius: 24,
-        backgroundImage: AssetImage(
-          'assets/imgs/hdlogo.png',
-        ),
-      ),*/
-      title: Text('siberian'),
-      subtitle: Text('owl'),
-      trailing: Icon(Icons.arrow_upward_rounded),
-    );
-  }
-}
-
-class DetailSliverDelegate extends SliverPersistentHeaderDelegate {
-  final double expandedHeight;
-  final double roundedContainerHeight;
-  final index;
-
-  DetailSliverDelegate(this.expandedHeight, this.roundedContainerHeight,
-      this.index);
-
-  @override
-  Widget build(BuildContext context, double shrinkOffset,
-      bool overlapsContent) {
-    return AnnotatedRegion<SystemUiOverlayStyle>(
-      value: SystemUiOverlayStyle(
-        statusBarColor: Colors.transparent,
-        statusBarIconBrightness: Brightness.dark,
-        statusBarBrightness: Brightness.dark,
-      ),
-      child: Hero(
-        tag: index,
-        child: Stack(
-          children: <Widget>[
-            Image.asset(
-              'assets/imgs/noImage.png',
-              width: MediaQuery
-                  .of(context)
-                  .size
-                  .width,
-              fit: BoxFit.contain,
-            ),
-            Positioned(
-              top: expandedHeight - roundedContainerHeight - shrinkOffset,
-              left: 0,
-              child: Container(
-                width: MediaQuery
-                    .of(context)
-                    .size
-                    .width,
-                height: roundedContainerHeight,
-                decoration: BoxDecoration(
-                  color: Colors.black26,
-                  borderRadius: BorderRadius.only(
-                    topLeft: Radius.circular(30),
-                    topRight: Radius.circular(30),
-                  ),
-                ),
-              ),
-            ),
-/*            Positioned(
-              top: expandedHeight - 120 - shrinkOffset,
-              left: 30,
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: <Widget>[
-                  Text(
-                    'Flutter',
-                    style: TextStyle(
-                      color: Colors.black,
-                      fontSize: 30,
-                    ),
-                  ),
-                  Text(
-                    'owl',
-                    style: TextStyle(
-                      color: Colors.black,
-                      fontSize: 15,
-                    ),
-                  ),
-                ],
-              ),
-            )*/
-          ],
         ),
       ),
     );
-  }
-
-  @override
-  double get maxExtent => expandedHeight;
-
-  @override
-  double get minExtent => 0;
-
-  @override
-  bool shouldRebuild(SliverPersistentHeaderDelegate oldDelegate) {
-    return true;
   }
 }

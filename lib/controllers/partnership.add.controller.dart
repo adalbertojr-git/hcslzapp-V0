@@ -1,7 +1,6 @@
 import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:hcslzapp/models/partnership.dart';
-import 'package:hcslzapp/repositories/associated.repo.dart';
 import 'package:hcslzapp/repositories/partnership.repo.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:mobx/mobx.dart';
