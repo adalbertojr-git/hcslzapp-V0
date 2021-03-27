@@ -132,7 +132,6 @@ class _PartnershipAddPageState extends State<PartnershipAddPage> {
                   nLines: 4,
                 ),
                 Container(
-                  color: Colors.white70,
                   child: Padding(
                     padding: const EdgeInsets.fromLTRB(0.0, 3.0, 2.0, 3.0),
                     child: Row(
@@ -170,7 +169,7 @@ class _PartnershipAddPageState extends State<PartnershipAddPage> {
                   ),
                 ),
                 SizedBox(
-                  height: 80.0,
+                  height: 100.0,
                 ),
               ],
             ),

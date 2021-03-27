@@ -309,7 +309,6 @@ class _AssociatedUpdatePageState extends State<AssociatedUpdatePage> {
                 height: 10.0,
               ),
               Container(
-                color: Colors.white70,
                 child: Padding(
                   padding: const EdgeInsets.fromLTRB(0.0, 3.0, 2.0, 3.0),
                   child: Row(
