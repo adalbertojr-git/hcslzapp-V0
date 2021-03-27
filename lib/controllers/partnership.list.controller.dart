@@ -29,7 +29,9 @@ abstract class PartnershipListControllerBase with Store {
   @action
   bool setButtonVisibilty() => isHidedButton = !isHidedButton;
 
-  get init {}
+  get init {
+    partnerships.clear();
+  }
 
   @action
   Future findAll() =>

@@ -5,7 +5,7 @@ import 'package:hcslzapp/components/button.dart';
 import 'package:hcslzapp/components/centered.message.dart';
 import 'package:hcslzapp/components/my.text.form.field.dart';
 import 'package:hcslzapp/components/progress.dart';
-import 'package:hcslzapp/components/top.margin.dart';
+import 'package:hcslzapp/components/top.bar.dart';
 import 'package:hcslzapp/controllers/payment.list.controller.dart';
 import 'package:hcslzapp/models/associated.dart';
 import 'package:hcslzapp/pages/financial/payment.selected.page.dart';
@@ -87,7 +87,7 @@ class _PaymentListPageState extends State<PaymentListPage> {
         height: MediaQuery.of(context).size.height,
         child: Column(
           children: [
-            TopMargin(),
+            TopBar(),
             MyTextFormField(
               textEditingController: _controller.nameCtrl,
               label: labelNamePayment,

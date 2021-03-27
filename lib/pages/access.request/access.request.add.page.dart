@@ -5,7 +5,7 @@ import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:hcslzapp/common/labels.and.hints.dart';
 import 'package:hcslzapp/components/button.dart';
 import 'package:hcslzapp/components/my.text.form.field.dart';
-import 'package:hcslzapp/components/top.margin.dart';
+import 'package:hcslzapp/components/top.bar.dart';
 import 'package:hcslzapp/controllers/access.request.controller.dart';
 
 class AccessRequestAddPage extends StatefulWidget {
@@ -45,7 +45,7 @@ class _AccessRequestAddPageState extends State<AccessRequestAddPage> {
         child: SingleChildScrollView(
           child: Column(
             children: <Widget>[
-              TopMargin(),
+              TopBar(),
               MyTextFormField(
                 textEditingController: _controller.nameCtrl,
                 hint: hintName,

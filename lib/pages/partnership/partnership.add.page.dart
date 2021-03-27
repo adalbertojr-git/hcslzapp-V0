@@ -4,7 +4,7 @@ import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:hcslzapp/common/labels.and.hints.dart';
 import 'package:hcslzapp/common/photo.image.provider.dart';
 import 'package:hcslzapp/components/button.dart';
-import 'package:hcslzapp/components/top.margin.dart';
+import 'package:hcslzapp/components/top.bar.dart';
 import 'package:hcslzapp/components/transaction.auth.dialog.dart';
 import 'package:hcslzapp/controllers/partnership.add.controller.dart';
 import 'package:hcslzapp/enums/associated.status.dart';
@@ -51,7 +51,7 @@ class _PartnershipAddPageState extends State<PartnershipAddPage> {
           child: SingleChildScrollView(
             child: Column(
               children: <Widget>[
-                TopMargin(),
+                TopBar(),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [

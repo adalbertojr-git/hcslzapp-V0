@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:hcslzapp/components/button.dart';
-import 'package:hcslzapp/components/top.margin.dart';
+import 'package:hcslzapp/components/top.bar.dart';
 
 class DtcCodeAccessOldModelsPage extends StatelessWidget {
   //@override
@@ -20,7 +20,7 @@ class DtcCodeAccessOldModelsPage extends StatelessWidget {
           child: SingleChildScrollView(
             child: Column(
               children: <Widget>[
-                TopMargin(),
+                TopBar(),
                 Container(
                   color: Colors.white,
                   padding: EdgeInsets.all(20.0),

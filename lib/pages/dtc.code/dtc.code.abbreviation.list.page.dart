@@ -5,7 +5,7 @@ import 'package:hcslzapp/components/button.dart';
 import 'package:hcslzapp/components/centered.message.dart';
 import 'package:hcslzapp/components/my.text.form.field.dart';
 import 'package:hcslzapp/components/progress.dart';
-import 'package:hcslzapp/components/top.margin.dart';
+import 'package:hcslzapp/components/top.bar.dart';
 import 'package:hcslzapp/controllers/dtc.code.abbreviation.list.controller.dart';
 import 'package:hcslzapp/models/dtc.code.abbreviation.dart';
 
@@ -88,7 +88,7 @@ class DtcCodeAbbreviationListPageState
         height: MediaQuery.of(context).size.height,
         child: Column(
           children: [
-            TopMargin(),
+            TopBar(),
             MyTextFormField(
               textEditingController: _controller.codeCtrl,
               label: labelAbbreviation,

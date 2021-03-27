@@ -4,7 +4,7 @@ import 'package:hcslzapp/components/button.dart';
 import 'package:hcslzapp/components/centered.message.dart';
 import 'package:hcslzapp/components/progress.dart';
 import 'dart:math';
-import 'package:hcslzapp/components/top.margin.dart';
+import 'package:hcslzapp/components/top.bar.dart';
 import 'package:hcslzapp/controllers/partnership.list.controller.dart';
 import 'package:hcslzapp/models/partnership.dart';
 
@@ -88,7 +88,7 @@ class _PartnershipListPageState extends State<PartnershipListPage> {
           floatingActionButton: _controller.isHidedButton
               ? null
               : Button(
-                  icon: Icons.arrow_back,
+                  icon: Icons.add,
                   onClick: () => Navigator.of(context).pop()),
         ),
       );
@@ -103,47 +103,57 @@ class _PartnershipListPageState extends State<PartnershipListPage> {
           ),
         ),
         height: MediaQuery.of(context).size.height,
-        child: ListView(
-          children: <Widget>[
-            TopMargin(),
-            Container(
-              height: PAGER_HEIGHT,
-              child: NotificationListener<ScrollNotification>(
-                onNotification: (ScrollNotification notification) {
-                  if (notification is ScrollUpdateNotification) {
-                    setState(() {
-                      page = pageController.page;
-                    });
-                  }
-                },
-                child: PageView.builder(
-                  onPageChanged: (pos) {
-                    setState(() {
-                      currentPage = pos;
-                    });
-                  },
-                  physics: BouncingScrollPhysics(),
-                  controller: pageController,
-                  itemCount: _controller.partnerships.length,//listOfCharacters.length,
-                  itemBuilder: (context, index) {
-                    final scale = max(SCALE_FRACTION,
-                        (FULL_SCALE - (index - page).abs()) + viewPortFraction);
-                    return circleOffer(listOfCharacters[index]['image'], scale);
-                    //return circleOffer(_controller.partnerships[index]['image'], scale);
-                  },
-                ),
+        child: Column(
+          children: [
+            TopBar(),
+            Expanded(
+              child: ListView(
+                children: <Widget>[
+                  Container(
+                    height: PAGER_HEIGHT,
+                    child: NotificationListener<ScrollNotification>(
+                      onNotification: (ScrollNotification notification) {
+                        if (notification is ScrollUpdateNotification) {
+                          setState(() {
+                            page = pageController.page;
+                          });
+                        }
+                      },
+                      child: PageView.builder(
+                        onPageChanged: (pos) {
+                          setState(() {
+                            currentPage = pos;
+                          });
+                        },
+                        physics: BouncingScrollPhysics(),
+                        controller: pageController,
+                        itemCount: _controller.partnerships.length,
+                        //listOfCharacters.length,
+                        itemBuilder: (context, index) {
+                          final scale = max(
+                              SCALE_FRACTION,
+                              (FULL_SCALE - (index - page).abs()) +
+                                  viewPortFraction);
+                          return circleOffer(
+                              listOfCharacters[index]['image'], scale);
+                          //return circleOffer(_controller.partnerships[index]['image'], scale);
+                        },
+                      ),
+                    ),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.all(20.0),
+                    child: Text(
+                      //listOfCharacters[currentPage]['name'],
+                      _controller.partnerships[currentPage].partner,
+                      textAlign: TextAlign.center,
+                      style: TextStyle(fontSize: 20),
+                    ),
+                  ),
+                  buildDetail()
+                ],
               ),
             ),
-            Padding(
-              padding: const EdgeInsets.all(20.0),
-              child: Text(
-                //listOfCharacters[currentPage]['name'],
-                _controller.partnerships[currentPage].partner,
-                textAlign: TextAlign.center,
-                style: TextStyle(fontSize: 20),
-              ),
-            ),
-            buildDetail()
           ],
         ),
       );
@@ -193,8 +203,8 @@ class _PartnershipListPageState extends State<PartnershipListPage> {
       );
 
   Widget buildUserInfo() => ListTile(
-        //title: Text(listOfCharacters[currentPage]['name']),
         title: Text(_controller.partnerships[currentPage].partner),
-        subtitle: Text('owl'),
+        subtitle: Text(_controller.partnerships[currentPage].address),
+        trailing: Icon(Icons.edit),
       );
 }

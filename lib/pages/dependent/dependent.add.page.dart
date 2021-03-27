@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:hcslzapp/common/labels.and.hints.dart';
 import 'package:hcslzapp/components/button.dart';
-import 'package:hcslzapp/components/top.margin.dart';
+import 'package:hcslzapp/components/top.bar.dart';
 import 'package:hcslzapp/controllers/dependent.controller.dart';
 import 'package:hcslzapp/enums/blood.types.dart';
 import 'package:hcslzapp/components/my.text.form.field.dart';
@@ -45,7 +45,7 @@ class _DependentAddPageState extends State<DependentAddPage> {
           child: SingleChildScrollView(
             child: Column(
               children: <Widget>[
-                TopMargin(),
+                TopBar(),
                 Observer(
                   builder: (_) {
                     return MyTextFormField(

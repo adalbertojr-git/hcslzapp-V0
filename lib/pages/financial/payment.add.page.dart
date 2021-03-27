@@ -3,7 +3,7 @@ import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:hcslzapp/common/labels.and.hints.dart';
 import 'package:hcslzapp/components/button.dart';
 import 'package:hcslzapp/components/my.text.form.field.dart';
-import 'package:hcslzapp/components/top.margin.dart';
+import 'package:hcslzapp/components/top.bar.dart';
 import 'package:hcslzapp/controllers/payment.add.controller.dart';
 import 'package:hcslzapp/models/associated.dart';
 import 'package:hcslzapp/models/payment.dart';
@@ -49,7 +49,7 @@ class _PaymentAddAddState extends State<PaymentAddPage> {
         child: SingleChildScrollView(
           child: Column(
             children: <Widget>[
-              TopMargin(),
+              TopBar(),
               MyTextFormField(
                 textEditingController: _controller.nameCtrl,
                 label: labelNamePayment,

@@ -6,7 +6,7 @@ import 'package:hcslzapp/components/button.dart';
 import 'package:hcslzapp/components/centered.message.dart';
 import 'package:hcslzapp/components/my.text.form.field.dart';
 import 'package:hcslzapp/components/progress.dart';
-import 'package:hcslzapp/components/top.margin.dart';
+import 'package:hcslzapp/components/top.bar.dart';
 import 'package:hcslzapp/components/transaction.auth.dialog.dart';
 import 'package:hcslzapp/controllers/associated.update.controller.dart';
 import 'package:hcslzapp/enums/associated.status.dart';
@@ -108,7 +108,7 @@ class _AssociatedUpdatePageState extends State<AssociatedUpdatePage> {
         child: SingleChildScrollView(
           child: Column(
             children: <Widget>[
-              TopMargin(),
+              TopBar(),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [

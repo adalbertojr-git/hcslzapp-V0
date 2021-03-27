@@ -3,7 +3,7 @@ import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:hcslzapp/common/labels.and.hints.dart';
 import 'package:hcslzapp/components/button.dart';
 import 'package:hcslzapp/components/my.text.form.field.dart';
-import 'package:hcslzapp/components/top.margin.dart';
+import 'package:hcslzapp/components/top.bar.dart';
 import 'package:hcslzapp/controllers/motorcycle.controller.dart';
 import 'package:hcslzapp/models/motorcycle.dart';
 import 'package:mask_text_input_formatter/mask_text_input_formatter.dart';
@@ -44,7 +44,7 @@ class _MotorcycleAddPageState extends State<MotorcycleAddPage> {
         child: SingleChildScrollView(
           child: Column(
             children: <Widget>[
-              TopMargin(),
+              TopBar(),
               Observer(
                 builder: (_) {
                   return MyTextFormField(
