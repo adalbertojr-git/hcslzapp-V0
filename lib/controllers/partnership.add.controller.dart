@@ -1,4 +1,5 @@
 import 'dart:io';
+import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:hcslzapp/models/partnership.dart';
 import 'package:hcslzapp/repositories/partnership.repo.dart';
@@ -101,20 +102,19 @@ abstract class PartnershipAddControllerBase with Store {
         errorMsg = "${e.message}";
       }, test: (e) => e is Exception);
 
-  Future<Partnership> _setValues2() async {
+/*  Future<Partnership> _setValues2() async {
     partnership.partner = partnerCtrl.text;
     partnership.phone1 = phone1Ctrl.text;
     partnership.phone2 = phone2Ctrl.text;
     partnership.address = addressCtrl.text;
     partnership.promotion = promotionCtrl.text;
     partnership.status = statusCtrl.text;
-/*    if (photo != null) {
+    if (photo != null) {
       //se houve alteração de foto
-      _savePhoto();
-      await _uploadPhoto().then((value) => associated.photoUrl = value);
-    }*/
+      await _uploadPhoto().then((value) => partnership.photoUrl = value);
+    }
     return partnership;
-  }
+  }*/
 
   Future<Partnership> _setValues() async {
     return Partnership(
@@ -125,6 +125,7 @@ abstract class PartnershipAddControllerBase with Store {
       address: addressCtrl.text,
       promotion: promotionCtrl.text,
       status: statusCtrl.text,
+      photoUrl: photo != null ? await _uploadPhoto() : '',
     );
   }
 
@@ -164,6 +165,18 @@ abstract class PartnershipAddControllerBase with Store {
       photoPath = photo.path.toString();
     }
   }
+
+  Future<String> _uploadPhoto() async {
+    FirebaseStorage storage = FirebaseStorage.instance;
+    Reference reference = storage.ref().child(
+      "partnerPhotos/${partnership.id}",
+    );
+    await reference.putFile(photo);
+    return await reference.getDownloadURL().catchError((e) {
+      errorMsg = "${e.message}";
+    });
+  }
+
 }
 
 class FormController extends FormControllerBase with _$FormController {

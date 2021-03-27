@@ -233,17 +233,6 @@ abstract class AssociatedUpdateControllerBase with Store {
     await Glutton.eat("photoPath", photoPath);
   }
 
-/*  _getPhoto() async {
-    FirebaseStorage storage = FirebaseStorage.instance;
-    storage
-        .ref()
-        .child('profilePhotos/${this.associated.id}')
-        .getData(10000000)
-        .then((data) {
-      this.photo2 = data;
-    }).catchError((e) => this.errorMsg = "${e.message}");
-  }*/
-
   Future<String> _uploadPhoto() async {
     FirebaseStorage storage = FirebaseStorage.instance;
     Reference reference = storage.ref().child(
