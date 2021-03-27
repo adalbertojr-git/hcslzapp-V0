@@ -7,6 +7,7 @@ import 'dart:math';
 import 'package:hcslzapp/components/top.bar.dart';
 import 'package:hcslzapp/controllers/partnership.list.controller.dart';
 import 'package:hcslzapp/models/partnership.dart';
+import 'package:hcslzapp/pages/partnership/partnership.add.page.dart';
 
 const SCALE_FRACTION = 0.7;
 const FULL_SCALE = 1.0;
@@ -38,7 +39,9 @@ class _PartnershipListPageState extends State<PartnershipListPage> {
   @override
   void initState() {
     pageController = PageController(
-        initialPage: currentPage, viewportFraction: viewPortFraction);
+      initialPage: currentPage,
+      viewportFraction: viewPortFraction,
+    );
     _controller.getFuture().then((value) {
       if (value != null && value.isNotEmpty) {
         _controller.setButtonVisibilty();
@@ -89,7 +92,13 @@ class _PartnershipListPageState extends State<PartnershipListPage> {
               ? null
               : Button(
                   icon: Icons.add,
-                  onClick: () => Navigator.of(context).pop()),
+                  onClick: () => Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) =>
+                            PartnershipAddPage(null, widget._user)),
+                  ),
+                ),
         ),
       );
 

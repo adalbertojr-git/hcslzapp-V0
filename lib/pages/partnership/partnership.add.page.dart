@@ -183,16 +183,18 @@ class _PartnershipAddPageState extends State<PartnershipAddPage> {
   }
 
   get _photo => Container(
-        height: 250.0,
-        width: 250.0,
-        padding: EdgeInsets.all(5.0),
+        height: 200.0,
+        width: 200.0,
+        padding: EdgeInsets.all(10.0),
         decoration: BoxDecoration(
           color: Colors.black.withOpacity(0.2),
+          borderRadius: BorderRadius.circular(100.0),
         ),
         child: Observer(
           builder: (_) => Container(
             decoration: BoxDecoration(
-              color: Colors.black26,
+              color: Colors.black,
+              borderRadius: BorderRadius.circular(150.0),
               image: _loadPhoto(),
             ),
           ),
