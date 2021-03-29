@@ -102,20 +102,6 @@ abstract class PartnershipAddControllerBase with Store {
         errorMsg = "${e.message}";
       }, test: (e) => e is Exception);
 
-/*  Future<Partnership> _setValues2() async {
-    partnership.partner = partnerCtrl.text;
-    partnership.phone1 = phone1Ctrl.text;
-    partnership.phone2 = phone2Ctrl.text;
-    partnership.address = addressCtrl.text;
-    partnership.promotion = promotionCtrl.text;
-    partnership.status = statusCtrl.text;
-    if (photo != null) {
-      //se houve alteração de foto
-      await _uploadPhoto().then((value) => partnership.photoUrl = value);
-    }
-    return partnership;
-  }*/
-
   Future<Partnership> _setValues() async {
     return Partnership(
       id: partnership != null ? partnership.id : int.parse('0'),

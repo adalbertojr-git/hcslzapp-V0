@@ -185,8 +185,8 @@ class _PartnershipListPageState extends State<PartnershipListPage> {
       image: _controller.partnerships[index].photoUrl != null
           ? NetworkImage(_controller.partnerships[index].photoUrl)
           : PhotoImageProvider().getImageProvider(
-        File('assets/imgs/noImage.png'),
-      ),
+              File('assets/imgs/noImage.png'),
+            ),
       fit: BoxFit.fill);
 
   Widget buildDetail() => Container(
@@ -201,8 +201,7 @@ class _PartnershipListPageState extends State<PartnershipListPage> {
                 horizontal: 15,
               ),
               child: Text(
-                'Creates insets with symmetrical vertical and horizontal offsets.' *
-                    20,
+                _controller.partnerships[currentPage].promotion,
                 style: TextStyle(
                   color: Colors.black,
                   height: 1.4,

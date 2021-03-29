@@ -264,7 +264,7 @@ class _PartnershipAddPageState extends State<PartnershipAddPage> {
             builder: (context) {
               return TransactionAuthDialog(
                   msg:
-                      'Inativar o parceiro faz com que não seja mais visto no App. ' +
+                      'O parceiro inativado não será mais visto pelos associados no App. ' +
                           '\n\n' +
                           'Confirma?');
             });
