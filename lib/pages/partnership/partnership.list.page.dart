@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
+import 'package:hcslzapp/common/photo.image.provider.dart';
 import 'package:hcslzapp/components/button.dart';
 import 'package:hcslzapp/components/centered.message.dart';
 import 'package:hcslzapp/components/progress.dart';
@@ -8,6 +9,7 @@ import 'package:hcslzapp/components/top.bar.dart';
 import 'package:hcslzapp/controllers/partnership.list.controller.dart';
 import 'package:hcslzapp/models/partnership.dart';
 import 'package:hcslzapp/pages/partnership/partnership.add.page.dart';
+import 'dart:io';
 
 const SCALE_FRACTION = 0.7;
 const FULL_SCALE = 1.0;
@@ -27,13 +29,6 @@ class _PartnershipListPageState extends State<PartnershipListPage> {
   double viewPortFraction = 0.5;
   PageController pageController;
   int currentPage = 0;
-  List<Map<String, String>> listOfCharacters = [
-    {'image': "assets/richmond.png", 'name': "Richmond"},
-    {'image': "assets/roy.png", 'name': "Roy"},
-    {'image': "assets/moss.png", 'name': "Moss"},
-    {'image': "assets/douglas.png", 'name': "Douglas"},
-    {'image': "assets/jen.png", 'name': "Jen"}
-  ];
   double page = 0.0;
 
   @override
@@ -143,9 +138,7 @@ class _PartnershipListPageState extends State<PartnershipListPage> {
                               SCALE_FRACTION,
                               (FULL_SCALE - (index - page).abs()) +
                                   viewPortFraction);
-                          return circleOffer(
-                              listOfCharacters[index]['image'], scale);
-                          //return circleOffer(_controller.partnerships[index]['image'], scale);
+                          return circleOffer(index, scale);
                         },
                       ),
                     ),
@@ -153,7 +146,6 @@ class _PartnershipListPageState extends State<PartnershipListPage> {
                   Padding(
                     padding: const EdgeInsets.all(20.0),
                     child: Text(
-                      //listOfCharacters[currentPage]['name'],
                       _controller.partnerships[currentPage].partner,
                       textAlign: TextAlign.center,
                       style: TextStyle(fontSize: 20),
@@ -167,7 +159,7 @@ class _PartnershipListPageState extends State<PartnershipListPage> {
         ),
       );
 
-  Widget circleOffer(String image, double scale) => Align(
+  Widget circleOffer(int index, double scale) => Align(
         alignment: Alignment.bottomCenter,
         child: Container(
           margin: EdgeInsets.only(bottom: 10),
@@ -178,13 +170,24 @@ class _PartnershipListPageState extends State<PartnershipListPage> {
             clipBehavior: Clip.antiAlias,
             shape: CircleBorder(
                 side: BorderSide(color: Colors.grey.shade200, width: 5)),
-            child: Image.asset(
-              image,
-              fit: BoxFit.cover,
+            child: Observer(
+              builder: (_) => Container(
+                decoration: BoxDecoration(
+                  image: _loadPhoto(index),
+                ),
+              ),
             ),
           ),
         ),
       );
+
+  DecorationImage _loadPhoto(int index) => DecorationImage(
+      image: _controller.partnerships[index].photoUrl != null
+          ? NetworkImage(_controller.partnerships[index].photoUrl)
+          : PhotoImageProvider().getImageProvider(
+        File('assets/imgs/noImage.png'),
+      ),
+      fit: BoxFit.fill);
 
   Widget buildDetail() => Container(
         color: Colors.black26,
@@ -214,6 +217,14 @@ class _PartnershipListPageState extends State<PartnershipListPage> {
   Widget buildUserInfo() => ListTile(
         title: Text(_controller.partnerships[currentPage].partner),
         subtitle: Text(_controller.partnerships[currentPage].address),
-        trailing: Icon(Icons.edit),
+        trailing: GestureDetector(
+          child: Icon(Icons.edit),
+          onTap: () => Navigator.push(
+            context,
+            MaterialPageRoute(
+                builder: (context) => PartnershipAddPage(
+                    _controller.partnerships[currentPage], widget._user)),
+          ),
+        ),
       );
 }

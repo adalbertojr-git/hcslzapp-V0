@@ -278,8 +278,8 @@ mixin _$PartnershipAddController on PartnershipAddControllerBase, Store {
       AsyncAction('PartnershipAddControllerBase.update');
 
   @override
-  Future<dynamic> update(Partnership partnership) {
-    return _$updateAsyncAction.run(() => super.update(partnership));
+  Future<dynamic> update() {
+    return _$updateAsyncAction.run(() => super.update());
   }
 
   final _$getImageFromCameraAsyncAction =

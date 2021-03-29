@@ -131,43 +131,47 @@ class _PartnershipAddPageState extends State<PartnershipAddPage> {
                   inputType: TextInputType.text,
                   nLines: 4,
                 ),
-                Container(
-                  child: Padding(
-                    padding: const EdgeInsets.fromLTRB(0.0, 3.0, 2.0, 3.0),
-                    child: Row(
-                      crossAxisAlignment: CrossAxisAlignment.baseline,
-                      children: <Widget>[
-                        Expanded(
-                          child: Text(
-                            'Status:',
-                            textAlign: TextAlign.center,
-                            style: TextStyle(
-                              fontSize: 18.0,
-                              fontWeight: FontWeight.bold,
-                            ),
-                          ),
-                        ),
-                        Expanded(
-                          child: Container(
-                            height: 55.0,
-                            child: DropdownButtonFormField(
-                              decoration: const InputDecoration(
-                                enabledBorder: OutlineInputBorder(
-                                  borderSide: BorderSide(
-                                    color: Colors.black,
+                widget.partnership == null
+                    ? Container()
+                    : Container(
+                        child: Padding(
+                          padding:
+                              const EdgeInsets.fromLTRB(0.0, 3.0, 2.0, 3.0),
+                          child: Row(
+                            crossAxisAlignment: CrossAxisAlignment.baseline,
+                            children: <Widget>[
+                              Expanded(
+                                child: Text(
+                                  'Status:',
+                                  textAlign: TextAlign.center,
+                                  style: TextStyle(
+                                    fontSize: 18.0,
+                                    fontWeight: FontWeight.bold,
                                   ),
                                 ),
                               ),
-                              //value: _controller.currentStatus,
-                              items: getStatus(),
-                              onChanged: _controller.changedStatusDropDownItem,
-                            ),
+                              Expanded(
+                                child: Container(
+                                  height: 55.0,
+                                  child: DropdownButtonFormField(
+                                    decoration: const InputDecoration(
+                                      enabledBorder: OutlineInputBorder(
+                                        borderSide: BorderSide(
+                                          color: Colors.black,
+                                        ),
+                                      ),
+                                    ),
+                                    value: _controller.currentStatus,
+                                    items: getStatus(),
+                                    onChanged:
+                                        _controller.changedStatusDropDownItem,
+                                  ),
+                                ),
+                              ),
+                            ],
                           ),
                         ),
-                      ],
-                    ),
-                  ),
-                ),
+                      ),
                 SizedBox(
                   height: 100.0,
                 ),
@@ -176,7 +180,10 @@ class _PartnershipAddPageState extends State<PartnershipAddPage> {
           ),
         ),
         floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
-        floatingActionButton: Button(icon: Icons.save, onClick: () => _save),
+        floatingActionButton: Button(
+          icon: Icons.save,
+          onClick: () => widget.partnership == null ? _save : _update,
+        ),
       ),
     );
   }
@@ -219,6 +226,37 @@ class _PartnershipAddPageState extends State<PartnershipAddPage> {
         ),
       );
     } else {
+      _controller.save().then(
+        (value) {
+          if (value != null) {
+            asuka.hideCurrentSnackBar();
+            asuka.showSnackBar(
+              SnackBar(
+                content: Text('Parceiro salvo com sucesso.'),
+              ),
+            );
+            Navigator.of(context).pop(_controller.partnership);
+          } else {
+            asuka.showSnackBar(
+              SnackBar(
+                content: Text(_controller.errorMsg),
+              ),
+            );
+          }
+        },
+      );
+    }
+  }
+
+  get _update async {
+    if (_controller.hasErrors) {
+      asuka.showSnackBar(
+        SnackBar(
+          content: Text('Atenção: Existem erros no formulário que devem '
+              'ser corrigidos antes de efetivar a transação.'),
+        ),
+      );
+    } else {
       var response = true;
       if (_controller.currentStatus == 'Inativo') {
         response = await showDialog(
@@ -237,7 +275,7 @@ class _PartnershipAddPageState extends State<PartnershipAddPage> {
             content: Text('Aguarde...'),
           ),
         );
-        _controller.save().then(
+        _controller.update().then(
           (value) {
             if (value != null) {
               asuka.hideCurrentSnackBar();
@@ -246,7 +284,7 @@ class _PartnershipAddPageState extends State<PartnershipAddPage> {
                   content: Text('Parceiro atualizado com sucesso.'),
                 ),
               );
-              //Navigator.of(context).pop(_controller.photoPath);
+              Navigator.of(context).pop(_controller.partnership);
             } else {
               asuka.showSnackBar(
                 SnackBar(

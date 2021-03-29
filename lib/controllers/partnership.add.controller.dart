@@ -97,7 +97,7 @@ abstract class PartnershipAddControllerBase with Store {
       }, test: (e) => e is Exception);
 
   @action
-  Future update(Partnership partnership) async =>
+  Future update() async =>
       await _partnershipRepo.update(await _setValues()).catchError((e) {
         errorMsg = "${e.message}";
       }, test: (e) => e is Exception);
@@ -118,14 +118,14 @@ abstract class PartnershipAddControllerBase with Store {
 
   Future<Partnership> _setValues() async {
     return Partnership(
-      id: int.parse('0'),
+      id: partnership != null ? partnership.id : int.parse('0'),
       partner: partnerCtrl.text,
       phone1: phone1Ctrl.text,
       phone2: phone2Ctrl.text,
       address: addressCtrl.text,
       promotion: promotionCtrl.text,
       status: statusCtrl.text,
-      photoUrl: photo != null ? await _uploadPhoto() : '',
+      photoUrl: photo != null ? await _uploadPhoto() : null,
     );
   }
 
@@ -169,14 +169,13 @@ abstract class PartnershipAddControllerBase with Store {
   Future<String> _uploadPhoto() async {
     FirebaseStorage storage = FirebaseStorage.instance;
     Reference reference = storage.ref().child(
-      "partnerPhotos/${partnership.id}",
-    );
+          "partnerPhotos/${partnerCtrl.text}",
+        );
     await reference.putFile(photo);
     return await reference.getDownloadURL().catchError((e) {
       errorMsg = "${e.message}";
     });
   }
-
 }
 
 class FormController extends FormControllerBase with _$FormController {
