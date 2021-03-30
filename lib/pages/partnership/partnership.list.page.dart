@@ -203,8 +203,7 @@ class _PartnershipListPageState extends State<PartnershipListPage> {
                 _controller.partnerships[currentPage].promotion,
                 style: TextStyle(
                   color: Colors.black,
-                  height: 1.4,
-                  fontSize: 16,
+                  fontSize: 18,
                 ),
               ),
             ),

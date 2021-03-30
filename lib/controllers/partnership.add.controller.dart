@@ -68,7 +68,7 @@ abstract class PartnershipAddControllerBase with Store {
   get init {
     _initTextFields;
     currentStatus = statusCtrl.text;
-    photoUrl = partnership.photoUrl;
+    photoUrl = partnership != null ? partnership.photoUrl : null;
     formController = FormController(
       partner: partnership != null ? partnership.partner : '',
     );
