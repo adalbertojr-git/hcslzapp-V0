@@ -68,6 +68,7 @@ abstract class PartnershipAddControllerBase with Store {
   get init {
     _initTextFields;
     currentStatus = statusCtrl.text;
+    photoUrl = partnership.photoUrl;
     formController = FormController(
       partner: partnership != null ? partnership.partner : '',
     );
@@ -80,6 +81,7 @@ abstract class PartnershipAddControllerBase with Store {
     addressCtrl.text = partnership != null ? partnership.address : null;
     promotionCtrl.text = partnership != null ? partnership.promotion : null;
     statusCtrl.text = partnership != null ? partnership.status : null;
+
   }
 
   @action
@@ -111,7 +113,7 @@ abstract class PartnershipAddControllerBase with Store {
       address: addressCtrl.text,
       promotion: promotionCtrl.text,
       status: statusCtrl.text,
-      photoUrl: photo != null ? await _uploadPhoto() : null,
+      photoUrl: photo != null ? await _uploadPhoto() : photoUrl,
     );
   }
 

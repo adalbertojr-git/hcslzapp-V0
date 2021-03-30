@@ -365,7 +365,7 @@ class _AssociatedUpdatePageState extends State<AssociatedUpdatePage> {
         child: Observer(
           builder: (_) => Container(
             decoration: BoxDecoration(
-              color: Colors.black,
+              color: Colors.white,
               borderRadius: BorderRadius.circular(150.0),
               image: _loadPhoto(),
             ),

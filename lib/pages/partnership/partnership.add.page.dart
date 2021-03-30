@@ -199,7 +199,7 @@ class _PartnershipAddPageState extends State<PartnershipAddPage> {
         child: Observer(
           builder: (_) => Container(
             decoration: BoxDecoration(
-              color: Colors.black,
+              color: Colors.white,
               borderRadius: BorderRadius.circular(150.0),
               image: _loadPhoto(),
             ),
@@ -208,10 +208,8 @@ class _PartnershipAddPageState extends State<PartnershipAddPage> {
       );
 
   DecorationImage _loadPhoto() => DecorationImage(
-      image: _controller.photoPath != null
-          ? PhotoImageProvider().getImageProvider(
-              File(_controller.photoPath),
-            )
+      image: _controller.photoUrl != null
+          ? NetworkImage(_controller.photoUrl)
           : PhotoImageProvider().getImageProvider(
               File('assets/imgs/noImage.png'),
             ),

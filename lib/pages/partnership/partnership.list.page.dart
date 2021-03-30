@@ -132,7 +132,6 @@ class _PartnershipListPageState extends State<PartnershipListPage> {
                         physics: BouncingScrollPhysics(),
                         controller: pageController,
                         itemCount: _controller.partnerships.length,
-                        //listOfCharacters.length,
                         itemBuilder: (context, index) {
                           final scale = max(
                               SCALE_FRACTION,
@@ -214,8 +213,18 @@ class _PartnershipListPageState extends State<PartnershipListPage> {
       );
 
   Widget buildUserInfo() => ListTile(
+        isThreeLine: true,
         title: Text(_controller.partnerships[currentPage].partner),
-        subtitle: Text(_controller.partnerships[currentPage].address),
+        subtitle: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text('Endereço: ' + _controller.partnerships[currentPage].address),
+            Text('Telefone(s): ' +
+                _controller.partnerships[currentPage].phone1 +
+                ' - ' +
+                _controller.partnerships[currentPage].phone2),
+          ],
+        ),
         trailing: GestureDetector(
           child: Icon(Icons.edit),
           onTap: () => Navigator.push(
