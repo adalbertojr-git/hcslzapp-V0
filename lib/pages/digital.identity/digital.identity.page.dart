@@ -2,10 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:hcslzapp/common/labels.and.hints.dart';
 import 'package:hcslzapp/common/photo.image.provider.dart';
-import 'package:hcslzapp/components/button.dart';
 import 'package:hcslzapp/components/centered.message.dart';
 import 'package:hcslzapp/components/my.text.form.field.dart';
 import 'package:hcslzapp/components/progress.dart';
+import 'package:hcslzapp/components/top.bar.dart';
 import 'package:hcslzapp/controllers/digital.identity.controller.dart';
 import 'dart:io';
 
@@ -70,149 +70,126 @@ class _DigitalIdentityPageState extends State<DigitalIdentityPage> {
               );
             },
           ),
-          floatingActionButtonLocation:
-              FloatingActionButtonLocation.centerFloat,
-          floatingActionButton: _controller.isHidedButton
-              ? null
-              : Button(
-                  icon: Icons.arrow_back,
-                  onClick: () => Navigator.of(context).pop(),
-                ),
         ),
       );
 
-  get _widgets => Stack(
-        children: <Widget>[
-          Center(
-            child: SizedBox(
-              height: 370.0,
-              child: Padding(
-                padding: EdgeInsets.fromLTRB(00.0, 10.0, 00.0, 0.0),
-                child: Image.asset('assets/imgs/logo_carteirad.png'),
-              ),
-            ),
+  get _widgets => Container(
+        decoration: BoxDecoration(
+          gradient: LinearGradient(
+            colors: [Colors.white30, Colors.deepOrange],
+            begin: FractionalOffset.topLeft,
+            end: FractionalOffset.bottomRight,
           ),
-          Center(
-            child: Container(
-              decoration: BoxDecoration(
-                gradient: LinearGradient(
-                  colors: [Colors.white30, Colors.deepOrange],
-                  begin: FractionalOffset.topLeft,
-                  end: FractionalOffset.bottomRight,
-                ),
+        ),
+        height: MediaQuery.of(context).size.height,
+        child: SingleChildScrollView(
+          child: Column(
+            children: [
+              TopBar(),
+              Stack(
+                children: <Widget>[
+                  Center(
+                    child: SizedBox(
+                      height: 300.0,
+                      child: Container(
+                        child: Image.asset('assets/imgs/logo_carteirad.png'),
+                      ),
+                    ),
+                  ),
+                  Center(
+                    child: _photo,
+                  ),
+                ],
               ),
-              height: MediaQuery.of(context).size.height,
-              child: SingleChildScrollView(
-                child: Column(
-                  children: <Widget>[
-                    SizedBox(
-                      height: 30.0,
-                    ),
-                    Center(
-                      child: _photo,
-                    ),
-                    SizedBox(
-                      height: 50.0,
-                    ),
-                    MyTextFormField(
-                      textEditingController: _controller.nameCtrl,
-                      label: labelNameDigitalPayment,
+              MyTextFormField(
+                textEditingController: _controller.nameCtrl,
+                label: labelNameDigitalPayment,
+                disabled: true,
+                size: _fontSize,
+              ),
+              Row(
+                children: <Widget>[
+                  Expanded(
+                    child: MyTextFormField(
+                      textEditingController: _controller.associatedTypeCtrl,
+                      label: labelAssociatedType,
                       disabled: true,
                       size: _fontSize,
+                      textAlign: TextAlign.center,
                     ),
-                    Row(
-                      children: <Widget>[
-                        Expanded(
-                          child: MyTextFormField(
-                            textEditingController:
-                                _controller.associatedTypeCtrl,
-                            label: labelAssociatedType,
-                            disabled: true,
-                            size: _fontSize,
-                            textAlign: TextAlign.center,
-                          ),
-                        ),
-                        Expanded(
-                          child: MyTextFormField(
-                            textEditingController: _controller.cnhCtrl,
-                            label: labelCNH,
-                            disabled: true,
-                            size: _fontSize,
-                            textAlign: TextAlign.center,
-                          ),
-                        ),
-                        Expanded(
-                          child: MyTextFormField(
-                            textEditingController: _controller.cpfCtrl,
-                            label: labelCPF,
-                            disabled: true,
-                            size: _fontSize,
-                            textAlign: TextAlign.center,
-                          ),
-                        ),
-                      ],
+                  ),
+                  Expanded(
+                    child: MyTextFormField(
+                      textEditingController: _controller.cnhCtrl,
+                      label: labelCNH,
+                      disabled: true,
+                      size: _fontSize,
+                      textAlign: TextAlign.center,
                     ),
-                    Row(
-                      children: <Widget>[
-                        Expanded(
-                          child: MyTextFormField(
-                            textEditingController: _controller.dateBirthCtrl,
-                            label: labelDateBirth,
-                            disabled: true,
-                            size: _fontSize,
-                            textAlign: TextAlign.center,
-                          ),
-                        ),
-                        Expanded(
-                          child: MyTextFormField(
-                            textEditingController: _controller.dateShieldCtrl,
-                            label: labelDateShield,
-                            disabled: true,
-                            size: _fontSize,
-                            textAlign: TextAlign.center,
-                          ),
-                        ),
-                        Expanded(
-                          child: MyTextFormField(
-                            textEditingController: _controller.bloodTypeCtrl,
-                            label: labelBloodType,
-                            disabled: true,
-                            size: _fontSize,
-                            textAlign: TextAlign.center,
-                          ),
-                        ),
-                      ],
+                  ),
+                  Expanded(
+                    child: MyTextFormField(
+                      textEditingController: _controller.cpfCtrl,
+                      label: labelCPF,
+                      disabled: true,
+                      size: _fontSize,
+                      textAlign: TextAlign.center,
                     ),
-                    SizedBox(
-                      height: 40.0,
+                  ),
+                ],
+              ),
+              Row(
+                children: <Widget>[
+                  Expanded(
+                    child: MyTextFormField(
+                      textEditingController: _controller.dateBirthCtrl,
+                      label: labelDateBirth,
+                      disabled: true,
+                      size: _fontSize,
+                      textAlign: TextAlign.center,
                     ),
-                    Center(
-                      child: Text(
-                        'Carteira digital de associado do Harley Club de São Luis - MA',
-                        style: TextStyle(
-                          fontSize: 12.0,
-                            fontWeight: FontWeight.bold
-                        ),
-                      ),
+                  ),
+                  Expanded(
+                    child: MyTextFormField(
+                      textEditingController: _controller.dateShieldCtrl,
+                      label: labelDateShield,
+                      disabled: true,
+                      size: _fontSize,
+                      textAlign: TextAlign.center,
                     ),
-                    SizedBox(
-                      height: 10.0,
+                  ),
+                  Expanded(
+                    child: MyTextFormField(
+                      textEditingController: _controller.bloodTypeCtrl,
+                      label: labelBloodType,
+                      disabled: true,
+                      size: _fontSize,
+                      textAlign: TextAlign.center,
                     ),
-                    Center(
-                      child: Text(
-                        'Válida até ${_controller.dueDateCtrl.text}',
-                        style: TextStyle(
-                          fontSize: 12.0,
-                          fontWeight: FontWeight.bold
-                        ),
-                      ),
-                    ),
-                  ],
+                  ),
+                ],
+              ),
+              SizedBox(
+                height: 10.0,
+              ),
+              Center(
+                child: Text(
+                  'Carteira digital de associado do Harley Club de São Luis - MA',
+                  style: TextStyle(fontSize: 12.0, fontWeight: FontWeight.bold),
                 ),
               ),
-            ),
-          )
-        ],
+              SizedBox(
+                height: 10.0,
+              ),
+              Center(
+                child: Text(
+                  'Válida até ${_controller.dueDateCtrl.text}',
+                  style: TextStyle(fontSize: 12.0, fontWeight: FontWeight.bold),
+                ),
+              ),
+            ],
+          ),
+        ),
       );
 
   get _photo => Container(
@@ -226,7 +203,7 @@ class _DigitalIdentityPageState extends State<DigitalIdentityPage> {
         child: Observer(
           builder: (_) => Container(
             decoration: BoxDecoration(
-              color: Colors.black,
+              color: Colors.white,
               borderRadius: BorderRadius.circular(150.0),
               image: _loadPhoto(),
             ),
@@ -243,26 +220,4 @@ class _DigitalIdentityPageState extends State<DigitalIdentityPage> {
               File('assets/imgs/noImage.png'),
             ),
       fit: BoxFit.fill);
-
-/*  Container _photo() {
-    return Container(
-      height: 250.0,
-      width: 250.0,
-      padding: EdgeInsets.all(10.0),
-      decoration: BoxDecoration(
-        color: Colors.black.withOpacity(0.2),
-        borderRadius: BorderRadius.circular(150.0),
-      ),
-      child: Container(
-        decoration: BoxDecoration(
-          color: Colors.black,
-          borderRadius: BorderRadius.circular(150.0),
-          image: DecorationImage(
-            image: AssetImage('assets/imgs/eu.jpg'),
-            fit: BoxFit.fill,
-          ),
-        ),
-      ),
-    );
-  }*/
 }
