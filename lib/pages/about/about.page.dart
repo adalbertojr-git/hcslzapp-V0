@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/painting.dart';
+import 'package:hcslzapp/components/top.bar.dart';
 
 class AboutPage extends StatelessWidget {
   //@override
   Widget build(BuildContext context) {
     return Scaffold(
-      //appBar: MyAppBar(_titleAppBar),
       body: Container(
         padding: EdgeInsets.fromLTRB(5.0, 0.0, 5.0, 0.0),
         decoration: BoxDecoration(
@@ -20,9 +20,7 @@ class AboutPage extends StatelessWidget {
           child: SingleChildScrollView(
               child: Column(
             children: <Widget>[
-              SizedBox (
-                height: 30.0,
-              ),
+              TopBar(),
               SizedBox(
                 height: 180.0,
                 child: Image.asset('assets/imgs/logo.png'),

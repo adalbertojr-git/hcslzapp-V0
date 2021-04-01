@@ -66,13 +66,6 @@ class _PaymentListPageState extends State<PaymentListPage> {
               );
             },
           ),
-          floatingActionButtonLocation:
-              FloatingActionButtonLocation.centerFloat,
-          floatingActionButton: _controller.isHidedButton
-              ? null
-              : Button(
-                  icon: Icons.arrow_back,
-                  onClick: () => Navigator.of(context).pop()),
         ),
       );
 

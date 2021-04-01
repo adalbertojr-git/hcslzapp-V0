@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'button.dart';
+import 'package:hcslzapp/components/top.bar.dart';
 import 'hc.logo.dart';
 import 'package:asuka/asuka.dart' as asuka;
 
@@ -15,8 +15,8 @@ class CenteredMessage extends StatefulWidget {
 class _CenteredMessageState extends State<CenteredMessage> {
   @override
   void initState() {
-    super.initState();
     WidgetsBinding.instance.addPostFrameCallback((_) => _showMessage);
+    super.initState();
   }
 
   get _showMessage {
@@ -38,21 +38,22 @@ class _CenteredMessageState extends State<CenteredMessage> {
         ),
       ),
       //color: Colors.red[400],
-      child: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: <Widget>[
-            HcLogo(0.0),
-            SizedBox(
-              height: 30.0,
-            ),
-            Button(
-              icon: Icons.arrow_back,
-              onClick: () => Navigator.of(context).pop(),
-            ),
-          ],
-        ),
+      child: Column(
+        children: <Widget>[
+          TopBar(),
+          SizedBox(
+            height: 80,
+          ),
+          HcLogo(0.0),
+          SizedBox(
+            height: 30.0,
+          ),
+          Icon(
+            Icons.warning_amber_sharp,
+            size: 80,
+            color: Colors.black,
+          ),
+        ],
       ),
     );
   }

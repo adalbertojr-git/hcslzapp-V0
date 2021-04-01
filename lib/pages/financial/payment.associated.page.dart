@@ -1,13 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
-import 'package:hcslzapp/components/button.dart';
 import 'package:hcslzapp/components/centered.message.dart';
 import 'package:hcslzapp/components/progress.dart';
-import 'package:hcslzapp/components/my.text.form.field.dart';
+import 'package:hcslzapp/components/top.bar.dart';
 import 'package:hcslzapp/controllers/payment.associated.controller.dart';
 import 'package:hcslzapp/models/payment.dart';
 import 'package:hcslzapp/models/payment.months.dart';
-import 'package:hcslzapp/repositories/payment.repo.dart';
 
 class PaymentAssociatedPage extends StatefulWidget {
   final int paymentId;
@@ -67,14 +65,6 @@ class _PaymentAssociatedPageState extends State<PaymentAssociatedPage> {
               );
             },
           ),
-          floatingActionButtonLocation:
-              FloatingActionButtonLocation.centerFloat,
-          floatingActionButton: _controller.isHidedButton
-              ? null
-              : Button(
-                  icon: Icons.arrow_back,
-                  onClick: () => Navigator.of(context).pop(),
-                ),
         ),
       );
 
@@ -90,6 +80,7 @@ class _PaymentAssociatedPageState extends State<PaymentAssociatedPage> {
         height: MediaQuery.of(context).size.height,
         child: Column(
           children: <Widget>[
+            TopBar(),
             Expanded(
               child: ListView.builder(
                 itemCount: _controller.payments.length,

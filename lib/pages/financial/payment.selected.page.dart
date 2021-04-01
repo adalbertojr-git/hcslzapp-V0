@@ -3,6 +3,7 @@ import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:hcslzapp/components/button.dart';
 import 'package:hcslzapp/components/centered.message.dart';
 import 'package:hcslzapp/components/progress.dart';
+import 'package:hcslzapp/components/top.bar.dart';
 import 'package:hcslzapp/components/transaction.auth.dialog.dart';
 import 'package:hcslzapp/controllers/payment.selected.controller.dart';
 import 'package:hcslzapp/models/associated.dart';
@@ -108,14 +109,21 @@ class _PaymentSelectedPageState extends State<PaymentSelectedPage> {
           ),
         ),
         height: MediaQuery.of(context).size.height,
-        child: Observer(
-          builder: (_) => ListView.builder(
-            itemCount: _controller.payments.length,
-            itemBuilder: (_, i) {
-              var payments = List<Payment>.from(_controller.payments);
-              return _buildExpansionTile(payments, i);
-            },
-          ),
+        child: Column(
+          children: [
+            TopBar(),
+            Expanded(
+              child: Observer(
+                builder: (_) => ListView.builder(
+                  itemCount: _controller.payments.length,
+                  itemBuilder: (_, i) {
+                    var payments = List<Payment>.from(_controller.payments);
+                    return _buildExpansionTile(payments, i);
+                  },
+                ),
+              ),
+            ),
+          ],
         ),
       );
 
