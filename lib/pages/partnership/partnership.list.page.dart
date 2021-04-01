@@ -83,7 +83,7 @@ class _PartnershipListPageState extends State<PartnershipListPage> {
           ),
           floatingActionButtonLocation:
               FloatingActionButtonLocation.centerFloat,
-          floatingActionButton: _controller.isHidedButton
+          floatingActionButton: widget._user == 'admin' ? _controller.isHidedButton
               ? null
               : Button(
                   icon: Icons.add,
@@ -93,7 +93,7 @@ class _PartnershipListPageState extends State<PartnershipListPage> {
                         builder: (context) =>
                             PartnershipAddPage(null, widget._user)),
                   ),
-                ),
+                ) : null,
         ),
       );
 
@@ -224,7 +224,7 @@ class _PartnershipListPageState extends State<PartnershipListPage> {
                 _controller.partnerships[currentPage].phone2),
           ],
         ),
-        trailing: GestureDetector(
+        trailing:  widget._user == 'admin' ? GestureDetector(
           child: Icon(Icons.edit),
           onTap: () => Navigator.push(
             context,
@@ -232,6 +232,6 @@ class _PartnershipListPageState extends State<PartnershipListPage> {
                 builder: (context) => PartnershipAddPage(
                     _controller.partnerships[currentPage], widget._user)),
           ),
-        ),
+        ) : null,
       );
 }
