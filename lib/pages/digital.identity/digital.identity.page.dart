@@ -86,18 +86,23 @@ class _DigitalIdentityPageState extends State<DigitalIdentityPage> {
           child: Column(
             children: [
               TopBar(),
-              Stack(
-                children: <Widget>[
-                  Center(
-                    child: SizedBox(
-                      height: 300.0,
-                      child: Container(
-                        child: Image.asset('assets/imgs/logo_carteirad.png'),
-                      ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  SizedBox(
+                    height: 70.0,
+                    child: Container(
+                      child: Image.asset('assets/imgs/logo_carteirad.png'),
                     ),
                   ),
                   Center(
                     child: _photo,
+                  ),
+                  SizedBox(
+                    height: 70.0,
+                    child: Container(
+                      child: Image.asset('assets/imgs/logo_carteirad.png'),
+                    ),
                   ),
                 ],
               ),
@@ -170,7 +175,7 @@ class _DigitalIdentityPageState extends State<DigitalIdentityPage> {
                 ],
               ),
               SizedBox(
-                height: 10.0,
+                height: 30.0,
               ),
               Center(
                 child: Text(
