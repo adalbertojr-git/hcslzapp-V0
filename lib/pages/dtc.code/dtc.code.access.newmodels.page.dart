@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:hcslzapp/components/button.dart';
 import 'package:hcslzapp/components/top.bar.dart';
 
 class DtcCodeAccessNewModelsPage extends StatelessWidget {
@@ -30,18 +29,10 @@ class DtcCodeAccessNewModelsPage extends StatelessWidget {
                   padding: EdgeInsets.all(20.0),
                   child: _paragraphs,
                 ),
-                SizedBox(
-                  height: 70.0,
-                ),
               ],
             ),
           ),
         ),
-      ),
-      floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
-      floatingActionButton: Button(
-        icon: Icons.arrow_back,
-        onClick: () => Navigator.of(context).pop(),
       ),
     );
   }
