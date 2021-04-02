@@ -137,7 +137,6 @@ class AssociatedListPageState extends State<AssociatedListPage> {
                             GestureDetector(
                               child: Icon(
                                 Icons.arrow_forward,
-                                size: 30.0,
                               ),
                               onTap: () {
                                 Navigator.push(

@@ -46,12 +46,6 @@ class _AssociatedUpdatePageState extends State<AssociatedUpdatePage> {
   }
 
   @override
-  void dispose() {
-    //if (!_controller.isHideButton) _controller.hideButton();
-    super.dispose();
-  }
-
-  @override
   Widget build(BuildContext context) => Observer(
         builder: (_) => Scaffold(
           body: FutureBuilder<List<Associated>>(
@@ -440,7 +434,6 @@ class _AssociatedUpdatePageState extends State<AssociatedUpdatePage> {
                           GestureDetector(
                             child: Icon(
                               Icons.delete,
-                              size: 30.0,
                             ),
                             onTap: () {
                               _controller.dependents.removeAt(i);
@@ -449,7 +442,6 @@ class _AssociatedUpdatePageState extends State<AssociatedUpdatePage> {
                           GestureDetector(
                             child: Icon(
                               Icons.arrow_forward,
-                              size: 30.0,
                             ),
                             onTap: () {
                               final Future<Dependent> future = Navigator.push(
@@ -488,7 +480,6 @@ class _AssociatedUpdatePageState extends State<AssociatedUpdatePage> {
                 child: Icon(
                   Icons.add,
                   color: Colors.black,
-                  size: 30,
                 ),
                 onPressed: () {
                   final Future<Dependent> future = Navigator.push(
@@ -558,7 +549,6 @@ class _AssociatedUpdatePageState extends State<AssociatedUpdatePage> {
                           GestureDetector(
                             child: Icon(
                               Icons.delete,
-                              size: 30.0,
                             ),
                             onTap: () {
                               _controller.motorcycles.removeAt(i);
@@ -567,7 +557,6 @@ class _AssociatedUpdatePageState extends State<AssociatedUpdatePage> {
                           GestureDetector(
                             child: Icon(
                               Icons.arrow_forward,
-                              size: 30.0,
                             ),
                             onTap: () {
                               final Future<Motorcycle> future = Navigator.push(

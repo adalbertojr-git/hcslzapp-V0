@@ -134,7 +134,6 @@ class _PaymentListPageState extends State<PaymentListPage> {
                             GestureDetector(
                               child: Icon(
                                 Icons.arrow_forward,
-                                size: 30.0,
                               ),
                               onTap: () {
                                 Navigator.push(

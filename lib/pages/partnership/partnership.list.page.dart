@@ -46,55 +46,54 @@ class _PartnershipListPageState extends State<PartnershipListPage> {
   }
 
   @override
-  Widget build(BuildContext context) => Observer(
-        builder: (_) => Scaffold(
-          body: FutureBuilder<List<Partnership>>(
-            future: _controller.future,
-            builder: (context, snapshot) {
-              switch (snapshot.connectionState) {
-                case ConnectionState.none:
-                  break;
-                case ConnectionState.waiting:
-                  return Progress();
-                case ConnectionState.active:
-                  break;
-                default:
-                  if (snapshot.hasError) {
-                    return CenteredMessage(snapshot.error.toString());
-                  } else {
-                    if (snapshot.data == null)
-                      return CenteredMessage(
-                        _controller.errorMsg,
-                      );
-                    if (snapshot.data.length > 0) {
-                      _controller.init;
-                      _controller.partnerships.addAll(snapshot.data);
-                      return _widgets();
-                    } else
-                      return CenteredMessage(
-                        'Não existem parcerias cadastradas.',
-                      );
-                  }
-              } //switch (snapshot.connectionState)
-              return CenteredMessage(
-                'Houve um erro desconhecido ao executar a transação.',
-              );
-            },
-          ),
-          floatingActionButtonLocation:
-              FloatingActionButtonLocation.centerFloat,
-          floatingActionButton: widget._user == 'admin' ? _controller.isHidedButton
-              ? null
-              : Button(
-                  icon: Icons.add,
-                  onClick: () => Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                        builder: (context) =>
-                            PartnershipAddPage(null, widget._user)),
-                  ),
-                ) : null,
+  Widget build(BuildContext context) => Scaffold(
+        body: FutureBuilder<List<Partnership>>(
+          future: _controller.future,
+          builder: (context, snapshot) {
+            switch (snapshot.connectionState) {
+              case ConnectionState.none:
+                break;
+              case ConnectionState.waiting:
+                return Progress();
+              case ConnectionState.active:
+                break;
+              default:
+                if (snapshot.hasError) {
+                  return CenteredMessage(snapshot.error.toString());
+                } else {
+                  if (snapshot.data == null)
+                    return CenteredMessage(
+                      _controller.errorMsg,
+                    );
+                  if (snapshot.data.length > 0) {
+                    _controller.init;
+                    _controller.partnerships.addAll(snapshot.data);
+                    return _widgets();
+                  } else
+                    return CenteredMessage(
+                      'Não existem parcerias cadastradas.',
+                    );
+                }
+            } //switch (snapshot.connectionState)
+            return CenteredMessage(
+              'Houve um erro desconhecido ao executar a transação.',
+            );
+          },
         ),
+        floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
+        floatingActionButton: widget._user == 'admin'
+            ? _controller.isHidedButton
+                ? null
+                : Button(
+                    icon: Icons.add,
+                    onClick: () => Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) =>
+                              PartnershipAddPage(null, widget._user)),
+                    ),
+                  )
+            : null,
       );
 
   _widgets() => Container(
@@ -111,47 +110,49 @@ class _PartnershipListPageState extends State<PartnershipListPage> {
           children: [
             TopBar(),
             Expanded(
-              child: ListView(
-                children: <Widget>[
-                  Container(
-                    height: PAGER_HEIGHT,
-                    child: NotificationListener<ScrollNotification>(
-                      onNotification: (ScrollNotification notification) {
-                        if (notification is ScrollUpdateNotification) {
-                          setState(() {
-                            page = pageController.page;
-                          });
-                        }
-                      },
-                      child: PageView.builder(
-                        onPageChanged: (pos) {
-                          setState(() {
-                            currentPage = pos;
-                          });
+              child: Observer(
+                builder: (_) => ListView(
+                  children: <Widget>[
+                    Container(
+                      height: PAGER_HEIGHT,
+                      child: NotificationListener<ScrollNotification>(
+                        onNotification: (ScrollNotification notification) {
+                          if (notification is ScrollUpdateNotification) {
+                            setState(() {
+                              page = pageController.page;
+                            });
+                          }
                         },
-                        physics: BouncingScrollPhysics(),
-                        controller: pageController,
-                        itemCount: _controller.partnerships.length,
-                        itemBuilder: (context, index) {
-                          final scale = max(
-                              SCALE_FRACTION,
-                              (FULL_SCALE - (index - page).abs()) +
-                                  viewPortFraction);
-                          return circleOffer(index, scale);
-                        },
+                        child: PageView.builder(
+                          onPageChanged: (pos) {
+                            setState(() {
+                              currentPage = pos;
+                            });
+                          },
+                          physics: BouncingScrollPhysics(),
+                          controller: pageController,
+                          itemCount: _controller.partnerships.length,
+                          itemBuilder: (context, index) {
+                            final scale = max(
+                                SCALE_FRACTION,
+                                (FULL_SCALE - (index - page).abs()) +
+                                    viewPortFraction);
+                            return circleOffer(index, scale);
+                          },
+                        ),
                       ),
                     ),
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.all(20.0),
-                    child: Text(
-                      _controller.partnerships[currentPage].partner,
-                      textAlign: TextAlign.center,
-                      style: TextStyle(fontSize: 20),
+                    Padding(
+                      padding: const EdgeInsets.all(20.0),
+                      child: Text(
+                        _controller.partnerships[currentPage].partner,
+                        textAlign: TextAlign.center,
+                        style: TextStyle(fontSize: 20),
+                      ),
                     ),
-                  ),
-                  buildDetail()
-                ],
+                    buildDetail()
+                  ],
+                ),
               ),
             ),
           ],
@@ -169,11 +170,9 @@ class _PartnershipListPageState extends State<PartnershipListPage> {
             clipBehavior: Clip.antiAlias,
             shape: CircleBorder(
                 side: BorderSide(color: Colors.grey.shade200, width: 5)),
-            child: Observer(
-              builder: (_) => Container(
-                decoration: BoxDecoration(
-                  image: _loadPhoto(index),
-                ),
+            child: Container(
+              decoration: BoxDecoration(
+                image: _loadPhoto(index),
               ),
             ),
           ),
@@ -224,14 +223,39 @@ class _PartnershipListPageState extends State<PartnershipListPage> {
                 _controller.partnerships[currentPage].phone2),
           ],
         ),
-        trailing:  widget._user == 'admin' ? GestureDetector(
-          child: Icon(Icons.edit),
-          onTap: () => Navigator.push(
-            context,
-            MaterialPageRoute(
-                builder: (context) => PartnershipAddPage(
-                    _controller.partnerships[currentPage], widget._user)),
-          ),
-        ) : null,
+        trailing: widget._user == 'admin'
+            ? Wrap(
+                spacing: 10,
+                children: [
+                  GestureDetector(
+                    child: Icon(
+                      Icons.delete,
+                    ),
+                    onTap: () {
+                      _controller.partnerships.removeAt(currentPage);
+                    },
+                  ),
+                  GestureDetector(
+                      child: Icon(Icons.edit),
+                      onTap: () {
+                        final Future<Partnership> future = Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => PartnershipAddPage(
+                                  _controller.partnerships[currentPage],
+                                  widget._user)),
+                        );
+                        future.then(
+                          (partnership) {
+                            if (partnership != null) {
+                              _controller.partnerships.removeAt(currentPage);
+                              _controller.partnerships.add(partnership);
+                            }
+                          },
+                        );
+                      }),
+                ],
+              )
+            : null,
       );
 }

@@ -111,7 +111,6 @@ class AccessRequestListPageState extends State<AccessRequestListPage> {
                       GestureDetector(
                         child: Icon(
                           Icons.delete,
-                          size: 25.0,
                         ),
                         onTap: () {
                           _controller.accessRequests.removeAt(i);

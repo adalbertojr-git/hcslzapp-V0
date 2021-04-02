@@ -143,7 +143,6 @@ class _PaymentSelectedPageState extends State<PaymentSelectedPage> {
             GestureDetector(
               child: Icon(
                 Icons.delete,
-                size: 30.0,
               ),
               onTap: () {
                 _delete(i);
@@ -152,7 +151,6 @@ class _PaymentSelectedPageState extends State<PaymentSelectedPage> {
             GestureDetector(
               child: Icon(
                 Icons.edit,
-                size: 30.0,
               ),
               onTap: () {
                 Navigator.push(

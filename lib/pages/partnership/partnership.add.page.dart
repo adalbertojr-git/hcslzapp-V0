@@ -282,7 +282,7 @@ class _PartnershipAddPageState extends State<PartnershipAddPage> {
                   content: Text('Parceiro atualizado com sucesso.'),
                 ),
               );
-              Navigator.of(context).pop(_controller.partnership);
+              Navigator.pop(context, _controller.partnership);
             } else {
               asuka.showSnackBar(
                 SnackBar(
