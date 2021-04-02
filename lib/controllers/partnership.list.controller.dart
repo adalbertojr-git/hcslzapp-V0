@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:hcslzapp/models/partnership.dart';
 import 'package:hcslzapp/repositories/partnership.repo.dart';
 import 'package:mobx/mobx.dart';
@@ -26,6 +27,15 @@ abstract class PartnershipListControllerBase with Store {
   @observable
   String errorMsg;
 
+  @observable
+  PageController pageController;
+
+  @observable
+  int currentPage = 0;
+
+  @observable
+  double page = 0.0;
+
   @action
   bool setButtonVisibilty() => isHidedButton = !isHidedButton;
 
@@ -42,4 +52,13 @@ abstract class PartnershipListControllerBase with Store {
 
   Future<List<Partnership>> getFuture() => future = findAll();
 
+  @action
+  notificationListener() {
+    page = pageController.page;
+  }
+
+  @action
+  onPageChanged(int pos) {
+    currentPage = pos;
+  }
 }

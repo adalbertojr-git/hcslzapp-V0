@@ -103,6 +103,53 @@ mixin _$PartnershipListController on PartnershipListControllerBase, Store {
     });
   }
 
+  final _$pageControllerAtom =
+      Atom(name: 'PartnershipListControllerBase.pageController');
+
+  @override
+  PageController get pageController {
+    _$pageControllerAtom.reportRead();
+    return super.pageController;
+  }
+
+  @override
+  set pageController(PageController value) {
+    _$pageControllerAtom.reportWrite(value, super.pageController, () {
+      super.pageController = value;
+    });
+  }
+
+  final _$currentPageAtom =
+      Atom(name: 'PartnershipListControllerBase.currentPage');
+
+  @override
+  int get currentPage {
+    _$currentPageAtom.reportRead();
+    return super.currentPage;
+  }
+
+  @override
+  set currentPage(int value) {
+    _$currentPageAtom.reportWrite(value, super.currentPage, () {
+      super.currentPage = value;
+    });
+  }
+
+  final _$pageAtom = Atom(name: 'PartnershipListControllerBase.page');
+
+  @override
+  double get page {
+    _$pageAtom.reportRead();
+    return super.page;
+  }
+
+  @override
+  set page(double value) {
+    _$pageAtom.reportWrite(value, super.page, () {
+      super.page = value;
+    });
+  }
+
   final _$PartnershipListControllerBaseActionController =
       ActionController(name: 'PartnershipListControllerBase');
 
@@ -129,13 +176,39 @@ mixin _$PartnershipListController on PartnershipListControllerBase, Store {
   }
 
   @override
+  dynamic notificationListener() {
+    final _$actionInfo =
+        _$PartnershipListControllerBaseActionController.startAction(
+            name: 'PartnershipListControllerBase.notificationListener');
+    try {
+      return super.notificationListener();
+    } finally {
+      _$PartnershipListControllerBaseActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
+  dynamic onPageChanged(int pos) {
+    final _$actionInfo = _$PartnershipListControllerBaseActionController
+        .startAction(name: 'PartnershipListControllerBase.onPageChanged');
+    try {
+      return super.onPageChanged(pos);
+    } finally {
+      _$PartnershipListControllerBaseActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
   String toString() {
     return '''
 isHidedButton: ${isHidedButton},
 partnership: ${partnership},
 partnerships: ${partnerships},
 future: ${future},
-errorMsg: ${errorMsg}
+errorMsg: ${errorMsg},
+pageController: ${pageController},
+currentPage: ${currentPage},
+page: ${page}
     ''';
   }
 }

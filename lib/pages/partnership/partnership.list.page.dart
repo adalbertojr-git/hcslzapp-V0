@@ -27,14 +27,15 @@ class PartnershipListPage extends StatefulWidget {
 class _PartnershipListPageState extends State<PartnershipListPage> {
   PartnershipListController _controller = PartnershipListController();
   double viewPortFraction = 0.5;
-  PageController pageController;
-  int currentPage = 0;
-  double page = 0.0;
+
+  //PageController pageController;
+  //int currentPage = 0;
+  //double page = 0.0;
 
   @override
   void initState() {
-    pageController = PageController(
-      initialPage: currentPage,
+    _controller.pageController = PageController(
+      initialPage: _controller.currentPage,
       viewportFraction: viewPortFraction,
     );
     _controller.getFuture().then((value) {
@@ -118,24 +119,26 @@ class _PartnershipListPageState extends State<PartnershipListPage> {
                       child: NotificationListener<ScrollNotification>(
                         onNotification: (ScrollNotification notification) {
                           if (notification is ScrollUpdateNotification) {
-                            setState(() {
-                              page = pageController.page;
-                            });
+                            //setState(() {
+                            //_controller.page = _controller.pageController.page;
+                            _controller.notificationListener();
+                            //});
                           }
                         },
                         child: PageView.builder(
                           onPageChanged: (pos) {
-                            setState(() {
-                              currentPage = pos;
-                            });
+                            //setState(() {
+                            //_controller.currentPage = pos;
+                            _controller.onPageChanged(pos);
+                            //});
                           },
                           physics: BouncingScrollPhysics(),
-                          controller: pageController,
+                          controller: _controller.pageController,
                           itemCount: _controller.partnerships.length,
                           itemBuilder: (context, index) {
                             final scale = max(
                                 SCALE_FRACTION,
-                                (FULL_SCALE - (index - page).abs()) +
+                                (FULL_SCALE - (index - _controller.page).abs()) +
                                     viewPortFraction);
                             return circleOffer(index, scale);
                           },
@@ -145,7 +148,7 @@ class _PartnershipListPageState extends State<PartnershipListPage> {
                     Padding(
                       padding: const EdgeInsets.all(20.0),
                       child: Text(
-                        _controller.partnerships[currentPage].partner,
+                        _controller.partnerships[_controller.currentPage].partner,
                         textAlign: TextAlign.center,
                         style: TextStyle(fontSize: 20),
                       ),
@@ -199,7 +202,7 @@ class _PartnershipListPageState extends State<PartnershipListPage> {
                 horizontal: 15,
               ),
               child: Text(
-                _controller.partnerships[currentPage].promotion,
+                _controller.partnerships[_controller.currentPage].promotion,
                 style: TextStyle(
                   color: Colors.black,
                   fontSize: 18,
@@ -212,15 +215,15 @@ class _PartnershipListPageState extends State<PartnershipListPage> {
 
   Widget buildUserInfo() => ListTile(
         isThreeLine: true,
-        title: Text(_controller.partnerships[currentPage].partner),
+        title: Text(_controller.partnerships[_controller.currentPage].partner),
         subtitle: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text('Endereço: ' + _controller.partnerships[currentPage].address),
+            Text('Endereço: ' + _controller.partnerships[_controller.currentPage].address),
             Text('Telefone(s): ' +
-                _controller.partnerships[currentPage].phone1 +
+                _controller.partnerships[_controller.currentPage].phone1 +
                 ' - ' +
-                _controller.partnerships[currentPage].phone2),
+                _controller.partnerships[_controller.currentPage].phone2),
           ],
         ),
         trailing: widget._user == 'admin'
@@ -232,7 +235,7 @@ class _PartnershipListPageState extends State<PartnershipListPage> {
                       Icons.delete,
                     ),
                     onTap: () {
-                      _controller.partnerships.removeAt(currentPage);
+                      _controller.partnerships.removeAt(_controller.currentPage);
                     },
                   ),
                   GestureDetector(
@@ -242,13 +245,13 @@ class _PartnershipListPageState extends State<PartnershipListPage> {
                           context,
                           MaterialPageRoute(
                               builder: (context) => PartnershipAddPage(
-                                  _controller.partnerships[currentPage],
+                                  _controller.partnerships[_controller.currentPage],
                                   widget._user)),
                         );
                         future.then(
                           (partnership) {
                             if (partnership != null) {
-                              _controller.partnerships.removeAt(currentPage);
+                              _controller.partnerships.removeAt(_controller.currentPage);
                               _controller.partnerships.add(partnership);
                             }
                           },
