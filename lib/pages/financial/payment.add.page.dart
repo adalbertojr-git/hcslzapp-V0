@@ -67,7 +67,7 @@ class _PaymentAddAddState extends State<PaymentAddPage> {
                       errorText: _controller.validateYear(),
                       maxLengh: 4,
                       textAlign: TextAlign.center,
-                      size: 20.0),
+                      fontSize: 20.0),
                 ),
               ),
               Container(

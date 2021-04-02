@@ -22,7 +22,7 @@ class DigitalIdentityPage extends StatefulWidget {
 
 class _DigitalIdentityPageState extends State<DigitalIdentityPage> {
   DigitalIdentityController _controller = DigitalIdentityController();
-  final double _fontSize = 16.0;
+  final double _fontSize = 14.0;
 
   @override
   void initState() {
@@ -86,31 +86,14 @@ class _DigitalIdentityPageState extends State<DigitalIdentityPage> {
           child: Column(
             children: [
               TopBar(),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  SizedBox(
-                    height: 70.0,
-                    child: Container(
-                      child: Image.asset('assets/imgs/logo_carteirad.png'),
-                    ),
-                  ),
-                  Center(
-                    child: _photo,
-                  ),
-                  SizedBox(
-                    height: 70.0,
-                    child: Container(
-                      child: Image.asset('assets/imgs/logo_carteirad.png'),
-                    ),
-                  ),
-                ],
+              Center(
+                child: _photo,
               ),
               MyTextFormField(
                 textEditingController: _controller.nameCtrl,
                 label: labelNameDigitalPayment,
                 disabled: true,
-                size: _fontSize,
+                fontSize: _fontSize,
               ),
               Row(
                 children: <Widget>[
@@ -119,7 +102,7 @@ class _DigitalIdentityPageState extends State<DigitalIdentityPage> {
                       textEditingController: _controller.associatedTypeCtrl,
                       label: labelAssociatedType,
                       disabled: true,
-                      size: _fontSize,
+                      fontSize: _fontSize,
                       textAlign: TextAlign.center,
                     ),
                   ),
@@ -128,7 +111,7 @@ class _DigitalIdentityPageState extends State<DigitalIdentityPage> {
                       textEditingController: _controller.cnhCtrl,
                       label: labelCNH,
                       disabled: true,
-                      size: _fontSize,
+                      fontSize: _fontSize,
                       textAlign: TextAlign.center,
                     ),
                   ),
@@ -137,7 +120,7 @@ class _DigitalIdentityPageState extends State<DigitalIdentityPage> {
                       textEditingController: _controller.cpfCtrl,
                       label: labelCPF,
                       disabled: true,
-                      size: _fontSize,
+                      fontSize: _fontSize,
                       textAlign: TextAlign.center,
                     ),
                   ),
@@ -150,7 +133,7 @@ class _DigitalIdentityPageState extends State<DigitalIdentityPage> {
                       textEditingController: _controller.dateBirthCtrl,
                       label: labelDateBirth,
                       disabled: true,
-                      size: _fontSize,
+                      fontSize: _fontSize,
                       textAlign: TextAlign.center,
                     ),
                   ),
@@ -159,7 +142,7 @@ class _DigitalIdentityPageState extends State<DigitalIdentityPage> {
                       textEditingController: _controller.dateShieldCtrl,
                       label: labelDateShield,
                       disabled: true,
-                      size: _fontSize,
+                      fontSize: _fontSize,
                       textAlign: TextAlign.center,
                     ),
                   ),
@@ -168,28 +151,28 @@ class _DigitalIdentityPageState extends State<DigitalIdentityPage> {
                       textEditingController: _controller.bloodTypeCtrl,
                       label: labelBloodType,
                       disabled: true,
-                      size: _fontSize,
+                      fontSize: _fontSize,
                       textAlign: TextAlign.center,
                     ),
                   ),
                 ],
               ),
               SizedBox(
-                height: 30.0,
+                height: 20.0,
               ),
               Center(
                 child: Text(
                   'Carteira digital de associado do Harley Club de São Luis - MA',
-                  style: TextStyle(fontSize: 12.0, fontWeight: FontWeight.bold),
+                  style: TextStyle(fontSize: 10.0, fontWeight: FontWeight.bold),
                 ),
               ),
               SizedBox(
-                height: 10.0,
+                height: 5.0,
               ),
               Center(
                 child: Text(
                   'Válida até ${_controller.dueDateCtrl.text}',
-                  style: TextStyle(fontSize: 12.0, fontWeight: FontWeight.bold),
+                  style: TextStyle(fontSize: 10.0, fontWeight: FontWeight.bold),
                 ),
               ),
             ],

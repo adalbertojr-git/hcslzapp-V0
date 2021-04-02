@@ -12,7 +12,7 @@ class MyTextFormField extends StatelessWidget {
   String prefix;
   int nLines;
   String label;
-  double size;
+  double fontSize;
   String text;
   Function onChanged;
   String errorText;
@@ -31,7 +31,7 @@ class MyTextFormField extends StatelessWidget {
       this.prefix,
       this.label,
       this.nLines,
-      this.size,
+      this.fontSize,
       this.text,
       this.onChanged,
       this.errorText,
@@ -52,7 +52,7 @@ class MyTextFormField extends StatelessWidget {
         obscureText: hidden != null ? hidden : false,
         readOnly: disabled != null ? disabled : false,
         style: TextStyle(
-          fontSize: size != null ? size : 15.0,
+          fontSize: fontSize != null ? fontSize : 15.0,
         ),
         textAlign: textAlign != null ? textAlign : TextAlign.left,
         maxLength: maxLengh != null ? maxLengh : null,

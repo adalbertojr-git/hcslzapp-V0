@@ -13,14 +13,25 @@ class TopBar extends StatelessWidget {
         Container(
           alignment: Alignment.centerLeft,
           height: 40,
-          child: GestureDetector(
-            onTap: () {
-              Navigator.of(context).pop();
-            },
-            child: Icon(
-              Icons.arrow_back,
-              color: Colors.black,
-            ),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              GestureDetector(
+                onTap: () {
+                  Navigator.of(context).pop();
+                },
+                child: Icon(
+                  Icons.arrow_back,
+                  color: Colors.black,
+                ),
+              ),
+              SizedBox(
+                height: 40.0,
+                child: Container(
+                  child: Image.asset('assets/imgs/logo.png'),
+                ),
+              ),
+            ],
           ),
         ),
       ],
