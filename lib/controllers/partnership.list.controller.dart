@@ -10,6 +10,9 @@ class PartnershipListController = PartnershipListControllerBase
 
 abstract class PartnershipListControllerBase with Store {
   @observable
+  var partnerCtrl = TextEditingController();
+
+  @observable
   bool isHidedButton = true;
 
   @observable
@@ -36,6 +39,9 @@ abstract class PartnershipListControllerBase with Store {
   @observable
   double page = 0.0;
 
+  @observable
+  String filter = '';
+
   @action
   bool setButtonVisibilty() => isHidedButton = !isHidedButton;
 
@@ -58,4 +64,16 @@ abstract class PartnershipListControllerBase with Store {
 
   Future<List<Partnership>> getFuture() => future = findAll();
 
+  @action
+  setFilter(String value) => filter = value;
+
+  @computed
+  List<Partnership> get listFiltered {
+    if (filter.isEmpty) {
+      return List<Partnership>.from(partnerships);
+    } else {
+      return List<Partnership>.from(partnerships
+          .where((element) => element.partner.contains(filter)));
+    }
+  }
 }
