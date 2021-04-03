@@ -89,6 +89,9 @@ class _DigitalIdentityPageState extends State<DigitalIdentityPage> {
               Center(
                 child: _photo,
               ),
+              SizedBox(
+                height: 20.0,
+              ),
               MyTextFormField(
                 textEditingController: _controller.nameCtrl,
                 label: labelNameDigitalPayment,

@@ -22,6 +22,9 @@ abstract class PartnershipListControllerBase with Store {
   ObservableList partnerships = [].asObservable();
 
   @observable
+  ObservableList activePartnerships = [].asObservable();
+
+  @observable
   PartnershipRepo _partnershipRepo = PartnershipRepo();
 
   @observable
@@ -53,6 +56,7 @@ abstract class PartnershipListControllerBase with Store {
 
   get init {
     partnerships.clear();
+    activePartnerships.clear();
   }
 
   @action
@@ -72,8 +76,11 @@ abstract class PartnershipListControllerBase with Store {
     if (filter.isEmpty) {
       return List<Partnership>.from(partnerships);
     } else {
-      return List<Partnership>.from(partnerships
-          .where((element) => element.partner.contains(filter)));
+      return List<Partnership>.from(
+          partnerships.where((element) => element.partner.contains(filter)));
     }
   }
+
+  get getActivePartnerships => activePartnerships.addAll(
+      partnerships.where((element) => element.status.contains('Ativo')));
 }

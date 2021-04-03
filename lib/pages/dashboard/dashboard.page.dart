@@ -72,7 +72,7 @@ class _DashboardPageState extends State<DashboardPage> {
     _listAdmWidgets = [
       AssociatedListPage(widget._user),
       PaymentListPage(),
-      PaymentListPage(),
+      EventCalendarPage(),
       PartnershipListPage(widget._user),
     ];
     super.initState();

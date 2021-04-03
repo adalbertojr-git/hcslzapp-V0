@@ -81,7 +81,6 @@ abstract class PartnershipAddControllerBase with Store {
     addressCtrl.text = partnership != null ? partnership.address : null;
     promotionCtrl.text = partnership != null ? partnership.promotion : null;
     statusCtrl.text = partnership != null ? partnership.status : null;
-
   }
 
   @action
@@ -112,7 +111,7 @@ abstract class PartnershipAddControllerBase with Store {
       phone2: phone2Ctrl.text,
       address: addressCtrl.text,
       promotion: promotionCtrl.text,
-      status: statusCtrl.text,
+      status: currentStatus,
       photoUrl: photo != null ? await _uploadPhoto() : photoUrl,
     );
   }

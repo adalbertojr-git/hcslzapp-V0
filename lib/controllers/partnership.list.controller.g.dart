@@ -9,6 +9,30 @@ part of 'partnership.list.controller.dart';
 // ignore_for_file: non_constant_identifier_names, unnecessary_brace_in_string_interps, unnecessary_lambdas, prefer_expression_function_bodies, lines_longer_than_80_chars, avoid_as, avoid_annotating_with_dynamic
 
 mixin _$PartnershipListController on PartnershipListControllerBase, Store {
+  Computed<List<Partnership>> _$listFilteredComputed;
+
+  @override
+  List<Partnership> get listFiltered => (_$listFilteredComputed ??=
+          Computed<List<Partnership>>(() => super.listFiltered,
+              name: 'PartnershipListControllerBase.listFiltered'))
+      .value;
+
+  final _$partnerCtrlAtom =
+      Atom(name: 'PartnershipListControllerBase.partnerCtrl');
+
+  @override
+  TextEditingController get partnerCtrl {
+    _$partnerCtrlAtom.reportRead();
+    return super.partnerCtrl;
+  }
+
+  @override
+  set partnerCtrl(TextEditingController value) {
+    _$partnerCtrlAtom.reportWrite(value, super.partnerCtrl, () {
+      super.partnerCtrl = value;
+    });
+  }
+
   final _$isHidedButtonAtom =
       Atom(name: 'PartnershipListControllerBase.isHidedButton');
 
@@ -54,6 +78,22 @@ mixin _$PartnershipListController on PartnershipListControllerBase, Store {
   set partnerships(ObservableList<dynamic> value) {
     _$partnershipsAtom.reportWrite(value, super.partnerships, () {
       super.partnerships = value;
+    });
+  }
+
+  final _$activePartnershipsAtom =
+      Atom(name: 'PartnershipListControllerBase.activePartnerships');
+
+  @override
+  ObservableList<dynamic> get activePartnerships {
+    _$activePartnershipsAtom.reportRead();
+    return super.activePartnerships;
+  }
+
+  @override
+  set activePartnerships(ObservableList<dynamic> value) {
+    _$activePartnershipsAtom.reportWrite(value, super.activePartnerships, () {
+      super.activePartnerships = value;
     });
   }
 
@@ -150,6 +190,21 @@ mixin _$PartnershipListController on PartnershipListControllerBase, Store {
     });
   }
 
+  final _$filterAtom = Atom(name: 'PartnershipListControllerBase.filter');
+
+  @override
+  String get filter {
+    _$filterAtom.reportRead();
+    return super.filter;
+  }
+
+  @override
+  set filter(String value) {
+    _$filterAtom.reportWrite(value, super.filter, () {
+      super.filter = value;
+    });
+  }
+
   final _$PartnershipListControllerBaseActionController =
       ActionController(name: 'PartnershipListControllerBase');
 
@@ -159,17 +214,6 @@ mixin _$PartnershipListController on PartnershipListControllerBase, Store {
         .startAction(name: 'PartnershipListControllerBase.setButtonVisibilty');
     try {
       return super.setButtonVisibilty();
-    } finally {
-      _$PartnershipListControllerBaseActionController.endAction(_$actionInfo);
-    }
-  }
-
-  @override
-  Future<dynamic> findAll() {
-    final _$actionInfo = _$PartnershipListControllerBaseActionController
-        .startAction(name: 'PartnershipListControllerBase.findAll');
-    try {
-      return super.findAll();
     } finally {
       _$PartnershipListControllerBaseActionController.endAction(_$actionInfo);
     }
@@ -199,16 +243,42 @@ mixin _$PartnershipListController on PartnershipListControllerBase, Store {
   }
 
   @override
+  Future<dynamic> findAll() {
+    final _$actionInfo = _$PartnershipListControllerBaseActionController
+        .startAction(name: 'PartnershipListControllerBase.findAll');
+    try {
+      return super.findAll();
+    } finally {
+      _$PartnershipListControllerBaseActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
+  dynamic setFilter(String value) {
+    final _$actionInfo = _$PartnershipListControllerBaseActionController
+        .startAction(name: 'PartnershipListControllerBase.setFilter');
+    try {
+      return super.setFilter(value);
+    } finally {
+      _$PartnershipListControllerBaseActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
   String toString() {
     return '''
+partnerCtrl: ${partnerCtrl},
 isHidedButton: ${isHidedButton},
 partnership: ${partnership},
 partnerships: ${partnerships},
+activePartnerships: ${activePartnerships},
 future: ${future},
 errorMsg: ${errorMsg},
 pageController: ${pageController},
 currentPage: ${currentPage},
-page: ${page}
+page: ${page},
+filter: ${filter},
+listFiltered: ${listFiltered}
     ''';
   }
 }
