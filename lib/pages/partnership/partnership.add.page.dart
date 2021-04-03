@@ -35,9 +35,7 @@ class _PartnershipAddPageState extends State<PartnershipAddPage> {
   }
 
   @override
-  Widget build(BuildContext context) {
-    return Observer(
-      builder: (_) => Scaffold(
+  Widget build(BuildContext context) => Scaffold(
         body: Container(
           padding: EdgeInsets.fromLTRB(5.0, 0.0, 5.0, 0.0),
           decoration: BoxDecoration(
@@ -184,9 +182,7 @@ class _PartnershipAddPageState extends State<PartnershipAddPage> {
           icon: Icons.save,
           onClick: () => widget.partnership == null ? _save : _update,
         ),
-      ),
-    );
-  }
+      );
 
   get _photo => Container(
         height: 200.0,
@@ -208,6 +204,18 @@ class _PartnershipAddPageState extends State<PartnershipAddPage> {
       );
 
   DecorationImage _loadPhoto() => DecorationImage(
+      image: _controller.changedPhoto
+          ? PhotoImageProvider().getImageProvider(
+              File(_controller.photoPath),
+            )
+          : _controller.photoUrl != null
+              ? NetworkImage(_controller.photoUrl)
+              : PhotoImageProvider().getImageProvider(
+                  File('assets/imgs/noImage.png'),
+                ),
+      fit: BoxFit.fill);
+
+  DecorationImage _loadPhoto2() => DecorationImage(
       image: _controller.photoUrl != null
           ? NetworkImage(_controller.photoUrl)
           : PhotoImageProvider().getImageProvider(
@@ -282,7 +290,7 @@ class _PartnershipAddPageState extends State<PartnershipAddPage> {
                   content: Text('Parceiro atualizado com sucesso.'),
                 ),
               );
-              Navigator.pop(context, _controller.partnership);
+              Navigator.pop(context, value);
             } else {
               asuka.showSnackBar(
                 SnackBar(

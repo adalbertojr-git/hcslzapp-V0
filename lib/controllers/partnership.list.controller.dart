@@ -39,6 +39,12 @@ abstract class PartnershipListControllerBase with Store {
   @action
   bool setButtonVisibilty() => isHidedButton = !isHidedButton;
 
+  @action
+  notificationListener() => page = pageController.page;
+
+  @action
+  onPageChanged(int pos) => currentPage = pos;
+
   get init {
     partnerships.clear();
   }
@@ -52,13 +58,4 @@ abstract class PartnershipListControllerBase with Store {
 
   Future<List<Partnership>> getFuture() => future = findAll();
 
-  @action
-  notificationListener() {
-    page = pageController.page;
-  }
-
-  @action
-  onPageChanged(int pos) {
-    currentPage = pos;
-  }
 }

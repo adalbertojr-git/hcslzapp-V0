@@ -11,7 +11,7 @@ import 'package:hcslzapp/models/partnership.dart';
 import 'package:hcslzapp/pages/partnership/partnership.add.page.dart';
 import 'dart:io';
 
-const SCALE_FRACTION = 0.7;
+const SCALE_FRACTION = 0.6;
 const FULL_SCALE = 1.0;
 const PAGER_HEIGHT = 200.0;
 
@@ -27,10 +27,6 @@ class PartnershipListPage extends StatefulWidget {
 class _PartnershipListPageState extends State<PartnershipListPage> {
   PartnershipListController _controller = PartnershipListController();
   double viewPortFraction = 0.5;
-
-  //PageController pageController;
-  //int currentPage = 0;
-  //double page = 0.0;
 
   @override
   void initState() {
@@ -119,38 +115,40 @@ class _PartnershipListPageState extends State<PartnershipListPage> {
                       child: NotificationListener<ScrollNotification>(
                         onNotification: (ScrollNotification notification) {
                           if (notification is ScrollUpdateNotification) {
-                            //setState(() {
-                            //_controller.page = _controller.pageController.page;
-                            _controller.notificationListener();
-                            //});
+                            setState(() {
+                              _controller.notificationListener();
+                            });
                           }
+                          return false;
                         },
                         child: PageView.builder(
                           onPageChanged: (pos) {
-                            //setState(() {
-                            //_controller.currentPage = pos;
                             _controller.onPageChanged(pos);
-                            //});
                           },
                           physics: BouncingScrollPhysics(),
                           controller: _controller.pageController,
                           itemCount: _controller.partnerships.length,
                           itemBuilder: (context, index) {
                             final scale = max(
-                                SCALE_FRACTION,
-                                (FULL_SCALE - (index - _controller.page).abs()) +
-                                    viewPortFraction);
+                              SCALE_FRACTION,
+                              (FULL_SCALE - (index - _controller.page).abs()) +
+                                  viewPortFraction,
+                            );
                             return circleOffer(index, scale);
                           },
                         ),
                       ),
                     ),
                     Padding(
-                      padding: const EdgeInsets.all(20.0),
+                      padding: const EdgeInsets.all(10.0),
                       child: Text(
-                        _controller.partnerships[_controller.currentPage].partner,
+                        _controller
+                            .partnerships[_controller.currentPage].partner,
                         textAlign: TextAlign.center,
-                        style: TextStyle(fontSize: 20),
+                        style: TextStyle(
+                          fontSize: 25,
+                          fontWeight: FontWeight.bold,
+                        ),
                       ),
                     ),
                     buildDetail()
@@ -162,20 +160,22 @@ class _PartnershipListPageState extends State<PartnershipListPage> {
         ),
       );
 
-  Widget circleOffer(int index, double scale) => Align(
-        alignment: Alignment.bottomCenter,
-        child: Container(
-          margin: EdgeInsets.only(bottom: 10),
-          height: PAGER_HEIGHT * scale,
-          width: PAGER_HEIGHT * scale,
-          child: Card(
-            elevation: 4,
-            clipBehavior: Clip.antiAlias,
-            shape: CircleBorder(
-                side: BorderSide(color: Colors.grey.shade200, width: 5)),
-            child: Container(
-              decoration: BoxDecoration(
-                image: _loadPhoto(index),
+  Widget circleOffer(int index, double scale) => Observer(
+        builder: (_) => Align(
+          alignment: Alignment.bottomCenter,
+          child: Container(
+            margin: EdgeInsets.only(bottom: 10),
+            height: PAGER_HEIGHT * scale,
+            width: PAGER_HEIGHT * scale,
+            child: Card(
+              elevation: 4,
+              clipBehavior: Clip.antiAlias,
+              shape: CircleBorder(
+                  side: BorderSide(color: Colors.grey.shade200, width: 5)),
+              child: Container(
+                decoration: BoxDecoration(
+                  image: _loadPhoto(index),
+                ),
               ),
             ),
           ),
@@ -190,28 +190,30 @@ class _PartnershipListPageState extends State<PartnershipListPage> {
             ),
       fit: BoxFit.fill);
 
-  Widget buildDetail() => Container(
-        color: Colors.black26,
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: <Widget>[
-            buildUserInfo(),
-            Padding(
-              padding: EdgeInsets.symmetric(
-                vertical: 15,
-                horizontal: 15,
-              ),
-              child: Text(
-                _controller.partnerships[_controller.currentPage].promotion,
-                style: TextStyle(
-                  color: Colors.black,
-                  fontSize: 18,
+  Widget buildDetail() => Observer(
+    builder: (_) => Container(
+          color: Colors.white70,
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: <Widget>[
+              buildUserInfo(),
+              Padding(
+                padding: EdgeInsets.symmetric(
+                  vertical: 15,
+                  horizontal: 15,
+                ),
+                child: Text(
+                  _controller.partnerships[_controller.currentPage].promotion,
+                  style: TextStyle(
+                    color: Colors.black,
+                    fontSize: 15,
+                  ),
                 ),
               ),
-            ),
-          ],
+            ],
+          ),
         ),
-      );
+  );
 
   Widget buildUserInfo() => ListTile(
         isThreeLine: true,
@@ -219,7 +221,8 @@ class _PartnershipListPageState extends State<PartnershipListPage> {
         subtitle: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text('Endereço: ' + _controller.partnerships[_controller.currentPage].address),
+            Text('Endereço: ' +
+                _controller.partnerships[_controller.currentPage].address),
             Text('Telefone(s): ' +
                 _controller.partnerships[_controller.currentPage].phone1 +
                 ' - ' +
@@ -235,7 +238,8 @@ class _PartnershipListPageState extends State<PartnershipListPage> {
                       Icons.delete,
                     ),
                     onTap: () {
-                      _controller.partnerships.removeAt(_controller.currentPage);
+                      _controller.partnerships
+                          .removeAt(_controller.currentPage);
                     },
                   ),
                   GestureDetector(
@@ -245,13 +249,17 @@ class _PartnershipListPageState extends State<PartnershipListPage> {
                           context,
                           MaterialPageRoute(
                               builder: (context) => PartnershipAddPage(
-                                  _controller.partnerships[_controller.currentPage],
+                                  _controller
+                                      .partnerships[_controller.currentPage],
                                   widget._user)),
                         );
                         future.then(
                           (partnership) {
                             if (partnership != null) {
-                              _controller.partnerships.removeAt(_controller.currentPage);
+                              print(_controller.currentPage);
+                              print(partnership);
+                              _controller.partnerships
+                                  .removeAt(_controller.currentPage);
                               _controller.partnerships.add(partnership);
                             }
                           },
