@@ -2,9 +2,8 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:hcslzapp/controllers/app.controller.dart';
 import 'package:hcslzapp/pages/splash/splash.page.dart';
-import 'package:intl/date_symbol_data_file.dart';
-import 'package:intl/intl.dart';
 import 'package:asuka/asuka.dart' as asuka;
+import 'package:flutter_localizations/flutter_localizations.dart';
 
 const _titleAppBar = 'HCSlz App';
 
@@ -17,14 +16,19 @@ void main() async {
 class HCSlzApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-/*    initializeDateFormatting("pt_BR", null).then((_) {
-      Intl.defaultLocale = 'pt_BR';
-    });*/
-
     return AnimatedBuilder(
       animation: AppController.instance,
       builder: (context, child) {
         return MaterialApp(
+          localizationsDelegates: [
+            GlobalMaterialLocalizations.delegate,
+            GlobalWidgetsLocalizations.delegate,
+            GlobalCupertinoLocalizations.delegate,
+          ],
+          supportedLocales: [
+            const Locale('en', ''), // English, no country code
+            const Locale('pt_BR', ''), // Portuguese, no country code
+          ],
           builder: asuka.builder,
           debugShowCheckedModeBanner: false,
           home: Splash(),
