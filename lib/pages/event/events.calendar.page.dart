@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:hcslzapp/components/top.bar.dart';
 import 'package:hcslzapp/pages/event/event.list.page.dart';
 import 'package:intl/date_symbol_data_file.dart';
 import 'package:table_calendar/table_calendar.dart';
@@ -25,13 +26,14 @@ class EventCalendarPageState extends State<EventCalendarPage>
   List _selectedEvents;
   AnimationController _animationController;
   CalendarController _calendarController;
+  TextEditingController _eventController;
 
   @override
   void initState() {
     super.initState();
     final _selectedDay = DateTime.now();
 
-    _events = {
+/*    _events = {
       _selectedDay.subtract(Duration(days: 30)): [
         'Event A0',
         'Event B0',
@@ -83,8 +85,16 @@ class EventCalendarPageState extends State<EventCalendarPage>
         'Event B14',
         'Event C14'
       ],
+    };*/
+    _events = {
+      DateTime.now(): [
+        'Viagem pra Ubajara',
+        'Passeio na Lito',
+      ],
+      DateTime.utc(2021, 4, 10): [
+        'Viagem pra Santa Inês',
+      ],
     };
-
     _selectedEvents = _events[_selectedDay] ?? [];
     _calendarController = CalendarController();
     _animationController = AnimationController(
@@ -108,14 +118,6 @@ class EventCalendarPageState extends State<EventCalendarPage>
     setState(() {
       _selectedEvents = events;
     });
-    Navigator.push(
-      context,
-      MaterialPageRoute(
-        builder: (context) {
-          return EventListPage();
-        },
-      ),
-    );
   }
 
   void _onDayLongPressed(DateTime day, List events) {
@@ -138,50 +140,34 @@ class EventCalendarPageState extends State<EventCalendarPage>
   }
 
   @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      //appBar: MyAppBar(_tituloAppBar),
-      body: Container(
-        decoration: BoxDecoration(
-          gradient: LinearGradient(
-            colors: [Colors.white30, Colors.deepOrange],
-            begin: FractionalOffset.topLeft,
-            end: FractionalOffset.bottomRight,
+  Widget build(BuildContext context) => Scaffold(
+        body: Container(
+          decoration: BoxDecoration(
+            gradient: LinearGradient(
+              colors: [Colors.white30, Colors.deepOrange],
+              begin: FractionalOffset.topLeft,
+              end: FractionalOffset.bottomRight,
+            ),
           ),
-        ),
-        height: MediaQuery.of(context).size.height,
-        child: Form(
-          child: SingleChildScrollView(
+          height: MediaQuery.of(context).size.height,
+          child: Center(
             child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[
+                TopBar(),
+                //_buildTableCalendar(),
+                _buildTableCalendarWithBuilders(),
+                const SizedBox(height: 8.0),
+                _buildButtons(),
                 SizedBox(
-                  height: 20.0,
+                  height: 8.0,
                 ),
-                _buildTableCalendar(),
+                Expanded(child: _buildEventList()),
               ],
             ),
           ),
         ),
-
-/*        child: SingleChildScrollView(
-          child: Column(
-            //mainAxisSize: MainAxisSize.max,
-            children: <Widget>[
-              // Switch out 2 lines below to play with TableCalendar's settings
-              //-----------------------
-              _buildTableCalendar(),
-              //_buildTableCalendarWithBuilders(),
-              //const SizedBox(height: 8.0),
-              //_buildButtons(),
-              //buildAddEventButton(),
-              //const SizedBox(height: 8.0),
-              //Expanded(child: _buildEventList()),
-            ],
-          ),
-        ),*/
-      ),
-    );
-  }
+      );
 
   Container buildAddEventButton() {
     return Container(
@@ -259,7 +245,6 @@ class EventCalendarPageState extends State<EventCalendarPage>
   }
 
 // More advanced TableCalendar configuration (using Builders & Styles)
-/*
   Widget _buildTableCalendarWithBuilders() {
     return TableCalendar(
       locale: 'pt_BR',
@@ -350,9 +335,7 @@ class EventCalendarPageState extends State<EventCalendarPage>
       onCalendarCreated: _onCalendarCreated,
     );
   }
-*/
 
-/*
   Widget _buildEventsMarker(DateTime date, List events) {
     return AnimatedContainer(
       duration: const Duration(milliseconds: 300),
@@ -377,9 +360,7 @@ class EventCalendarPageState extends State<EventCalendarPage>
       ),
     );
   }
-*/
 
-/*
   Widget _buildHolidaysMarker() {
     return Icon(
       Icons.add_box,
@@ -387,9 +368,8 @@ class EventCalendarPageState extends State<EventCalendarPage>
       color: Colors.blueGrey[800],
     );
   }
-*/
 
-/*  Widget _buildButtons() {
+  Widget _buildButtons() {
     final dateTime = _events.keys.elementAt(_events.length - 2);
 
     return Column(
@@ -439,6 +419,4 @@ class EventCalendarPageState extends State<EventCalendarPage>
       ],
     );
   }
-*/
-
 }
