@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:hcslzapp/components/top.bar.dart';
+import 'package:hcslzapp/models/dependent.dart';
+import 'package:hcslzapp/pages/dependent/dependent.add.page.dart';
 import 'package:hcslzapp/pages/event/event.list.page.dart';
 import 'package:intl/date_symbol_data_file.dart';
 import 'package:table_calendar/table_calendar.dart';
@@ -90,6 +93,8 @@ class EventCalendarPageState extends State<EventCalendarPage>
       DateTime.now(): [
         'Viagem pra Ubajara',
         'Passeio na Lito',
+        'Entrega de cestas básicas no Maiobão',
+        'Encontro na Sede',
       ],
       DateTime.utc(2021, 4, 10): [
         'Viagem pra Santa Inês',
@@ -157,8 +162,21 @@ class EventCalendarPageState extends State<EventCalendarPage>
                 TopBar(),
                 //_buildTableCalendar(),
                 _buildTableCalendarWithBuilders(),
-                const SizedBox(height: 8.0),
-                _buildButtons(),
+/*                const SizedBox(height: 8.0),
+                _buildButtons(),*/
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Icon(
+                        Icons.arrow_upward_rounded,
+                        size: 12.0,
+                      ),
+                      Icon(
+                        Icons.arrow_downward_rounded,
+                        size: 12.0,
+                      ),
+                    ],
+                  ),
                 SizedBox(
                   height: 8.0,
                 ),
@@ -180,7 +198,7 @@ class EventCalendarPageState extends State<EventCalendarPage>
     );
   }
 
-  // Simple TableCalendar configuration (using Styles)
+/*  // Simple TableCalendar configuration (using Styles)
   Widget _buildTableCalendar() {
     return TableCalendar(
       locale: 'pt_BR',
@@ -208,41 +226,196 @@ class EventCalendarPageState extends State<EventCalendarPage>
       onCalendarCreated: _onCalendarCreated,
       onDayLongPressed: _onDayLongPressed,
     );
-  }
+  }*/
 
-  Widget _buildEventList() {
-    return ListView(
-      children: _selectedEvents
-          .map((event) => Container(
-                decoration: BoxDecoration(
-                  border: Border.all(width: 0.8),
-                  borderRadius: BorderRadius.circular(12.0),
-                  color: Colors.black12,
-                ),
-                margin: const EdgeInsets.symmetric(
-                  horizontal: 8.0,
-                  vertical: 2.0,
-                ),
-                child: ListTile(
-                  contentPadding: EdgeInsets.symmetric(
-                    vertical: 0.0,
-                    horizontal: 16.0,
-                  ),
-                  dense: true,
-                  //leading: Icon(Icons.event_note),
-                  title: Text(
-                    event.toString(),
-                    style: TextStyle(
-                      fontSize: 12,
-                      fontWeight: FontWeight.bold,
+/*
+  Widget _buildEventList2() {
+    return Column(
+      children: [
+        Expanded(
+          child: ListView(
+            children: _selectedEvents
+                .map(
+                  (event) => Container(
+                    decoration: BoxDecoration(
+                      border: Border.all(width: 0.8),
+                      borderRadius: BorderRadius.circular(12.0),
+                      color: Colors.black12,
+                    ),
+                    margin: const EdgeInsets.symmetric(
+                      horizontal: 8.0,
+                      vertical: 2.0,
+                    ),
+                    child: ListTile(
+                      contentPadding: EdgeInsets.symmetric(
+                        vertical: 0.0,
+                        horizontal: 16.0,
+                      ),
+                      dense: true,
+                      //leading: Icon(Icons.event_note),
+                      title: Text(
+                        event.toString(),
+                        style: TextStyle(
+                          fontSize: 12,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                      onTap: () => print('$event tapped!'),
                     ),
                   ),
-                  onTap: () => print('$event tapped!'),
-                ),
-              ))
-          .toList(),
+                )
+                .toList(),
+          ),
+        ),
+        Container(
+          //padding: EdgeInsets.only(top: 20.0),
+          child: FloatingActionButton(
+            heroTag: "btnAdd",
+            mini: true,
+            backgroundColor: Colors.deepOrangeAccent[100],
+            child: Icon(
+              Icons.add,
+              color: Colors.black,
+            ),
+            onPressed: () {
+              final Future<Dependent> future = Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => DependentAddPage(null)),
+              );
+*/
+/*              future.then(
+                    (dependent) {
+                  if (dependent != null) {
+                    _controller.dependents.add(dependent);
+                  }
+                },
+              );*/ /*
+
+            },
+          ),
+        ),
+      ],
     );
   }
+*/
+
+  Widget _buildEventList() => Container(
+        padding: EdgeInsets.all(10.0),
+        decoration: BoxDecoration(
+          color: Colors.white12,
+          shape: BoxShape.rectangle,
+          borderRadius: BorderRadius.circular(8.0),
+        ),
+        child: Column(
+          children: [
+            Text(
+              "Eventos",
+              style: TextStyle(
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+            Expanded(
+              child: Observer(
+                builder: (_) => ListView.separated(
+                  shrinkWrap: true,
+                  itemCount: _selectedEvents.length,
+                  itemBuilder: (_, int i) {
+                    return Container(
+                      decoration: BoxDecoration(
+                        color: Colors.white30,
+                        shape: BoxShape.rectangle,
+                        borderRadius: BorderRadius.circular(8.0),
+                        boxShadow: <BoxShadow>[
+                          BoxShadow(
+                            color: Colors.black12,
+                            blurRadius: 10.0,
+                            offset: Offset(0.0, 5.0),
+                          ),
+                        ],
+                      ),
+                      child: ListTile(
+                        leading: Container(
+                          width: 48,
+                          height: 48,
+                          alignment: Alignment.center,
+                          child: CircleAvatar(
+                            child: Icon(Icons.event),
+                            backgroundColor: Colors.white,
+                          ),
+                        ),
+                        trailing: Wrap(
+                          spacing: 10, // space between two icons
+                          children: <Widget>[
+                            GestureDetector(
+                              child: Icon(
+                                Icons.delete,
+                              ),
+                              onTap: () {
+                                //_controller.dependents.removeAt(i);
+                              },
+                            ),
+                            GestureDetector(
+                              child: Icon(
+                                Icons.arrow_forward,
+                              ),
+                              onTap: () {
+                                final Future<Dependent> future = Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (context) =>
+                                        DependentAddPage(null),
+                                  ),
+                                );
+/*                          future.then(
+                                  (dependent) {
+                                if (dependent != null) {
+                                  _controller.dependents.removeAt(i);
+                                  _controller.dependents.add(dependent);
+                                }
+                              },
+                            );*/
+                              },
+                            ),
+                          ],
+                        ),
+                        title: Text(_selectedEvents[i].toString()),
+                        //subtitle: Text(event.toString()),
+                      ),
+                    );
+                  },
+                  separatorBuilder: (_, int index) => const Divider(),
+                ),
+              ),
+            ),
+            Container(
+              padding: EdgeInsets.only(top: 20.0),
+              child: FloatingActionButton(
+                heroTag: "btnAdd",
+                mini: true,
+                backgroundColor: Colors.deepOrangeAccent[100],
+                child: Icon(
+                  Icons.add,
+                  color: Colors.black,
+                ),
+                onPressed: () {
+                  final Future<Dependent> future = Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => DependentAddPage(null)),
+                  );
+/*              future.then(
+                    (dependent) {
+                  if (dependent != null) {
+                    _controller.dependents.add(dependent);
+                  }
+                },
+              );*/
+                },
+              ),
+            ),
+          ],
+        ),
+      );
 
 // More advanced TableCalendar configuration (using Builders & Styles)
   Widget _buildTableCalendarWithBuilders() {
@@ -251,6 +424,7 @@ class EventCalendarPageState extends State<EventCalendarPage>
       calendarController: _calendarController,
       events: _events,
       holidays: _holidays,
+      rowHeight: 40,
       initialCalendarFormat: CalendarFormat.month,
       formatAnimation: FormatAnimation.slide,
       startingDayOfWeek: StartingDayOfWeek.sunday,
@@ -265,7 +439,7 @@ class EventCalendarPageState extends State<EventCalendarPage>
         holidayStyle: TextStyle().copyWith(color: Colors.blue[800]),
       ),
       daysOfWeekStyle: DaysOfWeekStyle(
-        weekendStyle: TextStyle().copyWith(color: Colors.blue[600]),
+        weekendStyle: TextStyle().copyWith(color: Colors.blue[800]),
       ),
       headerStyle: HeaderStyle(
         centerHeaderTitle: true,
@@ -379,7 +553,7 @@ class EventCalendarPageState extends State<EventCalendarPage>
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: <Widget>[
             RaisedButton(
-              child: Text('Month'),
+              child: Text('Mês'),
               onPressed: () {
                 setState(() {
                   _calendarController.setCalendarFormat(CalendarFormat.month);
@@ -387,7 +561,7 @@ class EventCalendarPageState extends State<EventCalendarPage>
               },
             ),
             RaisedButton(
-              child: Text('2 weeks'),
+              child: Text('2 Semanas'),
               onPressed: () {
                 setState(() {
                   _calendarController
@@ -396,7 +570,7 @@ class EventCalendarPageState extends State<EventCalendarPage>
               },
             ),
             RaisedButton(
-              child: Text('Week'),
+              child: Text('1 Semana'),
               onPressed: () {
                 setState(() {
                   _calendarController.setCalendarFormat(CalendarFormat.week);
@@ -405,7 +579,7 @@ class EventCalendarPageState extends State<EventCalendarPage>
             ),
           ],
         ),
-        const SizedBox(height: 8.0),
+/*        const SizedBox(height: 8.0),
         RaisedButton(
           child: Text(
               'Set day ${dateTime.day}-${dateTime.month}-${dateTime.year}'),
@@ -415,7 +589,7 @@ class EventCalendarPageState extends State<EventCalendarPage>
               runCallback: true,
             );
           },
-        ),
+        ),*/
       ],
     );
   }
