@@ -97,7 +97,6 @@ flutter:
     - assets/imgs/sobre.jpeg
     - assets/imgs/dependentes.png
     - assets/imgs/motocicletas.png
-    - assets/imgs/loadingImage.png
 
     #
     - assets/icons/digital-logo.png
