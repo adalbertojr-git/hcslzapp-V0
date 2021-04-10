@@ -21,6 +21,6 @@ class Event {
 
   @override
   String toString() {
-    return 'Event{id: $id, description: $description, date: $date}';
+    return '{id: $id, description: $description, date: $date}';
   }
 }

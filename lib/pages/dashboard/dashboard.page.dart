@@ -13,7 +13,7 @@ import 'package:hcslzapp/pages/digital.identity/digital.identity.page.dart';
 import 'package:hcslzapp/pages/document/document.list.page.dart';
 import 'package:hcslzapp/pages/dtc.code/dtc.code.access.oldmodels.page.dart';
 import 'package:hcslzapp/pages/dtc.code/dtc.code.dashboard.page.dart';
-import 'package:hcslzapp/pages/event/events.calendar.page.dart';
+import 'package:hcslzapp/pages/event/event.calendar.page.dart';
 import 'package:hcslzapp/pages/financial/payment.associated.page.dart';
 import 'package:hcslzapp/pages/financial/payment.list.page.dart';
 import 'package:hcslzapp/pages/partnership/partnership.add.page.dart';

@@ -1,6 +1,9 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:hcslzapp/components/top.bar.dart';
+import 'package:hcslzapp/controllers/event.calendar.controller.dart';
 import 'package:hcslzapp/models/dependent.dart';
 import 'package:hcslzapp/pages/dependent/dependent.add.page.dart';
 import 'package:hcslzapp/pages/event/event.list.page.dart';
@@ -30,11 +33,45 @@ class EventCalendarPageState extends State<EventCalendarPage>
   AnimationController _animationController;
   CalendarController _calendarController;
   TextEditingController _eventController;
+  EventCalendarController _controller = EventCalendarController();
 
   @override
   void initState() {
     super.initState();
     final _selectedDay = DateTime.now();
+    _controller.getFuture().then((value) {
+      if (value != null && value.isNotEmpty) {
+        _controller.events.addAll(value);
+        //print(_controller.events);
+        var jsonSource0 = """{"Events": """;
+        var jsonSource1 = """}""";
+        var jsonSource2 = jsonSource0 + _controller.events.toString() + jsonSource1;
+        print(jsonSource2);
+        print(convertJsonToDateMap(jsonSource2));
+      }
+    });
+
+
+
+    var jsonSource = """
+  {
+   "Events": [
+        {
+          "id": 1,
+          "description": "Aniversario de Santa Quiteria",
+          "date": "2020-09-01"
+        },
+        {
+          "id": 2,
+          "description": "Festa de aniversario do Harley Club de Sao Luis",
+          "date": "2020-07-27"
+        }
+    ]
+    }
+  """;
+    //print(jsonSource);
+
+    //print(convertJsonToDateMap(jsonSource2));
 
 /*    _events = {
       _selectedDay.subtract(Duration(days: 30)): [
@@ -107,6 +144,23 @@ class EventCalendarPageState extends State<EventCalendarPage>
       duration: const Duration(milliseconds: 400),
     );
     _animationController.forward();
+  }
+
+  Map<DateTime, List> convertJsonToDateMap(String jsonSource) {
+    var json = jsonDecode(jsonSource);
+    var jsonEvents = json['Events'];
+    Map<DateTime, List<String>> events = {};
+    for(var event in jsonEvents){
+      var date = parseDate(event['date']);
+      events.putIfAbsent(date, () => <String>[]);
+      events[date].add(event['description']);
+    }
+    return events;
+  }
+
+  DateTime parseDate(String date) {
+    var parts = date.split('-').map(int.tryParse).toList();
+    return DateTime(parts[0], parts[1], parts[2]);
   }
 
   @override
