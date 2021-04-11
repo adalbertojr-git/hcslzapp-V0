@@ -46,24 +46,23 @@ abstract class EventCalendarControllerBase with Store {
   TextEditingController eventController;
 
   get init {
-    getFuture().then((value) {
+    findAll().then((value) {
       events = convertJsonToDateMap(value);
-      print(events);
       selectedEvents = events[DateTime.now()] ?? [];
     });
   }
 
   @action
-  Future<String> findAll()  =>
-      _eventRepo.findAll().then((value) => value)
-          .catchError((e) {
+  Future<String> findAll() =>
+      _eventRepo.findAll().then((value) => value).catchError((e) {
         errorMsg = "${e.message}";
       }, test: (e) => e is Exception);
 
-  Future<String> getFuture() => future = findAll();
-
   @action
   setSelectedEvents(List events) => selectedEvents = events;
+
+  @action
+  removeSelectedEvent(int i) => selectedEvents.removeAt(i);
 
   Map<DateTime, List> convertJsonToDateMap(String jsonSource) {
     var json = jsonDecode(jsonSource);
@@ -82,5 +81,4 @@ abstract class EventCalendarControllerBase with Store {
     var parts = date.split('-').map(int.tryParse).toList();
     return DateTime(parts[0], parts[1], parts[2]);
   }
-
 }

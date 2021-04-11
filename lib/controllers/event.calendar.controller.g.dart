@@ -204,6 +204,17 @@ mixin _$EventCalendarController on EventCalendarControllerBase, Store {
   }
 
   @override
+  dynamic removeSelectedEvent(int i) {
+    final _$actionInfo = _$EventCalendarControllerBaseActionController
+        .startAction(name: 'EventCalendarControllerBase.removeSelectedEvent');
+    try {
+      return super.removeSelectedEvent(i);
+    } finally {
+      _$EventCalendarControllerBaseActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
   String toString() {
     return '''
 nameCtrl: ${nameCtrl},

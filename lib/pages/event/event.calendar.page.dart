@@ -46,27 +46,19 @@ class EventCalendarPageState extends State<EventCalendarPage>
   }
 
   void _onDaySelected(DateTime day, List events) {
-    print('CALLBACK: _onDaySelected');
-    print('Day: $day');
-    print('Events: $events');
     _controller.setSelectedEvents(events);
   }
 
   void _onDayLongPressed(DateTime day, List events) {
-    print('CALLBACK: _onDayLongPressed');
-    print('Day: $day');
-    print('Events: $events');
     _controller.setSelectedEvents(events);
   }
 
   void _onVisibleDaysChanged(
       DateTime first, DateTime last, CalendarFormat format) {
-    print('CALLBACK: _onVisibleDaysChanged');
   }
 
   void _onCalendarCreated(
       DateTime first, DateTime last, CalendarFormat format) {
-    print('CALLBACK: _onCalendarCreated');
   }
 
   @override
@@ -172,12 +164,14 @@ class EventCalendarPageState extends State<EventCalendarPage>
                                 Icons.delete,
                               ),
                               onTap: () {
-                                //_controller.dependents.removeAt(i);
+                                setState(() {
+                                  _controller.removeSelectedEvent(i);
+                                });
                               },
                             ),
                             GestureDetector(
                               child: Icon(
-                                Icons.arrow_forward,
+                                Icons.edit,
                               ),
                               onTap: () {
                                 final Future<Dependent> future = Navigator.push(
