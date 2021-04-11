@@ -24,21 +24,6 @@ mixin _$EventCalendarController on EventCalendarControllerBase, Store {
     });
   }
 
-  final _$eventsAtom = Atom(name: 'EventCalendarControllerBase.events');
-
-  @override
-  ObservableList<dynamic> get events {
-    _$eventsAtom.reportRead();
-    return super.events;
-  }
-
-  @override
-  set events(ObservableList<dynamic> value) {
-    _$eventsAtom.reportWrite(value, super.events, () {
-      super.events = value;
-    });
-  }
-
   final _$eventAtom = Atom(name: 'EventCalendarControllerBase.event');
 
   @override
@@ -114,11 +99,90 @@ mixin _$EventCalendarController on EventCalendarControllerBase, Store {
     });
   }
 
+  final _$eventsAtom = Atom(name: 'EventCalendarControllerBase.events');
+
+  @override
+  Map<DateTime, List<dynamic>> get events {
+    _$eventsAtom.reportRead();
+    return super.events;
+  }
+
+  @override
+  set events(Map<DateTime, List<dynamic>> value) {
+    _$eventsAtom.reportWrite(value, super.events, () {
+      super.events = value;
+    });
+  }
+
+  final _$selectedEventsAtom =
+      Atom(name: 'EventCalendarControllerBase.selectedEvents');
+
+  @override
+  List<dynamic> get selectedEvents {
+    _$selectedEventsAtom.reportRead();
+    return super.selectedEvents;
+  }
+
+  @override
+  set selectedEvents(List<dynamic> value) {
+    _$selectedEventsAtom.reportWrite(value, super.selectedEvents, () {
+      super.selectedEvents = value;
+    });
+  }
+
+  final _$animationControllerAtom =
+      Atom(name: 'EventCalendarControllerBase.animationController');
+
+  @override
+  AnimationController get animationController {
+    _$animationControllerAtom.reportRead();
+    return super.animationController;
+  }
+
+  @override
+  set animationController(AnimationController value) {
+    _$animationControllerAtom.reportWrite(value, super.animationController, () {
+      super.animationController = value;
+    });
+  }
+
+  final _$calendarControllerAtom =
+      Atom(name: 'EventCalendarControllerBase.calendarController');
+
+  @override
+  CalendarController get calendarController {
+    _$calendarControllerAtom.reportRead();
+    return super.calendarController;
+  }
+
+  @override
+  set calendarController(CalendarController value) {
+    _$calendarControllerAtom.reportWrite(value, super.calendarController, () {
+      super.calendarController = value;
+    });
+  }
+
+  final _$eventControllerAtom =
+      Atom(name: 'EventCalendarControllerBase.eventController');
+
+  @override
+  TextEditingController get eventController {
+    _$eventControllerAtom.reportRead();
+    return super.eventController;
+  }
+
+  @override
+  set eventController(TextEditingController value) {
+    _$eventControllerAtom.reportWrite(value, super.eventController, () {
+      super.eventController = value;
+    });
+  }
+
   final _$EventCalendarControllerBaseActionController =
       ActionController(name: 'EventCalendarControllerBase');
 
   @override
-  Future<dynamic> findAll() {
+  Future<String> findAll() {
     final _$actionInfo = _$EventCalendarControllerBaseActionController
         .startAction(name: 'EventCalendarControllerBase.findAll');
     try {
@@ -129,14 +193,29 @@ mixin _$EventCalendarController on EventCalendarControllerBase, Store {
   }
 
   @override
+  dynamic setSelectedEvents(List<dynamic> events) {
+    final _$actionInfo = _$EventCalendarControllerBaseActionController
+        .startAction(name: 'EventCalendarControllerBase.setSelectedEvents');
+    try {
+      return super.setSelectedEvents(events);
+    } finally {
+      _$EventCalendarControllerBaseActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
   String toString() {
     return '''
 nameCtrl: ${nameCtrl},
-events: ${events},
 event: ${event},
 errorMsg: ${errorMsg},
 future: ${future},
-filter: ${filter}
+filter: ${filter},
+events: ${events},
+selectedEvents: ${selectedEvents},
+animationController: ${animationController},
+calendarController: ${calendarController},
+eventController: ${eventController}
     ''';
   }
 }
