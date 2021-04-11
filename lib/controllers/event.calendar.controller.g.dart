@@ -87,13 +87,13 @@ mixin _$EventCalendarController on EventCalendarControllerBase, Store {
   final _$futureAtom = Atom(name: 'EventCalendarControllerBase.future');
 
   @override
-  Future<List<Event>> get future {
+  Future<String> get future {
     _$futureAtom.reportRead();
     return super.future;
   }
 
   @override
-  set future(Future<List<Event>> value) {
+  set future(Future<String> value) {
     _$futureAtom.reportWrite(value, super.future, () {
       super.future = value;
     });

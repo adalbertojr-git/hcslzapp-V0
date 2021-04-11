@@ -26,7 +26,7 @@ abstract class EventCalendarControllerBase with Store {
   String errorMsg;
 
   @observable
-  Future<List<Event>> future;
+  Future<String> future;
 
   @observable
   String filter = '';
@@ -42,6 +42,6 @@ abstract class EventCalendarControllerBase with Store {
         errorMsg = "${e.message}";
       }, test: (e) => e is Exception);
 
-  Future<List<Event>> getFuture() => future = findAll();
+  Future<String> getFuture() => future = findAll();
 
 }

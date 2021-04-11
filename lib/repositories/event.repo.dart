@@ -7,21 +7,22 @@ import 'package:hcslzapp/http/http.exception.dart';
 const String _eventUrl = '/event';
 
 class EventRepo {
-  Future<List<Event>> findAll() async {
+  Future<String> findAll() async {
     final Response response = await client
         .get(
-          mainUrl + _eventUrl + "/list",
+          mainUrl + _eventUrl,
         )
         .timeout(
           Duration(seconds: 10),
         );
     if (response.statusCode == 200) {
-      final List<dynamic> decodedJson = jsonDecode(response.body);
+      return response.body;
+/*      final List<dynamic> decodedJson = jsonDecode(response.body);
       return decodedJson
           .map(
             (dynamic json) => Event.fromJson(json),
           )
-          .toList();
+          .toList();*/
     } else {
       throw HttpException(getMessage(response.statusCode));
     }

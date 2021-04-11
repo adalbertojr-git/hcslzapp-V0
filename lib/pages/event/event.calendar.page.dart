@@ -5,6 +5,7 @@ import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:hcslzapp/components/top.bar.dart';
 import 'package:hcslzapp/controllers/event.calendar.controller.dart';
 import 'package:hcslzapp/models/dependent.dart';
+import 'package:hcslzapp/models/event.dart';
 import 'package:hcslzapp/pages/dependent/dependent.add.page.dart';
 import 'package:hcslzapp/pages/event/event.list.page.dart';
 import 'package:intl/date_symbol_data_file.dart';
@@ -28,7 +29,7 @@ class EventCalendarPage extends StatefulWidget {
 
 class EventCalendarPageState extends State<EventCalendarPage>
     with SingleTickerProviderStateMixin {
-  Map<DateTime, List> _events;
+  Map<DateTime, List> _events = {};
   List _selectedEvents;
   AnimationController _animationController;
   CalendarController _calendarController;
@@ -41,38 +42,11 @@ class EventCalendarPageState extends State<EventCalendarPage>
     final _selectedDay = DateTime.now();
     _controller.getFuture().then((value) {
       if (value != null && value.isNotEmpty) {
-        _controller.events.addAll(value);
-        //print(_controller.events);
-        var jsonSource0 = """{"Events": """;
-        var jsonSource1 = """}""";
-        var jsonSource2 = jsonSource0 + _controller.events.toString() + jsonSource1;
-        print(jsonSource2);
-        print(convertJsonToDateMap(jsonSource2));
+        _events = convertJsonToDateMap(value);
+        print(_events);
+        _selectedEvents = _events[_selectedDay] ?? [];
       }
     });
-
-
-
-    var jsonSource = """
-  {
-   "Events": [
-        {
-          "id": 1,
-          "description": "Aniversario de Santa Quiteria",
-          "date": "2020-09-01"
-        },
-        {
-          "id": 2,
-          "description": "Festa de aniversario do Harley Club de Sao Luis",
-          "date": "2020-07-27"
-        }
-    ]
-    }
-  """;
-    //print(jsonSource);
-
-    //print(convertJsonToDateMap(jsonSource2));
-
 /*    _events = {
       _selectedDay.subtract(Duration(days: 30)): [
         'Event A0',
@@ -126,6 +100,7 @@ class EventCalendarPageState extends State<EventCalendarPage>
         'Event C14'
       ],
     };*/
+/*
     _events = {
       DateTime.now(): [
         'Viagem pra Ubajara',
@@ -137,7 +112,8 @@ class EventCalendarPageState extends State<EventCalendarPage>
         'Viagem pra Santa Inês',
       ],
     };
-    _selectedEvents = _events[_selectedDay] ?? [];
+*/
+    //_selectedEvents = _events[_selectedDay] ?? [];
     _calendarController = CalendarController();
     _animationController = AnimationController(
       vsync: this,
@@ -148,9 +124,10 @@ class EventCalendarPageState extends State<EventCalendarPage>
 
   Map<DateTime, List> convertJsonToDateMap(String jsonSource) {
     var json = jsonDecode(jsonSource);
-    var jsonEvents = json['Events'];
+    var jsonEmbedded = json['_embedded'];
+    var jsonEvents = jsonEmbedded['event'];
     Map<DateTime, List<String>> events = {};
-    for(var event in jsonEvents){
+    for (var event in jsonEvents) {
       var date = parseDate(event['date']);
       events.putIfAbsent(date, () => <String>[]);
       events[date].add(event['description']);
@@ -218,19 +195,19 @@ class EventCalendarPageState extends State<EventCalendarPage>
                 _buildTableCalendarWithBuilders(),
 /*                const SizedBox(height: 8.0),
                 _buildButtons(),*/
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Icon(
-                        Icons.arrow_upward_rounded,
-                        size: 12.0,
-                      ),
-                      Icon(
-                        Icons.arrow_downward_rounded,
-                        size: 12.0,
-                      ),
-                    ],
-                  ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Icon(
+                      Icons.arrow_upward_rounded,
+                      size: 12.0,
+                    ),
+                    Icon(
+                      Icons.arrow_downward_rounded,
+                      size: 12.0,
+                    ),
+                  ],
+                ),
                 SizedBox(
                   height: 8.0,
                 ),
