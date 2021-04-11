@@ -17,12 +17,6 @@ class EventRepo {
         );
     if (response.statusCode == 200) {
       return response.body;
-/*      final List<dynamic> decodedJson = jsonDecode(response.body);
-      return decodedJson
-          .map(
-            (dynamic json) => Event.fromJson(json),
-          )
-          .toList();*/
     } else {
       throw HttpException(getMessage(response.statusCode));
     }
