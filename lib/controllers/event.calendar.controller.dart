@@ -13,7 +13,7 @@ class EventCalendarController = EventCalendarControllerBase
 
 abstract class EventCalendarControllerBase with Store {
   @observable
-  var nameCtrl = TextEditingController();
+  var eventCtrl = TextEditingController();
 
   @observable
   Event event;
@@ -41,9 +41,6 @@ abstract class EventCalendarControllerBase with Store {
 
   @observable
   CalendarController calendarController;
-
-  @observable
-  TextEditingController eventController;
 
   get init {
     findAll().then((value) {

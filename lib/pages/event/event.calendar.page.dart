@@ -54,12 +54,10 @@ class EventCalendarPageState extends State<EventCalendarPage>
   }
 
   void _onVisibleDaysChanged(
-      DateTime first, DateTime last, CalendarFormat format) {
-  }
+      DateTime first, DateTime last, CalendarFormat format) {}
 
   void _onCalendarCreated(
-      DateTime first, DateTime last, CalendarFormat format) {
-  }
+      DateTime first, DateTime last, CalendarFormat format) {}
 
   @override
   Widget build(BuildContext context) => Scaffold(
@@ -213,24 +211,66 @@ class EventCalendarPageState extends State<EventCalendarPage>
                   color: Colors.black,
                 ),
                 onPressed: () {
-                  final Future<Dependent> future = Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                        builder: (context) => DependentAddPage(null)),
-                  );
-/*              future.then(
-                    (dependent) {
-                  if (dependent != null) {
-                    _controller.dependents.add(dependent);
-                  }
-                },
-              );*/
+                  _showAddDialog();
                 },
               ),
             ),
           ],
         ),
       );
+
+  _showAddDialog() async {
+    await showDialog(
+        context: context,
+        builder: (context) => AlertDialog(
+              backgroundColor: Colors.white70,
+              title: Text("Adicionar Evento"),
+              content: TextField(
+                controller: _controller.eventCtrl,
+              ),
+              actions: <Widget>[
+                Row(
+                  children: [
+                    FlatButton(
+                      child: Text(
+                        'Cancelar',
+                      ),
+                      onPressed: () {
+                        Navigator.pop(context);
+                      },
+                    ),
+                    FlatButton(
+                      child: Text(
+                        "Salvar",
+                      ),
+                      onPressed: () {
+                        if (_controller.eventCtrl.text.isEmpty) return;
+                        setState(() {
+                          print(_controller.events);
+                          print(_controller.events[_controller.calendarController.selectedDay]);
+                          print(_controller.calendarController.selectedDay);
+                          //print(_controller.eventCtrl.text);
+
+                          if (_controller.events[
+                                  _controller.calendarController.selectedDay] !=
+                              null) {
+                            _controller.events[
+                                    _controller.calendarController.selectedDay]
+                                .add(_controller.eventCtrl.text);
+                          } else {
+                            _controller.events[_controller.calendarController
+                                .selectedDay] = [_controller.eventCtrl.text];
+                          }
+                          _controller.eventCtrl.clear();
+                          Navigator.pop(context);
+                        });
+                      },
+                    ),
+                  ],
+                )
+              ],
+            ));
+  }
 
   Widget _buildTableCalendarWithBuilders() {
     return Observer(

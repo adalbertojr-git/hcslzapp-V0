@@ -9,18 +9,18 @@ part of 'event.calendar.controller.dart';
 // ignore_for_file: non_constant_identifier_names, unnecessary_brace_in_string_interps, unnecessary_lambdas, prefer_expression_function_bodies, lines_longer_than_80_chars, avoid_as, avoid_annotating_with_dynamic
 
 mixin _$EventCalendarController on EventCalendarControllerBase, Store {
-  final _$nameCtrlAtom = Atom(name: 'EventCalendarControllerBase.nameCtrl');
+  final _$eventCtrlAtom = Atom(name: 'EventCalendarControllerBase.eventCtrl');
 
   @override
-  TextEditingController get nameCtrl {
-    _$nameCtrlAtom.reportRead();
-    return super.nameCtrl;
+  TextEditingController get eventCtrl {
+    _$eventCtrlAtom.reportRead();
+    return super.eventCtrl;
   }
 
   @override
-  set nameCtrl(TextEditingController value) {
-    _$nameCtrlAtom.reportWrite(value, super.nameCtrl, () {
-      super.nameCtrl = value;
+  set eventCtrl(TextEditingController value) {
+    _$eventCtrlAtom.reportWrite(value, super.eventCtrl, () {
+      super.eventCtrl = value;
     });
   }
 
@@ -162,22 +162,6 @@ mixin _$EventCalendarController on EventCalendarControllerBase, Store {
     });
   }
 
-  final _$eventControllerAtom =
-      Atom(name: 'EventCalendarControllerBase.eventController');
-
-  @override
-  TextEditingController get eventController {
-    _$eventControllerAtom.reportRead();
-    return super.eventController;
-  }
-
-  @override
-  set eventController(TextEditingController value) {
-    _$eventControllerAtom.reportWrite(value, super.eventController, () {
-      super.eventController = value;
-    });
-  }
-
   final _$EventCalendarControllerBaseActionController =
       ActionController(name: 'EventCalendarControllerBase');
 
@@ -217,7 +201,7 @@ mixin _$EventCalendarController on EventCalendarControllerBase, Store {
   @override
   String toString() {
     return '''
-nameCtrl: ${nameCtrl},
+eventCtrl: ${eventCtrl},
 event: ${event},
 errorMsg: ${errorMsg},
 future: ${future},
@@ -225,8 +209,7 @@ filter: ${filter},
 events: ${events},
 selectedEvents: ${selectedEvents},
 animationController: ${animationController},
-calendarController: ${calendarController},
-eventController: ${eventController}
+calendarController: ${calendarController}
     ''';
   }
 }
