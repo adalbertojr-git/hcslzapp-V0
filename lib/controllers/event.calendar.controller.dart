@@ -67,7 +67,6 @@ abstract class EventCalendarControllerBase with Store {
     var jsonEvents = jsonEmbedded['event'];
     Map<DateTime, List<String>> events = {};
     for (var event in jsonEvents) {
-      //event['date'] = event['date'] + ' 12:00:00.000Z';
       var date = _parseDate(event['date']);
       events.putIfAbsent(date, () => <String>[]);
       events[date].add(event['description']);
@@ -79,4 +78,25 @@ abstract class EventCalendarControllerBase with Store {
     var parts = date.split('-').map(int.tryParse).toList();
     return DateTime(parts[0], parts[1], parts[2], 12, 0, 0, 0, 0);
   }
+
+  setEventCtrl(String value) => eventCtrl.text = value;
+
+  get addEvent {
+    if (eventCtrl.text.isEmpty) return;
+    if (selectedEvents.isNotEmpty) {
+      selectedEvents
+          .add(eventCtrl.text);
+      events[calController
+          .selectedDay] = selectedEvents;
+    } else {
+      events[calController.selectedDay] = [
+        eventCtrl.text
+      ].toList();
+    }
+    eventCtrl.clear();
+  }
+   get editEvent {
+     if (eventCtrl.text.isEmpty) return;
+
+   }
 }

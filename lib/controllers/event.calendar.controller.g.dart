@@ -130,34 +130,34 @@ mixin _$EventCalendarController on EventCalendarControllerBase, Store {
     });
   }
 
-  final _$animationControllerAtom =
-      Atom(name: 'EventCalendarControllerBase.animationController');
+  final _$animControllerAtom =
+      Atom(name: 'EventCalendarControllerBase.animController');
 
   @override
   AnimationController get animController {
-    _$animationControllerAtom.reportRead();
+    _$animControllerAtom.reportRead();
     return super.animController;
   }
 
   @override
   set animController(AnimationController value) {
-    _$animationControllerAtom.reportWrite(value, super.animController, () {
+    _$animControllerAtom.reportWrite(value, super.animController, () {
       super.animController = value;
     });
   }
 
-  final _$calendarControllerAtom =
-      Atom(name: 'EventCalendarControllerBase.calendarController');
+  final _$calControllerAtom =
+      Atom(name: 'EventCalendarControllerBase.calController');
 
   @override
   CalendarController get calController {
-    _$calendarControllerAtom.reportRead();
+    _$calControllerAtom.reportRead();
     return super.calController;
   }
 
   @override
   set calController(CalendarController value) {
-    _$calendarControllerAtom.reportWrite(value, super.calController, () {
+    _$calControllerAtom.reportWrite(value, super.calController, () {
       super.calController = value;
     });
   }
@@ -208,8 +208,8 @@ future: ${future},
 filter: ${filter},
 events: ${events},
 selectedEvents: ${selectedEvents},
-animationController: ${animController},
-calendarController: ${calController}
+animController: ${animController},
+calController: ${calController}
     ''';
   }
 }

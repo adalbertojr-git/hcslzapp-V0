@@ -12,7 +12,7 @@ class TopBar extends StatelessWidget {
         ),
         Container(
           alignment: Alignment.centerLeft,
-          height: 40,
+          height: 35,
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
@@ -26,7 +26,7 @@ class TopBar extends StatelessWidget {
                 ),
               ),
               SizedBox(
-                height: 40.0,
+                height: 35.0,
                 child: Container(
                   child: Image.asset('assets/imgs/logo.png'),
                 ),
