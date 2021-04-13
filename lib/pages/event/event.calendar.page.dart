@@ -29,19 +29,19 @@ class EventCalendarPageState extends State<EventCalendarPage>
   @override
   void initState() {
     _controller.init;
-    _controller.calendarController = CalendarController();
-    _controller.animationController = AnimationController(
+    _controller.calController = CalendarController();
+    _controller.animController = AnimationController(
       vsync: this,
       duration: const Duration(milliseconds: 400),
     );
-    _controller.animationController.forward();
+    _controller.animController.forward();
     super.initState();
   }
 
   @override
   void dispose() {
-    _controller.animationController.dispose();
-    _controller.calendarController.dispose();
+    _controller.animController.dispose();
+    _controller.calController.dispose();
     super.dispose();
   }
 
@@ -245,25 +245,19 @@ class EventCalendarPageState extends State<EventCalendarPage>
                       ),
                       onPressed: () {
                         if (_controller.eventCtrl.text.isEmpty) return;
-                        setState(() {
-                          print(_controller.events);
-                          print(_controller.events[_controller.calendarController.selectedDay]);
-                          print(_controller.calendarController.selectedDay);
-                          //print(_controller.eventCtrl.text);
-
-                          if (_controller.events[
-                                  _controller.calendarController.selectedDay] !=
-                              null) {
-                            _controller.events[
-                                    _controller.calendarController.selectedDay]
-                                .add(_controller.eventCtrl.text);
-                          } else {
-                            _controller.events[_controller.calendarController
-                                .selectedDay] = [_controller.eventCtrl.text];
-                          }
-                          _controller.eventCtrl.clear();
-                          Navigator.pop(context);
-                        });
+                        if (_controller.selectedEvents.isNotEmpty) {
+                          _controller.selectedEvents
+                              .add(_controller.eventCtrl.text);
+                          _controller.events[_controller.calController
+                              .selectedDay] = _controller.selectedEvents;
+                        } else {
+                          _controller
+                              .events[_controller.calController.selectedDay] = [
+                            _controller.eventCtrl.text
+                          ].toList();
+                        }
+                        _controller.eventCtrl.clear();
+                        Navigator.pop(context);
                       },
                     ),
                   ],
@@ -276,7 +270,7 @@ class EventCalendarPageState extends State<EventCalendarPage>
     return Observer(
       builder: (_) => TableCalendar(
         locale: 'pt_BR',
-        calendarController: _controller.calendarController,
+        calendarController: _controller.calController,
         events: _controller.events,
         holidays: _holidays,
         rowHeight: 40,
@@ -304,7 +298,7 @@ class EventCalendarPageState extends State<EventCalendarPage>
           selectedDayBuilder: (context, date, _) {
             return FadeTransition(
               opacity: Tween(begin: 0.0, end: 1.0)
-                  .animate(_controller.animationController),
+                  .animate(_controller.animController),
               child: Container(
                 margin: const EdgeInsets.all(4.0),
                 padding: const EdgeInsets.only(top: 5.0, left: 6.0),
@@ -359,7 +353,7 @@ class EventCalendarPageState extends State<EventCalendarPage>
         ),
         onDaySelected: (date, events) {
           _onDaySelected(date, events);
-          _controller.animationController.forward(from: 0.0);
+          _controller.animController.forward(from: 0.0);
         },
         onVisibleDaysChanged: _onVisibleDaysChanged,
         onCalendarCreated: _onCalendarCreated,
@@ -372,9 +366,9 @@ class EventCalendarPageState extends State<EventCalendarPage>
       duration: const Duration(milliseconds: 300),
       decoration: BoxDecoration(
         shape: BoxShape.rectangle,
-        color: _controller.calendarController.isSelected(date)
+        color: _controller.calController.isSelected(date)
             ? Colors.brown[500]
-            : _controller.calendarController.isToday(date)
+            : _controller.calController.isToday(date)
                 ? Colors.brown[300]
                 : Colors.blue[400],
       ),
