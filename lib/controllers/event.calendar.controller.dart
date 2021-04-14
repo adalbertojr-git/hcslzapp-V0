@@ -81,7 +81,7 @@ abstract class EventCalendarControllerBase with Store {
 
   setEventCtrl(String value) => eventCtrl.text = value;
 
-  get addEvent {
+  addEvent() {
     if (eventCtrl.text.isEmpty) return;
     if (selectedEvents.isNotEmpty) {
       selectedEvents.add(eventCtrl.text);

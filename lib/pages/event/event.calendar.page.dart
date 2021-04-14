@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
+import 'package:hcslzapp/components/my.text.form.field.dart';
 import 'package:hcslzapp/components/top.bar.dart';
 import 'package:hcslzapp/controllers/event.calendar.controller.dart';
 import 'package:table_calendar/table_calendar.dart';
@@ -17,7 +18,6 @@ class EventCalendarPage extends StatefulWidget {
   final String _user;
 
   const EventCalendarPage(this._user);
-
 
   @override
   State<StatefulWidget> createState() => EventCalendarPageState();
@@ -153,35 +153,42 @@ class EventCalendarPageState extends State<EventCalendarPage>
                             backgroundColor: Colors.white,
                           ),
                         ),
-                        trailing: widget._user == 'admin' ?
-                        Wrap(
-                          spacing: 10, // space between two icons
-                          children: <Widget>[
-                            GestureDetector(
-                              child: Icon(
-                                Icons.delete,
-                              ),
-                              onTap: () {
-                                setState(() {
-                                  _controller.removeSelectedEvent(i);
-                                });
-                              },
-                            ),
-                            GestureDetector(
-                              child: Icon(
-                                Icons.edit,
-                              ),
-                              onTap: () {
-                                _showAddDialog(
-                                    _controller.setEventCtrl(
-                                      _controller.selectedEvents[i].toString(),
+                        trailing: widget._user == 'admin'
+                            ? Wrap(
+                                spacing: 10, // space between two icons
+                                children: <Widget>[
+                                  GestureDetector(
+                                    child: Icon(
+                                      Icons.delete,
                                     ),
-                                    i);
-                              },
-                            ),
-                          ],
-                        ) : null,
-                        title: Text(_controller.selectedEvents[i].toString()),
+                                    onTap: () {
+                                      setState(() {
+                                        _controller.removeSelectedEvent(i);
+                                      });
+                                    },
+                                  ),
+                                  GestureDetector(
+                                    child: Icon(
+                                      Icons.edit,
+                                    ),
+                                    onTap: () {
+                                      _showAddDialog(
+                                          _controller.setEventCtrl(
+                                            _controller.selectedEvents[i]
+                                                .toString(),
+                                          ),
+                                          i);
+                                    },
+                                  ),
+                                ],
+                              )
+                            : null,
+                        title: Text(
+                          _controller.selectedEvents[i].toString(),
+                          style: TextStyle(
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
                         //subtitle: Text(event.toString()),
                       ),
                     );
@@ -190,21 +197,23 @@ class EventCalendarPageState extends State<EventCalendarPage>
                 ),
               ),
             ),
-            widget._user == 'admin' ? Container(
-              padding: EdgeInsets.only(top: 20.0),
-              child: FloatingActionButton(
-                heroTag: "btnAdd",
-                mini: true,
-                backgroundColor: Colors.deepOrangeAccent[100],
-                child: Icon(
-                  Icons.add,
-                  color: Colors.black,
-                ),
-                onPressed: () {
-                  _showAddDialog(null, null);
-                },
-              ),
-            ) : Container(),
+            widget._user == 'admin'
+                ? Container(
+                    padding: EdgeInsets.only(top: 20.0),
+                    child: FloatingActionButton(
+                      heroTag: "btnAdd",
+                      mini: true,
+                      backgroundColor: Colors.deepOrangeAccent[100],
+                      child: Icon(
+                        Icons.add,
+                        color: Colors.black,
+                      ),
+                      onPressed: () {
+                        _showAddDialog(null, null);
+                      },
+                    ),
+                  )
+                : Container(),
           ],
         ),
       );
@@ -215,8 +224,9 @@ class EventCalendarPageState extends State<EventCalendarPage>
         builder: (context) => AlertDialog(
               backgroundColor: Colors.white70,
               title: Text("Adicionar Evento"),
-              content: TextField(
-                controller: _controller.eventCtrl,
+              content: MyTextFormField(
+                nLines: 2,
+                textEditingController: _controller.eventCtrl,
               ),
               actions: <Widget>[
                 Row(
@@ -237,7 +247,7 @@ class EventCalendarPageState extends State<EventCalendarPage>
                         if (event != null)
                           _controller.editEvent(i);
                         else
-                          _controller.addEvent;
+                          _controller.addEvent();
                         Navigator.pop(context);
                       },
                     ),

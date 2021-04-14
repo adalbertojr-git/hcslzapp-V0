@@ -123,10 +123,8 @@ class AssociatedListPageState extends State<AssociatedListPage> {
                                 ? _controller.listFiltered[i].phone
                                 : 'Não informado') +
                             '\n' +
-                            'Email: ' +
-                            (_controller.listFiltered[i].email != null
-                                ? _controller.listFiltered[i].email
-                                : 'Não informado')),
+                            'Status: ' +
+                            _controller.listFiltered[i].status),
                         leading: CircleAvatar(
                           child: Icon(Icons.person),
                           backgroundColor: Colors.white,
@@ -142,8 +140,9 @@ class AssociatedListPageState extends State<AssociatedListPage> {
                                 Navigator.push(
                                   context,
                                   MaterialPageRoute(
-                                      builder: (context) => AssociatedUpdatePage(widget._user,
-                                          _controller.listFiltered[i].id)),
+                                      builder: (context) =>
+                                          AssociatedUpdatePage(widget._user,
+                                              _controller.listFiltered[i].id)),
                                 );
                               },
                             ),
