@@ -2,8 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:hcslzapp/components/top.bar.dart';
 import 'package:hcslzapp/controllers/event.calendar.controller.dart';
-import 'package:hcslzapp/models/dependent.dart';
-import 'package:hcslzapp/pages/dependent/dependent.add.page.dart';
 import 'package:table_calendar/table_calendar.dart';
 
 // Example holidays
@@ -16,6 +14,11 @@ final Map<DateTime, List> _holidays = {
 };
 
 class EventCalendarPage extends StatefulWidget {
+  final String _user;
+
+  const EventCalendarPage(this._user);
+
+
   @override
   State<StatefulWidget> createState() => EventCalendarPageState();
 }
@@ -150,7 +153,8 @@ class EventCalendarPageState extends State<EventCalendarPage>
                             backgroundColor: Colors.white,
                           ),
                         ),
-                        trailing: Wrap(
+                        trailing: widget._user == 'admin' ?
+                        Wrap(
                           spacing: 10, // space between two icons
                           children: <Widget>[
                             GestureDetector(
@@ -176,7 +180,7 @@ class EventCalendarPageState extends State<EventCalendarPage>
                               },
                             ),
                           ],
-                        ),
+                        ) : null,
                         title: Text(_controller.selectedEvents[i].toString()),
                         //subtitle: Text(event.toString()),
                       ),
@@ -186,7 +190,7 @@ class EventCalendarPageState extends State<EventCalendarPage>
                 ),
               ),
             ),
-            Container(
+            widget._user == 'admin' ? Container(
               padding: EdgeInsets.only(top: 20.0),
               child: FloatingActionButton(
                 heroTag: "btnAdd",
@@ -200,7 +204,7 @@ class EventCalendarPageState extends State<EventCalendarPage>
                   _showAddDialog(null, null);
                 },
               ),
-            ),
+            ) : Container(),
           ],
         ),
       );
@@ -260,11 +264,11 @@ class EventCalendarPageState extends State<EventCalendarPage>
           },
           calendarStyle: CalendarStyle(
             outsideDaysVisible: false,
-            weekendStyle: TextStyle().copyWith(color: Colors.blue[800]),
-            holidayStyle: TextStyle().copyWith(color: Colors.blue[800]),
+            weekendStyle: TextStyle().copyWith(color: Colors.purple),
+            holidayStyle: TextStyle().copyWith(color: Colors.purple),
           ),
           daysOfWeekStyle: DaysOfWeekStyle(
-            weekendStyle: TextStyle().copyWith(color: Colors.blue[800]),
+            weekendStyle: TextStyle().copyWith(color: Colors.purple),
           ),
           headerStyle: HeaderStyle(
             centerHeaderTitle: true,

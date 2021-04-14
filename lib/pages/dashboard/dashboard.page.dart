@@ -29,7 +29,8 @@ class DashboardPage extends StatefulWidget {
   final String _photoUrl;
   final int _associatedId;
 
-  DashboardPage(this._user, this._firstName, this._email, this._associatedId, this._photoUrl);
+  DashboardPage(this._user, this._firstName, this._email, this._associatedId,
+      this._photoUrl);
 
   @override
   _DashboardPageState createState() => _DashboardPageState();
@@ -72,7 +73,7 @@ class _DashboardPageState extends State<DashboardPage> {
     _listAdmWidgets = [
       AssociatedListPage(widget._user),
       PaymentListPage(),
-      EventCalendarPage(),
+      EventCalendarPage(widget._user),
       PartnershipListPage(widget._user),
     ];
     super.initState();
@@ -246,8 +247,8 @@ class _DashboardPageState extends State<DashboardPage> {
                   var photoPath = await Navigator.push(
                     _gContext,
                     MaterialPageRoute(
-                        builder: (gContext) =>
-                            AssociatedUpdatePage(widget._user, widget._associatedId)),
+                        builder: (gContext) => AssociatedUpdatePage(
+                            widget._user, widget._associatedId)),
                   );
                   if (photoPath != null) {
                     _controller.setPhoto(photoPath);
@@ -274,7 +275,9 @@ class _DashboardPageState extends State<DashboardPage> {
                 onClick: () {
                   Navigator.push(
                     _gContext,
-                    MaterialPageRoute(builder: (gContext) => DigitalIdentityPage(widget._associatedId)),
+                    MaterialPageRoute(
+                        builder: (gContext) =>
+                            DigitalIdentityPage(widget._associatedId)),
                   );
                 },
               ),
@@ -285,7 +288,9 @@ class _DashboardPageState extends State<DashboardPage> {
                 onClick: () {
                   Navigator.push(
                     _gContext,
-                    MaterialPageRoute(builder: (gContext) => PartnershipListPage(widget._user)),
+                    MaterialPageRoute(
+                        builder: (gContext) =>
+                            PartnershipListPage(widget._user)),
                   );
                 },
               ),
@@ -296,7 +301,8 @@ class _DashboardPageState extends State<DashboardPage> {
                 onClick: () {
                   Navigator.push(
                     _gContext,
-                    MaterialPageRoute(builder: (gContext) => EventCalendarPage()),
+                    MaterialPageRoute(
+                        builder: (gContext) => EventCalendarPage(widget._user)),
                   );
                 },
               ),
@@ -321,7 +327,8 @@ class _DashboardPageState extends State<DashboardPage> {
                   Navigator.push(
                     _gContext,
                     //MaterialPageRoute(builder: (context) => DtcCodeAccessPage()),
-                    MaterialPageRoute(builder: (context) => DtcCodeDashboardPage()),
+                    MaterialPageRoute(
+                        builder: (context) => DtcCodeDashboardPage()),
                   );
                 },
               ),
@@ -345,7 +352,8 @@ class _DashboardPageState extends State<DashboardPage> {
                 onClick: () {
                   Navigator.push(
                     _gContext,
-                    MaterialPageRoute(builder: (gContext) => BoutiqueListPage()),
+                    MaterialPageRoute(
+                        builder: (gContext) => BoutiqueListPage()),
                   );
                 },
               ),
