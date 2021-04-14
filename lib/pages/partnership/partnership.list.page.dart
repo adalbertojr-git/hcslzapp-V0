@@ -162,7 +162,7 @@ class _PartnershipListPageState extends State<PartnershipListPage> {
                                 children: [
                                   Text('Endereço: ' +
                                       _controller.listFiltered[i].address),
-                                  Text('Status:' +
+                                  Text('Status: ' +
                                       _controller.listFiltered[i].status),
                                 ],
                               ),
