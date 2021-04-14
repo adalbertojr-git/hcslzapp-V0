@@ -84,19 +84,17 @@ abstract class EventCalendarControllerBase with Store {
   get addEvent {
     if (eventCtrl.text.isEmpty) return;
     if (selectedEvents.isNotEmpty) {
-      selectedEvents
-          .add(eventCtrl.text);
-      events[calController
-          .selectedDay] = selectedEvents;
+      selectedEvents.add(eventCtrl.text);
+      events[calController.selectedDay] = selectedEvents;
     } else {
-      events[calController.selectedDay] = [
-        eventCtrl.text
-      ].toList();
+      events[calController.selectedDay] = [eventCtrl.text].toList();
     }
     eventCtrl.clear();
   }
-   get editEvent {
-     if (eventCtrl.text.isEmpty) return;
 
-   }
+  editEvent(int i) {
+    if (eventCtrl.text.isEmpty) return;
+    selectedEvents[i] = eventCtrl.text;
+    eventCtrl.clear();
+  }
 }

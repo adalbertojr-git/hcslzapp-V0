@@ -169,10 +169,10 @@ class EventCalendarPageState extends State<EventCalendarPage>
                               ),
                               onTap: () {
                                 _showAddDialog(
-                                  _controller.setEventCtrl(
-                                    _controller.selectedEvents[i].toString(),
-                                  ),
-                                );
+                                    _controller.setEventCtrl(
+                                      _controller.selectedEvents[i].toString(),
+                                    ),
+                                    i);
                               },
                             ),
                           ],
@@ -197,7 +197,7 @@ class EventCalendarPageState extends State<EventCalendarPage>
                   color: Colors.black,
                 ),
                 onPressed: () {
-                  _showAddDialog(null);
+                  _showAddDialog(null, null);
                 },
               ),
             ),
@@ -205,7 +205,7 @@ class EventCalendarPageState extends State<EventCalendarPage>
         ),
       );
 
-  _showAddDialog(String event) async {
+  _showAddDialog(String event, int i) async {
     await showDialog(
         context: context,
         builder: (context) => AlertDialog(
@@ -231,7 +231,7 @@ class EventCalendarPageState extends State<EventCalendarPage>
                       ),
                       onPressed: () {
                         if (event != null)
-                          _controller.editEvent;
+                          _controller.editEvent(i);
                         else
                           _controller.addEvent;
                         Navigator.pop(context);
@@ -275,26 +275,21 @@ class EventCalendarPageState extends State<EventCalendarPage>
               return FadeTransition(
                 opacity: Tween(begin: 0.0, end: 1.0)
                     .animate(_controller.animController),
-                child: Container(
-                  margin: const EdgeInsets.all(4.0),
-                  padding: const EdgeInsets.only(top: 5.0, left: 6.0),
-                  color: Colors.deepOrange[300],
-                  width: 100,
-                  height: 100,
+                child: CircleAvatar(
+                  backgroundColor: Colors.orangeAccent,
                   child: Text(
                     '${date.day}',
-                    style: TextStyle().copyWith(fontSize: 16.0),
+                    style: TextStyle().copyWith(
+                      fontSize: 16.0,
+                      color: Colors.white,
+                    ),
                   ),
                 ),
               );
             },
             todayDayBuilder: (context, date, _) {
-              return Container(
-                margin: const EdgeInsets.all(4.0),
-                padding: const EdgeInsets.only(top: 5.0, left: 6.0),
-                color: Colors.amber[400],
-                width: 100,
-                height: 100,
+              return CircleAvatar(
+                backgroundColor: Colors.white,
                 child: Text(
                   '${date.day}',
                   style: TextStyle().copyWith(fontSize: 16.0),
