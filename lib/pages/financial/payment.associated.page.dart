@@ -96,14 +96,15 @@ class _PaymentAssociatedPageState extends State<PaymentAssociatedPage> {
 
   ExpansionTile _buildExpansionTile(List<Payment> payments, int i) =>
       ExpansionTile(
-        leading: Icon(
-          Icons.calendar_today,
-          color: Colors.orangeAccent,
-          size: 30,
-        ),
+        backgroundColor: Colors.black26,
         title: Text(
           'Ano: ' + payments[i].year,
+          style: TextStyle(
+            fontSize: 18.0,
+            fontWeight: FontWeight.bold,
+          ),
         ),
+        subtitle: Text('Total pago: R\$ '),
         children: <Widget>[
           Column(
             children: payments[i].paymentMonths.map(_buildListTile).toList(),
@@ -124,6 +125,11 @@ class _PaymentAssociatedPageState extends State<PaymentAssociatedPage> {
             fontWeight: FontWeight.bold,
           ),
         ),
-        subtitle: Text('Valor Pago: ' + paymentMonths.value.toString()),
+        subtitle: Text(
+          'Valor Pago: R\$ ' + paymentMonths.value.toString(),
+          style: TextStyle(
+            fontWeight: FontWeight.bold,
+          ),
+        ),
       );
 }

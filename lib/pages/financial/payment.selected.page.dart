@@ -129,6 +129,7 @@ class _PaymentSelectedPageState extends State<PaymentSelectedPage> {
 
   ExpansionTile _buildExpansionTile(List<Payment> payments, int i) =>
       ExpansionTile(
+        backgroundColor: Colors.black26,
         title: Text(
           'Ano: ' + payments[i].year,
           style: TextStyle(
