@@ -13,7 +13,7 @@ class EventCalendarController = EventCalendarControllerBase
 
 abstract class EventCalendarControllerBase with Store {
   @observable
-  var eventCtrl = TextEditingController();
+  var titleCtrl = TextEditingController();
 
   @observable
   Event event;
@@ -47,6 +47,7 @@ abstract class EventCalendarControllerBase with Store {
       events = _convertJsonToDateMap(value);
       selectedEvents = events[DateTime.now()] ?? [];
     });
+    titleCtrl.text = '';
   }
 
   @action
@@ -69,7 +70,7 @@ abstract class EventCalendarControllerBase with Store {
     for (var event in jsonEvents) {
       var date = _parseDate(event['date']);
       events.putIfAbsent(date, () => <String>[]);
-      events[date].add(event['description']);
+      events[date].add(event['title']);
     }
     return events;
   }
@@ -79,22 +80,22 @@ abstract class EventCalendarControllerBase with Store {
     return DateTime(parts[0], parts[1], parts[2], 12, 0, 0, 0, 0);
   }
 
-  setEventCtrl(String value) => eventCtrl.text = value;
+  setTitle(String value) => titleCtrl.text = value;
 
   addEvent() {
-    if (eventCtrl.text.isEmpty) return;
+    if (titleCtrl.text.isEmpty) return;
     if (selectedEvents.isNotEmpty) {
-      selectedEvents.add(eventCtrl.text);
+      selectedEvents.add(titleCtrl.text);
       events[calController.selectedDay] = selectedEvents;
     } else {
-      events[calController.selectedDay] = [eventCtrl.text].toList();
+      events[calController.selectedDay] = [titleCtrl.text].toList();
     }
-    eventCtrl.clear();
+    titleCtrl.clear();
   }
 
   editEvent(int i) {
-    if (eventCtrl.text.isEmpty) return;
-    selectedEvents[i] = eventCtrl.text;
-    eventCtrl.clear();
+    if (titleCtrl.text.isEmpty) return;
+    selectedEvents[i] = titleCtrl.text;
+    titleCtrl.clear();
   }
 }

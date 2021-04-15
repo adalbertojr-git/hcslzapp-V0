@@ -93,3 +93,10 @@ const labelAddress = 'Endereço';
 const hintAddress = 'Digite o endereço do parceiro';
 const labelPromotion = 'Promoção';
 const hintPromotion = 'Digite a promoção oferecida aos associados do Harley Club';
+/*
+Event
+*/
+const labelTitle = 'Título';
+const hintTitle = 'Digite o título resumido do evento';
+const labelDescription = 'Descrição';
+const hintDescription = 'Digite a descrição do evento';

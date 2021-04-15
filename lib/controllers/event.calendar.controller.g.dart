@@ -9,18 +9,18 @@ part of 'event.calendar.controller.dart';
 // ignore_for_file: non_constant_identifier_names, unnecessary_brace_in_string_interps, unnecessary_lambdas, prefer_expression_function_bodies, lines_longer_than_80_chars, avoid_as, avoid_annotating_with_dynamic
 
 mixin _$EventCalendarController on EventCalendarControllerBase, Store {
-  final _$eventCtrlAtom = Atom(name: 'EventCalendarControllerBase.eventCtrl');
+  final _$titleCtrlAtom = Atom(name: 'EventCalendarControllerBase.titleCtrl');
 
   @override
-  TextEditingController get eventCtrl {
-    _$eventCtrlAtom.reportRead();
-    return super.eventCtrl;
+  TextEditingController get titleCtrl {
+    _$titleCtrlAtom.reportRead();
+    return super.titleCtrl;
   }
 
   @override
-  set eventCtrl(TextEditingController value) {
-    _$eventCtrlAtom.reportWrite(value, super.eventCtrl, () {
-      super.eventCtrl = value;
+  set titleCtrl(TextEditingController value) {
+    _$titleCtrlAtom.reportWrite(value, super.titleCtrl, () {
+      super.titleCtrl = value;
     });
   }
 
@@ -201,7 +201,7 @@ mixin _$EventCalendarController on EventCalendarControllerBase, Store {
   @override
   String toString() {
     return '''
-eventCtrl: ${eventCtrl},
+titleCtrl: ${titleCtrl},
 event: ${event},
 errorMsg: ${errorMsg},
 future: ${future},

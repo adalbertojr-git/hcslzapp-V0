@@ -17,7 +17,7 @@ class MyTextFormField extends StatelessWidget {
   Function onChanged;
   String errorText;
   MaskTextInputFormatter maskTextInputFormatter;
-  int maxLengh;
+  int maxLength;
   TextAlign textAlign;
 
   MyTextFormField(
@@ -36,7 +36,7 @@ class MyTextFormField extends StatelessWidget {
       this.onChanged,
       this.errorText,
       this.maskTextInputFormatter,
-      this.maxLengh,
+      this.maxLength,
       this.textAlign});
 
   @override
@@ -55,7 +55,7 @@ class MyTextFormField extends StatelessWidget {
           fontSize: fontSize != null ? fontSize : 15.0,
         ),
         textAlign: textAlign != null ? textAlign : TextAlign.left,
-        maxLength: maxLengh != null ? maxLengh : null,
+        maxLength: maxLength != null ? maxLength : null,
         decoration: InputDecoration(
           focusedBorder: OutlineInputBorder(
             borderSide: BorderSide(

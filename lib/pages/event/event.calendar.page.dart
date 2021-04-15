@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/rendering.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
+import 'package:hcslzapp/common/labels.and.hints.dart';
 import 'package:hcslzapp/components/my.text.form.field.dart';
 import 'package:hcslzapp/components/top.bar.dart';
 import 'package:hcslzapp/controllers/event.calendar.controller.dart';
@@ -100,15 +102,6 @@ class EventCalendarPageState extends State<EventCalendarPage>
         ),
       );
 
-  Container buildAddEventButton() => Container(
-        child: FloatingActionButton(
-          mini: true,
-          backgroundColor: Colors.black,
-          child: Icon(Icons.add),
-          onPressed: () {},
-        ),
-      );
-
   Widget _buildEventList() => Container(
         padding: EdgeInsets.all(10.0),
         decoration: BoxDecoration(
@@ -172,8 +165,9 @@ class EventCalendarPageState extends State<EventCalendarPage>
                                       Icons.edit,
                                     ),
                                     onTap: () {
+                                      _controller.titleCtrl.clear();
                                       _showAddDialog(
-                                          _controller.setEventCtrl(
+                                          _controller.setTitle(
                                             _controller.selectedEvents[i]
                                                 .toString(),
                                           ),
@@ -186,10 +180,9 @@ class EventCalendarPageState extends State<EventCalendarPage>
                         title: Text(
                           _controller.selectedEvents[i].toString(),
                           style: TextStyle(
-                            fontWeight: FontWeight.bold,
+                            fontSize: 13.0,
                           ),
                         ),
-                        //subtitle: Text(event.toString()),
                       ),
                     );
                   },
@@ -209,6 +202,7 @@ class EventCalendarPageState extends State<EventCalendarPage>
                         color: Colors.black,
                       ),
                       onPressed: () {
+                        _controller.titleCtrl.clear();
                         _showAddDialog(null, null);
                       },
                     ),
@@ -223,33 +217,56 @@ class EventCalendarPageState extends State<EventCalendarPage>
         context: context,
         builder: (context) => AlertDialog(
               backgroundColor: Colors.white70,
-              title: Text("Adicionar Evento"),
+              title: Container(
+                alignment: Alignment.topLeft,
+                child: Text(
+                  event == null ? 'Adicionar Evento' : 'Editar Evento',
+                  style: TextStyle(fontSize: 15.0),
+                ),
+              ),
               content: MyTextFormField(
-                nLines: 2,
-                textEditingController: _controller.eventCtrl,
+                textEditingController: _controller.titleCtrl,
+                label: labelTitle,
+                hint: hintTitle,
+                inputType: TextInputType.text,
+                maxLength: 4,
               ),
               actions: <Widget>[
                 Row(
                   children: [
-                    FlatButton(
-                      child: Text(
-                        'Cancelar',
+                    Container(
+                      padding: EdgeInsets.only(top: 20.0),
+                      child: FloatingActionButton(
+                        heroTag: "btnCancel",
+                        mini: true,
+                        backgroundColor: Colors.deepOrangeAccent[100],
+                        child: Icon(
+                          Icons.cancel,
+                          color: Colors.black,
+                        ),
+                        onPressed: () {
+                          Navigator.pop(context);
+                        },
                       ),
-                      onPressed: () {
-                        Navigator.pop(context);
-                      },
                     ),
-                    FlatButton(
-                      child: Text(
-                        "Salvar",
+                    Container(
+                      padding: EdgeInsets.only(top: 20.0),
+                      child: FloatingActionButton(
+                        heroTag: "btnSave",
+                        mini: true,
+                        backgroundColor: Colors.deepOrangeAccent[100],
+                        child: Icon(
+                          Icons.save,
+                          color: Colors.black,
+                        ),
+                        onPressed: () {
+                          if (event != null)
+                            _controller.editEvent(i);
+                          else
+                            _controller.addEvent();
+                          Navigator.pop(context);
+                        },
                       ),
-                      onPressed: () {
-                        if (event != null)
-                          _controller.editEvent(i);
-                        else
-                          _controller.addEvent();
-                        Navigator.pop(context);
-                      },
                     ),
                   ],
                 )
