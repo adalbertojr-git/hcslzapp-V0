@@ -229,7 +229,7 @@ class EventCalendarPageState extends State<EventCalendarPage>
                 label: labelTitle,
                 hint: hintTitle,
                 inputType: TextInputType.text,
-                maxLength: 4,
+                nLines: 3,
               ),
               actions: <Widget>[
                 Row(

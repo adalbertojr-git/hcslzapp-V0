@@ -160,7 +160,7 @@ class _DigitalIdentityPageState extends State<DigitalIdentityPage> {
                   ),
                 ],
               ),
-              SizedBox(
+/*              SizedBox(
                 height: 20.0,
               ),
               Center(
@@ -177,6 +177,38 @@ class _DigitalIdentityPageState extends State<DigitalIdentityPage> {
                   'Válida até ${_controller.dueDateCtrl.text}',
                   style: TextStyle(fontSize: 10.0, fontWeight: FontWeight.bold),
                 ),
+              ),*/
+              Stack(
+                children: [
+                  Center(
+                    child: SizedBox(
+                      height: 130.0,
+                      child: Image.asset('assets/imgs/logo_carteirad.png'),
+                    ),
+                  ),
+                  Column(
+                    children: [
+                      SizedBox(
+                        height: 110.0,
+                      ),
+/*                      Center(
+                        child: Text(
+                          'Carteira digital de associado do Harley Club de São Luis - MA',
+                          style: TextStyle(fontSize: 10.0, fontWeight: FontWeight.bold),
+                        ),
+                      ),
+                      SizedBox(
+                        height: 5.0,
+                      ),*/
+                      Center(
+                        child: Text(
+                          'Válida até ${_controller.dueDateCtrl.text}',
+                          style: TextStyle(fontSize: 12.0, fontWeight: FontWeight.bold),
+                        ),
+                      ),
+                    ],
+                  ),
+                ],
               ),
             ],
           ),
