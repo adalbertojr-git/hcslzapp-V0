@@ -80,7 +80,7 @@ abstract class PartnershipAddControllerBase with Store {
     phone2Ctrl.text = partnership != null ? partnership.phone2 : null;
     addressCtrl.text = partnership != null ? partnership.address : null;
     promotionCtrl.text = partnership != null ? partnership.promotion : null;
-    statusCtrl.text = partnership != null ? partnership.status : null;
+    statusCtrl.text = partnership != null ? partnership.status : 'Ativo';
   }
 
   @action

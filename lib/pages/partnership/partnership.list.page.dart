@@ -45,69 +45,58 @@ class _PartnershipListPageState extends State<PartnershipListPage> {
   }
 
   @override
-  Widget build(BuildContext context) =>
-      Observer(
-        builder: (_) =>
-            Scaffold(
-              body: FutureBuilder<List<Partnership>>(
-                future: _controller.future,
-                builder: (context, snapshot) {
-                  switch (snapshot.connectionState) {
-                    case ConnectionState.none:
-                      break;
-                    case ConnectionState.waiting:
-                      return Progress();
-                    case ConnectionState.active:
-                      break;
-                    default:
-                      if (snapshot.hasError) {
-                        return CenteredMessage(snapshot.error.toString());
-                      } else {
-                        if (snapshot.data == null)
-                          return CenteredMessage(
-                            _controller.errorMsg,
-                          );
-                        if (snapshot.data.length > 0) {
-                          _controller.init;
-                          _controller.partnerships.addAll(snapshot.data);
-                          if (widget._user != 'admin') {
-                            _controller.getActivePartnerships;
-                          }
-                          return _widgets();
-                        } else
-                          return CenteredMessage(
-                            'Não existem parcerias cadastradas.',
-                          );
-                      }
-                  } //switch (snapshot.connectionState)
-                  return CenteredMessage(
-                    'Houve um erro desconhecido ao executar a transação.',
-                  );
-                },
-              ),
-              floatingActionButtonLocation:
+  Widget build(BuildContext context) => Observer(
+        builder: (_) => Scaffold(
+          body: FutureBuilder<List<Partnership>>(
+            future: _controller.future,
+            builder: (context, snapshot) {
+              switch (snapshot.connectionState) {
+                case ConnectionState.none:
+                  break;
+                case ConnectionState.waiting:
+                  return Progress();
+                case ConnectionState.active:
+                  break;
+                default:
+                  if (snapshot.hasError) {
+                    return CenteredMessage(snapshot.error.toString());
+                  } else {
+                    if (snapshot.data == null)
+                      return CenteredMessage(
+                        _controller.errorMsg,
+                      );
+                    _controller.init;
+                    _controller.partnerships.addAll(snapshot.data);
+                    if (widget._user != 'admin') {
+                      _controller.getActivePartnerships;
+                    }
+                    return _widgets();
+                  }
+              } //switch (snapshot.connectionState)
+              return CenteredMessage(
+                'Houve um erro desconhecido ao executar a transação.',
+              );
+            },
+          ),
+          floatingActionButtonLocation:
               FloatingActionButtonLocation.centerFloat,
-              floatingActionButton: widget._user == 'admin'
-                  ? _controller.isHidedButton
-                  ? null
-                  : Button(
-                icon: Icons.add,
-                onClick: () =>
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) =>
-                              PartnershipAddPage(null, widget._user)),
-                    ),
-              )
-                  : null,
-            ),
+          floatingActionButton: widget._user == 'admin'
+              ? Button(
+                  icon: Icons.add,
+                  onClick: () => Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) =>
+                            PartnershipAddPage(null, widget._user)),
+                  ),
+                )
+              : null,
+        ),
       );
 
   _widgets() => widget._user == 'admin' ? _listAdmin : _listAssociated;
 
-  get _listAdmin =>
-      Container(
+  get _listAdmin => Container(
         decoration: BoxDecoration(
           gradient: LinearGradient(
             colors: [Colors.white30, Colors.deepOrange],
@@ -115,10 +104,7 @@ class _PartnershipListPageState extends State<PartnershipListPage> {
             end: FractionalOffset.bottomRight,
           ),
         ),
-        height: MediaQuery
-            .of(context)
-            .size
-            .height,
+        height: MediaQuery.of(context).size.height,
         child: Column(
           children: [
             TopBar(),
@@ -132,47 +118,46 @@ class _PartnershipListPageState extends State<PartnershipListPage> {
             ),
             Expanded(
               child: Observer(
-                builder: (_) =>
-                    ListView.separated(
-                      shrinkWrap: true,
-                      itemCount: _controller.listFiltered.length,
-                      itemBuilder: (_, int i) {
-                        return Container(
-                          decoration: BoxDecoration(
-                            color: Colors.white30,
-                            shape: BoxShape.rectangle,
-                            borderRadius: BorderRadius.circular(8.0),
-                            boxShadow: <BoxShadow>[
-                              BoxShadow(
-                                color: Colors.black12,
-                                blurRadius: 10.0,
-                                offset: Offset(0.0, 5.0),
-                              ),
+                builder: (_) => ListView.separated(
+                  shrinkWrap: true,
+                  itemCount: _controller.listFiltered.length,
+                  itemBuilder: (_, int i) {
+                    return Container(
+                      decoration: BoxDecoration(
+                        color: Colors.white30,
+                        shape: BoxShape.rectangle,
+                        borderRadius: BorderRadius.circular(8.0),
+                        boxShadow: <BoxShadow>[
+                          BoxShadow(
+                            color: Colors.black12,
+                            blurRadius: 10.0,
+                            offset: Offset(0.0, 5.0),
+                          ),
+                        ],
+                      ),
+                      child: ListTile(
+                          title: Text(
+                            _controller.listFiltered[i].partner,
+                            style: TextStyle(
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                          subtitle: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text('Endereço: ' +
+                                  _controller.listFiltered[i].address),
+                              Text('Status: ' +
+                                  _controller.listFiltered[i].status),
                             ],
                           ),
-                          child: ListTile(
-                              title: Text(
-                                _controller.listFiltered[i].partner,
-                                style: TextStyle(
-                                  fontWeight: FontWeight.bold,
-                                ),
-                              ),
-                              subtitle: Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  Text('Endereço: ' +
-                                      _controller.listFiltered[i].address),
-                                  Text('Status: ' +
-                                      _controller.listFiltered[i].status),
-                                ],
-                              ),
-                              leading: CircleAvatar(
-                                child: Icon(Icons.emoji_people),
-                                backgroundColor: Colors.white,
-                              ),
-                              trailing: Wrap(
-                                spacing: 10,
-                                children: [
+                          leading: CircleAvatar(
+                            child: Icon(Icons.emoji_people),
+                            backgroundColor: Colors.white,
+                          ),
+                          trailing: Wrap(
+                            spacing: 10,
+                            children: [
 /*                              GestureDetector(
                                 child: Icon(
                                   Icons.delete,
@@ -181,44 +166,41 @@ class _PartnershipListPageState extends State<PartnershipListPage> {
                                   _controller.listFiltered.removeAt(i);
                                 },
                               ),*/
-                                  GestureDetector(
-                                      child: Icon(Icons.edit),
-                                      onTap: () {
-                                        final Future<Partnership> future =
+                              GestureDetector(
+                                  child: Icon(Icons.edit),
+                                  onTap: () {
+                                    final Future<Partnership> future =
                                         Navigator.push(
-                                          context,
-                                          MaterialPageRoute(
-                                              builder: (context) =>
-                                                  PartnershipAddPage(
-                                                      _controller
-                                                          .listFiltered[i],
-                                                      widget._user)),
-                                        );
-                                        future.then(
-                                              (partnership) {
-                                            if (partnership != null) {
-                                              _controller.listFiltered.removeAt(
-                                                  i);
-                                              _controller.listFiltered
-                                                  .add(partnership);
-                                            }
-                                          },
-                                        );
-                                      }),
-                                ],
-                              )),
-                        );
-                      },
-                      separatorBuilder: (_, int index) => const Divider(),
-                    ),
+                                      context,
+                                      MaterialPageRoute(
+                                          builder: (context) =>
+                                              PartnershipAddPage(
+                                                  _controller.listFiltered[i],
+                                                  widget._user)),
+                                    );
+                                    future.then(
+                                      (partnership) {
+                                        if (partnership != null) {
+                                          _controller.listFiltered.removeAt(i);
+                                          _controller.listFiltered
+                                              .add(partnership);
+                                        }
+                                      },
+                                    );
+                                  }),
+                            ],
+                          )),
+                    );
+                  },
+                  separatorBuilder: (_, int index) => const Divider(),
+                ),
               ),
             ),
           ],
         ),
       );
 
-  get _listAssociated =>
-      Container(
+  get _listAssociated => Container(
         padding: EdgeInsets.fromLTRB(5.0, 0.0, 5.0, 0.0),
         decoration: BoxDecoration(
           gradient: LinearGradient(
@@ -227,133 +209,121 @@ class _PartnershipListPageState extends State<PartnershipListPage> {
             end: FractionalOffset.bottomRight,
           ),
         ),
-        height: MediaQuery
-            .of(context)
-            .size
-            .height,
+        height: MediaQuery.of(context).size.height,
         child: Column(
           children: [
             TopBar(),
             Expanded(
               child: Observer(
-                builder: (_) =>
-                    ListView(
-                      children: <Widget>[
-                        Container(
-                          height: PAGER_HEIGHT,
-                          child: NotificationListener<ScrollNotification>(
-                            onNotification: (ScrollNotification notification) {
-                              if (notification is ScrollUpdateNotification) {
-                                setState(() {
-                                  _controller.notificationListener();
-                                });
-                              }
-                              return false;
-                            },
-                            child: PageView.builder(
-                              onPageChanged: (pos) {
-                                _controller.onPageChanged(pos);
-                              },
-                              physics: BouncingScrollPhysics(),
-                              controller: _controller.pageController,
-                              itemCount: _controller.activePartnerships.length,
-                              itemBuilder: (context, index) {
-                                final scale = max(
-                                  SCALE_FRACTION,
-                                  (FULL_SCALE -
-                                      (index - _controller.page).abs()) +
-                                      viewPortFraction,
-                                );
-                                return circleOffer(index, scale);
-                              },
-                            ),
-                          ),
+                builder: (_) => ListView(
+                  children: <Widget>[
+                    Container(
+                      height: PAGER_HEIGHT,
+                      child: NotificationListener<ScrollNotification>(
+                        onNotification: (ScrollNotification notification) {
+                          if (notification is ScrollUpdateNotification) {
+                            setState(() {
+                              _controller.notificationListener();
+                            });
+                          }
+                          return false;
+                        },
+                        child: PageView.builder(
+                          onPageChanged: (pos) {
+                            _controller.onPageChanged(pos);
+                          },
+                          physics: BouncingScrollPhysics(),
+                          controller: _controller.pageController,
+                          itemCount: _controller.activePartnerships.length,
+                          itemBuilder: (context, index) {
+                            final scale = max(
+                              SCALE_FRACTION,
+                              (FULL_SCALE - (index - _controller.page).abs()) +
+                                  viewPortFraction,
+                            );
+                            return circleOffer(index, scale);
+                          },
                         ),
-                        Padding(
-                          padding: const EdgeInsets.all(10.0),
-                          child: Text(
-                            _controller
-                                .activePartnerships[_controller.currentPage]
-                                .partner,
-                            textAlign: TextAlign.center,
-                            style: TextStyle(
-                              fontSize: 25,
-                              fontWeight: FontWeight.bold,
-                            ),
-                          ),
-                        ),
-                        buildDetail()
-                      ],
+                      ),
                     ),
+                    Padding(
+                      padding: const EdgeInsets.all(10.0),
+                      child: Text(
+                        _controller.activePartnerships[_controller.currentPage]
+                            .partner,
+                        textAlign: TextAlign.center,
+                        style: TextStyle(
+                          fontSize: 25,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                    ),
+                    buildDetail()
+                  ],
+                ),
               ),
             ),
           ],
         ),
       );
 
-  Widget circleOffer(int index, double scale) =>
-      Observer(
-        builder: (_) =>
-            Align(
-              alignment: Alignment.bottomCenter,
+  Widget circleOffer(int index, double scale) => Observer(
+        builder: (_) => Align(
+          alignment: Alignment.bottomCenter,
+          child: Container(
+            margin: EdgeInsets.only(bottom: 10),
+            height: PAGER_HEIGHT * scale,
+            width: PAGER_HEIGHT * scale,
+            child: Card(
+              elevation: 4,
+              clipBehavior: Clip.antiAlias,
+              shape: CircleBorder(
+                  side: BorderSide(color: Colors.grey.shade200, width: 5)),
               child: Container(
-                margin: EdgeInsets.only(bottom: 10),
-                height: PAGER_HEIGHT * scale,
-                width: PAGER_HEIGHT * scale,
-                child: Card(
-                  elevation: 4,
-                  clipBehavior: Clip.antiAlias,
-                  shape: CircleBorder(
-                      side: BorderSide(color: Colors.grey.shade200, width: 5)),
-                  child: Container(
-                    decoration: BoxDecoration(
-                      image: _loadPhoto(index),
-                    ),
-                  ),
+                decoration: BoxDecoration(
+                  image: _loadPhoto(index),
                 ),
               ),
             ),
-      );
-
-  DecorationImage _loadPhoto(int index) =>
-      DecorationImage(
-          image: _controller.activePartnerships[index].photoUrl != null
-              ? NetworkImage(_controller.activePartnerships[index].photoUrl)
-              : PhotoImageProvider().getImageProvider(
-            File('assets/imgs/noImage.png'),
           ),
-          fit: BoxFit.fill);
-
-  Widget buildDetail() =>
-      Observer(
-        builder: (_) =>
-            Container(
-              color: Colors.white70,
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: <Widget>[
-                  buildUserInfo(),
-                  Padding(
-                    padding: EdgeInsets.symmetric(
-                      vertical: 15,
-                      horizontal: 15,
-                    ),
-                    child: Text(
-                      _controller.activePartnerships[_controller.currentPage]
-                          .promotion,
-                      style: TextStyle(
-                        color: Colors.black,
-                        fontSize: 15,
-                      ),
-                    ),
-                  ),
-                ],
-              ),
-            ),
+        ),
       );
 
-  Widget buildUserInfo() =>
-      ListTile(
+  DecorationImage _loadPhoto(int index) => DecorationImage(
+      image: _controller.activePartnerships[index].photoUrl != null
+          ? NetworkImage(_controller.activePartnerships[index].photoUrl)
+          : PhotoImageProvider().getImageProvider(
+              File('assets/imgs/noImage.png'),
+            ),
+      fit: BoxFit.fill);
+
+  Widget buildDetail() => Observer(
+        builder: (_) => Container(
+          color: Colors.white70,
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: <Widget>[
+              buildUserInfo(),
+              Padding(
+                padding: EdgeInsets.symmetric(
+                  vertical: 15,
+                  horizontal: 15,
+                ),
+                child: Text(
+                  _controller
+                      .activePartnerships[_controller.currentPage].promotion,
+                  style: TextStyle(
+                    color: Colors.black,
+                    fontSize: 15,
+                  ),
+                ),
+              ),
+            ],
+          ),
+        ),
+      );
+
+  Widget buildUserInfo() => ListTile(
         isThreeLine: true,
         title: Text(
             _controller.activePartnerships[_controller.currentPage].partner),
@@ -361,8 +331,8 @@ class _PartnershipListPageState extends State<PartnershipListPage> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text('Endereço: ' +
-                _controller.activePartnerships[_controller.currentPage]
-                    .address),
+                _controller
+                    .activePartnerships[_controller.currentPage].address),
             Text('Telefone(s): ' +
                 _controller.activePartnerships[_controller.currentPage].phone1 +
                 ' - ' +
