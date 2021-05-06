@@ -52,7 +52,7 @@ class EventRepo {
     );
     final Response response = await client
         .put(
-          mainUrl + _eventUrl + "/update/" + event.id.toString(),
+          mainUrl + _eventUrl + "/" + event.id.toString(),
           headers: {
             'Content-type': 'application/json',
           },

@@ -1,26 +1,26 @@
 class Event {
   int id;
-  String description;
+  String title;
   String date;
 
-  Event({this.id, this.description, this.date});
+  Event({this.id, this.title, this.date});
 
   Event.fromJson(Map<String, dynamic> json) {
     id = json['id'];
-    description = json['description'];
+    title = json['title'];
     date = json['date'];
   }
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = new Map<String, dynamic>();
     data['id'] = this.id;
-    data['description'] = this.description;
+    data['title'] = this.title;
     data['date'] = this.date;
     return data;
   }
 
   @override
   String toString() {
-    return 'Events:[{id: $id, description: $description, date: $date}]';
+    return 'Events:[{id: $id, title: $title, date: $date}]';
   }
 }

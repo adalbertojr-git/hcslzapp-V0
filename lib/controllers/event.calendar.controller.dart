@@ -74,7 +74,7 @@ abstract class EventCalendarControllerBase with Store {
     return Event(
         id: event != null ? event.id : int.parse('0'),
         date: calController.selectedDay.toString().substring(0,10),
-        description: titleCtrl.text
+        title: titleCtrl.text
     );
   }
 
