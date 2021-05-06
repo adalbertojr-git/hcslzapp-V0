@@ -90,7 +90,7 @@ class _DigitalIdentityPageState extends State<DigitalIdentityPage> {
                 child: _photo,
               ),
               SizedBox(
-                height: 20.0,
+                height: 5.0,
               ),
               MyTextFormField(
                 textEditingController: _controller.nameCtrl,
@@ -160,24 +160,6 @@ class _DigitalIdentityPageState extends State<DigitalIdentityPage> {
                   ),
                 ],
               ),
-/*              SizedBox(
-                height: 20.0,
-              ),
-              Center(
-                child: Text(
-                  'Carteira digital de associado do Harley Club de São Luis - MA',
-                  style: TextStyle(fontSize: 10.0, fontWeight: FontWeight.bold),
-                ),
-              ),
-              SizedBox(
-                height: 5.0,
-              ),
-              Center(
-                child: Text(
-                  'Válida até ${_controller.dueDateCtrl.text}',
-                  style: TextStyle(fontSize: 10.0, fontWeight: FontWeight.bold),
-                ),
-              ),*/
               Stack(
                 children: [
                   Center(
@@ -191,7 +173,7 @@ class _DigitalIdentityPageState extends State<DigitalIdentityPage> {
                       SizedBox(
                         height: 110.0,
                       ),
-/*                      Center(
+                      Center(
                         child: Text(
                           'Carteira digital de associado do Harley Club de São Luis - MA',
                           style: TextStyle(fontSize: 10.0, fontWeight: FontWeight.bold),
@@ -199,11 +181,11 @@ class _DigitalIdentityPageState extends State<DigitalIdentityPage> {
                       ),
                       SizedBox(
                         height: 5.0,
-                      ),*/
+                      ),
                       Center(
                         child: Text(
                           'Válida até ${_controller.dueDateCtrl.text}',
-                          style: TextStyle(fontSize: 12.0, fontWeight: FontWeight.bold),
+                          style: TextStyle(fontSize: 10.0, fontWeight: FontWeight.bold),
                         ),
                       ),
                     ],
@@ -216,18 +198,18 @@ class _DigitalIdentityPageState extends State<DigitalIdentityPage> {
       );
 
   get _photo => Container(
-        height: 200.0,
-        width: 200.0,
+        height: 250.0,
+        width: 250.0,
         padding: EdgeInsets.all(10.0),
         decoration: BoxDecoration(
           color: Colors.black.withOpacity(0.2),
-          borderRadius: BorderRadius.circular(100.0),
+          borderRadius: BorderRadius.circular(150.0),
         ),
         child: Observer(
           builder: (_) => Container(
             decoration: BoxDecoration(
               color: Colors.white,
-              borderRadius: BorderRadius.circular(150.0),
+              borderRadius: BorderRadius.circular(200.0),
               image: _loadPhoto(),
             ),
           ),

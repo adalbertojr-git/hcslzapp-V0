@@ -10,7 +10,7 @@ class EventRepo {
   Future<String> findAll() async {
     final Response response = await client
         .get(
-          mainUrl + _eventUrl,
+          mainUrl + _eventUrl
         )
         .timeout(
           Duration(seconds: 10),
@@ -21,34 +21,14 @@ class EventRepo {
       throw HttpException(getMessage(response.statusCode));
     }
   }
-/*
-  Future<List<Payment>> findByAssociatedIdToList(int id) async {
-    final Response response = await client
-        .get(
-          mainUrl + _eventUrl + '/list/' + id.toString(),
-        )
-        .timeout(
-          Duration(seconds: 10),
-        );
-    if (response.statusCode == 200) {
-      final List<dynamic> decodedJson = jsonDecode(response.body);
-      return decodedJson
-          .map(
-            (dynamic json) => Payment.fromJson(json),
-          )
-          .toList();
-    } else {
-      throw HttpException(getMessage(response.statusCode));
-    }
-  }
 
-  Future<Payment> save(Payment payment) async {
+  Future<Event> save(Event event) async {
     final String encodedJson = jsonEncode(
-      payment.toJson(),
+      event.toJson(),
     );
     final Response response = await client
         .post(
-          mainUrl + _eventUrl,
+          mainUrl + _eventUrl + "/save",
           headers: {
             'Content-type': 'application/json',
           },
@@ -58,7 +38,7 @@ class EventRepo {
           Duration(seconds: 10),
         );
     if (response.statusCode == 200) {
-      return Payment.fromJson(
+      return Event.fromJson(
         jsonDecode(response.body),
       );
     } else {
@@ -66,13 +46,13 @@ class EventRepo {
     }
   }
 
-  Future<Payment> update(Payment payment) async {
+  Future<Event> update(Event event) async {
     final String encodedJson = jsonEncode(
-      payment.toJson(),
+      event.toJson(),
     );
     final Response response = await client
         .put(
-          mainUrl + _eventUrl + "/update/" + payment.id.toString(),
+          mainUrl + _eventUrl + "/update/" + event.id.toString(),
           headers: {
             'Content-type': 'application/json',
           },
@@ -82,7 +62,7 @@ class EventRepo {
           Duration(seconds: 10),
         );
     if (response.statusCode == 200) {
-      return Payment.fromJson(
+      return Event.fromJson(
         jsonDecode(response.body),
       );
     } else {
@@ -90,13 +70,12 @@ class EventRepo {
     }
   }
 
-  Future<Response> deleteById(Payment payment) async {
+  Future<Response> deleteById(Event event) async {
     final String encodedJson = jsonEncode(
-      payment.toJson(),
+      event.toJson(),
     );
     final Response response = await client.delete(
-      mainUrl + _eventUrl + "/" + payment.id.toString(),
-      //mainUrl + _paymentUrl ,
+      mainUrl + _eventUrl + "/" + event.id.toString(),
       headers: {
         'Content-type': 'application/json',
       },
@@ -108,5 +87,5 @@ class EventRepo {
     } else {
       throw HttpException(getMessage(response.statusCode));
     }
-  }*/
+  }
 }

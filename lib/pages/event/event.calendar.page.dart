@@ -6,6 +6,7 @@ import 'package:hcslzapp/components/my.text.form.field.dart';
 import 'package:hcslzapp/components/top.bar.dart';
 import 'package:hcslzapp/controllers/event.calendar.controller.dart';
 import 'package:table_calendar/table_calendar.dart';
+import 'package:asuka/asuka.dart' as asuka;
 
 // Example holidays
 final Map<DateTime, List> _holidays = {
@@ -249,6 +250,9 @@ class EventCalendarPageState extends State<EventCalendarPage>
                         },
                       ),
                     ),
+                    SizedBox(
+                      width: 5.0,
+                    ),
                     Container(
                       padding: EdgeInsets.only(top: 20.0),
                       child: FloatingActionButton(
@@ -260,10 +264,11 @@ class EventCalendarPageState extends State<EventCalendarPage>
                           color: Colors.black,
                         ),
                         onPressed: () {
-                          if (event != null)
+                          /*if (event != null)
                             _controller.editEvent(i);
                           else
-                            _controller.addEvent();
+                            _controller.addEvent();*/
+                          _save;
                           Navigator.pop(context);
                         },
                       ),
@@ -390,4 +395,25 @@ class EventCalendarPageState extends State<EventCalendarPage>
         size: 20.0,
         color: Colors.blueGrey[800],
       );
+
+  get _save {
+    _controller.save().then(
+      (value) {
+        if (value != null) {
+          asuka.showSnackBar(
+            SnackBar(
+              content: Text('Evento salvo com sucesso.'),
+            ),
+          );
+          //Navigator.of(context).pop();
+        } else {
+          asuka.showSnackBar(
+            SnackBar(
+              content: Text(_controller.errorMsg),
+            ),
+          );
+        }
+      },
+    );
+  }
 }

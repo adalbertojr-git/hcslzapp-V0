@@ -101,7 +101,6 @@ class PaymentRepo {
     );
     final Response response = await client.delete(
       mainUrl + _paymentUrl + "/" + payment.id.toString(),
-      //mainUrl + _paymentUrl ,
       headers: {
         'Content-type': 'application/json',
       },
