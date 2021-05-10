@@ -73,9 +73,8 @@ abstract class EventCalendarControllerBase with Store {
   Event _setValues() {
     return Event(
         id: event != null ? event.id : int.parse('0'),
-        date: calController.selectedDay.toString().substring(0,10),
-        title: titleCtrl.text
-    );
+        date: calController.selectedDay.toString().substring(0, 10),
+        title: titleCtrl.text);
   }
 
   @action
@@ -120,4 +119,14 @@ abstract class EventCalendarControllerBase with Store {
     selectedEvents[i] = titleCtrl.text;
     titleCtrl.clear();
   }
+
+/*  void _deleteEvent(String s){
+    List<CalendarItem> d = _data.where((element) => element.name == s).toList();
+    if(d.length == 1){
+      DB.delete(CalendarItem.table, d[0]);
+      _selectedEvents.removeWhere((e) => e == s);
+      _fetchEvents();
+    }
+  }*/
+
 }

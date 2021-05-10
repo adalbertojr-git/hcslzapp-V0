@@ -5,6 +5,7 @@ import 'package:hcslzapp/common/labels.and.hints.dart';
 import 'package:hcslzapp/components/my.text.form.field.dart';
 import 'package:hcslzapp/components/top.bar.dart';
 import 'package:hcslzapp/controllers/event.calendar.controller.dart';
+import 'package:hcslzapp/models/event.dart';
 import 'package:table_calendar/table_calendar.dart';
 import 'package:asuka/asuka.dart' as asuka;
 
@@ -229,12 +230,6 @@ class EventCalendarPageState extends State<EventCalendarPage>
         ),
         child: Column(
           children: [
-            Text(
-              "Eventos",
-              style: TextStyle(
-                fontWeight: FontWeight.bold,
-              ),
-            ),
             Expanded(
               child: Observer(
                 builder: (_) => ListView.separated(
@@ -274,11 +269,20 @@ class EventCalendarPageState extends State<EventCalendarPage>
                                     ),
                                     onTap: () {
                                       setState(() {
-                                        _controller.removeSelectedEvent(i);
+                                        print(_controller.selectedEvents[i]);
+                                        List d = _controller.selectedEvents
+                                            .where((element) =>
+                                                element ==
+                                                _controller.selectedEvents[i])
+                                            .toList();
+                                        print(d);
+                                        if (d.length == 1) {
+                                          _controller.removeSelectedEvent(i);
+                                        }
                                       });
                                     },
                                   ),
-                                  GestureDetector(
+/*                                  GestureDetector(
                                     child: Icon(
                                       Icons.edit,
                                     ),
@@ -291,7 +295,7 @@ class EventCalendarPageState extends State<EventCalendarPage>
                                           ),
                                           i);
                                     },
-                                  ),
+                                  ),*/
                                 ],
                               )
                             : null,
@@ -347,7 +351,7 @@ class EventCalendarPageState extends State<EventCalendarPage>
                 label: labelTitle,
                 hint: hintTitle,
                 inputType: TextInputType.text,
-                nLines: 3,
+                nLines: 2,
               ),
               actions: <Widget>[
                 Row(
@@ -359,7 +363,7 @@ class EventCalendarPageState extends State<EventCalendarPage>
                         mini: true,
                         backgroundColor: Colors.deepOrangeAccent[100],
                         child: Icon(
-                          Icons.cancel,
+                          Icons.cancel_outlined,
                           color: Colors.black,
                         ),
                         onPressed: () {
@@ -368,7 +372,7 @@ class EventCalendarPageState extends State<EventCalendarPage>
                       ),
                     ),
                     SizedBox(
-                      width: 5.0,
+                      width: 10.0,
                     ),
                     Container(
                       padding: EdgeInsets.only(top: 20.0),
@@ -381,6 +385,7 @@ class EventCalendarPageState extends State<EventCalendarPage>
                           color: Colors.black,
                         ),
                         onPressed: () {
+                          print(_controller.selectedEvents[i]);
                           if (event != null)
                             //_controller.editEvent(i);
                             _update(i);
