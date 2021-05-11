@@ -4,6 +4,7 @@ import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:hcslzapp/common/labels.and.hints.dart';
 import 'package:hcslzapp/components/my.text.form.field.dart';
 import 'package:hcslzapp/components/top.bar.dart';
+import 'package:hcslzapp/components/transaction.auth.dialog.dart';
 import 'package:hcslzapp/controllers/event.calendar.controller.dart';
 import 'package:hcslzapp/models/event.dart';
 import 'package:table_calendar/table_calendar.dart';
@@ -268,34 +269,9 @@ class EventCalendarPageState extends State<EventCalendarPage>
                                       Icons.delete,
                                     ),
                                     onTap: () {
-                                      setState(() {
-                                        print(_controller.selectedEvents[i]);
-                                        List d = _controller.selectedEvents
-                                            .where((element) =>
-                                                element ==
-                                                _controller.selectedEvents[i])
-                                            .toList();
-                                        print(d);
-                                        if (d.length == 1) {
-                                          _controller.removeSelectedEvent(i);
-                                        }
-                                      });
+                                      _delete(i);
                                     },
                                   ),
-/*                                  GestureDetector(
-                                    child: Icon(
-                                      Icons.edit,
-                                    ),
-                                    onTap: () {
-                                      _controller.titleCtrl.clear();
-                                      _showAddDialog(
-                                          _controller.setTitle(
-                                            _controller.selectedEvents[i]
-                                                .toString(),
-                                          ),
-                                          i);
-                                    },
-                                  ),*/
                                 ],
                               )
                             : null,
@@ -325,7 +301,7 @@ class EventCalendarPageState extends State<EventCalendarPage>
                       ),
                       onPressed: () {
                         _controller.titleCtrl.clear();
-                        _showAddDialog(null, null);
+                        _showAddDialog(null);
                       },
                     ),
                   )
@@ -334,7 +310,7 @@ class EventCalendarPageState extends State<EventCalendarPage>
         ),
       );
 
-  _showAddDialog(String event, int i) async {
+  _showAddDialog(int i) async {
     await showDialog(
         context: context,
         builder: (context) => AlertDialog(
@@ -342,7 +318,7 @@ class EventCalendarPageState extends State<EventCalendarPage>
               title: Container(
                 alignment: Alignment.topLeft,
                 child: Text(
-                  event == null ? 'Adicionar Evento' : 'Editar Evento',
+                  'Adicionar Evento',
                   style: TextStyle(fontSize: 15.0),
                 ),
               ),
@@ -386,12 +362,7 @@ class EventCalendarPageState extends State<EventCalendarPage>
                         ),
                         onPressed: () {
                           print(_controller.selectedEvents[i]);
-                          if (event != null)
-                            //_controller.editEvent(i);
-                            _update(i);
-                          else
-                            //_controller.addEvent();
-                            _save();
+                          _save;
                           Navigator.pop(context);
                         },
                       ),
@@ -402,7 +373,7 @@ class EventCalendarPageState extends State<EventCalendarPage>
             ));
   }
 
-  _save() {
+  get _save {
     _controller.save().then(
       (value) {
         if (value != null) {
@@ -423,24 +394,22 @@ class EventCalendarPageState extends State<EventCalendarPage>
     );
   }
 
-  _update(int i) {
-    _controller.update().then(
-      (value) {
-        if (value != null) {
-          asuka.showSnackBar(
-            SnackBar(
-              content: Text('Evento atualizado com sucesso.'),
-            ),
-          );
-          _controller.editEvent(i);
-        } else {
-          asuka.showSnackBar(
-            SnackBar(
-              content: Text(_controller.errorMsg),
-            ),
-          );
-        }
-      },
-    );
+  _delete(int i) async {
+    var response = await showDialog(
+        context: context,
+        builder: (context) {
+          return TransactionAuthDialog(msg: 'Confirma a exclusão do evento?');
+        });
+    if (response == true) {
+      List event = _controller.selectedEvents
+          .where((element) => element == _controller.selectedEvents[i])
+          .toList();
+      event.add(
+          _controller.calController.selectedDay.toString().substring(0, 10));
+      print(event);
+      setState(() {
+        _controller.removeSelectedEvent(i);
+      });
+    }
   }
 }

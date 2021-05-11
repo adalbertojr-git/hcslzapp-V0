@@ -8,11 +8,7 @@ const String _eventUrl = '/event';
 
 class EventRepo {
   Future<String> findAll() async {
-    final Response response = await client
-        .get(
-          mainUrl + _eventUrl
-        )
-        .timeout(
+    final Response response = await client.get(mainUrl + _eventUrl).timeout(
           Duration(seconds: 10),
         );
     if (response.statusCode == 200) {
@@ -46,42 +42,22 @@ class EventRepo {
     }
   }
 
-  Future<Event> update(Event event) async {
+  Future<Response> delete(List event) async {
     final String encodedJson = jsonEncode(
-      event.toJson(),
+      event,
     );
     final Response response = await client
-        .put(
-          mainUrl + _eventUrl + "/" + event.id.toString(),
+        .post(
+          mainUrl + _eventUrl + "/delete",
           headers: {
             'Content-type': 'application/json',
+            'Accept': 'application/json'
           },
           body: encodedJson,
         )
         .timeout(
           Duration(seconds: 10),
         );
-    if (response.statusCode == 200) {
-      return Event.fromJson(
-        jsonDecode(response.body),
-      );
-    } else {
-      throw HttpException(getMessage(response.statusCode));
-    }
-  }
-
-  Future<Response> deleteById(Event event) async {
-    final String encodedJson = jsonEncode(
-      event.toJson(),
-    );
-    final Response response = await client.delete(
-      mainUrl + _eventUrl + "/" + event.id.toString(),
-      headers: {
-        'Content-type': 'application/json',
-      },
-    ).timeout(
-      Duration(seconds: 10),
-    );
     if (response.statusCode == 204) {
       return response;
     } else {

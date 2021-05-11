@@ -57,13 +57,6 @@ abstract class EventCalendarControllerBase with Store {
       }, test: (e) => e is Exception);
 
   @action
-  Future update() =>
-      ObservableFuture(_eventRepo.update(_setValues()).then((value) => value))
-          .catchError((e) {
-        errorMsg = "${e.message}";
-      }, test: (e) => e is Exception);
-
-  @action
   Future save() =>
       ObservableFuture(_eventRepo.save(_setValues()).then((value) => value))
           .catchError((e) {
