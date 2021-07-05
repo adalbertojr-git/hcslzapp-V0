@@ -16,9 +16,6 @@ abstract class EventCalendarControllerBase with Store {
   var titleCtrl = TextEditingController();
 
   @observable
-  Event event;
-
-  @observable
   EventRepo _eventRepo = EventRepo();
 
   @observable
@@ -63,9 +60,16 @@ abstract class EventCalendarControllerBase with Store {
         errorMsg = "${e.message}";
       }, test: (e) => e is Exception);
 
+  @action
+  Future delete() =>
+      ObservableFuture(_eventRepo.save(_setValues()).then((value) => value))
+          .catchError((e) {
+        errorMsg = "${e.message}";
+      }, test: (e) => e is Exception);
+
   Event _setValues() {
     return Event(
-        id: event != null ? event.id : int.parse('0'),
+        id: int.parse('0'),
         date: calController.selectedDay.toString().substring(0, 10),
         title: titleCtrl.text);
   }

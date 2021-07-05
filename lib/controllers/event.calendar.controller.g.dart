@@ -24,21 +24,6 @@ mixin _$EventCalendarController on EventCalendarControllerBase, Store {
     });
   }
 
-  final _$eventAtom = Atom(name: 'EventCalendarControllerBase.event');
-
-  @override
-  Event get event {
-    _$eventAtom.reportRead();
-    return super.event;
-  }
-
-  @override
-  set event(Event value) {
-    _$eventAtom.reportWrite(value, super.event, () {
-      super.event = value;
-    });
-  }
-
   final _$_eventRepoAtom = Atom(name: 'EventCalendarControllerBase._eventRepo');
 
   @override
@@ -188,6 +173,17 @@ mixin _$EventCalendarController on EventCalendarControllerBase, Store {
   }
 
   @override
+  Future<dynamic> delete() {
+    final _$actionInfo = _$EventCalendarControllerBaseActionController
+        .startAction(name: 'EventCalendarControllerBase.delete');
+    try {
+      return super.delete();
+    } finally {
+      _$EventCalendarControllerBaseActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
   dynamic setSelectedEvents(List<dynamic> events) {
     final _$actionInfo = _$EventCalendarControllerBaseActionController
         .startAction(name: 'EventCalendarControllerBase.setSelectedEvents');
@@ -213,7 +209,6 @@ mixin _$EventCalendarController on EventCalendarControllerBase, Store {
   String toString() {
     return '''
 titleCtrl: ${titleCtrl},
-event: ${event},
 errorMsg: ${errorMsg},
 future: ${future},
 filter: ${filter},

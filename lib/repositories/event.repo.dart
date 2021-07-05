@@ -42,16 +42,15 @@ class EventRepo {
     }
   }
 
-  Future<Response> delete(List event) async {
+  Future<Response> delete(Event event) async {
     final String encodedJson = jsonEncode(
-      event,
+      event.toJson(),
     );
     final Response response = await client
         .post(
           mainUrl + _eventUrl + "/delete",
           headers: {
             'Content-type': 'application/json',
-            'Accept': 'application/json'
           },
           body: encodedJson,
         )
