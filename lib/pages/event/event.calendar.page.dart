@@ -289,22 +289,23 @@ class EventCalendarPageState extends State<EventCalendarPage>
               ),
             ),
             widget._user == 'admin'
-                ? Container(
-                    padding: EdgeInsets.only(top: 20.0),
-                    child: FloatingActionButton(
-                      heroTag: "btnAdd",
-                      mini: true,
-                      backgroundColor: Colors.deepOrangeAccent[100],
-                      child: Icon(
-                        Icons.add,
-                        color: Colors.black,
+                ? Expanded(
+                  child: Container(
+                      child: FloatingActionButton(
+                        heroTag: "btnAdd",
+                        mini: true,
+                        backgroundColor: Colors.deepOrangeAccent[100],
+                        child: Icon(
+                          Icons.add,
+                          color: Colors.black,
+                        ),
+                        onPressed: () {
+                          _controller.titleCtrl.clear();
+                          _showAddDialog(null);
+                        },
                       ),
-                      onPressed: () {
-                        _controller.titleCtrl.clear();
-                        _showAddDialog(null);
-                      },
                     ),
-                  )
+                )
                 : Container(),
           ],
         ),
@@ -318,7 +319,7 @@ class EventCalendarPageState extends State<EventCalendarPage>
               title: Container(
                 alignment: Alignment.topLeft,
                 child: Text(
-                  'Adicionar Evento',
+                  'Evento',
                   style: TextStyle(fontSize: 15.0),
                 ),
               ),
@@ -347,9 +348,6 @@ class EventCalendarPageState extends State<EventCalendarPage>
                         },
                       ),
                     ),
-                    SizedBox(
-                      width: 10.0,
-                    ),
                     Container(
                       padding: EdgeInsets.only(top: 20.0),
                       child: FloatingActionButton(
@@ -361,7 +359,6 @@ class EventCalendarPageState extends State<EventCalendarPage>
                           color: Colors.black,
                         ),
                         onPressed: () {
-                          print(_controller.selectedEvents[i]);
                           _save;
                           Navigator.pop(context);
                         },
