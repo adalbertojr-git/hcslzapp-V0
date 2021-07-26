@@ -41,7 +41,7 @@ class LoginPage extends StatelessWidget {
             ),
             centerTitle: true,*/
             pinned: true,
-            expandedHeight: 140.0,
+            expandedHeight: 180.0,
             backgroundColor: Colors.black,
             flexibleSpace: FlexibleSpaceBar(
               background: Image.asset(

@@ -111,11 +111,11 @@ abstract class EventCalendarControllerBase with Store {
     titleCtrl.clear();
   }
 
-  editEvent(int i) {
+/*  editEvent(int i) {
     if (titleCtrl.text.isEmpty) return;
     selectedEvents[i] = titleCtrl.text;
     titleCtrl.clear();
-  }
+  }*/
 
 /*  void _deleteEvent(String s){
     List<CalendarItem> d = _data.where((element) => element.name == s).toList();
