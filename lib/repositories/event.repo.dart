@@ -46,17 +46,20 @@ class EventRepo {
     final String encodedJson = jsonEncode(
       event.toJson(),
     );
-    final Response response = await client
-        .post(
-          mainUrl + _eventUrl + "/delete",
-          headers: {
-            'Content-type': 'application/json',
-          },
-          body: encodedJson,
-        )
-        .timeout(
-          Duration(seconds: 10),
-        );
+    final Response response = await client.delete(
+      mainUrl +
+          _eventUrl +
+          "/delete" +
+          "/" +
+          event.date.toString() +
+          "/" +
+          event.title.toString(),
+      headers: {
+        'Content-type': 'application/json',
+      },
+    ).timeout(
+      Duration(seconds: 10),
+    );
     if (response.statusCode == 204) {
       return response;
     } else {

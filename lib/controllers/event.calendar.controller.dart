@@ -54,24 +54,24 @@ abstract class EventCalendarControllerBase with Store {
       }, test: (e) => e is Exception);
 
   @action
-  Future save() =>
-      ObservableFuture(_eventRepo.save(_setValues()).then((value) => value))
+  Future save(String title, String date) =>
+      ObservableFuture(_eventRepo.save(_setValues(title, date)).then((value) => value))
           .catchError((e) {
         errorMsg = "${e.message}";
       }, test: (e) => e is Exception);
 
   @action
-  Future delete() =>
-      ObservableFuture(_eventRepo.save(_setValues()).then((value) => value))
+  Future delete(String title, String date) =>
+      ObservableFuture(_eventRepo.delete(_setValues(title, date)).then((value) => value))
           .catchError((e) {
         errorMsg = "${e.message}";
       }, test: (e) => e is Exception);
 
-  Event _setValues() {
+  Event _setValues(String title, String date) {
     return Event(
         id: int.parse('0'),
-        date: calController.selectedDay.toString().substring(0, 10),
-        title: titleCtrl.text);
+        date: date, //calController.selectedDay.toString().substring(0, 10),
+        title: title); //titleCtrl.text);
   }
 
   @action

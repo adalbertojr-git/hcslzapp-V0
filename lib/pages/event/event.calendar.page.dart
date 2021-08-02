@@ -290,7 +290,7 @@ class EventCalendarPageState extends State<EventCalendarPage>
             ),
             widget._user == 'admin'
                 ? Expanded(
-                  child: Container(
+                    child: Container(
                       child: FloatingActionButton(
                         heroTag: "btnAdd",
                         mini: true,
@@ -305,7 +305,7 @@ class EventCalendarPageState extends State<EventCalendarPage>
                         },
                       ),
                     ),
-                )
+                  )
                 : Container(),
           ],
         ),
@@ -371,7 +371,10 @@ class EventCalendarPageState extends State<EventCalendarPage>
   }
 
   get _save {
-    _controller.save().then(
+    _controller
+        .save(_controller.titleCtrl.text,
+            _controller.calController.selectedDay.toString().substring(0, 10))
+        .then(
       (value) {
         if (value != null) {
           asuka.showSnackBar(
@@ -398,15 +401,35 @@ class EventCalendarPageState extends State<EventCalendarPage>
           return TransactionAuthDialog(msg: 'Confirma a exclusão do evento?');
         });
     if (response == true) {
+      //title
       List event = _controller.selectedEvents
           .where((element) => element == _controller.selectedEvents[i])
           .toList();
-      event.add(
-          _controller.calController.selectedDay.toString().substring(0, 10));
-      print(event);
-      setState(() {
-        _controller.removeSelectedEvent(i);
-      });
+      //date
+      event.add(_controller.calController.selectedDay
+          .toString()
+          .substring(0, 10));
+      //print(event);
+      _controller.delete(event[0], event[1]).then(
+        (value) {
+          if (value != null) {
+            asuka.showSnackBar(
+              SnackBar(
+                content: Text('Evento excluido com sucesso.'),
+              ),
+            );
+            setState(() {
+              _controller.removeSelectedEvent(i);
+            });
+          } else {
+            asuka.showSnackBar(
+              SnackBar(
+                content: Text(_controller.errorMsg),
+              ),
+            );
+          }
+        },
+      );
     }
   }
 }
