@@ -76,31 +76,14 @@ class EventCalendarPageState extends State<EventCalendarPage>
             ),
           ),
           height: MediaQuery.of(context).size.height,
-          child: Center(
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: <Widget>[
-                TopBar(),
-                _buildTableCalendarWithBuilders(),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Icon(
-                      Icons.arrow_upward_rounded,
-                      size: 12.0,
-                    ),
-                    Icon(
-                      Icons.arrow_downward_rounded,
-                      size: 12.0,
-                    ),
-                  ],
-                ),
-                SizedBox(
-                  height: 8.0,
-                ),
-                Expanded(child: _buildEventList()),
-              ],
-            ),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: <Widget>[
+              TopBar(),
+              _buildTableCalendarWithBuilders(),
+              SizedBox(height: 10.0),
+              Expanded(child: _buildEventList()),
+            ],
           ),
         ),
       );
@@ -111,14 +94,14 @@ class EventCalendarPageState extends State<EventCalendarPage>
           calendarController: _controller.calController,
           events: _controller.events,
           holidays: _holidays,
-          rowHeight: 40,
+          rowHeight: 30,
           initialCalendarFormat: CalendarFormat.month,
           formatAnimation: FormatAnimation.slide,
           startingDayOfWeek: StartingDayOfWeek.sunday,
           availableGestures: AvailableGestures.all,
           availableCalendarFormats: const {
             CalendarFormat.month: '',
-            CalendarFormat.week: '',
+            CalendarFormat.twoWeeks: '',
           },
           calendarStyle: CalendarStyle(
             outsideDaysVisible: false,
@@ -223,7 +206,7 @@ class EventCalendarPageState extends State<EventCalendarPage>
       );
 
   Widget _buildEventList() => Container(
-        padding: EdgeInsets.all(10.0),
+        padding: EdgeInsets.all(5.0),
         decoration: BoxDecoration(
           color: Colors.white12,
           shape: BoxShape.rectangle,
@@ -245,15 +228,15 @@ class EventCalendarPageState extends State<EventCalendarPage>
                         boxShadow: <BoxShadow>[
                           BoxShadow(
                             color: Colors.black12,
-                            blurRadius: 10.0,
+                            // blurRadius: 10.0,
                             offset: Offset(0.0, 5.0),
                           ),
                         ],
                       ),
                       child: ListTile(
                         leading: Container(
-                          width: 48,
-                          height: 48,
+                          width: 45,
+                          height: 45,
                           alignment: Alignment.center,
                           child: CircleAvatar(
                             child: Icon(Icons.event),
@@ -289,23 +272,19 @@ class EventCalendarPageState extends State<EventCalendarPage>
               ),
             ),
             widget._user == 'admin'
-                ? Expanded(
-                    child: Container(
-                      child: FloatingActionButton(
-                        heroTag: "btnAdd",
-                        mini: true,
-                        backgroundColor: Colors.deepOrangeAccent[100],
-                        child: Icon(
-                          Icons.add,
-                          color: Colors.black,
-                        ),
-                        onPressed: () {
-                          _controller.titleCtrl.clear();
-                          _showAddDialog(null);
-                        },
-                      ),
-                    ),
-                  )
+                ? FloatingActionButton(
+                  heroTag: "btnAdd",
+                  mini: true,
+                  backgroundColor: Colors.deepOrangeAccent[100],
+                  child: Icon(
+                    Icons.add,
+                    color: Colors.black,
+                  ),
+                  onPressed: () {
+                    _controller.titleCtrl.clear();
+                    _showAddDialog(null);
+                  },
+                )
                 : Container(),
           ],
         ),
@@ -406,9 +385,8 @@ class EventCalendarPageState extends State<EventCalendarPage>
           .where((element) => element == _controller.selectedEvents[i])
           .toList();
       //date
-      event.add(_controller.calController.selectedDay
-          .toString()
-          .substring(0, 10));
+      event.add(
+          _controller.calController.selectedDay.toString().substring(0, 10));
       //print(event);
       _controller.delete(event[0], event[1]).then(
         (value) {
