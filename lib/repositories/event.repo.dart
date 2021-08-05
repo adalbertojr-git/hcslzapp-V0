@@ -8,9 +8,10 @@ const String _eventUrl = '/event';
 
 class EventRepo {
   Future<String> findAll() async {
-    final Response response = await client.get(mainUrl + _eventUrl).timeout(
-          Duration(seconds: 10),
-        );
+    final Response response =
+        await client.get(mainUrl + _eventUrl + "/list").timeout(
+              Duration(seconds: 10),
+            );
     if (response.statusCode == 200) {
       return response.body;
     } else {

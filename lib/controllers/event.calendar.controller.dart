@@ -42,6 +42,7 @@ abstract class EventCalendarControllerBase with Store {
   get init {
     findAll().then((value) {
       events = _convertJsonToDateMap(value);
+      print(events);
       selectedEvents = events[DateTime.now()] ?? [];
     });
     titleCtrl.text = '';
@@ -80,15 +81,31 @@ abstract class EventCalendarControllerBase with Store {
   @action
   removeSelectedEvent(int i) => selectedEvents.removeAt(i);
 
-  Map<DateTime, List> _convertJsonToDateMap(String jsonSource) {
+/*  Map<DateTime, List> _convertJsonToDateMap2(String jsonSource) {
     var json = jsonDecode(jsonSource);
     var jsonEmbedded = json['_embedded'];
     var jsonEvents = jsonEmbedded['event'];
+    print(jsonEvents);
     Map<DateTime, List<String>> events = {};
     for (var event in jsonEvents) {
       var date = _parseDate(event['date']);
       events.putIfAbsent(date, () => <String>[]);
       events[date].add(event['title']);
+    }
+    return events;
+  }*/
+
+  Map<DateTime, List> _convertJsonToDateMap(String jsonSource) {
+    var json = jsonDecode(jsonSource);
+    //var jsonEmbedded = json['_embedded'];
+    //var jsonEvents = jsonEmbedded['event'];
+    //print(jsonSource);
+    Map<DateTime, List<String>> events = {};
+    for (var event in json) {
+      var date = _parseDate(event['date']);
+      events.putIfAbsent(date, () => <String>[]);
+      events[date].add(event['title']);
+      events[date].add(event['id'].toString());
     }
     return events;
   }
