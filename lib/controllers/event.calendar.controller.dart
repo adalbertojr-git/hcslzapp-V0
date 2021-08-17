@@ -42,7 +42,7 @@ abstract class EventCalendarControllerBase with Store {
   get init {
     findAll().then((value) {
       events = _convertJsonToDateMap(value);
-      print(events);
+      //print(events);
       selectedEvents = events[DateTime.now()] ?? [];
     });
     titleCtrl.text = '';
@@ -56,21 +56,21 @@ abstract class EventCalendarControllerBase with Store {
 
   @action
   Future save(String title, String date) =>
-      ObservableFuture(_eventRepo.save(_setValues(title, date)).then((value) => value))
+      ObservableFuture(_eventRepo.save(_setValues(0, title, date)).then((value) => value))
           .catchError((e) {
         errorMsg = "${e.message}";
       }, test: (e) => e is Exception);
 
   @action
-  Future delete(String title, String date) =>
-      ObservableFuture(_eventRepo.delete(_setValues(title, date)).then((value) => value))
+  Future deleteById(Event event) =>
+      ObservableFuture(_eventRepo.deleteById(_setValues(event.id, event.title, event.date)).then((value) => value))
           .catchError((e) {
         errorMsg = "${e.message}";
       }, test: (e) => e is Exception);
 
-  Event _setValues(String title, String date) {
+  Event _setValues(int id, String title, String date) {
     return Event(
-        id: int.parse('0'),
+        id: id,
         date: date, //calController.selectedDay.toString().substring(0, 10),
         title: title); //titleCtrl.text);
   }

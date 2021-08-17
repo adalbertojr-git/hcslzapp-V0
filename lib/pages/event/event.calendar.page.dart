@@ -220,9 +220,7 @@ class EventCalendarPageState extends State<EventCalendarPage>
                   shrinkWrap: true,
                   itemCount: _controller.selectedEvents.length,
                   itemBuilder: (_, int i) {
-                    //print(_controller.selectedEvents[i]);
-                    var e = _controller.selectedEvents[i] as Event;
-                    print(e.title);
+                    var event = _controller.selectedEvents[i] as Event;
                     return Container(
                       decoration: BoxDecoration(
                         color: Colors.white30,
@@ -263,7 +261,7 @@ class EventCalendarPageState extends State<EventCalendarPage>
                             : null,
                         title: Text(
                           //_controller.selectedEvents[i].toString(),
-                          e.title,
+                          event.title,
                           style: TextStyle(
                             fontSize: 13.0,
                           ),
@@ -384,15 +382,20 @@ class EventCalendarPageState extends State<EventCalendarPage>
           return TransactionAuthDialog(msg: 'Confirma a exclusão do evento?');
         });
     if (response == true) {
-      //title
+
+      var event = _controller.selectedEvents[i] as Event;
+      print(event);
+
+/*      //title
       List event = _controller.selectedEvents
           .where((element) => element == _controller.selectedEvents[i])
           .toList();
       //date
       event.add(
-          _controller.calController.selectedDay.toString().substring(0, 10));
-      //print(event);
-      _controller.delete(event[0], event[1]).then(
+          _controller.calController.selectedDay.toString().substring(0, 10));*/
+
+
+      _controller.deleteById(event).then(
         (value) {
           if (value != null) {
             asuka.showSnackBar(
