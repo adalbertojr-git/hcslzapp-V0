@@ -220,6 +220,9 @@ class EventCalendarPageState extends State<EventCalendarPage>
                   shrinkWrap: true,
                   itemCount: _controller.selectedEvents.length,
                   itemBuilder: (_, int i) {
+                    //print(_controller.selectedEvents[i]);
+                    var e = _controller.selectedEvents[i] as Event;
+                    print(e.title);
                     return Container(
                       decoration: BoxDecoration(
                         color: Colors.white30,
@@ -235,8 +238,8 @@ class EventCalendarPageState extends State<EventCalendarPage>
                       ),
                       child: ListTile(
                         leading: Container(
-                          width: 45,
-                          height: 45,
+                          width: 40,
+                          height: 40,
                           alignment: Alignment.center,
                           child: CircleAvatar(
                             child: Icon(Icons.event),
@@ -259,7 +262,8 @@ class EventCalendarPageState extends State<EventCalendarPage>
                               )
                             : null,
                         title: Text(
-                          _controller.selectedEvents[i].toString(),
+                          //_controller.selectedEvents[i].toString(),
+                          e.title,
                           style: TextStyle(
                             fontSize: 13.0,
                           ),

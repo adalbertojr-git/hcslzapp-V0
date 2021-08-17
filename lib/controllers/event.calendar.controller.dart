@@ -100,12 +100,17 @@ abstract class EventCalendarControllerBase with Store {
     //var jsonEmbedded = json['_embedded'];
     //var jsonEvents = jsonEmbedded['event'];
     //print(jsonSource);
-    Map<DateTime, List<String>> events = {};
+    Map<DateTime, List<Event>> events = {};
+    //Map<DateTime, List<String>> events = {};
     for (var event in json) {
       var date = _parseDate(event['date']);
-      events.putIfAbsent(date, () => <String>[]);
-      events[date].add(event['title']);
-      events[date].add(event['id'].toString());
+      events.putIfAbsent(date, () => <Event>[]);
+      var e = Event(
+        id: event['id'],
+        date: event['date'],
+        title: event['title']      );
+      events[date].add(e);
+      //events[date].add(event['id'].toString());
     }
     return events;
   }
