@@ -61,8 +61,7 @@ class EventCalendarPageState extends State<EventCalendarPage>
 
   void _onVisibleDaysChanged(
       DateTime first, DateTime last, CalendarFormat format) {
-    List events = List();
-    _controller.setSelectedEvents(events);
+    _controller.setSelectedEvents(List.empty());
   }
 
   void _onCalendarCreated(
