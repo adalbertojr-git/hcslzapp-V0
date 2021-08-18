@@ -11,13 +11,13 @@ import 'package:table_calendar/table_calendar.dart';
 import 'package:asuka/asuka.dart' as asuka;
 
 // Example holidays
-final Map<DateTime, List> _holidays = {
+/*final Map<DateTime, List> _holidays = {
   DateTime(2019, 1, 1): ['New Year\'s Day'],
   DateTime(2019, 1, 6): ['Epiphany'],
   DateTime(2019, 2, 14): ['Valentine\'s Day'],
   DateTime(2019, 4, 21): ['Easter Sunday'],
   DateTime(2019, 4, 22): ['Easter Monday'],
-};
+};*/
 
 class EventCalendarPage extends StatefulWidget {
   final String _user;
@@ -95,7 +95,7 @@ class EventCalendarPageState extends State<EventCalendarPage>
           locale: 'pt_BR',
           calendarController: _controller.calController,
           events: _controller.events,
-          holidays: _holidays,
+          //holidays: _holidays,
           rowHeight: 30,
           initialCalendarFormat: CalendarFormat.month,
           formatAnimation: FormatAnimation.slide,
@@ -252,6 +252,15 @@ class EventCalendarPageState extends State<EventCalendarPage>
                                 children: <Widget>[
                                   GestureDetector(
                                     child: Icon(
+                                      Icons.edit,
+                                    ),
+                                    onTap: () {
+                                      _controller.setEventTitle(event.title);
+                                      _showAddDialog(event, i);
+                                    },
+                                  ),
+                                  GestureDetector(
+                                    child: Icon(
                                       Icons.delete,
                                     ),
                                     onTap: () {
@@ -286,7 +295,7 @@ class EventCalendarPageState extends State<EventCalendarPage>
                     ),
                     onPressed: () {
                       _controller.titleCtrl.clear();
-                      _showAddDialog(null);
+                      _showAddDialog(null, 0);
                     },
                   )
                 : Container(),
@@ -294,7 +303,7 @@ class EventCalendarPageState extends State<EventCalendarPage>
         ),
       );
 
-  _showAddDialog(int i) async {
+  _showAddDialog(Event event, int i) async {
     await showDialog(
         context: context,
         builder: (context) => AlertDialog(
@@ -342,7 +351,12 @@ class EventCalendarPageState extends State<EventCalendarPage>
                           color: Colors.black,
                         ),
                         onPressed: () {
-                          _save;
+                          if (event == null) {
+                            _save;
+                          }
+                          else {
+                            _update(event, i);
+                          }
                           Navigator.pop(context);
                         },
                       ),
@@ -365,7 +379,29 @@ class EventCalendarPageState extends State<EventCalendarPage>
               content: Text('Evento salvo com sucesso.'),
             ),
           );
-          _controller.addEvent();
+          _controller.addEvent(value);
+        } else {
+          asuka.showSnackBar(
+            SnackBar(
+              content: Text(_controller.errorMsg),
+            ),
+          );
+        }
+      },
+    );
+  }
+
+  _update(Event event, int i) {
+    event.title = _controller.titleCtrl.text;
+    _controller.update(event).then(
+      (value) {
+        if (value != null) {
+          asuka.showSnackBar(
+            SnackBar(
+              content: Text('Evento atualizado com sucesso.'),
+            ),
+          );
+          _controller.editEvent(i);
         } else {
           asuka.showSnackBar(
             SnackBar(

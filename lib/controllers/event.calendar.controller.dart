@@ -54,24 +54,28 @@ abstract class EventCalendarControllerBase with Store {
       }, test: (e) => e is Exception);
 
   @action
-  Future save(String title, String date) =>
-      ObservableFuture(_eventRepo.save(_setValues(0, title, date)).then((value) => value))
-          .catchError((e) {
+  Future save(String title, String date) => ObservableFuture(_eventRepo
+          .save(_setValues(0, title, date))
+          .then((value) => value)).catchError((e) {
         errorMsg = "${e.message}";
       }, test: (e) => e is Exception);
 
   @action
-  Future deleteById(Event event) =>
-      ObservableFuture(_eventRepo.deleteById(_setValues(event.id, event.title, event.date)).then((value) => value))
-          .catchError((e) {
+  Future update(Event event) => ObservableFuture(_eventRepo
+          .update(_setValues(event.id, event.title, event.date))
+          .then((value) => value)).catchError((e) {
+        errorMsg = "${e.message}";
+      }, test: (e) => e is Exception);
+
+  @action
+  Future deleteById(Event event) => ObservableFuture(_eventRepo
+          .deleteById(_setValues(event.id, event.title, event.date))
+          .then((value) => value)).catchError((e) {
         errorMsg = "${e.message}";
       }, test: (e) => e is Exception);
 
   Event _setValues(int id, String title, String date) {
-    return Event(
-        id: id,
-        date: date, //calController.selectedDay.toString().substring(0, 10),
-        title: title); //titleCtrl.text);
+    return Event(id: id, date: date, title: title);
   }
 
   @action
@@ -86,10 +90,8 @@ abstract class EventCalendarControllerBase with Store {
     for (var event in json) {
       var date = _parseDate(event['date']);
       events.putIfAbsent(date, () => <Event>[]);
-      var e = Event(
-        id: event['id'],
-        date: event['date'],
-        title: event['title']      );
+      var e =
+          Event(id: event['id'], date: event['date'], title: event['title']);
       events[date].add(e);
     }
     return events;
@@ -100,12 +102,12 @@ abstract class EventCalendarControllerBase with Store {
     return DateTime(parts[0], parts[1], parts[2], 12, 0, 0, 0, 0);
   }
 
-  setTitle(String value) => titleCtrl.text = value;
+  setEventTitle(String value) => titleCtrl.text = value;
 
-  addEvent() {
+  addEvent(Event event) {
     if (titleCtrl.text.isEmpty) return;
     if (selectedEvents.isNotEmpty) {
-      selectedEvents.add(titleCtrl.text);
+      selectedEvents.add(event);
       events[calController.selectedDay] = selectedEvents;
     } else {
       events[calController.selectedDay] = [titleCtrl.text].toList();
@@ -113,10 +115,9 @@ abstract class EventCalendarControllerBase with Store {
     titleCtrl.clear();
   }
 
-/*  editEvent(int i) {
+  editEvent(int i) {
     if (titleCtrl.text.isEmpty) return;
     selectedEvents[i] = titleCtrl.text;
     titleCtrl.clear();
-  }*/
-
+  }
 }

@@ -43,6 +43,28 @@ class EventRepo {
     }
   }
 
+  Future<Event> update(Event event) async {
+    final String encodedJson = jsonEncode(
+      event.toJson(),
+    );
+    final Response response = await client.put(
+      mainUrl + _eventUrl + "/" + event.id.toString(),
+      headers: {
+        'Content-type': 'application/json',
+      },
+      body: encodedJson,
+    ).timeout(
+      Duration(seconds: 10),
+    );
+    if (response.statusCode == 200) {
+      return Event.fromJson(
+        jsonDecode(response.body),
+      );
+    } else {
+      throw HttpException(getMessage(response.statusCode));
+    }
+  }
+
   Future<Response> deleteById(Event event) async {
     final String encodedJson = jsonEncode(
       event.toJson(),
