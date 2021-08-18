@@ -20,51 +20,14 @@ class LoginPage extends StatelessWidget {
     return Observer(
       builder: (_) {
         return Scaffold(
-          body: _sliverAppBar(context),
+          body: _widgets(_),
         );
       },
     );
   }
 
-  _sliverAppBar(BuildContext context) => CustomScrollView(
-        slivers: <Widget>[
-          SliverAppBar(
-/*            title: Container(
-              alignment: Alignment.topLeft,
-              child: Text(
-                'HCSlz App',
-                style: TextStyle(
-                  fontSize: 25.0,
-                  color: Colors.white70,
-                ),
-              ),
-            ),
-            centerTitle: true,*/
-            pinned: true,
-            expandedHeight: 140.0,
-            backgroundColor: Colors.black,
-            flexibleSpace: FlexibleSpaceBar(
-              background: Image.asset(
-                'assets/imgs/passeio.jpg',
-                fit: BoxFit.fill,
-              ),
-            ),
-          ),
-          SliverFillRemaining(
-            child: _widgets(context),
-          ),
-        ],
-      );
-
   _widgets(BuildContext context) => Stack(
         children: [
-          Center(
-            child: SizedBox(
-              height: MediaQuery.of(context).size.height,
-              width: MediaQuery.of(context).size.width,
-              child: Image.asset('assets/imgs/logo_login.png'),
-            ),
-          ),
           Container(
             decoration: BoxDecoration(
               gradient: LinearGradient(
@@ -78,18 +41,10 @@ class LoginPage extends StatelessWidget {
               child: Column(
                 children: <Widget>[
                   SizedBox(
-                    height: 5.0,
-                  ),
-                  Text(
-                    '<<< HCSlz App >>>',
-                    style: TextStyle(
-                      fontSize: 20.0,
-                      fontWeight: FontWeight.bold,
-                      color: Colors.orangeAccent,
-                    ),
+                    height: 30.0,
                   ),
                   SizedBox(
-                    height: 5.0,
+                    child: Image.asset('assets/imgs/logo.png'),
                   ),
                   MyTextFormField(
                     textEditingController: _controller.userLoginCtrl,
@@ -107,16 +62,13 @@ class LoginPage extends StatelessWidget {
                     hidden: true,
                   ),
                   SizedBox(
-                    height: 30.0,
+                    height: 20.0,
                   ),
                   Button(
                     icon: Icons.arrow_forward,
                     onClick: () {
                       _login(context);
                     },
-                  ),
-                  SizedBox(
-                    height: 20.0,
                   ),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -132,7 +84,7 @@ class LoginPage extends StatelessWidget {
                         child: Text(
                           'Esqueceu a senha?',
                           style: TextStyle(
-                            color: Colors.indigo,
+                            color: Colors.white,
                             fontSize: 12.0,
                           ),
                         ),
@@ -154,7 +106,7 @@ class LoginPage extends StatelessWidget {
                         child: Text(
                           'Primeiro acesso?',
                           style: TextStyle(
-                            color: Colors.indigo,
+                            color: Colors.white,
                             fontSize: 12.0,
                           ),
                         ),

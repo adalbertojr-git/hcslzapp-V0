@@ -275,18 +275,18 @@ class EventCalendarPageState extends State<EventCalendarPage>
             ),
             widget._user == 'admin'
                 ? FloatingActionButton(
-                  heroTag: "btnAdd",
-                  mini: true,
-                  backgroundColor: Colors.deepOrangeAccent[100],
-                  child: Icon(
-                    Icons.add,
-                    color: Colors.black,
-                  ),
-                  onPressed: () {
-                    _controller.titleCtrl.clear();
-                    _showAddDialog(null);
-                  },
-                )
+                    heroTag: "btnAdd",
+                    mini: true,
+                    backgroundColor: Colors.deepOrangeAccent[100],
+                    child: Icon(
+                      Icons.add,
+                      color: Colors.black,
+                    ),
+                    onPressed: () {
+                      _controller.titleCtrl.clear();
+                      _showAddDialog(null);
+                    },
+                  )
                 : Container(),
           ],
         ),
@@ -382,19 +382,7 @@ class EventCalendarPageState extends State<EventCalendarPage>
           return TransactionAuthDialog(msg: 'Confirma a exclusão do evento?');
         });
     if (response == true) {
-
       var event = _controller.selectedEvents[i] as Event;
-      print(event);
-
-/*      //title
-      List event = _controller.selectedEvents
-          .where((element) => element == _controller.selectedEvents[i])
-          .toList();
-      //date
-      event.add(
-          _controller.calController.selectedDay.toString().substring(0, 10));*/
-
-
       _controller.deleteById(event).then(
         (value) {
           if (value != null) {
