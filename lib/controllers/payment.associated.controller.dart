@@ -5,7 +5,8 @@ import 'package:mobx/mobx.dart';
 
 part 'payment.associated.controller.g.dart';
 
-class PaymentAssociatedController = PaymentAssociatedControllerBase with _$PaymentAssociatedController;
+class PaymentAssociatedController = PaymentAssociatedControllerBase
+    with _$PaymentAssociatedController;
 
 abstract class PaymentAssociatedControllerBase with Store {
   @observable
@@ -34,8 +35,8 @@ abstract class PaymentAssociatedControllerBase with Store {
   bool setButtonVisibilty() => isHidedButton = !isHidedButton;
 
   @action
-  Future findByAssociatedIdToList(int id) =>
-      ObservableFuture(_paymentRepo.findByAssociatedIdToList(id).then((value) => value))
+  Future findByAssociatedIdToList(int id) => ObservableFuture(
+              _paymentRepo.findByAssociatedIdToList(id).then((value) => value))
           .catchError((e) {
         errorMsg = "${e.message}";
       }, test: (e) => e is Exception);

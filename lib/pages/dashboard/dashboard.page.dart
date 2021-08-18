@@ -8,17 +8,13 @@ import 'package:hcslzapp/pages/access.request/access.request.list.page.dart';
 import 'package:hcslzapp/pages/associated/associated.list.page.dart';
 import 'package:hcslzapp/pages/associated/associated.update.page.dart';
 import 'package:hcslzapp/pages/boutique/boutique.list.page.dart';
-import 'package:hcslzapp/pages/defect/defect.list.page.dart';
 import 'package:hcslzapp/pages/digital.identity/digital.identity.page.dart';
-import 'package:hcslzapp/pages/document/document.list.page.dart';
-import 'package:hcslzapp/pages/dtc.code/dtc.code.access.oldmodels.page.dart';
 import 'package:hcslzapp/pages/dtc.code/dtc.code.dashboard.page.dart';
 import 'package:hcslzapp/pages/event/event.calendar.page.dart';
 import 'package:hcslzapp/pages/financial/payment.associated.page.dart';
 import 'package:hcslzapp/pages/financial/payment.list.page.dart';
-import 'package:hcslzapp/pages/partnership/partnership.add.page.dart';
+import 'package:hcslzapp/pages/financial/payment.selected.page.dart';
 import 'package:hcslzapp/pages/partnership/partnership.list.page.dart';
-import 'package:hcslzapp/pages/ride/my.ride.page.dart';
 import 'dart:io';
 
 // ignore: must_be_immutable
@@ -264,7 +260,8 @@ class _DashboardPageState extends State<DashboardPage> {
                     _gContext,
                     MaterialPageRoute(
                         builder: (gContext) =>
-                            PaymentAssociatedPage(widget._associatedId)),
+                  PaymentSelectedPage(widget._associatedId)),
+                            //PaymentAssociatedPage(widget._associatedId)),
                   );
                 },
               ),

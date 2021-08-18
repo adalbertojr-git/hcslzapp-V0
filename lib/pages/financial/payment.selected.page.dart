@@ -13,9 +13,12 @@ import 'package:hcslzapp/pages/financial/payment.add.page.dart';
 import 'package:asuka/asuka.dart' as asuka;
 
 class PaymentSelectedPage extends StatefulWidget {
-  final Associated _associated;
+/*  final Associated _associated;
 
-  const PaymentSelectedPage(this._associated);
+  const PaymentSelectedPage(this._associated);*/
+  final int _associatedId;
+
+  const PaymentSelectedPage(this._associatedId);
 
   @override
   _PaymentSelectedPageState createState() => _PaymentSelectedPageState();
@@ -26,7 +29,7 @@ class _PaymentSelectedPageState extends State<PaymentSelectedPage> {
 
   @override
   void initState() {
-    _controller.getFuture(widget._associated.id).then((value) {
+    _controller.getFuture(widget._associatedId).then((value) {
       if (value != null) {
         _controller.setButtonVisibilty();
       }
@@ -38,7 +41,7 @@ class _PaymentSelectedPageState extends State<PaymentSelectedPage> {
   @override
   Widget build(BuildContext context) => Scaffold(
         body: FutureBuilder<List<Payment>>(
-          future: _controller.getFuture(widget._associated.id),//_controller.future,
+          future: _controller.getFuture(widget._associatedId),//_controller.future,
           builder: (context, snapshot) {
             switch (snapshot.connectionState) {
               case ConnectionState.none:
@@ -82,7 +85,7 @@ class _PaymentSelectedPageState extends State<PaymentSelectedPage> {
       );
 
   get _add async {
-    var payment = await Navigator.push(
+/*    var payment = await Navigator.push(
       context,
       MaterialPageRoute(
         builder: (_) => PaymentAddPage(
@@ -96,7 +99,7 @@ class _PaymentSelectedPageState extends State<PaymentSelectedPage> {
       _controller.setPayments(payment);
       print('Button:');
       print((_controller.payments.length));
-    }
+    }*/
   }
 
   get _buildListView => Container(
@@ -154,12 +157,12 @@ class _PaymentSelectedPageState extends State<PaymentSelectedPage> {
                 Icons.edit,
               ),
               onTap: () {
-                Navigator.push(
+/*                Navigator.push(
                   context,
                   MaterialPageRoute(
                       builder: (context) => PaymentAddPage(_controller.payments[i],
                           widget._associated, _controller.loadYears())),
-                );
+                );*/
               },
             ),
           ],
