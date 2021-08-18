@@ -42,7 +42,6 @@ abstract class EventCalendarControllerBase with Store {
   get init {
     findAll().then((value) {
       events = _convertJsonToDateMap(value);
-      //print(events);
       selectedEvents = events[DateTime.now()] ?? [];
     });
     titleCtrl.text = '';
@@ -81,27 +80,9 @@ abstract class EventCalendarControllerBase with Store {
   @action
   removeSelectedEvent(int i) => selectedEvents.removeAt(i);
 
-/*  Map<DateTime, List> _convertJsonToDateMap2(String jsonSource) {
-    var json = jsonDecode(jsonSource);
-    var jsonEmbedded = json['_embedded'];
-    var jsonEvents = jsonEmbedded['event'];
-    print(jsonEvents);
-    Map<DateTime, List<String>> events = {};
-    for (var event in jsonEvents) {
-      var date = _parseDate(event['date']);
-      events.putIfAbsent(date, () => <String>[]);
-      events[date].add(event['title']);
-    }
-    return events;
-  }*/
-
   Map<DateTime, List> _convertJsonToDateMap(String jsonSource) {
     var json = jsonDecode(jsonSource);
-    //var jsonEmbedded = json['_embedded'];
-    //var jsonEvents = jsonEmbedded['event'];
-    //print(jsonSource);
     Map<DateTime, List<Event>> events = {};
-    //Map<DateTime, List<String>> events = {};
     for (var event in json) {
       var date = _parseDate(event['date']);
       events.putIfAbsent(date, () => <Event>[]);
@@ -110,7 +91,6 @@ abstract class EventCalendarControllerBase with Store {
         date: event['date'],
         title: event['title']      );
       events[date].add(e);
-      //events[date].add(event['id'].toString());
     }
     return events;
   }
@@ -137,15 +117,6 @@ abstract class EventCalendarControllerBase with Store {
     if (titleCtrl.text.isEmpty) return;
     selectedEvents[i] = titleCtrl.text;
     titleCtrl.clear();
-  }*/
-
-/*  void _deleteEvent(String s){
-    List<CalendarItem> d = _data.where((element) => element.name == s).toList();
-    if(d.length == 1){
-      DB.delete(CalendarItem.table, d[0]);
-      _selectedEvents.removeWhere((e) => e == s);
-      _fetchEvents();
-    }
   }*/
 
 }

@@ -173,11 +173,11 @@ mixin _$EventCalendarController on EventCalendarControllerBase, Store {
   }
 
   @override
-  Future<dynamic> delete(String title, String date) {
+  Future<dynamic> deleteById(Event event) {
     final _$actionInfo = _$EventCalendarControllerBaseActionController
-        .startAction(name: 'EventCalendarControllerBase.delete');
+        .startAction(name: 'EventCalendarControllerBase.deleteById');
     try {
-      return super.delete(title, date);
+      return super.deleteById(event);
     } finally {
       _$EventCalendarControllerBaseActionController.endAction(_$actionInfo);
     }
