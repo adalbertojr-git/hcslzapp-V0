@@ -24,21 +24,6 @@ mixin _$PaymentAddController on PaymentAddControllerBase, Store {
     });
   }
 
-  final _$nameCtrlAtom = Atom(name: 'PaymentAddControllerBase.nameCtrl');
-
-  @override
-  TextEditingController get nameCtrl {
-    _$nameCtrlAtom.reportRead();
-    return super.nameCtrl;
-  }
-
-  @override
-  set nameCtrl(TextEditingController value) {
-    _$nameCtrlAtom.reportWrite(value, super.nameCtrl, () {
-      super.nameCtrl = value;
-    });
-  }
-
   final _$yearCtrlAtom = Atom(name: 'PaymentAddControllerBase.yearCtrl');
 
   @override
@@ -391,7 +376,6 @@ mixin _$PaymentAddController on PaymentAddControllerBase, Store {
   String toString() {
     return '''
 idCtrl: ${idCtrl},
-nameCtrl: ${nameCtrl},
 yearCtrl: ${yearCtrl},
 janCtrl: ${janCtrl},
 febCtrl: ${febCtrl},

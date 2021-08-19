@@ -7,9 +7,13 @@ import 'package:hcslzapp/components/progress.dart';
 import 'package:hcslzapp/components/top.bar.dart';
 import 'package:hcslzapp/controllers/payment.list.controller.dart';
 import 'package:hcslzapp/models/associated.dart';
-import 'package:hcslzapp/pages/financial/payment.selected.page.dart';
+import 'package:hcslzapp/pages/payment/payment.associated.page.dart';
 
 class PaymentListPage extends StatefulWidget {
+  final String _user;
+
+  const PaymentListPage(this._user);
+
   @override
   _PaymentListPageState createState() => _PaymentListPageState();
 }
@@ -136,7 +140,8 @@ class _PaymentListPageState extends State<PaymentListPage> {
                                 Navigator.push(
                                   context,
                                   MaterialPageRoute(
-                                      builder: (context) => PaymentSelectedPage(
+                                      builder: (context) => PaymentAssociatedPage(
+                                          widget._user,
                                           _controller.listFiltered[i].id)),
                                 );
                               },

@@ -117,12 +117,45 @@ mixin _$PaymentAssociatedController on PaymentAssociatedControllerBase, Store {
   }
 
   @override
+  dynamic setPayments(Payment payment) {
+    final _$actionInfo = _$PaymentAssociatedControllerBaseActionController
+        .startAction(name: 'PaymentAssociatedControllerBase.setPayments');
+    try {
+      return super.setPayments(payment);
+    } finally {
+      _$PaymentAssociatedControllerBaseActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
   Future<dynamic> findByAssociatedIdToList(int id) {
     final _$actionInfo =
         _$PaymentAssociatedControllerBaseActionController.startAction(
             name: 'PaymentAssociatedControllerBase.findByAssociatedIdToList');
     try {
       return super.findByAssociatedIdToList(id);
+    } finally {
+      _$PaymentAssociatedControllerBaseActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
+  Future<List<Payment>> getFuture(int id) {
+    final _$actionInfo = _$PaymentAssociatedControllerBaseActionController
+        .startAction(name: 'PaymentAssociatedControllerBase.getFuture');
+    try {
+      return super.getFuture(id);
+    } finally {
+      _$PaymentAssociatedControllerBaseActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
+  Future<dynamic> deleteById(Payment payment) {
+    final _$actionInfo = _$PaymentAssociatedControllerBaseActionController
+        .startAction(name: 'PaymentAssociatedControllerBase.deleteById');
+    try {
+      return super.deleteById(payment);
     } finally {
       _$PaymentAssociatedControllerBaseActionController.endAction(_$actionInfo);
     }

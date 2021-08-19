@@ -5,27 +5,24 @@ import 'package:hcslzapp/components/centered.message.dart';
 import 'package:hcslzapp/components/progress.dart';
 import 'package:hcslzapp/components/top.bar.dart';
 import 'package:hcslzapp/components/transaction.auth.dialog.dart';
-import 'package:hcslzapp/controllers/payment.selected.controller.dart';
-import 'package:hcslzapp/models/associated.dart';
+import 'package:hcslzapp/controllers/payment.associated.controller.dart';
 import 'package:hcslzapp/models/payment.dart';
 import 'package:hcslzapp/models/payment.months.dart';
-import 'package:hcslzapp/pages/financial/payment.add.page.dart';
+import 'package:hcslzapp/pages/payment/payment.add.page.dart';
 import 'package:asuka/asuka.dart' as asuka;
 
-class PaymentSelectedPage extends StatefulWidget {
-/*  final Associated _associated;
-
-  const PaymentSelectedPage(this._associated);*/
+class PaymentAssociatedPage extends StatefulWidget {
   final int _associatedId;
+  final String _user;
 
-  const PaymentSelectedPage(this._associatedId);
+  const PaymentAssociatedPage(this._user, this._associatedId);
 
   @override
-  _PaymentSelectedPageState createState() => _PaymentSelectedPageState();
+  _PaymentAssociatedPageState createState() => _PaymentAssociatedPageState();
 }
 
-class _PaymentSelectedPageState extends State<PaymentSelectedPage> {
-  PaymentSelectedController _controller = PaymentSelectedController();
+class _PaymentAssociatedPageState extends State<PaymentAssociatedPage> {
+  PaymentAssociatedController _controller = PaymentAssociatedController();
 
   @override
   void initState() {
@@ -41,7 +38,8 @@ class _PaymentSelectedPageState extends State<PaymentSelectedPage> {
   @override
   Widget build(BuildContext context) => Scaffold(
         body: FutureBuilder<List<Payment>>(
-          future: _controller.getFuture(widget._associatedId),//_controller.future,
+          future: _controller.getFuture(widget._associatedId),
+          //_controller.future,
           builder: (context, snapshot) {
             switch (snapshot.connectionState) {
               case ConnectionState.none:
@@ -72,25 +70,26 @@ class _PaymentSelectedPageState extends State<PaymentSelectedPage> {
           },
         ),
         floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
-        floatingActionButton: Observer(
-          builder: (_) => _controller.isHidedButton
-              ? Container()
-              : Button(
-                  icon: Icons.add,
-                  onClick: () {
-                    _add;
-                  },
-                ),
-        ),
+        floatingActionButton: widget._user == 'admin'
+            ? Observer(
+                builder: (_) => _controller.isHidedButton
+                    ? Container()
+                    : Button(
+                        icon: Icons.add,
+                        onClick: () {
+                          _add;
+                        },
+                      ),
+              )
+            : Container(),
       );
 
   get _add async {
-/*    var payment = await Navigator.push(
+    var payment = await Navigator.push(
       context,
       MaterialPageRoute(
         builder: (_) => PaymentAddPage(
           null,
-          widget._associated,
           _controller.loadYears(),
         ),
       ),
@@ -99,7 +98,7 @@ class _PaymentSelectedPageState extends State<PaymentSelectedPage> {
       _controller.setPayments(payment);
       print('Button:');
       print((_controller.payments.length));
-    }*/
+    }
   }
 
   get _buildListView => Container(
@@ -132,7 +131,7 @@ class _PaymentSelectedPageState extends State<PaymentSelectedPage> {
 
   ExpansionTile _buildExpansionTile(List<Payment> payments, int i) =>
       ExpansionTile(
-        backgroundColor: Colors.black26,
+        backgroundColor: Colors.white54,
         title: Text(
           'Ano: ' + payments[i].year,
           style: TextStyle(
@@ -141,7 +140,7 @@ class _PaymentSelectedPageState extends State<PaymentSelectedPage> {
           ),
         ),
         subtitle: Text('Total pago: R\$ '),
-        trailing: Wrap(
+        trailing:  widget._user == 'admin' ? Wrap(
           spacing: 10, // space between two icons
           children: <Widget>[
             GestureDetector(
@@ -157,16 +156,16 @@ class _PaymentSelectedPageState extends State<PaymentSelectedPage> {
                 Icons.edit,
               ),
               onTap: () {
-/*                Navigator.push(
+                Navigator.push(
                   context,
                   MaterialPageRoute(
                       builder: (context) => PaymentAddPage(_controller.payments[i],
-                          widget._associated, _controller.loadYears())),
-                );*/
+                          _controller.loadYears())),
+                );
               },
             ),
           ],
-        ),
+        ) : null,
         children: <Widget>[
           Column(
             children: payments[i].paymentMonths.map(_buildListTile).toList(),
@@ -199,7 +198,8 @@ class _PaymentSelectedPageState extends State<PaymentSelectedPage> {
     var response = await showDialog(
         context: context,
         builder: (context) {
-          return TransactionAuthDialog(msg: 'Deseja excluir o registro selecionado?');
+          return TransactionAuthDialog(
+              msg: 'Deseja excluir o registro selecionado?');
         });
     if (response == true) {
       _controller.deleteById(_controller.payments[i]).then((value) {

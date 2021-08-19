@@ -12,10 +12,9 @@ import 'package:asuka/asuka.dart' as asuka;
 
 class PaymentAddPage extends StatefulWidget {
   final Payment _payment;
-  final Associated _associated;
   final List<String> _years;
 
-  PaymentAddPage(this._payment, this._associated, this._years);
+  PaymentAddPage(this._payment, this._years);
 
   @override
   _PaymentAddAddState createState() => _PaymentAddAddState();
@@ -27,7 +26,6 @@ class _PaymentAddAddState extends State<PaymentAddPage> {
   @override
   void initState() {
     _controller.payment = widget._payment != null ? widget._payment : null;
-    _controller.associated = widget._associated;
     _controller.init;
     _controller.setYears(widget._years);
     super.initState();
@@ -50,11 +48,6 @@ class _PaymentAddAddState extends State<PaymentAddPage> {
           child: Column(
             children: <Widget>[
               TopBar(),
-              MyTextFormField(
-                textEditingController: _controller.nameCtrl,
-                label: labelNamePayment,
-                disabled: true,
-              ),
               Container(
                 width: 200.0,
                 child: Observer(

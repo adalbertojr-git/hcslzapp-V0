@@ -1,5 +1,6 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
+import 'package:glutton/glutton.dart';
 import 'package:hcslzapp/models/associated.dart';
 import 'package:hcslzapp/models/payment.dart';
 import 'package:hcslzapp/models/payment.months.dart';
@@ -16,9 +17,6 @@ abstract class PaymentAddControllerBase with Store {
 
   @observable
   var idCtrl = TextEditingController();
-
-  @observable
-  var nameCtrl = TextEditingController();
 
   @observable
   var yearCtrl = TextEditingController();
@@ -90,7 +88,6 @@ abstract class PaymentAddControllerBase with Store {
 
   get _initTextFields {
     idCtrl.text = payment != null ? payment.id.toString() : null;
-    nameCtrl.text = payment != null ? payment.associated.name : associated.name;
     yearCtrl.text = payment != null ? payment.year : null;
     if (payment != null) {
       payment.paymentMonths.forEach((element) {
@@ -134,6 +131,10 @@ abstract class PaymentAddControllerBase with Store {
         }
       });
     }
+  }
+
+  Future<String> getUserFromDevice() async {
+    return await Glutton.vomit("user");
   }
 
   @action

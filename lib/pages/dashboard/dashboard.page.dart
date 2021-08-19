@@ -11,9 +11,8 @@ import 'package:hcslzapp/pages/boutique/boutique.list.page.dart';
 import 'package:hcslzapp/pages/digital.identity/digital.identity.page.dart';
 import 'package:hcslzapp/pages/dtc.code/dtc.code.dashboard.page.dart';
 import 'package:hcslzapp/pages/event/event.calendar.page.dart';
-import 'package:hcslzapp/pages/financial/payment.associated.page.dart';
-import 'package:hcslzapp/pages/financial/payment.list.page.dart';
-import 'package:hcslzapp/pages/financial/payment.selected.page.dart';
+import 'package:hcslzapp/pages/payment/payment.list.page.dart';
+import 'package:hcslzapp/pages/payment/payment.associated.page.dart';
 import 'package:hcslzapp/pages/partnership/partnership.list.page.dart';
 import 'dart:io';
 
@@ -68,7 +67,7 @@ class _DashboardPageState extends State<DashboardPage> {
     _controller.init;
     _listAdmWidgets = [
       AssociatedListPage(widget._user),
-      PaymentListPage(),
+      PaymentListPage(widget._user),
       EventCalendarPage(widget._user),
       PartnershipListPage(widget._user),
     ];
@@ -260,7 +259,7 @@ class _DashboardPageState extends State<DashboardPage> {
                     _gContext,
                     MaterialPageRoute(
                         builder: (gContext) =>
-                  PaymentSelectedPage(widget._associatedId)),
+                            PaymentAssociatedPage(widget._user, widget._associatedId)),
                             //PaymentAssociatedPage(widget._associatedId)),
                   );
                 },
