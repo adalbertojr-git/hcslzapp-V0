@@ -131,7 +131,6 @@ class _PaymentAssociatedPageState extends State<PaymentAssociatedPage> {
 
   ExpansionTile _buildExpansionTile(List<Payment> payments, int i) =>
       ExpansionTile(
-        backgroundColor: Colors.white54,
         title: Text(
           'Ano: ' + payments[i].year,
           style: TextStyle(
@@ -139,7 +138,7 @@ class _PaymentAssociatedPageState extends State<PaymentAssociatedPage> {
             fontWeight: FontWeight.bold,
           ),
         ),
-        subtitle: Text('Total pago: R\$ '),
+        subtitle: Text('Total: R\$ ' + _controller.getTotal().toString()),
         trailing:  widget._user == 'admin' ? Wrap(
           spacing: 10, // space between two icons
           children: <Widget>[
@@ -180,7 +179,7 @@ class _PaymentAssociatedPageState extends State<PaymentAssociatedPage> {
           size: 25,
         ),
         title: Text(
-          'Mes: ' + paymentMonths.month.toString(),
+          _controller.getMonthName(paymentMonths.month),
           style: TextStyle(
             fontSize: 18.0,
             fontWeight: FontWeight.bold,

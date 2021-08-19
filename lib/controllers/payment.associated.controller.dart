@@ -62,4 +62,32 @@ abstract class PaymentAssociatedControllerBase with Store {
     });
     return years;
   }
+
+  String getMonthName (int i) {
+    Map _months = {
+      1: "Janeiro",
+      2: "Fevereiro",
+      3: "Março",
+      4: "Abril",
+      5: "Maio",
+      6: "Junho",
+      7: "Julho",
+      8: "Agosto",
+      9: "Setembro",
+      10: "Outubro",
+      11: "Novembro",
+      12: "Dezembro",
+    };
+    return _months[i];
+  }
+
+  double getTotal() {
+    double value = 0;
+    payments.forEach((element) {
+      element.paymentMonths.forEach((e) {
+        value = value + e.value;
+      });
+    });
+    return value;
+  }
 }
