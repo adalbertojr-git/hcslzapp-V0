@@ -27,7 +27,7 @@ abstract class PaymentAssociatedControllerBase with Store {
   @observable
   Future<List<Payment>> future;
 
-  get init {
+  init() {
     payments.clear();
   }
 

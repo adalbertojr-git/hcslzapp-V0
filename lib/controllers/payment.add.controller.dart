@@ -78,15 +78,15 @@ abstract class PaymentAddControllerBase with Store {
   @observable
   List<String> years;
 
-  get init {
-    _initTextFields;
+  init() {
+    _initTextFields();
     payments.clear();
     formController = FormController(
       year: yearCtrl.text,
     );
   }
 
-  get _initTextFields {
+  _initTextFields() {
     idCtrl.text = payment != null ? payment.id.toString() : null;
     yearCtrl.text = payment != null ? payment.year : null;
     if (payment != null) {

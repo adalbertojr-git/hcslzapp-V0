@@ -31,7 +31,7 @@ class _PaymentAssociatedPageState extends State<PaymentAssociatedPage> {
         _controller.setButtonVisibilty();
       }
     });
-    _controller.init;
+    _controller.init();
     super.initState();
   }
 
@@ -61,7 +61,7 @@ class _PaymentAssociatedPageState extends State<PaymentAssociatedPage> {
                       _controller.payments.addAll(snapshot.data);
                     }
                   }
-                  return _buildListView;
+                  return _buildListView();
                 }
             } //switch (snapshot.connectionState)
             return CenteredMessage(
@@ -77,18 +77,19 @@ class _PaymentAssociatedPageState extends State<PaymentAssociatedPage> {
                     : Button(
                         icon: Icons.add,
                         onClick: () {
-                          _add;
+                          _add();
                         },
                       ),
               )
             : Container(),
       );
 
-  get _add async {
+  _add() async {
     var payment = await Navigator.push(
       context,
       MaterialPageRoute(
         builder: (_) => PaymentAddPage(
+          widget._user,
           null,
           _controller.loadYears(),
         ),
@@ -101,7 +102,125 @@ class _PaymentAssociatedPageState extends State<PaymentAssociatedPage> {
     }
   }
 
-  get _buildListView => Container(
+  _buildListView() => Container(
+        decoration: BoxDecoration(
+          gradient: LinearGradient(
+            colors: [Colors.white30, Colors.deepOrange],
+            begin: FractionalOffset.topLeft,
+            end: FractionalOffset.bottomRight,
+          ),
+        ),
+        height: MediaQuery.of(context).size.height,
+        child: Column(
+          children: [
+            TopBar(),
+            Expanded(
+              child: Observer(
+                builder: (_) => ListView.separated(
+                  shrinkWrap: true,
+                  itemCount: _controller.payments.length,
+                  itemBuilder: (_, int i) {
+                    return Container(
+                      decoration: BoxDecoration(
+                        color: Colors.white30,
+                        shape: BoxShape.rectangle,
+                        borderRadius: BorderRadius.circular(8.0),
+                        boxShadow: <BoxShadow>[
+                          BoxShadow(
+                            color: Colors.black12,
+                            blurRadius: 10.0,
+                            offset: Offset(0.0, 5.0),
+                          ),
+                        ],
+                      ),
+                      child: ListTile(
+                        title: Text(
+                          'Ano: ' + _controller.payments[i].year,
+                          style: TextStyle(
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                        leading: CircleAvatar(
+                          child: Icon(Icons.calendar_today),
+                          backgroundColor: Colors.white,
+                        ),
+                        trailing: widget._user == 'admin'
+                            ? Wrap(
+                                spacing: 10, // space between two icons
+                                children: <Widget>[
+                                  GestureDetector(
+                                    child: Icon(
+                                      Icons.delete,
+                                    ),
+                                    onTap: () {
+                                      _delete(i);
+                                    },
+                                  ),
+                                  GestureDetector(
+                                    child: Icon(
+                                      Icons.edit,
+                                    ),
+                                    onTap: () {
+                                      Navigator.push(
+                                        context,
+                                        MaterialPageRoute(
+                                            builder: (context) =>
+                                                PaymentAddPage(
+                                                    widget._user,
+                                                    _controller.payments[i],
+                                                    _controller.loadYears())),
+                                      );
+                                    },
+                                  ),
+                                ],
+                              )
+                            : GestureDetector(
+                                child: Icon(
+                                  Icons.arrow_forward,
+                                ),
+                                onTap: () {
+                                  Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (context) => PaymentAddPage(
+                                            widget._user,
+                                            _controller.payments[i],
+                                            _controller.loadYears())),
+                                  );
+                                },
+                              ),
+/*                    trailing: Wrap(
+                      spacing: 10, // space between two icons
+                      children: <Widget>[
+                        GestureDetector(
+                          child: Icon(
+                            Icons.arrow_forward,
+                          ),
+                          onTap: () {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => PaymentAddPage(_controller.payments[i],
+                                      _controller.loadYears())),
+                            );
+                          },
+                        ),
+                      ],
+                    ),*/
+                      ),
+                    );
+                  },
+                  separatorBuilder: (_, int index) => const Divider(),
+                ),
+              ),
+            ),
+          ],
+        ),
+      );
+
+/*
+
+  get _buildListView2 => Container(
         padding: EdgeInsets.fromLTRB(5.0, 5.0, 5.0, 0.0),
         decoration: BoxDecoration(
           gradient: LinearGradient(
@@ -192,6 +311,7 @@ class _PaymentAssociatedPageState extends State<PaymentAssociatedPage> {
           ),
         ),
       );
+*/
 
   _delete(int i) async {
     var response = await showDialog(

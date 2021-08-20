@@ -13,8 +13,9 @@ import 'package:asuka/asuka.dart' as asuka;
 class PaymentAddPage extends StatefulWidget {
   final Payment _payment;
   final List<String> _years;
+  final String _user;
 
-  PaymentAddPage(this._payment, this._years);
+  PaymentAddPage(this._user, this._payment, this._years);
 
   @override
   _PaymentAddAddState createState() => _PaymentAddAddState();
@@ -26,7 +27,7 @@ class _PaymentAddAddState extends State<PaymentAddPage> {
   @override
   void initState() {
     _controller.payment = widget._payment != null ? widget._payment : null;
-    _controller.init;
+    _controller.init();
     _controller.setYears(widget._years);
     super.initState();
   }
@@ -206,14 +207,16 @@ class _PaymentAddAddState extends State<PaymentAddPage> {
         ),
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
-      floatingActionButton: Button(
-        icon: Icons.save,
-        onClick: () => widget._payment == null ? _save : _update,
-      ),
+      floatingActionButton: widget._user == 'admin'
+          ? Button(
+              icon: Icons.save,
+              onClick: () => widget._payment == null ? _save() : _update(),
+            )
+          : Container(),
     );
   }
 
-  get _save {
+  _save() {
     if (_controller.hasErrors) {
       asuka.showSnackBar(
         SnackBar(
@@ -243,7 +246,7 @@ class _PaymentAddAddState extends State<PaymentAddPage> {
     }
   }
 
-  get _update {
+  _update() {
     if (_controller.hasErrors) {
       asuka.showSnackBar(
         SnackBar(
