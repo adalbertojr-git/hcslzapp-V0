@@ -124,33 +124,37 @@ class LoginPage extends StatelessWidget {
     _controller.setLoading(true);
     _controller.errorMsg = null;
     _controller.authenticate().then(
-      (token) {
+      (token) async {
         if (_controller.errorMsg != null) {
           asuka.showSnackBar(
             SnackBar(
               content: Text(_controller.errorMsg),
             ),
           );
-          _controller.setLoading(false);
         } else {
           Token _t = token;
           print(_t.token);
           _controller.setTokenToDevice(_t.token);
           _controller.setUserToDevice(_controller.userLoginCtrl.text);
           TokenDetails _tokenDetails = TokenDetails(_t.token);
+          if (_controller.userLoginCtrl.text != 'admin')
+            await _controller
+                .findByIdToList(_tokenDetails.associatedId())
+                .then((value) {
+              _controller.associated = value[0];
+            });
           Navigator.pushReplacement(
             context,
             MaterialPageRoute(
               builder: (context) => DashboardPage(
-                  _controller.userLoginCtrl.text,
-                  _tokenDetails.firstName(),
-                  _tokenDetails.email(),
-                  _tokenDetails.associatedId(),
-                  _tokenDetails.photoUrl()),
+                _controller.userLoginCtrl.text,
+                _controller.associated,
+              ),
             ),
           );
         }
       },
     );
+    _controller.setLoading(false);
   }
 }

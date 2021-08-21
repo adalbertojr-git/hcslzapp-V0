@@ -9,7 +9,10 @@ abstract class DashboardControllerBase with Store {
   @observable
   String photoPath;
 
-  get init {
+  @observable
+  String errorMsg;
+
+  init() {
     getPhotoFromDevice().then((value) => photoPath = value);
   }
 
@@ -18,5 +21,10 @@ abstract class DashboardControllerBase with Store {
 
   Future<String> getPhotoFromDevice() async {
     return await Glutton.vomit("photoPath");
+  }
+
+  String getFirstName (String fullName) {
+    var names = fullName.split(' ');
+    return names[0];
   }
 }

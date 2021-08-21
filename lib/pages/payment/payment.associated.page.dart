@@ -7,7 +7,6 @@ import 'package:hcslzapp/components/top.bar.dart';
 import 'package:hcslzapp/components/transaction.auth.dialog.dart';
 import 'package:hcslzapp/controllers/payment.associated.controller.dart';
 import 'package:hcslzapp/models/payment.dart';
-import 'package:hcslzapp/models/payment.months.dart';
 import 'package:hcslzapp/pages/payment/payment.add.page.dart';
 import 'package:asuka/asuka.dart' as asuka;
 
@@ -39,7 +38,6 @@ class _PaymentAssociatedPageState extends State<PaymentAssociatedPage> {
   Widget build(BuildContext context) => Scaffold(
         body: FutureBuilder<List<Payment>>(
           future: _controller.getFuture(widget._associatedId),
-          //_controller.future,
           builder: (context, snapshot) {
             switch (snapshot.connectionState) {
               case ConnectionState.none:

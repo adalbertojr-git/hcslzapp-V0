@@ -1,7 +1,9 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:glutton/glutton.dart';
+import 'package:hcslzapp/models/associated.dart';
 import 'package:hcslzapp/models/token.dart';
+import 'package:hcslzapp/repositories/associated.repo.dart';
 import 'package:hcslzapp/repositories/login.repo.dart';
 import 'package:mobx/mobx.dart';
 
@@ -28,6 +30,12 @@ abstract class LoginControllerBase with Store {
   @observable
   LoginRepo _loginRepo = LoginRepo();
 
+  @observable
+  Associated associated;
+
+  @observable
+  AssociatedRepo _associatedRepo = AssociatedRepo();
+
   @action
   Future authenticate() => token = ObservableFuture(_loginRepo
           .authenticate(
@@ -37,6 +45,13 @@ abstract class LoginControllerBase with Store {
           .then((value) => value)).catchError((e) {
         errorMsg = "${e.message}";
       }, test: (e) => e is Exception);
+
+  @action
+  Future findByIdToList(int id) => ObservableFuture(
+      _associatedRepo.findByIdToList(id).then((value) => value))
+      .catchError((e) {
+    errorMsg = "${e.message}";
+  }, test: (e) => e is Exception);
 
   @action
   bool setLoading(bool value) => isLoading = value;

@@ -3,6 +3,7 @@ import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:hcslzapp/common/photo.image.provider.dart';
 import 'package:hcslzapp/controllers/app.controller.dart';
 import 'package:hcslzapp/controllers/dashboard.controller.dart';
+import 'package:hcslzapp/models/associated.dart';
 import 'package:hcslzapp/pages/about/about.page.dart';
 import 'package:hcslzapp/pages/access.request/access.request.list.page.dart';
 import 'package:hcslzapp/pages/associated/associated.list.page.dart';
@@ -19,13 +20,9 @@ import 'dart:io';
 // ignore: must_be_immutable
 class DashboardPage extends StatefulWidget {
   final String _user;
-  final String _firstName;
-  final String _email;
-  final String _photoUrl;
-  final int _associatedId;
+  Associated _associated;
 
-  DashboardPage(this._user, this._firstName, this._email, this._associatedId,
-      this._photoUrl);
+  DashboardPage(this._user, this._associated);
 
   @override
   _DashboardPageState createState() => _DashboardPageState();
@@ -64,7 +61,7 @@ class _DashboardPageState extends State<DashboardPage> {
   @override
   void initState() {
     //_controller = Provider.of<AssociatedController>(context, listen: false);
-    _controller.init;
+    _controller.init();
     _listAdmWidgets = [
       AssociatedListPage(widget._user),
       PaymentListPage(widget._user),
@@ -94,9 +91,15 @@ class _DashboardPageState extends State<DashboardPage> {
             ),
             UserAccountsDrawerHeader(
               accountName: Text(
-                widget._firstName,
+                widget._user == 'admin'
+                    ? 'Administrador'
+                    : widget._associated.name,
               ),
-              accountEmail: Text(widget._email),
+              accountEmail: Text(
+                widget._user == 'admin'
+                    ? 'harleyclubslz@gmail.com'
+                    : widget._associated.email,
+              ),
               decoration: BoxDecoration(
                 image: DecorationImage(
                   image: ExactAssetImage('assets/imgs/ladies.jpg'),
@@ -166,11 +169,13 @@ class _DashboardPageState extends State<DashboardPage> {
         title: Text(
           widget._user == 'admin'
               ? 'Olá, Administrador'
-              : 'Olá, ${widget._firstName}',
+              : 'Olá, ${_controller.getFirstName(widget._associated.name)}',
           style: TextStyle(color: Colors.white, fontSize: 22.0),
         ),
         subtitle: Text(
-          widget._email,
+          widget._user == 'admin'
+              ? 'harleyclubslz@gmail.com'
+              : widget._associated.email,
           style: TextStyle(color: Colors.white60),
         ),
         trailing: widget._user == 'admin'
@@ -243,7 +248,7 @@ class _DashboardPageState extends State<DashboardPage> {
                     _gContext,
                     MaterialPageRoute(
                         builder: (gContext) => AssociatedUpdatePage(
-                            widget._user, widget._associatedId)),
+                            widget._user, widget._associated.id)),
                   );
                   if (photoPath != null) {
                     _controller.setPhoto(photoPath);
@@ -258,9 +263,8 @@ class _DashboardPageState extends State<DashboardPage> {
                   Navigator.push(
                     _gContext,
                     MaterialPageRoute(
-                        builder: (gContext) =>
-                            PaymentAssociatedPage(widget._user, widget._associatedId)),
-                            //PaymentAssociatedPage(widget._associatedId)),
+                        builder: (gContext) => PaymentAssociatedPage(
+                            widget._user, widget._associated.id)),
                   );
                 },
               ),
@@ -273,7 +277,7 @@ class _DashboardPageState extends State<DashboardPage> {
                     _gContext,
                     MaterialPageRoute(
                         builder: (gContext) =>
-                            DigitalIdentityPage(widget._associatedId)),
+                            DigitalIdentityPage(widget._associated.id)),
                   );
                 },
               ),

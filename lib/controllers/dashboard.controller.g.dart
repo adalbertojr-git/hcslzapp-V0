@@ -24,6 +24,21 @@ mixin _$DashboardController on DashboardControllerBase, Store {
     });
   }
 
+  final _$errorMsgAtom = Atom(name: 'DashboardControllerBase.errorMsg');
+
+  @override
+  String get errorMsg {
+    _$errorMsgAtom.reportRead();
+    return super.errorMsg;
+  }
+
+  @override
+  set errorMsg(String value) {
+    _$errorMsgAtom.reportWrite(value, super.errorMsg, () {
+      super.errorMsg = value;
+    });
+  }
+
   final _$DashboardControllerBaseActionController =
       ActionController(name: 'DashboardControllerBase');
 
@@ -41,7 +56,8 @@ mixin _$DashboardController on DashboardControllerBase, Store {
   @override
   String toString() {
     return '''
-photoPath: ${photoPath}
+photoPath: ${photoPath},
+errorMsg: ${errorMsg}
     ''';
   }
 }

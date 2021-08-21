@@ -99,6 +99,37 @@ mixin _$LoginController on LoginControllerBase, Store {
     });
   }
 
+  final _$associatedAtom = Atom(name: 'LoginControllerBase.associated');
+
+  @override
+  Associated get associated {
+    _$associatedAtom.reportRead();
+    return super.associated;
+  }
+
+  @override
+  set associated(Associated value) {
+    _$associatedAtom.reportWrite(value, super.associated, () {
+      super.associated = value;
+    });
+  }
+
+  final _$_associatedRepoAtom =
+      Atom(name: 'LoginControllerBase._associatedRepo');
+
+  @override
+  AssociatedRepo get _associatedRepo {
+    _$_associatedRepoAtom.reportRead();
+    return super._associatedRepo;
+  }
+
+  @override
+  set _associatedRepo(AssociatedRepo value) {
+    _$_associatedRepoAtom.reportWrite(value, super._associatedRepo, () {
+      super._associatedRepo = value;
+    });
+  }
+
   final _$LoginControllerBaseActionController =
       ActionController(name: 'LoginControllerBase');
 
@@ -108,6 +139,17 @@ mixin _$LoginController on LoginControllerBase, Store {
         name: 'LoginControllerBase.authenticate');
     try {
       return super.authenticate();
+    } finally {
+      _$LoginControllerBaseActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
+  Future<dynamic> findByIdToList(int id) {
+    final _$actionInfo = _$LoginControllerBaseActionController.startAction(
+        name: 'LoginControllerBase.findByIdToList');
+    try {
+      return super.findByIdToList(id);
     } finally {
       _$LoginControllerBaseActionController.endAction(_$actionInfo);
     }
@@ -131,7 +173,8 @@ userLoginCtrl: ${userLoginCtrl},
 pswLoginCtrl: ${pswLoginCtrl},
 token: ${token},
 isLoading: ${isLoading},
-errorMsg: ${errorMsg}
+errorMsg: ${errorMsg},
+associated: ${associated}
     ''';
   }
 }
