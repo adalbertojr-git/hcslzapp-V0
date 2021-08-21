@@ -54,7 +54,7 @@ abstract class AccessRequestControllerBase with Store {
   @observable
   AccessRequestRepo _accessRequestRepo = AccessRequestRepo();
 
-  get init {
+  init() {
     accessRequests.clear();
     formController = FormController(
         name: '',

@@ -52,7 +52,7 @@ class DtcCodeAbbreviationListPageState
                     _controller.errorMsg,
                   );
                 if (snapshot.data.length > 0) {
-                  _controller.init;
+                  _controller.init();
                   _controller.abbreviations.addAll(snapshot.data);
                   return _widgets();
                 } else

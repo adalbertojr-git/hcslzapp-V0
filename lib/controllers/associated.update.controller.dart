@@ -93,9 +93,9 @@ abstract class AssociatedUpdateControllerBase with Store {
   @observable
   String currentStatus;
 
-  get init async {
-    _initLists;
-    _initTextFields;
+  init() async {
+    _initLists();
+    _initTextFields();
     currentBloodType = associated.bloodType;
     currentAssociatedType = associated.associatedType;
     currentStatus = associated.status;
@@ -107,14 +107,14 @@ abstract class AssociatedUpdateControllerBase with Store {
     photoPath = await _getPhotoFromDevice();
   }
 
-  get _initLists {
+  _initLists() {
     dependents.clear();
     motorcycles.clear();
     dependents.addAll(associated.dependents);
     motorcycles.addAll(associated.motorcycles);
   }
 
-  get _initTextFields {
+  _initTextFields() {
     nameCtrl.text = associated.name;
     emailCtrl.text = associated.email;
     phoneCtrl.text = associated.phone;

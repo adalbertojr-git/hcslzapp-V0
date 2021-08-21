@@ -9,13 +9,13 @@ class Splash extends StatelessWidget {
   Widget build(BuildContext context) {
     return Stack(
       children: <Widget>[
-        splashScreen,
-        animation,
+        _splashScreen(),
+        _animation(),
       ],
     );
   }
 
-  get splashScreen => SplashScreen(
+  _splashScreen() => SplashScreen(
         seconds: 5,
         gradientBackground: LinearGradient(
           begin: FractionalOffset.topLeft,
@@ -26,7 +26,7 @@ class Splash extends StatelessWidget {
         loaderColor: Colors.transparent,
       );
 
-  get animation => Center(
+  _animation() => Center(
         child: Container(
           width: double.infinity,
           height: 300,

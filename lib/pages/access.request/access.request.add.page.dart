@@ -18,7 +18,7 @@ class _AccessRequestAddPageState extends State<AccessRequestAddPage> {
 
   @override
   void initState() {
-    _controller.init;
+    _controller.init();
     super.initState();
   }
 
@@ -104,7 +104,7 @@ class _AccessRequestAddPageState extends State<AccessRequestAddPage> {
               Button(
                 icon: Icons.send_to_mobile,
                 onClick: () {
-                  _save;
+                  _save();
                 },
               ),
               Padding(
@@ -127,7 +127,7 @@ class _AccessRequestAddPageState extends State<AccessRequestAddPage> {
         ),
       );
 
-  get _save {
+  _save() {
     if (_controller.hasErrors) {
       asuka.showSnackBar(
         SnackBar(

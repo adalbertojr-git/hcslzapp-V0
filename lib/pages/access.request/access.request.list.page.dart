@@ -49,9 +49,9 @@ class AccessRequestListPageState extends State<AccessRequestListPage> {
                         _controller.errorMsg,
                       );
                     if (snapshot.data.length > 0) {
-                      _controller.init;
+                      _controller.init();
                       _controller.accessRequests.addAll(snapshot.data);
-                      return _widgets;
+                      return _widgets();
                     } else
                       return CenteredMessage(
                         'Não existem requisições de acesso a serem aprovadas.',
@@ -67,11 +67,11 @@ class AccessRequestListPageState extends State<AccessRequestListPage> {
               FloatingActionButtonLocation.centerFloat,
           floatingActionButton: _controller.isHidedButton
               ? null
-              : Button(icon: Icons.check, onClick: () => _check),
+              : Button(icon: Icons.check, onClick: () => _check()),
         ),
       );
 
-  get _widgets => Container(
+  _widgets() => Container(
         decoration: BoxDecoration(
           gradient: LinearGradient(
             colors: [Colors.white30, Colors.deepOrange],
@@ -126,7 +126,7 @@ class AccessRequestListPageState extends State<AccessRequestListPage> {
         ),
       );
 
-  get _check {
+  _check() {
     _controller.check().then(
       (value) {
         if (value != null) {

@@ -23,11 +23,11 @@ class DtcCodeAccessOldModelsPage extends StatelessWidget {
                 Container(
                   color: Colors.white,
                   padding: EdgeInsets.all(20.0),
-                  child: _disclaimer,
+                  child: _disclaimer(),
                 ),
                 Container(
                   padding: EdgeInsets.all(20.0),
-                  child: _paragraphs,
+                  child: _paragraphs(),
                 ),
               ],
             ),
@@ -37,7 +37,7 @@ class DtcCodeAccessOldModelsPage extends StatelessWidget {
     );
   }
 
-  get _disclaimer => RichText(
+  _disclaimer() => RichText(
         textAlign: TextAlign.justify,
         text: TextSpan(
             style: TextStyle(color: Colors.black, fontWeight: FontWeight.bold),
@@ -50,7 +50,7 @@ class DtcCodeAccessOldModelsPage extends StatelessWidget {
                 'feedback .'),
       );
 
-  get _paragraphs => RichText(
+  _paragraphs() => RichText(
         textAlign: TextAlign.justify,
         text: TextSpan(
           style: TextStyle(color: Colors.black),

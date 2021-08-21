@@ -75,14 +75,14 @@ class _DashboardPageState extends State<DashboardPage> {
   Widget build(BuildContext context) {
     _gContext = context;
     return Scaffold(
-      drawer: drawr,
+      drawer: _drawr(),
       body: Stack(
-        children: <Widget>[dashBg, content],
+        children: <Widget>[_dashBg(), _content()],
       ),
     );
   }
 
-  get drawr => Drawer(
+  _drawr() => Drawer(
         child: ListView(
           children: <Widget>[
             Text(
@@ -142,7 +142,7 @@ class _DashboardPageState extends State<DashboardPage> {
         ),
       );
 
-  get dashBg => Column(
+  _dashBg() => Column(
         children: <Widget>[
           Expanded(
             child: Container(color: Colors.deepOrange[300]),
@@ -154,17 +154,17 @@ class _DashboardPageState extends State<DashboardPage> {
         ],
       );
 
-  get content => Container(
+  _content() => Container(
         child: Column(
           children: <Widget>[
-            header,
-            bar,
-            grid,
+            _header(),
+            _bar(),
+            _grid(),
           ],
         ),
       );
 
-  get header => ListTile(
+  _header() => ListTile(
         contentPadding: EdgeInsets.only(left: 40, right: 20, top: 30),
         title: Text(
           widget._user == 'admin'
@@ -200,7 +200,7 @@ class _DashboardPageState extends State<DashboardPage> {
               ),
       );
 
-  get bar => (widget._user != 'admin'
+  _bar() => (widget._user != 'admin'
       ? SizedBox()
       : Row(
           mainAxisAlignment: MainAxisAlignment.center,
@@ -228,9 +228,9 @@ class _DashboardPageState extends State<DashboardPage> {
           ],
         ));
 
-  get grid => (widget._user == 'admin' ? gridAdm : gridAssociated);
+  _grid() => (widget._user == 'admin' ? _gridAdm() : _gridAssociated());
 
-  get gridAssociated => Expanded(
+  _gridAssociated() => Expanded(
         child: Container(
           padding: EdgeInsets.only(left: 16, right: 16, bottom: 16),
           child: GridView.count(
@@ -405,7 +405,7 @@ class _DashboardPageState extends State<DashboardPage> {
         ),
       );
 
-  get gridAdm => Expanded(
+  _gridAdm() => Expanded(
         child: Container(
           padding: EdgeInsets.only(left: 16, right: 16, bottom: 16),
           child: ListView.builder(

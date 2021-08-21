@@ -38,14 +38,14 @@ abstract class MotorcycleControllerBase with Store {
   @observable
   Motorcycle motorcycle;
 
-  get init {
-    _initTextFields;
+  init() {
+    _initTextFields();
     formController = FormController(
       model: motorcycle != null ? motorcycle.model : '',
     );
   }
 
-  get _initTextFields {
+  _initTextFields() {
     modelCtrl.text = motorcycle != null ? motorcycle.model : null;
     yearCtrl.text = motorcycle != null ? motorcycle.year : null;
     colorCtrl.text = motorcycle != null ? motorcycle.color : null;

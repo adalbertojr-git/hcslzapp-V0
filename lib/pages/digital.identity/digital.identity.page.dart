@@ -57,8 +57,8 @@ class _DigitalIdentityPageState extends State<DigitalIdentityPage> {
                       );
                     if (snapshot.data.length > 0) {
                       _controller.digitalIdentity = snapshot.data.first;
-                      _controller.init;
-                      return _widgets;
+                      _controller.init();
+                      return _widgets();
                     } else
                       return CenteredMessage(
                         'Identidade Digital não disponível. Consulte suas mensalidades junto à Diretoria.',
@@ -73,7 +73,7 @@ class _DigitalIdentityPageState extends State<DigitalIdentityPage> {
         ),
       );
 
-  get _widgets => Container(
+  _widgets() => Container(
         decoration: BoxDecoration(
           gradient: LinearGradient(
             colors: [Colors.white30, Colors.deepOrange],
@@ -87,7 +87,7 @@ class _DigitalIdentityPageState extends State<DigitalIdentityPage> {
             children: [
               TopBar(),
               Center(
-                child: _photo,
+                child: _photo(),
               ),
               SizedBox(
                 height: 5.0,
@@ -197,7 +197,7 @@ class _DigitalIdentityPageState extends State<DigitalIdentityPage> {
         ),
       );
 
-  get _photo => Container(
+  _photo() => Container(
         height: 250.0,
         width: 250.0,
         padding: EdgeInsets.all(10.0),

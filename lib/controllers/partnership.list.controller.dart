@@ -54,7 +54,7 @@ abstract class PartnershipListControllerBase with Store {
   @action
   onPageChanged(int pos) => currentPage = pos;
 
-  get init {
+  init() {
     partnerships.clear();
     activePartnerships.clear();
   }

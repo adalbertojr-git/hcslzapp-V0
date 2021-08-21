@@ -34,7 +34,7 @@ abstract class AssociatedListControllerBase with Store {
   @observable
   String filter = '';
 
-  get init {
+  init() {
     associateds.clear();
   }
 

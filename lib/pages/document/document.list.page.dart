@@ -34,15 +34,6 @@ class DocumentListPageState extends State<DocumentListPage> {
     );
   }
 
-  void _atualiza(Dependent dependenteRecebido) {
-    if (dependenteRecebido != null) {
-      setState(
-        () {
-          //widget.listDependentes.add(dependenteRecebido);
-        },
-      );
-    }
-  }
 }
 
 class ItemList extends StatelessWidget {

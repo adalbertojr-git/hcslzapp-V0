@@ -15,7 +15,7 @@ abstract class ForgotPasswordControllerBase with Store {
   @observable
   String errorMsg;
 
-  get init {
+  init() {
     formController = FormController(email: '');
   }
 

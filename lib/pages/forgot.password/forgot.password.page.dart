@@ -5,7 +5,6 @@ import 'package:hcslzapp/common/labels.and.hints.dart';
 import 'package:hcslzapp/components/button.dart';
 import 'package:hcslzapp/components/my.text.form.field.dart';
 import 'package:hcslzapp/components/top.bar.dart';
-import 'package:asuka/asuka.dart' as asuka;
 import 'package:hcslzapp/controllers/forgot.password.controller.dart';
 
 class ForgotPasswordPage extends StatefulWidget {
@@ -18,7 +17,7 @@ class _ForgotPasswordPageState extends State<ForgotPasswordPage> {
 
   @override
   void initState() {
-    _controller.init;
+    _controller.init();
     super.initState();
   }
 

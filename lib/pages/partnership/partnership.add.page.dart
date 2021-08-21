@@ -30,7 +30,7 @@ class _PartnershipAddPageState extends State<PartnershipAddPage> {
   void initState() {
     _controller.partnership =
         widget.partnership != null ? widget.partnership : null;
-    _controller.init;
+    _controller.init();
     super.initState();
   }
 
@@ -61,7 +61,7 @@ class _PartnershipAddPageState extends State<PartnershipAddPage> {
                       ),
                       onPressed: _controller.getImageFromGallery,
                     ),
-                    _photo,
+                    _photo(),
                     IconButton(
                       icon: Icon(
                         Icons.add_a_photo,
@@ -180,11 +180,11 @@ class _PartnershipAddPageState extends State<PartnershipAddPage> {
         floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
         floatingActionButton: Button(
           icon: Icons.save,
-          onClick: () => widget.partnership == null ? _save : _update,
+          onClick: () => widget.partnership == null ? _save() : _update(),
         ),
       );
 
-  get _photo => Container(
+  _photo() => Container(
         height: 200.0,
         width: 200.0,
         padding: EdgeInsets.all(10.0),
@@ -215,15 +215,7 @@ class _PartnershipAddPageState extends State<PartnershipAddPage> {
                 ),
       fit: BoxFit.fill);
 
-  DecorationImage _loadPhoto2() => DecorationImage(
-      image: _controller.photoUrl != null
-          ? NetworkImage(_controller.photoUrl)
-          : PhotoImageProvider().getImageProvider(
-              File('assets/imgs/noImage.png'),
-            ),
-      fit: BoxFit.fill);
-
-  get _save async {
+  _save() async {
     if (_controller.hasErrors) {
       asuka.showSnackBar(
         SnackBar(
@@ -254,7 +246,7 @@ class _PartnershipAddPageState extends State<PartnershipAddPage> {
     }
   }
 
-  get _update async {
+  _update() async {
     if (_controller.hasErrors) {
       asuka.showSnackBar(
         SnackBar(

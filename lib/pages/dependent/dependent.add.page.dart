@@ -24,7 +24,7 @@ class _DependentAddPageState extends State<DependentAddPage> {
   @override
   void initState() {
     _controller.dependent = widget.dependent != null ? widget.dependent : null;
-    _controller.init;
+    _controller.init();
     super.initState();
   }
 

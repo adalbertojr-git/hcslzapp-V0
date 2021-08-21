@@ -35,7 +35,7 @@ abstract class PaymentListControllerBase with Store {
   @observable
   String filter = '';
 
-  get init {
+  init() {
     associateds.clear();
   }
 

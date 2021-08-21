@@ -24,7 +24,7 @@ class _MotorcycleAddPageState extends State<MotorcycleAddPage> {
   void initState() {
     _controller.motorcycle =
         widget.motorcycle != null ? widget.motorcycle : null;
-    _controller.init;
+    _controller.init();
     super.initState();
   }
 

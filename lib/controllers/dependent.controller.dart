@@ -46,8 +46,8 @@ abstract class DependentControllerBase with Store {
   @action
   setAssociated() => isAssociated = !isAssociated;
 
-  get init {
-    _initTextFields;
+  init() {
+    _initTextFields();
     currentBloodType =
         dependent != null ? dependent.bloodType : getBloodTypes().first.value;
     isAssociated = (dependent != null
@@ -59,7 +59,7 @@ abstract class DependentControllerBase with Store {
     );
   }
 
-  get _initTextFields {
+  _initTextFields() {
     nameCtrl.text = dependent != null ? dependent.name : null;
     emailCtrl.text = dependent != null ? dependent.email : null;
     phoneCtrl.text = dependent != null ? dependent.phone : null;

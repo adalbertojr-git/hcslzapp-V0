@@ -52,12 +52,12 @@ abstract class DigitalIdentityControllerBase with Store {
   @observable
   String errorMsg;
 
-  get init {
-    _initTextFields;
+  init() {
+    _initTextFields();
     getPhotoFromDevice().then((value) => photoPath = value);
   }
 
-  get _initTextFields {
+  _initTextFields() {
     nameCtrl.text = digitalIdentity.name;
     cnhCtrl.text = digitalIdentity.cnh;
     cpfCtrl.text = digitalIdentity.cpf;

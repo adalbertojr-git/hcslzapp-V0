@@ -30,7 +30,7 @@ abstract class DtcCodeAbbreviationListControllerBase with Store {
   @observable
   String filter = '';
 
-  get init {
+  init() {
     abbreviations.clear();
   }
 

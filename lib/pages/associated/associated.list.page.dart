@@ -55,7 +55,7 @@ class AssociatedListPageState extends State<AssociatedListPage> {
                         _controller.errorMsg,
                       );
                     if (snapshot.data.length > 0) {
-                      _controller.init;
+                      _controller.init();
                       _controller.associateds.addAll(snapshot.data);
                       return _widgets();
                     } else

@@ -24,7 +24,7 @@ class _PaymentListPageState extends State<PaymentListPage> {
   @override
   void initState() {
     //_controller = Provider.of<AssociatedController>(context, listen: false);
-    _controller.init;
+    _controller.init();
     _controller.getFuture().then((value) {
       if (value != null && value.isNotEmpty) {
         _controller.setButtonVisibilty();
@@ -55,7 +55,7 @@ class _PaymentListPageState extends State<PaymentListPage> {
                         _controller.errorMsg,
                       );
                     if (snapshot.data.length > 0) {
-                      _controller.init;
+                      _controller.init();
                       _controller.associateds.addAll(snapshot.data);
                       return _widgets();
                     } else

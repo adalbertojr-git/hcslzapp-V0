@@ -34,7 +34,7 @@ class EventCalendarPageState extends State<EventCalendarPage>
 
   @override
   void initState() {
-    _controller.init;
+    _controller.init();
     _controller.calController = CalendarController();
     _controller.animController = AnimationController(
       vsync: this,
@@ -52,10 +52,6 @@ class EventCalendarPageState extends State<EventCalendarPage>
   }
 
   void _onDaySelected(DateTime day, List events) {
-    _controller.setSelectedEvents(events);
-  }
-
-  void _onDayLongPressed(DateTime day, List events) {
     _controller.setSelectedEvents(events);
   }
 
@@ -352,9 +348,8 @@ class EventCalendarPageState extends State<EventCalendarPage>
                         ),
                         onPressed: () {
                           if (event == null) {
-                            _save;
-                          }
-                          else {
+                            _save();
+                          } else {
                             _update(event, i);
                           }
                           Navigator.pop(context);
@@ -367,7 +362,7 @@ class EventCalendarPageState extends State<EventCalendarPage>
             ));
   }
 
-  get _save {
+  _save() {
     _controller
         .save(_controller.titleCtrl.text,
             _controller.calController.selectedDay.toString().substring(0, 10))

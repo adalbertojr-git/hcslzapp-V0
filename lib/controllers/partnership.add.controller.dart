@@ -65,8 +65,8 @@ abstract class PartnershipAddControllerBase with Store {
   @action
   setStatus() => isActive = !isActive;
 
-  get init {
-    _initTextFields;
+  init() {
+    _initTextFields();
     currentStatus = statusCtrl.text;
     photoUrl = partnership != null ? partnership.photoUrl : null;
     formController = FormController(
@@ -74,7 +74,7 @@ abstract class PartnershipAddControllerBase with Store {
     );
   }
 
-  get _initTextFields {
+  _initTextFields() {
     partnerCtrl.text = partnership != null ? partnership.partner : null;
     phone1Ctrl.text = partnership != null ? partnership.phone1 : null;
     phone2Ctrl.text = partnership != null ? partnership.phone2 : null;

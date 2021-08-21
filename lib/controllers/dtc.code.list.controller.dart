@@ -30,7 +30,7 @@ abstract class DtcCodeListControllerBase with Store {
   @observable
   String filter = '';
 
-  get init {
+  init() {
     codes.clear();
   }
 

@@ -39,7 +39,7 @@ abstract class EventCalendarControllerBase with Store {
   @observable
   CalendarController calController;
 
-  get init {
+  init() {
     findAll().then((value) {
       events = _convertJsonToDateMap(value);
       selectedEvents = events[DateTime.now()] ?? [];

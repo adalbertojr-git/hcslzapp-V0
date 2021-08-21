@@ -68,7 +68,7 @@ class _AssociatedUpdatePageState extends State<AssociatedUpdatePage> {
                       );
                     if (snapshot.data.length > 0) {
                       _controller.associated = snapshot.data.first;
-                      _controller.init;
+                      _controller.init();
                       return _widgets(context);
                     } else
                       return CenteredMessage(
@@ -116,7 +116,7 @@ class _AssociatedUpdatePageState extends State<AssociatedUpdatePage> {
                           onPressed: _controller.getImageFromGallery,
                         )
                       : Container(),
-                  _photo,
+                  _photo(),
                   widget._user != 'admin'
                       ? IconButton(
                           icon: Icon(
@@ -294,11 +294,11 @@ class _AssociatedUpdatePageState extends State<AssociatedUpdatePage> {
                 ],
               ),
               Divider(),
-              _dependentsListWidget,
+              _dependentsListWidget(),
               SizedBox(
                 height: 10.0,
               ),
-              _motorcyclesListWidget,
+              _motorcyclesListWidget(),
               SizedBox(
                 height: 10.0,
               ),
@@ -348,7 +348,7 @@ class _AssociatedUpdatePageState extends State<AssociatedUpdatePage> {
         ),
       );
 
-  get _photo => Container(
+  _photo() => Container(
         height: 200.0,
         width: 200.0,
         padding: EdgeInsets.all(10.0),
@@ -385,7 +385,7 @@ class _AssociatedUpdatePageState extends State<AssociatedUpdatePage> {
                 ),
           fit: BoxFit.fill));
 
-  get _dependentsListWidget => Container(
+  _dependentsListWidget() => Container(
         padding: EdgeInsets.all(10.0),
         decoration: BoxDecoration(
           color: Colors.white12,
@@ -500,7 +500,7 @@ class _AssociatedUpdatePageState extends State<AssociatedUpdatePage> {
         ),
       );
 
-  get _motorcyclesListWidget => Container(
+  _motorcyclesListWidget() => Container(
         padding: EdgeInsets.all(10.0),
         decoration: BoxDecoration(
           color: Colors.white12,
@@ -617,7 +617,7 @@ class _AssociatedUpdatePageState extends State<AssociatedUpdatePage> {
         ),
       );
 
-  get _update async {
+  _update() async {
     if (_controller.hasErrors) {
       asuka.showSnackBar(
         SnackBar(

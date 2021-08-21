@@ -35,7 +35,7 @@ class DtcCodeDashboardPage extends StatelessWidget {
     _gContext = context;
     return Scaffold(
       body: Stack(
-        children: <Widget>[dashBg, content],
+        children: <Widget>[_dashBg(), _content()],
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
       floatingActionButton: Button(
@@ -45,7 +45,7 @@ class DtcCodeDashboardPage extends StatelessWidget {
     );
   }
 
-  get dashBg => Column(
+  _dashBg() => Column(
         children: <Widget>[
           Expanded(
             child: Container(color: Colors.deepOrange[300]),
@@ -58,17 +58,17 @@ class DtcCodeDashboardPage extends StatelessWidget {
         ],
       );
 
-  get content => Container(
+  _content() => Container(
         child: Column(
           children: <Widget>[
-            header,
-            bar,
-            grid,
+            _header(),
+            _bar(),
+            _grid(),
           ],
         ),
       );
 
-  get header => ListTile(
+  _header() => ListTile(
         contentPadding: EdgeInsets.only(left: 40, right: 20, top: 30),
         title: Text(
           'Códigos DTC',
@@ -85,7 +85,7 @@ class DtcCodeDashboardPage extends StatelessWidget {
         ),
       );
 
-  get bar => Row(
+  _bar() => Row(
         mainAxisAlignment: MainAxisAlignment.center,
         children: <Widget>[
           _BarButton(
@@ -117,7 +117,7 @@ class DtcCodeDashboardPage extends StatelessWidget {
         ],
       );
 
-  get grid => Expanded(
+  _grid() => Expanded(
         child: Container(
           padding: EdgeInsets.only(left: 16, right: 16, bottom: 16),
           child: ListView.builder(

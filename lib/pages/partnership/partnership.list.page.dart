@@ -65,7 +65,7 @@ class _PartnershipListPageState extends State<PartnershipListPage> {
                       return CenteredMessage(
                         _controller.errorMsg,
                       );
-                    _controller.init;
+                    _controller.init();
                     _controller.partnerships.addAll(snapshot.data);
                     if (widget._user != 'admin') {
                       _controller.getActivePartnerships;
@@ -94,9 +94,9 @@ class _PartnershipListPageState extends State<PartnershipListPage> {
         ),
       );
 
-  _widgets() => widget._user == 'admin' ? _listAdmin : _listAssociated;
+  _widgets() => widget._user == 'admin' ? _listAdmin() : _listAssociated();
 
-  get _listAdmin => Container(
+  _listAdmin() => Container(
         decoration: BoxDecoration(
           gradient: LinearGradient(
             colors: [Colors.white30, Colors.deepOrange],
@@ -200,7 +200,7 @@ class _PartnershipListPageState extends State<PartnershipListPage> {
         ),
       );
 
-  get _listAssociated => Container(
+  _listAssociated() => Container(
         padding: EdgeInsets.fromLTRB(5.0, 0.0, 5.0, 0.0),
         decoration: BoxDecoration(
           gradient: LinearGradient(
