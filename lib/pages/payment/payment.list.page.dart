@@ -142,7 +142,7 @@ class _PaymentListPageState extends State<PaymentListPage> {
                                   MaterialPageRoute(
                                       builder: (context) => PaymentAssociatedPage(
                                           widget._user,
-                                          _controller.listFiltered[i].id)),
+                                          _controller.listFiltered[i])),
                                 );
                               },
                             ),

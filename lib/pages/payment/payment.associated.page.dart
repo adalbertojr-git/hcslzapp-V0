@@ -6,15 +6,16 @@ import 'package:hcslzapp/components/progress.dart';
 import 'package:hcslzapp/components/top.bar.dart';
 import 'package:hcslzapp/components/transaction.auth.dialog.dart';
 import 'package:hcslzapp/controllers/payment.associated.controller.dart';
+import 'package:hcslzapp/models/associated.dart';
 import 'package:hcslzapp/models/payment.dart';
 import 'package:hcslzapp/pages/payment/payment.add.page.dart';
 import 'package:asuka/asuka.dart' as asuka;
 
 class PaymentAssociatedPage extends StatefulWidget {
-  final int _associatedId;
   final String _user;
+  final Associated _associated;
 
-  const PaymentAssociatedPage(this._user, this._associatedId);
+  const PaymentAssociatedPage(this._user, this._associated);
 
   @override
   _PaymentAssociatedPageState createState() => _PaymentAssociatedPageState();
@@ -25,7 +26,7 @@ class _PaymentAssociatedPageState extends State<PaymentAssociatedPage> {
 
   @override
   void initState() {
-    _controller.getFuture(widget._associatedId).then((value) {
+    _controller.getFuture(widget._associated.id).then((value) {
       if (value != null) {
         _controller.setButtonVisibilty();
       }
@@ -37,7 +38,7 @@ class _PaymentAssociatedPageState extends State<PaymentAssociatedPage> {
   @override
   Widget build(BuildContext context) => Scaffold(
         body: FutureBuilder<List<Payment>>(
-          future: _controller.getFuture(widget._associatedId),
+          future: _controller.getFuture(widget._associated.id),
           builder: (context, snapshot) {
             switch (snapshot.connectionState) {
               case ConnectionState.none:
@@ -87,10 +88,7 @@ class _PaymentAssociatedPageState extends State<PaymentAssociatedPage> {
       context,
       MaterialPageRoute(
         builder: (_) => PaymentAddPage(
-          widget._user,
-          null,
-          _controller.loadYears(),
-        ),
+            widget._user, null, _controller.loadYears(), widget._associated),
       ),
     );
     if (payment != null) {
@@ -138,6 +136,8 @@ class _PaymentAssociatedPageState extends State<PaymentAssociatedPage> {
                             fontWeight: FontWeight.bold,
                           ),
                         ),
+                        subtitle: Text('Total pago: R\$ ' +
+                            _controller.getTotal(_controller.payments[i].year).toString()),
                         leading: CircleAvatar(
                           child: Icon(Icons.calendar_today),
                           backgroundColor: Colors.white,
@@ -166,7 +166,8 @@ class _PaymentAssociatedPageState extends State<PaymentAssociatedPage> {
                                                 PaymentAddPage(
                                                     widget._user,
                                                     _controller.payments[i],
-                                                    _controller.loadYears())),
+                                                    _controller.loadYears(),
+                                                    widget._associated)),
                                       );
                                     },
                                   ),
@@ -183,7 +184,8 @@ class _PaymentAssociatedPageState extends State<PaymentAssociatedPage> {
                                         builder: (context) => PaymentAddPage(
                                             widget._user,
                                             _controller.payments[i],
-                                            _controller.loadYears())),
+                                            _controller.loadYears(),
+                                            widget._associated)),
                                   );
                                 },
                               ),

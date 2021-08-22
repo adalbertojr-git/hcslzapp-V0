@@ -264,7 +264,7 @@ class _DashboardPageState extends State<DashboardPage> {
                     _gContext,
                     MaterialPageRoute(
                         builder: (gContext) => PaymentAssociatedPage(
-                            widget._user, widget._associated.id)),
+                            widget._user, widget._associated)),
                   );
                 },
               ),

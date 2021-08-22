@@ -5,6 +5,7 @@ import 'package:hcslzapp/components/button.dart';
 import 'package:hcslzapp/components/my.text.form.field.dart';
 import 'package:hcslzapp/components/top.bar.dart';
 import 'package:hcslzapp/controllers/payment.add.controller.dart';
+import 'package:hcslzapp/models/associated.dart';
 import 'package:hcslzapp/models/payment.dart';
 import 'package:mask_text_input_formatter/mask_text_input_formatter.dart';
 import 'package:asuka/asuka.dart' as asuka;
@@ -13,8 +14,9 @@ class PaymentAddPage extends StatefulWidget {
   final Payment _payment;
   final List<String> _years;
   final String _user;
+  final Associated _associated;
 
-  PaymentAddPage(this._user, this._payment, this._years);
+  PaymentAddPage(this._user, this._payment, this._years, this._associated);
 
   @override
   _PaymentAddAddState createState() => _PaymentAddAddState();
@@ -26,6 +28,8 @@ class _PaymentAddAddState extends State<PaymentAddPage> {
   @override
   void initState() {
     _controller.payment = widget._payment != null ? widget._payment : null;
+    _controller.associated =
+        widget._associated != null ? widget._associated : null;
     _controller.init();
     _controller.setYears(widget._years);
     super.initState();
