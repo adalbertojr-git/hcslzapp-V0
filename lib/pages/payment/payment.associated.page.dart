@@ -137,7 +137,9 @@ class _PaymentAssociatedPageState extends State<PaymentAssociatedPage> {
                           ),
                         ),
                         subtitle: Text('Total pago: R\$ ' +
-                            _controller.getTotal(_controller.payments[i].year).toString()),
+                            _controller
+                                .getTotal(_controller.payments[i].year)
+                                .toString()),
                         leading: CircleAvatar(
                           child: Icon(Icons.calendar_today),
                           backgroundColor: Colors.white,

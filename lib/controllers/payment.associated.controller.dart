@@ -82,13 +82,13 @@ abstract class PaymentAssociatedControllerBase with Store {
   }
 
   double getTotal(String year) {
-    double value = 0;
+    double total = 0;
     var list = payments.where((element) => element.year == year);
     list.forEach((element) {
       element.paymentMonths.forEach((e) {
-        value = value + e.value;
+        total = total + e.value;
       });
     });
-    return value;
+    return total;
   }
 }
