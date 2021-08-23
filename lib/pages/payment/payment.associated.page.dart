@@ -58,6 +58,7 @@ class _PaymentAssociatedPageState extends State<PaymentAssociatedPage> {
                   if (_controller.payments.isEmpty) {
                     if (snapshot.data.length > 0) {
                       _controller.payments.addAll(snapshot.data);
+                      _controller.payments.sort((a, b) => a.year.compareTo(b.year));
                     }
                   }
                   return _buildListView();
@@ -93,8 +94,6 @@ class _PaymentAssociatedPageState extends State<PaymentAssociatedPage> {
     );
     if (payment != null) {
       _controller.setPayments(payment);
-      print('Button:');
-      print((_controller.payments.length));
     }
   }
 
@@ -331,7 +330,6 @@ class _PaymentAssociatedPageState extends State<PaymentAssociatedPage> {
             ),
           );
           _controller.payments.removeAt(i);
-          print(_controller.payments.length);
         } else {
           asuka.showSnackBar(
             SnackBar(
