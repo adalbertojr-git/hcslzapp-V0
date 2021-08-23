@@ -58,7 +58,9 @@ class _PaymentAssociatedPageState extends State<PaymentAssociatedPage> {
                   if (_controller.payments.isEmpty) {
                     if (snapshot.data.length > 0) {
                       _controller.payments.addAll(snapshot.data);
-                      _controller.payments.sort((a, b) => a.year.compareTo(b.year));
+                      _controller.payments.sort(
+                        (a, b) => b.year.compareTo(a.year),
+                      );
                     }
                   }
                   return _buildListView();
