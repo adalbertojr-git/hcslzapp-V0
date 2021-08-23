@@ -57,6 +57,9 @@ class AssociatedListPageState extends State<AssociatedListPage> {
                     if (snapshot.data.length > 0) {
                       _controller.init();
                       _controller.associateds.addAll(snapshot.data);
+                      _controller.associateds.sort(
+                        (a, b) => a.name.compareTo(b.name),
+                      );
                       return _widgets();
                     } else
                       return CenteredMessage(
