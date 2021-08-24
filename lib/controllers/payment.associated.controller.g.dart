@@ -101,6 +101,21 @@ mixin _$PaymentAssociatedController on PaymentAssociatedControllerBase, Store {
     });
   }
 
+  final _$totalAtom = Atom(name: 'PaymentAssociatedControllerBase.total');
+
+  @override
+  double get total {
+    _$totalAtom.reportRead();
+    return super.total;
+  }
+
+  @override
+  set total(double value) {
+    _$totalAtom.reportWrite(value, super.total, () {
+      super.total = value;
+    });
+  }
+
   final _$PaymentAssociatedControllerBaseActionController =
       ActionController(name: 'PaymentAssociatedControllerBase');
 
@@ -162,13 +177,25 @@ mixin _$PaymentAssociatedController on PaymentAssociatedControllerBase, Store {
   }
 
   @override
+  double getTotal(String year) {
+    final _$actionInfo = _$PaymentAssociatedControllerBaseActionController
+        .startAction(name: 'PaymentAssociatedControllerBase.getTotal');
+    try {
+      return super.getTotal(year);
+    } finally {
+      _$PaymentAssociatedControllerBaseActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
   String toString() {
     return '''
 isHidedButton: ${isHidedButton},
 payments: ${payments},
 payment: ${payment},
 errorMsg: ${errorMsg},
-future: ${future}
+future: ${future},
+total: ${total}
     ''';
   }
 }

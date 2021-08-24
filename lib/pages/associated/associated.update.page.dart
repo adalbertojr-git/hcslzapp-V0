@@ -85,7 +85,7 @@ class _AssociatedUpdatePageState extends State<AssociatedUpdatePage> {
               FloatingActionButtonLocation.centerFloat,
           floatingActionButton: _controller.isHidedButton
               ? null
-              : Button(icon: Icons.save, onClick: () => _update),
+              : Button(icon: Icons.save, onClick: () => _update()),
         ),
       );
 
@@ -455,7 +455,7 @@ class _AssociatedUpdatePageState extends State<AssociatedUpdatePage> {
                                 (dependent) {
                                   if (dependent != null) {
                                     _controller.dependents.removeAt(i);
-                                    _controller.dependents.add(dependent);
+                                    _controller.dependents.insert(i, dependent);
                                   }
                                 },
                               );
@@ -570,7 +570,7 @@ class _AssociatedUpdatePageState extends State<AssociatedUpdatePage> {
                                 (motorcycle) {
                                   if (motorcycle != null) {
                                     _controller.motorcycles.removeAt(i);
-                                    _controller.motorcycles.add(motorcycle);
+                                    _controller.motorcycles.insert(i, motorcycle);
                                   }
                                 },
                               );

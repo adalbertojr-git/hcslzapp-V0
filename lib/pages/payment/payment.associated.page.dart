@@ -162,7 +162,7 @@ class _PaymentAssociatedPageState extends State<PaymentAssociatedPage> {
                                       Icons.arrow_forward,
                                     ),
                                     onTap: () {
-                                      Navigator.push(
+                                      final Future<Payment> future =  Navigator.push(
                                         context,
                                         MaterialPageRoute(
                                             builder: (context) =>
@@ -171,6 +171,14 @@ class _PaymentAssociatedPageState extends State<PaymentAssociatedPage> {
                                                     _controller.payments[i],
                                                     _controller.loadYears(),
                                                     widget._associated)),
+                                      );
+                                      future.then(
+                                            (payment) {
+                                          if (payment != null) {
+                                            _controller.payments.removeAt(i);
+                                            _controller.payments.insert(i, payment);
+                                          }
+                                        },
                                       );
                                     },
                                   ),

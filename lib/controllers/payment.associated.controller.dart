@@ -27,6 +27,9 @@ abstract class PaymentAssociatedControllerBase with Store {
   @observable
   Future<List<Payment>> future;
 
+  @observable
+  double total;
+
   init() {
     payments.clear();
   }
@@ -81,8 +84,9 @@ abstract class PaymentAssociatedControllerBase with Store {
     return _months[i];
   }
 
+  @action
   double getTotal(String year) {
-    double total = 0;
+    this.total = 0;
     var list = payments.where((element) => element.year == year);
     list.forEach((element) {
       element.paymentMonths.forEach((e) {
