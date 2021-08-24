@@ -75,4 +75,23 @@ class AccessRequestRepo {
       throw HttpException(getMessage(response.statusCode));
     }
   }
+
+  Future<Response> deleteById(AccessRequest accessRequest) async {
+    final String encodedJson = jsonEncode(
+      accessRequest.toJson(),
+    );
+    final Response response = await client.delete(
+      mainUrl + _accReqUrl + "/" + accessRequest.id.toString(),
+      headers: {
+        'Content-type': 'application/json',
+      },
+    ).timeout(
+      Duration(seconds: 10),
+    );
+    if (response.statusCode == 204) {
+      return response;
+    } else {
+      throw HttpException(getMessage(response.statusCode));
+    }
+  }
 }

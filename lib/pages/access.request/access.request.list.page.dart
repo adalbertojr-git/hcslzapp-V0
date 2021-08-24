@@ -4,6 +4,7 @@ import 'package:hcslzapp/components/button.dart';
 import 'package:hcslzapp/components/centered.message.dart';
 import 'package:hcslzapp/components/progress.dart';
 import 'package:hcslzapp/components/top.bar.dart';
+import 'package:hcslzapp/components/transaction.auth.dialog.dart';
 import 'package:hcslzapp/controllers/access.request.controller.dart';
 import 'package:hcslzapp/models/access.request.dart';
 import 'package:asuka/asuka.dart' as asuka;
@@ -120,7 +121,8 @@ class AccessRequestListPageState extends State<AccessRequestListPage> {
                               Icons.delete,
                             ),
                             onTap: () {
-                              _controller.accessRequests.removeAt(i);
+                              _delete(i);
+                              //_controller.accessRequests.removeAt(i);
                             },
                           ),
                         ],
@@ -134,6 +136,33 @@ class AccessRequestListPageState extends State<AccessRequestListPage> {
           ],
         ),
       );
+
+  _delete(int i) async {
+    var response = await showDialog(
+        context: context,
+        builder: (context) {
+          return TransactionAuthDialog(
+              msg: 'Deseja excluir o registro selecionado?');
+        });
+    if (response == true) {
+      _controller.deleteById(_controller.accessRequests[i]).then((value) {
+        if (value != null) {
+          asuka.showSnackBar(
+            SnackBar(
+              content: Text('Requisiçao de Acesso excluída com sucesso.'),
+            ),
+          );
+          _controller.accessRequests.removeAt(i);
+        } else {
+          asuka.showSnackBar(
+            SnackBar(
+              content: Text(_controller.errorMsg),
+            ),
+          );
+        }
+      });
+    }
+  }
 
   _check() {
     _controller.check().then(

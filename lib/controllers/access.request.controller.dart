@@ -87,6 +87,13 @@ abstract class AccessRequestControllerBase with Store {
       }, test: (e) => e is Exception);
 
   @action
+  Future deleteById(AccessRequest accessRequest) =>
+      ObservableFuture(_accessRequestRepo.deleteById(accessRequest).then((value) => value))
+          .catchError((e) {
+        errorMsg = "${e.message}";
+      }, test: (e) => e is Exception);
+
+  @action
   bool setButtonVisibilty() => isHidedButton = !isHidedButton;
 
   Future<List<AccessRequest>> getFuture() => future = findAll();

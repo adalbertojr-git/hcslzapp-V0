@@ -161,25 +161,4 @@ class AssociatedListPageState extends State<AssociatedListPage> {
           ],
         ),
       );
-/*
-  get _check {
-    _controller.check().then(
-          (value) {
-        if (value != null) {
-          asuka.showSnackBar(
-            SnackBar(
-              content: Text('Requisições de acesso autorizadas com sucesso.'),
-            ),
-          );
-          Navigator.of(context).pop();
-        } else {
-          asuka.showSnackBar(
-            SnackBar(
-              content: Text(_controller.errorMsg),
-            ),
-          );
-        }
-      },
-    );
-  }*/
 }
