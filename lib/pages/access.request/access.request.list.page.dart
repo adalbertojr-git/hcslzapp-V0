@@ -3,6 +3,7 @@ import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:hcslzapp/components/button.dart';
 import 'package:hcslzapp/components/centered.message.dart';
 import 'package:hcslzapp/components/progress.dart';
+import 'package:hcslzapp/components/top.bar.dart';
 import 'package:hcslzapp/controllers/access.request.controller.dart';
 import 'package:hcslzapp/models/access.request.dart';
 import 'package:asuka/asuka.dart' as asuka;
@@ -51,6 +52,9 @@ class AccessRequestListPageState extends State<AccessRequestListPage> {
                     if (snapshot.data.length > 0) {
                       _controller.init();
                       _controller.accessRequests.addAll(snapshot.data);
+                      _controller.accessRequests.sort(
+                        (a, b) => a.name.compareTo(b.name),
+                      );
                       return _widgets();
                     } else
                       return CenteredMessage(
@@ -80,49 +84,54 @@ class AccessRequestListPageState extends State<AccessRequestListPage> {
           ),
         ),
         height: MediaQuery.of(context).size.height,
-        child: Observer(
-          builder: (_) => ListView.separated(
-            shrinkWrap: true,
-            itemCount: _controller.accessRequests.length,
-            itemBuilder: (_, int i) {
-              return Container(
-                decoration: BoxDecoration(
-                  color: Colors.white30,
-                  shape: BoxShape.rectangle,
-                  borderRadius: BorderRadius.circular(8.0),
-                  boxShadow: <BoxShadow>[
-                    BoxShadow(
-                      color: Colors.black12,
-                      blurRadius: 10.0,
-                      offset: Offset(0.0, 5.0),
-                    ),
-                  ],
-                ),
-                child: ListTile(
-                  title: Text(_controller.accessRequests[i].name),
-                  subtitle: Text(_controller.accessRequests[i].email),
-                  leading: CircleAvatar(
-                    child: Icon(Icons.person),
-                    backgroundColor: Colors.white,
-                  ),
-                  trailing: Wrap(
-                    spacing: 10, // space between two icons
-                    children: <Widget>[
-                      GestureDetector(
-                        child: Icon(
-                          Icons.delete,
+        child: Column(
+          children: [
+            TopBar(),
+            Observer(
+              builder: (_) => ListView.separated(
+                shrinkWrap: true,
+                itemCount: _controller.accessRequests.length,
+                itemBuilder: (_, int i) {
+                  return Container(
+                    decoration: BoxDecoration(
+                      color: Colors.white30,
+                      shape: BoxShape.rectangle,
+                      borderRadius: BorderRadius.circular(8.0),
+                      boxShadow: <BoxShadow>[
+                        BoxShadow(
+                          color: Colors.black12,
+                          blurRadius: 10.0,
+                          offset: Offset(0.0, 5.0),
                         ),
-                        onTap: () {
-                          _controller.accessRequests.removeAt(i);
-                        },
+                      ],
+                    ),
+                    child: ListTile(
+                      title: Text(_controller.accessRequests[i].name),
+                      subtitle: Text(_controller.accessRequests[i].email),
+                      leading: CircleAvatar(
+                        child: Icon(Icons.person),
+                        backgroundColor: Colors.white,
                       ),
-                    ],
-                  ),
-                ),
-              );
-            },
-            separatorBuilder: (_, int index) => const Divider(),
-          ),
+                      trailing: Wrap(
+                        spacing: 10, // space between two icons
+                        children: <Widget>[
+                          GestureDetector(
+                            child: Icon(
+                              Icons.delete,
+                            ),
+                            onTap: () {
+                              _controller.accessRequests.removeAt(i);
+                            },
+                          ),
+                        ],
+                      ),
+                    ),
+                  );
+                },
+                separatorBuilder: (_, int index) => const Divider(),
+              ),
+            ),
+          ],
         ),
       );
 
