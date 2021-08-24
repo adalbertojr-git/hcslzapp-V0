@@ -179,7 +179,7 @@ class _DigitalIdentityPageState extends State<DigitalIdentityPage> {
                           style: TextStyle(fontSize: 10.0, fontWeight: FontWeight.bold),
                         ),
                       ),
-                      SizedBox(
+/*                      SizedBox(
                         height: 5.0,
                       ),
                       Center(
@@ -187,7 +187,7 @@ class _DigitalIdentityPageState extends State<DigitalIdentityPage> {
                           'Válida até ${_controller.dueDateCtrl.text}',
                           style: TextStyle(fontSize: 10.0, fontWeight: FontWeight.bold),
                         ),
-                      ),
+                      ),*/
                     ],
                   ),
                 ],
