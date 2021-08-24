@@ -167,7 +167,7 @@ class _PartnershipListPageState extends State<PartnershipListPage> {
                                 },
                               ),*/
                               GestureDetector(
-                                  child: Icon(Icons.edit),
+                                  child: Icon(Icons.arrow_forward),
                                   onTap: () {
                                     final Future<Partnership> future =
                                         Navigator.push(

@@ -159,7 +159,7 @@ class _PaymentAssociatedPageState extends State<PaymentAssociatedPage> {
                                   ),
                                   GestureDetector(
                                     child: Icon(
-                                      Icons.edit,
+                                      Icons.arrow_forward,
                                     ),
                                     onTap: () {
                                       Navigator.push(
