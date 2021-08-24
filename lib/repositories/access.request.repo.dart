@@ -53,7 +53,7 @@ class AccessRequestRepo {
     }
   }
 
-  Future<AccessRequest> check(List<AccessRequest> accessRequests) async {
+  Future<Response> check(List<AccessRequest> accessRequests) async {
     final String encodedJson = jsonEncode(
       accessRequests,
     );
@@ -70,9 +70,7 @@ class AccessRequestRepo {
           Duration(seconds: 10),
         );
     if (response.statusCode == 200) {
-      return AccessRequest.fromJson(
-        jsonDecode(response.body),
-      );
+      return response;
     } else {
       throw HttpException(getMessage(response.statusCode));
     }

@@ -80,7 +80,7 @@ abstract class AccessRequestControllerBase with Store {
       }, test: (e) => e is Exception);
 
   @action
-  Future check() => checkFuture = ObservableFuture(_accessRequestRepo
+  Future check() => ObservableFuture(_accessRequestRepo
           .check(List<AccessRequest>.from(accessRequests))
           .then((value) => value)).catchError((e) {
         errorMsg = "${e.message}";
