@@ -17,6 +17,8 @@ import 'package:hcslzapp/pages/payment/payment.associated.page.dart';
 import 'package:hcslzapp/pages/partnership/partnership.list.page.dart';
 import 'dart:io';
 
+import 'package:path/path.dart';
+
 // ignore: must_be_immutable
 class DashboardPage extends StatefulWidget {
   final String _user;
@@ -75,15 +77,17 @@ class _DashboardPageState extends State<DashboardPage> {
   Widget build(BuildContext context) {
     _gContext = context;
     return Scaffold(
-      drawer: _drawr(),
-      body: Stack(
-        children: <Widget>[_dashBg(), _content()],
-      ),
-    );
+        body: Stack(
+          children: <Widget>[_dashBg(), _content()],
+        ),
+        drawer: _drawr(),
+        drawerEdgeDragWidth: 50,
+        drawerScrimColor: Colors.black87);
   }
 
   _drawr() => Drawer(
         child: ListView(
+          padding: EdgeInsets.zero,
           children: <Widget>[
             Text(
               'Ladies Harley Club',
@@ -107,19 +111,10 @@ class _DashboardPageState extends State<DashboardPage> {
                 ),
               ),
             ),
-            ListTile(
-              leading: Icon(Icons.info),
-              title: Text("Sobre o HCSlz App"),
-              onTap: () {
-                Navigator.pop(_gContext);
-              },
-            ),
             Row(
+              mainAxisAlignment: MainAxisAlignment.end,
               children: [
-                SizedBox(
-                  width: 20.0,
-                ),
-                Text('Tema Escuro:'),
+                Text('Dark:'),
                 Container(
                   child: Switch(
                     activeColor: Colors.orangeAccent,
@@ -133,6 +128,14 @@ class _DashboardPageState extends State<DashboardPage> {
                 ),
               ],
             ),
+            _buildDrawerMenu(),
+            ListTile(
+              leading: Icon(Icons.info),
+              title: Text("Sobre o HCSlz App"),
+              onTap: () {
+                Navigator.pop(_gContext);
+              },
+            ),
             ListTile(
               leading: Icon(Icons.power_settings_new),
               title: Text("Logout"),
@@ -142,6 +145,125 @@ class _DashboardPageState extends State<DashboardPage> {
             ),
           ],
         ),
+      );
+
+  _buildDrawerMenu() => (widget._user == 'admin' ? _menuAdm() : _menuAssociated());
+
+  _menuAdm() => Column(
+    children: <Widget>[
+      ListTile(
+        leading: Icon(Icons.arrow_forward_ios),
+        title: Text("Acesso"),
+        onTap: () {
+          Navigator.pop(_gContext);
+        },
+      ),
+      ListTile(
+        leading: Icon(Icons.arrow_forward_ios),
+        title: Text("Documentos"),
+        onTap: () {
+          Navigator.pop(_gContext);
+        },
+      ),
+      ListTile(
+        leading: Icon(Icons.arrow_forward_ios),
+        title: Text("Associados"),
+        onTap: () {
+          Navigator.pop(_gContext);
+        },
+      ),
+      ListTile(
+        leading: Icon(Icons.arrow_forward_ios),
+        title: Text("Financeiro"),
+        onTap: () {
+          Navigator.pop(_gContext);
+        },
+      ),
+      ListTile(
+        leading: Icon(Icons.arrow_forward_ios),
+        title: Text("Eventos"),
+        onTap: () {
+          Navigator.pop(_gContext);
+        },
+      ),
+      ListTile(
+        leading: Icon(Icons.arrow_forward_ios),
+        title: Text("Parcerias"),
+        onTap: () {
+          Navigator.pop(_gContext);
+        },
+      ),
+      ListTile(
+        leading: Icon(Icons.arrow_forward_ios),
+        title: Text("Boutique"),
+        onTap: () {
+          Navigator.pop(_gContext);
+        },
+      ),
+    ],
+  );
+
+  _menuAssociated() => Column(
+        children: <Widget>[
+          ListTile(
+            leading: Icon(Icons.arrow_forward_ios),
+            title: Text("Associado"),
+            onTap: () async {
+              var photoPath = await Navigator.push(
+                _gContext,
+                MaterialPageRoute(
+                    builder: (gContext) => AssociatedUpdatePage(
+                        widget._user, widget._associated.id)),
+              );
+              if (photoPath != null) {
+                _controller.setPhoto(photoPath);
+              }
+              Navigator.pop(_gContext);
+            },
+          ),
+          ListTile(
+            leading: Icon(Icons.arrow_forward_ios),
+            title: Text("Financeiro"),
+            onTap: () {
+              Navigator.pop(_gContext);
+            },
+          ),
+          ListTile(
+            leading: Icon(Icons.arrow_forward_ios),
+            title: Text("Carteira Harley Club"),
+            onTap: () {
+              Navigator.pop(_gContext);
+            },
+          ),
+          ListTile(
+            leading: Icon(Icons.arrow_forward_ios),
+            title: Text("Parcerias"),
+            onTap: () {
+              Navigator.pop(_gContext);
+            },
+          ),
+          ListTile(
+            leading: Icon(Icons.arrow_forward_ios),
+            title: Text("Eventos"),
+            onTap: () {
+              Navigator.pop(_gContext);
+            },
+          ),
+          ListTile(
+            leading: Icon(Icons.arrow_forward_ios),
+            title: Text("Códigos DTC"),
+            onTap: () {
+              Navigator.pop(_gContext);
+            },
+          ),
+          ListTile(
+            leading: Icon(Icons.arrow_forward_ios),
+            title: Text("Boutique"),
+            onTap: () {
+              Navigator.pop(_gContext);
+            },
+          ),
+        ],
       );
 
   _dashBg() => Column(
@@ -167,7 +289,7 @@ class _DashboardPageState extends State<DashboardPage> {
       );
 
   _header() => ListTile(
-        contentPadding: EdgeInsets.only(left: 40, right: 20, top: 30),
+        contentPadding: EdgeInsets.only(left: 10, right: 20, top: 30),
         title: Text(
           widget._user == 'admin'
               ? 'Olá, Administrador'
