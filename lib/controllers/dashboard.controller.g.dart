@@ -9,33 +9,33 @@ part of 'dashboard.controller.dart';
 // ignore_for_file: non_constant_identifier_names, unnecessary_brace_in_string_interps, unnecessary_lambdas, prefer_expression_function_bodies, lines_longer_than_80_chars, avoid_as, avoid_annotating_with_dynamic
 
 mixin _$DashboardController on DashboardControllerBase, Store {
-  final _$photoPathAtom = Atom(name: 'DashboardControllerBase.photoPath');
+  final _$photoUrlAtom = Atom(name: 'DashboardControllerBase.photoUrl');
 
   @override
-  String get photoPath {
-    _$photoPathAtom.reportRead();
-    return super.photoPath;
+  String get photoUrl {
+    _$photoUrlAtom.reportRead();
+    return super.photoUrl;
   }
 
   @override
-  set photoPath(String value) {
-    _$photoPathAtom.reportWrite(value, super.photoPath, () {
-      super.photoPath = value;
+  set photoUrl(String value) {
+    _$photoUrlAtom.reportWrite(value, super.photoUrl, () {
+      super.photoUrl = value;
     });
   }
 
-  final _$errorMsgAtom = Atom(name: 'DashboardControllerBase.errorMsg');
+  final _$associatedAtom = Atom(name: 'DashboardControllerBase.associated');
 
   @override
-  String get errorMsg {
-    _$errorMsgAtom.reportRead();
-    return super.errorMsg;
+  Associated get associated {
+    _$associatedAtom.reportRead();
+    return super.associated;
   }
 
   @override
-  set errorMsg(String value) {
-    _$errorMsgAtom.reportWrite(value, super.errorMsg, () {
-      super.errorMsg = value;
+  set associated(Associated value) {
+    _$associatedAtom.reportWrite(value, super.associated, () {
+      super.associated = value;
     });
   }
 
@@ -56,8 +56,8 @@ mixin _$DashboardController on DashboardControllerBase, Store {
   @override
   String toString() {
     return '''
-photoPath: ${photoPath},
-errorMsg: ${errorMsg}
+photoUrl: ${photoUrl},
+associated: ${associated}
     ''';
   }
 }

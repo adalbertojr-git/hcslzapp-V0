@@ -63,6 +63,7 @@ class _DashboardPageState extends State<DashboardPage> {
   @override
   void initState() {
     //_controller = Provider.of<AssociatedController>(context, listen: false);
+    _controller.associated = widget._associated;
     _controller.init();
     _listAdmWidgets = [
       AssociatedListPage(widget._user),
@@ -217,7 +218,8 @@ class _DashboardPageState extends State<DashboardPage> {
                         widget._user, widget._associated.id)),
               );
               if (photoPath != null) {
-                _controller.setPhoto(photoPath);
+                //_controller.setPhoto(photoPath);
+
               }
               Navigator.pop(_gContext);
             },
@@ -317,8 +319,8 @@ class _DashboardPageState extends State<DashboardPage> {
                           File('assets/imgs/noImage.png'),
                         ),*/
 
-                backgroundImage: widget._associated.photoUrl != null
-                        ? NetworkImage(widget._associated.photoUrl)
+                backgroundImage: _controller.photoUrl != null
+                        ? NetworkImage(_controller.photoUrl)
                         : PhotoImageProvider().getImageProvider(
                       File('assets/imgs/noImage.png'),
                     ),
@@ -375,14 +377,14 @@ class _DashboardPageState extends State<DashboardPage> {
                 image: "assets/imgs/user.png",
                 context: _gContext,
                 onClick: () async {
-                  var photoPath = await Navigator.push(
+                  var photoUrl = await Navigator.push(
                     _gContext,
                     MaterialPageRoute(
                         builder: (gContext) => AssociatedUpdatePage(
                             widget._user, widget._associated.id)),
                   );
-                  if (photoPath != null) {
-                    _controller.setPhoto(photoPath);
+                  if (photoUrl != null) {
+                    _controller.setPhoto(photoUrl);
                   }
                 },
               ),

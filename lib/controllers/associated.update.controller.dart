@@ -104,7 +104,8 @@ abstract class AssociatedUpdateControllerBase with Store {
       name: associated.name,
       email: associated.email,
     );
-    photoPath = await _getPhotoFromDevice();
+    //photoPath = await _getPhotoFromDevice();
+    //photoPath = photoUrl;
   }
 
   _initLists() {
@@ -169,7 +170,7 @@ abstract class AssociatedUpdateControllerBase with Store {
     associated.motorcycles = List<Motorcycle>.from(motorcycles);
     if (photo != null) {
       //se houve alteração de foto
-      _savePhoto();
+      //_savePhoto();
       await _uploadPhoto().then((value) => associated.photoUrl = value);
     }
     return associated;
@@ -225,13 +226,13 @@ abstract class AssociatedUpdateControllerBase with Store {
     }
   }
 
-  Future<String> _getPhotoFromDevice() async {
+/*  Future<String> _getPhotoFromDevice() async {
     return await Glutton.vomit("photoPath");
   }
 
   Future _savePhoto() async {
     await Glutton.eat("photoPath", photoPath);
-  }
+  }*/
 
   Future<String> _uploadPhoto() async {
     FirebaseStorage storage = FirebaseStorage.instance;

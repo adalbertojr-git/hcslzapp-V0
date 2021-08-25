@@ -1,3 +1,6 @@
+import 'dart:io';
+
+import 'package:asuka/asuka.dart' as asuka;
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:hcslzapp/common/labels.and.hints.dart';
@@ -18,8 +21,6 @@ import 'package:hcslzapp/models/motorcycle.dart';
 import 'package:hcslzapp/pages/dependent/dependent.add.page.dart';
 import 'package:hcslzapp/pages/motorcycle/motorcycle.add.page.dart';
 import 'package:mask_text_input_formatter/mask_text_input_formatter.dart';
-import 'package:asuka/asuka.dart' as asuka;
-import 'dart:io';
 
 class AssociatedUpdatePage extends StatefulWidget {
   final int _associatedId;
@@ -331,8 +332,7 @@ class _AssociatedUpdatePageState extends State<AssociatedUpdatePage> {
                             ),
                             value: _controller.currentStatus,
                             items: getStatus(),
-                            onChanged:
-                                _controller.changedStatusDropDownItem,
+                            onChanged: _controller.changedStatusDropDownItem,
                           ),
                         ),
                       ),
@@ -368,30 +368,24 @@ class _AssociatedUpdatePageState extends State<AssociatedUpdatePage> {
       );
 
   DecorationImage _loadPhoto() => DecorationImage(
-      image: _controller.associated.photoUrl != null
-          ? NetworkImage(_controller.associated.photoUrl)
-          : PhotoImageProvider().getImageProvider(
-        File('assets/imgs/noImage.png'),
-      ),
+      image: _controller.photoPath != null
+          ? PhotoImageProvider().getImageProvider(
+              File(_controller.photoPath),
+            )
+          : _controller.photoUrl != null
+              ? NetworkImage(_controller.photoUrl)
+              : PhotoImageProvider().getImageProvider(
+                  File('assets/imgs/noImage.png'),
+                ),
       fit: BoxFit.fill);
 
-/*  DecorationImage _loadPhoto() => (widget._user == 'admin'
-      ? DecorationImage(
-          image: _controller.associated.photoUrl != null
-              ? NetworkImage(_controller.associated.photoUrl)
-              : PhotoImageProvider().getImageProvider(
-                  File('assets/imgs/noImage.png'),
-                ),
-          fit: BoxFit.fill)
-      : DecorationImage(
-          image: _controller.photoPath != null
-              ? PhotoImageProvider().getImageProvider(
-                  File(_controller.photoPath),
-                )
-              : PhotoImageProvider().getImageProvider(
-                  File('assets/imgs/noImage.png'),
-                ),
-          fit: BoxFit.fill));*/
+  DecorationImage _loadPhoto2() => DecorationImage(
+      image: _controller.photoUrl != null
+          ? NetworkImage(_controller.photoUrl)
+          : PhotoImageProvider().getImageProvider(
+              File('assets/imgs/noImage.png'),
+            ),
+      fit: BoxFit.fill);
 
   _dependentsListWidget() => Container(
         padding: EdgeInsets.all(10.0),
@@ -455,8 +449,8 @@ class _AssociatedUpdatePageState extends State<AssociatedUpdatePage> {
                               final Future<Dependent> future = Navigator.push(
                                 context,
                                 MaterialPageRoute(
-                                  builder: (context) =>
-                                      DependentAddPage(_controller.dependents[i]),
+                                  builder: (context) => DependentAddPage(
+                                      _controller.dependents[i]),
                                 ),
                               );
                               future.then(
@@ -492,7 +486,8 @@ class _AssociatedUpdatePageState extends State<AssociatedUpdatePage> {
                 onPressed: () {
                   final Future<Dependent> future = Navigator.push(
                     context,
-                    MaterialPageRoute(builder: (context) => DependentAddPage(null)),
+                    MaterialPageRoute(
+                        builder: (context) => DependentAddPage(null)),
                   );
                   future.then(
                     (dependent) {
@@ -570,15 +565,16 @@ class _AssociatedUpdatePageState extends State<AssociatedUpdatePage> {
                               final Future<Motorcycle> future = Navigator.push(
                                 context,
                                 MaterialPageRoute(
-                                  builder: (context) =>
-                                      MotorcycleAddPage(_controller.motorcycles[i]),
+                                  builder: (context) => MotorcycleAddPage(
+                                      _controller.motorcycles[i]),
                                 ),
                               );
                               future.then(
                                 (motorcycle) {
                                   if (motorcycle != null) {
                                     _controller.motorcycles.removeAt(i);
-                                    _controller.motorcycles.insert(i, motorcycle);
+                                    _controller.motorcycles
+                                        .insert(i, motorcycle);
                                   }
                                 },
                               );
@@ -661,7 +657,8 @@ class _AssociatedUpdatePageState extends State<AssociatedUpdatePage> {
                   content: Text('Associado atualizado com sucesso.'),
                 ),
               );
-              Navigator.of(context).pop(_controller.photoPath);
+              //Navigator.of(context).pop(_controller.photoPath);
+              Navigator.of(context).pop(_controller.photoUrl);
             } else {
               asuka.showSnackBar(
                 SnackBar(

@@ -1,16 +1,13 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:hcslzapp/common/labels.and.hints.dart';
 import 'package:hcslzapp/common/photo.image.provider.dart';
-import 'package:hcslzapp/components/centered.message.dart';
 import 'package:hcslzapp/components/my.text.form.field.dart';
-import 'package:hcslzapp/components/progress.dart';
 import 'package:hcslzapp/components/top.bar.dart';
 import 'package:hcslzapp/controllers/digital.identity.controller.dart';
 import 'package:hcslzapp/models/associated.dart';
-import 'dart:io';
-
-import 'package:hcslzapp/models/digital.identity.dart';
 
 class DigitalIdentityPage extends StatefulWidget {
   final Associated _associated;
