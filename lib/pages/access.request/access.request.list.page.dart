@@ -122,7 +122,6 @@ class AccessRequestListPageState extends State<AccessRequestListPage> {
                             ),
                             onTap: () {
                               _delete(i);
-                              //_controller.accessRequests.removeAt(i);
                             },
                           ),
                         ],
@@ -149,7 +148,7 @@ class AccessRequestListPageState extends State<AccessRequestListPage> {
         if (value != null) {
           asuka.showSnackBar(
             SnackBar(
-              content: Text('Requisiçao de Acesso excluída com sucesso.'),
+              content: Text('Requisição de acesso excluída com sucesso.'),
             ),
           );
           _controller.accessRequests.removeAt(i);
