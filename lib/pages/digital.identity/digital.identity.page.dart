@@ -7,14 +7,15 @@ import 'package:hcslzapp/components/my.text.form.field.dart';
 import 'package:hcslzapp/components/progress.dart';
 import 'package:hcslzapp/components/top.bar.dart';
 import 'package:hcslzapp/controllers/digital.identity.controller.dart';
+import 'package:hcslzapp/models/associated.dart';
 import 'dart:io';
 
 import 'package:hcslzapp/models/digital.identity.dart';
 
 class DigitalIdentityPage extends StatefulWidget {
-  final int _associatedId;
+  final Associated _associated;
 
-  DigitalIdentityPage(this._associatedId);
+  DigitalIdentityPage(this._associated);
 
   @override
   _DigitalIdentityPageState createState() => _DigitalIdentityPageState();
@@ -26,52 +27,21 @@ class _DigitalIdentityPageState extends State<DigitalIdentityPage> {
 
   @override
   void initState() {
-    _controller.getFuture(widget._associatedId).then((value) {
-      if (value != null && value.isNotEmpty) {
-        _controller.setButtonVisibilty();
-      }
-    });
+    _controller.associated = widget._associated;
+    _controller.init();
     super.initState();
   }
 
   @override
-  Widget build(BuildContext context) => Observer(
-        builder: (_) => Scaffold(
-          body: FutureBuilder<List<DigitalIdentity>>(
-            future: _controller.future,
-            builder: (context, snapshot) {
-              switch (snapshot.connectionState) {
-                case ConnectionState.none:
-                  break;
-                case ConnectionState.waiting:
-                  return Progress();
-                case ConnectionState.active:
-                  break;
-                default:
-                  if (snapshot.hasError) {
-                    return CenteredMessage(snapshot.error.toString());
-                  } else {
-                    if (snapshot.data == null)
-                      return CenteredMessage(
-                        _controller.errorMsg,
-                      );
-                    if (snapshot.data.length > 0) {
-                      _controller.digitalIdentity = snapshot.data.first;
-                      _controller.init();
-                      return _widgets();
-                    } else
-                      return CenteredMessage(
-                        'Identidade Digital não disponível. Consulte suas mensalidades junto à Diretoria.',
-                      );
-                  }
-              } //switch (snapshot.connectionState)
-              return CenteredMessage(
-                'Houve um erro desconhecido ao executar a transação.',
-              );
-            },
-          ),
-        ),
-      );
+  Widget build(BuildContext context) {
+    return Observer(
+      builder: (_) {
+        return Scaffold(
+          body: _widgets(),
+        );
+      },
+    );
+  }
 
   _widgets() => Container(
         decoration: BoxDecoration(
@@ -179,15 +149,6 @@ class _DigitalIdentityPageState extends State<DigitalIdentityPage> {
                           style: TextStyle(fontSize: 10.0, fontWeight: FontWeight.bold),
                         ),
                       ),
-/*                      SizedBox(
-                        height: 5.0,
-                      ),
-                      Center(
-                        child: Text(
-                          'Válida até ${_controller.dueDateCtrl.text}',
-                          style: TextStyle(fontSize: 10.0, fontWeight: FontWeight.bold),
-                        ),
-                      ),*/
                     ],
                   ),
                 ],
@@ -217,12 +178,10 @@ class _DigitalIdentityPageState extends State<DigitalIdentityPage> {
       );
 
   DecorationImage _loadPhoto() => DecorationImage(
-      image: _controller.photoPath != null
-          ? PhotoImageProvider().getImageProvider(
-              File(_controller.photoPath),
-            )
+      image: widget._associated.photoUrl != null
+          ? NetworkImage(widget._associated.photoUrl)
           : PhotoImageProvider().getImageProvider(
-              File('assets/imgs/noImage.png'),
-            ),
+        File('assets/imgs/noImage.png'),
+      ),
       fit: BoxFit.fill);
 }

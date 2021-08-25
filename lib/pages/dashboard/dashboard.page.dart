@@ -129,6 +129,7 @@ class _DashboardPageState extends State<DashboardPage> {
               ],
             ),
             _buildDrawerMenu(),
+            Divider(),
             ListTile(
               leading: Icon(Icons.info),
               title: Text("Sobre o HCSlz App"),
@@ -308,13 +309,19 @@ class _DashboardPageState extends State<DashboardPage> {
                 builder: (_) => CircleAvatar(
                   backgroundColor: Colors.white,
                   radius: 30.0,
-                  backgroundImage: _controller.photoPath != null
+/*                  backgroundImage: _controller.photoPath != null
                       ? PhotoImageProvider().getImageProvider(
                           File(_controller.photoPath),
                         )
                       : PhotoImageProvider().getImageProvider(
                           File('assets/imgs/noImage.png'),
-                        ),
+                        ),*/
+
+                backgroundImage: widget._associated.photoUrl != null
+                        ? NetworkImage(widget._associated.photoUrl)
+                        : PhotoImageProvider().getImageProvider(
+                      File('assets/imgs/noImage.png'),
+                    ),
 /*                  backgroundImage: _controller.photoPath != null
                       ? NetworkImage(_controller.photoPath)
                       : PhotoImageProvider().getImageProvider(
@@ -401,7 +408,7 @@ class _DashboardPageState extends State<DashboardPage> {
                     _gContext,
                     MaterialPageRoute(
                         builder: (gContext) =>
-                            DigitalIdentityPage(widget._associated.id)),
+                            DigitalIdentityPage(widget._associated)),
                   );
                 },
               ),

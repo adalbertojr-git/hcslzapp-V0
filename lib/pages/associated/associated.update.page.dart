@@ -367,7 +367,15 @@ class _AssociatedUpdatePageState extends State<AssociatedUpdatePage> {
         ),
       );
 
-  DecorationImage _loadPhoto() => (widget._user == 'admin'
+  DecorationImage _loadPhoto() => DecorationImage(
+      image: _controller.associated.photoUrl != null
+          ? NetworkImage(_controller.associated.photoUrl)
+          : PhotoImageProvider().getImageProvider(
+        File('assets/imgs/noImage.png'),
+      ),
+      fit: BoxFit.fill);
+
+/*  DecorationImage _loadPhoto() => (widget._user == 'admin'
       ? DecorationImage(
           image: _controller.associated.photoUrl != null
               ? NetworkImage(_controller.associated.photoUrl)
@@ -383,7 +391,7 @@ class _AssociatedUpdatePageState extends State<AssociatedUpdatePage> {
               : PhotoImageProvider().getImageProvider(
                   File('assets/imgs/noImage.png'),
                 ),
-          fit: BoxFit.fill));
+          fit: BoxFit.fill));*/
 
   _dependentsListWidget() => Container(
         padding: EdgeInsets.all(10.0),
