@@ -248,19 +248,19 @@ class EventCalendarPageState extends State<EventCalendarPage>
                                 children: <Widget>[
                                   GestureDetector(
                                     child: Icon(
+                                      Icons.delete,
+                                    ),
+                                    onTap: () {
+                                      _delete(i);
+                                    },
+                                  ),
+                                  GestureDetector(
+                                    child: Icon(
                                       Icons.edit,
                                     ),
                                     onTap: () {
                                       _controller.setEventTitle(event.title);
                                       _showAddDialog(event, i);
-                                    },
-                                  ),
-                                  GestureDetector(
-                                    child: Icon(
-                                      Icons.delete,
-                                    ),
-                                    onTap: () {
-                                      _delete(i);
                                     },
                                   ),
                                 ],
