@@ -125,7 +125,9 @@ class _DashboardPageState extends State<DashboardPage> {
                     activeColor: Colors.orangeAccent,
                     value: AppController.instance.isDarkTheme,
                     onChanged: (value) {
-                      AppController.instance.changeTheme();
+                      setState(() {
+                        AppController.instance.changeTheme();
+                      });
                     },
                   ),
                 ),

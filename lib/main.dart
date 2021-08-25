@@ -10,6 +10,7 @@ const _titleAppBar = 'HCSlz App';
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
+  await AppController.instance.loadTheme();
   runApp(HCSlzApp());
 }
 
