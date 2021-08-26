@@ -143,7 +143,8 @@ class _DigitalIdentityPageState extends State<DigitalIdentityPage> {
                       Center(
                         child: Text(
                           'Carteira digital de associado do Harley Club de São Luis - MA',
-                          style: TextStyle(fontSize: 10.0, fontWeight: FontWeight.bold),
+                          style: TextStyle(
+                              fontSize: 10.0, fontWeight: FontWeight.bold),
                         ),
                       ),
                     ],
@@ -163,13 +164,11 @@ class _DigitalIdentityPageState extends State<DigitalIdentityPage> {
           color: Colors.black.withOpacity(0.2),
           borderRadius: BorderRadius.circular(150.0),
         ),
-        child: Observer(
-          builder: (_) => Container(
-            decoration: BoxDecoration(
-              color: Colors.white,
-              borderRadius: BorderRadius.circular(200.0),
-              image: _loadPhoto(),
-            ),
+        child: Container(
+          decoration: BoxDecoration(
+            color: Colors.white,
+            borderRadius: BorderRadius.circular(200.0),
+            image: _loadPhoto(),
           ),
         ),
       );
@@ -178,7 +177,7 @@ class _DigitalIdentityPageState extends State<DigitalIdentityPage> {
       image: widget._associated.photoUrl != null
           ? NetworkImage(widget._associated.photoUrl)
           : PhotoImageProvider().getImageProvider(
-        File('assets/imgs/noImage.png'),
-      ),
+              File('assets/imgs/noImage.png'),
+            ),
       fit: BoxFit.fill);
 }
