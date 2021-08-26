@@ -134,7 +134,8 @@ class _DashboardPageState extends State<DashboardPage> {
             ListTile(
               leading: Icon(Icons.info),
               title: Text("Sobre o HCSlz App"),
-              onTap: () {
+              onTap: () async {
+                await _controller.loadAboutPage(_gContext);
                 Navigator.pop(_gContext);
               },
             ),
@@ -149,98 +150,35 @@ class _DashboardPageState extends State<DashboardPage> {
         ),
       );
 
-  _buildDrawerMenu() => (widget._user == 'admin' ? _menuAdm() : _menuAssociated());
+  _buildDrawerMenu() =>
+      (widget._user == 'admin' ? _menuAdm() : _menuAssociated());
 
   _menuAdm() => Column(
-    children: <Widget>[
-      ListTile(
-        leading: Icon(Icons.arrow_forward_ios),
-        title: Text("Acesso"),
-        onTap: () {
-          Navigator.pop(_gContext);
-        },
-      ),
-      ListTile(
-        leading: Icon(Icons.arrow_forward_ios),
-        title: Text("Documentos"),
-        onTap: () {
-          Navigator.pop(_gContext);
-        },
-      ),
-      ListTile(
-        leading: Icon(Icons.arrow_forward_ios),
-        title: Text("Associados"),
-        onTap: () {
-          Navigator.pop(_gContext);
-        },
-      ),
-      ListTile(
-        leading: Icon(Icons.arrow_forward_ios),
-        title: Text("Financeiro"),
-        onTap: () {
-          Navigator.pop(_gContext);
-        },
-      ),
-      ListTile(
-        leading: Icon(Icons.arrow_forward_ios),
-        title: Text("Eventos"),
-        onTap: () {
-          Navigator.pop(_gContext);
-        },
-      ),
-      ListTile(
-        leading: Icon(Icons.arrow_forward_ios),
-        title: Text("Parcerias"),
-        onTap: () {
-          Navigator.pop(_gContext);
-        },
-      ),
-      ListTile(
-        leading: Icon(Icons.arrow_forward_ios),
-        title: Text("Boutique"),
-        onTap: () {
-          Navigator.pop(_gContext);
-        },
-      ),
-    ],
-  );
-
-  _menuAssociated() => Column(
         children: <Widget>[
           ListTile(
             leading: Icon(Icons.arrow_forward_ios),
-            title: Text("Associado"),
-            onTap: () async {
-              var photoPath = await Navigator.push(
-                _gContext,
-                MaterialPageRoute(
-                    builder: (gContext) => AssociatedUpdatePage(
-                        widget._user, widget._associated.id)),
-              );
-              if (photoPath != null) {
-                //_controller.setPhoto(photoPath);
-
-              }
+            title: Text("Acesso"),
+            onTap: () {
+              Navigator.pop(_gContext);
+            },
+          ),
+          ListTile(
+            leading: Icon(Icons.arrow_forward_ios),
+            title: Text("Documentos"),
+            onTap: () {
+              Navigator.pop(_gContext);
+            },
+          ),
+          ListTile(
+            leading: Icon(Icons.arrow_forward_ios),
+            title: Text("Associados"),
+            onTap: () {
               Navigator.pop(_gContext);
             },
           ),
           ListTile(
             leading: Icon(Icons.arrow_forward_ios),
             title: Text("Financeiro"),
-            onTap: () {
-              Navigator.pop(_gContext);
-            },
-          ),
-          ListTile(
-            leading: Icon(Icons.arrow_forward_ios),
-            title: Text("Carteira Harley Club"),
-            onTap: () {
-              Navigator.pop(_gContext);
-            },
-          ),
-          ListTile(
-            leading: Icon(Icons.arrow_forward_ios),
-            title: Text("Parcerias"),
             onTap: () {
               Navigator.pop(_gContext);
             },
@@ -254,8 +192,85 @@ class _DashboardPageState extends State<DashboardPage> {
           ),
           ListTile(
             leading: Icon(Icons.arrow_forward_ios),
-            title: Text("Códigos DTC"),
+            title: Text("Parcerias"),
             onTap: () {
+              Navigator.pop(_gContext);
+            },
+          ),
+          ListTile(
+            leading: Icon(Icons.arrow_forward_ios),
+            title: Text("Boutique"),
+            onTap: () {
+              Navigator.pop(_gContext);
+            },
+          ),
+        ],
+      );
+
+  _menuAssociated() => Column(
+        children: <Widget>[
+          ListTile(
+            leading: Icon(Icons.arrow_forward_ios),
+            title: Text("Associado"),
+            onTap: () async {
+              await _controller.loadAssociatedUpdatePage(
+                _gContext,
+                widget._user,
+                widget._associated.id,
+              );
+              Navigator.pop(_gContext);
+            },
+          ),
+          ListTile(
+            leading: Icon(Icons.arrow_forward_ios),
+            title: Text("Financeiro"),
+            onTap: () async {
+              await _controller.loadPaymentAssociatedPage(
+                _gContext,
+                widget._user,
+                widget._associated,
+              );
+              Navigator.pop(_gContext);
+            },
+          ),
+          ListTile(
+            leading: Icon(Icons.arrow_forward_ios),
+            title: Text("Carteira Harley Club"),
+            onTap: () async {
+              await _controller.loadDigitalIdentityPage(
+                _gContext,
+                widget._associated,
+              );
+              Navigator.pop(_gContext);
+            },
+          ),
+          ListTile(
+            leading: Icon(Icons.arrow_forward_ios),
+            title: Text("Parcerias"),
+            onTap: () async {
+              await _controller.loadPartnershipListPage(
+                _gContext,
+                widget._user,
+              );
+              Navigator.pop(_gContext);
+            },
+          ),
+          ListTile(
+            leading: Icon(Icons.arrow_forward_ios),
+            title: Text("Eventos"),
+            onTap: () async {
+              await _controller.loadEventCalendarPage(
+                _gContext,
+                widget._user,
+              );
+              Navigator.pop(_gContext);
+            },
+          ),
+          ListTile(
+            leading: Icon(Icons.arrow_forward_ios),
+            title: Text("Códigos DTC"),
+            onTap: () async {
+              await _controller.loadDtcCodeDashboardPage(_gContext);
               Navigator.pop(_gContext);
             },
           ),
@@ -319,11 +334,11 @@ class _DashboardPageState extends State<DashboardPage> {
                           File('assets/imgs/noImage.png'),
                         ),*/
 
-                backgroundImage: _controller.photoUrl != null
-                        ? NetworkImage(_controller.photoUrl)
-                        : PhotoImageProvider().getImageProvider(
-                      File('assets/imgs/noImage.png'),
-                    ),
+                  backgroundImage: _controller.photoUrl != null
+                      ? NetworkImage(_controller.photoUrl)
+                      : PhotoImageProvider().getImageProvider(
+                          File('assets/imgs/noImage.png'),
+                        ),
 /*                  backgroundImage: _controller.photoPath != null
                       ? NetworkImage(_controller.photoPath)
                       : PhotoImageProvider().getImageProvider(
@@ -376,16 +391,12 @@ class _DashboardPageState extends State<DashboardPage> {
                 title: "Associado",
                 image: "assets/imgs/user.png",
                 context: _gContext,
-                onClick: () async {
-                  var photoUrl = await Navigator.push(
+                onClick: () {
+                  _controller.loadAssociatedUpdatePage(
                     _gContext,
-                    MaterialPageRoute(
-                        builder: (gContext) => AssociatedUpdatePage(
-                            widget._user, widget._associated.id)),
+                    widget._user,
+                    widget._associated.id,
                   );
-                  if (photoUrl != null) {
-                    _controller.setPhoto(photoUrl);
-                  }
                 },
               ),
               _GridButton(
@@ -393,11 +404,10 @@ class _DashboardPageState extends State<DashboardPage> {
                 image: "assets/imgs/financeiro.png",
                 context: _gContext,
                 onClick: () {
-                  Navigator.push(
+                  _controller.loadPaymentAssociatedPage(
                     _gContext,
-                    MaterialPageRoute(
-                        builder: (gContext) => PaymentAssociatedPage(
-                            widget._user, widget._associated)),
+                    widget._user,
+                    widget._associated,
                   );
                 },
               ),
@@ -406,11 +416,9 @@ class _DashboardPageState extends State<DashboardPage> {
                 image: "assets/imgs/carteirad.png",
                 context: _gContext,
                 onClick: () {
-                  Navigator.push(
+                  _controller.loadDigitalIdentityPage(
                     _gContext,
-                    MaterialPageRoute(
-                        builder: (gContext) =>
-                            DigitalIdentityPage(widget._associated)),
+                    widget._associated,
                   );
                 },
               ),
@@ -419,11 +427,9 @@ class _DashboardPageState extends State<DashboardPage> {
                 image: "assets/imgs/parcerias.png",
                 context: _gContext,
                 onClick: () {
-                  Navigator.push(
+                  _controller.loadPartnershipListPage(
                     _gContext,
-                    MaterialPageRoute(
-                        builder: (gContext) =>
-                            PartnershipListPage(widget._user)),
+                    widget._user,
                   );
                 },
               ),
@@ -432,10 +438,9 @@ class _DashboardPageState extends State<DashboardPage> {
                 image: "assets/imgs/eventos.png",
                 context: _gContext,
                 onClick: () {
-                  Navigator.push(
+                  _controller.loadEventCalendarPage(
                     _gContext,
-                    MaterialPageRoute(
-                        builder: (gContext) => EventCalendarPage(widget._user)),
+                    widget._user,
                   );
                 },
               ),
@@ -457,12 +462,7 @@ class _DashboardPageState extends State<DashboardPage> {
                 image: "assets/imgs/codigosdtc.png",
                 context: _gContext,
                 onClick: () {
-                  Navigator.push(
-                    _gContext,
-                    //MaterialPageRoute(builder: (context) => DtcCodeAccessPage()),
-                    MaterialPageRoute(
-                        builder: (context) => DtcCodeDashboardPage()),
-                  );
+                  _controller.loadDtcCodeDashboardPage(_gContext);
                 },
               ),
 /*
@@ -527,10 +527,7 @@ class _DashboardPageState extends State<DashboardPage> {
                 image: "assets/imgs/logo.png",
                 context: _gContext,
                 onClick: () {
-                  Navigator.push(
-                    _gContext,
-                    MaterialPageRoute(builder: (gContext) => AboutPage()),
-                  );
+                  _controller.loadAboutPage(_gContext);
                 },
               ),
             ],
