@@ -18,7 +18,12 @@ abstract class DashboardControllerBase with Store {
   }
 
   @action
-  setPhoto(String value) => photoUrl = value;
+  //setPhoto(String value) => photoUrl = value;
+  setPhoto(String value) {
+    photoUrl = value;
+    associated.photoUrl = photoUrl;
+    print(photoUrl);
+  }
 
 /*  @observable
   String photoPath;
@@ -26,7 +31,20 @@ abstract class DashboardControllerBase with Store {
   @observable
   String errorMsg;
 
-  init() {
+  init() {(gContext) => PaymentAssociatedPage(
+                            widget._user, widget._associated)),
+                  );
+                },
+              ),
+              _GridButton(
+                title: "Carteira Harley Club",
+                image: "assets/imgs/carteirad.png",
+                context: _gContext,
+                onClick: () {
+                  Navigator.push(
+                    _gContext,
+                    MaterialPageRoute(
+                        builder: (g
     getPhotoFromDevice().then((value) => photoPath = value);
   }
 
@@ -37,8 +55,9 @@ abstract class DashboardControllerBase with Store {
     return await Glutton.vomit("photoPath");
   }*/
 
-  String getFirstName (String fullName) {
-    var names = fullName.split(' ');
-    return names[0];
-  }
+    String getFirstName (String fullName) {
+      var names = fullName.split(' ');
+      return names[0];
+    }
+  //}
 }

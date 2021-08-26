@@ -658,7 +658,7 @@ class _AssociatedUpdatePageState extends State<AssociatedUpdatePage> {
                 ),
               );
               //Navigator.of(context).pop(_controller.photoPath);
-              Navigator.of(context).pop(_controller.photoUrl);
+              Navigator.of(context).pop(_controller.associated.photoUrl);
             } else {
               asuka.showSnackBar(
                 SnackBar(
