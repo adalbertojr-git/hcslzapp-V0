@@ -21,7 +21,7 @@ abstract class DashboardControllerBase with Store {
   Associated associated;
 
   init() {
-    photoUrl = associated.photoUrl;
+    photoUrl = associated == null ? "" : associated.photoUrl;
   }
 
   @action
@@ -118,6 +118,105 @@ abstract class DashboardControllerBase with Store {
       context,
       MaterialPageRoute(
         builder: (context) => AboutPage(),
+      ),
+    );
+  }
+}
+
+class GridButton extends StatelessWidget {
+  final String title;
+  final String image;
+  final BuildContext context;
+  final Color color = Colors.white10;
+  final Function onClick;
+
+  GridButton({this.title, this.image, this.context, this.onClick});
+
+  @override
+  Widget build(BuildContext context) {
+    return Card(
+      color: Colors.white,
+      elevation: 10,
+      child: InkWell(
+        onTap: () {
+          onClick();
+        },
+        splashColor: Colors.black,
+        child: Container(
+          decoration: BoxDecoration(
+            image: DecorationImage(
+              image: AssetImage(image),
+              fit: BoxFit.contain,
+            ),
+          ),
+          child: Align(
+            alignment: Alignment.bottomCenter,
+            child: Text(
+              title,
+              textAlign: TextAlign.center,
+              style: TextStyle(
+                fontSize: 9,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+          ),
+        ),
+      ),
+    );
+  } //build
+} //GridButton
+
+class BarButton extends StatelessWidget {
+  final String title;
+  final String subtitle;
+  final IconData icon;
+  final Function onClick; //callback
+
+  BarButton(this.title, this.subtitle, this.icon, {@required this.onClick});
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.all(5.0),
+      child: Material(
+        color: Colors.deepOrange[100],
+        child: InkWell(
+          onTap: () {
+            onClick();
+          },
+          child: Container(
+            padding: EdgeInsets.all(8),
+            height: 100,
+            width: MediaQuery.of(context).size.width / 2 - 15,
+            //width: 150,
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: <Widget>[
+                Icon(
+                  icon,
+                  color: Colors.orange,
+                  size: 50.0,
+                ),
+                Text(
+                  title,
+                  style: TextStyle(
+                    color: Colors.black,
+                    fontSize: 14.0,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+                Text(
+                  subtitle,
+                  style: TextStyle(
+                    color: Colors.black,
+                    fontSize: 11.0,
+                  ),
+                ),
+              ],
+            ),
+          ),
+        ),
       ),
     );
   }

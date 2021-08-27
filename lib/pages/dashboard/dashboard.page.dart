@@ -1,23 +1,17 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:hcslzapp/common/photo.image.provider.dart';
 import 'package:hcslzapp/controllers/app.controller.dart';
 import 'package:hcslzapp/controllers/dashboard.controller.dart';
 import 'package:hcslzapp/models/associated.dart';
-import 'package:hcslzapp/pages/about/about.page.dart';
 import 'package:hcslzapp/pages/access.request/access.request.list.page.dart';
 import 'package:hcslzapp/pages/associated/associated.list.page.dart';
-import 'package:hcslzapp/pages/associated/associated.update.page.dart';
 import 'package:hcslzapp/pages/boutique/boutique.list.page.dart';
-import 'package:hcslzapp/pages/digital.identity/digital.identity.page.dart';
-import 'package:hcslzapp/pages/dtc.code/dtc.code.dashboard.page.dart';
 import 'package:hcslzapp/pages/event/event.calendar.page.dart';
-import 'package:hcslzapp/pages/payment/payment.list.page.dart';
-import 'package:hcslzapp/pages/payment/payment.associated.page.dart';
 import 'package:hcslzapp/pages/partnership/partnership.list.page.dart';
-import 'dart:io';
-
-import 'package:path/path.dart';
+import 'package:hcslzapp/pages/payment/payment.list.page.dart';
 
 // ignore: must_be_immutable
 class DashboardPage extends StatefulWidget {
@@ -353,7 +347,7 @@ class _DashboardPageState extends State<DashboardPage> {
       : Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
-            _BarButton(
+            BarButton(
               'Acesso',
               'Requisições de acesso',
               Icons.send_to_mobile,
@@ -365,7 +359,7 @@ class _DashboardPageState extends State<DashboardPage> {
                 );
               },
             ),
-            _BarButton(
+            BarButton(
               'Documentos',
               'Atas, estatuto, etc',
               Icons.file_copy_outlined,
@@ -387,7 +381,7 @@ class _DashboardPageState extends State<DashboardPage> {
             crossAxisCount: 2,
             childAspectRatio: 0.9,
             children: <Widget>[
-              _GridButton(
+              GridButton(
                 title: "Associado",
                 image: "assets/imgs/user.png",
                 context: _gContext,
@@ -399,7 +393,7 @@ class _DashboardPageState extends State<DashboardPage> {
                   );
                 },
               ),
-              _GridButton(
+              GridButton(
                 title: "Financeiro",
                 image: "assets/imgs/financeiro.png",
                 context: _gContext,
@@ -411,7 +405,7 @@ class _DashboardPageState extends State<DashboardPage> {
                   );
                 },
               ),
-              _GridButton(
+              GridButton(
                 title: "Carteira Harley Club",
                 image: "assets/imgs/carteirad.png",
                 context: _gContext,
@@ -422,7 +416,7 @@ class _DashboardPageState extends State<DashboardPage> {
                   );
                 },
               ),
-              _GridButton(
+              GridButton(
                 title: "Parcerias",
                 image: "assets/imgs/parcerias.png",
                 context: _gContext,
@@ -433,7 +427,7 @@ class _DashboardPageState extends State<DashboardPage> {
                   );
                 },
               ),
-              _GridButton(
+              GridButton(
                 title: "Eventos",
                 image: "assets/imgs/eventos.png",
                 context: _gContext,
@@ -457,7 +451,7 @@ class _DashboardPageState extends State<DashboardPage> {
                 },
               ),
 */
-              _GridButton(
+              GridButton(
                 title: "Codigos DTC",
                 image: "assets/imgs/codigosdtc.png",
                 context: _gContext,
@@ -478,7 +472,7 @@ class _DashboardPageState extends State<DashboardPage> {
                 },
               ),
 */
-              _GridButton(
+              GridButton(
                 title: "Boutique",
                 image: "assets/imgs/boutique.png",
                 context: _gContext,
@@ -522,7 +516,7 @@ class _DashboardPageState extends State<DashboardPage> {
                 },
               ),
 */
-              _GridButton(
+              GridButton(
                 title: "O Harley Club",
                 image: "assets/imgs/logo.png",
                 context: _gContext,
@@ -587,103 +581,4 @@ class _DashboardPageState extends State<DashboardPage> {
           ],
         ),
       );
-}
-
-class _GridButton extends StatelessWidget {
-  _GridButton({this.title, this.image, this.context, this.onClick});
-
-  final String title;
-  final String image;
-  final BuildContext context;
-  final Color color = Colors.white10;
-  final Function onClick;
-
-  @override
-  Widget build(BuildContext context) {
-    return Card(
-      color: Colors.white,
-      elevation: 10,
-      child: InkWell(
-        onTap: () {
-          onClick();
-        },
-        splashColor: Colors.black,
-        child: Container(
-          decoration: BoxDecoration(
-            image: DecorationImage(
-              image: AssetImage(image),
-              fit: BoxFit.contain,
-            ),
-          ),
-          child: Align(
-            alignment: Alignment.bottomCenter,
-            child: Text(
-              title,
-              textAlign: TextAlign.center,
-              style: TextStyle(
-                fontSize: 9,
-                fontWeight: FontWeight.bold,
-              ),
-            ),
-          ),
-        ),
-      ),
-    );
-  } //build
-} //GridButton
-
-class _BarButton extends StatelessWidget {
-  final String title;
-  final String subtitle;
-  final IconData icon;
-  final Function onClick; //callback
-
-  _BarButton(this.title, this.subtitle, this.icon, {@required this.onClick});
-
-  @override
-  Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.all(5.0),
-      child: Material(
-        color: Colors.deepOrange[100],
-        child: InkWell(
-          onTap: () {
-            onClick();
-          },
-          child: Container(
-            padding: EdgeInsets.all(8),
-            height: 100,
-            width: MediaQuery.of(context).size.width / 2 - 15,
-            //width: 150,
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: <Widget>[
-                Icon(
-                  icon,
-                  color: Colors.orange,
-                  size: 50.0,
-                ),
-                Text(
-                  title,
-                  style: TextStyle(
-                    color: Colors.black,
-                    fontSize: 14.0,
-                    fontWeight: FontWeight.bold,
-                  ),
-                ),
-                Text(
-                  subtitle,
-                  style: TextStyle(
-                    color: Colors.black,
-                    fontSize: 11.0,
-                  ),
-                ),
-              ],
-            ),
-          ),
-        ),
-      ),
-    );
-  }
 }
