@@ -376,8 +376,6 @@ class _DashboardPageState extends State<DashboardPage> {
         child: Container(
           padding: EdgeInsets.only(left: 16, right: 16, bottom: 16),
           child: GridView.count(
-            //crossAxisSpacing: 10,
-            //mainAxisSpacing: 10,
             crossAxisCount: 2,
             childAspectRatio: 0.9,
             children: <Widget>[
@@ -529,7 +527,7 @@ class _DashboardPageState extends State<DashboardPage> {
         ),
       );
 
-  _gridAdm() => Expanded(
+/*  _gridAdm() => Expanded(
         child: Container(
           padding: EdgeInsets.only(left: 16, right: 16, bottom: 16),
           child: ListView.builder(
@@ -537,9 +535,23 @@ class _DashboardPageState extends State<DashboardPage> {
             itemBuilder: _listItem,
           ),
         ),
-      );
+      );*/
 
-  Widget _listItem(BuildContext context, int index) => Card(
+  _gridAdm() => Expanded(
+    child: Container(
+      padding: EdgeInsets.only(left: 16, right: 16, bottom: 16),
+      child: ListView.builder(
+        itemCount: _listAdmScreens.length,
+        itemBuilder: (BuildContext context, int index) => Card(
+          color: Colors.deepOrange[100],
+          shadowColor: Colors.black,
+          child: _listItem(context, index),
+        ),
+      ),
+    ),
+  );
+
+/*  Widget _listItem(BuildContext context, int index) => Card(
         color: Colors.deepOrange[100],
         shadowColor: Colors.black,
         child: Column(
@@ -580,5 +592,44 @@ class _DashboardPageState extends State<DashboardPage> {
             )
           ],
         ),
-      );
+      );*/
+
+  Widget _listItem(BuildContext context, int index) => Column(
+    children: <Widget>[
+      ListTile(
+        leading: Icon(
+          _listAdmIcons[index],
+          size: 50,
+          color: Colors.orange,
+        ),
+        title: Text(
+          _listAdmScreens[index],
+          style: TextStyle(
+            fontSize: 14.0,
+            fontWeight: FontWeight.bold,
+          ),
+        ),
+        subtitle: Column(
+          mainAxisAlignment: MainAxisAlignment.start,
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: <Widget>[
+            Text(
+              _listAdmScreensDesc[index],
+              style: TextStyle(
+                fontSize: 11.0,
+                fontWeight: FontWeight.normal,
+              ),
+            ),
+          ],
+        ),
+        onTap: () {
+          Navigator.push(
+            context,
+            MaterialPageRoute(
+                builder: (_) => _listAdmWidgets[index]),
+          );
+        },
+      )
+    ],
+  );
 }
