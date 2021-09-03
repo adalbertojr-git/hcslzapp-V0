@@ -46,6 +46,7 @@ class AccessRequestListPageState extends State<AccessRequestListPage> {
                   if (snapshot.hasError) {
                     return CenteredMessage(snapshot.error.toString());
                   } else {
+
                     if (snapshot.data == null)
                       return CenteredMessage(
                         _controller.errorMsg,

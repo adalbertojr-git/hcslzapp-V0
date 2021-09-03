@@ -65,12 +65,17 @@ class _PartnershipListPageState extends State<PartnershipListPage> {
                       return CenteredMessage(
                         _controller.errorMsg,
                       );
-                    _controller.init();
-                    _controller.partnerships.addAll(snapshot.data);
-                    if (widget._user != 'admin') {
-                      _controller.getActivePartnerships;
-                    }
-                    return _widgets();
+                    if (snapshot.data.length > 0) {
+                      _controller.init();
+                      _controller.partnerships.addAll(snapshot.data);
+                      if (widget._user != 'admin') {
+                        _controller.getActivePartnerships;
+                      }
+                      return _widgets();
+                    } else
+                      return CenteredMessage(
+                        'Não existem parceiros cadastrados.',
+                      );
                   }
               } //switch (snapshot.connectionState)
               return CenteredMessage(

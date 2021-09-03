@@ -55,15 +55,19 @@ class _PaymentAssociatedPageState extends State<PaymentAssociatedPage> {
                     return CenteredMessage(
                       _controller.errorMsg,
                     );
-                  if (_controller.payments.isEmpty) {
+                  //if (_controller.payments.isEmpty) {
                     if (snapshot.data.length > 0) {
                       _controller.payments.addAll(snapshot.data);
                       _controller.payments.sort(
                         (a, b) => b.year.compareTo(a.year),
                       );
-                    }
-                  }
-                  return _buildListView();
+                      return _buildListView();
+                    } else
+                      return CenteredMessage(
+                        'Não existem pagamentos cadastrados para o usuário.',
+                      );
+                  //}
+                  //return _buildListView();
                 }
             } //switch (snapshot.connectionState)
             return CenteredMessage(

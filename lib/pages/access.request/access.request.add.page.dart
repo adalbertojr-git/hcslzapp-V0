@@ -27,7 +27,7 @@ class _AccessRequestAddPageState extends State<AccessRequestAddPage> {
     return Observer(
       builder: (_) {
         return Scaffold(
-          body: _widgets(context),
+          body: _widgets(_),
         );
       },
     );
@@ -112,9 +112,8 @@ class _AccessRequestAddPageState extends State<AccessRequestAddPage> {
                 child: RichText(
                   text: TextSpan(
                     text:
-                        'Atenção: seu cadastro será analisado e liberado pela Diretoria HC. Você '
-                        'receberá um email informando da liberação. Verifique sua caixa '
-                        'spam.',
+                        'Atenção: seu cadastro será analisado e liberado pela ' +
+                            'Diretoria HC. Entraremos em contato.',
                     style: const TextStyle(
                       fontSize: 12.0,
                       color: Colors.black87,
