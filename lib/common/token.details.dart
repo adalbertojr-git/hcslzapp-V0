@@ -5,9 +5,6 @@ class TokenDetails {
 
   TokenDetails(this._token);
 
-/*  String firstName() => Jwt.parseJwt(_token)['firstName'];
-  String email() => Jwt.parseJwt(_token)['email'];
-  String photoUrl() => Jwt.parseJwt(_token)['photoUrl'];*/
   int associatedId() => Jwt.parseJwt(_token)['id'];
 
 //   To get expiry date

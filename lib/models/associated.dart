@@ -1,6 +1,8 @@
 import 'package:hcslzapp/models/dependent.dart';
 import 'package:hcslzapp/models/motorcycle.dart';
 
+import 'authenticate.dart';
+
 class Associated {
   final int id;
   String name;
@@ -17,6 +19,7 @@ class Associated {
   String photoUrl;
   List<Dependent> dependents;
   List<Motorcycle> motorcycles;
+  Authenticate authenticate;
 
   Associated(
       {this.id,
@@ -33,7 +36,8 @@ class Associated {
       this.status,
       this.photoUrl,
       this.dependents,
-      this.motorcycles});
+      this.motorcycles,
+      this.authenticate});
 
   Associated.fromJson(Map<String, dynamic> json)
       : id = json['id'],
@@ -52,7 +56,9 @@ class Associated {
         dependents = List.from((json['dependents'] as List)
             .map((dependents) => Dependent.fromJson(dependents))),
         motorcycles = List.from((json['motorcycles'] as List)
-            .map((motorcycles) => Motorcycle.fromJson(motorcycles)));
+            .map((motorcycles) => Motorcycle.fromJson(motorcycles))),
+        //authenticate = json['authenticate'];
+        authenticate = Authenticate.fromJson(json['authenticate']);
 
   Map<String, dynamic> toJson() => {
         'id': id,
@@ -72,6 +78,7 @@ class Associated {
             dependents.map((dependents) => dependents.toJson())),
         'motorcycles': List<dynamic>.from(
             motorcycles.map((motorcycles) => motorcycles.toJson())),
+        'authenticate': authenticate.toJson(),
       };
 
   @override
@@ -80,6 +87,6 @@ class Associated {
         'cnh: $cnh, cpf: $cpf, '
         'bloodType: $bloodType, dateBirth: $dateBirth, '
         'dateShield: $dateShield, status: $status, photoUrl: $photoUrl, '
-        'dependents: $dependents, motorcycles: $motorcycles}';
+        'dependents: $dependents, motorcycles: $motorcycles,  authenticate: $authenticate}';
   }
 }

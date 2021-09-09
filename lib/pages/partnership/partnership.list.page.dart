@@ -65,17 +65,12 @@ class _PartnershipListPageState extends State<PartnershipListPage> {
                       return CenteredMessage(
                         _controller.errorMsg,
                       );
-                    if (snapshot.data.length > 0) {
-                      _controller.init();
-                      _controller.partnerships.addAll(snapshot.data);
-                      if (widget._user != 'admin') {
-                        _controller.getActivePartnerships;
-                      }
-                      return _widgets();
-                    } else
-                      return CenteredMessage(
-                        'Não existem parceiros cadastrados.',
-                      );
+                    _controller.init();
+                    _controller.partnerships.addAll(snapshot.data);
+                    if (widget._user != 'admin') {
+                      _controller.getActivePartnerships;
+                    }
+                    return _widgets();
                   }
               } //switch (snapshot.connectionState)
               return CenteredMessage(
@@ -99,7 +94,7 @@ class _PartnershipListPageState extends State<PartnershipListPage> {
         ),
       );
 
-  _widgets() => widget._user == 'admin' ? _listAdmin() : _listAssociated();
+  _widgets() => widget._user == 'atajr' ? _listAdmin() : _listAssociated();
 
   _listAdmin() => Container(
         decoration: BoxDecoration(

@@ -61,13 +61,9 @@ class _PaymentAssociatedPageState extends State<PaymentAssociatedPage> {
                       _controller.payments.sort(
                         (a, b) => b.year.compareTo(a.year),
                       );
-                      return _buildListView();
-                    } else
-                      return CenteredMessage(
-                        'Não existem pagamentos cadastrados para o usuário.',
-                      );
+                    }
                   //}
-                  //return _buildListView();
+                  return _buildListView();
                 }
             } //switch (snapshot.connectionState)
             return CenteredMessage(

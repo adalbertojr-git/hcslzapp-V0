@@ -370,7 +370,8 @@ class _DashboardPageState extends State<DashboardPage> {
           ],
         ));
 
-  _grid() => (widget._user == 'admin' ? _gridAdm() : _gridAssociated());
+  _grid() => (widget._user == 'atajr' ? _gridAdm() : _gridAssociated());
+  //_grid() => (widget._user == 'atajr' ? _gridAdm() : _gridAssociated());
 
   _gridAssociated() => Expanded(
         child: Container(
