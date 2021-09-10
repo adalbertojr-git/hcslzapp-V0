@@ -1,0 +1,2 @@
+const ADMIN = 'ADMIN';
+const ASSOCIATED = 'ASSOCIATED';

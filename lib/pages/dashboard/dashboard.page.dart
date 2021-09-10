@@ -5,7 +5,9 @@ import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:hcslzapp/common/photo.image.provider.dart';
 import 'package:hcslzapp/controllers/app.controller.dart';
 import 'package:hcslzapp/controllers/dashboard.controller.dart';
+import 'package:hcslzapp/common/associated.profiles.dart';
 import 'package:hcslzapp/models/associated.dart';
+import 'package:hcslzapp/models/role.dart';
 import 'package:hcslzapp/pages/access.request/access.request.list.page.dart';
 import 'package:hcslzapp/pages/associated/associated.list.page.dart';
 import 'package:hcslzapp/pages/boutique/boutique.list.page.dart';
@@ -370,8 +372,9 @@ class _DashboardPageState extends State<DashboardPage> {
           ],
         ));
 
-  _grid() => (widget._user == 'atajr' ? _gridAdm() : _gridAssociated());
-  //_grid() => (widget._user == 'atajr' ? _gridAdm() : _gridAssociated());
+  _grid() => (_controller.isAssociatedAdmin()
+      ? _gridAdm()
+      : _gridAssociated());
 
   _gridAssociated() => Expanded(
         child: Container(
@@ -539,18 +542,18 @@ class _DashboardPageState extends State<DashboardPage> {
       );*/
 
   _gridAdm() => Expanded(
-    child: Container(
-      padding: EdgeInsets.only(left: 16, right: 16, bottom: 16),
-      child: ListView.builder(
-        itemCount: _listAdmScreens.length,
-        itemBuilder: (BuildContext context, int index) => Card(
-          color: Colors.deepOrange[100],
-          shadowColor: Colors.black,
-          child: _listItem(context, index),
+        child: Container(
+          padding: EdgeInsets.only(left: 16, right: 16, bottom: 16),
+          child: ListView.builder(
+            itemCount: _listAdmScreens.length,
+            itemBuilder: (BuildContext context, int index) => Card(
+              color: Colors.deepOrange[100],
+              shadowColor: Colors.black,
+              child: _listItem(context, index),
+            ),
+          ),
         ),
-      ),
-    ),
-  );
+      );
 
 /*  Widget _listItem(BuildContext context, int index) => Card(
         color: Colors.deepOrange[100],
@@ -596,41 +599,40 @@ class _DashboardPageState extends State<DashboardPage> {
       );*/
 
   Widget _listItem(BuildContext context, int index) => Column(
-    children: <Widget>[
-      ListTile(
-        leading: Icon(
-          _listAdmIcons[index],
-          size: 50,
-          color: Colors.orange,
-        ),
-        title: Text(
-          _listAdmScreens[index],
-          style: TextStyle(
-            fontSize: 14.0,
-            fontWeight: FontWeight.bold,
-          ),
-        ),
-        subtitle: Column(
-          mainAxisAlignment: MainAxisAlignment.start,
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: <Widget>[
-            Text(
-              _listAdmScreensDesc[index],
+        children: <Widget>[
+          ListTile(
+            leading: Icon(
+              _listAdmIcons[index],
+              size: 50,
+              color: Colors.orange,
+            ),
+            title: Text(
+              _listAdmScreens[index],
               style: TextStyle(
-                fontSize: 11.0,
-                fontWeight: FontWeight.normal,
+                fontSize: 14.0,
+                fontWeight: FontWeight.bold,
               ),
             ),
-          ],
-        ),
-        onTap: () {
-          Navigator.push(
-            context,
-            MaterialPageRoute(
-                builder: (_) => _listAdmWidgets[index]),
-          );
-        },
-      )
-    ],
-  );
+            subtitle: Column(
+              mainAxisAlignment: MainAxisAlignment.start,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: <Widget>[
+                Text(
+                  _listAdmScreensDesc[index],
+                  style: TextStyle(
+                    fontSize: 11.0,
+                    fontWeight: FontWeight.normal,
+                  ),
+                ),
+              ],
+            ),
+            onTap: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (_) => _listAdmWidgets[index]),
+              );
+            },
+          )
+        ],
+      );
 }

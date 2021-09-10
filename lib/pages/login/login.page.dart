@@ -141,7 +141,6 @@ class LoginPage extends StatelessWidget {
             await _controller
                 .findByIdToList(_tokenDetails.associatedId())
                 .then((value) {
-                  print(value);
               _controller.associated = value[0];
             });
           Navigator.pushReplacement(

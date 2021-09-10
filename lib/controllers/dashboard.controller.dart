@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:hcslzapp/common/associated.profiles.dart';
 import 'package:hcslzapp/models/associated.dart';
+import 'package:hcslzapp/models/role.dart';
 import 'package:hcslzapp/pages/about/about.page.dart';
 import 'package:hcslzapp/pages/associated/associated.update.page.dart';
 import 'package:hcslzapp/pages/digital.identity/digital.identity.page.dart';
@@ -28,6 +30,11 @@ abstract class DashboardControllerBase with Store {
   setPhoto(String value) {
     photoUrl = value;
     associated.photoUrl = photoUrl;
+  }
+
+  bool isAssociatedAdmin() {
+    return associated.authenticate.roles
+        .any((Role r) => r.profile == ADMIN);
   }
 
   String getFirstName(String fullName) {
