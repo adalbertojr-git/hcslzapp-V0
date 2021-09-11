@@ -22,7 +22,7 @@ const hintConfPswAccessReq = 'Repita a senha para confirmação';
 Associated
 */
 const labelPhone = 'Telefone';
-const hintPhone = 'Telefone no formato (DDD) XXXXX-XXXX';
+const hintPhone = '(DDD) XXXXX-XXXX';
 const labelSponsor = 'Padrinho';
 const hintSponsor = 'Quem é o seu padrinho no Harley Club?';
 const labelAssociatedType = 'Tipo de Associado';
@@ -30,9 +30,9 @@ const labelCNH = 'CNH';
 const hintCNH = 'Carteira Nac. de Habilitação';
 const labelCPF = 'CPF';
 const hintCPF = 'Cadastro de Pesssoa Física';
-const labelDateBirth = 'Data de Nascimento';
+const labelDateBirth = 'Nascimento';
 const hintDate = 'dd/mm/yyyy';
-const labelDateShield = 'Data de Escudamento';
+const labelDateShield = 'Escudamento';
 /*
 Dependent
 */

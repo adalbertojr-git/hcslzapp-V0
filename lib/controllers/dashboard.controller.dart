@@ -22,8 +22,12 @@ abstract class DashboardControllerBase with Store {
   @observable
   Associated associated;
 
+  @observable
+  String profile;
+
   init() {
     photoUrl = associated == null ? "" : associated.photoUrl;
+    profile = ASSOCIATED;
   }
 
   @action
@@ -37,6 +41,8 @@ abstract class DashboardControllerBase with Store {
         .any((Role r) => r.profile == ADMIN);
   }
 
+  changeProfile() => profile = (profile == ADMIN ? ASSOCIATED : ADMIN);
+
   String getFirstName(String fullName) {
     var names = fullName.split(' ');
     return names[0];
@@ -44,13 +50,12 @@ abstract class DashboardControllerBase with Store {
 
   Future<void> loadAssociatedUpdatePage(
     BuildContext context,
-    String user,
     int id,
   ) async {
     var _photoUrl = await Navigator.push(
       context,
       MaterialPageRoute(
-        builder: (context) => AssociatedUpdatePage(user, id),
+        builder: (context) => AssociatedUpdatePage(id),
       ),
     );
     if (_photoUrl != null) {

@@ -24,9 +24,8 @@ import 'package:mask_text_input_formatter/mask_text_input_formatter.dart';
 
 class AssociatedUpdatePage extends StatefulWidget {
   final int _associatedId;
-  final String _user;
 
-  AssociatedUpdatePage(this._user, this._associatedId);
+  AssociatedUpdatePage(this._associatedId);
 
   @override
   _AssociatedUpdatePageState createState() => _AssociatedUpdatePageState();
@@ -107,27 +106,23 @@ class _AssociatedUpdatePageState extends State<AssociatedUpdatePage> {
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
-                  widget._user != 'admin'
-                      ? IconButton(
-                          icon: Icon(
-                            Icons.add_photo_alternate,
-                            color: Colors.black,
-                            size: 43.0,
-                          ),
-                          onPressed: _controller.getImageFromGallery,
-                        )
-                      : Container(),
+                  IconButton(
+                    icon: Icon(
+                      Icons.add_photo_alternate,
+                      color: Colors.black,
+                      size: 43.0,
+                    ),
+                    onPressed: _controller.getImageFromGallery,
+                  ),
                   _photo(),
-                  widget._user != 'admin'
-                      ? IconButton(
-                          icon: Icon(
-                            Icons.add_a_photo,
-                            color: Colors.black,
-                            size: 40.0,
-                          ),
-                          onPressed: _controller.getImageFromCamera,
-                        )
-                      : Container(),
+                  IconButton(
+                    icon: Icon(
+                      Icons.add_a_photo,
+                      color: Colors.black,
+                      size: 40.0,
+                    ),
+                    onPressed: _controller.getImageFromCamera,
+                  ),
                 ],
               ),
               SizedBox(

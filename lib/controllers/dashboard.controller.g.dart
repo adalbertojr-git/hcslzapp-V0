@@ -39,6 +39,21 @@ mixin _$DashboardController on DashboardControllerBase, Store {
     });
   }
 
+  final _$profileAtom = Atom(name: 'DashboardControllerBase.profile');
+
+  @override
+  String get profile {
+    _$profileAtom.reportRead();
+    return super.profile;
+  }
+
+  @override
+  set profile(String value) {
+    _$profileAtom.reportWrite(value, super.profile, () {
+      super.profile = value;
+    });
+  }
+
   final _$DashboardControllerBaseActionController =
       ActionController(name: 'DashboardControllerBase');
 
@@ -57,7 +72,8 @@ mixin _$DashboardController on DashboardControllerBase, Store {
   String toString() {
     return '''
 photoUrl: ${photoUrl},
-associated: ${associated}
+associated: ${associated},
+profile: ${profile}
     ''';
   }
 }

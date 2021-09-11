@@ -2,12 +2,11 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
+import 'package:hcslzapp/common/associated.profiles.dart';
 import 'package:hcslzapp/common/photo.image.provider.dart';
 import 'package:hcslzapp/controllers/app.controller.dart';
 import 'package:hcslzapp/controllers/dashboard.controller.dart';
-import 'package:hcslzapp/common/associated.profiles.dart';
 import 'package:hcslzapp/models/associated.dart';
-import 'package:hcslzapp/models/role.dart';
 import 'package:hcslzapp/pages/access.request/access.request.list.page.dart';
 import 'package:hcslzapp/pages/associated/associated.list.page.dart';
 import 'package:hcslzapp/pages/boutique/boutique.list.page.dart';
@@ -62,7 +61,7 @@ class _DashboardPageState extends State<DashboardPage> {
     _controller.associated = widget._associated;
     _controller.init();
     _listAdmWidgets = [
-      AssociatedListPage(widget._user),
+      AssociatedListPage(),
       PaymentListPage(widget._user),
       EventCalendarPage(widget._user),
       PartnershipListPage(widget._user),
@@ -74,13 +73,18 @@ class _DashboardPageState extends State<DashboardPage> {
   Widget build(BuildContext context) {
     _gContext = context;
     return Scaffold(
-        body: Stack(
-          children: <Widget>[_dashBg(), _content()],
-        ),
+        body: _widgets(),
         drawer: _drawr(),
         drawerEdgeDragWidth: 50,
         drawerScrimColor: Colors.black87);
   }
+
+  _widgets() => Stack(
+        children: <Widget>[
+          _dashBg(),
+          _content(),
+        ],
+      );
 
   _drawr() => Drawer(
         child: ListView(
@@ -111,7 +115,7 @@ class _DashboardPageState extends State<DashboardPage> {
             Row(
               mainAxisAlignment: MainAxisAlignment.end,
               children: [
-                Text('Dark:'),
+                Text('Tema Escuro:'),
                 Container(
                   child: Switch(
                     activeColor: Colors.orangeAccent,
@@ -126,6 +130,20 @@ class _DashboardPageState extends State<DashboardPage> {
               ],
             ),
             _buildDrawerMenu(),
+            Divider(),
+            _controller.isAssociatedAdmin()
+                ? ListTile(
+                    leading: Icon(Icons.add_moderator),
+                    title: Text("Trocar Perfil de Acesso"),
+                    onTap: () async {
+                      setState(() {
+                        _controller.changeProfile();
+                        _widgets();
+                        Navigator.pop(_gContext);
+                      });
+                    },
+                  )
+                : Container(),
             Divider(),
             ListTile(
               leading: Icon(Icons.info),
@@ -145,9 +163,6 @@ class _DashboardPageState extends State<DashboardPage> {
           ],
         ),
       );
-
-  _buildDrawerMenu() =>
-      (widget._user == 'admin' ? _menuAdm() : _menuAssociated());
 
   _menuAdm() => Column(
         children: <Widget>[
@@ -203,6 +218,9 @@ class _DashboardPageState extends State<DashboardPage> {
         ],
       );
 
+  _buildDrawerMenu() =>
+      (_controller.profile == ADMIN ? _menuAdm() : _menuAssociated());
+
   _menuAssociated() => Column(
         children: <Widget>[
           ListTile(
@@ -211,7 +229,6 @@ class _DashboardPageState extends State<DashboardPage> {
             onTap: () async {
               await _controller.loadAssociatedUpdatePage(
                 _gContext,
-                widget._user,
                 widget._associated.id,
               );
               Navigator.pop(_gContext);
@@ -305,18 +322,18 @@ class _DashboardPageState extends State<DashboardPage> {
   _header() => ListTile(
         contentPadding: EdgeInsets.only(left: 10, right: 20, top: 30),
         title: Text(
-          widget._user == 'admin'
+          _controller.profile == ADMIN
               ? 'Olá, Administrador'
               : 'Olá, ${_controller.getFirstName(widget._associated.name)}',
           style: TextStyle(color: Colors.white, fontSize: 22.0),
         ),
         subtitle: Text(
-          widget._user == 'admin'
+          _controller.profile == ADMIN
               ? 'harleyclubslz@gmail.com'
               : widget._associated.email,
           style: TextStyle(color: Colors.white60),
         ),
-        trailing: widget._user == 'admin'
+        trailing: _controller.profile == ADMIN
             ? null
             : Observer(
                 builder: (_) => CircleAvatar(
@@ -344,7 +361,7 @@ class _DashboardPageState extends State<DashboardPage> {
               ),
       );
 
-  _bar() => (widget._user != 'admin'
+  _bar() => (_controller.profile != ADMIN
       ? SizedBox()
       : Row(
           mainAxisAlignment: MainAxisAlignment.center,
@@ -372,9 +389,7 @@ class _DashboardPageState extends State<DashboardPage> {
           ],
         ));
 
-  _grid() => (_controller.isAssociatedAdmin()
-      ? _gridAdm()
-      : _gridAssociated());
+  _grid() => (_controller.profile == ADMIN ? _gridAdm() : _gridAssociated());
 
   _gridAssociated() => Expanded(
         child: Container(
@@ -390,7 +405,6 @@ class _DashboardPageState extends State<DashboardPage> {
                 onClick: () {
                   _controller.loadAssociatedUpdatePage(
                     _gContext,
-                    widget._user,
                     widget._associated.id,
                   );
                 },
@@ -628,8 +642,8 @@ class _DashboardPageState extends State<DashboardPage> {
             ),
             onTap: () {
               Navigator.push(
-                context,
-                MaterialPageRoute(builder: (_) => _listAdmWidgets[index]),
+                _gContext,
+                MaterialPageRoute(builder: (_gContext) => _listAdmWidgets[index]),
               );
             },
           )
