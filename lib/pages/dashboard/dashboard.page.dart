@@ -133,7 +133,7 @@ class _DashboardPageState extends State<DashboardPage> {
             Divider(),
             _controller.isAssociatedAdmin()
                 ? ListTile(
-                    leading: Icon(Icons.add_moderator),
+                    leading: Icon(Icons.wifi_protected_setup),
                     title: Text("Trocar Perfil de Acesso"),
                     onTap: () async {
                       setState(() {
