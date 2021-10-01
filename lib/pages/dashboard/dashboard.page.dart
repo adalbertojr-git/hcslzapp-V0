@@ -11,6 +11,7 @@ import 'package:hcslzapp/pages/access.request/access.request.list.page.dart';
 import 'package:hcslzapp/pages/associated/associated.list.page.dart';
 import 'package:hcslzapp/pages/boutique/boutique.list.page.dart';
 import 'package:hcslzapp/pages/event/event.calendar.page.dart';
+import 'package:hcslzapp/pages/management/management.list.page.dart';
 import 'package:hcslzapp/pages/partnership/partnership.list.page.dart';
 import 'package:hcslzapp/pages/payment/payment.list.page.dart';
 
@@ -379,10 +380,15 @@ class _DashboardPageState extends State<DashboardPage> {
               },
             ),
             BarButton(
-              'Documentos',
-              'Atas, estatuto, etc',
-              Icons.file_copy_outlined,
+              'Perfis',
+              'Administradores do App',
+              Icons.admin_panel_settings,
               onClick: () {
+                Navigator.push(
+                  _gContext,
+                  MaterialPageRoute(
+                      builder: (_gContext) => ManagementListPage()),
+                );
                 //_showContactsList(context);
               },
             ),

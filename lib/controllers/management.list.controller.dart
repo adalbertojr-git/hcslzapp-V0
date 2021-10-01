@@ -4,12 +4,12 @@ import 'package:hcslzapp/models/associated.dart';
 import 'package:hcslzapp/repositories/associated.repo.dart';
 import 'package:mobx/mobx.dart';
 
-part 'associated.list.controller.g.dart';
+part 'management.list.controller.g.dart';
 
-class AssociatedListController = AssociatedListControllerBase
-    with _$AssociatedListController;
+class ManagementListController = ManagementListControllerBase
+    with _$ManagementListController;
 
-abstract class AssociatedListControllerBase with Store {
+abstract class ManagementListControllerBase with Store {
   @observable
   var nameCtrl = TextEditingController();
 
