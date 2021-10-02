@@ -1,6 +1,8 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
+import 'package:hcslzapp/common/associated.profiles.dart';
 import 'package:hcslzapp/models/associated.dart';
+import 'package:hcslzapp/models/role.dart';
 import 'package:hcslzapp/repositories/associated.repo.dart';
 import 'package:mobx/mobx.dart';
 
@@ -49,6 +51,15 @@ abstract class ManagementListControllerBase with Store {
       }, test: (e) => e is Exception);
 
   Future<List<Associated>> getFuture() => future = findAll();
+
+  loadAdmins(List<Associated> list) {
+    for (Associated associated in list) {
+      if (associated.authenticate.roles
+          .any((Role r) => r.profile == ADMIN)) {
+        associateds.add(associated);
+      }
+    }
+  }
 
   @action
   setFilter(String value) => filter = value;

@@ -7,7 +7,7 @@ import 'package:hcslzapp/components/my.text.form.field.dart';
 import 'package:hcslzapp/components/progress.dart';
 import 'package:hcslzapp/components/top.bar.dart';
 import 'package:hcslzapp/components/transaction.auth.dialog.dart';
-import 'package:hcslzapp/controllers/associated.list.controller.dart';
+import 'package:hcslzapp/controllers/management.list.controller.dart';
 import 'package:hcslzapp/models/associated.dart';
 import 'package:asuka/asuka.dart' as asuka;
 import 'management.add.page.dart';
@@ -21,7 +21,7 @@ class ManagementListPage extends StatefulWidget {
 }
 
 class ManagementListPageState extends State<ManagementListPage> {
-  AssociatedListController _controller = AssociatedListController();
+  ManagementListController _controller = ManagementListController();
 
   @override
   void initState() {
@@ -58,7 +58,7 @@ class ManagementListPageState extends State<ManagementListPage> {
                           );
                         if (snapshot.data.length > 0) {
                           _controller.init();
-                          _controller.associateds.addAll(snapshot.data);
+                          _controller.loadAdmins(snapshot.data);
                           _controller.associateds.sort(
                                 (a, b) => a.name.compareTo(b.name),
                           );
