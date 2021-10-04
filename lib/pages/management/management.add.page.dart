@@ -6,9 +6,8 @@ import 'package:hcslzapp/components/centered.message.dart';
 import 'package:hcslzapp/components/my.text.form.field.dart';
 import 'package:hcslzapp/components/progress.dart';
 import 'package:hcslzapp/components/top.bar.dart';
-import 'package:hcslzapp/controllers/associated.list.controller.dart';
+import 'package:hcslzapp/controllers/management.add.controller.dart';
 import 'package:hcslzapp/models/associated.dart';
-import 'package:hcslzapp/pages/associated/associated.update.page.dart';
 
 class ManagementAddPage extends StatefulWidget {
 
@@ -19,7 +18,7 @@ class ManagementAddPage extends StatefulWidget {
 }
 
 class ManagementAddPageState extends State<ManagementAddPage> {
-  AssociatedListController _controller = AssociatedListController();
+  ManagementAddController _controller = ManagementAddController();
   bool _value = false;
 
   @override
@@ -57,7 +56,7 @@ class ManagementAddPageState extends State<ManagementAddPage> {
                           );
                         if (snapshot.data.length > 0) {
                           _controller.init();
-                          _controller.associateds.addAll(snapshot.data);
+                          _controller.loadNotAdmins(snapshot.data);
                           _controller.associateds.sort(
                                 (a, b) => a.name.compareTo(b.name),
                           );
