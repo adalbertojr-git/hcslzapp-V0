@@ -57,7 +57,6 @@ class Associated {
             .map((dependents) => Dependent.fromJson(dependents))),
         motorcycles = List.from((json['motorcycles'] as List)
             .map((motorcycles) => Motorcycle.fromJson(motorcycles))),
-        //authenticate = json['authenticate'];
         authenticate = Authenticate.fromJson(json['authenticate']);
 
   Map<String, dynamic> toJson() => {

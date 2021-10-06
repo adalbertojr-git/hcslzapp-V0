@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:hcslzapp/common/associated.profiles.dart';
+import 'package:hcslzapp/controllers/item.model.dart';
 import 'package:hcslzapp/models/associated.dart';
 import 'package:hcslzapp/models/role.dart';
 import 'package:hcslzapp/repositories/associated.repo.dart';
@@ -14,6 +15,9 @@ class ManagementAddController = ManagementAddControllerBase
 abstract class ManagementAddControllerBase with Store {
   @observable
   var nameCtrl = TextEditingController();
+
+  @observable
+  List<ItemModel> listItems = [];
 
   @observable
   bool isHidedButton = true;
@@ -37,7 +41,7 @@ abstract class ManagementAddControllerBase with Store {
   String filter = '';
 
   init() {
-    associateds.clear();
+    listItems.clear();
   }
 
   @action
@@ -54,9 +58,8 @@ abstract class ManagementAddControllerBase with Store {
 
   loadNotAdmins(List<Associated> list) {
     for (Associated associated in list) {
-      if (!associated.authenticate.roles
-          .any((Role r) => r.profile == ADMIN)) {
-        associateds.add(associated);
+      if (!associated.authenticate.roles.any((Role r) => r.profile == ADMIN)) {
+        listItems.add(ItemModel(name: associated.name, check: false));
       }
     }
   }
@@ -65,12 +68,12 @@ abstract class ManagementAddControllerBase with Store {
   setFilter(String value) => filter = value;
 
   @computed
-  List<Associated> get listFiltered {
+  List<ItemModel> get listFiltered {
     if (filter.isEmpty) {
-      return List<Associated>.from(associateds);
+      return List<ItemModel>.from(listItems);
     } else {
-      return List<Associated>.from(associateds
-          .where((element) => element.name.contains(filter)));
+      return List<ItemModel>.from(
+          listItems.where((element) => element.name.contains(filter)));
     }
   }
 }

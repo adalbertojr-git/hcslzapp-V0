@@ -9,11 +9,11 @@ part of 'management.add.controller.dart';
 // ignore_for_file: non_constant_identifier_names, unnecessary_brace_in_string_interps, unnecessary_lambdas, prefer_expression_function_bodies, lines_longer_than_80_chars, avoid_as, avoid_annotating_with_dynamic
 
 mixin _$ManagementAddController on ManagementAddControllerBase, Store {
-  Computed<List<Associated>> _$listFilteredComputed;
+  Computed<List<ItemModel>> _$listFilteredComputed;
 
   @override
-  List<Associated> get listFiltered => (_$listFilteredComputed ??=
-          Computed<List<Associated>>(() => super.listFiltered,
+  List<ItemModel> get listFiltered => (_$listFilteredComputed ??=
+          Computed<List<ItemModel>>(() => super.listFiltered,
               name: 'ManagementAddControllerBase.listFiltered'))
       .value;
 
@@ -29,6 +29,21 @@ mixin _$ManagementAddController on ManagementAddControllerBase, Store {
   set nameCtrl(TextEditingController value) {
     _$nameCtrlAtom.reportWrite(value, super.nameCtrl, () {
       super.nameCtrl = value;
+    });
+  }
+
+  final _$listItemsAtom = Atom(name: 'ManagementAddControllerBase.listItems');
+
+  @override
+  List<ItemModel> get listItems {
+    _$listItemsAtom.reportRead();
+    return super.listItems;
+  }
+
+  @override
+  set listItems(List<ItemModel> value) {
+    _$listItemsAtom.reportWrite(value, super.listItems, () {
+      super.listItems = value;
     });
   }
 
@@ -180,6 +195,7 @@ mixin _$ManagementAddController on ManagementAddControllerBase, Store {
   String toString() {
     return '''
 nameCtrl: ${nameCtrl},
+listItems: ${listItems},
 isHidedButton: ${isHidedButton},
 associateds: ${associateds},
 associated: ${associated},
