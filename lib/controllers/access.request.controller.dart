@@ -243,13 +243,3 @@ abstract class FormControllerBase with Store {
   @action
   changeConfPassword(String value) => confPassword = value;
 }
-
-/*class ListItemController = ListItemControllerBase with _$ListItemController;
-
-abstract class ListItemControllerBase with Store {
-  @observable
-  bool check = false;
-
-  @action
-  setCheck(bool value) => check = value;
-}*/

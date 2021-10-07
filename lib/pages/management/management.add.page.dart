@@ -103,47 +103,10 @@ class ManagementAddPageState extends State<ManagementAddPage> {
                   shrinkWrap: true,
                   itemCount: _controller.listFiltered.length,
                   itemBuilder: (_, int i) {
-                    return CheckboxWidget(item: _controller.listFiltered[i]);
-/*                  return Container(
-                      decoration: BoxDecoration(
-                        color: Colors.white30,
-                        shape: BoxShape.rectangle,
-                        borderRadius: BorderRadius.circular(8.0),
-                        boxShadow: <BoxShadow>[
-                          BoxShadow(
-                            color: Colors.black12,
-                            blurRadius: 10.0,
-                            offset: Offset(0.0, 5.0),
-                          ),
-                        ],
-                      ),
-                      child: Observer(
-                        builder: (_) => CheckboxListTile(
-                          title: Text(
-                            _controller.listFiltered[i].name,
-                            style: TextStyle(
-                              fontWeight: FontWeight.bold,
-                            ),
-                          ),
-                          subtitle: Text('Tel.: ' +
-                              (_controller.listFiltered[i].phone != null
-                                  ? _controller.listFiltered[i].phone
-                                  : 'Não informado') +
-                              '\n' +
-                              'Status: ' +
-                              _controller.listFiltered[i].status),
-                          secondary: CircleAvatar(
-                            child: Icon(Icons.person),
-                            backgroundColor: Colors.white,
-                          ),
-                          value: _controller.check,
-                          onChanged: (bool value) {
-                            //_controller.setCheck(value);
-                            _controller.listFiltered[i].check = value;
-                          },
-                        ),
-                      ),
-                    );*/
+                    return CheckboxWidget(
+                      item: _controller.listFiltered[i],
+                      controller: _controller,
+                    );
                   },
                   separatorBuilder: (_, int index) => const Divider(),
                 ),
@@ -157,9 +120,10 @@ class ManagementAddPageState extends State<ManagementAddPage> {
 }
 
 class CheckboxWidget extends StatelessWidget {
-  const CheckboxWidget({Key key, this.item}) : super(key: key);
+  const CheckboxWidget({Key key, this.item, this.controller}) : super(key: key);
 
   final ItemModel item;
+  final ManagementAddController controller;
 
   @override
   Widget build(BuildContext context) {
@@ -192,6 +156,12 @@ class CheckboxWidget extends StatelessWidget {
           value: item.check,
           onChanged: (bool value) {
             item.check = value;
+            if (value) {
+              controller.associateds.add(item.id);
+            } else {
+              controller.associateds.remove(item.id);
+            }
+            print(controller.associateds);
           },
           secondary: CircleAvatar(
             child: Icon(Icons.person),

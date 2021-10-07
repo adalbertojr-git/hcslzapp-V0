@@ -7,7 +7,10 @@ class ItemModel = ItemModelBase
 
 abstract class ItemModelBase with Store {
 
-  ItemModelBase({this.name, this.phone, this.status, this.check});
+  ItemModelBase({this.id, this.name, this.phone, this.status, this.check});
+
+  @observable
+  int id;
 
   @observable
   String name;

@@ -5,6 +5,7 @@ import 'package:hcslzapp/controllers/item.model.dart';
 import 'package:hcslzapp/models/associated.dart';
 import 'package:hcslzapp/models/role.dart';
 import 'package:hcslzapp/repositories/associated.repo.dart';
+import 'package:hcslzapp/repositories/management.repo.dart';
 import 'package:mobx/mobx.dart';
 
 part 'management.add.controller.g.dart';
@@ -20,13 +21,16 @@ abstract class ManagementAddControllerBase with Store {
   var listItems = ObservableList<ItemModel>();
 
   @observable
+  var associateds = ObservableList<int>();
+
+  @observable
   bool isHidedButton = true;
 
   @observable
-  Associated associated;
+  AssociatedRepo _associatedRepo = AssociatedRepo();
 
   @observable
-  AssociatedRepo _associatedRepo = AssociatedRepo();
+  ManagementRepo _managementRepo = ManagementRepo();
 
   @observable
   String errorMsg;
@@ -39,6 +43,7 @@ abstract class ManagementAddControllerBase with Store {
 
   init() {
     listItems.clear();
+    associateds.clear();
   }
 
   @action
@@ -53,11 +58,19 @@ abstract class ManagementAddControllerBase with Store {
 
   Future<List<Associated>> getFuture() => future = findAll();
 
+  @action
+  Future save() => ObservableFuture(_managementRepo
+          .save(List<int>.from(associateds))
+          .then((value) => value)).catchError((e) {
+        errorMsg = "${e.message}";
+      }, test: (e) => e is Exception);
+
   loadNotAdmins(List<Associated> list) {
     for (Associated associated in list) {
       if (!associated.authenticate.roles.any((Role r) => r.profile == ADMIN)) {
         listItems.add(
           ItemModel(
+              id: associated.id,
               name: associated.name,
               phone: associated.phone,
               status: associated.status,

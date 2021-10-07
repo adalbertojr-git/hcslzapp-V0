@@ -47,6 +47,22 @@ mixin _$ManagementAddController on ManagementAddControllerBase, Store {
     });
   }
 
+  final _$associatedsAtom =
+      Atom(name: 'ManagementAddControllerBase.associateds');
+
+  @override
+  ObservableList<int> get associateds {
+    _$associatedsAtom.reportRead();
+    return super.associateds;
+  }
+
+  @override
+  set associateds(ObservableList<int> value) {
+    _$associatedsAtom.reportWrite(value, super.associateds, () {
+      super.associateds = value;
+    });
+  }
+
   final _$isHidedButtonAtom =
       Atom(name: 'ManagementAddControllerBase.isHidedButton');
 
@@ -63,21 +79,6 @@ mixin _$ManagementAddController on ManagementAddControllerBase, Store {
     });
   }
 
-  final _$associatedAtom = Atom(name: 'ManagementAddControllerBase.associated');
-
-  @override
-  Associated get associated {
-    _$associatedAtom.reportRead();
-    return super.associated;
-  }
-
-  @override
-  set associated(Associated value) {
-    _$associatedAtom.reportWrite(value, super.associated, () {
-      super.associated = value;
-    });
-  }
-
   final _$_associatedRepoAtom =
       Atom(name: 'ManagementAddControllerBase._associatedRepo');
 
@@ -91,6 +92,22 @@ mixin _$ManagementAddController on ManagementAddControllerBase, Store {
   set _associatedRepo(AssociatedRepo value) {
     _$_associatedRepoAtom.reportWrite(value, super._associatedRepo, () {
       super._associatedRepo = value;
+    });
+  }
+
+  final _$_managementRepoAtom =
+      Atom(name: 'ManagementAddControllerBase._managementRepo');
+
+  @override
+  ManagementRepo get _managementRepo {
+    _$_managementRepoAtom.reportRead();
+    return super._managementRepo;
+  }
+
+  @override
+  set _managementRepo(ManagementRepo value) {
+    _$_managementRepoAtom.reportWrite(value, super._managementRepo, () {
+      super._managementRepo = value;
     });
   }
 
@@ -165,6 +182,17 @@ mixin _$ManagementAddController on ManagementAddControllerBase, Store {
   }
 
   @override
+  Future<dynamic> save() {
+    final _$actionInfo = _$ManagementAddControllerBaseActionController
+        .startAction(name: 'ManagementAddControllerBase.save');
+    try {
+      return super.save();
+    } finally {
+      _$ManagementAddControllerBaseActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
   dynamic setFilter(String value) {
     final _$actionInfo = _$ManagementAddControllerBaseActionController
         .startAction(name: 'ManagementAddControllerBase.setFilter');
@@ -180,8 +208,8 @@ mixin _$ManagementAddController on ManagementAddControllerBase, Store {
     return '''
 nameCtrl: ${nameCtrl},
 listItems: ${listItems},
+associateds: ${associateds},
 isHidedButton: ${isHidedButton},
-associated: ${associated},
 errorMsg: ${errorMsg},
 future: ${future},
 filter: ${filter},
