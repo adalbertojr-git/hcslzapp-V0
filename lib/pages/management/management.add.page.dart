@@ -19,7 +19,6 @@ class ManagementAddPage extends StatefulWidget {
 
 class ManagementAddPageState extends State<ManagementAddPage> {
   ManagementAddController _controller = ManagementAddController();
-  bool _value = false;
 
   @override
   void initState() {
@@ -99,53 +98,55 @@ class ManagementAddPageState extends State<ManagementAddPage> {
               onChanged: _controller.setFilter,
             ),
             Expanded(
-              child: ListView.separated(
-                shrinkWrap: true,
-                itemCount: _controller.listFiltered.length,
-                itemBuilder: (_, int i) {
-                  return CheckboxWidget(item: _controller.listFiltered[i]);
+              child: Observer(
+                builder: (_) => ListView.separated(
+                  shrinkWrap: true,
+                  itemCount: _controller.listFiltered.length,
+                  itemBuilder: (_, int i) {
+                    return CheckboxWidget(item: _controller.listFiltered[i]);
 /*                  return Container(
-                    decoration: BoxDecoration(
-                      color: Colors.white30,
-                      shape: BoxShape.rectangle,
-                      borderRadius: BorderRadius.circular(8.0),
-                      boxShadow: <BoxShadow>[
-                        BoxShadow(
-                          color: Colors.black12,
-                          blurRadius: 10.0,
-                          offset: Offset(0.0, 5.0),
-                        ),
-                      ],
-                    ),
-                    child: Observer(
-                      builder: (_) => CheckboxListTile(
-                        title: Text(
-                          _controller.listFiltered[i].name,
-                          style: TextStyle(
-                            fontWeight: FontWeight.bold,
+                      decoration: BoxDecoration(
+                        color: Colors.white30,
+                        shape: BoxShape.rectangle,
+                        borderRadius: BorderRadius.circular(8.0),
+                        boxShadow: <BoxShadow>[
+                          BoxShadow(
+                            color: Colors.black12,
+                            blurRadius: 10.0,
+                            offset: Offset(0.0, 5.0),
                           ),
-                        ),
-                        subtitle: Text('Tel.: ' +
-                            (_controller.listFiltered[i].phone != null
-                                ? _controller.listFiltered[i].phone
-                                : 'Não informado') +
-                            '\n' +
-                            'Status: ' +
-                            _controller.listFiltered[i].status),
-                        secondary: CircleAvatar(
-                          child: Icon(Icons.person),
-                          backgroundColor: Colors.white,
-                        ),
-                        value: _controller.check,
-                        onChanged: (bool value) {
-                          //_controller.setCheck(value);
-                          _controller.listFiltered[i].check = value;
-                        },
+                        ],
                       ),
-                    ),
-                  );*/
-                },
-                separatorBuilder: (_, int index) => const Divider(),
+                      child: Observer(
+                        builder: (_) => CheckboxListTile(
+                          title: Text(
+                            _controller.listFiltered[i].name,
+                            style: TextStyle(
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                          subtitle: Text('Tel.: ' +
+                              (_controller.listFiltered[i].phone != null
+                                  ? _controller.listFiltered[i].phone
+                                  : 'Não informado') +
+                              '\n' +
+                              'Status: ' +
+                              _controller.listFiltered[i].status),
+                          secondary: CircleAvatar(
+                            child: Icon(Icons.person),
+                            backgroundColor: Colors.white,
+                          ),
+                          value: _controller.check,
+                          onChanged: (bool value) {
+                            //_controller.setCheck(value);
+                            _controller.listFiltered[i].check = value;
+                          },
+                        ),
+                      ),
+                    );*/
+                  },
+                  separatorBuilder: (_, int index) => const Divider(),
+                ),
               ),
             ),
           ],
@@ -155,25 +156,48 @@ class ManagementAddPageState extends State<ManagementAddPage> {
   _save() {}
 }
 
-class CheckboxWidget extends StatefulWidget {
+class CheckboxWidget extends StatelessWidget {
   const CheckboxWidget({Key key, this.item}) : super(key: key);
 
   final ItemModel item;
 
   @override
-  _CheckboxWidgetState createState() => _CheckboxWidgetState();
-}
-
-class _CheckboxWidgetState extends State<CheckboxWidget> {
-  @override
   Widget build(BuildContext context) {
     return Observer(
-      builder: (_) => CheckboxListTile(
-        title: Text(widget.item.name),
-        value: (widget.item.check == null ? false : widget.item.check),
-        onChanged: (bool value) {
-          widget.item.check = value;
-        },
+      builder: (_) => Container(
+        decoration: BoxDecoration(
+          color: Colors.white30,
+          shape: BoxShape.rectangle,
+          borderRadius: BorderRadius.circular(8.0),
+          boxShadow: <BoxShadow>[
+            BoxShadow(
+              color: Colors.black12,
+              blurRadius: 10.0,
+              offset: Offset(0.0, 5.0),
+            ),
+          ],
+        ),
+        child: CheckboxListTile(
+          title: Text(
+            item.name,
+            style: TextStyle(
+              fontWeight: FontWeight.bold,
+            ),
+          ),
+          subtitle: Text('Tel.: ' +
+              (item.phone != null ? item.phone : 'Não informado') +
+              '\n' +
+              'Status: ' +
+              item.status),
+          value: item.check,
+          onChanged: (bool value) {
+            item.check = value;
+          },
+          secondary: CircleAvatar(
+            child: Icon(Icons.person),
+            backgroundColor: Colors.white,
+          ),
+        ),
       ),
     );
   }

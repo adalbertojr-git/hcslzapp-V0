@@ -17,13 +17,10 @@ abstract class ManagementAddControllerBase with Store {
   var nameCtrl = TextEditingController();
 
   @observable
-  List<ItemModel> listItems = [];
+  var listItems = ObservableList<ItemModel>();
 
   @observable
   bool isHidedButton = true;
-
-  @observable
-  ObservableList associateds = [].asObservable();
 
   @observable
   Associated associated;
@@ -59,7 +56,13 @@ abstract class ManagementAddControllerBase with Store {
   loadNotAdmins(List<Associated> list) {
     for (Associated associated in list) {
       if (!associated.authenticate.roles.any((Role r) => r.profile == ADMIN)) {
-        listItems.add(ItemModel(name: associated.name, check: false));
+        listItems.add(
+          ItemModel(
+              name: associated.name,
+              phone: associated.phone,
+              status: associated.status,
+              check: false),
+        );
       }
     }
   }

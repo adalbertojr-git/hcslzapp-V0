@@ -24,6 +24,36 @@ mixin _$ItemModel on ItemModelBase, Store {
     });
   }
 
+  final _$phoneAtom = Atom(name: 'ItemModelBase.phone');
+
+  @override
+  String get phone {
+    _$phoneAtom.reportRead();
+    return super.phone;
+  }
+
+  @override
+  set phone(String value) {
+    _$phoneAtom.reportWrite(value, super.phone, () {
+      super.phone = value;
+    });
+  }
+
+  final _$statusAtom = Atom(name: 'ItemModelBase.status');
+
+  @override
+  String get status {
+    _$statusAtom.reportRead();
+    return super.status;
+  }
+
+  @override
+  set status(String value) {
+    _$statusAtom.reportWrite(value, super.status, () {
+      super.status = value;
+    });
+  }
+
   final _$checkAtom = Atom(name: 'ItemModelBase.check');
 
   @override
@@ -57,6 +87,8 @@ mixin _$ItemModel on ItemModelBase, Store {
   String toString() {
     return '''
 name: ${name},
+phone: ${phone},
+status: ${status},
 check: ${check}
     ''';
   }

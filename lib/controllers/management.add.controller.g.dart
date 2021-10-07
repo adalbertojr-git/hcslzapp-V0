@@ -35,13 +35,13 @@ mixin _$ManagementAddController on ManagementAddControllerBase, Store {
   final _$listItemsAtom = Atom(name: 'ManagementAddControllerBase.listItems');
 
   @override
-  List<ItemModel> get listItems {
+  ObservableList<ItemModel> get listItems {
     _$listItemsAtom.reportRead();
     return super.listItems;
   }
 
   @override
-  set listItems(List<ItemModel> value) {
+  set listItems(ObservableList<ItemModel> value) {
     _$listItemsAtom.reportWrite(value, super.listItems, () {
       super.listItems = value;
     });
@@ -60,22 +60,6 @@ mixin _$ManagementAddController on ManagementAddControllerBase, Store {
   set isHidedButton(bool value) {
     _$isHidedButtonAtom.reportWrite(value, super.isHidedButton, () {
       super.isHidedButton = value;
-    });
-  }
-
-  final _$associatedsAtom =
-      Atom(name: 'ManagementAddControllerBase.associateds');
-
-  @override
-  ObservableList<dynamic> get associateds {
-    _$associatedsAtom.reportRead();
-    return super.associateds;
-  }
-
-  @override
-  set associateds(ObservableList<dynamic> value) {
-    _$associatedsAtom.reportWrite(value, super.associateds, () {
-      super.associateds = value;
     });
   }
 
@@ -197,7 +181,6 @@ mixin _$ManagementAddController on ManagementAddControllerBase, Store {
 nameCtrl: ${nameCtrl},
 listItems: ${listItems},
 isHidedButton: ${isHidedButton},
-associateds: ${associateds},
 associated: ${associated},
 errorMsg: ${errorMsg},
 future: ${future},
