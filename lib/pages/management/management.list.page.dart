@@ -13,7 +13,6 @@ import 'package:asuka/asuka.dart' as asuka;
 import 'management.add.page.dart';
 
 class ManagementListPage extends StatefulWidget {
-
   @override
   State<StatefulWidget> createState() {
     return ManagementListPageState();
@@ -34,62 +33,70 @@ class ManagementListPageState extends State<ManagementListPage> {
   }
 
   @override
-  Widget build(BuildContext context) =>
-      Observer(
-        builder: (_) =>
-            Scaffold(
-              body: FutureBuilder<List<Associated>>(
-                future: _controller.future,
-                builder: (context, snapshot) {
-                  switch (snapshot.connectionState) {
-                    case ConnectionState.none:
-                      break;
-                    case ConnectionState.waiting:
-                      return Progress();
-                    case ConnectionState.active:
-                      break;
-                    default:
-                      if (snapshot.hasError) {
-                        return CenteredMessage(snapshot.error.toString());
-                      } else {
-                        if (snapshot.data == null)
-                          return CenteredMessage(
-                            _controller.errorMsg,
-                          );
-                        if (snapshot.data.length > 0) {
-                          _controller.init();
-                          _controller.loadAdmins(snapshot.data);
-                          _controller.associateds.sort(
-                                (a, b) => a.name.compareTo(b.name),
-                          );
-                          return _widgets();
-                        } else
-                          return CenteredMessage(
-                            'Não existem associados cadastrados. Confira as requisições de acesso.',
-                          );
-                      }
-                  } //switch (snapshot.connectionState)
-                  return CenteredMessage(
-                    'Houve um erro desconhecido ao executar a transação.',
-                  );
-                },
-              ),
-              floatingActionButtonLocation:
+  Widget build(BuildContext context) => Observer(
+        builder: (_) => Scaffold(
+          body: FutureBuilder<List<Associated>>(
+            future: _controller.future,
+            builder: (context, snapshot) {
+              switch (snapshot.connectionState) {
+                case ConnectionState.none:
+                  break;
+                case ConnectionState.waiting:
+                  return Progress();
+                case ConnectionState.active:
+                  break;
+                default:
+                  if (snapshot.hasError) {
+                    return CenteredMessage(snapshot.error.toString());
+                  } else {
+                    if (snapshot.data == null)
+                      return CenteredMessage(
+                        _controller.errorMsg,
+                      );
+                    if (snapshot.data.length > 0) {
+                      _controller.init();
+                      _controller.loadAdmins(snapshot.data);
+                      _controller.associateds.sort(
+                        (a, b) => a.name.compareTo(b.name),
+                      );
+                      return _widgets();
+                    } else
+                      return CenteredMessage(
+                        'Não existem associados cadastrados. Confira as requisições de acesso.',
+                      );
+                  }
+              } //switch (snapshot.connectionState)
+              return CenteredMessage(
+                'Houve um erro desconhecido ao executar a transação.',
+              );
+            },
+          ),
+          floatingActionButtonLocation:
               FloatingActionButtonLocation.centerFloat,
-              floatingActionButton: _controller.isHidedButton
-                  ? null
-                  : Button(icon: Icons.add, onClick: () {
-                Navigator.push(
-                  _,
-                  MaterialPageRoute(
-                      builder: (_) => ManagementAddPage()),
-                );
-              }),
-            ),
+          floatingActionButton: _controller.isHidedButton
+              ? null
+              : Button(
+                  icon: Icons.add,
+                  onClick: () {
+                    final Future<Associated> future = Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => ManagementAddPage(),
+                      ),
+                    );
+                    future.then(
+                      (associated) {
+                        if (associated != null) {
+                          //_controller.associateds.add(associated);
+                          _controller.getFuture();
+                        }
+                      },
+                    );
+                  }),
+        ),
       );
 
-  _widgets() =>
-      Container(
+  _widgets() => Container(
         decoration: BoxDecoration(
           gradient: LinearGradient(
             colors: [Colors.white30, Colors.deepOrange],
@@ -97,10 +104,7 @@ class ManagementListPageState extends State<ManagementListPage> {
             end: FractionalOffset.bottomRight,
           ),
         ),
-        height: MediaQuery
-            .of(context)
-            .size
-            .height,
+        height: MediaQuery.of(context).size.height,
         child: Column(
           children: [
             TopBar(),
@@ -114,60 +118,59 @@ class ManagementListPageState extends State<ManagementListPage> {
             ),
             Expanded(
               child: Observer(
-                builder: (_) =>
-                    ListView.separated(
-                      shrinkWrap: true,
-                      itemCount: _controller.listFiltered.length,
-                      itemBuilder: (_, int i) {
-                        return Container(
-                          decoration: BoxDecoration(
-                            color: Colors.white30,
-                            shape: BoxShape.rectangle,
-                            borderRadius: BorderRadius.circular(8.0),
-                            boxShadow: <BoxShadow>[
-                              BoxShadow(
-                                color: Colors.black12,
-                                blurRadius: 10.0,
-                                offset: Offset(0.0, 5.0),
-                              ),
-                            ],
+                builder: (_) => ListView.separated(
+                  shrinkWrap: true,
+                  itemCount: _controller.listFiltered.length,
+                  itemBuilder: (_, int i) {
+                    return Container(
+                      decoration: BoxDecoration(
+                        color: Colors.white30,
+                        shape: BoxShape.rectangle,
+                        borderRadius: BorderRadius.circular(8.0),
+                        boxShadow: <BoxShadow>[
+                          BoxShadow(
+                            color: Colors.black12,
+                            blurRadius: 10.0,
+                            offset: Offset(0.0, 5.0),
                           ),
-                          child: ListTile(
-                            title: Text(
-                              _controller.listFiltered[i].name,
-                              style: TextStyle(
-                                fontWeight: FontWeight.bold,
-                              ),
-                            ),
-                            subtitle: Text('Tel.: ' +
-                                (_controller.listFiltered[i].phone != null
-                                    ? _controller.listFiltered[i].phone
-                                    : 'Não informado') +
-                                '\n' +
-                                'Status: ' +
-                                _controller.listFiltered[i].status),
-                            leading: CircleAvatar(
-                              child: Icon(Icons.admin_panel_settings),
-                              backgroundColor: Colors.white,
-                            ),
-                            trailing: Wrap(
-                              spacing: 10, // space between two icons
-                              children: <Widget>[
-                                GestureDetector(
-                                  child: Icon(
-                                    Icons.delete,
-                                  ),
-                                  onTap: () {
-                                    _delete(i);
-                                  },
-                                ),
-                              ],
-                            ),
+                        ],
+                      ),
+                      child: ListTile(
+                        title: Text(
+                          _controller.listFiltered[i].name,
+                          style: TextStyle(
+                            fontWeight: FontWeight.bold,
                           ),
-                        );
-                      },
-                      separatorBuilder: (_, int index) => const Divider(),
-                    ),
+                        ),
+                        subtitle: Text('Tel.: ' +
+                            (_controller.listFiltered[i].phone != null
+                                ? _controller.listFiltered[i].phone
+                                : 'Não informado') +
+                            '\n' +
+                            'Status: ' +
+                            _controller.listFiltered[i].status),
+                        leading: CircleAvatar(
+                          child: Icon(Icons.admin_panel_settings),
+                          backgroundColor: Colors.white,
+                        ),
+                        trailing: Wrap(
+                          spacing: 10, // space between two icons
+                          children: <Widget>[
+                            GestureDetector(
+                              child: Icon(
+                                Icons.delete,
+                              ),
+                              onTap: () {
+                                _delete(i);
+                              },
+                            ),
+                          ],
+                        ),
+                      ),
+                    );
+                  },
+                  separatorBuilder: (_, int index) => const Divider(),
+                ),
               ),
             ),
           ],
@@ -182,14 +185,14 @@ class ManagementListPageState extends State<ManagementListPage> {
               msg: 'Deseja excluir o registro selecionado?');
         });
     if (response == true) {
-/*      _controller.deleteById(_controller.accessRequests[i]).then((value) {
+      _controller.deleteById(_controller.associateds[i]).then((value) {
         if (value != null) {
           asuka.showSnackBar(
             SnackBar(
-              content: Text('Requisição de acesso excluída com sucesso.'),
+              content: Text('Administrador excluído com sucesso.'),
             ),
           );
-          _controller.accessRequests.removeAt(i);
+          _controller.associateds.removeAt(i);
         } else {
           asuka.showSnackBar(
             SnackBar(
@@ -197,7 +200,7 @@ class ManagementListPageState extends State<ManagementListPage> {
             ),
           );
         }
-      });*/
+      });
     }
   }
 }

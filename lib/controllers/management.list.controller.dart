@@ -4,6 +4,7 @@ import 'package:hcslzapp/common/associated.profiles.dart';
 import 'package:hcslzapp/models/associated.dart';
 import 'package:hcslzapp/models/role.dart';
 import 'package:hcslzapp/repositories/associated.repo.dart';
+import 'package:hcslzapp/repositories/management.repo.dart';
 import 'package:mobx/mobx.dart';
 
 part 'management.list.controller.g.dart';
@@ -26,6 +27,9 @@ abstract class ManagementListControllerBase with Store {
 
   @observable
   AssociatedRepo _associatedRepo = AssociatedRepo();
+
+  @observable
+  ManagementRepo _managementRepo = ManagementRepo();
 
   @observable
   String errorMsg;
@@ -51,6 +55,13 @@ abstract class ManagementListControllerBase with Store {
       }, test: (e) => e is Exception);
 
   Future<List<Associated>> getFuture() => future = findAll();
+
+  @action
+  Future deleteById(Associated associated) =>
+      ObservableFuture(_managementRepo.deleteById(associated).then((value) => value))
+          .catchError((e) {
+        errorMsg = "${e.message}";
+      }, test: (e) => e is Exception);
 
   loadAdmins(List<Associated> list) {
     for (Associated associated in list) {

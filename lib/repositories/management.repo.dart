@@ -6,7 +6,7 @@ import 'package:hcslzapp/models/associated.dart';
 import 'package:http/http.dart';
 import '../common/settings.dart';
 
-const String _accReqUrl = '/management';
+const String _managUrl = '/management';
 
 class ManagementRepo {
 
@@ -16,7 +16,7 @@ class ManagementRepo {
     );
     final Response response = await client
         .post(
-          mainUrl + _accReqUrl,
+          mainUrl + _managUrl,
           headers: {
             'Content-type': 'application/json',
             'Accept': 'application/json'
@@ -26,19 +26,19 @@ class ManagementRepo {
         .timeout(
           Duration(seconds: 10),
         );
-    if (response.statusCode == 200) {
+    if (response.statusCode == 204) {
       return response;
     } else {
       throw HttpException(getMessage(response.statusCode));
     }
   }
-/*
-  Future<Response> deleteById(AccessRequest accessRequest) async {
+  
+  Future<Response> deleteById(Associated associated) async {
     final String encodedJson = jsonEncode(
-      accessRequest.toJson(),
+      associated.toJson(),
     );
     final Response response = await client.delete(
-      mainUrl + _accReqUrl + "/" + accessRequest.id.toString(),
+      mainUrl + _managUrl + "/" + associated.id.toString(),
       headers: {
         'Content-type': 'application/json',
       },
@@ -50,5 +50,5 @@ class ManagementRepo {
     } else {
       throw HttpException(getMessage(response.statusCode));
     }
-  }*/
+  }
 }

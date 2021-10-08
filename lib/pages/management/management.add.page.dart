@@ -9,6 +9,7 @@ import 'package:hcslzapp/components/top.bar.dart';
 import 'package:hcslzapp/controllers/item.model.dart';
 import 'package:hcslzapp/controllers/management.add.controller.dart';
 import 'package:hcslzapp/models/associated.dart';
+import 'package:asuka/asuka.dart' as asuka;
 
 class ManagementAddPage extends StatefulWidget {
   @override
@@ -116,7 +117,27 @@ class ManagementAddPageState extends State<ManagementAddPage> {
         ),
       );
 
-  _save() {}
+  _save() {
+    _controller.save().then(
+          (value) {
+        if (value != null) {
+          asuka.showSnackBar(
+            SnackBar(
+              content: Text('Admininstradore(s) salvo(s) com sucesso.'),
+            ),
+          );
+          Navigator.of(context).pop(value);
+          //Navigator.pop(context, value);
+        } else {
+          asuka.showSnackBar(
+            SnackBar(
+              content: Text(_controller.errorMsg),
+            ),
+          );
+        }
+      },
+    );
+  }
 }
 
 class CheckboxWidget extends StatelessWidget {
