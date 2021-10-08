@@ -69,6 +69,21 @@ mixin _$ItemModel on ItemModelBase, Store {
     });
   }
 
+  final _$authenticateAtom = Atom(name: 'ItemModelBase.authenticate');
+
+  @override
+  Authenticate get authenticate {
+    _$authenticateAtom.reportRead();
+    return super.authenticate;
+  }
+
+  @override
+  set authenticate(Authenticate value) {
+    _$authenticateAtom.reportWrite(value, super.authenticate, () {
+      super.authenticate = value;
+    });
+  }
+
   final _$checkAtom = Atom(name: 'ItemModelBase.check');
 
   @override
@@ -105,6 +120,7 @@ id: ${id},
 name: ${name},
 phone: ${phone},
 status: ${status},
+authenticate: ${authenticate},
 check: ${check}
     ''';
   }

@@ -21,7 +21,10 @@ abstract class ManagementAddControllerBase with Store {
   var listItems = ObservableList<ItemModel>();
 
   @observable
-  var associateds = ObservableList<int>();
+  var ids = ObservableList<int>();
+
+  @observable
+  var associateds = ObservableList<ItemModel>();
 
   @observable
   bool isHidedButton = true;
@@ -43,6 +46,7 @@ abstract class ManagementAddControllerBase with Store {
 
   init() {
     listItems.clear();
+    ids.clear();
     associateds.clear();
   }
 
@@ -60,7 +64,7 @@ abstract class ManagementAddControllerBase with Store {
 
   @action
   Future save() => ObservableFuture(_managementRepo
-          .save(List<int>.from(associateds))
+          .save(List<int>.from(ids))
           .then((value) => value)).catchError((e) {
         errorMsg = "${e.message}";
       }, test: (e) => e is Exception);
@@ -74,6 +78,7 @@ abstract class ManagementAddControllerBase with Store {
               name: associated.name,
               phone: associated.phone,
               status: associated.status,
+              authenticate: associated.authenticate,
               check: false),
         );
       }

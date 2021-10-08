@@ -47,17 +47,32 @@ mixin _$ManagementAddController on ManagementAddControllerBase, Store {
     });
   }
 
+  final _$idsAtom = Atom(name: 'ManagementAddControllerBase.ids');
+
+  @override
+  ObservableList<int> get ids {
+    _$idsAtom.reportRead();
+    return super.ids;
+  }
+
+  @override
+  set ids(ObservableList<int> value) {
+    _$idsAtom.reportWrite(value, super.ids, () {
+      super.ids = value;
+    });
+  }
+
   final _$associatedsAtom =
       Atom(name: 'ManagementAddControllerBase.associateds');
 
   @override
-  ObservableList<int> get associateds {
+  ObservableList<ItemModel> get associateds {
     _$associatedsAtom.reportRead();
     return super.associateds;
   }
 
   @override
-  set associateds(ObservableList<int> value) {
+  set associateds(ObservableList<ItemModel> value) {
     _$associatedsAtom.reportWrite(value, super.associateds, () {
       super.associateds = value;
     });
@@ -208,6 +223,7 @@ mixin _$ManagementAddController on ManagementAddControllerBase, Store {
     return '''
 nameCtrl: ${nameCtrl},
 listItems: ${listItems},
+ids: ${ids},
 associateds: ${associateds},
 isHidedButton: ${isHidedButton},
 errorMsg: ${errorMsg},

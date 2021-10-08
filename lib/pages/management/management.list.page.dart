@@ -7,9 +7,12 @@ import 'package:hcslzapp/components/my.text.form.field.dart';
 import 'package:hcslzapp/components/progress.dart';
 import 'package:hcslzapp/components/top.bar.dart';
 import 'package:hcslzapp/components/transaction.auth.dialog.dart';
+import 'package:hcslzapp/controllers/item.model.dart';
 import 'package:hcslzapp/controllers/management.list.controller.dart';
 import 'package:hcslzapp/models/associated.dart';
 import 'package:asuka/asuka.dart' as asuka;
+import 'package:hcslzapp/models/dependent.dart';
+import 'package:hcslzapp/models/motorcycle.dart';
 import 'management.add.page.dart';
 
 class ManagementListPage extends StatefulWidget {
@@ -59,6 +62,7 @@ class ManagementListPageState extends State<ManagementListPage> {
                       _controller.associateds.sort(
                         (a, b) => a.name.compareTo(b.name),
                       );
+                      print(_controller.associateds);
                       return _widgets();
                     } else
                       return CenteredMessage(
@@ -78,16 +82,26 @@ class ManagementListPageState extends State<ManagementListPage> {
               : Button(
                   icon: Icons.add,
                   onClick: () {
-                    final Future<List<int>> future = Navigator.push(
+                    final Future<List<ItemModel>> future = Navigator.push(
                       context,
                       MaterialPageRoute(
                         builder: (context) => ManagementAddPage(),
                       ),
                     );
                     future.then(
-                      (value) {
-                        if (value != null) {
-                          //_controller.associateds.add(associated);
+                      (items) {
+                        if (items != null) {
+                          items.forEach((element) {
+                            _controller.associateds.add(Associated(
+                              id: element.id,
+                              name: element.name,
+                              phone: element.phone,
+                              status: element.status,
+                              dependents: List<Dependent>.from([]),
+                              motorcycles: List<Motorcycle>.from([]),
+                              authenticate: element.authenticate,
+                            ));
+                          });
                         }
                       },
                     );
@@ -190,8 +204,7 @@ class ManagementListPageState extends State<ManagementListPage> {
             content: Text('Deve haver pelo menos um Administrador cadastrado.'),
           ),
         );
-      }
-      else {
+      } else {
         _controller.deleteById(_controller.associateds[i]).then((value) {
           if (value != null) {
             asuka.showSnackBar(
