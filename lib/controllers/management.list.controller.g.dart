@@ -96,6 +96,22 @@ mixin _$ManagementListController on ManagementListControllerBase, Store {
     });
   }
 
+  final _$_managementRepoAtom =
+      Atom(name: 'ManagementListControllerBase._managementRepo');
+
+  @override
+  ManagementRepo get _managementRepo {
+    _$_managementRepoAtom.reportRead();
+    return super._managementRepo;
+  }
+
+  @override
+  set _managementRepo(ManagementRepo value) {
+    _$_managementRepoAtom.reportWrite(value, super._managementRepo, () {
+      super._managementRepo = value;
+    });
+  }
+
   final _$errorMsgAtom = Atom(name: 'ManagementListControllerBase.errorMsg');
 
   @override
@@ -161,6 +177,17 @@ mixin _$ManagementListController on ManagementListControllerBase, Store {
         .startAction(name: 'ManagementListControllerBase.findAll');
     try {
       return super.findAll();
+    } finally {
+      _$ManagementListControllerBaseActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
+  Future<dynamic> deleteById(Associated associated) {
+    final _$actionInfo = _$ManagementListControllerBaseActionController
+        .startAction(name: 'ManagementListControllerBase.deleteById');
+    try {
+      return super.deleteById(associated);
     } finally {
       _$ManagementListControllerBaseActionController.endAction(_$actionInfo);
     }

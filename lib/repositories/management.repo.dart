@@ -10,9 +10,9 @@ const String _managUrl = '/management';
 
 class ManagementRepo {
 
-  Future<Response> save(List<int> ids) async {
+  Future<Response> save(List<int> ints) async {
     final String encodedJson = jsonEncode(
-      ids,
+      ints,
     );
     final Response response = await client
         .post(

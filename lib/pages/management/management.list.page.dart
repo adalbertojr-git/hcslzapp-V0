@@ -78,17 +78,16 @@ class ManagementListPageState extends State<ManagementListPage> {
               : Button(
                   icon: Icons.add,
                   onClick: () {
-                    final Future<Associated> future = Navigator.push(
+                    final Future<List<int>> future = Navigator.push(
                       context,
                       MaterialPageRoute(
                         builder: (context) => ManagementAddPage(),
                       ),
                     );
                     future.then(
-                      (associated) {
-                        if (associated != null) {
+                      (value) {
+                        if (value != null) {
                           //_controller.associateds.add(associated);
-                          _controller.getFuture();
                         }
                       },
                     );
@@ -185,22 +184,31 @@ class ManagementListPageState extends State<ManagementListPage> {
               msg: 'Deseja excluir o registro selecionado?');
         });
     if (response == true) {
-      _controller.deleteById(_controller.associateds[i]).then((value) {
-        if (value != null) {
-          asuka.showSnackBar(
-            SnackBar(
-              content: Text('Administrador excluído com sucesso.'),
-            ),
-          );
-          _controller.associateds.removeAt(i);
-        } else {
-          asuka.showSnackBar(
-            SnackBar(
-              content: Text(_controller.errorMsg),
-            ),
-          );
-        }
-      });
+      if (_controller.associateds.length == 1) {
+        asuka.showSnackBar(
+          SnackBar(
+            content: Text('Deve haver pelo menos um Administrador cadastrado.'),
+          ),
+        );
+      }
+      else {
+        _controller.deleteById(_controller.associateds[i]).then((value) {
+          if (value != null) {
+            asuka.showSnackBar(
+              SnackBar(
+                content: Text('Administrador excluído com sucesso.'),
+              ),
+            );
+            _controller.associateds.removeAt(i);
+          } else {
+            asuka.showSnackBar(
+              SnackBar(
+                content: Text(_controller.errorMsg),
+              ),
+            );
+          }
+        });
+      }
     }
   }
 }

@@ -130,8 +130,8 @@ class _DashboardPageState extends State<DashboardPage> {
                 ),
               ],
             ),
-            _buildDrawerMenu(),
-            Divider(),
+            //_buildDrawerMenu(),
+            //Divider(),
             _controller.isAssociatedAdmin()
                 ? ListTile(
                     leading: Icon(Icons.wifi_protected_setup),
@@ -145,7 +145,7 @@ class _DashboardPageState extends State<DashboardPage> {
                     },
                   )
                 : Container(),
-            Divider(),
+            //Divider(),
             ListTile(
               leading: Icon(Icons.info),
               title: Text("Sobre o HCSlz App"),

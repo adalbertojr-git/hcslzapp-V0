@@ -10,6 +10,9 @@ import 'package:hcslzapp/controllers/item.model.dart';
 import 'package:hcslzapp/controllers/management.add.controller.dart';
 import 'package:hcslzapp/models/associated.dart';
 import 'package:asuka/asuka.dart' as asuka;
+import 'package:hcslzapp/models/authenticate.dart';
+import 'package:hcslzapp/models/dependent.dart';
+import 'package:hcslzapp/models/motorcycle.dart';
 
 class ManagementAddPage extends StatefulWidget {
   @override
@@ -74,7 +77,7 @@ class ManagementAddPageState extends State<ManagementAddPage> {
               FloatingActionButtonLocation.centerFloat,
           floatingActionButton: _controller.isHidedButton
               ? null
-              : Button(icon: Icons.save, onClick: () => _save()),
+              : Button(icon: Icons.save, onClick: () => _save(context)),
         ),
       );
 
@@ -117,17 +120,20 @@ class ManagementAddPageState extends State<ManagementAddPage> {
         ),
       );
 
-  _save() {
+  _save(BuildContext context) {
     _controller.save().then(
-          (value) {
+      (value) {
         if (value != null) {
           asuka.showSnackBar(
             SnackBar(
               content: Text('Admininstradore(s) salvo(s) com sucesso.'),
             ),
           );
-          Navigator.of(context).pop(value);
-          //Navigator.pop(context, value);
+
+/*          final Associated associated = Associated (
+            id: _controller.associateds
+          );*/
+          Navigator.pop(context, _controller.associateds);
         } else {
           asuka.showSnackBar(
             SnackBar(
@@ -179,6 +185,14 @@ class CheckboxWidget extends StatelessWidget {
             item.check = value;
             if (value) {
               controller.associateds.add(item.id);
+/*              controller.associateds.add(Associated(
+                id: item.id,
+                name: item.name,
+                // email: "hc@gmail.com",
+                dependents: List<Dependent>.from([]),
+                motorcycles: List<Motorcycle>.from([]),
+                authenticate: Authenticate(id: 0),
+              ));*/
             } else {
               controller.associateds.remove(item.id);
             }
