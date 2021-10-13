@@ -31,7 +31,6 @@ class _PaymentAssociatedPageState extends State<PaymentAssociatedPage> {
         _controller.setButtonVisibilty();
       }
     });
-    _controller.init();
     super.initState();
   }
 
@@ -55,14 +54,13 @@ class _PaymentAssociatedPageState extends State<PaymentAssociatedPage> {
                     return CenteredMessage(
                       _controller.errorMsg,
                     );
-                  //if (_controller.payments.isEmpty) {
                   if (snapshot.data.length > 0) {
+                    _controller.init();
                     _controller.payments.addAll(snapshot.data);
                     _controller.payments.sort(
                       (a, b) => b.year.compareTo(a.year),
                     );
                   }
-                  //}
                   return _buildListView();
                 }
             } //switch (snapshot.connectionState)
@@ -79,29 +77,27 @@ class _PaymentAssociatedPageState extends State<PaymentAssociatedPage> {
                     : Button(
                         icon: Icons.add,
                         onClick: () {
-                          _add();
+                          final Future<Payment> future = Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (_) => PaymentAddPage(
+                                widget._isAdmin,
+                                null,
+                                _controller.loadYears(),
+                                widget._associated,
+                              ),
+                            ),
+                          );
+                          future.then((value) {
+                            if (value != null) {
+                              _controller.payments.add(value);
+                            }
+                          });
                         },
                       ),
               )
             : Container(),
       );
-
-  _add() async {
-    var payment = await Navigator.push(
-      context,
-      MaterialPageRoute(
-        builder: (_) => PaymentAddPage(
-          widget._isAdmin,
-          null,
-          _controller.loadYears(),
-          widget._associated,
-        ),
-      ),
-    );
-    if (payment != null) {
-      _controller.setPayments(payment);
-    }
-  }
 
   _buildListView() => Container(
         decoration: BoxDecoration(
@@ -206,24 +202,6 @@ class _PaymentAssociatedPageState extends State<PaymentAssociatedPage> {
                                   );
                                 },
                               ),
-/*                    trailing: Wrap(
-                      spacing: 10, // space between two icons
-                      children: <Widget>[
-                        GestureDetector(
-                          child: Icon(
-                            Icons.arrow_forward,
-                          ),
-                          onTap: () {
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) => PaymentAddPage(_controller.payments[i],
-                                      _controller.loadYears())),
-                            );
-                          },
-                        ),
-                      ],
-                    ),*/
                       ),
                     );
                   },
@@ -234,101 +212,6 @@ class _PaymentAssociatedPageState extends State<PaymentAssociatedPage> {
           ],
         ),
       );
-
-/*
-
-  get _buildListView2 => Container(
-        padding: EdgeInsets.fromLTRB(5.0, 5.0, 5.0, 0.0),
-        decoration: BoxDecoration(
-          gradient: LinearGradient(
-            colors: [Colors.white30, Colors.deepOrange],
-            begin: FractionalOffset.topLeft,
-            end: FractionalOffset.bottomRight,
-          ),
-        ),
-        height: MediaQuery.of(context).size.height,
-        child: Column(
-          children: [
-            TopBar(),
-            Expanded(
-              child: Observer(
-                builder: (_) => ListView.builder(
-                  itemCount: _controller.payments.length,
-                  itemBuilder: (_, i) {
-                    var payments = List<Payment>.from(_controller.payments);
-                    return _buildExpansionTile(payments, i);
-                  },
-                ),
-              ),
-            ),
-          ],
-        ),
-      );
-
-  ExpansionTile _buildExpansionTile(List<Payment> payments, int i) =>
-      ExpansionTile(
-        title: Text(
-          'Ano: ' + payments[i].year,
-          style: TextStyle(
-            fontSize: 18.0,
-            fontWeight: FontWeight.bold,
-          ),
-        ),
-        subtitle: Text('Total: R\$ ' + _controller.getTotal().toString()),
-        trailing:  widget._user == 'admin' ? Wrap(
-          spacing: 10, // space between two icons
-          children: <Widget>[
-            GestureDetector(
-              child: Icon(
-                Icons.delete,
-              ),
-              onTap: () {
-                _delete(i);
-              },
-            ),
-            GestureDetector(
-              child: Icon(
-                Icons.edit,
-              ),
-              onTap: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                      builder: (context) => PaymentAddPage(_controller.payments[i],
-                          _controller.loadYears())),
-                );
-              },
-            ),
-          ],
-        ) : null,
-        children: <Widget>[
-          Column(
-            children: payments[i].paymentMonths.map(_buildListTile).toList(),
-          ),
-        ],
-      );
-
-  ListTile _buildListTile(PaymentMonths paymentMonths) => ListTile(
-        leading: Icon(
-          Icons.check_circle,
-          color: Colors.green,
-          size: 25,
-        ),
-        title: Text(
-          _controller.getMonthName(paymentMonths.month),
-          style: TextStyle(
-            fontSize: 18.0,
-            fontWeight: FontWeight.bold,
-          ),
-        ),
-        subtitle: Text(
-          'Valor Pago: R\$ ' + paymentMonths.value.toString(),
-          style: TextStyle(
-            fontWeight: FontWeight.bold,
-          ),
-        ),
-      );
-*/
 
   _delete(int i) async {
     var response = await showDialog(
