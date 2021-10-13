@@ -36,7 +36,7 @@ abstract class DashboardControllerBase with Store {
     associated.photoUrl = photoUrl;
   }
 
-  bool isAssociatedAdmin() {
+  bool isAdmin() {
     return associated.authenticate.roles
         .any((Role r) => r.profile == ADMIN);
   }
@@ -65,13 +65,13 @@ abstract class DashboardControllerBase with Store {
 
   loadPaymentAssociatedPage(
     BuildContext context,
-    String user,
+    bool isAdmin,
     Associated associated,
   ) async {
     await Navigator.push(
       context,
       MaterialPageRoute(
-        builder: (context) => PaymentAssociatedPage(user, associated),
+        builder: (context) => PaymentAssociatedPage(isAdmin, associated),
       ),
     );
   }

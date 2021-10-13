@@ -10,9 +10,6 @@ import 'package:hcslzapp/controllers/item.model.dart';
 import 'package:hcslzapp/controllers/management.add.controller.dart';
 import 'package:hcslzapp/models/associated.dart';
 import 'package:asuka/asuka.dart' as asuka;
-import 'package:hcslzapp/models/authenticate.dart';
-import 'package:hcslzapp/models/dependent.dart';
-import 'package:hcslzapp/models/motorcycle.dart';
 
 class ManagementAddPage extends StatefulWidget {
   @override
@@ -189,20 +186,10 @@ class CheckboxWidget extends StatelessWidget {
                 item.check = value;
                 if (value) {
                   controller.ids.add(item.id);
-/*              controller.associateds.add(Associated(
-                id: item.id,
-                name: item.name,
-                // email: "hc@gmail.com",
-                dependents: List<Dependent>.from([]),
-                motorcycles: List<Motorcycle>.from([]),
-                authenticate: Authenticate(id: 0),
-              ));*/
                   controller.associateds.add(item);
                 } else {
                   controller.ids.remove(item.id);
                 }
-                print(controller.ids);
-                print(controller.associateds);
               },
               secondary: CircleAvatar(
                 child: Icon(Icons.person),

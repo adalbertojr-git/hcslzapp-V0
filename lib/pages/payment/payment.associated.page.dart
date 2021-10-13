@@ -12,10 +12,10 @@ import 'package:hcslzapp/pages/payment/payment.add.page.dart';
 import 'package:asuka/asuka.dart' as asuka;
 
 class PaymentAssociatedPage extends StatefulWidget {
-  final String _user;
+  final bool _isAdmin;
   final Associated _associated;
 
-  const PaymentAssociatedPage(this._user, this._associated);
+  const PaymentAssociatedPage(this._isAdmin, this._associated);
 
   @override
   _PaymentAssociatedPageState createState() => _PaymentAssociatedPageState();
@@ -56,12 +56,12 @@ class _PaymentAssociatedPageState extends State<PaymentAssociatedPage> {
                       _controller.errorMsg,
                     );
                   //if (_controller.payments.isEmpty) {
-                    if (snapshot.data.length > 0) {
-                      _controller.payments.addAll(snapshot.data);
-                      _controller.payments.sort(
-                        (a, b) => b.year.compareTo(a.year),
-                      );
-                    }
+                  if (snapshot.data.length > 0) {
+                    _controller.payments.addAll(snapshot.data);
+                    _controller.payments.sort(
+                      (a, b) => b.year.compareTo(a.year),
+                    );
+                  }
                   //}
                   return _buildListView();
                 }
@@ -72,7 +72,7 @@ class _PaymentAssociatedPageState extends State<PaymentAssociatedPage> {
           },
         ),
         floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
-        floatingActionButton: widget._user == 'admin'
+        floatingActionButton: widget._isAdmin
             ? Observer(
                 builder: (_) => _controller.isHidedButton
                     ? Container()
@@ -91,7 +91,11 @@ class _PaymentAssociatedPageState extends State<PaymentAssociatedPage> {
       context,
       MaterialPageRoute(
         builder: (_) => PaymentAddPage(
-            widget._user, null, _controller.loadYears(), widget._associated),
+          widget._isAdmin,
+          null,
+          _controller.loadYears(),
+          widget._associated,
+        ),
       ),
     );
     if (payment != null) {
@@ -145,7 +149,7 @@ class _PaymentAssociatedPageState extends State<PaymentAssociatedPage> {
                           child: Icon(Icons.calendar_today),
                           backgroundColor: Colors.white,
                         ),
-                        trailing: widget._user == 'admin'
+                        trailing: widget._isAdmin
                             ? Wrap(
                                 spacing: 10, // space between two icons
                                 children: <Widget>[
@@ -162,21 +166,23 @@ class _PaymentAssociatedPageState extends State<PaymentAssociatedPage> {
                                       Icons.arrow_forward,
                                     ),
                                     onTap: () {
-                                      final Future<Payment> future =  Navigator.push(
+                                      final Future<Payment> future =
+                                          Navigator.push(
                                         context,
                                         MaterialPageRoute(
                                             builder: (context) =>
                                                 PaymentAddPage(
-                                                    widget._user,
+                                                    widget._isAdmin,
                                                     _controller.payments[i],
                                                     _controller.loadYears(),
                                                     widget._associated)),
                                       );
                                       future.then(
-                                            (payment) {
+                                        (payment) {
                                           if (payment != null) {
                                             _controller.payments.removeAt(i);
-                                            _controller.payments.insert(i, payment);
+                                            _controller.payments
+                                                .insert(i, payment);
                                           }
                                         },
                                       );
@@ -193,7 +199,7 @@ class _PaymentAssociatedPageState extends State<PaymentAssociatedPage> {
                                     context,
                                     MaterialPageRoute(
                                         builder: (context) => PaymentAddPage(
-                                            widget._user,
+                                            widget._isAdmin,
                                             _controller.payments[i],
                                             _controller.loadYears(),
                                             widget._associated)),

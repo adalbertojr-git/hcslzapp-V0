@@ -63,7 +63,7 @@ class _DashboardPageState extends State<DashboardPage> {
     _controller.init();
     _listAdmWidgets = [
       AssociatedListPage(),
-      PaymentListPage(widget._user),
+      PaymentListPage(_controller.isAdmin()),
       EventCalendarPage(widget._user),
       PartnershipListPage(widget._user),
     ];
@@ -132,7 +132,7 @@ class _DashboardPageState extends State<DashboardPage> {
             ),
             //_buildDrawerMenu(),
             //Divider(),
-            _controller.isAssociatedAdmin()
+            _controller.isAdmin()
                 ? ListTile(
                     leading: Icon(Icons.wifi_protected_setup),
                     title: Text("Trocar Perfil de Acesso"),
@@ -241,7 +241,7 @@ class _DashboardPageState extends State<DashboardPage> {
             onTap: () async {
               await _controller.loadPaymentAssociatedPage(
                 _gContext,
-                widget._user,
+                _controller.isAdmin(),
                 widget._associated,
               );
               Navigator.pop(_gContext);
@@ -422,7 +422,7 @@ class _DashboardPageState extends State<DashboardPage> {
                 onClick: () {
                   _controller.loadPaymentAssociatedPage(
                     _gContext,
-                    widget._user,
+                    _controller.isAdmin(),
                     widget._associated,
                   );
                 },
