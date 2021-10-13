@@ -97,12 +97,12 @@ class _DashboardPageState extends State<DashboardPage> {
             ),
             UserAccountsDrawerHeader(
               accountName: Text(
-                widget._user == 'admin'
+                _controller.profile == ADMIN
                     ? 'Administrador'
                     : widget._associated.name,
               ),
               accountEmail: Text(
-                widget._user == 'admin'
+                _controller.profile == ADMIN
                     ? 'harleyclubslz@gmail.com'
                     : widget._associated.email,
               ),
