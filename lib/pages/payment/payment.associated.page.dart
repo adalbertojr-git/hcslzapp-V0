@@ -225,7 +225,7 @@ class _PaymentAssociatedPageState extends State<PaymentAssociatedPage> {
         if (value != null) {
           asuka.showSnackBar(
             SnackBar(
-              content: Text('Mensalidade(s) excluída(s) com sucesso.'),
+              content: Text('Mensalidade excluída com sucesso.'),
             ),
           );
           _controller.payments.removeAt(i);
