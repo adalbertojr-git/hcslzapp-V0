@@ -254,6 +254,17 @@ mixin _$PartnershipListController on PartnershipListControllerBase, Store {
   }
 
   @override
+  Future<dynamic> deleteById(Partnership partnership) {
+    final _$actionInfo = _$PartnershipListControllerBaseActionController
+        .startAction(name: 'PartnershipListControllerBase.deleteById');
+    try {
+      return super.deleteById(partnership);
+    } finally {
+      _$PartnershipListControllerBaseActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
   dynamic setFilter(String value) {
     final _$actionInfo = _$PartnershipListControllerBaseActionController
         .startAction(name: 'PartnershipListControllerBase.setFilter');

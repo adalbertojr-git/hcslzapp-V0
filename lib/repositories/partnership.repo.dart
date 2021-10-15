@@ -76,4 +76,23 @@ class PartnershipRepo {
       throw HttpException(getMessage(response.statusCode));
     }
   }
+
+  Future<Response> deleteById(Partnership partnership) async {
+    final String encodedJson = jsonEncode(
+      partnership.toJson(),
+    );
+    final Response response = await client.delete(
+      mainUrl + _partnershipUrl + "/" + partnership.id.toString(),
+      headers: {
+        'Content-type': 'application/json',
+      },
+    ).timeout(
+      Duration(seconds: 10),
+    );
+    if (response.statusCode == 204) {
+      return response;
+    } else {
+      throw HttpException(getMessage(response.statusCode));
+    }
+  }
 }

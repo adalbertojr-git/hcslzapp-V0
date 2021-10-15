@@ -15,9 +15,8 @@ import 'package:asuka/asuka.dart' as asuka;
 
 class PartnershipAddPage extends StatefulWidget {
   final Partnership partnership;
-  final String _selectedProfile;
 
-  PartnershipAddPage(this.partnership, this._selectedProfile);
+  PartnershipAddPage(this.partnership);
 
   @override
   _PartnershipAddPageState createState() => _PartnershipAddPageState();
@@ -233,7 +232,7 @@ class _PartnershipAddPageState extends State<PartnershipAddPage> {
                 content: Text('Parceiro salvo com sucesso.'),
               ),
             );
-            Navigator.of(context).pop(_controller.partnership);
+            Navigator.of(context).pop(value);
           } else {
             asuka.showSnackBar(
               SnackBar(

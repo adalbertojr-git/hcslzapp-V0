@@ -9,10 +9,12 @@ import 'package:hcslzapp/components/my.text.form.field.dart';
 import 'package:hcslzapp/components/progress.dart';
 import 'dart:math';
 import 'package:hcslzapp/components/top.bar.dart';
+import 'package:hcslzapp/components/transaction.auth.dialog.dart';
 import 'package:hcslzapp/controllers/partnership.list.controller.dart';
 import 'package:hcslzapp/models/partnership.dart';
 import 'package:hcslzapp/pages/partnership/partnership.add.page.dart';
 import 'dart:io';
+import 'package:asuka/asuka.dart' as asuka;
 
 const SCALE_FRACTION = 0.2;
 const FULL_SCALE = 0.9;
@@ -68,6 +70,9 @@ class _PartnershipListPageState extends State<PartnershipListPage> {
                       );
                     _controller.init();
                     _controller.partnerships.addAll(snapshot.data);
+                    _controller.partnerships.sort(
+                      (a, b) => a.partner.compareTo(b.partner),
+                    );
                     if (widget._selectedProfile == ASSOCIATED) {
                       _controller.getActivePartnerships;
                     }
@@ -84,18 +89,26 @@ class _PartnershipListPageState extends State<PartnershipListPage> {
           floatingActionButton: widget._selectedProfile == ADMIN
               ? Button(
                   icon: Icons.add,
-                  onClick: () => Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                        builder: (context) =>
-                            PartnershipAddPage(null, widget._selectedProfile)),
-                  ),
-                )
+                  onClick: () {
+                    final Future<Partnership> future = Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => PartnershipAddPage(null)),
+                    );
+                    future.then(
+                      (partnership) {
+                        if (partnership != null) {
+                          _controller.partnerships.add(partnership);
+                        }
+                      },
+                    );
+                  })
               : null,
         ),
       );
 
-  _widgets() => widget._selectedProfile == ADMIN ? _listAdmin() : _listAssociated();
+  _widgets() =>
+      widget._selectedProfile == ADMIN ? _listAdmin() : _listAssociated();
 
   _listAdmin() => Container(
         decoration: BoxDecoration(
@@ -143,8 +156,8 @@ class _PartnershipListPageState extends State<PartnershipListPage> {
                               fontWeight: FontWeight.bold,
                             ),
                           ),
-                          subtitle: Text('Status: ' +
-                                  _controller.listFiltered[i].status),
+                          subtitle: Text(
+                              'Status: ' + _controller.listFiltered[i].status),
                           leading: CircleAvatar(
                             child: Icon(Icons.emoji_people),
                             backgroundColor: Colors.white,
@@ -157,7 +170,7 @@ class _PartnershipListPageState extends State<PartnershipListPage> {
                                   Icons.delete,
                                 ),
                                 onTap: () {
-                                  _controller.listFiltered.removeAt(i);
+                                  _delete(i);
                                 },
                               ),
                               GestureDetector(
@@ -169,8 +182,7 @@ class _PartnershipListPageState extends State<PartnershipListPage> {
                                       MaterialPageRoute(
                                           builder: (context) =>
                                               PartnershipAddPage(
-                                                  _controller.listFiltered[i],
-                                                  widget._selectedProfile)),
+                                                  _controller.listFiltered[i])),
                                     );
                                     future.then(
                                       (partnership) {
@@ -333,4 +345,31 @@ class _PartnershipListPageState extends State<PartnershipListPage> {
           ],
         ),
       );
+
+  _delete(int i) async {
+    var response = await showDialog(
+        context: context,
+        builder: (context) {
+          return TransactionAuthDialog(
+              msg: 'Deseja excluir o registro selecionado?');
+        });
+    if (response == true) {
+      _controller.deleteById(_controller.partnerships[i]).then((value) {
+        if (value != null) {
+          asuka.showSnackBar(
+            SnackBar(
+              content: Text('Parceiro excluído com sucesso.'),
+            ),
+          );
+          _controller.partnerships.removeAt(i);
+        } else {
+          asuka.showSnackBar(
+            SnackBar(
+              content: Text(_controller.errorMsg),
+            ),
+          );
+        }
+      });
+    }
+  }
 }

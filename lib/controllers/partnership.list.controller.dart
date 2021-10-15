@@ -69,6 +69,13 @@ abstract class PartnershipListControllerBase with Store {
   Future<List<Partnership>> getFuture() => future = findAll();
 
   @action
+  Future deleteById(Partnership partnership) =>
+      ObservableFuture(_partnershipRepo.deleteById(partnership).then((value) => value))
+          .catchError((e) {
+        errorMsg = "${e.message}";
+      }, test: (e) => e is Exception);
+
+  @action
   setFilter(String value) => filter = value;
 
   @computed
