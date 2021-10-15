@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
+import 'package:hcslzapp/common/associated.profiles.dart';
 import 'package:hcslzapp/common/labels.and.hints.dart';
 import 'package:hcslzapp/common/photo.image.provider.dart';
 import 'package:hcslzapp/components/button.dart';
@@ -18,9 +19,9 @@ const FULL_SCALE = 1.0;
 const PAGER_HEIGHT = 200.0;
 
 class PartnershipListPage extends StatefulWidget {
-  final String _user;
+  final String _selectedProfile;
 
-  PartnershipListPage(this._user);
+  PartnershipListPage(this._selectedProfile);
 
   @override
   _PartnershipListPageState createState() => _PartnershipListPageState();
@@ -41,6 +42,7 @@ class _PartnershipListPageState extends State<PartnershipListPage> {
         _controller.setButtonVisibilty();
       }
     });
+    print(widget._selectedProfile);
     super.initState();
   }
 
@@ -67,7 +69,7 @@ class _PartnershipListPageState extends State<PartnershipListPage> {
                       );
                     _controller.init();
                     _controller.partnerships.addAll(snapshot.data);
-                    if (widget._user != 'admin') {
+                    if (widget._selectedProfile == ASSOCIATED) {
                       _controller.getActivePartnerships;
                     }
                     return _widgets();
@@ -80,21 +82,21 @@ class _PartnershipListPageState extends State<PartnershipListPage> {
           ),
           floatingActionButtonLocation:
               FloatingActionButtonLocation.centerFloat,
-          floatingActionButton: widget._user == 'admin'
+          floatingActionButton: widget._selectedProfile == ADMIN
               ? Button(
                   icon: Icons.add,
                   onClick: () => Navigator.push(
                     context,
                     MaterialPageRoute(
                         builder: (context) =>
-                            PartnershipAddPage(null, widget._user)),
+                            PartnershipAddPage(null, widget._selectedProfile)),
                   ),
                 )
               : null,
         ),
       );
 
-  _widgets() => widget._user == 'atajr' ? _listAdmin() : _listAssociated();
+  _widgets() => widget._selectedProfile == ADMIN ? _listAdmin() : _listAssociated();
 
   _listAdmin() => Container(
         decoration: BoxDecoration(
@@ -176,7 +178,7 @@ class _PartnershipListPageState extends State<PartnershipListPage> {
                                           builder: (context) =>
                                               PartnershipAddPage(
                                                   _controller.listFiltered[i],
-                                                  widget._user)),
+                                                  widget._selectedProfile)),
                                     );
                                     future.then(
                                       (partnership) {

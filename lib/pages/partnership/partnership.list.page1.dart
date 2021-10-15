@@ -93,14 +93,14 @@ class _PartnershipListPage1State extends State<PartnershipListPage1> {
           },
         ),
       ),
-      floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
+/*      floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
       floatingActionButton: Button(icon: Icons.add, onClick: () =>
           Navigator.push(
             context,
             MaterialPageRoute(
                 builder: (context) => PartnershipAddPage(null, widget._user)),
           ),
-      ),
+      ),*/
     );
   }
 }

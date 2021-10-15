@@ -61,18 +61,18 @@ class _DashboardPageState extends State<DashboardPage> {
     //_controller = Provider.of<AssociatedController>(context, listen: false);
     _controller.associated = widget._associated;
     _controller.init();
-    _listAdmWidgets = [
-      AssociatedListPage(),
-      PaymentListPage(_controller.isAdmin()),
-      EventCalendarPage(widget._user),
-      PartnershipListPage(widget._user),
-    ];
     super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
     _gContext = context;
+    _listAdmWidgets = [
+      AssociatedListPage(),
+      PaymentListPage(_controller.selectedProfile),
+      EventCalendarPage(widget._user),
+      PartnershipListPage(_controller.selectedProfile),
+    ];
     return Scaffold(
         body: _widgets(),
         drawer: _drawr(),
@@ -97,12 +97,12 @@ class _DashboardPageState extends State<DashboardPage> {
             ),
             UserAccountsDrawerHeader(
               accountName: Text(
-                _controller.profile == ADMIN
+                _controller.selectedProfile == ADMIN
                     ? 'Administrador'
                     : widget._associated.name,
               ),
               accountEmail: Text(
-                _controller.profile == ADMIN
+                _controller.selectedProfile == ADMIN
                     ? 'harleyclubslz@gmail.com'
                     : widget._associated.email,
               ),
@@ -139,6 +139,7 @@ class _DashboardPageState extends State<DashboardPage> {
                     onTap: () async {
                       setState(() {
                         _controller.changeProfile();
+                        print(_controller.selectedProfile);
                         _widgets();
                         Navigator.pop(_gContext);
                       });
@@ -165,7 +166,7 @@ class _DashboardPageState extends State<DashboardPage> {
         ),
       );
 
-  _menuAdm() => Column(
+/*  _menuAdm() => Column(
         children: <Widget>[
           ListTile(
             leading: Icon(Icons.arrow_forward_ios),
@@ -298,6 +299,7 @@ class _DashboardPageState extends State<DashboardPage> {
         ],
       );
 
+ */
   _dashBg() => Column(
         children: <Widget>[
           Expanded(
@@ -323,18 +325,18 @@ class _DashboardPageState extends State<DashboardPage> {
   _header() => ListTile(
         contentPadding: EdgeInsets.only(left: 10, right: 20, top: 30),
         title: Text(
-          _controller.profile == ADMIN
+          _controller.selectedProfile == ADMIN
               ? 'Olá, Administrador'
               : 'Olá, ${_controller.getFirstName(widget._associated.name)}',
           style: TextStyle(color: Colors.white, fontSize: 22.0),
         ),
         subtitle: Text(
-          _controller.profile == ADMIN
+          _controller.selectedProfile == ADMIN
               ? 'harleyclubslz@gmail.com'
               : widget._associated.email,
           style: TextStyle(color: Colors.white60),
         ),
-        trailing: _controller.profile == ADMIN
+        trailing: _controller.selectedProfile == ADMIN
             ? null
             : Observer(
                 builder: (_) => CircleAvatar(
@@ -362,7 +364,7 @@ class _DashboardPageState extends State<DashboardPage> {
               ),
       );
 
-  _bar() => (_controller.profile != ADMIN
+  _bar() => (_controller.selectedProfile != ADMIN
       ? SizedBox()
       : Row(
           mainAxisAlignment: MainAxisAlignment.center,
@@ -395,7 +397,7 @@ class _DashboardPageState extends State<DashboardPage> {
           ],
         ));
 
-  _grid() => (_controller.profile == ADMIN ? _gridAdm() : _gridAssociated());
+  _grid() => (_controller.selectedProfile == ADMIN ? _gridAdm() : _gridAssociated());
 
   _gridAssociated() => Expanded(
         child: Container(
@@ -445,7 +447,6 @@ class _DashboardPageState extends State<DashboardPage> {
                 onClick: () {
                   _controller.loadPartnershipListPage(
                     _gContext,
-                    widget._user,
                   );
                 },
               ),

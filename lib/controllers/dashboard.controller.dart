@@ -23,11 +23,11 @@ abstract class DashboardControllerBase with Store {
   Associated associated;
 
   @observable
-  String profile;
+  String selectedProfile;
 
   init() {
     photoUrl = associated == null ? "" : associated.photoUrl;
-    profile = ASSOCIATED;
+    selectedProfile = ASSOCIATED;
   }
 
   @action
@@ -37,11 +37,11 @@ abstract class DashboardControllerBase with Store {
   }
 
   bool isAdmin() {
-    return associated.authenticate.roles
-        .any((Role r) => r.profile == ADMIN);
+    return associated.authenticate.roles.any((Role r) => r.profile == ADMIN);
   }
 
-  changeProfile() => profile = (profile == ADMIN ? ASSOCIATED : ADMIN);
+  @action
+  changeProfile() => selectedProfile = (selectedProfile == ADMIN ? ASSOCIATED : ADMIN);
 
   String getFirstName(String fullName) {
     var names = fullName.split(' ');
@@ -71,7 +71,7 @@ abstract class DashboardControllerBase with Store {
     await Navigator.push(
       context,
       MaterialPageRoute(
-        builder: (context) => PaymentAssociatedPage(isAdmin, associated),
+        builder: (context) => PaymentAssociatedPage(selectedProfile, associated),
       ),
     );
   }
@@ -90,12 +90,11 @@ abstract class DashboardControllerBase with Store {
 
   loadPartnershipListPage(
     BuildContext context,
-    String user,
   ) async {
     await Navigator.push(
       context,
       MaterialPageRoute(
-        builder: (context) => PartnershipListPage(user),
+        builder: (context) => PartnershipListPage(this.selectedProfile),
       ),
     );
   }
@@ -124,8 +123,8 @@ abstract class DashboardControllerBase with Store {
   }
 
   loadAboutPage(
-      BuildContext context,
-      ) async {
+    BuildContext context,
+  ) async {
     await Navigator.push(
       context,
       MaterialPageRoute(

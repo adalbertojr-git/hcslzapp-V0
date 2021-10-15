@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
+import 'package:hcslzapp/common/associated.profiles.dart';
 import 'package:hcslzapp/components/button.dart';
 import 'package:hcslzapp/components/centered.message.dart';
 import 'package:hcslzapp/components/progress.dart';
@@ -12,10 +13,10 @@ import 'package:hcslzapp/pages/payment/payment.add.page.dart';
 import 'package:asuka/asuka.dart' as asuka;
 
 class PaymentAssociatedPage extends StatefulWidget {
-  final bool _isAdmin;
+  final String _selectedProfile;
   final Associated _associated;
 
-  const PaymentAssociatedPage(this._isAdmin, this._associated);
+  const PaymentAssociatedPage(this._selectedProfile, this._associated);
 
   @override
   _PaymentAssociatedPageState createState() => _PaymentAssociatedPageState();
@@ -70,7 +71,7 @@ class _PaymentAssociatedPageState extends State<PaymentAssociatedPage> {
           },
         ),
         floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
-        floatingActionButton: widget._isAdmin
+        floatingActionButton: widget._selectedProfile == ADMIN
             ? Observer(
                 builder: (_) => _controller.isHidedButton
                     ? Container()
@@ -81,7 +82,7 @@ class _PaymentAssociatedPageState extends State<PaymentAssociatedPage> {
                             context,
                             MaterialPageRoute(
                               builder: (_) => PaymentAddPage(
-                                widget._isAdmin,
+                                widget._selectedProfile,
                                 null,
                                 _controller.loadYears(),
                                 widget._associated,
@@ -145,7 +146,7 @@ class _PaymentAssociatedPageState extends State<PaymentAssociatedPage> {
                           child: Icon(Icons.calendar_today),
                           backgroundColor: Colors.white,
                         ),
-                        trailing: widget._isAdmin
+                        trailing: widget._selectedProfile == ADMIN
                             ? Wrap(
                                 spacing: 10, // space between two icons
                                 children: <Widget>[
@@ -168,7 +169,7 @@ class _PaymentAssociatedPageState extends State<PaymentAssociatedPage> {
                                         MaterialPageRoute(
                                             builder: (context) =>
                                                 PaymentAddPage(
-                                                    widget._isAdmin,
+                                                    widget._selectedProfile,
                                                     _controller.payments[i],
                                                     _controller.loadYears(),
                                                     widget._associated)),
@@ -195,7 +196,7 @@ class _PaymentAssociatedPageState extends State<PaymentAssociatedPage> {
                                     context,
                                     MaterialPageRoute(
                                         builder: (context) => PaymentAddPage(
-                                            widget._isAdmin,
+                                            widget._selectedProfile,
                                             _controller.payments[i],
                                             _controller.loadYears(),
                                             widget._associated)),

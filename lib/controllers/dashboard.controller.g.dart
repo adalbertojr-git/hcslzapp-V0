@@ -39,18 +39,19 @@ mixin _$DashboardController on DashboardControllerBase, Store {
     });
   }
 
-  final _$profileAtom = Atom(name: 'DashboardControllerBase.profile');
+  final _$selectedProfileAtom =
+      Atom(name: 'DashboardControllerBase.selectedProfile');
 
   @override
-  String get profile {
-    _$profileAtom.reportRead();
-    return super.profile;
+  String get selectedProfile {
+    _$selectedProfileAtom.reportRead();
+    return super.selectedProfile;
   }
 
   @override
-  set profile(String value) {
-    _$profileAtom.reportWrite(value, super.profile, () {
-      super.profile = value;
+  set selectedProfile(String value) {
+    _$selectedProfileAtom.reportWrite(value, super.selectedProfile, () {
+      super.selectedProfile = value;
     });
   }
 
@@ -69,11 +70,22 @@ mixin _$DashboardController on DashboardControllerBase, Store {
   }
 
   @override
+  dynamic changeProfile() {
+    final _$actionInfo = _$DashboardControllerBaseActionController.startAction(
+        name: 'DashboardControllerBase.changeProfile');
+    try {
+      return super.changeProfile();
+    } finally {
+      _$DashboardControllerBaseActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
   String toString() {
     return '''
 photoUrl: ${photoUrl},
 associated: ${associated},
-profile: ${profile}
+selectedProfile: ${selectedProfile}
     ''';
   }
 }

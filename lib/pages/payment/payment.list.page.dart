@@ -10,9 +10,9 @@ import 'package:hcslzapp/models/associated.dart';
 import 'package:hcslzapp/pages/payment/payment.associated.page.dart';
 
 class PaymentListPage extends StatefulWidget {
-  final bool _isAdmin;
+  final String _selectedProfile;
 
-  const PaymentListPage(this._isAdmin);
+  const PaymentListPage(this._selectedProfile);
 
   @override
   _PaymentListPageState createState() => _PaymentListPageState();
@@ -30,7 +30,6 @@ class _PaymentListPageState extends State<PaymentListPage> {
         _controller.setButtonVisibilty();
       }
     });
-    print(widget._isAdmin);
     super.initState();
   }
 
@@ -145,7 +144,7 @@ class _PaymentListPageState extends State<PaymentListPage> {
                                   context,
                                   MaterialPageRoute(
                                       builder: (context) => PaymentAssociatedPage(
-                                          widget._isAdmin,
+                                          widget._selectedProfile,
                                           _controller.listFiltered[i])),
                                 );
                               },

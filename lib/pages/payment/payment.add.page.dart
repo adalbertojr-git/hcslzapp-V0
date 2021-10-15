@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
+import 'package:hcslzapp/common/associated.profiles.dart';
 import 'package:hcslzapp/common/labels.and.hints.dart';
 import 'package:hcslzapp/components/button.dart';
 import 'package:hcslzapp/components/my.text.form.field.dart';
@@ -13,10 +14,10 @@ import 'package:asuka/asuka.dart' as asuka;
 class PaymentAddPage extends StatefulWidget {
   final Payment _payment;
   final List<String> _years;
-  final bool _isAdmin;
+  final String _selectedProfile;
   final Associated _associated;
 
-  PaymentAddPage(this._isAdmin, this._payment, this._years, this._associated);
+  PaymentAddPage(this._selectedProfile, this._payment, this._years, this._associated);
 
   @override
   _PaymentAddAddState createState() => _PaymentAddAddState();
@@ -210,7 +211,7 @@ class _PaymentAddAddState extends State<PaymentAddPage> {
         ),
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
-      floatingActionButton: widget._isAdmin
+      floatingActionButton: widget._selectedProfile == ADMIN
           ? Button(
               icon: Icons.save,
               onClick: () => widget._payment == null ? _save() : _update(),
