@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
-import 'package:hcslzapp/common/labels.and.hints.dart';
 import 'package:hcslzapp/components/button.dart';
 import 'package:hcslzapp/components/centered.message.dart';
-import 'package:hcslzapp/components/my.text.form.field.dart';
 import 'package:hcslzapp/components/progress.dart';
 import 'package:hcslzapp/components/top.bar.dart';
 import 'package:hcslzapp/controllers/item.model.dart';
@@ -96,23 +94,15 @@ class ManagementAddPageState extends State<ManagementAddPage> {
         child: Column(
           children: [
             TopBar(),
-            MyTextFormField(
-              textEditingController: _controller.nameCtrl,
-              label: labelNamePayment,
-              hint: hintNamePayment,
-              icon: Icons.search,
-              inputType: TextInputType.text,
-              onChanged: _controller.setFilter,
-            ),
             Expanded(
               child: Observer(
                 builder: (_) =>
                     ListView.separated(
                       shrinkWrap: true,
-                      itemCount: _controller.listFiltered.length,
+                      itemCount: _controller.listItems.length,
                       itemBuilder: (_, int i) {
                         return CheckboxWidget(
-                          item: _controller.listFiltered[i],
+                          item: _controller.listItems[i],
                           controller: _controller,
                         );
                       },
@@ -133,7 +123,7 @@ class ManagementAddPageState extends State<ManagementAddPage> {
               content: Text('Admininstradore(s) salvo(s) com sucesso.'),
             ),
           );
-          Navigator.pop(context, _controller.associateds);
+          Navigator.pop(context, _controller.listItems);
         } else {
           asuka.showSnackBar(
             SnackBar(

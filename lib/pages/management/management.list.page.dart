@@ -81,32 +81,38 @@ class ManagementListPageState extends State<ManagementListPage> {
               : Button(
                   icon: Icons.add,
                   onClick: () {
-                    final Future<List<ItemModel>> future = Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => ManagementAddPage(),
-                      ),
-                    );
-                    future.then(
-                      (items) {
-                        if (items != null) {
-                          items.forEach((element) {
-                            _controller.associateds.add(Associated(
-                              id: element.id,
-                              name: element.name,
-                              phone: element.phone,
-                              status: element.status,
-                              dependents: List<Dependent>.from([]),
-                              motorcycles: List<Motorcycle>.from([]),
-                              authenticate: element.authenticate,
-                            ));
-                          });
-                        }
-                      },
-                    );
+                    _add(context);
                   }),
         ),
       );
+
+  void _add(BuildContext context) {
+    final Future<List<ItemModel>> future = Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (context) => ManagementAddPage(),
+      ),
+    );
+    future.then(
+      (items) {
+        if (items != null) {
+          items.forEach((element) {
+            if (element.check) {
+              _controller.associateds.add(Associated(
+                id: element.id,
+                name: element.name,
+                phone: element.phone,
+                status: element.status,
+                dependents: List<Dependent>.from([]),
+                motorcycles: List<Motorcycle>.from([]),
+                authenticate: element.authenticate,
+              ));
+            }
+          });
+        }
+      },
+    );
+  }
 
   _widgets() => Container(
         decoration: BoxDecoration(
