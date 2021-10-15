@@ -9,14 +9,6 @@ part of 'management.list.controller.dart';
 // ignore_for_file: non_constant_identifier_names, unnecessary_brace_in_string_interps, unnecessary_lambdas, prefer_expression_function_bodies, lines_longer_than_80_chars, avoid_as, avoid_annotating_with_dynamic
 
 mixin _$ManagementListController on ManagementListControllerBase, Store {
-  Computed<List<Associated>> _$listFilteredComputed;
-
-  @override
-  List<Associated> get listFiltered => (_$listFilteredComputed ??=
-          Computed<List<Associated>>(() => super.listFiltered,
-              name: 'ManagementListControllerBase.listFiltered'))
-      .value;
-
   final _$nameCtrlAtom = Atom(name: 'ManagementListControllerBase.nameCtrl');
 
   @override
@@ -194,17 +186,6 @@ mixin _$ManagementListController on ManagementListControllerBase, Store {
   }
 
   @override
-  dynamic setFilter(String value) {
-    final _$actionInfo = _$ManagementListControllerBaseActionController
-        .startAction(name: 'ManagementListControllerBase.setFilter');
-    try {
-      return super.setFilter(value);
-    } finally {
-      _$ManagementListControllerBaseActionController.endAction(_$actionInfo);
-    }
-  }
-
-  @override
   String toString() {
     return '''
 nameCtrl: ${nameCtrl},
@@ -213,8 +194,7 @@ associateds: ${associateds},
 associated: ${associated},
 errorMsg: ${errorMsg},
 future: ${future},
-filter: ${filter},
-listFiltered: ${listFiltered}
+filter: ${filter}
     ''';
   }
 }

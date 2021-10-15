@@ -71,17 +71,4 @@ abstract class ManagementListControllerBase with Store {
       }
     }
   }
-
-  @action
-  setFilter(String value) => filter = value;
-
-  @computed
-  List<Associated> get listFiltered {
-    if (filter.isEmpty) {
-      return List<Associated>.from(associateds);
-    } else {
-      return List<Associated>.from(associateds
-          .where((element) => element.name.contains(filter)));
-    }
-  }
 }

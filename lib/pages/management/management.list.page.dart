@@ -126,19 +126,11 @@ class ManagementListPageState extends State<ManagementListPage> {
         child: Column(
           children: [
             TopBar(),
-            MyTextFormField(
-              textEditingController: _controller.nameCtrl,
-              label: labelNamePayment,
-              hint: hintNamePayment,
-              icon: Icons.search,
-              inputType: TextInputType.text,
-              onChanged: _controller.setFilter,
-            ),
             Expanded(
               child: Observer(
                 builder: (_) => ListView.separated(
                   shrinkWrap: true,
-                  itemCount: _controller.listFiltered.length,
+                  itemCount: _controller.associateds.length,
                   itemBuilder: (_, int i) {
                     return Container(
                       decoration: BoxDecoration(
@@ -155,18 +147,18 @@ class ManagementListPageState extends State<ManagementListPage> {
                       ),
                       child: ListTile(
                         title: Text(
-                          _controller.listFiltered[i].name,
+                          _controller.associateds[i].name,
                           style: TextStyle(
                             fontWeight: FontWeight.bold,
                           ),
                         ),
                         subtitle: Text('Tel.: ' +
-                            (_controller.listFiltered[i].phone != null
-                                ? _controller.listFiltered[i].phone
+                            (_controller.associateds[i].phone != null
+                                ? _controller.associateds[i].phone
                                 : 'Não informado') +
                             '\n' +
                             'Status: ' +
-                            _controller.listFiltered[i].status),
+                            _controller.associateds[i].status),
                         leading: CircleAvatar(
                           child: Icon(Icons.admin_panel_settings),
                           backgroundColor: Colors.white,
@@ -179,7 +171,8 @@ class ManagementListPageState extends State<ManagementListPage> {
                                 Icons.delete,
                               ),
                               onTap: () {
-                                _delete(i);
+                                print(_controller.associateds[i]);
+                                _delete(_controller.associateds[i]);
                               },
                             ),
                           ],
@@ -195,7 +188,8 @@ class ManagementListPageState extends State<ManagementListPage> {
         ),
       );
 
-  _delete(int i) async {
+  // _delete(int i) async {
+  _delete(Associated associated) async {
     var response = await showDialog(
         context: context,
         builder: (context) {
@@ -210,14 +204,16 @@ class ManagementListPageState extends State<ManagementListPage> {
           ),
         );
       } else {
-        _controller.deleteById(_controller.associateds[i]).then((value) {
+        _controller.deleteById(associated).then((value) {
           if (value != null) {
             asuka.showSnackBar(
               SnackBar(
                 content: Text('Administrador excluído com sucesso.'),
               ),
             );
-            _controller.associateds.removeAt(i);
+            _controller.associateds.removeWhere(
+              (item) => item.id == associated.id,
+            );
           } else {
             asuka.showSnackBar(
               SnackBar(
