@@ -14,8 +14,8 @@ import 'package:hcslzapp/models/partnership.dart';
 import 'package:hcslzapp/pages/partnership/partnership.add.page.dart';
 import 'dart:io';
 
-const SCALE_FRACTION = 0.6;
-const FULL_SCALE = 1.0;
+const SCALE_FRACTION = 0.2;
+const FULL_SCALE = 0.9;
 const PAGER_HEIGHT = 200.0;
 
 class PartnershipListPage extends StatefulWidget {
@@ -42,7 +42,6 @@ class _PartnershipListPageState extends State<PartnershipListPage> {
         _controller.setButtonVisibilty();
       }
     });
-    print(widget._selectedProfile);
     super.initState();
   }
 
@@ -144,15 +143,8 @@ class _PartnershipListPageState extends State<PartnershipListPage> {
                               fontWeight: FontWeight.bold,
                             ),
                           ),
-                          subtitle: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Text('Endereço: ' +
-                                  _controller.listFiltered[i].address),
-                              Text('Status: ' +
+                          subtitle: Text('Status: ' +
                                   _controller.listFiltered[i].status),
-                            ],
-                          ),
                           leading: CircleAvatar(
                             child: Icon(Icons.emoji_people),
                             backgroundColor: Colors.white,
@@ -160,14 +152,14 @@ class _PartnershipListPageState extends State<PartnershipListPage> {
                           trailing: Wrap(
                             spacing: 10,
                             children: [
-/*                              GestureDetector(
+                              GestureDetector(
                                 child: Icon(
                                   Icons.delete,
                                 ),
                                 onTap: () {
                                   _controller.listFiltered.removeAt(i);
                                 },
-                              ),*/
+                              ),
                               GestureDetector(
                                   child: Icon(Icons.arrow_forward),
                                   onTap: () {
@@ -249,7 +241,7 @@ class _PartnershipListPageState extends State<PartnershipListPage> {
                       ),
                     ),
                     Padding(
-                      padding: const EdgeInsets.all(10.0),
+                      padding: const EdgeInsets.all(5.0),
                       child: Text(
                         _controller.activePartnerships[_controller.currentPage]
                             .partner,
@@ -273,11 +265,10 @@ class _PartnershipListPageState extends State<PartnershipListPage> {
         builder: (_) => Align(
           alignment: Alignment.bottomCenter,
           child: Container(
-            margin: EdgeInsets.only(bottom: 10),
             height: PAGER_HEIGHT * scale,
             width: PAGER_HEIGHT * scale,
             child: Card(
-              elevation: 4,
+              elevation: 15,
               clipBehavior: Clip.antiAlias,
               shape: CircleBorder(
                   side: BorderSide(color: Colors.grey.shade200, width: 5)),

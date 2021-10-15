@@ -17,10 +17,9 @@ import 'package:hcslzapp/pages/payment/payment.list.page.dart';
 
 // ignore: must_be_immutable
 class DashboardPage extends StatefulWidget {
-  final String _user;
   Associated _associated;
 
-  DashboardPage(this._user, this._associated);
+  DashboardPage(this._associated);
 
   @override
   _DashboardPageState createState() => _DashboardPageState();
@@ -70,7 +69,7 @@ class _DashboardPageState extends State<DashboardPage> {
     _listAdmWidgets = [
       AssociatedListPage(),
       PaymentListPage(_controller.selectedProfile),
-      EventCalendarPage(widget._user),
+      EventCalendarPage(_controller.selectedProfile),
       PartnershipListPage(_controller.selectedProfile),
     ];
     return Scaffold(
@@ -135,7 +134,17 @@ class _DashboardPageState extends State<DashboardPage> {
             _controller.isAdmin()
                 ? ListTile(
                     leading: Icon(Icons.wifi_protected_setup),
-                    title: Text("Trocar Perfil de Acesso"),
+                    title: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text("Trocar Perfil de Acesso"),
+                        Text(
+                          "Perfil atual: " +
+                              _controller.selectedProfileToPortuguese(),
+                          style: TextStyle(fontSize: 10),
+                        ),
+                      ],
+                    ),
                     onTap: () async {
                       setState(() {
                         _controller.changeProfile();
@@ -397,157 +406,160 @@ class _DashboardPageState extends State<DashboardPage> {
           ],
         ));
 
-  _grid() => (_controller.selectedProfile == ADMIN ? _gridAdm() : _gridAssociated());
+  _grid() =>
+      (_controller.selectedProfile == ADMIN ? _gridAdm() : _gridAssociated());
 
   _gridAssociated() => Expanded(
         child: Container(
           padding: EdgeInsets.only(left: 16, right: 16, bottom: 16),
-          child: GridView.count(
-            crossAxisCount: 2,
-            childAspectRatio: 0.9,
-            children: <Widget>[
-              GridButton(
-                title: "Associado",
-                image: "assets/imgs/user.png",
-                context: _gContext,
-                onClick: () {
-                  _controller.loadAssociatedUpdatePage(
-                    _gContext,
-                    widget._associated.id,
-                  );
-                },
-              ),
-              GridButton(
-                title: "Financeiro",
-                image: "assets/imgs/financeiro.png",
-                context: _gContext,
-                onClick: () {
-                  _controller.loadPaymentAssociatedPage(
-                    _gContext,
-                    _controller.isAdmin(),
-                    widget._associated,
-                  );
-                },
-              ),
-              GridButton(
-                title: "Carteira Harley Club",
-                image: "assets/imgs/carteirad.png",
-                context: _gContext,
-                onClick: () {
-                  _controller.loadDigitalIdentityPage(
-                    _gContext,
-                    widget._associated,
-                  );
-                },
-              ),
-              GridButton(
-                title: "Parcerias",
-                image: "assets/imgs/parcerias.png",
-                context: _gContext,
-                onClick: () {
-                  _controller.loadPartnershipListPage(
-                    _gContext,
-                  );
-                },
-              ),
-              GridButton(
-                title: "Eventos",
-                image: "assets/imgs/eventos.png",
-                context: _gContext,
-                onClick: () {
-                  _controller.loadEventCalendarPage(
-                    _gContext,
-                    widget._user,
-                  );
-                },
-              ),
+          child: Center(
+            child: GridView.count(
+              crossAxisCount: 2,
+              childAspectRatio: 0.9,
+              children: <Widget>[
+                GridButton(
+                  title: "Associado",
+                  image: "assets/imgs/user.png",
+                  context: _gContext,
+                  onClick: () {
+                    _controller.loadAssociatedUpdatePage(
+                      _gContext,
+                      widget._associated.id,
+                    );
+                  },
+                ),
+                GridButton(
+                  title: "Financeiro",
+                  image: "assets/imgs/financeiro.png",
+                  context: _gContext,
+                  onClick: () {
+                    _controller.loadPaymentAssociatedPage(
+                      _gContext,
+                      _controller.isAdmin(),
+                      widget._associated,
+                    );
+                  },
+                ),
+                GridButton(
+                  title: "Carteira Harley Club",
+                  image: "assets/imgs/carteirad.png",
+                  context: _gContext,
+                  onClick: () {
+                    _controller.loadDigitalIdentityPage(
+                      _gContext,
+                      widget._associated,
+                    );
+                  },
+                ),
+                GridButton(
+                  title: "Parcerias",
+                  image: "assets/imgs/parcerias.png",
+                  context: _gContext,
+                  onClick: () {
+                    _controller.loadPartnershipListPage(
+                      _gContext,
+                    );
+                  },
+                ),
+                GridButton(
+                  title: "Eventos",
+                  image: "assets/imgs/eventos.png",
+                  context: _gContext,
+                  onClick: () {
+                    _controller.loadEventCalendarPage(
+                      _gContext,
+                      _controller.selectedProfile,
+                    );
+                  },
+                ),
 /*
-              GridButton(
-                title: "Documentos",
-                image: "assets/imgs/docs.png",
-                context: gContext,
-                onClick: () {
-                  Navigator.push(
-                    gContext,
-                    MaterialPageRoute(builder: (gContext) => DocumentList()),
-                  );
-                },
-              ),
+                GridButton(
+                  title: "Documentos",
+                  image: "assets/imgs/docs.png",
+                  context: gContext,
+                  onClick: () {
+                    Navigator.push(
+                      gContext,
+                      MaterialPageRoute(builder: (gContext) => DocumentList()),
+                    );
+                  },
+                ),
 */
-              GridButton(
-                title: "Codigos DTC",
-                image: "assets/imgs/codigosdtc.png",
-                context: _gContext,
-                onClick: () {
-                  _controller.loadDtcCodeDashboardPage(_gContext);
-                },
-              ),
+                GridButton(
+                  title: "Codigos DTC",
+                  image: "assets/imgs/codigosdtc.png",
+                  context: _gContext,
+                  onClick: () {
+                    _controller.loadDtcCodeDashboardPage(_gContext);
+                  },
+                ),
 /*
-              GridButton(
-                title: "Oficina",
-                image: "assets/imgs/oficina.png",
-                context: gContext,
-                onClick: () {
-                  Navigator.push(
-                    gContext,
-                    MaterialPageRoute(builder: (gContext) => DefectList()),
-                  );
-                },
-              ),
+                GridButton(
+                  title: "Oficina",
+                  image: "assets/imgs/oficina.png",
+                  context: gContext,
+                  onClick: () {
+                    Navigator.push(
+                      gContext,
+                      MaterialPageRoute(builder: (gContext) => DefectList()),
+                    );
+                  },
+                ),
 */
-              GridButton(
-                title: "Boutique",
-                image: "assets/imgs/boutique.png",
-                context: _gContext,
-                onClick: () {
-                  Navigator.push(
-                    _gContext,
-                    MaterialPageRoute(
-                        builder: (gContext) => BoutiqueListPage()),
-                  );
-                },
-              ),
+                GridButton(
+                  title: "Boutique",
+                  image: "assets/imgs/boutique.png",
+                  context: _gContext,
+                  onClick: () {
+                    Navigator.push(
+                      _gContext,
+                      MaterialPageRoute(
+                          builder: (gContext) => BoutiqueListPage()),
+                    );
+                  },
+                ),
 /*
-              GridButton(
-                title: "Classificados",
-                image: "assets/imgs/classificados.png",
-                context: gContext,
-                onClick: () {
+                GridButton(
+                  title: "Classificados",
+                  image: "assets/imgs/classificados.png",
+                  context: gContext,
+                  onClick: () {
 */
 /*                            Navigator.push(
-                              gContext,
-                              MaterialPageRoute(
-                                builder: (gContext) {
-                                  return Classificados();
-                                },
-                              ),
-                            );*/ /*
+                                gContext,
+                                MaterialPageRoute(
+                                  builder: (gContext) {
+                                    return Classificados();
+                                  },
+                                ),
+                              );*/ /*
 
-                },
-              ),
+                  },
+                ),
 */
 /*
-              GridButton(
-                title: "Meu Role",
-                image: "assets/imgs/maps.png",
-                context: gContext,
-                onClick: () {
-                  Navigator.push(
-                    gContext,
-                    MaterialPageRoute(builder: (gContext) => MyRide()),
-                  );
-                },
-              ),
+                GridButton(
+                  title: "Meu Role",
+                  image: "assets/imgs/maps.png",
+                  context: gContext,
+                  onClick: () {
+                    Navigator.push(
+                      gContext,
+                      MaterialPageRoute(builder: (gContext) => MyRide()),
+                    );
+                  },
+                ),
 */
-              GridButton(
-                title: "O Harley Club",
-                image: "assets/imgs/logo.png",
-                context: _gContext,
-                onClick: () {
-                  _controller.loadAboutPage(_gContext);
-                },
-              ),
-            ],
+                GridButton(
+                  title: "O Harley Club",
+                  image: "assets/imgs/logo.png",
+                  context: _gContext,
+                  onClick: () {
+                    _controller.loadAboutPage(_gContext);
+                  },
+                ),
+              ],
+            ),
           ),
         ),
       );
@@ -650,7 +662,8 @@ class _DashboardPageState extends State<DashboardPage> {
             onTap: () {
               Navigator.push(
                 _gContext,
-                MaterialPageRoute(builder: (_gContext) => _listAdmWidgets[index]),
+                MaterialPageRoute(
+                    builder: (_gContext) => _listAdmWidgets[index]),
               );
             },
           )

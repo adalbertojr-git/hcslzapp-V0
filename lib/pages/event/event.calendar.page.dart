@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
+import 'package:hcslzapp/common/associated.profiles.dart';
 import 'package:hcslzapp/common/labels.and.hints.dart';
 import 'package:hcslzapp/components/my.text.form.field.dart';
 import 'package:hcslzapp/components/top.bar.dart';
@@ -20,9 +21,9 @@ import 'package:asuka/asuka.dart' as asuka;
 };*/
 
 class EventCalendarPage extends StatefulWidget {
-  final String _user;
+  final String _selectedProfile;
 
-  const EventCalendarPage(this._user);
+  const EventCalendarPage(this._selectedProfile);
 
   @override
   State<StatefulWidget> createState() => EventCalendarPageState();
@@ -242,7 +243,7 @@ class EventCalendarPageState extends State<EventCalendarPage>
                             backgroundColor: Colors.white,
                           ),
                         ),
-                        trailing: widget._user == 'admin'
+                        trailing: widget._selectedProfile == ADMIN
                             ? Wrap(
                                 spacing: 10, // space between two icons
                                 children: <Widget>[
@@ -280,7 +281,7 @@ class EventCalendarPageState extends State<EventCalendarPage>
                 ),
               ),
             ),
-            widget._user == 'admin'
+            widget._selectedProfile == ADMIN
                 ? FloatingActionButton(
                     heroTag: "btnAdd",
                     mini: true,

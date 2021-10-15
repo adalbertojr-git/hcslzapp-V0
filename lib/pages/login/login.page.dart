@@ -147,7 +147,6 @@ class LoginPage extends StatelessWidget {
             context,
             MaterialPageRoute(
               builder: (context) => DashboardPage(
-                _controller.userLoginCtrl.text,
                 _controller.associated,
               ),
             ),
