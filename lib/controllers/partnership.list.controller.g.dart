@@ -9,30 +9,6 @@ part of 'partnership.list.controller.dart';
 // ignore_for_file: non_constant_identifier_names, unnecessary_brace_in_string_interps, unnecessary_lambdas, prefer_expression_function_bodies, lines_longer_than_80_chars, avoid_as, avoid_annotating_with_dynamic
 
 mixin _$PartnershipListController on PartnershipListControllerBase, Store {
-  Computed<List<Partnership>> _$listFilteredComputed;
-
-  @override
-  List<Partnership> get listFiltered => (_$listFilteredComputed ??=
-          Computed<List<Partnership>>(() => super.listFiltered,
-              name: 'PartnershipListControllerBase.listFiltered'))
-      .value;
-
-  final _$partnerCtrlAtom =
-      Atom(name: 'PartnershipListControllerBase.partnerCtrl');
-
-  @override
-  TextEditingController get partnerCtrl {
-    _$partnerCtrlAtom.reportRead();
-    return super.partnerCtrl;
-  }
-
-  @override
-  set partnerCtrl(TextEditingController value) {
-    _$partnerCtrlAtom.reportWrite(value, super.partnerCtrl, () {
-      super.partnerCtrl = value;
-    });
-  }
-
   final _$isHidedButtonAtom =
       Atom(name: 'PartnershipListControllerBase.isHidedButton');
 
@@ -265,20 +241,8 @@ mixin _$PartnershipListController on PartnershipListControllerBase, Store {
   }
 
   @override
-  dynamic setFilter(String value) {
-    final _$actionInfo = _$PartnershipListControllerBaseActionController
-        .startAction(name: 'PartnershipListControllerBase.setFilter');
-    try {
-      return super.setFilter(value);
-    } finally {
-      _$PartnershipListControllerBaseActionController.endAction(_$actionInfo);
-    }
-  }
-
-  @override
   String toString() {
     return '''
-partnerCtrl: ${partnerCtrl},
 isHidedButton: ${isHidedButton},
 partnership: ${partnership},
 partnerships: ${partnerships},
@@ -288,8 +252,7 @@ errorMsg: ${errorMsg},
 pageController: ${pageController},
 currentPage: ${currentPage},
 page: ${page},
-filter: ${filter},
-listFiltered: ${listFiltered}
+filter: ${filter}
     ''';
   }
 }

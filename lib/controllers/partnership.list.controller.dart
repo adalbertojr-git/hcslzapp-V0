@@ -9,8 +9,6 @@ class PartnershipListController = PartnershipListControllerBase
     with _$PartnershipListController;
 
 abstract class PartnershipListControllerBase with Store {
-  @observable
-  var partnerCtrl = TextEditingController();
 
   @observable
   bool isHidedButton = true;
@@ -74,19 +72,6 @@ abstract class PartnershipListControllerBase with Store {
           .catchError((e) {
         errorMsg = "${e.message}";
       }, test: (e) => e is Exception);
-
-  @action
-  setFilter(String value) => filter = value;
-
-  @computed
-  List<Partnership> get listFiltered {
-    if (filter.isEmpty) {
-      return List<Partnership>.from(partnerships);
-    } else {
-      return List<Partnership>.from(
-          partnerships.where((element) => element.partner.contains(filter)));
-    }
-  }
 
   get getActivePartnerships => activePartnerships.addAll(
       partnerships.where((element) => element.status.contains('Ativo')));

@@ -122,19 +122,11 @@ class _PartnershipListPageState extends State<PartnershipListPage> {
         child: Column(
           children: [
             TopBar(),
-            MyTextFormField(
-              textEditingController: _controller.partnerCtrl,
-              label: labelPartner,
-              hint: hintPartner,
-              icon: Icons.search,
-              inputType: TextInputType.text,
-              onChanged: _controller.setFilter,
-            ),
             Expanded(
               child: Observer(
                 builder: (_) => ListView.separated(
                   shrinkWrap: true,
-                  itemCount: _controller.listFiltered.length,
+                  itemCount: _controller.partnerships.length,
                   itemBuilder: (_, int i) {
                     return Container(
                       decoration: BoxDecoration(
@@ -151,13 +143,13 @@ class _PartnershipListPageState extends State<PartnershipListPage> {
                       ),
                       child: ListTile(
                           title: Text(
-                            _controller.listFiltered[i].partner,
+                            _controller.partnerships[i].partner,
                             style: TextStyle(
                               fontWeight: FontWeight.bold,
                             ),
                           ),
                           subtitle: Text(
-                              'Status: ' + _controller.listFiltered[i].status),
+                              'Status: ' + _controller.partnerships[i].status),
                           leading: CircleAvatar(
                             child: Icon(Icons.emoji_people),
                             backgroundColor: Colors.white,
@@ -182,13 +174,13 @@ class _PartnershipListPageState extends State<PartnershipListPage> {
                                       MaterialPageRoute(
                                           builder: (context) =>
                                               PartnershipAddPage(
-                                                  _controller.listFiltered[i])),
+                                                  _controller.partnerships[i])),
                                     );
                                     future.then(
                                       (partnership) {
                                         if (partnership != null) {
-                                          _controller.listFiltered.removeAt(i);
-                                          _controller.listFiltered
+                                          _controller.partnerships.removeAt(i);
+                                          _controller.partnerships
                                               .add(partnership);
                                         }
                                       },
