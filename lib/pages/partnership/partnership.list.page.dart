@@ -90,22 +90,25 @@ class _PartnershipListPageState extends State<PartnershipListPage> {
               ? Button(
                   icon: Icons.add,
                   onClick: () {
-                    final Future<Partnership> future = Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) => PartnershipAddPage(null)),
-                    );
-                    future.then(
-                      (partnership) {
-                        if (partnership != null) {
-                          _controller.partnerships.add(partnership);
-                        }
-                      },
-                    );
+                    _add(context);
                   })
               : null,
         ),
       );
+
+  _add(BuildContext context) {
+    final Future<Partnership> future = Navigator.push(
+      context,
+      MaterialPageRoute(builder: (context) => PartnershipAddPage(null)),
+    );
+    future.then(
+      (partnership) {
+        if (partnership != null) {
+          _controller.partnerships.add(partnership);
+        }
+      },
+    );
+  }
 
   _widgets() =>
       widget._selectedProfile == ADMIN ? _listAdmin() : _listAssociated();
@@ -176,15 +179,13 @@ class _PartnershipListPageState extends State<PartnershipListPage> {
                                               PartnershipAddPage(
                                                   _controller.partnerships[i])),
                                     );
-                                    future.then(
-                                      (partnership) {
-                                        if (partnership != null) {
-                                          _controller.partnerships.removeAt(i);
-                                          _controller.partnerships
-                                              .add(partnership);
-                                        }
-                                      },
-                                    );
+                                    future.then((partnership) {
+                                      if (partnership != null) {
+                                        _controller.partnerships.removeAt(i);
+                                        _controller.partnerships
+                                            .insert(i, partnership);
+                                      }
+                                    });
                                   }),
                             ],
                           )),

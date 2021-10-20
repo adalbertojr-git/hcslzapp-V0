@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
-import 'package:hcslzapp/common/labels.and.hints.dart';
 import 'package:hcslzapp/components/button.dart';
 import 'package:hcslzapp/components/centered.message.dart';
-import 'package:hcslzapp/components/my.text.form.field.dart';
 import 'package:hcslzapp/components/progress.dart';
 import 'package:hcslzapp/components/top.bar.dart';
 import 'package:hcslzapp/components/transaction.auth.dialog.dart';
@@ -86,7 +84,7 @@ class ManagementListPageState extends State<ManagementListPage> {
         ),
       );
 
-  void _add(BuildContext context) {
+  _add(BuildContext context) {
     final Future<List<ItemModel>> future = Navigator.push(
       context,
       MaterialPageRoute(
@@ -171,7 +169,6 @@ class ManagementListPageState extends State<ManagementListPage> {
                                 Icons.delete,
                               ),
                               onTap: () {
-                                print(_controller.associateds[i]);
                                 _delete(_controller.associateds[i]);
                               },
                             ),
@@ -188,7 +185,6 @@ class ManagementListPageState extends State<ManagementListPage> {
         ),
       );
 
-  // _delete(int i) async {
   _delete(Associated associated) async {
     var response = await showDialog(
         context: context,

@@ -78,27 +78,31 @@ class _PaymentAssociatedPageState extends State<PaymentAssociatedPage> {
                     : Button(
                         icon: Icons.add,
                         onClick: () {
-                          final Future<Payment> future = Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                              builder: (_) => PaymentAddPage(
-                                widget._selectedProfile,
-                                null,
-                                _controller.loadYears(),
-                                widget._associated,
-                              ),
-                            ),
-                          );
-                          future.then((value) {
-                            if (value != null) {
-                              _controller.payments.add(value);
-                            }
-                          });
+                          _add(context);
                         },
                       ),
               )
             : Container(),
       );
+
+  _add(BuildContext context) {
+    final Future<Payment> future = Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (_) => PaymentAddPage(
+          widget._selectedProfile,
+          null,
+          _controller.loadYears(),
+          widget._associated,
+        ),
+      ),
+    );
+    future.then((value) {
+      if (value != null) {
+        _controller.payments.add(value);
+      }
+    });
+  }
 
   _buildListView() => Container(
         decoration: BoxDecoration(
