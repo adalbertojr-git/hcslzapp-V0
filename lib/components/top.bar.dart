@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 
 class TopBar extends StatelessWidget {
+final String title;
+
+  TopBar({this.title});
 
   @override
   Widget build(BuildContext context) {
@@ -25,6 +28,7 @@ class TopBar extends StatelessWidget {
                   color: Colors.black,
                 ),
               ),
+              this.title != null ? Text(this.title) : Container(),
               SizedBox(
                 height: 35.0,
                 child: Container(

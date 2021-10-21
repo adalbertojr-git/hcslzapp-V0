@@ -11,6 +11,8 @@ import 'package:hcslzapp/models/event.dart';
 import 'package:table_calendar/table_calendar.dart';
 import 'package:asuka/asuka.dart' as asuka;
 
+import 'event.list.page.dart';
+
 // Example holidays
 /*final Map<DateTime, List> _holidays = {
   DateTime(2019, 1, 1): ['New Year\'s Day'],
@@ -54,6 +56,15 @@ class EventCalendarPageState extends State<EventCalendarPage>
 
   void _onDaySelected(DateTime day, List events) {
     _controller.setSelectedEvents(events);
+    Navigator.push(
+      context,
+      MaterialPageRoute(
+          builder: (context) => EventListPage(
+                widget._selectedProfile,
+                _controller.selectedEvents,
+                _controller.calController.selectedDay,
+              )),
+    );
   }
 
   void _onVisibleDaysChanged(
@@ -76,12 +87,27 @@ class EventCalendarPageState extends State<EventCalendarPage>
           ),
           height: MediaQuery.of(context).size.height,
           child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
               TopBar(),
               _buildTableCalendarWithBuilders(),
-              SizedBox(height: 10.0),
-              Expanded(child: _buildEventList()),
+/*              Expanded(
+                child: _buildEventList(),
+              ),
+                         widget._selectedProfile == ADMIN
+                ? FloatingActionButton(
+                    heroTag: "btnAdd",
+                    mini: true,
+                    backgroundColor: Colors.deepOrangeAccent[100],
+                    child: Icon(
+                      Icons.add,
+                      color: Colors.black,
+                    ),
+                    onPressed: () {
+                      _controller.titleCtrl.clear();
+                      _showAddDialog(null, 0);
+                    },
+                  )
+                : Container(),*/
             ],
           ),
         ),
@@ -93,7 +119,7 @@ class EventCalendarPageState extends State<EventCalendarPage>
           calendarController: _controller.calController,
           events: _controller.events,
           //holidays: _holidays,
-          rowHeight: 30,
+          rowHeight: 50,
           initialCalendarFormat: CalendarFormat.month,
           formatAnimation: FormatAnimation.slide,
           startingDayOfWeek: StartingDayOfWeek.sunday,
@@ -281,7 +307,7 @@ class EventCalendarPageState extends State<EventCalendarPage>
                 ),
               ),
             ),
-            widget._selectedProfile == ADMIN
+/*            widget._selectedProfile == ADMIN
                 ? FloatingActionButton(
                     heroTag: "btnAdd",
                     mini: true,
@@ -295,7 +321,7 @@ class EventCalendarPageState extends State<EventCalendarPage>
                       _showAddDialog(null, 0);
                     },
                   )
-                : Container(),
+                : Container(),*/
           ],
         ),
       );
