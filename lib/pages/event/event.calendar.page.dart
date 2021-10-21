@@ -119,7 +119,7 @@ class EventCalendarPageState extends State<EventCalendarPage>
           calendarController: _controller.calController,
           events: _controller.events,
           //holidays: _holidays,
-          rowHeight: 50,
+          rowHeight: 55,
           initialCalendarFormat: CalendarFormat.month,
           formatAnimation: FormatAnimation.slide,
           startingDayOfWeek: StartingDayOfWeek.sunday,

@@ -9,6 +9,21 @@ part of 'event.list.controller.dart';
 // ignore_for_file: non_constant_identifier_names, unnecessary_brace_in_string_interps, unnecessary_lambdas, prefer_expression_function_bodies, lines_longer_than_80_chars, avoid_as, avoid_annotating_with_dynamic
 
 mixin _$EventListController on EventListControllerBase, Store {
+  final _$titleCtrlAtom = Atom(name: 'EventListControllerBase.titleCtrl');
+
+  @override
+  TextEditingController get titleCtrl {
+    _$titleCtrlAtom.reportRead();
+    return super.titleCtrl;
+  }
+
+  @override
+  set titleCtrl(TextEditingController value) {
+    _$titleCtrlAtom.reportWrite(value, super.titleCtrl, () {
+      super.titleCtrl = value;
+    });
+  }
+
   final _$selectedEventsAtom =
       Atom(name: 'EventListControllerBase.selectedEvents');
 
@@ -25,10 +40,72 @@ mixin _$EventListController on EventListControllerBase, Store {
     });
   }
 
+  final _$eventsAtom = Atom(name: 'EventListControllerBase.events');
+
+  @override
+  Map<DateTime, List<dynamic>> get events {
+    _$eventsAtom.reportRead();
+    return super.events;
+  }
+
+  @override
+  set events(Map<DateTime, List<dynamic>> value) {
+    _$eventsAtom.reportWrite(value, super.events, () {
+      super.events = value;
+    });
+  }
+
+  final _$_eventRepoAtom = Atom(name: 'EventListControllerBase._eventRepo');
+
+  @override
+  EventRepo get _eventRepo {
+    _$_eventRepoAtom.reportRead();
+    return super._eventRepo;
+  }
+
+  @override
+  set _eventRepo(EventRepo value) {
+    _$_eventRepoAtom.reportWrite(value, super._eventRepo, () {
+      super._eventRepo = value;
+    });
+  }
+
+  final _$errorMsgAtom = Atom(name: 'EventListControllerBase.errorMsg');
+
+  @override
+  String get errorMsg {
+    _$errorMsgAtom.reportRead();
+    return super.errorMsg;
+  }
+
+  @override
+  set errorMsg(String value) {
+    _$errorMsgAtom.reportWrite(value, super.errorMsg, () {
+      super.errorMsg = value;
+    });
+  }
+
+  final _$EventListControllerBaseActionController =
+      ActionController(name: 'EventListControllerBase');
+
+  @override
+  Future<dynamic> save(String title, String date) {
+    final _$actionInfo = _$EventListControllerBaseActionController.startAction(
+        name: 'EventListControllerBase.save');
+    try {
+      return super.save(title, date);
+    } finally {
+      _$EventListControllerBaseActionController.endAction(_$actionInfo);
+    }
+  }
+
   @override
   String toString() {
     return '''
-selectedEvents: ${selectedEvents}
+titleCtrl: ${titleCtrl},
+selectedEvents: ${selectedEvents},
+events: ${events},
+errorMsg: ${errorMsg}
     ''';
   }
 }

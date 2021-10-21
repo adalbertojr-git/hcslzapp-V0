@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 class TopBar extends StatelessWidget {
-final String title;
+  final String title;
 
   TopBar({this.title});
 
@@ -10,8 +10,8 @@ final String title;
     return Column(
       children: [
         SizedBox(
-            height: 30.0,
-            width: double.infinity,
+          height: 30.0,
+          width: double.infinity,
         ),
         Container(
           alignment: Alignment.centerLeft,
@@ -28,7 +28,13 @@ final String title;
                   color: Colors.black,
                 ),
               ),
-              this.title != null ? Text(this.title) : Container(),
+              this.title != null
+                  ? Text(
+                      this.title,
+                      style: TextStyle(fontSize: 16.0,
+                      fontWeight: FontWeight.bold),
+                    )
+                  : Container(),
               SizedBox(
                 height: 35.0,
                 child: Container(

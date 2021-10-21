@@ -97,6 +97,6 @@ const hintPromotion = 'Digite a promoção oferecida aos associados do Harley Cl
 Event
 */
 const labelTitle = 'Título';
-const hintTitle = 'Digite o título resumido do evento';
+const hintTitle = 'Digite o título do evento';
 const labelDescription = 'Descrição';
 const hintDescription = 'Digite a descrição do evento';
