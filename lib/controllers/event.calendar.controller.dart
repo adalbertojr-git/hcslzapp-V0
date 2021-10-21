@@ -13,9 +13,6 @@ class EventCalendarController = EventCalendarControllerBase
 
 abstract class EventCalendarControllerBase with Store {
   @observable
-  var titleCtrl = TextEditingController();
-
-  @observable
   EventRepo _eventRepo = EventRepo();
 
   @observable
@@ -24,8 +21,8 @@ abstract class EventCalendarControllerBase with Store {
   @observable
   Future<String> future;
 
-  @observable
-  String filter = '';
+  //@observable
+  //String filter = '';
 
   @observable
   Map<DateTime, List> events = {};
@@ -44,7 +41,6 @@ abstract class EventCalendarControllerBase with Store {
       events = _convertJsonToDateMap(value);
       selectedEvents = events[DateTime.now()] ?? [];
     });
-    titleCtrl.text = '';
   }
 
   @action
@@ -52,7 +48,7 @@ abstract class EventCalendarControllerBase with Store {
       _eventRepo.findAll().then((value) => value).catchError((e) {
         errorMsg = "${e.message}";
       }, test: (e) => e is Exception);
-
+/*
   @action
   Future save(String title, String date) => ObservableFuture(_eventRepo
           .save(_setValues(0, title, date))
@@ -76,13 +72,13 @@ abstract class EventCalendarControllerBase with Store {
 
   Event _setValues(int id, String title, String date) {
     return Event(id: id, date: date, title: title);
-  }
+  }*/
 
   @action
   setSelectedEvents(List events) => selectedEvents = events;
 
-  @action
-  removeSelectedEvent(int i) => selectedEvents.removeAt(i);
+/*  @action
+  removeSelectedEvent(int i) => selectedEvents.removeAt(i);*/
 
   Map<DateTime, List> _convertJsonToDateMap(String jsonSource) {
     var json = jsonDecode(jsonSource);
@@ -102,7 +98,7 @@ abstract class EventCalendarControllerBase with Store {
     return DateTime(parts[0], parts[1], parts[2], 12, 0, 0, 0, 0);
   }
 
-  setEventTitle(String value) => titleCtrl.text = value;
+/*  setEventTitle(String value) => titleCtrl.text = value;
 
   addEvent(Event event) {
     if (titleCtrl.text.isEmpty) return;
@@ -119,5 +115,5 @@ abstract class EventCalendarControllerBase with Store {
     if (titleCtrl.text.isEmpty) return;
     selectedEvents[i] = titleCtrl.text;
     titleCtrl.clear();
-  }
+  }*/
 }

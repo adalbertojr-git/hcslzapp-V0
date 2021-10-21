@@ -100,6 +100,61 @@ mixin _$EventListController on EventListControllerBase, Store {
   }
 
   @override
+  Future<dynamic> update(Event event) {
+    final _$actionInfo = _$EventListControllerBaseActionController.startAction(
+        name: 'EventListControllerBase.update');
+    try {
+      return super.update(event);
+    } finally {
+      _$EventListControllerBaseActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
+  Future<dynamic> deleteById(Event event) {
+    final _$actionInfo = _$EventListControllerBaseActionController.startAction(
+        name: 'EventListControllerBase.deleteById');
+    try {
+      return super.deleteById(event);
+    } finally {
+      _$EventListControllerBaseActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
+  dynamic setEventTitle(String value) {
+    final _$actionInfo = _$EventListControllerBaseActionController.startAction(
+        name: 'EventListControllerBase.setEventTitle');
+    try {
+      return super.setEventTitle(value);
+    } finally {
+      _$EventListControllerBaseActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
+  dynamic removeSelectedEvent(int i) {
+    final _$actionInfo = _$EventListControllerBaseActionController.startAction(
+        name: 'EventListControllerBase.removeSelectedEvent');
+    try {
+      return super.removeSelectedEvent(i);
+    } finally {
+      _$EventListControllerBaseActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
+  dynamic addEvent(Event event, DateTime selectedDay) {
+    final _$actionInfo = _$EventListControllerBaseActionController.startAction(
+        name: 'EventListControllerBase.addEvent');
+    try {
+      return super.addEvent(event, selectedDay);
+    } finally {
+      _$EventListControllerBaseActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
   String toString() {
     return '''
 titleCtrl: ${titleCtrl},

@@ -36,12 +36,31 @@ abstract class EventListControllerBase with Store {
     errorMsg = "${e.message}";
   }, test: (e) => e is Exception);
 
+  @action
+  Future update(Event event) => ObservableFuture(_eventRepo
+      .update(_setValues(event.id, event.title, event.date))
+      .then((value) => value)).catchError((e) {
+    errorMsg = "${e.message}";
+  }, test: (e) => e is Exception);
+
+  @action
+  Future deleteById(Event event) => ObservableFuture(_eventRepo
+      .deleteById(_setValues(event.id, event.title, event.date))
+      .then((value) => value)).catchError((e) {
+    errorMsg = "${e.message}";
+  }, test: (e) => e is Exception);
+
   Event _setValues(int id, String title, String date) {
     return Event(id: id, date: date, title: title);
   }
 
+  @action
   setEventTitle(String value) => titleCtrl.text = value;
 
+  @action
+  removeSelectedEvent(int i) => selectedEvents.removeAt(i);
+
+  @action
   addEvent(Event event, DateTime selectedDay) {
     if (titleCtrl.text.isEmpty) return;
     if (selectedEvents.isNotEmpty) {
@@ -50,6 +69,12 @@ abstract class EventListControllerBase with Store {
     } else {
       events[selectedDay] = [titleCtrl.text].toList();
     }
+    titleCtrl.clear();
+  }
+
+  editEvent(int i) {
+    if (titleCtrl.text.isEmpty) return;
+    selectedEvents[i] = titleCtrl.text;
     titleCtrl.clear();
   }
 

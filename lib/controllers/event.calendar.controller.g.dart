@@ -9,21 +9,6 @@ part of 'event.calendar.controller.dart';
 // ignore_for_file: non_constant_identifier_names, unnecessary_brace_in_string_interps, unnecessary_lambdas, prefer_expression_function_bodies, lines_longer_than_80_chars, avoid_as, avoid_annotating_with_dynamic
 
 mixin _$EventCalendarController on EventCalendarControllerBase, Store {
-  final _$titleCtrlAtom = Atom(name: 'EventCalendarControllerBase.titleCtrl');
-
-  @override
-  TextEditingController get titleCtrl {
-    _$titleCtrlAtom.reportRead();
-    return super.titleCtrl;
-  }
-
-  @override
-  set titleCtrl(TextEditingController value) {
-    _$titleCtrlAtom.reportWrite(value, super.titleCtrl, () {
-      super.titleCtrl = value;
-    });
-  }
-
   final _$_eventRepoAtom = Atom(name: 'EventCalendarControllerBase._eventRepo');
 
   @override
@@ -66,21 +51,6 @@ mixin _$EventCalendarController on EventCalendarControllerBase, Store {
   set future(Future<String> value) {
     _$futureAtom.reportWrite(value, super.future, () {
       super.future = value;
-    });
-  }
-
-  final _$filterAtom = Atom(name: 'EventCalendarControllerBase.filter');
-
-  @override
-  String get filter {
-    _$filterAtom.reportRead();
-    return super.filter;
-  }
-
-  @override
-  set filter(String value) {
-    _$filterAtom.reportWrite(value, super.filter, () {
-      super.filter = value;
     });
   }
 
@@ -162,39 +132,6 @@ mixin _$EventCalendarController on EventCalendarControllerBase, Store {
   }
 
   @override
-  Future<dynamic> save(String title, String date) {
-    final _$actionInfo = _$EventCalendarControllerBaseActionController
-        .startAction(name: 'EventCalendarControllerBase.save');
-    try {
-      return super.save(title, date);
-    } finally {
-      _$EventCalendarControllerBaseActionController.endAction(_$actionInfo);
-    }
-  }
-
-  @override
-  Future<dynamic> update(Event event) {
-    final _$actionInfo = _$EventCalendarControllerBaseActionController
-        .startAction(name: 'EventCalendarControllerBase.update');
-    try {
-      return super.update(event);
-    } finally {
-      _$EventCalendarControllerBaseActionController.endAction(_$actionInfo);
-    }
-  }
-
-  @override
-  Future<dynamic> deleteById(Event event) {
-    final _$actionInfo = _$EventCalendarControllerBaseActionController
-        .startAction(name: 'EventCalendarControllerBase.deleteById');
-    try {
-      return super.deleteById(event);
-    } finally {
-      _$EventCalendarControllerBaseActionController.endAction(_$actionInfo);
-    }
-  }
-
-  @override
   dynamic setSelectedEvents(List<dynamic> events) {
     final _$actionInfo = _$EventCalendarControllerBaseActionController
         .startAction(name: 'EventCalendarControllerBase.setSelectedEvents');
@@ -206,23 +143,10 @@ mixin _$EventCalendarController on EventCalendarControllerBase, Store {
   }
 
   @override
-  dynamic removeSelectedEvent(int i) {
-    final _$actionInfo = _$EventCalendarControllerBaseActionController
-        .startAction(name: 'EventCalendarControllerBase.removeSelectedEvent');
-    try {
-      return super.removeSelectedEvent(i);
-    } finally {
-      _$EventCalendarControllerBaseActionController.endAction(_$actionInfo);
-    }
-  }
-
-  @override
   String toString() {
     return '''
-titleCtrl: ${titleCtrl},
 errorMsg: ${errorMsg},
 future: ${future},
-filter: ${filter},
 events: ${events},
 selectedEvents: ${selectedEvents},
 animController: ${animController},

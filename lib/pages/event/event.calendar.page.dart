@@ -1,16 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
-import 'package:hcslzapp/common/associated.profiles.dart';
-import 'package:hcslzapp/common/labels.and.hints.dart';
-import 'package:hcslzapp/components/my.text.form.field.dart';
 import 'package:hcslzapp/components/top.bar.dart';
-import 'package:hcslzapp/components/transaction.auth.dialog.dart';
 import 'package:hcslzapp/controllers/event.calendar.controller.dart';
-import 'package:hcslzapp/models/event.dart';
 import 'package:table_calendar/table_calendar.dart';
-import 'package:asuka/asuka.dart' as asuka;
-
 import 'event.list.page.dart';
 
 // Example holidays
@@ -230,7 +223,7 @@ class EventCalendarPageState extends State<EventCalendarPage>
         color: Colors.blueGrey[800],
       );
 
-  Widget _buildEventList() => Container(
+/*  Widget _buildEventList() => Container(
         padding: EdgeInsets.all(5.0),
         decoration: BoxDecoration(
           color: Colors.white12,
@@ -307,7 +300,7 @@ class EventCalendarPageState extends State<EventCalendarPage>
                 ),
               ),
             ),
-/*            widget._selectedProfile == ADMIN
+*//*            widget._selectedProfile == ADMIN
                 ? FloatingActionButton(
                     heroTag: "btnAdd",
                     mini: true,
@@ -321,7 +314,7 @@ class EventCalendarPageState extends State<EventCalendarPage>
                       _showAddDialog(null, 0);
                     },
                   )
-                : Container(),*/
+                : Container(),*//*
           ],
         ),
       );
@@ -465,4 +458,5 @@ class EventCalendarPageState extends State<EventCalendarPage>
       );
     }
   }
+  */
 }
