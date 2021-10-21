@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:hcslzapp/common/associated.profiles.dart';
 import 'package:hcslzapp/common/labels.and.hints.dart';
+import 'package:hcslzapp/components/button.dart';
 import 'package:hcslzapp/components/my.text.form.field.dart';
 import 'package:hcslzapp/components/top.bar.dart';
 import 'package:hcslzapp/components/transaction.auth.dialog.dart';
@@ -36,6 +37,17 @@ class EventListPageState extends State<EventListPage> {
   @override
   Widget build(BuildContext context) => Scaffold(
         body: _widgets(),
+        floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
+        floatingActionButton: widget._selectedProfile == ADMIN
+            ? Observer(
+                builder: (_) => Button(
+                        icon: Icons.add,
+                        onClick: () {
+                          _controller.titleCtrl.clear();
+                          _showAddDialog(null, 0);                      },
+                      ),
+              )
+            : Container(),
       );
 
   _widgets() => Observer(
@@ -117,20 +129,6 @@ class EventListPageState extends State<EventListPage> {
                   separatorBuilder: (_, int index) => const Divider(),
                 ),
               ),
-              widget._selectedProfile == ADMIN
-                  ? FloatingActionButton(
-                      heroTag: "btnAdd",
-                      backgroundColor: Colors.deepOrangeAccent[100],
-                      child: Icon(
-                        Icons.add,
-                        color: Colors.black,
-                      ),
-                      onPressed: () {
-                        _controller.titleCtrl.clear();
-                        _showAddDialog(null, 0);
-                      },
-                    )
-                  : Container(),
             ],
           ),
         ),
@@ -226,7 +224,7 @@ class EventListPageState extends State<EventListPage> {
   _update(Event event, int i) {
     event.title = _controller.titleCtrl.text;
     _controller.update(event).then(
-          (value) {
+      (value) {
         if (value != null) {
           asuka.showSnackBar(
             SnackBar(
@@ -254,7 +252,7 @@ class EventListPageState extends State<EventListPage> {
     if (response == true) {
       var event = _controller.selectedEvents[i] as Event;
       _controller.deleteById(event).then(
-            (value) {
+        (value) {
           if (value != null) {
             asuka.showSnackBar(
               SnackBar(
