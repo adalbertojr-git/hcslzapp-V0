@@ -72,6 +72,7 @@ abstract class EventListControllerBase with Store {
     titleCtrl.clear();
   }
 
+  @action
   editEvent(int i) {
     if (titleCtrl.text.isEmpty) return;
     selectedEvents[i] = titleCtrl.text;

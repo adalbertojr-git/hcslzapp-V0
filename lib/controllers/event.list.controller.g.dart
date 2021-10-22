@@ -155,6 +155,17 @@ mixin _$EventListController on EventListControllerBase, Store {
   }
 
   @override
+  dynamic editEvent(int i) {
+    final _$actionInfo = _$EventListControllerBaseActionController.startAction(
+        name: 'EventListControllerBase.editEvent');
+    try {
+      return super.editEvent(i);
+    } finally {
+      _$EventListControllerBaseActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
   String toString() {
     return '''
 titleCtrl: ${titleCtrl},

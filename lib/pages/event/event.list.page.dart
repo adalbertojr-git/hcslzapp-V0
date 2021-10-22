@@ -39,13 +39,12 @@ class EventListPageState extends State<EventListPage> {
         body: _widgets(),
         floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
         floatingActionButton: widget._selectedProfile == ADMIN
-            ? Observer(
-                builder: (_) => Button(
-                        icon: Icons.add,
-                        onClick: () {
-                          _controller.titleCtrl.clear();
-                          _showAddDialog(null, 0);                      },
-                      ),
+            ? Button(
+                icon: Icons.add,
+                onClick: () {
+                  _controller.titleCtrl.clear();
+                  _showAddDialog(null, 0);
+                },
               )
             : Container(),
       );
