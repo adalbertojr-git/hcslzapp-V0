@@ -142,7 +142,10 @@ class EventListPageState extends State<EventListPage> {
                 alignment: Alignment.topLeft,
                 child: Text(
                   'Evento',
-                  style: TextStyle(fontSize: 15.0),
+                  style: TextStyle(
+                    fontSize: 16.0,
+                    fontWeight: FontWeight.bold,
+                  ),
                 ),
               ),
               content: MyTextFormField(
@@ -162,13 +165,16 @@ class EventListPageState extends State<EventListPage> {
                         mini: true,
                         backgroundColor: Colors.deepOrangeAccent[100],
                         child: Icon(
-                          Icons.cancel_outlined,
+                          Icons.cancel_rounded,
                           color: Colors.black,
                         ),
                         onPressed: () {
                           Navigator.pop(context);
                         },
                       ),
+                    ),
+                    SizedBox(
+                      width: 5.0,
                     ),
                     Container(
                       padding: EdgeInsets.only(top: 20.0),

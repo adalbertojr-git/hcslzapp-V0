@@ -6,8 +6,7 @@ import 'package:hcslzapp/models/event.dart';
 
 part 'event.list.controller.g.dart';
 
-class EventListController = EventListControllerBase
-    with _$EventListController;
+class EventListController = EventListControllerBase with _$EventListController;
 
 abstract class EventListControllerBase with Store {
   @observable
@@ -31,24 +30,24 @@ abstract class EventListControllerBase with Store {
 
   @action
   Future save(String title, String date) => ObservableFuture(_eventRepo
-      .save(_setValues(0, title, date))
-      .then((value) => value)).catchError((e) {
-    errorMsg = "${e.message}";
-  }, test: (e) => e is Exception);
+          .save(_setValues(0, title, date))
+          .then((value) => value)).catchError((e) {
+        errorMsg = "${e.message}";
+      }, test: (e) => e is Exception);
 
   @action
   Future update(Event event) => ObservableFuture(_eventRepo
-      .update(_setValues(event.id, event.title, event.date))
-      .then((value) => value)).catchError((e) {
-    errorMsg = "${e.message}";
-  }, test: (e) => e is Exception);
+          .update(_setValues(event.id, event.title, event.date))
+          .then((value) => value)).catchError((e) {
+        errorMsg = "${e.message}";
+      }, test: (e) => e is Exception);
 
   @action
   Future deleteById(Event event) => ObservableFuture(_eventRepo
-      .deleteById(_setValues(event.id, event.title, event.date))
-      .then((value) => value)).catchError((e) {
-    errorMsg = "${e.message}";
-  }, test: (e) => e is Exception);
+          .deleteById(_setValues(event.id, event.title, event.date))
+          .then((value) => value)).catchError((e) {
+        errorMsg = "${e.message}";
+      }, test: (e) => e is Exception);
 
   Event _setValues(int id, String title, String date) {
     return Event(id: id, date: date, title: title);
@@ -63,11 +62,7 @@ abstract class EventListControllerBase with Store {
   @action
   addEvent(Event event, DateTime selectedDay) {
     if (titleCtrl.text.isEmpty) return;
-    if (selectedEvents.isNotEmpty) {
-      events[selectedDay] = selectedEvents;
-    } else {
-      events[selectedDay] = [titleCtrl.text].toList();
-    }
+    events[selectedDay] = selectedEvents;
     selectedEvents.add(event);
     titleCtrl.clear();
   }
@@ -78,5 +73,4 @@ abstract class EventListControllerBase with Store {
     selectedEvents[i] = titleCtrl.text;
     titleCtrl.clear();
   }
-
 }

@@ -83,24 +83,6 @@ class EventCalendarPageState extends State<EventCalendarPage>
             children: <Widget>[
               TopBar(),
               _buildTableCalendarWithBuilders(),
-/*              Expanded(
-                child: _buildEventList(),
-              ),
-                         widget._selectedProfile == ADMIN
-                ? FloatingActionButton(
-                    heroTag: "btnAdd",
-                    mini: true,
-                    backgroundColor: Colors.deepOrangeAccent[100],
-                    child: Icon(
-                      Icons.add,
-                      color: Colors.black,
-                    ),
-                    onPressed: () {
-                      _controller.titleCtrl.clear();
-                      _showAddDialog(null, 0);
-                    },
-                  )
-                : Container(),*/
             ],
           ),
         ),
@@ -300,7 +282,7 @@ class EventCalendarPageState extends State<EventCalendarPage>
                 ),
               ),
             ),
-*//*            widget._selectedProfile == ADMIN
+*/ /*            widget._selectedProfile == ADMIN
                 ? FloatingActionButton(
                     heroTag: "btnAdd",
                     mini: true,
@@ -314,7 +296,7 @@ class EventCalendarPageState extends State<EventCalendarPage>
                       _showAddDialog(null, 0);
                     },
                   )
-                : Container(),*//*
+                : Container(),*/ /*
           ],
         ),
       );
