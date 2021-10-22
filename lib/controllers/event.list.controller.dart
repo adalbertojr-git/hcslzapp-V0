@@ -64,11 +64,11 @@ abstract class EventListControllerBase with Store {
   addEvent(Event event, DateTime selectedDay) {
     if (titleCtrl.text.isEmpty) return;
     if (selectedEvents.isNotEmpty) {
-      selectedEvents.add(event);
       events[selectedDay] = selectedEvents;
     } else {
       events[selectedDay] = [titleCtrl.text].toList();
     }
+    selectedEvents.add(event);
     titleCtrl.clear();
   }
 
