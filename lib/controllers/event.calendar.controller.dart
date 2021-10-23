@@ -75,22 +75,22 @@ abstract class EventCalendarControllerBase with Store {
   }*/
 
   @action
-  setSelectedEvents(List events) => selectedEvents = events;
+  setSelectedEvents(List e) => selectedEvents = e;
 
 /*  @action
   removeSelectedEvent(int i) => selectedEvents.removeAt(i);*/
 
   Map<DateTime, List> _convertJsonToDateMap(String jsonSource) {
     var json = jsonDecode(jsonSource);
-    Map<DateTime, List<Event>> events = {};
+    Map<DateTime, List<Event>> ev = {};
     for (var event in json) {
       var date = _parseDate(event['date']);
-      events.putIfAbsent(date, () => <Event>[]);
+      ev.putIfAbsent(date, () => <Event>[]);
       var e =
           Event(id: event['id'], date: event['date'], title: event['title']);
-      events[date].add(e);
+      ev[date].add(e);
     }
-    return events;
+    return ev;
   }
 
   DateTime _parseDate(String date) {

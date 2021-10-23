@@ -29,8 +29,8 @@ class EventListPageState extends State<EventListPage> {
 
   @override
   void initState() {
-    _controller.init();
     _controller.selectedEvents = widget.selectedEvents;
+    print(_controller.selectedEvents);
     super.initState();
   }
 
@@ -62,7 +62,8 @@ class EventListPageState extends State<EventListPage> {
           child: Column(
             children: [
               TopBar(
-                  title: 'Eventos do dia ' + widget.selectedDay.day.toString()),
+                title: 'Eventos do dia ' + widget.selectedDay.day.toString(),
+              ),
               Expanded(
                 child: ListView.separated(
                   shrinkWrap: true,

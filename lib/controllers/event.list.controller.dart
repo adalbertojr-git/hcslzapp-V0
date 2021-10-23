@@ -24,10 +24,6 @@ abstract class EventListControllerBase with Store {
   @observable
   String errorMsg;
 
-  init() {
-    selectedEvents.clear();
-  }
-
   @action
   Future save(String title, String date) => ObservableFuture(_eventRepo
           .save(_setValues(0, title, date))

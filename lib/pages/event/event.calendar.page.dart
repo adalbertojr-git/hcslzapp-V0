@@ -49,7 +49,7 @@ class EventCalendarPageState extends State<EventCalendarPage>
 
   void _onDaySelected(DateTime day, List events) {
     _controller.setSelectedEvents(events);
-    Navigator.push(
+    final Future<List> future = Navigator.push(
       context,
       MaterialPageRoute(
           builder: (context) => EventListPage(
@@ -58,6 +58,11 @@ class EventCalendarPageState extends State<EventCalendarPage>
                 _controller.calController.selectedDay,
               )),
     );
+    future.then((value) {
+      if (value != null) {
+        print(value);
+      }
+    });
   }
 
   void _onVisibleDaysChanged(

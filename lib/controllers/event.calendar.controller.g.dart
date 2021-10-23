@@ -132,11 +132,11 @@ mixin _$EventCalendarController on EventCalendarControllerBase, Store {
   }
 
   @override
-  dynamic setSelectedEvents(List<dynamic> events) {
+  dynamic setSelectedEvents(List<dynamic> e) {
     final _$actionInfo = _$EventCalendarControllerBaseActionController
         .startAction(name: 'EventCalendarControllerBase.setSelectedEvents');
     try {
-      return super.setSelectedEvents(events);
+      return super.setSelectedEvents(e);
     } finally {
       _$EventCalendarControllerBaseActionController.endAction(_$actionInfo);
     }
