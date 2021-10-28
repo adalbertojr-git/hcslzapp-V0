@@ -6,9 +6,11 @@ import 'package:hcslzapp/components/button.dart';
 import 'package:hcslzapp/components/my.text.form.field.dart';
 import 'package:hcslzapp/components/top.bar.dart';
 import 'package:hcslzapp/components/transaction.auth.dialog.dart';
+import 'package:hcslzapp/controllers/event.calendar.controller.dart';
 import 'package:hcslzapp/controllers/event.list.controller.dart';
 import 'package:hcslzapp/models/event.dart';
 import 'package:asuka/asuka.dart' as asuka;
+import 'package:provider/provider.dart';
 
 class EventListPage extends StatefulWidget {
   final String _selectedProfile;
@@ -30,24 +32,29 @@ class EventListPageState extends State<EventListPage> {
   @override
   void initState() {
     _controller.selectedEvents = widget.selectedEvents;
-    print(_controller.selectedEvents);
     super.initState();
   }
 
   @override
-  Widget build(BuildContext context) => Scaffold(
-        body: _widgets(),
-        floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
-        floatingActionButton: widget._selectedProfile == ADMIN
-            ? Button(
-                icon: Icons.add,
-                onClick: () {
-                  _controller.titleCtrl.clear();
-                  _showAddDialog(null, 0);
-                },
-              )
-            : Container(),
-      );
+  Widget build(BuildContext context) {
+    _controller.eventCalendarController = Provider.of<EventCalendarController>(
+      context,
+      listen: false,
+    );
+    return Scaffold(
+      body: _widgets(),
+      floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
+      floatingActionButton: widget._selectedProfile == ADMIN
+          ? Button(
+              icon: Icons.add,
+              onClick: () {
+                _controller.titleCtrl.clear();
+                _showAddDialog(null, 0);
+              },
+            )
+          : Container(),
+    );
+  }
 
   _widgets() => Observer(
         builder: (_) => Container(
@@ -215,7 +222,7 @@ class EventListPageState extends State<EventListPage> {
               content: Text('Evento salvo com sucesso.'),
             ),
           );
-          _controller.addEvent(value, widget.selectedDay);
+          _controller.addEvent(value, widget.selectedDay, context);
         } else {
           asuka.showSnackBar(
             SnackBar(

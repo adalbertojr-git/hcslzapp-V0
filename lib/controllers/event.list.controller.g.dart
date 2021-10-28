@@ -40,21 +40,6 @@ mixin _$EventListController on EventListControllerBase, Store {
     });
   }
 
-  final _$eventsAtom = Atom(name: 'EventListControllerBase.events');
-
-  @override
-  Map<DateTime, List<dynamic>> get events {
-    _$eventsAtom.reportRead();
-    return super.events;
-  }
-
-  @override
-  set events(Map<DateTime, List<dynamic>> value) {
-    _$eventsAtom.reportWrite(value, super.events, () {
-      super.events = value;
-    });
-  }
-
   final _$_eventRepoAtom = Atom(name: 'EventListControllerBase._eventRepo');
 
   @override
@@ -82,6 +67,23 @@ mixin _$EventListController on EventListControllerBase, Store {
   set errorMsg(String value) {
     _$errorMsgAtom.reportWrite(value, super.errorMsg, () {
       super.errorMsg = value;
+    });
+  }
+
+  final _$eventCalendarControllerAtom =
+      Atom(name: 'EventListControllerBase.eventCalendarController');
+
+  @override
+  EventCalendarController get eventCalendarController {
+    _$eventCalendarControllerAtom.reportRead();
+    return super.eventCalendarController;
+  }
+
+  @override
+  set eventCalendarController(EventCalendarController value) {
+    _$eventCalendarControllerAtom
+        .reportWrite(value, super.eventCalendarController, () {
+      super.eventCalendarController = value;
     });
   }
 
@@ -144,11 +146,11 @@ mixin _$EventListController on EventListControllerBase, Store {
   }
 
   @override
-  dynamic addEvent(Event event, DateTime selectedDay) {
+  dynamic addEvent(Event event, DateTime selectedDay, BuildContext context) {
     final _$actionInfo = _$EventListControllerBaseActionController.startAction(
         name: 'EventListControllerBase.addEvent');
     try {
-      return super.addEvent(event, selectedDay);
+      return super.addEvent(event, selectedDay, context);
     } finally {
       _$EventListControllerBaseActionController.endAction(_$actionInfo);
     }
@@ -170,8 +172,8 @@ mixin _$EventListController on EventListControllerBase, Store {
     return '''
 titleCtrl: ${titleCtrl},
 selectedEvents: ${selectedEvents},
-events: ${events},
-errorMsg: ${errorMsg}
+errorMsg: ${errorMsg},
+eventCalendarController: ${eventCalendarController}
     ''';
   }
 }

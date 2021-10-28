@@ -3,6 +3,9 @@ import 'package:flutter/material.dart';
 import 'package:hcslzapp/repositories/event.repo.dart';
 import 'package:mobx/mobx.dart';
 import 'package:hcslzapp/models/event.dart';
+import 'package:provider/provider.dart';
+
+import 'event.calendar.controller.dart';
 
 part 'event.list.controller.g.dart';
 
@@ -15,14 +18,17 @@ abstract class EventListControllerBase with Store {
   @observable
   List selectedEvents = List();
 
-  @observable
-  Map<DateTime, List> events = {};
+/*  @observable
+  Map<DateTime, List> events = {};*/
 
   @observable
   EventRepo _eventRepo = EventRepo();
 
   @observable
   String errorMsg;
+
+  @observable
+  EventCalendarController eventCalendarController;
 
   @action
   Future save(String title, String date) => ObservableFuture(_eventRepo
@@ -56,10 +62,13 @@ abstract class EventListControllerBase with Store {
   removeSelectedEvent(int i) => selectedEvents.removeAt(i);
 
   @action
-  addEvent(Event event, DateTime selectedDay) {
+  addEvent(Event event, DateTime selectedDay, BuildContext context) {
     if (titleCtrl.text.isEmpty) return;
-    events[selectedDay] = selectedEvents;
     selectedEvents.add(event);
+    //events[selectedDay] = selectedEvents;
+    print(eventCalendarController.events);
+    eventCalendarController.events[selectedDay] = selectedEvents;
+    print(eventCalendarController.events);
     titleCtrl.clear();
   }
 

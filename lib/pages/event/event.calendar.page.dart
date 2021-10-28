@@ -49,7 +49,7 @@ class EventCalendarPageState extends State<EventCalendarPage>
 
   void _onDaySelected(DateTime day, List events) {
     _controller.setSelectedEvents(events);
-    final Future<List> future = Navigator.push(
+    Navigator.push(
       context,
       MaterialPageRoute(
           builder: (context) => EventListPage(
@@ -58,11 +58,6 @@ class EventCalendarPageState extends State<EventCalendarPage>
                 _controller.calController.selectedDay,
               )),
     );
-    future.then((value) {
-      if (value != null) {
-        print(value);
-      }
-    });
   }
 
   void _onVisibleDaysChanged(
@@ -93,6 +88,7 @@ class EventCalendarPageState extends State<EventCalendarPage>
         ),
       );
 
+  @override
   Widget _buildTableCalendarWithBuilders() => Observer(
         builder: (_) => TableCalendar(
           locale: 'pt_BR',
@@ -150,6 +146,7 @@ class EventCalendarPageState extends State<EventCalendarPage>
               final children = <Widget>[];
 
               if (events.isNotEmpty) {
+                print(events);
                 children.add(
                   Positioned(
                     right: 1,

@@ -36,7 +36,6 @@ class _AssociatedUpdatePageState extends State<AssociatedUpdatePage> {
 
   @override
   void initState() {
-    //_controller = Provider.of<AssociatedController>(context, listen: false);
     _controller.getFuture(widget._associatedId).then((value) {
       if (value != null && value.isNotEmpty) {
         _controller.setButtonVisibilty();
