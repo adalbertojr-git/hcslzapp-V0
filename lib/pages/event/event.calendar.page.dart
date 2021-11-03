@@ -1,10 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
+import 'package:hcslzapp/common/associated.profiles.dart';
+import 'package:hcslzapp/common/labels.and.hints.dart';
+import 'package:hcslzapp/components/my.text.form.field.dart';
 import 'package:hcslzapp/components/top.bar.dart';
 import 'package:hcslzapp/controllers/event.calendar.controller.dart';
 import 'package:table_calendar/table_calendar.dart';
 import 'event.list.page.dart';
+import 'package:hcslzapp/models/event.dart';
+import 'package:asuka/asuka.dart' as asuka;
 
 // Example holidays
 /*final Map<DateTime, List> _holidays = {
@@ -28,6 +33,37 @@ class EventCalendarPageState extends State<EventCalendarPage>
     with SingleTickerProviderStateMixin {
   EventCalendarController _controller = EventCalendarController();
 
+  List<Widget> get _eventWidgets =>
+      _controller.selectedEvents.map((e) => events(e)).toList();
+
+  Widget events(var d) {
+    print(d);
+    return Observer(
+      builder: (_) => Container(
+        padding: EdgeInsets.fromLTRB(10, 10, 10, 10),
+        child: Container(
+          width: MediaQuery.of(context).size.width * 0.9,
+          padding: EdgeInsets.fromLTRB(0, 15, 0, 0),
+          decoration: BoxDecoration(
+              border: Border(
+            top: BorderSide(color: Theme.of(context).dividerColor),
+          )),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Text(d.toString(),
+                  style: Theme.of(context).primaryTextTheme.bodyText1),
+/*            IconButton(
+                icon: Icon(Icons.clear),
+                //onPressed: () => _deleteEvent(d))
+              ),*/
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+
   @override
   void initState() {
     _controller.init();
@@ -49,7 +85,7 @@ class EventCalendarPageState extends State<EventCalendarPage>
 
   void _onDaySelected(DateTime day, List events) {
     _controller.setSelectedEvents(events);
-    Navigator.push(
+/*    Navigator.push(
       context,
       MaterialPageRoute(
           builder: (context) => EventListPage(
@@ -57,7 +93,7 @@ class EventCalendarPageState extends State<EventCalendarPage>
                 _controller.selectedEvents,
                 _controller.calController.selectedDay,
               )),
-    );
+    );*/
   }
 
   void _onVisibleDaysChanged(
@@ -69,7 +105,7 @@ class EventCalendarPageState extends State<EventCalendarPage>
       DateTime first, DateTime last, CalendarFormat format) {}
 
   @override
-  Widget build(BuildContext context) => Scaffold(
+  Widget buildx(BuildContext context) => Scaffold(
         body: Container(
           decoration: BoxDecoration(
             gradient: LinearGradient(
@@ -89,13 +125,86 @@ class EventCalendarPageState extends State<EventCalendarPage>
       );
 
   @override
+  Widget build2(BuildContext context) {
+    return Scaffold(
+      body: ListView(
+        //crossAxisAlignment: CrossAxisAlignment.start,
+        children: <Widget>[
+          _buildTableCalendarWithBuilders(),
+          //eventTitle(),
+          Expanded(child: _buildEventList()),
+          //Column(children: _eventWidgets),
+          SizedBox(height: 60)
+        ],
+      ),
+      floatingActionButton: FloatingActionButton(
+        backgroundColor: Colors.redAccent,
+        onPressed: () {
+          _showAddDialog(null, 0);
+        },
+        child: Icon(
+          Icons.add,
+          color: Colors.white,
+        ),
+      ),
+      floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
+    );
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      body: Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: <Widget>[
+            TopBar(),
+            _buildTableCalendarWithBuilders(),
+            Expanded(child: _buildEventList()),
+          ],
+        ),
+      ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {
+          _showAddDialog(null, 0);
+        },
+        tooltip: 'Increment',
+        child: Icon(Icons.add),
+      ),
+    );
+  }
+
+  Widget _buildEventList() {
+    return Observer(
+      builder: (_) => ListView(
+        children: _controller.selectedEvents
+            .map(
+              (event) => Container(
+                decoration: BoxDecoration(
+                  border: Border.all(width: 0.8),
+                  borderRadius: BorderRadius.circular(12.0),
+                ),
+                margin:
+                    const EdgeInsets.symmetric(horizontal: 8.0, vertical: 4.0),
+                child: ListTile(
+                  title: Text(event.title),
+                  onTap: () => print('$event tapped!'),
+                ),
+              ),
+            )
+            .toList(),
+      ),
+    );
+  }
+
+  @override
   Widget _buildTableCalendarWithBuilders() => Observer(
         builder: (_) => TableCalendar(
           locale: 'pt_BR',
           calendarController: _controller.calController,
           events: _controller.events,
           //holidays: _holidays,
-          rowHeight: 55,
+          rowHeight: 30,
           initialCalendarFormat: CalendarFormat.month,
           formatAnimation: FormatAnimation.slide,
           startingDayOfWeek: StartingDayOfWeek.sunday,
@@ -146,7 +255,6 @@ class EventCalendarPageState extends State<EventCalendarPage>
               final children = <Widget>[];
 
               if (events.isNotEmpty) {
-                print(events);
                 children.add(
                   Positioned(
                     right: 1,
@@ -188,14 +296,14 @@ class EventCalendarPageState extends State<EventCalendarPage>
                   ? Colors.brown[300]
                   : Colors.blue[400],
         ),
-        width: 16.0,
-        height: 16.0,
+        width: 12.0,
+        height: 12.0,
         child: Center(
           child: Text(
             '${events.length}',
             style: TextStyle().copyWith(
               color: Colors.white,
-              fontSize: 12.0,
+              fontSize: 10.0,
             ),
           ),
         ),
@@ -207,7 +315,7 @@ class EventCalendarPageState extends State<EventCalendarPage>
         color: Colors.blueGrey[800],
       );
 
-/*  Widget _buildEventList() => Container(
+  Widget _buildEventList2() => Container(
         padding: EdgeInsets.all(5.0),
         decoration: BoxDecoration(
           color: Colors.white12,
@@ -255,7 +363,7 @@ class EventCalendarPageState extends State<EventCalendarPage>
                                       Icons.delete,
                                     ),
                                     onTap: () {
-                                      _delete(i);
+                                      //_delete(i);
                                     },
                                   ),
                                   GestureDetector(
@@ -263,7 +371,7 @@ class EventCalendarPageState extends State<EventCalendarPage>
                                       Icons.edit,
                                     ),
                                     onTap: () {
-                                      _controller.setEventTitle(event.title);
+                                      //_controller.setEventTitle(event.title);
                                       _showAddDialog(event, i);
                                     },
                                   ),
@@ -284,7 +392,7 @@ class EventCalendarPageState extends State<EventCalendarPage>
                 ),
               ),
             ),
-*/ /*            widget._selectedProfile == ADMIN
+            /*            widget._selectedProfile == ADMIN
                 ? FloatingActionButton(
                     heroTag: "btnAdd",
                     mini: true,
@@ -298,7 +406,7 @@ class EventCalendarPageState extends State<EventCalendarPage>
                       _showAddDialog(null, 0);
                     },
                   )
-                : Container(),*/ /*
+                : Container(),*/
           ],
         ),
       );
@@ -352,9 +460,9 @@ class EventCalendarPageState extends State<EventCalendarPage>
                         ),
                         onPressed: () {
                           if (event == null) {
-                            _save();
+                            //_save();
                           } else {
-                            _update(event, i);
+                            //_update(event, i);
                           }
                           Navigator.pop(context);
                         },
@@ -366,7 +474,7 @@ class EventCalendarPageState extends State<EventCalendarPage>
             ));
   }
 
-  _save() {
+/* _save() {
     _controller
         .save(_controller.titleCtrl.text,
             _controller.calController.selectedDay.toString().substring(0, 10))
@@ -441,6 +549,6 @@ class EventCalendarPageState extends State<EventCalendarPage>
         },
       );
     }
-  }
-  */
+  }*/
+
 }

@@ -13,6 +13,9 @@ class EventCalendarController = EventCalendarControllerBase
 
 abstract class EventCalendarControllerBase with Store {
   @observable
+  var titleCtrl = TextEditingController();
+
+  @observable
   EventRepo _eventRepo = EventRepo();
 
   @observable
@@ -37,6 +40,8 @@ abstract class EventCalendarControllerBase with Store {
   CalendarController calController;
 
   init() {
+    events.clear();
+    selectedEvents.clear();
     findAll().then((value) {
       events = _convertJsonToDateMap(value);
       selectedEvents = events[DateTime.now()] ?? [];
@@ -96,6 +101,12 @@ abstract class EventCalendarControllerBase with Store {
   DateTime _parseDate(String date) {
     var parts = date.split('-').map(int.tryParse).toList();
     return DateTime(parts[0], parts[1], parts[2], 12, 0, 0, 0, 0);
+  }
+
+  @action
+  addEvent(List selectedEvents, DateTime selectedDay) {
+    events[selectedDay] = selectedEvents;
+    print(events);
   }
 
 /*  setEventTitle(String value) => titleCtrl.text = value;

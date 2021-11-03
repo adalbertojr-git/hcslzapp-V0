@@ -66,9 +66,10 @@ abstract class EventListControllerBase with Store {
     if (titleCtrl.text.isEmpty) return;
     selectedEvents.add(event);
     //events[selectedDay] = selectedEvents;
-    print(eventCalendarController.events);
-    eventCalendarController.events[selectedDay] = selectedEvents;
-    print(eventCalendarController.events);
+    //eventCalendarController.events[selectedDay] = selectedEvents;
+
+    //eventCalendarController.addEvent(selectedEvents, selectedDay);
+    eventCalendarController.init();
     titleCtrl.clear();
   }
 
