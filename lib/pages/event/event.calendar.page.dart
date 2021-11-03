@@ -3,23 +3,14 @@ import 'package:flutter/rendering.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:hcslzapp/common/associated.profiles.dart';
 import 'package:hcslzapp/common/labels.and.hints.dart';
+import 'package:hcslzapp/components/button.dart';
 import 'package:hcslzapp/components/my.text.form.field.dart';
 import 'package:hcslzapp/components/top.bar.dart';
 import 'package:hcslzapp/components/transaction.auth.dialog.dart';
 import 'package:hcslzapp/controllers/event.calendar.controller.dart';
 import 'package:table_calendar/table_calendar.dart';
-import 'event.list.page.dart';
 import 'package:hcslzapp/models/event.dart';
 import 'package:asuka/asuka.dart' as asuka;
-
-// Example holidays
-/*final Map<DateTime, List> _holidays = {
-  DateTime(2019, 1, 1): ['New Year\'s Day'],
-  DateTime(2019, 1, 6): ['Epiphany'],
-  DateTime(2019, 2, 14): ['Valentine\'s Day'],
-  DateTime(2019, 4, 21): ['Easter Sunday'],
-  DateTime(2019, 4, 22): ['Easter Monday'],
-};*/
 
 class EventCalendarPage extends StatefulWidget {
   final String _selectedProfile;
@@ -155,45 +146,36 @@ class EventCalendarPageState extends State<EventCalendarPage>
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            TopBar(),
-            _buildTableCalendarWithBuilders(),
-            Expanded(child: _buildEventList()),
-          ],
+      body: Container(
+        decoration: BoxDecoration(
+          gradient: LinearGradient(
+            colors: [Colors.white30, Colors.deepOrange],
+            begin: FractionalOffset.topLeft,
+            end: FractionalOffset.bottomRight,
+          ),
+        ),
+        height: MediaQuery.of(context).size.height,
+        child: Center(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: <Widget>[
+              TopBar(),
+              _buildTableCalendarWithBuilders(),
+              Expanded(child: _buildEventList()),
+            ],
+          ),
         ),
       ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: () {
-          _showAddDialog(null, 0);
-        },
-        child: Icon(Icons.add),
-      ),
-    );
-  }
-
-  Widget _buildEventList() {
-    return Observer(
-      builder: (_) => ListView(
-        children: _controller.selectedEvents
-            .map(
-              (event) => Container(
-                decoration: BoxDecoration(
-                  border: Border.all(width: 0.8),
-                  borderRadius: BorderRadius.circular(5.0),
-                ),
-                margin:
-                    const EdgeInsets.symmetric(horizontal: 8.0, vertical: 3.0),
-                child: ListTile(
-                  title: Text(event.title),
-                  onTap: () => print('$event tapped!'),
-                ),
-              ),
+      floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
+      floatingActionButton: widget._selectedProfile == ADMIN
+          ? Button(
+              icon: Icons.add,
+              onClick: () {
+                _controller.titleCtrl.clear();
+                _showAddDialog(null, 0);
+              },
             )
-            .toList(),
-      ),
+          : Container(),
     );
   }
 
@@ -203,7 +185,6 @@ class EventCalendarPageState extends State<EventCalendarPage>
           locale: 'pt_BR',
           calendarController: _controller.calController,
           events: _controller.events,
-          //holidays: _holidays,
           rowHeight: 25,
           initialCalendarFormat: CalendarFormat.month,
           formatAnimation: FormatAnimation.slide,
@@ -315,9 +296,7 @@ class EventCalendarPageState extends State<EventCalendarPage>
         color: Colors.blueGrey[800],
       );
 
-/*
-
-  Widget _buildEventList2() => Container(
+  Widget _buildEventList() => Container(
         padding: EdgeInsets.all(5.0),
         decoration: BoxDecoration(
           color: Colors.white12,
@@ -365,7 +344,7 @@ class EventCalendarPageState extends State<EventCalendarPage>
                                       Icons.delete,
                                     ),
                                     onTap: () {
-                                      //_delete(i);
+                                      _delete(i);
                                     },
                                   ),
                                   GestureDetector(
@@ -373,7 +352,7 @@ class EventCalendarPageState extends State<EventCalendarPage>
                                       Icons.edit,
                                     ),
                                     onTap: () {
-                                      //_controller.setEventTitle(event.title);
+                                      _controller.setEventTitle(event.title);
                                       _showAddDialog(event, i);
                                     },
                                   ),
@@ -394,28 +373,10 @@ class EventCalendarPageState extends State<EventCalendarPage>
                 ),
               ),
             ),
-            */
-/*            widget._selectedProfile == ADMIN
-                ? FloatingActionButton(
-                    heroTag: "btnAdd",
-                    mini: true,
-                    backgroundColor: Colors.deepOrangeAccent[100],
-                    child: Icon(
-                      Icons.add,
-                      color: Colors.black,
-                    ),
-                    onPressed: () {
-                      _controller.titleCtrl.clear();
-                      _showAddDialog(null, 0);
-                    },
-                  )
-                : Container(),*/ /*
-
           ],
         ),
       );
 
-*/
   _showAddDialog(Event event, int i) async {
     await showDialog(
         context: context,
@@ -465,9 +426,9 @@ class EventCalendarPageState extends State<EventCalendarPage>
                         ),
                         onPressed: () {
                           if (event == null) {
-                            //_save();
+                            _save();
                           } else {
-                            //_update(event, i);
+                            _update(event, i);
                           }
                           Navigator.pop(context);
                         },

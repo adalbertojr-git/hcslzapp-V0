@@ -224,6 +224,17 @@ mixin _$EventCalendarController on EventCalendarControllerBase, Store {
   }
 
   @override
+  dynamic setEventTitle(String value) {
+    final _$actionInfo = _$EventCalendarControllerBaseActionController
+        .startAction(name: 'EventCalendarControllerBase.setEventTitle');
+    try {
+      return super.setEventTitle(value);
+    } finally {
+      _$EventCalendarControllerBaseActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
   String toString() {
     return '''
 titleCtrl: ${titleCtrl},

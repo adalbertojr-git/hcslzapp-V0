@@ -114,6 +114,7 @@ abstract class EventCalendarControllerBase with Store {
     if (titleCtrl.text.isEmpty) return;
     selectedEvents.add(event);
     //events[selectedDay] = selectedEvents;
+    events[calController.selectedDay] = [titleCtrl.text].toList();
     //eventCalendarController.events[selectedDay] = selectedEvents;
 
     //eventCalendarController.addEvent(selectedEvents, selectedDay);
@@ -130,6 +131,9 @@ abstract class EventCalendarControllerBase with Store {
 
   @action
   removeSelectedEvent(int i) => selectedEvents.removeAt(i);
+
+  @action
+  setEventTitle(String value) => titleCtrl.text = value;
 
 /*  setEventTitle(String value) => titleCtrl.text = value;
 
