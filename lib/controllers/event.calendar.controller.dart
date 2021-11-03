@@ -53,31 +53,31 @@ abstract class EventCalendarControllerBase with Store {
       _eventRepo.findAll().then((value) => value).catchError((e) {
         errorMsg = "${e.message}";
       }, test: (e) => e is Exception);
-/*
+
   @action
   Future save(String title, String date) => ObservableFuture(_eventRepo
-          .save(_setValues(0, title, date))
-          .then((value) => value)).catchError((e) {
-        errorMsg = "${e.message}";
-      }, test: (e) => e is Exception);
+      .save(_setValues(0, title, date))
+      .then((value) => value)).catchError((e) {
+    errorMsg = "${e.message}";
+  }, test: (e) => e is Exception);
 
   @action
   Future update(Event event) => ObservableFuture(_eventRepo
-          .update(_setValues(event.id, event.title, event.date))
-          .then((value) => value)).catchError((e) {
-        errorMsg = "${e.message}";
-      }, test: (e) => e is Exception);
+      .update(_setValues(event.id, event.title, event.date))
+      .then((value) => value)).catchError((e) {
+    errorMsg = "${e.message}";
+  }, test: (e) => e is Exception);
 
   @action
   Future deleteById(Event event) => ObservableFuture(_eventRepo
-          .deleteById(_setValues(event.id, event.title, event.date))
-          .then((value) => value)).catchError((e) {
-        errorMsg = "${e.message}";
-      }, test: (e) => e is Exception);
+      .deleteById(_setValues(event.id, event.title, event.date))
+      .then((value) => value)).catchError((e) {
+    errorMsg = "${e.message}";
+  }, test: (e) => e is Exception);
 
   Event _setValues(int id, String title, String date) {
     return Event(id: id, date: date, title: title);
-  }*/
+  }
 
   @action
   setSelectedEvents(List e) => selectedEvents = e;
@@ -103,11 +103,33 @@ abstract class EventCalendarControllerBase with Store {
     return DateTime(parts[0], parts[1], parts[2], 12, 0, 0, 0, 0);
   }
 
-  @action
+/*  @action
   addEvent(List selectedEvents, DateTime selectedDay) {
     events[selectedDay] = selectedEvents;
     print(events);
+  }*/
+
+  @action
+  addEvent(Event event, DateTime selectedDay, BuildContext context) {
+    if (titleCtrl.text.isEmpty) return;
+    selectedEvents.add(event);
+    //events[selectedDay] = selectedEvents;
+    //eventCalendarController.events[selectedDay] = selectedEvents;
+
+    //eventCalendarController.addEvent(selectedEvents, selectedDay);
+    //eventCalendarController.init();
+    titleCtrl.clear();
   }
+
+  @action
+  editEvent(int i) {
+    if (titleCtrl.text.isEmpty) return;
+    selectedEvents[i] = titleCtrl.text;
+    titleCtrl.clear();
+  }
+
+  @action
+  removeSelectedEvent(int i) => selectedEvents.removeAt(i);
 
 /*  setEventTitle(String value) => titleCtrl.text = value;
 

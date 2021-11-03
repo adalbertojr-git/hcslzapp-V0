@@ -5,6 +5,7 @@ import 'package:hcslzapp/common/associated.profiles.dart';
 import 'package:hcslzapp/common/labels.and.hints.dart';
 import 'package:hcslzapp/components/my.text.form.field.dart';
 import 'package:hcslzapp/components/top.bar.dart';
+import 'package:hcslzapp/components/transaction.auth.dialog.dart';
 import 'package:hcslzapp/controllers/event.calendar.controller.dart';
 import 'package:table_calendar/table_calendar.dart';
 import 'event.list.page.dart';
@@ -33,7 +34,7 @@ class EventCalendarPageState extends State<EventCalendarPage>
     with SingleTickerProviderStateMixin {
   EventCalendarController _controller = EventCalendarController();
 
-  List<Widget> get _eventWidgets =>
+/*  List<Widget> get _eventWidgets =>
       _controller.selectedEvents.map((e) => events(e)).toList();
 
   Widget events(var d) {
@@ -53,16 +54,16 @@ class EventCalendarPageState extends State<EventCalendarPage>
             children: [
               Text(d.toString(),
                   style: Theme.of(context).primaryTextTheme.bodyText1),
-/*            IconButton(
+*/ /*            IconButton(
                 icon: Icon(Icons.clear),
                 //onPressed: () => _deleteEvent(d))
-              ),*/
+              ),*/ /*
             ],
           ),
         ),
       ),
     );
-  }
+  }*/
 
   @override
   void initState() {
@@ -104,7 +105,7 @@ class EventCalendarPageState extends State<EventCalendarPage>
   void _onCalendarCreated(
       DateTime first, DateTime last, CalendarFormat format) {}
 
-  @override
+/*  @override
   Widget buildx(BuildContext context) => Scaffold(
         body: Container(
           decoration: BoxDecoration(
@@ -122,8 +123,8 @@ class EventCalendarPageState extends State<EventCalendarPage>
             ],
           ),
         ),
-      );
-
+      );*/
+/*
   @override
   Widget build2(BuildContext context) {
     return Scaffold(
@@ -149,7 +150,7 @@ class EventCalendarPageState extends State<EventCalendarPage>
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
     );
-  }
+  }*/
 
   @override
   Widget build(BuildContext context) {
@@ -168,7 +169,6 @@ class EventCalendarPageState extends State<EventCalendarPage>
         onPressed: () {
           _showAddDialog(null, 0);
         },
-        tooltip: 'Increment',
         child: Icon(Icons.add),
       ),
     );
@@ -182,10 +182,10 @@ class EventCalendarPageState extends State<EventCalendarPage>
               (event) => Container(
                 decoration: BoxDecoration(
                   border: Border.all(width: 0.8),
-                  borderRadius: BorderRadius.circular(12.0),
+                  borderRadius: BorderRadius.circular(5.0),
                 ),
                 margin:
-                    const EdgeInsets.symmetric(horizontal: 8.0, vertical: 4.0),
+                    const EdgeInsets.symmetric(horizontal: 8.0, vertical: 3.0),
                 child: ListTile(
                   title: Text(event.title),
                   onTap: () => print('$event tapped!'),
@@ -204,7 +204,7 @@ class EventCalendarPageState extends State<EventCalendarPage>
           calendarController: _controller.calController,
           events: _controller.events,
           //holidays: _holidays,
-          rowHeight: 30,
+          rowHeight: 25,
           initialCalendarFormat: CalendarFormat.month,
           formatAnimation: FormatAnimation.slide,
           startingDayOfWeek: StartingDayOfWeek.sunday,
@@ -315,6 +315,8 @@ class EventCalendarPageState extends State<EventCalendarPage>
         color: Colors.blueGrey[800],
       );
 
+/*
+
   Widget _buildEventList2() => Container(
         padding: EdgeInsets.all(5.0),
         decoration: BoxDecoration(
@@ -392,7 +394,8 @@ class EventCalendarPageState extends State<EventCalendarPage>
                 ),
               ),
             ),
-            /*            widget._selectedProfile == ADMIN
+            */
+/*            widget._selectedProfile == ADMIN
                 ? FloatingActionButton(
                     heroTag: "btnAdd",
                     mini: true,
@@ -406,11 +409,13 @@ class EventCalendarPageState extends State<EventCalendarPage>
                       _showAddDialog(null, 0);
                     },
                   )
-                : Container(),*/
+                : Container(),*/ /*
+
           ],
         ),
       );
 
+*/
   _showAddDialog(Event event, int i) async {
     await showDialog(
         context: context,
@@ -428,7 +433,7 @@ class EventCalendarPageState extends State<EventCalendarPage>
                 label: labelTitle,
                 hint: hintTitle,
                 inputType: TextInputType.text,
-                nLines: 2,
+                fontSize: 12,
               ),
               actions: <Widget>[
                 Row(
@@ -472,6 +477,84 @@ class EventCalendarPageState extends State<EventCalendarPage>
                 )
               ],
             ));
+  }
+
+  _save() {
+    var _selectedDay = _controller.calController.selectedDay;
+    _controller
+        .save(_controller.titleCtrl.text,
+            _selectedDay.toString().substring(0, 10))
+        .then(
+      (value) {
+        if (value != null) {
+          asuka.showSnackBar(
+            SnackBar(
+              content: Text('Evento salvo com sucesso.'),
+            ),
+          );
+          _controller.addEvent(value, _selectedDay, context);
+        } else {
+          asuka.showSnackBar(
+            SnackBar(
+              content: Text(_controller.errorMsg),
+            ),
+          );
+        }
+      },
+    );
+  }
+
+  _update(Event event, int i) {
+    event.title = _controller.titleCtrl.text;
+    _controller.update(event).then(
+      (value) {
+        if (value != null) {
+          asuka.showSnackBar(
+            SnackBar(
+              content: Text('Evento atualizado com sucesso.'),
+            ),
+          );
+          _controller.editEvent(i);
+        } else {
+          asuka.showSnackBar(
+            SnackBar(
+              content: Text(_controller.errorMsg),
+            ),
+          );
+        }
+      },
+    );
+  }
+
+  _delete(int i) async {
+    var response = await showDialog(
+        context: context,
+        builder: (context) {
+          return TransactionAuthDialog(msg: 'Confirma a exclusão do evento?');
+        });
+    if (response == true) {
+      var event = _controller.selectedEvents[i] as Event;
+      _controller.deleteById(event).then(
+        (value) {
+          if (value != null) {
+            asuka.showSnackBar(
+              SnackBar(
+                content: Text('Evento excluido com sucesso.'),
+              ),
+            );
+            setState(() {
+              _controller.removeSelectedEvent(i);
+            });
+          } else {
+            asuka.showSnackBar(
+              SnackBar(
+                content: Text(_controller.errorMsg),
+              ),
+            );
+          }
+        },
+      );
+    }
   }
 
 /* _save() {

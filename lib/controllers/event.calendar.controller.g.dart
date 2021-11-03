@@ -147,6 +147,39 @@ mixin _$EventCalendarController on EventCalendarControllerBase, Store {
   }
 
   @override
+  Future<dynamic> save(String title, String date) {
+    final _$actionInfo = _$EventCalendarControllerBaseActionController
+        .startAction(name: 'EventCalendarControllerBase.save');
+    try {
+      return super.save(title, date);
+    } finally {
+      _$EventCalendarControllerBaseActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
+  Future<dynamic> update(Event event) {
+    final _$actionInfo = _$EventCalendarControllerBaseActionController
+        .startAction(name: 'EventCalendarControllerBase.update');
+    try {
+      return super.update(event);
+    } finally {
+      _$EventCalendarControllerBaseActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
+  Future<dynamic> deleteById(Event event) {
+    final _$actionInfo = _$EventCalendarControllerBaseActionController
+        .startAction(name: 'EventCalendarControllerBase.deleteById');
+    try {
+      return super.deleteById(event);
+    } finally {
+      _$EventCalendarControllerBaseActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
   dynamic setSelectedEvents(List<dynamic> e) {
     final _$actionInfo = _$EventCalendarControllerBaseActionController
         .startAction(name: 'EventCalendarControllerBase.setSelectedEvents');
@@ -158,11 +191,33 @@ mixin _$EventCalendarController on EventCalendarControllerBase, Store {
   }
 
   @override
-  dynamic addEvent(List<dynamic> selectedEvents, DateTime selectedDay) {
+  dynamic addEvent(Event event, DateTime selectedDay, BuildContext context) {
     final _$actionInfo = _$EventCalendarControllerBaseActionController
         .startAction(name: 'EventCalendarControllerBase.addEvent');
     try {
-      return super.addEvent(selectedEvents, selectedDay);
+      return super.addEvent(event, selectedDay, context);
+    } finally {
+      _$EventCalendarControllerBaseActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
+  dynamic editEvent(int i) {
+    final _$actionInfo = _$EventCalendarControllerBaseActionController
+        .startAction(name: 'EventCalendarControllerBase.editEvent');
+    try {
+      return super.editEvent(i);
+    } finally {
+      _$EventCalendarControllerBaseActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
+  dynamic removeSelectedEvent(int i) {
+    final _$actionInfo = _$EventCalendarControllerBaseActionController
+        .startAction(name: 'EventCalendarControllerBase.removeSelectedEvent');
+    try {
+      return super.removeSelectedEvent(i);
     } finally {
       _$EventCalendarControllerBaseActionController.endAction(_$actionInfo);
     }
