@@ -97,12 +97,12 @@ abstract class EventCalendarControllerBase with Store {
     return DateTime(parts[0], parts[1], parts[2], 12, 0, 0, 0, 0);
   }
 
-  @action
+/*  @action
   addEvent(Event event, DateTime selectedDay) {
     if (titleCtrl.text.isEmpty) return;
     selectedEvents.add(event);
     titleCtrl.clear();
-  }
+  }*/
 
   @action
   editEvent(int i) {
@@ -117,8 +117,7 @@ abstract class EventCalendarControllerBase with Store {
   @action
   setEventTitle(String value) => titleCtrl.text = value;
 
-/*  setEventTitle(String value) => titleCtrl.text = value;
-
+/*
   addEvent(Event event) {
     if (titleCtrl.text.isEmpty) return;
     if (selectedEvents.isNotEmpty) {
