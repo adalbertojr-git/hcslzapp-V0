@@ -24,9 +24,6 @@ abstract class EventCalendarControllerBase with Store {
   @observable
   Future<String> future;
 
-  //@observable
-  //String filter = '';
-
   @observable
   Map<DateTime, List> events = {};
 
@@ -82,9 +79,6 @@ abstract class EventCalendarControllerBase with Store {
   @action
   setSelectedEvents(List e) => selectedEvents = e;
 
-/*  @action
-  removeSelectedEvent(int i) => selectedEvents.removeAt(i);*/
-
   Map<DateTime, List> _convertJsonToDateMap(String jsonSource) {
     var json = jsonDecode(jsonSource);
     Map<DateTime, List<Event>> ev = {};
@@ -103,22 +97,10 @@ abstract class EventCalendarControllerBase with Store {
     return DateTime(parts[0], parts[1], parts[2], 12, 0, 0, 0, 0);
   }
 
-/*  @action
-  addEvent(List selectedEvents, DateTime selectedDay) {
-    events[selectedDay] = selectedEvents;
-    print(events);
-  }*/
-
   @action
-  addEvent(Event event, DateTime selectedDay, BuildContext context) {
+  addEvent(Event event, DateTime selectedDay) {
     if (titleCtrl.text.isEmpty) return;
     selectedEvents.add(event);
-    //events[selectedDay] = selectedEvents;
-    events[calController.selectedDay] = [titleCtrl.text].toList();
-    //eventCalendarController.events[selectedDay] = selectedEvents;
-
-    //eventCalendarController.addEvent(selectedEvents, selectedDay);
-    //eventCalendarController.init();
     titleCtrl.clear();
   }
 

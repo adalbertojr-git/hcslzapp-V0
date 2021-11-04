@@ -191,11 +191,11 @@ mixin _$EventCalendarController on EventCalendarControllerBase, Store {
   }
 
   @override
-  dynamic addEvent(Event event, DateTime selectedDay, BuildContext context) {
+  dynamic addEvent(Event event, DateTime selectedDay) {
     final _$actionInfo = _$EventCalendarControllerBaseActionController
         .startAction(name: 'EventCalendarControllerBase.addEvent');
     try {
-      return super.addEvent(event, selectedDay, context);
+      return super.addEvent(event, selectedDay);
     } finally {
       _$EventCalendarControllerBaseActionController.endAction(_$actionInfo);
     }

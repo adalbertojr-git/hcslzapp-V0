@@ -25,37 +25,6 @@ class EventCalendarPageState extends State<EventCalendarPage>
     with SingleTickerProviderStateMixin {
   EventCalendarController _controller = EventCalendarController();
 
-/*  List<Widget> get _eventWidgets =>
-      _controller.selectedEvents.map((e) => events(e)).toList();
-
-  Widget events(var d) {
-    print(d);
-    return Observer(
-      builder: (_) => Container(
-        padding: EdgeInsets.fromLTRB(10, 10, 10, 10),
-        child: Container(
-          width: MediaQuery.of(context).size.width * 0.9,
-          padding: EdgeInsets.fromLTRB(0, 15, 0, 0),
-          decoration: BoxDecoration(
-              border: Border(
-            top: BorderSide(color: Theme.of(context).dividerColor),
-          )),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Text(d.toString(),
-                  style: Theme.of(context).primaryTextTheme.bodyText1),
-*/ /*            IconButton(
-                icon: Icon(Icons.clear),
-                //onPressed: () => _deleteEvent(d))
-              ),*/ /*
-            ],
-          ),
-        ),
-      ),
-    );
-  }*/
-
   @override
   void initState() {
     _controller.init();
@@ -77,15 +46,6 @@ class EventCalendarPageState extends State<EventCalendarPage>
 
   void _onDaySelected(DateTime day, List events) {
     _controller.setSelectedEvents(events);
-/*    Navigator.push(
-      context,
-      MaterialPageRoute(
-          builder: (context) => EventListPage(
-                widget._selectedProfile,
-                _controller.selectedEvents,
-                _controller.calController.selectedDay,
-              )),
-    );*/
   }
 
   void _onVisibleDaysChanged(
@@ -95,53 +55,6 @@ class EventCalendarPageState extends State<EventCalendarPage>
 
   void _onCalendarCreated(
       DateTime first, DateTime last, CalendarFormat format) {}
-
-/*  @override
-  Widget buildx(BuildContext context) => Scaffold(
-        body: Container(
-          decoration: BoxDecoration(
-            gradient: LinearGradient(
-              colors: [Colors.white30, Colors.deepOrange],
-              begin: FractionalOffset.topLeft,
-              end: FractionalOffset.bottomRight,
-            ),
-          ),
-          height: MediaQuery.of(context).size.height,
-          child: Column(
-            children: <Widget>[
-              TopBar(),
-              _buildTableCalendarWithBuilders(),
-            ],
-          ),
-        ),
-      );*/
-/*
-  @override
-  Widget build2(BuildContext context) {
-    return Scaffold(
-      body: ListView(
-        //crossAxisAlignment: CrossAxisAlignment.start,
-        children: <Widget>[
-          _buildTableCalendarWithBuilders(),
-          //eventTitle(),
-          Expanded(child: _buildEventList()),
-          //Column(children: _eventWidgets),
-          SizedBox(height: 60)
-        ],
-      ),
-      floatingActionButton: FloatingActionButton(
-        backgroundColor: Colors.redAccent,
-        onPressed: () {
-          _showAddDialog(null, 0);
-        },
-        child: Icon(
-          Icons.add,
-          color: Colors.white,
-        ),
-      ),
-      floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
-    );
-  }*/
 
   @override
   Widget build(BuildContext context) {
@@ -453,7 +366,8 @@ class EventCalendarPageState extends State<EventCalendarPage>
               content: Text('Evento salvo com sucesso.'),
             ),
           );
-          _controller.addEvent(value, _selectedDay, context);
+          //_controller.addEvent(value, _selectedDay);
+          _controller.init();
         } else {
           asuka.showSnackBar(
             SnackBar(
@@ -475,7 +389,8 @@ class EventCalendarPageState extends State<EventCalendarPage>
               content: Text('Evento atualizado com sucesso.'),
             ),
           );
-          _controller.editEvent(i);
+          //_controller.editEvent(i);
+          _controller.init();
         } else {
           asuka.showSnackBar(
             SnackBar(
@@ -503,9 +418,10 @@ class EventCalendarPageState extends State<EventCalendarPage>
                 content: Text('Evento excluido com sucesso.'),
               ),
             );
-            setState(() {
+/*            setState(() {
               _controller.removeSelectedEvent(i);
-            });
+            });*/
+            _controller.init();
           } else {
             asuka.showSnackBar(
               SnackBar(
