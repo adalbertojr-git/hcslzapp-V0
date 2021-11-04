@@ -134,17 +134,7 @@ class _DashboardPageState extends State<DashboardPage> {
             _controller.isAdmin()
                 ? ListTile(
                     leading: Icon(Icons.wifi_protected_setup),
-                    title: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text("Trocar Perfil de Acesso"),
-                        Text(
-                          "Perfil atual: " +
-                              _controller.selectedProfileToPortuguese(),
-                          style: TextStyle(fontSize: 10),
-                        ),
-                      ],
-                    ),
+                    title: Text("Trocar Perfil de Acesso"),
                     onTap: () async {
                       setState(() {
                         _controller.changeProfile();
