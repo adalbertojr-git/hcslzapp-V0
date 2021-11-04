@@ -210,64 +210,64 @@ class EventCalendarPageState extends State<EventCalendarPage>
       );
 
   Widget _buildEventList() => Observer(
-    builder: (_) => ListView.separated(
-      shrinkWrap: true,
-      itemCount: _controller.selectedEvents.length,
-      itemBuilder: (_, int i) {
-        var event = _controller.selectedEvents[i] as Event;
-        return Container(
-          decoration: BoxDecoration(
-            color: Colors.white30,
-            shape: BoxShape.rectangle,
-            borderRadius: BorderRadius.circular(8.0),
-          ),
-          child: ListTile(
-            leading: Container(
-              width: 40,
-              height: 40,
-              alignment: Alignment.center,
-              child: CircleAvatar(
-                child: Icon(Icons.event),
-                backgroundColor: Colors.white,
+        builder: (_) => ListView.separated(
+          shrinkWrap: true,
+          itemCount: _controller.selectedEvents.length,
+          itemBuilder: (_, int i) {
+            var event = _controller.selectedEvents[i] as Event;
+            return Container(
+              decoration: BoxDecoration(
+                color: Colors.white30,
+                shape: BoxShape.rectangle,
+                borderRadius: BorderRadius.circular(8.0),
               ),
-            ),
-            trailing: widget._selectedProfile == ADMIN
-                ? Wrap(
-                    spacing: 10, // space between two icons
-                    children: <Widget>[
-                      GestureDetector(
-                        child: Icon(
-                          Icons.delete,
-                        ),
-                        onTap: () {
-                          _delete(i);
-                        },
-                      ),
-                      GestureDetector(
-                        child: Icon(
-                          Icons.edit,
-                        ),
-                        onTap: () {
-                          _controller.setEventTitle(event.title);
-                          _showAddDialog(event, i);
-                        },
-                      ),
-                    ],
-                  )
-                : null,
-            title: Text(
-              //_controller.selectedEvents[i].toString(),
-              event.title,
-              style: TextStyle(
-                fontSize: 13.0,
+              child: ListTile(
+                leading: Container(
+                  width: 40,
+                  height: 40,
+                  alignment: Alignment.center,
+                  child: CircleAvatar(
+                    child: Icon(Icons.event),
+                    backgroundColor: Colors.white,
+                  ),
+                ),
+                trailing: widget._selectedProfile == ADMIN
+                    ? Wrap(
+                        spacing: 10, // space between two icons
+                        children: <Widget>[
+                          GestureDetector(
+                            child: Icon(
+                              Icons.delete,
+                            ),
+                            onTap: () {
+                              _delete(i);
+                            },
+                          ),
+                          GestureDetector(
+                            child: Icon(
+                              Icons.edit,
+                            ),
+                            onTap: () {
+                              _controller.setEventTitle(event.title);
+                              _showAddDialog(event, i);
+                            },
+                          ),
+                        ],
+                      )
+                    : null,
+                title: Text(
+                  //_controller.selectedEvents[i].toString(),
+                  event.title,
+                  style: TextStyle(
+                    fontSize: 13.0,
+                  ),
+                ),
               ),
-            ),
-          ),
-        );
-      },
-      separatorBuilder: (_, int index) => const Divider(),
-    ),
-  );
+            );
+          },
+          separatorBuilder: (_, int index) => const Divider(),
+        ),
+      );
 
   _showAddDialog(Event event, int i) async {
     await showDialog(
