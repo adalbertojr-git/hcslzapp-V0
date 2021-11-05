@@ -50,7 +50,9 @@ class _PartnershipListPageState extends State<PartnershipListPage> {
   @override
   Widget build(BuildContext context) => Scaffold(
         body: FutureBuilder<List<Partnership>>(
-          future: _controller.getFuture(),
+          future: widget._selectedProfile == ADMIN
+              ? _controller.getFuture()
+              : _controller.future,
           builder: (context, snapshot) {
             switch (snapshot.connectionState) {
               case ConnectionState.none:
@@ -297,7 +299,7 @@ class _PartnershipListPageState extends State<PartnershipListPage> {
           : PhotoImageProvider().getImageProvider(
               File('assets/imgs/noImage.png'),
             ),
-      fit: BoxFit.fill);
+      fit: BoxFit.contain);
 
   Widget buildDetail() => Observer(
         builder: (_) => Container(
