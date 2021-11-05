@@ -48,26 +48,26 @@ class _PartnershipListPageState extends State<PartnershipListPage> {
   }
 
   @override
-  Widget build(BuildContext context) => Observer(
-        builder: (_) => Scaffold(
-          body: FutureBuilder<List<Partnership>>(
-            future: _controller.future,
-            builder: (context, snapshot) {
-              switch (snapshot.connectionState) {
-                case ConnectionState.none:
-                  break;
-                case ConnectionState.waiting:
-                  return Progress();
-                case ConnectionState.active:
-                  break;
-                default:
-                  if (snapshot.hasError) {
-                    return CenteredMessage(snapshot.error.toString());
-                  } else {
-                    if (snapshot.data == null)
-                      return CenteredMessage(
-                        _controller.errorMsg,
-                      );
+  Widget build(BuildContext context) => Scaffold(
+        body: FutureBuilder<List<Partnership>>(
+          future: _controller.getFuture(),
+          builder: (context, snapshot) {
+            switch (snapshot.connectionState) {
+              case ConnectionState.none:
+                break;
+              case ConnectionState.waiting:
+                return Progress();
+              case ConnectionState.active:
+                break;
+              default:
+                if (snapshot.hasError) {
+                  return CenteredMessage(snapshot.error.toString());
+                } else {
+                  if (snapshot.data == null)
+                    return CenteredMessage(
+                      _controller.errorMsg,
+                    );
+                  if (snapshot.data.length > 0) {
                     _controller.init();
                     _controller.partnerships.addAll(snapshot.data);
                     _controller.partnerships.sort(
@@ -76,24 +76,28 @@ class _PartnershipListPageState extends State<PartnershipListPage> {
                     if (widget._selectedProfile == ASSOCIATED) {
                       _controller.getActivePartnerships;
                     }
-                    return _widgets();
                   }
-              } //switch (snapshot.connectionState)
-              return CenteredMessage(
-                'Houve um erro desconhecido ao executar a transação.',
-              );
-            },
-          ),
-          floatingActionButtonLocation:
-              FloatingActionButtonLocation.centerFloat,
-          floatingActionButton: widget._selectedProfile == ADMIN
-              ? Button(
-                  icon: Icons.add,
-                  onClick: () {
-                    _add(context);
-                  })
-              : null,
+                  return _widgets();
+                }
+            } //switch (snapshot.connectionState)
+            return CenteredMessage(
+              'Houve um erro desconhecido ao executar a transação.',
+            );
+          },
         ),
+        floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
+        floatingActionButton: widget._selectedProfile == ADMIN
+            ? Observer(
+                builder: (_) => _controller.isHidedButton
+                    ? Container()
+                    : Button(
+                        icon: Icons.add,
+                        onClick: () {
+                          _add(context);
+                        },
+                      ),
+              )
+            : Container(),
       );
 
   _add(BuildContext context) {
