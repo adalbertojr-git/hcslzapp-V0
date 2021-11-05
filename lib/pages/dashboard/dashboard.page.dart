@@ -342,7 +342,7 @@ class _DashboardPageState extends State<DashboardPage> {
               child: Icon(
                   Icons.admin_panel_settings,
                   size: 50.0,
-                  color: Colors.deepOrange,
+                  color: Colors.orange,
                 ),
             )
             : Observer(
