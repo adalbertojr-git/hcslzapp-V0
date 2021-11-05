@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:hcslzapp/common/labels.and.hints.dart';
+import 'package:hcslzapp/components/button.dart';
 import 'package:hcslzapp/components/centered.message.dart';
 import 'package:hcslzapp/components/my.text.form.field.dart';
 import 'package:hcslzapp/components/progress.dart';
@@ -8,6 +9,7 @@ import 'package:hcslzapp/components/top.bar.dart';
 import 'package:hcslzapp/controllers/payment.list.controller.dart';
 import 'package:hcslzapp/models/associated.dart';
 import 'package:hcslzapp/pages/payment/payment.associated.page.dart';
+import 'package:hcslzapp/pages/payment/payment.table.page.dart';
 
 class PaymentListPage extends StatefulWidget {
   final String _selectedProfile;
@@ -35,45 +37,58 @@ class _PaymentListPageState extends State<PaymentListPage> {
 
   @override
   Widget build(BuildContext context) => Observer(
-        builder: (_) => Scaffold(
-          body: FutureBuilder<List<Associated>>(
-            future: _controller.future,
-            builder: (context, snapshot) {
-              switch (snapshot.connectionState) {
-                case ConnectionState.none:
-                  break;
-                case ConnectionState.waiting:
-                  return Progress();
-                case ConnectionState.active:
-                  break;
-                default:
-                  if (snapshot.hasError) {
-                    return CenteredMessage(snapshot.error.toString());
-                  } else {
-                    if (snapshot.data == null)
-                      return CenteredMessage(
-                        _controller.errorMsg,
+      builder: (_) => Scaffold(
+            body: FutureBuilder<List<Associated>>(
+              future: _controller.future,
+              builder: (context, snapshot) {
+                switch (snapshot.connectionState) {
+                  case ConnectionState.none:
+                    break;
+                  case ConnectionState.waiting:
+                    return Progress();
+                  case ConnectionState.active:
+                    break;
+                  default:
+                    if (snapshot.hasError) {
+                      return CenteredMessage(snapshot.error.toString());
+                    } else {
+                      if (snapshot.data == null)
+                        return CenteredMessage(
+                          _controller.errorMsg,
+                        );
+                      if (snapshot.data.length > 0) {
+                        _controller.init();
+                        _controller.associateds.addAll(snapshot.data);
+                        _controller.associateds.sort(
+                          (a, b) => a.name.compareTo(b.name),
+                        );
+                        return _widgets();
+                      } else
+                        return CenteredMessage(
+                          'Não existem associados cadastrados. Confira as requisições de acesso.',
+                        );
+                    }
+                } //switch (snapshot.connectionState)
+                return CenteredMessage(
+                  'Houve um erro desconhecido ao executar a transação.',
+                );
+              },
+            ),
+            floatingActionButtonLocation:
+                FloatingActionButtonLocation.centerFloat,
+            floatingActionButton: _controller.isHidedButton
+                ? Container()
+                : Button(
+                    icon: Icons.apps,
+                    onClick: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => PaymentTablePage()),
                       );
-                    if (snapshot.data.length > 0) {
-                      _controller.init();
-                      _controller.associateds.addAll(snapshot.data);
-                      _controller.associateds.sort(
-                            (a, b) => a.name.compareTo(b.name),
-                      );
-                      return _widgets();
-                    } else
-                      return CenteredMessage(
-                        'Não existem associados cadastrados. Confira as requisições de acesso.',
-                      );
-                  }
-              } //switch (snapshot.connectionState)
-              return CenteredMessage(
-                'Houve um erro desconhecido ao executar a transação.',
-              );
-            },
-          ),
-        ),
-      );
+                    },
+                  ),
+          ));
 
   _widgets() => Container(
         decoration: BoxDecoration(
@@ -143,9 +158,10 @@ class _PaymentListPageState extends State<PaymentListPage> {
                                 Navigator.push(
                                   context,
                                   MaterialPageRoute(
-                                      builder: (context) => PaymentAssociatedPage(
-                                          widget._selectedProfile,
-                                          _controller.listFiltered[i])),
+                                      builder: (context) =>
+                                          PaymentAssociatedPage(
+                                              widget._selectedProfile,
+                                              _controller.listFiltered[i])),
                                 );
                               },
                             ),
