@@ -336,7 +336,15 @@ class _DashboardPageState extends State<DashboardPage> {
           style: TextStyle(color: Colors.white60),
         ),
         trailing: _controller.selectedProfile == ADMIN
-            ? null
+            ? CircleAvatar(
+          backgroundColor: Colors.white,
+          radius: 30.0,
+              child: Icon(
+                  Icons.admin_panel_settings,
+                  size: 50.0,
+                  color: Colors.deepOrange,
+                ),
+            )
             : Observer(
                 builder: (_) => CircleAvatar(
                   backgroundColor: Colors.white,
@@ -553,16 +561,6 @@ class _DashboardPageState extends State<DashboardPage> {
           ),
         ),
       );
-
-/*  _gridAdm() => Expanded(
-        child: Container(
-          padding: EdgeInsets.only(left: 16, right: 16, bottom: 16),
-          child: ListView.builder(
-            itemCount: _listAdmScreens.length,
-            itemBuilder: _listItem,
-          ),
-        ),
-      );*/
 
   _gridAdm() => Expanded(
         child: Container(
