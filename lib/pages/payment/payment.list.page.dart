@@ -84,7 +84,7 @@ class _PaymentListPageState extends State<PaymentListPage> {
                       Navigator.push(
                         context,
                         MaterialPageRoute(
-                            builder: (context) => PaymentTablePage()),
+                            builder: (context) => PaymentsTablePage()),
                       );
                     },
                   ),
