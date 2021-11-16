@@ -26,7 +26,7 @@ class _PaymentsTablePageState extends State<PaymentsTablePage> {
           children: [
             TopBar(),
             PaginatedDataTable(
-              header: Text('Tabela de Pagamentos'),
+              header: Center(child: Text('Tabela de Pagamentos')),
               rowsPerPage: _rowsPerPage,
               availableRowsPerPage: <int>[5, 10, 20],
               onRowsPerPageChanged: (int value) {
@@ -34,6 +34,8 @@ class _PaymentsTablePageState extends State<PaymentsTablePage> {
                   _rowsPerPage = value;
                 });
               },
+              columnSpacing: 10.0,
+              dataRowHeight: 40.0,
               columns: kTableColumns,
               source: DessertDataSource(),
             ),
@@ -98,7 +100,7 @@ class Dessert {
 class DessertDataSource extends DataTableSource {
   int _selectedCount = 0;
   final List<Dessert> _desserts = <Dessert>[
-    new Dessert('Adalberto Jr', 159, 6.0, 24, 4.0, 87, 14, 1),
+    new Dessert('Adalberto Teixeira Azevedo Jr', 159, 6.0, 24, 4.0, 87, 14, 1),
     new Dessert('Marcelo Noar', 237, 9.0, 37, 4.3, 129, 8, 1),
     new Dessert('Cynthia', 262, 16.0, 24, 6.0, 337, 6, 7),
     new Dessert('Sebastião Vaz', 305, 3.7, 67, 4.3, 413, 3, 8),
