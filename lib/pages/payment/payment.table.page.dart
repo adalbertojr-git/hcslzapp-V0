@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:hcslzapp/components/top.bar.dart';
 
 class PaymentsTablePage extends StatefulWidget {
-
   @override
   _PaymentsTablePageState createState() => _PaymentsTablePageState();
 }
@@ -21,8 +20,12 @@ class _PaymentsTablePageState extends State<PaymentsTablePage> {
         ),
       ),
       height: MediaQuery.of(context).size.height,
-      child: SingleChildScrollView(
-        child: Column(
+      child: Theme(
+        data: Theme.of(context).copyWith(
+          cardColor: Colors.black12.withOpacity(0.1),
+          dividerColor: Colors.deepOrange,
+        ),
+        child: ListView(
           children: [
             TopBar(),
             PaginatedDataTable(
@@ -83,7 +86,8 @@ const kTableColumns = <DataColumn>[
 
 ////// Data class.
 class Dessert {
-  Dessert(this.name, this.calories, this.fat, this.carbs, this.protein, this.sodium, this.calcium, this.iron);
+  Dessert(this.name, this.calories, this.fat, this.carbs, this.protein,
+      this.sodium, this.calcium, this.iron);
 
   final String name;
   final int calories;
@@ -124,9 +128,7 @@ class DessertDataSource extends DataTableSource {
     assert(index >= 0);
     if (index >= _desserts.length) return null;
     final Dessert dessert = _desserts[index];
-    return DataRow.byIndex(
-        index: index,
-        selected: dessert.selected,
+    return DataRow.byIndex(index: index, selected: dessert.selected,
 /*        onSelectChanged: (bool value) {
           if (dessert.selected != value) {
             _selectedCount += value ? 1 : -1;
