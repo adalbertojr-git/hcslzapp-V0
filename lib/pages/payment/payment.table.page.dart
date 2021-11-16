@@ -12,23 +12,33 @@ class _PaymentsTablePageState extends State<PaymentsTablePage> {
 
   @override
   Widget build(BuildContext context) {
-    return SingleChildScrollView(
-      child: Column(
-        children: [
-          TopBar(),
-          PaginatedDataTable(
-            header: Text('Tabela de Pagamentos'),
-            rowsPerPage: _rowsPerPage,
-            availableRowsPerPage: <int>[5, 10, 20],
-            onRowsPerPageChanged: (int value) {
-              setState(() {
-                _rowsPerPage = value;
-              });
-            },
-            columns: kTableColumns,
-            source: DessertDataSource(),
-          ),
-        ],
+    return Container(
+      decoration: BoxDecoration(
+        gradient: LinearGradient(
+          colors: [Colors.white30, Colors.deepOrange],
+          begin: FractionalOffset.topLeft,
+          end: FractionalOffset.bottomRight,
+        ),
+      ),
+      height: MediaQuery.of(context).size.height,
+      child: SingleChildScrollView(
+        child: Column(
+          children: [
+            TopBar(),
+            PaginatedDataTable(
+              header: Text('Tabela de Pagamentos'),
+              rowsPerPage: _rowsPerPage,
+              availableRowsPerPage: <int>[5, 10, 20],
+              onRowsPerPageChanged: (int value) {
+                setState(() {
+                  _rowsPerPage = value;
+                });
+              },
+              columns: kTableColumns,
+              source: DessertDataSource(),
+            ),
+          ],
+        ),
       ),
     );
   }
@@ -37,36 +47,34 @@ class _PaymentsTablePageState extends State<PaymentsTablePage> {
 ////// Columns in table.
 const kTableColumns = <DataColumn>[
   DataColumn(
-    label: const Text('Dessert (100g serving)'),
+    label: const Text('Associado'),
   ),
   DataColumn(
-    label: const Text('Calories'),
-    tooltip: 'The total amount of food energy in the given serving size.',
+    label: const Text('Jan'),
     numeric: true,
   ),
   DataColumn(
-    label: const Text('Fat (g)'),
+    label: const Text('Fev'),
     numeric: true,
   ),
   DataColumn(
-    label: const Text('Carbs (g)'),
+    label: const Text('Mar'),
     numeric: true,
   ),
   DataColumn(
-    label: const Text('Protein (g)'),
+    label: const Text('Abr'),
     numeric: true,
   ),
   DataColumn(
-    label: const Text('Sodium (mg)'),
+    label: const Text('Mai'),
     numeric: true,
   ),
   DataColumn(
-    label: const Text('Calcium (%)'),
-    tooltip: 'The amount of calcium as a percentage of the recommended daily amount.',
+    label: const Text('Jun'),
     numeric: true,
   ),
   DataColumn(
-    label: const Text('Iron (%)'),
+    label: const Text('Jul'),
     numeric: true,
   ),
 ];
@@ -90,23 +98,23 @@ class Dessert {
 class DessertDataSource extends DataTableSource {
   int _selectedCount = 0;
   final List<Dessert> _desserts = <Dessert>[
-    new Dessert('Frozen yogurt', 159, 6.0, 24, 4.0, 87, 14, 1),
-    new Dessert('Ice cream sandwich', 237, 9.0, 37, 4.3, 129, 8, 1),
-    new Dessert('Eclair', 262, 16.0, 24, 6.0, 337, 6, 7),
-    new Dessert('Cupcake', 305, 3.7, 67, 4.3, 413, 3, 8),
-    new Dessert('Gingerbread', 356, 16.0, 49, 3.9, 327, 7, 16),
-    new Dessert('Jelly bean', 375, 0.0, 94, 0.0, 50, 0, 0),
-    new Dessert('Lollipop', 392, 0.2, 98, 0.0, 38, 0, 2),
-    new Dessert('Honeycomb', 408, 3.2, 87, 6.5, 562, 0, 45),
-    new Dessert('Donut', 452, 25.0, 51, 4.9, 326, 2, 22),
-    new Dessert('KitKat', 518, 26.0, 65, 7.0, 54, 12, 6),
-    new Dessert('Frozen yogurt with sugar', 168, 6.0, 26, 4.0, 87, 14, 1),
-    new Dessert('Ice cream sandwich with sugar', 246, 9.0, 39, 4.3, 129, 8, 1),
-    new Dessert('Eclair with sugar', 271, 16.0, 26, 6.0, 337, 6, 7),
-    new Dessert('Cupcake with sugar', 314, 3.7, 69, 4.3, 413, 3, 8),
-    new Dessert('Gingerbread with sugar', 345, 16.0, 51, 3.9, 327, 7, 16),
-    new Dessert('Jelly bean with sugar', 364, 0.0, 96, 0.0, 50, 0, 0),
-    new Dessert('Lollipop with sugar', 401, 0.2, 100, 0.0, 38, 0, 2),
+    new Dessert('Adalberto Jr', 159, 6.0, 24, 4.0, 87, 14, 1),
+    new Dessert('Marcelo Noar', 237, 9.0, 37, 4.3, 129, 8, 1),
+    new Dessert('Cynthia', 262, 16.0, 24, 6.0, 337, 6, 7),
+    new Dessert('Sebastião Vaz', 305, 3.7, 67, 4.3, 413, 3, 8),
+    new Dessert('Joelma', 356, 16.0, 49, 3.9, 327, 7, 16),
+    new Dessert('André Stocco', 375, 0.0, 94, 0.0, 50, 0, 0),
+    new Dessert('André Cruz', 392, 0.2, 98, 0.0, 38, 0, 2),
+    new Dessert('Rachel', 408, 3.2, 87, 6.5, 562, 0, 45),
+    new Dessert('Enedina', 452, 25.0, 51, 4.9, 326, 2, 22),
+    new Dessert('Adauto', 518, 26.0, 65, 7.0, 54, 12, 6),
+    new Dessert('Will', 168, 6.0, 26, 4.0, 87, 14, 1),
+    new Dessert('Robert Pedrosa', 246, 9.0, 39, 4.3, 129, 8, 1),
+    new Dessert('Thiago Fortes', 271, 16.0, 26, 6.0, 337, 6, 7),
+    new Dessert('Herquimas', 314, 3.7, 69, 4.3, 413, 3, 8),
+    new Dessert('Ruy Palhano', 345, 16.0, 51, 3.9, 327, 7, 16),
+    new Dessert('Francisco', 364, 0.0, 96, 0.0, 50, 0, 0),
+    new Dessert('Mariano', 401, 0.2, 100, 0.0, 38, 0, 2),
   ];
 
   @override
