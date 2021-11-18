@@ -131,14 +131,14 @@ class _DigitalIdentityPageState extends State<DigitalIdentityPage> {
                 children: [
                   Center(
                     child: SizedBox(
-                      height: 130.0,
+                      height: 100.0,
                       child: Image.asset('assets/imgs/logo_carteirad.png'),
                     ),
                   ),
                   Column(
                     children: [
                       SizedBox(
-                        height: 110.0,
+                        height: 90.0,
                       ),
                       Center(
                         child: Text(
@@ -157,17 +157,17 @@ class _DigitalIdentityPageState extends State<DigitalIdentityPage> {
       );
 
   _photo() => Container(
-        height: 250.0,
-        width: 250.0,
-        padding: EdgeInsets.all(10.0),
+        height: 150.0,
+        width: 150.0,
+        padding: EdgeInsets.all(5.0),
         decoration: BoxDecoration(
           color: Colors.black.withOpacity(0.2),
-          borderRadius: BorderRadius.circular(150.0),
+          borderRadius: BorderRadius.circular(100.0),
         ),
         child: Container(
           decoration: BoxDecoration(
             color: Colors.white,
-            borderRadius: BorderRadius.circular(200.0),
+            borderRadius: BorderRadius.circular(100.0),
             image: _loadPhoto(),
           ),
         ),
