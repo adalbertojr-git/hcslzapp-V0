@@ -134,20 +134,82 @@ mixin _$DigitalIdentityController on DigitalIdentityControllerBase, Store {
     });
   }
 
-  final _$associatedAtom =
-      Atom(name: 'DigitalIdentityControllerBase.associated');
+  final _$digitalIdentityAtom =
+      Atom(name: 'DigitalIdentityControllerBase.digitalIdentity');
 
   @override
-  Associated get associated {
-    _$associatedAtom.reportRead();
-    return super.associated;
+  DigitalIdentity get digitalIdentity {
+    _$digitalIdentityAtom.reportRead();
+    return super.digitalIdentity;
   }
 
   @override
-  set associated(Associated value) {
-    _$associatedAtom.reportWrite(value, super.associated, () {
-      super.associated = value;
+  set digitalIdentity(DigitalIdentity value) {
+    _$digitalIdentityAtom.reportWrite(value, super.digitalIdentity, () {
+      super.digitalIdentity = value;
     });
+  }
+
+  final _$_digitalIdentityRepoAtom =
+      Atom(name: 'DigitalIdentityControllerBase._digitalIdentityRepo');
+
+  @override
+  DigitalIdentityRepo get _digitalIdentityRepo {
+    _$_digitalIdentityRepoAtom.reportRead();
+    return super._digitalIdentityRepo;
+  }
+
+  @override
+  set _digitalIdentityRepo(DigitalIdentityRepo value) {
+    _$_digitalIdentityRepoAtom.reportWrite(value, super._digitalIdentityRepo,
+        () {
+      super._digitalIdentityRepo = value;
+    });
+  }
+
+  final _$futureAtom = Atom(name: 'DigitalIdentityControllerBase.future');
+
+  @override
+  Future<List<DigitalIdentity>> get future {
+    _$futureAtom.reportRead();
+    return super.future;
+  }
+
+  @override
+  set future(Future<List<DigitalIdentity>> value) {
+    _$futureAtom.reportWrite(value, super.future, () {
+      super.future = value;
+    });
+  }
+
+  final _$errorMsgAtom = Atom(name: 'DigitalIdentityControllerBase.errorMsg');
+
+  @override
+  String get errorMsg {
+    _$errorMsgAtom.reportRead();
+    return super.errorMsg;
+  }
+
+  @override
+  set errorMsg(String value) {
+    _$errorMsgAtom.reportWrite(value, super.errorMsg, () {
+      super.errorMsg = value;
+    });
+  }
+
+  final _$DigitalIdentityControllerBaseActionController =
+      ActionController(name: 'DigitalIdentityControllerBase');
+
+  @override
+  Future<dynamic> findAssociatedByIdToList(int id) {
+    final _$actionInfo =
+        _$DigitalIdentityControllerBaseActionController.startAction(
+            name: 'DigitalIdentityControllerBase.findAssociatedByIdToList');
+    try {
+      return super.findAssociatedByIdToList(id);
+    } finally {
+      _$DigitalIdentityControllerBaseActionController.endAction(_$actionInfo);
+    }
   }
 
   @override
@@ -161,7 +223,9 @@ dateBirthCtrl: ${dateBirthCtrl},
 dateShieldCtrl: ${dateShieldCtrl},
 bloodTypeCtrl: ${bloodTypeCtrl},
 dueDateCtrl: ${dueDateCtrl},
-associated: ${associated}
+digitalIdentity: ${digitalIdentity},
+future: ${future},
+errorMsg: ${errorMsg}
     ''';
   }
 }

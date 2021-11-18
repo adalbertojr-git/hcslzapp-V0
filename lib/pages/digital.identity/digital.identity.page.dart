@@ -1,13 +1,15 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
-import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:hcslzapp/common/labels.and.hints.dart';
 import 'package:hcslzapp/common/photo.image.provider.dart';
+import 'package:hcslzapp/components/centered.message.dart';
 import 'package:hcslzapp/components/my.text.form.field.dart';
+import 'package:hcslzapp/components/progress.dart';
 import 'package:hcslzapp/components/top.bar.dart';
 import 'package:hcslzapp/controllers/digital.identity.controller.dart';
 import 'package:hcslzapp/models/associated.dart';
+import 'package:hcslzapp/models/digital.identity.dart';
 
 class DigitalIdentityPage extends StatefulWidget {
   final Associated _associated;
@@ -23,22 +25,41 @@ class _DigitalIdentityPageState extends State<DigitalIdentityPage> {
   final double _fontSize = 14.0;
 
   @override
-  void initState() {
-    _controller.associated = widget._associated;
-    _controller.init();
-    super.initState();
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return Observer(
-      builder: (_) {
-        return Scaffold(
-          body: _widgets(),
-        );
-      },
-    );
-  }
+  Widget build(BuildContext context) => Scaffold(
+        body: FutureBuilder<List<DigitalIdentity>>(
+          future: _controller.getFuture(widget._associated.id),
+          builder: (context, snapshot) {
+            switch (snapshot.connectionState) {
+              case ConnectionState.none:
+                break;
+              case ConnectionState.waiting:
+                return Progress();
+              case ConnectionState.active:
+                break;
+              default:
+                if (snapshot.hasError) {
+                  return CenteredMessage(snapshot.error.toString());
+                } else {
+                  if (snapshot.data == null)
+                    return CenteredMessage(
+                      _controller.errorMsg,
+                    );
+                  if (snapshot.data.length > 0) {
+                    _controller.digitalIdentity = snapshot.data.first;
+                    _controller.init();
+                    return _widgets();
+                  } else
+                    return CenteredMessage(
+                      'Dados do associado especificado não foram encontrados.',
+                    );
+                }
+            } //switch (snapshot.connectionState)
+            return CenteredMessage(
+              'Houve um erro desconhecido ao executar a transação.',
+            );
+          },
+        ),
+      );
 
   _widgets() => Container(
         decoration: BoxDecoration(

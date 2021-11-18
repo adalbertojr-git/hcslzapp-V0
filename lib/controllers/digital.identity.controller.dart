@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
-import 'package:hcslzapp/models/associated.dart';
+import 'package:hcslzapp/models/digital.identity.dart';
+import 'package:hcslzapp/repositories/digital.identity.repo.dart';
 import 'package:mobx/mobx.dart';
 
 part 'digital.identity.controller.g.dart';
@@ -33,19 +34,35 @@ abstract class DigitalIdentityControllerBase with Store {
   var dueDateCtrl = TextEditingController();
 
   @observable
-  Associated associated;
+  DigitalIdentity digitalIdentity;
+
+  @observable
+  DigitalIdentityRepo _digitalIdentityRepo = DigitalIdentityRepo();
+
+  @observable
+  Future<List<DigitalIdentity>> future;
+
+  @observable
+  String errorMsg;
+
 
   init() {
-    _initTextFields();
+    nameCtrl.text = digitalIdentity.name;
+    cnhCtrl.text = digitalIdentity.cnh;
+    cpfCtrl.text = digitalIdentity.cpf;
+    associatedTypeCtrl.text = digitalIdentity.associatedType;
+    dateBirthCtrl.text = digitalIdentity.dateBirth;
+    dateShieldCtrl.text = digitalIdentity.dateShield;
+    bloodTypeCtrl.text = digitalIdentity.bloodType;
   }
 
-  _initTextFields() {
-    nameCtrl.text = associated.name;
-    cnhCtrl.text = associated.cnh;
-    cpfCtrl.text = associated.cpf;
-    associatedTypeCtrl.text = associated.associatedType;
-    dateBirthCtrl.text = associated.dateBirth;
-    dateShieldCtrl.text = associated.dateShield;
-    bloodTypeCtrl.text = associated.bloodType;
-  }
+  @action
+  Future findAssociatedByIdToList(int id) => ObservableFuture(
+      _digitalIdentityRepo.findAssociatedByIdToList(id).then((value) => value))
+      .catchError((e) {
+    errorMsg = "${e.message}";
+  }, test: (e) => e is Exception);
+
+  Future<List<DigitalIdentity>> getFuture(int _associatedId) =>
+      future = findAssociatedByIdToList(_associatedId);
 }
