@@ -157,8 +157,8 @@ class _DigitalIdentityPageState extends State<DigitalIdentityPage> {
       );
 
   _photo() => Container(
-        height: 150.0,
-        width: 150.0,
+        height: 170.0,
+        width: 170.0,
         padding: EdgeInsets.all(5.0),
         decoration: BoxDecoration(
           color: Colors.black.withOpacity(0.2),
