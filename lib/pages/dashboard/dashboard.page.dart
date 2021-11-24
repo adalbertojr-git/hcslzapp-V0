@@ -550,7 +550,7 @@ class _DashboardPageState extends State<DashboardPage> {
                   },
                 ),
 */
-                GridButton(
+/*                GridButton(
                   title: "Boutique",
                   image: "assets/imgs/boutique.png",
                   context: _gContext,
@@ -561,7 +561,7 @@ class _DashboardPageState extends State<DashboardPage> {
                           builder: (gContext) => BoutiqueListPage()),
                     );
                   },
-                ),
+                ),*/
 /*
                 GridButton(
                   title: "Classificados",
