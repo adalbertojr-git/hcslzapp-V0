@@ -150,9 +150,44 @@ class _DashboardPageState extends State<DashboardPage> {
             ListTile(
               leading: Icon(Icons.info),
               title: Text("Sobre o HCSlz App"),
-              onTap: () async {
-                await _controller.loadAboutPage(_gContext);
-                Navigator.pop(_gContext);
+              onTap: () {
+                showAboutDialog(
+                  context: context,
+                  applicationVersion: '1.0.0',
+                  applicationName: 'HCSlz App',
+                  children: <Widget>[
+                    Padding(
+                      padding: EdgeInsets.only(top: 5),
+                      child: Text(
+                        'Este aplicativo é propriedade do Harley Club de Ŝão '
+                        'Luís - MA, Brasil. Suas informações e  utilização são '
+                        'restritos a associados.',
+                        style: TextStyle(fontSize: 14.0),
+                      ),
+                    ),
+                    Padding(
+                      padding: EdgeInsets.only(top: 30),
+                      child: Text(
+                        'Desenvolvedor: Adalberto Jr.',
+                        style: TextStyle(fontSize: 12.0),
+                      ),
+                    ),
+                    Padding(
+                      padding: EdgeInsets.only(top: 2),
+                      child: Text(
+                        'email: atajr.650@gmail.com',
+                        style: TextStyle(fontSize: 12.0),
+                      ),
+                    ),
+                    Padding(
+                      padding: EdgeInsets.only(top: 2),
+                      child: Text(
+                        'tel: (98) 99120-7728',
+                        style: TextStyle(fontSize: 12.0),
+                      ),
+                    ),
+                  ],
+                );
               },
             ),
             ListTile(
