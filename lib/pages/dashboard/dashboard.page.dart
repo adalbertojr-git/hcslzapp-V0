@@ -159,7 +159,6 @@ class _DashboardPageState extends State<DashboardPage> {
               leading: Icon(Icons.power_settings_new),
               title: Text("Logout"),
               onTap: () {
-                //Navigator.pop(_gContext);
                 Navigator.of(context).pushAndRemoveUntil(
                   // the new route
                   MaterialPageRoute(
