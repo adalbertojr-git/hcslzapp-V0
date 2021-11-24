@@ -63,13 +63,17 @@ class _ForgotPasswordPageState extends State<ForgotPasswordPage> {
                   //_login(context);
                 },
               ),
-              Padding(
-                padding: const EdgeInsets.all(10.0),
+              SizedBox(
+                height: 40.0,
+              ),
+              Container(
+                padding: const EdgeInsets.only(left: 10.0),
                 child: RichText(
                   text: TextSpan(
                     text:
-                    'Atenção: para redefinir sua senha, informe seu email cadastrado. '
-                    'Você receberá uma senha provisória para posterior alteração.',
+                    'Atenção: Você receberá um código no email informado, o qual ' +
+                    ' deverá ser utilizado para geração de nova senha. Verifique ' +
+                        'também sua caixa de Spam.',
                     style: const TextStyle(
                       fontSize: 12.0,
                       color: Colors.black87,
