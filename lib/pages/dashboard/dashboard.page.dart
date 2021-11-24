@@ -14,6 +14,7 @@ import 'package:hcslzapp/pages/event/event.calendar.page.dart';
 import 'package:hcslzapp/pages/management/management.list.page.dart';
 import 'package:hcslzapp/pages/partnership/partnership.list.page.dart';
 import 'package:hcslzapp/pages/payment/payment.list.page.dart';
+import 'package:hcslzapp/pages/splash/splash.page.dart';
 
 // ignore: must_be_immutable
 class DashboardPage extends StatefulWidget {
@@ -158,7 +159,18 @@ class _DashboardPageState extends State<DashboardPage> {
               leading: Icon(Icons.power_settings_new),
               title: Text("Logout"),
               onTap: () {
-                Navigator.pop(_gContext);
+                //Navigator.pop(_gContext);
+                Navigator.of(context).pushAndRemoveUntil(
+                  // the new route
+                  MaterialPageRoute(
+                    builder: (BuildContext context) => Splash(),
+                  ),
+
+                  // this function should return true when we're done removing routes
+                  // but because we want to remove all other screens, we make it
+                  // always return false
+                  (Route route) => false,
+                );
               },
             ),
           ],
@@ -337,14 +349,14 @@ class _DashboardPageState extends State<DashboardPage> {
         ),
         trailing: _controller.selectedProfile == ADMIN
             ? CircleAvatar(
-          backgroundColor: Colors.white,
-          radius: 30.0,
-              child: Icon(
+                backgroundColor: Colors.white,
+                radius: 30.0,
+                child: Icon(
                   Icons.admin_panel_settings,
                   size: 50.0,
                   color: Colors.orange,
                 ),
-            )
+              )
             : Observer(
                 builder: (_) => CircleAvatar(
                   backgroundColor: Colors.white,
