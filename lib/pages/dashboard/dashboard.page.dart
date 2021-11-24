@@ -74,10 +74,52 @@ class _DashboardPageState extends State<DashboardPage> {
       PartnershipListPage(_controller.selectedProfile),
     ];
     return Scaffold(
-        body: _widgets(),
-        drawer: _drawr(),
-        drawerEdgeDragWidth: 50,
-        drawerScrimColor: Colors.black87);
+      appBar: AppBar(
+        leading: Builder(
+          builder: (context) => Row(
+            children: [
+              IconButton(
+                icon: Icon(Icons.menu_rounded),
+                onPressed: () => Scaffold.of(context).openDrawer(),
+              ),
+            ],
+          ),
+        ),
+        title: Text(
+          _controller.selectedProfile == ADMIN
+              ? 'Olá, Administrador'
+              : 'Olá, ${_controller.getFirstName(widget._associated.name)}',
+          style: TextStyle(color: Colors.white, fontSize: 22.0),
+        ),
+        actions: <Widget>[
+          _controller.selectedProfile == ADMIN
+              ? CircleAvatar(
+            backgroundColor: Colors.white,
+            radius: 30.0,
+            child: Icon(
+              Icons.admin_panel_settings,
+              size: 50.0,
+              color: Colors.orange,
+            ),
+          )
+              : Observer(
+            builder: (_) => CircleAvatar(
+              backgroundColor: Colors.white,
+              radius: 30.0,
+              backgroundImage: _controller.photoUrl != null
+                  ? NetworkImage(_controller.photoUrl)
+                  : PhotoImageProvider().getImageProvider(
+                File('assets/imgs/noImage.png'),
+              ),
+            ),
+          ),
+        ],
+      ),
+      drawer: _drawr(),
+      drawerEdgeDragWidth: 50,
+      drawerScrimColor: Colors.black87,
+      body: _widgets(),
+    );
   }
 
   _widgets() => Stack(
@@ -211,140 +253,6 @@ class _DashboardPageState extends State<DashboardPage> {
         ),
       );
 
-/*  _menuAdm() => Column(
-        children: <Widget>[
-          ListTile(
-            leading: Icon(Icons.arrow_forward_ios),
-            title: Text("Acesso"),
-            onTap: () {
-              Navigator.pop(_gContext);
-            },
-          ),
-          ListTile(
-            leading: Icon(Icons.arrow_forward_ios),
-            title: Text("Documentos"),
-            onTap: () {
-              Navigator.pop(_gContext);
-            },
-          ),
-          ListTile(
-            leading: Icon(Icons.arrow_forward_ios),
-            title: Text("Associados"),
-            onTap: () {
-              Navigator.pop(_gContext);
-            },
-          ),
-          ListTile(
-            leading: Icon(Icons.arrow_forward_ios),
-            title: Text("Financeiro"),
-            onTap: () {
-              Navigator.pop(_gContext);
-            },
-          ),
-          ListTile(
-            leading: Icon(Icons.arrow_forward_ios),
-            title: Text("Eventos"),
-            onTap: () {
-              Navigator.pop(_gContext);
-            },
-          ),
-          ListTile(
-            leading: Icon(Icons.arrow_forward_ios),
-            title: Text("Parcerias"),
-            onTap: () {
-              Navigator.pop(_gContext);
-            },
-          ),
-          ListTile(
-            leading: Icon(Icons.arrow_forward_ios),
-            title: Text("Boutique"),
-            onTap: () {
-              Navigator.pop(_gContext);
-            },
-          ),
-        ],
-      );
-
-  _buildDrawerMenu() =>
-      (_controller.profile == ADMIN ? _menuAdm() : _menuAssociated());
-
-  _menuAssociated() => Column(
-        children: <Widget>[
-          ListTile(
-            leading: Icon(Icons.arrow_forward_ios),
-            title: Text("Associado"),
-            onTap: () async {
-              await _controller.loadAssociatedUpdatePage(
-                _gContext,
-                widget._associated.id,
-              );
-              Navigator.pop(_gContext);
-            },
-          ),
-          ListTile(
-            leading: Icon(Icons.arrow_forward_ios),
-            title: Text("Financeiro"),
-            onTap: () async {
-              await _controller.loadPaymentAssociatedPage(
-                _gContext,
-                _controller.isAdmin(),
-                widget._associated,
-              );
-              Navigator.pop(_gContext);
-            },
-          ),
-          ListTile(
-            leading: Icon(Icons.arrow_forward_ios),
-            title: Text("Carteira Harley Club"),
-            onTap: () async {
-              await _controller.loadDigitalIdentityPage(
-                _gContext,
-                widget._associated,
-              );
-              Navigator.pop(_gContext);
-            },
-          ),
-          ListTile(
-            leading: Icon(Icons.arrow_forward_ios),
-            title: Text("Parcerias"),
-            onTap: () async {
-              await _controller.loadPartnershipListPage(
-                _gContext,
-                widget._user,
-              );
-              Navigator.pop(_gContext);
-            },
-          ),
-          ListTile(
-            leading: Icon(Icons.arrow_forward_ios),
-            title: Text("Eventos"),
-            onTap: () async {
-              await _controller.loadEventCalendarPage(
-                _gContext,
-                widget._user,
-              );
-              Navigator.pop(_gContext);
-            },
-          ),
-          ListTile(
-            leading: Icon(Icons.arrow_forward_ios),
-            title: Text("Códigos DTC"),
-            onTap: () async {
-              await _controller.loadDtcCodeDashboardPage(_gContext);
-              Navigator.pop(_gContext);
-            },
-          ),
-          ListTile(
-            leading: Icon(Icons.arrow_forward_ios),
-            title: Text("Boutique"),
-            onTap: () {
-              Navigator.pop(_gContext);
-            },
-          ),
-        ],
-      );
-
- */
   _dashBg() => Column(
         children: <Widget>[
           Expanded(
@@ -368,7 +276,7 @@ class _DashboardPageState extends State<DashboardPage> {
       );
 
   _header() => ListTile(
-        contentPadding: EdgeInsets.only(left: 10, right: 20, top: 30),
+        contentPadding: EdgeInsets.only(left: 10, right: 20),
         title: Text(
           _controller.selectedProfile == ADMIN
               ? 'Olá, Administrador'
@@ -395,24 +303,11 @@ class _DashboardPageState extends State<DashboardPage> {
                 builder: (_) => CircleAvatar(
                   backgroundColor: Colors.white,
                   radius: 30.0,
-/*                  backgroundImage: _controller.photoPath != null
-                      ? PhotoImageProvider().getImageProvider(
-                          File(_controller.photoPath),
-                        )
-                      : PhotoImageProvider().getImageProvider(
-                          File('assets/imgs/noImage.png'),
-                        ),*/
-
                   backgroundImage: _controller.photoUrl != null
                       ? NetworkImage(_controller.photoUrl)
                       : PhotoImageProvider().getImageProvider(
                           File('assets/imgs/noImage.png'),
                         ),
-/*                  backgroundImage: _controller.photoPath != null
-                      ? NetworkImage(_controller.photoPath)
-                      : PhotoImageProvider().getImageProvider(
-                          File('assets/imgs/noImage.png'),
-                        ),*/
                 ),
               ),
       );
@@ -621,49 +516,6 @@ class _DashboardPageState extends State<DashboardPage> {
           ),
         ),
       );
-
-/*  Widget _listItem(BuildContext context, int index) => Card(
-        color: Colors.deepOrange[100],
-        shadowColor: Colors.black,
-        child: Column(
-          children: <Widget>[
-            ListTile(
-              leading: Icon(
-                _listAdmIcons[index],
-                size: 50,
-                color: Colors.orange,
-              ),
-              title: Text(
-                _listAdmScreens[index],
-                style: TextStyle(
-                  fontSize: 14.0,
-                  fontWeight: FontWeight.bold,
-                ),
-              ),
-              subtitle: Column(
-                mainAxisAlignment: MainAxisAlignment.start,
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: <Widget>[
-                  Text(
-                    _listAdmScreensDesc[index],
-                    style: TextStyle(
-                      fontSize: 11.0,
-                      fontWeight: FontWeight.normal,
-                    ),
-                  ),
-                ],
-              ),
-              onTap: () {
-                Navigator.push(
-                  _gContext,
-                  MaterialPageRoute(
-                      builder: (_gContext) => _listAdmWidgets[index]),
-                );
-              },
-            )
-          ],
-        ),
-      );*/
 
   Widget _listItem(BuildContext context, int index) => Column(
         children: <Widget>[
