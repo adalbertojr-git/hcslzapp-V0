@@ -330,17 +330,36 @@ class _PartnershipListPageState extends State<PartnershipListPage> {
   Widget buildUserInfo() => ListTile(
         isThreeLine: true,
         title: Text(
-            _controller.activePartnerships[_controller.currentPage].partner),
+          _controller.activePartnerships[_controller.currentPage].partner,
+          style: TextStyle(
+            color: Colors.black,
+            fontSize: 15,
+          ),
+        ),
         subtitle: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text('Endereço: ' +
-                _controller
-                    .activePartnerships[_controller.currentPage].address),
-            Text('Telefone(s): ' +
-                _controller.activePartnerships[_controller.currentPage].phone1 +
-                ' - ' +
-                _controller.activePartnerships[_controller.currentPage].phone2),
+            Text(
+              'Endereço: ' +
+                  _controller
+                      .activePartnerships[_controller.currentPage].address,
+              style: TextStyle(
+                color: Colors.black,
+                fontSize: 15,
+              ),
+            ),
+            Text(
+              'Telefone(s): ' +
+                  _controller
+                      .activePartnerships[_controller.currentPage].phone1 +
+                  ' - ' +
+                  _controller
+                      .activePartnerships[_controller.currentPage].phone2,
+              style: TextStyle(
+                color: Colors.black,
+                fontSize: 15,
+              ),
+            ),
           ],
         ),
       );
