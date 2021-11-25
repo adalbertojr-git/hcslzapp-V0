@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:hcslzapp/common/associated.profiles.dart';
 import 'package:hcslzapp/common/photo.image.provider.dart';
+import 'package:hcslzapp/components/transaction.auth.dialog.dart';
 import 'package:hcslzapp/controllers/app.controller.dart';
 import 'package:hcslzapp/controllers/dashboard.controller.dart';
 import 'package:hcslzapp/models/associated.dart';
@@ -83,6 +84,7 @@ class _DashboardPageState extends State<DashboardPage> {
   }
 
   AppBar _appBar() => AppBar(
+        elevation: 1.0,
         leading: Builder(
           builder: (context) => Row(
             children: [
@@ -126,9 +128,9 @@ class _DashboardPageState extends State<DashboardPage> {
                     ],
                   ),
                 ),
-                PopupMenuItem(
-                  child: _controller.isAdmin()
-                      ? GestureDetector(
+                _controller.isAdmin()
+                    ? PopupMenuItem(
+                        child: GestureDetector(
                           child: Text(
                             'Trocar Perfil de Acesso',
                             style: TextStyle(fontSize: 12.0),
@@ -141,9 +143,38 @@ class _DashboardPageState extends State<DashboardPage> {
                               Navigator.pop(context);
                             });
                           },
-                        )
-                      : Container(),
-                ),
+                        ),
+                      )
+                    : null,
+                PopupMenuItem(
+                  child: GestureDetector(
+                    child: Text(
+                      'Logout',
+                      style: TextStyle(fontSize: 12.0),
+                    ),
+                    onTap: () async {
+                      var response = await showDialog(
+                          context: context,
+                          builder: (context) {
+                            return TransactionAuthDialog(
+                                msg: 'Confirma Logout?');
+                          });
+                      if (response) {
+                        Navigator.of(context).pushAndRemoveUntil(
+                          // the new route
+                          MaterialPageRoute(
+                            builder: (BuildContext context) => Splash(),
+                          ),
+
+                          // this function should return true when we're done removing routes
+                          // but because we want to remove all other screens, we make it
+                          // always return false
+                          (Route route) => false,
+                        );
+                      }
+                    },
+                  ),
+                )
               ];
             },
           )
@@ -160,7 +191,6 @@ class _DashboardPageState extends State<DashboardPage> {
 
   _drawr() => Drawer(
         child: ListView(
-          padding: EdgeInsets.zero,
           children: <Widget>[
             Text(
               'Ladies Harley Club',
@@ -264,18 +294,25 @@ class _DashboardPageState extends State<DashboardPage> {
             ListTile(
               leading: Icon(Icons.power_settings_new),
               title: Text("Logout"),
-              onTap: () {
-                Navigator.of(context).pushAndRemoveUntil(
-                  // the new route
-                  MaterialPageRoute(
-                    builder: (BuildContext context) => Splash(),
-                  ),
+              onTap: () async {
+                var response = await showDialog(
+                    context: context,
+                    builder: (context) {
+                      return TransactionAuthDialog(msg: 'Confirma Logout?');
+                    });
+                if (response) {
+                  Navigator.of(context).pushAndRemoveUntil(
+                    // the new route
+                    MaterialPageRoute(
+                      builder: (BuildContext context) => Splash(),
+                    ),
 
-                  // this function should return true when we're done removing routes
-                  // but because we want to remove all other screens, we make it
-                  // always return false
-                  (Route route) => false,
-                );
+                    // this function should return true when we're done removing routes
+                    // but because we want to remove all other screens, we make it
+                    // always return false
+                    (Route route) => false,
+                  );
+                }
               },
             ),
           ],
