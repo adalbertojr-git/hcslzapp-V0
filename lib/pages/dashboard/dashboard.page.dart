@@ -74,7 +74,15 @@ class _DashboardPageState extends State<DashboardPage> {
       PartnershipListPage(_controller.selectedProfile),
     ];
     return Scaffold(
-      appBar: AppBar(
+      appBar: _appBar(),
+      drawer: _drawr(),
+      drawerEdgeDragWidth: 50,
+      drawerScrimColor: Colors.black87,
+      body: _widgets(),
+    );
+  }
+
+  AppBar _appBar() => AppBar(
         leading: Builder(
           builder: (context) => Row(
             children: [
@@ -86,41 +94,20 @@ class _DashboardPageState extends State<DashboardPage> {
           ),
         ),
         title: Text(
-          _controller.selectedProfile == ADMIN
-              ? 'Olá, Administrador'
-              : 'Olá, ${_controller.getFirstName(widget._associated.name)}',
-          style: TextStyle(color: Colors.white, fontSize: 22.0),
+          'HCSlz App',
+          style: TextStyle(color: Colors.white, fontSize: 25.0),
         ),
+        centerTitle: true,
         actions: <Widget>[
-          _controller.selectedProfile == ADMIN
-              ? CircleAvatar(
-            backgroundColor: Colors.white,
-            radius: 30.0,
-            child: Icon(
-              Icons.admin_panel_settings,
-              size: 50.0,
-              color: Colors.orange,
-            ),
-          )
-              : Observer(
-            builder: (_) => CircleAvatar(
-              backgroundColor: Colors.white,
-              radius: 30.0,
-              backgroundImage: _controller.photoUrl != null
-                  ? NetworkImage(_controller.photoUrl)
-                  : PhotoImageProvider().getImageProvider(
-                File('assets/imgs/noImage.png'),
-              ),
-            ),
-          ),
+          Padding(
+              padding: EdgeInsets.only(right: 20.0),
+              child: GestureDetector(
+                onTap: () {},
+                child: Icon(Icons.more_vert),
+              )),
         ],
-      ),
-      drawer: _drawr(),
-      drawerEdgeDragWidth: 50,
-      drawerScrimColor: Colors.black87,
-      body: _widgets(),
-    );
-  }
+        backgroundColor: Colors.deepOrange[300],
+      );
 
   _widgets() => Stack(
         children: <Widget>[
@@ -281,13 +268,13 @@ class _DashboardPageState extends State<DashboardPage> {
           _controller.selectedProfile == ADMIN
               ? 'Olá, Administrador'
               : 'Olá, ${_controller.getFirstName(widget._associated.name)}',
-          style: TextStyle(color: Colors.white, fontSize: 22.0),
+          style: TextStyle(color: Colors.white, fontSize: 18.0),
         ),
         subtitle: Text(
           _controller.selectedProfile == ADMIN
               ? 'harleyclubslz@gmail.com'
               : widget._associated.email,
-          style: TextStyle(color: Colors.white60),
+          style: TextStyle(color: Colors.white60, fontSize: 12.0),
         ),
         trailing: _controller.selectedProfile == ADMIN
             ? CircleAvatar(
