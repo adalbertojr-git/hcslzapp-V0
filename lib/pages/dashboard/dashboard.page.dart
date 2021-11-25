@@ -98,13 +98,55 @@ class _DashboardPageState extends State<DashboardPage> {
           style: TextStyle(color: Colors.white, fontSize: 25.0),
         ),
         centerTitle: true,
+        toolbarHeight: 40.0,
         actions: <Widget>[
-          Padding(
-              padding: EdgeInsets.only(right: 20.0),
-              child: GestureDetector(
-                onTap: () {},
-                child: Icon(Icons.more_vert),
-              )),
+          PopupMenuButton(
+            itemBuilder: (BuildContext context) {
+              return [
+                PopupMenuItem(
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    children: [
+                      Text(
+                        'Tema Escuro',
+                        style: TextStyle(fontSize: 12.0),
+                      ),
+                      Container(
+                        child: Switch(
+                          activeColor: Colors.orangeAccent,
+                          value: AppController.instance.isDarkTheme,
+                          onChanged: (value) {
+                            setState(() {
+                              AppController.instance.changeTheme();
+                              Navigator.pop(context);
+                            });
+                          },
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+                PopupMenuItem(
+                  child: _controller.isAdmin()
+                      ? GestureDetector(
+                          child: Text(
+                            'Trocar Perfil de Acesso',
+                            style: TextStyle(fontSize: 12.0),
+                          ),
+                          onTap: () {
+                            setState(() {
+                              _controller.changeProfile();
+                              print(_controller.selectedProfile);
+                              _widgets();
+                              Navigator.pop(context);
+                            });
+                          },
+                        )
+                      : Container(),
+                ),
+              ];
+            },
+          )
         ],
         backgroundColor: Colors.deepOrange[300],
       );
