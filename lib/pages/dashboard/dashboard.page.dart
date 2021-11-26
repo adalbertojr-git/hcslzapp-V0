@@ -153,6 +153,7 @@ class _DashboardPageState extends State<DashboardPage> {
                       style: TextStyle(fontSize: 12.0),
                     ),
                     onTap: () async {
+                      Navigator.pop(context);
                       var response = await showDialog(
                           context: context,
                           builder: (context) {
