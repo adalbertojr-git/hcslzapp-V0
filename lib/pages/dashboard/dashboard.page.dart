@@ -262,8 +262,15 @@ class _DashboardPageState extends State<DashboardPage> {
                       padding: EdgeInsets.only(top: 5),
                       child: Text(
                         'Este aplicativo é propriedade do Harley Club de Ŝão '
-                        'Luís - MA, Brasil. Suas informações e  utilização são '
-                        'restritos a associados.',
+                        'Luís - MA, Brasil.',
+                        style: TextStyle(fontSize: 14.0),
+                      ),
+                    ),
+                    Padding(
+                      padding: EdgeInsets.only(top: 5),
+                      child: Text(
+                            'Seu conteúdo e  utilização são '
+                            'restritos a associados.',
                         style: TextStyle(fontSize: 14.0),
                       ),
                     ),
