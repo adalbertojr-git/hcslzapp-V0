@@ -29,6 +29,25 @@ const String _labelAboutApp = 'Sobre o HCSlz App';
 const String _labelAppVersion = '1.0.0';
 const String _labelImageLadies = 'assets/imgs/ladies.jpg';
 const String _labelNoImage = 'assets/imgs/noImage.png';
+const String _labelAccessRequest = 'Acesso';
+const String _labelAccessRequestDescr = 'Requisições de acesso';
+const String _labelAdministration = 'Administração';
+const String _labelAdministrationDescr = 'Administradores do App';
+const String  _labelAssociated = 'Associado';
+const String  _labelImageAssociated = 'assets/imgs/user.png';
+const String  _labelPayment = 'Financeiro';
+const String  _labelImagePayment = 'assets/imgs/financeiro.png';
+const String  _labelDigitalIdentity = 'Carteira Harley Club';
+const String  _labelDigitalIdentityImage = 'assets/imgs/carteirad.png';
+const String  _labelPartnership = 'Parcerias';
+const String  _labelPartnershipImage = 'assets/imgs/parcerias.png';
+const String  _labelEvent = 'Eventos';
+const String  _labelEventImage = 'assets/imgs/eventos.png';
+const String  _labelDTC = 'Codigos DTC';
+const String  _labelDTCImage = 'assets/imgs/codigosdtc.png';
+const String  _labelAboutHarleyClub = 'O Harley Club';
+const String  _labelAboutHarleyClubImage = 'assets/imgs/logo.png';
+
 
 const List<String> _listAdmScreens = [
   "Associados",
@@ -69,6 +88,7 @@ class _DashboardPageState extends State<DashboardPage> {
   BuildContext _gContext;
 
   List<Widget> _listAdmWidgets;
+
 
   @override
   void initState() {
@@ -402,8 +422,8 @@ class _DashboardPageState extends State<DashboardPage> {
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
             BarButton(
-              'Acesso',
-              'Requisições de acesso',
+              _labelAccessRequest,
+              _labelAccessRequestDescr,
               Icons.send_to_mobile,
               onClick: () {
                 Navigator.push(
@@ -414,8 +434,8 @@ class _DashboardPageState extends State<DashboardPage> {
               },
             ),
             BarButton(
-              'Administração',
-              'Administradores do App',
+              _labelAdministration,
+              _labelAdministrationDescr,
               Icons.admin_panel_settings,
               onClick: () {
                 Navigator.push(
@@ -441,8 +461,8 @@ class _DashboardPageState extends State<DashboardPage> {
               childAspectRatio: 0.9,
               children: <Widget>[
                 GridButton(
-                  title: "Associado",
-                  image: "assets/imgs/user.png",
+                  title: _labelAssociated,
+                  image: _labelImageAssociated,
                   context: _gContext,
                   onClick: () {
                     _controller.loadAssociatedUpdatePage(
@@ -452,8 +472,8 @@ class _DashboardPageState extends State<DashboardPage> {
                   },
                 ),
                 GridButton(
-                  title: "Financeiro",
-                  image: "assets/imgs/financeiro.png",
+                  title: _labelPayment,
+                  image: _labelImagePayment,
                   context: _gContext,
                   onClick: () {
                     _controller.loadPaymentAssociatedPage(
@@ -464,8 +484,8 @@ class _DashboardPageState extends State<DashboardPage> {
                   },
                 ),
                 GridButton(
-                  title: "Carteira Harley Club",
-                  image: "assets/imgs/carteirad.png",
+                  title: _labelDigitalIdentity,
+                  image: _labelDigitalIdentityImage,
                   context: _gContext,
                   onClick: () {
                     _controller.loadDigitalIdentityPage(
@@ -475,8 +495,8 @@ class _DashboardPageState extends State<DashboardPage> {
                   },
                 ),
                 GridButton(
-                  title: "Parcerias",
-                  image: "assets/imgs/parcerias.png",
+                  title: _labelPartnership,
+                  image: _labelPartnershipImage,
                   context: _gContext,
                   onClick: () {
                     _controller.loadPartnershipListPage(
@@ -485,8 +505,8 @@ class _DashboardPageState extends State<DashboardPage> {
                   },
                 ),
                 GridButton(
-                  title: "Eventos",
-                  image: "assets/imgs/eventos.png",
+                  title: _labelEvent,
+                  image: _labelEventImage,
                   context: _gContext,
                   onClick: () {
                     _controller.loadEventCalendarPage(
@@ -509,8 +529,8 @@ class _DashboardPageState extends State<DashboardPage> {
                 ),
 */
                 GridButton(
-                  title: "Codigos DTC",
-                  image: "assets/imgs/codigosdtc.png",
+                  title: _labelDTC,
+                  image: _labelDTCImage,
                   context: _gContext,
                   onClick: () {
                     _controller.loadDtcCodeDashboardPage(_gContext);
@@ -574,8 +594,8 @@ class _DashboardPageState extends State<DashboardPage> {
                 ),
 */
                 GridButton(
-                  title: "O Harley Club",
-                  image: "assets/imgs/logo.png",
+                  title: _labelAboutHarleyClub,
+                  image: _labelAboutHarleyClubImage,
                   context: _gContext,
                   onClick: () {
                     _controller.loadAboutPage(_gContext);
