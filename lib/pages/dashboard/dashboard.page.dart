@@ -27,16 +27,16 @@ const String _labelAdm = 'Administrador';
 const String _labelAdmEmail = 'harleyclubslz@gmail.com';
 const String _labelAboutApp = 'Sobre o HCSlz App';
 const String _labelAppVersion = '1.0.0';
-const String _labelImageLadies = 'assets/imgs/ladies.jpg';
+const String _labeLadieslImage = 'assets/imgs/ladies.jpg';
 const String _labelNoImage = 'assets/imgs/noImage.png';
 const String _labelAccessRequest = 'Acesso';
 const String _labelAccessRequestDescr = 'Requisições de acesso';
 const String _labelAdministration = 'Administração';
 const String _labelAdministrationDescr = 'Administradores do App';
 const String  _labelAssociated = 'Associado';
-const String  _labelImageAssociated = 'assets/imgs/user.png';
+const String  _labelAssociatedImage = 'assets/imgs/user.png';
 const String  _labelPayment = 'Financeiro';
-const String  _labelImagePayment = 'assets/imgs/financeiro.png';
+const String  _labelPaymentImage = 'assets/imgs/financeiro.png';
 const String  _labelDigitalIdentity = 'Carteira Harley Club';
 const String  _labelDigitalIdentityImage = 'assets/imgs/carteirad.png';
 const String  _labelPartnership = 'Parcerias';
@@ -242,7 +242,7 @@ class _DashboardPageState extends State<DashboardPage> {
               ),
               decoration: BoxDecoration(
                 image: DecorationImage(
-                  image: ExactAssetImage(_labelImageLadies),
+                  image: ExactAssetImage(_labeLadieslImage),
                   fit: BoxFit.fill,
                 ),
               ),
@@ -462,7 +462,7 @@ class _DashboardPageState extends State<DashboardPage> {
               children: <Widget>[
                 GridButton(
                   title: _labelAssociated,
-                  image: _labelImageAssociated,
+                  image: _labelAssociatedImage,
                   context: _gContext,
                   onClick: () {
                     _controller.loadAssociatedUpdatePage(
@@ -473,7 +473,7 @@ class _DashboardPageState extends State<DashboardPage> {
                 ),
                 GridButton(
                   title: _labelPayment,
-                  image: _labelImagePayment,
+                  image: _labelPaymentImage,
                   context: _gContext,
                   onClick: () {
                     _controller.loadPaymentAssociatedPage(
