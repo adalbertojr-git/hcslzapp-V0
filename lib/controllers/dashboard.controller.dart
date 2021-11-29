@@ -172,6 +172,7 @@ class GridButton extends StatelessWidget {
               style: TextStyle(
                 fontSize: 9,
                 fontWeight: FontWeight.bold,
+                color: Colors.black,
               ),
             ),
           ),
@@ -216,7 +217,7 @@ class BarButton extends StatelessWidget {
                 Text(
                   title,
                   style: TextStyle(
-                    color: Colors.black,
+                    //color: Colors.black,
                     fontSize: 14.0,
                     fontWeight: FontWeight.bold,
                   ),
@@ -224,7 +225,7 @@ class BarButton extends StatelessWidget {
                 Text(
                   subtitle,
                   style: TextStyle(
-                    color: Colors.black,
+                    //color: Colors.black,
                     fontSize: 11.0,
                   ),
                 ),

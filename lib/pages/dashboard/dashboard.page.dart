@@ -17,6 +17,43 @@ import 'package:hcslzapp/pages/partnership/partnership.list.page.dart';
 import 'package:hcslzapp/pages/payment/payment.list.page.dart';
 import 'package:hcslzapp/pages/splash/splash.page.dart';
 
+const String _labelAppTitle = 'HCSlz App';
+const String _labelDarkTheme = 'Tema Escuro';
+const String _labelChangeProfile = 'Trocar Perfil de Acesso';
+const String _labelLogout = 'Logout';
+const String _labelLogoutConf = 'Confirma Logout?';
+const String _labelLadiesHC = 'Ladies Harley Club';
+const String _labelAdm = 'Administrador';
+const String _labelAdmEmail = 'harleyclubslz@gmail.com';
+const String _labelAboutApp = 'Sobre o HCSlz App';
+const String _labelAppVersion = '1.0.0';
+const String _labelImageLadies = 'assets/imgs/ladies.jpg';
+const String _labelNoImage = 'assets/imgs/noImage.png';
+
+const List<String> _listAdmScreens = [
+  "Associados",
+  "Financeiro",
+  "Eventos",
+  "Parcerias",
+  //"Boutique",
+];
+
+const List<String> _listAdmScreensDesc = [
+  "Harleyros associados ao Harley Club",
+  "Registro de pagamento das mensalidades dos associados",
+  "Informações sobre viagens, encontros, passeios, etc.",
+  "Empresas com promoções oferecidas ao Harley Club",
+  //"Produtos da marca Harley Club (camisas, bonés, etc)",
+];
+
+const List<IconData> _listAdmIcons = [
+  Icons.people_alt_rounded,
+  Icons.monetization_on,
+  Icons.event,
+  Icons.emoji_people,
+  //Icons.wallet_giftcard,
+];
+
 // ignore: must_be_immutable
 class DashboardPage extends StatefulWidget {
   Associated _associated;
@@ -30,30 +67,6 @@ class DashboardPage extends StatefulWidget {
 class _DashboardPageState extends State<DashboardPage> {
   DashboardController _controller = DashboardController();
   BuildContext _gContext;
-
-  List<String> _listAdmScreens = [
-    "Associados",
-    "Financeiro",
-    "Eventos",
-    "Parcerias",
-    "Boutique",
-  ];
-
-  List<String> _listAdmScreensDesc = [
-    "Harleyros associados ao Harley Club",
-    "Registro de pagamento das mensalidades dos associados",
-    "Informações sobre viagens, encontros, passeios, etc.",
-    "Empresas com promoções oferecidas ao Harley Club",
-    "Produtos da marca Harley Club (camisas, bonés, etc)",
-  ];
-
-  List<IconData> _listAdmIcons = [
-    Icons.people_alt_rounded,
-    Icons.monetization_on,
-    Icons.event,
-    Icons.emoji_people,
-    Icons.wallet_giftcard,
-  ];
 
   List<Widget> _listAdmWidgets;
 
@@ -96,7 +109,7 @@ class _DashboardPageState extends State<DashboardPage> {
           ),
         ),
         title: Text(
-          'HCSlz App',
+          _labelAppTitle,
           style: TextStyle(color: Colors.white, fontSize: 25.0),
         ),
         centerTitle: true,
@@ -110,7 +123,7 @@ class _DashboardPageState extends State<DashboardPage> {
                     mainAxisAlignment: MainAxisAlignment.start,
                     children: [
                       Text(
-                        'Tema Escuro',
+                        _labelDarkTheme,
                         style: TextStyle(fontSize: 12.0),
                       ),
                       Container(
@@ -132,7 +145,7 @@ class _DashboardPageState extends State<DashboardPage> {
                     ? PopupMenuItem(
                         child: GestureDetector(
                           child: Text(
-                            'Trocar Perfil de Acesso',
+                            _labelChangeProfile,
                             style: TextStyle(fontSize: 12.0),
                           ),
                           onTap: () {
@@ -149,7 +162,7 @@ class _DashboardPageState extends State<DashboardPage> {
                 PopupMenuItem(
                   child: GestureDetector(
                     child: Text(
-                      'Logout',
+                      _labelLogout,
                       style: TextStyle(fontSize: 12.0),
                     ),
                     onTap: () async {
@@ -157,8 +170,7 @@ class _DashboardPageState extends State<DashboardPage> {
                       var response = await showDialog(
                           context: context,
                           builder: (context) {
-                            return TransactionAuthDialog(
-                                msg: 'Confirma Logout?');
+                            return TransactionAuthDialog(msg: _labelLogoutConf);
                           });
                       if (response) {
                         Navigator.of(context).pushAndRemoveUntil(
@@ -194,23 +206,23 @@ class _DashboardPageState extends State<DashboardPage> {
         child: ListView(
           children: <Widget>[
             Text(
-              'Ladies Harley Club',
+              _labelLadiesHC,
               textAlign: TextAlign.center,
             ),
             UserAccountsDrawerHeader(
               accountName: Text(
                 _controller.selectedProfile == ADMIN
-                    ? 'Administrador'
+                    ? _labelAdm
                     : widget._associated.name,
               ),
               accountEmail: Text(
                 _controller.selectedProfile == ADMIN
-                    ? 'harleyclubslz@gmail.com'
+                    ? _labelAdmEmail
                     : widget._associated.email,
               ),
               decoration: BoxDecoration(
                 image: DecorationImage(
-                  image: ExactAssetImage('assets/imgs/ladies.jpg'),
+                  image: ExactAssetImage(_labelImageLadies),
                   fit: BoxFit.fill,
                 ),
               ),
@@ -218,7 +230,7 @@ class _DashboardPageState extends State<DashboardPage> {
             Row(
               mainAxisAlignment: MainAxisAlignment.end,
               children: [
-                Text('Tema Escuro:'),
+                Text(_labelDarkTheme),
                 Container(
                   child: Switch(
                     activeColor: Colors.orangeAccent,
@@ -232,12 +244,10 @@ class _DashboardPageState extends State<DashboardPage> {
                 ),
               ],
             ),
-            //_buildDrawerMenu(),
-            //Divider(),
             _controller.isAdmin()
                 ? ListTile(
                     leading: Icon(Icons.wifi_protected_setup),
-                    title: Text("Trocar Perfil de Acesso"),
+                    title: Text(_labelChangeProfile),
                     onTap: () async {
                       setState(() {
                         _controller.changeProfile();
@@ -251,16 +261,16 @@ class _DashboardPageState extends State<DashboardPage> {
             //Divider(),
             ListTile(
               leading: Icon(Icons.info),
-              title: Text("Sobre o HCSlz App"),
+              title: Text(_labelAboutApp),
               onTap: () {
                 showAboutDialog(
                   context: context,
-                  applicationVersion: '1.0.0',
-                  applicationName: 'HCSlz App',
+                  applicationVersion: _labelAppVersion,
+                  applicationName: _labelAppTitle,
                   children: <Widget>[
                     Padding(
                       padding: EdgeInsets.only(top: 5),
-                      child: Text(
+                      child: const Text(
                         'Este aplicativo é propriedade do Harley Club de Ŝão '
                         'Luís - MA, Brasil.',
                         style: TextStyle(fontSize: 14.0),
@@ -268,29 +278,29 @@ class _DashboardPageState extends State<DashboardPage> {
                     ),
                     Padding(
                       padding: EdgeInsets.only(top: 5),
-                      child: Text(
-                            'Seu conteúdo e  utilização são '
-                            'restritos a associados.',
+                      child: const Text(
+                        'Seu conteúdo e  utilização são '
+                        'restritos a associados.',
                         style: TextStyle(fontSize: 14.0),
                       ),
                     ),
                     Padding(
                       padding: EdgeInsets.only(top: 30),
-                      child: Text(
+                      child: const Text(
                         'Desenvolvedor: Adalberto Jr.',
                         style: TextStyle(fontSize: 12.0),
                       ),
                     ),
                     Padding(
                       padding: EdgeInsets.only(top: 2),
-                      child: Text(
+                      child: const Text(
                         'email: atajr.650@gmail.com',
                         style: TextStyle(fontSize: 12.0),
                       ),
                     ),
                     Padding(
                       padding: EdgeInsets.only(top: 2),
-                      child: Text(
+                      child: const Text(
                         'tel: (98) 99120-7728',
                         style: TextStyle(fontSize: 12.0),
                       ),
@@ -301,12 +311,12 @@ class _DashboardPageState extends State<DashboardPage> {
             ),
             ListTile(
               leading: Icon(Icons.power_settings_new),
-              title: Text("Logout"),
+              title: Text(_labelLogout),
               onTap: () async {
                 var response = await showDialog(
                     context: context,
                     builder: (context) {
-                      return TransactionAuthDialog(msg: 'Confirma Logout?');
+                      return TransactionAuthDialog(msg: _labelLogoutConf);
                     });
                 if (response) {
                   Navigator.of(context).pushAndRemoveUntil(
@@ -353,13 +363,13 @@ class _DashboardPageState extends State<DashboardPage> {
         contentPadding: EdgeInsets.only(left: 10, right: 20),
         title: Text(
           _controller.selectedProfile == ADMIN
-              ? 'Olá, Administrador'
+              ? 'Olá, ' + _labelAdm
               : 'Olá, ${_controller.getFirstName(widget._associated.name)}',
           style: TextStyle(color: Colors.white, fontSize: 18.0),
         ),
         subtitle: Text(
           _controller.selectedProfile == ADMIN
-              ? 'harleyclubslz@gmail.com'
+              ? _labelAdmEmail
               : widget._associated.email,
           style: TextStyle(color: Colors.white60, fontSize: 12.0),
         ),
@@ -380,7 +390,7 @@ class _DashboardPageState extends State<DashboardPage> {
                   backgroundImage: _controller.photoUrl != null
                       ? NetworkImage(_controller.photoUrl)
                       : PhotoImageProvider().getImageProvider(
-                          File('assets/imgs/noImage.png'),
+                          File(_labelNoImage),
                         ),
                 ),
               ),
@@ -404,7 +414,7 @@ class _DashboardPageState extends State<DashboardPage> {
               },
             ),
             BarButton(
-              'Perfis',
+              'Administração',
               'Administradores do App',
               Icons.admin_panel_settings,
               onClick: () {
@@ -603,6 +613,7 @@ class _DashboardPageState extends State<DashboardPage> {
               _listAdmScreens[index],
               style: TextStyle(
                 fontSize: 14.0,
+                //color: Colors.black,
                 fontWeight: FontWeight.bold,
               ),
             ),
@@ -614,6 +625,7 @@ class _DashboardPageState extends State<DashboardPage> {
                   _listAdmScreensDesc[index],
                   style: TextStyle(
                     fontSize: 11.0,
+                    //color: Colors.black,
                     fontWeight: FontWeight.normal,
                   ),
                 ),
