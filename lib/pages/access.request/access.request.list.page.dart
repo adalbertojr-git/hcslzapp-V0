@@ -9,6 +9,11 @@ import 'package:hcslzapp/controllers/access.request.controller.dart';
 import 'package:hcslzapp/models/access.request.dart';
 import 'package:asuka/asuka.dart' as asuka;
 
+const String _labelNotExists =
+    'Não existem requisições de acesso a serem aprovadas.';
+const String _labelUnknown =
+    'Houve um erro desconhecido ao executar a transação.';
+
 class AccessRequestListPage extends StatefulWidget {
   @override
   State<StatefulWidget> createState() {
@@ -46,7 +51,6 @@ class AccessRequestListPageState extends State<AccessRequestListPage> {
                   if (snapshot.hasError) {
                     return CenteredMessage(snapshot.error.toString());
                   } else {
-
                     if (snapshot.data == null)
                       return CenteredMessage(
                         _controller.errorMsg,
@@ -60,12 +64,12 @@ class AccessRequestListPageState extends State<AccessRequestListPage> {
                       return _widgets();
                     } else
                       return CenteredMessage(
-                        'Não existem requisições de acesso a serem aprovadas.',
+                        _labelNotExists,
                       );
                   }
               } //switch (snapshot.connectionState)
               return CenteredMessage(
-                'Houve um erro desconhecido ao executar a transação.',
+                _labelUnknown,
               );
             },
           ),
@@ -149,7 +153,7 @@ class AccessRequestListPageState extends State<AccessRequestListPage> {
         if (value != null) {
           asuka.showSnackBar(
             SnackBar(
-              content: Text('Requisição de acesso excluída com sucesso.'),
+              content: const Text('Requisição de acesso excluída com sucesso.'),
             ),
           );
           _controller.accessRequests.removeAt(i);

@@ -110,7 +110,7 @@ class _AccessRequestAddPageState extends State<AccessRequestAddPage> {
               Padding(
                 padding: const EdgeInsets.all(10.0),
                 child: RichText(
-                  text: TextSpan(
+                  text: const TextSpan(
                     text:
                         'Atenção: seu cadastro será analisado e liberado pela ' +
                             'Diretoria HC. Entraremos em contato.',
@@ -130,7 +130,7 @@ class _AccessRequestAddPageState extends State<AccessRequestAddPage> {
     if (_controller.hasErrors) {
       asuka.showSnackBar(
         SnackBar(
-          content: Text('Atenção: Existem erros no formulário que devem '
+          content: const Text('Atenção: Existem erros no formulário que devem '
               'ser corrigidos antes de efetivar a transação.'),
         ),
       );
@@ -140,14 +140,14 @@ class _AccessRequestAddPageState extends State<AccessRequestAddPage> {
           if (value != null) {
             asuka.showSnackBar(
               SnackBar(
-                content: Text('Requisição de acesso enviado com sucesso.'),
+                content: const Text('Requisição de acesso enviado com sucesso.'),
               ),
             );
             Navigator.of(context).pop();
           } else {
             asuka.showSnackBar(
               SnackBar(
-                content: Text(_controller.errorMsg),
+                content: const Text(_controller.errorMsg),
               ),
             );
           }
