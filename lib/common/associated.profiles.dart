@@ -1,2 +1,2 @@
-const ADMIN = 'ADMIN';
-const ASSOCIATED = 'ASSOCIATED';
+const String ADMIN = 'ADMIN';
+const String ASSOCIATED = 'ASSOCIATED';

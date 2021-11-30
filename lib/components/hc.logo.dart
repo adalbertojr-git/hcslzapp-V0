@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+const String _pathNoImage = 'assets/imgs/logo.png';
+
 class HcLogo extends StatelessWidget {
 
   final double _top;
@@ -10,7 +12,7 @@ class HcLogo extends StatelessWidget {
   Widget build(BuildContext context) {
     return Padding(
       padding: EdgeInsets.fromLTRB(00.0, _top, 00.0, 0.0),
-      child: Image.asset('assets/imgs/logo.png'),
+      child: Image.asset(_pathNoImage),
     );
   }
 }

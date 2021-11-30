@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 
+const String _labelOK = 'OK';
+const String _labelCancel = 'Cancelar';
+
 class TransactionAuthDialog extends StatelessWidget {
   final String msg;
 
@@ -14,7 +17,6 @@ class TransactionAuthDialog extends StatelessWidget {
         color: Colors.orangeAccent,
       ),
       content: Text(
-        //'Deseja excluir o registro selecionado?',
         this.msg,
         style: TextStyle(
           color: Colors.black,
@@ -23,11 +25,11 @@ class TransactionAuthDialog extends StatelessWidget {
       actions: <Widget>[
         FlatButton(
           onPressed: () => Navigator.pop(context, false),
-          child: Text('Cancelar'),
+          child: Text(_labelCancel),
         ),
         FlatButton(
           onPressed: () => Navigator.pop(context, true),
-          child: Text('OK'),
+          child: Text(_labelOK),
         ),
       ],
     );

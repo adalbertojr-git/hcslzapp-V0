@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+const String _pathLogo = 'assets/imgs/logo.png';
+
 class TopBar extends StatelessWidget {
   final String title;
 
@@ -38,7 +40,7 @@ class TopBar extends StatelessWidget {
               SizedBox(
                 height: 35.0,
                 child: Container(
-                  child: Image.asset('assets/imgs/logo.png'),
+                  child: Image.asset(_pathLogo),
                 ),
               ),
             ],
