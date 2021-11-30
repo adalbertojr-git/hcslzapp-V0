@@ -3,6 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:splashscreen/splashscreen.dart';
 import '../login/login.page.dart';
 
+const String _pathFlareActor = 'assets/anims/splash.flr';
+
 class Splash extends StatelessWidget {
 
   @override
@@ -31,7 +33,7 @@ class Splash extends StatelessWidget {
           width: double.infinity,
           height: 300,
           child: FlareActor(
-            'assets/anims/splash.flr',
+            _pathFlareActor,
             alignment: Alignment.center,
             fit: BoxFit.fitWidth,
             isPaused: false,

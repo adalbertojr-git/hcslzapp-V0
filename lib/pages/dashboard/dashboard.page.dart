@@ -27,27 +27,26 @@ const String _labelAdm = 'Administrador';
 const String _labelAdmEmail = 'harleyclubslz@gmail.com';
 const String _labelAboutApp = 'Sobre o HCSlz App';
 const String _labelAppVersion = '1.0.0';
-const String _labeLadieslImage = 'assets/imgs/ladies.jpg';
-const String _labelNoImage = 'assets/imgs/noImage.png';
+const String _pathLadiesImage = 'assets/imgs/ladies.jpg';
+const String _pathNoImage = 'assets/imgs/noImage.png';
 const String _labelAccessRequest = 'Acesso';
 const String _labelAccessRequestDescr = 'Requisições de acesso';
 const String _labelAdministration = 'Administração';
 const String _labelAdministrationDescr = 'Administradores do App';
-const String  _labelAssociated = 'Associado';
-const String  _labelAssociatedImage = 'assets/imgs/user.png';
-const String  _labelPayment = 'Financeiro';
-const String  _labelPaymentImage = 'assets/imgs/financeiro.png';
-const String  _labelDigitalIdentity = 'Carteira Harley Club';
-const String  _labelDigitalIdentityImage = 'assets/imgs/carteirad.png';
-const String  _labelPartnership = 'Parcerias';
-const String  _labelPartnershipImage = 'assets/imgs/parcerias.png';
-const String  _labelEvent = 'Eventos';
-const String  _labelEventImage = 'assets/imgs/eventos.png';
-const String  _labelDTC = 'Codigos DTC';
-const String  _labelDTCImage = 'assets/imgs/codigosdtc.png';
-const String  _labelAboutHarleyClub = 'O Harley Club';
-const String  _labelAboutHarleyClubImage = 'assets/imgs/logo.png';
-
+const String _labelAssociated = 'Associado';
+const String _pathAssociatedImage = 'assets/imgs/user.png';
+const String _labelPayment = 'Financeiro';
+const String _pathPaymentImage = 'assets/imgs/financeiro.png';
+const String _labelDigitalIdentity = 'Carteira Harley Club';
+const String _pathDigitalIdentityImage = 'assets/imgs/carteirad.png';
+const String _labelPartnership = 'Parcerias';
+const String _pathPartnershipImage = 'assets/imgs/parcerias.png';
+const String _labelEvent = 'Eventos';
+const String _pathEventImage = 'assets/imgs/eventos.png';
+const String _labelDTC = 'Codigos DTC';
+const String _pathDTCImage = 'assets/imgs/codigosdtc.png';
+const String _labelAboutHarleyClub = 'O Harley Club';
+const String _pathAboutHarleyClubImage = 'assets/imgs/logo.png';
 
 const List<String> _listAdmScreens = [
   "Associados",
@@ -88,7 +87,6 @@ class _DashboardPageState extends State<DashboardPage> {
   BuildContext _gContext;
 
   List<Widget> _listAdmWidgets;
-
 
   @override
   void initState() {
@@ -242,7 +240,7 @@ class _DashboardPageState extends State<DashboardPage> {
               ),
               decoration: BoxDecoration(
                 image: DecorationImage(
-                  image: ExactAssetImage(_labeLadieslImage),
+                  image: ExactAssetImage(_pathLadiesImage),
                   fit: BoxFit.fill,
                 ),
               ),
@@ -410,7 +408,7 @@ class _DashboardPageState extends State<DashboardPage> {
                   backgroundImage: _controller.photoUrl != null
                       ? NetworkImage(_controller.photoUrl)
                       : PhotoImageProvider().getImageProvider(
-                          File(_labelNoImage),
+                          File(_pathNoImage),
                         ),
                 ),
               ),
@@ -462,7 +460,7 @@ class _DashboardPageState extends State<DashboardPage> {
               children: <Widget>[
                 GridButton(
                   title: _labelAssociated,
-                  image: _labelAssociatedImage,
+                  image: _pathAssociatedImage,
                   context: _gContext,
                   onClick: () {
                     _controller.loadAssociatedUpdatePage(
@@ -473,7 +471,7 @@ class _DashboardPageState extends State<DashboardPage> {
                 ),
                 GridButton(
                   title: _labelPayment,
-                  image: _labelPaymentImage,
+                  image: _pathPaymentImage,
                   context: _gContext,
                   onClick: () {
                     _controller.loadPaymentAssociatedPage(
@@ -485,7 +483,7 @@ class _DashboardPageState extends State<DashboardPage> {
                 ),
                 GridButton(
                   title: _labelDigitalIdentity,
-                  image: _labelDigitalIdentityImage,
+                  image: _pathDigitalIdentityImage,
                   context: _gContext,
                   onClick: () {
                     _controller.loadDigitalIdentityPage(
@@ -496,7 +494,7 @@ class _DashboardPageState extends State<DashboardPage> {
                 ),
                 GridButton(
                   title: _labelPartnership,
-                  image: _labelPartnershipImage,
+                  image: _pathPartnershipImage,
                   context: _gContext,
                   onClick: () {
                     _controller.loadPartnershipListPage(
@@ -506,7 +504,7 @@ class _DashboardPageState extends State<DashboardPage> {
                 ),
                 GridButton(
                   title: _labelEvent,
-                  image: _labelEventImage,
+                  image: _pathEventImage,
                   context: _gContext,
                   onClick: () {
                     _controller.loadEventCalendarPage(
@@ -530,7 +528,7 @@ class _DashboardPageState extends State<DashboardPage> {
 */
                 GridButton(
                   title: _labelDTC,
-                  image: _labelDTCImage,
+                  image: _pathDTCImage,
                   context: _gContext,
                   onClick: () {
                     _controller.loadDtcCodeDashboardPage(_gContext);
@@ -595,7 +593,7 @@ class _DashboardPageState extends State<DashboardPage> {
 */
                 GridButton(
                   title: _labelAboutHarleyClub,
-                  image: _labelAboutHarleyClubImage,
+                  image: _pathAboutHarleyClubImage,
                   context: _gContext,
                   onClick: () {
                     _controller.loadAboutPage(_gContext);
