@@ -88,8 +88,9 @@ abstract class AccessRequestControllerBase with Store {
 
   @action
   Future deleteById(AccessRequest accessRequest) =>
-      ObservableFuture(_accessRequestRepo.deleteById(accessRequest).then((value) => value))
-          .catchError((e) {
+      ObservableFuture(_accessRequestRepo
+          .deleteById(accessRequest)
+          .then((value) => value)).catchError((e) {
         errorMsg = "${e.message}";
       }, test: (e) => e is Exception);
 
@@ -129,61 +130,77 @@ abstract class AccessRequestControllerBase with Store {
   bool get hasErrorConfPassword => validateConfPassword() != null;
 
   String validateName() {
+    const String _labelNameRequired = 'Nome é obrigatório!!!';
+    const String _labelNameLenght = 'Nome deve ter no mínimo 4 caracteres!!!';
+
     if (formController.name.isEmpty) {
-      return "Nome é obrigatório!!!";
-    } else if (formController.password.toString().length < 4) {
-      return "Nome deve ter no mínimo 4 caracteres!!!";
+      return _labelNameRequired;
+    } else if (formController.name.toString().length < 4) {
+      return _labelNameLenght;
     }
     return null;
   }
 
   String validateUser() {
+    const String _labelUserRequired = 'Usuário é obrigatório!!!';
+    const String _labelUserLenght =
+        'Usuário deve ter no mínimo 4 caracteres!!!';
+
     if (formController.user.isEmpty) {
-      return "Usuário é obrigatório!!!";
-    } else if (formController.user == 'adm' ||
-        formController.user == 'admin' ||
-        formController.user == 'administrador') {
-      return "Usuário não pode ser igual a <adm>, <admin> ou <administrador>!!!";
-    } else if (formController.user.toString().length < 2) {
-      return "Usuário deve ter no mínimo 2 caracteres!!!";
+      return _labelUserRequired;
+    } else if (formController.user.toString().length < 4) {
+      return _labelUserLenght;
     }
     return null;
   }
 
   String validateEmail() {
+    const String _labelEmailRequired = 'Email é obrigatório!!!';
+    const String _labelEmailNotValid = 'Informe um email válido!!!';
+
     if (formController.email.isEmpty) {
-      return "Email é obrigatório!!!";
+      return _labelEmailRequired;
     } else if (!RegExp(
             r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+")
         .hasMatch(formController.email)) {
-      return "Informe um email válido!!!";
+      return _labelEmailNotValid;
     }
     return null;
   }
 
   String validateConfEmail() {
+    const String _labelConfEmailRequired = 'Confirmação do email é obrigatória!!!';
+    const String _labelEmailNotValid = 'Emails informados não conferem!!!';
+
     if (formController.confEmail.isEmpty) {
-      return "Confirmação do email é obrigatória!!!";
+      return _labelConfEmailRequired;
     } else if (formController.confEmail != formController.email) {
-      return "Emails informados não conferem!!!";
+      return _labelEmailNotValid;
     }
     return null;
   }
 
   String validatePassword() {
+    const String _labelPswRequired = 'Senha é obrigatória!!!';
+    const String _labelPswLenght =
+        'Senha deve ter no mínimo 4 caracteres!!!';
+
     if (formController.password.isEmpty) {
-      return "Senha é obrigatória!!!";
+      return _labelPswRequired;
     } else if (formController.password.toString().length < 4) {
-      return "Senha deve ter no mínimo 4 caracteres!!!";
+      return _labelPswLenght;
     }
     return null;
   }
 
   String validateConfPassword() {
+    const String _labelConfPswRequired = 'Confirmação da senha é obrigatória!!!';
+    const String _labelPswNotValid = 'Senhas informadas não conferem!!!';
+
     if (formController.confPassword.isEmpty) {
-      return "Confirmação da senha é obrigatória!!!";
+      return _labelConfPswRequired;
     } else if (formController.confPassword != formController.password) {
-      return "Senhas informadas não conferem!!!";
+      return _labelPswNotValid;
     }
     return null;
   }

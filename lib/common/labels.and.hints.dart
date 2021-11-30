@@ -2,7 +2,7 @@
 Login
 */
 const String labelUser = 'Usuário *';
-const String hintUser = 'Código usado para conectar no HCSlz App';
+const String hintUser = 'Usado no login do HCSlz App';
 const String labelPsw = 'Senha *';
 const String hintPsw = 'Digite sua senha';
 /*
