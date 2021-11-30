@@ -12,6 +12,10 @@ import 'package:asuka/asuka.dart' as asuka;
 import 'package:hcslzapp/pages/access.request/access.request.add.page.dart';
 import '../forgot.password/forgot.password.page.dart';
 
+const String _pathLogoImage = 'assets/imgs/logo.png';
+const String _labelForgotPsw = 'Esqueceu a senha?';
+const String _labelFirstAcc = 'Primeiro acesso?';
+
 class LoginPage extends StatelessWidget {
   LoginController _controller = LoginController();
 
@@ -44,7 +48,7 @@ class LoginPage extends StatelessWidget {
                     height: 30.0,
                   ),
                   SizedBox(
-                    child: Image.asset('assets/imgs/logo.png'),
+                    child: Image.asset(_pathLogoImage),
                   ),
                   MyTextFormField(
                     textEditingController: _controller.userLoginCtrl,
@@ -82,7 +86,7 @@ class LoginPage extends StatelessWidget {
                           );
                         },
                         child: Text(
-                          'Esqueceu a senha?',
+                          _labelForgotPsw,
                           style: TextStyle(
                             color: Colors.white,
                             fontSize: 12.0,
@@ -104,7 +108,7 @@ class LoginPage extends StatelessWidget {
                           );
                         },
                         child: Text(
-                          'Primeiro acesso?',
+                          _labelFirstAcc,
                           style: TextStyle(
                             color: Colors.white,
                             fontSize: 12.0,
@@ -137,12 +141,11 @@ class LoginPage extends StatelessWidget {
           _controller.setTokenToDevice(_t.token);
           _controller.setUserToDevice(_controller.userLoginCtrl.text);
           TokenDetails _tokenDetails = TokenDetails(_t.token);
-          if (_controller.userLoginCtrl.text != 'admin')
-            await _controller
-                .findByIdToList(_tokenDetails.associatedId())
-                .then((value) {
-              _controller.associated = value[0];
-            });
+          await _controller
+              .findByIdToList(_tokenDetails.associatedId())
+              .then((value) {
+            _controller.associated = value[0];
+          });
           Navigator.pushReplacement(
             context,
             MaterialPageRoute(
