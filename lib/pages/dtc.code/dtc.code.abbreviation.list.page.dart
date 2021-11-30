@@ -8,6 +8,11 @@ import 'package:hcslzapp/components/top.bar.dart';
 import 'package:hcslzapp/controllers/dtc.code.abbreviation.list.controller.dart';
 import 'package:hcslzapp/models/dtc.code.abbreviation.dart';
 
+const String _labelNotExists =
+    'Não existem abreviaturas de códigos DTC cadastradas.';
+const String _labelUnknown =
+    'Houve um erro desconhecido ao executar a transação.';
+
 class DtcCodeAbbreviationListPage extends StatefulWidget {
   @override
   State<StatefulWidget> createState() {
@@ -57,12 +62,12 @@ class DtcCodeAbbreviationListPageState
                   return _widgets();
                 } else
                   return CenteredMessage(
-                    'Não existem abreviaturas de códigos DTC cadastradas.',
+                    _labelNotExists,
                   );
               }
           } //switch (snapshot.connectionState)
           return CenteredMessage(
-            'Houve um erro desconhecido ao executar a transação.',
+            _labelUnknown,
           );
         },
       ),

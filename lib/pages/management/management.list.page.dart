@@ -13,6 +13,11 @@ import 'package:hcslzapp/models/dependent.dart';
 import 'package:hcslzapp/models/motorcycle.dart';
 import 'management.add.page.dart';
 
+const String _labelNotExists =
+    'Não existem associados cadastrados. Confira as requisições de acesso.';
+const String _labelUnknown =
+    'Houve um erro desconhecido ao executar a transação.';
+
 class ManagementListPage extends StatefulWidget {
   @override
   State<StatefulWidget> createState() {
@@ -63,12 +68,12 @@ class ManagementListPageState extends State<ManagementListPage> {
                       return _widgets();
                     } else
                       return CenteredMessage(
-                        'Não existem associados cadastrados. Confira as requisições de acesso.',
+                        _labelNotExists,
                       );
                   }
               } //switch (snapshot.connectionState)
               return CenteredMessage(
-                'Houve um erro desconhecido ao executar a transação.',
+                _labelUnknown,
               );
             },
           ),
@@ -196,7 +201,7 @@ class ManagementListPageState extends State<ManagementListPage> {
       if (_controller.associateds.length == 1) {
         asuka.showSnackBar(
           SnackBar(
-            content: Text('Deve haver pelo menos um Administrador cadastrado.'),
+            content: const Text('Deve haver pelo menos um Administrador cadastrado.'),
           ),
         );
       } else {
@@ -204,7 +209,7 @@ class ManagementListPageState extends State<ManagementListPage> {
           if (value != null) {
             asuka.showSnackBar(
               SnackBar(
-                content: Text('Administrador excluído com sucesso.'),
+                content: const Text('Administrador excluído com sucesso.'),
               ),
             );
             _controller.associateds.removeWhere(

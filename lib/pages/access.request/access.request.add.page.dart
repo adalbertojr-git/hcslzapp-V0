@@ -147,7 +147,7 @@ class _AccessRequestAddPageState extends State<AccessRequestAddPage> {
           } else {
             asuka.showSnackBar(
               SnackBar(
-                content: const Text(_controller.errorMsg),
+                content: Text(_controller.errorMsg),
               ),
             );
           }

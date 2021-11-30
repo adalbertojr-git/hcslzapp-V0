@@ -12,6 +12,9 @@ import 'package:hcslzapp/models/payment.dart';
 import 'package:hcslzapp/pages/payment/payment.add.page.dart';
 import 'package:asuka/asuka.dart' as asuka;
 
+const String _labelUnknown =
+    'Houve um erro desconhecido ao executar a transação.';
+
 class PaymentAssociatedPage extends StatefulWidget {
   final String _selectedProfile;
   final Associated _associated;
@@ -66,7 +69,7 @@ class _PaymentAssociatedPageState extends State<PaymentAssociatedPage> {
                 }
             } //switch (snapshot.connectionState)
             return CenteredMessage(
-              'Houve um erro desconhecido ao executar a transação.',
+              _labelUnknown,
             );
           },
         ),
@@ -230,7 +233,7 @@ class _PaymentAssociatedPageState extends State<PaymentAssociatedPage> {
         if (value != null) {
           asuka.showSnackBar(
             SnackBar(
-              content: Text('Mensalidade excluída com sucesso.'),
+              content: const Text('Mensalidade excluída com sucesso.'),
             ),
           );
           _controller.payments.removeAt(i);

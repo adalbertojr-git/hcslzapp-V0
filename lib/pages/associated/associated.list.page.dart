@@ -9,6 +9,11 @@ import 'package:hcslzapp/controllers/associated.list.controller.dart';
 import 'package:hcslzapp/models/associated.dart';
 import 'package:hcslzapp/pages/associated/associated.update.page.dart';
 
+const String _labelNotExists =
+    'Não existem associados cadastrados. Confira as requisições de acesso.';
+const String _labelUnknown =
+    'Houve um erro desconhecido ao executar a transação.';
+
 class AssociatedListPage extends StatefulWidget {
 
   @override
@@ -60,12 +65,12 @@ class AssociatedListPageState extends State<AssociatedListPage> {
                       return _widgets();
                     } else
                       return CenteredMessage(
-                        'Não existem associados cadastrados. Confira as requisições de acesso.',
+                        _labelNotExists,
                       );
                   }
               } //switch (snapshot.connectionState)
               return CenteredMessage(
-                'Houve um erro desconhecido ao executar a transação.',
+                _labelUnknown,
               );
             },
           ),

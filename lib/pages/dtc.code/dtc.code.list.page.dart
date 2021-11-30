@@ -8,6 +8,10 @@ import 'package:hcslzapp/components/top.bar.dart';
 import 'package:hcslzapp/controllers/dtc.code.list.controller.dart';
 import 'package:hcslzapp/models/dtc.code.dart';
 
+const String _labelNotExists = 'Não existem códigos DTC cadastrados.';
+const String _labelUnknown =
+    'Houve um erro desconhecido ao executar a transação.';
+
 class DtcCodeListPage extends StatefulWidget {
   @override
   State<StatefulWidget> createState() {
@@ -55,12 +59,12 @@ class DtcCodeListPageState extends State<DtcCodeListPage> {
                       return _widgets();
                     } else
                       return CenteredMessage(
-                        'Não existem códigos DTC cadastrados.',
+                        _labelNotExists,
                       );
                   }
               } //switch (snapshot.connectionState)
               return CenteredMessage(
-                'Houve um erro desconhecido ao executar a transação.',
+                _labelUnknown,
               );
             },
           ),

@@ -224,7 +224,7 @@ class _PaymentAddAddState extends State<PaymentAddPage> {
     if (_controller.hasErrors) {
       asuka.showSnackBar(
         SnackBar(
-          content: Text('Atenção: Existem erros no formulário que devem '
+          content: const Text('Atenção: Existem erros no formulário que devem '
               'ser corrigidos antes de efetivar a transação.'),
         ),
       );
@@ -234,7 +234,7 @@ class _PaymentAddAddState extends State<PaymentAddPage> {
           if (payment != null) {
             asuka.showSnackBar(
               SnackBar(
-                content: Text('Mensalidades cadastradas com sucesso.'),
+                content: const Text('Mensalidades cadastradas com sucesso.'),
               ),
             );
             Navigator.of(context).pop(payment);
@@ -254,7 +254,7 @@ class _PaymentAddAddState extends State<PaymentAddPage> {
     if (_controller.hasErrors) {
       asuka.showSnackBar(
         SnackBar(
-          content: Text('Atenção: Existem erros no formulário que devem '
+          content: const Text('Atenção: Existem erros no formulário que devem '
               'ser corrigidos antes de efetivar a transação.'),
         ),
       );
@@ -264,7 +264,7 @@ class _PaymentAddAddState extends State<PaymentAddPage> {
           if (payment != null) {
             asuka.showSnackBar(
               SnackBar(
-                content: Text('Mensalidades atualizadas com sucesso.'),
+                content: const Text('Mensalidades atualizadas com sucesso.'),
               ),
             );
             Navigator.of(context).pop(payment);

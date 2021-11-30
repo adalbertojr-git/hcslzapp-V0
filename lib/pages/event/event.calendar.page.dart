@@ -276,7 +276,7 @@ class EventCalendarPageState extends State<EventCalendarPage>
               backgroundColor: Colors.white70,
               title: Container(
                 alignment: Alignment.topLeft,
-                child: Text(
+                child: const Text(
                   'Evento',
                   style: TextStyle(fontSize: 15.0),
                 ),
@@ -294,7 +294,7 @@ class EventCalendarPageState extends State<EventCalendarPage>
                     Container(
                       padding: EdgeInsets.only(top: 20.0),
                       child: FloatingActionButton(
-                        heroTag: "btnCancel",
+                        heroTag: 'btnCancel',
                         mini: true,
                         backgroundColor: Colors.deepOrangeAccent[100],
                         child: Icon(
@@ -309,7 +309,7 @@ class EventCalendarPageState extends State<EventCalendarPage>
                     Container(
                       padding: EdgeInsets.only(top: 20.0),
                       child: FloatingActionButton(
-                        heroTag: "btnSave",
+                        heroTag: 'btnSave',
                         mini: true,
                         backgroundColor: Colors.deepOrangeAccent[100],
                         child: Icon(
@@ -342,12 +342,10 @@ class EventCalendarPageState extends State<EventCalendarPage>
         if (value != null) {
           asuka.showSnackBar(
             SnackBar(
-              content: Text('Evento salvo com sucesso.'),
+              content: const Text('Evento salvo com sucesso.'),
             ),
           );
           _controller.init();
-          // _controller.addEvent(value, _selectedDay);
-          //_controller.calController.setFocusedDay(_selectedDay);
         } else {
           asuka.showSnackBar(
             SnackBar(
@@ -366,7 +364,7 @@ class EventCalendarPageState extends State<EventCalendarPage>
         if (value != null) {
           asuka.showSnackBar(
             SnackBar(
-              content: Text('Evento atualizado com sucesso.'),
+              content: const Text('Evento atualizado com sucesso.'),
             ),
           );
           _controller.editEvent(i);
@@ -395,7 +393,7 @@ class EventCalendarPageState extends State<EventCalendarPage>
           if (value != null) {
             asuka.showSnackBar(
               SnackBar(
-                content: Text('Evento excluido com sucesso.'),
+                content: const Text('Evento excluido com sucesso.'),
               ),
             );
             setState(() {

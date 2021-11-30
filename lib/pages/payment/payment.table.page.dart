@@ -29,7 +29,7 @@ class _PaymentsTablePageState extends State<PaymentsTablePage> {
           children: [
             TopBar(),
             PaginatedDataTable(
-              header: Center(child: Text('Tabela de Pagamentos')),
+              header: Center(child: const Text('Tabela de Pagamentos')),
               rowsPerPage: _rowsPerPage,
               availableRowsPerPage: <int>[5, 10, 20],
               onRowsPerPageChanged: (int value) {

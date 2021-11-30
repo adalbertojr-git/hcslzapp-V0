@@ -11,6 +11,13 @@ import 'package:hcslzapp/controllers/digital.identity.controller.dart';
 import 'package:hcslzapp/models/associated.dart';
 import 'package:hcslzapp/models/digital.identity.dart';
 
+const String _labelNotExists =
+    'Dados do associado especificado não foram encontrados.';
+const String _labelUnknown =
+    'Houve um erro desconhecido ao executar a transação.';
+const String _pathIdentity = 'assets/imgs/logo_carteirad.png';
+const String _pathNoImage = 'assets/imgs/noImage.png';
+
 class DigitalIdentityPage extends StatefulWidget {
   final Associated _associated;
 
@@ -25,7 +32,8 @@ class _DigitalIdentityPageState extends State<DigitalIdentityPage> {
   final double _fontSize = 14.0;
 
   @override
-  Widget build(BuildContext context) => Scaffold(
+  Widget build(BuildContext context) =>
+      Scaffold(
         body: FutureBuilder<List<DigitalIdentity>>(
           future: _controller.getFuture(widget._associated.id),
           builder: (context, snapshot) {
@@ -50,18 +58,19 @@ class _DigitalIdentityPageState extends State<DigitalIdentityPage> {
                     return _widgets();
                   } else
                     return CenteredMessage(
-                      'Dados do associado especificado não foram encontrados.',
+                        _labelNotExists,
                     );
                 }
             } //switch (snapshot.connectionState)
             return CenteredMessage(
-              'Houve um erro desconhecido ao executar a transação.',
+              _labelUnknown,
             );
           },
         ),
       );
 
-  _widgets() => Container(
+  _widgets() =>
+      Container(
         decoration: BoxDecoration(
           gradient: LinearGradient(
             colors: [Colors.white30, Colors.deepOrange],
@@ -69,7 +78,10 @@ class _DigitalIdentityPageState extends State<DigitalIdentityPage> {
             end: FractionalOffset.bottomRight,
           ),
         ),
-        height: MediaQuery.of(context).size.height,
+        height: MediaQuery
+            .of(context)
+            .size
+            .height,
         child: SingleChildScrollView(
           child: Column(
             children: [
@@ -153,7 +165,7 @@ class _DigitalIdentityPageState extends State<DigitalIdentityPage> {
                   Center(
                     child: SizedBox(
                       height: 100.0,
-                      child: Image.asset('assets/imgs/logo_carteirad.png'),
+                      child: Image.asset(_pathIdentity),
                     ),
                   ),
                   Column(
@@ -162,7 +174,7 @@ class _DigitalIdentityPageState extends State<DigitalIdentityPage> {
                         height: 90.0,
                       ),
                       Center(
-                        child: Text(
+                        child: const Text(
                           'Carteira digital de associado do Harley Club de São Luis - MA',
                           style: TextStyle(
                               fontSize: 10.0, fontWeight: FontWeight.bold),
@@ -177,7 +189,8 @@ class _DigitalIdentityPageState extends State<DigitalIdentityPage> {
         ),
       );
 
-  _photo() => Container(
+  _photo() =>
+      Container(
         height: 170.0,
         width: 170.0,
         padding: EdgeInsets.all(5.0),
@@ -194,11 +207,12 @@ class _DigitalIdentityPageState extends State<DigitalIdentityPage> {
         ),
       );
 
-  DecorationImage _loadPhoto() => DecorationImage(
-      image: widget._associated.photoUrl != null
-          ? NetworkImage(widget._associated.photoUrl)
-          : PhotoImageProvider().getImageProvider(
-              File('assets/imgs/noImage.png'),
-            ),
-      fit: BoxFit.fill);
+  DecorationImage _loadPhoto() =>
+      DecorationImage(
+          image: widget._associated.photoUrl != null
+              ? NetworkImage(widget._associated.photoUrl)
+              : PhotoImageProvider().getImageProvider(
+            File(_pathNoImage),
+          ),
+          fit: BoxFit.fill);
 }

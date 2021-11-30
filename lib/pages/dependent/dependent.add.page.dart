@@ -87,7 +87,7 @@ class _DependentAddPageState extends State<DependentAddPage> {
                     crossAxisAlignment: CrossAxisAlignment.baseline,
                     children: <Widget>[
                       Expanded(
-                        child: Text(
+                        child: const Text(
                           'Tipo Sanguineo:',
                           textAlign: TextAlign.center,
                         ),
@@ -141,9 +141,9 @@ class _DependentAddPageState extends State<DependentAddPage> {
                 Container(
                   alignment: Alignment.centerLeft,
                   padding: EdgeInsets.fromLTRB(0.0, 15.0, 0.0, 0.0),
-                  child: Text(
+                  child: const Text(
                     'Membro Harley Club?',
-                    style: new TextStyle(
+                    style: TextStyle(
                       fontSize: 15.0,
                     ),
                   ),

@@ -1,11 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:hcslzapp/common/associated.profiles.dart';
-import 'package:hcslzapp/common/labels.and.hints.dart';
 import 'package:hcslzapp/common/photo.image.provider.dart';
 import 'package:hcslzapp/components/button.dart';
 import 'package:hcslzapp/components/centered.message.dart';
-import 'package:hcslzapp/components/my.text.form.field.dart';
 import 'package:hcslzapp/components/progress.dart';
 import 'dart:math';
 import 'package:hcslzapp/components/top.bar.dart';
@@ -19,6 +17,10 @@ import 'package:asuka/asuka.dart' as asuka;
 const SCALE_FRACTION = 0.2;
 const FULL_SCALE = 0.9;
 const PAGER_HEIGHT = 200.0;
+
+const String _labelUnknown =
+    'Houve um erro desconhecido ao executar a transação.';
+const String _pathNoImage = 'assets/imgs/noImage.png';
 
 class PartnershipListPage extends StatefulWidget {
   final String _selectedProfile;
@@ -83,7 +85,7 @@ class _PartnershipListPageState extends State<PartnershipListPage> {
                 }
             } //switch (snapshot.connectionState)
             return CenteredMessage(
-              'Houve um erro desconhecido ao executar a transação.',
+              _labelUnknown,
             );
           },
         ),
@@ -297,7 +299,7 @@ class _PartnershipListPageState extends State<PartnershipListPage> {
       image: _controller.activePartnerships[index].photoUrl != null
           ? NetworkImage(_controller.activePartnerships[index].photoUrl)
           : PhotoImageProvider().getImageProvider(
-              File('assets/imgs/noImage.png'),
+              File(_pathNoImage),
             ),
       fit: BoxFit.contain);
 
@@ -376,7 +378,7 @@ class _PartnershipListPageState extends State<PartnershipListPage> {
         if (value != null) {
           asuka.showSnackBar(
             SnackBar(
-              content: Text('Parceiro excluído com sucesso.'),
+              content: const Text('Parceiro excluído com sucesso.'),
             ),
           );
           _controller.partnerships.removeAt(i);

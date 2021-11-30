@@ -13,6 +13,8 @@ import 'package:hcslzapp/models/partnership.dart';
 import 'package:mask_text_input_formatter/mask_text_input_formatter.dart';
 import 'package:asuka/asuka.dart' as asuka;
 
+const String _pathNoImage = 'assets/imgs/noImage.png';
+
 class PartnershipAddPage extends StatefulWidget {
   final Partnership partnership;
 
@@ -138,7 +140,7 @@ class _PartnershipAddPageState extends State<PartnershipAddPage> {
                             crossAxisAlignment: CrossAxisAlignment.baseline,
                             children: <Widget>[
                               Expanded(
-                                child: Text(
+                                child: const Text(
                                   'Status:',
                                   textAlign: TextAlign.center,
                                   style: TextStyle(
@@ -210,7 +212,7 @@ class _PartnershipAddPageState extends State<PartnershipAddPage> {
           : _controller.photoUrl != null
               ? NetworkImage(_controller.photoUrl)
               : PhotoImageProvider().getImageProvider(
-                  File('assets/imgs/noImage.png'),
+                  File(_pathNoImage),
                 ),
       fit: BoxFit.fill);
 
@@ -218,7 +220,7 @@ class _PartnershipAddPageState extends State<PartnershipAddPage> {
     if (_controller.hasErrors) {
       asuka.showSnackBar(
         SnackBar(
-          content: Text('Atenção: Existem erros no formulário que devem '
+          content: const Text('Atenção: Existem erros no formulário que devem '
               'ser corrigidos antes de efetivar a transação.'),
         ),
       );
@@ -229,7 +231,7 @@ class _PartnershipAddPageState extends State<PartnershipAddPage> {
             asuka.hideCurrentSnackBar();
             asuka.showSnackBar(
               SnackBar(
-                content: Text('Parceiro salvo com sucesso.'),
+                content: const Text('Parceiro salvo com sucesso.'),
               ),
             );
             Navigator.of(context).pop(value);
@@ -249,7 +251,7 @@ class _PartnershipAddPageState extends State<PartnershipAddPage> {
     if (_controller.hasErrors) {
       asuka.showSnackBar(
         SnackBar(
-          content: Text('Atenção: Existem erros no formulário que devem '
+          content: const Text('Atenção: Existem erros no formulário que devem '
               'ser corrigidos antes de efetivar a transação.'),
         ),
       );
@@ -269,7 +271,7 @@ class _PartnershipAddPageState extends State<PartnershipAddPage> {
       if (response == true) {
         asuka.showSnackBar(
           SnackBar(
-            content: Text('Aguarde...'),
+            content: const Text('Aguarde...'),
           ),
         );
         _controller.update().then(
@@ -278,7 +280,7 @@ class _PartnershipAddPageState extends State<PartnershipAddPage> {
               asuka.hideCurrentSnackBar();
               asuka.showSnackBar(
                 SnackBar(
-                  content: Text('Parceiro atualizado com sucesso.'),
+                  content: const Text('Parceiro atualizado com sucesso.'),
                 ),
               );
               Navigator.pop(context, value);

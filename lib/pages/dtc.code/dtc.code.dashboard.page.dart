@@ -6,24 +6,24 @@ import 'package:hcslzapp/pages/dtc.code/dtc.code.list.page.dart';
 import 'dtc.code.abbreviation.list.page.dart';
 import 'dtc.code.access.newmodels.page.dart';
 
+const List<String> _listAdmScreens = [
+  "Códigos",
+  "Abreviaturas",
+];
+
+const List<String> _listAdmScreensDesc = [
+  "Lista de códigos de erro catalogados pela HD",
+  "Lista de siglas utilizadas",
+];
+
+const List<IconData> _listAdmIcons = [
+  Icons.error_outline_rounded,
+  Icons.list_rounded,
+];
+
 // ignore: must_be_immutable
 class DtcCodeDashboardPage extends StatelessWidget {
   BuildContext _gContext;
-
-  List<String> _listAdmScreens = [
-    "Códigos",
-    "Abreviaturas",
-  ];
-
-  List<String> _listAdmScreensDesc = [
-    "Lista de códigos de erro catalogados pela HD",
-    "Lista de siglas utilizadas",
-  ];
-
-  List<IconData> _listAdmIcons = [
-    Icons.error_outline_rounded,
-    Icons.list_rounded,
-  ];
 
   List<Widget> _listAdmWidgets = [
     DtcCodeListPage(),
@@ -70,11 +70,11 @@ class DtcCodeDashboardPage extends StatelessWidget {
 
   _header() => ListTile(
         contentPadding: EdgeInsets.only(left: 40, right: 20, top: 30),
-        title: Text(
+        title: const Text(
           'Códigos DTC',
           style: TextStyle(color: Colors.white, fontSize: 22.0),
         ),
-        subtitle: Text(
+        subtitle: const Text(
           'Diagnostic Trouble Codes',
           style: TextStyle(color: Colors.white60),
         ),
@@ -170,6 +170,7 @@ class DtcCodeDashboardPage extends StatelessWidget {
         ),
       );
 }
+
 class _BarButton extends StatelessWidget {
   final String title;
   final String subtitle;
@@ -177,7 +178,8 @@ class _BarButton extends StatelessWidget {
   final Color iconColor;
   final Function onClick; //callback
 
-  _BarButton(this.title, this.subtitle, this.icon, this.iconColor, {@required this.onClick});
+  _BarButton(this.title, this.subtitle, this.icon, this.iconColor,
+      {@required this.onClick});
 
   @override
   Widget build(BuildContext context) {
@@ -200,7 +202,7 @@ class _BarButton extends StatelessWidget {
               children: <Widget>[
                 Icon(
                   icon,
-                  color: iconColor,//Colors.orange,
+                  color: iconColor, //Colors.orange,
                   size: 50.0,
                 ),
                 Text(

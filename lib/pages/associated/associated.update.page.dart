@@ -22,6 +22,12 @@ import 'package:hcslzapp/pages/dependent/dependent.add.page.dart';
 import 'package:hcslzapp/pages/motorcycle/motorcycle.add.page.dart';
 import 'package:mask_text_input_formatter/mask_text_input_formatter.dart';
 
+const String _labelNotExists =
+    'Dados do associado especificado não foram encontrados.';
+const String _labelUnknown =
+    'Houve um erro desconhecido ao executar a transação.';
+const String _pathNoImage = 'assets/imgs/noImage.png';
+
 class AssociatedUpdatePage extends StatefulWidget {
   final int _associatedId;
 
@@ -71,12 +77,12 @@ class _AssociatedUpdatePageState extends State<AssociatedUpdatePage> {
                       return _widgets(context);
                     } else
                       return CenteredMessage(
-                        'Dados do associado especificado não foram encontrados.',
+                        _labelNotExists,
                       );
                   }
               } //switch (snapshot.connectionState)
               return CenteredMessage(
-                'Houve um erro desconhecido ao executar a transação.',
+                _labelUnknown,
               );
             },
           ),
@@ -175,7 +181,7 @@ class _AssociatedUpdatePageState extends State<AssociatedUpdatePage> {
                   crossAxisAlignment: CrossAxisAlignment.baseline,
                   children: <Widget>[
                     Expanded(
-                      child: Text(
+                      child: const Text(
                         'Tipo Sanguíneo:',
                         textAlign: TextAlign.center,
                       ),
@@ -232,7 +238,7 @@ class _AssociatedUpdatePageState extends State<AssociatedUpdatePage> {
                   crossAxisAlignment: CrossAxisAlignment.baseline,
                   children: <Widget>[
                     Expanded(
-                      child: Text(
+                      child: const Text(
                         'Tipo de Associado:',
                         textAlign: TextAlign.center,
                       ),
@@ -304,7 +310,7 @@ class _AssociatedUpdatePageState extends State<AssociatedUpdatePage> {
                     crossAxisAlignment: CrossAxisAlignment.baseline,
                     children: <Widget>[
                       Expanded(
-                        child: Text(
+                        child: const Text(
                           'Status:',
                           textAlign: TextAlign.center,
                           style: TextStyle(
@@ -369,16 +375,8 @@ class _AssociatedUpdatePageState extends State<AssociatedUpdatePage> {
           : _controller.photoUrl != null
               ? NetworkImage(_controller.photoUrl)
               : PhotoImageProvider().getImageProvider(
-                  File('assets/imgs/noImage.png'),
+                  File(_pathNoImage),
                 ),
-      fit: BoxFit.fill);
-
-  DecorationImage _loadPhoto2() => DecorationImage(
-      image: _controller.photoUrl != null
-          ? NetworkImage(_controller.photoUrl)
-          : PhotoImageProvider().getImageProvider(
-              File('assets/imgs/noImage.png'),
-            ),
       fit: BoxFit.fill);
 
   _dependentsListWidget() => Container(
@@ -390,8 +388,8 @@ class _AssociatedUpdatePageState extends State<AssociatedUpdatePage> {
         ),
         child: Column(
           children: [
-            Text(
-              "Dependentes",
+            const Text(
+              'Dependentes',
               style: TextStyle(
                 fontWeight: FontWeight.bold,
               ),
@@ -470,7 +468,7 @@ class _AssociatedUpdatePageState extends State<AssociatedUpdatePage> {
             Container(
               padding: EdgeInsets.only(top: 20.0),
               child: FloatingActionButton(
-                heroTag: "btnDependentes",
+                heroTag: 'btnDependentes',
                 mini: true,
                 backgroundColor: Colors.deepOrangeAccent[100],
                 child: Icon(
@@ -506,8 +504,8 @@ class _AssociatedUpdatePageState extends State<AssociatedUpdatePage> {
         ),
         child: Column(
           children: [
-            Text(
-              "Motocicletas",
+            const Text(
+              'Motocicletas',
               style: TextStyle(
                 fontWeight: FontWeight.bold,
               ),
@@ -587,7 +585,7 @@ class _AssociatedUpdatePageState extends State<AssociatedUpdatePage> {
             Container(
               padding: EdgeInsets.only(top: 20.0),
               child: FloatingActionButton(
-                heroTag: "btnMotocicletas",
+                heroTag: 'btnMotocicletas',
                 mini: true,
                 backgroundColor: Colors.deepOrangeAccent[100],
                 child: Icon(
@@ -619,7 +617,7 @@ class _AssociatedUpdatePageState extends State<AssociatedUpdatePage> {
     if (_controller.hasErrors) {
       asuka.showSnackBar(
         SnackBar(
-          content: Text('Atenção: Existem erros no formulário que devem '
+          content: const Text('Atenção: Existem erros no formulário que devem '
               'ser corrigidos antes de efetivar a transação.'),
         ),
       );
@@ -639,7 +637,7 @@ class _AssociatedUpdatePageState extends State<AssociatedUpdatePage> {
       if (response == true) {
         asuka.showSnackBar(
           SnackBar(
-            content: Text('Aguarde...'),
+            content: const Text('Aguarde...'),
           ),
         );
         _controller.update(_controller.associated).then(
@@ -648,10 +646,9 @@ class _AssociatedUpdatePageState extends State<AssociatedUpdatePage> {
               asuka.hideCurrentSnackBar();
               asuka.showSnackBar(
                 SnackBar(
-                  content: Text('Associado atualizado com sucesso.'),
+                  content: const Text('Associado atualizado com sucesso.'),
                 ),
               );
-              //Navigator.of(context).pop(_controller.photoPath);
               Navigator.of(context).pop(_controller.associated.photoUrl);
             } else {
               asuka.showSnackBar(

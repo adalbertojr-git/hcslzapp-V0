@@ -69,7 +69,7 @@ class _ForgotPasswordPageState extends State<ForgotPasswordPage> {
               Container(
                 padding: const EdgeInsets.only(left: 10.0),
                 child: RichText(
-                  text: TextSpan(
+                  text: const TextSpan(
                     text:
                     'Atenção: Você receberá um código no email informado, o qual ' +
                     ' deverá ser utilizado para geração de nova senha. Verifique ' +
