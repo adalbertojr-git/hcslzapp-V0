@@ -7,8 +7,8 @@ enum Status {
 
 extension StatusExt on Status {
   static const StatusMap = {
-    Status.A: "Ativo",
-    Status.I: "Inativo",
+    Status.A: 'Ativo' ,
+    Status.I: 'Inativo' ,
   };
 
   //prints enum index and custom message

@@ -99,17 +99,21 @@ abstract class DependentControllerBase with Store {
   }
 
   String validateName() {
+    const String _labelNameRequired = 'Nome é obrigatório!!!';
+
     if (formController.name.isEmpty) {
-      return "Nome é obrigatório!!!";
+      return _labelNameRequired;
     }
     return null;
   }
 
   String validateEmail() {
+    const String _labelEmailNotValid = 'Informe um email válido!!!';
+
     if (!RegExp(
-            r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+")
+        r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+")
         .hasMatch(formController.email)) {
-      return "Informe um email válido!!!";
+      return _labelEmailNotValid;
     }
     return null;
   }

@@ -20,12 +20,15 @@ abstract class ForgotPasswordControllerBase with Store {
   }
 
   String validateEmail() {
+    const String _labelEmailRequired = 'Email é obrigatório!!!';
+    const String _labelEmailNotValid = 'Informe um email válido!!!';
+
     if (formController.email.isEmpty) {
-      return "Email não pode ser nulo!!!";
+      return _labelEmailRequired;
     } else if (!RegExp(
-            r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+")
+        r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+")
         .hasMatch(formController.email)) {
-      return "Informe um email válido!!!";
+      return _labelEmailNotValid;
     }
     return null;
   }

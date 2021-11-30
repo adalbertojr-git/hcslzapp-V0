@@ -202,12 +202,16 @@ abstract class PaymentAddControllerBase with Store {
   }
 
   String validateYear() {
+    const String _labelYearRequired = 'Ano é obrigatório!!!';
+    const String _labelYearGreaterThan = 'Ano deve ser maior que 2018!!!';
+    const String _labelYearExists = 'Ano informado já cadastrado!!!';
+
     if (formController.year.isEmpty) {
-      return "Ano é obrigatório!!!";
+      return _labelYearRequired;
     } else if (int.parse(formController.year) < 2018) {
-      return "Ano deve ser maior que 2018";
+      return _labelYearGreaterThan;
     } else if (idCtrl.text == '' && this.years.contains(formController.year)) {
-      return "Ano informado já cadastrado";
+      return _labelYearExists;
     }
     return null;
   }

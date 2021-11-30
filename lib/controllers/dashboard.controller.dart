@@ -43,10 +43,6 @@ abstract class DashboardControllerBase with Store {
   @action
   changeProfile() => selectedProfile = (selectedProfile == ADMIN ? ASSOCIATED : ADMIN);
 
-  String selectedProfileToPortuguese() {
-    return selectedProfile == ADMIN ? 'Administrador' : 'Associado';
-  }
-
   String getFirstName(String fullName) {
     var names = fullName.split(' ');
     return names[0];

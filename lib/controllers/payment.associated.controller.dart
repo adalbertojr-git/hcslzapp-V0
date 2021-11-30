@@ -39,10 +39,10 @@ abstract class PaymentAssociatedControllerBase with Store {
 
   @action
   Future findByAssociatedIdToList(int id) => ObservableFuture(
-      _paymentRepo.findByAssociatedIdToList(id).then((value) => value))
-      .catchError((e) {
-    errorMsg = "${e.message}";
-  }, test: (e) => e is Exception);
+              _paymentRepo.findByAssociatedIdToList(id).then((value) => value))
+          .catchError((e) {
+        errorMsg = "${e.message}";
+      }, test: (e) => e is Exception);
 
   @action
   Future<List<Payment>> getFuture(int id) =>
@@ -63,20 +63,20 @@ abstract class PaymentAssociatedControllerBase with Store {
     return years;
   }
 
-  String getMonthName (int i) {
+  String getMonthName(int i) {
     Map _months = {
-      1: "Janeiro",
-      2: "Fevereiro",
-      3: "Março",
-      4: "Abril",
-      5: "Maio",
-      6: "Junho",
-      7: "Julho",
-      8: "Agosto",
-      9: "Setembro",
-      10: "Outubro",
-      11: "Novembro",
-      12: "Dezembro",
+      1: 'Janeiro',
+      2: 'Fevereiro',
+      3: 'Março',
+      4: 'Abril',
+      5: 'Maio',
+      6: 'Junho',
+      7: 'Julho',
+      8: 'Agosto',
+      9: 'Setembro',
+      10: 'Outubro',
+      11: 'Novembro',
+      12: 'Dezembro',
     };
     return _months[i];
   }

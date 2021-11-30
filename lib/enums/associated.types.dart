@@ -8,9 +8,9 @@ enum AssociatedType {
 
 extension AssociatedTypeExt on AssociatedType {
   static const associatedTypesMap = {
-    AssociatedType.MF: "Fundador",
-    AssociatedType.ME: "Efetivo",
-    AssociatedType.MB: "Benemérito",
+    AssociatedType.MF: 'Fundador',
+    AssociatedType.ME: 'Efetivo',
+    AssociatedType.MB: 'Benemérito',
   };
 
   //prints enum index and custom message

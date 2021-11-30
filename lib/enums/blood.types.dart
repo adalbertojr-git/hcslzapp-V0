@@ -13,14 +13,14 @@ enum BloodType {
 
 extension BloodTypeExt on BloodType {
   static const bloodTypesMap = {
-    BloodType.A_NEGATIVE: "A-",
-    BloodType.A_POSITIVE: "A+",
-    BloodType.B_NEGATIVE: "B-",
-    BloodType.B_POSITIVE: "B+",
-    BloodType.O_NEGATIVE: "O-",
-    BloodType.O_POSITIVE: "O+",
-    BloodType.AB_NEGATIVE: "AB-",
-    BloodType.AB_POSITIVE: "AB+",
+    BloodType.A_NEGATIVE: 'A-',
+    BloodType.A_POSITIVE: 'A+',
+    BloodType.B_NEGATIVE: 'B-',
+    BloodType.B_POSITIVE: 'B+',
+    BloodType.O_NEGATIVE: 'O-',
+    BloodType.O_POSITIVE: 'O+',
+    BloodType.AB_NEGATIVE: 'AB-',
+    BloodType.AB_POSITIVE: 'AB+',
   };
 
   //prints enum index and custom message

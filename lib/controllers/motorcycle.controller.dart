@@ -78,8 +78,10 @@ abstract class MotorcycleControllerBase with Store {
   }
 
   String validateModel() {
+    const String _labelModelRequired = 'Modelo é obrigatório!!!';
+
     if (formController.model.isEmpty) {
-      return "Modelo é obrigatório!!!";
+      return _labelModelRequired;
     }
     return null;
   }

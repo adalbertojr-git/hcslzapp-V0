@@ -123,8 +123,10 @@ abstract class PartnershipAddControllerBase with Store {
   String changedStatusDropDownItem(selected) => currentStatus = selected;
 
   String validatePartner() {
+    const String _labelPartnerRequired = 'Parceiro é obrigatório!!!';
+
     if (formController.partner.isEmpty) {
-      return "Parceiro é obrigatório!!!";
+      return _labelPartnerRequired;
     }
     return null;
   }
@@ -156,7 +158,7 @@ abstract class PartnershipAddControllerBase with Store {
   Future<String> _uploadPhoto() async {
     FirebaseStorage storage = FirebaseStorage.instance;
     Reference reference = storage.ref().child(
-          "partnerPhotos/${partnerCtrl.text}",
+          'partnerPhotos/${partnerCtrl.text}',
         );
     await reference.putFile(photo);
     return await reference.getDownloadURL().catchError((e) {

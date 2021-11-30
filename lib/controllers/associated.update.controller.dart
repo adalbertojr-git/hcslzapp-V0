@@ -8,7 +8,6 @@ import 'package:hcslzapp/repositories/associated.repo.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:mobx/mobx.dart';
 import 'dart:io';
-import 'package:glutton/glutton.dart';
 
 part 'associated.update.controller.g.dart';
 
@@ -104,8 +103,6 @@ abstract class AssociatedUpdateControllerBase with Store {
       name: associated.name,
       email: associated.email,
     );
-    //photoPath = await _getPhotoFromDevice();
-    //photoPath = photoUrl;
   }
 
   _initLists() {
@@ -170,26 +167,30 @@ abstract class AssociatedUpdateControllerBase with Store {
     associated.motorcycles = List<Motorcycle>.from(motorcycles);
     if (photo != null) {
       //se houve alteração de foto
-      //_savePhoto();
       await _uploadPhoto().then((value) => associated.photoUrl = value);
     }
     return associated;
   }
 
   String validateName() {
+    const String _labelNameRequired = 'Nome é obrigatório!!!';
+
     if (formController.name.isEmpty) {
-      return "Nome é obrigatório!!!";
+      return _labelNameRequired;
     }
     return null;
   }
 
   String validateEmail() {
+    const String _labelEmailRequired = 'Email é obrigatório!!!';
+    const String _labelEmailNotValid = 'Informe um email válido!!!';
+
     if (formController.email.isEmpty) {
-      return "Email é obrigatório!!!";
+      return _labelEmailRequired;
     } else if (!RegExp(
-            r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+")
+        r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+")
         .hasMatch(formController.email)) {
-      return "Informe um email válido!!!";
+      return _labelEmailNotValid;
     }
     return null;
   }
@@ -226,18 +227,10 @@ abstract class AssociatedUpdateControllerBase with Store {
     }
   }
 
-/*  Future<String> _getPhotoFromDevice() async {
-    return await Glutton.vomit("photoPath");
-  }
-
-  Future _savePhoto() async {
-    await Glutton.eat("photoPath", photoPath);
-  }*/
-
   Future<String> _uploadPhoto() async {
     FirebaseStorage storage = FirebaseStorage.instance;
     Reference reference = storage.ref().child(
-          "profilePhotos/${associated.id}",
+          'profilePhotos/${associated.id}',
         );
     await reference.putFile(photo);
     return await reference.getDownloadURL().catchError((e) {

@@ -57,10 +57,12 @@ abstract class LoginControllerBase with Store {
   bool setLoading(bool value) => isLoading = value;
 
   Future setTokenToDevice(String token) async {
-    await Glutton.eat("token", token);
+    const String _labelToken = 'token';
+    await Glutton.eat(_labelToken, token);
   }
 
   Future setUserToDevice(String user) async {
-    await Glutton.eat("user", user);
+    const String _labelUser = 'user';
+    await Glutton.eat(_labelUser, user);
   }
 }
