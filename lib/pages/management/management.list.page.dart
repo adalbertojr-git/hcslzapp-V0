@@ -195,7 +195,7 @@ class ManagementListPageState extends State<ManagementListPage> {
         context: context,
         builder: (context) {
           return TransactionAuthDialog(
-              msg: 'Deseja excluir o registro selecionado?');
+              msg: 'Confirma exclusão?');
         });
     if (response == true) {
       if (_controller.associateds.length == 1) {

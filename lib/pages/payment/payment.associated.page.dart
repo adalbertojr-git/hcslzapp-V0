@@ -233,7 +233,7 @@ class _PaymentAssociatedPageState extends State<PaymentAssociatedPage> {
         context: context,
         builder: (context) {
           return TransactionAuthDialog(
-              msg: 'Deseja excluir o registro selecionado?');
+              msg: 'Confirma exclusão?');
         });
     if (response == true) {
       _controller.deleteById(_controller.payments[i]).then((value) {
