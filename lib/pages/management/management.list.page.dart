@@ -19,7 +19,6 @@ const String _labelUnknown =
     'Houve um erro desconhecido ao executar a transação.';
 const String _title = 'Administradores';
 
-
 class ManagementListPage extends StatefulWidget {
   @override
   State<StatefulWidget> createState() {
@@ -55,8 +54,8 @@ class ManagementListPageState extends State<ManagementListPage> {
                   break;
                 default:
                   if (snapshot.hasError) {
-                    return CenteredMessage(title: _title,
-                        message: snapshot.error.toString());
+                    return CenteredMessage(
+                        title: _title, message: snapshot.error.toString());
                   } else {
                     if (snapshot.data == null)
                       return CenteredMessage(
@@ -134,7 +133,9 @@ class ManagementListPageState extends State<ManagementListPage> {
         height: MediaQuery.of(context).size.height,
         child: Column(
           children: [
-            TopBar(),
+            TopBar(
+              title: _title,
+            ),
             Expanded(
               child: Observer(
                 builder: (_) => ListView.separated(
@@ -200,14 +201,14 @@ class ManagementListPageState extends State<ManagementListPage> {
     var response = await showDialog(
         context: context,
         builder: (context) {
-          return TransactionAuthDialog(
-              msg: 'Confirma exclusão?');
+          return TransactionAuthDialog(msg: 'Confirma exclusão?');
         });
     if (response == true) {
       if (_controller.associateds.length == 1) {
         asuka.showSnackBar(
           SnackBar(
-            content: const Text('Deve haver pelo menos um Administrador cadastrado.'),
+            content: const Text(
+                'Deve haver pelo menos um Administrador cadastrado.'),
           ),
         );
       } else {

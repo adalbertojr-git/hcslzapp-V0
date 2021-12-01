@@ -17,7 +17,6 @@ const String _labelUnknown =
     'Houve um erro desconhecido ao executar a transação.';
 const String _title = 'Associados';
 
-
 class PaymentListPage extends StatefulWidget {
   final String _selectedProfile;
 
@@ -57,8 +56,8 @@ class _PaymentListPageState extends State<PaymentListPage> {
                     break;
                   default:
                     if (snapshot.hasError) {
-                      return CenteredMessage(title: _title,
-                          message: snapshot.error.toString());
+                      return CenteredMessage(
+                          title: _title, message: snapshot.error.toString());
                     } else {
                       if (snapshot.data == null)
                         return CenteredMessage(
@@ -112,7 +111,9 @@ class _PaymentListPageState extends State<PaymentListPage> {
         height: MediaQuery.of(context).size.height,
         child: Column(
           children: [
-            TopBar(),
+            TopBar(
+              title: _title,
+            ),
             MyTextFormField(
               textEditingController: _controller.nameCtrl,
               label: labelNamePayment,

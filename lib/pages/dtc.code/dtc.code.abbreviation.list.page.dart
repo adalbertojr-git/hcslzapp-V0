@@ -9,7 +9,7 @@ import 'package:hcslzapp/controllers/dtc.code.abbreviation.list.controller.dart'
 import 'package:hcslzapp/models/dtc.code.abbreviation.dart';
 
 const String _labelNotExists =
-    'Não existem abreviaturas de códigos DTC cadastradas.';
+    'Não existem abreviaturas cadastradas.';
 const String _labelUnknown =
     'Houve um erro desconhecido ao executar a transação.';
 const String _title = 'Abreviaturas';

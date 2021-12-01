@@ -35,7 +35,7 @@ const String _labelAdministration = 'Administração';
 const String _labelAdministrationDescr = 'Administradores do App';
 const String _labelAssociated = 'Associado';
 const String _pathAssociatedImage = 'assets/imgs/user.png';
-const String _labelPayment = 'Financeiro';
+const String _labelPayment = 'Mensalidades';
 const String _pathPaymentImage = 'assets/imgs/financeiro.png';
 const String _labelDigitalIdentity = 'Carteira Harley Club';
 const String _pathDigitalIdentityImage = 'assets/imgs/carteirad.png';
@@ -50,7 +50,7 @@ const String _pathAboutHarleyClubImage = 'assets/imgs/logo.png';
 
 const List<String> _listAdmScreens = [
   "Associados",
-  "Financeiro",
+  "Mensalidades",
   "Eventos",
   "Parcerias",
   //"Boutique",

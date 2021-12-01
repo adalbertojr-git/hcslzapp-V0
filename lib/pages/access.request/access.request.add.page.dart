@@ -8,6 +8,8 @@ import 'package:hcslzapp/components/my.text.form.field.dart';
 import 'package:hcslzapp/components/top.bar.dart';
 import 'package:hcslzapp/controllers/access.request.controller.dart';
 
+const String _title = 'Primeiro acesso?';
+
 class AccessRequestAddPage extends StatefulWidget {
   @override
   _AccessRequestAddPageState createState() => _AccessRequestAddPageState();
@@ -45,7 +47,9 @@ class _AccessRequestAddPageState extends State<AccessRequestAddPage> {
         child: SingleChildScrollView(
           child: Column(
             children: <Widget>[
-              TopBar(),
+              TopBar(
+                title: _title,
+              ),
               MyTextFormField(
                 textEditingController: _controller.nameCtrl,
                 hint: hintName,

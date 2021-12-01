@@ -14,6 +14,7 @@ import 'package:mask_text_input_formatter/mask_text_input_formatter.dart';
 import 'package:asuka/asuka.dart' as asuka;
 
 const String _pathNoImage = 'assets/imgs/noImage.png';
+const String _title = 'Parceria';
 
 class PartnershipAddPage extends StatefulWidget {
   final Partnership partnership;
@@ -50,7 +51,11 @@ class _PartnershipAddPageState extends State<PartnershipAddPage> {
           child: SingleChildScrollView(
             child: Column(
               children: <Widget>[
-                TopBar(),
+                TopBar(
+                  title: widget.partnership == null
+                      ? 'Adicionar ' + _title
+                      : 'Editar ' + _title,
+                ),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [

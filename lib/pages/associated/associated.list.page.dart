@@ -16,7 +16,6 @@ const String _labelUnknown =
 const String _title = 'Associados';
 
 class AssociatedListPage extends StatefulWidget {
-
   @override
   State<StatefulWidget> createState() {
     return AssociatedListPageState();
@@ -51,8 +50,10 @@ class AssociatedListPageState extends State<AssociatedListPage> {
                   break;
                 default:
                   if (snapshot.hasError) {
-                    return CenteredMessage(title: _title,
-                        message: snapshot.error.toString(),);
+                    return CenteredMessage(
+                      title: _title,
+                      message: snapshot.error.toString(),
+                    );
                   } else {
                     if (snapshot.data == null)
                       return CenteredMessage(
@@ -93,7 +94,9 @@ class AssociatedListPageState extends State<AssociatedListPage> {
         height: MediaQuery.of(context).size.height,
         child: Column(
           children: [
-            TopBar(),
+            TopBar(
+              title: _title,
+            ),
             MyTextFormField(
               textEditingController: _controller.nameCtrl,
               label: labelNamePayment,

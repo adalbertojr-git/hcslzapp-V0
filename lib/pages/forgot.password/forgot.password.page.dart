@@ -7,6 +7,8 @@ import 'package:hcslzapp/components/my.text.form.field.dart';
 import 'package:hcslzapp/components/top.bar.dart';
 import 'package:hcslzapp/controllers/forgot.password.controller.dart';
 
+const String _title = 'Esqueceu a senha?';
+
 class ForgotPasswordPage extends StatefulWidget {
   @override
   _ForgotPasswordPageState createState() => _ForgotPasswordPageState();
@@ -32,7 +34,8 @@ class _ForgotPasswordPageState extends State<ForgotPasswordPage> {
     );
   }
 
-  _widgets(BuildContext context) => Container(
+  _widgets(BuildContext context) =>
+      Container(
         decoration: BoxDecoration(
           gradient: LinearGradient(
             colors: [Colors.white30, Colors.deepOrange],
@@ -40,11 +43,14 @@ class _ForgotPasswordPageState extends State<ForgotPasswordPage> {
             end: FractionalOffset.bottomRight,
           ),
         ),
-        height: MediaQuery.of(context).size.height,
+        height: MediaQuery
+            .of(context)
+            .size
+            .height,
         child: SingleChildScrollView(
           child: Column(
             children: <Widget>[
-              TopBar(),
+              TopBar(title: _title,),
               MyTextFormField(
                 textEditingController: _controller.emailForgotPswCtrl,
                 hint: hintEmail,
@@ -72,7 +78,7 @@ class _ForgotPasswordPageState extends State<ForgotPasswordPage> {
                   text: const TextSpan(
                     text:
                     'Atenção: Você receberá um código no email informado, o qual ' +
-                    ' deverá ser utilizado para geração de nova senha. Verifique ' +
+                        ' deverá ser utilizado para geração de nova senha. Verifique ' +
                         'também sua caixa de Spam.',
                     style: const TextStyle(
                       fontSize: 12.0,

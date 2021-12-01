@@ -16,8 +16,7 @@ const String _labelNotExists =
     'Não existem pagamentos registrados para o associado.';
 const String _labelUnknown =
     'Houve um erro desconhecido ao executar a transação.';
-const String _title = 'Financeiro';
-
+const String _title = 'Mensalidades';
 
 class PaymentAssociatedPage extends StatefulWidget {
   final String _selectedProfile;
@@ -56,8 +55,8 @@ class _PaymentAssociatedPageState extends State<PaymentAssociatedPage> {
                 break;
               default:
                 if (snapshot.hasError) {
-                  return CenteredMessage(title: _title,
-                      message: snapshot.error.toString());
+                  return CenteredMessage(
+                      title: _title, message: snapshot.error.toString());
                 } else {
                   if (snapshot.data == null)
                     return CenteredMessage(
@@ -75,8 +74,8 @@ class _PaymentAssociatedPageState extends State<PaymentAssociatedPage> {
                     return widget._selectedProfile == ADMIN
                         ? _buildListView()
                         : CenteredMessage(
-                      title: _title,
-                      message: _labelNotExists,
+                            title: _title,
+                            message: _labelNotExists,
                           );
                 }
             } //switch (snapshot.connectionState)
@@ -131,7 +130,9 @@ class _PaymentAssociatedPageState extends State<PaymentAssociatedPage> {
         height: MediaQuery.of(context).size.height,
         child: Column(
           children: [
-            TopBar(title: 'Financeiro'),
+            TopBar(
+              title: _title,
+            ),
             Expanded(
               child: Observer(
                 builder: (_) => ListView.separated(
@@ -238,8 +239,7 @@ class _PaymentAssociatedPageState extends State<PaymentAssociatedPage> {
     var response = await showDialog(
         context: context,
         builder: (context) {
-          return TransactionAuthDialog(
-              msg: 'Confirma exclusão?');
+          return TransactionAuthDialog(msg: 'Confirma exclusão?');
         });
     if (response == true) {
       _controller.deleteById(_controller.payments[i]).then((value) {

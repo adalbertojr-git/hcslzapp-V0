@@ -14,8 +14,7 @@ const String _labelUnknown =
     'Houve um erro desconhecido ao executar a transação.';
 const String _title = 'Parcerias';
 
-
-class PartnershipListAdmPage  extends StatelessWidget {
+class PartnershipListAdmPage extends StatelessWidget {
   PartnershipListController _controller = PartnershipListController();
 
   @override
@@ -32,8 +31,8 @@ class PartnershipListAdmPage  extends StatelessWidget {
                 break;
               default:
                 if (snapshot.hasError) {
-                  return CenteredMessage(title: _title,
-                      message: snapshot.error.toString());
+                  return CenteredMessage(
+                      title: _title, message: snapshot.error.toString());
                 } else {
                   if (snapshot.data == null)
                     return CenteredMessage(
@@ -58,21 +57,21 @@ class PartnershipListAdmPage  extends StatelessWidget {
         ),
         floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
         floatingActionButton: Button(
-          icon: Icons.add,
-          onClick: () {
-            final Future<Partnership> future = Navigator.push(
-              context,
-              MaterialPageRoute(builder: (context) => PartnershipAddPage(null)),
-            );
-            future.then(
-                  (partnership) {
-                if (partnership != null) {
-                  _controller.partnerships.add(partnership);
-                }
-              },
-            );
-          }
-        ),
+            icon: Icons.add,
+            onClick: () {
+              final Future<Partnership> future = Navigator.push(
+                context,
+                MaterialPageRoute(
+                    builder: (context) => PartnershipAddPage(null)),
+              );
+              future.then(
+                (partnership) {
+                  if (partnership != null) {
+                    _controller.partnerships.add(partnership);
+                  }
+                },
+              );
+            }),
       );
 
   _widgets(BuildContext context) => Container(
@@ -86,7 +85,9 @@ class PartnershipListAdmPage  extends StatelessWidget {
         height: MediaQuery.of(context).size.height,
         child: Column(
           children: [
-            TopBar(),
+            TopBar(
+              title: _title,
+            ),
             Expanded(
               child: Observer(
                 builder: (_) => ListView.separated(
@@ -165,8 +166,7 @@ class PartnershipListAdmPage  extends StatelessWidget {
     var response = await showDialog(
         context: context,
         builder: (context) {
-          return TransactionAuthDialog(
-              msg: 'Confirma exclusão?');
+          return TransactionAuthDialog(msg: 'Confirma exclusão?');
         });
     if (response == true) {
       _controller.deleteById(_controller.partnerships[i]).then((value) {

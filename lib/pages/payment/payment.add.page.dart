@@ -11,13 +11,16 @@ import 'package:hcslzapp/models/payment.dart';
 import 'package:mask_text_input_formatter/mask_text_input_formatter.dart';
 import 'package:asuka/asuka.dart' as asuka;
 
+const String _title = 'Adicionar Mensalidade(s)';
+
 class PaymentAddPage extends StatefulWidget {
   final Payment _payment;
   final List<String> _years;
   final String _selectedProfile;
   final Associated _associated;
 
-  PaymentAddPage(this._selectedProfile, this._payment, this._years, this._associated);
+  PaymentAddPage(
+      this._selectedProfile, this._payment, this._years, this._associated);
 
   @override
   _PaymentAddAddState createState() => _PaymentAddAddState();
@@ -52,7 +55,9 @@ class _PaymentAddAddState extends State<PaymentAddPage> {
         child: SingleChildScrollView(
           child: Column(
             children: <Widget>[
-              TopBar(),
+              TopBar(
+                title: _title,
+              ),
               Container(
                 width: 200.0,
                 child: Observer(

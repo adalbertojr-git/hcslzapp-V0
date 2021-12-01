@@ -13,8 +13,7 @@ const String _labelNotExists =
     'Não existem associados cadastrados. Confira as requisições de acesso.';
 const String _labelUnknown =
     'Houve um erro desconhecido ao executar a transação.';
-const String _title = 'Associados';
-
+const String _title = 'Adicionar Administrador';
 
 class ManagementAddPage extends StatefulWidget {
   @override
@@ -51,8 +50,8 @@ class ManagementAddPageState extends State<ManagementAddPage> {
                   break;
                 default:
                   if (snapshot.hasError) {
-                    return CenteredMessage(title: _title,
-                        message: snapshot.error.toString());
+                    return CenteredMessage(
+                        title: _title, message: snapshot.error.toString());
                   } else {
                     if (snapshot.data == null)
                       return CenteredMessage(
@@ -98,7 +97,9 @@ class ManagementAddPageState extends State<ManagementAddPage> {
         height: MediaQuery.of(context).size.height,
         child: Column(
           children: [
-            TopBar(),
+            TopBar(
+              title: _title,
+            ),
             Expanded(
               child: Observer(
                 builder: (_) => ListView.separated(
