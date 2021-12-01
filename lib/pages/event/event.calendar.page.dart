@@ -278,7 +278,7 @@ class EventCalendarPageState extends State<EventCalendarPage>
     await showDialog(
         context: context,
         builder: (context) => AlertDialog(
-              backgroundColor: Colors.deepOrange[300],
+              backgroundColor: Colors.deepOrange[200],
               title: Container(
                 alignment: Alignment.topLeft,
                 child: Text(
