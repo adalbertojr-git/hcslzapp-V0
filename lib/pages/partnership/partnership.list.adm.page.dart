@@ -166,7 +166,7 @@ class PartnershipListAdmPage extends StatelessWidget {
     var response = await showDialog(
         context: context,
         builder: (context) {
-          return TransactionAuthDialog(msg: 'Confirma exclusão?');
+          return TransactionAuthDialog(msg: 'Confirma a exclusão?');
         });
     if (response == true) {
       _controller.deleteById(_controller.partnerships[i]).then((value) {

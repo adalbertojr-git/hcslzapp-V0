@@ -278,7 +278,7 @@ class EventCalendarPageState extends State<EventCalendarPage>
     await showDialog(
         context: context,
         builder: (context) => AlertDialog(
-              backgroundColor: Colors.white70,
+              backgroundColor: Colors.deepOrange[300],
               title: Container(
                 alignment: Alignment.topLeft,
                 child: Text(
@@ -392,7 +392,7 @@ class EventCalendarPageState extends State<EventCalendarPage>
     var response = await showDialog(
         context: context,
         builder: (context) {
-          return TransactionAuthDialog(msg: 'Confirma a exclusão do evento?');
+          return TransactionAuthDialog(msg: 'Confirma a exclusão?');
         });
     if (response == true) {
       var event = _controller.selectedEvents[i] as Event;

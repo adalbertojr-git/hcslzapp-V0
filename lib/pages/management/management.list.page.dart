@@ -201,7 +201,7 @@ class ManagementListPageState extends State<ManagementListPage> {
     var response = await showDialog(
         context: context,
         builder: (context) {
-          return TransactionAuthDialog(msg: 'Confirma exclusão?');
+          return TransactionAuthDialog(msg: 'Confirma a exclusão?');
         });
     if (response == true) {
       if (_controller.associateds.length == 1) {

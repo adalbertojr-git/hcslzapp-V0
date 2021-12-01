@@ -239,7 +239,7 @@ class _PaymentAssociatedPageState extends State<PaymentAssociatedPage> {
     var response = await showDialog(
         context: context,
         builder: (context) {
-          return TransactionAuthDialog(msg: 'Confirma exclusão?');
+          return TransactionAuthDialog(msg: 'Confirma a exclusão?');
         });
     if (response == true) {
       _controller.deleteById(_controller.payments[i]).then((value) {
