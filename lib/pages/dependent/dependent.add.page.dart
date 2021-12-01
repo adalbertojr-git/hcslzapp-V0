@@ -9,6 +9,8 @@ import 'package:hcslzapp/components/my.text.form.field.dart';
 import 'package:hcslzapp/models/dependent.dart';
 import 'package:mask_text_input_formatter/mask_text_input_formatter.dart';
 
+const String _title = 'Dependente';
+
 class DependentAddPage extends StatefulWidget {
   final Dependent dependent;
 
@@ -45,7 +47,11 @@ class _DependentAddPageState extends State<DependentAddPage> {
           child: SingleChildScrollView(
             child: Column(
               children: <Widget>[
-                TopBar(),
+                TopBar(
+                  title: widget.dependent == null
+                      ? 'Adicionar ' + _title
+                      : 'Editar ' + _title,
+                ),
                 Observer(
                   builder: (_) {
                     return MyTextFormField(

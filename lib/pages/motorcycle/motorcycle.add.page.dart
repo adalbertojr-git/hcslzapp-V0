@@ -8,6 +8,8 @@ import 'package:hcslzapp/controllers/motorcycle.controller.dart';
 import 'package:hcslzapp/models/motorcycle.dart';
 import 'package:mask_text_input_formatter/mask_text_input_formatter.dart';
 
+const String _title = 'Motocicleta';
+
 class MotorcycleAddPage extends StatefulWidget {
   final Motorcycle motorcycle;
 
@@ -44,7 +46,11 @@ class _MotorcycleAddPageState extends State<MotorcycleAddPage> {
         child: SingleChildScrollView(
           child: Column(
             children: <Widget>[
-              TopBar(),
+              TopBar(
+                title: widget.motorcycle == null
+                    ? 'Adicionar ' + _title
+                    : 'Editar ' + _title,
+              ),
               Observer(
                 builder: (_) {
                   return MyTextFormField(

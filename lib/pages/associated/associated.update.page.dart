@@ -27,7 +27,7 @@ const String _labelNotExists =
 const String _labelUnknown =
     'Houve um erro desconhecido ao executar a transação.';
 const String _pathNoImage = 'assets/imgs/noImage.png';
-const String _title = 'Associado';
+const String _title = 'Editar Associado';
 
 class AssociatedUpdatePage extends StatefulWidget {
   final int _associatedId;
@@ -66,8 +66,8 @@ class _AssociatedUpdatePageState extends State<AssociatedUpdatePage> {
                   break;
                 default:
                   if (snapshot.hasError) {
-                    return CenteredMessage(title: _title,
-                        message: snapshot.error.toString());
+                    return CenteredMessage(
+                        title: _title, message: snapshot.error.toString());
                   } else {
                     if (snapshot.data == null)
                       return CenteredMessage(
@@ -112,7 +112,9 @@ class _AssociatedUpdatePageState extends State<AssociatedUpdatePage> {
         child: SingleChildScrollView(
           child: Column(
             children: <Widget>[
-              TopBar(title: 'Associado'),
+              TopBar(
+                title: _title,
+              ),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
