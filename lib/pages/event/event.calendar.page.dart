@@ -12,6 +12,9 @@ import 'package:table_calendar/table_calendar.dart';
 import 'package:hcslzapp/models/event.dart';
 import 'package:asuka/asuka.dart' as asuka;
 
+const String _labelAddEvent = 'Adicionar Evento';
+const String _labelEditEvent = 'Editar Evento';
+
 class EventCalendarPage extends StatefulWidget {
   final String _selectedProfile;
 
@@ -72,7 +75,9 @@ class EventCalendarPageState extends State<EventCalendarPage>
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
-              TopBar(title: 'Eventos',),
+              TopBar(
+                title: 'Eventos',
+              ),
               _buildTableCalendarWithBuilders(),
               Expanded(child: _buildEventList()),
             ],
@@ -276,9 +281,12 @@ class EventCalendarPageState extends State<EventCalendarPage>
               backgroundColor: Colors.white70,
               title: Container(
                 alignment: Alignment.topLeft,
-                child: const Text(
-                  'Evento',
-                  style: TextStyle(fontSize: 15.0),
+                child: Text(
+                  event == null ? _labelAddEvent : _labelEditEvent,
+                  style: TextStyle(
+                    fontSize: 15.0,
+                    color: Colors.black,
+                  ),
                 ),
               ),
               content: MyTextFormField(
