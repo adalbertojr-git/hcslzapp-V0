@@ -103,7 +103,7 @@ class _DashboardPageState extends State<DashboardPage> {
       AssociatedListPage(),
       PaymentListPage(_controller.selectedProfile),
       EventCalendarPage(_controller.selectedProfile),
-      PartnershipListPage(_controller.selectedProfile),
+      PartnershipListAdmPage(),
     ];
     return Scaffold(
       appBar: _appBar(),

@@ -1,48 +1,20 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
-import 'package:hcslzapp/common/associated.profiles.dart';
-import 'package:hcslzapp/common/photo.image.provider.dart';
 import 'package:hcslzapp/components/button.dart';
 import 'package:hcslzapp/components/centered.message.dart';
 import 'package:hcslzapp/components/progress.dart';
-import 'dart:math';
 import 'package:hcslzapp/components/top.bar.dart';
 import 'package:hcslzapp/components/transaction.auth.dialog.dart';
 import 'package:hcslzapp/controllers/partnership.list.controller.dart';
 import 'package:hcslzapp/models/partnership.dart';
 import 'package:hcslzapp/pages/partnership/partnership.add.page.dart';
-import 'dart:io';
 import 'package:asuka/asuka.dart' as asuka;
-
-const SCALE_FRACTION = 0.2;
-const FULL_SCALE = 0.9;
-const PAGER_HEIGHT = 200.0;
 
 const String _labelUnknown =
     'Houve um erro desconhecido ao executar a transação.';
-const String _pathNoImage = 'assets/imgs/noImage.png';
 
-class PartnershipListPage extends StatefulWidget {
-  final String _selectedProfile;
-
-  PartnershipListPage(this._selectedProfile);
-
-  @override
-  _PartnershipListPageState createState() => _PartnershipListPageState();
-}
-
-class _PartnershipListPageState extends State<PartnershipListPage> {
+class PartnershipListAdmPage  extends StatelessWidget {
   PartnershipListController _controller = PartnershipListController();
-  double viewPortFraction = 0.5;
-
-  @override
-  void initState() {
-    _controller.pageController = PageController(
-      initialPage: _controller.currentPage,
-      viewportFraction: viewPortFraction,
-    );
-    super.initState();
-  }
 
   @override
   Widget build(BuildContext context) => Scaffold(
@@ -71,7 +43,7 @@ class _PartnershipListPageState extends State<PartnershipListPage> {
                       (a, b) => a.partner.compareTo(b.partner),
                     );
                   }
-                  return _widgets();
+                  return _widgets(context);
                 }
             } //switch (snapshot.connectionState)
             return CenteredMessage(
@@ -82,25 +54,23 @@ class _PartnershipListPageState extends State<PartnershipListPage> {
         floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
         floatingActionButton: Button(
           icon: Icons.add,
-          onClick: () => _add(),
+          onClick: () {
+            final Future<Partnership> future = Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => PartnershipAddPage(null)),
+            );
+            future.then(
+                  (partnership) {
+                if (partnership != null) {
+                  _controller.partnerships.add(partnership);
+                }
+              },
+            );
+          }
         ),
       );
 
-  _add() {
-    final Future<Partnership> future = Navigator.push(
-      context,
-      MaterialPageRoute(builder: (context) => PartnershipAddPage(null)),
-    );
-    future.then(
-      (partnership) {
-        if (partnership != null) {
-          _controller.partnerships.add(partnership);
-        }
-      },
-    );
-  }
-
-  _widgets() => Container(
+  _widgets(BuildContext context) => Container(
         decoration: BoxDecoration(
           gradient: LinearGradient(
             colors: [Colors.white30, Colors.deepOrange],
@@ -152,7 +122,7 @@ class _PartnershipListPageState extends State<PartnershipListPage> {
                                   Icons.delete,
                                 ),
                                 onTap: () {
-                                  _delete(i);
+                                  _delete(context, i);
                                 },
                               ),
                               GestureDetector(
@@ -186,7 +156,7 @@ class _PartnershipListPageState extends State<PartnershipListPage> {
         ),
       );
 
-  _delete(int i) async {
+  _delete(BuildContext context, int i) async {
     var response = await showDialog(
         context: context,
         builder: (context) {

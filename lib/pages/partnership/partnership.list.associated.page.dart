@@ -39,13 +39,14 @@ class _PartnershipListAssociatedPageState
       initialPage: _controller.currentPage,
       viewportFraction: viewPortFraction,
     );
+    _controller.getFuture();
     super.initState();
   }
 
   @override
   Widget build(BuildContext context) => Scaffold(
         body: FutureBuilder<List<Partnership>>(
-          future: _controller.getFuture(),
+          future: _controller.future,
           builder: (context, snapshot) {
             switch (snapshot.connectionState) {
               case ConnectionState.none:
