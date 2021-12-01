@@ -4,9 +4,10 @@ import 'hc.logo.dart';
 import 'package:asuka/asuka.dart' as asuka;
 
 class CenteredMessage extends StatefulWidget {
-  final String _message;
+  final String message;
+  final String title;
 
-  CenteredMessage(this._message);
+  CenteredMessage({this.title, this.message});
 
   @override
   _CenteredMessageState createState() => _CenteredMessageState();
@@ -22,7 +23,7 @@ class _CenteredMessageState extends State<CenteredMessage> {
   get _showMessage {
     asuka.showSnackBar(
       SnackBar(
-        content: Text(widget._message),
+        content: Text(widget.message),
       ),
     );
   }
@@ -40,7 +41,9 @@ class _CenteredMessageState extends State<CenteredMessage> {
       //color: Colors.red[400],
       child: Column(
         children: <Widget>[
-          TopBar(),
+          TopBar(
+            title: widget.title,
+          ),
           SizedBox(
             height: 50,
           ),

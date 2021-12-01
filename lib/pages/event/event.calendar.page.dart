@@ -72,7 +72,7 @@ class EventCalendarPageState extends State<EventCalendarPage>
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
-              TopBar(),
+              TopBar(title: 'Eventos',),
               _buildTableCalendarWithBuilders(),
               Expanded(child: _buildEventList()),
             ],

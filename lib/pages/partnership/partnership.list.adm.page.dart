@@ -12,6 +12,8 @@ import 'package:asuka/asuka.dart' as asuka;
 
 const String _labelUnknown =
     'Houve um erro desconhecido ao executar a transação.';
+const String _title = 'Parcerias';
+
 
 class PartnershipListAdmPage  extends StatelessWidget {
   PartnershipListController _controller = PartnershipListController();
@@ -30,11 +32,13 @@ class PartnershipListAdmPage  extends StatelessWidget {
                 break;
               default:
                 if (snapshot.hasError) {
-                  return CenteredMessage(snapshot.error.toString());
+                  return CenteredMessage(title: _title,
+                      message: snapshot.error.toString());
                 } else {
                   if (snapshot.data == null)
                     return CenteredMessage(
-                      _controller.errorMsg,
+                      title: _title,
+                      message: _controller.errorMsg,
                     );
                   if (snapshot.data.length > 0) {
                     _controller.init();
@@ -47,7 +51,8 @@ class PartnershipListAdmPage  extends StatelessWidget {
                 }
             } //switch (snapshot.connectionState)
             return CenteredMessage(
-              _labelUnknown,
+              title: _title,
+              message: _labelUnknown,
             );
           },
         ),

@@ -15,6 +15,8 @@ const String _labelNotExists =
     'Não existem associados cadastrados. Confira as requisições de acesso.';
 const String _labelUnknown =
     'Houve um erro desconhecido ao executar a transação.';
+const String _title = 'Associados';
+
 
 class PaymentListPage extends StatefulWidget {
   final String _selectedProfile;
@@ -55,11 +57,13 @@ class _PaymentListPageState extends State<PaymentListPage> {
                     break;
                   default:
                     if (snapshot.hasError) {
-                      return CenteredMessage(snapshot.error.toString());
+                      return CenteredMessage(title: _title,
+                          message: snapshot.error.toString());
                     } else {
                       if (snapshot.data == null)
                         return CenteredMessage(
-                          _controller.errorMsg,
+                          title: _title,
+                          message: _controller.errorMsg,
                         );
                       if (snapshot.data.length > 0) {
                         _controller.init();
@@ -70,12 +74,14 @@ class _PaymentListPageState extends State<PaymentListPage> {
                         return _widgets();
                       } else
                         return CenteredMessage(
-                          _labelNotExists,
+                          title: _title,
+                          message: _labelNotExists,
                         );
                     }
                 } //switch (snapshot.connectionState)
                 return CenteredMessage(
-                  _labelUnknown,
+                  title: _title,
+                  message: _labelUnknown,
                 );
               },
             ),

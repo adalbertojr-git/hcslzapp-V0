@@ -33,8 +33,8 @@ class TopBar extends StatelessWidget {
               this.title != null
                   ? Text(
                       this.title,
-                      style: TextStyle(fontSize: 16.0,
-                      fontWeight: FontWeight.bold),
+                      style: TextStyle(fontSize: 14.0,
+                      ),
                     )
                   : Container(),
               SizedBox(

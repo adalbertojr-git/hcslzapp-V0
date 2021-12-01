@@ -18,6 +18,8 @@ const String _labelNotExists =
 const String _labelUnknown =
     'Houve um erro desconhecido ao executar a transação.';
 const String _pathNoImage = 'assets/imgs/noImage.png';
+const String _title = 'Parcerias';
+
 
 class PartnershipListAssociatedPage extends StatefulWidget {
 
@@ -57,11 +59,13 @@ class _PartnershipListAssociatedPageState
                 break;
               default:
                 if (snapshot.hasError) {
-                  return CenteredMessage(snapshot.error.toString());
+                  return CenteredMessage(title: _title,
+                      message: snapshot.error.toString());
                 } else {
                   if (snapshot.data == null)
                     return CenteredMessage(
-                      _controller.errorMsg,
+                      title: _title,
+                      message: _controller.errorMsg,
                     );
                   if (snapshot.data.length > 0) {
                     _controller.init();
@@ -73,12 +77,14 @@ class _PartnershipListAssociatedPageState
                     return _widgets();
                   } else
                     return CenteredMessage(
-                      _labelNotExists,
+                      title: _title,
+                      message: _labelNotExists,
                     );
                 }
             } //switch (snapshot.connectionState)
             return CenteredMessage(
-              _labelUnknown,
+              title: _title,
+              message: _labelUnknown,
             );
           },
         ),
@@ -96,7 +102,7 @@ class _PartnershipListAssociatedPageState
         height: MediaQuery.of(context).size.height,
         child: Column(
           children: [
-            TopBar(),
+            TopBar(title: 'Parcerias',),
             Expanded(
               child: Observer(
                 builder: (_) => ListView(

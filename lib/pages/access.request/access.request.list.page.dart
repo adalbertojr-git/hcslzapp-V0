@@ -13,6 +13,7 @@ const String _labelNotExists =
     'Não existem requisições de acesso a serem aprovadas.';
 const String _labelUnknown =
     'Houve um erro desconhecido ao executar a transação.';
+const String _title = 'Requisições de Acesso';
 
 class AccessRequestListPage extends StatefulWidget {
   @override
@@ -49,11 +50,15 @@ class AccessRequestListPageState extends State<AccessRequestListPage> {
                   break;
                 default:
                   if (snapshot.hasError) {
-                    return CenteredMessage(snapshot.error.toString());
+                    return CenteredMessage(
+                      title: _title,
+                      message: snapshot.error.toString(),
+                    );
                   } else {
                     if (snapshot.data == null)
                       return CenteredMessage(
-                        _controller.errorMsg,
+                        title: _title,
+                        message: _controller.errorMsg,
                       );
                     if (snapshot.data.length > 0) {
                       _controller.init();
@@ -64,12 +69,14 @@ class AccessRequestListPageState extends State<AccessRequestListPage> {
                       return _widgets();
                     } else
                       return CenteredMessage(
-                        _labelNotExists,
+                        title: _title,
+                        message: _labelNotExists,
                       );
                   }
               } //switch (snapshot.connectionState)
               return CenteredMessage(
-                _labelUnknown,
+                title: _title,
+                message: _labelUnknown,
               );
             },
           ),
@@ -145,8 +152,7 @@ class AccessRequestListPageState extends State<AccessRequestListPage> {
     var response = await showDialog(
         context: context,
         builder: (context) {
-          return TransactionAuthDialog(
-              msg: 'Confirma exclusão?');
+          return TransactionAuthDialog(msg: 'Confirma exclusão?');
         });
     if (response == true) {
       _controller.deleteById(_controller.accessRequests[i]).then((value) {

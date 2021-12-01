@@ -19,7 +19,7 @@ class DtcCodeAccessNewModelsPage extends StatelessWidget {
           child: SingleChildScrollView(
             child: Column(
               children: <Widget>[
-                TopBar(),
+                TopBar(title: 'Códigos DTC a partir de 2005',),
                 Container(
                   color: Colors.white,
                   padding: EdgeInsets.all(20.0),

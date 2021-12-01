@@ -17,6 +17,7 @@ const String _labelUnknown =
     'Houve um erro desconhecido ao executar a transação.';
 const String _pathIdentity = 'assets/imgs/logo_carteirad.png';
 const String _pathNoImage = 'assets/imgs/noImage.png';
+const String _title = 'Carteira Digital Harley Club';
 
 class DigitalIdentityPage extends StatefulWidget {
   final Associated _associated;
@@ -32,8 +33,7 @@ class _DigitalIdentityPageState extends State<DigitalIdentityPage> {
   final double _fontSize = 14.0;
 
   @override
-  Widget build(BuildContext context) =>
-      Scaffold(
+  Widget build(BuildContext context) => Scaffold(
         body: FutureBuilder<List<DigitalIdentity>>(
           future: _controller.getFuture(widget._associated.id),
           builder: (context, snapshot) {
@@ -46,11 +46,13 @@ class _DigitalIdentityPageState extends State<DigitalIdentityPage> {
                 break;
               default:
                 if (snapshot.hasError) {
-                  return CenteredMessage(snapshot.error.toString());
+                  return CenteredMessage(
+                      title: _title, message: snapshot.error.toString());
                 } else {
                   if (snapshot.data == null)
                     return CenteredMessage(
-                      _controller.errorMsg,
+                      title: _title,
+                      message: _controller.errorMsg,
                     );
                   if (snapshot.data.length > 0) {
                     _controller.digitalIdentity = snapshot.data.first;
@@ -58,19 +60,20 @@ class _DigitalIdentityPageState extends State<DigitalIdentityPage> {
                     return _widgets();
                   } else
                     return CenteredMessage(
-                        _labelNotExists,
+                      title: _title,
+                      message: _labelNotExists,
                     );
                 }
             } //switch (snapshot.connectionState)
             return CenteredMessage(
-              _labelUnknown,
+              title: _title,
+              message: _labelUnknown,
             );
           },
         ),
       );
 
-  _widgets() =>
-      Container(
+  _widgets() => Container(
         decoration: BoxDecoration(
           gradient: LinearGradient(
             colors: [Colors.white30, Colors.deepOrange],
@@ -78,14 +81,13 @@ class _DigitalIdentityPageState extends State<DigitalIdentityPage> {
             end: FractionalOffset.bottomRight,
           ),
         ),
-        height: MediaQuery
-            .of(context)
-            .size
-            .height,
+        height: MediaQuery.of(context).size.height,
         child: SingleChildScrollView(
           child: Column(
             children: [
-              TopBar(),
+              TopBar(
+                title: _title,
+              ),
               Center(
                 child: _photo(),
               ),
@@ -189,8 +191,7 @@ class _DigitalIdentityPageState extends State<DigitalIdentityPage> {
         ),
       );
 
-  _photo() =>
-      Container(
+  _photo() => Container(
         height: 170.0,
         width: 170.0,
         padding: EdgeInsets.all(5.0),
@@ -207,12 +208,11 @@ class _DigitalIdentityPageState extends State<DigitalIdentityPage> {
         ),
       );
 
-  DecorationImage _loadPhoto() =>
-      DecorationImage(
-          image: widget._associated.photoUrl != null
-              ? NetworkImage(widget._associated.photoUrl)
-              : PhotoImageProvider().getImageProvider(
-            File(_pathNoImage),
-          ),
-          fit: BoxFit.fill);
+  DecorationImage _loadPhoto() => DecorationImage(
+      image: widget._associated.photoUrl != null
+          ? NetworkImage(widget._associated.photoUrl)
+          : PhotoImageProvider().getImageProvider(
+              File(_pathNoImage),
+            ),
+      fit: BoxFit.fill);
 }
