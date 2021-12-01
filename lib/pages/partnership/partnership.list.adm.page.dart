@@ -41,20 +41,13 @@ class _PartnershipListPageState extends State<PartnershipListPage> {
       initialPage: _controller.currentPage,
       viewportFraction: viewPortFraction,
     );
-    _controller.getFuture().then((value) {
-      if (value != null && value.isNotEmpty) {
-        _controller.setButtonVisibilty();
-      }
-    });
     super.initState();
   }
 
   @override
   Widget build(BuildContext context) => Scaffold(
         body: FutureBuilder<List<Partnership>>(
-          future: widget._selectedProfile == ADMIN
-              ? _controller.getFuture()
-              : _controller.future,
+          future: _controller.getFuture(),
           builder: (context, snapshot) {
             switch (snapshot.connectionState) {
               case ConnectionState.none:
@@ -77,9 +70,6 @@ class _PartnershipListPageState extends State<PartnershipListPage> {
                     _controller.partnerships.sort(
                       (a, b) => a.partner.compareTo(b.partner),
                     );
-                    if (widget._selectedProfile == ASSOCIATED) {
-                      _controller.getActivePartnerships;
-                    }
                   }
                   return _widgets();
                 }
@@ -90,21 +80,13 @@ class _PartnershipListPageState extends State<PartnershipListPage> {
           },
         ),
         floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
-        floatingActionButton: widget._selectedProfile == ADMIN
-            ? Observer(
-                builder: (_) => _controller.isHidedButton
-                    ? Container()
-                    : Button(
-                        icon: Icons.add,
-                        onClick: () {
-                          _add(context);
-                        },
-                      ),
-              )
-            : Container(),
+        floatingActionButton: Button(
+          icon: Icons.add,
+          onClick: () => _add(),
+        ),
       );
 
-  _add(BuildContext context) {
+  _add() {
     final Future<Partnership> future = Navigator.push(
       context,
       MaterialPageRoute(builder: (context) => PartnershipAddPage(null)),
@@ -118,10 +100,7 @@ class _PartnershipListPageState extends State<PartnershipListPage> {
     );
   }
 
-  _widgets() =>
-      widget._selectedProfile == ADMIN ? _listAdmin() : _listAssociated();
-
-  _listAdmin() => Container(
+  _widgets() => Container(
         decoration: BoxDecoration(
           gradient: LinearGradient(
             colors: [Colors.white30, Colors.deepOrange],
@@ -201,165 +180,6 @@ class _PartnershipListPageState extends State<PartnershipListPage> {
                   },
                   separatorBuilder: (_, int index) => const Divider(),
                 ),
-              ),
-            ),
-          ],
-        ),
-      );
-
-  _listAssociated() => Container(
-        padding: EdgeInsets.fromLTRB(5.0, 0.0, 5.0, 0.0),
-        decoration: BoxDecoration(
-          gradient: LinearGradient(
-            colors: [Colors.white30, Colors.deepOrange],
-            begin: FractionalOffset.topLeft,
-            end: FractionalOffset.bottomRight,
-          ),
-        ),
-        height: MediaQuery.of(context).size.height,
-        child: Column(
-          children: [
-            TopBar(),
-            Expanded(
-              child: Observer(
-                builder: (_) => ListView(
-                  children: <Widget>[
-                    Container(
-                      height: PAGER_HEIGHT,
-                      child: NotificationListener<ScrollNotification>(
-                        onNotification: (ScrollNotification notification) {
-                          if (notification is ScrollUpdateNotification) {
-                            setState(() {
-                              _controller.notificationListener();
-                            });
-                          }
-                          return false;
-                        },
-                        child: PageView.builder(
-                          onPageChanged: (pos) {
-                            _controller.onPageChanged(pos);
-                          },
-                          physics: BouncingScrollPhysics(),
-                          controller: _controller.pageController,
-                          itemCount: _controller.activePartnerships.length,
-                          itemBuilder: (context, index) {
-                            final scale = max(
-                              SCALE_FRACTION,
-                              (FULL_SCALE - (index - _controller.page).abs()) +
-                                  viewPortFraction,
-                            );
-                            return circleOffer(index, scale);
-                          },
-                        ),
-                      ),
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.all(5.0),
-                      child: Text(
-                        _controller.activePartnerships[_controller.currentPage]
-                            .partner,
-                        textAlign: TextAlign.center,
-                        style: TextStyle(
-                          fontSize: 25,
-                          fontWeight: FontWeight.bold,
-                        ),
-                      ),
-                    ),
-                    buildDetail()
-                  ],
-                ),
-              ),
-            ),
-          ],
-        ),
-      );
-
-  Widget circleOffer(int index, double scale) => Observer(
-        builder: (_) => Align(
-          alignment: Alignment.bottomCenter,
-          child: Container(
-            height: PAGER_HEIGHT * scale,
-            width: PAGER_HEIGHT * scale,
-            child: Card(
-              elevation: 15,
-              clipBehavior: Clip.antiAlias,
-              shape: CircleBorder(
-                  side: BorderSide(color: Colors.grey.shade200, width: 5)),
-              child: Container(
-                decoration: BoxDecoration(
-                  image: _loadPhoto(index),
-                ),
-              ),
-            ),
-          ),
-        ),
-      );
-
-  DecorationImage _loadPhoto(int index) => DecorationImage(
-      image: _controller.activePartnerships[index].photoUrl != null
-          ? NetworkImage(_controller.activePartnerships[index].photoUrl)
-          : PhotoImageProvider().getImageProvider(
-              File(_pathNoImage),
-            ),
-      fit: BoxFit.contain);
-
-  Widget buildDetail() => Observer(
-        builder: (_) => Container(
-          color: Colors.white70,
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: <Widget>[
-              buildUserInfo(),
-              Padding(
-                padding: EdgeInsets.symmetric(
-                  vertical: 15,
-                  horizontal: 15,
-                ),
-                child: Text(
-                  _controller
-                      .activePartnerships[_controller.currentPage].promotion,
-                  style: TextStyle(
-                    color: Colors.black,
-                    fontSize: 15,
-                  ),
-                ),
-              ),
-            ],
-          ),
-        ),
-      );
-
-  Widget buildUserInfo() => ListTile(
-        isThreeLine: true,
-        title: Text(
-          _controller.activePartnerships[_controller.currentPage].partner,
-          style: TextStyle(
-            color: Colors.black,
-            fontSize: 15,
-          ),
-        ),
-        subtitle: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Text(
-              'Endereço: ' +
-                  _controller
-                      .activePartnerships[_controller.currentPage].address,
-              style: TextStyle(
-                color: Colors.black,
-                fontSize: 15,
-              ),
-            ),
-            Text(
-              'Telefone(s): ' +
-                  _controller
-                      .activePartnerships[_controller.currentPage].phone1 +
-                  ' - ' +
-                  _controller
-                      .activePartnerships[_controller.currentPage].phone2,
-              style: TextStyle(
-                color: Colors.black,
-                fontSize: 15,
               ),
             ),
           ],

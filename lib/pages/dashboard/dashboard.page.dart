@@ -13,7 +13,7 @@ import 'package:hcslzapp/pages/associated/associated.list.page.dart';
 import 'package:hcslzapp/pages/boutique/boutique.list.page.dart';
 import 'package:hcslzapp/pages/event/event.calendar.page.dart';
 import 'package:hcslzapp/pages/management/management.list.page.dart';
-import 'package:hcslzapp/pages/partnership/partnership.list.page.dart';
+import 'package:hcslzapp/pages/partnership/partnership.list.adm.page.dart';
 import 'package:hcslzapp/pages/payment/payment.list.page.dart';
 import 'package:hcslzapp/pages/splash/splash.page.dart';
 
@@ -497,7 +497,7 @@ class _DashboardPageState extends State<DashboardPage> {
                   image: _pathPartnershipImage,
                   context: _gContext,
                   onClick: () {
-                    _controller.loadPartnershipListPage(
+                    _controller.loadPartnershipListAssociatedPage(
                       _gContext,
                     );
                   },

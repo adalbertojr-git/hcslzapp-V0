@@ -7,7 +7,8 @@ import 'package:hcslzapp/pages/associated/associated.update.page.dart';
 import 'package:hcslzapp/pages/digital.identity/digital.identity.page.dart';
 import 'package:hcslzapp/pages/dtc.code/dtc.code.dashboard.page.dart';
 import 'package:hcslzapp/pages/event/event.calendar.page.dart';
-import 'package:hcslzapp/pages/partnership/partnership.list.page.dart';
+import 'package:hcslzapp/pages/partnership/partnership.list.associated.page.dart';
+import 'package:hcslzapp/pages/partnership/partnership.list.adm.page.dart';
 import 'package:hcslzapp/pages/payment/payment.associated.page.dart';
 import 'package:mobx/mobx.dart';
 
@@ -88,13 +89,13 @@ abstract class DashboardControllerBase with Store {
     );
   }
 
-  loadPartnershipListPage(
+  loadPartnershipListAssociatedPage(
     BuildContext context,
   ) async {
     await Navigator.push(
       context,
       MaterialPageRoute(
-        builder: (context) => PartnershipListPage(this.selectedProfile),
+        builder: (context) => PartnershipListAssociatedPage(),
       ),
     );
   }
