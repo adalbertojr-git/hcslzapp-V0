@@ -112,8 +112,9 @@ class _AccessRequestAddPageState extends State<AccessRequestAddPage> {
                 child: RichText(
                   text: const TextSpan(
                     text:
-                        'Atenção: seu cadastro será analisado e liberado pela ' +
-                            'Diretoria HC. Entraremos em contato.',
+                        'Atenção: seu cadastro será liberado após análise da ' +
+                            'Diretoria. Aguarde contato no grupo oficial do ' +
+                            'Harley Club (WhatsApp) ou via email.',
                     style: const TextStyle(
                       fontSize: 12.0,
                       color: Colors.black87,
@@ -140,7 +141,8 @@ class _AccessRequestAddPageState extends State<AccessRequestAddPage> {
           if (value != null) {
             asuka.showSnackBar(
               SnackBar(
-                content: const Text('Requisição de acesso enviado com sucesso.'),
+                content:
+                    const Text('Requisição de acesso enviado com sucesso.'),
               ),
             );
             Navigator.of(context).pop();
