@@ -42,12 +42,9 @@ class _CenteredMessageState extends State<CenteredMessage> {
         children: <Widget>[
           TopBar(),
           SizedBox(
-            height: 80,
+            height: 50,
           ),
           HcLogo(0.0),
-          SizedBox(
-            height: 30.0,
-          ),
           Icon(
             Icons.warning_amber_sharp,
             size: 80,

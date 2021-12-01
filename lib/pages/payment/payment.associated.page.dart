@@ -12,6 +12,8 @@ import 'package:hcslzapp/models/payment.dart';
 import 'package:hcslzapp/pages/payment/payment.add.page.dart';
 import 'package:asuka/asuka.dart' as asuka;
 
+const String _labelNotExists =
+    'Não existem pagamentos registrados para o associado.';
 const String _labelUnknown =
     'Houve um erro desconhecido ao executar a transação.';
 
@@ -64,8 +66,13 @@ class _PaymentAssociatedPageState extends State<PaymentAssociatedPage> {
                     _controller.payments.sort(
                       (a, b) => b.year.compareTo(a.year),
                     );
-                  }
-                  return _buildListView();
+                    return _buildListView();
+                  } else
+                    return widget._selectedProfile == ADMIN
+                        ? _buildListView()
+                        : CenteredMessage(
+                            _labelNotExists,
+                          );
                 }
             } //switch (snapshot.connectionState)
             return CenteredMessage(
