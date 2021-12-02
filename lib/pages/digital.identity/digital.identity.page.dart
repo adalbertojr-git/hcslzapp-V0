@@ -17,7 +17,7 @@ const String _labelUnknown =
     'Houve um erro desconhecido ao executar a transação.';
 const String _pathIdentity = 'assets/imgs/logo_carteirad.png';
 const String _pathNoImage = 'assets/imgs/noImage.png';
-const String _title = 'Carteira Digital Harley Club';
+const String _title = 'Carteira Harley Club';
 
 class DigitalIdentityPage extends StatefulWidget {
   final Associated _associated;
