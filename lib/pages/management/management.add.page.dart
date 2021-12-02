@@ -11,6 +11,8 @@ import 'package:asuka/asuka.dart' as asuka;
 
 const String _labelNotExists =
     'Não existem associados cadastrados. Confira as requisições de acesso.';
+const String _labelAllAdmins =
+    'Todos os associados já estão com perfil de Administrador.';
 const String _labelUnknown =
     'Houve um erro desconhecido ao executar a transação.';
 const String _title = 'Adicionar Administrador';
@@ -61,10 +63,17 @@ class ManagementAddPageState extends State<ManagementAddPage> {
                     if (snapshot.data.length > 0) {
                       _controller.init();
                       _controller.loadNotAdmins(snapshot.data);
-                      _controller.listItems.sort(
-                        (a, b) => a.name.compareTo(b.name),
-                      );
-                      return _widgets();
+                      if (_controller.listItems.length > 0) {
+                        _controller.listItems.sort(
+                              (a, b) => a.name.compareTo(b.name),
+                        );
+                        return _widgets();
+                      }
+                      else
+                        return CenteredMessage(
+                          title: _title,
+                          message: _labelAllAdmins,
+                        );
                     } else
                       return CenteredMessage(
                         title: _title,
