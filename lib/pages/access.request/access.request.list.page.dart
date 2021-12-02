@@ -99,7 +99,9 @@ class AccessRequestListPageState extends State<AccessRequestListPage> {
         height: MediaQuery.of(context).size.height,
         child: Column(
           children: [
-            TopBar(),
+            TopBar(
+              title: _title,
+            ),
             Observer(
               builder: (_) => ListView.separated(
                 shrinkWrap: true,
