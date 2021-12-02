@@ -13,11 +13,9 @@ class Button extends StatelessWidget {
         mini: mini,
         heroTag: heroTag,
         backgroundColor: Colors.black,
-        //backgroundColor: Colors.deepOrangeAccent[100],
         child: Icon(
           icon,
           color: Colors.deepOrangeAccent[100],
-          //color: Colors.black,
           size: 35,
         ),
         onPressed: () async {

@@ -304,10 +304,10 @@ class EventCalendarPageState extends State<EventCalendarPage>
                       child: FloatingActionButton(
                         heroTag: 'btnCancel',
                         mini: true,
-                        backgroundColor: Colors.deepOrangeAccent[100],
+                        backgroundColor: Colors.black,
                         child: Icon(
                           Icons.cancel_outlined,
-                          color: Colors.black,
+                          color: Colors.deepOrangeAccent[100],
                         ),
                         onPressed: () {
                           Navigator.pop(context);
@@ -319,10 +319,10 @@ class EventCalendarPageState extends State<EventCalendarPage>
                       child: FloatingActionButton(
                         heroTag: 'btnSave',
                         mini: true,
-                        backgroundColor: Colors.deepOrangeAccent[100],
+                        backgroundColor: Colors.black,
                         child: Icon(
                           Icons.save,
-                          color: Colors.black,
+                          color: Colors.deepOrangeAccent[100],
                         ),
                         onPressed: () {
                           if (event == null) {
