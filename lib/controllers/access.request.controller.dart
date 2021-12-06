@@ -4,6 +4,8 @@ import 'package:hcslzapp/models/access.request.dart';
 import 'package:hcslzapp/repositories/access.request.repo.dart';
 import 'package:mobx/mobx.dart';
 
+import 'item.model.dart';
+
 part 'access.request.controller.g.dart';
 
 class AccessRequestController = AccessRequestControllerBase
@@ -44,6 +46,12 @@ abstract class AccessRequestControllerBase with Store {
 
   @observable
   ObservableList accessRequests = [].asObservable();
+
+  @observable
+  var listItems = ObservableList<ItemModel>();
+
+  @observable
+  var ids = ObservableList<int>();
 
   @observable
   String errorMsg;
@@ -109,6 +117,18 @@ abstract class AccessRequestControllerBase with Store {
     );
   }
 
+  loadRequests(List<AccessRequest> list) {
+    for (AccessRequest accessRequest in list) {
+      listItems.add(
+        ItemModel(
+            id: accessRequest.id,
+            name: accessRequest.name,
+            email: accessRequest.email,
+            check: false),
+      );
+    }
+  }
+
   bool get hasErrors =>
       hasErrorName ||
       hasErrorUser ||
@@ -169,7 +189,8 @@ abstract class AccessRequestControllerBase with Store {
   }
 
   String validateConfEmail() {
-    const String _labelConfEmailRequired = 'Confirmação do email é obrigatória!!!';
+    const String _labelConfEmailRequired =
+        'Confirmação do email é obrigatória!!!';
     const String _labelEmailNotValid = 'Emails informados não conferem!!!';
 
     if (formController.confEmail.isEmpty) {
@@ -182,8 +203,7 @@ abstract class AccessRequestControllerBase with Store {
 
   String validatePassword() {
     const String _labelPswRequired = 'Senha é obrigatória!!!';
-    const String _labelPswLenght =
-        'Senha deve ter no mínimo 4 caracteres!!!';
+    const String _labelPswLenght = 'Senha deve ter no mínimo 4 caracteres!!!';
 
     if (formController.password.isEmpty) {
       return _labelPswRequired;
@@ -194,7 +214,8 @@ abstract class AccessRequestControllerBase with Store {
   }
 
   String validateConfPassword() {
-    const String _labelConfPswRequired = 'Confirmação da senha é obrigatória!!!';
+    const String _labelConfPswRequired =
+        'Confirmação da senha é obrigatória!!!';
     const String _labelPswNotValid = 'Senhas informadas não conferem!!!';
 
     if (formController.confPassword.isEmpty) {

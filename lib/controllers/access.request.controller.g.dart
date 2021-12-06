@@ -182,6 +182,36 @@ mixin _$AccessRequestController on AccessRequestControllerBase, Store {
     });
   }
 
+  final _$listItemsAtom = Atom(name: 'AccessRequestControllerBase.listItems');
+
+  @override
+  ObservableList<ItemModel> get listItems {
+    _$listItemsAtom.reportRead();
+    return super.listItems;
+  }
+
+  @override
+  set listItems(ObservableList<ItemModel> value) {
+    _$listItemsAtom.reportWrite(value, super.listItems, () {
+      super.listItems = value;
+    });
+  }
+
+  final _$idsAtom = Atom(name: 'AccessRequestControllerBase.ids');
+
+  @override
+  ObservableList<int> get ids {
+    _$idsAtom.reportRead();
+    return super.ids;
+  }
+
+  @override
+  set ids(ObservableList<int> value) {
+    _$idsAtom.reportWrite(value, super.ids, () {
+      super.ids = value;
+    });
+  }
+
   final _$errorMsgAtom = Atom(name: 'AccessRequestControllerBase.errorMsg');
 
   @override
@@ -300,6 +330,8 @@ accessRequestListFuture: ${accessRequestListFuture},
 accessRequestPost: ${accessRequestPost},
 checkFuture: ${checkFuture},
 accessRequests: ${accessRequests},
+listItems: ${listItems},
+ids: ${ids},
 errorMsg: ${errorMsg},
 future: ${future}
     ''';

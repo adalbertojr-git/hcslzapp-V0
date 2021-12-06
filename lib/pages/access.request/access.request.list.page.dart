@@ -6,6 +6,7 @@ import 'package:hcslzapp/components/progress.dart';
 import 'package:hcslzapp/components/top.bar.dart';
 import 'package:hcslzapp/components/transaction.auth.dialog.dart';
 import 'package:hcslzapp/controllers/access.request.controller.dart';
+import 'package:hcslzapp/controllers/item.model.dart';
 import 'package:hcslzapp/models/access.request.dart';
 import 'package:asuka/asuka.dart' as asuka;
 
@@ -62,8 +63,12 @@ class AccessRequestListPageState extends State<AccessRequestListPage> {
                       );
                     if (snapshot.data.length > 0) {
                       _controller.init();
-                      _controller.accessRequests.addAll(snapshot.data);
+/*                      _controller.accessRequests.addAll(snapshot.data);
                       _controller.accessRequests.sort(
+                        (a, b) => a.name.compareTo(b.name),
+                      );*/
+                      _controller.loadRequests(snapshot.data);
+                      _controller.listItems.sort(
                         (a, b) => a.name.compareTo(b.name),
                       );
                       return _widgets();
@@ -102,10 +107,43 @@ class AccessRequestListPageState extends State<AccessRequestListPage> {
             TopBar(
               title: _title,
             ),
+            Expanded(
+              child: Observer(
+                builder: (_) => ListView.separated(
+                  shrinkWrap: true,
+                  itemCount: _controller.listItems.length,
+                  itemBuilder: (_, int i) {
+                    return CheckboxWidget(
+                      item: _controller.listItems[i],
+                      controller: _controller,
+                    );
+                  },
+                  separatorBuilder: (_, int index) => const Divider(),
+                ),
+              ),
+            ),
+          ],
+        ),
+      );
+
+  _widgets2() => Container(
+        decoration: BoxDecoration(
+          gradient: LinearGradient(
+            colors: [Colors.white30, Colors.deepOrange],
+            begin: FractionalOffset.topLeft,
+            end: FractionalOffset.bottomRight,
+          ),
+        ),
+        height: MediaQuery.of(context).size.height,
+        child: Column(
+          children: [
+            TopBar(
+              title: _title,
+            ),
             Observer(
               builder: (_) => ListView.separated(
                 shrinkWrap: true,
-                itemCount: _controller.accessRequests.length,
+                itemCount: _controller.listItems.length,
                 itemBuilder: (_, int i) {
                   return Container(
                     decoration: BoxDecoration(
@@ -121,8 +159,8 @@ class AccessRequestListPageState extends State<AccessRequestListPage> {
                       ],
                     ),
                     child: ListTile(
-                      title: Text(_controller.accessRequests[i].name),
-                      subtitle: Text(_controller.accessRequests[i].email),
+                      title: Text(_controller.listItems[i].name),
+                      subtitle: Text(_controller.listItems[i].email),
                       leading: CircleAvatar(
                         child: Icon(Icons.person),
                         backgroundColor: Colors.white,
@@ -151,20 +189,20 @@ class AccessRequestListPageState extends State<AccessRequestListPage> {
       );
 
   _delete(int i) async {
-    var response = await showDialog(
+/*    var response = await showDialog(
         context: context,
         builder: (context) {
           return TransactionAuthDialog(msg: 'Confirma a exclusão?');
         });
     if (response == true) {
-      _controller.deleteById(_controller.accessRequests[i]).then((value) {
+      _controller.deleteById(_controller.listItems[i]).then((value) {
         if (value != null) {
           asuka.showSnackBar(
             SnackBar(
               content: const Text('Requisição de acesso excluída com sucesso.'),
             ),
           );
-          _controller.accessRequests.removeAt(i);
+          _controller.listItems.removeAt(i);
         } else {
           asuka.showSnackBar(
             SnackBar(
@@ -173,7 +211,7 @@ class AccessRequestListPageState extends State<AccessRequestListPage> {
           );
         }
       });
-    }
+    }*/
   }
 
   _check() {
@@ -194,6 +232,59 @@ class AccessRequestListPageState extends State<AccessRequestListPage> {
           );
         }
       },
+    );
+  }
+}
+
+class CheckboxWidget extends StatelessWidget {
+  const CheckboxWidget({Key key, this.item, this.controller}) : super(key: key);
+
+  final ItemModel item;
+  final AccessRequestController controller;
+
+  @override
+  Widget build(BuildContext context) {
+    return Observer(
+      builder: (_) => Container(
+        decoration: BoxDecoration(
+          color: Colors.white30,
+          shape: BoxShape.rectangle,
+          borderRadius: BorderRadius.circular(8.0),
+          boxShadow: <BoxShadow>[
+            BoxShadow(
+              color: Colors.black12,
+              blurRadius: 10.0,
+              offset: Offset(0.0, 5.0),
+            ),
+          ],
+        ),
+        child: CheckboxListTile(
+          controlAffinity: ListTileControlAffinity.leading,
+          title: Text(
+            item.name,
+            style: TextStyle(
+              fontWeight: FontWeight.bold,
+            ),
+          ),
+          subtitle: Text(item.email),
+          value: item.check,
+          onChanged: (bool value) {
+            item.check = value;
+            if (value) {
+              controller.ids.add(item.id);
+              controller.accessRequests.add(item);
+            } else {
+              controller.ids.remove(item.id);
+            }
+          },
+          secondary: GestureDetector(
+            child: Icon(
+              Icons.delete,
+            ),
+            onTap: () {},
+          ),
+        ),
+      ),
     );
   }
 }

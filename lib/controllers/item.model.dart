@@ -12,6 +12,7 @@ abstract class ItemModelBase with Store {
       this.phone,
       this.status,
       this.authenticate,
+      this.email,
       this.check});
 
   @observable
@@ -28,6 +29,9 @@ abstract class ItemModelBase with Store {
 
   @observable
   Authenticate authenticate;
+
+  @observable
+  String email;
 
   @observable
   bool check;

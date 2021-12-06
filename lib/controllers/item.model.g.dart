@@ -84,6 +84,21 @@ mixin _$ItemModel on ItemModelBase, Store {
     });
   }
 
+  final _$emailAtom = Atom(name: 'ItemModelBase.email');
+
+  @override
+  String get email {
+    _$emailAtom.reportRead();
+    return super.email;
+  }
+
+  @override
+  set email(String value) {
+    _$emailAtom.reportWrite(value, super.email, () {
+      super.email = value;
+    });
+  }
+
   final _$checkAtom = Atom(name: 'ItemModelBase.check');
 
   @override
@@ -121,6 +136,7 @@ name: ${name},
 phone: ${phone},
 status: ${status},
 authenticate: ${authenticate},
+email: ${email},
 check: ${check}
     ''';
   }
