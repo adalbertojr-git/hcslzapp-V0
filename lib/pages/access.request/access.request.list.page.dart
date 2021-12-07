@@ -126,7 +126,7 @@ class AccessRequestListPageState extends State<AccessRequestListPage> {
         ),
       );
 
-  _widgets2() => Container(
+  /*_widgets2() => Container(
         decoration: BoxDecoration(
           gradient: LinearGradient(
             colors: [Colors.white30, Colors.deepOrange],
@@ -187,15 +187,16 @@ class AccessRequestListPageState extends State<AccessRequestListPage> {
           ],
         ),
       );
-
-  _delete(int i) async {
-/*    var response = await showDialog(
+*/
+/*  delete(int i) async {
+    var response = await showDialog(
         context: context,
         builder: (context) {
           return TransactionAuthDialog(msg: 'Confirma a exclusão?');
         });
     if (response == true) {
-      _controller.deleteById(_controller.listItems[i]).then((value) {
+      _controller.accessRequests.add(_controller.listItems[i]);
+      _controller.deleteById(_controller.accessRequests[i]).then((value) {
         if (value != null) {
           asuka.showSnackBar(
             SnackBar(
@@ -211,8 +212,8 @@ class AccessRequestListPageState extends State<AccessRequestListPage> {
           );
         }
       });
-    }*/
-  }
+    }
+  }*/
 
   _check() {
     _controller.check().then(
@@ -281,10 +282,38 @@ class CheckboxWidget extends StatelessWidget {
             child: Icon(
               Icons.delete,
             ),
-            onTap: () {},
+            onTap: () {
+              _delete(item, context);
+            },
           ),
         ),
       ),
     );
+  }
+
+  _delete(ItemModel item, BuildContext context) async {
+    var response = await showDialog(
+        context: context,
+        builder: (context) {
+          return TransactionAuthDialog(msg: 'Confirma a exclusão?');
+        });
+    if (response == true) {
+      controller.deleteById(item.id).then((value) {
+        if (value != null) {
+          asuka.showSnackBar(
+            SnackBar(
+              content: const Text('Requisição de acesso excluída com sucesso.'),
+            ),
+          );
+          controller.listItems.remove(item);
+        } else {
+          asuka.showSnackBar(
+            SnackBar(
+              content: Text(controller.errorMsg),
+            ),
+          );
+        }
+      });
+    }
   }
 }

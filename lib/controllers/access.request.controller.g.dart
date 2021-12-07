@@ -295,11 +295,11 @@ mixin _$AccessRequestController on AccessRequestControllerBase, Store {
   }
 
   @override
-  Future<dynamic> deleteById(AccessRequest accessRequest) {
+  Future<dynamic> deleteById(int id) {
     final _$actionInfo = _$AccessRequestControllerBaseActionController
         .startAction(name: 'AccessRequestControllerBase.deleteById');
     try {
-      return super.deleteById(accessRequest);
+      return super.deleteById(id);
     } finally {
       _$AccessRequestControllerBaseActionController.endAction(_$actionInfo);
     }
