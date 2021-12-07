@@ -89,7 +89,7 @@ class AccessRequestListPageState extends State<AccessRequestListPage> {
               FloatingActionButtonLocation.centerFloat,
           floatingActionButton: _controller.isHidedButton
               ? null
-              : Button(icon: Icons.check, onClick: () => _check()),
+              : Button(icon: Icons.check_rounded, onClick: () => _check()),
         ),
       );
 
@@ -125,95 +125,6 @@ class AccessRequestListPageState extends State<AccessRequestListPage> {
           ],
         ),
       );
-
-  /*_widgets2() => Container(
-        decoration: BoxDecoration(
-          gradient: LinearGradient(
-            colors: [Colors.white30, Colors.deepOrange],
-            begin: FractionalOffset.topLeft,
-            end: FractionalOffset.bottomRight,
-          ),
-        ),
-        height: MediaQuery.of(context).size.height,
-        child: Column(
-          children: [
-            TopBar(
-              title: _title,
-            ),
-            Observer(
-              builder: (_) => ListView.separated(
-                shrinkWrap: true,
-                itemCount: _controller.listItems.length,
-                itemBuilder: (_, int i) {
-                  return Container(
-                    decoration: BoxDecoration(
-                      color: Colors.white30,
-                      shape: BoxShape.rectangle,
-                      borderRadius: BorderRadius.circular(8.0),
-                      boxShadow: <BoxShadow>[
-                        BoxShadow(
-                          color: Colors.black12,
-                          blurRadius: 10.0,
-                          offset: Offset(0.0, 5.0),
-                        ),
-                      ],
-                    ),
-                    child: ListTile(
-                      title: Text(_controller.listItems[i].name),
-                      subtitle: Text(_controller.listItems[i].email),
-                      leading: CircleAvatar(
-                        child: Icon(Icons.person),
-                        backgroundColor: Colors.white,
-                      ),
-                      trailing: Wrap(
-                        spacing: 10, // space between two icons
-                        children: <Widget>[
-                          GestureDetector(
-                            child: Icon(
-                              Icons.delete,
-                            ),
-                            onTap: () {
-                              _delete(i);
-                            },
-                          ),
-                        ],
-                      ),
-                    ),
-                  );
-                },
-                separatorBuilder: (_, int index) => const Divider(),
-              ),
-            ),
-          ],
-        ),
-      );
-*/
-/*  delete(int i) async {
-    var response = await showDialog(
-        context: context,
-        builder: (context) {
-          return TransactionAuthDialog(msg: 'Confirma a exclusão?');
-        });
-    if (response == true) {
-      _controller.accessRequests.add(_controller.listItems[i]);
-      _controller.deleteById(_controller.accessRequests[i]).then((value) {
-        if (value != null) {
-          asuka.showSnackBar(
-            SnackBar(
-              content: const Text('Requisição de acesso excluída com sucesso.'),
-            ),
-          );
-          _controller.listItems.removeAt(i);
-        } else {
-          asuka.showSnackBar(
-            SnackBar(
-              content: Text(_controller.errorMsg),
-            ),
-          );
-        }
-      });
-    }
-  }*/
 
   _check() {
     _controller.check().then(
