@@ -56,7 +56,7 @@ class _PaymentAddAddState extends State<PaymentAddPage> {
           child: Column(
             children: <Widget>[
               TopBar(
-                title: _title,
+                title: widget._selectedProfile == ADMIN ? _title : '',
               ),
               Container(
                 width: 200.0,

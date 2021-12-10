@@ -13,7 +13,7 @@ import 'package:hcslzapp/pages/payment/payment.add.page.dart';
 import 'package:asuka/asuka.dart' as asuka;
 
 const String _labelNotExists =
-    'Não existem mensalidades registradas para o associado.';
+    'Não existem mensalidades registradas.';
 const String _labelUnknown =
     'Houve um erro desconhecido ao executar a transação.';
 const String _title = 'Mensalidades';
