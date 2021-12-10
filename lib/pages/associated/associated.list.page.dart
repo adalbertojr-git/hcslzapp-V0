@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
+import 'package:hcslzapp/common/associated.profiles.dart';
 import 'package:hcslzapp/common/labels.and.hints.dart';
 import 'package:hcslzapp/components/centered.message.dart';
 import 'package:hcslzapp/components/my.text.form.field.dart';
@@ -154,7 +155,7 @@ class AssociatedListPageState extends State<AssociatedListPage> {
                                   context,
                                   MaterialPageRoute(
                                       builder: (context) =>
-                                          AssociatedUpdatePage(
+                                          AssociatedUpdatePage(ADMIN,
                                               _controller.listFiltered[i].id)),
                                 );
                               },

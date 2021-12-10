@@ -78,14 +78,29 @@ class _DependentAddPageState extends State<DependentAddPage> {
                     );
                   },
                 ),
-                MyTextFormField(
-                  textEditingController: _controller.phoneCtrl,
-                  label: labelPhone,
-                  hint: hintPhone,
-                  icon: Icons.phone,
-                  inputType: TextInputType.phone,
-                  maskTextInputFormatter:
-                      MaskTextInputFormatter(mask: "(##) #####-####"),
+                Row(
+                  children: [
+                    Expanded(
+                      child: MyTextFormField(
+                        textEditingController: _controller.phoneCtrl,
+                        label: labelPhone,
+                        hint: hintPhone,
+                        inputType: TextInputType.phone,
+                        maskTextInputFormatter:
+                            MaskTextInputFormatter(mask: "(##) #####-####"),
+                      ),
+                    ),
+                    Expanded(
+                      child: MyTextFormField(
+                        textEditingController: _controller.dateBirthCtrl,
+                        label: labelDateBirth,
+                        hint: hintDate,
+                        inputType: TextInputType.datetime,
+                        maskTextInputFormatter:
+                        MaskTextInputFormatter(mask: "##/##/####"),
+                      )
+                    ),
+                  ],
                 ),
                 Padding(
                   padding: const EdgeInsets.fromLTRB(0.0, 3.0, 2.0, 3.0),
@@ -118,7 +133,7 @@ class _DependentAddPageState extends State<DependentAddPage> {
                     ],
                   ),
                 ),
-                Row(
+/*                Row(
                   crossAxisAlignment: CrossAxisAlignment.baseline,
                   children: <Widget>[
                     Expanded(
@@ -143,7 +158,7 @@ class _DependentAddPageState extends State<DependentAddPage> {
                       ),
                     ),
                   ],
-                ),
+                ),*/
                 Container(
                   alignment: Alignment.centerLeft,
                   padding: EdgeInsets.fromLTRB(0.0, 15.0, 0.0, 0.0),

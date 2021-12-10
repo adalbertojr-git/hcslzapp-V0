@@ -3,6 +3,7 @@ import 'dart:io';
 import 'package:asuka/asuka.dart' as asuka;
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
+import 'package:hcslzapp/common/associated.profiles.dart';
 import 'package:hcslzapp/common/labels.and.hints.dart';
 import 'package:hcslzapp/common/photo.image.provider.dart';
 import 'package:hcslzapp/components/button.dart';
@@ -30,9 +31,10 @@ const String _pathNoImage = 'assets/imgs/noImage.png';
 const String _title = 'Editar Associado';
 
 class AssociatedUpdatePage extends StatefulWidget {
+  final String _selectedProfile;
   final int _associatedId;
 
-  AssociatedUpdatePage(this._associatedId);
+  AssociatedUpdatePage(this._selectedProfile, this._associatedId);
 
   @override
   _AssociatedUpdatePageState createState() => _AssociatedUpdatePageState();
@@ -310,7 +312,7 @@ class _AssociatedUpdatePageState extends State<AssociatedUpdatePage> {
               SizedBox(
                 height: 10.0,
               ),
-              Container(
+              widget._selectedProfile == ADMIN ? Container(
                 child: Padding(
                   padding: const EdgeInsets.fromLTRB(0.0, 3.0, 2.0, 3.0),
                   child: Row(
@@ -346,9 +348,9 @@ class _AssociatedUpdatePageState extends State<AssociatedUpdatePage> {
                     ],
                   ),
                 ),
-              ),
+              ) : Container(),
               SizedBox(
-                height: 100.0,
+                height: 80.0,
               ),
             ],
           ),
@@ -387,7 +389,6 @@ class _AssociatedUpdatePageState extends State<AssociatedUpdatePage> {
       fit: BoxFit.fill);
 
   _dependentsListWidget() => Container(
-        padding: EdgeInsets.all(10.0),
         decoration: BoxDecoration(
           color: Colors.white12,
           shape: BoxShape.rectangle,
@@ -503,7 +504,6 @@ class _AssociatedUpdatePageState extends State<AssociatedUpdatePage> {
       );
 
   _motorcyclesListWidget() => Container(
-        padding: EdgeInsets.all(10.0),
         decoration: BoxDecoration(
           color: Colors.white12,
           shape: BoxShape.rectangle,

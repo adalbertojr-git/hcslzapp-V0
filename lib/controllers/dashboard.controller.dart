@@ -56,7 +56,7 @@ abstract class DashboardControllerBase with Store {
     var _photoUrl = await Navigator.push(
       context,
       MaterialPageRoute(
-        builder: (context) => AssociatedUpdatePage(id),
+        builder: (context) => AssociatedUpdatePage(selectedProfile, id),
       ),
     );
     if (_photoUrl != null) {
