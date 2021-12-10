@@ -14,6 +14,7 @@ import 'package:asuka/asuka.dart' as asuka;
 
 const String _labelAddEvent = 'Adicionar Evento';
 const String _labelEditEvent = 'Editar Evento';
+const String _title = 'Eventos';
 
 class EventCalendarPage extends StatefulWidget {
   final String _selectedProfile;
@@ -76,7 +77,7 @@ class EventCalendarPageState extends State<EventCalendarPage>
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
               TopBar(
-                title: 'Eventos',
+                title: _title,
               ),
               _buildTableCalendarWithBuilders(),
               Expanded(child: _buildEventList()),
@@ -214,65 +215,68 @@ class EventCalendarPageState extends State<EventCalendarPage>
         color: Colors.blueGrey[800],
       );
 
-  Widget _buildEventList() => Observer(
-        builder: (_) => ListView.separated(
-          shrinkWrap: true,
-          itemCount: _controller.selectedEvents.length,
-          itemBuilder: (_, int i) {
-            var event = _controller.selectedEvents[i] as Event;
-            return Container(
-              decoration: BoxDecoration(
-                color: Colors.white30,
-                shape: BoxShape.rectangle,
-                borderRadius: BorderRadius.circular(8.0),
-              ),
-              child: ListTile(
-                leading: Container(
-                  width: 40,
-                  height: 40,
-                  alignment: Alignment.center,
-                  child: CircleAvatar(
-                    child: Icon(Icons.event),
-                    backgroundColor: Colors.white,
+  Widget _buildEventList() => Container(
+    color: Colors.white10,
+    child: Observer(
+          builder: (_) => ListView.separated(
+            shrinkWrap: true,
+            itemCount: _controller.selectedEvents.length,
+            itemBuilder: (_, int i) {
+              var event = _controller.selectedEvents[i] as Event;
+              return Container(
+                decoration: BoxDecoration(
+                  color: Colors.white30,
+                  shape: BoxShape.rectangle,
+                  borderRadius: BorderRadius.circular(8.0),
+                ),
+                child: ListTile(
+                  leading: Container(
+                    width: 40,
+                    height: 40,
+                    alignment: Alignment.center,
+                    child: CircleAvatar(
+                      child: Icon(Icons.event),
+                      backgroundColor: Colors.white,
+                    ),
+                  ),
+                  trailing: widget._selectedProfile == ADMIN
+                      ? Wrap(
+                          spacing: 10, // space between two icons
+                          children: <Widget>[
+                            GestureDetector(
+                              child: Icon(
+                                Icons.delete,
+                              ),
+                              onTap: () {
+                                _delete(i);
+                              },
+                            ),
+                            GestureDetector(
+                              child: Icon(
+                                Icons.edit,
+                              ),
+                              onTap: () {
+                                _controller.setEventTitle(event.title);
+                                _showAddDialog(event, i);
+                              },
+                            ),
+                          ],
+                        )
+                      : null,
+                  title: Text(
+                    //_controller.selectedEvents[i].toString(),
+                    event.title,
+                    style: TextStyle(
+                      fontSize: 13.0,
+                    ),
                   ),
                 ),
-                trailing: widget._selectedProfile == ADMIN
-                    ? Wrap(
-                        spacing: 10, // space between two icons
-                        children: <Widget>[
-                          GestureDetector(
-                            child: Icon(
-                              Icons.delete,
-                            ),
-                            onTap: () {
-                              _delete(i);
-                            },
-                          ),
-                          GestureDetector(
-                            child: Icon(
-                              Icons.edit,
-                            ),
-                            onTap: () {
-                              _controller.setEventTitle(event.title);
-                              _showAddDialog(event, i);
-                            },
-                          ),
-                        ],
-                      )
-                    : null,
-                title: Text(
-                  //_controller.selectedEvents[i].toString(),
-                  event.title,
-                  style: TextStyle(
-                    fontSize: 13.0,
-                  ),
-                ),
-              ),
-            );
-          },
-          separatorBuilder: (_, int index) => const Divider(),
+              );
+            },
+            separatorBuilder: (_, int index) => const Divider(),
+          ),
         ),
-      );
+  );
 
   _showAddDialog(Event event, int i) async {
     await showDialog(
