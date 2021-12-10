@@ -216,7 +216,16 @@ class EventCalendarPageState extends State<EventCalendarPage>
       );
 
   Widget _buildEventList() => Container(
-    color: Colors.white10,
+    padding: EdgeInsets.only(left: 3.0, right: 3.0),
+    decoration:  BoxDecoration(
+      color: Colors.black26,
+      shape: BoxShape.rectangle,
+      borderRadius: BorderRadius.circular(5.0),
+      border: Border.all(
+        color: Colors.white,
+          width: 0.5,
+      ),
+    ),
     child: Observer(
           builder: (_) => ListView.separated(
             shrinkWrap: true,
