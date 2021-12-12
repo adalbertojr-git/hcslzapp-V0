@@ -289,38 +289,51 @@ class _DashboardPageState extends State<DashboardPage> {
                     Padding(
                       padding: EdgeInsets.only(top: 5),
                       child: const Text(
-                        'Este aplicativo é propriedade do Harley Club de Ŝão '
-                        'Luís - MA, Brasil.',
-                        style: TextStyle(fontSize: 14.0),
+                        'Este aplicativo é propriedade do Harley Club de São '
+                        'Luís-MA.',
+                        style: TextStyle(fontSize: 12.0),
                       ),
                     ),
                     Padding(
                       padding: EdgeInsets.only(top: 5),
                       child: const Text(
-                        'Seu conteúdo e  utilização são '
+                        'Seu conteúdo e utilização são '
                         'restritos a associados.',
-                        style: TextStyle(fontSize: 14.0),
+                        style: TextStyle(fontSize: 12.0),
                       ),
                     ),
                     Padding(
-                      padding: EdgeInsets.only(top: 30),
+                      padding: EdgeInsets.only(top: 20),
                       child: const Text(
                         'Desenvolvedor: Adalberto Jr.',
-                        style: TextStyle(fontSize: 12.0),
+                        style: TextStyle(fontSize: 10.0),
                       ),
                     ),
                     Padding(
                       padding: EdgeInsets.only(top: 2),
                       child: const Text(
-                        'email: atajr.650@gmail.com',
-                        style: TextStyle(fontSize: 12.0),
+                        'Email: atajr.650@gmail.com',
+                        style: TextStyle(fontSize: 10.0),
                       ),
                     ),
                     Padding(
                       padding: EdgeInsets.only(top: 2),
                       child: const Text(
-                        'tel: (98) 99120-7728',
-                        style: TextStyle(fontSize: 12.0),
+                        'Tel: (98) 99120-7728',
+                        style: TextStyle(fontSize: 10.0),
+                      ),
+                    ),
+                    Padding(
+                      padding: EdgeInsets.only(top: 2, bottom: 20),
+                      child: const Text(
+                        'Copyright 2020-2021 Brasil',
+                        style: TextStyle(fontSize: 10.0),
+                      ),
+                    ),
+                    SizedBox(
+                      height: 70.0,
+                      child: Container(
+                        child: Image.asset(_pathAboutHarleyClubImage),
                       ),
                     ),
                   ],
