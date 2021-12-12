@@ -255,7 +255,7 @@ class _AssociatedUpdatePageState extends State<AssociatedUpdatePage> {
                     Expanded(
                       child: Container(
                         height: 55.0,
-                        child: DropdownButtonFormField(
+                        child: widget._selectedProfile == ADMIN ? DropdownButtonFormField(
                           decoration: const InputDecoration(
                             enabledBorder: OutlineInputBorder(
                               borderSide: BorderSide(
@@ -267,6 +267,9 @@ class _AssociatedUpdatePageState extends State<AssociatedUpdatePage> {
                           items: getAssociatedTypes(),
                           onChanged:
                               _controller.changedAssociatedTypesDropDownItem,
+                        ) : MyTextFormField(
+                          textEditingController: _controller.associatedTypeCtrl,
+                          disabled: true,
                         ),
                       ),
                     ),
@@ -312,43 +315,46 @@ class _AssociatedUpdatePageState extends State<AssociatedUpdatePage> {
               SizedBox(
                 height: 10.0,
               ),
-              widget._selectedProfile == ADMIN ? Container(
-                child: Padding(
-                  padding: const EdgeInsets.fromLTRB(0.0, 3.0, 2.0, 3.0),
-                  child: Row(
-                    crossAxisAlignment: CrossAxisAlignment.baseline,
-                    children: <Widget>[
-                      Expanded(
-                        child: const Text(
-                          'Status:',
-                          textAlign: TextAlign.center,
-                          style: TextStyle(
-                            fontSize: 18.0,
-                            fontWeight: FontWeight.bold,
-                          ),
-                        ),
-                      ),
-                      Expanded(
-                        child: Container(
-                          height: 55.0,
-                          child: DropdownButtonFormField(
-                            decoration: const InputDecoration(
-                              enabledBorder: OutlineInputBorder(
-                                borderSide: BorderSide(
-                                  color: Colors.black,
+              widget._selectedProfile == ADMIN
+                  ? Container(
+                      child: Padding(
+                        padding: const EdgeInsets.fromLTRB(0.0, 3.0, 2.0, 3.0),
+                        child: Row(
+                          crossAxisAlignment: CrossAxisAlignment.baseline,
+                          children: <Widget>[
+                            Expanded(
+                              child: const Text(
+                                'Status:',
+                                textAlign: TextAlign.center,
+                                style: TextStyle(
+                                  fontSize: 18.0,
+                                  fontWeight: FontWeight.bold,
                                 ),
                               ),
                             ),
-                            value: _controller.currentStatus,
-                            items: getStatus(),
-                            onChanged: _controller.changedStatusDropDownItem,
-                          ),
+                            Expanded(
+                              child: Container(
+                                height: 55.0,
+                                child: DropdownButtonFormField(
+                                  decoration: const InputDecoration(
+                                    enabledBorder: OutlineInputBorder(
+                                      borderSide: BorderSide(
+                                        color: Colors.black,
+                                      ),
+                                    ),
+                                  ),
+                                  value: _controller.currentStatus,
+                                  items: getStatus(),
+                                  onChanged:
+                                      _controller.changedStatusDropDownItem,
+                                ),
+                              ),
+                            ),
+                          ],
                         ),
                       ),
-                    ],
-                  ),
-                ),
-              ) : Container(),
+                    )
+                  : Container(),
               SizedBox(
                 height: 80.0,
               ),
