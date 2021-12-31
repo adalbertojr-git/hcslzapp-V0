@@ -14,7 +14,7 @@ description: The Harley Club Slz Project
 version: 1.0.0+1
 
 environment:
-  sdk: ">=2.6.0 <3.0.0"
+  sdk: ">=2.10.0 <3.0.0"
   #sdk: ">=2.6.0 <3.0.0"
 
 dependencies:
@@ -25,7 +25,7 @@ dependencies:
   http_interceptor:
   #cached_network_image: ^2.0.0
   url_launcher: ^5.7.2
-  location: ^3.0.2
+  #location: ^3.0.2
   #location_permissions: ^3.0.0+1
   table_calendar: ^2.2.3
   intl: ^0.16.1
@@ -41,9 +41,13 @@ dependencies:
   jwt_decode: ^0.2.0
   glutton: ^1.0.5
   image_picker: ^0.6.7+12
-  firebase_storage: ^7.0.0
+
+  #firebase_storage: ^7.0.0
+  firebase_storage: ^10.2.4
   #cloud_firestore: ^0.16.0
   firebase_core: ^0.7.0
+  #firebase_core: ^1.10.6
+
   flutter_localizations:
     sdk: flutter
 
