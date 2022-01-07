@@ -81,7 +81,8 @@ abstract class AssociatedUpdateControllerBase with Store {
   late String errorMsg;
 
   @observable
-  late Future<List<Associated>> future;
+  //late Future<List<Associated>> future;
+  late Future future;
 
   @observable
   late String currentBloodType;
@@ -147,7 +148,10 @@ abstract class AssociatedUpdateControllerBase with Store {
         errorMsg = "${e.message}";
       }, test: (e) => e is Exception);
 
-  Future<List<Associated>> getFuture(int _associatedId) =>
+/*  Future<List<Associated>> getFuture(int _associatedId) =>
+      future = findByIdToList(_associatedId);*/
+
+  Future getFuture(int _associatedId) =>
       future = findByIdToList(_associatedId);
 
   Future<Associated> _setValues() async {

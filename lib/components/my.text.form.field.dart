@@ -1,5 +1,3 @@
-import 'dart:html';
-
 import 'package:flutter/material.dart';
 import 'package:mask_text_input_formatter/mask_text_input_formatter.dart';
 
@@ -16,7 +14,7 @@ class MyTextFormField extends StatelessWidget {
   String label;
   double fontSize;
   String text;
-  FunctionStringCallback onChanged;
+  Function(String) onChanged;
   String errorText;
   MaskTextInputFormatter maskTextInputFormatter;
   int maxLength;

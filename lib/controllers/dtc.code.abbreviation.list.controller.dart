@@ -22,10 +22,11 @@ abstract class DtcCodeAbbreviationListControllerBase with Store {
   DtcCodeAbbreviationRepo _dtcCodeAbbreviationRepo = DtcCodeAbbreviationRepo();
 
   @observable
-  String errorMsg;
+  late String errorMsg;
 
   @observable
-  Future<List<DtcCodeAbbreviation>> future;
+  //late Future<List<DtcCodeAbbreviation>> future;
+  late Future future;
 
   @observable
   String filter = '';
@@ -44,7 +45,8 @@ abstract class DtcCodeAbbreviationListControllerBase with Store {
         errorMsg = "${e.message}";
       }, test: (e) => e is Exception);
 
-  Future<List<DtcCodeAbbreviation>> getFuture() => future = findAll();
+  //Future<List<DtcCodeAbbreviation>> getFuture() => future = findAll();
+  Future getFuture() => future = findAll();
 
   @action
   setFilter(String value) => filter = value.toUpperCase();

@@ -14,7 +14,7 @@ abstract class DependentControllerBase with Store {
   var idCtrl = TextEditingController();
 
   @observable
-  var nameCtrl = TextEditingController();
+  TextEditingController? nameCtrl = TextEditingController();
 
   @observable
   var phoneCtrl = TextEditingController();
@@ -38,7 +38,7 @@ abstract class DependentControllerBase with Store {
   bool isAssociated = false;
 
   @observable
-  late String currentBloodType;
+  late String? currentBloodType;
 
   @observable
   late Dependent dependent;
@@ -54,20 +54,21 @@ abstract class DependentControllerBase with Store {
 
     //String a = b ?? 'hello';
     //This means a equals b, but if b is null then a equals 'hello'.
+    currentBloodType = dependent?.bloodType ?? getBloodTypes().first.value;
 
-    currentBloodType = (dependent?.bloodType ?? getBloodTypes().first.value)!;
-
-    isAssociated = (dependent != null
+/*    isAssociated = (dependent != null
         ? (dependent.isAssociated == 'S' ? true : false)
-        : false);
+        : false);*/
+    isAssociated = (dependent.isAssociated == 'S' ? true : false);
+
     formController = FormController(
-      name: dependent != null ? dependent.name : '',
-      email: dependent != null ? dependent.email : '',
+      name: dependent.name ?? '',
+      email: dependent.email ?? '',
     );
   }
 
   _initTextFields() {
-    nameCtrl.text = dependent != null ? dependent.name : null;
+    nameCtrl?.text = dependent.name;
     emailCtrl.text = dependent != null ? dependent.email : null;
     phoneCtrl.text = dependent != null ? dependent.phone : null;
     cpfCtrl.text = dependent != null ? dependent.cpf : null;
@@ -105,7 +106,7 @@ abstract class DependentControllerBase with Store {
     }
   }
 
-  String validateName() {
+  String? validateName() {
     const String _labelNameRequired = 'Nome é obrigatório!!!';
 
     if (formController.name.isEmpty) {
@@ -114,7 +115,7 @@ abstract class DependentControllerBase with Store {
     return null;
   }
 
-  String validateEmail() {
+  String? validateEmail() {
     const String _labelEmailNotValid = 'Informe um email válido!!!';
 
     if (!RegExp(
@@ -127,7 +128,7 @@ abstract class DependentControllerBase with Store {
 }
 
 class FormController extends FormControllerBase with _$FormController {
-  FormController({String name, String email}) {
+  FormController({required String name, required String email}) {
     super.name = name;
     super.email = email;
   }
@@ -135,10 +136,10 @@ class FormController extends FormControllerBase with _$FormController {
 
 abstract class FormControllerBase with Store {
   @observable
-  String name;
+  late String name;
 
   @observable
-  String email;
+  late String email;
 
   @action
   changeName(String value) => name = value;

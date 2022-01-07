@@ -27,13 +27,13 @@ mixin _$DependentController on DependentControllerBase, Store {
   final _$nameCtrlAtom = Atom(name: 'DependentControllerBase.nameCtrl');
 
   @override
-  TextEditingController get nameCtrl {
+  TextEditingController? get nameCtrl {
     _$nameCtrlAtom.reportRead();
     return super.nameCtrl;
   }
 
   @override
-  set nameCtrl(TextEditingController value) {
+  set nameCtrl(TextEditingController? value) {
     _$nameCtrlAtom.reportWrite(value, super.nameCtrl, () {
       super.nameCtrl = value;
     });
@@ -151,13 +151,13 @@ mixin _$DependentController on DependentControllerBase, Store {
       Atom(name: 'DependentControllerBase.currentBloodType');
 
   @override
-  String get currentBloodType {
+  String? get currentBloodType {
     _$currentBloodTypeAtom.reportRead();
     return super.currentBloodType;
   }
 
   @override
-  set currentBloodType(String value) {
+  set currentBloodType(String? value) {
     _$currentBloodTypeAtom.reportWrite(value, super.currentBloodType, () {
       super.currentBloodType = value;
     });

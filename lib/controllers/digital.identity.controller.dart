@@ -34,16 +34,17 @@ abstract class DigitalIdentityControllerBase with Store {
   var dueDateCtrl = TextEditingController();
 
   @observable
-  DigitalIdentity digitalIdentity;
+  late DigitalIdentity digitalIdentity;
 
   @observable
   DigitalIdentityRepo _digitalIdentityRepo = DigitalIdentityRepo();
 
   @observable
-  Future<List<DigitalIdentity>> future;
+  //late Future<List<DigitalIdentity>> future;
+  late Future future;
 
   @observable
-  String errorMsg;
+  late String errorMsg;
 
 
   init() {
@@ -63,6 +64,6 @@ abstract class DigitalIdentityControllerBase with Store {
     errorMsg = "${e.message}";
   }, test: (e) => e is Exception);
 
-  Future<List<DigitalIdentity>> getFuture(int _associatedId) =>
+  Future getFuture(int _associatedId) =>
       future = findAssociatedByIdToList(_associatedId);
 }

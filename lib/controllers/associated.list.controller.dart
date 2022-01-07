@@ -29,7 +29,8 @@ abstract class AssociatedListControllerBase with Store {
   late String errorMsg;
 
   @observable
-  late Future<List<Associated>> future;
+  //late Future<List<Associated>> future;
+  late Future future;
 
   @observable
   String filter = '';
@@ -48,7 +49,8 @@ abstract class AssociatedListControllerBase with Store {
         errorMsg = "${e.message}";
       }, test: (e) => e is Exception);
 
-  Future<List<Associated>> getFuture() => future = findAll();
+  //Future<List<Associated>> getFuture() => future = findAll();
+  Future getFuture() => future = findAll();
 
   @action
   setFilter(String value) => filter = value;

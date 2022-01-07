@@ -19,10 +19,10 @@ abstract class EventCalendarControllerBase with Store {
   EventRepo _eventRepo = EventRepo();
 
   @observable
-  String errorMsg;
+  late String errorMsg;
 
   @observable
-  Future<String> future;
+  late Future<String> future;
 
   @observable
   Map<DateTime, List> events = {};
@@ -31,10 +31,10 @@ abstract class EventCalendarControllerBase with Store {
   List selectedEvents = List();
 
   @observable
-  AnimationController animController;
+  late AnimationController animController;
 
   @observable
-  CalendarController calController;
+  late CalendarController calController;
 
   init() {
     events.clear();
@@ -87,7 +87,7 @@ abstract class EventCalendarControllerBase with Store {
       ev.putIfAbsent(date, () => <Event>[]);
       var e =
           Event(id: event['id'], date: event['date'], title: event['title']);
-      ev[date].add(e);
+      ev[date]?.add(e);
     }
     return ev;
   }
