@@ -177,7 +177,7 @@ class EventCalendarPageState extends State<EventCalendarPage>
               return children;
             },
           ),
-          onDaySelected: (date, events) {
+          onDaySelected: (date, events, _) {
             _onDaySelected(date, events);
             _controller.animController.forward(from: 0.0);
           },

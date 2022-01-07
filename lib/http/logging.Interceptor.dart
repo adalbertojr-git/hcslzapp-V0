@@ -9,7 +9,7 @@ pacote http do Dart. Você pode usar para adicionar cabeçalhos, modificar
 parâmetros de consulta ou imprimir um log da resposta.
 
 */
-import 'package:http_interceptor/interceptor_contract.dart';
+import 'package:http_interceptor/http/interceptor_contract.dart';
 import 'package:http_interceptor/models/request_data.dart';
 import 'package:http_interceptor/models/response_data.dart';
 

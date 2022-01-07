@@ -5,7 +5,7 @@ const String _pathLogo = 'assets/imgs/logo.png';
 class TopBar extends StatelessWidget {
   final String title;
 
-  TopBar({this.title});
+  TopBar({required this.title});
 
   @override
   Widget build(BuildContext context) {

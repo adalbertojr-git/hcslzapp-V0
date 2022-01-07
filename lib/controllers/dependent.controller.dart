@@ -38,18 +38,25 @@ abstract class DependentControllerBase with Store {
   bool isAssociated = false;
 
   @observable
-  String currentBloodType;
+  late String currentBloodType;
 
   @observable
-  Dependent dependent;
+  late Dependent dependent;
 
   @action
   setAssociated() => isAssociated = !isAssociated;
 
   init() {
     _initTextFields();
-    currentBloodType =
-        dependent != null ? dependent.bloodType : getBloodTypes().first.value;
+/*    currentBloodType = (dependent != null
+        ? dependent.bloodType
+        : getBloodTypes().first.value)!;*/
+
+    //String a = b ?? 'hello';
+    //This means a equals b, but if b is null then a equals 'hello'.
+
+    currentBloodType = (dependent?.bloodType ?? getBloodTypes().first.value)!;
+
     isAssociated = (dependent != null
         ? (dependent.isAssociated == 'S' ? true : false)
         : false);
@@ -111,7 +118,7 @@ abstract class DependentControllerBase with Store {
     const String _labelEmailNotValid = 'Informe um email válido!!!';
 
     if (!RegExp(
-        r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+")
+            r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+")
         .hasMatch(formController.email)) {
       return _labelEmailNotValid;
     }

@@ -2,7 +2,7 @@ import 'package:http/http.dart';
 import 'package:http_interceptor/http_interceptor.dart';
 import '../http/logging.Interceptor.dart';
 
-final Client client = HttpClientWithInterceptor.build(
+final Client client = InterceptedClient.build(
   interceptors: [LoggingInterceptor()],
 );
 
@@ -10,15 +10,15 @@ final Client client = HttpClientWithInterceptor.build(
 URL base de acesso, a partir da qual sao chamadas as demais URls
 */
 // no TRE
-//const String mainUrl = 'http://10.11.153.168:8080';
+const String mainUrl = 'http://10.11.153.168:8080';
 // em casa
-const String mainUrl = 'http://192.168.15.154:8080';
+//const String mainUrl = 'http://192.168.15.154:8080';
 // casa da sogra
 //const String mainUrl = 'http://192.168.100.65:8080';
 // via wifi celular
 //const String mainUrl = 'http://192.168.43.8:8080';
 
-String getMessage(int statusCode) {
+String? getMessage(int statusCode) {
   if(_statusCodeResponses.containsKey(statusCode)){
     return _statusCodeResponses[statusCode];
   }

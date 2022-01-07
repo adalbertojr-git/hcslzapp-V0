@@ -6,7 +6,7 @@ const String _labelCancel = 'Cancelar';
 class TransactionAuthDialog extends StatelessWidget {
   final String msg;
 
-  const TransactionAuthDialog({@required this.msg});
+  const TransactionAuthDialog({required this.msg});
 
   @override
   Widget build(BuildContext context) {

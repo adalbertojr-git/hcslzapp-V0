@@ -10,7 +10,7 @@ class ResponseDialog extends StatelessWidget {
   ResponseDialog({
     this.title = "",
     this.message = "",
-    this.icon,
+    required this.icon,
     this.buttonText = 'Ok',
     this.colorIcon = Colors.black,
   });

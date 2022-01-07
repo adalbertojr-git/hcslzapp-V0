@@ -20,16 +20,16 @@ abstract class AssociatedListControllerBase with Store {
   ObservableList associateds = [].asObservable();
 
   @observable
-  Associated associated;
+  late Associated associated;
 
   @observable
   AssociatedRepo _associatedRepo = AssociatedRepo();
 
   @observable
-  String errorMsg;
+  late String errorMsg;
 
   @observable
-  Future<List<Associated>> future;
+  late Future<List<Associated>> future;
 
   @observable
   String filter = '';

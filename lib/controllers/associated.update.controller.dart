@@ -60,37 +60,37 @@ abstract class AssociatedUpdateControllerBase with Store {
   ObservableList motorcycles = [].asObservable();
 
   @observable
-  String photoPath;
+  late String photoPath;
 
   @observable
-  String photoUrl;
+  late String photoUrl;
 
   @observable
-  File photo;
+  late File photo;
 
   @observable
   bool changedPhoto = false;
 
   @observable
-  Associated associated;
+  late Associated associated;
 
   @observable
   AssociatedRepo _associatedRepo = AssociatedRepo();
 
   @observable
-  String errorMsg;
+  late String errorMsg;
 
   @observable
-  Future<List<Associated>> future;
+  late Future<List<Associated>> future;
 
   @observable
-  String currentBloodType;
+  late String currentBloodType;
 
   @observable
-  String currentAssociatedType;
+  late String currentAssociatedType;
 
   @observable
-  String currentStatus;
+  late String currentStatus;
 
   init() async {
     _initLists();
@@ -172,7 +172,7 @@ abstract class AssociatedUpdateControllerBase with Store {
     return associated;
   }
 
-  String validateName() {
+  String? validateName() {
     const String _labelNameRequired = 'Nome é obrigatório!!!';
 
     if (formController.name.isEmpty) {
@@ -181,14 +181,14 @@ abstract class AssociatedUpdateControllerBase with Store {
     return null;
   }
 
-  String validateEmail() {
+  String? validateEmail() {
     const String _labelEmailRequired = 'Email é obrigatório!!!';
     const String _labelEmailNotValid = 'Informe um email válido!!!';
 
     if (formController.email.isEmpty) {
       return _labelEmailRequired;
     } else if (!RegExp(
-        r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+")
+            r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+")
         .hasMatch(formController.email)) {
       return _labelEmailNotValid;
     }
@@ -200,8 +200,7 @@ abstract class AssociatedUpdateControllerBase with Store {
   String changedAssociatedTypesDropDownItem(selected) =>
       currentAssociatedType = selected;
 
-  String changedStatusDropDownItem(selected) =>
-      currentStatus = selected;
+  String changedStatusDropDownItem(selected) => currentStatus = selected;
 
   @action
   Future getImageFromCamera() async {
@@ -240,7 +239,7 @@ abstract class AssociatedUpdateControllerBase with Store {
 }
 
 class FormController extends FormControllerBase with _$FormController {
-  FormController({String name, String email}) {
+  FormController({required String name, required String email}) {
     super.name = name;
     super.email = email;
   }
@@ -248,10 +247,10 @@ class FormController extends FormControllerBase with _$FormController {
 
 abstract class FormControllerBase with Store {
   @observable
-  String name;
+  late String name;
 
   @observable
-  String email;
+  late String email;
 
   @action
   changeName(String value) => name = value;

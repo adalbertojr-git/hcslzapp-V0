@@ -7,7 +7,7 @@ class CenteredMessage extends StatefulWidget {
   final String message;
   final String title;
 
-  CenteredMessage({this.title, this.message});
+  CenteredMessage({required this.title, required this.message});
 
   @override
   _CenteredMessageState createState() => _CenteredMessageState();
@@ -16,7 +16,7 @@ class CenteredMessage extends StatefulWidget {
 class _CenteredMessageState extends State<CenteredMessage> {
   @override
   void initState() {
-    WidgetsBinding.instance.addPostFrameCallback((_) => _showMessage);
+    WidgetsBinding.instance?.addPostFrameCallback((_) => _showMessage);
     super.initState();
   }
 

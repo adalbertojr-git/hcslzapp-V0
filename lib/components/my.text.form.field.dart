@@ -1,3 +1,5 @@
+import 'dart:html';
+
 import 'package:flutter/material.dart';
 import 'package:mask_text_input_formatter/mask_text_input_formatter.dart';
 
@@ -14,30 +16,30 @@ class MyTextFormField extends StatelessWidget {
   String label;
   double fontSize;
   String text;
-  Function onChanged;
+  FunctionStringCallback onChanged;
   String errorText;
   MaskTextInputFormatter maskTextInputFormatter;
   int maxLength;
   TextAlign textAlign;
 
   MyTextFormField(
-      {this.textEditingController,
-      this.helper,
-      this.hint,
-      this.icon,
-      this.inputType,
-      this.hidden,
-      this.disabled,
-      this.prefix,
-      this.label,
-      this.nLines,
-      this.fontSize,
-      this.text,
-      this.onChanged,
-      this.errorText,
-      this.maskTextInputFormatter,
-      this.maxLength,
-      this.textAlign});
+      {required this.textEditingController,
+      required this.helper,
+      required this.hint,
+      required this.icon,
+      required this.inputType,
+      required this.hidden,
+      required this.disabled,
+      required this.prefix,
+      required this.label,
+      required this.nLines,
+      required this.fontSize,
+      required this.text,
+      required this.onChanged,
+      required this.errorText,
+      required this.maskTextInputFormatter,
+      required this.maxLength,
+      required this.textAlign});
 
   @override
   Widget build(BuildContext context) {

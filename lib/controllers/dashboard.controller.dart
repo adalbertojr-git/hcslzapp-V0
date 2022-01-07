@@ -18,13 +18,13 @@ class DashboardController = DashboardControllerBase with _$DashboardController;
 
 abstract class DashboardControllerBase with Store {
   @observable
-  String photoUrl;
+  late String photoUrl;
 
   @observable
-  Associated associated;
+  late Associated associated;
 
   @observable
-  String selectedProfile;
+  late String selectedProfile;
 
   init() {
     photoUrl = associated == null ? "" : associated.photoUrl;
@@ -42,7 +42,8 @@ abstract class DashboardControllerBase with Store {
   }
 
   @action
-  changeProfile() => selectedProfile = (selectedProfile == ADMIN ? ASSOCIATED : ADMIN);
+  changeProfile() =>
+      selectedProfile = (selectedProfile == ADMIN ? ASSOCIATED : ADMIN);
 
   String getFirstName(String fullName) {
     var names = fullName.split(' ');
@@ -72,7 +73,8 @@ abstract class DashboardControllerBase with Store {
     await Navigator.push(
       context,
       MaterialPageRoute(
-        builder: (context) => PaymentAssociatedPage(selectedProfile, associated),
+        builder: (context) =>
+            PaymentAssociatedPage(selectedProfile, associated),
       ),
     );
   }
@@ -142,7 +144,11 @@ class GridButton extends StatelessWidget {
   final Color color = Colors.white10;
   final Function onClick;
 
-  GridButton({this.title, this.image, this.context, this.onClick});
+  GridButton(
+      {required this.title,
+      required this.image,
+      required this.context,
+      required this.onClick});
 
   @override
   Widget build(BuildContext context) {
@@ -185,7 +191,7 @@ class BarButton extends StatelessWidget {
   final IconData icon;
   final Function onClick; //callback
 
-  BarButton(this.title, this.subtitle, this.icon, {@required this.onClick});
+  BarButton(this.title, this.subtitle, this.icon, {required this.onClick});
 
   @override
   Widget build(BuildContext context) {

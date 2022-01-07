@@ -6,7 +6,7 @@ class Button extends StatelessWidget {
   final String heroTag;
   final bool mini;
 
-  Button({this.icon, this.heroTag, @required this.onClick, this.mini = false});
+  Button({required this.icon, required this.heroTag, required this.onClick, this.mini = false});
 
   @override
   Widget build(BuildContext context) => FloatingActionButton(

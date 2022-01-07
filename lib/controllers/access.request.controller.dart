@@ -36,13 +36,13 @@ abstract class AccessRequestControllerBase with Store {
   bool isHidedButton = true;
 
   @observable
-  ObservableFuture<List<AccessRequest>> accessRequestListFuture;
+  late ObservableFuture<List<AccessRequest>> accessRequestListFuture;
 
   @observable
-  ObservableFuture<AccessRequest> accessRequestPost;
+  late ObservableFuture<AccessRequest> accessRequestPost;
 
   @observable
-  ObservableFuture<AccessRequest> checkFuture;
+  late ObservableFuture<AccessRequest> checkFuture;
 
   @observable
   ObservableList accessRequests = [].asObservable();
@@ -54,10 +54,10 @@ abstract class AccessRequestControllerBase with Store {
   var ids = ObservableList<int>();
 
   @observable
-  String errorMsg;
+  late String errorMsg;
 
   @observable
-  Future<List<AccessRequest>> future;
+  late Future<List<AccessRequest>> future;
 
   @observable
   AccessRequestRepo _accessRequestRepo = AccessRequestRepo();
@@ -105,7 +105,8 @@ abstract class AccessRequestControllerBase with Store {
   @action
   bool setButtonVisibilty() => isHidedButton = !isHidedButton;
 
-  Future<List<AccessRequest>> getFuture() => future = findAll();
+  //Future<List<AccessRequest>>? getFuture() => future = findAll();
+  Future getFuture() => future = findAll();
 
   AccessRequest _setValues() {
     return AccessRequest(
@@ -149,7 +150,7 @@ abstract class AccessRequestControllerBase with Store {
 
   bool get hasErrorConfPassword => validateConfPassword() != null;
 
-  String validateName() {
+  String? validateName() {
     const String _labelNameRequired = 'Nome é obrigatório!!!';
     const String _labelNameLenght = 'Nome deve ter no mínimo 4 caracteres!!!';
 
@@ -161,7 +162,7 @@ abstract class AccessRequestControllerBase with Store {
     return null;
   }
 
-  String validateUser() {
+  String? validateUser() {
     const String _labelUserRequired = 'Usuário é obrigatório!!!';
     const String _labelUserLenght =
         'Usuário deve ter no mínimo 4 caracteres!!!';
@@ -174,7 +175,7 @@ abstract class AccessRequestControllerBase with Store {
     return null;
   }
 
-  String validateEmail() {
+  String? validateEmail() {
     const String _labelEmailRequired = 'Email é obrigatório!!!';
     const String _labelEmailNotValid = 'Informe um email válido!!!';
 
@@ -188,7 +189,7 @@ abstract class AccessRequestControllerBase with Store {
     return null;
   }
 
-  String validateConfEmail() {
+  String? validateConfEmail() {
     const String _labelConfEmailRequired =
         'Confirmação do email é obrigatória!!!';
     const String _labelEmailNotValid = 'Emails informados não conferem!!!';
@@ -201,7 +202,7 @@ abstract class AccessRequestControllerBase with Store {
     return null;
   }
 
-  String validatePassword() {
+  String? validatePassword() {
     const String _labelPswRequired = 'Senha é obrigatória!!!';
     const String _labelPswLenght = 'Senha deve ter no mínimo 4 caracteres!!!';
 
@@ -213,7 +214,7 @@ abstract class AccessRequestControllerBase with Store {
     return null;
   }
 
-  String validateConfPassword() {
+  String? validateConfPassword() {
     const String _labelConfPswRequired =
         'Confirmação da senha é obrigatória!!!';
     const String _labelPswNotValid = 'Senhas informadas não conferem!!!';
@@ -229,12 +230,12 @@ abstract class AccessRequestControllerBase with Store {
 
 class FormController extends FormControllerBase with _$FormController {
   FormController(
-      {String name,
-      String user,
-      String email,
-      String confEmail,
-      String confPassword,
-      String password}) {
+      {required String name,
+      required String user,
+      required String email,
+      required String confEmail,
+      required String confPassword,
+      required String password}) {
     super.name = name;
     super.user = user;
     super.email = email;
@@ -246,22 +247,22 @@ class FormController extends FormControllerBase with _$FormController {
 
 abstract class FormControllerBase with Store {
   @observable
-  String name;
+  late String name;
 
   @observable
-  String user;
+  late String user;
 
   @observable
-  String email;
+  late String email;
 
   @observable
-  String confEmail;
+  late String confEmail;
 
   @observable
-  String password;
+  late String password;
 
   @observable
-  String confPassword;
+  late String confPassword;
 
   @action
   changeName(String value) => name = value;
