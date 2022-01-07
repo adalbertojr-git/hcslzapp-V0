@@ -32,7 +32,7 @@ class EventCalendarPageState extends State<EventCalendarPage>
   @override
   void initState() {
     _controller.init();
-    _controller.calController = CalendarController();
+    //_controller.calController = CalendarController();
     _controller.animController = AnimationController(
       vsync: this,
       duration: const Duration(milliseconds: 400),
@@ -44,7 +44,7 @@ class EventCalendarPageState extends State<EventCalendarPage>
   @override
   void dispose() {
     _controller.animController.dispose();
-    _controller.calController.dispose();
+    //_controller.calController.dispose();
     super.dispose();
   }
 

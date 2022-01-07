@@ -14,7 +14,7 @@ class AccessRequestRepo {
     );
     final Response response = await client
         .post(
-          mainUrl + _accReqUrl,
+          Uri.parse(mainUrl + _accReqUrl),
           headers: {
             'Content-type': 'application/json',
             'Accept': 'application/json'
@@ -36,7 +36,7 @@ class AccessRequestRepo {
   Future<List<AccessRequest>> findAll() async {
     final Response response = await client
         .get(
-          mainUrl + _accReqUrl + "/list",
+          Uri.parse(mainUrl + _accReqUrl + "/list"),
         )
         .timeout(
           Duration(seconds: 10),
@@ -59,7 +59,7 @@ class AccessRequestRepo {
     );
     final Response response = await client
         .post(
-          mainUrl + _accReqUrl + "/check",
+          Uri.parse(mainUrl + _accReqUrl + "/check"),
           headers: {
             'Content-type': 'application/json',
             'Accept': 'application/json'
@@ -81,7 +81,7 @@ class AccessRequestRepo {
       accessRequest.toJson(),
     );*/
     final Response response = await client.delete(
-      mainUrl + _accReqUrl + "/" + id.toString(),
+      Uri.parse(mainUrl + _accReqUrl + "/" + id.toString()),
       headers: {
         'Content-type': 'application/json',
       },

@@ -10,7 +10,6 @@ import 'package:hcslzapp/controllers/dashboard.controller.dart';
 import 'package:hcslzapp/models/associated.dart';
 import 'package:hcslzapp/pages/access.request/access.request.list.page.dart';
 import 'package:hcslzapp/pages/associated/associated.list.page.dart';
-import 'package:hcslzapp/pages/boutique/boutique.list.page.dart';
 import 'package:hcslzapp/pages/event/event.calendar.page.dart';
 import 'package:hcslzapp/pages/management/management.list.page.dart';
 import 'package:hcslzapp/pages/partnership/partnership.list.adm.page.dart';

@@ -10,7 +10,7 @@ class PaymentTableRepo {
   Future<List<PaymentTable>> findAll() async {
     final Response response = await client
         .get(
-          mainUrl + _paymentUrl + "/list",
+        Uri.parse(mainUrl + _paymentUrl + "/list"),
         )
         .timeout(
           Duration(seconds: 10),

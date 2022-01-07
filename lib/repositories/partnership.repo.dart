@@ -14,7 +14,7 @@ class PartnershipRepo {
     );
     final Response response = await client
         .post(
-          mainUrl + _partnershipUrl,
+          Uri.parse(mainUrl + _partnershipUrl),
           headers: {
             'Content-type': 'application/json',
             'Accept': 'application/json'
@@ -36,7 +36,7 @@ class PartnershipRepo {
   Future<List<Partnership>> findAll() async {
     final Response response = await client
         .get(
-          mainUrl + _partnershipUrl + "/list",
+          Uri.parse(mainUrl + _partnershipUrl + "/list"),
         )
         .timeout(
           Duration(seconds: 10),
@@ -59,7 +59,8 @@ class PartnershipRepo {
     );
     final Response response = await client
         .put(
-          mainUrl + _partnershipUrl + "/" + partnership.id.toString(),
+          Uri.parse(
+              mainUrl + _partnershipUrl + "/" + partnership.id.toString()),
           headers: {
             'Content-type': 'application/json',
           },
@@ -82,7 +83,7 @@ class PartnershipRepo {
       partnership.toJson(),
     );
     final Response response = await client.delete(
-      mainUrl + _partnershipUrl + "/" + partnership.id.toString(),
+      Uri.parse(mainUrl + _partnershipUrl + "/" + partnership.id.toString()),
       headers: {
         'Content-type': 'application/json',
       },

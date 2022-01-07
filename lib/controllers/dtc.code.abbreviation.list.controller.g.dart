@@ -10,7 +10,7 @@ part of 'dtc.code.abbreviation.list.controller.dart';
 
 mixin _$DtcCodeAbbreviationListController
     on DtcCodeAbbreviationListControllerBase, Store {
-  Computed<List<DtcCodeAbbreviation>> _$listFilteredComputed;
+  Computed<List<DtcCodeAbbreviation>>? _$listFilteredComputed;
 
   @override
   List<DtcCodeAbbreviation> get listFiltered => (_$listFilteredComputed ??=

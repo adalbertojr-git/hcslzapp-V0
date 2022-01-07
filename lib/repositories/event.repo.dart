@@ -9,7 +9,7 @@ const String _eventUrl = '/event';
 class EventRepo {
   Future<String> findAll() async {
     final Response response =
-        await client.get(mainUrl + _eventUrl + "/list").timeout(
+        await client.get(Uri.parse(mainUrl + _eventUrl + "/list")).timeout(
               Duration(seconds: 10),
             );
     if (response.statusCode == 200) {
@@ -25,7 +25,7 @@ class EventRepo {
     );
     final Response response = await client
         .post(
-          mainUrl + _eventUrl + "/save",
+          Uri.parse(mainUrl + _eventUrl + "/save"),
           headers: {
             'Content-type': 'application/json',
           },
@@ -47,15 +47,17 @@ class EventRepo {
     final String encodedJson = jsonEncode(
       event.toJson(),
     );
-    final Response response = await client.put(
-      mainUrl + _eventUrl + "/" + event.id.toString(),
-      headers: {
-        'Content-type': 'application/json',
-      },
-      body: encodedJson,
-    ).timeout(
-      Duration(seconds: 10),
-    );
+    final Response response = await client
+        .put(
+          Uri.parse(mainUrl + _eventUrl + "/" + event.id.toString()),
+          headers: {
+            'Content-type': 'application/json',
+          },
+          body: encodedJson,
+        )
+        .timeout(
+          Duration(seconds: 10),
+        );
     if (response.statusCode == 200) {
       return Event.fromJson(
         jsonDecode(response.body),
@@ -70,7 +72,7 @@ class EventRepo {
       event.toJson(),
     );
     final Response response = await client.delete(
-      mainUrl + _eventUrl + "/" + event.id.toString(),
+      Uri.parse(mainUrl + _eventUrl + "/" + event.id.toString()),
       headers: {
         'Content-type': 'application/json',
       },

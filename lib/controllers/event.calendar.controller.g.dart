@@ -116,22 +116,6 @@ mixin _$EventCalendarController on EventCalendarControllerBase, Store {
     });
   }
 
-  final _$calControllerAtom =
-      Atom(name: 'EventCalendarControllerBase.calController');
-
-  @override
-  CalendarController get calController {
-    _$calControllerAtom.reportRead();
-    return super.calController;
-  }
-
-  @override
-  set calController(CalendarController value) {
-    _$calControllerAtom.reportWrite(value, super.calController, () {
-      super.calController = value;
-    });
-  }
-
   final _$EventCalendarControllerBaseActionController =
       ActionController(name: 'EventCalendarControllerBase');
 
@@ -231,8 +215,7 @@ errorMsg: ${errorMsg},
 future: ${future},
 events: ${events},
 selectedEvents: ${selectedEvents},
-animController: ${animController},
-calController: ${calController}
+animController: ${animController}
     ''';
   }
 }

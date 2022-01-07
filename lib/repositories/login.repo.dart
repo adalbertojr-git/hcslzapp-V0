@@ -12,7 +12,7 @@ class LoginRepo {
     Map params = {"username": username, "password": password};
     final Response response = await client
         .post(
-          mainUrl + _authUrl,
+        Uri.parse(mainUrl + _authUrl),
           headers: {'Content-type': 'application/json'},
           body: jsonEncode(
             params,

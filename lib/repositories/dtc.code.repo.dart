@@ -11,7 +11,7 @@ class DtcCodeRepo {
   Future<List<DtcCode>> findAll() async {
     final Response response = await client
         .get(
-          mainUrl + _dtcCodeUrl + "/list",
+          Uri.parse(mainUrl + _dtcCodeUrl + "/list"),
         )
         .timeout(
           Duration(seconds: 10),

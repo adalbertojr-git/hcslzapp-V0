@@ -11,7 +11,7 @@ class AssociatedRepo {
   Future<List<Associated>> findAll() async {
     final Response response = await client
         .get(
-          mainUrl + _associatedUrl + "/list",
+          Uri.parse(mainUrl + _associatedUrl + "/list"),
         )
         .timeout(
           Duration(seconds: 10),
@@ -31,7 +31,7 @@ class AssociatedRepo {
   Future<List<Associated>> findByIdToList(int id) async {
     final Response response = await client
         .get(
-          mainUrl + _associatedUrl + '/list/' + id.toString(),
+          Uri.parse(mainUrl + _associatedUrl + '/list/' + id.toString()),
         )
         .timeout(
           Duration(seconds: 10),
@@ -54,7 +54,7 @@ class AssociatedRepo {
     );
     final Response response = await client
         .put(
-          mainUrl + _associatedUrl + "/" + associated.id.toString(),
+          Uri.parse(mainUrl + _associatedUrl + "/" + associated.id.toString()),
           headers: {
             'Content-type': 'application/json',
           },

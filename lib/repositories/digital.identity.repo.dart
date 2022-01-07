@@ -11,7 +11,7 @@ class DigitalIdentityRepo {
   Future<List<DigitalIdentity>> findAssociatedByIdToList(int id) async {
     final Response response = await client
         .get(
-          mainUrl + _digitalIdentityUrl + '/' + id.toString(),
+          Uri.parse(mainUrl + _digitalIdentityUrl + '/' + id.toString()),
         )
         .timeout(
           Duration(seconds: 10),
@@ -27,5 +27,4 @@ class DigitalIdentityRepo {
       throw HttpException(getMessage(response.statusCode));
     }
   }
-
 }

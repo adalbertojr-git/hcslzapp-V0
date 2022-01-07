@@ -10,7 +10,7 @@ class PaymentRepo {
   Future<List<Payment>> findAll() async {
     final Response response = await client
         .get(
-          mainUrl + _paymentUrl + "/list",
+          Uri.parse(mainUrl + _paymentUrl + "/list"),
         )
         .timeout(
           Duration(seconds: 10),
@@ -30,7 +30,7 @@ class PaymentRepo {
   Future<List<Payment>> findByAssociatedIdToList(int id) async {
     final Response response = await client
         .get(
-          mainUrl + _paymentUrl + '/list/' + id.toString(),
+          Uri.parse(mainUrl + _paymentUrl + '/list/' + id.toString()),
         )
         .timeout(
           Duration(seconds: 10),
@@ -53,7 +53,7 @@ class PaymentRepo {
     );
     final Response response = await client
         .post(
-          mainUrl + _paymentUrl,
+          Uri.parse(mainUrl + _paymentUrl),
           headers: {
             'Content-type': 'application/json',
           },
@@ -77,7 +77,7 @@ class PaymentRepo {
     );
     final Response response = await client
         .put(
-          mainUrl + _paymentUrl + "/update/" + payment.id.toString(),
+          Uri.parse(mainUrl + _paymentUrl + "/update/" + payment.id.toString()),
           headers: {
             'Content-type': 'application/json',
           },
@@ -100,7 +100,7 @@ class PaymentRepo {
       payment.toJson(),
     );
     final Response response = await client.delete(
-      mainUrl + _paymentUrl + "/" + payment.id.toString(),
+      Uri.parse(mainUrl + _paymentUrl + "/" + payment.id.toString()),
       headers: {
         'Content-type': 'application/json',
       },
