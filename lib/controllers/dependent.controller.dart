@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:hcslzapp/enums/blood.types.dart';
-import 'package:hcslzapp/models/dependent.dart';
+import '../enums/blood.types.dart';
+import '../models/dependent.dart';
 import 'package:mobx/mobx.dart';
 
 part 'dependent.controller.g.dart';

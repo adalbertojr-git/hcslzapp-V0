@@ -2,8 +2,8 @@ import 'dart:async';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:hcslzapp/models/associated.dart';
-import 'package:hcslzapp/models/dependent.dart';
-import 'package:hcslzapp/models/motorcycle.dart';
+/*import 'package:hcslzapp/models/dependent.dart';
+import 'package:hcslzapp/models/motorcycle.dart';*/
 import 'package:hcslzapp/repositories/associated.repo.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:mobx/mobx.dart';
@@ -167,8 +167,8 @@ abstract class AssociatedUpdateControllerBase with Store {
     associated.status = currentStatus;
     associated.dateBirth = dateBirthCtrl.text;
     associated.dateShield = dateShieldCtrl.text;
-    associated.dependents = List<Dependent>.from(dependents);
-    associated.motorcycles = List<Motorcycle>.from(motorcycles);
+    //associated.dependents = List<Dependent>.from(dependents);
+    //associated.motorcycles = List<Motorcycle>.from(motorcycles);
     if (photo != null) {
       //se houve alteração de foto
       await _uploadPhoto().then((value) => associated.photoUrl = value);

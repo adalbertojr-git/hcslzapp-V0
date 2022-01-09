@@ -1,4 +1,4 @@
-import 'package:hcslzapp/models/authenticate.dart';
+import '../models/authenticate.dart';
 import 'package:mobx/mobx.dart';
 
 part 'item.model.g.dart';
@@ -16,25 +16,25 @@ abstract class ItemModelBase with Store {
       this.check});
 
   @observable
-  int id;
+  int? id;
 
   @observable
-  String name;
+  String? name;
 
   @observable
-  String phone;
+  String? phone;
 
   @observable
-  String status;
+  String? status;
 
   @observable
-  Authenticate authenticate;
+  Authenticate? authenticate;
 
   @observable
-  String email;
+  String? email;
 
   @observable
-  bool check;
+  bool? check;
 
   @action
   setCheck(bool value) => check = value;

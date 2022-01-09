@@ -1,15 +1,15 @@
 import 'package:flutter/material.dart';
-import 'package:hcslzapp/common/associated.profiles.dart';
-import 'package:hcslzapp/models/associated.dart';
-import 'package:hcslzapp/models/role.dart';
-import 'package:hcslzapp/pages/about/about.page.dart';
-import 'package:hcslzapp/pages/associated/associated.update.page.dart';
-import 'package:hcslzapp/pages/digital.identity/digital.identity.page.dart';
+import '../models/role.dart';
+import '../common/associated.profiles.dart';
+import '../models/associated.dart';
+import '../pages/about/about.page.dart';
+import '../pages/associated/associated.update.page.dart';
+/*import 'package:hcslzapp/pages/digital.identity/digital.identity.page.dart';
 import 'package:hcslzapp/pages/dtc.code/dtc.code.dashboard.page.dart';
 import 'package:hcslzapp/pages/event/event.calendar.page.dart';
 import 'package:hcslzapp/pages/partnership/partnership.list.associated.page.dart';
 import 'package:hcslzapp/pages/partnership/partnership.list.adm.page.dart';
-import 'package:hcslzapp/pages/payment/payment.associated.page.dart';
+import 'package:hcslzapp/pages/payment/payment.associated.page.dart';*/
 import 'package:mobx/mobx.dart';
 
 part 'dashboard.controller.g.dart';
@@ -70,59 +70,59 @@ abstract class DashboardControllerBase with Store {
     bool isAdmin,
     Associated associated,
   ) async {
-    await Navigator.push(
+/*    await Navigator.push(
       context,
       MaterialPageRoute(
         builder: (context) =>
             PaymentAssociatedPage(selectedProfile, associated),
       ),
-    );
+    );*/
   }
 
   loadDigitalIdentityPage(
     BuildContext context,
     Associated associated,
   ) async {
-    await Navigator.push(
+/*    await Navigator.push(
       context,
       MaterialPageRoute(
         builder: (context) => DigitalIdentityPage(associated),
       ),
-    );
+    );*/
   }
 
   loadPartnershipListAssociatedPage(
     BuildContext context,
   ) async {
-    await Navigator.push(
+/*    await Navigator.push(
       context,
       MaterialPageRoute(
         builder: (context) => PartnershipListAssociatedPage(),
       ),
-    );
+    );*/
   }
 
   loadEventCalendarPage(
     BuildContext context,
     String user,
   ) async {
-    await Navigator.push(
+/*    await Navigator.push(
       context,
       MaterialPageRoute(
         builder: (context) => EventCalendarPage(user),
       ),
-    );
+    );*/
   }
 
   loadDtcCodeDashboardPage(
     BuildContext context,
   ) async {
-    await Navigator.push(
+/*    await Navigator.push(
       context,
       MaterialPageRoute(
         builder: (context) => DtcCodeDashboardPage(),
       ),
-    );
+    );*/
   }
 
   loadAboutPage(
