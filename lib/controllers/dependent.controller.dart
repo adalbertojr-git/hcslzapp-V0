@@ -11,34 +11,34 @@ abstract class DependentControllerBase with Store {
   var formController;
 
   @observable
-  var idCtrl = TextEditingController();
+  TextEditingController? idCtrl = TextEditingController();
 
   @observable
   TextEditingController? nameCtrl = TextEditingController();
 
   @observable
-  var phoneCtrl = TextEditingController();
+  TextEditingController? phoneCtrl = TextEditingController();
 
   @observable
-  var emailCtrl = TextEditingController();
+  TextEditingController? emailCtrl = TextEditingController();
 
   @observable
-  var cpfCtrl = TextEditingController();
+  TextEditingController? cpfCtrl = TextEditingController();
 
   @observable
-  var bloodTypeCtrl = TextEditingController();
+  TextEditingController? bloodTypeCtrl = TextEditingController();
 
   @observable
-  var dateBirthCtrl = TextEditingController();
+  TextEditingController? dateBirthCtrl = TextEditingController();
 
   @observable
-  var isAssociatedCtrl = TextEditingController();
+  TextEditingController? isAssociatedCtrl = TextEditingController();
 
   @observable
   bool isAssociated = false;
 
   @observable
-  late String? currentBloodType;
+  late String currentBloodType;
 
   @observable
   late Dependent dependent;
@@ -54,7 +54,7 @@ abstract class DependentControllerBase with Store {
 
     //String a = b ?? 'hello';
     //This means a equals b, but if b is null then a equals 'hello'.
-    currentBloodType = dependent?.bloodType ?? getBloodTypes().first.value;
+    currentBloodType = (dependent?.bloodType ?? getBloodTypes().first.value)!;
 
 /*    isAssociated = (dependent != null
         ? (dependent.isAssociated == 'S' ? true : false)
@@ -69,32 +69,32 @@ abstract class DependentControllerBase with Store {
 
   _initTextFields() {
     nameCtrl?.text = dependent.name;
-    emailCtrl.text = dependent != null ? dependent.email : null;
-    phoneCtrl.text = dependent != null ? dependent.phone : null;
-    cpfCtrl.text = dependent != null ? dependent.cpf : null;
-    dateBirthCtrl.text = dependent != null ? dependent.dateBirth : null;
+    emailCtrl?.text = dependent.email;
+    phoneCtrl?.text = dependent.phone;
+    cpfCtrl?.text = dependent.cpf;
+    dateBirthCtrl?.text = dependent.dateBirth;
   }
 
   String changedDropDownItem(selected) => currentBloodType = selected;
 
   add(BuildContext context) {
-    idCtrl.text = "0";
-    final int id = int.parse(idCtrl.text);
-    final String name = nameCtrl.text;
-    final String email = emailCtrl.text;
-    final String phone = phoneCtrl.text;
-    final String cpf = cpfCtrl.text;
-    final String bloodType = currentBloodType;
-    final String dateBirth = dateBirthCtrl.text;
+    idCtrl?.text = "0";
+    final int? id = int.parse(idCtrl.text);
+    final String? name = nameCtrl?.text;
+    final String? email = emailCtrl?.text;
+    final String? phone = phoneCtrl?.text;
+    final String? cpf = cpfCtrl?.text;
+    final String? bloodType = currentBloodType;
+    final String? dateBirth = dateBirthCtrl?.text;
     if (name != '') {
       final dependent = Dependent(
-        id,
-        name,
-        email,
-        phone,
-        cpf,
-        bloodType,
-        dateBirth,
+        id!,
+        name!,
+        email!,
+        phone!,
+        cpf!,
+        bloodType!,
+        dateBirth!,
         (isAssociated ? 'S' : 'N'),
       );
       /*

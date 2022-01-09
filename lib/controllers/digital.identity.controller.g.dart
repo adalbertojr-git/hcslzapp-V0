@@ -170,13 +170,13 @@ mixin _$DigitalIdentityController on DigitalIdentityControllerBase, Store {
   final _$futureAtom = Atom(name: 'DigitalIdentityControllerBase.future');
 
   @override
-  Future<List<DigitalIdentity>> get future {
+  Future<dynamic> get future {
     _$futureAtom.reportRead();
     return super.future;
   }
 
   @override
-  set future(Future<List<DigitalIdentity>> value) {
+  set future(Future<dynamic> value) {
     _$futureAtom.reportWrite(value, super.future, () {
       super.future = value;
     });

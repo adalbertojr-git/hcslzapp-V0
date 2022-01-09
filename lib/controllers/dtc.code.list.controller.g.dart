@@ -97,13 +97,13 @@ mixin _$DtcCodeListController on DtcCodeListControllerBase, Store {
   final _$futureAtom = Atom(name: 'DtcCodeListControllerBase.future');
 
   @override
-  Future<List<DtcCode>> get future {
+  Future<dynamic> get future {
     _$futureAtom.reportRead();
     return super.future;
   }
 
   @override
-  set future(Future<List<DtcCode>> value) {
+  set future(Future<dynamic> value) {
     _$futureAtom.reportWrite(value, super.future, () {
       super.future = value;
     });

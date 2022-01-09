@@ -103,13 +103,13 @@ mixin _$DtcCodeAbbreviationListController
       Atom(name: 'DtcCodeAbbreviationListControllerBase.future');
 
   @override
-  Future<List<DtcCodeAbbreviation>> get future {
+  Future<dynamic> get future {
     _$futureAtom.reportRead();
     return super.future;
   }
 
   @override
-  set future(Future<List<DtcCodeAbbreviation>> value) {
+  set future(Future<dynamic> value) {
     _$futureAtom.reportWrite(value, super.future, () {
       super.future = value;
     });
