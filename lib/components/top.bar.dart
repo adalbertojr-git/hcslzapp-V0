@@ -3,9 +3,9 @@ import 'package:flutter/material.dart';
 const String _pathLogo = 'assets/imgs/logo.png';
 
 class TopBar extends StatelessWidget {
-  final String title;
+  final String? title;
 
-  TopBar({required this.title});
+  TopBar({this.title});
 
   @override
   Widget build(BuildContext context) {
@@ -30,13 +30,12 @@ class TopBar extends StatelessWidget {
                   color: Colors.black,
                 ),
               ),
-              this.title != null
-                  ? Text(
-                      this.title,
-                      style: TextStyle(fontSize: 14.0,
-                      ),
-                    )
-                  : Container(),
+              Text(
+                this.title ?? "",
+                style: TextStyle(
+                  fontSize: 14.0,
+                ),
+              ),
               SizedBox(
                 height: 35.0,
                 child: Container(

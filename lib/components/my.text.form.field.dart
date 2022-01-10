@@ -3,45 +3,45 @@ import 'package:mask_text_input_formatter/mask_text_input_formatter.dart';
 
 class MyTextFormField extends StatelessWidget {
   TextEditingController textEditingController;
-  String helper;
-  String hint;
-  IconData icon;
-  TextInputType inputType;
-  bool hidden;
-  bool disabled;
-  String prefix;
-  int nLines;
-  String label;
-  double fontSize;
-  String text;
-  Function(String) onChanged;
-  String errorText;
-  MaskTextInputFormatter maskTextInputFormatter;
-  int maxLength;
-  TextAlign textAlign;
+  String? helper;
+  String? hint;
+  IconData? icon;
+  TextInputType? inputType;
+  bool? hidden;
+  bool? disabled;
+  String? prefix;
+  int? nLines;
+  String? label;
+  double? fontSize;
+  String? text;
+  Function(String)? onChanged;
+  String? errorText;
+  MaskTextInputFormatter? maskTextInputFormatter;
+  int? maxLength;
+  TextAlign? textAlign;
 
   MyTextFormField(
       {required this.textEditingController,
-      required this.helper,
-      required this.hint,
-      required this.icon,
-      required this.inputType,
-      required this.hidden,
-      required this.disabled,
-      required this.prefix,
-      required this.label,
-      required this.nLines,
-      required this.fontSize,
-      required this.text,
-      required this.onChanged,
-      required this.errorText,
-      required this.maskTextInputFormatter,
-      required this.maxLength,
-      required this.textAlign});
+      this.helper,
+      this.hint,
+      this.icon,
+      this.inputType,
+      this.hidden,
+      this.disabled,
+      this.prefix,
+      this.label,
+      this.nLines,
+      this.fontSize,
+      this.text,
+      this.onChanged,
+      this.errorText,
+      this.maskTextInputFormatter,
+      this.maxLength,
+      this.textAlign});
 
   @override
   Widget build(BuildContext context) {
-    textEditingController.text = text;
+    textEditingController.text = text!;
     textEditingController.selection = TextSelection.fromPosition(TextPosition(
       offset: textEditingController.text.length,
     ));
@@ -49,13 +49,13 @@ class MyTextFormField extends StatelessWidget {
       padding: const EdgeInsets.fromLTRB(2.0, 3.0, 2.0, 3.0),
       child: TextFormField(
         textCapitalization: TextCapitalization.words,
-        obscureText: hidden != null ? hidden : false,
-        readOnly: disabled != null ? disabled : false,
+        obscureText: hidden ?? false,
+        readOnly: disabled ?? false,
         style: TextStyle(
           fontSize: fontSize != null ? fontSize : 15.0,
         ),
-        textAlign: textAlign != null ? textAlign : TextAlign.left,
-        maxLength: maxLength != null ? maxLength : null,
+        textAlign: textAlign ?? TextAlign.left,
+        maxLength: maxLength ?? null,
         decoration: InputDecoration(
           focusedBorder: OutlineInputBorder(
             borderSide: BorderSide(
@@ -78,7 +78,7 @@ class MyTextFormField extends StatelessWidget {
             ),
           ),
           fillColor: Colors.black26,
-          filled: disabled != null ? true : false,
+          filled: disabled ?? false,
           icon: icon != null
               ? Icon(
                   icon,
@@ -98,18 +98,18 @@ class MyTextFormField extends StatelessWidget {
             color: Colors.black45,
           ),
           prefixText: prefix,
-          errorText: errorText == null ? null : errorText,
+          errorText: errorText ?? null,
           errorStyle: TextStyle(
             fontSize: 11.0,
             color: Colors.red,
           ),
         ),
         keyboardType: inputType,
-        maxLines: nLines != null ? nLines : 1,
+        maxLines: nLines ?? 1,
         controller: textEditingController,
         onChanged: onChanged,
-        inputFormatters:
-            maskTextInputFormatter == null ? null : [maskTextInputFormatter],
+/*        inputFormatters:
+            maskTextInputFormatter == null ? null : [maskTextInputFormatter],*/
       ),
     );
   }
