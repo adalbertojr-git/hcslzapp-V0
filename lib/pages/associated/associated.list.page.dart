@@ -29,7 +29,7 @@ class AssociatedListPageState extends State<AssociatedListPage> {
   @override
   void initState() {
     _controller.getFuture().then((value) {
-      if (value != null && value.isNotEmpty) {
+      if (value.isNotEmpty) {
         _controller.setButtonVisibilty();
       }
     });

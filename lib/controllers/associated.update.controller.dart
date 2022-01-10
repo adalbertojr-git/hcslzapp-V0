@@ -1,10 +1,10 @@
 import 'dart:async';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
-import 'package:hcslzapp/models/associated.dart';
-/*import 'package:hcslzapp/models/dependent.dart';
-import 'package:hcslzapp/models/motorcycle.dart';*/
-import 'package:hcslzapp/repositories/associated.repo.dart';
+import '../models/associated.dart';
+import '../models/dependent.dart';
+import '../models/motorcycle.dart';
+import '../repositories/associated.repo.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:mobx/mobx.dart';
 import 'dart:io';
@@ -81,8 +81,7 @@ abstract class AssociatedUpdateControllerBase with Store {
   late String errorMsg;
 
   @observable
-  //late Future<List<Associated>> future;
-  late Future future;
+  late Future<List<Associated>> future;
 
   @observable
   late String currentBloodType;
@@ -136,7 +135,7 @@ abstract class AssociatedUpdateControllerBase with Store {
   bool get hasErrorEmail => validateEmail() != null;
 
   @action
-  Future findByIdToList(int id) => ObservableFuture(
+  Future<List<Associated>> findByIdToList(int id) => ObservableFuture(
               _associatedRepo.findByIdToList(id).then((value) => value))
           .catchError((e) {
         errorMsg = "${e.message}";
@@ -148,10 +147,7 @@ abstract class AssociatedUpdateControllerBase with Store {
         errorMsg = "${e.message}";
       }, test: (e) => e is Exception);
 
-/*  Future<List<Associated>> getFuture(int _associatedId) =>
-      future = findByIdToList(_associatedId);*/
-
-  Future getFuture(int _associatedId) =>
+  Future<List<Associated>> getFuture(int _associatedId) =>
       future = findByIdToList(_associatedId);
 
   Future<Associated> _setValues() async {

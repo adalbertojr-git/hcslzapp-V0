@@ -18,7 +18,7 @@ const String mainUrl = 'http://10.11.153.168:8080';
 // via wifi celular
 //const String mainUrl = 'http://192.168.43.8:8080';
 
-String? getMessage(int statusCode) {
+String getMessage(int statusCode) {
   if(_statusCodeResponses.containsKey(statusCode)){
     return _statusCodeResponses[statusCode];
   }

@@ -230,13 +230,13 @@ mixin _$AccessRequestController on AccessRequestControllerBase, Store {
   final _$futureAtom = Atom(name: 'AccessRequestControllerBase.future');
 
   @override
-  Future<dynamic> get future {
+  Future<List<AccessRequest>> get future {
     _$futureAtom.reportRead();
     return super.future;
   }
 
   @override
-  set future(Future<dynamic> value) {
+  set future(Future<List<AccessRequest>> value) {
     _$futureAtom.reportWrite(value, super.future, () {
       super.future = value;
     });
@@ -262,7 +262,7 @@ mixin _$AccessRequestController on AccessRequestControllerBase, Store {
       ActionController(name: 'AccessRequestControllerBase');
 
   @override
-  Future<dynamic> findAll() {
+  Future<List<AccessRequest>> findAll() {
     final _$actionInfo = _$AccessRequestControllerBaseActionController
         .startAction(name: 'AccessRequestControllerBase.findAll');
     try {

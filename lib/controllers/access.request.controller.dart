@@ -57,8 +57,7 @@ abstract class AccessRequestControllerBase with Store {
   late String errorMsg;
 
   @observable
-  //late Future<List<AccessRequest>> future;
-  late Future future;
+  late Future<List<AccessRequest>> future;
 
   @observable
   AccessRequestRepo _accessRequestRepo = AccessRequestRepo();
@@ -75,7 +74,7 @@ abstract class AccessRequestControllerBase with Store {
   }
 
   @action
-  Future findAll() => accessRequestListFuture =
+  Future<List<AccessRequest>> findAll() => accessRequestListFuture =
           ObservableFuture(_accessRequestRepo.findAll().then((value) => value))
               .catchError((e) {
         errorMsg = "${e.message}";
@@ -106,8 +105,7 @@ abstract class AccessRequestControllerBase with Store {
   @action
   bool setButtonVisibilty() => isHidedButton = !isHidedButton;
 
- //Future<List<AccessRequest?>> getFuture() => future = findAll();
- Future getFuture() => future = findAll();
+ Future<List<AccessRequest>> getFuture() => future = findAll();
 
   AccessRequest _setValues() {
     return AccessRequest(

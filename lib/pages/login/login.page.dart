@@ -1,16 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
-import 'package:hcslzapp/common/labels.and.hints.dart';
-import 'package:hcslzapp/common/token.details.dart';
-import 'package:hcslzapp/components/button.dart';
-import 'package:hcslzapp/components/my.text.form.field.dart';
-import 'package:hcslzapp/controllers/login.controller.dart';
-import 'package:hcslzapp/models/token.dart';
-import 'package:hcslzapp/pages/dashboard/dashboard.page.dart';
+import '../../common/labels.and.hints.dart';
+import '../../common/token.details.dart';
+import '../../components/button.dart';
+import '../../components/my.text.form.field.dart';
+import '../../controllers/login.controller.dart';
+import '../../models/token.dart';
+import '../dashboard/dashboard.page.dart';
 import 'package:asuka/asuka.dart' as asuka;
-import 'package:hcslzapp/pages/access.request/access.request.add.page.dart';
-import '../forgot.password/forgot.password.page.dart';
+import '../access.request/access.request.add.page.dart';
+//import '../forgot.password/forgot.password.page.dart';
 
 const String _pathLogoImage = 'assets/imgs/logo.png';
 const String _labelForgotPsw = 'Esqueceu a senha?';
@@ -79,11 +79,11 @@ class LoginPage extends StatelessWidget {
                     children: [
                       FlatButton(
                         onPressed: () {
-                          Navigator.push(
+/*                          Navigator.push(
                             context,
                             MaterialPageRoute(
                                 builder: (context) => ForgotPasswordPage()),
-                          );
+                          );*/
                         },
                         child: Text(
                           _labelForgotPsw,

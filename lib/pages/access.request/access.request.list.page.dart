@@ -28,7 +28,7 @@ class AccessRequestListPageState extends State<AccessRequestListPage> {
 
   @override
   void initState() {
-    _controller.getFuture().then((value) {
+    _controller.getFuture()?.then((value) {
       if (value != null && value.isNotEmpty) {
         _controller.setButtonVisibilty();
       }
@@ -61,7 +61,7 @@ class AccessRequestListPageState extends State<AccessRequestListPage> {
                         title: _title,
                         message: _controller.errorMsg,
                       );
-                    if (snapshot.data.length > 0) {
+                    if (snapshot.data?.length > 0) {
                       _controller.init();
 /*                      _controller.accessRequests.addAll(snapshot.data);
                       _controller.accessRequests.sort(

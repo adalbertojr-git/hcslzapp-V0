@@ -29,8 +29,7 @@ abstract class AssociatedListControllerBase with Store {
   late String errorMsg;
 
   @observable
-  //late Future<List<Associated>> future;
-  late Future future;
+  late Future<List<Associated>> future;
 
   @observable
   String filter = '';
@@ -43,14 +42,13 @@ abstract class AssociatedListControllerBase with Store {
   bool setButtonVisibilty() => isHidedButton = !isHidedButton;
 
   @action
-  Future findAll() =>
+  Future<List<Associated>>  findAll() =>
       ObservableFuture(_associatedRepo.findAll().then((value) => value))
           .catchError((e) {
         errorMsg = "${e.message}";
       }, test: (e) => e is Exception);
 
-  //Future<List<Associated>> getFuture() => future = findAll();
-  Future getFuture() => future = findAll();
+  Future<List<Associated>> getFuture() => future = findAll();
 
   @action
   setFilter(String value) => filter = value;

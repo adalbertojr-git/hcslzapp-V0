@@ -1,7 +1,7 @@
 import 'dart:async';
 import 'dart:convert';
-import 'package:hcslzapp/http/http.exception.dart';
-import 'package:hcslzapp/models/access.request.dart';
+import '../http/http.exception.dart';
+import '../models/access.request.dart';
 import 'package:http/http.dart';
 import '../common/settings.dart';
 
