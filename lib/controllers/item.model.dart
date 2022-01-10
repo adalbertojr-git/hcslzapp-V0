@@ -7,7 +7,7 @@ class ItemModel = ItemModelBase with _$ItemModel;
 
 abstract class ItemModelBase with Store {
   ItemModelBase(
-      {this.id,
+      {required this.id,
       this.name,
       this.phone,
       this.status,
@@ -16,7 +16,7 @@ abstract class ItemModelBase with Store {
       this.check});
 
   @observable
-  int? id;
+  int id;
 
   @observable
   String? name;

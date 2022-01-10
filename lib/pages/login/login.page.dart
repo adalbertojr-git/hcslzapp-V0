@@ -126,7 +126,7 @@ class LoginPage extends StatelessWidget {
 
   _login(BuildContext context) {
     _controller.setLoading(true);
-    _controller.errorMsg = null;
+    _controller.errorMsg = "";
     _controller.authenticate().then(
       (token) async {
         if (_controller.errorMsg != null) {

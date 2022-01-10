@@ -341,13 +341,13 @@ mixin _$AssociatedUpdateController on AssociatedUpdateControllerBase, Store {
   final _$futureAtom = Atom(name: 'AssociatedUpdateControllerBase.future');
 
   @override
-  Future<dynamic> get future {
+  Future<List<Associated>> get future {
     _$futureAtom.reportRead();
     return super.future;
   }
 
   @override
-  set future(Future<dynamic> value) {
+  set future(Future<List<Associated>> value) {
     _$futureAtom.reportWrite(value, super.future, () {
       super.future = value;
     });
@@ -443,7 +443,7 @@ mixin _$AssociatedUpdateController on AssociatedUpdateControllerBase, Store {
   }
 
   @override
-  Future<dynamic> findByIdToList(int id) {
+  Future<List<Associated>> findByIdToList(int id) {
     final _$actionInfo = _$AssociatedUpdateControllerBaseActionController
         .startAction(name: 'AssociatedUpdateControllerBase.findByIdToList');
     try {

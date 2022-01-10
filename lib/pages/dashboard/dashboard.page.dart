@@ -87,7 +87,7 @@ class _DashboardPageState extends State<DashboardPage> {
   DashboardController _controller = DashboardController();
   BuildContext _gContext;
 
-  List<Widget> _listAdmWidgets;
+  late List<Widget> _listAdmWidgets;
 
   @override
   void initState() {
@@ -102,9 +102,9 @@ class _DashboardPageState extends State<DashboardPage> {
     _gContext = context;
     _listAdmWidgets = [
       AssociatedListPage(),
-      PaymentListPage(_controller.selectedProfile),
-      EventCalendarPage(_controller.selectedProfile),
-      PartnershipListAdmPage(),
+      //PaymentListPage(_controller.selectedProfile),
+      //EventCalendarPage(_controller.selectedProfile),
+      //PartnershipListAdmPage(),
     ];
     return Scaffold(
       appBar: _appBar(),
@@ -450,12 +450,11 @@ class _DashboardPageState extends State<DashboardPage> {
               _labelAdministrationDescr,
               Icons.admin_panel_settings,
               onClick: () {
-                Navigator.push(
+/*                Navigator.push(
                   _gContext,
                   MaterialPageRoute(
                       builder: (_gContext) => ManagementListPage()),
-                );
-                //_showContactsList(context);
+                );*/
               },
             ),
           ],

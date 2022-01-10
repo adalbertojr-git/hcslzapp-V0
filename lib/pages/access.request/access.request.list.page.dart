@@ -149,7 +149,7 @@ class AccessRequestListPageState extends State<AccessRequestListPage> {
 }
 
 class CheckboxWidget extends StatelessWidget {
-  const CheckboxWidget({Key key, this.item, this.controller}) : super(key: key);
+  const CheckboxWidget({required this.item, required this.controller});
 
   final ItemModel item;
   final AccessRequestController controller;
@@ -173,22 +173,23 @@ class CheckboxWidget extends StatelessWidget {
         child: CheckboxListTile(
           controlAffinity: ListTileControlAffinity.leading,
           title: Text(
-            item.name,
+            item.name!,
             style: TextStyle(
               fontWeight: FontWeight.bold,
             ),
           ),
-          subtitle: Text(item.email),
+          subtitle: Text(item.email!),
           value: item.check,
-          onChanged: (bool value) {
-            item.check = value;
+/*          onChanged: (bool nvalue) {
+            item.check = nvalue;
             if (value) {
               controller.ids.add(item.id);
               controller.accessRequests.add(item);
             } else {
               controller.ids.remove(item.id);
             }
-          },
+          },*/
+        onChanged: _onChanged,
           secondary: GestureDetector(
             child: Icon(
               Icons.delete,
@@ -200,6 +201,16 @@ class CheckboxWidget extends StatelessWidget {
         ),
       ),
     );
+  }
+
+  _onChanged (bool? value) {
+    item.check = value;
+    if (value!) {
+      controller.ids.add(item.id);
+      controller.accessRequests.add(item);
+    } else {
+      controller.ids.remove(item.id);
+    }
   }
 
   _delete(ItemModel item, BuildContext context) async {
