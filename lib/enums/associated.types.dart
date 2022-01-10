@@ -19,15 +19,17 @@ extension AssociatedTypeExt on AssociatedType {
   }
 
   //about property returns the custom message
-  String get description => associatedTypesMap[this];
+  String? get description => associatedTypesMap[this];
 }
 
 List<DropdownMenuItem<String>> getAssociatedTypes() {
-  List _associatedTypes = List();
-  List<DropdownMenuItem<String>> types = new List();
-  AssociatedType.values.forEach((v) => _associatedTypes.add(v.description));
+  List<String> _associatedTypes = List<String>.empty(growable: true);
+  List<DropdownMenuItem<String>> types =
+      List<DropdownMenuItem<String>>.empty(growable: true);
+  AssociatedType.values
+      .forEach((v) => _associatedTypes.add(v.description ?? ""));
   for (String type in _associatedTypes) {
-    types.add(new DropdownMenuItem(value: type, child: new Text(type)));
+    types.add(DropdownMenuItem(value: type, child: Text(type)));
   }
   return types;
 }

@@ -1,7 +1,7 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
-import 'package:hcslzapp/models/associated.dart';
-import 'package:hcslzapp/repositories/associated.repo.dart';
+import '../../models/associated.dart';
+import '../repositories/associated.repo.dart';
 import 'package:mobx/mobx.dart';
 
 part 'associated.list.controller.g.dart';

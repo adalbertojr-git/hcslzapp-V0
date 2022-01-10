@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/painting.dart';
-import 'package:hcslzapp/components/top.bar.dart';
+import '../../components/top.bar.dart';
 
 const String _pathLogoImage = 'assets/imgs/logo.png';
 const String _pathAboutImage = 'assets/imgs/sobre.jpeg';

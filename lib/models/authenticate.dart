@@ -5,19 +5,18 @@ class Authenticate {
   String username;
   List<Role> roles;
 
-  Authenticate({this.id, this.username, this.roles});
+  Authenticate({required this.id, required this.username, required this.roles});
 
   Authenticate.fromJson(Map<String, dynamic> json)
       : id = json['id'],
         username = json['username'],
-        roles = List.from((json['roles'] as List)
-            .map((roles) => Role.fromJson(roles)));
+        roles = List.from(
+            (json['roles'] as List).map((roles) => Role.fromJson(roles)));
 
   Map<String, dynamic> toJson() => {
         'id': id,
         'username': username,
-        'roles': List<dynamic>.from(
-            roles.map((roles) => roles.toJson())),
+        'roles': List<dynamic>.from(roles.map((roles) => roles.toJson())),
       };
 
   @override
@@ -25,4 +24,3 @@ class Authenticate {
     return 'Authenticate{id: $id, username: $username, roles: $roles}';
   }
 }
-

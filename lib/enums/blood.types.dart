@@ -29,15 +29,16 @@ extension BloodTypeExt on BloodType {
   }
 
   //about property returns the custom message
-  String get description => bloodTypesMap[this];
+  String? get description => bloodTypesMap[this];
 }
 
 List<DropdownMenuItem<String>> getBloodTypes() {
-  List _bloodTypes = List();
-  List<DropdownMenuItem<String>> types = new List();
-  BloodType.values.forEach((v) => _bloodTypes.add(v.description));
+  List<String> _bloodTypes = List<String>.empty(growable: true);
+  List<DropdownMenuItem<String>> types =
+      List<DropdownMenuItem<String>>.empty(growable: true);
+  BloodType.values.forEach((v) => _bloodTypes.add(v.description ?? ""));
   for (String type in _bloodTypes) {
-    types.add(new DropdownMenuItem(value: type, child: new Text(type)));
+    types.add(DropdownMenuItem(value: type, child: new Text(type)));
   }
   return types;
 }

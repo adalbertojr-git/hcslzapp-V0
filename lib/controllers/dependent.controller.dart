@@ -11,28 +11,28 @@ abstract class DependentControllerBase with Store {
   var formController;
 
   @observable
-  TextEditingController? idCtrl = TextEditingController();
+  late TextEditingController idCtrl = TextEditingController();
 
   @observable
-  TextEditingController? nameCtrl = TextEditingController();
+  late TextEditingController nameCtrl = TextEditingController();
 
   @observable
-  TextEditingController? phoneCtrl = TextEditingController();
+  late TextEditingController phoneCtrl = TextEditingController();
 
   @observable
-  TextEditingController? emailCtrl = TextEditingController();
+  late TextEditingController emailCtrl = TextEditingController();
 
   @observable
-  TextEditingController? cpfCtrl = TextEditingController();
+  late TextEditingController cpfCtrl = TextEditingController();
 
   @observable
-  TextEditingController? bloodTypeCtrl = TextEditingController();
+  late TextEditingController bloodTypeCtrl = TextEditingController();
 
   @observable
-  TextEditingController? dateBirthCtrl = TextEditingController();
+  late TextEditingController dateBirthCtrl = TextEditingController();
 
   @observable
-  TextEditingController? isAssociatedCtrl = TextEditingController();
+  late TextEditingController isAssociatedCtrl = TextEditingController();
 
   @observable
   bool isAssociated = false;
@@ -78,7 +78,7 @@ abstract class DependentControllerBase with Store {
   String changedDropDownItem(selected) => currentBloodType = selected;
 
   add(BuildContext context) {
-    idCtrl?.text = "0";
+    idCtrl.text = "0";
     final int? id = int.parse(idCtrl.text);
     final String? name = nameCtrl?.text;
     final String? email = emailCtrl?.text;

@@ -15,7 +15,7 @@ import 'package:http_interceptor/models/response_data.dart';
 
 class LoggingInterceptor implements InterceptorContract {
   @override
-  Future<RequestData> interceptRequest({RequestData data}) async {
+  Future<RequestData> interceptRequest({required RequestData data}) async {
 /*    print('---------- Request ---------- ');
     print('url: ${data.url}');
     print('body: ${data.body}');
@@ -25,7 +25,7 @@ class LoggingInterceptor implements InterceptorContract {
   }
 
   @override
-  Future<ResponseData> interceptResponse({ResponseData data}) async {
+  Future<ResponseData> interceptResponse({required ResponseData data}) async {
 /*    print('---------- Response ---------- ');
     print('status code: ${data.statusCode}');
     print('body: ${data.body}');

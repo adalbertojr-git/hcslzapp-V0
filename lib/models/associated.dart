@@ -1,6 +1,5 @@
-import 'package:hcslzapp/models/dependent.dart';
-import 'package:hcslzapp/models/motorcycle.dart';
-
+import 'dependent.dart';
+import 'motorcycle.dart';
 import 'authenticate.dart';
 
 class Associated {
@@ -22,22 +21,22 @@ class Associated {
   Authenticate authenticate;
 
   Associated(
-      {this.id,
-      this.name,
-      this.email,
-      this.phone,
-      this.sponsor,
-      this.cnh,
-      this.cpf,
-      this.bloodType,
-      this.associatedType,
-      this.dateBirth,
-      this.dateShield,
-      this.status,
-      this.photoUrl,
-      this.dependents,
-      this.motorcycles,
-      this.authenticate});
+      {required this.id,
+      required this.name,
+      required this.email,
+      required this.phone,
+      required this.sponsor,
+      required this.cnh,
+      required this.cpf,
+      required this.bloodType,
+      required this.associatedType,
+      required this.dateBirth,
+      required this.dateShield,
+      required this.status,
+      required this.photoUrl,
+      required this.dependents,
+      required this.motorcycles,
+      required this.authenticate});
 
   Associated.fromJson(Map<String, dynamic> json)
       : id = json['id'],

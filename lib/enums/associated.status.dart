@@ -7,8 +7,8 @@ enum Status {
 
 extension StatusExt on Status {
   static const StatusMap = {
-    Status.A: 'Ativo' ,
-    Status.I: 'Inativo' ,
+    Status.A: 'Ativo',
+    Status.I: 'Inativo',
   };
 
   //prints enum index and custom message
@@ -17,13 +17,14 @@ extension StatusExt on Status {
   }
 
   //about property returns the custom message
-  String get description => StatusMap[this];
+  String? get description => StatusMap[this];
 }
 
 List<DropdownMenuItem<String>> getStatus() {
-  List status = List();
-  List<DropdownMenuItem<String>> types = new List();
-  Status.values.forEach((v) => status.add(v.description));
+  List<String> status = List<String>.empty(growable: true);
+  List<DropdownMenuItem<String>> types =
+      List<DropdownMenuItem<String>>.empty(growable: true);
+  Status.values.forEach((v) => status.add(v.description ?? ""));
   for (String type in status) {
     types.add(new DropdownMenuItem(value: type, child: new Text(type)));
   }
