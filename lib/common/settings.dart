@@ -17,18 +17,3 @@ const String mainUrl = 'http://10.11.153.168:8080';
 //const String mainUrl = 'http://192.168.100.65:8080';
 // via wifi celular
 //const String mainUrl = 'http://192.168.43.8:8080';
-
-String getMessage(int statusCode) {
-  if(_statusCodeResponses.containsKey(statusCode)){
-    return _statusCodeResponses[statusCode];
-  }
-  return 'unknown error';
-}
-
-final Map<int, String> _statusCodeResponses = {
-  400: 'Erro na transação devido a informações inválidas no formulário',
-  401: 'Falha na autenticação do usuário',
-  404: 'Pagina web não encontrada',
-  405: 'Método (GET, POST, etc) requisitado não suportado',
-  409: 'Erro de conflito pois o arquivo já existe'
-};

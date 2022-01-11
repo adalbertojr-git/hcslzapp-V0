@@ -69,7 +69,7 @@ class AccessRequestListPageState extends State<AccessRequestListPage> {
                       );*/
                       _controller.loadRequests((snapshot.data)!);
                       _controller.listItems.sort(
-                        (a, b) => a.name.compareTo(b.name),
+                        (a, b) => a.name?.compareTo(b.name),
                       );
                       return _widgets();
                     } else

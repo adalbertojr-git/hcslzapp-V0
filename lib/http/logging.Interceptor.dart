@@ -1,14 +1,3 @@
-/*
-Autor: Adalberto Jr.
-App: HCSlz
-Todos os direitos reservados ao Harley Club de Sao Luis
-2020
-
-Descriçao: classe que permite interceptar os diferentes pedidos e respostas do
-pacote http do Dart. Você pode usar para adicionar cabeçalhos, modificar
-parâmetros de consulta ou imprimir um log da resposta.
-
-*/
 import 'package:http_interceptor/http/interceptor_contract.dart';
 import 'package:http_interceptor/models/request_data.dart';
 import 'package:http_interceptor/models/response_data.dart';
