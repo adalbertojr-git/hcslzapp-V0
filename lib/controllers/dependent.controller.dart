@@ -14,25 +14,25 @@ abstract class DependentControllerBase with Store {
   late TextEditingController idCtrl = TextEditingController();
 
   @observable
-  late TextEditingController nameCtrl = TextEditingController();
+  late TextEditingController? nameCtrl = TextEditingController();
 
   @observable
-  late TextEditingController phoneCtrl = TextEditingController();
+  late TextEditingController? phoneCtrl = TextEditingController();
 
   @observable
-  late TextEditingController emailCtrl = TextEditingController();
+  late TextEditingController? emailCtrl = TextEditingController();
 
   @observable
-  late TextEditingController cpfCtrl = TextEditingController();
+  late TextEditingController? cpfCtrl = TextEditingController();
 
   @observable
-  late TextEditingController bloodTypeCtrl = TextEditingController();
+  late TextEditingController? bloodTypeCtrl = TextEditingController();
 
   @observable
-  late TextEditingController dateBirthCtrl = TextEditingController();
+  late TextEditingController? dateBirthCtrl = TextEditingController();
 
   @observable
-  late TextEditingController isAssociatedCtrl = TextEditingController();
+  late TextEditingController? isAssociatedCtrl = TextEditingController();
 
   @observable
   bool isAssociated = false;
@@ -41,7 +41,7 @@ abstract class DependentControllerBase with Store {
   late String currentBloodType;
 
   @observable
-  late Dependent dependent;
+  late Dependent? dependent;
 
   @action
   setAssociated() => isAssociated = !isAssociated;
@@ -59,20 +59,20 @@ abstract class DependentControllerBase with Store {
 /*    isAssociated = (dependent != null
         ? (dependent.isAssociated == 'S' ? true : false)
         : false);*/
-    isAssociated = (dependent.isAssociated == 'S' ? true : false);
+    isAssociated = (dependent?.isAssociated == 'S' ? true : false);
 
     formController = FormController(
-      name: dependent.name ?? '',
-      email: dependent.email ?? '',
+      name: dependent?.name ?? '',
+      email: dependent?.email ?? '',
     );
   }
 
   _initTextFields() {
-    nameCtrl?.text = dependent.name;
-    emailCtrl?.text = dependent.email;
-    phoneCtrl?.text = dependent.phone;
-    cpfCtrl?.text = dependent.cpf;
-    dateBirthCtrl?.text = dependent.dateBirth;
+    nameCtrl?.text = dependent?.name ?? "";
+    emailCtrl?.text = dependent?.email ?? "";
+    phoneCtrl?.text = dependent?.phone ?? "";
+    cpfCtrl?.text = dependent?.cpf ?? "";
+    dateBirthCtrl?.text = dependent?.dateBirth ?? "";
   }
 
   String changedDropDownItem(selected) => currentBloodType = selected;

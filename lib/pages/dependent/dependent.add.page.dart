@@ -12,7 +12,7 @@ import 'package:mask_text_input_formatter/mask_text_input_formatter.dart';
 const String _title = 'Dependente';
 
 class DependentAddPage extends StatefulWidget {
-  final Dependent dependent;
+  final Dependent? dependent;
 
   DependentAddPage(this.dependent);
 
@@ -25,7 +25,7 @@ class _DependentAddPageState extends State<DependentAddPage> {
 
   @override
   void initState() {
-    _controller.dependent = widget.dependent != null ? widget.dependent : null;
+    _controller.dependent = widget.dependent ?? null;
     _controller.init();
     super.initState();
   }

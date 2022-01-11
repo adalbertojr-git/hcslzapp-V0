@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:mask_text_input_formatter/mask_text_input_formatter.dart';
 
 class MyTextFormField extends StatelessWidget {
-  TextEditingController textEditingController;
+  TextEditingController? textEditingController;
   String? helper;
   String? hint;
   IconData? icon;
@@ -21,7 +21,7 @@ class MyTextFormField extends StatelessWidget {
   TextAlign? textAlign;
 
   MyTextFormField(
-      {required this.textEditingController,
+      {this.textEditingController,
       this.helper,
       this.hint,
       this.icon,
@@ -41,9 +41,9 @@ class MyTextFormField extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    textEditingController.text = text!;
-    textEditingController.selection = TextSelection.fromPosition(TextPosition(
-      offset: textEditingController.text.length,
+    textEditingController?.text = text!;
+    textEditingController?.selection = TextSelection.fromPosition(TextPosition(
+      offset: textEditingController?.text.length ?? 0,
     ));
     return Padding(
       padding: const EdgeInsets.fromLTRB(2.0, 3.0, 2.0, 3.0),
@@ -52,7 +52,7 @@ class MyTextFormField extends StatelessWidget {
         obscureText: hidden ?? false,
         readOnly: disabled ?? false,
         style: TextStyle(
-          fontSize: fontSize != null ? fontSize : 15.0,
+          fontSize: fontSize ?? 15.0,
         ),
         textAlign: textAlign ?? TextAlign.left,
         maxLength: maxLength ?? null,

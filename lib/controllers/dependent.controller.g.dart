@@ -27,13 +27,13 @@ mixin _$DependentController on DependentControllerBase, Store {
   final _$nameCtrlAtom = Atom(name: 'DependentControllerBase.nameCtrl');
 
   @override
-  TextEditingController get nameCtrl {
+  TextEditingController? get nameCtrl {
     _$nameCtrlAtom.reportRead();
     return super.nameCtrl;
   }
 
   @override
-  set nameCtrl(TextEditingController value) {
+  set nameCtrl(TextEditingController? value) {
     _$nameCtrlAtom.reportWrite(value, super.nameCtrl, () {
       super.nameCtrl = value;
     });
@@ -42,13 +42,13 @@ mixin _$DependentController on DependentControllerBase, Store {
   final _$phoneCtrlAtom = Atom(name: 'DependentControllerBase.phoneCtrl');
 
   @override
-  TextEditingController get phoneCtrl {
+  TextEditingController? get phoneCtrl {
     _$phoneCtrlAtom.reportRead();
     return super.phoneCtrl;
   }
 
   @override
-  set phoneCtrl(TextEditingController value) {
+  set phoneCtrl(TextEditingController? value) {
     _$phoneCtrlAtom.reportWrite(value, super.phoneCtrl, () {
       super.phoneCtrl = value;
     });
@@ -57,13 +57,13 @@ mixin _$DependentController on DependentControllerBase, Store {
   final _$emailCtrlAtom = Atom(name: 'DependentControllerBase.emailCtrl');
 
   @override
-  TextEditingController get emailCtrl {
+  TextEditingController? get emailCtrl {
     _$emailCtrlAtom.reportRead();
     return super.emailCtrl;
   }
 
   @override
-  set emailCtrl(TextEditingController value) {
+  set emailCtrl(TextEditingController? value) {
     _$emailCtrlAtom.reportWrite(value, super.emailCtrl, () {
       super.emailCtrl = value;
     });
@@ -72,13 +72,13 @@ mixin _$DependentController on DependentControllerBase, Store {
   final _$cpfCtrlAtom = Atom(name: 'DependentControllerBase.cpfCtrl');
 
   @override
-  TextEditingController get cpfCtrl {
+  TextEditingController? get cpfCtrl {
     _$cpfCtrlAtom.reportRead();
     return super.cpfCtrl;
   }
 
   @override
-  set cpfCtrl(TextEditingController value) {
+  set cpfCtrl(TextEditingController? value) {
     _$cpfCtrlAtom.reportWrite(value, super.cpfCtrl, () {
       super.cpfCtrl = value;
     });
@@ -88,13 +88,13 @@ mixin _$DependentController on DependentControllerBase, Store {
       Atom(name: 'DependentControllerBase.bloodTypeCtrl');
 
   @override
-  TextEditingController get bloodTypeCtrl {
+  TextEditingController? get bloodTypeCtrl {
     _$bloodTypeCtrlAtom.reportRead();
     return super.bloodTypeCtrl;
   }
 
   @override
-  set bloodTypeCtrl(TextEditingController value) {
+  set bloodTypeCtrl(TextEditingController? value) {
     _$bloodTypeCtrlAtom.reportWrite(value, super.bloodTypeCtrl, () {
       super.bloodTypeCtrl = value;
     });
@@ -104,13 +104,13 @@ mixin _$DependentController on DependentControllerBase, Store {
       Atom(name: 'DependentControllerBase.dateBirthCtrl');
 
   @override
-  TextEditingController get dateBirthCtrl {
+  TextEditingController? get dateBirthCtrl {
     _$dateBirthCtrlAtom.reportRead();
     return super.dateBirthCtrl;
   }
 
   @override
-  set dateBirthCtrl(TextEditingController value) {
+  set dateBirthCtrl(TextEditingController? value) {
     _$dateBirthCtrlAtom.reportWrite(value, super.dateBirthCtrl, () {
       super.dateBirthCtrl = value;
     });
@@ -120,13 +120,13 @@ mixin _$DependentController on DependentControllerBase, Store {
       Atom(name: 'DependentControllerBase.isAssociatedCtrl');
 
   @override
-  TextEditingController get isAssociatedCtrl {
+  TextEditingController? get isAssociatedCtrl {
     _$isAssociatedCtrlAtom.reportRead();
     return super.isAssociatedCtrl;
   }
 
   @override
-  set isAssociatedCtrl(TextEditingController value) {
+  set isAssociatedCtrl(TextEditingController? value) {
     _$isAssociatedCtrlAtom.reportWrite(value, super.isAssociatedCtrl, () {
       super.isAssociatedCtrl = value;
     });
@@ -166,13 +166,13 @@ mixin _$DependentController on DependentControllerBase, Store {
   final _$dependentAtom = Atom(name: 'DependentControllerBase.dependent');
 
   @override
-  Dependent get dependent {
+  Dependent? get dependent {
     _$dependentAtom.reportRead();
     return super.dependent;
   }
 
   @override
-  set dependent(Dependent value) {
+  set dependent(Dependent? value) {
     _$dependentAtom.reportWrite(value, super.dependent, () {
       super.dependent = value;
     });

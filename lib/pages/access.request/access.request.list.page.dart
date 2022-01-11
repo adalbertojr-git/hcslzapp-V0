@@ -28,8 +28,8 @@ class AccessRequestListPageState extends State<AccessRequestListPage> {
 
   @override
   void initState() {
-    _controller.getFuture()?.then((value) {
-      if (value != null && value.isNotEmpty) {
+    _controller.getFuture().then((value) {
+      if (value.isNotEmpty) {
         _controller.setButtonVisibilty();
       }
     });

@@ -85,7 +85,7 @@ class DashboardPage extends StatefulWidget {
 
 class _DashboardPageState extends State<DashboardPage> {
   DashboardController _controller = DashboardController();
-  BuildContext _gContext;
+  late BuildContext _gContext;
 
   late List<Widget> _listAdmWidgets;
 
@@ -134,7 +134,7 @@ class _DashboardPageState extends State<DashboardPage> {
         centerTitle: true,
         toolbarHeight: 40.0,
         actions: <Widget>[
-          PopupMenuButton(
+          PopupMenuButton<String?>(
             itemBuilder: (BuildContext context) {
               return [
                 PopupMenuItem(
@@ -177,7 +177,9 @@ class _DashboardPageState extends State<DashboardPage> {
                           },
                         ),
                       )
-                    : null,
+                    : PopupMenuItem(
+                        child: null,
+                      ),
                 PopupMenuItem(
                   child: GestureDetector(
                     child: Text(

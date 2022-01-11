@@ -12,13 +12,13 @@ mixin _$ItemModel on ItemModelBase, Store {
   final _$idAtom = Atom(name: 'ItemModelBase.id');
 
   @override
-  int? get id {
+  int get id {
     _$idAtom.reportRead();
     return super.id;
   }
 
   @override
-  set id(int? value) {
+  set id(int value) {
     _$idAtom.reportWrite(value, super.id, () {
       super.id = value;
     });

@@ -11,7 +11,7 @@ import 'package:mask_text_input_formatter/mask_text_input_formatter.dart';
 const String _title = 'Motocicleta';
 
 class MotorcycleAddPage extends StatefulWidget {
-  final Motorcycle motorcycle;
+  final Motorcycle? motorcycle;
 
   MotorcycleAddPage(this.motorcycle);
 
@@ -24,8 +24,7 @@ class _MotorcycleAddPageState extends State<MotorcycleAddPage> {
 
   @override
   void initState() {
-    _controller.motorcycle =
-        widget.motorcycle != null ? widget.motorcycle : null;
+    _controller.motorcycle = widget.motorcycle ?? null;
     _controller.init();
     super.initState();
   }
@@ -69,15 +68,15 @@ class _MotorcycleAddPageState extends State<MotorcycleAddPage> {
                 children: <Widget>[
                   Expanded(
                     child: MyTextFormField(
-                          textEditingController: _controller.yearCtrl,
-                          icon: Icons.calendar_today,
-                          label: labelYear,
-                          hint: hintYear,
-                          inputType: TextInputType.number,
-                          maskTextInputFormatter:
-                              MaskTextInputFormatter(mask: "####"),
-                        ),
+                      textEditingController: _controller.yearCtrl,
+                      icon: Icons.calendar_today,
+                      label: labelYear,
+                      hint: hintYear,
+                      inputType: TextInputType.number,
+                      maskTextInputFormatter:
+                          MaskTextInputFormatter(mask: "####"),
                     ),
+                  ),
                   Expanded(
                     child: MyTextFormField(
                       textEditingController: _controller.colorCtrl,
