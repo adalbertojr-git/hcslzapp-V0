@@ -42,9 +42,9 @@ class MyTextFormField extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     textEditingController?.text = text ?? "";
-    textEditingController?.selection = TextSelection.fromPosition(TextPosition(
+/*    textEditingController?.selection = TextSelection.fromPosition(TextPosition(
       offset: textEditingController?.text.length ?? 0,
-    ));
+    ));*/
     return Padding(
       padding: const EdgeInsets.fromLTRB(2.0, 3.0, 2.0, 3.0),
       child: TextFormField(
@@ -59,7 +59,8 @@ class MyTextFormField extends StatelessWidget {
         decoration: InputDecoration(
           focusedBorder: OutlineInputBorder(
             borderSide: BorderSide(
-              color: Colors.orangeAccent,
+              //color: Colors.orangeAccent,
+              color: Colors.white,
             ),
           ),
           enabledBorder: OutlineInputBorder(

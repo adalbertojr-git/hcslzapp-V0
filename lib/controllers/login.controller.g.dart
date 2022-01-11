@@ -42,13 +42,13 @@ mixin _$LoginController on LoginControllerBase, Store {
   final _$tokenAtom = Atom(name: 'LoginControllerBase.token');
 
   @override
-  ObservableFuture<Token> get token {
+  ObservableFuture<Token>? get token {
     _$tokenAtom.reportRead();
     return super.token;
   }
 
   @override
-  set token(ObservableFuture<Token> value) {
+  set token(ObservableFuture<Token>? value) {
     _$tokenAtom.reportWrite(value, super.token, () {
       super.token = value;
     });

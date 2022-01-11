@@ -19,13 +19,13 @@ abstract class LoginControllerBase with Store {
   var pswLoginCtrl = TextEditingController();
 
   @observable
-  late ObservableFuture<Token> token;
+  ObservableFuture<Token>? token;
 
   @observable
   bool isLoading = false;
 
   @observable
-  late String errorMsg;
+  late String errorMsg = "";
 
   @observable
   LoginRepo _loginRepo = LoginRepo();
