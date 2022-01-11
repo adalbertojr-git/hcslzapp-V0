@@ -455,7 +455,7 @@ class _AssociatedUpdatePageState extends State<AssociatedUpdatePage> {
                               Icons.arrow_forward,
                             ),
                             onTap: () {
-                              final Future<Dependent> future = Navigator.push(
+                              final Future future = Navigator.push(
                                 context,
                                 MaterialPageRoute(
                                   builder: (context) => DependentAddPage(
@@ -493,7 +493,7 @@ class _AssociatedUpdatePageState extends State<AssociatedUpdatePage> {
                   color: Colors.black,
                 ),
                 onPressed: () {
-                  final Future<Dependent> future = Navigator.push(
+                  final Future future = Navigator.push(
                     context,
                     MaterialPageRoute(
                         builder: (context) => DependentAddPage(null)),
@@ -570,7 +570,7 @@ class _AssociatedUpdatePageState extends State<AssociatedUpdatePage> {
                               Icons.arrow_forward,
                             ),
                             onTap: () {
-                              final Future<Motorcycle> future = Navigator.push(
+                              final Future future = Navigator.push(
                                 context,
                                 MaterialPageRoute(
                                   builder: (context) => MotorcycleAddPage(
@@ -610,7 +610,7 @@ class _AssociatedUpdatePageState extends State<AssociatedUpdatePage> {
                   size: 25,
                 ),
                 onPressed: () {
-                  final Future<Motorcycle> future = Navigator.push(
+                  final Future future = Navigator.push(
                     context,
                     MaterialPageRoute(
                         builder: (context) => MotorcycleAddPage(null)),
