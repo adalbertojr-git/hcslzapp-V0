@@ -41,7 +41,7 @@ class MyTextFormField extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    textEditingController?.text = text!;
+    textEditingController?.text = text ?? "";
     textEditingController?.selection = TextSelection.fromPosition(TextPosition(
       offset: textEditingController?.text.length ?? 0,
     ));
