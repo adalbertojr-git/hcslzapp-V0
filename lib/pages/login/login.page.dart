@@ -129,7 +129,7 @@ class LoginPage extends StatelessWidget {
     _controller.errorMsg = "";
     _controller.authenticate().then(
       (token) async {
-        if (_controller.errorMsg != null) {
+        if (_controller.errorMsg.isNotEmpty) {
           asuka.showSnackBar(
             SnackBar(
               content: Text(_controller.errorMsg),
