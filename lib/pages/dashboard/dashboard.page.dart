@@ -425,7 +425,7 @@ class _DashboardPageState extends State<DashboardPage> {
                       ? NetworkImage(_controller.photoUrl)
                       : PhotoImageProvider().getImageProvider(
                           File(_pathNoImage),
-                        ),
+                        ) as ImageProvider,
                 ),
               ),
       );

@@ -255,22 +255,25 @@ class _AssociatedUpdatePageState extends State<AssociatedUpdatePage> {
                     Expanded(
                       child: Container(
                         height: 55.0,
-                        child: widget._selectedProfile == ADMIN ? DropdownButtonFormField(
-                          decoration: const InputDecoration(
-                            enabledBorder: OutlineInputBorder(
-                              borderSide: BorderSide(
-                                color: Colors.white70,
+                        child: widget._selectedProfile == ADMIN
+                            ? DropdownButtonFormField(
+                                decoration: const InputDecoration(
+                                  enabledBorder: OutlineInputBorder(
+                                    borderSide: BorderSide(
+                                      color: Colors.white70,
+                                    ),
+                                  ),
+                                ),
+                                value: _controller.currentAssociatedType,
+                                items: getAssociatedTypes(),
+                                onChanged: _controller
+                                    .changedAssociatedTypesDropDownItem,
+                              )
+                            : MyTextFormField(
+                                textEditingController:
+                                    _controller.associatedTypeCtrl,
+                                disabled: true,
                               ),
-                            ),
-                          ),
-                          value: _controller.currentAssociatedType,
-                          items: getAssociatedTypes(),
-                          onChanged:
-                              _controller.changedAssociatedTypesDropDownItem,
-                        ) : MyTextFormField(
-                          textEditingController: _controller.associatedTypeCtrl,
-                          disabled: true,
-                        ),
                       ),
                     ),
                   ],
@@ -386,12 +389,12 @@ class _AssociatedUpdatePageState extends State<AssociatedUpdatePage> {
       image: _controller.photoPath != null
           ? PhotoImageProvider().getImageProvider(
               File(_controller.photoPath),
-            )
+            ) as ImageProvider
           : _controller.photoUrl != null
               ? NetworkImage(_controller.photoUrl)
               : PhotoImageProvider().getImageProvider(
                   File(_pathNoImage),
-                ),
+                ) as ImageProvider,
       fit: BoxFit.fill);
 
   _dependentsListWidget() => Container(
