@@ -76,8 +76,8 @@ class _AssociatedUpdatePageState extends State<AssociatedUpdatePage> {
                         title: _title,
                         message: _controller.errorMsg,
                       );
-                    if (snapshot.data.length > 0) {
-                      _controller.associated = snapshot.data.first;
+                    if ((snapshot.data?.length)! > 0) {
+                      _controller.associated = (snapshot.data?.first)!;
                       _controller.init();
                       return _widgets(context);
                     } else

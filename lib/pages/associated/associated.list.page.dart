@@ -61,9 +61,9 @@ class AssociatedListPageState extends State<AssociatedListPage> {
                         title: _title,
                         message: _controller.errorMsg,
                       );
-                    if (snapshot.data.length > 0) {
+                    if ((snapshot.data?.length)! > 0) {
                       _controller.init();
-                      _controller.associateds.addAll(snapshot.data);
+                      _controller.associateds.addAll((snapshot.data)!);
                       _controller.associateds.sort(
                         (a, b) => a.name.compareTo(b.name),
                       );

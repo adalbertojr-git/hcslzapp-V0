@@ -61,13 +61,13 @@ class AccessRequestListPageState extends State<AccessRequestListPage> {
                         title: _title,
                         message: _controller.errorMsg,
                       );
-                    if (snapshot.data?.length > 0) {
+                    if ((snapshot.data?.length)! > 0) {
                       _controller.init();
 /*                      _controller.accessRequests.addAll(snapshot.data);
                       _controller.accessRequests.sort(
                         (a, b) => a.name.compareTo(b.name),
                       );*/
-                      _controller.loadRequests(snapshot.data);
+                      _controller.loadRequests((snapshot.data)!);
                       _controller.listItems.sort(
                         (a, b) => a.name.compareTo(b.name),
                       );
