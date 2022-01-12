@@ -84,17 +84,28 @@ class DashboardPage extends StatefulWidget {
 }
 
 class _DashboardPageState extends State<DashboardPage> {
-  DashboardController _controller = DashboardController();
+  late DashboardController _controller;
+/*  DashboardController _controller = DashboardController(
+    associated: this._associated,
+    photoUrl: _associated.photoUrl,
+    selectedProfile: ASSOCIATED,
+  );*/
   late BuildContext _gContext;
 
   late List<Widget> _listAdmWidgets;
 
   @override
   void initState() {
-    //_controller = Provider.of<AssociatedController>(context, listen: false);
-    _controller.associated = widget._associated;
-    _controller.init();
     super.initState();
+    _controller = DashboardController(
+      associated: widget._associated,
+      photoUrl: widget._associated.photoUrl,
+      selectedProfile: ASSOCIATED,
+    );
+    //_controller = Provider.of<AssociatedController>(context, listen: false);
+    //_controller.associated = widget._associated;
+    //_controller.setAssociated(widget._associated);
+    //_controller.init();
   }
 
   @override

@@ -59,6 +59,17 @@ mixin _$DashboardController on DashboardControllerBase, Store {
       ActionController(name: 'DashboardControllerBase');
 
   @override
+  dynamic setAssociated(Associated associated) {
+    final _$actionInfo = _$DashboardControllerBaseActionController.startAction(
+        name: 'DashboardControllerBase.setAssociated');
+    try {
+      return super.setAssociated(associated);
+    } finally {
+      _$DashboardControllerBaseActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
   dynamic setPhoto(String value) {
     final _$actionInfo = _$DashboardControllerBaseActionController.startAction(
         name: 'DashboardControllerBase.setPhoto');

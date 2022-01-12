@@ -1,7 +1,6 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:glutton/glutton.dart';
-import '../models/associated.dart';
 import '../models/token.dart';
 import '../repositories/associated.repo.dart';
 import '../repositories/login.repo.dart';
@@ -29,9 +28,6 @@ abstract class LoginControllerBase with Store {
 
   @observable
   LoginRepo _loginRepo = LoginRepo();
-
-  @observable
-  late Associated associated;
 
   @observable
   AssociatedRepo _associatedRepo = AssociatedRepo();

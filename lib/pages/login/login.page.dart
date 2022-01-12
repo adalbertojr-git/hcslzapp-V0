@@ -1,6 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
+import "../../models/associated.dart";
+import "../../models/dependent.dart";
+import "../../models/motorcycle.dart";
+import "../../models/authenticate.dart";
+import "../../models/role.dart";
 import '../../common/labels.and.hints.dart';
 import '../../common/token.details.dart';
 import '../../components/button.dart';
@@ -138,19 +143,21 @@ class LoginPage extends StatelessWidget {
         } else {
           Token _t = token;
           print(_t.token);
+          Associated associated = _dummy();
           _controller.setTokenToDevice(_t.token);
           _controller.setUserToDevice(_controller.userLoginCtrl.text);
           TokenDetails _tokenDetails = TokenDetails(_t.token);
-          await _controller
-              .findByIdToList(_tokenDetails.associatedId())
-              .then((value) {
-            _controller.associated = value[0];
-          });
+          await _controller.findByIdToList(_tokenDetails.associatedId()).then(
+            (value) {
+              associated = value[0];
+            },
+          );
           Navigator.pushReplacement(
             context,
             MaterialPageRoute(
               builder: (context) => DashboardPage(
-                _controller.associated,
+                //_controller.associated,
+                associated,
               ),
             ),
           );
@@ -159,4 +166,27 @@ class LoginPage extends StatelessWidget {
     );
     _controller.setLoading(false);
   }
+
+  Associated _dummy() => Associated(
+      id: 0,
+      name: "",
+      email: "",
+      phone: "",
+      sponsor: "",
+      cnh: "",
+      cpf: "",
+      bloodType: "",
+      associatedType: "",
+      dateBirth: "",
+      dateShield: "",
+      status: "",
+      photoUrl: "",
+      dependents: List<Dependent>.from([]),
+      motorcycles: List<Motorcycle>.from([]),
+      authenticate: Authenticate(
+        id: 0,
+        roles: List<Role>.from([]),
+        username: "",
+      ),
+    );
 }

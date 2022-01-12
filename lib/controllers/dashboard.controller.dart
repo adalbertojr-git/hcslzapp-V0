@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 import '../models/role.dart';
+import '../models/dependent.dart';
+import '../models/motorcycle.dart';
+import '../models/authenticate.dart';
 import '../common/associated.profiles.dart';
 import '../models/associated.dart';
 import '../pages/about/about.page.dart';
@@ -17,19 +20,74 @@ part 'dashboard.controller.g.dart';
 class DashboardController = DashboardControllerBase with _$DashboardController;
 
 abstract class DashboardControllerBase with Store {
-  @observable
-  late String photoUrl;
+  DashboardControllerBase(
+      {required this.associated,
+      required this.photoUrl,
+      required this.selectedProfile});
 
   @observable
-  late Associated associated;
+  String photoUrl;
 
   @observable
-  late String selectedProfile;
+  Associated associated;
+
+/*  @observable
+  Associated associated = Associated(
+    id: 0,
+    name: "",
+    email: "",
+    phone: "",
+    sponsor: "",
+    cnh: "",
+    cpf: "",
+    bloodType: "",
+    associatedType: "",
+    dateBirth: "",
+    dateShield: "",
+    status: "",
+    photoUrl: "",
+    dependents: List<Dependent>.from([]),
+    motorcycles: List<Motorcycle>.from([]),
+    authenticate: Authenticate(
+      id: 0,
+      roles: List<Role>.from([]),
+      username: "",
+    ),
+  );*/
+
+  @observable
+  String selectedProfile;
 
   init() {
-    photoUrl = associated == null ? "" : associated.photoUrl;
+    photoUrl = associated.photoUrl ?? "";
     selectedProfile = ASSOCIATED;
   }
+
+  @action
+  setAssociated(Associated associated) => this.associated = associated;
+
+  Associated _dummy() => Associated(
+        id: 0,
+        name: "",
+        email: "",
+        phone: "",
+        sponsor: "",
+        cnh: "",
+        cpf: "",
+        bloodType: "",
+        associatedType: "",
+        dateBirth: "",
+        dateShield: "",
+        status: "",
+        photoUrl: "",
+        dependents: List<Dependent>.from([]),
+        motorcycles: List<Motorcycle>.from([]),
+        authenticate: Authenticate(
+          id: 0,
+          roles: List<Role>.from([]),
+          username: "",
+        ),
+      );
 
   @action
   setPhoto(String value) {

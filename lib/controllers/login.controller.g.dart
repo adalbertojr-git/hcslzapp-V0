@@ -99,21 +99,6 @@ mixin _$LoginController on LoginControllerBase, Store {
     });
   }
 
-  final _$associatedAtom = Atom(name: 'LoginControllerBase.associated');
-
-  @override
-  Associated get associated {
-    _$associatedAtom.reportRead();
-    return super.associated;
-  }
-
-  @override
-  set associated(Associated value) {
-    _$associatedAtom.reportWrite(value, super.associated, () {
-      super.associated = value;
-    });
-  }
-
   final _$_associatedRepoAtom =
       Atom(name: 'LoginControllerBase._associatedRepo');
 
@@ -173,8 +158,7 @@ userLoginCtrl: ${userLoginCtrl},
 pswLoginCtrl: ${pswLoginCtrl},
 token: ${token},
 isLoading: ${isLoading},
-errorMsg: ${errorMsg},
-associated: ${associated}
+errorMsg: ${errorMsg}
     ''';
   }
 }
