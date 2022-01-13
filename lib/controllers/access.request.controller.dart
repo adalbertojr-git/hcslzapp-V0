@@ -229,12 +229,12 @@ abstract class AccessRequestControllerBase with Store {
 
 class FormController extends FormControllerBase with _$FormController {
   FormController(
-      {required String name,
-      required String user,
-      required String email,
-      required String confEmail,
-      required String confPassword,
-      required String password}) {
+      {String? name,
+      String? user,
+      String? email,
+      String? confEmail,
+      String? confPassword,
+      String? password}) {
     super.name = name;
     super.user = user;
     super.email = email;
@@ -246,22 +246,22 @@ class FormController extends FormControllerBase with _$FormController {
 
 abstract class FormControllerBase with Store {
   @observable
-  late String name;
+  String? name;
 
   @observable
-  late String user;
+  String? user;
 
   @observable
-  late String email;
+  String? email;
 
   @observable
-  late String confEmail;
+  String? confEmail;
 
   @observable
-  late String password;
+  String? password;
 
   @observable
-  late String confPassword;
+  String? confPassword;
 
   @action
   changeName(String value) => name = value;

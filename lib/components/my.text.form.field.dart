@@ -13,7 +13,7 @@ class MyTextFormField extends StatelessWidget {
   int? nLines;
   String? label;
   double? fontSize;
-  String? text;
+  //String? text;
   Function(String)? onChanged;
   String? errorText;
   MaskTextInputFormatter? maskTextInputFormatter;
@@ -32,7 +32,7 @@ class MyTextFormField extends StatelessWidget {
       this.label,
       this.nLines,
       this.fontSize,
-      this.text,
+      //this.text,
       this.onChanged,
       this.errorText,
       this.maskTextInputFormatter,
@@ -41,10 +41,11 @@ class MyTextFormField extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    textEditingController?.text = text ?? "";
+    //textEditingController?.text = text ?? "";
 /*    textEditingController?.selection = TextSelection.fromPosition(TextPosition(
       offset: textEditingController?.text.length ?? 0,
     ));*/
+    maskTextInputFormatter = maskTextInputFormatter ?? MaskTextInputFormatter();
     return Padding(
       padding: const EdgeInsets.fromLTRB(2.0, 3.0, 2.0, 3.0),
       child: TextFormField(
@@ -111,6 +112,7 @@ class MyTextFormField extends StatelessWidget {
         onChanged: onChanged,
 /*        inputFormatters:
             maskTextInputFormatter == null ? null : [maskTextInputFormatter],*/
+        inputFormatters: [maskTextInputFormatter!],
       ),
     );
   }

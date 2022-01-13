@@ -342,13 +342,13 @@ mixin _$FormController on FormControllerBase, Store {
   final _$nameAtom = Atom(name: 'FormControllerBase.name');
 
   @override
-  String get name {
+  String? get name {
     _$nameAtom.reportRead();
     return super.name;
   }
 
   @override
-  set name(String value) {
+  set name(String? value) {
     _$nameAtom.reportWrite(value, super.name, () {
       super.name = value;
     });
@@ -357,13 +357,13 @@ mixin _$FormController on FormControllerBase, Store {
   final _$userAtom = Atom(name: 'FormControllerBase.user');
 
   @override
-  String get user {
+  String? get user {
     _$userAtom.reportRead();
     return super.user;
   }
 
   @override
-  set user(String value) {
+  set user(String? value) {
     _$userAtom.reportWrite(value, super.user, () {
       super.user = value;
     });
@@ -372,13 +372,13 @@ mixin _$FormController on FormControllerBase, Store {
   final _$emailAtom = Atom(name: 'FormControllerBase.email');
 
   @override
-  String get email {
+  String? get email {
     _$emailAtom.reportRead();
     return super.email;
   }
 
   @override
-  set email(String value) {
+  set email(String? value) {
     _$emailAtom.reportWrite(value, super.email, () {
       super.email = value;
     });
@@ -387,13 +387,13 @@ mixin _$FormController on FormControllerBase, Store {
   final _$confEmailAtom = Atom(name: 'FormControllerBase.confEmail');
 
   @override
-  String get confEmail {
+  String? get confEmail {
     _$confEmailAtom.reportRead();
     return super.confEmail;
   }
 
   @override
-  set confEmail(String value) {
+  set confEmail(String? value) {
     _$confEmailAtom.reportWrite(value, super.confEmail, () {
       super.confEmail = value;
     });
@@ -402,13 +402,13 @@ mixin _$FormController on FormControllerBase, Store {
   final _$passwordAtom = Atom(name: 'FormControllerBase.password');
 
   @override
-  String get password {
+  String? get password {
     _$passwordAtom.reportRead();
     return super.password;
   }
 
   @override
-  set password(String value) {
+  set password(String? value) {
     _$passwordAtom.reportWrite(value, super.password, () {
       super.password = value;
     });
@@ -417,13 +417,13 @@ mixin _$FormController on FormControllerBase, Store {
   final _$confPasswordAtom = Atom(name: 'FormControllerBase.confPassword');
 
   @override
-  String get confPassword {
+  String? get confPassword {
     _$confPasswordAtom.reportRead();
     return super.confPassword;
   }
 
   @override
-  set confPassword(String value) {
+  set confPassword(String? value) {
     _$confPasswordAtom.reportWrite(value, super.confPassword, () {
       super.confPassword = value;
     });
