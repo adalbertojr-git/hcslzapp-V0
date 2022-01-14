@@ -1,7 +1,7 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
-import 'package:hcslzapp/models/access.request.dart';
-import 'package:hcslzapp/repositories/access.request.repo.dart';
+import '../models/access.request.dart';
+import '../repositories/access.request.repo.dart';
 import 'package:mobx/mobx.dart';
 
 import 'item.model.dart';
@@ -96,16 +96,15 @@ abstract class AccessRequestControllerBase with Store {
 
   @action
   Future deleteById(int id) =>
-      ObservableFuture(_accessRequestRepo
-          .deleteById(id)
-          .then((value) => value)).catchError((e) {
+      ObservableFuture(_accessRequestRepo.deleteById(id).then((value) => value))
+          .catchError((e) {
         errorMsg = "${e.message}";
       }, test: (e) => e is Exception);
 
   @action
   bool setButtonVisibilty() => isHidedButton = !isHidedButton;
 
- Future<List<AccessRequest>> getFuture() => future = findAll();
+  Future<List<AccessRequest>> getFuture() => future = findAll();
 
   AccessRequest _setValues() {
     return AccessRequest(
@@ -228,13 +227,14 @@ abstract class AccessRequestControllerBase with Store {
 }
 
 class FormController extends FormControllerBase with _$FormController {
-  FormController(
-      {String? name,
-      String? user,
-      String? email,
-      String? confEmail,
-      String? confPassword,
-      String? password}) {
+  FormController({
+    String? name,
+    String? user,
+    String? email,
+    String? confEmail,
+    String? confPassword,
+    String? password,
+  }) {
     super.name = name;
     super.user = user;
     super.email = email;
