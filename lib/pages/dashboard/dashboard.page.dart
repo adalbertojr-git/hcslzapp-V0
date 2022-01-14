@@ -163,6 +163,7 @@ class _DashboardPageState extends State<DashboardPage> {
                   ),
                 ),
                 PopupMenuItem(
+                  enabled: _controller.isAdmin(),
                   child: GestureDetector(
                     child: Text(
                       _labelChangeProfile,
@@ -181,7 +182,6 @@ class _DashboardPageState extends State<DashboardPage> {
                       }
                     },
                   ),
-                  enabled: _controller.isAdmin(),
                 ),
                 PopupMenuItem(
                   child: GestureDetector(
@@ -268,21 +268,19 @@ class _DashboardPageState extends State<DashboardPage> {
                 ),
               ],
             ),
-            _controller.isAdmin()
-                ? ListTile(
-                    leading: Icon(Icons.wifi_protected_setup),
-                    title: Text(_labelChangeProfile),
-                    onTap: () async {
-                      setState(() {
-                        _controller.changeProfile();
-                        print(_controller.selectedProfile);
-                        _widgets();
-                        Navigator.pop(_gContext);
-                      });
-                    },
-                  )
-                : Container(),
-            //Divider(),
+            ListTile(
+              enabled:  _controller.isAdmin(),
+              leading: Icon(Icons.wifi_protected_setup),
+              title: Text(_labelChangeProfile),
+              onTap: () async {
+                setState(() {
+                  _controller.changeProfile();
+                  print(_controller.selectedProfile);
+                  _widgets();
+                  Navigator.pop(_gContext);
+                });
+              },
+            ),
             ListTile(
               leading: Icon(Icons.info),
               title: Text(_labelAboutApp),
