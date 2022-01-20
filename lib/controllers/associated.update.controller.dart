@@ -81,6 +81,7 @@ abstract class AssociatedUpdateControllerBase with Store {
   late String errorMsg;
 
   @observable
+  //Future<List<Associated>> future = [] as Future<List<Associated>>;
   late Future<List<Associated>> future;
 
   @observable

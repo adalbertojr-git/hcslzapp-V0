@@ -42,11 +42,14 @@ class AssociatedUpdatePage extends StatefulWidget {
 
 class _AssociatedUpdatePageState extends State<AssociatedUpdatePage> {
   AssociatedUpdateController _controller = AssociatedUpdateController();
+  //late AssociatedUpdateController _controller;
 
   @override
   void initState() {
+    //_controller = AssociatedUpdateController();
+    Future<List<Associated>> future = _controller.findByIdToList(widget._associatedId);
     _controller.getFuture(widget._associatedId).then((value) {
-      if (value != null && value.isNotEmpty) {
+      if (value.isNotEmpty) {
         _controller.setButtonVisibilty();
       }
     });
