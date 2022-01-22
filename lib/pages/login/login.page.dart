@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
+import 'package:hcslzapp/models/template.dart';
 import 'package:mask_text_input_formatter/mask_text_input_formatter.dart';
 import "../../models/associated.dart";
 import "../../models/dependent.dart";
@@ -143,7 +144,7 @@ class LoginPage extends StatelessWidget {
         } else {
           Token _t = token;
           print(_t.token);
-          Associated associated = _dummy();
+          Associated associated = Template().loadAssociated();
           _controller.setTokenToDevice(_t.token);
           _controller.setUserToDevice(_controller.userLoginCtrl.text);
           TokenDetails _tokenDetails = TokenDetails(_t.token);
@@ -167,26 +168,4 @@ class LoginPage extends StatelessWidget {
     _controller.setLoading(false);
   }
 
-  Associated _dummy() => Associated(
-      id: 0,
-      name: "",
-      email: "",
-      phone: "",
-      sponsor: "",
-      cnh: "",
-      cpf: "",
-      bloodType: "",
-      associatedType: "",
-      dateBirth: "",
-      dateShield: "",
-      status: "",
-      photoUrl: "",
-      dependents: List<Dependent>.from([]),
-      motorcycles: List<Motorcycle>.from([]),
-      authenticate: Authenticate(
-        id: 0,
-        roles: List<Role>.from([]),
-        username: "",
-      ),
-    );
 }
