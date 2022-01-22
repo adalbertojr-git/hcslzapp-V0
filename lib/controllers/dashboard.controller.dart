@@ -17,10 +17,11 @@ part 'dashboard.controller.g.dart';
 class DashboardController = DashboardControllerBase with _$DashboardController;
 
 abstract class DashboardControllerBase with Store {
-  DashboardControllerBase(
-      {required this.associated,
-      required this.photoUrl,
-      required this.selectedProfile});
+  DashboardControllerBase({
+    required this.associated,
+    required this.photoUrl,
+    required this.selectedProfile,
+  });
 
   @observable
   String photoUrl;

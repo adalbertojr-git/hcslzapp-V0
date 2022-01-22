@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
+import 'package:hcslzapp/models/template.dart';
 import '../models/associated.dart';
 import '../models/dependent.dart';
 import '../models/motorcycle.dart';
@@ -60,10 +61,10 @@ abstract class AssociatedUpdateControllerBase with Store {
   ObservableList motorcycles = [].asObservable();
 
   @observable
-  late String photoPath;
+  String photoPath = "";
 
   @observable
-  late String photoUrl;
+  String photoUrl = "";
 
   @observable
   late File photo;
@@ -72,25 +73,25 @@ abstract class AssociatedUpdateControllerBase with Store {
   bool changedPhoto = false;
 
   @observable
-  late Associated associated;
+  Associated associated = Template().loadAssociated();
 
   @observable
   AssociatedRepo _associatedRepo = AssociatedRepo();
 
   @observable
-  late String errorMsg;
+  String errorMsg = "";
 
   @observable
   Future<List<Associated>> future = Future<List<Associated>>.value([]);
 
   @observable
-  late String currentBloodType;
+  String currentBloodType = "";
 
   @observable
-  late String currentAssociatedType;
+  String currentAssociatedType = "";
 
   @observable
-  late String currentStatus;
+  String currentStatus = "";
 
   init() async {
     _initLists();
@@ -163,8 +164,8 @@ abstract class AssociatedUpdateControllerBase with Store {
     associated.status = currentStatus;
     associated.dateBirth = dateBirthCtrl.text;
     associated.dateShield = dateShieldCtrl.text;
-    //associated.dependents = List<Dependent>.from(dependents);
-    //associated.motorcycles = List<Motorcycle>.from(motorcycles);
+    associated.dependents = List<Dependent>.from(dependents);
+    associated.motorcycles = List<Motorcycle>.from(motorcycles);
     if (photo != null) {
       //se houve alteração de foto
       await _uploadPhoto().then((value) => associated.photoUrl = value);
@@ -239,7 +240,10 @@ abstract class AssociatedUpdateControllerBase with Store {
 }
 
 class FormController extends FormControllerBase with _$FormController {
-  FormController({required String name, required String email}) {
+  FormController({
+    String? name,
+    String? email,
+  }) {
     super.name = name;
     super.email = email;
   }
@@ -247,10 +251,10 @@ class FormController extends FormControllerBase with _$FormController {
 
 abstract class FormControllerBase with Store {
   @observable
-  late String name;
+  String? name;
 
   @observable
-  late String email;
+  String? email;
 
   @action
   changeName(String value) => name = value;

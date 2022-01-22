@@ -24,7 +24,7 @@ abstract class LoginControllerBase with Store {
   bool isLoading = false;
 
   @observable
-  late String errorMsg = "";
+  String errorMsg = "";
 
   @observable
   LoginRepo _loginRepo = LoginRepo();

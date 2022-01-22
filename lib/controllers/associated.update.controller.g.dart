@@ -488,13 +488,13 @@ mixin _$FormController on FormControllerBase, Store {
   final _$nameAtom = Atom(name: 'FormControllerBase.name');
 
   @override
-  String get name {
+  String? get name {
     _$nameAtom.reportRead();
     return super.name;
   }
 
   @override
-  set name(String value) {
+  set name(String? value) {
     _$nameAtom.reportWrite(value, super.name, () {
       super.name = value;
     });
@@ -503,13 +503,13 @@ mixin _$FormController on FormControllerBase, Store {
   final _$emailAtom = Atom(name: 'FormControllerBase.email');
 
   @override
-  String get email {
+  String? get email {
     _$emailAtom.reportRead();
     return super.email;
   }
 
   @override
-  set email(String value) {
+  set email(String? value) {
     _$emailAtom.reportWrite(value, super.email, () {
       super.email = value;
     });
