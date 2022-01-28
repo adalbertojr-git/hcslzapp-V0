@@ -75,7 +75,7 @@ const List<IconData> _listAdmIcons = [
 
 // ignore: must_be_immutable
 class DashboardPage extends StatefulWidget {
-  Associated _associated;
+  final Associated _associated;
 
   DashboardPage(this._associated);
 
