@@ -388,11 +388,11 @@ class _AssociatedUpdatePageState extends State<AssociatedUpdatePage> {
       );
 
   DecorationImage _loadPhoto() => DecorationImage(
-      image: _controller.photoPath != null
+      image: _controller.photoPath != ""
           ? PhotoImageProvider().getImageProvider(
               File(_controller.photoPath),
             ) as ImageProvider
-          : _controller.photoUrl != null
+          : _controller.photoUrl != ""
               ? NetworkImage(_controller.photoUrl)
               : PhotoImageProvider().getImageProvider(
                   File(_pathNoImage),
