@@ -8,8 +8,16 @@ class Dependent {
   String dateBirth;
   String isAssociated;
 
-  Dependent(this.id, this.name, this.email, this.phone, this.cpf,
-      this.bloodType, this.dateBirth, this.isAssociated);
+  Dependent({
+    required this.id,
+    required this.name,
+    required this.email,
+    required this.phone,
+    required this.cpf,
+    required this.bloodType,
+    required this.dateBirth,
+    required this.isAssociated,
+  });
 
   Dependent.fromJson(Map<String, dynamic> json)
       : id = json['id'],

@@ -20,23 +20,24 @@ class Associated {
   List<Motorcycle> motorcycles;
   Authenticate authenticate;
 
-  Associated(
-      {required this.id,
-      required this.name,
-      required this.email,
-      required this.phone,
-      required this.sponsor,
-      required this.cnh,
-      required this.cpf,
-      required this.bloodType,
-      required this.associatedType,
-      required this.dateBirth,
-      required this.dateShield,
-      required this.status,
-      required this.photoUrl,
-      required this.dependents,
-      required this.motorcycles,
-      required this.authenticate});
+  Associated({
+    required this.id,
+    required this.name,
+    required this.email,
+    required this.phone,
+    required this.sponsor,
+    required this.cnh,
+    required this.cpf,
+    required this.bloodType,
+    required this.associatedType,
+    required this.dateBirth,
+    required this.dateShield,
+    required this.status,
+    required this.photoUrl,
+    required this.dependents,
+    required this.motorcycles,
+    required this.authenticate,
+  });
 
   Associated.fromJson(Map<String, dynamic> json)
       : id = json['id'],
