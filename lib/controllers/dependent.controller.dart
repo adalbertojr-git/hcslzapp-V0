@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:hcslzapp/models/template.dart';
 import '../enums/blood.types.dart';
 import '../models/dependent.dart';
 import 'package:mobx/mobx.dart';
@@ -38,10 +39,10 @@ abstract class DependentControllerBase with Store {
   bool isAssociated = false;
 
   @observable
-  late String currentBloodType;
+  String currentBloodType = '';
 
   @observable
-  late Dependent? dependent;
+  Dependent dependent = Template().loadDependent();
 
   @action
   setAssociated() => isAssociated = !isAssociated;
@@ -54,25 +55,23 @@ abstract class DependentControllerBase with Store {
 
     //String a = b ?? 'hello';
     //This means a equals b, but if b is null then a equals 'hello'.
-    currentBloodType = (dependent?.bloodType ?? getBloodTypes().first.value)!;
+    currentBloodType = (dependent.bloodType.isEmpty ? getBloodTypes().first.value : dependent.bloodType)!;
 
 /*    isAssociated = (dependent != null
         ? (dependent.isAssociated == 'S' ? true : false)
         : false);*/
-    isAssociated = (dependent?.isAssociated == 'S' ? true : false);
+    isAssociated = (dependent.isAssociated == 'S' ? true : false);
 
-    formController = FormController(
-      name: dependent?.name ?? '',
-      email: dependent?.email ?? '',
-    );
+    formController =
+        FormController(name: dependent.name, email: dependent.email);
   }
 
   _initTextFields() {
-    nameCtrl?.text = dependent?.name ?? "";
-    emailCtrl?.text = dependent?.email ?? "";
-    phoneCtrl?.text = dependent?.phone ?? "";
-    cpfCtrl?.text = dependent?.cpf ?? "";
-    dateBirthCtrl?.text = dependent?.dateBirth ?? "";
+    nameCtrl?.text = dependent.name;
+    emailCtrl?.text = dependent.email;
+    phoneCtrl?.text = dependent.phone;
+    cpfCtrl?.text = dependent.cpf;
+    dateBirthCtrl?.text = dependent.dateBirth;
   }
 
   String changedDropDownItem(selected) => currentBloodType = selected;
@@ -80,12 +79,12 @@ abstract class DependentControllerBase with Store {
   add(BuildContext context) {
     idCtrl.text = "0";
     final int id = int.parse(idCtrl.text);
-    final String name = nameCtrl.text;
-    final String email = emailCtrl.text;
-    final String phone = phoneCtrl.text;
-    final String  cpf = cpfCtrl.text;
-    final String  bloodType = currentBloodType;
-    final String  dateBirth = dateBirthCtrl.text;
+    final String name = nameCtrl!.text;
+    final String email = emailCtrl!.text;
+    final String phone = phoneCtrl!.text;
+    final String cpf = cpfCtrl!.text;
+    final String bloodType = currentBloodType;
+    final String dateBirth = dateBirthCtrl!.text;
     if (name != '') {
       final dependent = Dependent(
           id: id,
@@ -128,7 +127,10 @@ abstract class DependentControllerBase with Store {
 }
 
 class FormController extends FormControllerBase with _$FormController {
-  FormController({required String name, required String email}) {
+  FormController({
+    String? name,
+    String? email,
+  }) {
     super.name = name;
     super.email = email;
   }
@@ -136,10 +138,10 @@ class FormController extends FormControllerBase with _$FormController {
 
 abstract class FormControllerBase with Store {
   @observable
-  late String name;
+  String? name;
 
   @observable
-  late String email;
+  String? email;
 
   @action
   changeName(String value) => name = value;

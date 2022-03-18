@@ -25,7 +25,7 @@ class _DependentAddPageState extends State<DependentAddPage> {
 
   @override
   void initState() {
-    _controller.dependent = widget.dependent ?? null;
+    //_controller.dependent = (widget.dependent ?? null)!;
     _controller.init();
     super.initState();
   }
@@ -105,7 +105,6 @@ class _DependentAddPageState extends State<DependentAddPage> {
                 Padding(
                   padding: const EdgeInsets.fromLTRB(0.0, 3.0, 2.0, 3.0),
                   child: Row(
-                    crossAxisAlignment: CrossAxisAlignment.baseline,
                     children: <Widget>[
                       Expanded(
                         child: const Text(
