@@ -67,7 +67,8 @@ abstract class AssociatedUpdateControllerBase with Store {
   String photoUrl = "";
 
   @observable
-  late File photo;
+  //late File photo;
+  File photo = File('');
 
   @observable
   bool changedPhoto = false;
@@ -166,7 +167,7 @@ abstract class AssociatedUpdateControllerBase with Store {
     associated.dateShield = dateShieldCtrl.text;
     associated.dependents = List<Dependent>.from(dependents);
     associated.motorcycles = List<Motorcycle>.from(motorcycles);
-    if (photo != null) {
+    if (photo.path != '') {
       //se houve alteração de foto
       await _uploadPhoto().then((value) => associated.photoUrl = value);
     }
