@@ -67,7 +67,6 @@ abstract class AssociatedUpdateControllerBase with Store {
   String photoUrl = "";
 
   @observable
-  //late File photo;
   File photo = File('');
 
   @observable
@@ -100,7 +99,7 @@ abstract class AssociatedUpdateControllerBase with Store {
     currentBloodType = associated.bloodType;
     currentAssociatedType = associated.associatedType;
     currentStatus = associated.status;
-    photoUrl = associated.photoUrl;
+    photoUrl = associated.photoUrl ?? '';
     formController = FormController(
       name: associated.name,
       email: associated.email,
