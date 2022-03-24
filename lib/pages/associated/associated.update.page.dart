@@ -420,16 +420,16 @@ class _AssociatedUpdatePageState extends State<AssociatedUpdatePage> {
                 itemBuilder: (_, int i) {
                   return Container(
                     decoration: BoxDecoration(
-                      color: Colors.white30,
+                      color: Colors.white38,
                       shape: BoxShape.rectangle,
                       borderRadius: BorderRadius.circular(8.0),
-                      boxShadow: <BoxShadow>[
+/*                      boxShadow: <BoxShadow>[
                         BoxShadow(
                           color: Colors.black12,
                           blurRadius: 10.0,
                           offset: Offset(0.0, 5.0),
                         ),
-                      ],
+                      ],*/
                     ),
                     child: ListTile(
                       leading: Container(

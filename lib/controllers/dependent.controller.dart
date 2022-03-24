@@ -55,7 +55,9 @@ abstract class DependentControllerBase with Store {
 
     //String a = b ?? 'hello';
     //This means a equals b, but if b is null then a equals 'hello'.
-    currentBloodType = (dependent.bloodType.isEmpty ? getBloodTypes().first.value : dependent.bloodType)!;
+    currentBloodType = (dependent.bloodType.isEmpty
+        ? getBloodTypes().first.value
+        : dependent.bloodType)!;
 
 /*    isAssociated = (dependent != null
         ? (dependent.isAssociated == 'S' ? true : false)
