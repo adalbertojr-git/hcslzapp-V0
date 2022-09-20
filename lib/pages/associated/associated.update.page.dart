@@ -3,6 +3,7 @@ import 'dart:io';
 import 'package:asuka/asuka.dart' as asuka;
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
+import 'package:hcslzapp/models/template.dart';
 import '../../common/associated.profiles.dart';
 import '../../common/labels.and.hints.dart';
 import '../../common/photo.image.provider.dart';
