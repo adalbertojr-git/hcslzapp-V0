@@ -49,21 +49,12 @@ abstract class DependentControllerBase with Store {
 
   init() {
     _initTextFields();
-/*    currentBloodType = (dependent != null
-        ? dependent.bloodType
-        : getBloodTypes().first.value)!;*/
-
     //String a = b ?? 'hello';
     //This means a equals b, but if b is null then a equals 'hello'.
     currentBloodType = (dependent.bloodType.isEmpty
         ? getBloodTypes().first.value
         : dependent.bloodType)!;
-
-/*    isAssociated = (dependent != null
-        ? (dependent.isAssociated == 'S' ? true : false)
-        : false);*/
     isAssociated = (dependent.isAssociated == 'S' ? true : false);
-
     formController =
         FormController(name: dependent.name, email: dependent.email);
   }
