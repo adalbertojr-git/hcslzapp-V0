@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:hcslzapp/models/motorcycle.dart';
+import 'package:hcslzapp/models/template.dart';
 import 'package:mobx/mobx.dart';
 
 part 'motorcycle.controller.g.dart';
@@ -35,45 +36,45 @@ abstract class MotorcycleControllerBase with Store {
   late TextEditingController? renavamCtrl = TextEditingController();
 
   @observable
-  late Motorcycle? motorcycle;
+  Motorcycle motorcycle = Template().loadMotorcycle();
 
   init() {
     _initTextFields();
     formController = FormController(
-      model: motorcycle?.model ?? '',
+      model: motorcycle.model,
     );
   }
 
   _initTextFields() {
-    modelCtrl?.text = motorcycle?.model ?? "";
-    yearCtrl?.text = motorcycle?.year ?? "";
-    colorCtrl?.text = motorcycle?.color ?? "";
-    licencePlateCtrl?.text = motorcycle?.licencePlate ?? "";
-    nicknameCtrl?.text = motorcycle?.nickname ?? "";
-    chassisCtrl?.text = motorcycle?.chassis ?? "";
-    renavamCtrl?.text = motorcycle?.renavam ?? "";
+    modelCtrl?.text = motorcycle.model;
+    yearCtrl?.text = motorcycle.year;
+    colorCtrl?.text = motorcycle.color;
+    licencePlateCtrl?.text = motorcycle.licencePlate;
+    nicknameCtrl?.text = motorcycle.nickname;
+    chassisCtrl?.text = motorcycle.chassis;
+    renavamCtrl?.text = motorcycle.renavam;
   }
 
   add(BuildContext context) {
     idCtrl.text = "0";
     final int id = int.parse(idCtrl.text);
-    final String? model = modelCtrl?.text;
-    final String? year = yearCtrl?.text;
-    final String? color = colorCtrl?.text;
-    final String? licencePlate = licencePlateCtrl?.text;
-    final String? nickname = nicknameCtrl?.text;
-    final String? chassis = chassisCtrl?.text;
-    final String? renavam = renavamCtrl?.text;
+    final String model = modelCtrl!.text;
+    final String year = yearCtrl!.text;
+    final String color = colorCtrl!.text;
+    final String licencePlate = licencePlateCtrl!.text;
+    final String nickname = nicknameCtrl!.text;
+    final String chassis = chassisCtrl!.text;
+    final String renavam = renavamCtrl!.text;
     if (model != '') {
       final motorcycle = Motorcycle(
-        id,
-        model!,
-        year!,
-        color!,
-        licencePlate!,
-        nickname!,
-        chassis!,
-        renavam!,
+        id: id,
+        model: model,
+        year: year,
+        color: color,
+        licencePlate: licencePlate,
+        nickname: nickname,
+        chassis: chassis,
+        renavam: renavam,
       );
       /*
       pop = manda resposta para o push (then)
@@ -95,14 +96,16 @@ abstract class MotorcycleControllerBase with Store {
 }
 
 class FormController extends FormControllerBase with _$FormController {
-  FormController({required String model}) {
+  FormController({
+    String? model,
+  }) {
     super.model = model;
   }
 }
 
 abstract class FormControllerBase with Store {
   @observable
-  late String model;
+  String? model;
 
   @action
   changeModel(String value) => model = value;

@@ -134,13 +134,13 @@ mixin _$MotorcycleController on MotorcycleControllerBase, Store {
   final _$motorcycleAtom = Atom(name: 'MotorcycleControllerBase.motorcycle');
 
   @override
-  Motorcycle? get motorcycle {
+  Motorcycle get motorcycle {
     _$motorcycleAtom.reportRead();
     return super.motorcycle;
   }
 
   @override
-  set motorcycle(Motorcycle? value) {
+  set motorcycle(Motorcycle value) {
     _$motorcycleAtom.reportWrite(value, super.motorcycle, () {
       super.motorcycle = value;
     });
@@ -166,13 +166,13 @@ mixin _$FormController on FormControllerBase, Store {
   final _$modelAtom = Atom(name: 'FormControllerBase.model');
 
   @override
-  String get model {
+  String? get model {
     _$modelAtom.reportRead();
     return super.model;
   }
 
   @override
-  set model(String value) {
+  set model(String? value) {
     _$modelAtom.reportWrite(value, super.model, () {
       super.model = value;
     });

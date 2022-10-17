@@ -55,8 +55,10 @@ abstract class DependentControllerBase with Store {
         ? getBloodTypes().first.value
         : dependent.bloodType)!;
     isAssociated = (dependent.isAssociated == 'S' ? true : false);
-    formController =
-        FormController(name: dependent.name, email: dependent.email);
+    formController = FormController(
+      name: dependent.name,
+      email: dependent.email,
+    );
   }
 
   _initTextFields() {

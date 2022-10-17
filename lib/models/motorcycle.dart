@@ -8,8 +8,16 @@ class Motorcycle {
   String chassis;
   String renavam;
 
-  Motorcycle(this.id, this.model, this.year, this.color, this.licencePlate,
-      this.nickname, this.chassis, this.renavam);
+  Motorcycle({
+    required this.id,
+    required this.model,
+    required this.year,
+    required this.color,
+    required this.licencePlate,
+    required this.nickname,
+    required this.chassis,
+    required this.renavam,
+  });
 
   Motorcycle.fromJson(Map<String, dynamic> json)
       : id = json['id'],
@@ -22,15 +30,15 @@ class Motorcycle {
         renavam = json['renavam'];
 
   Map<String, dynamic> toJson() => {
-    'id': id,
-    'model': model,
-    'year': year,
-    'color': color,
-    'licencePlate': licencePlate,
-    'nickname': nickname,
-    'chassis': chassis,
-    'renavam': renavam,
-  };
+        'id': id,
+        'model': model,
+        'year': year,
+        'color': color,
+        'licencePlate': licencePlate,
+        'nickname': nickname,
+        'chassis': chassis,
+        'renavam': renavam,
+      };
 
   @override
   String toString() {

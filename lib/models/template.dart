@@ -5,8 +5,7 @@ import 'dependent.dart';
 import 'motorcycle.dart';
 
 class Template {
-  Associated loadAssociated() =>
-      Associated(
+  Associated loadAssociated() => Associated(
         id: 0,
         name: '',
         email: '',
@@ -29,13 +28,25 @@ class Template {
         ),
       );
 
-  Dependent loadDependent() =>
-      Dependent(id: 0,
-          name: '',
-          email: '',
-          phone: '',
-          cpf: '',
-          bloodType: '',
-          dateBirth: '',
-          isAssociated: '');
+  Dependent loadDependent() => Dependent(
+        id: 0,
+        name: '',
+        email: '',
+        phone: '',
+        cpf: '',
+        bloodType: '',
+        dateBirth: '',
+        isAssociated: '',
+      );
+
+  Motorcycle loadMotorcycle() => Motorcycle(
+        id: 0,
+        model: '',
+        year: '',
+        color: '',
+        licencePlate: '',
+        nickname: '',
+        chassis: '',
+        renavam: '',
+      );
 }
