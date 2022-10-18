@@ -1,13 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:hcslzapp/pages/digital.identity/digital.identity.page.dart';
 import '../models/role.dart';
 import '../common/associated.profiles.dart';
 import '../models/associated.dart';
 import '../pages/about/about.page.dart';
 import '../pages/associated/associated.update.page.dart';
-/*import 'package:hcslzapp/pages/digital.identity/digital.identity.page.dart';
+import 'package:hcslzapp/pages/digital.identity/digital.identity.page.dart';
 import 'package:hcslzapp/pages/dtc.code/dtc.code.dashboard.page.dart';
-import 'package:hcslzapp/pages/event/event.calendar.page.dart';
+/*import 'package:hcslzapp/pages/event/event.calendar.page.dart';
 import 'package:hcslzapp/pages/partnership/partnership.list.associated.page.dart';
 import 'package:hcslzapp/pages/partnership/partnership.list.adm.page.dart';
 import 'package:hcslzapp/pages/payment/payment.associated.page.dart';*/
@@ -119,12 +118,12 @@ abstract class DashboardControllerBase with Store {
   loadDtcCodeDashboardPage(
     BuildContext context,
   ) async {
-/*    await Navigator.push(
+    await Navigator.push(
       context,
       MaterialPageRoute(
         builder: (context) => DtcCodeDashboardPage(),
       ),
-    );*/
+    );
   }
 
   loadAboutPage(
