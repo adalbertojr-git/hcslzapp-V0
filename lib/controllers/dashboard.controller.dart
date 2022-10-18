@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:hcslzapp/pages/digital.identity/digital.identity.page.dart';
 import '../models/role.dart';
 import '../common/associated.profiles.dart';
 import '../models/associated.dart';
@@ -84,12 +85,12 @@ abstract class DashboardControllerBase with Store {
     BuildContext context,
     Associated associated,
   ) async {
-/*    await Navigator.push(
+    await Navigator.push(
       context,
       MaterialPageRoute(
         builder: (context) => DigitalIdentityPage(associated),
       ),
-    );*/
+    );
   }
 
   loadPartnershipListAssociatedPage(

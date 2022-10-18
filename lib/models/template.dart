@@ -1,3 +1,5 @@
+import 'package:hcslzapp/models/digital.identity.dart';
+
 import 'role.dart';
 import 'associated.dart';
 import 'authenticate.dart';
@@ -48,5 +50,19 @@ class Template {
         nickname: '',
         chassis: '',
         renavam: '',
+      );
+
+  DigitalIdentity loadDigitalIdentity() => DigitalIdentity(
+        id: 0,
+        name: '',
+        cnh: '',
+        cpf: '',
+        bloodType: '',
+        associatedType: '',
+        dateBirth: '',
+        dateShield: '',
+        dueDate: '',
+        dependents: List<Dependent>.from([]),
+        motorcycles: List<Motorcycle>.from([]),
       );
 }
