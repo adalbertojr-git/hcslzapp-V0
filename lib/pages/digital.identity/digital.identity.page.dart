@@ -32,17 +32,6 @@ class _DigitalIdentityPageState extends State<DigitalIdentityPage> {
   DigitalIdentityController _controller = DigitalIdentityController();
   final double _fontSize = 14.0;
 
-/*  @override
-  void initState() {
-    _controller.getFuture(widget._associated.id).then((value) {
-      if (value.isNotEmpty) {
-        _controller.setButtonVisibilty();
-      }
-    });
-
-    super.initState();
-  }*/
-
   @override
   Widget build(BuildContext context) => Scaffold(
         body: FutureBuilder<List<DigitalIdentity>>(

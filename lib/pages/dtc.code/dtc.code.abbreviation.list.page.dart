@@ -30,7 +30,7 @@ class DtcCodeAbbreviationListPageState
   @override
   void initState() {
     _controller.getFuture().then((value) {
-      if (value != null && value.isNotEmpty) {
+      if (value.isNotEmpty) {
         _controller.setButtonVisibilty();
       }
     });
@@ -60,9 +60,9 @@ class DtcCodeAbbreviationListPageState
                     title: _title,
                     message: _controller.errorMsg,
                   );
-                if (snapshot.data.length > 0) {
+                if ((snapshot.data?.length)! > 0) {
                   _controller.init();
-                  _controller.abbreviations.addAll(snapshot.data);
+                  _controller.abbreviations.addAll(snapshot.data!);
                   return _widgets();
                 } else
                   return CenteredMessage(

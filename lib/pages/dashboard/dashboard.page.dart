@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
+import 'package:hcslzapp/pages/login/login.page.dart';
 import '../../common/associated.profiles.dart';
 import 'package:hcslzapp/common/photo.image.provider.dart';
 import 'package:hcslzapp/components/transaction.auth.dialog.dart';
@@ -16,7 +17,6 @@ import 'package:hcslzapp/pages/management/management.list.page.dart';
 import 'package:hcslzapp/pages/partnership/partnership.list.adm.page.dart';
 import 'package:hcslzapp/pages/payment/payment.list.page.dart';
 */
-import 'package:hcslzapp/pages/splash/splash.page.dart';
 
 const String _labelAppTitle = 'HCSlz App';
 const String _labelDarkTheme = 'Tema Escuro';
@@ -200,7 +200,7 @@ class _DashboardPageState extends State<DashboardPage> {
                         Navigator.of(context).pushAndRemoveUntil(
                           // the new route
                           MaterialPageRoute(
-                            builder: (BuildContext context) => Splash(),
+                            builder: (BuildContext context) => LoginPage(),
                           ),
 
                           // this function should return true when we're done removing routes
@@ -357,7 +357,7 @@ class _DashboardPageState extends State<DashboardPage> {
                   Navigator.of(context).pushAndRemoveUntil(
                     // the new route
                     MaterialPageRoute(
-                      builder: (BuildContext context) => Splash(),
+                      builder: (BuildContext context) => LoginPage(),
                     ),
 
                     // this function should return true when we're done removing routes

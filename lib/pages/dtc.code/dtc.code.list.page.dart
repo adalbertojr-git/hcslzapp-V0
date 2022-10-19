@@ -57,9 +57,9 @@ class DtcCodeListPageState extends State<DtcCodeListPage> {
                         title: _title,
                         message: _controller.errorMsg,
                       );
-                    if (snapshot.data.length > 0) {
+                    if ((snapshot.data?.length)! > 0) {
                       _controller.init();
-                      _controller.codes.addAll(snapshot.data);
+                      _controller.codes.addAll(snapshot.data!);
                       return _widgets();
                     } else
                       return CenteredMessage(
@@ -126,12 +126,10 @@ class DtcCodeListPageState extends State<DtcCodeListPage> {
                         subtitle: Column(
                           children: [
                             Container(
-                              color: Colors.white54,
                               alignment: Alignment.centerLeft,
                               child: Text(
                                 _controller.listFiltered[i].description,
                                 textAlign: TextAlign.justify,
-                                style: TextStyle(color: Colors.black),
                               ),
                             ),
                             Container(

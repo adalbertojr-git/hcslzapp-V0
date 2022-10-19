@@ -23,7 +23,7 @@ const List<IconData> _listAdmIcons = [
 
 // ignore: must_be_immutable
 class DtcCodeDashboardPage extends StatelessWidget {
-  BuildContext _gContext;
+  late BuildContext _gContext;
 
   List<Widget> _listAdmWidgets = [
     DtcCodeListPage(),
@@ -45,7 +45,8 @@ class DtcCodeDashboardPage extends StatelessWidget {
     );
   }
 
-  _dashBg() => Column(
+  _dashBg() =>
+      Column(
         children: <Widget>[
           Expanded(
             child: Container(color: Colors.deepOrange[300]),
@@ -58,7 +59,8 @@ class DtcCodeDashboardPage extends StatelessWidget {
         ],
       );
 
-  _content() => Container(
+  _content() =>
+      Container(
         child: Column(
           children: <Widget>[
             _header(),
@@ -68,7 +70,8 @@ class DtcCodeDashboardPage extends StatelessWidget {
         ),
       );
 
-  _header() => ListTile(
+  _header() =>
+      ListTile(
         contentPadding: EdgeInsets.only(left: 40, right: 20, top: 30),
         title: const Text(
           'Códigos DTC',
@@ -85,7 +88,8 @@ class DtcCodeDashboardPage extends StatelessWidget {
         ),
       );
 
-  _bar() => Row(
+  _bar() =>
+      Row(
         mainAxisAlignment: MainAxisAlignment.center,
         children: <Widget>[
           _BarButton(
@@ -117,7 +121,8 @@ class DtcCodeDashboardPage extends StatelessWidget {
         ],
       );
 
-  _grid() => Expanded(
+  _grid() =>
+      Expanded(
         child: Container(
           padding: EdgeInsets.only(left: 16, right: 16, bottom: 16),
           child: ListView.builder(
@@ -127,7 +132,8 @@ class DtcCodeDashboardPage extends StatelessWidget {
         ),
       );
 
-  Widget _listItem(BuildContext context, int index) => Card(
+  Widget _listItem(BuildContext context, int index) =>
+      Card(
         color: Colors.deepOrange[100],
         shadowColor: Colors.black,
         child: Column(
@@ -179,7 +185,7 @@ class _BarButton extends StatelessWidget {
   final Function onClick; //callback
 
   _BarButton(this.title, this.subtitle, this.icon, this.iconColor,
-      {@required this.onClick});
+      {required this.onClick});
 
   @override
   Widget build(BuildContext context) {
@@ -194,7 +200,10 @@ class _BarButton extends StatelessWidget {
           child: Container(
             padding: EdgeInsets.all(8),
             height: 100,
-            width: MediaQuery.of(context).size.width / 2 - 15,
+            width: MediaQuery
+                .of(context)
+                .size
+                .width / 2 - 15,
             //width: 150,
             child: Column(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,

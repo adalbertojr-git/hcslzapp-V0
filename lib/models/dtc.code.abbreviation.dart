@@ -3,13 +3,16 @@ class DtcCodeAbbreviation {
   String code;
   String description;
 
-  DtcCodeAbbreviation({this.id, this.code, this.description});
+  DtcCodeAbbreviation({
+    required this.id,
+    required this.code,
+    required this.description,
+  });
 
-  DtcCodeAbbreviation.fromJson(Map<String, dynamic> json) {
-    id = json['id'];
-    code = json['code'];
-    description = json['description'];
-  }
+  DtcCodeAbbreviation.fromJson(Map<String, dynamic> json)
+      : id = json['id'],
+        code = json['code'],
+        description = json['description'];
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = new Map<String, dynamic>();

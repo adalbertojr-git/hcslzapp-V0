@@ -51,10 +51,8 @@ abstract class DashboardControllerBase with Store {
     return names[0];
   }
 
-  Future<void> loadAssociatedUpdatePage(
-    BuildContext context,
-    int id,
-  ) async {
+  Future<void> loadAssociatedUpdatePage(BuildContext context,
+      int id,) async {
     var _photoUrl = await Navigator.push(
       context,
       MaterialPageRoute(
@@ -66,11 +64,9 @@ abstract class DashboardControllerBase with Store {
     }
   }
 
-  loadPaymentAssociatedPage(
-    BuildContext context,
-    bool isAdmin,
-    Associated associated,
-  ) async {
+  loadPaymentAssociatedPage(BuildContext context,
+      bool isAdmin,
+      Associated associated,) async {
 /*    await Navigator.push(
       context,
       MaterialPageRoute(
@@ -80,10 +76,8 @@ abstract class DashboardControllerBase with Store {
     );*/
   }
 
-  loadDigitalIdentityPage(
-    BuildContext context,
-    Associated associated,
-  ) async {
+  loadDigitalIdentityPage(BuildContext context,
+      Associated associated,) async {
     await Navigator.push(
       context,
       MaterialPageRoute(
@@ -92,9 +86,7 @@ abstract class DashboardControllerBase with Store {
     );
   }
 
-  loadPartnershipListAssociatedPage(
-    BuildContext context,
-  ) async {
+  loadPartnershipListAssociatedPage(BuildContext context,) async {
 /*    await Navigator.push(
       context,
       MaterialPageRoute(
@@ -103,10 +95,8 @@ abstract class DashboardControllerBase with Store {
     );*/
   }
 
-  loadEventCalendarPage(
-    BuildContext context,
-    String user,
-  ) async {
+  loadEventCalendarPage(BuildContext context,
+      String user,) async {
 /*    await Navigator.push(
       context,
       MaterialPageRoute(
@@ -115,9 +105,7 @@ abstract class DashboardControllerBase with Store {
     );*/
   }
 
-  loadDtcCodeDashboardPage(
-    BuildContext context,
-  ) async {
+  loadDtcCodeDashboardPage(BuildContext context,) async {
     await Navigator.push(
       context,
       MaterialPageRoute(
@@ -126,9 +114,7 @@ abstract class DashboardControllerBase with Store {
     );
   }
 
-  loadAboutPage(
-    BuildContext context,
-  ) async {
+  loadAboutPage(BuildContext context,) async {
     await Navigator.push(
       context,
       MaterialPageRoute(
@@ -145,11 +131,10 @@ class GridButton extends StatelessWidget {
   final Color color = Colors.white10;
   final Function onClick;
 
-  GridButton(
-      {required this.title,
-      required this.image,
-      required this.context,
-      required this.onClick});
+  GridButton({required this.title,
+    required this.image,
+    required this.context,
+    required this.onClick});
 
   @override
   Widget build(BuildContext context) {
@@ -207,7 +192,10 @@ class BarButton extends StatelessWidget {
           child: Container(
             padding: EdgeInsets.all(8),
             height: 100,
-            width: MediaQuery.of(context).size.width / 2 - 15,
+            width: MediaQuery
+                .of(context)
+                .size
+                .width / 2 - 15,
             //width: 150,
             child: Column(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
