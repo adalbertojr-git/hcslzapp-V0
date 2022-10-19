@@ -28,13 +28,13 @@ abstract class EventCalendarControllerBase with Store {
   Map<DateTime, List> events = {};
 
   @observable
-  List selectedEvents = List();
+  List selectedEvents = List.filled(0, 0, growable: true);
 
   @observable
-  late AnimationController animController;
+  AnimationController animController = AnimationController();
 
   @observable
-  late CalendarController calController;
+  CalendarController calController;
 
   init() {
     events.clear();
@@ -93,8 +93,11 @@ abstract class EventCalendarControllerBase with Store {
   }
 
   DateTime _parseDate(String date) {
-    var parts = date.split('-').map(int.tryParse).toList();
-    return DateTime(parts[0], parts[1], parts[2], 12, 0, 0, 0, 0);
+    List<int?> parts = date.split('-').map(int.tryParse).toList();
+    int y = parts[0] ?? 0;
+    int m = parts[1] ?? 0;
+    int d = parts[2] ?? 0;
+    return DateTime(y, m, d, 12, 0, 0, 0, 0);
   }
 
   @action
