@@ -1,9 +1,11 @@
-
 class Role {
   int id;
   String profile;
 
-  Role({required this.id, required this.profile});
+  Role({
+    required this.id,
+    required this.profile,
+  });
 
   Role.fromJson(Map<String, dynamic> json)
       : id = json['id'],
@@ -19,4 +21,3 @@ class Role {
     return 'Role{id: $id, profile: $profile}';
   }
 }
-

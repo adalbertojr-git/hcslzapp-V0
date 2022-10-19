@@ -1,7 +1,9 @@
 class Token {
   String token;
 
-  Token({required this.token});
+  Token({
+    required this.token,
+  });
 
   Token.fromJson(Map<String, dynamic> json) : token = json['token'];
 

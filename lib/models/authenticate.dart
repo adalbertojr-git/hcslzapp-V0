@@ -5,7 +5,11 @@ class Authenticate {
   String username;
   List<Role> roles;
 
-  Authenticate({required this.id, required this.username, required this.roles});
+  Authenticate({
+    required this.id,
+    required this.username,
+    required this.roles,
+  });
 
   Authenticate.fromJson(Map<String, dynamic> json)
       : id = json['id'],
