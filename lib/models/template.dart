@@ -1,4 +1,6 @@
 import 'package:hcslzapp/models/digital.identity.dart';
+import 'package:hcslzapp/models/payment.dart';
+import 'package:hcslzapp/models/payment.months.dart';
 
 import 'role.dart';
 import 'associated.dart';
@@ -64,5 +66,12 @@ class Template {
         dueDate: '',
         dependents: List<Dependent>.from([]),
         motorcycles: List<Motorcycle>.from([]),
+      );
+
+  Payment loadPayment() => Payment(
+        id: 0,
+        year: '',
+        associated: this.loadAssociated(),
+        paymentMonths: List<PaymentMonths>.from([]),
       );
 }

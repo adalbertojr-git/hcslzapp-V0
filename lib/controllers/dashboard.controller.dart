@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:hcslzapp/pages/payment/payment.associated.page.dart';
 import '../models/role.dart';
 import '../common/associated.profiles.dart';
 import '../models/associated.dart';
@@ -67,13 +68,13 @@ abstract class DashboardControllerBase with Store {
   loadPaymentAssociatedPage(BuildContext context,
       bool isAdmin,
       Associated associated,) async {
-/*    await Navigator.push(
+    await Navigator.push(
       context,
       MaterialPageRoute(
         builder: (context) =>
             PaymentAssociatedPage(selectedProfile, associated),
       ),
-    );*/
+    );
   }
 
   loadDigitalIdentityPage(BuildContext context,
