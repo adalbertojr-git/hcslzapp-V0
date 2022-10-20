@@ -32,19 +32,18 @@ class EventCalendarPageState extends State<EventCalendarPage>
   @override
   void initState() {
     _controller.init();
-    //_controller.calController = CalendarController();
+    _controller.calController = CalendarController();
     _controller.animController = AnimationController(
       vsync: this,
       duration: const Duration(milliseconds: 400),
     );
-    _controller.animController.forward();
+    _controller.animController?.forward();
     super.initState();
   }
 
   @override
   void dispose() {
-    _controller.animController.dispose();
-    //_controller.calController.dispose();
+    _controller.animController?.dispose();
     super.dispose();
   }
 
@@ -129,7 +128,7 @@ class EventCalendarPageState extends State<EventCalendarPage>
             selectedDayBuilder: (context, date, _) {
               return FadeTransition(
                 opacity: Tween(begin: 0.0, end: 1.0)
-                    .animate(_controller.animController),
+                    .animate(_controller.animController!),
                 child: CircleAvatar(
                   backgroundColor: Colors.orangeAccent,
                   child: Text(
@@ -179,7 +178,7 @@ class EventCalendarPageState extends State<EventCalendarPage>
           ),
           onDaySelected: (date, events, _) {
             _onDaySelected(date, events);
-            _controller.animController.forward(from: 0.0);
+            _controller.animController?.forward(from: 0.0);
           },
           onVisibleDaysChanged: _onVisibleDaysChanged,
           onCalendarCreated: _onCalendarCreated,
@@ -190,9 +189,9 @@ class EventCalendarPageState extends State<EventCalendarPage>
         duration: const Duration(milliseconds: 300),
         decoration: BoxDecoration(
           shape: BoxShape.rectangle,
-          color: _controller.calController.isSelected(date)
+          color: _controller.calController!.isSelected(date)
               ? Colors.brown[500]
-              : _controller.calController.isToday(date)
+              : _controller.calController!.isToday(date)
                   ? Colors.brown[300]
                   : Colors.blue[400],
         ),
@@ -354,7 +353,7 @@ class EventCalendarPageState extends State<EventCalendarPage>
   }
 
   _save() {
-    var _selectedDay = _controller.calController.selectedDay;
+    var _selectedDay = _controller.calController!.selectedDay;
     _controller
         .save(_controller.titleCtrl.text,
             _selectedDay.toString().substring(0, 10))

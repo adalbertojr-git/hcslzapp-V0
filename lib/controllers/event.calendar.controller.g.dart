@@ -104,13 +104,13 @@ mixin _$EventCalendarController on EventCalendarControllerBase, Store {
       Atom(name: 'EventCalendarControllerBase.animController');
 
   @override
-  AnimationController get animController {
+  AnimationController? get animController {
     _$animControllerAtom.reportRead();
     return super.animController;
   }
 
   @override
-  set animController(AnimationController value) {
+  set animController(AnimationController? value) {
     _$animControllerAtom.reportWrite(value, super.animController, () {
       super.animController = value;
     });
@@ -120,13 +120,13 @@ mixin _$EventCalendarController on EventCalendarControllerBase, Store {
       Atom(name: 'EventCalendarControllerBase.calController');
 
   @override
-  CalendarController get calController {
+  CalendarController? get calController {
     _$calControllerAtom.reportRead();
     return super.calController;
   }
 
   @override
-  set calController(CalendarController value) {
+  set calController(CalendarController? value) {
     _$calControllerAtom.reportWrite(value, super.calController, () {
       super.calController = value;
     });

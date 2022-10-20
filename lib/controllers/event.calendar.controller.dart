@@ -31,10 +31,10 @@ abstract class EventCalendarControllerBase with Store {
   List selectedEvents = List.filled(0, 0, growable: true);
 
   @observable
-  AnimationController animController = AnimationController();
+  AnimationController? animController;
 
   @observable
-  CalendarController calController;
+  CalendarController? calController;
 
   init() {
     events.clear();
