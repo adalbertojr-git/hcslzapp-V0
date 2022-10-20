@@ -4,6 +4,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:hcslzapp/pages/event/event.calendar.page.dart';
 import 'package:hcslzapp/pages/login/login.page.dart';
+import 'package:hcslzapp/pages/partnership/partnership.list.adm.page.dart';
+import 'package:hcslzapp/pages/payment/payment.list.page.dart';
 import '../../common/associated.profiles.dart';
 import 'package:hcslzapp/common/photo.image.provider.dart';
 import 'package:hcslzapp/components/transaction.auth.dialog.dart';
@@ -12,11 +14,6 @@ import 'package:hcslzapp/controllers/dashboard.controller.dart';
 import 'package:hcslzapp/models/associated.dart';
 import 'package:hcslzapp/pages/access.request/access.request.list.page.dart';
 import 'package:hcslzapp/pages/associated/associated.list.page.dart';
-/*
-import 'package:hcslzapp/pages/management/management.list.page.dart';
-import 'package:hcslzapp/pages/partnership/partnership.list.adm.page.dart';
-import 'package:hcslzapp/pages/payment/payment.list.page.dart';
-*/
 
 const String _labelAppTitle = 'HCSlz App';
 const String _labelDarkTheme = 'Tema Escuro';
@@ -104,9 +101,9 @@ class _DashboardPageState extends State<DashboardPage> {
     _gContext = context;
     _listAdmWidgets = [
       AssociatedListPage(),
-      //PaymentListPage(_controller.selectedProfile),
+      PaymentListPage(_controller.selectedProfile),
       EventCalendarPage(_controller.selectedProfile),
-      //PartnershipListAdmPage(),
+      PartnershipListAdmPage(),
     ];
     return Scaffold(
       appBar: _appBar(),

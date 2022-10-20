@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:hcslzapp/pages/partnership/partnership.list.associated.page.dart';
 import 'package:hcslzapp/pages/payment/payment.associated.page.dart';
 import '../models/role.dart';
 import '../common/associated.profiles.dart';
@@ -8,9 +9,6 @@ import '../pages/associated/associated.update.page.dart';
 import 'package:hcslzapp/pages/digital.identity/digital.identity.page.dart';
 import 'package:hcslzapp/pages/dtc.code/dtc.code.dashboard.page.dart';
 import 'package:hcslzapp/pages/event/event.calendar.page.dart';
-/*import 'package:hcslzapp/pages/partnership/partnership.list.associated.page.dart';
-import 'package:hcslzapp/pages/partnership/partnership.list.adm.page.dart';
-import 'package:hcslzapp/pages/payment/payment.associated.page.dart';*/
 import 'package:mobx/mobx.dart';
 
 part 'dashboard.controller.g.dart';
@@ -88,12 +86,12 @@ abstract class DashboardControllerBase with Store {
   }
 
   loadPartnershipListAssociatedPage(BuildContext context,) async {
-/*    await Navigator.push(
+    await Navigator.push(
       context,
       MaterialPageRoute(
         builder: (context) => PartnershipListAssociatedPage(),
       ),
-    );*/
+    );
   }
 
   loadEventCalendarPage(BuildContext context,

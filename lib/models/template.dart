@@ -1,4 +1,5 @@
 import 'package:hcslzapp/models/digital.identity.dart';
+import 'package:hcslzapp/models/partnership.dart';
 import 'package:hcslzapp/models/payment.dart';
 import 'package:hcslzapp/models/payment.months.dart';
 
@@ -73,5 +74,16 @@ class Template {
         year: '',
         associated: this.loadAssociated(),
         paymentMonths: List<PaymentMonths>.from([]),
+      );
+
+  Partnership loadPartnership() => Partnership(
+        id: 0,
+        partner: '',
+        phone1: '',
+        phone2: '',
+        address: '',
+        promotion: '',
+        status: '',
+        photoUrl: '',
       );
 }
