@@ -95,6 +95,7 @@ class _PartnershipAddPageState extends State<PartnershipAddPage> {
                 ),
                 Row(
                   crossAxisAlignment: CrossAxisAlignment.baseline,
+                  textBaseline: TextBaseline.alphabetic,
                   children: <Widget>[
                     Expanded(
                       child: MyTextFormField(
