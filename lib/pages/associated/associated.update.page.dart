@@ -327,6 +327,7 @@ class _AssociatedUpdatePageState extends State<AssociatedUpdatePage> {
                         padding: const EdgeInsets.fromLTRB(0.0, 3.0, 2.0, 3.0),
                         child: Row(
                           crossAxisAlignment: CrossAxisAlignment.baseline,
+                          textBaseline: TextBaseline.alphabetic,
                           children: <Widget>[
                             Expanded(
                               child: const Text(
