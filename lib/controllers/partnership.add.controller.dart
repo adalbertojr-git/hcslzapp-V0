@@ -106,14 +106,14 @@ abstract class PartnershipAddControllerBase with Store {
 
   Future<Partnership> _setValues() async {
     return Partnership(
-      id: partnership != null ? partnership.id : int.parse('0'),
+      id: partnership.id,
       partner: partnerCtrl.text,
       phone1: phone1Ctrl.text,
       phone2: phone2Ctrl.text,
       address: addressCtrl.text,
       promotion: promotionCtrl.text,
       status: currentStatus,
-      photoUrl: photo != null ? await _uploadPhoto() : photoUrl,
+      photoUrl: photo.path.length != 0 ? await _uploadPhoto() : photoUrl,
     );
   }
 

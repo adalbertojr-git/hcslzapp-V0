@@ -62,7 +62,7 @@ class _PartnershipAddPageState extends State<PartnershipAddPage> {
                       icon: Icon(
                         Icons.add_photo_alternate,
                         color: Colors.black,
-                        size: 43.0,
+                        size: 28.0,
                       ),
                       onPressed: _controller.getImageFromGallery,
                     ),
@@ -71,7 +71,7 @@ class _PartnershipAddPageState extends State<PartnershipAddPage> {
                       icon: Icon(
                         Icons.add_a_photo,
                         color: Colors.black,
-                        size: 40.0,
+                        size: 25.0,
                       ),
                       onPressed: _controller.getImageFromCamera,
                     ),
@@ -143,6 +143,7 @@ class _PartnershipAddPageState extends State<PartnershipAddPage> {
                               const EdgeInsets.fromLTRB(0.0, 3.0, 2.0, 3.0),
                           child: Row(
                             crossAxisAlignment: CrossAxisAlignment.baseline,
+                            textBaseline: TextBaseline.alphabetic,
                             children: <Widget>[
                               Expanded(
                                 child: const Text(
