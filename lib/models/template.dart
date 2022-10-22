@@ -76,6 +76,12 @@ class Template {
         paymentMonths: List<PaymentMonths>.from([]),
       );
 
+  PaymentMonths loadPaymentMonths() => PaymentMonths(
+        id: 0,
+        month: 0,
+        value: 0.0,
+      );
+
   Partnership loadPartnership() => Partnership(
         id: 0,
         partner: '',

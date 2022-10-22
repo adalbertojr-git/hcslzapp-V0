@@ -162,7 +162,7 @@ abstract class PaymentAddControllerBase with Store {
 
   Payment _setValues() {
     return Payment(
-        id: payment != null ? payment.id : int.parse('0'),
+        id: payment.id,
         year: yearCtrl.text,
         associated: associated,
         paymentMonths: _setPaymentMonths());
@@ -178,7 +178,7 @@ abstract class PaymentAddControllerBase with Store {
   List<PaymentMonths> _setPaymentMonths() {
     List<PaymentMonths> paymentMonthsList = List<PaymentMonths>.filled(
       0,
-      [] as PaymentMonths,
+      Template().loadPaymentMonths(),
       growable: true,
     );
     paymentMonthsList.add(_setMonthsAndValues(1, janCtrl.text));

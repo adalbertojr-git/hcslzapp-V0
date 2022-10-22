@@ -197,9 +197,11 @@ class _PaymentAssociatedPageState extends State<PaymentAssociatedPage> {
                                       );
                                       future.then(
                                         (payment) {
-                                          _controller.payments.removeAt(i);
-                                          _controller.payments
-                                              .insert(i, payment);
+                                          if (payment != null) {
+                                            _controller.payments.removeAt(i);
+                                            _controller.payments
+                                                .insert(i, payment);
+                                          }
                                         },
                                       );
                                     },
