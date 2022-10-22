@@ -32,7 +32,7 @@ abstract class PaymentAssociatedControllerBase with Store {
   double total = 0.0;
 
   init() {
-    payments.clear();
+    //payments.clear();
   }
 
   @action

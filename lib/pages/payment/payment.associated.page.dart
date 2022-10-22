@@ -21,7 +21,10 @@ class PaymentAssociatedPage extends StatefulWidget {
   final String _selectedProfile;
   final Associated _associated;
 
-  const PaymentAssociatedPage(this._selectedProfile, this._associated);
+  const PaymentAssociatedPage(
+    this._selectedProfile,
+    this._associated,
+  );
 
   @override
   _PaymentAssociatedPageState createState() => _PaymentAssociatedPageState();
