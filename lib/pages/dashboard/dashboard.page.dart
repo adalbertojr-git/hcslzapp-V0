@@ -51,7 +51,7 @@ const List<String> _listAdmScreens = [
   "Mensalidades",
   "Eventos",
   "Parcerias",
-  //"Boutique",
+  "Boutique",
 ];
 
 const List<String> _listAdmScreensDesc = [
@@ -59,7 +59,7 @@ const List<String> _listAdmScreensDesc = [
   "Registro de pagamento das mensalidades dos associados",
   "Informações sobre viagens, encontros, passeios, etc.",
   "Empresas com promoções oferecidas ao Harley Club",
-  //"Produtos da marca Harley Club (camisas, bonés, etc)",
+  "Produtos da marca Harley Club (camisas, bonés, etc)",
 ];
 
 const List<IconData> _listAdmIcons = [
@@ -67,7 +67,7 @@ const List<IconData> _listAdmIcons = [
   Icons.monetization_on,
   Icons.event,
   Icons.emoji_people,
-  //Icons.wallet_giftcard,
+  Icons.wallet_giftcard,
 ];
 
 // ignore: must_be_immutable
@@ -104,6 +104,7 @@ class _DashboardPageState extends State<DashboardPage> {
       PaymentListPage(_controller.selectedProfile),
       EventCalendarPage(_controller.selectedProfile),
       PartnershipListAdmPage(),
+      Container(),
     ];
     return Scaffold(
       appBar: _appBar(),
@@ -560,18 +561,18 @@ class _DashboardPageState extends State<DashboardPage> {
                   },
                 ),
 */
-/*                GridButton(
+                GridButton(
                   title: "Boutique",
                   image: "assets/imgs/boutique.png",
                   context: _gContext,
                   onClick: () {
-                    Navigator.push(
+/*                    Navigator.push(
                       _gContext,
                       MaterialPageRoute(
                           builder: (gContext) => BoutiqueListPage()),
-                    );
+                    );*/
                   },
-                ),*/
+                ),
 /*
                 GridButton(
                   title: "Classificados",
