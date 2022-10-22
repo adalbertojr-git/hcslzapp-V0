@@ -90,7 +90,7 @@ class EventCalendarPageState extends State<EventCalendarPage>
               icon: Icons.add,
               onClick: () {
                 _controller.titleCtrl.clear();
-                //_showAddDialog(null, 0);
+                _showAddDialog(null, 0);
               },
             )
           : Container(),
@@ -286,7 +286,7 @@ class EventCalendarPageState extends State<EventCalendarPage>
         ),
   );
 
-  _showAddDialog(Event event, int i) async {
+  _showAddDialog(Event? event, int i) async {
     await showDialog(
         context: context,
         builder: (context) => AlertDialog(
