@@ -179,7 +179,7 @@ class _PartnershipListAssociatedPageState
       );
 
   DecorationImage _loadPhoto(int index) => DecorationImage(
-      image: _controller.activePartnerships[index].photoUrl != null
+      image: _controller.activePartnerships[index].photoUrl != ""
           ? NetworkImage(_controller.activePartnerships[index].photoUrl)
           : PhotoImageProvider().getImageProvider(
               File(_pathNoImage),
