@@ -9,6 +9,7 @@ import 'package:hcslzapp/controllers/access.request.controller.dart';
 import 'package:hcslzapp/controllers/item.model.dart';
 import 'package:hcslzapp/models/access.request.dart';
 import 'package:asuka/asuka.dart' as asuka;
+import 'package:mobx/mobx.dart';
 
 const String _labelNotExists =
     'Não existem requisições de acesso a serem aprovadas.';
@@ -63,14 +64,7 @@ class AccessRequestListPageState extends State<AccessRequestListPage> {
                       );
                     if ((snapshot.data?.length)! > 0) {
                       _controller.init();
-/*                      _controller.accessRequests.addAll(snapshot.data);
-                      _controller.accessRequests.sort(
-                        (a, b) => a.name.compareTo(b.name),
-                      );*/
                       _controller.loadRequests((snapshot.data)!);
-/*                      _controller.listItems.sort(
-                        (a, b) => a.name?.compareTo(b.name),
-                      );*/
                       return _widgets();
                     } else
                       return CenteredMessage(
@@ -127,7 +121,10 @@ class AccessRequestListPageState extends State<AccessRequestListPage> {
       );
 
   _check() {
-    _controller.check().then(
+    print(_controller.accessRequests);
+    List<AccessRequest> list =
+        List<AccessRequest>.from(_controller.accessRequests);
+/*    _controller.check().then(
       (value) {
         if (value != null) {
           asuka.showSnackBar(
@@ -144,7 +141,7 @@ class AccessRequestListPageState extends State<AccessRequestListPage> {
           );
         }
       },
-    );
+    );*/
   }
 }
 
@@ -180,16 +177,7 @@ class CheckboxWidget extends StatelessWidget {
           ),
           subtitle: Text(item.email!),
           value: item.check,
-/*          onChanged: (bool nvalue) {
-            item.check = nvalue;
-            if (value) {
-              controller.ids.add(item.id);
-              controller.accessRequests.add(item);
-            } else {
-              controller.ids.remove(item.id);
-            }
-          },*/
-        onChanged: _onChanged,
+          onChanged: _onChanged,
           secondary: GestureDetector(
             child: Icon(
               Icons.delete,
@@ -203,11 +191,11 @@ class CheckboxWidget extends StatelessWidget {
     );
   }
 
-  _onChanged (bool? value) {
+  _onChanged(bool? value) {
     item.check = value;
     if (value!) {
       controller.ids.add(item.id);
-      controller.accessRequests.add(item);
+      controller.accessRequests?.add(item);
     } else {
       controller.ids.remove(item.id);
     }

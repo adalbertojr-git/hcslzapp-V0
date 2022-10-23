@@ -120,11 +120,14 @@ abstract class AccessRequestControllerBase with Store {
     for (AccessRequest accessRequest in list) {
       listItems.add(
         ItemModel(
-            id: accessRequest.id,
-            name: accessRequest.name,
-            email: accessRequest.email,
-            check: false,
-            authenticate: null, status: '', phone: ''),
+          id: accessRequest.id,
+          name: accessRequest.name,
+          email: accessRequest.email,
+          check: false,
+          authenticate: null,
+          status: '',
+          phone: '',
+        ),
       );
     }
   }
