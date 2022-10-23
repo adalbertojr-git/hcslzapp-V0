@@ -8,12 +8,12 @@ class ItemModel = ItemModelBase with _$ItemModel;
 abstract class ItemModelBase with Store {
   ItemModelBase(
       {required this.id,
-      this.name,
-      this.phone,
-      this.status,
-      this.authenticate,
-      this.email,
-      this.check});
+      required this.name,
+      required this.phone,
+      required this.status,
+      required this.authenticate,
+      required this.email,
+      required this.check});
 
   @observable
   int id;

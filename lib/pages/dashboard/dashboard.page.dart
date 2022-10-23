@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:hcslzapp/pages/event/event.calendar.page.dart';
 import 'package:hcslzapp/pages/login/login.page.dart';
+import 'package:hcslzapp/pages/management/management.list.page.dart';
 import 'package:hcslzapp/pages/partnership/partnership.list.adm.page.dart';
 import 'package:hcslzapp/pages/payment/payment.list.page.dart';
 import '../../common/associated.profiles.dart';
@@ -451,11 +452,11 @@ class _DashboardPageState extends State<DashboardPage> {
               _labelAdministrationDescr,
               Icons.admin_panel_settings,
               onClick: () {
-/*                Navigator.push(
+                Navigator.push(
                   _gContext,
                   MaterialPageRoute(
                       builder: (_gContext) => ManagementListPage()),
-                );*/
+                );
               },
             ),
           ],
