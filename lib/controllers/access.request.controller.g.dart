@@ -121,13 +121,13 @@ mixin _$AccessRequestController on AccessRequestControllerBase, Store {
       Atom(name: 'AccessRequestControllerBase.accessRequestListFuture');
 
   @override
-  ObservableFuture<List<AccessRequest>> get accessRequestListFuture {
+  ObservableFuture<List<AccessRequest>>? get accessRequestListFuture {
     _$accessRequestListFutureAtom.reportRead();
     return super.accessRequestListFuture;
   }
 
   @override
-  set accessRequestListFuture(ObservableFuture<List<AccessRequest>> value) {
+  set accessRequestListFuture(ObservableFuture<List<AccessRequest>>? value) {
     _$accessRequestListFutureAtom
         .reportWrite(value, super.accessRequestListFuture, () {
       super.accessRequestListFuture = value;
@@ -138,13 +138,13 @@ mixin _$AccessRequestController on AccessRequestControllerBase, Store {
       Atom(name: 'AccessRequestControllerBase.accessRequestPost');
 
   @override
-  ObservableFuture<AccessRequest> get accessRequestPost {
+  ObservableFuture<AccessRequest>? get accessRequestPost {
     _$accessRequestPostAtom.reportRead();
     return super.accessRequestPost;
   }
 
   @override
-  set accessRequestPost(ObservableFuture<AccessRequest> value) {
+  set accessRequestPost(ObservableFuture<AccessRequest>? value) {
     _$accessRequestPostAtom.reportWrite(value, super.accessRequestPost, () {
       super.accessRequestPost = value;
     });
@@ -154,13 +154,13 @@ mixin _$AccessRequestController on AccessRequestControllerBase, Store {
       Atom(name: 'AccessRequestControllerBase.checkFuture');
 
   @override
-  ObservableFuture<AccessRequest> get checkFuture {
+  ObservableFuture<AccessRequest>? get checkFuture {
     _$checkFutureAtom.reportRead();
     return super.checkFuture;
   }
 
   @override
-  set checkFuture(ObservableFuture<AccessRequest> value) {
+  set checkFuture(ObservableFuture<AccessRequest>? value) {
     _$checkFutureAtom.reportWrite(value, super.checkFuture, () {
       super.checkFuture = value;
     });

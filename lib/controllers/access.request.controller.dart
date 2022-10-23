@@ -36,13 +36,13 @@ abstract class AccessRequestControllerBase with Store {
   bool isHidedButton = true;
 
   @observable
-  late ObservableFuture<List<AccessRequest>> accessRequestListFuture;
+  ObservableFuture<List<AccessRequest>>? accessRequestListFuture;
 
   @observable
-  late ObservableFuture<AccessRequest> accessRequestPost;
+  ObservableFuture<AccessRequest>? accessRequestPost;
 
   @observable
-  late ObservableFuture<AccessRequest> checkFuture;
+  ObservableFuture<AccessRequest>? checkFuture;
 
   @observable
   ObservableList accessRequests = [].asObservable();
@@ -54,10 +54,10 @@ abstract class AccessRequestControllerBase with Store {
   var ids = ObservableList<int>();
 
   @observable
-  late String errorMsg;
+  late String errorMsg = '';
 
   @observable
-  late Future<List<AccessRequest>> future;
+  Future<List<AccessRequest>> future = Future<List<AccessRequest>>.value([]);
 
   @observable
   AccessRequestRepo _accessRequestRepo = AccessRequestRepo();
