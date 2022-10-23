@@ -89,6 +89,7 @@ class _PaymentAddAddState extends State<PaymentAddPage> {
                       textEditingController: _controller.janCtrl,
                       label: labelJan,
                       inputType: TextInputType.number,
+                      disabled: widget._selectedProfile == ADMIN ? false : true,
                       maskTextInputFormatter:
                           MaskTextInputFormatter(mask: "###.##"),
                     ),
@@ -98,6 +99,7 @@ class _PaymentAddAddState extends State<PaymentAddPage> {
                       textEditingController: _controller.febCtrl,
                       label: labelFeb,
                       inputType: TextInputType.number,
+                      disabled: widget._selectedProfile == ADMIN ? false : true,
                       maskTextInputFormatter:
                           MaskTextInputFormatter(mask: "###.##"),
                     ),
@@ -107,6 +109,7 @@ class _PaymentAddAddState extends State<PaymentAddPage> {
                       textEditingController: _controller.marCtrl,
                       label: labelMar,
                       inputType: TextInputType.number,
+                      disabled: widget._selectedProfile == ADMIN ? false : true,
                       maskTextInputFormatter:
                           MaskTextInputFormatter(mask: "###.##"),
                     ),
@@ -121,6 +124,7 @@ class _PaymentAddAddState extends State<PaymentAddPage> {
                       textEditingController: _controller.aprCtrl,
                       label: labelApr,
                       inputType: TextInputType.number,
+                      disabled: widget._selectedProfile == ADMIN ? false : true,
                       maskTextInputFormatter:
                           MaskTextInputFormatter(mask: "###.##"),
                     ),
@@ -130,6 +134,7 @@ class _PaymentAddAddState extends State<PaymentAddPage> {
                       textEditingController: _controller.mayCtrl,
                       label: labelMay,
                       inputType: TextInputType.number,
+                      disabled: widget._selectedProfile == ADMIN ? false : true,
                       maskTextInputFormatter:
                           MaskTextInputFormatter(mask: "###.##"),
                     ),
@@ -139,6 +144,7 @@ class _PaymentAddAddState extends State<PaymentAddPage> {
                       textEditingController: _controller.junCtrl,
                       label: labelJun,
                       inputType: TextInputType.number,
+                      disabled: widget._selectedProfile == ADMIN ? false : true,
                       maskTextInputFormatter:
                           MaskTextInputFormatter(mask: "###.##"),
                     ),
@@ -158,6 +164,7 @@ class _PaymentAddAddState extends State<PaymentAddPage> {
                       textEditingController: _controller.julCtrl,
                       label: labelJul,
                       inputType: TextInputType.number,
+                      disabled: widget._selectedProfile == ADMIN ? false : true,
                       maskTextInputFormatter:
                           MaskTextInputFormatter(mask: "###.##"),
                     ),
@@ -167,6 +174,7 @@ class _PaymentAddAddState extends State<PaymentAddPage> {
                       textEditingController: _controller.augCtrl,
                       label: labelAug,
                       inputType: TextInputType.number,
+                      disabled: widget._selectedProfile == ADMIN ? false : true,
                       maskTextInputFormatter:
                           MaskTextInputFormatter(mask: "###.##"),
                     ),
@@ -176,6 +184,7 @@ class _PaymentAddAddState extends State<PaymentAddPage> {
                       textEditingController: _controller.sepCtrl,
                       label: labelSep,
                       inputType: TextInputType.number,
+                      disabled: widget._selectedProfile == ADMIN ? false : true,
                       maskTextInputFormatter:
                           MaskTextInputFormatter(mask: "###.##"),
                     ),
@@ -190,6 +199,7 @@ class _PaymentAddAddState extends State<PaymentAddPage> {
                       textEditingController: _controller.octCtrl,
                       label: labelOct,
                       inputType: TextInputType.number,
+                      disabled: widget._selectedProfile == ADMIN ? false : true,
                       maskTextInputFormatter:
                           MaskTextInputFormatter(mask: "###.##"),
                     ),
@@ -199,6 +209,7 @@ class _PaymentAddAddState extends State<PaymentAddPage> {
                       textEditingController: _controller.novCtrl,
                       label: labelNov,
                       inputType: TextInputType.number,
+                      disabled: widget._selectedProfile == ADMIN ? false : true,
                       maskTextInputFormatter:
                           MaskTextInputFormatter(mask: "###.##"),
                     ),
@@ -208,6 +219,7 @@ class _PaymentAddAddState extends State<PaymentAddPage> {
                       textEditingController: _controller.decCtrl,
                       label: labelDec,
                       inputType: TextInputType.number,
+                      disabled: widget._selectedProfile == ADMIN ? false : true,
                       maskTextInputFormatter:
                           MaskTextInputFormatter(mask: "###.##"),
                     ),
