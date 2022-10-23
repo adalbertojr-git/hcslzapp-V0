@@ -203,11 +203,11 @@ abstract class AccessRequestControllerBase with Store {
 
   String? validatePassword() {
     const String _labelPswRequired = 'Senha é obrigatória!!!';
-    const String _labelPswLenght = 'Senha deve ter no mínimo 4 caracteres!!!';
+    const String _labelPswLenght = 'Senha deve ter no mínimo 6 caracteres!!!';
 
     if (formController.password.isEmpty) {
       return _labelPswRequired;
-    } else if (formController.password.toString().length < 4) {
+    } else if (formController.password.toString().length < 6) {
       return _labelPswLenght;
     }
     return null;
