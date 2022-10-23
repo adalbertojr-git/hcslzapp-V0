@@ -63,9 +63,9 @@ abstract class ManagementAddControllerBase with Store {
   Future<List<Associated>> getFuture() => future = findAll();
 
   @action
-  Future save() => ObservableFuture(_managementRepo
-          .save(List<int>.from(ids))
-          .then((value) => value)).catchError((e) {
+  Future save() => ObservableFuture(
+              _managementRepo.save(List<int>.from(ids)).then((value) => value))
+          .catchError((e) {
         errorMsg = "${e.message}";
       }, test: (e) => e is Exception);
 
@@ -79,7 +79,8 @@ abstract class ManagementAddControllerBase with Store {
               phone: associated.phone,
               status: associated.status,
               authenticate: associated.authenticate,
-              check: false),
+              check: false,
+              email: ''),
         );
       }
     }

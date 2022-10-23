@@ -95,7 +95,7 @@ class ManagementListPageState extends State<ManagementListPage> {
       );
 
   _add(BuildContext context) {
-    final Future<List<ItemModel>> future = Navigator.push(
+    final Future future = Navigator.push(
       context,
       MaterialPageRoute(
         builder: (context) => ManagementAddPage(),
@@ -114,6 +114,15 @@ class ManagementListPageState extends State<ManagementListPage> {
                 dependents: List<Dependent>.from([]),
                 motorcycles: List<Motorcycle>.from([]),
                 authenticate: element.authenticate,
+                dateShield: '',
+                cpf: '',
+                associatedType: '',
+                sponsor: '',
+                cnh: '',
+                email: '',
+                dateBirth: '',
+                photoUrl: '',
+                bloodType: '',
               ));
             }
           });

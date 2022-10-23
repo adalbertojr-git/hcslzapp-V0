@@ -65,11 +65,10 @@ class ManagementAddPageState extends State<ManagementAddPage> {
                       _controller.loadNotAdmins(snapshot.data!);
                       if (_controller.listItems.length > 0) {
                         _controller.listItems.sort(
-                              (a, b) => a.name.compareTo(b.name),
+                          (a, b) => a.name!.compareTo(b.name!),
                         );
                         return _widgets();
-                      }
-                      else
+                      } else
                         return CenteredMessage(
                           title: _title,
                           message: _labelAllAdmins,
@@ -151,7 +150,10 @@ class ManagementAddPageState extends State<ManagementAddPage> {
 }
 
 class CheckboxWidget extends StatelessWidget {
-  const CheckboxWidget({Key key, this.item, this.controller}) : super(key: key);
+  const CheckboxWidget({
+    required this.item,
+    required this.controller,
+  });
 
   final ItemModel item;
   final ManagementAddController controller;
@@ -175,20 +177,20 @@ class CheckboxWidget extends StatelessWidget {
         child: CheckboxListTile(
           controlAffinity: ListTileControlAffinity.leading,
           title: Text(
-            item.name,
+            item.name!,
             style: TextStyle(
               fontWeight: FontWeight.bold,
             ),
           ),
           subtitle: Text('Tel.: ' +
-              (item.phone != null ? item.phone : 'Não informado') +
+              (item.phone ?? 'Não informado') +
               '\n' +
               'Status: ' +
-              item.status),
+              item.status!),
           value: item.check,
-          onChanged: (bool value) {
+          onChanged: (bool? value) {
             item.check = value;
-            if (value) {
+            if (value != null && value) {
               controller.ids.add(item.id);
               controller.associateds.add(item);
             } else {

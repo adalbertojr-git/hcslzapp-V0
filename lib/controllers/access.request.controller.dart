@@ -123,7 +123,8 @@ abstract class AccessRequestControllerBase with Store {
             id: accessRequest.id,
             name: accessRequest.name,
             email: accessRequest.email,
-            check: false),
+            check: false,
+            authenticate: null, status: '', phone: ''),
       );
     }
   }
