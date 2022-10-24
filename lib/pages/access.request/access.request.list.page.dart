@@ -9,7 +9,6 @@ import 'package:hcslzapp/controllers/access.request.controller.dart';
 import 'package:hcslzapp/controllers/item.model.dart';
 import 'package:hcslzapp/models/access.request.dart';
 import 'package:asuka/asuka.dart' as asuka;
-import 'package:mobx/mobx.dart';
 
 const String _labelNotExists =
     'Não existem requisições de acesso a serem aprovadas.';

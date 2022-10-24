@@ -46,7 +46,6 @@ abstract class AccessRequestControllerBase with Store {
 
   @observable
   ObservableList<AccessRequest> accessRequests = ObservableList();
-  //ObservableList accessRequests = [].asObservable();
 
   @observable
   var listItems = ObservableList<ItemModel>();
@@ -94,12 +93,6 @@ abstract class AccessRequestControllerBase with Store {
           .then((value) => value)).catchError((e) {
         errorMsg = "${e.message}";
       }, test: (e) => e is Exception);
-
-/*  Future check() => ObservableFuture(_accessRequestRepo
-          .check(List<AccessRequest>.from(accessRequests))
-          .then((value) => value)).catchError((e) {
-        errorMsg = "${e.message}";
-      }, test: (e) => e is Exception);*/
 
   @action
   Future deleteById(int id) =>
