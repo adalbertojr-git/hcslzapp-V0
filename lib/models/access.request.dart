@@ -5,12 +5,13 @@ class AccessRequest {
   String email;
   String password;
 
-  AccessRequest(
-      {required this.id,
-      required this.name,
-      required this.user,
-      required this.email,
-      required this.password});
+  AccessRequest({
+    required this.id,
+    required this.name,
+    required this.user,
+    required this.email,
+    required this.password,
+  });
 
   AccessRequest.fromJson(Map<String, dynamic> json)
       : id = json['id'],

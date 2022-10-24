@@ -121,14 +121,7 @@ class AccessRequestListPageState extends State<AccessRequestListPage> {
       );
 
   _check() {
-    print(_controller.accessRequests);
-    // List<AccessRequest> list =
-    //     List<AccessRequest>.from(_controller.accessRequests);
-
-    List<AccessRequest> list =
-        _controller.accessRequests as List<AccessRequest>;
-
-/*    _controller.check().then(
+    _controller.check().then(
       (value) {
         if (value != null) {
           asuka.showSnackBar(
@@ -145,7 +138,7 @@ class AccessRequestListPageState extends State<AccessRequestListPage> {
           );
         }
       },
-    );*/
+    );
   }
 }
 
@@ -202,7 +195,17 @@ class CheckboxWidget extends StatelessWidget {
     item.check = value;
     if (value!) {
       controller.ids.add(item.id);
-      controller.accessRequests?.addAll(item);
+      controller.accessRequests?.addAll(
+        [
+          AccessRequest(
+            id: item.id,
+            name: item.name!,
+            user: '',
+            email: item.email!,
+            password: '',
+          ),
+        ],
+      );
     } else {
       controller.ids.remove(item.id);
     }

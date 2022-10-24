@@ -95,6 +95,12 @@ abstract class AccessRequestControllerBase with Store {
         errorMsg = "${e.message}";
       }, test: (e) => e is Exception);
 
+/*  Future check() => ObservableFuture(_accessRequestRepo
+          .check(List<AccessRequest>.from(accessRequests))
+          .then((value) => value)).catchError((e) {
+        errorMsg = "${e.message}";
+      }, test: (e) => e is Exception);*/
+
   @action
   Future deleteById(int id) =>
       ObservableFuture(_accessRequestRepo.deleteById(id).then((value) => value))
