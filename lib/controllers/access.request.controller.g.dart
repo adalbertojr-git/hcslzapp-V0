@@ -170,13 +170,13 @@ mixin _$AccessRequestController on AccessRequestControllerBase, Store {
       Atom(name: 'AccessRequestControllerBase.accessRequests');
 
   @override
-  ObservableList<dynamic> get accessRequests {
+  ObservableList<AccessRequest> get accessRequests {
     _$accessRequestsAtom.reportRead();
     return super.accessRequests;
   }
 
   @override
-  set accessRequests(ObservableList<dynamic> value) {
+  set accessRequests(ObservableList<AccessRequest> value) {
     _$accessRequestsAtom.reportWrite(value, super.accessRequests, () {
       super.accessRequests = value;
     });

@@ -45,7 +45,8 @@ abstract class AccessRequestControllerBase with Store {
   ObservableFuture<AccessRequest>? checkFuture;
 
   @observable
-  ObservableList accessRequests = [].asObservable();
+  ObservableList<AccessRequest> accessRequests = ObservableList();
+  //ObservableList accessRequests = [].asObservable();
 
   @observable
   var listItems = ObservableList<ItemModel>();

@@ -122,8 +122,12 @@ class AccessRequestListPageState extends State<AccessRequestListPage> {
 
   _check() {
     print(_controller.accessRequests);
+    // List<AccessRequest> list =
+    //     List<AccessRequest>.from(_controller.accessRequests);
+
     List<AccessRequest> list =
-        List<AccessRequest>.from(_controller.accessRequests);
+        _controller.accessRequests as List<AccessRequest>;
+
 /*    _controller.check().then(
       (value) {
         if (value != null) {
@@ -146,7 +150,10 @@ class AccessRequestListPageState extends State<AccessRequestListPage> {
 }
 
 class CheckboxWidget extends StatelessWidget {
-  const CheckboxWidget({required this.item, required this.controller});
+  const CheckboxWidget({
+    required this.item,
+    required this.controller,
+  });
 
   final ItemModel item;
   final AccessRequestController controller;
@@ -195,7 +202,7 @@ class CheckboxWidget extends StatelessWidget {
     item.check = value;
     if (value!) {
       controller.ids.add(item.id);
-      controller.accessRequests?.add(item);
+      controller.accessRequests?.addAll(item);
     } else {
       controller.ids.remove(item.id);
     }

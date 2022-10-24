@@ -6,14 +6,15 @@ part 'item.model.g.dart';
 class ItemModel = ItemModelBase with _$ItemModel;
 
 abstract class ItemModelBase with Store {
-  ItemModelBase(
-      {required this.id,
-      required this.name,
-      required this.phone,
-      required this.status,
-      required this.authenticate,
-      required this.email,
-      required this.check});
+  ItemModelBase({
+    required this.id,
+    required this.name,
+    required this.phone,
+    required this.status,
+    required this.authenticate,
+    required this.email,
+    required this.check,
+  });
 
   @observable
   int id;
