@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:hcslzapp/repositories/email.repo.dart';
 import 'package:mobx/mobx.dart';
 
 part 'forgot.password.controller.g.dart';
@@ -13,11 +14,24 @@ abstract class ForgotPasswordControllerBase with Store {
   var emailForgotPswCtrl = TextEditingController();
 
   @observable
+  EmailRepo _emailRepo = EmailRepo();
+
+  @observable
   String errorMsg = '';
+
+/*  @observable
+  Future<String> future = Future<String>.value([]);*/
 
   init() {
     formController = FormController(email: '');
   }
+
+  @action
+  Future<String> forgotPassword(String email) =>
+      ObservableFuture(_emailRepo.forgotPassword(email).then((value) => value))
+          .catchError((e) {
+        errorMsg = "${e.message}";
+      }, test: (e) => e is Exception);
 
   String? validateEmail() {
     const String _labelEmailRequired = 'Email é obrigatório!!!';
@@ -26,7 +40,7 @@ abstract class ForgotPasswordControllerBase with Store {
     if (formController.email.isEmpty) {
       return _labelEmailRequired;
     } else if (!RegExp(
-        r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+")
+            r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+")
         .hasMatch(formController.email)) {
       return _labelEmailNotValid;
     }

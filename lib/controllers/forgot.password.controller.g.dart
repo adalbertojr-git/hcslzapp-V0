@@ -25,6 +25,22 @@ mixin _$ForgotPasswordController on ForgotPasswordControllerBase, Store {
     });
   }
 
+  final _$_emailRepoAtom =
+      Atom(name: 'ForgotPasswordControllerBase._emailRepo');
+
+  @override
+  EmailRepo get _emailRepo {
+    _$_emailRepoAtom.reportRead();
+    return super._emailRepo;
+  }
+
+  @override
+  set _emailRepo(EmailRepo value) {
+    _$_emailRepoAtom.reportWrite(value, super._emailRepo, () {
+      super._emailRepo = value;
+    });
+  }
+
   final _$errorMsgAtom = Atom(name: 'ForgotPasswordControllerBase.errorMsg');
 
   @override
@@ -38,6 +54,20 @@ mixin _$ForgotPasswordController on ForgotPasswordControllerBase, Store {
     _$errorMsgAtom.reportWrite(value, super.errorMsg, () {
       super.errorMsg = value;
     });
+  }
+
+  final _$ForgotPasswordControllerBaseActionController =
+      ActionController(name: 'ForgotPasswordControllerBase');
+
+  @override
+  Future<String> forgotPassword(String email) {
+    final _$actionInfo = _$ForgotPasswordControllerBaseActionController
+        .startAction(name: 'ForgotPasswordControllerBase.forgotPassword');
+    try {
+      return super.forgotPassword(email);
+    } finally {
+      _$ForgotPasswordControllerBaseActionController.endAction(_$actionInfo);
+    }
   }
 
   @override

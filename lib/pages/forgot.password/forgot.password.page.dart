@@ -5,6 +5,7 @@ import 'package:hcslzapp/components/button.dart';
 import 'package:hcslzapp/components/my.text.form.field.dart';
 import 'package:hcslzapp/components/top.bar.dart';
 import 'package:hcslzapp/controllers/forgot.password.controller.dart';
+import 'package:asuka/asuka.dart' as asuka;
 
 const String _title = 'Esqueceu a senha?';
 
@@ -63,7 +64,7 @@ class _ForgotPasswordPageState extends State<ForgotPasswordPage> {
               Button(
                 icon: Icons.email,
                 onClick: () {
-                  //_login(context);
+                  _forgotPassword();
                 },
               ),
               SizedBox(
@@ -87,4 +88,16 @@ class _ForgotPasswordPageState extends State<ForgotPasswordPage> {
           ),
         ),
       );
+
+  _forgotPassword() {
+    _controller
+        .forgotPassword(_controller.emailForgotPswCtrl.text)
+        .then((value) {
+      asuka.showSnackBar(
+        SnackBar(
+          content: Text(value.toString()),
+        ),
+      );
+    });
+  }
 }
