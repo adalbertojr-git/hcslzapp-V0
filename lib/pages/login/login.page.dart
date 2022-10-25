@@ -1,12 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:hcslzapp/models/template.dart';
-import 'package:mask_text_input_formatter/mask_text_input_formatter.dart';
+import 'package:hcslzapp/pages/forgot.password/forgot.password.page.dart';
 import "../../models/associated.dart";
-import "../../models/dependent.dart";
-import "../../models/motorcycle.dart";
-import "../../models/authenticate.dart";
-import "../../models/role.dart";
 import '../../common/labels.and.hints.dart';
 import '../../common/token.details.dart';
 import '../../components/button.dart';
@@ -16,7 +12,6 @@ import '../../models/token.dart';
 import '../dashboard/dashboard.page.dart';
 import 'package:asuka/asuka.dart' as asuka;
 import '../access.request/access.request.add.page.dart';
-//import '../forgot.password/forgot.password.page.dart';
 
 const String _pathLogoImage = 'assets/imgs/logo.png';
 const String _labelForgotPsw = 'Esqueceu a senha?';
@@ -85,11 +80,11 @@ class LoginPage extends StatelessWidget {
                     children: [
                       FlatButton(
                         onPressed: () {
-/*                          Navigator.push(
+                          Navigator.push(
                             context,
                             MaterialPageRoute(
                                 builder: (context) => ForgotPasswordPage()),
-                          );*/
+                          );
                         },
                         child: Text(
                           _labelForgotPsw,
