@@ -120,9 +120,9 @@ class _AccessRequestAddPageState extends State<AccessRequestAddPage> {
                 child: RichText(
                   text: const TextSpan(
                     text:
-                        'Atenção: seu cadastro será liberado após análise da ' +
-                            'Diretoria. Aguarde contato no grupo oficial do ' +
-                            'Harley Club (WhatsApp) ou via email.',
+                        'Atenção: A liberação de acesso será informada no grupo oficial do ' +
+                            'WhatsApp e também através do email informado. ' +
+                            'Caso não encontre o email na Caixa de Entrada, verifique sua caixa de Spam.',
                     style: const TextStyle(
                       fontSize: 12.0,
                       color: Colors.black87,
