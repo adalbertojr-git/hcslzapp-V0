@@ -6,6 +6,7 @@ import 'package:hcslzapp/components/my.text.form.field.dart';
 import 'package:hcslzapp/components/top.bar.dart';
 import 'package:hcslzapp/controllers/forgot.password.controller.dart';
 import 'package:asuka/asuka.dart' as asuka;
+import 'package:mask_text_input_formatter/mask_text_input_formatter.dart';
 
 const String _title = 'Esqueceu a senha?';
 
@@ -78,7 +79,7 @@ class _ForgotPasswordPageState extends State<ForgotPasswordPage> {
                         ' o qual deverá ser informado para geração de nova senha. Caso não ' +
                         ' encontre o email na Caixa de Entrada, verifique sua caixa de Spam.',
                     style: const TextStyle(
-                      fontSize: 12.0,
+                      fontSize: 14.0,
                       color: Colors.black87,
                     ),
                   ),
@@ -90,7 +91,7 @@ class _ForgotPasswordPageState extends State<ForgotPasswordPage> {
       );
 
   _forgotPassword() {
-    _controller
+/*    _controller
         .forgotPassword(_controller.emailForgotPswCtrl.text)
         .then((value) {
       asuka.showSnackBar(
@@ -98,6 +99,62 @@ class _ForgotPasswordPageState extends State<ForgotPasswordPage> {
           content: Text(value.toString()),
         ),
       );
-    });
+    });*/
+    _controller.initTextFields();
+    _showCodedDialog();
+  }
+
+  _showCodedDialog() async {
+    await showDialog(
+        context: context,
+        builder: (context) => AlertDialog(
+              backgroundColor: Colors.deepOrange[200],
+              content: MyTextFormField(
+                textEditingController: _controller.codeCtrl,
+                label: labelCode,
+                hint: hintCode,
+                fontSize: 22,
+                maxLength: 6,
+                inputType: TextInputType.number,
+                maskTextInputFormatter: MaskTextInputFormatter(mask: "######"),
+                textAlign: TextAlign.center,
+              ),
+              actions: <Widget>[
+                Row(
+                  children: [
+                    Container(
+                      padding: EdgeInsets.only(top: 20.0),
+                      child: FloatingActionButton(
+                        heroTag: 'btnCancel',
+                        mini: true,
+                        backgroundColor: Colors.black,
+                        child: Icon(
+                          Icons.cancel_outlined,
+                          color: Colors.deepOrangeAccent[100],
+                        ),
+                        onPressed: () {
+                          Navigator.pop(context);
+                        },
+                      ),
+                    ),
+                    Container(
+                      padding: EdgeInsets.only(top: 20.0),
+                      child: FloatingActionButton(
+                        heroTag: 'btnSend',
+                        mini: true,
+                        backgroundColor: Colors.black,
+                        child: Icon(
+                          Icons.arrow_forward,
+                          color: Colors.deepOrangeAccent[100],
+                        ),
+                        onPressed: () {
+                          Navigator.pop(context);
+                        },
+                      ),
+                    ),
+                  ],
+                )
+              ],
+            ));
   }
 }

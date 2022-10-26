@@ -102,3 +102,8 @@ const String labelTitle = 'Título';
 const String hintTitle = 'Digite o título do evento';
 const String labelDescription = 'Descrição';
 const String hintDescription = 'Digite a descrição do evento';
+/*
+Forgot Password
+*/
+const String labelCode = 'Código';
+const String hintCode = 'Informe o código recebido no email';

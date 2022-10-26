@@ -215,17 +215,17 @@ class EventCalendarPageState extends State<EventCalendarPage>
       );
 
   Widget _buildEventList() => Container(
-    padding: EdgeInsets.only(left: 3.0, right: 3.0),
-    decoration:  BoxDecoration(
-      color: Colors.black26,
-      shape: BoxShape.rectangle,
-      borderRadius: BorderRadius.circular(5.0),
-      border: Border.all(
-        color: Colors.white,
-          width: 0.5,
-      ),
-    ),
-    child: Observer(
+        padding: EdgeInsets.only(left: 3.0, right: 3.0),
+        decoration: BoxDecoration(
+          color: Colors.black26,
+          shape: BoxShape.rectangle,
+          borderRadius: BorderRadius.circular(5.0),
+          border: Border.all(
+            color: Colors.white,
+            width: 0.5,
+          ),
+        ),
+        child: Observer(
           builder: (_) => ListView.separated(
             shrinkWrap: true,
             itemCount: _controller.selectedEvents.length,
@@ -284,7 +284,7 @@ class EventCalendarPageState extends State<EventCalendarPage>
             separatorBuilder: (_, int index) => const Divider(),
           ),
         ),
-  );
+      );
 
   _showAddDialog(Event? event, int i) async {
     await showDialog(

@@ -14,6 +14,9 @@ abstract class ForgotPasswordControllerBase with Store {
   var emailForgotPswCtrl = TextEditingController();
 
   @observable
+  var codeCtrl = TextEditingController();
+
+  @observable
   EmailRepo _emailRepo = EmailRepo();
 
   @observable
@@ -24,6 +27,11 @@ abstract class ForgotPasswordControllerBase with Store {
 
   init() {
     formController = FormController(email: '');
+  }
+
+  initTextFields() {
+    emailForgotPswCtrl.text = '';
+    codeCtrl.text = '';
   }
 
   @action
