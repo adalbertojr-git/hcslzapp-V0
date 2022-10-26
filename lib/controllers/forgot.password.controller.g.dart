@@ -25,6 +25,21 @@ mixin _$ForgotPasswordController on ForgotPasswordControllerBase, Store {
     });
   }
 
+  final _$codeCtrlAtom = Atom(name: 'ForgotPasswordControllerBase.codeCtrl');
+
+  @override
+  TextEditingController get codeCtrl {
+    _$codeCtrlAtom.reportRead();
+    return super.codeCtrl;
+  }
+
+  @override
+  set codeCtrl(TextEditingController value) {
+    _$codeCtrlAtom.reportWrite(value, super.codeCtrl, () {
+      super.codeCtrl = value;
+    });
+  }
+
   final _$_emailRepoAtom =
       Atom(name: 'ForgotPasswordControllerBase._emailRepo');
 
@@ -74,6 +89,7 @@ mixin _$ForgotPasswordController on ForgotPasswordControllerBase, Store {
   String toString() {
     return '''
 emailForgotPswCtrl: ${emailForgotPswCtrl},
+codeCtrl: ${codeCtrl},
 errorMsg: ${errorMsg}
     ''';
   }

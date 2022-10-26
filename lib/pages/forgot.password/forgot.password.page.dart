@@ -7,6 +7,7 @@ import 'package:hcslzapp/components/top.bar.dart';
 import 'package:hcslzapp/controllers/forgot.password.controller.dart';
 import 'package:asuka/asuka.dart' as asuka;
 import 'package:mask_text_input_formatter/mask_text_input_formatter.dart';
+import 'package:circular_countdown_timer/circular_countdown_timer.dart';
 
 const String _title = 'Esqueceu a senha?';
 
@@ -17,6 +18,7 @@ class ForgotPasswordPage extends StatefulWidget {
 
 class _ForgotPasswordPageState extends State<ForgotPasswordPage> {
   ForgotPasswordController _controller = ForgotPasswordController();
+  final CountDownController _controllerCountDown = CountDownController();
 
   @override
   void initState() {
@@ -104,20 +106,26 @@ class _ForgotPasswordPageState extends State<ForgotPasswordPage> {
     _showCodedDialog();
   }
 
-  _showCodedDialog() async {
+  _showCodedDialog2() async {
     await showDialog(
         context: context,
         builder: (context) => AlertDialog(
               backgroundColor: Colors.deepOrange[200],
-              content: MyTextFormField(
-                textEditingController: _controller.codeCtrl,
-                label: labelCode,
-                hint: hintCode,
-                fontSize: 22,
-                maxLength: 6,
-                inputType: TextInputType.number,
-                maskTextInputFormatter: MaskTextInputFormatter(mask: "######"),
-                textAlign: TextAlign.center,
+              content: Column(
+                children: [
+                  MyTextFormField(
+                    textEditingController: _controller.codeCtrl,
+                    label: labelCode,
+                    hint: hintCode,
+                    fontSize: 22,
+                    maxLength: 6,
+                    inputType: TextInputType.number,
+                    maskTextInputFormatter:
+                        MaskTextInputFormatter(mask: "######"),
+                    textAlign: TextAlign.center,
+                  ),
+                  showCountdown(),
+                ],
               ),
               actions: <Widget>[
                 Row(
@@ -157,4 +165,162 @@ class _ForgotPasswordPageState extends State<ForgotPasswordPage> {
               ],
             ));
   }
+
+  _showCodedDialog() async {
+    await showDialog(
+        context: context,
+        builder: (context) => Dialog(
+            backgroundColor: Colors.deepOrange[200],
+            child: Stack(
+              alignment: Alignment.center,
+              children: <Widget>[
+                Container(
+                  width: double.infinity,
+                  height: 300,
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(15),
+                    color: Colors.deepOrange[200],
+                  ),
+                  padding: EdgeInsets.fromLTRB(50, 20, 50, 20),
+                  child: Column(
+                    children: [
+                      MyTextFormField(
+                        textEditingController: _controller.codeCtrl,
+                        label: labelCode,
+                        hint: hintCode,
+                        fontSize: 30,
+                        maxLength: 6,
+                        inputType: TextInputType.number,
+                        maskTextInputFormatter:
+                            MaskTextInputFormatter(mask: "######"),
+                        textAlign: TextAlign.center,
+                      ),
+                      showCountdown(),
+                      Row(
+                        //crossAxisAlignment: CrossAxisAlignment.center,
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Container(
+                            padding: EdgeInsets.only(top: 20.0),
+                            child: FloatingActionButton(
+                              heroTag: 'btnCancel',
+                              mini: true,
+                              backgroundColor: Colors.black,
+                              child: Icon(
+                                Icons.cancel_outlined,
+                                color: Colors.deepOrangeAccent[100],
+                              ),
+                              onPressed: () {
+                                Navigator.pop(context);
+                              },
+                            ),
+                          ),
+                          Container(
+                            padding: EdgeInsets.only(top: 20.0),
+                            child: FloatingActionButton(
+                              heroTag: 'btnSend',
+                              mini: true,
+                              backgroundColor: Colors.black,
+                              child: Icon(
+                                Icons.arrow_forward,
+                                color: Colors.deepOrangeAccent[100],
+                              ),
+                              onPressed: () {
+                                Navigator.pop(context);
+                              },
+                            ),
+                          ),
+                        ],
+                      )
+                    ],
+                  ),
+                ),
+              ],
+            )));
+  }
+
+  Center showCountdown() => Center(
+        child: CircularCountDownTimer(
+          // Countdown duration in Seconds.
+          duration: 60,
+
+          // Countdown initial elapsed Duration in Seconds.
+          initialDuration: 0,
+
+          // Controls (i.e Start, Pause, Resume, Restart) the Countdown Timer.
+          controller: _controllerCountDown,
+
+          // Width of the Countdown Widget.
+          //width: MediaQuery.of(context).size.width / 2,
+          width: 80,
+
+          // Height of the Countdown Widget.
+          //height: MediaQuery.of(context).size.height / 2,
+          height: 80,
+
+          // Ring Color for Countdown Widget.
+          ringColor: Colors.grey[300]!,
+
+          // Ring Gradient for Countdown Widget.
+          ringGradient: null,
+
+          // Filling Color for Countdown Widget.
+          fillColor: Colors.purpleAccent[100]!,
+
+          // Filling Gradient for Countdown Widget.
+          fillGradient: null,
+
+          // Background Color for Countdown Widget.
+          backgroundColor: Colors.purple[500],
+
+          // Background Gradient for Countdown Widget.
+          backgroundGradient: null,
+
+          // Border Thickness of the Countdown Ring.
+          strokeWidth: 10.0,
+
+          // Begin and end contours with a flat edge and no extension.
+          strokeCap: StrokeCap.round,
+
+          // Text Style for Countdown Text.
+          textStyle: const TextStyle(
+            fontSize: 25.0,
+            color: Colors.white,
+            fontWeight: FontWeight.bold,
+          ),
+
+          // Format for the Countdown Text.
+          textFormat: CountdownTextFormat.S,
+
+          // Handles Countdown Timer (true for Reverse Countdown (max to 0), false for Forward Countdown (0 to max)).
+          isReverse: false,
+
+          // Handles Animation Direction (true for Reverse Animation, false for Forward Animation).
+          isReverseAnimation: false,
+
+          // Handles visibility of the Countdown Text.
+          isTimerTextShown: true,
+
+          // Handles the timer start.
+          autoStart: true,
+
+          // This Callback will execute when the Countdown Starts.
+          onStart: () {
+            // Here, do whatever you want
+            debugPrint('Countdown Started');
+          },
+
+          // This Callback will execute when the Countdown Ends.
+          onComplete: () {
+            // Here, do whatever you want
+            debugPrint('Countdown Ended');
+          },
+
+          // This Callback will execute when the Countdown Changes.
+/*          onChange: (String timeStamp) {
+            // Here, do whatever you want
+            debugPrint('Countdown Changed $timeStamp');
+          },*/
+        ),
+      );
 }
