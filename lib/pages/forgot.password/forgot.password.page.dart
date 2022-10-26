@@ -88,6 +88,23 @@ class _ForgotPasswordPageState extends State<ForgotPasswordPage> {
                   ),
                 ),
               ),
+              SizedBox(
+                height: 20.0,
+              ),
+              Container(
+                padding: const EdgeInsets.only(left: 10.0),
+                child: RichText(
+                  text: const TextSpan(
+                    text:
+                        'Atenção: Você tem 2 minutos para informar o código enviado. Após esse prazo, ' +
+                            'o código irá expirar e uma nova requisição deve ser feita.',
+                    style: const TextStyle(
+                      fontSize: 14.0,
+                      color: Colors.black87,
+                    ),
+                  ),
+                ),
+              ),
             ],
           ),
         ),
