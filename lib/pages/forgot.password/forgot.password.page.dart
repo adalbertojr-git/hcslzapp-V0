@@ -95,9 +95,8 @@ class _ForgotPasswordPageState extends State<ForgotPasswordPage> {
                 padding: const EdgeInsets.only(left: 10.0),
                 child: RichText(
                   text: const TextSpan(
-                    text:
-                        'Atenção: Você tem 2 minutos para informar o código enviado. Após esse prazo, ' +
-                            'o código irá expirar e uma nova requisição deve ser feita.',
+                    text: 'Atenção: Você tem 2 minutos para informar o código enviado. Após esse prazo, ' +
+                        'o código irá expirar e uma nova requisição deve ser feita.',
                     style: const TextStyle(
                       fontSize: 14.0,
                       color: Colors.black87,
@@ -111,20 +110,33 @@ class _ForgotPasswordPageState extends State<ForgotPasswordPage> {
       );
 
   _forgotPassword() {
-/*    _controller
+    _controller
         .forgotPassword(_controller.emailForgotPswCtrl.text)
         .then((value) {
-      asuka.showSnackBar(
-        SnackBar(
-          content: Text(value.toString()),
-        ),
-      );
-    });*/
-    _controller.initTextFields();
-    _showCodedDialog();
+          if(value != null) {
+            if (value.startsWith('ERRO'))
+              asuka.showSnackBar(
+                SnackBar(
+                  content: Text(value.toString()),
+                ),
+              );
+            else {
+              _controller.initTextFields();
+              _showCodedDialog(value);
+            }
+          }
+          else {
+            asuka.showSnackBar(
+              SnackBar(
+                content: Text(_controller.errorMsg),
+              ),
+            );
+          }
+    });
+
   }
 
-  _showCodedDialog() async {
+  _showCodedDialog(String code) async {
     await showDialog(
         context: context,
         builder: (context) => Dialog(
@@ -183,11 +195,20 @@ class _ForgotPasswordPageState extends State<ForgotPasswordPage> {
                                 color: Colors.deepOrangeAccent[100],
                               ),
                               onPressed: () {
-                                asuka.showSnackBar(
-                                  SnackBar(
-                                    content: Text('O código informado não é válido.'),
-                                  ),
-                                );
+                                if (_controller.codeCtrl.text == code)
+                                  asuka.showSnackBar(
+                                    SnackBar(
+                                      content: Text(
+                                          'O código informado está correto.'),
+                                    ),
+                                  );
+                                else
+                                  asuka.showSnackBar(
+                                    SnackBar(
+                                      content: Text(
+                                          'O código informado não é válido.'),
+                                    ),
+                                  );
                               },
                             ),
                           ),
