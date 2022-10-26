@@ -134,7 +134,7 @@ class _ForgotPasswordPageState extends State<ForgotPasswordPage> {
               children: <Widget>[
                 Container(
                   width: double.infinity,
-                  height: 315,
+                  height: 310,
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(15),
                     color: Colors.deepOrange[200],
@@ -147,14 +147,14 @@ class _ForgotPasswordPageState extends State<ForgotPasswordPage> {
                         label: labelCode,
                         hint: hintCode,
                         fontSize: 30,
-                        maxLength: 6,
                         inputType: TextInputType.number,
                         maskTextInputFormatter:
                             MaskTextInputFormatter(mask: "######"),
                         textAlign: TextAlign.center,
                       ),
-                      showCountdown(context),
                       Divider(height: 20),
+                      showCountdown(context),
+                      Divider(height: 10),
                       Row(
                         children: [
                           Container(
@@ -183,7 +183,11 @@ class _ForgotPasswordPageState extends State<ForgotPasswordPage> {
                                 color: Colors.deepOrangeAccent[100],
                               ),
                               onPressed: () {
-                                Navigator.pop(context);
+                                asuka.showSnackBar(
+                                  SnackBar(
+                                    content: Text('O código informado não é válido.'),
+                                  ),
+                                );
                               },
                             ),
                           ),
