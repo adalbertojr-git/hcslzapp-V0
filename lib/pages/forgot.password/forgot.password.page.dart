@@ -71,15 +71,16 @@ class _ForgotPasswordPageState extends State<ForgotPasswordPage> {
                 },
               ),
               SizedBox(
-                height: 40.0,
+                height: 60.0,
               ),
               Container(
                 padding: const EdgeInsets.only(left: 10.0),
                 child: RichText(
                   text: const TextSpan(
-                    text: 'Atenção: Você receberá um email contendo um código de segurança, ' +
-                        ' o qual deverá ser informado para geração de nova senha. Caso não ' +
-                        ' encontre o email na Caixa de Entrada, verifique sua caixa de Spam.',
+                    text: 'Atenção: Após pressionar o botão acima, você receberá um email em nome do Harley Club ' +
+                        'contendo um código de segurança (numérico de 6 dígitos), o qual deverá ser informado ' +
+                        'para geração de nova senha. ' +
+                        'Caso não encontre o email na Caixa de Entrada, verifique sua caixa de Spam.',
                     style: const TextStyle(
                       fontSize: 14.0,
                       color: Colors.black87,
@@ -106,66 +107,6 @@ class _ForgotPasswordPageState extends State<ForgotPasswordPage> {
     _showCodedDialog();
   }
 
-  _showCodedDialog2() async {
-    await showDialog(
-        context: context,
-        builder: (context) => AlertDialog(
-              backgroundColor: Colors.deepOrange[200],
-              content: Column(
-                children: [
-                  MyTextFormField(
-                    textEditingController: _controller.codeCtrl,
-                    label: labelCode,
-                    hint: hintCode,
-                    fontSize: 22,
-                    maxLength: 6,
-                    inputType: TextInputType.number,
-                    maskTextInputFormatter:
-                        MaskTextInputFormatter(mask: "######"),
-                    textAlign: TextAlign.center,
-                  ),
-                  showCountdown(),
-                ],
-              ),
-              actions: <Widget>[
-                Row(
-                  children: [
-                    Container(
-                      padding: EdgeInsets.only(top: 20.0),
-                      child: FloatingActionButton(
-                        heroTag: 'btnCancel',
-                        mini: true,
-                        backgroundColor: Colors.black,
-                        child: Icon(
-                          Icons.cancel_outlined,
-                          color: Colors.deepOrangeAccent[100],
-                        ),
-                        onPressed: () {
-                          Navigator.pop(context);
-                        },
-                      ),
-                    ),
-                    Container(
-                      padding: EdgeInsets.only(top: 20.0),
-                      child: FloatingActionButton(
-                        heroTag: 'btnSend',
-                        mini: true,
-                        backgroundColor: Colors.black,
-                        child: Icon(
-                          Icons.arrow_forward,
-                          color: Colors.deepOrangeAccent[100],
-                        ),
-                        onPressed: () {
-                          Navigator.pop(context);
-                        },
-                      ),
-                    ),
-                  ],
-                )
-              ],
-            ));
-  }
-
   _showCodedDialog() async {
     await showDialog(
         context: context,
@@ -176,7 +117,7 @@ class _ForgotPasswordPageState extends State<ForgotPasswordPage> {
               children: <Widget>[
                 Container(
                   width: double.infinity,
-                  height: 300,
+                  height: 315,
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(15),
                     color: Colors.deepOrange[200],
@@ -195,10 +136,9 @@ class _ForgotPasswordPageState extends State<ForgotPasswordPage> {
                             MaskTextInputFormatter(mask: "######"),
                         textAlign: TextAlign.center,
                       ),
-                      showCountdown(),
+                      showCountdown(context),
+                      Divider(height: 20),
                       Row(
-                        //crossAxisAlignment: CrossAxisAlignment.center,
-                        mainAxisAlignment: MainAxisAlignment.center,
                         children: [
                           Container(
                             padding: EdgeInsets.only(top: 20.0),
@@ -239,10 +179,10 @@ class _ForgotPasswordPageState extends State<ForgotPasswordPage> {
             )));
   }
 
-  Center showCountdown() => Center(
+  Center showCountdown(BuildContext c) => Center(
         child: CircularCountDownTimer(
           // Countdown duration in Seconds.
-          duration: 60,
+          duration: 120,
 
           // Countdown initial elapsed Duration in Seconds.
           initialDuration: 0,
@@ -265,13 +205,13 @@ class _ForgotPasswordPageState extends State<ForgotPasswordPage> {
           ringGradient: null,
 
           // Filling Color for Countdown Widget.
-          fillColor: Colors.purpleAccent[100]!,
+          fillColor: Colors.deepOrange[400]!,
 
           // Filling Gradient for Countdown Widget.
           fillGradient: null,
 
           // Background Color for Countdown Widget.
-          backgroundColor: Colors.purple[500],
+          backgroundColor: Colors.black,
 
           // Background Gradient for Countdown Widget.
           backgroundGradient: null,
@@ -312,8 +252,7 @@ class _ForgotPasswordPageState extends State<ForgotPasswordPage> {
 
           // This Callback will execute when the Countdown Ends.
           onComplete: () {
-            // Here, do whatever you want
-            debugPrint('Countdown Ended');
+            Navigator.pop(c);
           },
 
           // This Callback will execute when the Countdown Changes.
