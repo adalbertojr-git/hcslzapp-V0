@@ -107,3 +107,12 @@ Forgot Password
 */
 const String labelCode = 'Código de 6 dígitos';
 const String hintCode = 'Informe o código recebido no email';
+/*
+Change Password
+*/
+const String labelCurrentPsw = 'Senha atual *';
+const String hintCurrentPsw = 'Informe a senha atualmente usada no App';
+const String labelNewPsw = 'Nova senha *';
+const String hintNewPsw = 'Informe a nova senha';
+const String labelConfirmNewPsw = 'Confirme a nova Senha *';
+const String hintConfirmNewPsw = 'Confirme a nova senha para validação';

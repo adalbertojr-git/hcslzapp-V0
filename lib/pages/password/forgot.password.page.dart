@@ -6,6 +6,7 @@ import 'package:hcslzapp/components/my.text.form.field.dart';
 import 'package:hcslzapp/components/top.bar.dart';
 import 'package:hcslzapp/controllers/forgot.password.controller.dart';
 import 'package:asuka/asuka.dart' as asuka;
+import 'package:hcslzapp/pages/password/change.password.page.dart';
 import 'package:mask_text_input_formatter/mask_text_input_formatter.dart';
 import 'package:circular_countdown_timer/circular_countdown_timer.dart';
 
@@ -109,7 +110,7 @@ class _ForgotPasswordPageState extends State<ForgotPasswordPage> {
         ),
       );
 
-  _forgotPassword() {
+  _forgotPassword2() {
     if (_controller.hasErrors) {
       asuka.showSnackBar(
         SnackBar(
@@ -146,6 +147,14 @@ class _ForgotPasswordPageState extends State<ForgotPasswordPage> {
         }
       });
     }
+  }
+
+  _forgotPassword() {
+    Navigator.push(
+      context,
+      MaterialPageRoute(
+          builder: (_) => ChangePasswordPage()),
+    );
   }
 
   _showCodedDialog(String code) async {
