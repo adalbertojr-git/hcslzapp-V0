@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:hcslzapp/repositories/email.repo.dart';
+import 'package:hcslzapp/repositories/forgot.password.repo.dart';
 import 'package:mobx/mobx.dart';
 
 part 'forgot.password.controller.g.dart';
@@ -17,7 +17,7 @@ abstract class ForgotPasswordControllerBase with Store {
   var codeCtrl = TextEditingController();
 
   @observable
-  EmailRepo _emailRepo = EmailRepo();
+  ForgotPasswordRepo _forgotPasswordRepo = ForgotPasswordRepo();
 
   @observable
   String errorMsg = '';
@@ -36,7 +36,7 @@ abstract class ForgotPasswordControllerBase with Store {
 
   @action
   Future<String> forgotPassword(String email) =>
-      ObservableFuture(_emailRepo.forgotPassword(email).then((value) => value))
+      ObservableFuture(_forgotPasswordRepo.sendEmail(email).then((value) => value))
           .catchError((e) {
         errorMsg = "${e.message}";
       }, test: (e) => e is Exception);

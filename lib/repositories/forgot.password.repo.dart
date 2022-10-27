@@ -5,13 +5,13 @@ import 'package:hcslzapp/models/dtc.code.dart';
 import 'package:http/http.dart';
 import '../common/settings.dart';
 
-const String _emailUrl = '/email';
+const String _emailUrl = '/forgotpassword';
 
-class EmailRepo {
-  Future<String> forgotPassword(String email) async {
+class ForgotPasswordRepo {
+  Future<String> sendEmail(String email) async {
     final Response response = await client
         .get(
-          Uri.parse(mainUrl + _emailUrl + "/forgot/" + email),
+          Uri.parse(mainUrl + _emailUrl + "/send/" + email),
         )
         .timeout(
           Duration(seconds: 10),
