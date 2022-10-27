@@ -194,7 +194,7 @@ class CheckboxWidget extends StatelessWidget {
     item.check = value;
     if (value!) {
       controller.ids.add(item.id);
-      controller.accessRequests?.addAll(
+      controller.accessRequests.addAll(
         [
           AccessRequest(
             id: item.id,

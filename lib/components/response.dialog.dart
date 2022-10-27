@@ -36,7 +36,7 @@ class ResponseDialog extends StatelessWidget {
                 color: colorIcon,
               ),
             ),
-            visible: icon != null,
+            visible: true,
           ),
           Visibility(
             child: Padding(
