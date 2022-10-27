@@ -118,6 +118,11 @@ class _ForgotPasswordPageState extends State<ForgotPasswordPage> {
         ),
       );
     } else {
+      asuka.showSnackBar(
+        SnackBar(
+          content: const Text('Aguarde...'),
+        ),
+      );
       _controller
           .forgotPassword(_controller.emailForgotPswCtrl.text)
           .then((value) {
