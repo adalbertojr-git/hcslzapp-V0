@@ -3,13 +3,13 @@ import 'package:hcslzapp/http/http.exception.dart';
 import 'package:http/http.dart';
 import '../common/settings.dart';
 
-const String _emailUrl = '/forgotpassword';
+const String _forgotlUrl = '/forgotpassword';
 
 class ForgotPasswordRepo {
   Future<String> sendEmail(String email) async {
     final Response response = await client
         .get(
-          Uri.parse(mainUrl + _emailUrl + "/send/" + email),
+          Uri.parse(mainUrl + _forgotlUrl + "/send/" + email),
         )
         .timeout(
           Duration(seconds: 10),

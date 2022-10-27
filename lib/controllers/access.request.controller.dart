@@ -39,7 +39,7 @@ abstract class AccessRequestControllerBase with Store {
   ObservableFuture<List<AccessRequest>>? accessRequestListFuture;
 
   @observable
-  ObservableFuture<AccessRequest>? accessRequestPost;
+  ObservableFuture<AccessRequest>? accessRequestPosst;
 
   @observable
   ObservableFuture<AccessRequest>? checkFuture;
@@ -81,7 +81,7 @@ abstract class AccessRequestControllerBase with Store {
       }, test: (e) => e is Exception);
 
   @action
-  Future save() => accessRequestPost = ObservableFuture(
+  Future save() => accessRequestPosst = ObservableFuture(
               _accessRequestRepo.save(_setValues()).then((value) => value))
           .catchError((e) {
         errorMsg = "${e.message}";

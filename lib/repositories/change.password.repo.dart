@@ -3,13 +3,17 @@ import 'package:hcslzapp/http/http.exception.dart';
 import 'package:http/http.dart';
 import '../common/settings.dart';
 
-const String _emailUrl = '/changepassword';
+const String _changelUrl = '/changepassword';
 
 class ChangePasswordRepo {
-  Future<String> save(String email) async {
+  Future<String> update(String password) async {
     final Response response = await client
-        .get(
-          Uri.parse(mainUrl + _emailUrl + "/send/" + email),
+        .put(
+          Uri.parse(mainUrl + _changelUrl),
+          headers: {
+            'Content-type': 'application/json',
+          },
+          body: password,
         )
         .timeout(
           Duration(seconds: 10),

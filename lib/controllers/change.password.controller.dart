@@ -1,10 +1,7 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
-import '../models/access.request.dart';
-import '../repositories/access.request.repo.dart';
+import 'package:hcslzapp/repositories/change.password.repo.dart';
 import 'package:mobx/mobx.dart';
-
-import 'item.model.dart';
 
 part 'change.password.controller.g.dart';
 
@@ -24,37 +21,12 @@ abstract class ChangePasswordControllerBase with Store {
   var confPswCtrl = TextEditingController();
 
   @observable
-  bool isHidedButton = true;
-
-  @observable
-  ObservableFuture<List<AccessRequest>>? accessRequestListFuture;
-
-  @observable
-  ObservableFuture<AccessRequest>? accessRequestPost;
-
-  @observable
-  ObservableFuture<AccessRequest>? checkFuture;
-
-  @observable
-  ObservableList<AccessRequest> accessRequests = ObservableList();
-
-  @observable
-  var listItems = ObservableList<ItemModel>();
-
-  @observable
-  var ids = ObservableList<int>();
-
-  @observable
   late String errorMsg = '';
 
   @observable
-  Future<List<AccessRequest>> future = Future<List<AccessRequest>>.value([]);
-
-  @observable
-  AccessRequestRepo _accessRequestRepo = AccessRequestRepo();
+  ChangePasswordRepo _changePasswordRepo = ChangePasswordRepo();
 
   init() {
-    accessRequests.clear();
     formController = FormController(
         currentPassword: '',
         confPassword: '',
@@ -62,40 +34,11 @@ abstract class ChangePasswordControllerBase with Store {
   }
 
   @action
-  Future save() => accessRequestPost = ObservableFuture(
-              _accessRequestRepo.save(_setValues()).then((value) => value))
+  Future update(String password) => ObservableFuture(
+      _changePasswordRepo.update(password).then((value) => value))
           .catchError((e) {
         errorMsg = "${e.message}";
       }, test: (e) => e is Exception);
-
-  @action
-  bool setButtonVisibilty() => isHidedButton = !isHidedButton;
-
-  AccessRequest _setValues() {
-    return AccessRequest(
-      id: int.parse('0'),
-      name: currentPswCtrl.text,
-      user: '',
-      email: '',
-      password: pswCtrl.text,
-    );
-  }
-
-  loadRequests(List<AccessRequest> list) {
-    for (AccessRequest accessRequest in list) {
-      listItems.add(
-        ItemModel(
-          id: accessRequest.id,
-          name: accessRequest.name,
-          email: accessRequest.email,
-          check: false,
-          authenticate: null,
-          status: '',
-          phone: '',
-        ),
-      );
-    }
-  }
 
   bool get hasErrors =>
       hasErrorCurrentPassword || hasErrorNewPassword || hasErrorConfNewPassword;

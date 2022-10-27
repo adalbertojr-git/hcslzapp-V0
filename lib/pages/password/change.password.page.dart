@@ -89,7 +89,7 @@ class _ChangePasswordPageState extends State<ChangePasswordPage> {
               Button(
                 icon: Icons.save,
                 onClick: () {
-                  _save();
+                  _update();
                 },
               ),
             ],
@@ -97,7 +97,7 @@ class _ChangePasswordPageState extends State<ChangePasswordPage> {
         ),
       );
 
-  _save() {
+  _update() {
     if (_controller.hasErrors) {
       asuka.showSnackBar(
         SnackBar(
@@ -106,7 +106,7 @@ class _ChangePasswordPageState extends State<ChangePasswordPage> {
         ),
       );
     } else {
-      _controller.save().then(
+      _controller.update(_controller.pswCtrl.text).then(
         (value) {
           if (value != null) {
             asuka.showSnackBar(

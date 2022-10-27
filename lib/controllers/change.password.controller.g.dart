@@ -56,117 +56,6 @@ mixin _$ChangePasswordController on ChangePasswordControllerBase, Store {
     });
   }
 
-  final _$isHidedButtonAtom =
-      Atom(name: 'ChangePasswordControllerBase.isHidedButton');
-
-  @override
-  bool get isHidedButton {
-    _$isHidedButtonAtom.reportRead();
-    return super.isHidedButton;
-  }
-
-  @override
-  set isHidedButton(bool value) {
-    _$isHidedButtonAtom.reportWrite(value, super.isHidedButton, () {
-      super.isHidedButton = value;
-    });
-  }
-
-  final _$accessRequestListFutureAtom =
-      Atom(name: 'ChangePasswordControllerBase.accessRequestListFuture');
-
-  @override
-  ObservableFuture<List<AccessRequest>>? get accessRequestListFuture {
-    _$accessRequestListFutureAtom.reportRead();
-    return super.accessRequestListFuture;
-  }
-
-  @override
-  set accessRequestListFuture(ObservableFuture<List<AccessRequest>>? value) {
-    _$accessRequestListFutureAtom
-        .reportWrite(value, super.accessRequestListFuture, () {
-      super.accessRequestListFuture = value;
-    });
-  }
-
-  final _$accessRequestPostAtom =
-      Atom(name: 'ChangePasswordControllerBase.accessRequestPost');
-
-  @override
-  ObservableFuture<AccessRequest>? get accessRequestPost {
-    _$accessRequestPostAtom.reportRead();
-    return super.accessRequestPost;
-  }
-
-  @override
-  set accessRequestPost(ObservableFuture<AccessRequest>? value) {
-    _$accessRequestPostAtom.reportWrite(value, super.accessRequestPost, () {
-      super.accessRequestPost = value;
-    });
-  }
-
-  final _$checkFutureAtom =
-      Atom(name: 'ChangePasswordControllerBase.checkFuture');
-
-  @override
-  ObservableFuture<AccessRequest>? get checkFuture {
-    _$checkFutureAtom.reportRead();
-    return super.checkFuture;
-  }
-
-  @override
-  set checkFuture(ObservableFuture<AccessRequest>? value) {
-    _$checkFutureAtom.reportWrite(value, super.checkFuture, () {
-      super.checkFuture = value;
-    });
-  }
-
-  final _$accessRequestsAtom =
-      Atom(name: 'ChangePasswordControllerBase.accessRequests');
-
-  @override
-  ObservableList<AccessRequest> get accessRequests {
-    _$accessRequestsAtom.reportRead();
-    return super.accessRequests;
-  }
-
-  @override
-  set accessRequests(ObservableList<AccessRequest> value) {
-    _$accessRequestsAtom.reportWrite(value, super.accessRequests, () {
-      super.accessRequests = value;
-    });
-  }
-
-  final _$listItemsAtom = Atom(name: 'ChangePasswordControllerBase.listItems');
-
-  @override
-  ObservableList<ItemModel> get listItems {
-    _$listItemsAtom.reportRead();
-    return super.listItems;
-  }
-
-  @override
-  set listItems(ObservableList<ItemModel> value) {
-    _$listItemsAtom.reportWrite(value, super.listItems, () {
-      super.listItems = value;
-    });
-  }
-
-  final _$idsAtom = Atom(name: 'ChangePasswordControllerBase.ids');
-
-  @override
-  ObservableList<int> get ids {
-    _$idsAtom.reportRead();
-    return super.ids;
-  }
-
-  @override
-  set ids(ObservableList<int> value) {
-    _$idsAtom.reportWrite(value, super.ids, () {
-      super.ids = value;
-    });
-  }
-
   final _$errorMsgAtom = Atom(name: 'ChangePasswordControllerBase.errorMsg');
 
   @override
@@ -182,34 +71,19 @@ mixin _$ChangePasswordController on ChangePasswordControllerBase, Store {
     });
   }
 
-  final _$futureAtom = Atom(name: 'ChangePasswordControllerBase.future');
+  final _$_changePasswordRepoAtom =
+      Atom(name: 'ChangePasswordControllerBase._changePasswordRepo');
 
   @override
-  Future<List<AccessRequest>> get future {
-    _$futureAtom.reportRead();
-    return super.future;
+  ChangePasswordRepo get _changePasswordRepo {
+    _$_changePasswordRepoAtom.reportRead();
+    return super._changePasswordRepo;
   }
 
   @override
-  set future(Future<List<AccessRequest>> value) {
-    _$futureAtom.reportWrite(value, super.future, () {
-      super.future = value;
-    });
-  }
-
-  final _$_accessRequestRepoAtom =
-      Atom(name: 'ChangePasswordControllerBase._accessRequestRepo');
-
-  @override
-  AccessRequestRepo get _accessRequestRepo {
-    _$_accessRequestRepoAtom.reportRead();
-    return super._accessRequestRepo;
-  }
-
-  @override
-  set _accessRequestRepo(AccessRequestRepo value) {
-    _$_accessRequestRepoAtom.reportWrite(value, super._accessRequestRepo, () {
-      super._accessRequestRepo = value;
+  set _changePasswordRepo(ChangePasswordRepo value) {
+    _$_changePasswordRepoAtom.reportWrite(value, super._changePasswordRepo, () {
+      super._changePasswordRepo = value;
     });
   }
 
@@ -217,22 +91,11 @@ mixin _$ChangePasswordController on ChangePasswordControllerBase, Store {
       ActionController(name: 'ChangePasswordControllerBase');
 
   @override
-  Future<dynamic> save() {
+  Future<dynamic> update(String password) {
     final _$actionInfo = _$ChangePasswordControllerBaseActionController
-        .startAction(name: 'ChangePasswordControllerBase.save');
+        .startAction(name: 'ChangePasswordControllerBase.update');
     try {
-      return super.save();
-    } finally {
-      _$ChangePasswordControllerBaseActionController.endAction(_$actionInfo);
-    }
-  }
-
-  @override
-  bool setButtonVisibilty() {
-    final _$actionInfo = _$ChangePasswordControllerBaseActionController
-        .startAction(name: 'ChangePasswordControllerBase.setButtonVisibilty');
-    try {
-      return super.setButtonVisibilty();
+      return super.update(password);
     } finally {
       _$ChangePasswordControllerBaseActionController.endAction(_$actionInfo);
     }
@@ -244,15 +107,7 @@ mixin _$ChangePasswordController on ChangePasswordControllerBase, Store {
 currentPswCtrl: ${currentPswCtrl},
 pswCtrl: ${pswCtrl},
 confPswCtrl: ${confPswCtrl},
-isHidedButton: ${isHidedButton},
-accessRequestListFuture: ${accessRequestListFuture},
-accessRequestPost: ${accessRequestPost},
-checkFuture: ${checkFuture},
-accessRequests: ${accessRequests},
-listItems: ${listItems},
-ids: ${ids},
-errorMsg: ${errorMsg},
-future: ${future}
+errorMsg: ${errorMsg}
     ''';
   }
 }

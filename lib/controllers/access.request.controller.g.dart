@@ -134,19 +134,19 @@ mixin _$AccessRequestController on AccessRequestControllerBase, Store {
     });
   }
 
-  final _$accessRequestPostAtom =
-      Atom(name: 'AccessRequestControllerBase.accessRequestPost');
+  final _$accessRequestPosstAtom =
+      Atom(name: 'AccessRequestControllerBase.accessRequestPosst');
 
   @override
-  ObservableFuture<AccessRequest>? get accessRequestPost {
-    _$accessRequestPostAtom.reportRead();
-    return super.accessRequestPost;
+  ObservableFuture<AccessRequest>? get accessRequestPosst {
+    _$accessRequestPosstAtom.reportRead();
+    return super.accessRequestPosst;
   }
 
   @override
-  set accessRequestPost(ObservableFuture<AccessRequest>? value) {
-    _$accessRequestPostAtom.reportWrite(value, super.accessRequestPost, () {
-      super.accessRequestPost = value;
+  set accessRequestPosst(ObservableFuture<AccessRequest>? value) {
+    _$accessRequestPosstAtom.reportWrite(value, super.accessRequestPosst, () {
+      super.accessRequestPosst = value;
     });
   }
 
@@ -327,7 +327,7 @@ pswCtrl: ${pswCtrl},
 confPswCtrl: ${confPswCtrl},
 isHidedButton: ${isHidedButton},
 accessRequestListFuture: ${accessRequestListFuture},
-accessRequestPost: ${accessRequestPost},
+accessRequestPosst: ${accessRequestPosst},
 checkFuture: ${checkFuture},
 accessRequests: ${accessRequests},
 listItems: ${listItems},
