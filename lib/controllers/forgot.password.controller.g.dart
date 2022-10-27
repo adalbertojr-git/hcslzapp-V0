@@ -40,19 +40,19 @@ mixin _$ForgotPasswordController on ForgotPasswordControllerBase, Store {
     });
   }
 
-  final _$_emailRepoAtom =
-      Atom(name: 'ForgotPasswordControllerBase._emailRepo');
+  final _$_forgotPasswordRepoAtom =
+      Atom(name: 'ForgotPasswordControllerBase._forgotPasswordRepo');
 
   @override
-  EmailRepo get _emailRepo {
-    _$_emailRepoAtom.reportRead();
-    return super._emailRepo;
+  ForgotPasswordRepo get _forgotPasswordRepo {
+    _$_forgotPasswordRepoAtom.reportRead();
+    return super._forgotPasswordRepo;
   }
 
   @override
-  set _emailRepo(EmailRepo value) {
-    _$_emailRepoAtom.reportWrite(value, super._emailRepo, () {
-      super._emailRepo = value;
+  set _forgotPasswordRepo(ForgotPasswordRepo value) {
+    _$_forgotPasswordRepoAtom.reportWrite(value, super._forgotPasswordRepo, () {
+      super._forgotPasswordRepo = value;
     });
   }
 
