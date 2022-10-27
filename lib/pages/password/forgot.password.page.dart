@@ -153,7 +153,7 @@ class _ForgotPasswordPageState extends State<ForgotPasswordPage> {
     Navigator.push(
       context,
       MaterialPageRoute(
-          builder: (_) => ChangePasswordPage()),
+          builder: (_) => ChangePasswordPage('FORGOT')),
     );
   }
 

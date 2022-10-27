@@ -10,6 +10,10 @@ import 'package:hcslzapp/controllers/change.password.controller.dart';
 const String _title = 'Alterar Senha';
 
 class ChangePasswordPage extends StatefulWidget {
+  final String _action;
+
+  ChangePasswordPage(this._action);
+
   @override
   _ChangePasswordPageState createState() => _ChangePasswordPageState();
 }
@@ -49,7 +53,7 @@ class _ChangePasswordPageState extends State<ChangePasswordPage> {
               TopBar(
                 title: _title,
               ),
-              MyTextFormField(
+              widget._action == 'CHANGE' ? MyTextFormField(
                 textEditingController: _controller.currentPswCtrl,
                 hint: hintCurrentPsw,
                 label: labelCurrentPsw,
@@ -58,7 +62,7 @@ class _ChangePasswordPageState extends State<ChangePasswordPage> {
                 hidden: true,
                 onChanged: _controller.formController.changeCurrentPassword,
                 errorText: _controller.validateCurrentPassword(),
-              ),
+              ): Container(),
               MyTextFormField(
                 textEditingController: _controller.pswCtrl,
                 label: labelNewPsw,
