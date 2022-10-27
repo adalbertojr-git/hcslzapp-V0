@@ -41,6 +41,10 @@ abstract class ForgotPasswordControllerBase with Store {
         errorMsg = "${e.message}";
       }, test: (e) => e is Exception);
 
+  bool get hasErrors => hasErrorEmail;
+
+  bool get hasErrorEmail => validateEmail() != null;
+
   String? validateEmail() {
     const String _labelEmailRequired = 'Email é obrigatório!!!';
     const String _labelEmailNotValid = 'Informe um email válido!!!';

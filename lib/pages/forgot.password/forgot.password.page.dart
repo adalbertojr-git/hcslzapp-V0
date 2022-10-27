@@ -110,30 +110,37 @@ class _ForgotPasswordPageState extends State<ForgotPasswordPage> {
       );
 
   _forgotPassword() {
-    _controller
-        .forgotPassword(_controller.emailForgotPswCtrl.text)
-        .then((value) {
-          if(value != null) {
-            if (value.startsWith('ERRO'))
-              asuka.showSnackBar(
-                SnackBar(
-                  content: Text(value.toString()),
-                ),
-              );
-            else {
-              _controller.initTextFields();
-              _showCodedDialog(value);
-            }
-          }
-          else {
+    if (_controller.hasErrors) {
+      asuka.showSnackBar(
+        SnackBar(
+          content: const Text('Atenção: Existem erros no formulário que devem '
+              'ser corrigidos antes de efetivar a transação.'),
+        ),
+      );
+    } else {
+      _controller
+          .forgotPassword(_controller.emailForgotPswCtrl.text)
+          .then((value) {
+        if (value != null) {
+          if (value.startsWith('ERRO'))
             asuka.showSnackBar(
               SnackBar(
-                content: Text(_controller.errorMsg),
+                content: Text(value.toString()),
               ),
             );
+          else {
+            _controller.initTextFields();
+            _showCodedDialog(value);
           }
-    });
-
+        } else {
+          asuka.showSnackBar(
+            SnackBar(
+              content: Text(_controller.errorMsg),
+            ),
+          );
+        }
+      });
+    }
   }
 
   _showCodedDialog(String code) async {
@@ -195,14 +202,15 @@ class _ForgotPasswordPageState extends State<ForgotPasswordPage> {
                                 color: Colors.deepOrangeAccent[100],
                               ),
                               onPressed: () {
-                                if (_controller.codeCtrl.text == code)
+                                if (_controller.codeCtrl.text == code) {
                                   asuka.showSnackBar(
                                     SnackBar(
                                       content: Text(
                                           'O código informado está correto.'),
                                     ),
                                   );
-                                else
+                                  Navigator.pop(context);
+                                } else
                                   asuka.showSnackBar(
                                     SnackBar(
                                       content: Text(
