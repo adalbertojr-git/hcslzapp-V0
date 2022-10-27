@@ -5,17 +5,17 @@ import 'package:hcslzapp/common/labels.and.hints.dart';
 import 'package:hcslzapp/components/button.dart';
 import 'package:hcslzapp/components/my.text.form.field.dart';
 import 'package:hcslzapp/components/top.bar.dart';
-import 'package:hcslzapp/controllers/access.request.controller.dart';
+import 'package:hcslzapp/controllers/change.password.controller.dart';
 
-const String _title = 'Primeiro acesso?';
+const String _title = 'Alterar Senha';
 
-class AccessRequestAddPage extends StatefulWidget {
+class ChangePasswordPage extends StatefulWidget {
   @override
-  _AccessRequestAddPageState createState() => _AccessRequestAddPageState();
+  _ChangePasswordPageState createState() => _ChangePasswordPageState();
 }
 
-class _AccessRequestAddPageState extends State<AccessRequestAddPage> {
-  AccessRequestController _controller = AccessRequestController();
+class _ChangePasswordPageState extends State<ChangePasswordPage> {
+  ChangePasswordController _controller = ChangePasswordController();
 
   @override
   void initState() {
@@ -58,33 +58,7 @@ class _AccessRequestAddPageState extends State<AccessRequestAddPage> {
                 onChanged: _controller.formController.changeName,
                 errorText: _controller.validateName(),
               ),
-              MyTextFormField(
-                textEditingController: _controller.userCtrl,
-                hint: hintUser,
-                label: labelUser,
-                icon: Icons.account_circle_outlined,
-                inputType: TextInputType.text,
-                onChanged: _controller.formController.changeUser,
-                errorText: _controller.validateUser(),
-              ),
-              MyTextFormField(
-                textEditingController: _controller.emailCtrl,
-                hint: hintEmail,
-                label: labelEmail + " *",
-                icon: Icons.email,
-                inputType: TextInputType.emailAddress,
-                onChanged: _controller.formController.changeEmail,
-                errorText: _controller.validateEmail(),
-              ),
-              MyTextFormField(
-                textEditingController: _controller.confEmailCtrl,
-                hint: hintConfEmail,
-                label: labelConfEmail,
-                icon: Icons.email,
-                inputType: TextInputType.emailAddress,
-                onChanged: _controller.formController.changeConfEmail,
-                errorText: _controller.validateConfEmail(),
-              ),
+
               MyTextFormField(
                 textEditingController: _controller.pswCtrl,
                 label: labelPswAccessReq,
@@ -109,25 +83,10 @@ class _AccessRequestAddPageState extends State<AccessRequestAddPage> {
                 height: 10.0,
               ),
               Button(
-                icon: Icons.send_to_mobile,
+                icon: Icons.save,
                 onClick: () {
                   _save();
                 },
-              ),
-              Padding(
-                padding: const EdgeInsets.all(10.0),
-                child: RichText(
-                  text: const TextSpan(
-                    text:
-                        'Atenção: A liberação de acesso será informada no grupo oficial do ' +
-                            'WhatsApp e também através do email informado. ' +
-                            'Caso não encontre o email na Caixa de Entrada, verifique sua caixa de Spam.',
-                    style: const TextStyle(
-                      fontSize: 12.0,
-                      color: Colors.black87,
-                    ),
-                  ),
-                ),
               ),
             ],
           ),

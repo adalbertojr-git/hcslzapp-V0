@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:hcslzapp/models/template.dart';
-import 'package:hcslzapp/pages/forgot.password/forgot.password.page.dart';
+import 'package:hcslzapp/pages/password/forgot.password.page.dart';
 import "../../models/associated.dart";
 import '../../common/labels.and.hints.dart';
 import '../../common/token.details.dart';
