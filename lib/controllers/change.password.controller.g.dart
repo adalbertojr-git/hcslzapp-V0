@@ -9,18 +9,19 @@ part of 'change.password.controller.dart';
 // ignore_for_file: non_constant_identifier_names, unnecessary_brace_in_string_interps, unnecessary_lambdas, prefer_expression_function_bodies, lines_longer_than_80_chars, avoid_as, avoid_annotating_with_dynamic
 
 mixin _$ChangePasswordController on ChangePasswordControllerBase, Store {
-  final _$nameCtrlAtom = Atom(name: 'ChangePasswordControllerBase.nameCtrl');
+  final _$currentPswCtrlAtom =
+      Atom(name: 'ChangePasswordControllerBase.currentPswCtrl');
 
   @override
-  TextEditingController get nameCtrl {
-    _$nameCtrlAtom.reportRead();
-    return super.nameCtrl;
+  TextEditingController get currentPswCtrl {
+    _$currentPswCtrlAtom.reportRead();
+    return super.currentPswCtrl;
   }
 
   @override
-  set nameCtrl(TextEditingController value) {
-    _$nameCtrlAtom.reportWrite(value, super.nameCtrl, () {
-      super.nameCtrl = value;
+  set currentPswCtrl(TextEditingController value) {
+    _$currentPswCtrlAtom.reportWrite(value, super.currentPswCtrl, () {
+      super.currentPswCtrl = value;
     });
   }
 
@@ -216,44 +217,11 @@ mixin _$ChangePasswordController on ChangePasswordControllerBase, Store {
       ActionController(name: 'ChangePasswordControllerBase');
 
   @override
-  Future<List<AccessRequest>> findAll() {
-    final _$actionInfo = _$ChangePasswordControllerBaseActionController
-        .startAction(name: 'ChangePasswordControllerBase.findAll');
-    try {
-      return super.findAll();
-    } finally {
-      _$ChangePasswordControllerBaseActionController.endAction(_$actionInfo);
-    }
-  }
-
-  @override
   Future<dynamic> save() {
     final _$actionInfo = _$ChangePasswordControllerBaseActionController
         .startAction(name: 'ChangePasswordControllerBase.save');
     try {
       return super.save();
-    } finally {
-      _$ChangePasswordControllerBaseActionController.endAction(_$actionInfo);
-    }
-  }
-
-  @override
-  Future<dynamic> check() {
-    final _$actionInfo = _$ChangePasswordControllerBaseActionController
-        .startAction(name: 'ChangePasswordControllerBase.check');
-    try {
-      return super.check();
-    } finally {
-      _$ChangePasswordControllerBaseActionController.endAction(_$actionInfo);
-    }
-  }
-
-  @override
-  Future<dynamic> deleteById(int id) {
-    final _$actionInfo = _$ChangePasswordControllerBaseActionController
-        .startAction(name: 'ChangePasswordControllerBase.deleteById');
-    try {
-      return super.deleteById(id);
     } finally {
       _$ChangePasswordControllerBaseActionController.endAction(_$actionInfo);
     }
@@ -273,7 +241,7 @@ mixin _$ChangePasswordController on ChangePasswordControllerBase, Store {
   @override
   String toString() {
     return '''
-nameCtrl: ${nameCtrl},
+currentPswCtrl: ${currentPswCtrl},
 pswCtrl: ${pswCtrl},
 confPswCtrl: ${confPswCtrl},
 isHidedButton: ${isHidedButton},
@@ -290,63 +258,19 @@ future: ${future}
 }
 
 mixin _$FormController on FormControllerBase, Store {
-  final _$nameAtom = Atom(name: 'FormControllerBase.name');
+  final _$currentPasswordAtom =
+      Atom(name: 'FormControllerBase.currentPassword');
 
   @override
-  String? get name {
-    _$nameAtom.reportRead();
-    return super.name;
+  String? get currentPassword {
+    _$currentPasswordAtom.reportRead();
+    return super.currentPassword;
   }
 
   @override
-  set name(String? value) {
-    _$nameAtom.reportWrite(value, super.name, () {
-      super.name = value;
-    });
-  }
-
-  final _$userAtom = Atom(name: 'FormControllerBase.user');
-
-  @override
-  String? get user {
-    _$userAtom.reportRead();
-    return super.user;
-  }
-
-  @override
-  set user(String? value) {
-    _$userAtom.reportWrite(value, super.user, () {
-      super.user = value;
-    });
-  }
-
-  final _$emailAtom = Atom(name: 'FormControllerBase.email');
-
-  @override
-  String? get email {
-    _$emailAtom.reportRead();
-    return super.email;
-  }
-
-  @override
-  set email(String? value) {
-    _$emailAtom.reportWrite(value, super.email, () {
-      super.email = value;
-    });
-  }
-
-  final _$confEmailAtom = Atom(name: 'FormControllerBase.confEmail');
-
-  @override
-  String? get confEmail {
-    _$confEmailAtom.reportRead();
-    return super.confEmail;
-  }
-
-  @override
-  set confEmail(String? value) {
-    _$confEmailAtom.reportWrite(value, super.confEmail, () {
-      super.confEmail = value;
+  set currentPassword(String? value) {
+    _$currentPasswordAtom.reportWrite(value, super.currentPassword, () {
+      super.currentPassword = value;
     });
   }
 
@@ -384,44 +308,11 @@ mixin _$FormController on FormControllerBase, Store {
       ActionController(name: 'FormControllerBase');
 
   @override
-  dynamic changeName(String value) {
+  dynamic changeCurrentPassword(String value) {
     final _$actionInfo = _$FormControllerBaseActionController.startAction(
-        name: 'FormControllerBase.changeName');
+        name: 'FormControllerBase.changeCurrentPassword');
     try {
-      return super.changeName(value);
-    } finally {
-      _$FormControllerBaseActionController.endAction(_$actionInfo);
-    }
-  }
-
-  @override
-  dynamic changeUser(String value) {
-    final _$actionInfo = _$FormControllerBaseActionController.startAction(
-        name: 'FormControllerBase.changeUser');
-    try {
-      return super.changeUser(value);
-    } finally {
-      _$FormControllerBaseActionController.endAction(_$actionInfo);
-    }
-  }
-
-  @override
-  dynamic changeEmail(String value) {
-    final _$actionInfo = _$FormControllerBaseActionController.startAction(
-        name: 'FormControllerBase.changeEmail');
-    try {
-      return super.changeEmail(value);
-    } finally {
-      _$FormControllerBaseActionController.endAction(_$actionInfo);
-    }
-  }
-
-  @override
-  dynamic changeConfEmail(String value) {
-    final _$actionInfo = _$FormControllerBaseActionController.startAction(
-        name: 'FormControllerBase.changeConfEmail');
-    try {
-      return super.changeConfEmail(value);
+      return super.changeCurrentPassword(value);
     } finally {
       _$FormControllerBaseActionController.endAction(_$actionInfo);
     }
@@ -452,10 +343,7 @@ mixin _$FormController on FormControllerBase, Store {
   @override
   String toString() {
     return '''
-name: ${name},
-user: ${user},
-email: ${email},
-confEmail: ${confEmail},
+currentPassword: ${currentPassword},
 password: ${password},
 confPassword: ${confPassword}
     ''';

@@ -59,7 +59,6 @@ class _ChangePasswordPageState extends State<ChangePasswordPage> {
                 onChanged: _controller.formController.changeCurrentPassword,
                 errorText: _controller.validateCurrentPassword(),
               ),
-
               MyTextFormField(
                 textEditingController: _controller.pswCtrl,
                 label: labelNewPsw,
@@ -109,7 +108,7 @@ class _ChangePasswordPageState extends State<ChangePasswordPage> {
             asuka.showSnackBar(
               SnackBar(
                 content:
-                    const Text('Requisição de acesso enviado com sucesso.'),
+                    const Text('Alteração de senha realizada com sucesso.'),
               ),
             );
             Navigator.of(context).pop();
