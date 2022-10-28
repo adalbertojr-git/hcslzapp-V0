@@ -42,6 +42,13 @@ abstract class ForgotPasswordControllerBase with Store {
         errorMsg = "${e.message}";
       }, test: (e) => e is Exception);
 
+  @action
+  Future<String> validateCode(Password password) =>
+      ObservableFuture(_forgotPasswordRepo.validateCode(password).then((value) => value))
+          .catchError((e) {
+        errorMsg = "${e.message}";
+      }, test: (e) => e is Exception);
+
   bool get hasErrors => hasErrorEmail;
 
   bool get hasErrorEmail => validateEmail() != null;

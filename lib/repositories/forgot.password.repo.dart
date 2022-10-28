@@ -24,4 +24,26 @@ class ForgotPasswordRepo {
       throw HttpException(getMessage(response.statusCode));
     }
   }
+
+  Future<String> validateCode(Password password) async {
+    final String encodedJson = jsonEncode(
+      password.toJson(),
+    );
+    final Response response = await client
+        .get(
+          Uri.parse(mainUrl + _forgotlUrl + "/validate/"),
+          headers: {
+            'Content-type': 'application/json',
+            'password': encodedJson,
+          },
+        )
+        .timeout(
+          Duration(seconds: 10),
+        );
+    if (response.statusCode == 200) {
+      return response.body;
+    } else {
+      throw HttpException(getMessage(response.statusCode));
+    }
+  }
 }

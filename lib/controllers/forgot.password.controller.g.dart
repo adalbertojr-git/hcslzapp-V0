@@ -86,6 +86,17 @@ mixin _$ForgotPasswordController on ForgotPasswordControllerBase, Store {
   }
 
   @override
+  Future<String> validateCode(Password password) {
+    final _$actionInfo = _$ForgotPasswordControllerBaseActionController
+        .startAction(name: 'ForgotPasswordControllerBase.validateCode');
+    try {
+      return super.validateCode(password);
+    } finally {
+      _$ForgotPasswordControllerBaseActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
   String toString() {
     return '''
 emailForgotPswCtrl: ${emailForgotPswCtrl},

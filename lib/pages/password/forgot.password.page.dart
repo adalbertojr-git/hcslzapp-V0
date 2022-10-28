@@ -6,6 +6,7 @@ import 'package:hcslzapp/components/my.text.form.field.dart';
 import 'package:hcslzapp/components/top.bar.dart';
 import 'package:hcslzapp/controllers/forgot.password.controller.dart';
 import 'package:asuka/asuka.dart' as asuka;
+import 'package:hcslzapp/models/password.dart';
 import 'package:hcslzapp/pages/password/change.password.page.dart';
 import 'package:mask_text_input_formatter/mask_text_input_formatter.dart';
 import 'package:circular_countdown_timer/circular_countdown_timer.dart';
@@ -136,7 +137,7 @@ class _ForgotPasswordPageState extends State<ForgotPasswordPage> {
             );
           else {
             _controller.initTextFields();
-            _showCodedDialog();
+            _showCodedDialog(value);
           }
         } else {
           asuka.showSnackBar(
@@ -152,12 +153,11 @@ class _ForgotPasswordPageState extends State<ForgotPasswordPage> {
   _forgotPassword2() {
     Navigator.push(
       context,
-      MaterialPageRoute(
-          builder: (_) => ChangePasswordPage('FORGOT')),
+      MaterialPageRoute(builder: (_) => ChangePasswordPage('FORGOT')),
     );
   }
 
-  _showCodedDialog() async {
+  _showCodedDialog(Password password) async {
     await showDialog(
         context: context,
         builder: (context) => Dialog(
@@ -216,6 +216,11 @@ class _ForgotPasswordPageState extends State<ForgotPasswordPage> {
                                 color: Colors.deepOrangeAccent[100],
                               ),
                               onPressed: () {
+                                _controller.validateCode(Password(
+                                  associatedId: password.associatedId,
+                                  aux: password.aux,
+                                ));
+
 /*                                if (_controller.codeCtrl.text == code) {
                                   asuka.showSnackBar(
                                     SnackBar(
