@@ -75,7 +75,7 @@ mixin _$ForgotPasswordController on ForgotPasswordControllerBase, Store {
       ActionController(name: 'ForgotPasswordControllerBase');
 
   @override
-  Future<String> forgotPassword(String email) {
+  Future<Password> forgotPassword(String email) {
     final _$actionInfo = _$ForgotPasswordControllerBaseActionController
         .startAction(name: 'ForgotPasswordControllerBase.forgotPassword');
     try {

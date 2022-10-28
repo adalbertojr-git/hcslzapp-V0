@@ -110,7 +110,7 @@ class _ForgotPasswordPageState extends State<ForgotPasswordPage> {
         ),
       );
 
-  _forgotPassword2() {
+  _forgotPassword() {
     if (_controller.hasErrors) {
       asuka.showSnackBar(
         SnackBar(
@@ -128,15 +128,15 @@ class _ForgotPasswordPageState extends State<ForgotPasswordPage> {
           .forgotPassword(_controller.emailForgotPswCtrl.text)
           .then((value) {
         if (value != null) {
-          if (value.startsWith('ERRO'))
+          if (value.aux.startsWith('ERRO'))
             asuka.showSnackBar(
               SnackBar(
-                content: Text(value.toString()),
+                content: Text(value.aux),
               ),
             );
           else {
             _controller.initTextFields();
-            _showCodedDialog(value);
+            _showCodedDialog();
           }
         } else {
           asuka.showSnackBar(
@@ -149,7 +149,7 @@ class _ForgotPasswordPageState extends State<ForgotPasswordPage> {
     }
   }
 
-  _forgotPassword() {
+  _forgotPassword2() {
     Navigator.push(
       context,
       MaterialPageRoute(
@@ -157,7 +157,7 @@ class _ForgotPasswordPageState extends State<ForgotPasswordPage> {
     );
   }
 
-  _showCodedDialog(String code) async {
+  _showCodedDialog() async {
     await showDialog(
         context: context,
         builder: (context) => Dialog(
@@ -216,7 +216,7 @@ class _ForgotPasswordPageState extends State<ForgotPasswordPage> {
                                 color: Colors.deepOrangeAccent[100],
                               ),
                               onPressed: () {
-                                if (_controller.codeCtrl.text == code) {
+/*                                if (_controller.codeCtrl.text == code) {
                                   asuka.showSnackBar(
                                     SnackBar(
                                       content: Text(
@@ -230,7 +230,7 @@ class _ForgotPasswordPageState extends State<ForgotPasswordPage> {
                                       content: Text(
                                           'O código informado não é válido.'),
                                     ),
-                                  );
+                                  );*/
                               },
                             ),
                           ),
