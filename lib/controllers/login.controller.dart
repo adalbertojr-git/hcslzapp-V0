@@ -21,9 +21,6 @@ abstract class LoginControllerBase with Store {
   ObservableFuture<Token>? token;
 
   @observable
-  bool isLoading = false;
-
-  @observable
   String errorMsg = "";
 
   @observable
@@ -44,13 +41,10 @@ abstract class LoginControllerBase with Store {
 
   @action
   Future findByIdToList(int id) => ObservableFuture(
-      _associatedRepo.findByIdToList(id).then((value) => value))
-      .catchError((e) {
-    errorMsg = "${e.message}";
-  }, test: (e) => e is Exception);
-
-  @action
-  bool setLoading(bool value) => isLoading = value;
+              _associatedRepo.findByIdToList(id).then((value) => value))
+          .catchError((e) {
+        errorMsg = "${e.message}";
+      }, test: (e) => e is Exception);
 
   Future setTokenToDevice(String token) async {
     const String _labelToken = 'token';

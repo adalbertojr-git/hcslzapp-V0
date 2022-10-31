@@ -94,12 +94,6 @@ class LoginPage extends StatelessWidget {
                           ),
                         ),
                       ),
-                      Observer(
-                        builder: (_) => Visibility(
-                          child: CircularProgressIndicator(),
-                          visible: _controller.isLoading,
-                        ),
-                      ),
                       FlatButton(
                         onPressed: () {
                           Navigator.push(
@@ -126,7 +120,11 @@ class LoginPage extends StatelessWidget {
       );
 
   _login(BuildContext context) {
-    _controller.setLoading(true);
+    asuka.showSnackBar(
+      SnackBar(
+        content: Text('Carregando...'),
+      ),
+    );
     _controller.errorMsg = "";
     _controller.authenticate().then(
       (token) async {
@@ -160,7 +158,6 @@ class LoginPage extends StatelessWidget {
         }
       },
     );
-    _controller.setLoading(false);
   }
 
 }
