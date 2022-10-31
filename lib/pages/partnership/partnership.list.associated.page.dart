@@ -188,6 +188,7 @@ class _PartnershipListAssociatedPageState
 
   Widget buildDetail() => Observer(
         builder: (_) => Container(
+          height: MediaQuery.of(context).size.height,
           color: Colors.white70,
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
