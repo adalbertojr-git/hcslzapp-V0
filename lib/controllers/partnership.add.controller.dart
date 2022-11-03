@@ -81,13 +81,14 @@ abstract class PartnershipAddControllerBase with Store {
     phone2Ctrl.text = partnership.phone2;
     addressCtrl.text = partnership.address;
     promotionCtrl.text = partnership.promotion;
-    statusCtrl.text = partnership.status.length > 0 ? partnership.status : 'Ativo';
+    statusCtrl.text =
+        partnership.status.length > 0 ? partnership.status : 'Ativo';
   }
 
   @action
   Future findAll() async =>
       await _partnershipRepo.findAll().then((value) => value).catchError((e) {
-        errorMsg = "${e.message}";
+        errorMsg = "$e";
       }, test: (e) => e is Exception);
 
   @action
@@ -95,13 +96,13 @@ abstract class PartnershipAddControllerBase with Store {
           .save(await _setValues())
           .then((value) => value)
           .catchError((e) {
-        errorMsg = "${e.message}";
+        errorMsg = "$e";
       }, test: (e) => e is Exception);
 
   @action
   Future update() async =>
       await _partnershipRepo.update(await _setValues()).catchError((e) {
-        errorMsg = "${e.message}";
+        errorMsg = "$e";
       }, test: (e) => e is Exception);
 
   Future<Partnership> _setValues() async {

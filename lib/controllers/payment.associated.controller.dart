@@ -42,7 +42,7 @@ abstract class PaymentAssociatedControllerBase with Store {
   Future<List<Payment>> findByAssociatedIdToList(int id) => ObservableFuture(
               _paymentRepo.findByAssociatedIdToList(id).then((value) => value))
           .catchError((e) {
-        errorMsg = "${e.message}";
+        errorMsg = "$e";
       }, test: (e) => e is Exception);
 
   @action
@@ -53,7 +53,7 @@ abstract class PaymentAssociatedControllerBase with Store {
   Future deleteById(Payment payment) =>
       ObservableFuture(_paymentRepo.deleteById(payment).then((value) => value))
           .catchError((e) {
-        errorMsg = "${e.message}";
+        errorMsg = "$e";
       }, test: (e) => e is Exception);
 
   List<String> loadYears() {

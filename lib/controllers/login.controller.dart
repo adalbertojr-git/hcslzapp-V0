@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:glutton/glutton.dart';
+import 'package:hcslzapp/models/associated.dart';
 import '../models/token.dart';
 import '../repositories/associated.repo.dart';
 import '../repositories/login.repo.dart';
@@ -30,20 +31,20 @@ abstract class LoginControllerBase with Store {
   AssociatedRepo _associatedRepo = AssociatedRepo();
 
   @action
-  Future authenticate() => token = ObservableFuture(_loginRepo
+  Future<Token> authenticate() => token = ObservableFuture(_loginRepo
           .authenticate(
             userLoginCtrl.text,
             pswLoginCtrl.text,
           )
           .then((value) => value)).catchError((e) {
-        errorMsg = "${e.message}";
+        errorMsg = "$e";
       }, test: (e) => e is Exception);
 
   @action
-  Future findByIdToList(int id) => ObservableFuture(
+  Future<List<Associated>> findByIdToList(int id) => ObservableFuture(
               _associatedRepo.findByIdToList(id).then((value) => value))
           .catchError((e) {
-        errorMsg = "${e.message}";
+        errorMsg = "$e";
       }, test: (e) => e is Exception);
 
   Future setTokenToDevice(String token) async {

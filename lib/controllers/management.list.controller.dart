@@ -52,22 +52,21 @@ abstract class ManagementListControllerBase with Store {
   Future<List<Associated>> findAll() =>
       ObservableFuture(_associatedRepo.findAll().then((value) => value))
           .catchError((e) {
-        errorMsg = "${e.message}";
+        errorMsg = "$e";
       }, test: (e) => e is Exception);
 
   Future<List<Associated>> getFuture() => future = findAll();
 
   @action
-  Future deleteById(Associated associated) =>
-      ObservableFuture(_managementRepo.deleteById(associated).then((value) => value))
+  Future deleteById(Associated associated) => ObservableFuture(
+              _managementRepo.deleteById(associated).then((value) => value))
           .catchError((e) {
-        errorMsg = "${e.message}";
+        errorMsg = "$e";
       }, test: (e) => e is Exception);
 
   loadAdmins(List<Associated> list) {
     for (Associated associated in list) {
-      if (associated.authenticate.roles
-          .any((Role r) => r.profile == ADMIN)) {
+      if (associated.authenticate.roles.any((Role r) => r.profile == ADMIN)) {
         associateds.add(associated);
       }
     }

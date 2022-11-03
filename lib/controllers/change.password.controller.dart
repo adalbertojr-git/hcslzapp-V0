@@ -27,17 +27,15 @@ abstract class ChangePasswordControllerBase with Store {
   ChangePasswordRepo _changePasswordRepo = ChangePasswordRepo();
 
   init() {
-    formController = FormController(
-        currentPassword: '',
-        confPassword: '',
-        password: '');
+    formController =
+        FormController(currentPassword: '', confPassword: '', password: '');
   }
 
   @action
   Future update(String password) => ObservableFuture(
-      _changePasswordRepo.update(password).then((value) => value))
+              _changePasswordRepo.update(password).then((value) => value))
           .catchError((e) {
-        errorMsg = "${e.message}";
+        errorMsg = "$e";
       }, test: (e) => e is Exception);
 
   bool get hasErrors =>

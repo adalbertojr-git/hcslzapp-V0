@@ -57,7 +57,7 @@ abstract class ManagementAddControllerBase with Store {
   Future<List<Associated>> findAll() =>
       ObservableFuture(_associatedRepo.findAll().then((value) => value))
           .catchError((e) {
-        errorMsg = "${e.message}";
+        errorMsg = "$e";
       }, test: (e) => e is Exception);
 
   Future<List<Associated>> getFuture() => future = findAll();
@@ -66,7 +66,7 @@ abstract class ManagementAddControllerBase with Store {
   Future save() => ObservableFuture(
               _managementRepo.save(List<int>.from(ids)).then((value) => value))
           .catchError((e) {
-        errorMsg = "${e.message}";
+        errorMsg = "$e";
       }, test: (e) => e is Exception);
 
   loadNotAdmins(List<Associated> list) {

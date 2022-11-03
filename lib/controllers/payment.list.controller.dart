@@ -41,12 +41,12 @@ abstract class PaymentListControllerBase with Store {
 
   @action
   bool setButtonVisibilty() => isHidedButton = !isHidedButton;
-  
+
   @action
   Future<List<Associated>> findAll() =>
       ObservableFuture(_associatedRepo.findAll().then((value) => value))
           .catchError((e) {
-        errorMsg = "${e.message}";
+        errorMsg = "$e";
       }, test: (e) => e is Exception);
 
   Future<List<Associated>> getFuture() => future = findAll();
@@ -59,8 +59,8 @@ abstract class PaymentListControllerBase with Store {
     if (filter.isEmpty) {
       return List<Associated>.from(associateds);
     } else {
-      return List<Associated>.from(associateds
-          .where((element) => element.name.contains(filter)));
+      return List<Associated>.from(
+          associateds.where((element) => element.name.contains(filter)));
     }
   }
 }

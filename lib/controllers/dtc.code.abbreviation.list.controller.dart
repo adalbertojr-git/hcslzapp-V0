@@ -42,7 +42,7 @@ abstract class DtcCodeAbbreviationListControllerBase with Store {
   Future<List<DtcCodeAbbreviation>> findAll() => ObservableFuture(
               _dtcCodeAbbreviationRepo.findAll().then((value) => value))
           .catchError((e) {
-        errorMsg = "${e.message}";
+        errorMsg = "$e";
       }, test: (e) => e is Exception);
 
   Future<List<DtcCodeAbbreviation>> getFuture() => future = findAll();

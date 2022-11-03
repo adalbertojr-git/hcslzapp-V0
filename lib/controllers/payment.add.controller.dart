@@ -140,7 +140,7 @@ abstract class PaymentAddControllerBase with Store {
   Future<List<Payment>> findByAssociatedIdToList(int id) => ObservableFuture(
               _paymentRepo.findByAssociatedIdToList(id).then((value) => value))
           .catchError((e) {
-        errorMsg = "${e.message}";
+        errorMsg = "$e";
       }, test: (e) => e is Exception);
 
   Future<List<Payment>> getFuture(int _paymentId) =>
@@ -150,14 +150,14 @@ abstract class PaymentAddControllerBase with Store {
   Future update() =>
       ObservableFuture(_paymentRepo.update(_setValues()).then((value) => value))
           .catchError((e) {
-        errorMsg = "${e.message}";
+        errorMsg = "$e";
       }, test: (e) => e is Exception);
 
   @action
   Future save() =>
       ObservableFuture(_paymentRepo.save(_setValues()).then((value) => value))
           .catchError((e) {
-        errorMsg = "${e.message}";
+        errorMsg = "$e";
       }, test: (e) => e is Exception);
 
   Payment _setValues() {

@@ -48,29 +48,29 @@ abstract class EventCalendarControllerBase with Store {
   @action
   Future<String> findAll() =>
       _eventRepo.findAll().then((value) => value).catchError((e) {
-        errorMsg = "${e.message}";
+        errorMsg = "$e";
       }, test: (e) => e is Exception);
 
   @action
   Future save(String title, String date) => ObservableFuture(_eventRepo
-      .save(_setValues(0, title, date))
-      .then((value) => value)).catchError((e) {
-    errorMsg = "${e.message}";
-  }, test: (e) => e is Exception);
+          .save(_setValues(0, title, date))
+          .then((value) => value)).catchError((e) {
+        errorMsg = "$e";
+      }, test: (e) => e is Exception);
 
   @action
   Future update(Event event) => ObservableFuture(_eventRepo
-      .update(_setValues(event.id, event.title, event.date))
-      .then((value) => value)).catchError((e) {
-    errorMsg = "${e.message}";
-  }, test: (e) => e is Exception);
+          .update(_setValues(event.id, event.title, event.date))
+          .then((value) => value)).catchError((e) {
+        errorMsg = "$e";
+      }, test: (e) => e is Exception);
 
   @action
   Future deleteById(Event event) => ObservableFuture(_eventRepo
-      .deleteById(_setValues(event.id, event.title, event.date))
-      .then((value) => value)).catchError((e) {
-    errorMsg = "${e.message}";
-  }, test: (e) => e is Exception);
+          .deleteById(_setValues(event.id, event.title, event.date))
+          .then((value) => value)).catchError((e) {
+        errorMsg = "$e";
+      }, test: (e) => e is Exception);
 
   Event _setValues(int id, String title, String date) {
     return Event(id: id, date: date, title: title);

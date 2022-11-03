@@ -41,7 +41,7 @@ abstract class DtcCodeListControllerBase with Store {
   Future<List<DtcCode>> findAll() =>
       ObservableFuture(_dtcCodeRepo.findAll().then((value) => value))
           .catchError((e) {
-        errorMsg = "${e.message}";
+        errorMsg = "$e";
       }, test: (e) => e is Exception);
 
   Future<List<DtcCode>> getFuture() => future = findAll();

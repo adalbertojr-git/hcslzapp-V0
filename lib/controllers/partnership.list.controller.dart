@@ -10,7 +10,6 @@ class PartnershipListController = PartnershipListControllerBase
     with _$PartnershipListController;
 
 abstract class PartnershipListControllerBase with Store {
-
   @observable
   bool isHidedButton = true;
 
@@ -62,16 +61,16 @@ abstract class PartnershipListControllerBase with Store {
   Future<List<Partnership>> findAll() =>
       ObservableFuture(_partnershipRepo.findAll().then((value) => value))
           .catchError((e) {
-        errorMsg = "${e.message}";
+        errorMsg = "$e";
       }, test: (e) => e is Exception);
 
   Future<List<Partnership>> getFuture() => future = findAll();
 
   @action
-  Future deleteById(Partnership partnership) =>
-      ObservableFuture(_partnershipRepo.deleteById(partnership).then((value) => value))
+  Future deleteById(Partnership partnership) => ObservableFuture(
+              _partnershipRepo.deleteById(partnership).then((value) => value))
           .catchError((e) {
-        errorMsg = "${e.message}";
+        errorMsg = "$e";
       }, test: (e) => e is Exception);
 
   get getActivePartnerships => activePartnerships.addAll(
