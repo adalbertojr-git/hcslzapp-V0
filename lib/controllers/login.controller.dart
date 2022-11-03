@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:glutton/glutton.dart';
+import 'package:hcslzapp/http/http.exception.dart';
 import 'package:hcslzapp/models/associated.dart';
 import '../models/token.dart';
 import '../repositories/associated.repo.dart';
@@ -37,6 +38,8 @@ abstract class LoginControllerBase with Store {
             pswLoginCtrl.text,
           )
           .then((value) => value)).catchError((e) {
+        errorMsg = "${e.message}";
+      }, test: (e) => e is HttpException).catchError((e) {
         errorMsg = "$e";
       }, test: (e) => e is Exception);
 
