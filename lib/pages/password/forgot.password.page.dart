@@ -112,14 +112,7 @@ class _ForgotPasswordPageState extends State<ForgotPasswordPage> {
       );
 
   _forgotPassword() {
-    if (_controller.hasErrors) {
-      asuka.showSnackBar(
-        SnackBar(
-          content: const Text('Atenção: Existem erros no formulário que devem '
-              'ser corrigidos antes de efetivar a transação.'),
-        ),
-      );
-    } else {
+    if (_controller.emailForgotPswCtrl.text.length != 0) {
       asuka.showSnackBar(
         SnackBar(
           content: const Text('Aguarde...'),
@@ -319,14 +312,7 @@ class _ForgotPasswordPageState extends State<ForgotPasswordPage> {
       );
 
   _validateCode(BuildContext c, PasswordDTO passwordDTO) {
-    if (_controller.hasErrors) {
-      asuka.showSnackBar(
-        SnackBar(
-          content: const Text('Atenção: Existem erros no formulário que devem '
-              'ser corrigidos antes de efetivar a transação.'),
-        ),
-      );
-    } else {
+    if (passwordDTO.aux.length != 0) {
       _controller.validateCode(passwordDTO).then((value) {
         if (value != null) {
           if (value.startsWith('OK')) {
