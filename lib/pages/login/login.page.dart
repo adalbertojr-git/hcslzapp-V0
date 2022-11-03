@@ -120,43 +120,45 @@ class LoginPage extends StatelessWidget {
       );
 
   _login(BuildContext context) {
-    asuka.showSnackBar(
-      SnackBar(
-        content: Text('Carregando...'),
-      ),
-    );
-    _controller.authenticate().then(
-      (token) async {
-        if (token == null) {
-          asuka.showSnackBar(
-            SnackBar(
-              content: Text(_controller.errorMsg),
-            ),
-          );
-        } else {
-          Token _t = token;
-          print(_t.token);
-          Associated associated = Template().loadAssociated();
-          _controller.setTokenToDevice(_t.token);
-          _controller.setUserToDevice(_controller.userLoginCtrl.text);
-          TokenDetails _tokenDetails = TokenDetails(_t.token);
-          await _controller.findByIdToList(_tokenDetails.associatedId()).then(
-            (value) {
-              associated = value[0];
-            },
-          );
-          Navigator.pushReplacement(
-            context,
-            MaterialPageRoute(
-              builder: (context) => DashboardPage(
-                //_controller.associated,
-                associated,
+    if (_controller.userLoginCtrl.text.length > 0 &&
+        _controller.pswLoginCtrl.text.length > 0) {
+      asuka.showSnackBar(
+        SnackBar(
+          content: Text('Carregando...'),
+        ),
+      );
+      _controller.authenticate().then(
+        (token) async {
+          if (token == null) {
+            asuka.showSnackBar(
+              SnackBar(
+                content: Text(_controller.errorMsg),
               ),
-            ),
-          );
-        }
-      },
-    );
+            );
+          } else {
+            Token _t = token;
+            print(_t.token);
+            Associated associated = Template().loadAssociated();
+            _controller.setTokenToDevice(_t.token);
+            _controller.setUserToDevice(_controller.userLoginCtrl.text);
+            TokenDetails _tokenDetails = TokenDetails(_t.token);
+            await _controller.findByIdToList(_tokenDetails.associatedId()).then(
+              (value) {
+                associated = value[0];
+              },
+            );
+            Navigator.pushReplacement(
+              context,
+              MaterialPageRoute(
+                builder: (context) => DashboardPage(
+                  //_controller.associated,
+                  associated,
+                ),
+              ),
+            );
+          }
+        },
+      );
+    }
   }
-
 }
