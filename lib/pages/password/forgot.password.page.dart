@@ -6,7 +6,7 @@ import 'package:hcslzapp/components/my.text.form.field.dart';
 import 'package:hcslzapp/components/top.bar.dart';
 import 'package:hcslzapp/controllers/forgot.password.controller.dart';
 import 'package:asuka/asuka.dart' as asuka;
-import 'package:hcslzapp/models/password.dart';
+import 'package:hcslzapp/models/password.dto.dart';
 import 'package:hcslzapp/pages/password/change.password.page.dart';
 import 'package:mask_text_input_formatter/mask_text_input_formatter.dart';
 import 'package:circular_countdown_timer/circular_countdown_timer.dart';
@@ -157,7 +157,7 @@ class _ForgotPasswordPageState extends State<ForgotPasswordPage> {
     );
   }
 
-  _showCodedDialog(Password password) async {
+  _showCodedDialog(PasswordDTO password) async {
     await showDialog(
         context: context,
         builder: (context) => Dialog(
@@ -216,9 +216,9 @@ class _ForgotPasswordPageState extends State<ForgotPasswordPage> {
                                 color: Colors.deepOrangeAccent[100],
                               ),
                               onPressed: () {
-                                _controller.validateCode(Password(
+                                _controller.validateCode(PasswordDTO(
                                   associatedId: password.associatedId,
-                                  aux: password.aux,
+                                  aux: _controller.codeCtrl.text,
                                 ));
 
 /*                                if (_controller.codeCtrl.text == code) {

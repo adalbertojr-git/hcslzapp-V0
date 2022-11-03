@@ -1,14 +1,14 @@
 import 'dart:async';
 import 'dart:convert';
 import 'package:hcslzapp/http/http.exception.dart';
-import 'package:hcslzapp/models/password.dart';
+import 'package:hcslzapp/models/password.dto.dart';
 import 'package:http/http.dart';
 import '../common/settings.dart';
 
 const String _forgotlUrl = '/forgotpassword';
 
 class ForgotPasswordRepo {
-  Future<Password> sendEmail(String email) async {
+  Future<PasswordDTO> sendEmail(String email) async {
     final Response response = await client
         .get(
           Uri.parse(mainUrl + _forgotlUrl + "/send/" + email),
@@ -17,7 +17,7 @@ class ForgotPasswordRepo {
           Duration(seconds: 10),
         );
     if (response.statusCode == 200) {
-      return Password.fromJson(
+      return PasswordDTO.fromJson(
         jsonDecode(response.body),
       );
     } else {
@@ -25,21 +25,19 @@ class ForgotPasswordRepo {
     }
   }
 
-  Future<String> validateCode(Password password) async {
+  Future<String> validateCode(PasswordDTO password) async {
     final String encodedJson = jsonEncode(
       password.toJson(),
     );
-    final Response response = await client
-        .get(
-          Uri.parse(mainUrl + _forgotlUrl + "/validate/"),
-          headers: {
-            'Content-type': 'application/json',
-            'password': encodedJson,
-          },
-        )
-        .timeout(
-          Duration(seconds: 10),
-        );
+    final Response response = await client.get(
+      Uri.parse(mainUrl + _forgotlUrl + "/validate"),
+      headers: {
+        'Content-type': 'application/json',
+        'body': encodedJson,
+      },
+    ).timeout(
+      Duration(seconds: 10),
+    );
     if (response.statusCode == 200) {
       return response.body;
     } else {

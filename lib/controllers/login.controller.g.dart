@@ -54,21 +54,6 @@ mixin _$LoginController on LoginControllerBase, Store {
     });
   }
 
-  final _$isLoadingAtom = Atom(name: 'LoginControllerBase.isLoading');
-
-  @override
-  bool get isLoading {
-    _$isLoadingAtom.reportRead();
-    return super.isLoading;
-  }
-
-  @override
-  set isLoading(bool value) {
-    _$isLoadingAtom.reportWrite(value, super.isLoading, () {
-      super.isLoading = value;
-    });
-  }
-
   final _$errorMsgAtom = Atom(name: 'LoginControllerBase.errorMsg');
 
   @override
@@ -141,23 +126,11 @@ mixin _$LoginController on LoginControllerBase, Store {
   }
 
   @override
-  bool setLoading(bool value) {
-    final _$actionInfo = _$LoginControllerBaseActionController.startAction(
-        name: 'LoginControllerBase.setLoading');
-    try {
-      return super.setLoading(value);
-    } finally {
-      _$LoginControllerBaseActionController.endAction(_$actionInfo);
-    }
-  }
-
-  @override
   String toString() {
     return '''
 userLoginCtrl: ${userLoginCtrl},
 pswLoginCtrl: ${pswLoginCtrl},
 token: ${token},
-isLoading: ${isLoading},
 errorMsg: ${errorMsg}
     ''';
   }

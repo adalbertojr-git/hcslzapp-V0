@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:hcslzapp/models/password.dart';
+import 'package:hcslzapp/models/password.dto.dart';
 import 'package:hcslzapp/repositories/forgot.password.repo.dart';
 import 'package:mobx/mobx.dart';
 
@@ -36,14 +36,14 @@ abstract class ForgotPasswordControllerBase with Store {
   }
 
   @action
-  Future<Password> forgotPassword(String email) =>
+  Future<PasswordDTO> forgotPassword(String email) =>
       ObservableFuture(_forgotPasswordRepo.sendEmail(email).then((value) => value))
           .catchError((e) {
         errorMsg = "${e.message}";
       }, test: (e) => e is Exception);
 
   @action
-  Future<String> validateCode(Password password) =>
+  Future<String> validateCode(PasswordDTO password) =>
       ObservableFuture(_forgotPasswordRepo.validateCode(password).then((value) => value))
           .catchError((e) {
         errorMsg = "${e.message}";
