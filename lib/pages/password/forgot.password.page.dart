@@ -216,26 +216,12 @@ class _ForgotPasswordPageState extends State<ForgotPasswordPage> {
                                 color: Colors.deepOrangeAccent[100],
                               ),
                               onPressed: () {
-                                _controller.validateCode(PasswordDTO(
-                                  associatedId: password.associatedId,
-                                  aux: _controller.codeCtrl.text,
-                                ));
-
-/*                                if (_controller.codeCtrl.text == code) {
-                                  asuka.showSnackBar(
-                                    SnackBar(
-                                      content: Text(
-                                          'O código informado está correto.'),
-                                    ),
-                                  );
-                                  Navigator.pop(context);
-                                } else
-                                  asuka.showSnackBar(
-                                    SnackBar(
-                                      content: Text(
-                                          'O código informado não é válido.'),
-                                    ),
-                                  );*/
+                                _validateCode(
+                                    context,
+                                    PasswordDTO(
+                                      associatedId: password.associatedId,
+                                      aux: _controller.codeCtrl.text,
+                                    ));
                               },
                             ),
                           ),
@@ -331,4 +317,38 @@ class _ForgotPasswordPageState extends State<ForgotPasswordPage> {
           },*/
         ),
       );
+
+  _validateCode(BuildContext c, PasswordDTO passwordDTO) {
+    if (_controller.hasErrors) {
+      asuka.showSnackBar(
+        SnackBar(
+          content: const Text('Atenção: Existem erros no formulário que devem '
+              'ser corrigidos antes de efetivar a transação.'),
+        ),
+      );
+    } else {
+      _controller.validateCode(passwordDTO).then((value) {
+        if (value != null) {
+          if (value.startsWith('OK')) {
+            Navigator.pop(c);
+            Navigator.push(
+              context,
+              MaterialPageRoute(builder: (_) => ChangePasswordPage('FORGOT')),
+            );
+          } else
+            asuka.showSnackBar(
+              SnackBar(
+                content: Text('O código informado não é válido.'),
+              ),
+            );
+        } else {
+          asuka.showSnackBar(
+            SnackBar(
+              content: Text(_controller.errorMsg),
+            ),
+          );
+        }
+      });
+    }
+  }
 }

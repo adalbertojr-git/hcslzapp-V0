@@ -25,19 +25,23 @@ class ForgotPasswordRepo {
     }
   }
 
-  Future<String> validateCode(PasswordDTO password) async {
+  Future<String> validateCode(PasswordDTO passwordDTO) async {
     final String encodedJson = jsonEncode(
-      password.toJson(),
+      passwordDTO.toJson(),
     );
-    final Response response = await client.get(
-      Uri.parse(mainUrl + _forgotlUrl + "/validate"),
-      headers: {
-        'Content-type': 'application/json',
-        'body': encodedJson,
-      },
-    ).timeout(
-      Duration(seconds: 10),
-    );
+    final Response response = await client
+        .post(
+          Uri.parse(mainUrl + _forgotlUrl + "/validate"),
+          headers: {
+            'Content-type': 'application/json',
+            'Accept': 'application/json'
+          },
+          body: encodedJson,
+        )
+        .timeout(
+          Duration(seconds: 10),
+        );
+
     if (response.statusCode == 200) {
       return response.body;
     } else {

@@ -43,8 +43,8 @@ abstract class ForgotPasswordControllerBase with Store {
       }, test: (e) => e is Exception);
 
   @action
-  Future<String> validateCode(PasswordDTO password) =>
-      ObservableFuture(_forgotPasswordRepo.validateCode(password).then((value) => value))
+  Future<String> validateCode(PasswordDTO passwordDTO) =>
+      ObservableFuture(_forgotPasswordRepo.validateCode(passwordDTO).then((value) => value))
           .catchError((e) {
         errorMsg = "${e.message}";
       }, test: (e) => e is Exception);

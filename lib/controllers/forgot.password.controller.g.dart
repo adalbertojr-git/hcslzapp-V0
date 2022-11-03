@@ -86,11 +86,11 @@ mixin _$ForgotPasswordController on ForgotPasswordControllerBase, Store {
   }
 
   @override
-  Future<String> validateCode(PasswordDTO password) {
+  Future<String> validateCode(PasswordDTO passwordDTO) {
     final _$actionInfo = _$ForgotPasswordControllerBaseActionController
         .startAction(name: 'ForgotPasswordControllerBase.validateCode');
     try {
-      return super.validateCode(password);
+      return super.validateCode(passwordDTO);
     } finally {
       _$ForgotPasswordControllerBaseActionController.endAction(_$actionInfo);
     }
