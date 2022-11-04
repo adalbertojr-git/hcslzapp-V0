@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:glutton/glutton.dart';
 import 'package:hcslzapp/models/associated.dart';
@@ -140,6 +141,8 @@ abstract class PaymentAddControllerBase with Store {
   Future<List<Payment>> findByAssociatedIdToList(int id) => ObservableFuture(
               _paymentRepo.findByAssociatedIdToList(id).then((value) => value))
           .catchError((e) {
+        errorMsg = "${e.message}";
+      }, test: (e) => e is HttpException).catchError((e) {
         errorMsg = "$e";
       }, test: (e) => e is Exception);
 
@@ -150,6 +153,8 @@ abstract class PaymentAddControllerBase with Store {
   Future update() =>
       ObservableFuture(_paymentRepo.update(_setValues()).then((value) => value))
           .catchError((e) {
+        errorMsg = "${e.message}";
+      }, test: (e) => e is HttpException).catchError((e) {
         errorMsg = "$e";
       }, test: (e) => e is Exception);
 
@@ -157,6 +162,8 @@ abstract class PaymentAddControllerBase with Store {
   Future save() =>
       ObservableFuture(_paymentRepo.save(_setValues()).then((value) => value))
           .catchError((e) {
+        errorMsg = "${e.message}";
+      }, test: (e) => e is HttpException).catchError((e) {
         errorMsg = "$e";
       }, test: (e) => e is Exception);
 

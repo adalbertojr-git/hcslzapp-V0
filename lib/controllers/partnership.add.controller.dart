@@ -88,6 +88,8 @@ abstract class PartnershipAddControllerBase with Store {
   @action
   Future findAll() async =>
       await _partnershipRepo.findAll().then((value) => value).catchError((e) {
+        errorMsg = "${e.message}";
+      }, test: (e) => e is HttpException).catchError((e) {
         errorMsg = "$e";
       }, test: (e) => e is Exception);
 
@@ -96,12 +98,16 @@ abstract class PartnershipAddControllerBase with Store {
           .save(await _setValues())
           .then((value) => value)
           .catchError((e) {
+        errorMsg = "${e.message}";
+      }, test: (e) => e is HttpException).catchError((e) {
         errorMsg = "$e";
       }, test: (e) => e is Exception);
 
   @action
   Future update() async =>
       await _partnershipRepo.update(await _setValues()).catchError((e) {
+        errorMsg = "${e.message}";
+      }, test: (e) => e is HttpException).catchError((e) {
         errorMsg = "$e";
       }, test: (e) => e is Exception);
 

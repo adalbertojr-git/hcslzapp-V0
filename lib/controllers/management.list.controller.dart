@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:hcslzapp/common/associated.profiles.dart';
 import 'package:hcslzapp/models/associated.dart';
@@ -52,6 +53,8 @@ abstract class ManagementListControllerBase with Store {
   Future<List<Associated>> findAll() =>
       ObservableFuture(_associatedRepo.findAll().then((value) => value))
           .catchError((e) {
+        errorMsg = "${e.message}";
+      }, test: (e) => e is HttpException).catchError((e) {
         errorMsg = "$e";
       }, test: (e) => e is Exception);
 
@@ -61,6 +64,8 @@ abstract class ManagementListControllerBase with Store {
   Future deleteById(Associated associated) => ObservableFuture(
               _managementRepo.deleteById(associated).then((value) => value))
           .catchError((e) {
+        errorMsg = "${e.message}";
+      }, test: (e) => e is HttpException).catchError((e) {
         errorMsg = "$e";
       }, test: (e) => e is Exception);
 

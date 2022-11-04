@@ -47,6 +47,8 @@ abstract class LoginControllerBase with Store {
   Future<List<Associated>> findByIdToList(int id) => ObservableFuture(
               _associatedRepo.findByIdToList(id).then((value) => value))
           .catchError((e) {
+        errorMsg = "${e.message}";
+      }, test: (e) => e is HttpException).catchError((e) {
         errorMsg = "$e";
       }, test: (e) => e is Exception);
 

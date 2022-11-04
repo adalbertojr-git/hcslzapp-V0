@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:hcslzapp/models/dtc.code.dart';
 import 'package:hcslzapp/repositories/dtc.code.repo.dart';
@@ -41,6 +43,8 @@ abstract class DtcCodeListControllerBase with Store {
   Future<List<DtcCode>> findAll() =>
       ObservableFuture(_dtcCodeRepo.findAll().then((value) => value))
           .catchError((e) {
+        errorMsg = "${e.message}";
+      }, test: (e) => e is HttpException).catchError((e) {
         errorMsg = "$e";
       }, test: (e) => e is Exception);
 

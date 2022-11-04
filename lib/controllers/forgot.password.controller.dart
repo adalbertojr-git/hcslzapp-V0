@@ -39,6 +39,8 @@ abstract class ForgotPasswordControllerBase with Store {
   Future<PasswordDTO> forgotPassword(String email) => ObservableFuture(
               _forgotPasswordRepo.sendEmail(email).then((value) => value))
           .catchError((e) {
+        errorMsg = "${e.message}";
+      }, test: (e) => e is HttpException).catchError((e) {
         errorMsg = "$e";
       }, test: (e) => e is Exception);
 
@@ -47,6 +49,8 @@ abstract class ForgotPasswordControllerBase with Store {
       ObservableFuture(_forgotPasswordRepo
           .validateCode(passwordDTO)
           .then((value) => value)).catchError((e) {
+        errorMsg = "${e.message}";
+      }, test: (e) => e is HttpException).catchError((e) {
         errorMsg = "$e";
       }, test: (e) => e is Exception);
 

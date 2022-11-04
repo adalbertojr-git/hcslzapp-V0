@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter/cupertino.dart';
 import 'package:hcslzapp/models/digital.identity.dart';
 import 'package:hcslzapp/models/template.dart';
@@ -70,6 +72,8 @@ abstract class DigitalIdentityControllerBase with Store {
       ObservableFuture(_digitalIdentityRepo
           .findAssociatedByIdToList(id)
           .then((value) => value)).catchError((e) {
+        errorMsg = "${e.message}";
+      }, test: (e) => e is HttpException).catchError((e) {
         errorMsg = "$e";
       }, test: (e) => e is Exception);
 

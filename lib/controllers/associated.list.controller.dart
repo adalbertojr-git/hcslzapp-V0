@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:hcslzapp/models/template.dart';
 import '../../models/associated.dart';
@@ -46,6 +47,8 @@ abstract class AssociatedListControllerBase with Store {
   Future<List<Associated>> findAll() =>
       ObservableFuture(_associatedRepo.findAll().then((value) => value))
           .catchError((e) {
+        errorMsg = "${e.message}";
+      }, test: (e) => e is HttpException).catchError((e) {
         errorMsg = "$e";
       }, test: (e) => e is Exception);
 

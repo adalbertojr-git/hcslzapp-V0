@@ -139,12 +139,16 @@ abstract class AssociatedUpdateControllerBase with Store {
   Future<List<Associated>> findByIdToList(int id) => ObservableFuture(
               _associatedRepo.findByIdToList(id).then((value) => value))
           .catchError((e) {
+        errorMsg = "${e.message}";
+      }, test: (e) => e is HttpException).catchError((e) {
         errorMsg = "$e";
       }, test: (e) => e is Exception);
 
   @action
   Future update(Associated associated) async =>
       await _associatedRepo.update(await _setValues()).catchError((e) {
+        errorMsg = "${e.message}";
+      }, test: (e) => e is HttpException).catchError((e) {
         errorMsg = "$e";
       }, test: (e) => e is Exception);
 

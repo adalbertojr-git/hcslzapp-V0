@@ -1,5 +1,6 @@
 import 'dart:async';
 import 'dart:convert';
+import 'dart:io';
 import 'package:flutter/cupertino.dart';
 import 'package:hcslzapp/models/event.dart';
 import 'package:hcslzapp/repositories/event.repo.dart';
@@ -55,6 +56,8 @@ abstract class EventCalendarControllerBase with Store {
   Future save(String title, String date) => ObservableFuture(_eventRepo
           .save(_setValues(0, title, date))
           .then((value) => value)).catchError((e) {
+        errorMsg = "${e.message}";
+      }, test: (e) => e is HttpException).catchError((e) {
         errorMsg = "$e";
       }, test: (e) => e is Exception);
 
@@ -62,6 +65,8 @@ abstract class EventCalendarControllerBase with Store {
   Future update(Event event) => ObservableFuture(_eventRepo
           .update(_setValues(event.id, event.title, event.date))
           .then((value) => value)).catchError((e) {
+        errorMsg = "${e.message}";
+      }, test: (e) => e is HttpException).catchError((e) {
         errorMsg = "$e";
       }, test: (e) => e is Exception);
 
@@ -69,6 +74,8 @@ abstract class EventCalendarControllerBase with Store {
   Future deleteById(Event event) => ObservableFuture(_eventRepo
           .deleteById(_setValues(event.id, event.title, event.date))
           .then((value) => value)).catchError((e) {
+        errorMsg = "${e.message}";
+      }, test: (e) => e is HttpException).catchError((e) {
         errorMsg = "$e";
       }, test: (e) => e is Exception);
 
