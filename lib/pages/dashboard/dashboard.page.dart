@@ -31,6 +31,10 @@ const String _labelAboutApp = 'Sobre o HCSlz App';
 const String _labelAppVersion = '1.0.0';
 const String _pathLadiesImage = 'assets/imgs/ladies.jpg';
 const String _pathNoImage = 'assets/imgs/noImage.png';
+const String _labelBirthdaysMonth = 'Aniversariantes';
+const String _labelBirthdaysMonthDescr = 'Aniversariantes do mês';
+const String _labelNotification = 'Avisos';
+const String _labelNotificationDescr = 'Quadro de avisos';
 const String _labelAccessRequest = 'Acesso';
 const String _labelAccessRequestDescr = 'Requisições de acesso';
 const String _labelAdministration = 'Administração';
@@ -419,7 +423,7 @@ class _DashboardPageState extends State<DashboardPage> {
                 builder: (_) => CircleAvatar(
                   backgroundColor: Colors.white,
                   radius: 30.0,
-                  backgroundImage: _controller.photoUrl.length > 0
+                  backgroundImage: _controller.photoUrl != null
                       ? NetworkImage(_controller.photoUrl)
                       : PhotoImageProvider().getImageProvider(
                           File(_pathNoImage),
@@ -429,7 +433,35 @@ class _DashboardPageState extends State<DashboardPage> {
       );
 
   _bar() => (_controller.selectedProfile != ADMIN
-      ? SizedBox()
+      ? Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: <Widget>[
+            BarButton(
+              _labelBirthdaysMonth,
+              _labelBirthdaysMonthDescr,
+              Icons.cake,
+              onClick: () {
+/*                Navigator.push(
+                  _gContext,
+                  MaterialPageRoute(
+                      builder: (_gContext) => AccessRequestListPage()),
+                );*/
+              },
+            ),
+            BarButton(
+              _labelNotification,
+              _labelNotificationDescr,
+              Icons.announcement,
+              onClick: () {
+/*                Navigator.push(
+                  _gContext,
+                  MaterialPageRoute(
+                      builder: (_gContext) => ManagementListPage()),
+                );*/
+              },
+            ),
+          ],
+        )
       : Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[

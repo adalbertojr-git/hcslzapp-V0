@@ -138,8 +138,7 @@ class GridButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Card(
-      color: Colors.white,
-      elevation: 10,
+      color: Colors.deepOrange[100],
       child: InkWell(
         onTap: () {
           onClick();
@@ -158,7 +157,7 @@ class GridButton extends StatelessWidget {
               title,
               textAlign: TextAlign.center,
               style: TextStyle(
-                fontSize: 9,
+                fontSize: 12,
                 fontWeight: FontWeight.bold,
                 color: Colors.black,
               ),
