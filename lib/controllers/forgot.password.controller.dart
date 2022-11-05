@@ -25,10 +25,7 @@ abstract class ForgotPasswordControllerBase with Store {
   @observable
   String errorMsg = '';
 
-/*  @observable
-  Future<String> future = Future<String>.value([]);*/
-
-  init() {
+s  init() {
     formController = FormController(email: '');
   }
 
