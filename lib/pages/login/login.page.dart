@@ -51,6 +51,9 @@ class LoginPage extends StatelessWidget {
                   SizedBox(
                     child: Image.asset(_pathLogoImage),
                   ),
+                  SizedBox(
+                    height: 50.0,
+                  ),
                   MyTextFormField(
                     textEditingController: _controller.userLoginCtrl,
                     label: labelUser,
@@ -67,7 +70,7 @@ class LoginPage extends StatelessWidget {
                     hidden: true,
                   ),
                   SizedBox(
-                    height: 20.0,
+                    height: 50.0,
                   ),
                   Button(
                     icon: Icons.arrow_forward,
