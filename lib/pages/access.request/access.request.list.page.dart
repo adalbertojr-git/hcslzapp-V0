@@ -120,7 +120,7 @@ class AccessRequestListPageState extends State<AccessRequestListPage> {
       );
 
   _check() {
-    _controller.check().then(
+    _controller.allow().then(
       (value) {
         if (value != null) {
           asuka.showSnackBar(

@@ -9,22 +9,6 @@ part of 'change.password.controller.dart';
 // ignore_for_file: non_constant_identifier_names, unnecessary_brace_in_string_interps, unnecessary_lambdas, prefer_expression_function_bodies, lines_longer_than_80_chars, avoid_as, avoid_annotating_with_dynamic
 
 mixin _$ChangePasswordController on ChangePasswordControllerBase, Store {
-  final _$currentPswCtrlAtom =
-      Atom(name: 'ChangePasswordControllerBase.currentPswCtrl');
-
-  @override
-  TextEditingController get currentPswCtrl {
-    _$currentPswCtrlAtom.reportRead();
-    return super.currentPswCtrl;
-  }
-
-  @override
-  set currentPswCtrl(TextEditingController value) {
-    _$currentPswCtrlAtom.reportWrite(value, super.currentPswCtrl, () {
-      super.currentPswCtrl = value;
-    });
-  }
-
   final _$pswCtrlAtom = Atom(name: 'ChangePasswordControllerBase.pswCtrl');
 
   @override
@@ -104,7 +88,6 @@ mixin _$ChangePasswordController on ChangePasswordControllerBase, Store {
   @override
   String toString() {
     return '''
-currentPswCtrl: ${currentPswCtrl},
 pswCtrl: ${pswCtrl},
 confPswCtrl: ${confPswCtrl},
 errorMsg: ${errorMsg}
@@ -113,22 +96,6 @@ errorMsg: ${errorMsg}
 }
 
 mixin _$FormController on FormControllerBase, Store {
-  final _$currentPasswordAtom =
-      Atom(name: 'FormControllerBase.currentPassword');
-
-  @override
-  String? get currentPassword {
-    _$currentPasswordAtom.reportRead();
-    return super.currentPassword;
-  }
-
-  @override
-  set currentPassword(String? value) {
-    _$currentPasswordAtom.reportWrite(value, super.currentPassword, () {
-      super.currentPassword = value;
-    });
-  }
-
   final _$passwordAtom = Atom(name: 'FormControllerBase.password');
 
   @override
@@ -163,17 +130,6 @@ mixin _$FormController on FormControllerBase, Store {
       ActionController(name: 'FormControllerBase');
 
   @override
-  dynamic changeCurrentPassword(String value) {
-    final _$actionInfo = _$FormControllerBaseActionController.startAction(
-        name: 'FormControllerBase.changeCurrentPassword');
-    try {
-      return super.changeCurrentPassword(value);
-    } finally {
-      _$FormControllerBaseActionController.endAction(_$actionInfo);
-    }
-  }
-
-  @override
   dynamic changePassword(String value) {
     final _$actionInfo = _$FormControllerBaseActionController.startAction(
         name: 'FormControllerBase.changePassword');
@@ -198,7 +154,6 @@ mixin _$FormController on FormControllerBase, Store {
   @override
   String toString() {
     return '''
-currentPassword: ${currentPassword},
 password: ${password},
 confPassword: ${confPassword}
     ''';

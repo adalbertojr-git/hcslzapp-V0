@@ -53,13 +53,13 @@ class AccessRequestRepo {
     }
   }
 
-  Future<Response> check(List<AccessRequest> accessRequests) async {
+  Future<Response> allow(List<AccessRequest> accessRequests) async {
     final String encodedJson = jsonEncode(
       accessRequests,
     );
     final Response response = await client
         .post(
-          Uri.parse(mainUrl + _accReqUrl + "/check"),
+          Uri.parse(mainUrl + _accReqUrl + "/allow"),
           headers: {
             'Content-type': 'application/json',
             'Accept': 'application/json'
