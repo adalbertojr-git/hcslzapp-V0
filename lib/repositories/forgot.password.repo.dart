@@ -14,7 +14,7 @@ class ForgotPasswordRepo {
           Uri.parse(mainUrl + _forgotlUrl + "/send/" + email),
         )
         .timeout(
-          Duration(seconds: 10),
+          Duration(seconds: 30),
         );
     if (response.statusCode == 200) {
       return PasswordDTO.fromJson(
