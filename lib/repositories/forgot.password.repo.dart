@@ -41,7 +41,6 @@ class ForgotPasswordRepo {
         .timeout(
           Duration(seconds: 10),
         );
-
     if (response.statusCode == 200) {
       return response.body;
     } else {

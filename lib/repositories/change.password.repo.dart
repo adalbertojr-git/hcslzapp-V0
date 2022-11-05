@@ -1,19 +1,25 @@
 import 'dart:async';
+import 'dart:convert';
 import 'package:hcslzapp/http/http.exception.dart';
+import 'package:hcslzapp/models/password.dto.dart';
 import 'package:http/http.dart';
 import '../common/settings.dart';
 
 const String _changelUrl = '/changepassword';
 
 class ChangePasswordRepo {
-  Future<String> update(String password) async {
+  Future<String> update(PasswordDTO passwordDTO) async {
+    final String encodedJson = jsonEncode(
+      passwordDTO.toJson(),
+    );
     final Response response = await client
-        .put(
-          Uri.parse(mainUrl + _changelUrl),
+        .post(
+          Uri.parse(mainUrl + _changelUrl + "/validate"),
           headers: {
             'Content-type': 'application/json',
+            'Accept': 'application/json'
           },
-          body: password,
+          body: encodedJson,
         )
         .timeout(
           Duration(seconds: 10),

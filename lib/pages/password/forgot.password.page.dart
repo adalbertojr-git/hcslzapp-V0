@@ -143,13 +143,6 @@ class _ForgotPasswordPageState extends State<ForgotPasswordPage> {
     }
   }
 
-  _forgotPassword2() {
-    Navigator.push(
-      context,
-      MaterialPageRoute(builder: (_) => ChangePasswordPage('FORGOT')),
-    );
-  }
-
   _showCodedDialog(PasswordDTO password) async {
     await showDialog(
         context: context,
@@ -319,7 +312,11 @@ class _ForgotPasswordPageState extends State<ForgotPasswordPage> {
             Navigator.pop(c);
             Navigator.push(
               context,
-              MaterialPageRoute(builder: (_) => ChangePasswordPage('FORGOT')),
+              MaterialPageRoute(
+                  builder: (_) => ChangePasswordPage(
+                        'FORGOT',
+                        passwordDTO,
+                      )),
             );
           } else
             asuka.showSnackBar(
