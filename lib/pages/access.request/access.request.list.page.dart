@@ -82,7 +82,7 @@ class AccessRequestListPageState extends State<AccessRequestListPage> {
               FloatingActionButtonLocation.centerFloat,
           floatingActionButton: _controller.isHidedButton
               ? null
-              : Button(icon: Icons.save, onClick: () => _check()),
+              : Button(icon: Icons.save, onClick: () => _allow()),
         ),
       );
 
@@ -119,7 +119,7 @@ class AccessRequestListPageState extends State<AccessRequestListPage> {
         ),
       );
 
-  _check() {
+  _allow() {
     _controller.allow().then(
       (value) {
         if (value != null) {
