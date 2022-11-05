@@ -13,8 +13,8 @@ class ChangePasswordRepo {
       passwordDTO.toJson(),
     );
     final Response response = await client
-        .post(
-          Uri.parse(mainUrl + _changelUrl + "/validate"),
+        .put(
+          Uri.parse(mainUrl + _changelUrl),
           headers: {
             'Content-type': 'application/json',
             'Accept': 'application/json'
