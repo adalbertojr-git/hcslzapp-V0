@@ -12,12 +12,12 @@ class TopBar extends StatelessWidget {
     return Column(
       children: [
         SizedBox(
-          height: 30.0,
+          height: 50.0,
           width: double.infinity,
         ),
         Container(
           alignment: Alignment.centerLeft,
-          height: 35,
+          height: 45,
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
@@ -28,6 +28,7 @@ class TopBar extends StatelessWidget {
                 child: Icon(
                   Icons.arrow_back,
                   color: Colors.black,
+                  size: 35.0,
                 ),
               ),
               Text(
@@ -37,7 +38,7 @@ class TopBar extends StatelessWidget {
                 ),
               ),
               SizedBox(
-                height: 35.0,
+                height: 40.0,
                 child: Container(
                   child: Image.asset(_pathLogo),
                 ),

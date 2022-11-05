@@ -284,11 +284,11 @@ mixin _$AccessRequestController on AccessRequestControllerBase, Store {
   }
 
   @override
-  Future<dynamic> check() {
+  Future<dynamic> allow() {
     final _$actionInfo = _$AccessRequestControllerBaseActionController
-        .startAction(name: 'AccessRequestControllerBase.check');
+        .startAction(name: 'AccessRequestControllerBase.allow');
     try {
-      return super.check();
+      return super.allow();
     } finally {
       _$AccessRequestControllerBaseActionController.endAction(_$actionInfo);
     }
