@@ -165,27 +165,6 @@ class _DashboardPageState extends State<DashboardPage> {
                   ),
                 ),
                 PopupMenuItem(
-                  enabled: _controller.isAdmin(),
-                  child: GestureDetector(
-                    child: Text(
-                      _labelChangeProfile,
-                      style: TextStyle(
-                        fontSize: 12.0,
-                      ),
-                    ),
-                    onTap: () {
-                      if (_controller.isAdmin()) {
-                        setState(() {
-                          _controller.changeProfile();
-                          print(_controller.selectedProfile);
-                          _widgets();
-                          Navigator.pop(context);
-                        });
-                      }
-                    },
-                  ),
-                ),
-                PopupMenuItem(
                   child: GestureDetector(
                     child: Text(
                       _labelLogout,
