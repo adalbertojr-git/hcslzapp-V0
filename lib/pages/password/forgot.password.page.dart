@@ -314,7 +314,6 @@ class _ForgotPasswordPageState extends State<ForgotPasswordPage> {
               context,
               MaterialPageRoute(
                   builder: (_) => ChangePasswordPage(
-                        'FORGOT',
                         passwordDTO,
                       )),
             );

@@ -11,10 +11,9 @@ import 'package:hcslzapp/models/password.dto.dart';
 const String _title = 'Alterar Senha';
 
 class ChangePasswordPage extends StatefulWidget {
-  final String _action;
   final PasswordDTO _passwordDTO;
 
-  ChangePasswordPage(this._action, this._passwordDTO);
+  ChangePasswordPage(this._passwordDTO);
 
   @override
   _ChangePasswordPageState createState() => _ChangePasswordPageState();
@@ -55,19 +54,6 @@ class _ChangePasswordPageState extends State<ChangePasswordPage> {
               TopBar(
                 title: _title,
               ),
-              widget._action == 'CHANGE'
-                  ? MyTextFormField(
-                      textEditingController: _controller.currentPswCtrl,
-                      hint: hintCurrentPsw,
-                      label: labelCurrentPsw,
-                      icon: Icons.password,
-                      inputType: TextInputType.text,
-                      hidden: true,
-                      onChanged:
-                          _controller.formController.changeCurrentPassword,
-                      errorText: _controller.validateCurrentPassword(),
-                    )
-                  : Container(),
               MyTextFormField(
                 textEditingController: _controller.pswCtrl,
                 label: labelNewPsw,
@@ -103,7 +89,7 @@ class _ChangePasswordPageState extends State<ChangePasswordPage> {
       );
 
   _update() {
-    if (_controller.hasErrorsForgot) {
+    if (_controller.hasErrors) {
       asuka.showSnackBar(
         SnackBar(
           content: const Text('Atenção: Existem erros no formulário que devem '
@@ -112,10 +98,12 @@ class _ChangePasswordPageState extends State<ChangePasswordPage> {
       );
     } else {
       _controller
-          .update(PasswordDTO(
-        associatedId: widget._passwordDTO.associatedId,
-        aux: _controller.pswCtrl.text,
-      ))
+          .update(
+        PasswordDTO(
+          associatedId: widget._passwordDTO.associatedId,
+          aux: _controller.pswCtrl.text,
+        ),
+      )
           .then(
         (value) {
           if (value != null) {

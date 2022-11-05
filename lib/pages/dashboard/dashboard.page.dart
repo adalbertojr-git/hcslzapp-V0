@@ -2,10 +2,12 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
+import 'package:hcslzapp/models/password.dto.dart';
 import 'package:hcslzapp/pages/event/event.calendar.page.dart';
 import 'package:hcslzapp/pages/login/login.page.dart';
 import 'package:hcslzapp/pages/management/management.list.page.dart';
 import 'package:hcslzapp/pages/partnership/partnership.list.adm.page.dart';
+import 'package:hcslzapp/pages/password/change.password.page.dart';
 import 'package:hcslzapp/pages/payment/payment.list.page.dart';
 import '../../common/associated.profiles.dart';
 import 'package:hcslzapp/common/photo.image.provider.dart';
@@ -19,6 +21,7 @@ import 'package:hcslzapp/pages/associated/associated.list.page.dart';
 const String _labelAppTitle = 'HCSlz App';
 const String _labelDarkTheme = 'Tema Escuro';
 const String _labelChangeProfile = 'Trocar Perfil de Acesso';
+const String _labelChangePassword = 'Alterar senha';
 const String _labelLogout = 'Logout';
 const String _labelLogoutConf = 'Confirma Logout?';
 const String _labelLadiesHC = 'Ladies Harley Club';
@@ -268,7 +271,7 @@ class _DashboardPageState extends State<DashboardPage> {
               ],
             ),
             ListTile(
-              enabled:  _controller.isAdmin(),
+              enabled: _controller.isAdmin(),
               leading: Icon(Icons.wifi_protected_setup),
               title: Text(_labelChangeProfile),
               onTap: () async {
@@ -278,6 +281,22 @@ class _DashboardPageState extends State<DashboardPage> {
                   _widgets();
                   Navigator.pop(_gContext);
                 });
+              },
+            ),
+            ListTile(
+              leading: Icon(Icons.password),
+              title: Text(_labelChangePassword),
+              onTap: () async {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (_) => ChangePasswordPage(
+                            PasswordDTO(
+                              associatedId: widget._associated.id,
+                              aux: '',
+                            ),
+                          )),
+                );
               },
             ),
             ListTile(
@@ -421,7 +440,7 @@ class _DashboardPageState extends State<DashboardPage> {
                 builder: (_) => CircleAvatar(
                   backgroundColor: Colors.white,
                   radius: 30.0,
-                  backgroundImage: _controller.photoUrl != null
+                  backgroundImage: _controller.photoUrl.length > 0
                       ? NetworkImage(_controller.photoUrl)
                       : PhotoImageProvider().getImageProvider(
                           File(_pathNoImage),

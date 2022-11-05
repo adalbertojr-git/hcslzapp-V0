@@ -14,9 +14,6 @@ abstract class ChangePasswordControllerBase with Store {
   var formController;
 
   @observable
-  var currentPswCtrl = TextEditingController();
-
-  @observable
   var pswCtrl = TextEditingController();
 
   @observable
@@ -30,7 +27,7 @@ abstract class ChangePasswordControllerBase with Store {
 
   init() {
     formController =
-        FormController(currentPassword: '', confPassword: '', password: '');
+        FormController(confPassword: '', password: '');
   }
 
   @action
@@ -42,28 +39,11 @@ abstract class ChangePasswordControllerBase with Store {
         errorMsg = "$e";
       }, test: (e) => e is Exception);
 
-  bool get hasErrorsForgot => hasErrorNewPassword || hasErrorConfNewPassword;
-
-  bool get hasErrorsChange =>
-      hasErrorCurrentPassword || hasErrorNewPassword || hasErrorConfNewPassword;
-
-  bool get hasErrorCurrentPassword => validateCurrentPassword() != null;
+  bool get hasErrors => hasErrorNewPassword || hasErrorConfNewPassword;
 
   bool get hasErrorNewPassword => validateNewPassword() != null;
 
   bool get hasErrorConfNewPassword => validateConfNewPassword() != null;
-
-  String? validateCurrentPassword() {
-    const String _labelPswRequired = 'Senha atual é obrigatória!!!';
-    const String _labelPswLenght = 'Senha deve ter no mínimo 6 caracteres!!!';
-
-    if (formController.currentPassword.isEmpty) {
-      return _labelPswRequired;
-    } else if (formController.currentPassword.toString().length < 6) {
-      return _labelPswLenght;
-    }
-    return null;
-  }
 
   String? validateNewPassword() {
     const String _labelPswRequired = 'Nova senha é obrigatória!!!';
@@ -93,11 +73,9 @@ abstract class ChangePasswordControllerBase with Store {
 
 class FormController extends FormControllerBase with _$FormController {
   FormController({
-    String? currentPassword,
     String? confPassword,
     String? password,
   }) {
-    super.currentPassword = currentPassword;
     super.password = password;
     super.confPassword = confPassword;
   }
@@ -105,16 +83,10 @@ class FormController extends FormControllerBase with _$FormController {
 
 abstract class FormControllerBase with Store {
   @observable
-  String? currentPassword;
-
-  @observable
   String? password;
 
   @observable
   String? confPassword;
-
-  @action
-  changeCurrentPassword(String value) => currentPassword = value;
 
   @action
   changePassword(String value) => password = value;
