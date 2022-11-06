@@ -178,11 +178,11 @@ mixin _$ManagementAddController on ManagementAddControllerBase, Store {
   }
 
   @override
-  Future<List<Associated>> findAll() {
+  Future<List<Associated>> findAllActive() {
     final _$actionInfo = _$ManagementAddControllerBaseActionController
-        .startAction(name: 'ManagementAddControllerBase.findAll');
+        .startAction(name: 'ManagementAddControllerBase.findAllActive');
     try {
-      return super.findAll();
+      return super.findAllActive();
     } finally {
       _$ManagementAddControllerBaseActionController.endAction(_$actionInfo);
     }

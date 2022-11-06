@@ -55,15 +55,15 @@ abstract class ManagementAddControllerBase with Store {
   bool setButtonVisibilty() => isHidedButton = !isHidedButton;
 
   @action
-  Future<List<Associated>> findAll() =>
-      ObservableFuture(_associatedRepo.findAll().then((value) => value))
+  Future<List<Associated>> findAllActive() =>
+      ObservableFuture(_associatedRepo.findAllActive().then((value) => value))
           .catchError((e) {
         errorMsg = "${e.message}";
       }, test: (e) => e is HttpException).catchError((e) {
         errorMsg = "$e";
       }, test: (e) => e is Exception);
 
-  Future<List<Associated>> getFuture() => future = findAll();
+  Future<List<Associated>> getFuture() => future = findAllActive();
 
   @action
   Future save() => ObservableFuture(

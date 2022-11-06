@@ -28,6 +28,26 @@ class AssociatedRepo {
     }
   }
 
+  Future<List<Associated>> findAllActive() async {
+    final Response response = await client
+        .get(
+      Uri.parse(mainUrl + _associatedUrl + "/active"),
+    )
+        .timeout(
+      Duration(seconds: 10),
+    );
+    if (response.statusCode == 200) {
+      final List<dynamic> decodedJson = jsonDecode(response.body);
+      return decodedJson
+          .map(
+            (dynamic json) => Associated.fromJson(json),
+      )
+          .toList();
+    } else {
+      throw HttpException(getMessage(response.statusCode));
+    }
+  }
+
   Future<List<Associated>> findByIdToList(int id) async {
     final Response response = await client
         .get(
