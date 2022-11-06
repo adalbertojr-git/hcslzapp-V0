@@ -79,13 +79,16 @@ abstract class ManagementAddControllerBase with Store {
       if (!associated.authenticate.roles.any((Role r) => r.profile == ADMIN)) {
         listItems.add(
           ItemModel(
-              id: associated.id,
-              name: associated.name,
-              phone: associated.phone,
-              status: associated.status,
-              authenticate: associated.authenticate,
-              check: false,
-              email: ''),
+            id: associated.id,
+            name: associated.name,
+            phone: associated.phone,
+            status: associated.status,
+            authenticate: associated.authenticate,
+            check: false,
+            email: '',
+            user: '',
+            password: '',
+          ),
         );
       }
     }

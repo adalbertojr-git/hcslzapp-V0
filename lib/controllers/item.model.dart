@@ -13,6 +13,8 @@ abstract class ItemModelBase with Store {
     required this.status,
     required this.authenticate,
     required this.email,
+    required this.user,
+    required this.password,
     required this.check,
   });
 
@@ -33,6 +35,12 @@ abstract class ItemModelBase with Store {
 
   @observable
   String? email;
+
+  @observable
+  String? user;
+
+  @observable
+  String? password;
 
   @observable
   bool? check;

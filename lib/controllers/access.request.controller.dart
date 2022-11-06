@@ -132,6 +132,8 @@ abstract class AccessRequestControllerBase with Store {
           id: accessRequest.id,
           name: accessRequest.name,
           email: accessRequest.email,
+          user: accessRequest.user,
+          password: accessRequest.password,
           check: false,
           authenticate: null,
           status: '',

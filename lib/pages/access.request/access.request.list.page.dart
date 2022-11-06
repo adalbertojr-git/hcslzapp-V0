@@ -199,9 +199,9 @@ class CheckboxWidget extends StatelessWidget {
           AccessRequest(
             id: item.id,
             name: item.name!,
-            user: '',
+            user: item.user!,
             email: item.email!,
-            password: '',
+            password: item.password!,
           ),
         ],
       );

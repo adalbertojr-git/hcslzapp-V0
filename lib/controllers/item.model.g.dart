@@ -99,6 +99,36 @@ mixin _$ItemModel on ItemModelBase, Store {
     });
   }
 
+  final _$userAtom = Atom(name: 'ItemModelBase.user');
+
+  @override
+  String? get user {
+    _$userAtom.reportRead();
+    return super.user;
+  }
+
+  @override
+  set user(String? value) {
+    _$userAtom.reportWrite(value, super.user, () {
+      super.user = value;
+    });
+  }
+
+  final _$passwordAtom = Atom(name: 'ItemModelBase.password');
+
+  @override
+  String? get password {
+    _$passwordAtom.reportRead();
+    return super.password;
+  }
+
+  @override
+  set password(String? value) {
+    _$passwordAtom.reportWrite(value, super.password, () {
+      super.password = value;
+    });
+  }
+
   final _$checkAtom = Atom(name: 'ItemModelBase.check');
 
   @override
@@ -137,6 +167,8 @@ phone: ${phone},
 status: ${status},
 authenticate: ${authenticate},
 email: ${email},
+user: ${user},
+password: ${password},
 check: ${check}
     ''';
   }
