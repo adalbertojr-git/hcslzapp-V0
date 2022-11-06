@@ -34,6 +34,12 @@ class _ForgotPasswordPageState extends State<ForgotPasswordPage> {
       builder: (_) {
         return Scaffold(
           body: _widgets(context),
+          floatingActionButtonLocation:
+              FloatingActionButtonLocation.centerFloat,
+          floatingActionButton: Button(
+            icon: Icons.email,
+            onClick: () => _forgotPassword(),
+          ),
         );
       },
     );
@@ -62,15 +68,6 @@ class _ForgotPasswordPageState extends State<ForgotPasswordPage> {
                 inputType: TextInputType.emailAddress,
                 onChanged: _controller.formController.changeEmail,
                 errorText: _controller.validateEmail(),
-              ),
-              SizedBox(
-                height: 20.0,
-              ),
-              Button(
-                icon: Icons.email,
-                onClick: () {
-                  _forgotPassword();
-                },
               ),
               SizedBox(
                 height: 60.0,

@@ -34,6 +34,12 @@ class _ChangePasswordPageState extends State<ChangePasswordPage> {
       builder: (_) {
         return Scaffold(
           body: _widgets(_),
+          floatingActionButtonLocation:
+              FloatingActionButtonLocation.centerFloat,
+          floatingActionButton: Button(
+            icon: Icons.save,
+            onClick: () => _update(),
+          ),
         );
       },
     );
@@ -73,15 +79,6 @@ class _ChangePasswordPageState extends State<ChangePasswordPage> {
                 hidden: true,
                 onChanged: _controller.formController.changeConfPassword,
                 errorText: _controller.validateConfNewPassword(),
-              ),
-              SizedBox(
-                height: 10.0,
-              ),
-              Button(
-                icon: Icons.save,
-                onClick: () {
-                  _update();
-                },
               ),
             ],
           ),

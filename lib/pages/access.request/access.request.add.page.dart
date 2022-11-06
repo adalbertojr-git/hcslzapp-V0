@@ -29,6 +29,13 @@ class _AccessRequestAddPageState extends State<AccessRequestAddPage> {
       builder: (_) {
         return Scaffold(
           body: _widgets(_),
+          floatingActionButtonLocation:
+          FloatingActionButtonLocation.centerFloat,
+          floatingActionButton: Button(
+            icon: Icons.send_to_mobile,
+            onClick: () => _save(),
+          ),
+
         );
       },
     );
@@ -104,30 +111,6 @@ class _AccessRequestAddPageState extends State<AccessRequestAddPage> {
                 hidden: true,
                 onChanged: _controller.formController.changeConfPassword,
                 errorText: _controller.validateConfPassword(),
-              ),
-              SizedBox(
-                height: 10.0,
-              ),
-              Button(
-                icon: Icons.send_to_mobile,
-                onClick: () {
-                  _save();
-                },
-              ),
-              Padding(
-                padding: const EdgeInsets.all(10.0),
-                child: RichText(
-                  text: const TextSpan(
-                    text:
-                        'Atenção: A liberação de acesso será informada no grupo oficial do ' +
-                            'WhatsApp e também através do email informado. ' +
-                            'Caso não encontre o email na Caixa de Entrada, verifique sua caixa de Spam.',
-                    style: const TextStyle(
-                      fontSize: 12.0,
-                      color: Colors.black87,
-                    ),
-                  ),
-                ),
               ),
             ],
           ),
