@@ -210,7 +210,7 @@ class _DigitalIdentityPageState extends State<DigitalIdentityPage> {
       );
 
   DecorationImage _loadPhoto() => DecorationImage(
-      image: widget._associated.photoUrl != ""
+      image: widget._associated.photoUrl != null
           ? NetworkImage(widget._associated.photoUrl)
           : PhotoImageProvider().getImageProvider(
               File(_pathNoImage),
