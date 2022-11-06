@@ -76,9 +76,8 @@ class _ForgotPasswordPageState extends State<ForgotPasswordPage> {
                 padding: const EdgeInsets.only(left: 10.0),
                 child: RichText(
                   text: const TextSpan(
-                    text: 'Atenção: Após pressionar o botão acima, você receberá um email em nome do Harley Club ' +
-                        'contendo um código de segurança (numérico de 6 dígitos), o qual deverá ser informado ' +
-                        'para geração de nova senha. ' +
+                    text: 'Atenção: Você receberá um email em nome do Harley Club ' +
+                        'contendo um código de segurança (numérico de 6 dígitos). ' +
                         'Caso não encontre o email na Caixa de Entrada, verifique sua caixa de Spam.',
                     style: const TextStyle(
                       fontSize: 14.0,
