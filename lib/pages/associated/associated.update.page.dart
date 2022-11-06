@@ -394,7 +394,7 @@ class _AssociatedUpdatePageState extends State<AssociatedUpdatePage> {
           ? PhotoImageProvider().getImageProvider(
               File(_controller.photoPath),
             ) as ImageProvider
-          : _controller.photoUrl != ""
+          : _controller.photoUrl != null
               ? NetworkImage(_controller.photoUrl)
               : PhotoImageProvider().getImageProvider(
                   File(_pathNoImage),
