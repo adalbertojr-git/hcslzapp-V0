@@ -159,7 +159,6 @@ class GridButton extends StatelessWidget {
               style: TextStyle(
                 fontSize: 12,
                 fontWeight: FontWeight.bold,
-                color: Colors.black,
               ),
             ),
           ),
