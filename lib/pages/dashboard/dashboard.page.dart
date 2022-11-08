@@ -3,6 +3,7 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:hcslzapp/models/password.dto.dart';
+import 'package:hcslzapp/pages/associated/month.birthdays.list.page.dart';
 import 'package:hcslzapp/pages/event/event.calendar.page.dart';
 import 'package:hcslzapp/pages/login/login.page.dart';
 import 'package:hcslzapp/pages/management/management.list.page.dart';
@@ -77,7 +78,7 @@ const List<IconData> _listAdmIcons = [
   Icons.monetization_on,
   Icons.event,
   Icons.emoji_people,
-  Icons.message_outlined,
+  Icons.announcement,
   Icons.wallet_giftcard,
 ];
 
@@ -445,11 +446,11 @@ class _DashboardPageState extends State<DashboardPage> {
               _labelBirthdaysMonthDescr,
               Icons.cake,
               onClick: () {
-/*                Navigator.push(
+                Navigator.push(
                   _gContext,
                   MaterialPageRoute(
-                      builder: (_gContext) => AccessRequestListPage()),
-                );*/
+                      builder: (_gContext) => MonthBirthdaysListPage()),
+                );
               },
             ),
             BarButton(
