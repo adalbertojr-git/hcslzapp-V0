@@ -52,18 +52,18 @@ abstract class DigitalIdentityControllerBase with Store {
   init() {
     nameCtrl.text = digitalIdentity.name;
     cnhCtrl.text =
-        digitalIdentity.cnh != null ? 'Não informado' : digitalIdentity.cnh;
-    cpfCtrl.text = digitalIdentity.cpf != null
+        digitalIdentity.cnh == '' ? 'Não informado' : digitalIdentity.cnh;
+    cpfCtrl.text = digitalIdentity.cpf == ''
         ? 'Não informado'
         : digitalIdentity.cpf;
     associatedTypeCtrl.text = digitalIdentity.associatedType;
-    dateBirthCtrl.text = digitalIdentity.dateBirth != null
+    dateBirthCtrl.text = digitalIdentity.dateBirth == ''
         ? 'Não informado'
         : digitalIdentity.dateBirth;
-    dateShieldCtrl.text = digitalIdentity.dateShield != null
+    dateShieldCtrl.text = digitalIdentity.dateShield == ''
         ? 'Não informado'
         : digitalIdentity.dateShield;
-    bloodTypeCtrl.text = digitalIdentity.bloodType != null
+    bloodTypeCtrl.text = digitalIdentity.bloodType == ''
         ? 'Não informado'
         : digitalIdentity.bloodType;
   }
