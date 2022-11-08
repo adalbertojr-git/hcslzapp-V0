@@ -59,6 +59,7 @@ const List<String> _listAdmScreens = [
   "Mensalidades",
   "Eventos",
   "Parcerias",
+  "Avisos",
   "Boutique",
 ];
 
@@ -67,6 +68,7 @@ const List<String> _listAdmScreensDesc = [
   "Registro de pagamento das mensalidades dos associados",
   "Informações sobre viagens, encontros, passeios, etc.",
   "Empresas com promoções oferecidas ao Harley Club",
+  "Avisos da Diretoria aos harleyros associados",
   "Produtos da marca Harley Club (camisas, bonés, etc)",
 ];
 
@@ -75,6 +77,7 @@ const List<IconData> _listAdmIcons = [
   Icons.monetization_on,
   Icons.event,
   Icons.emoji_people,
+  Icons.message_outlined,
   Icons.wallet_giftcard,
 ];
 
@@ -112,6 +115,7 @@ class _DashboardPageState extends State<DashboardPage> {
       PaymentListPage(_controller.selectedProfile),
       EventCalendarPage(_controller.selectedProfile),
       PartnershipListAdmPage(),
+      Container(),
       Container(),
     ];
     return Scaffold(
