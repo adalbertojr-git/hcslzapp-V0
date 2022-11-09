@@ -44,7 +44,7 @@ class MonthBirthdaysListPage extends StatelessWidget {
                     if ((snapshot.data?.length)! > 0) {
                       _controller.associateds.addAll((snapshot.data)!);
                       _controller.associateds.sort(
-                        (a, b) => a.name.compareTo(b.name),
+                        (a, b) => a.date_birth.compareTo(b.date_birth),
                       );
                       return _widgets(context);
                     } else
