@@ -7,7 +7,7 @@ import 'package:hcslzapp/pages/associated/month.birthdays.list.page.dart';
 import 'package:hcslzapp/pages/event/event.calendar.page.dart';
 import 'package:hcslzapp/pages/login/login.page.dart';
 import 'package:hcslzapp/pages/management/management.list.page.dart';
-import 'package:hcslzapp/pages/notification/head.notification.add.page.dart';
+import 'package:hcslzapp/pages/notification/head.notification.list.page.dart';
 import 'package:hcslzapp/pages/partnership/partnership.list.adm.page.dart';
 import 'package:hcslzapp/pages/password/change.password.page.dart';
 import 'package:hcslzapp/pages/payment/payment.list.page.dart';
@@ -117,7 +117,7 @@ class _DashboardPageState extends State<DashboardPage> {
       PaymentListPage(_controller.selectedProfile),
       EventCalendarPage(_controller.selectedProfile),
       PartnershipListAdmPage(),
-      HeadNotificationAddPage(null),
+      HeadNotificationListPage(),
       Container(),
     ];
     return Scaffold(
