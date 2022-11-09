@@ -116,3 +116,10 @@ const String labelNewPsw = 'Nova senha *';
 const String hintNewPsw = 'Informe a nova senha';
 const String labelConfirmNewPsw = 'Confirme a nova Senha *';
 const String hintConfirmNewPsw = 'Confirme a nova senha para validação';
+/*
+Head Notification
+*/
+const String labelNotificationTitle = 'Título';
+const String hintNotificationTitle = 'Informe o título da aviso';
+const String labelNotification = 'Aviso';
+const String hintNotification = 'Descreva aqui o aviso aos associados';
