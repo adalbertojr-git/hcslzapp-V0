@@ -29,13 +29,13 @@ mixin _$HeadNotificationAddController
       Atom(name: 'HeadNotificationAddControllerBase.titleCtrl');
 
   @override
-  TextEditingController? get titleCtrl {
+  TextEditingController get titleCtrl {
     _$titleCtrlAtom.reportRead();
     return super.titleCtrl;
   }
 
   @override
-  set titleCtrl(TextEditingController? value) {
+  set titleCtrl(TextEditingController value) {
     _$titleCtrlAtom.reportWrite(value, super.titleCtrl, () {
       super.titleCtrl = value;
     });
@@ -45,13 +45,13 @@ mixin _$HeadNotificationAddController
       Atom(name: 'HeadNotificationAddControllerBase.notificationCtrl');
 
   @override
-  TextEditingController? get notificationCtrl {
+  TextEditingController get notificationCtrl {
     _$notificationCtrlAtom.reportRead();
     return super.notificationCtrl;
   }
 
   @override
-  set notificationCtrl(TextEditingController? value) {
+  set notificationCtrl(TextEditingController value) {
     _$notificationCtrlAtom.reportWrite(value, super.notificationCtrl, () {
       super.notificationCtrl = value;
     });
@@ -73,13 +73,63 @@ mixin _$HeadNotificationAddController
     });
   }
 
+  final _$_headNotificationRepoAtom =
+      Atom(name: 'HeadNotificationAddControllerBase._headNotificationRepo');
+
+  @override
+  HeadNotificationRepo get _headNotificationRepo {
+    _$_headNotificationRepoAtom.reportRead();
+    return super._headNotificationRepo;
+  }
+
+  @override
+  set _headNotificationRepo(HeadNotificationRepo value) {
+    _$_headNotificationRepoAtom.reportWrite(value, super._headNotificationRepo,
+        () {
+      super._headNotificationRepo = value;
+    });
+  }
+
+  final _$errorMsgAtom =
+      Atom(name: 'HeadNotificationAddControllerBase.errorMsg');
+
+  @override
+  String get errorMsg {
+    _$errorMsgAtom.reportRead();
+    return super.errorMsg;
+  }
+
+  @override
+  set errorMsg(String value) {
+    _$errorMsgAtom.reportWrite(value, super.errorMsg, () {
+      super.errorMsg = value;
+    });
+  }
+
+  final _$saveAsyncAction =
+      AsyncAction('HeadNotificationAddControllerBase.save');
+
+  @override
+  Future<dynamic> save() {
+    return _$saveAsyncAction.run(() => super.save());
+  }
+
+  final _$updateAsyncAction =
+      AsyncAction('HeadNotificationAddControllerBase.update');
+
+  @override
+  Future<dynamic> update() {
+    return _$updateAsyncAction.run(() => super.update());
+  }
+
   @override
   String toString() {
     return '''
 idCtrl: ${idCtrl},
 titleCtrl: ${titleCtrl},
 notificationCtrl: ${notificationCtrl},
-headNotification: ${headNotification}
+headNotification: ${headNotification},
+errorMsg: ${errorMsg}
     ''';
   }
 }

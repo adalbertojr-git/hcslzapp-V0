@@ -84,7 +84,7 @@ class _HeadNotificationAddPageState extends State<HeadNotificationAddPage> {
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
       floatingActionButton: Button(
-          icon: Icons.save, onClick: () => _controller.add(context)),
+          icon: Icons.save, onClick: () => _controller.save()),
     );
   }
 }

@@ -1,6 +1,9 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:hcslzapp/models/head.notification.dart';
 import 'package:hcslzapp/models/template.dart';
+import 'package:hcslzapp/repositories/head.notification.repo.dart';
 import 'package:mobx/mobx.dart';
 
 part 'head.notification.add.controller.g.dart';
@@ -15,45 +18,56 @@ abstract class HeadNotificationAddControllerBase with Store {
   late TextEditingController idCtrl = TextEditingController();
 
   @observable
-  late TextEditingController? titleCtrl = TextEditingController();
+  late TextEditingController titleCtrl = TextEditingController();
 
   @observable
-  late TextEditingController? notificationCtrl = TextEditingController();
+  late TextEditingController notificationCtrl = TextEditingController();
 
   @observable
   HeadNotification headNotification = Template().loadHeadNotification();
 
+  @observable
+  HeadNotificationRepo _headNotificationRepo = HeadNotificationRepo();
+
+  @observable
+  String errorMsg = '';
+
   init() {
     _initTextFields();
     formController = FormController(
-      title: headNotification.title,
-      notification: headNotification.notification
-    );
+        title: headNotification.title,
+        notification: headNotification.notification);
   }
 
   _initTextFields() {
-    titleCtrl?.text = headNotification.title;
-    notificationCtrl?.text = headNotification.notification;
+    titleCtrl.text = headNotification.title;
+    notificationCtrl.text = headNotification.notification;
   }
 
-  add(BuildContext context) {
-    idCtrl.text = "0";
-    final int id = int.parse(idCtrl.text);
-    final String title = titleCtrl!.text;
-    final String notification = notificationCtrl!.text;
-    if (title != '' && notification != '') {
-      final headNotification = HeadNotification(
-        id: id,
-        title: title,
-        notification: notification,
-      );
-      /*
-      pop = manda resposta para o push (then)
-      remove a tela da pilha de navegação. Ou seja, o push() adiciona uma tela
-      à pilha, e o pop() a remove.
-      */
-      Navigator.pop(context, headNotification);
-    }
+  @action
+  Future save() async => await _headNotificationRepo
+          .save(await _setValues())
+          .then((value) => value)
+          .catchError((e) {
+        errorMsg = "${e.message}";
+      }, test: (e) => e is HttpException).catchError((e) {
+        errorMsg = "$e";
+      }, test: (e) => e is Exception);
+
+  @action
+  Future update() async =>
+      await _headNotificationRepo.update(await _setValues()).catchError((e) {
+        errorMsg = "${e.message}";
+      }, test: (e) => e is HttpException).catchError((e) {
+        errorMsg = "$e";
+      }, test: (e) => e is Exception);
+
+  Future<HeadNotification> _setValues() async {
+    return HeadNotification(
+      id: headNotification.id,
+      title: titleCtrl.text,
+      notification: notificationCtrl.text,
+    );
   }
 
   String? validateTitle() {
@@ -66,7 +80,8 @@ abstract class HeadNotificationAddControllerBase with Store {
   }
 
   String? validateNotification() {
-    const String _labelNotificationRequired = 'Descrição do aviso é obrigatória!!!';
+    const String _labelNotificationRequired =
+        'Descrição do aviso é obrigatória!!!';
 
     if (formController.notification.isEmpty) {
       return _labelNotificationRequired;
