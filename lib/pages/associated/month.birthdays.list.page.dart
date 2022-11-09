@@ -17,49 +17,47 @@ class MonthBirthdaysListPage extends StatelessWidget {
       MonthBirthdaysListController();
 
   @override
-  Widget build(BuildContext context) => Observer(
-        builder: (_) => Scaffold(
-          body: FutureBuilder<List<MonthBirthdays>>(
-            future: _controller.getFuture(),
-            builder: (context, snapshot) {
-              switch (snapshot.connectionState) {
-                case ConnectionState.none:
-                  break;
-                case ConnectionState.waiting:
-                  return Progress();
-                case ConnectionState.active:
-                  break;
-                default:
-                  if (snapshot.hasError) {
+  Widget build(BuildContext context) => Scaffold(
+        body: FutureBuilder<List<MonthBirthdays>>(
+          future: _controller.getFuture(),
+          builder: (context, snapshot) {
+            switch (snapshot.connectionState) {
+              case ConnectionState.none:
+                break;
+              case ConnectionState.waiting:
+                return Progress();
+              case ConnectionState.active:
+                break;
+              default:
+                if (snapshot.hasError) {
+                  return CenteredMessage(
+                    title: _title,
+                    message: snapshot.error.toString(),
+                  );
+                } else {
+                  if (snapshot.data == null)
                     return CenteredMessage(
                       title: _title,
-                      message: snapshot.error.toString(),
+                      message: _controller.errorMsg,
                     );
-                  } else {
-                    if (snapshot.data == null)
-                      return CenteredMessage(
-                        title: _title,
-                        message: _controller.errorMsg,
-                      );
-                    if ((snapshot.data?.length)! > 0) {
-                      _controller.associateds.addAll((snapshot.data)!);
-                      _controller.associateds.sort(
-                        (a, b) => a.date_birth.compareTo(b.date_birth),
-                      );
-                      return _widgets(context);
-                    } else
-                      return CenteredMessage(
-                        title: _title,
-                        message: _labelNotExists,
-                      );
-                  }
-              } //switch (snapshot.connectionState)
-              return CenteredMessage(
-                title: _title,
-                message: _labelUnknown,
-              );
-            },
-          ),
+                  if ((snapshot.data?.length)! > 0) {
+                    _controller.associateds.addAll((snapshot.data)!);
+                    _controller.associateds.sort(
+                      (a, b) => a.date_birth.compareTo(b.date_birth),
+                    );
+                    return _widgets(context);
+                  } else
+                    return CenteredMessage(
+                      title: _title,
+                      message: _labelNotExists,
+                    );
+                }
+            } //switch (snapshot.connectionState)
+            return CenteredMessage(
+              title: _title,
+              message: _labelUnknown,
+            );
+          },
         ),
       );
 
