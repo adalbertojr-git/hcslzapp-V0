@@ -173,12 +173,14 @@ class HeadNotificationListPageState extends State<HeadNotificationListPage> {
                     ),
                   ),
                   ListTile(
-                    contentPadding: EdgeInsets.all(10),
+                    contentPadding: EdgeInsets.fromLTRB(10, 0, 10, 0),
+                    dense: true,
                     title: Text(
-                      _controller.listFiltered[i].title,
-                      textAlign: TextAlign.center,
+                      _controller.listFiltered[i].title + '\n',
+                      //textAlign: TextAlign.center,
                       style: TextStyle(
                         fontWeight: FontWeight.bold,
+                        fontSize: 20.0
                       ),
                     ),
                     subtitle: Text(_controller.listFiltered[i].notification),

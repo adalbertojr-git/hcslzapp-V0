@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:hcslzapp/controllers/app.controller.dart';
 
-const String _pathLogo = 'assets/imgs/logo.png';
+//const String _pathLogo = 'assets/imgs/logo.png';
 const String _labelDarkTheme = 'Tema Escuro';
 
 class TopBar extends StatelessWidget {
