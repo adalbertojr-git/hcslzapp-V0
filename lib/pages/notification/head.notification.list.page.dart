@@ -7,9 +7,10 @@ import 'package:hcslzapp/components/centered.message.dart';
 import 'package:hcslzapp/components/my.text.form.field.dart';
 import 'package:hcslzapp/components/progress.dart';
 import 'package:hcslzapp/components/top.bar.dart';
+import 'package:hcslzapp/components/transaction.auth.dialog.dart';
 import 'package:hcslzapp/controllers/head.notification.list.controller.dart';
 import 'package:hcslzapp/models/head.notification.dart';
-
+import 'package:asuka/asuka.dart' as asuka;
 import 'head.notification.add.page.dart';
 
 const String _labelNotExists = 'Não existem avisos cadastrados.';
@@ -162,6 +163,14 @@ class HeadNotificationListPageState extends State<HeadNotificationListPage> {
                           children: <Widget>[
                             GestureDetector(
                               child: Icon(
+                                Icons.delete,
+                              ),
+                              onTap: () {
+                                _delete(i);
+                              },
+                            ),
+                            GestureDetector(
+                              child: Icon(
                                 Icons.arrow_forward,
                               ),
                               onTap: () {
@@ -193,5 +202,36 @@ class HeadNotificationListPageState extends State<HeadNotificationListPage> {
         _controller.headNotifications.add(value);
       }
     });
+  }
+
+  _delete(int i) async {
+    var response = await showDialog(
+        context: context,
+        builder: (context) {
+          return TransactionAuthDialog(msg: 'Confirma a exclusão?');
+        });
+    if (response == true) {
+      var notification = _controller.selectedNotifications[i] as HeadNotification;
+      _controller.deleteById(notification).then(
+            (value) {
+          if (value != null) {
+            asuka.showSnackBar(
+              SnackBar(
+                content: const Text('Aviso excluido com sucesso.'),
+              ),
+            );
+            setState(() {
+              _controller.removeSelectedNotification(i);
+            });
+          } else {
+            asuka.showSnackBar(
+              SnackBar(
+                content: Text(_controller.errorMsg),
+              ),
+            );
+          }
+        },
+      );
+    }
   }
 }

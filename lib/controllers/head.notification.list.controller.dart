@@ -24,6 +24,9 @@ abstract class HeadNotificationListControllerBase with Store {
   ObservableList headNotifications = [].asObservable();
 
   @observable
+  List selectedNotifications = List.filled(0, 0, growable: true);
+
+  @observable
   HeadNotification headNotification = Template().loadHeadNotification();
 
   @observable
@@ -40,6 +43,7 @@ abstract class HeadNotificationListControllerBase with Store {
 
   init() {
     headNotifications.clear();
+    selectedNotifications.clear();
   }
 
   @action
@@ -55,6 +59,27 @@ abstract class HeadNotificationListControllerBase with Store {
       }, test: (e) => e is Exception);
 
   Future<List<HeadNotification>> getFuture() => future = findAll();
+
+  @action
+  Future deleteById(HeadNotification headNotification) => ObservableFuture(_headNotificationRepo
+      .deleteById(_setValues(headNotification.id, headNotification.title, headNotification.notification,))
+      .then((value) => value)).catchError((e) {
+    errorMsg = "${e.message}";
+  }, test: (e) => e is HttpException).catchError((e) {
+    errorMsg = "$e";
+  }, test: (e) => e is Exception);
+
+  HeadNotification _setValues(int id, String title, String notification) {
+    return HeadNotification(
+      id: id,
+      title: title,
+      notification: notification,
+      datePublication: '',
+    );
+  }
+
+  @action
+  removeSelectedNotification(int i) => selectedNotifications.removeAt(i);
 
   @action
   setFilter(String value) => filter = value;
