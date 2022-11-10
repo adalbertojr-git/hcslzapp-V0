@@ -459,11 +459,12 @@ class _DashboardPageState extends State<DashboardPage> {
               _labelNotificationDescr,
               Icons.announcement,
               onClick: () {
-/*                Navigator.push(
+                Navigator.push(
                   _gContext,
                   MaterialPageRoute(
-                      builder: (_gContext) => HeadNotificationAddPage()),
-                );*/
+                      builder: (_gContext) => HeadNotificationListPage(
+                          _controller.selectedProfile)),
+                );
               },
             ),
           ],

@@ -95,7 +95,7 @@ class HeadNotificationListPageState extends State<HeadNotificationListPage> {
                       : Button(
                           icon: Icons.add,
                           onClick: () {
-                            _add(context, 0);
+                            _add(context, null);
                           },
                         ),
                 )
@@ -165,7 +165,7 @@ class HeadNotificationListPageState extends State<HeadNotificationListPage> {
                                 Icons.arrow_forward,
                               ),
                               onTap: () {
-                                _add(context, i);
+                                _add(context, _controller.listFiltered[i]);
                               },
                             ),
                           ],
@@ -181,12 +181,11 @@ class HeadNotificationListPageState extends State<HeadNotificationListPage> {
         ),
       );
 
-  _add(BuildContext context, int i) {
+  _add(BuildContext context, HeadNotification? headNotification) {
     final Future future = Navigator.push(
       context,
       MaterialPageRoute(
-        builder: (_) => HeadNotificationAddPage(
-            i == 0 ? null : _controller.listFiltered[i]),
+        builder: (_) => HeadNotificationAddPage(headNotification),
       ),
     );
     future.then((value) {
