@@ -117,7 +117,7 @@ class _DashboardPageState extends State<DashboardPage> {
       PaymentListPage(_controller.selectedProfile),
       EventCalendarPage(_controller.selectedProfile),
       PartnershipListAdmPage(),
-      HeadNotificationListPage(),
+      HeadNotificationListPage(_controller.selectedProfile),
       Container(),
     ];
     return Scaffold(

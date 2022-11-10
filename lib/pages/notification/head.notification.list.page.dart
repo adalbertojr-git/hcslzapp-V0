@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
+import 'package:hcslzapp/common/associated.profiles.dart';
 import 'package:hcslzapp/common/labels.and.hints.dart';
+import 'package:hcslzapp/components/button.dart';
 import 'package:hcslzapp/components/centered.message.dart';
 import 'package:hcslzapp/components/my.text.form.field.dart';
 import 'package:hcslzapp/components/progress.dart';
@@ -10,13 +12,16 @@ import 'package:hcslzapp/models/head.notification.dart';
 
 import 'head.notification.add.page.dart';
 
-const String _labelNotExists =
-    'Não existem avisos cadastrados.';
+const String _labelNotExists = 'Não existem avisos cadastrados.';
 const String _labelUnknown =
     'Houve um erro desconhecido ao executar a transação.';
 const String _title = 'Avisos da Diretoria';
 
 class HeadNotificationListPage extends StatefulWidget {
+  final String _selectedProfile;
+
+  HeadNotificationListPage(this._selectedProfile);
+
   @override
   State<StatefulWidget> createState() {
     return HeadNotificationListPageState();
@@ -29,9 +34,7 @@ class HeadNotificationListPageState extends State<HeadNotificationListPage> {
   @override
   void initState() {
     _controller.getFuture().then((value) {
-      if (value.isNotEmpty) {
-        _controller.setButtonVisibilty();
-      }
+      _controller.setButtonVisibilty();
     });
     super.initState();
   }
@@ -69,10 +72,12 @@ class HeadNotificationListPageState extends State<HeadNotificationListPage> {
                       );
                       return _widgets();
                     } else
-                      return CenteredMessage(
-                        title: _title,
-                        message: _labelNotExists,
-                      );
+                      return widget._selectedProfile == ADMIN
+                          ? _widgets()
+                          : CenteredMessage(
+                              title: _title,
+                              message: _labelNotExists,
+                            );
                   }
               } //switch (snapshot.connectionState)
               return CenteredMessage(
@@ -81,6 +86,20 @@ class HeadNotificationListPageState extends State<HeadNotificationListPage> {
               );
             },
           ),
+          floatingActionButtonLocation:
+              FloatingActionButtonLocation.centerFloat,
+          floatingActionButton: widget._selectedProfile == ADMIN
+              ? Observer(
+                  builder: (_) => _controller.isHidedButton
+                      ? Container()
+                      : Button(
+                          icon: Icons.add,
+                          onClick: () {
+                            _add(context, 0);
+                          },
+                        ),
+                )
+              : Container(),
         ),
       );
 
@@ -151,12 +170,7 @@ class HeadNotificationListPageState extends State<HeadNotificationListPage> {
                                 Icons.arrow_forward,
                               ),
                               onTap: () {
-                                Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                      builder: (context) =>
-                                          HeadNotificationAddPage(_controller.listFiltered[i])),
-                                );
+                                _add(context, i);
                               },
                             ),
                           ],
@@ -171,4 +185,19 @@ class HeadNotificationListPageState extends State<HeadNotificationListPage> {
           ],
         ),
       );
+
+  _add(BuildContext context, int i) {
+    final Future future = Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (_) => HeadNotificationAddPage(
+            i == 0 ? null : _controller.listFiltered[i]),
+      ),
+    );
+    future.then((value) {
+      if (value != null) {
+        _controller.headNotifications.add(value);
+      }
+    });
+  }
 }
