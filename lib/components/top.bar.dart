@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:hcslzapp/controllers/app.controller.dart';
 
 const String _pathLogo = 'assets/imgs/logo.png';
+const String _labelDarkTheme = 'Tema Escuro';
 
 class TopBar extends StatelessWidget {
   final String? title;
@@ -37,12 +39,41 @@ class TopBar extends StatelessWidget {
                   fontSize: 14.0,
                 ),
               ),
-              SizedBox(
+/*              SizedBox(
                 height: 40.0,
                 child: Container(
                   child: Image.asset(_pathLogo),
                 ),
-              ),
+              ),*/
+              Container(
+                child: PopupMenuButton<String?>(
+                  itemBuilder: (BuildContext context) {
+                    return [
+                      PopupMenuItem(
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          children: [
+                            Text(
+                              _labelDarkTheme,
+                              style: TextStyle(fontSize: 12.0),
+                            ),
+                            Container(
+                              child: Switch(
+                                activeColor: Colors.orangeAccent,
+                                value: AppController.instance.isDarkTheme,
+                                onChanged: (value) {
+                                  AppController.instance.changeTheme();
+                                  Navigator.pop(context);
+                                },
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ];
+                  },
+                ),
+              )
             ],
           ),
         ),
