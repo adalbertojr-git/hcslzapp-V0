@@ -132,56 +132,9 @@ class HeadNotificationListPageState extends State<HeadNotificationListPage> {
                   shrinkWrap: true,
                   itemCount: _controller.listFiltered.length,
                   itemBuilder: (_, int i) {
-                    return _getItemUI(context, i);
-/*                    return Container(
-                      decoration: BoxDecoration(
-                        color: Colors.white30,
-                        shape: BoxShape.rectangle,
-                        borderRadius: BorderRadius.circular(8.0),
-                        boxShadow: <BoxShadow>[
-                          BoxShadow(
-                            color: Colors.black12,
-                            blurRadius: 10.0,
-                            offset: Offset(0.0, 5.0),
-                          ),
-                        ],
-                      ),
-                      child: ListTile(
-                        title: Text(
-                          _controller.listFiltered[i].title,
-                          style: TextStyle(
-                            fontWeight: FontWeight.bold,
-                          ),
-                        ),
-                        subtitle: Text('Data de Publicação: ' +
-                            (_controller.listFiltered[i].datePublication)),
-                        leading: CircleAvatar(
-                          child: Icon(Icons.message),
-                          backgroundColor: Colors.white,
-                        ),
-                        trailing: Wrap(
-                          spacing: 10, // space between two icons
-                          children: <Widget>[
-                            GestureDetector(
-                              child: Icon(
-                                Icons.delete,
-                              ),
-                              onTap: () {
-                                _delete(i);
-                              },
-                            ),
-                            GestureDetector(
-                              child: Icon(
-                                Icons.arrow_forward,
-                              ),
-                              onTap: () {
-                                _add(context, _controller.listFiltered[i]);
-                              },
-                            ),
-                          ],
-                        ),
-                      ),
-                    );*/
+                    return widget._selectedProfile == ASSOCIATED
+                        ? _getListAssociated(context, i)
+                        : _getListAdmin(context, i);
                   },
                   separatorBuilder: (_, int index) => const Divider(),
                 ),
@@ -191,32 +144,32 @@ class HeadNotificationListPageState extends State<HeadNotificationListPage> {
         ),
       );
 
-  Widget _getItemUI(BuildContext context, int i) => Column(
-    children: [
-      Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+  Widget _getListAssociated(BuildContext context, int i) => Column(
         children: [
-          Icon(Icons.message_outlined),
-          Text('Publicado em: '+ _controller.listFiltered[i].datePublication)
-        ],
-      ),
-      Container(
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Icon(Icons.message_outlined),
+              Text('Publicado em: ' +
+                  _controller.listFiltered[i].datePublication)
+            ],
+          ),
+          Container(
             height: 450,
             child: Card(
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(10.0),
               ),
-              color: Colors.white54,
+              color: Colors.white30,
               elevation: 1.0,
               child: Column(
-                //mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: <Widget>[
                   Center(
-                    heightFactor: 1.2,
+                    heightFactor: 1.1,
                     child: Image.asset(
                       'assets/imgs/logo.png',
                       fit: BoxFit.cover,
-                      width: 250.0,
+                      width: 300.0,
                     ),
                   ),
                   ListTile(
@@ -234,8 +187,58 @@ class HeadNotificationListPageState extends State<HeadNotificationListPage> {
               ),
             ),
           ),
-    ],
-  );
+        ],
+      );
+
+  Widget _getListAdmin(BuildContext context, int i) => Container(
+        decoration: BoxDecoration(
+          color: Colors.white30,
+          shape: BoxShape.rectangle,
+          borderRadius: BorderRadius.circular(8.0),
+          boxShadow: <BoxShadow>[
+            BoxShadow(
+              color: Colors.black12,
+              blurRadius: 10.0,
+              offset: Offset(0.0, 5.0),
+            ),
+          ],
+        ),
+        child: ListTile(
+          title: Text(
+            _controller.listFiltered[i].title,
+            style: TextStyle(
+              fontWeight: FontWeight.bold,
+            ),
+          ),
+          subtitle: Text('Data de Publicação: ' +
+              (_controller.listFiltered[i].datePublication)),
+          leading: CircleAvatar(
+            child: Icon(Icons.message),
+            backgroundColor: Colors.white,
+          ),
+          trailing: Wrap(
+            spacing: 10, // space between two icons
+            children: <Widget>[
+              GestureDetector(
+                child: Icon(
+                  Icons.delete,
+                ),
+                onTap: () {
+                  _delete(i);
+                },
+              ),
+              GestureDetector(
+                child: Icon(
+                  Icons.arrow_forward,
+                ),
+                onTap: () {
+                  _add(context, _controller.listFiltered[i]);
+                },
+              ),
+            ],
+          ),
+        ),
+      );
 
   _add(BuildContext context, HeadNotification? headNotification) {
     final Future future = Navigator.push(
