@@ -6,6 +6,7 @@ import 'package:hcslzapp/components/my.text.form.field.dart';
 import 'package:hcslzapp/components/top.bar.dart';
 import 'package:hcslzapp/controllers/head.notification.add.controller.dart';
 import 'package:hcslzapp/models/head.notification.dart';
+import 'package:asuka/asuka.dart' as asuka;
 
 const String _title = 'Avisos da Diretoria';
 
@@ -84,7 +85,69 @@ class _HeadNotificationAddPageState extends State<HeadNotificationAddPage> {
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
       floatingActionButton: Button(
-          icon: Icons.save, onClick: () => _controller.save()),
+          icon: Icons.save,
+          onClick: () =>
+              widget._headNotification == null ? _save() : _update()),
     );
+  }
+
+  _save() {
+    if (_controller.hasErrors) {
+      asuka.showSnackBar(
+        SnackBar(
+          content: const Text('Atenção: Existem erros no formulário que devem '
+              'ser corrigidos antes de efetivar a transação.'),
+        ),
+      );
+    } else {
+      _controller.save().then(
+        (value) {
+          if (value != null) {
+            asuka.showSnackBar(
+              SnackBar(
+                content: const Text('Aviso cadastrado com sucesso.'),
+              ),
+            );
+            Navigator.of(context).pop(value);
+          } else {
+            asuka.showSnackBar(
+              SnackBar(
+                content: Text(_controller.errorMsg),
+              ),
+            );
+          }
+        },
+      );
+    }
+  }
+
+  _update() {
+    if (_controller.hasErrors) {
+      asuka.showSnackBar(
+        SnackBar(
+          content: const Text('Atenção: Existem erros no formulário que devem '
+              'ser corrigidos antes de efetivar a transação.'),
+        ),
+      );
+    } else {
+      _controller.update().then(
+        (value) {
+          if (value != null) {
+            asuka.showSnackBar(
+              SnackBar(
+                content: const Text('Aviso atualizado com sucesso.'),
+              ),
+            );
+            Navigator.of(context).pop(value);
+          } else {
+            asuka.showSnackBar(
+              SnackBar(
+                content: Text(_controller.errorMsg),
+              ),
+            );
+          }
+        },
+      );
+    }
   }
 }

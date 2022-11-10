@@ -71,6 +71,12 @@ abstract class HeadNotificationAddControllerBase with Store {
     );
   }
 
+  bool get hasErrors => hasErrorTitle || hasErrorNotification;
+
+  bool get hasErrorTitle => validateTitle() != null;
+
+  bool get hasErrorNotification => validateNotification() != null;
+
   String? validateTitle() {
     const String _labelTitleRequired = 'Título é obrigatório!!!';
 
