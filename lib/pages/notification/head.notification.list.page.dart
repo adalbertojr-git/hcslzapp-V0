@@ -132,7 +132,8 @@ class HeadNotificationListPageState extends State<HeadNotificationListPage> {
                   shrinkWrap: true,
                   itemCount: _controller.listFiltered.length,
                   itemBuilder: (_, int i) {
-                    return Container(
+                    return _getItemUI(context, i);
+/*                    return Container(
                       decoration: BoxDecoration(
                         color: Colors.white30,
                         shape: BoxShape.rectangle,
@@ -180,7 +181,7 @@ class HeadNotificationListPageState extends State<HeadNotificationListPage> {
                           ],
                         ),
                       ),
-                    );
+                    );*/
                   },
                   separatorBuilder: (_, int index) => const Divider(),
                 ),
@@ -189,6 +190,52 @@ class HeadNotificationListPageState extends State<HeadNotificationListPage> {
           ],
         ),
       );
+
+  Widget _getItemUI(BuildContext context, int i) => Column(
+    children: [
+      Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          Icon(Icons.message_outlined),
+          Text('Publicado em: '+ _controller.listFiltered[i].datePublication)
+        ],
+      ),
+      Container(
+            height: 450,
+            child: Card(
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(10.0),
+              ),
+              color: Colors.white54,
+              elevation: 1.0,
+              child: Column(
+                //mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: <Widget>[
+                  Center(
+                    heightFactor: 1.2,
+                    child: Image.asset(
+                      'assets/imgs/logo.png',
+                      fit: BoxFit.cover,
+                      width: 250.0,
+                    ),
+                  ),
+                  ListTile(
+                    contentPadding: EdgeInsets.all(10),
+                    title: Text(
+                      _controller.listFiltered[i].title,
+                      textAlign: TextAlign.center,
+                      style: TextStyle(
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                    subtitle: Text(_controller.listFiltered[i].notification),
+                  ),
+                ],
+              ),
+            ),
+          ),
+    ],
+  );
 
   _add(BuildContext context, HeadNotification? headNotification) {
     final Future future = Navigator.push(
@@ -211,9 +258,10 @@ class HeadNotificationListPageState extends State<HeadNotificationListPage> {
           return TransactionAuthDialog(msg: 'Confirma a exclusão?');
         });
     if (response == true) {
-      var notification = _controller.selectedNotifications[i] as HeadNotification;
+      var notification =
+          _controller.selectedNotifications[i] as HeadNotification;
       _controller.deleteById(notification).then(
-            (value) {
+        (value) {
           if (value != null) {
             asuka.showSnackBar(
               SnackBar(
