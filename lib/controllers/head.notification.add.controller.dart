@@ -67,6 +67,7 @@ abstract class HeadNotificationAddControllerBase with Store {
       id: headNotification.id,
       title: titleCtrl.text,
       notification: notificationCtrl.text,
+      datePublication: '',
     );
   }
 

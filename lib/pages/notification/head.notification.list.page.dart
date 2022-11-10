@@ -151,13 +151,8 @@ class HeadNotificationListPageState extends State<HeadNotificationListPage> {
                             fontWeight: FontWeight.bold,
                           ),
                         ),
-/*                        subtitle: Text('Tel.: ' +
-                            (_controller.listFiltered[i].phone != null
-                                ? _controller.listFiltered[i].phone
-                                : 'Não informado') +
-                            '\n' +
-                            'Status: ' +
-                            _controller.listFiltered[i].status),*/
+                        subtitle: Text('Data de Publicação: ' +
+                            (_controller.listFiltered[i].datePublication)),
                         leading: CircleAvatar(
                           child: Icon(Icons.message),
                           backgroundColor: Colors.white,

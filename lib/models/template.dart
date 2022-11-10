@@ -102,5 +102,5 @@ class Template {
       );
 
   HeadNotification loadHeadNotification() =>
-      HeadNotification(id: 0, title: '', notification: '',);
+      HeadNotification(id: 0, title: '', notification: '', datePublication: '');
 }
