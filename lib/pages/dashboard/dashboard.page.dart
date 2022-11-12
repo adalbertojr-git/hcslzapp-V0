@@ -380,7 +380,10 @@ class _DashboardPageState extends State<DashboardPage> {
   _dashBg() => Column(
         children: <Widget>[
           Expanded(
-            child: Container(color: Colors.deepOrange[300]),
+            child: Container(
+                color: _controller.selectedProfile == ADMIN
+                    ? Colors.black87
+                    : Colors.deepOrange[300]),
           ),
           Expanded(
             child: Container(color: Colors.transparent),
