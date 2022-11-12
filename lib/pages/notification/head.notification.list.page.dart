@@ -147,7 +147,7 @@ class HeadNotificationListPageState extends State<HeadNotificationListPage> {
   Widget _getListAssociated(BuildContext context, int i) => Column(
         children: [
           Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            mainAxisAlignment: MainAxisAlignment.start,
             children: [
               Icon(Icons.message_outlined),
               Text('Publicado em: ' +
