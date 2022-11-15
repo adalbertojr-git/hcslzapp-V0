@@ -16,33 +16,17 @@ const String _labelUnknown =
     'Houve um erro desconhecido ao executar a transação.';
 const String _title = 'Avisos da Diretoria';
 
-class HeadNotificationListPage extends StatefulWidget {
+class HeadNotificationListPage extends StatelessWidget {
+  HeadNotificationListController _controller = HeadNotificationListController();
   final String _selectedProfile;
 
   HeadNotificationListPage(this._selectedProfile);
 
   @override
-  State<StatefulWidget> createState() {
-    return HeadNotificationListPageState();
-  }
-}
-
-class HeadNotificationListPageState extends State<HeadNotificationListPage> {
-  HeadNotificationListController _controller = HeadNotificationListController();
-
-  @override
-  void initState() {
-    _controller.getFuture().then((value) {
-      _controller.setButtonVisibilty();
-    });
-    super.initState();
-  }
-
-  @override
   Widget build(BuildContext context) => Observer(
         builder: (_) => Scaffold(
           body: FutureBuilder<List<HeadNotification>>(
-            future: _controller.future,
+            future: _controller.getFuture(),
             builder: (context, snapshot) {
               switch (snapshot.connectionState) {
                 case ConnectionState.none:
@@ -69,10 +53,10 @@ class HeadNotificationListPageState extends State<HeadNotificationListPage> {
                       _controller.headNotifications.sort(
                         (a, b) => b.datePublication.compareTo(a.datePublication),
                       );
-                      return _widgets();
+                      return _widgets(context);
                     } else
-                      return widget._selectedProfile == ADMIN
-                          ? _widgets()
+                      return _selectedProfile == ADMIN
+                          ? _widgets(context)
                           : CenteredMessage(
                               title: _title,
                               message: _labelNotExists,
@@ -87,14 +71,14 @@ class HeadNotificationListPageState extends State<HeadNotificationListPage> {
           ),
           floatingActionButtonLocation:
               FloatingActionButtonLocation.centerFloat,
-          floatingActionButton: widget._selectedProfile == ADMIN
+          floatingActionButton: _selectedProfile == ADMIN
               ? Observer(
                   builder: (_) => _controller.isHidedButton
                       ? Container()
                       : Button(
                           icon: Icons.add,
                           onClick: () {
-                            _add(-1);
+                            _add(context, -1);
                           },
                         ),
                 )
@@ -102,7 +86,7 @@ class HeadNotificationListPageState extends State<HeadNotificationListPage> {
         ),
       );
 
-  _widgets() => Container(
+  _widgets(BuildContext context) => Container(
         decoration: BoxDecoration(
           gradient: LinearGradient(
             colors: [Colors.white30, Colors.deepOrange],
@@ -122,7 +106,7 @@ class HeadNotificationListPageState extends State<HeadNotificationListPage> {
                   shrinkWrap: true,
                   itemCount: _controller.headNotifications.length,
                   itemBuilder: (_, int i) {
-                    return widget._selectedProfile == ASSOCIATED
+                    return _selectedProfile == ASSOCIATED
                         ? _getListAssociated(context, i)
                         : _getListAdmin(context, i);
                   },
@@ -215,7 +199,7 @@ class HeadNotificationListPageState extends State<HeadNotificationListPage> {
                     Icons.delete,
                   ),
                   onTap: () {
-                    _delete(i);
+                    _delete(context, i);
                   },
                 ),
                 GestureDetector(
@@ -223,7 +207,7 @@ class HeadNotificationListPageState extends State<HeadNotificationListPage> {
                     Icons.arrow_forward,
                   ),
                   onTap: () {
-                    _add(i);
+                    _add(context, i);
                   },
                 ),
               ],
@@ -232,7 +216,7 @@ class HeadNotificationListPageState extends State<HeadNotificationListPage> {
         ),
       );
 
-  _add(int i) {
+  _add(BuildContext context, int i) {
     HeadNotification headNotification =
         i.isNegative ? null : _controller.headNotifications[i];
     final Future future = Navigator.push(
@@ -251,7 +235,7 @@ class HeadNotificationListPageState extends State<HeadNotificationListPage> {
     });
   }
 
-  _delete(int i) async {
+  _delete(BuildContext context, int i) async {
     var response = await showDialog(
         context: context,
         builder: (context) {
