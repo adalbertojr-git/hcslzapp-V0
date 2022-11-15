@@ -39,6 +39,7 @@ abstract class HeadNotificationListControllerBase with Store {
 
   init() {
     headNotifications.clear();
+    setButtonVisibilty();
   }
 
   @action

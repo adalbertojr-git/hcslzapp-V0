@@ -8,7 +8,8 @@ import 'package:hcslzapp/pages/associated/month.birthdays.list.page.dart';
 import 'package:hcslzapp/pages/event/event.calendar.page.dart';
 import 'package:hcslzapp/pages/login/login.page.dart';
 import 'package:hcslzapp/pages/management/management.list.page.dart';
-import 'package:hcslzapp/pages/notification/head.notification.list.page.dart';
+import 'package:hcslzapp/pages/notification/head.notification.list.adm.page.dart';
+import 'package:hcslzapp/pages/notification/head.notification.list.associated.page.dart';
 import 'package:hcslzapp/pages/partnership/partnership.list.adm.page.dart';
 import 'package:hcslzapp/pages/password/change.password.page.dart';
 import 'package:hcslzapp/pages/payment/payment.list.page.dart';
@@ -118,7 +119,7 @@ class _DashboardPageState extends State<DashboardPage> {
       PaymentListPage(_controller.selectedProfile),
       EventCalendarPage(_controller.selectedProfile),
       PartnershipListAdmPage(),
-      HeadNotificationListPage(_controller.selectedProfile),
+      HeadNotificationListAdmPage(),
       CenteredMessage(
         title: 'Boutique Harley Club',
         message: 'Funcionalidade em contrução. Aguarde nova versão do App',
@@ -467,8 +468,7 @@ class _DashboardPageState extends State<DashboardPage> {
                 Navigator.push(
                   _gContext,
                   MaterialPageRoute(
-                      builder: (_gContext) => HeadNotificationListPage(
-                          _controller.selectedProfile)),
+                      builder: (_gContext) => HeadNotificationListAssociatedPage()),
                 );
               },
             ),
