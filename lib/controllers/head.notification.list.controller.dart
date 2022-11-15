@@ -79,17 +79,4 @@ abstract class HeadNotificationListControllerBase with Store {
       datePublication: '',
     );
   }
-
-  @action
-  setFilter(String value) => filter = value;
-
-  @computed
-  List<HeadNotification> get listFiltered {
-    if (filter.isEmpty) {
-      return List<HeadNotification>.from(headNotifications);
-    } else {
-      return List<HeadNotification>.from(
-          headNotifications.where((element) => element.title.contains(filter)));
-    }
-  }
 }

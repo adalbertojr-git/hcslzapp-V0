@@ -118,19 +118,11 @@ class HeadNotificationListPageState extends State<HeadNotificationListPage> {
             TopBar(
               title: _title,
             ),
-            MyTextFormField(
-              textEditingController: _controller.titleCtrl,
-              label: labelNotificationTitle,
-              hint: hintNotificationTitle,
-              icon: Icons.search,
-              inputType: TextInputType.text,
-              onChanged: _controller.setFilter,
-            ),
             Expanded(
               child: Observer(
                 builder: (_) => ListView.separated(
                   shrinkWrap: true,
-                  itemCount: _controller.listFiltered.length,
+                  itemCount: _controller.headNotifications.length,
                   itemBuilder: (_, int i) {
                     return widget._selectedProfile == ASSOCIATED
                         ? _getListAssociated(context, i)
@@ -151,7 +143,7 @@ class HeadNotificationListPageState extends State<HeadNotificationListPage> {
             children: [
               Icon(Icons.message_outlined),
               Text('Publicado em: ' +
-                  _controller.listFiltered[i].datePublication)
+                  _controller.headNotifications[i].datePublication)
             ],
           ),
           Container(
@@ -160,7 +152,6 @@ class HeadNotificationListPageState extends State<HeadNotificationListPage> {
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(10.0),
               ),
-              color: Colors.white30,
               elevation: 1.0,
               child: Column(
                 children: <Widget>[
@@ -176,12 +167,12 @@ class HeadNotificationListPageState extends State<HeadNotificationListPage> {
                     contentPadding: EdgeInsets.fromLTRB(10, 0, 10, 0),
                     dense: true,
                     title: Text(
-                      _controller.listFiltered[i].title + '\n',
+                      _controller.headNotifications[i].title + '\n',
                       //textAlign: TextAlign.center,
                       style: TextStyle(
                           fontWeight: FontWeight.bold, fontSize: 20.0),
                     ),
-                    subtitle: Text(_controller.listFiltered[i].notification),
+                    subtitle: Text(_controller.headNotifications[i].notification),
                   ),
                 ],
               ),
@@ -206,13 +197,13 @@ class HeadNotificationListPageState extends State<HeadNotificationListPage> {
         child: Observer(
           builder: (_) => ListTile(
             title: Text(
-              _controller.listFiltered[i].title,
+              _controller.headNotifications[i].title,
               style: TextStyle(
                 fontWeight: FontWeight.bold,
               ),
             ),
             subtitle: Text('Data de Publicação: ' +
-                (_controller.listFiltered[i].datePublication)),
+                (_controller.headNotifications[i].datePublication)),
             leading: CircleAvatar(
               child: Icon(Icons.message),
               backgroundColor: Colors.white,
@@ -233,7 +224,7 @@ class HeadNotificationListPageState extends State<HeadNotificationListPage> {
                     Icons.arrow_forward,
                   ),
                   onTap: () {
-                    _add(_controller.listFiltered[i]);
+                    _add(_controller.headNotifications[i]);
                   },
                 ),
               ],

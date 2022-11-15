@@ -10,14 +10,6 @@ part of 'head.notification.list.controller.dart';
 
 mixin _$HeadNotificationListController
     on HeadNotificationListControllerBase, Store {
-  Computed<List<HeadNotification>>? _$listFilteredComputed;
-
-  @override
-  List<HeadNotification> get listFiltered => (_$listFilteredComputed ??=
-          Computed<List<HeadNotification>>(() => super.listFiltered,
-              name: 'HeadNotificationListControllerBase.listFiltered'))
-      .value;
-
   final _$titleCtrlAtom =
       Atom(name: 'HeadNotificationListControllerBase.titleCtrl');
 
@@ -186,18 +178,6 @@ mixin _$HeadNotificationListController
   }
 
   @override
-  dynamic setFilter(String value) {
-    final _$actionInfo = _$HeadNotificationListControllerBaseActionController
-        .startAction(name: 'HeadNotificationListControllerBase.setFilter');
-    try {
-      return super.setFilter(value);
-    } finally {
-      _$HeadNotificationListControllerBaseActionController
-          .endAction(_$actionInfo);
-    }
-  }
-
-  @override
   String toString() {
     return '''
 titleCtrl: ${titleCtrl},
@@ -206,8 +186,7 @@ headNotifications: ${headNotifications},
 headNotification: ${headNotification},
 errorMsg: ${errorMsg},
 future: ${future},
-filter: ${filter},
-listFiltered: ${listFiltered}
+filter: ${filter}
     ''';
   }
 }
