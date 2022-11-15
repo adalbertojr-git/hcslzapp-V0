@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
+import 'package:hcslzapp/components/centered.message.dart';
 import 'package:hcslzapp/models/password.dto.dart';
 import 'package:hcslzapp/pages/associated/month.birthdays.list.page.dart';
 import 'package:hcslzapp/pages/event/event.calendar.page.dart';
@@ -118,7 +119,10 @@ class _DashboardPageState extends State<DashboardPage> {
       EventCalendarPage(_controller.selectedProfile),
       PartnershipListAdmPage(),
       HeadNotificationListPage(_controller.selectedProfile),
-      Container(),
+      CenteredMessage(
+        title: 'Boutique Harley Club',
+        message: 'Funcionalidade em contrução. Aguarde nova versão do App',
+      ),
     ];
     return Scaffold(
       appBar: _appBar(),
@@ -605,11 +609,15 @@ class _DashboardPageState extends State<DashboardPage> {
                   image: "assets/imgs/boutique.png",
                   context: _gContext,
                   onClick: () {
-/*                    Navigator.push(
+                    Navigator.push(
                       _gContext,
                       MaterialPageRoute(
-                          builder: (gContext) => BoutiqueListPage()),
-                    );*/
+                          builder: (gContext) => CenteredMessage(
+                                title: 'Boutique Harley Club',
+                                message:
+                                    'Funcionalidade em contrução. Aguarde nova versão do App',
+                              )),
+                    );
                   },
                 ),
 /*
