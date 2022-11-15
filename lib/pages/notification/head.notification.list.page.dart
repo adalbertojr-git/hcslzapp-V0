@@ -67,7 +67,7 @@ class HeadNotificationListPageState extends State<HeadNotificationListPage> {
                       _controller.init();
                       _controller.headNotifications.addAll((snapshot.data)!);
                       _controller.headNotifications.sort(
-                        (a, b) => a.title.compareTo(b.title),
+                        (a, b) => b.datePublication.compareTo(a.datePublication),
                       );
                       return _widgets();
                     } else
@@ -94,7 +94,7 @@ class HeadNotificationListPageState extends State<HeadNotificationListPage> {
                       : Button(
                           icon: Icons.add,
                           onClick: () {
-                            _add(null);
+                            _add(-1);
                           },
                         ),
                 )
@@ -170,7 +170,8 @@ class HeadNotificationListPageState extends State<HeadNotificationListPage> {
                       style: TextStyle(
                           fontWeight: FontWeight.bold, fontSize: 20.0),
                     ),
-                    subtitle: Text(_controller.headNotifications[i].notification),
+                    subtitle:
+                        Text(_controller.headNotifications[i].notification),
                   ),
                 ],
               ),
@@ -222,7 +223,7 @@ class HeadNotificationListPageState extends State<HeadNotificationListPage> {
                     Icons.arrow_forward,
                   ),
                   onTap: () {
-                    _add(_controller.headNotifications[i]);
+                    _add(i);
                   },
                 ),
               ],
@@ -231,16 +232,21 @@ class HeadNotificationListPageState extends State<HeadNotificationListPage> {
         ),
       );
 
-  _add(HeadNotification? headNotification) {
+  _add(int i) {
+    HeadNotification headNotification =
+        i.isNegative ? null : _controller.headNotifications[i];
     final Future future = Navigator.push(
       context,
       MaterialPageRoute(
-        builder: (context) => HeadNotificationAddPage(headNotification),
-      ),
+          builder: (context) => HeadNotificationAddPage(headNotification)),
     );
     future.then((value) {
       if (value != null) {
-        _controller.headNotifications.add(value);
+        if (!i.isNegative) {
+          _controller.headNotifications.removeAt(i);
+          _controller.headNotifications.insert(i, value);
+        } else
+          _controller.headNotifications.add(value);
       }
     });
   }

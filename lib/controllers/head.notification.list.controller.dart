@@ -32,7 +32,7 @@ abstract class HeadNotificationListControllerBase with Store {
 
   @observable
   Future<List<HeadNotification>> future =
-      Future<List<HeadNotification>>.value([]);
+  Future<List<HeadNotification>>.value([]);
 
   @observable
   String filter = '';
@@ -59,10 +59,10 @@ abstract class HeadNotificationListControllerBase with Store {
   Future deleteById(HeadNotification headNotification) =>
       ObservableFuture(_headNotificationRepo
           .deleteById(_setValues(
-            headNotification.id,
-            headNotification.title,
-            headNotification.notification,
-          ))
+        headNotification.id,
+        headNotification.title,
+        headNotification.notification,
+      ))
           .then((value) => value)).catchError((e) {
         errorMsg = "${e.message}";
       }, test: (e) => e is HttpException).catchError((e) {
@@ -77,4 +77,5 @@ abstract class HeadNotificationListControllerBase with Store {
       datePublication: '',
     );
   }
+
 }
