@@ -5,6 +5,7 @@ import 'package:hcslzapp/components/progress.dart';
 import 'package:hcslzapp/components/top.bar.dart';
 import 'package:hcslzapp/controllers/month.birthdays.list.controller.dart';
 import 'package:hcslzapp/models/month.birthdays.dart';
+import 'package:intl/intl.dart';
 
 const String _labelNotExists =
     'Não existem Harleyros aniversariantes neste mês.';
@@ -107,8 +108,17 @@ class MonthBirthdaysListPage extends StatelessWidget {
                             'Status: ' +
                             _controller.associateds[i].status),
                         leading: CircleAvatar(
-                          child: Icon(Icons.cake),
-                          backgroundColor: Colors.white,
+                          child: Icon(
+                            Icons.cake,
+                            color:
+                                isToday(_controller.associateds[i].date_birth)
+                                    ? Colors.deepOrange
+                                    : Colors.blue,
+                          ),
+                          backgroundColor:
+                              isToday(_controller.associateds[i].date_birth)
+                                  ? Colors.green
+                                  : Colors.white,
                         ),
                       ),
                     );
@@ -120,4 +130,14 @@ class MonthBirthdaysListPage extends StatelessWidget {
           ],
         ),
       );
+
+  bool isToday(String dateBirth) {
+    var now = DateTime.now();
+    var formatter = DateFormat('dd/MM');
+    String formattedDate = formatter.format(now);
+    if (dateBirth.substring(0, 5).compareTo(formattedDate) == 0)
+      return true;
+    else
+      return false;
+  }
 }
