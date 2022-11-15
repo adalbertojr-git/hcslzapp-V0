@@ -107,7 +107,7 @@ class HeadNotificationListAssociatedPage extends StatelessWidget {
                                   ),
                                 ),
                                 Container(
-                                  color: Colors.deepOrange[200],
+                                  color: Colors.black26,
                                     height: 200,
                                   child: ListTile(
                                     contentPadding:
