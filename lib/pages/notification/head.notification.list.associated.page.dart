@@ -16,111 +16,47 @@ class HeadNotificationListAssociatedPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) => Scaffold(
-    body: FutureBuilder<List<HeadNotification>>(
-      future: _controller.getFuture(),
-      builder: (context, snapshot) {
-        switch (snapshot.connectionState) {
-          case ConnectionState.none:
-            break;
-          case ConnectionState.waiting:
-            return Progress();
-          case ConnectionState.active:
-            break;
-          default:
-            if (snapshot.hasError) {
-              return CenteredMessage(title: _title,
-                  message: snapshot.error.toString());
-            } else {
-              if (snapshot.data == null)
-                return CenteredMessage(
-                  title: _title,
-                  message: _controller.errorMsg,
-                );
-              if ((snapshot.data?.length)! > 0) {
-                _controller.init();
-                _controller.headNotifications.addAll(snapshot.data!);
-                _controller.headNotifications.sort(
-                      (a, b) => b.datePublication.compareTo(a.datePublication),
-                );
-                return _widgets(context);
-              } else
-                return CenteredMessage(
-                  title: _title,
-                  message: _labelNotExists,
-                );
-            }
-        } //switch (snapshot.connectionState)
-        return CenteredMessage(
-          title: _title,
-          message: _labelUnknown,
-        );
-      },
-    ),
-  );
-
-/*  @override
-  Widget build(BuildContext context) => Observer(
-        builder: (_) => Scaffold(
-          body: FutureBuilder<List<HeadNotification>>(
-            future: _controller.getFuture(),
-            builder: (context, snapshot) {
-              switch (snapshot.connectionState) {
-                case ConnectionState.none:
-                  break;
-                case ConnectionState.waiting:
-                  return Progress();
-                case ConnectionState.active:
-                  break;
-                default:
-                  if (snapshot.hasError) {
+        body: FutureBuilder<List<HeadNotification>>(
+          future: _controller.getFuture(),
+          builder: (context, snapshot) {
+            switch (snapshot.connectionState) {
+              case ConnectionState.none:
+                break;
+              case ConnectionState.waiting:
+                return Progress();
+              case ConnectionState.active:
+                break;
+              default:
+                if (snapshot.hasError) {
+                  return CenteredMessage(
+                      title: _title, message: snapshot.error.toString());
+                } else {
+                  if (snapshot.data == null)
                     return CenteredMessage(
                       title: _title,
-                      message: snapshot.error.toString(),
+                      message: _controller.errorMsg,
                     );
-                  } else {
-                    if (snapshot.data == null)
-                      return CenteredMessage(
-                        title: _title,
-                        message: _controller.errorMsg,
-                      );
-                    if ((snapshot.data?.length)! > 0) {
-                      _controller.init();
-                      _controller.headNotifications.addAll((snapshot.data)!);
-                      _controller.headNotifications.sort(
-                        (a, b) => b.datePublication.compareTo(a.datePublication),
-                      );
-                      return _widgets(context);
-                    } else
-                      return _selectedProfile == ADMIN
-                          ? _widgets(context)
-                          : CenteredMessage(
-                              title: _title,
-                              message: _labelNotExists,
-                            );
-                  }
-              } //switch (snapshot.connectionState)
-              return CenteredMessage(
-                title: _title,
-                message: _labelUnknown,
-              );
-            },
-          ),
-          floatingActionButtonLocation:
-              FloatingActionButtonLocation.centerFloat,
-          floatingActionButton: _selectedProfile == ADMIN
-              ? Observer(
-                  builder: (_) => _controller.isHidedButton
-                      ? Container()
-                      : Button(
-                          icon: Icons.add,
-                          onClick: () {
-                            _add(context, -1);
-                          },
-                        ),
-                )
-              : Container(),
+                  if ((snapshot.data?.length)! > 0) {
+                    _controller.init();
+                    _controller.headNotifications.addAll(snapshot.data!);
+                    _controller.headNotifications.sort(
+                      (a, b) => b.datePublication.compareTo(a.datePublication),
+                    );
+                    return _widgets(context);
+                  } else
+                    return CenteredMessage(
+                      title: _title,
+                      message: _labelNotExists,
+                    );
+                }
+            } //switch (snapshot.connectionState)
+            return CenteredMessage(
+              title: _title,
+              message: _labelUnknown,
+            );
+          },
         ),
-      );*/
+      );
 
   _widgets(BuildContext context) => Container(
         decoration: BoxDecoration(
@@ -149,7 +85,8 @@ class HeadNotificationListAssociatedPage extends StatelessWidget {
                           children: [
                             Icon(Icons.message_outlined),
                             Text('Publicado em: ' +
-                                _controller.headNotifications[i].datePublication)
+                                _controller
+                                    .headNotifications[i].datePublication)
                           ],
                         ),
                         Container(
@@ -170,16 +107,19 @@ class HeadNotificationListAssociatedPage extends StatelessWidget {
                                   ),
                                 ),
                                 ListTile(
-                                  contentPadding: EdgeInsets.fromLTRB(10, 0, 10, 0),
+                                  contentPadding:
+                                      EdgeInsets.fromLTRB(10, 0, 10, 0),
                                   dense: true,
                                   title: Text(
-                                    _controller.headNotifications[i].title + '\n',
+                                    _controller.headNotifications[i].title +
+                                        '\n',
                                     //textAlign: TextAlign.center,
                                     style: TextStyle(
-                                        fontWeight: FontWeight.bold, fontSize: 20.0),
+                                        fontWeight: FontWeight.bold,
+                                        fontSize: 20.0),
                                   ),
-                                  subtitle:
-                                  Text(_controller.headNotifications[i].notification),
+                                  subtitle: Text(_controller
+                                      .headNotifications[i].notification),
                                 ),
                               ],
                             ),
@@ -195,150 +135,4 @@ class HeadNotificationListAssociatedPage extends StatelessWidget {
           ],
         ),
       );
-
-  /*Widget _getListAssociated(BuildContext context, int i) => Column(
-        children: [
-          Row(
-            mainAxisAlignment: MainAxisAlignment.start,
-            children: [
-              Icon(Icons.message_outlined),
-              Text('Publicado em: ' +
-                  _controller.headNotifications[i].datePublication)
-            ],
-          ),
-          Container(
-            height: 450,
-            child: Card(
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(10.0),
-              ),
-              elevation: 1.0,
-              child: Column(
-                children: <Widget>[
-                  Center(
-                    heightFactor: 1.1,
-                    child: Image.asset(
-                      'assets/imgs/logo.png',
-                      fit: BoxFit.cover,
-                      width: 300.0,
-                    ),
-                  ),
-                  ListTile(
-                    contentPadding: EdgeInsets.fromLTRB(10, 0, 10, 0),
-                    dense: true,
-                    title: Text(
-                      _controller.headNotifications[i].title + '\n',
-                      //textAlign: TextAlign.center,
-                      style: TextStyle(
-                          fontWeight: FontWeight.bold, fontSize: 20.0),
-                    ),
-                    subtitle:
-                        Text(_controller.headNotifications[i].notification),
-                  ),
-                ],
-              ),
-            ),
-          ),
-        ],
-      );
-
-  Widget _getListAdmin(BuildContext context, int i) => Container(
-        decoration: BoxDecoration(
-          color: Colors.white30,
-          shape: BoxShape.rectangle,
-          borderRadius: BorderRadius.circular(8.0),
-          boxShadow: <BoxShadow>[
-            BoxShadow(
-              color: Colors.black12,
-              blurRadius: 10.0,
-              offset: Offset(0.0, 5.0),
-            ),
-          ],
-        ),
-        child: Observer(
-          builder: (_) => ListTile(
-            title: Text(
-              _controller.headNotifications[i].title,
-              style: TextStyle(
-                fontWeight: FontWeight.bold,
-              ),
-            ),
-            subtitle: Text('Data de Publicação: ' +
-                (_controller.headNotifications[i].datePublication)),
-            leading: CircleAvatar(
-              child: Icon(Icons.message),
-              backgroundColor: Colors.white,
-            ),
-            trailing: Wrap(
-              spacing: 10, // space between two icons
-              children: <Widget>[
-                GestureDetector(
-                  child: Icon(
-                    Icons.delete,
-                  ),
-                  onTap: () {
-                    _delete(context, i);
-                  },
-                ),
-                GestureDetector(
-                  child: Icon(
-                    Icons.arrow_forward,
-                  ),
-                  onTap: () {
-                    _add(context, i);
-                  },
-                ),
-              ],
-            ),
-          ),
-        ),
-      );
-
-  _add(BuildContext context, int i) {
-    HeadNotification headNotification =
-        i.isNegative ? null : _controller.headNotifications[i];
-    final Future future = Navigator.push(
-      context,
-      MaterialPageRoute(
-          builder: (context) => HeadNotificationAddPage(headNotification)),
-    );
-    future.then((value) {
-      if (value != null) {
-        if (!i.isNegative) {
-          _controller.headNotifications.removeAt(i);
-          _controller.headNotifications.insert(i, value);
-        } else
-          _controller.headNotifications.add(value);
-      }
-    });
-  }
-
-  _delete(BuildContext context, int i) async {
-    var response = await showDialog(
-        context: context,
-        builder: (context) {
-          return TransactionAuthDialog(msg: 'Confirma a exclusão?');
-        });
-    if (response == true) {
-      _controller.deleteById(_controller.headNotifications[i]).then(
-        (value) {
-          if (value != null) {
-            asuka.showSnackBar(
-              SnackBar(
-                content: const Text('Aviso excluido com sucesso.'),
-              ),
-            );
-            _controller.headNotifications.removeAt(i);
-          } else {
-            asuka.showSnackBar(
-              SnackBar(
-                content: Text(_controller.errorMsg),
-              ),
-            );
-          }
-        },
-      );
-    }
-  }
-*/
 }
