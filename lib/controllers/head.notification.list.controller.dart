@@ -4,8 +4,6 @@ import 'package:flutter/material.dart';
 import 'package:hcslzapp/models/head.notification.dart';
 import 'package:hcslzapp/models/template.dart';
 import 'package:hcslzapp/repositories/head.notification.repo.dart';
-import '../../models/associated.dart';
-import '../repositories/associated.repo.dart';
 import 'package:mobx/mobx.dart';
 
 part 'head.notification.list.controller.g.dart';
