@@ -1,15 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
-import 'package:hcslzapp/common/associated.profiles.dart';
-import 'package:hcslzapp/components/button.dart';
 import 'package:hcslzapp/components/centered.message.dart';
 import 'package:hcslzapp/components/progress.dart';
 import 'package:hcslzapp/components/top.bar.dart';
-import 'package:hcslzapp/components/transaction.auth.dialog.dart';
 import 'package:hcslzapp/controllers/head.notification.list.controller.dart';
 import 'package:hcslzapp/models/head.notification.dart';
-import 'package:asuka/asuka.dart' as asuka;
-import 'head.notification.add.page.dart';
 
 const String _labelNotExists = 'Não existem avisos cadastrados.';
 const String _labelUnknown =
