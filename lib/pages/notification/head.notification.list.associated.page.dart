@@ -113,7 +113,6 @@ class HeadNotificationListAssociatedPage extends StatelessWidget {
                                   title: Text(
                                     _controller.headNotifications[i].title +
                                         '\n',
-                                    //textAlign: TextAlign.center,
                                     style: TextStyle(
                                         fontWeight: FontWeight.bold,
                                         fontSize: 20.0),
