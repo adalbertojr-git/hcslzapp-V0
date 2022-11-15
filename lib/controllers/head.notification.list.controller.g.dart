@@ -66,23 +66,6 @@ mixin _$HeadNotificationListController
     });
   }
 
-  final _$selectedNotificationsAtom =
-      Atom(name: 'HeadNotificationListControllerBase.selectedNotifications');
-
-  @override
-  List<dynamic> get selectedNotifications {
-    _$selectedNotificationsAtom.reportRead();
-    return super.selectedNotifications;
-  }
-
-  @override
-  set selectedNotifications(List<dynamic> value) {
-    _$selectedNotificationsAtom.reportWrite(value, super.selectedNotifications,
-        () {
-      super.selectedNotifications = value;
-    });
-  }
-
   final _$headNotificationAtom =
       Atom(name: 'HeadNotificationListControllerBase.headNotification');
 
@@ -203,20 +186,6 @@ mixin _$HeadNotificationListController
   }
 
   @override
-  dynamic removeSelectedNotification(int i) {
-    final _$actionInfo =
-        _$HeadNotificationListControllerBaseActionController.startAction(
-            name:
-                'HeadNotificationListControllerBase.removeSelectedNotification');
-    try {
-      return super.removeSelectedNotification(i);
-    } finally {
-      _$HeadNotificationListControllerBaseActionController
-          .endAction(_$actionInfo);
-    }
-  }
-
-  @override
   dynamic setFilter(String value) {
     final _$actionInfo = _$HeadNotificationListControllerBaseActionController
         .startAction(name: 'HeadNotificationListControllerBase.setFilter');
@@ -234,7 +203,6 @@ mixin _$HeadNotificationListController
 titleCtrl: ${titleCtrl},
 isHidedButton: ${isHidedButton},
 headNotifications: ${headNotifications},
-selectedNotifications: ${selectedNotifications},
 headNotification: ${headNotification},
 errorMsg: ${errorMsg},
 future: ${future},

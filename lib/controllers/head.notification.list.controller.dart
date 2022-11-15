@@ -24,9 +24,6 @@ abstract class HeadNotificationListControllerBase with Store {
   ObservableList headNotifications = [].asObservable();
 
   @observable
-  List selectedNotifications = List.filled(0, 0, growable: true);
-
-  @observable
   HeadNotification headNotification = Template().loadHeadNotification();
 
   @observable
@@ -36,14 +33,14 @@ abstract class HeadNotificationListControllerBase with Store {
   String errorMsg = '';
 
   @observable
-  Future<List<HeadNotification>> future = Future<List<HeadNotification>>.value([]);
+  Future<List<HeadNotification>> future =
+      Future<List<HeadNotification>>.value([]);
 
   @observable
   String filter = '';
 
   init() {
     headNotifications.clear();
-    selectedNotifications.clear();
   }
 
   @action
@@ -61,13 +58,18 @@ abstract class HeadNotificationListControllerBase with Store {
   Future<List<HeadNotification>> getFuture() => future = findAll();
 
   @action
-  Future deleteById(HeadNotification headNotification) => ObservableFuture(_headNotificationRepo
-      .deleteById(_setValues(headNotification.id, headNotification.title, headNotification.notification,))
-      .then((value) => value)).catchError((e) {
-    errorMsg = "${e.message}";
-  }, test: (e) => e is HttpException).catchError((e) {
-    errorMsg = "$e";
-  }, test: (e) => e is Exception);
+  Future deleteById(HeadNotification headNotification) =>
+      ObservableFuture(_headNotificationRepo
+          .deleteById(_setValues(
+            headNotification.id,
+            headNotification.title,
+            headNotification.notification,
+          ))
+          .then((value) => value)).catchError((e) {
+        errorMsg = "${e.message}";
+      }, test: (e) => e is HttpException).catchError((e) {
+        errorMsg = "$e";
+      }, test: (e) => e is Exception);
 
   HeadNotification _setValues(int id, String title, String notification) {
     return HeadNotification(
@@ -77,9 +79,6 @@ abstract class HeadNotificationListControllerBase with Store {
       datePublication: '',
     );
   }
-
-  @action
-  removeSelectedNotification(int i) => selectedNotifications.removeAt(i);
 
   @action
   setFilter(String value) => filter = value;

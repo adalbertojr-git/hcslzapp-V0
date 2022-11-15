@@ -179,9 +179,7 @@ class HeadNotificationListPageState extends State<HeadNotificationListPage> {
                       _controller.listFiltered[i].title + '\n',
                       //textAlign: TextAlign.center,
                       style: TextStyle(
-                        fontWeight: FontWeight.bold,
-                        fontSize: 20.0
-                      ),
+                          fontWeight: FontWeight.bold, fontSize: 20.0),
                     ),
                     subtitle: Text(_controller.listFiltered[i].notification),
                   ),
@@ -205,39 +203,41 @@ class HeadNotificationListPageState extends State<HeadNotificationListPage> {
             ),
           ],
         ),
-        child: ListTile(
-          title: Text(
-            _controller.listFiltered[i].title,
-            style: TextStyle(
-              fontWeight: FontWeight.bold,
+        child: Observer(
+          builder: (_) => ListTile(
+            title: Text(
+              _controller.listFiltered[i].title,
+              style: TextStyle(
+                fontWeight: FontWeight.bold,
+              ),
             ),
-          ),
-          subtitle: Text('Data de Publicação: ' +
-              (_controller.listFiltered[i].datePublication)),
-          leading: CircleAvatar(
-            child: Icon(Icons.message),
-            backgroundColor: Colors.white,
-          ),
-          trailing: Wrap(
-            spacing: 10, // space between two icons
-            children: <Widget>[
-              GestureDetector(
-                child: Icon(
-                  Icons.delete,
+            subtitle: Text('Data de Publicação: ' +
+                (_controller.listFiltered[i].datePublication)),
+            leading: CircleAvatar(
+              child: Icon(Icons.message),
+              backgroundColor: Colors.white,
+            ),
+            trailing: Wrap(
+              spacing: 10, // space between two icons
+              children: <Widget>[
+                GestureDetector(
+                  child: Icon(
+                    Icons.delete,
+                  ),
+                  onTap: () {
+                    _delete(i);
+                  },
                 ),
-                onTap: () {
-                  _delete(i);
-                },
-              ),
-              GestureDetector(
-                child: Icon(
-                  Icons.arrow_forward,
+                GestureDetector(
+                  child: Icon(
+                    Icons.arrow_forward,
+                  ),
+                  onTap: () {
+                    _add(_controller.listFiltered[i]);
+                  },
                 ),
-                onTap: () {
-                  _add(_controller.listFiltered[i]);
-                },
-              ),
-            ],
+              ],
+            ),
           ),
         ),
       );
@@ -263,9 +263,7 @@ class HeadNotificationListPageState extends State<HeadNotificationListPage> {
           return TransactionAuthDialog(msg: 'Confirma a exclusão?');
         });
     if (response == true) {
-      var notification =
-          _controller.selectedNotifications[i] as HeadNotification;
-      _controller.deleteById(notification).then(
+      _controller.deleteById(_controller.headNotifications[i]).then(
         (value) {
           if (value != null) {
             asuka.showSnackBar(
@@ -273,9 +271,7 @@ class HeadNotificationListPageState extends State<HeadNotificationListPage> {
                 content: const Text('Aviso excluido com sucesso.'),
               ),
             );
-            setState(() {
-              _controller.removeSelectedNotification(i);
-            });
+            _controller.headNotifications.removeAt(i);
           } else {
             asuka.showSnackBar(
               SnackBar(
