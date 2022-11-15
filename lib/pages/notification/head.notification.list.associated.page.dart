@@ -106,19 +106,25 @@ class HeadNotificationListAssociatedPage extends StatelessWidget {
                                     width: 300.0,
                                   ),
                                 ),
-                                ListTile(
-                                  contentPadding:
-                                      EdgeInsets.fromLTRB(10, 0, 10, 0),
-                                  dense: true,
-                                  title: Text(
-                                    _controller.headNotifications[i].title +
-                                        '\n',
-                                    style: TextStyle(
-                                        fontWeight: FontWeight.bold,
-                                        fontSize: 20.0),
+                                Container(
+                                  color: Colors.deepOrange[200],
+                                    height: 200,
+                                  child: ListTile(
+                                    contentPadding:
+                                        EdgeInsets.fromLTRB(10, 0, 10, 0),
+                                    dense: true,
+                                    title: Text(
+                                      _controller.headNotifications[i].title +
+                                          '\n',
+                                      style: TextStyle(
+                                          fontWeight: FontWeight.bold,
+                                          fontSize: 20.0),
+                                    ),
+                                    subtitle: Text(_controller
+                                        .headNotifications[i].notification,
+                                        style: TextStyle(
+                                            fontSize: 17.0)),
                                   ),
-                                  subtitle: Text(_controller
-                                      .headNotifications[i].notification),
                                 ),
                               ],
                             ),
