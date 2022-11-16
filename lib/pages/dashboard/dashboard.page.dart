@@ -23,7 +23,7 @@ import 'package:hcslzapp/pages/access.request/access.request.list.page.dart';
 import 'package:hcslzapp/pages/associated/associated.list.page.dart';
 
 const String _labelAppTitle = 'HCSlz App';
-const String _labelDarkTheme = 'Tema Escuro';
+const String _labelTheme = 'Alterar Tema';
 const String _labelChangeProfile = 'Trocar Perfil de Acesso';
 const String _labelChangePassword = 'Alterar senha';
 const String _labelLogout = 'Logout';
@@ -157,34 +157,27 @@ class _DashboardPageState extends State<DashboardPage> {
             itemBuilder: (BuildContext context) {
               return [
                 PopupMenuItem(
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    children: [
-                      Text(
-                        _labelDarkTheme,
-                        style: TextStyle(fontSize: 12.0),
-                      ),
-                      Container(
-                        child: Switch(
-                          activeColor: Colors.orangeAccent,
-                          value: AppController.instance.isDarkTheme,
-                          onChanged: (value) {
-                            AppController.instance.changeTheme();
-                            Navigator.pop(context);
-                          },
-                        ),
-                      ),
-                    ],
+                  child: ListTile(
+                    leading: Icon(
+                      AppController.instance.isDarkTheme
+                          ? Icons.light_mode
+                          : Icons.dark_mode,
+                      color: AppController.instance.isDarkTheme
+                          ? Colors.white
+                          : Colors.black,
+                    ),
+                    title: Text(_labelTheme),
+                    onTap: () {
+                      AppController.instance.changeTheme();
+                      Navigator.pop(context);
+                    },
                   ),
                 ),
                 PopupMenuItem(
-                  child: GestureDetector(
-                    child: Text(
-                      _labelLogout,
-                      style: TextStyle(fontSize: 12.0),
-                    ),
+                  child: ListTile(
+                    leading: Icon(Icons.power_settings_new),
+                    title: Text(_labelLogout),
                     onTap: () async {
-                      Navigator.pop(context);
                       var response = await showDialog(
                           context: context,
                           builder: (context) {
@@ -245,22 +238,18 @@ class _DashboardPageState extends State<DashboardPage> {
                 ),
               ),
             ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.end,
-              children: [
-                Text(_labelDarkTheme),
-                Container(
-                  child: Switch(
-                    activeColor: Colors.orangeAccent,
-                    value: AppController.instance.isDarkTheme,
-                    onChanged: (value) {
-                      setState(() {
-                        AppController.instance.changeTheme();
-                      });
-                    },
-                  ),
-                ),
-              ],
+            ListTile(
+              leading: Icon(
+                AppController.instance.isDarkTheme
+                    ? Icons.light_mode
+                    : Icons.dark_mode,
+              ),
+              title: Text(_labelTheme),
+              onTap: () {
+                setState(() {
+                  AppController.instance.changeTheme();
+                });
+              },
             ),
             ListTile(
               enabled: _controller.isAdmin(),
@@ -468,7 +457,8 @@ class _DashboardPageState extends State<DashboardPage> {
                 Navigator.push(
                   _gContext,
                   MaterialPageRoute(
-                      builder: (_gContext) => HeadNotificationListAssociatedPage()),
+                      builder: (_gContext) =>
+                          HeadNotificationListAssociatedPage()),
                 );
               },
             ),
