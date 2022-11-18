@@ -18,7 +18,7 @@ const String _labelForgotPsw = 'Esqueceu a senha?';
 const String _labelFirstAcc = 'Primeiro acesso?';
 
 class LoginPage extends StatelessWidget {
-  LoginController _controller = LoginController();
+  final LoginController _controller = LoginController();
 
   @override
   Widget build(BuildContext context) {
