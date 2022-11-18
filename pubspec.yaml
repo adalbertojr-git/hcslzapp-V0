@@ -36,8 +36,12 @@ dependencies:
   jwt_decode: ^0.3.1
   glutton: ^2.0.0
   image_picker: ^0.8.4+4
+
   firebase_storage: ^10.2.4
-  firebase_core: ^1.10.6
+  #firebase_core: ^1.10.6
+  firebase_auth: ^3.3.0
+  cloud_firestore: ^3.1.0
+
   flutter_localizations:
     sdk: flutter
   flutter_native_splash: ^2.1.6

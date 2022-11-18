@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:hcslzapp/controllers/app.controller.dart';
@@ -12,6 +13,7 @@ void main() async {
   Firebase.initializeApp();
   await AppController.instance.loadTheme();
   runApp(HCSlzApp());
+  FirebaseFirestore.instance.collection('teste').add({'descricao': 'testando o Firebase'});
 }
 
 class HCSlzApp extends StatelessWidget {
