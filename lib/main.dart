@@ -32,7 +32,6 @@ class HCSlzApp extends StatelessWidget {
           ],
           builder: asuka.builder,
           debugShowCheckedModeBanner: false,
-          //home: Splash(),
           home: LoginPage(),
           title: _titleAppBar,
           theme: ThemeData(
