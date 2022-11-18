@@ -117,7 +117,11 @@ class _DashboardPageState extends State<DashboardPage> {
     _listAdmWidgets = [
       AssociatedListPage(),
       PaymentListPage(_controller.selectedProfile),
-      EventCalendarPage(_controller.selectedProfile),
+      //EventCalendarPage(_controller.selectedProfile),
+      CenteredMessage(
+        title: 'Boutique Harley Club',
+        message: 'Funcionalidade em contrução. Aguarde nova versão do App',
+      ),
       PartnershipListAdmPage(),
       HeadNotificationListAdmPage(),
       CenteredMessage(
@@ -549,7 +553,7 @@ class _DashboardPageState extends State<DashboardPage> {
                     );
                   },
                 ),
-                GridButton(
+/*                GridButton(
                   title: _labelEvent,
                   image: _pathEventImage,
                   context: _gContext,
@@ -559,7 +563,7 @@ class _DashboardPageState extends State<DashboardPage> {
                       _controller.selectedProfile,
                     );
                   },
-                ),
+                ),*/
 /*
                 GridButton(
                   title: "Documentos",
@@ -594,7 +598,7 @@ class _DashboardPageState extends State<DashboardPage> {
                   },
                 ),
 */
-                GridButton(
+/*                GridButton(
                   title: "Boutique",
                   image: "assets/imgs/boutique.png",
                   context: _gContext,
@@ -609,7 +613,7 @@ class _DashboardPageState extends State<DashboardPage> {
                               )),
                     );
                   },
-                ),
+                ),*/
 /*
                 GridButton(
                   title: "Classificados",

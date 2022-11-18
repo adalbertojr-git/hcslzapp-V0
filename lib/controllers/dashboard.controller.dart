@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:hcslzapp/pages/event/complex.example.dart';
 import 'package:hcslzapp/pages/partnership/partnership.list.associated.page.dart';
 import 'package:hcslzapp/pages/payment/payment.associated.page.dart';
 import '../models/role.dart';
@@ -94,15 +95,16 @@ abstract class DashboardControllerBase with Store {
     );
   }
 
-  loadEventCalendarPage(BuildContext context,
+/*  loadEventCalendarPage(BuildContext context,
       String user,) async {
     await Navigator.push(
       context,
       MaterialPageRoute(
-        builder: (context) => EventCalendarPage(user),
+        builder: (context) => TableComplexExample(),
+            //EventCalendarPage(user),
       ),
     );
-  }
+  }*/
 
   loadDtcCodeDashboardPage(BuildContext context,) async {
     await Navigator.push(

@@ -33,6 +33,7 @@ class HCSlzApp extends StatelessWidget {
           builder: asuka.builder,
           debugShowCheckedModeBanner: false,
           home: LoginPage(),
+          //home: TableEventsExample(),
           title: _titleAppBar,
           theme: ThemeData(
             brightness: AppController.instance.isDarkTheme
