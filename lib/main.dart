@@ -1,9 +1,8 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:asuka/asuka.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:hcslzapp/controllers/app.controller.dart';
 import 'package:hcslzapp/pages/login/login.page.dart';
-import 'package:asuka/asuka.dart' as asuka;
 import 'package:flutter_localizations/flutter_localizations.dart';
 
 const _titleAppBar = 'HCSlz App';
@@ -31,7 +30,7 @@ class HCSlzApp extends StatelessWidget {
             const Locale('en', ''), // English, no country code
             const Locale('pt_BR', ''), // Portuguese, no country code
           ],
-          builder: asuka.builder,
+          builder: Asuka.builder,
           debugShowCheckedModeBanner: false,
           home: LoginPage(),
           //home: TableEventsExample(),

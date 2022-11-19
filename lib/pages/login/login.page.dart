@@ -1,3 +1,4 @@
+import 'package:asuka/asuka.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:hcslzapp/models/template.dart';
@@ -10,25 +11,22 @@ import '../../components/my.text.form.field.dart';
 import '../../controllers/login.controller.dart';
 import '../../models/token.dart';
 import '../dashboard/dashboard.page.dart';
-import 'package:asuka/asuka.dart' as asuka;
 import '../access.request/access.request.add.page.dart';
 
 const String _pathLogoImage = 'assets/imgs/logo.png';
 const String _labelForgotPsw = 'Esqueceu a senha?';
-const String _labelFirstAcc = 'Primeiro acesso?';
+const String _labelFirstAcc = 'Não tem conta? Solicite acesso';
 
 class LoginPage extends StatelessWidget {
   final LoginController _controller = LoginController();
 
   @override
   Widget build(BuildContext context) {
-    return Observer(
-      builder: (_) {
-        return Scaffold(
-          body: _widgets(_),
-        );
-      },
-    );
+    return Observer(builder: (_) {
+      return Scaffold(
+        body: _widgets(_),
+      );
+    });
   }
 
   _widgets(BuildContext context) => Stack(
@@ -42,81 +40,77 @@ class LoginPage extends StatelessWidget {
               ),
             ),
             height: MediaQuery.of(context).size.height,
-            child: SingleChildScrollView(
-              child: Column(
-                children: <Widget>[
-                  SizedBox(
-                    height: 50.0,
-                  ),
-                  SizedBox(
-                    child: Image.asset(_pathLogoImage),
-                  ),
-                  SizedBox(
-                    height: 50.0,
-                  ),
-                  MyTextFormField(
-                    textEditingController: _controller.userLoginCtrl,
-                    label: labelUser,
-                    hint: hintUser,
-                    icon: Icons.person,
-                    inputType: TextInputType.text,
-                  ),
-                  MyTextFormField(
-                    textEditingController: _controller.pswLoginCtrl,
-                    label: labelPsw,
-                    hint: hintPsw,
-                    icon: Icons.vpn_key,
-                    inputType: TextInputType.text,
-                    hidden: true,
-                  ),
-                  SizedBox(
-                    height: 50.0,
-                  ),
-                  Button(
-                    icon: Icons.arrow_forward,
-                    onClick: () {
-                      _login(context);
+            child: ListView(
+              children: <Widget>[
+                SizedBox(
+                  height: 20.0,
+                ),
+                SizedBox(
+                  child: Image.asset(_pathLogoImage),
+                ),
+                SizedBox(
+                  height: 10.0,
+                ),
+                MyTextFormField(
+                  textEditingController: _controller.userLoginCtrl,
+                  label: labelUser,
+                  hint: hintUser,
+                  icon: Icons.person,
+                  inputType: TextInputType.text,
+                ),
+                MyTextFormField(
+                  textEditingController: _controller.pswLoginCtrl,
+                  label: labelPsw,
+                  hint: hintPsw,
+                  icon: Icons.vpn_key,
+                  inputType: TextInputType.text,
+                  hidden: true,
+                ),
+                Align(
+                  alignment: Alignment.centerRight,
+                  child: TextButton(
+                    onPressed: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => ForgotPasswordPage()),
+                      );
                     },
-                  ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      TextButton(
-                        onPressed: () {
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => ForgotPasswordPage()),
-                          );
-                        },
-                        child: Text(
-                          _labelForgotPsw,
-                          style: TextStyle(
-                            color: Colors.white,
-                            fontSize: 14.0,
-                          ),
-                        ),
+                    child: Text(
+                      _labelForgotPsw,
+                      style: TextStyle(
+                        color: Colors.white,
+                        fontSize: 10.0,
                       ),
-                      TextButton(
-                        onPressed: () {
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => AccessRequestAddPage()),
-                          );
-                        },
-                        child: Text(
-                          _labelFirstAcc,
-                          style: TextStyle(
-                            color: Colors.white,
-                            fontSize: 14.0,
-                          ),
-                        ),
-                      ),
-                    ],
+                    ),
                   ),
-                ],
-              ),
+                ),
+                Button(
+                  icon: Icons.arrow_forward,
+                  onClick: () {
+                    _login(context);
+                  },
+                ),
+                SizedBox(
+                  height: 20.0,
+                ),
+                TextButton(
+                  onPressed: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => AccessRequestAddPage()),
+                    );
+                  },
+                  child: Text(
+                    _labelFirstAcc,
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontSize: 10.0,
+                    ),
+                  ),
+                ),
+              ],
             ),
           ),
         ],
@@ -125,7 +119,7 @@ class LoginPage extends StatelessWidget {
   _login(BuildContext context) {
     if (_controller.userLoginCtrl.text.length > 0 &&
         _controller.pswLoginCtrl.text.length > 0) {
-      asuka.showSnackBar(
+      Asuka.showSnackBar(
         SnackBar(
           content: Text('Carregando...'),
         ),
@@ -133,7 +127,7 @@ class LoginPage extends StatelessWidget {
       _controller.authenticate().then(
         (token) async {
           if (token == null) {
-            asuka.showSnackBar(
+            Asuka.showSnackBar(
               SnackBar(
                 content: Text(_controller.errorMsg),
               ),
