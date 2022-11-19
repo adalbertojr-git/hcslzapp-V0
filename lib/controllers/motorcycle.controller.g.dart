@@ -6,10 +6,11 @@ part of 'motorcycle.controller.dart';
 // StoreGenerator
 // **************************************************************************
 
-// ignore_for_file: non_constant_identifier_names, unnecessary_brace_in_string_interps, unnecessary_lambdas, prefer_expression_function_bodies, lines_longer_than_80_chars, avoid_as, avoid_annotating_with_dynamic
+// ignore_for_file: non_constant_identifier_names, unnecessary_brace_in_string_interps, unnecessary_lambdas, prefer_expression_function_bodies, lines_longer_than_80_chars, avoid_as, avoid_annotating_with_dynamic, no_leading_underscores_for_local_identifiers
 
 mixin _$MotorcycleController on MotorcycleControllerBase, Store {
-  final _$idCtrlAtom = Atom(name: 'MotorcycleControllerBase.idCtrl');
+  late final _$idCtrlAtom =
+      Atom(name: 'MotorcycleControllerBase.idCtrl', context: context);
 
   @override
   TextEditingController get idCtrl {
@@ -24,7 +25,8 @@ mixin _$MotorcycleController on MotorcycleControllerBase, Store {
     });
   }
 
-  final _$modelCtrlAtom = Atom(name: 'MotorcycleControllerBase.modelCtrl');
+  late final _$modelCtrlAtom =
+      Atom(name: 'MotorcycleControllerBase.modelCtrl', context: context);
 
   @override
   TextEditingController? get modelCtrl {
@@ -39,7 +41,8 @@ mixin _$MotorcycleController on MotorcycleControllerBase, Store {
     });
   }
 
-  final _$yearCtrlAtom = Atom(name: 'MotorcycleControllerBase.yearCtrl');
+  late final _$yearCtrlAtom =
+      Atom(name: 'MotorcycleControllerBase.yearCtrl', context: context);
 
   @override
   TextEditingController? get yearCtrl {
@@ -54,7 +57,8 @@ mixin _$MotorcycleController on MotorcycleControllerBase, Store {
     });
   }
 
-  final _$colorCtrlAtom = Atom(name: 'MotorcycleControllerBase.colorCtrl');
+  late final _$colorCtrlAtom =
+      Atom(name: 'MotorcycleControllerBase.colorCtrl', context: context);
 
   @override
   TextEditingController? get colorCtrl {
@@ -69,8 +73,8 @@ mixin _$MotorcycleController on MotorcycleControllerBase, Store {
     });
   }
 
-  final _$licencePlateCtrlAtom =
-      Atom(name: 'MotorcycleControllerBase.licencePlateCtrl');
+  late final _$licencePlateCtrlAtom =
+      Atom(name: 'MotorcycleControllerBase.licencePlateCtrl', context: context);
 
   @override
   TextEditingController? get licencePlateCtrl {
@@ -85,8 +89,8 @@ mixin _$MotorcycleController on MotorcycleControllerBase, Store {
     });
   }
 
-  final _$nicknameCtrlAtom =
-      Atom(name: 'MotorcycleControllerBase.nicknameCtrl');
+  late final _$nicknameCtrlAtom =
+      Atom(name: 'MotorcycleControllerBase.nicknameCtrl', context: context);
 
   @override
   TextEditingController? get nicknameCtrl {
@@ -101,7 +105,8 @@ mixin _$MotorcycleController on MotorcycleControllerBase, Store {
     });
   }
 
-  final _$chassisCtrlAtom = Atom(name: 'MotorcycleControllerBase.chassisCtrl');
+  late final _$chassisCtrlAtom =
+      Atom(name: 'MotorcycleControllerBase.chassisCtrl', context: context);
 
   @override
   TextEditingController? get chassisCtrl {
@@ -116,7 +121,8 @@ mixin _$MotorcycleController on MotorcycleControllerBase, Store {
     });
   }
 
-  final _$renavamCtrlAtom = Atom(name: 'MotorcycleControllerBase.renavamCtrl');
+  late final _$renavamCtrlAtom =
+      Atom(name: 'MotorcycleControllerBase.renavamCtrl', context: context);
 
   @override
   TextEditingController? get renavamCtrl {
@@ -131,7 +137,8 @@ mixin _$MotorcycleController on MotorcycleControllerBase, Store {
     });
   }
 
-  final _$motorcycleAtom = Atom(name: 'MotorcycleControllerBase.motorcycle');
+  late final _$motorcycleAtom =
+      Atom(name: 'MotorcycleControllerBase.motorcycle', context: context);
 
   @override
   Motorcycle get motorcycle {
@@ -163,7 +170,8 @@ motorcycle: ${motorcycle}
 }
 
 mixin _$FormController on FormControllerBase, Store {
-  final _$modelAtom = Atom(name: 'FormControllerBase.model');
+  late final _$modelAtom =
+      Atom(name: 'FormControllerBase.model', context: context);
 
   @override
   String? get model {
@@ -178,8 +186,8 @@ mixin _$FormController on FormControllerBase, Store {
     });
   }
 
-  final _$FormControllerBaseActionController =
-      ActionController(name: 'FormControllerBase');
+  late final _$FormControllerBaseActionController =
+      ActionController(name: 'FormControllerBase', context: context);
 
   @override
   dynamic changeModel(String value) {

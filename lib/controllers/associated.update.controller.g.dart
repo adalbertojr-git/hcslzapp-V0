@@ -6,10 +6,11 @@ part of 'associated.update.controller.dart';
 // StoreGenerator
 // **************************************************************************
 
-// ignore_for_file: non_constant_identifier_names, unnecessary_brace_in_string_interps, unnecessary_lambdas, prefer_expression_function_bodies, lines_longer_than_80_chars, avoid_as, avoid_annotating_with_dynamic
+// ignore_for_file: non_constant_identifier_names, unnecessary_brace_in_string_interps, unnecessary_lambdas, prefer_expression_function_bodies, lines_longer_than_80_chars, avoid_as, avoid_annotating_with_dynamic, no_leading_underscores_for_local_identifiers
 
 mixin _$AssociatedUpdateController on AssociatedUpdateControllerBase, Store {
-  final _$idCtrlAtom = Atom(name: 'AssociatedUpdateControllerBase.idCtrl');
+  late final _$idCtrlAtom =
+      Atom(name: 'AssociatedUpdateControllerBase.idCtrl', context: context);
 
   @override
   TextEditingController get idCtrl {
@@ -24,7 +25,8 @@ mixin _$AssociatedUpdateController on AssociatedUpdateControllerBase, Store {
     });
   }
 
-  final _$nameCtrlAtom = Atom(name: 'AssociatedUpdateControllerBase.nameCtrl');
+  late final _$nameCtrlAtom =
+      Atom(name: 'AssociatedUpdateControllerBase.nameCtrl', context: context);
 
   @override
   TextEditingController get nameCtrl {
@@ -39,8 +41,8 @@ mixin _$AssociatedUpdateController on AssociatedUpdateControllerBase, Store {
     });
   }
 
-  final _$phoneCtrlAtom =
-      Atom(name: 'AssociatedUpdateControllerBase.phoneCtrl');
+  late final _$phoneCtrlAtom =
+      Atom(name: 'AssociatedUpdateControllerBase.phoneCtrl', context: context);
 
   @override
   TextEditingController get phoneCtrl {
@@ -55,8 +57,8 @@ mixin _$AssociatedUpdateController on AssociatedUpdateControllerBase, Store {
     });
   }
 
-  final _$emailCtrlAtom =
-      Atom(name: 'AssociatedUpdateControllerBase.emailCtrl');
+  late final _$emailCtrlAtom =
+      Atom(name: 'AssociatedUpdateControllerBase.emailCtrl', context: context);
 
   @override
   TextEditingController get emailCtrl {
@@ -71,8 +73,8 @@ mixin _$AssociatedUpdateController on AssociatedUpdateControllerBase, Store {
     });
   }
 
-  final _$sponsorCtrlAtom =
-      Atom(name: 'AssociatedUpdateControllerBase.sponsorCtrl');
+  late final _$sponsorCtrlAtom = Atom(
+      name: 'AssociatedUpdateControllerBase.sponsorCtrl', context: context);
 
   @override
   TextEditingController get sponsorCtrl {
@@ -87,8 +89,9 @@ mixin _$AssociatedUpdateController on AssociatedUpdateControllerBase, Store {
     });
   }
 
-  final _$associatedTypeCtrlAtom =
-      Atom(name: 'AssociatedUpdateControllerBase.associatedTypeCtrl');
+  late final _$associatedTypeCtrlAtom = Atom(
+      name: 'AssociatedUpdateControllerBase.associatedTypeCtrl',
+      context: context);
 
   @override
   TextEditingController get associatedTypeCtrl {
@@ -103,7 +106,8 @@ mixin _$AssociatedUpdateController on AssociatedUpdateControllerBase, Store {
     });
   }
 
-  final _$cnhCtrlAtom = Atom(name: 'AssociatedUpdateControllerBase.cnhCtrl');
+  late final _$cnhCtrlAtom =
+      Atom(name: 'AssociatedUpdateControllerBase.cnhCtrl', context: context);
 
   @override
   TextEditingController get cnhCtrl {
@@ -118,7 +122,8 @@ mixin _$AssociatedUpdateController on AssociatedUpdateControllerBase, Store {
     });
   }
 
-  final _$cpfCtrlAtom = Atom(name: 'AssociatedUpdateControllerBase.cpfCtrl');
+  late final _$cpfCtrlAtom =
+      Atom(name: 'AssociatedUpdateControllerBase.cpfCtrl', context: context);
 
   @override
   TextEditingController get cpfCtrl {
@@ -133,8 +138,8 @@ mixin _$AssociatedUpdateController on AssociatedUpdateControllerBase, Store {
     });
   }
 
-  final _$dateBirthCtrlAtom =
-      Atom(name: 'AssociatedUpdateControllerBase.dateBirthCtrl');
+  late final _$dateBirthCtrlAtom = Atom(
+      name: 'AssociatedUpdateControllerBase.dateBirthCtrl', context: context);
 
   @override
   TextEditingController get dateBirthCtrl {
@@ -149,8 +154,8 @@ mixin _$AssociatedUpdateController on AssociatedUpdateControllerBase, Store {
     });
   }
 
-  final _$dateShieldCtrlAtom =
-      Atom(name: 'AssociatedUpdateControllerBase.dateShieldCtrl');
+  late final _$dateShieldCtrlAtom = Atom(
+      name: 'AssociatedUpdateControllerBase.dateShieldCtrl', context: context);
 
   @override
   TextEditingController get dateShieldCtrl {
@@ -165,8 +170,8 @@ mixin _$AssociatedUpdateController on AssociatedUpdateControllerBase, Store {
     });
   }
 
-  final _$statusCtrlAtom =
-      Atom(name: 'AssociatedUpdateControllerBase.statusCtrl');
+  late final _$statusCtrlAtom =
+      Atom(name: 'AssociatedUpdateControllerBase.statusCtrl', context: context);
 
   @override
   TextEditingController get statusCtrl {
@@ -181,8 +186,8 @@ mixin _$AssociatedUpdateController on AssociatedUpdateControllerBase, Store {
     });
   }
 
-  final _$isHidedButtonAtom =
-      Atom(name: 'AssociatedUpdateControllerBase.isHidedButton');
+  late final _$isHidedButtonAtom = Atom(
+      name: 'AssociatedUpdateControllerBase.isHidedButton', context: context);
 
   @override
   bool get isHidedButton {
@@ -197,8 +202,8 @@ mixin _$AssociatedUpdateController on AssociatedUpdateControllerBase, Store {
     });
   }
 
-  final _$dependentsAtom =
-      Atom(name: 'AssociatedUpdateControllerBase.dependents');
+  late final _$dependentsAtom =
+      Atom(name: 'AssociatedUpdateControllerBase.dependents', context: context);
 
   @override
   ObservableList<dynamic> get dependents {
@@ -213,8 +218,8 @@ mixin _$AssociatedUpdateController on AssociatedUpdateControllerBase, Store {
     });
   }
 
-  final _$motorcyclesAtom =
-      Atom(name: 'AssociatedUpdateControllerBase.motorcycles');
+  late final _$motorcyclesAtom = Atom(
+      name: 'AssociatedUpdateControllerBase.motorcycles', context: context);
 
   @override
   ObservableList<dynamic> get motorcycles {
@@ -229,8 +234,8 @@ mixin _$AssociatedUpdateController on AssociatedUpdateControllerBase, Store {
     });
   }
 
-  final _$photoPathAtom =
-      Atom(name: 'AssociatedUpdateControllerBase.photoPath');
+  late final _$photoPathAtom =
+      Atom(name: 'AssociatedUpdateControllerBase.photoPath', context: context);
 
   @override
   String get photoPath {
@@ -245,7 +250,8 @@ mixin _$AssociatedUpdateController on AssociatedUpdateControllerBase, Store {
     });
   }
 
-  final _$photoUrlAtom = Atom(name: 'AssociatedUpdateControllerBase.photoUrl');
+  late final _$photoUrlAtom =
+      Atom(name: 'AssociatedUpdateControllerBase.photoUrl', context: context);
 
   @override
   String get photoUrl {
@@ -260,7 +266,8 @@ mixin _$AssociatedUpdateController on AssociatedUpdateControllerBase, Store {
     });
   }
 
-  final _$photoAtom = Atom(name: 'AssociatedUpdateControllerBase.photo');
+  late final _$photoAtom =
+      Atom(name: 'AssociatedUpdateControllerBase.photo', context: context);
 
   @override
   File get photo {
@@ -275,8 +282,8 @@ mixin _$AssociatedUpdateController on AssociatedUpdateControllerBase, Store {
     });
   }
 
-  final _$changedPhotoAtom =
-      Atom(name: 'AssociatedUpdateControllerBase.changedPhoto');
+  late final _$changedPhotoAtom = Atom(
+      name: 'AssociatedUpdateControllerBase.changedPhoto', context: context);
 
   @override
   bool get changedPhoto {
@@ -291,8 +298,8 @@ mixin _$AssociatedUpdateController on AssociatedUpdateControllerBase, Store {
     });
   }
 
-  final _$associatedAtom =
-      Atom(name: 'AssociatedUpdateControllerBase.associated');
+  late final _$associatedAtom =
+      Atom(name: 'AssociatedUpdateControllerBase.associated', context: context);
 
   @override
   Associated get associated {
@@ -307,8 +314,8 @@ mixin _$AssociatedUpdateController on AssociatedUpdateControllerBase, Store {
     });
   }
 
-  final _$_associatedRepoAtom =
-      Atom(name: 'AssociatedUpdateControllerBase._associatedRepo');
+  late final _$_associatedRepoAtom = Atom(
+      name: 'AssociatedUpdateControllerBase._associatedRepo', context: context);
 
   @override
   AssociatedRepo get _associatedRepo {
@@ -323,7 +330,8 @@ mixin _$AssociatedUpdateController on AssociatedUpdateControllerBase, Store {
     });
   }
 
-  final _$errorMsgAtom = Atom(name: 'AssociatedUpdateControllerBase.errorMsg');
+  late final _$errorMsgAtom =
+      Atom(name: 'AssociatedUpdateControllerBase.errorMsg', context: context);
 
   @override
   String get errorMsg {
@@ -338,7 +346,8 @@ mixin _$AssociatedUpdateController on AssociatedUpdateControllerBase, Store {
     });
   }
 
-  final _$futureAtom = Atom(name: 'AssociatedUpdateControllerBase.future');
+  late final _$futureAtom =
+      Atom(name: 'AssociatedUpdateControllerBase.future', context: context);
 
   @override
   Future<List<Associated>> get future {
@@ -353,8 +362,9 @@ mixin _$AssociatedUpdateController on AssociatedUpdateControllerBase, Store {
     });
   }
 
-  final _$currentBloodTypeAtom =
-      Atom(name: 'AssociatedUpdateControllerBase.currentBloodType');
+  late final _$currentBloodTypeAtom = Atom(
+      name: 'AssociatedUpdateControllerBase.currentBloodType',
+      context: context);
 
   @override
   String get currentBloodType {
@@ -369,8 +379,9 @@ mixin _$AssociatedUpdateController on AssociatedUpdateControllerBase, Store {
     });
   }
 
-  final _$currentAssociatedTypeAtom =
-      Atom(name: 'AssociatedUpdateControllerBase.currentAssociatedType');
+  late final _$currentAssociatedTypeAtom = Atom(
+      name: 'AssociatedUpdateControllerBase.currentAssociatedType',
+      context: context);
 
   @override
   String get currentAssociatedType {
@@ -386,8 +397,8 @@ mixin _$AssociatedUpdateController on AssociatedUpdateControllerBase, Store {
     });
   }
 
-  final _$currentStatusAtom =
-      Atom(name: 'AssociatedUpdateControllerBase.currentStatus');
+  late final _$currentStatusAtom = Atom(
+      name: 'AssociatedUpdateControllerBase.currentStatus', context: context);
 
   @override
   String get currentStatus {
@@ -402,16 +413,17 @@ mixin _$AssociatedUpdateController on AssociatedUpdateControllerBase, Store {
     });
   }
 
-  final _$updateAsyncAction =
-      AsyncAction('AssociatedUpdateControllerBase.update');
+  late final _$updateAsyncAction =
+      AsyncAction('AssociatedUpdateControllerBase.update', context: context);
 
   @override
   Future<dynamic> update(Associated associated) {
     return _$updateAsyncAction.run(() => super.update(associated));
   }
 
-  final _$getImageFromCameraAsyncAction =
-      AsyncAction('AssociatedUpdateControllerBase.getImageFromCamera');
+  late final _$getImageFromCameraAsyncAction = AsyncAction(
+      'AssociatedUpdateControllerBase.getImageFromCamera',
+      context: context);
 
   @override
   Future<dynamic> getImageFromCamera() {
@@ -419,8 +431,9 @@ mixin _$AssociatedUpdateController on AssociatedUpdateControllerBase, Store {
         .run(() => super.getImageFromCamera());
   }
 
-  final _$getImageFromGalleryAsyncAction =
-      AsyncAction('AssociatedUpdateControllerBase.getImageFromGallery');
+  late final _$getImageFromGalleryAsyncAction = AsyncAction(
+      'AssociatedUpdateControllerBase.getImageFromGallery',
+      context: context);
 
   @override
   Future<dynamic> getImageFromGallery() {
@@ -428,8 +441,9 @@ mixin _$AssociatedUpdateController on AssociatedUpdateControllerBase, Store {
         .run(() => super.getImageFromGallery());
   }
 
-  final _$AssociatedUpdateControllerBaseActionController =
-      ActionController(name: 'AssociatedUpdateControllerBase');
+  late final _$AssociatedUpdateControllerBaseActionController =
+      ActionController(
+          name: 'AssociatedUpdateControllerBase', context: context);
 
   @override
   bool setButtonVisibilty() {
@@ -485,7 +499,8 @@ currentStatus: ${currentStatus}
 }
 
 mixin _$FormController on FormControllerBase, Store {
-  final _$nameAtom = Atom(name: 'FormControllerBase.name');
+  late final _$nameAtom =
+      Atom(name: 'FormControllerBase.name', context: context);
 
   @override
   String? get name {
@@ -500,7 +515,8 @@ mixin _$FormController on FormControllerBase, Store {
     });
   }
 
-  final _$emailAtom = Atom(name: 'FormControllerBase.email');
+  late final _$emailAtom =
+      Atom(name: 'FormControllerBase.email', context: context);
 
   @override
   String? get email {
@@ -515,8 +531,8 @@ mixin _$FormController on FormControllerBase, Store {
     });
   }
 
-  final _$FormControllerBaseActionController =
-      ActionController(name: 'FormControllerBase');
+  late final _$FormControllerBaseActionController =
+      ActionController(name: 'FormControllerBase', context: context);
 
   @override
   dynamic changeName(String value) {

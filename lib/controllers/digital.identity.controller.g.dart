@@ -6,10 +6,11 @@ part of 'digital.identity.controller.dart';
 // StoreGenerator
 // **************************************************************************
 
-// ignore_for_file: non_constant_identifier_names, unnecessary_brace_in_string_interps, unnecessary_lambdas, prefer_expression_function_bodies, lines_longer_than_80_chars, avoid_as, avoid_annotating_with_dynamic
+// ignore_for_file: non_constant_identifier_names, unnecessary_brace_in_string_interps, unnecessary_lambdas, prefer_expression_function_bodies, lines_longer_than_80_chars, avoid_as, avoid_annotating_with_dynamic, no_leading_underscores_for_local_identifiers
 
 mixin _$DigitalIdentityController on DigitalIdentityControllerBase, Store {
-  final _$nameCtrlAtom = Atom(name: 'DigitalIdentityControllerBase.nameCtrl');
+  late final _$nameCtrlAtom =
+      Atom(name: 'DigitalIdentityControllerBase.nameCtrl', context: context);
 
   @override
   TextEditingController get nameCtrl {
@@ -24,8 +25,9 @@ mixin _$DigitalIdentityController on DigitalIdentityControllerBase, Store {
     });
   }
 
-  final _$associatedTypeCtrlAtom =
-      Atom(name: 'DigitalIdentityControllerBase.associatedTypeCtrl');
+  late final _$associatedTypeCtrlAtom = Atom(
+      name: 'DigitalIdentityControllerBase.associatedTypeCtrl',
+      context: context);
 
   @override
   TextEditingController get associatedTypeCtrl {
@@ -40,7 +42,8 @@ mixin _$DigitalIdentityController on DigitalIdentityControllerBase, Store {
     });
   }
 
-  final _$cnhCtrlAtom = Atom(name: 'DigitalIdentityControllerBase.cnhCtrl');
+  late final _$cnhCtrlAtom =
+      Atom(name: 'DigitalIdentityControllerBase.cnhCtrl', context: context);
 
   @override
   TextEditingController get cnhCtrl {
@@ -55,7 +58,8 @@ mixin _$DigitalIdentityController on DigitalIdentityControllerBase, Store {
     });
   }
 
-  final _$cpfCtrlAtom = Atom(name: 'DigitalIdentityControllerBase.cpfCtrl');
+  late final _$cpfCtrlAtom =
+      Atom(name: 'DigitalIdentityControllerBase.cpfCtrl', context: context);
 
   @override
   TextEditingController get cpfCtrl {
@@ -70,8 +74,8 @@ mixin _$DigitalIdentityController on DigitalIdentityControllerBase, Store {
     });
   }
 
-  final _$dateBirthCtrlAtom =
-      Atom(name: 'DigitalIdentityControllerBase.dateBirthCtrl');
+  late final _$dateBirthCtrlAtom = Atom(
+      name: 'DigitalIdentityControllerBase.dateBirthCtrl', context: context);
 
   @override
   TextEditingController get dateBirthCtrl {
@@ -86,8 +90,8 @@ mixin _$DigitalIdentityController on DigitalIdentityControllerBase, Store {
     });
   }
 
-  final _$dateShieldCtrlAtom =
-      Atom(name: 'DigitalIdentityControllerBase.dateShieldCtrl');
+  late final _$dateShieldCtrlAtom = Atom(
+      name: 'DigitalIdentityControllerBase.dateShieldCtrl', context: context);
 
   @override
   TextEditingController get dateShieldCtrl {
@@ -102,8 +106,8 @@ mixin _$DigitalIdentityController on DigitalIdentityControllerBase, Store {
     });
   }
 
-  final _$bloodTypeCtrlAtom =
-      Atom(name: 'DigitalIdentityControllerBase.bloodTypeCtrl');
+  late final _$bloodTypeCtrlAtom = Atom(
+      name: 'DigitalIdentityControllerBase.bloodTypeCtrl', context: context);
 
   @override
   TextEditingController get bloodTypeCtrl {
@@ -118,8 +122,8 @@ mixin _$DigitalIdentityController on DigitalIdentityControllerBase, Store {
     });
   }
 
-  final _$dueDateCtrlAtom =
-      Atom(name: 'DigitalIdentityControllerBase.dueDateCtrl');
+  late final _$dueDateCtrlAtom =
+      Atom(name: 'DigitalIdentityControllerBase.dueDateCtrl', context: context);
 
   @override
   TextEditingController get dueDateCtrl {
@@ -134,8 +138,8 @@ mixin _$DigitalIdentityController on DigitalIdentityControllerBase, Store {
     });
   }
 
-  final _$digitalIdentityAtom =
-      Atom(name: 'DigitalIdentityControllerBase.digitalIdentity');
+  late final _$digitalIdentityAtom = Atom(
+      name: 'DigitalIdentityControllerBase.digitalIdentity', context: context);
 
   @override
   DigitalIdentity get digitalIdentity {
@@ -150,8 +154,9 @@ mixin _$DigitalIdentityController on DigitalIdentityControllerBase, Store {
     });
   }
 
-  final _$_digitalIdentityRepoAtom =
-      Atom(name: 'DigitalIdentityControllerBase._digitalIdentityRepo');
+  late final _$_digitalIdentityRepoAtom = Atom(
+      name: 'DigitalIdentityControllerBase._digitalIdentityRepo',
+      context: context);
 
   @override
   DigitalIdentityRepo get _digitalIdentityRepo {
@@ -167,7 +172,8 @@ mixin _$DigitalIdentityController on DigitalIdentityControllerBase, Store {
     });
   }
 
-  final _$futureAtom = Atom(name: 'DigitalIdentityControllerBase.future');
+  late final _$futureAtom =
+      Atom(name: 'DigitalIdentityControllerBase.future', context: context);
 
   @override
   Future<List<DigitalIdentity>> get future {
@@ -182,7 +188,8 @@ mixin _$DigitalIdentityController on DigitalIdentityControllerBase, Store {
     });
   }
 
-  final _$errorMsgAtom = Atom(name: 'DigitalIdentityControllerBase.errorMsg');
+  late final _$errorMsgAtom =
+      Atom(name: 'DigitalIdentityControllerBase.errorMsg', context: context);
 
   @override
   String get errorMsg {
@@ -197,8 +204,8 @@ mixin _$DigitalIdentityController on DigitalIdentityControllerBase, Store {
     });
   }
 
-  final _$DigitalIdentityControllerBaseActionController =
-      ActionController(name: 'DigitalIdentityControllerBase');
+  late final _$DigitalIdentityControllerBaseActionController =
+      ActionController(name: 'DigitalIdentityControllerBase', context: context);
 
   @override
   Future<List<DigitalIdentity>> findAssociatedByIdToList(int id) {

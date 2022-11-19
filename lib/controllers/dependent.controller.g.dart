@@ -6,10 +6,11 @@ part of 'dependent.controller.dart';
 // StoreGenerator
 // **************************************************************************
 
-// ignore_for_file: non_constant_identifier_names, unnecessary_brace_in_string_interps, unnecessary_lambdas, prefer_expression_function_bodies, lines_longer_than_80_chars, avoid_as, avoid_annotating_with_dynamic
+// ignore_for_file: non_constant_identifier_names, unnecessary_brace_in_string_interps, unnecessary_lambdas, prefer_expression_function_bodies, lines_longer_than_80_chars, avoid_as, avoid_annotating_with_dynamic, no_leading_underscores_for_local_identifiers
 
 mixin _$DependentController on DependentControllerBase, Store {
-  final _$idCtrlAtom = Atom(name: 'DependentControllerBase.idCtrl');
+  late final _$idCtrlAtom =
+      Atom(name: 'DependentControllerBase.idCtrl', context: context);
 
   @override
   TextEditingController get idCtrl {
@@ -24,7 +25,8 @@ mixin _$DependentController on DependentControllerBase, Store {
     });
   }
 
-  final _$nameCtrlAtom = Atom(name: 'DependentControllerBase.nameCtrl');
+  late final _$nameCtrlAtom =
+      Atom(name: 'DependentControllerBase.nameCtrl', context: context);
 
   @override
   TextEditingController? get nameCtrl {
@@ -39,7 +41,8 @@ mixin _$DependentController on DependentControllerBase, Store {
     });
   }
 
-  final _$phoneCtrlAtom = Atom(name: 'DependentControllerBase.phoneCtrl');
+  late final _$phoneCtrlAtom =
+      Atom(name: 'DependentControllerBase.phoneCtrl', context: context);
 
   @override
   TextEditingController? get phoneCtrl {
@@ -54,7 +57,8 @@ mixin _$DependentController on DependentControllerBase, Store {
     });
   }
 
-  final _$emailCtrlAtom = Atom(name: 'DependentControllerBase.emailCtrl');
+  late final _$emailCtrlAtom =
+      Atom(name: 'DependentControllerBase.emailCtrl', context: context);
 
   @override
   TextEditingController? get emailCtrl {
@@ -69,7 +73,8 @@ mixin _$DependentController on DependentControllerBase, Store {
     });
   }
 
-  final _$cpfCtrlAtom = Atom(name: 'DependentControllerBase.cpfCtrl');
+  late final _$cpfCtrlAtom =
+      Atom(name: 'DependentControllerBase.cpfCtrl', context: context);
 
   @override
   TextEditingController? get cpfCtrl {
@@ -84,8 +89,8 @@ mixin _$DependentController on DependentControllerBase, Store {
     });
   }
 
-  final _$bloodTypeCtrlAtom =
-      Atom(name: 'DependentControllerBase.bloodTypeCtrl');
+  late final _$bloodTypeCtrlAtom =
+      Atom(name: 'DependentControllerBase.bloodTypeCtrl', context: context);
 
   @override
   TextEditingController? get bloodTypeCtrl {
@@ -100,8 +105,8 @@ mixin _$DependentController on DependentControllerBase, Store {
     });
   }
 
-  final _$dateBirthCtrlAtom =
-      Atom(name: 'DependentControllerBase.dateBirthCtrl');
+  late final _$dateBirthCtrlAtom =
+      Atom(name: 'DependentControllerBase.dateBirthCtrl', context: context);
 
   @override
   TextEditingController? get dateBirthCtrl {
@@ -116,8 +121,8 @@ mixin _$DependentController on DependentControllerBase, Store {
     });
   }
 
-  final _$isAssociatedCtrlAtom =
-      Atom(name: 'DependentControllerBase.isAssociatedCtrl');
+  late final _$isAssociatedCtrlAtom =
+      Atom(name: 'DependentControllerBase.isAssociatedCtrl', context: context);
 
   @override
   TextEditingController? get isAssociatedCtrl {
@@ -132,7 +137,8 @@ mixin _$DependentController on DependentControllerBase, Store {
     });
   }
 
-  final _$isAssociatedAtom = Atom(name: 'DependentControllerBase.isAssociated');
+  late final _$isAssociatedAtom =
+      Atom(name: 'DependentControllerBase.isAssociated', context: context);
 
   @override
   bool get isAssociated {
@@ -147,8 +153,8 @@ mixin _$DependentController on DependentControllerBase, Store {
     });
   }
 
-  final _$currentBloodTypeAtom =
-      Atom(name: 'DependentControllerBase.currentBloodType');
+  late final _$currentBloodTypeAtom =
+      Atom(name: 'DependentControllerBase.currentBloodType', context: context);
 
   @override
   String get currentBloodType {
@@ -163,7 +169,8 @@ mixin _$DependentController on DependentControllerBase, Store {
     });
   }
 
-  final _$dependentAtom = Atom(name: 'DependentControllerBase.dependent');
+  late final _$dependentAtom =
+      Atom(name: 'DependentControllerBase.dependent', context: context);
 
   @override
   Dependent get dependent {
@@ -178,8 +185,8 @@ mixin _$DependentController on DependentControllerBase, Store {
     });
   }
 
-  final _$DependentControllerBaseActionController =
-      ActionController(name: 'DependentControllerBase');
+  late final _$DependentControllerBaseActionController =
+      ActionController(name: 'DependentControllerBase', context: context);
 
   @override
   dynamic setAssociated() {
@@ -211,7 +218,8 @@ dependent: ${dependent}
 }
 
 mixin _$FormController on FormControllerBase, Store {
-  final _$nameAtom = Atom(name: 'FormControllerBase.name');
+  late final _$nameAtom =
+      Atom(name: 'FormControllerBase.name', context: context);
 
   @override
   String? get name {
@@ -226,7 +234,8 @@ mixin _$FormController on FormControllerBase, Store {
     });
   }
 
-  final _$emailAtom = Atom(name: 'FormControllerBase.email');
+  late final _$emailAtom =
+      Atom(name: 'FormControllerBase.email', context: context);
 
   @override
   String? get email {
@@ -241,8 +250,8 @@ mixin _$FormController on FormControllerBase, Store {
     });
   }
 
-  final _$FormControllerBaseActionController =
-      ActionController(name: 'FormControllerBase');
+  late final _$FormControllerBaseActionController =
+      ActionController(name: 'FormControllerBase', context: context);
 
   @override
   dynamic changeName(String value) {

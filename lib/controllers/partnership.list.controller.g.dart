@@ -6,11 +6,11 @@ part of 'partnership.list.controller.dart';
 // StoreGenerator
 // **************************************************************************
 
-// ignore_for_file: non_constant_identifier_names, unnecessary_brace_in_string_interps, unnecessary_lambdas, prefer_expression_function_bodies, lines_longer_than_80_chars, avoid_as, avoid_annotating_with_dynamic
+// ignore_for_file: non_constant_identifier_names, unnecessary_brace_in_string_interps, unnecessary_lambdas, prefer_expression_function_bodies, lines_longer_than_80_chars, avoid_as, avoid_annotating_with_dynamic, no_leading_underscores_for_local_identifiers
 
 mixin _$PartnershipListController on PartnershipListControllerBase, Store {
-  final _$isHidedButtonAtom =
-      Atom(name: 'PartnershipListControllerBase.isHidedButton');
+  late final _$isHidedButtonAtom = Atom(
+      name: 'PartnershipListControllerBase.isHidedButton', context: context);
 
   @override
   bool get isHidedButton {
@@ -25,8 +25,8 @@ mixin _$PartnershipListController on PartnershipListControllerBase, Store {
     });
   }
 
-  final _$partnershipAtom =
-      Atom(name: 'PartnershipListControllerBase.partnership');
+  late final _$partnershipAtom =
+      Atom(name: 'PartnershipListControllerBase.partnership', context: context);
 
   @override
   Partnership get partnership {
@@ -41,8 +41,8 @@ mixin _$PartnershipListController on PartnershipListControllerBase, Store {
     });
   }
 
-  final _$partnershipsAtom =
-      Atom(name: 'PartnershipListControllerBase.partnerships');
+  late final _$partnershipsAtom = Atom(
+      name: 'PartnershipListControllerBase.partnerships', context: context);
 
   @override
   ObservableList<dynamic> get partnerships {
@@ -57,8 +57,9 @@ mixin _$PartnershipListController on PartnershipListControllerBase, Store {
     });
   }
 
-  final _$activePartnershipsAtom =
-      Atom(name: 'PartnershipListControllerBase.activePartnerships');
+  late final _$activePartnershipsAtom = Atom(
+      name: 'PartnershipListControllerBase.activePartnerships',
+      context: context);
 
   @override
   ObservableList<dynamic> get activePartnerships {
@@ -73,8 +74,8 @@ mixin _$PartnershipListController on PartnershipListControllerBase, Store {
     });
   }
 
-  final _$_partnershipRepoAtom =
-      Atom(name: 'PartnershipListControllerBase._partnershipRepo');
+  late final _$_partnershipRepoAtom = Atom(
+      name: 'PartnershipListControllerBase._partnershipRepo', context: context);
 
   @override
   PartnershipRepo get _partnershipRepo {
@@ -89,7 +90,8 @@ mixin _$PartnershipListController on PartnershipListControllerBase, Store {
     });
   }
 
-  final _$futureAtom = Atom(name: 'PartnershipListControllerBase.future');
+  late final _$futureAtom =
+      Atom(name: 'PartnershipListControllerBase.future', context: context);
 
   @override
   Future<List<Partnership>> get future {
@@ -104,7 +106,8 @@ mixin _$PartnershipListController on PartnershipListControllerBase, Store {
     });
   }
 
-  final _$errorMsgAtom = Atom(name: 'PartnershipListControllerBase.errorMsg');
+  late final _$errorMsgAtom =
+      Atom(name: 'PartnershipListControllerBase.errorMsg', context: context);
 
   @override
   String get errorMsg {
@@ -119,8 +122,8 @@ mixin _$PartnershipListController on PartnershipListControllerBase, Store {
     });
   }
 
-  final _$pageControllerAtom =
-      Atom(name: 'PartnershipListControllerBase.pageController');
+  late final _$pageControllerAtom = Atom(
+      name: 'PartnershipListControllerBase.pageController', context: context);
 
   @override
   PageController get pageController {
@@ -135,8 +138,8 @@ mixin _$PartnershipListController on PartnershipListControllerBase, Store {
     });
   }
 
-  final _$currentPageAtom =
-      Atom(name: 'PartnershipListControllerBase.currentPage');
+  late final _$currentPageAtom =
+      Atom(name: 'PartnershipListControllerBase.currentPage', context: context);
 
   @override
   int get currentPage {
@@ -151,7 +154,8 @@ mixin _$PartnershipListController on PartnershipListControllerBase, Store {
     });
   }
 
-  final _$pageAtom = Atom(name: 'PartnershipListControllerBase.page');
+  late final _$pageAtom =
+      Atom(name: 'PartnershipListControllerBase.page', context: context);
 
   @override
   double get page {
@@ -166,7 +170,8 @@ mixin _$PartnershipListController on PartnershipListControllerBase, Store {
     });
   }
 
-  final _$filterAtom = Atom(name: 'PartnershipListControllerBase.filter');
+  late final _$filterAtom =
+      Atom(name: 'PartnershipListControllerBase.filter', context: context);
 
   @override
   String get filter {
@@ -181,8 +186,8 @@ mixin _$PartnershipListController on PartnershipListControllerBase, Store {
     });
   }
 
-  final _$PartnershipListControllerBaseActionController =
-      ActionController(name: 'PartnershipListControllerBase');
+  late final _$PartnershipListControllerBaseActionController =
+      ActionController(name: 'PartnershipListControllerBase', context: context);
 
   @override
   bool setButtonVisibilty() {

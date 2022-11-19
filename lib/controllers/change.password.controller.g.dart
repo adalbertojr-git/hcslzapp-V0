@@ -6,10 +6,11 @@ part of 'change.password.controller.dart';
 // StoreGenerator
 // **************************************************************************
 
-// ignore_for_file: non_constant_identifier_names, unnecessary_brace_in_string_interps, unnecessary_lambdas, prefer_expression_function_bodies, lines_longer_than_80_chars, avoid_as, avoid_annotating_with_dynamic
+// ignore_for_file: non_constant_identifier_names, unnecessary_brace_in_string_interps, unnecessary_lambdas, prefer_expression_function_bodies, lines_longer_than_80_chars, avoid_as, avoid_annotating_with_dynamic, no_leading_underscores_for_local_identifiers
 
 mixin _$ChangePasswordController on ChangePasswordControllerBase, Store {
-  final _$pswCtrlAtom = Atom(name: 'ChangePasswordControllerBase.pswCtrl');
+  late final _$pswCtrlAtom =
+      Atom(name: 'ChangePasswordControllerBase.pswCtrl', context: context);
 
   @override
   TextEditingController get pswCtrl {
@@ -24,8 +25,8 @@ mixin _$ChangePasswordController on ChangePasswordControllerBase, Store {
     });
   }
 
-  final _$confPswCtrlAtom =
-      Atom(name: 'ChangePasswordControllerBase.confPswCtrl');
+  late final _$confPswCtrlAtom =
+      Atom(name: 'ChangePasswordControllerBase.confPswCtrl', context: context);
 
   @override
   TextEditingController get confPswCtrl {
@@ -40,7 +41,8 @@ mixin _$ChangePasswordController on ChangePasswordControllerBase, Store {
     });
   }
 
-  final _$errorMsgAtom = Atom(name: 'ChangePasswordControllerBase.errorMsg');
+  late final _$errorMsgAtom =
+      Atom(name: 'ChangePasswordControllerBase.errorMsg', context: context);
 
   @override
   String get errorMsg {
@@ -55,8 +57,9 @@ mixin _$ChangePasswordController on ChangePasswordControllerBase, Store {
     });
   }
 
-  final _$_changePasswordRepoAtom =
-      Atom(name: 'ChangePasswordControllerBase._changePasswordRepo');
+  late final _$_changePasswordRepoAtom = Atom(
+      name: 'ChangePasswordControllerBase._changePasswordRepo',
+      context: context);
 
   @override
   ChangePasswordRepo get _changePasswordRepo {
@@ -71,8 +74,8 @@ mixin _$ChangePasswordController on ChangePasswordControllerBase, Store {
     });
   }
 
-  final _$ChangePasswordControllerBaseActionController =
-      ActionController(name: 'ChangePasswordControllerBase');
+  late final _$ChangePasswordControllerBaseActionController =
+      ActionController(name: 'ChangePasswordControllerBase', context: context);
 
   @override
   Future<dynamic> update(PasswordDTO passwordDTO) {
@@ -96,7 +99,8 @@ errorMsg: ${errorMsg}
 }
 
 mixin _$FormController on FormControllerBase, Store {
-  final _$passwordAtom = Atom(name: 'FormControllerBase.password');
+  late final _$passwordAtom =
+      Atom(name: 'FormControllerBase.password', context: context);
 
   @override
   String? get password {
@@ -111,7 +115,8 @@ mixin _$FormController on FormControllerBase, Store {
     });
   }
 
-  final _$confPasswordAtom = Atom(name: 'FormControllerBase.confPassword');
+  late final _$confPasswordAtom =
+      Atom(name: 'FormControllerBase.confPassword', context: context);
 
   @override
   String? get confPassword {
@@ -126,8 +131,8 @@ mixin _$FormController on FormControllerBase, Store {
     });
   }
 
-  final _$FormControllerBaseActionController =
-      ActionController(name: 'FormControllerBase');
+  late final _$FormControllerBaseActionController =
+      ActionController(name: 'FormControllerBase', context: context);
 
   @override
   dynamic changePassword(String value) {

@@ -6,10 +6,10 @@ part of 'item.model.dart';
 // StoreGenerator
 // **************************************************************************
 
-// ignore_for_file: non_constant_identifier_names, unnecessary_brace_in_string_interps, unnecessary_lambdas, prefer_expression_function_bodies, lines_longer_than_80_chars, avoid_as, avoid_annotating_with_dynamic
+// ignore_for_file: non_constant_identifier_names, unnecessary_brace_in_string_interps, unnecessary_lambdas, prefer_expression_function_bodies, lines_longer_than_80_chars, avoid_as, avoid_annotating_with_dynamic, no_leading_underscores_for_local_identifiers
 
 mixin _$ItemModel on ItemModelBase, Store {
-  final _$idAtom = Atom(name: 'ItemModelBase.id');
+  late final _$idAtom = Atom(name: 'ItemModelBase.id', context: context);
 
   @override
   int get id {
@@ -24,7 +24,7 @@ mixin _$ItemModel on ItemModelBase, Store {
     });
   }
 
-  final _$nameAtom = Atom(name: 'ItemModelBase.name');
+  late final _$nameAtom = Atom(name: 'ItemModelBase.name', context: context);
 
   @override
   String? get name {
@@ -39,7 +39,7 @@ mixin _$ItemModel on ItemModelBase, Store {
     });
   }
 
-  final _$phoneAtom = Atom(name: 'ItemModelBase.phone');
+  late final _$phoneAtom = Atom(name: 'ItemModelBase.phone', context: context);
 
   @override
   String? get phone {
@@ -54,7 +54,8 @@ mixin _$ItemModel on ItemModelBase, Store {
     });
   }
 
-  final _$statusAtom = Atom(name: 'ItemModelBase.status');
+  late final _$statusAtom =
+      Atom(name: 'ItemModelBase.status', context: context);
 
   @override
   String? get status {
@@ -69,7 +70,8 @@ mixin _$ItemModel on ItemModelBase, Store {
     });
   }
 
-  final _$authenticateAtom = Atom(name: 'ItemModelBase.authenticate');
+  late final _$authenticateAtom =
+      Atom(name: 'ItemModelBase.authenticate', context: context);
 
   @override
   Authenticate? get authenticate {
@@ -84,7 +86,7 @@ mixin _$ItemModel on ItemModelBase, Store {
     });
   }
 
-  final _$emailAtom = Atom(name: 'ItemModelBase.email');
+  late final _$emailAtom = Atom(name: 'ItemModelBase.email', context: context);
 
   @override
   String? get email {
@@ -99,7 +101,7 @@ mixin _$ItemModel on ItemModelBase, Store {
     });
   }
 
-  final _$userAtom = Atom(name: 'ItemModelBase.user');
+  late final _$userAtom = Atom(name: 'ItemModelBase.user', context: context);
 
   @override
   String? get user {
@@ -114,7 +116,8 @@ mixin _$ItemModel on ItemModelBase, Store {
     });
   }
 
-  final _$passwordAtom = Atom(name: 'ItemModelBase.password');
+  late final _$passwordAtom =
+      Atom(name: 'ItemModelBase.password', context: context);
 
   @override
   String? get password {
@@ -129,7 +132,7 @@ mixin _$ItemModel on ItemModelBase, Store {
     });
   }
 
-  final _$checkAtom = Atom(name: 'ItemModelBase.check');
+  late final _$checkAtom = Atom(name: 'ItemModelBase.check', context: context);
 
   @override
   bool? get check {
@@ -144,8 +147,8 @@ mixin _$ItemModel on ItemModelBase, Store {
     });
   }
 
-  final _$ItemModelBaseActionController =
-      ActionController(name: 'ItemModelBase');
+  late final _$ItemModelBaseActionController =
+      ActionController(name: 'ItemModelBase', context: context);
 
   @override
   dynamic setCheck(bool value) {

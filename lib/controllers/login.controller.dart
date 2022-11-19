@@ -13,6 +13,8 @@ part 'login.controller.g.dart';
 class LoginController = LoginControllerBase with _$LoginController;
 
 abstract class LoginControllerBase with Store {
+  var formController;
+
   @observable
   var userLoginCtrl = TextEditingController();
 
@@ -30,6 +32,10 @@ abstract class LoginControllerBase with Store {
 
   @observable
   AssociatedRepo _associatedRepo = AssociatedRepo();
+
+  init() {
+    formController = FormController(user: '', password: '');
+  }
 
   @action
   Future<Token> authenticate() => token = ObservableFuture(_loginRepo
@@ -61,4 +67,59 @@ abstract class LoginControllerBase with Store {
     const String _labelUser = 'user';
     await Glutton.eat(_labelUser, user);
   }
+
+  bool get hasErrors => hasErrorUser || hasErrorPassword;
+
+  bool get hasErrorUser => validateUser() != null;
+
+  bool get hasErrorPassword => validatePassword() != null;
+
+  String? validateUser() {
+    const String _labelUserRequired = 'Usuário é obrigatório!!!';
+    const String _labelUserLenght =
+        'Usuário deve ter no mínimo 4 caracteres!!!';
+
+    if (formController.user.isEmpty) {
+      return _labelUserRequired;
+    } else if (formController.user.toString().length < 4) {
+      return _labelUserLenght;
+    }
+    return null;
+  }
+
+  String? validatePassword() {
+    const String _labelPswRequired = 'Senha é obrigatória!!!';
+    const String _labelPswLenght = 'Senha deve ter no mínimo 6 caracteres!!!';
+
+    if (formController.password.isEmpty) {
+      return _labelPswRequired;
+    } else if (formController.password.toString().length < 6) {
+      return _labelPswLenght;
+    }
+    return null;
+  }
+}
+
+class FormController extends FormControllerBase with _$FormController {
+  FormController({
+    String? user,
+    String? password,
+  }) {
+    super.user = user;
+    super.password = password;
+  }
+}
+
+abstract class FormControllerBase with Store {
+  @observable
+  String? user;
+
+  @observable
+  String? password;
+
+  @action
+  changeUser(String value) => user = value;
+
+  @action
+  changePassword(String value) => password = value;
 }

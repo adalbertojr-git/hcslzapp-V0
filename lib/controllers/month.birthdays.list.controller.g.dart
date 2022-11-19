@@ -6,12 +6,12 @@ part of 'month.birthdays.list.controller.dart';
 // StoreGenerator
 // **************************************************************************
 
-// ignore_for_file: non_constant_identifier_names, unnecessary_brace_in_string_interps, unnecessary_lambdas, prefer_expression_function_bodies, lines_longer_than_80_chars, avoid_as, avoid_annotating_with_dynamic
+// ignore_for_file: non_constant_identifier_names, unnecessary_brace_in_string_interps, unnecessary_lambdas, prefer_expression_function_bodies, lines_longer_than_80_chars, avoid_as, avoid_annotating_with_dynamic, no_leading_underscores_for_local_identifiers
 
 mixin _$MonthBirthdaysListController
     on MonthBirthdaysListControllerBase, Store {
-  final _$isHidedButtonAtom =
-      Atom(name: 'MonthBirthdaysListControllerBase.isHidedButton');
+  late final _$isHidedButtonAtom = Atom(
+      name: 'MonthBirthdaysListControllerBase.isHidedButton', context: context);
 
   @override
   bool get isHidedButton {
@@ -26,8 +26,8 @@ mixin _$MonthBirthdaysListController
     });
   }
 
-  final _$associatedsAtom =
-      Atom(name: 'MonthBirthdaysListControllerBase.associateds');
+  late final _$associatedsAtom = Atom(
+      name: 'MonthBirthdaysListControllerBase.associateds', context: context);
 
   @override
   ObservableList<dynamic> get associateds {
@@ -42,8 +42,9 @@ mixin _$MonthBirthdaysListController
     });
   }
 
-  final _$_associatedRepoAtom =
-      Atom(name: 'MonthBirthdaysListControllerBase._associatedRepo');
+  late final _$_associatedRepoAtom = Atom(
+      name: 'MonthBirthdaysListControllerBase._associatedRepo',
+      context: context);
 
   @override
   AssociatedRepo get _associatedRepo {
@@ -58,8 +59,8 @@ mixin _$MonthBirthdaysListController
     });
   }
 
-  final _$errorMsgAtom =
-      Atom(name: 'MonthBirthdaysListControllerBase.errorMsg');
+  late final _$errorMsgAtom =
+      Atom(name: 'MonthBirthdaysListControllerBase.errorMsg', context: context);
 
   @override
   String get errorMsg {
@@ -74,7 +75,8 @@ mixin _$MonthBirthdaysListController
     });
   }
 
-  final _$futureAtom = Atom(name: 'MonthBirthdaysListControllerBase.future');
+  late final _$futureAtom =
+      Atom(name: 'MonthBirthdaysListControllerBase.future', context: context);
 
   @override
   Future<List<MonthBirthdays>> get future {
@@ -89,8 +91,9 @@ mixin _$MonthBirthdaysListController
     });
   }
 
-  final _$MonthBirthdaysListControllerBaseActionController =
-      ActionController(name: 'MonthBirthdaysListControllerBase');
+  late final _$MonthBirthdaysListControllerBaseActionController =
+      ActionController(
+          name: 'MonthBirthdaysListControllerBase', context: context);
 
   @override
   bool setButtonVisibilty() {

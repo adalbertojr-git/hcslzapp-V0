@@ -6,10 +6,11 @@ part of 'dashboard.controller.dart';
 // StoreGenerator
 // **************************************************************************
 
-// ignore_for_file: non_constant_identifier_names, unnecessary_brace_in_string_interps, unnecessary_lambdas, prefer_expression_function_bodies, lines_longer_than_80_chars, avoid_as, avoid_annotating_with_dynamic
+// ignore_for_file: non_constant_identifier_names, unnecessary_brace_in_string_interps, unnecessary_lambdas, prefer_expression_function_bodies, lines_longer_than_80_chars, avoid_as, avoid_annotating_with_dynamic, no_leading_underscores_for_local_identifiers
 
 mixin _$DashboardController on DashboardControllerBase, Store {
-  final _$photoUrlAtom = Atom(name: 'DashboardControllerBase.photoUrl');
+  late final _$photoUrlAtom =
+      Atom(name: 'DashboardControllerBase.photoUrl', context: context);
 
   @override
   String get photoUrl {
@@ -24,7 +25,8 @@ mixin _$DashboardController on DashboardControllerBase, Store {
     });
   }
 
-  final _$associatedAtom = Atom(name: 'DashboardControllerBase.associated');
+  late final _$associatedAtom =
+      Atom(name: 'DashboardControllerBase.associated', context: context);
 
   @override
   Associated get associated {
@@ -39,8 +41,8 @@ mixin _$DashboardController on DashboardControllerBase, Store {
     });
   }
 
-  final _$selectedProfileAtom =
-      Atom(name: 'DashboardControllerBase.selectedProfile');
+  late final _$selectedProfileAtom =
+      Atom(name: 'DashboardControllerBase.selectedProfile', context: context);
 
   @override
   String get selectedProfile {
@@ -55,8 +57,8 @@ mixin _$DashboardController on DashboardControllerBase, Store {
     });
   }
 
-  final _$DashboardControllerBaseActionController =
-      ActionController(name: 'DashboardControllerBase');
+  late final _$DashboardControllerBaseActionController =
+      ActionController(name: 'DashboardControllerBase', context: context);
 
   @override
   dynamic setPhoto(String value) {

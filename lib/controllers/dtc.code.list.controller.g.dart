@@ -6,7 +6,7 @@ part of 'dtc.code.list.controller.dart';
 // StoreGenerator
 // **************************************************************************
 
-// ignore_for_file: non_constant_identifier_names, unnecessary_brace_in_string_interps, unnecessary_lambdas, prefer_expression_function_bodies, lines_longer_than_80_chars, avoid_as, avoid_annotating_with_dynamic
+// ignore_for_file: non_constant_identifier_names, unnecessary_brace_in_string_interps, unnecessary_lambdas, prefer_expression_function_bodies, lines_longer_than_80_chars, avoid_as, avoid_annotating_with_dynamic, no_leading_underscores_for_local_identifiers
 
 mixin _$DtcCodeListController on DtcCodeListControllerBase, Store {
   Computed<List<DtcCode>>? _$listFilteredComputed;
@@ -17,7 +17,8 @@ mixin _$DtcCodeListController on DtcCodeListControllerBase, Store {
               name: 'DtcCodeListControllerBase.listFiltered'))
       .value;
 
-  final _$codeCtrlAtom = Atom(name: 'DtcCodeListControllerBase.codeCtrl');
+  late final _$codeCtrlAtom =
+      Atom(name: 'DtcCodeListControllerBase.codeCtrl', context: context);
 
   @override
   TextEditingController get codeCtrl {
@@ -32,8 +33,8 @@ mixin _$DtcCodeListController on DtcCodeListControllerBase, Store {
     });
   }
 
-  final _$isHidedButtonAtom =
-      Atom(name: 'DtcCodeListControllerBase.isHidedButton');
+  late final _$isHidedButtonAtom =
+      Atom(name: 'DtcCodeListControllerBase.isHidedButton', context: context);
 
   @override
   bool get isHidedButton {
@@ -48,7 +49,8 @@ mixin _$DtcCodeListController on DtcCodeListControllerBase, Store {
     });
   }
 
-  final _$codesAtom = Atom(name: 'DtcCodeListControllerBase.codes');
+  late final _$codesAtom =
+      Atom(name: 'DtcCodeListControllerBase.codes', context: context);
 
   @override
   ObservableList<dynamic> get codes {
@@ -63,8 +65,8 @@ mixin _$DtcCodeListController on DtcCodeListControllerBase, Store {
     });
   }
 
-  final _$_dtcCodeRepoAtom =
-      Atom(name: 'DtcCodeListControllerBase._dtcCodeRepo');
+  late final _$_dtcCodeRepoAtom =
+      Atom(name: 'DtcCodeListControllerBase._dtcCodeRepo', context: context);
 
   @override
   DtcCodeRepo get _dtcCodeRepo {
@@ -79,7 +81,8 @@ mixin _$DtcCodeListController on DtcCodeListControllerBase, Store {
     });
   }
 
-  final _$errorMsgAtom = Atom(name: 'DtcCodeListControllerBase.errorMsg');
+  late final _$errorMsgAtom =
+      Atom(name: 'DtcCodeListControllerBase.errorMsg', context: context);
 
   @override
   String get errorMsg {
@@ -94,7 +97,8 @@ mixin _$DtcCodeListController on DtcCodeListControllerBase, Store {
     });
   }
 
-  final _$futureAtom = Atom(name: 'DtcCodeListControllerBase.future');
+  late final _$futureAtom =
+      Atom(name: 'DtcCodeListControllerBase.future', context: context);
 
   @override
   Future<List<DtcCode>> get future {
@@ -109,7 +113,8 @@ mixin _$DtcCodeListController on DtcCodeListControllerBase, Store {
     });
   }
 
-  final _$filterAtom = Atom(name: 'DtcCodeListControllerBase.filter');
+  late final _$filterAtom =
+      Atom(name: 'DtcCodeListControllerBase.filter', context: context);
 
   @override
   String get filter {
@@ -124,8 +129,8 @@ mixin _$DtcCodeListController on DtcCodeListControllerBase, Store {
     });
   }
 
-  final _$DtcCodeListControllerBaseActionController =
-      ActionController(name: 'DtcCodeListControllerBase');
+  late final _$DtcCodeListControllerBaseActionController =
+      ActionController(name: 'DtcCodeListControllerBase', context: context);
 
   @override
   bool setButtonVisibilty() {

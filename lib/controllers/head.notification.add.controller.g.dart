@@ -6,11 +6,12 @@ part of 'head.notification.add.controller.dart';
 // StoreGenerator
 // **************************************************************************
 
-// ignore_for_file: non_constant_identifier_names, unnecessary_brace_in_string_interps, unnecessary_lambdas, prefer_expression_function_bodies, lines_longer_than_80_chars, avoid_as, avoid_annotating_with_dynamic
+// ignore_for_file: non_constant_identifier_names, unnecessary_brace_in_string_interps, unnecessary_lambdas, prefer_expression_function_bodies, lines_longer_than_80_chars, avoid_as, avoid_annotating_with_dynamic, no_leading_underscores_for_local_identifiers
 
 mixin _$HeadNotificationAddController
     on HeadNotificationAddControllerBase, Store {
-  final _$idCtrlAtom = Atom(name: 'HeadNotificationAddControllerBase.idCtrl');
+  late final _$idCtrlAtom =
+      Atom(name: 'HeadNotificationAddControllerBase.idCtrl', context: context);
 
   @override
   TextEditingController get idCtrl {
@@ -25,8 +26,8 @@ mixin _$HeadNotificationAddController
     });
   }
 
-  final _$titleCtrlAtom =
-      Atom(name: 'HeadNotificationAddControllerBase.titleCtrl');
+  late final _$titleCtrlAtom = Atom(
+      name: 'HeadNotificationAddControllerBase.titleCtrl', context: context);
 
   @override
   TextEditingController get titleCtrl {
@@ -41,8 +42,9 @@ mixin _$HeadNotificationAddController
     });
   }
 
-  final _$notificationCtrlAtom =
-      Atom(name: 'HeadNotificationAddControllerBase.notificationCtrl');
+  late final _$notificationCtrlAtom = Atom(
+      name: 'HeadNotificationAddControllerBase.notificationCtrl',
+      context: context);
 
   @override
   TextEditingController get notificationCtrl {
@@ -57,8 +59,9 @@ mixin _$HeadNotificationAddController
     });
   }
 
-  final _$headNotificationAtom =
-      Atom(name: 'HeadNotificationAddControllerBase.headNotification');
+  late final _$headNotificationAtom = Atom(
+      name: 'HeadNotificationAddControllerBase.headNotification',
+      context: context);
 
   @override
   HeadNotification get headNotification {
@@ -73,8 +76,9 @@ mixin _$HeadNotificationAddController
     });
   }
 
-  final _$_headNotificationRepoAtom =
-      Atom(name: 'HeadNotificationAddControllerBase._headNotificationRepo');
+  late final _$_headNotificationRepoAtom = Atom(
+      name: 'HeadNotificationAddControllerBase._headNotificationRepo',
+      context: context);
 
   @override
   HeadNotificationRepo get _headNotificationRepo {
@@ -90,8 +94,8 @@ mixin _$HeadNotificationAddController
     });
   }
 
-  final _$errorMsgAtom =
-      Atom(name: 'HeadNotificationAddControllerBase.errorMsg');
+  late final _$errorMsgAtom = Atom(
+      name: 'HeadNotificationAddControllerBase.errorMsg', context: context);
 
   @override
   String get errorMsg {
@@ -106,16 +110,16 @@ mixin _$HeadNotificationAddController
     });
   }
 
-  final _$saveAsyncAction =
-      AsyncAction('HeadNotificationAddControllerBase.save');
+  late final _$saveAsyncAction =
+      AsyncAction('HeadNotificationAddControllerBase.save', context: context);
 
   @override
   Future<dynamic> save() {
     return _$saveAsyncAction.run(() => super.save());
   }
 
-  final _$updateAsyncAction =
-      AsyncAction('HeadNotificationAddControllerBase.update');
+  late final _$updateAsyncAction =
+      AsyncAction('HeadNotificationAddControllerBase.update', context: context);
 
   @override
   Future<dynamic> update() {
@@ -135,7 +139,8 @@ errorMsg: ${errorMsg}
 }
 
 mixin _$FormController on FormControllerBase, Store {
-  final _$titleAtom = Atom(name: 'FormControllerBase.title');
+  late final _$titleAtom =
+      Atom(name: 'FormControllerBase.title', context: context);
 
   @override
   String? get title {
@@ -150,7 +155,8 @@ mixin _$FormController on FormControllerBase, Store {
     });
   }
 
-  final _$notificationAtom = Atom(name: 'FormControllerBase.notification');
+  late final _$notificationAtom =
+      Atom(name: 'FormControllerBase.notification', context: context);
 
   @override
   String? get notification {
@@ -165,8 +171,8 @@ mixin _$FormController on FormControllerBase, Store {
     });
   }
 
-  final _$FormControllerBaseActionController =
-      ActionController(name: 'FormControllerBase');
+  late final _$FormControllerBaseActionController =
+      ActionController(name: 'FormControllerBase', context: context);
 
   @override
   dynamic changeTitle(String value) {

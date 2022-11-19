@@ -6,11 +6,11 @@ part of 'payment.associated.controller.dart';
 // StoreGenerator
 // **************************************************************************
 
-// ignore_for_file: non_constant_identifier_names, unnecessary_brace_in_string_interps, unnecessary_lambdas, prefer_expression_function_bodies, lines_longer_than_80_chars, avoid_as, avoid_annotating_with_dynamic
+// ignore_for_file: non_constant_identifier_names, unnecessary_brace_in_string_interps, unnecessary_lambdas, prefer_expression_function_bodies, lines_longer_than_80_chars, avoid_as, avoid_annotating_with_dynamic, no_leading_underscores_for_local_identifiers
 
 mixin _$PaymentAssociatedController on PaymentAssociatedControllerBase, Store {
-  final _$isHidedButtonAtom =
-      Atom(name: 'PaymentAssociatedControllerBase.isHidedButton');
+  late final _$isHidedButtonAtom = Atom(
+      name: 'PaymentAssociatedControllerBase.isHidedButton', context: context);
 
   @override
   bool get isHidedButton {
@@ -25,7 +25,8 @@ mixin _$PaymentAssociatedController on PaymentAssociatedControllerBase, Store {
     });
   }
 
-  final _$paymentsAtom = Atom(name: 'PaymentAssociatedControllerBase.payments');
+  late final _$paymentsAtom =
+      Atom(name: 'PaymentAssociatedControllerBase.payments', context: context);
 
   @override
   ObservableList<dynamic> get payments {
@@ -40,7 +41,8 @@ mixin _$PaymentAssociatedController on PaymentAssociatedControllerBase, Store {
     });
   }
 
-  final _$paymentAtom = Atom(name: 'PaymentAssociatedControllerBase.payment');
+  late final _$paymentAtom =
+      Atom(name: 'PaymentAssociatedControllerBase.payment', context: context);
 
   @override
   Payment get payment {
@@ -55,8 +57,8 @@ mixin _$PaymentAssociatedController on PaymentAssociatedControllerBase, Store {
     });
   }
 
-  final _$_paymentRepoAtom =
-      Atom(name: 'PaymentAssociatedControllerBase._paymentRepo');
+  late final _$_paymentRepoAtom = Atom(
+      name: 'PaymentAssociatedControllerBase._paymentRepo', context: context);
 
   @override
   PaymentRepo get _paymentRepo {
@@ -71,7 +73,8 @@ mixin _$PaymentAssociatedController on PaymentAssociatedControllerBase, Store {
     });
   }
 
-  final _$errorMsgAtom = Atom(name: 'PaymentAssociatedControllerBase.errorMsg');
+  late final _$errorMsgAtom =
+      Atom(name: 'PaymentAssociatedControllerBase.errorMsg', context: context);
 
   @override
   String get errorMsg {
@@ -86,7 +89,8 @@ mixin _$PaymentAssociatedController on PaymentAssociatedControllerBase, Store {
     });
   }
 
-  final _$futureAtom = Atom(name: 'PaymentAssociatedControllerBase.future');
+  late final _$futureAtom =
+      Atom(name: 'PaymentAssociatedControllerBase.future', context: context);
 
   @override
   Future<List<Payment>> get future {
@@ -101,7 +105,8 @@ mixin _$PaymentAssociatedController on PaymentAssociatedControllerBase, Store {
     });
   }
 
-  final _$totalAtom = Atom(name: 'PaymentAssociatedControllerBase.total');
+  late final _$totalAtom =
+      Atom(name: 'PaymentAssociatedControllerBase.total', context: context);
 
   @override
   double get total {
@@ -116,8 +121,9 @@ mixin _$PaymentAssociatedController on PaymentAssociatedControllerBase, Store {
     });
   }
 
-  final _$PaymentAssociatedControllerBaseActionController =
-      ActionController(name: 'PaymentAssociatedControllerBase');
+  late final _$PaymentAssociatedControllerBaseActionController =
+      ActionController(
+          name: 'PaymentAssociatedControllerBase', context: context);
 
   @override
   bool setButtonVisibilty() {

@@ -6,7 +6,7 @@ part of 'payment.list.controller.dart';
 // StoreGenerator
 // **************************************************************************
 
-// ignore_for_file: non_constant_identifier_names, unnecessary_brace_in_string_interps, unnecessary_lambdas, prefer_expression_function_bodies, lines_longer_than_80_chars, avoid_as, avoid_annotating_with_dynamic
+// ignore_for_file: non_constant_identifier_names, unnecessary_brace_in_string_interps, unnecessary_lambdas, prefer_expression_function_bodies, lines_longer_than_80_chars, avoid_as, avoid_annotating_with_dynamic, no_leading_underscores_for_local_identifiers
 
 mixin _$PaymentListController on PaymentListControllerBase, Store {
   Computed<List<Associated>>? _$listFilteredComputed;
@@ -17,7 +17,8 @@ mixin _$PaymentListController on PaymentListControllerBase, Store {
               name: 'PaymentListControllerBase.listFiltered'))
       .value;
 
-  final _$nameCtrlAtom = Atom(name: 'PaymentListControllerBase.nameCtrl');
+  late final _$nameCtrlAtom =
+      Atom(name: 'PaymentListControllerBase.nameCtrl', context: context);
 
   @override
   TextEditingController get nameCtrl {
@@ -32,8 +33,8 @@ mixin _$PaymentListController on PaymentListControllerBase, Store {
     });
   }
 
-  final _$isHidedButtonAtom =
-      Atom(name: 'PaymentListControllerBase.isHidedButton');
+  late final _$isHidedButtonAtom =
+      Atom(name: 'PaymentListControllerBase.isHidedButton', context: context);
 
   @override
   bool get isHidedButton {
@@ -48,7 +49,8 @@ mixin _$PaymentListController on PaymentListControllerBase, Store {
     });
   }
 
-  final _$associatedsAtom = Atom(name: 'PaymentListControllerBase.associateds');
+  late final _$associatedsAtom =
+      Atom(name: 'PaymentListControllerBase.associateds', context: context);
 
   @override
   ObservableList<dynamic> get associateds {
@@ -63,8 +65,8 @@ mixin _$PaymentListController on PaymentListControllerBase, Store {
     });
   }
 
-  final _$_paymentTableRepoAtom =
-      Atom(name: 'PaymentListControllerBase._paymentTableRepo');
+  late final _$_paymentTableRepoAtom = Atom(
+      name: 'PaymentListControllerBase._paymentTableRepo', context: context);
 
   @override
   PaymentTableRepo get _paymentTableRepo {
@@ -79,8 +81,8 @@ mixin _$PaymentListController on PaymentListControllerBase, Store {
     });
   }
 
-  final _$_associatedRepoAtom =
-      Atom(name: 'PaymentListControllerBase._associatedRepo');
+  late final _$_associatedRepoAtom =
+      Atom(name: 'PaymentListControllerBase._associatedRepo', context: context);
 
   @override
   AssociatedRepo get _associatedRepo {
@@ -95,7 +97,8 @@ mixin _$PaymentListController on PaymentListControllerBase, Store {
     });
   }
 
-  final _$errorMsgAtom = Atom(name: 'PaymentListControllerBase.errorMsg');
+  late final _$errorMsgAtom =
+      Atom(name: 'PaymentListControllerBase.errorMsg', context: context);
 
   @override
   String get errorMsg {
@@ -110,7 +113,8 @@ mixin _$PaymentListController on PaymentListControllerBase, Store {
     });
   }
 
-  final _$futureAtom = Atom(name: 'PaymentListControllerBase.future');
+  late final _$futureAtom =
+      Atom(name: 'PaymentListControllerBase.future', context: context);
 
   @override
   Future<List<Associated>> get future {
@@ -125,7 +129,8 @@ mixin _$PaymentListController on PaymentListControllerBase, Store {
     });
   }
 
-  final _$filterAtom = Atom(name: 'PaymentListControllerBase.filter');
+  late final _$filterAtom =
+      Atom(name: 'PaymentListControllerBase.filter', context: context);
 
   @override
   String get filter {
@@ -140,8 +145,8 @@ mixin _$PaymentListController on PaymentListControllerBase, Store {
     });
   }
 
-  final _$PaymentListControllerBaseActionController =
-      ActionController(name: 'PaymentListControllerBase');
+  late final _$PaymentListControllerBaseActionController =
+      ActionController(name: 'PaymentListControllerBase', context: context);
 
   @override
   bool setButtonVisibilty() {

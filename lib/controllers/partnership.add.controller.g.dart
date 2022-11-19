@@ -6,10 +6,11 @@ part of 'partnership.add.controller.dart';
 // StoreGenerator
 // **************************************************************************
 
-// ignore_for_file: non_constant_identifier_names, unnecessary_brace_in_string_interps, unnecessary_lambdas, prefer_expression_function_bodies, lines_longer_than_80_chars, avoid_as, avoid_annotating_with_dynamic
+// ignore_for_file: non_constant_identifier_names, unnecessary_brace_in_string_interps, unnecessary_lambdas, prefer_expression_function_bodies, lines_longer_than_80_chars, avoid_as, avoid_annotating_with_dynamic, no_leading_underscores_for_local_identifiers
 
 mixin _$PartnershipAddController on PartnershipAddControllerBase, Store {
-  final _$idCtrlAtom = Atom(name: 'PartnershipAddControllerBase.idCtrl');
+  late final _$idCtrlAtom =
+      Atom(name: 'PartnershipAddControllerBase.idCtrl', context: context);
 
   @override
   TextEditingController get idCtrl {
@@ -24,8 +25,8 @@ mixin _$PartnershipAddController on PartnershipAddControllerBase, Store {
     });
   }
 
-  final _$partnerCtrlAtom =
-      Atom(name: 'PartnershipAddControllerBase.partnerCtrl');
+  late final _$partnerCtrlAtom =
+      Atom(name: 'PartnershipAddControllerBase.partnerCtrl', context: context);
 
   @override
   TextEditingController get partnerCtrl {
@@ -40,8 +41,8 @@ mixin _$PartnershipAddController on PartnershipAddControllerBase, Store {
     });
   }
 
-  final _$phone1CtrlAtom =
-      Atom(name: 'PartnershipAddControllerBase.phone1Ctrl');
+  late final _$phone1CtrlAtom =
+      Atom(name: 'PartnershipAddControllerBase.phone1Ctrl', context: context);
 
   @override
   TextEditingController get phone1Ctrl {
@@ -56,8 +57,8 @@ mixin _$PartnershipAddController on PartnershipAddControllerBase, Store {
     });
   }
 
-  final _$phone2CtrlAtom =
-      Atom(name: 'PartnershipAddControllerBase.phone2Ctrl');
+  late final _$phone2CtrlAtom =
+      Atom(name: 'PartnershipAddControllerBase.phone2Ctrl', context: context);
 
   @override
   TextEditingController get phone2Ctrl {
@@ -72,8 +73,8 @@ mixin _$PartnershipAddController on PartnershipAddControllerBase, Store {
     });
   }
 
-  final _$addressCtrlAtom =
-      Atom(name: 'PartnershipAddControllerBase.addressCtrl');
+  late final _$addressCtrlAtom =
+      Atom(name: 'PartnershipAddControllerBase.addressCtrl', context: context);
 
   @override
   TextEditingController get addressCtrl {
@@ -88,8 +89,8 @@ mixin _$PartnershipAddController on PartnershipAddControllerBase, Store {
     });
   }
 
-  final _$promotionCtrlAtom =
-      Atom(name: 'PartnershipAddControllerBase.promotionCtrl');
+  late final _$promotionCtrlAtom = Atom(
+      name: 'PartnershipAddControllerBase.promotionCtrl', context: context);
 
   @override
   TextEditingController get promotionCtrl {
@@ -104,8 +105,8 @@ mixin _$PartnershipAddController on PartnershipAddControllerBase, Store {
     });
   }
 
-  final _$statusCtrlAtom =
-      Atom(name: 'PartnershipAddControllerBase.statusCtrl');
+  late final _$statusCtrlAtom =
+      Atom(name: 'PartnershipAddControllerBase.statusCtrl', context: context);
 
   @override
   TextEditingController get statusCtrl {
@@ -120,7 +121,8 @@ mixin _$PartnershipAddController on PartnershipAddControllerBase, Store {
     });
   }
 
-  final _$photoUrlAtom = Atom(name: 'PartnershipAddControllerBase.photoUrl');
+  late final _$photoUrlAtom =
+      Atom(name: 'PartnershipAddControllerBase.photoUrl', context: context);
 
   @override
   String get photoUrl {
@@ -135,7 +137,8 @@ mixin _$PartnershipAddController on PartnershipAddControllerBase, Store {
     });
   }
 
-  final _$photoPathAtom = Atom(name: 'PartnershipAddControllerBase.photoPath');
+  late final _$photoPathAtom =
+      Atom(name: 'PartnershipAddControllerBase.photoPath', context: context);
 
   @override
   String get photoPath {
@@ -150,7 +153,8 @@ mixin _$PartnershipAddController on PartnershipAddControllerBase, Store {
     });
   }
 
-  final _$photoAtom = Atom(name: 'PartnershipAddControllerBase.photo');
+  late final _$photoAtom =
+      Atom(name: 'PartnershipAddControllerBase.photo', context: context);
 
   @override
   File get photo {
@@ -165,8 +169,8 @@ mixin _$PartnershipAddController on PartnershipAddControllerBase, Store {
     });
   }
 
-  final _$changedPhotoAtom =
-      Atom(name: 'PartnershipAddControllerBase.changedPhoto');
+  late final _$changedPhotoAtom =
+      Atom(name: 'PartnershipAddControllerBase.changedPhoto', context: context);
 
   @override
   bool get changedPhoto {
@@ -181,7 +185,8 @@ mixin _$PartnershipAddController on PartnershipAddControllerBase, Store {
     });
   }
 
-  final _$isActiveAtom = Atom(name: 'PartnershipAddControllerBase.isActive');
+  late final _$isActiveAtom =
+      Atom(name: 'PartnershipAddControllerBase.isActive', context: context);
 
   @override
   bool get isActive {
@@ -196,8 +201,8 @@ mixin _$PartnershipAddController on PartnershipAddControllerBase, Store {
     });
   }
 
-  final _$currentStatusAtom =
-      Atom(name: 'PartnershipAddControllerBase.currentStatus');
+  late final _$currentStatusAtom = Atom(
+      name: 'PartnershipAddControllerBase.currentStatus', context: context);
 
   @override
   String get currentStatus {
@@ -212,8 +217,8 @@ mixin _$PartnershipAddController on PartnershipAddControllerBase, Store {
     });
   }
 
-  final _$partnershipAtom =
-      Atom(name: 'PartnershipAddControllerBase.partnership');
+  late final _$partnershipAtom =
+      Atom(name: 'PartnershipAddControllerBase.partnership', context: context);
 
   @override
   Partnership get partnership {
@@ -228,8 +233,8 @@ mixin _$PartnershipAddController on PartnershipAddControllerBase, Store {
     });
   }
 
-  final _$_partnershipRepoAtom =
-      Atom(name: 'PartnershipAddControllerBase._partnershipRepo');
+  late final _$_partnershipRepoAtom = Atom(
+      name: 'PartnershipAddControllerBase._partnershipRepo', context: context);
 
   @override
   PartnershipRepo get _partnershipRepo {
@@ -244,7 +249,8 @@ mixin _$PartnershipAddController on PartnershipAddControllerBase, Store {
     });
   }
 
-  final _$errorMsgAtom = Atom(name: 'PartnershipAddControllerBase.errorMsg');
+  late final _$errorMsgAtom =
+      Atom(name: 'PartnershipAddControllerBase.errorMsg', context: context);
 
   @override
   String get errorMsg {
@@ -259,31 +265,33 @@ mixin _$PartnershipAddController on PartnershipAddControllerBase, Store {
     });
   }
 
-  final _$findAllAsyncAction =
-      AsyncAction('PartnershipAddControllerBase.findAll');
+  late final _$findAllAsyncAction =
+      AsyncAction('PartnershipAddControllerBase.findAll', context: context);
 
   @override
   Future<dynamic> findAll() {
     return _$findAllAsyncAction.run(() => super.findAll());
   }
 
-  final _$saveAsyncAction = AsyncAction('PartnershipAddControllerBase.save');
+  late final _$saveAsyncAction =
+      AsyncAction('PartnershipAddControllerBase.save', context: context);
 
   @override
   Future<dynamic> save() {
     return _$saveAsyncAction.run(() => super.save());
   }
 
-  final _$updateAsyncAction =
-      AsyncAction('PartnershipAddControllerBase.update');
+  late final _$updateAsyncAction =
+      AsyncAction('PartnershipAddControllerBase.update', context: context);
 
   @override
   Future<dynamic> update() {
     return _$updateAsyncAction.run(() => super.update());
   }
 
-  final _$getImageFromCameraAsyncAction =
-      AsyncAction('PartnershipAddControllerBase.getImageFromCamera');
+  late final _$getImageFromCameraAsyncAction = AsyncAction(
+      'PartnershipAddControllerBase.getImageFromCamera',
+      context: context);
 
   @override
   Future<dynamic> getImageFromCamera() {
@@ -291,8 +299,9 @@ mixin _$PartnershipAddController on PartnershipAddControllerBase, Store {
         .run(() => super.getImageFromCamera());
   }
 
-  final _$getImageFromGalleryAsyncAction =
-      AsyncAction('PartnershipAddControllerBase.getImageFromGallery');
+  late final _$getImageFromGalleryAsyncAction = AsyncAction(
+      'PartnershipAddControllerBase.getImageFromGallery',
+      context: context);
 
   @override
   Future<dynamic> getImageFromGallery() {
@@ -300,8 +309,8 @@ mixin _$PartnershipAddController on PartnershipAddControllerBase, Store {
         .run(() => super.getImageFromGallery());
   }
 
-  final _$PartnershipAddControllerBaseActionController =
-      ActionController(name: 'PartnershipAddControllerBase');
+  late final _$PartnershipAddControllerBaseActionController =
+      ActionController(name: 'PartnershipAddControllerBase', context: context);
 
   @override
   dynamic setStatus() {
@@ -337,7 +346,8 @@ errorMsg: ${errorMsg}
 }
 
 mixin _$FormController on FormControllerBase, Store {
-  final _$partnerAtom = Atom(name: 'FormControllerBase.partner');
+  late final _$partnerAtom =
+      Atom(name: 'FormControllerBase.partner', context: context);
 
   @override
   String? get partner {
@@ -352,8 +362,8 @@ mixin _$FormController on FormControllerBase, Store {
     });
   }
 
-  final _$FormControllerBaseActionController =
-      ActionController(name: 'FormControllerBase');
+  late final _$FormControllerBaseActionController =
+      ActionController(name: 'FormControllerBase', context: context);
 
   @override
   dynamic changePartner(String value) {

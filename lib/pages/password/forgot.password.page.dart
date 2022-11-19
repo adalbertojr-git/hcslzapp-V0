@@ -19,7 +19,7 @@ class ForgotPasswordPage extends StatefulWidget {
 }
 
 class _ForgotPasswordPageState extends State<ForgotPasswordPage> {
-  ForgotPasswordController _controller = ForgotPasswordController();
+  final ForgotPasswordController _controller = ForgotPasswordController();
   final CountDownController _controllerCountDown = CountDownController();
 
   @override

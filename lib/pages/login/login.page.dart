@@ -17,8 +17,19 @@ const String _pathLogoImage = 'assets/imgs/logo.png';
 const String _labelForgotPsw = 'Esqueceu a senha?';
 const String _labelFirstAcc = 'Não tem conta? Solicite acesso';
 
-class LoginPage extends StatelessWidget {
+class LoginPage extends StatefulWidget {
+  @override
+  State<LoginPage> createState() => _LoginPageState();
+}
+
+class _LoginPageState extends State<LoginPage> {
   final LoginController _controller = LoginController();
+
+  @override
+  void initState() {
+    _controller.init();
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -57,6 +68,8 @@ class LoginPage extends StatelessWidget {
                   hint: hintUser,
                   icon: Icons.person,
                   inputType: TextInputType.text,
+                  onChanged: _controller.formController.changeUser,
+                  errorText: _controller.validateUser(),
                 ),
                 MyTextFormField(
                   textEditingController: _controller.pswLoginCtrl,
@@ -65,6 +78,8 @@ class LoginPage extends StatelessWidget {
                   icon: Icons.vpn_key,
                   inputType: TextInputType.text,
                   hidden: true,
+                  onChanged: _controller.formController.changePassword,
+                  errorText: _controller.validatePassword(),
                 ),
                 Align(
                   alignment: Alignment.centerRight,
@@ -88,7 +103,12 @@ class LoginPage extends StatelessWidget {
                 Button(
                   icon: Icons.arrow_forward,
                   onClick: () {
-                    _login(context);
+                    if(!_controller.hasErrors) {
+                      _login(context);
+                    }
+                    else {
+                      AsukaSnackbar.warning('Existem erros no formulário que precisam ser corrigidos').show();
+                    }
                   },
                 ),
                 SizedBox(
@@ -117,46 +137,38 @@ class LoginPage extends StatelessWidget {
       );
 
   _login(BuildContext context) {
-    if (_controller.userLoginCtrl.text.length > 0 &&
-        _controller.pswLoginCtrl.text.length > 0) {
-      AsukaSnackbar.success("success").show();
-      Asuka.showSnackBar(
-        SnackBar(
-          content: Text('Carregando...'),
-        ),
-      );
-      _controller.authenticate().then(
-        (token) async {
-          if (token == null) {
-            Asuka.showSnackBar(
-              SnackBar(
-                content: Text(_controller.errorMsg),
+    AsukaSnackbar.message('Carregando...').show();
+    _controller.authenticate().then(
+      (token) async {
+        if (token == null) {
+          Asuka.showSnackBar(
+            SnackBar(
+              content: Text(_controller.errorMsg),
+            ),
+          );
+        } else {
+          Token _t = token;
+          debugPrint(_t.token);
+          Associated associated = Template().loadAssociated();
+          _controller.setTokenToDevice(_t.token);
+          _controller.setUserToDevice(_controller.userLoginCtrl.text);
+          TokenDetails _tokenDetails = TokenDetails(_t.token);
+          await _controller.findByIdToList(_tokenDetails.associatedId()).then(
+            (value) {
+              associated = value[0];
+            },
+          );
+          Navigator.pushReplacement(
+            context,
+            MaterialPageRoute(
+              builder: (context) => DashboardPage(
+                //_controller.associated,
+                associated,
               ),
-            );
-          } else {
-            Token _t = token;
-            debugPrint(_t.token);
-            Associated associated = Template().loadAssociated();
-            _controller.setTokenToDevice(_t.token);
-            _controller.setUserToDevice(_controller.userLoginCtrl.text);
-            TokenDetails _tokenDetails = TokenDetails(_t.token);
-            await _controller.findByIdToList(_tokenDetails.associatedId()).then(
-              (value) {
-                associated = value[0];
-              },
-            );
-            Navigator.pushReplacement(
-              context,
-              MaterialPageRoute(
-                builder: (context) => DashboardPage(
-                  //_controller.associated,
-                  associated,
-                ),
-              ),
-            );
-          }
-        },
-      );
-    }
+            ),
+          );
+        }
+      },
+    );
   }
 }

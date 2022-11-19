@@ -6,10 +6,11 @@ part of 'management.add.controller.dart';
 // StoreGenerator
 // **************************************************************************
 
-// ignore_for_file: non_constant_identifier_names, unnecessary_brace_in_string_interps, unnecessary_lambdas, prefer_expression_function_bodies, lines_longer_than_80_chars, avoid_as, avoid_annotating_with_dynamic
+// ignore_for_file: non_constant_identifier_names, unnecessary_brace_in_string_interps, unnecessary_lambdas, prefer_expression_function_bodies, lines_longer_than_80_chars, avoid_as, avoid_annotating_with_dynamic, no_leading_underscores_for_local_identifiers
 
 mixin _$ManagementAddController on ManagementAddControllerBase, Store {
-  final _$nameCtrlAtom = Atom(name: 'ManagementAddControllerBase.nameCtrl');
+  late final _$nameCtrlAtom =
+      Atom(name: 'ManagementAddControllerBase.nameCtrl', context: context);
 
   @override
   TextEditingController get nameCtrl {
@@ -24,7 +25,8 @@ mixin _$ManagementAddController on ManagementAddControllerBase, Store {
     });
   }
 
-  final _$listItemsAtom = Atom(name: 'ManagementAddControllerBase.listItems');
+  late final _$listItemsAtom =
+      Atom(name: 'ManagementAddControllerBase.listItems', context: context);
 
   @override
   ObservableList<ItemModel> get listItems {
@@ -39,7 +41,8 @@ mixin _$ManagementAddController on ManagementAddControllerBase, Store {
     });
   }
 
-  final _$idsAtom = Atom(name: 'ManagementAddControllerBase.ids');
+  late final _$idsAtom =
+      Atom(name: 'ManagementAddControllerBase.ids', context: context);
 
   @override
   ObservableList<int> get ids {
@@ -54,8 +57,8 @@ mixin _$ManagementAddController on ManagementAddControllerBase, Store {
     });
   }
 
-  final _$associatedsAtom =
-      Atom(name: 'ManagementAddControllerBase.associateds');
+  late final _$associatedsAtom =
+      Atom(name: 'ManagementAddControllerBase.associateds', context: context);
 
   @override
   ObservableList<ItemModel> get associateds {
@@ -70,8 +73,8 @@ mixin _$ManagementAddController on ManagementAddControllerBase, Store {
     });
   }
 
-  final _$isHidedButtonAtom =
-      Atom(name: 'ManagementAddControllerBase.isHidedButton');
+  late final _$isHidedButtonAtom =
+      Atom(name: 'ManagementAddControllerBase.isHidedButton', context: context);
 
   @override
   bool get isHidedButton {
@@ -86,8 +89,8 @@ mixin _$ManagementAddController on ManagementAddControllerBase, Store {
     });
   }
 
-  final _$_associatedRepoAtom =
-      Atom(name: 'ManagementAddControllerBase._associatedRepo');
+  late final _$_associatedRepoAtom = Atom(
+      name: 'ManagementAddControllerBase._associatedRepo', context: context);
 
   @override
   AssociatedRepo get _associatedRepo {
@@ -102,8 +105,8 @@ mixin _$ManagementAddController on ManagementAddControllerBase, Store {
     });
   }
 
-  final _$_managementRepoAtom =
-      Atom(name: 'ManagementAddControllerBase._managementRepo');
+  late final _$_managementRepoAtom = Atom(
+      name: 'ManagementAddControllerBase._managementRepo', context: context);
 
   @override
   ManagementRepo get _managementRepo {
@@ -118,7 +121,8 @@ mixin _$ManagementAddController on ManagementAddControllerBase, Store {
     });
   }
 
-  final _$errorMsgAtom = Atom(name: 'ManagementAddControllerBase.errorMsg');
+  late final _$errorMsgAtom =
+      Atom(name: 'ManagementAddControllerBase.errorMsg', context: context);
 
   @override
   String get errorMsg {
@@ -133,7 +137,8 @@ mixin _$ManagementAddController on ManagementAddControllerBase, Store {
     });
   }
 
-  final _$futureAtom = Atom(name: 'ManagementAddControllerBase.future');
+  late final _$futureAtom =
+      Atom(name: 'ManagementAddControllerBase.future', context: context);
 
   @override
   Future<List<Associated>> get future {
@@ -148,7 +153,8 @@ mixin _$ManagementAddController on ManagementAddControllerBase, Store {
     });
   }
 
-  final _$filterAtom = Atom(name: 'ManagementAddControllerBase.filter');
+  late final _$filterAtom =
+      Atom(name: 'ManagementAddControllerBase.filter', context: context);
 
   @override
   String get filter {
@@ -163,8 +169,8 @@ mixin _$ManagementAddController on ManagementAddControllerBase, Store {
     });
   }
 
-  final _$ManagementAddControllerBaseActionController =
-      ActionController(name: 'ManagementAddControllerBase');
+  late final _$ManagementAddControllerBaseActionController =
+      ActionController(name: 'ManagementAddControllerBase', context: context);
 
   @override
   bool setButtonVisibilty() {

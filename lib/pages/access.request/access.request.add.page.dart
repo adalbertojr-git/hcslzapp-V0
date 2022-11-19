@@ -15,7 +15,7 @@ class AccessRequestAddPage extends StatefulWidget {
 }
 
 class _AccessRequestAddPageState extends State<AccessRequestAddPage> {
-  AccessRequestController _controller = AccessRequestController();
+  final AccessRequestController _controller = AccessRequestController();
 
   @override
   void initState() {

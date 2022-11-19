@@ -6,10 +6,11 @@ part of 'payment.add.controller.dart';
 // StoreGenerator
 // **************************************************************************
 
-// ignore_for_file: non_constant_identifier_names, unnecessary_brace_in_string_interps, unnecessary_lambdas, prefer_expression_function_bodies, lines_longer_than_80_chars, avoid_as, avoid_annotating_with_dynamic
+// ignore_for_file: non_constant_identifier_names, unnecessary_brace_in_string_interps, unnecessary_lambdas, prefer_expression_function_bodies, lines_longer_than_80_chars, avoid_as, avoid_annotating_with_dynamic, no_leading_underscores_for_local_identifiers
 
 mixin _$PaymentAddController on PaymentAddControllerBase, Store {
-  final _$idCtrlAtom = Atom(name: 'PaymentAddControllerBase.idCtrl');
+  late final _$idCtrlAtom =
+      Atom(name: 'PaymentAddControllerBase.idCtrl', context: context);
 
   @override
   TextEditingController get idCtrl {
@@ -24,7 +25,8 @@ mixin _$PaymentAddController on PaymentAddControllerBase, Store {
     });
   }
 
-  final _$yearCtrlAtom = Atom(name: 'PaymentAddControllerBase.yearCtrl');
+  late final _$yearCtrlAtom =
+      Atom(name: 'PaymentAddControllerBase.yearCtrl', context: context);
 
   @override
   TextEditingController get yearCtrl {
@@ -39,7 +41,8 @@ mixin _$PaymentAddController on PaymentAddControllerBase, Store {
     });
   }
 
-  final _$janCtrlAtom = Atom(name: 'PaymentAddControllerBase.janCtrl');
+  late final _$janCtrlAtom =
+      Atom(name: 'PaymentAddControllerBase.janCtrl', context: context);
 
   @override
   TextEditingController get janCtrl {
@@ -54,7 +57,8 @@ mixin _$PaymentAddController on PaymentAddControllerBase, Store {
     });
   }
 
-  final _$febCtrlAtom = Atom(name: 'PaymentAddControllerBase.febCtrl');
+  late final _$febCtrlAtom =
+      Atom(name: 'PaymentAddControllerBase.febCtrl', context: context);
 
   @override
   TextEditingController get febCtrl {
@@ -69,7 +73,8 @@ mixin _$PaymentAddController on PaymentAddControllerBase, Store {
     });
   }
 
-  final _$marCtrlAtom = Atom(name: 'PaymentAddControllerBase.marCtrl');
+  late final _$marCtrlAtom =
+      Atom(name: 'PaymentAddControllerBase.marCtrl', context: context);
 
   @override
   TextEditingController get marCtrl {
@@ -84,7 +89,8 @@ mixin _$PaymentAddController on PaymentAddControllerBase, Store {
     });
   }
 
-  final _$aprCtrlAtom = Atom(name: 'PaymentAddControllerBase.aprCtrl');
+  late final _$aprCtrlAtom =
+      Atom(name: 'PaymentAddControllerBase.aprCtrl', context: context);
 
   @override
   TextEditingController get aprCtrl {
@@ -99,7 +105,8 @@ mixin _$PaymentAddController on PaymentAddControllerBase, Store {
     });
   }
 
-  final _$mayCtrlAtom = Atom(name: 'PaymentAddControllerBase.mayCtrl');
+  late final _$mayCtrlAtom =
+      Atom(name: 'PaymentAddControllerBase.mayCtrl', context: context);
 
   @override
   TextEditingController get mayCtrl {
@@ -114,7 +121,8 @@ mixin _$PaymentAddController on PaymentAddControllerBase, Store {
     });
   }
 
-  final _$junCtrlAtom = Atom(name: 'PaymentAddControllerBase.junCtrl');
+  late final _$junCtrlAtom =
+      Atom(name: 'PaymentAddControllerBase.junCtrl', context: context);
 
   @override
   TextEditingController get junCtrl {
@@ -129,7 +137,8 @@ mixin _$PaymentAddController on PaymentAddControllerBase, Store {
     });
   }
 
-  final _$julCtrlAtom = Atom(name: 'PaymentAddControllerBase.julCtrl');
+  late final _$julCtrlAtom =
+      Atom(name: 'PaymentAddControllerBase.julCtrl', context: context);
 
   @override
   TextEditingController get julCtrl {
@@ -144,7 +153,8 @@ mixin _$PaymentAddController on PaymentAddControllerBase, Store {
     });
   }
 
-  final _$augCtrlAtom = Atom(name: 'PaymentAddControllerBase.augCtrl');
+  late final _$augCtrlAtom =
+      Atom(name: 'PaymentAddControllerBase.augCtrl', context: context);
 
   @override
   TextEditingController get augCtrl {
@@ -159,7 +169,8 @@ mixin _$PaymentAddController on PaymentAddControllerBase, Store {
     });
   }
 
-  final _$sepCtrlAtom = Atom(name: 'PaymentAddControllerBase.sepCtrl');
+  late final _$sepCtrlAtom =
+      Atom(name: 'PaymentAddControllerBase.sepCtrl', context: context);
 
   @override
   TextEditingController get sepCtrl {
@@ -174,7 +185,8 @@ mixin _$PaymentAddController on PaymentAddControllerBase, Store {
     });
   }
 
-  final _$octCtrlAtom = Atom(name: 'PaymentAddControllerBase.octCtrl');
+  late final _$octCtrlAtom =
+      Atom(name: 'PaymentAddControllerBase.octCtrl', context: context);
 
   @override
   TextEditingController get octCtrl {
@@ -189,7 +201,8 @@ mixin _$PaymentAddController on PaymentAddControllerBase, Store {
     });
   }
 
-  final _$novCtrlAtom = Atom(name: 'PaymentAddControllerBase.novCtrl');
+  late final _$novCtrlAtom =
+      Atom(name: 'PaymentAddControllerBase.novCtrl', context: context);
 
   @override
   TextEditingController get novCtrl {
@@ -204,7 +217,8 @@ mixin _$PaymentAddController on PaymentAddControllerBase, Store {
     });
   }
 
-  final _$decCtrlAtom = Atom(name: 'PaymentAddControllerBase.decCtrl');
+  late final _$decCtrlAtom =
+      Atom(name: 'PaymentAddControllerBase.decCtrl', context: context);
 
   @override
   TextEditingController get decCtrl {
@@ -219,7 +233,8 @@ mixin _$PaymentAddController on PaymentAddControllerBase, Store {
     });
   }
 
-  final _$paymentsAtom = Atom(name: 'PaymentAddControllerBase.payments');
+  late final _$paymentsAtom =
+      Atom(name: 'PaymentAddControllerBase.payments', context: context);
 
   @override
   ObservableList<dynamic> get payments {
@@ -234,7 +249,8 @@ mixin _$PaymentAddController on PaymentAddControllerBase, Store {
     });
   }
 
-  final _$paymentAtom = Atom(name: 'PaymentAddControllerBase.payment');
+  late final _$paymentAtom =
+      Atom(name: 'PaymentAddControllerBase.payment', context: context);
 
   @override
   Payment get payment {
@@ -249,7 +265,8 @@ mixin _$PaymentAddController on PaymentAddControllerBase, Store {
     });
   }
 
-  final _$associatedAtom = Atom(name: 'PaymentAddControllerBase.associated');
+  late final _$associatedAtom =
+      Atom(name: 'PaymentAddControllerBase.associated', context: context);
 
   @override
   Associated get associated {
@@ -264,8 +281,8 @@ mixin _$PaymentAddController on PaymentAddControllerBase, Store {
     });
   }
 
-  final _$_paymentRepoAtom =
-      Atom(name: 'PaymentAddControllerBase._paymentRepo');
+  late final _$_paymentRepoAtom =
+      Atom(name: 'PaymentAddControllerBase._paymentRepo', context: context);
 
   @override
   PaymentRepo get _paymentRepo {
@@ -280,7 +297,8 @@ mixin _$PaymentAddController on PaymentAddControllerBase, Store {
     });
   }
 
-  final _$errorMsgAtom = Atom(name: 'PaymentAddControllerBase.errorMsg');
+  late final _$errorMsgAtom =
+      Atom(name: 'PaymentAddControllerBase.errorMsg', context: context);
 
   @override
   String get errorMsg {
@@ -295,7 +313,8 @@ mixin _$PaymentAddController on PaymentAddControllerBase, Store {
     });
   }
 
-  final _$futureAtom = Atom(name: 'PaymentAddControllerBase.future');
+  late final _$futureAtom =
+      Atom(name: 'PaymentAddControllerBase.future', context: context);
 
   @override
   Future<List<Payment>> get future {
@@ -310,7 +329,8 @@ mixin _$PaymentAddController on PaymentAddControllerBase, Store {
     });
   }
 
-  final _$yearsAtom = Atom(name: 'PaymentAddControllerBase.years');
+  late final _$yearsAtom =
+      Atom(name: 'PaymentAddControllerBase.years', context: context);
 
   @override
   List<String> get years {
@@ -325,8 +345,8 @@ mixin _$PaymentAddController on PaymentAddControllerBase, Store {
     });
   }
 
-  final _$PaymentAddControllerBaseActionController =
-      ActionController(name: 'PaymentAddControllerBase');
+  late final _$PaymentAddControllerBaseActionController =
+      ActionController(name: 'PaymentAddControllerBase', context: context);
 
   @override
   Future<List<Payment>> findByAssociatedIdToList(int id) {
@@ -400,7 +420,8 @@ years: ${years}
 }
 
 mixin _$FormController on FormControllerBase, Store {
-  final _$yearAtom = Atom(name: 'FormControllerBase.year');
+  late final _$yearAtom =
+      Atom(name: 'FormControllerBase.year', context: context);
 
   @override
   String? get year {
@@ -415,8 +436,8 @@ mixin _$FormController on FormControllerBase, Store {
     });
   }
 
-  final _$FormControllerBaseActionController =
-      ActionController(name: 'FormControllerBase');
+  late final _$FormControllerBaseActionController =
+      ActionController(name: 'FormControllerBase', context: context);
 
   @override
   dynamic changeYear(String value) {

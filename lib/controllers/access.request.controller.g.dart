@@ -6,10 +6,11 @@ part of 'access.request.controller.dart';
 // StoreGenerator
 // **************************************************************************
 
-// ignore_for_file: non_constant_identifier_names, unnecessary_brace_in_string_interps, unnecessary_lambdas, prefer_expression_function_bodies, lines_longer_than_80_chars, avoid_as, avoid_annotating_with_dynamic
+// ignore_for_file: non_constant_identifier_names, unnecessary_brace_in_string_interps, unnecessary_lambdas, prefer_expression_function_bodies, lines_longer_than_80_chars, avoid_as, avoid_annotating_with_dynamic, no_leading_underscores_for_local_identifiers
 
 mixin _$AccessRequestController on AccessRequestControllerBase, Store {
-  final _$nameCtrlAtom = Atom(name: 'AccessRequestControllerBase.nameCtrl');
+  late final _$nameCtrlAtom =
+      Atom(name: 'AccessRequestControllerBase.nameCtrl', context: context);
 
   @override
   TextEditingController get nameCtrl {
@@ -24,7 +25,8 @@ mixin _$AccessRequestController on AccessRequestControllerBase, Store {
     });
   }
 
-  final _$userCtrlAtom = Atom(name: 'AccessRequestControllerBase.userCtrl');
+  late final _$userCtrlAtom =
+      Atom(name: 'AccessRequestControllerBase.userCtrl', context: context);
 
   @override
   TextEditingController get userCtrl {
@@ -39,7 +41,8 @@ mixin _$AccessRequestController on AccessRequestControllerBase, Store {
     });
   }
 
-  final _$emailCtrlAtom = Atom(name: 'AccessRequestControllerBase.emailCtrl');
+  late final _$emailCtrlAtom =
+      Atom(name: 'AccessRequestControllerBase.emailCtrl', context: context);
 
   @override
   TextEditingController get emailCtrl {
@@ -54,8 +57,8 @@ mixin _$AccessRequestController on AccessRequestControllerBase, Store {
     });
   }
 
-  final _$confEmailCtrlAtom =
-      Atom(name: 'AccessRequestControllerBase.confEmailCtrl');
+  late final _$confEmailCtrlAtom =
+      Atom(name: 'AccessRequestControllerBase.confEmailCtrl', context: context);
 
   @override
   TextEditingController get confEmailCtrl {
@@ -70,7 +73,8 @@ mixin _$AccessRequestController on AccessRequestControllerBase, Store {
     });
   }
 
-  final _$pswCtrlAtom = Atom(name: 'AccessRequestControllerBase.pswCtrl');
+  late final _$pswCtrlAtom =
+      Atom(name: 'AccessRequestControllerBase.pswCtrl', context: context);
 
   @override
   TextEditingController get pswCtrl {
@@ -85,8 +89,8 @@ mixin _$AccessRequestController on AccessRequestControllerBase, Store {
     });
   }
 
-  final _$confPswCtrlAtom =
-      Atom(name: 'AccessRequestControllerBase.confPswCtrl');
+  late final _$confPswCtrlAtom =
+      Atom(name: 'AccessRequestControllerBase.confPswCtrl', context: context);
 
   @override
   TextEditingController get confPswCtrl {
@@ -101,8 +105,8 @@ mixin _$AccessRequestController on AccessRequestControllerBase, Store {
     });
   }
 
-  final _$isHidedButtonAtom =
-      Atom(name: 'AccessRequestControllerBase.isHidedButton');
+  late final _$isHidedButtonAtom =
+      Atom(name: 'AccessRequestControllerBase.isHidedButton', context: context);
 
   @override
   bool get isHidedButton {
@@ -117,8 +121,9 @@ mixin _$AccessRequestController on AccessRequestControllerBase, Store {
     });
   }
 
-  final _$accessRequestListFutureAtom =
-      Atom(name: 'AccessRequestControllerBase.accessRequestListFuture');
+  late final _$accessRequestListFutureAtom = Atom(
+      name: 'AccessRequestControllerBase.accessRequestListFuture',
+      context: context);
 
   @override
   ObservableFuture<List<AccessRequest>>? get accessRequestListFuture {
@@ -134,8 +139,8 @@ mixin _$AccessRequestController on AccessRequestControllerBase, Store {
     });
   }
 
-  final _$accessRequestPosstAtom =
-      Atom(name: 'AccessRequestControllerBase.accessRequestPosst');
+  late final _$accessRequestPosstAtom = Atom(
+      name: 'AccessRequestControllerBase.accessRequestPosst', context: context);
 
   @override
   ObservableFuture<AccessRequest>? get accessRequestPosst {
@@ -150,8 +155,8 @@ mixin _$AccessRequestController on AccessRequestControllerBase, Store {
     });
   }
 
-  final _$checkFutureAtom =
-      Atom(name: 'AccessRequestControllerBase.checkFuture');
+  late final _$checkFutureAtom =
+      Atom(name: 'AccessRequestControllerBase.checkFuture', context: context);
 
   @override
   ObservableFuture<AccessRequest>? get checkFuture {
@@ -166,8 +171,8 @@ mixin _$AccessRequestController on AccessRequestControllerBase, Store {
     });
   }
 
-  final _$accessRequestsAtom =
-      Atom(name: 'AccessRequestControllerBase.accessRequests');
+  late final _$accessRequestsAtom = Atom(
+      name: 'AccessRequestControllerBase.accessRequests', context: context);
 
   @override
   ObservableList<AccessRequest> get accessRequests {
@@ -182,7 +187,8 @@ mixin _$AccessRequestController on AccessRequestControllerBase, Store {
     });
   }
 
-  final _$listItemsAtom = Atom(name: 'AccessRequestControllerBase.listItems');
+  late final _$listItemsAtom =
+      Atom(name: 'AccessRequestControllerBase.listItems', context: context);
 
   @override
   ObservableList<ItemModel> get listItems {
@@ -197,7 +203,8 @@ mixin _$AccessRequestController on AccessRequestControllerBase, Store {
     });
   }
 
-  final _$idsAtom = Atom(name: 'AccessRequestControllerBase.ids');
+  late final _$idsAtom =
+      Atom(name: 'AccessRequestControllerBase.ids', context: context);
 
   @override
   ObservableList<int> get ids {
@@ -212,7 +219,8 @@ mixin _$AccessRequestController on AccessRequestControllerBase, Store {
     });
   }
 
-  final _$errorMsgAtom = Atom(name: 'AccessRequestControllerBase.errorMsg');
+  late final _$errorMsgAtom =
+      Atom(name: 'AccessRequestControllerBase.errorMsg', context: context);
 
   @override
   String get errorMsg {
@@ -227,7 +235,8 @@ mixin _$AccessRequestController on AccessRequestControllerBase, Store {
     });
   }
 
-  final _$futureAtom = Atom(name: 'AccessRequestControllerBase.future');
+  late final _$futureAtom =
+      Atom(name: 'AccessRequestControllerBase.future', context: context);
 
   @override
   Future<List<AccessRequest>> get future {
@@ -242,8 +251,8 @@ mixin _$AccessRequestController on AccessRequestControllerBase, Store {
     });
   }
 
-  final _$_accessRequestRepoAtom =
-      Atom(name: 'AccessRequestControllerBase._accessRequestRepo');
+  late final _$_accessRequestRepoAtom = Atom(
+      name: 'AccessRequestControllerBase._accessRequestRepo', context: context);
 
   @override
   AccessRequestRepo get _accessRequestRepo {
@@ -258,8 +267,8 @@ mixin _$AccessRequestController on AccessRequestControllerBase, Store {
     });
   }
 
-  final _$AccessRequestControllerBaseActionController =
-      ActionController(name: 'AccessRequestControllerBase');
+  late final _$AccessRequestControllerBaseActionController =
+      ActionController(name: 'AccessRequestControllerBase', context: context);
 
   @override
   Future<List<AccessRequest>> findAll() {
@@ -339,7 +348,8 @@ future: ${future}
 }
 
 mixin _$FormController on FormControllerBase, Store {
-  final _$nameAtom = Atom(name: 'FormControllerBase.name');
+  late final _$nameAtom =
+      Atom(name: 'FormControllerBase.name', context: context);
 
   @override
   String? get name {
@@ -354,7 +364,8 @@ mixin _$FormController on FormControllerBase, Store {
     });
   }
 
-  final _$userAtom = Atom(name: 'FormControllerBase.user');
+  late final _$userAtom =
+      Atom(name: 'FormControllerBase.user', context: context);
 
   @override
   String? get user {
@@ -369,7 +380,8 @@ mixin _$FormController on FormControllerBase, Store {
     });
   }
 
-  final _$emailAtom = Atom(name: 'FormControllerBase.email');
+  late final _$emailAtom =
+      Atom(name: 'FormControllerBase.email', context: context);
 
   @override
   String? get email {
@@ -384,7 +396,8 @@ mixin _$FormController on FormControllerBase, Store {
     });
   }
 
-  final _$confEmailAtom = Atom(name: 'FormControllerBase.confEmail');
+  late final _$confEmailAtom =
+      Atom(name: 'FormControllerBase.confEmail', context: context);
 
   @override
   String? get confEmail {
@@ -399,7 +412,8 @@ mixin _$FormController on FormControllerBase, Store {
     });
   }
 
-  final _$passwordAtom = Atom(name: 'FormControllerBase.password');
+  late final _$passwordAtom =
+      Atom(name: 'FormControllerBase.password', context: context);
 
   @override
   String? get password {
@@ -414,7 +428,8 @@ mixin _$FormController on FormControllerBase, Store {
     });
   }
 
-  final _$confPasswordAtom = Atom(name: 'FormControllerBase.confPassword');
+  late final _$confPasswordAtom =
+      Atom(name: 'FormControllerBase.confPassword', context: context);
 
   @override
   String? get confPassword {
@@ -429,8 +444,8 @@ mixin _$FormController on FormControllerBase, Store {
     });
   }
 
-  final _$FormControllerBaseActionController =
-      ActionController(name: 'FormControllerBase');
+  late final _$FormControllerBaseActionController =
+      ActionController(name: 'FormControllerBase', context: context);
 
   @override
   dynamic changeName(String value) {

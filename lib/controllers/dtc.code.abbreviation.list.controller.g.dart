@@ -6,7 +6,7 @@ part of 'dtc.code.abbreviation.list.controller.dart';
 // StoreGenerator
 // **************************************************************************
 
-// ignore_for_file: non_constant_identifier_names, unnecessary_brace_in_string_interps, unnecessary_lambdas, prefer_expression_function_bodies, lines_longer_than_80_chars, avoid_as, avoid_annotating_with_dynamic
+// ignore_for_file: non_constant_identifier_names, unnecessary_brace_in_string_interps, unnecessary_lambdas, prefer_expression_function_bodies, lines_longer_than_80_chars, avoid_as, avoid_annotating_with_dynamic, no_leading_underscores_for_local_identifiers
 
 mixin _$DtcCodeAbbreviationListController
     on DtcCodeAbbreviationListControllerBase, Store {
@@ -18,8 +18,8 @@ mixin _$DtcCodeAbbreviationListController
               name: 'DtcCodeAbbreviationListControllerBase.listFiltered'))
       .value;
 
-  final _$codeCtrlAtom =
-      Atom(name: 'DtcCodeAbbreviationListControllerBase.codeCtrl');
+  late final _$codeCtrlAtom = Atom(
+      name: 'DtcCodeAbbreviationListControllerBase.codeCtrl', context: context);
 
   @override
   TextEditingController get codeCtrl {
@@ -34,8 +34,9 @@ mixin _$DtcCodeAbbreviationListController
     });
   }
 
-  final _$isHidedButtonAtom =
-      Atom(name: 'DtcCodeAbbreviationListControllerBase.isHidedButton');
+  late final _$isHidedButtonAtom = Atom(
+      name: 'DtcCodeAbbreviationListControllerBase.isHidedButton',
+      context: context);
 
   @override
   bool get isHidedButton {
@@ -50,8 +51,9 @@ mixin _$DtcCodeAbbreviationListController
     });
   }
 
-  final _$abbreviationsAtom =
-      Atom(name: 'DtcCodeAbbreviationListControllerBase.abbreviations');
+  late final _$abbreviationsAtom = Atom(
+      name: 'DtcCodeAbbreviationListControllerBase.abbreviations',
+      context: context);
 
   @override
   ObservableList<dynamic> get abbreviations {
@@ -66,8 +68,9 @@ mixin _$DtcCodeAbbreviationListController
     });
   }
 
-  final _$_dtcCodeAbbreviationRepoAtom = Atom(
-      name: 'DtcCodeAbbreviationListControllerBase._dtcCodeAbbreviationRepo');
+  late final _$_dtcCodeAbbreviationRepoAtom = Atom(
+      name: 'DtcCodeAbbreviationListControllerBase._dtcCodeAbbreviationRepo',
+      context: context);
 
   @override
   DtcCodeAbbreviationRepo get _dtcCodeAbbreviationRepo {
@@ -83,8 +86,8 @@ mixin _$DtcCodeAbbreviationListController
     });
   }
 
-  final _$errorMsgAtom =
-      Atom(name: 'DtcCodeAbbreviationListControllerBase.errorMsg');
+  late final _$errorMsgAtom = Atom(
+      name: 'DtcCodeAbbreviationListControllerBase.errorMsg', context: context);
 
   @override
   String get errorMsg {
@@ -99,8 +102,8 @@ mixin _$DtcCodeAbbreviationListController
     });
   }
 
-  final _$futureAtom =
-      Atom(name: 'DtcCodeAbbreviationListControllerBase.future');
+  late final _$futureAtom = Atom(
+      name: 'DtcCodeAbbreviationListControllerBase.future', context: context);
 
   @override
   Future<List<DtcCodeAbbreviation>> get future {
@@ -115,8 +118,8 @@ mixin _$DtcCodeAbbreviationListController
     });
   }
 
-  final _$filterAtom =
-      Atom(name: 'DtcCodeAbbreviationListControllerBase.filter');
+  late final _$filterAtom = Atom(
+      name: 'DtcCodeAbbreviationListControllerBase.filter', context: context);
 
   @override
   String get filter {
@@ -131,8 +134,9 @@ mixin _$DtcCodeAbbreviationListController
     });
   }
 
-  final _$DtcCodeAbbreviationListControllerBaseActionController =
-      ActionController(name: 'DtcCodeAbbreviationListControllerBase');
+  late final _$DtcCodeAbbreviationListControllerBaseActionController =
+      ActionController(
+          name: 'DtcCodeAbbreviationListControllerBase', context: context);
 
   @override
   bool setButtonVisibilty() {

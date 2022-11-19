@@ -6,11 +6,12 @@ part of 'forgot.password.controller.dart';
 // StoreGenerator
 // **************************************************************************
 
-// ignore_for_file: non_constant_identifier_names, unnecessary_brace_in_string_interps, unnecessary_lambdas, prefer_expression_function_bodies, lines_longer_than_80_chars, avoid_as, avoid_annotating_with_dynamic
+// ignore_for_file: non_constant_identifier_names, unnecessary_brace_in_string_interps, unnecessary_lambdas, prefer_expression_function_bodies, lines_longer_than_80_chars, avoid_as, avoid_annotating_with_dynamic, no_leading_underscores_for_local_identifiers
 
 mixin _$ForgotPasswordController on ForgotPasswordControllerBase, Store {
-  final _$emailForgotPswCtrlAtom =
-      Atom(name: 'ForgotPasswordControllerBase.emailForgotPswCtrl');
+  late final _$emailForgotPswCtrlAtom = Atom(
+      name: 'ForgotPasswordControllerBase.emailForgotPswCtrl',
+      context: context);
 
   @override
   TextEditingController get emailForgotPswCtrl {
@@ -25,7 +26,8 @@ mixin _$ForgotPasswordController on ForgotPasswordControllerBase, Store {
     });
   }
 
-  final _$codeCtrlAtom = Atom(name: 'ForgotPasswordControllerBase.codeCtrl');
+  late final _$codeCtrlAtom =
+      Atom(name: 'ForgotPasswordControllerBase.codeCtrl', context: context);
 
   @override
   TextEditingController get codeCtrl {
@@ -40,8 +42,9 @@ mixin _$ForgotPasswordController on ForgotPasswordControllerBase, Store {
     });
   }
 
-  final _$_forgotPasswordRepoAtom =
-      Atom(name: 'ForgotPasswordControllerBase._forgotPasswordRepo');
+  late final _$_forgotPasswordRepoAtom = Atom(
+      name: 'ForgotPasswordControllerBase._forgotPasswordRepo',
+      context: context);
 
   @override
   ForgotPasswordRepo get _forgotPasswordRepo {
@@ -56,7 +59,8 @@ mixin _$ForgotPasswordController on ForgotPasswordControllerBase, Store {
     });
   }
 
-  final _$errorMsgAtom = Atom(name: 'ForgotPasswordControllerBase.errorMsg');
+  late final _$errorMsgAtom =
+      Atom(name: 'ForgotPasswordControllerBase.errorMsg', context: context);
 
   @override
   String get errorMsg {
@@ -71,8 +75,8 @@ mixin _$ForgotPasswordController on ForgotPasswordControllerBase, Store {
     });
   }
 
-  final _$ForgotPasswordControllerBaseActionController =
-      ActionController(name: 'ForgotPasswordControllerBase');
+  late final _$ForgotPasswordControllerBaseActionController =
+      ActionController(name: 'ForgotPasswordControllerBase', context: context);
 
   @override
   Future<PasswordDTO> forgotPassword(String email) {
@@ -107,7 +111,8 @@ errorMsg: ${errorMsg}
 }
 
 mixin _$FormController on FormControllerBase, Store {
-  final _$emailAtom = Atom(name: 'FormControllerBase.email');
+  late final _$emailAtom =
+      Atom(name: 'FormControllerBase.email', context: context);
 
   @override
   String? get email {
@@ -122,8 +127,8 @@ mixin _$FormController on FormControllerBase, Store {
     });
   }
 
-  final _$FormControllerBaseActionController =
-      ActionController(name: 'FormControllerBase');
+  late final _$FormControllerBaseActionController =
+      ActionController(name: 'FormControllerBase', context: context);
 
   @override
   dynamic changeEmail(String value) {
