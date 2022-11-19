@@ -119,6 +119,7 @@ class LoginPage extends StatelessWidget {
   _login(BuildContext context) {
     if (_controller.userLoginCtrl.text.length > 0 &&
         _controller.pswLoginCtrl.text.length > 0) {
+      AsukaSnackbar.success("success").show();
       Asuka.showSnackBar(
         SnackBar(
           content: Text('Carregando...'),

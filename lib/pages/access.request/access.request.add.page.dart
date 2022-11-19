@@ -1,4 +1,4 @@
-import 'package:asuka/asuka.dart' as asuka;
+import 'package:asuka/asuka.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:hcslzapp/common/labels.and.hints.dart';
@@ -29,13 +29,6 @@ class _AccessRequestAddPageState extends State<AccessRequestAddPage> {
       builder: (_) {
         return Scaffold(
           body: _widgets(_),
-          floatingActionButtonLocation:
-          FloatingActionButtonLocation.centerFloat,
-          floatingActionButton: Button(
-            icon: Icons.send_to_mobile,
-            onClick: () => _save(),
-          ),
-
         );
       },
     );
@@ -50,76 +43,81 @@ class _AccessRequestAddPageState extends State<AccessRequestAddPage> {
           ),
         ),
         height: MediaQuery.of(context).size.height,
-        child: SingleChildScrollView(
-          child: Column(
-            children: <Widget>[
-              TopBar(
-                title: _title,
-              ),
-              MyTextFormField(
-                textEditingController: _controller.nameCtrl,
-                hint: hintName,
-                label: labelName,
-                icon: Icons.person_add,
-                inputType: TextInputType.text,
-                onChanged: _controller.formController.changeName,
-                errorText: _controller.validateName(),
-              ),
-              MyTextFormField(
-                textEditingController: _controller.userCtrl,
-                hint: hintUser,
-                label: labelUser,
-                icon: Icons.account_circle_outlined,
-                inputType: TextInputType.text,
-                onChanged: _controller.formController.changeUser,
-                errorText: _controller.validateUser(),
-              ),
-              MyTextFormField(
-                textEditingController: _controller.emailCtrl,
-                hint: hintEmail,
-                label: labelEmail + " *",
-                icon: Icons.email,
-                inputType: TextInputType.emailAddress,
-                onChanged: _controller.formController.changeEmail,
-                errorText: _controller.validateEmail(),
-              ),
-              MyTextFormField(
-                textEditingController: _controller.confEmailCtrl,
-                hint: hintConfEmail,
-                label: labelConfEmail,
-                icon: Icons.email,
-                inputType: TextInputType.emailAddress,
-                onChanged: _controller.formController.changeConfEmail,
-                errorText: _controller.validateConfEmail(),
-              ),
-              MyTextFormField(
-                textEditingController: _controller.pswCtrl,
-                label: labelPswAccessReq,
-                hint: hintPswAccessReq,
-                icon: Icons.password,
-                inputType: TextInputType.text,
-                hidden: true,
-                onChanged: _controller.formController.changePassword,
-                errorText: _controller.validatePassword(),
-              ),
-              MyTextFormField(
-                textEditingController: _controller.confPswCtrl,
-                label: labelConfPswAccessReq,
-                hint: hintConfPswAccessReq,
-                icon: Icons.password,
-                inputType: TextInputType.text,
-                hidden: true,
-                onChanged: _controller.formController.changeConfPassword,
-                errorText: _controller.validateConfPassword(),
-              ),
-            ],
-          ),
+        child: ListView(
+          children: <Widget>[
+            TopBar(
+              title: _title,
+            ),
+            MyTextFormField(
+              textEditingController: _controller.nameCtrl,
+              hint: hintName,
+              label: labelName,
+              icon: Icons.person_add,
+              inputType: TextInputType.text,
+              onChanged: _controller.formController.changeName,
+              errorText: _controller.validateName(),
+            ),
+            MyTextFormField(
+              textEditingController: _controller.userCtrl,
+              hint: hintUser,
+              label: labelUser,
+              icon: Icons.account_circle_outlined,
+              inputType: TextInputType.text,
+              onChanged: _controller.formController.changeUser,
+              errorText: _controller.validateUser(),
+            ),
+            MyTextFormField(
+              textEditingController: _controller.emailCtrl,
+              hint: hintEmail,
+              label: labelEmail + " *",
+              icon: Icons.email,
+              inputType: TextInputType.emailAddress,
+              onChanged: _controller.formController.changeEmail,
+              errorText: _controller.validateEmail(),
+            ),
+            MyTextFormField(
+              textEditingController: _controller.confEmailCtrl,
+              hint: hintConfEmail,
+              label: labelConfEmail,
+              icon: Icons.email,
+              inputType: TextInputType.emailAddress,
+              onChanged: _controller.formController.changeConfEmail,
+              errorText: _controller.validateConfEmail(),
+            ),
+            MyTextFormField(
+              textEditingController: _controller.pswCtrl,
+              label: labelPswAccessReq,
+              hint: hintPswAccessReq,
+              icon: Icons.password,
+              inputType: TextInputType.text,
+              hidden: true,
+              onChanged: _controller.formController.changePassword,
+              errorText: _controller.validatePassword(),
+            ),
+            MyTextFormField(
+              textEditingController: _controller.confPswCtrl,
+              label: labelConfPswAccessReq,
+              hint: hintConfPswAccessReq,
+              icon: Icons.password,
+              inputType: TextInputType.text,
+              hidden: true,
+              onChanged: _controller.formController.changeConfPassword,
+              errorText: _controller.validateConfPassword(),
+            ),
+            SizedBox(
+              height: 10.0,
+            ),
+            Button(
+              icon: Icons.send_to_mobile,
+              onClick: () => _save(),
+            ),
+          ],
         ),
       );
 
   _save() {
     if (_controller.hasErrors) {
-      asuka.showSnackBar(
+      Asuka.showSnackBar(
         SnackBar(
           content: const Text('Atenção: Existem erros no formulário que devem '
               'ser corrigidos antes de efetivar a transação.'),
@@ -129,7 +127,7 @@ class _AccessRequestAddPageState extends State<AccessRequestAddPage> {
       _controller.save().then(
         (value) {
           if (value != null) {
-            asuka.showSnackBar(
+            Asuka.showSnackBar(
               SnackBar(
                 content:
                     const Text('Requisição de acesso enviado com sucesso.'),
@@ -137,7 +135,7 @@ class _AccessRequestAddPageState extends State<AccessRequestAddPage> {
             );
             Navigator.of(context).pop();
           } else {
-            asuka.showSnackBar(
+            Asuka.showSnackBar(
               SnackBar(
                 content: Text(_controller.errorMsg),
               ),

@@ -31,6 +31,9 @@ class HCSlzApp extends StatelessWidget {
             const Locale('pt_BR', ''), // Portuguese, no country code
           ],
           builder: Asuka.builder,
+          navigatorObservers: [
+            Asuka.asukaHeroController //This line is needed for the Hero widget to work
+          ],
           debugShowCheckedModeBanner: false,
           home: LoginPage(),
           //home: TableEventsExample(),

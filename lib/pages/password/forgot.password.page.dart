@@ -1,11 +1,11 @@
-import 'package:flutter/material.dart';
+import 'package:asuka/asuka.dart';
+import 'package:flutter/material.dart' hide showDialog;
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:hcslzapp/common/labels.and.hints.dart';
 import 'package:hcslzapp/components/button.dart';
 import 'package:hcslzapp/components/my.text.form.field.dart';
 import 'package:hcslzapp/components/top.bar.dart';
 import 'package:hcslzapp/controllers/forgot.password.controller.dart';
-import 'package:asuka/asuka.dart' as asuka;
 import 'package:hcslzapp/models/password.dto.dart';
 import 'package:hcslzapp/pages/password/change.password.page.dart';
 import 'package:mask_text_input_formatter/mask_text_input_formatter.dart';
@@ -54,46 +54,44 @@ class _ForgotPasswordPageState extends State<ForgotPasswordPage> {
           ),
         ),
         height: MediaQuery.of(context).size.height,
-        child: SingleChildScrollView(
-          child: Column(
-            children: <Widget>[
-              TopBar(
-                title: _title,
-              ),
-              MyTextFormField(
-                textEditingController: _controller.emailForgotPswCtrl,
-                hint: hintEmail,
-                label: labelEmail + " *",
-                icon: Icons.email,
-                inputType: TextInputType.emailAddress,
-                onChanged: _controller.formController.changeEmail,
-                errorText: _controller.validateEmail(),
-              ),
-              SizedBox(
-                height: 60.0,
-              ),
-              Container(
-                padding: const EdgeInsets.only(left: 10.0),
-                child: RichText(
-                  text: const TextSpan(
-                    text: 'Atenção: Você receberá um email em nome do Harley Club ' +
-                        'contendo um código de segurança (numérico de 6 dígitos). ' +
-                        'Caso não encontre o email na Caixa de Entrada, verifique sua caixa de Spam.',
-                    style: const TextStyle(
-                      fontSize: 14.0,
-                      color: Colors.black87,
-                    ),
+        child: ListView(
+          children: <Widget>[
+            TopBar(
+              title: _title,
+            ),
+            MyTextFormField(
+              textEditingController: _controller.emailForgotPswCtrl,
+              hint: hintEmail,
+              label: labelEmail + " *",
+              icon: Icons.email,
+              inputType: TextInputType.emailAddress,
+              onChanged: _controller.formController.changeEmail,
+              errorText: _controller.validateEmail(),
+            ),
+            SizedBox(
+              height: 60.0,
+            ),
+            Container(
+              padding: const EdgeInsets.only(left: 10.0),
+              child: RichText(
+                text: const TextSpan(
+                  text: 'Atenção: Você receberá um email em nome do Harley Club ' +
+                      'contendo um código de segurança (numérico de 6 dígitos). ' +
+                      'Caso não encontre o email na Caixa de Entrada, verifique sua caixa de Spam.',
+                  style: const TextStyle(
+                    fontSize: 12.0,
+                    color: Colors.black87,
                   ),
                 ),
               ),
-            ],
-          ),
+            ),
+          ],
         ),
       );
 
   _forgotPassword() {
     if (_controller.emailForgotPswCtrl.text.length != 0) {
-      asuka.showSnackBar(
+      Asuka.showSnackBar(
         SnackBar(
           content: const Text('Aguarde...'),
         ),
@@ -103,7 +101,7 @@ class _ForgotPasswordPageState extends State<ForgotPasswordPage> {
           .then((value) {
         if (value != null) {
           if (value.aux.startsWith('ERRO'))
-            asuka.showSnackBar(
+            Asuka.showSnackBar(
               SnackBar(
                 content: Text(value.aux),
               ),
@@ -113,7 +111,7 @@ class _ForgotPasswordPageState extends State<ForgotPasswordPage> {
             _showCodedDialog(value);
           }
         } else {
-          asuka.showSnackBar(
+          Asuka.showSnackBar(
             SnackBar(
               content: Text(_controller.errorMsg),
             ),
@@ -124,8 +122,7 @@ class _ForgotPasswordPageState extends State<ForgotPasswordPage> {
   }
 
   _showCodedDialog(PasswordDTO password) async {
-    await showDialog(
-        context: context,
+    await Asuka.showDialog(
         builder: (context) => Dialog(
             backgroundColor: Colors.deepOrange[200],
             child: Stack(
@@ -298,13 +295,13 @@ class _ForgotPasswordPageState extends State<ForgotPasswordPage> {
                       )),
             );
           } else
-            asuka.showSnackBar(
+            Asuka.showSnackBar(
               SnackBar(
                 content: Text('O código informado não é válido.'),
               ),
             );
         } else {
-          asuka.showSnackBar(
+          Asuka.showSnackBar(
             SnackBar(
               content: Text(_controller.errorMsg),
             ),
