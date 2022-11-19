@@ -103,11 +103,11 @@ class _LoginPageState extends State<LoginPage> {
                 Button(
                   icon: Icons.arrow_forward,
                   onClick: () {
-                    if(!_controller.hasErrors) {
+                    if (!_controller.hasErrors) {
                       _login(context);
-                    }
-                    else {
-                      AsukaSnackbar.warning('Existem erros no formulário que precisam ser corrigidos').show();
+                    } else {
+                      AsukaSnackbar.alert('Preencha os campos ogrigatórios')
+                          .show();
                     }
                   },
                 ),
@@ -141,11 +141,7 @@ class _LoginPageState extends State<LoginPage> {
     _controller.authenticate().then(
       (token) async {
         if (token == null) {
-          Asuka.showSnackBar(
-            SnackBar(
-              content: Text(_controller.errorMsg),
-            ),
-          );
+          AsukaSnackbar.alert(_controller.errorMsg).show();
         } else {
           Token _t = token;
           debugPrint(_t.token);
@@ -162,7 +158,6 @@ class _LoginPageState extends State<LoginPage> {
             context,
             MaterialPageRoute(
               builder: (context) => DashboardPage(
-                //_controller.associated,
                 associated,
               ),
             ),
