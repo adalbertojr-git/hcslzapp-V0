@@ -2,52 +2,48 @@ import 'package:flutter/material.dart';
 import 'package:mask_text_input_formatter/mask_text_input_formatter.dart';
 
 class MyTextFormField extends StatelessWidget {
-  TextEditingController? textEditingController;
-  String? helper;
-  String? hint;
-  IconData? icon;
-  TextInputType? inputType;
-  bool? hidden;
-  bool? disabled;
-  String? prefix;
-  int? nLines;
-  String? label;
-  double? fontSize;
-  //String? text;
-  Function(String)? onChanged;
-  String? errorText;
+  final TextEditingController? textEditingController;
+  final String? helper;
+  final String? hint;
+  final IconData? icon;
+  final TextInputType? inputType;
+  final bool? hidden;
+  final bool? disabled;
+  final String? prefix;
+  final int? nLines;
+  final String? label;
+  final double? fontSize;
+  final  Function(String)? onChanged;
+  final  String? errorText;
   MaskTextInputFormatter? maskTextInputFormatter;
-  int? maxLength;
-  TextAlign? textAlign;
+  final  int? maxLength;
+  final TextAlign? textAlign;
 
-  MyTextFormField(
-      {this.textEditingController,
-      this.helper,
-      this.hint,
-      this.icon,
-      this.inputType,
-      this.hidden,
-      this.disabled,
-      this.prefix,
-      this.label,
-      this.nLines,
-      this.fontSize,
-      //this.text,
-      this.onChanged,
-      this.errorText,
-      this.maskTextInputFormatter,
-      this.maxLength,
-      this.textAlign});
+  MyTextFormField({
+    this.textEditingController,
+    this.helper,
+    this.hint,
+    this.icon,
+    this.inputType,
+    this.hidden,
+    this.disabled,
+    this.prefix,
+    this.label,
+    this.nLines,
+    this.fontSize,
+    //this.text,
+    this.onChanged,
+    this.errorText,
+    this.maskTextInputFormatter,
+    this.maxLength,
+    this.textAlign,
+  });
 
   @override
   Widget build(BuildContext context) {
-    //textEditingController?.text = text ?? "";
-/*    textEditingController?.selection = TextSelection.fromPosition(TextPosition(
-      offset: textEditingController?.text.length ?? 0,
-    ));*/
     maskTextInputFormatter = maskTextInputFormatter ?? MaskTextInputFormatter();
     return Padding(
-      padding: const EdgeInsets.fromLTRB(10.0, 3.0, 10.0, 3.0),
+      padding: const EdgeInsets.fromLTRB(10.0, 0.0, 10.0, 0.0),
       child: TextFormField(
         textCapitalization: TextCapitalization.words,
         obscureText: hidden ?? false,
@@ -110,8 +106,6 @@ class MyTextFormField extends StatelessWidget {
         maxLines: nLines ?? 1,
         controller: textEditingController,
         onChanged: onChanged,
-/*        inputFormatters:
-            maskTextInputFormatter == null ? null : [maskTextInputFormatter],*/
         inputFormatters: [maskTextInputFormatter!],
       ),
     );
