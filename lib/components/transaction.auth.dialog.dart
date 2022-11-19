@@ -23,11 +23,11 @@ class TransactionAuthDialog extends StatelessWidget {
         ),
       ),
       actions: <Widget>[
-        FlatButton(
+        TextButton(
           onPressed: () => Navigator.pop(context, false),
           child: Text(_labelCancel),
         ),
-        FlatButton(
+        TextButton(
           onPressed: () => Navigator.pop(context, true),
           child: Text(_labelOK),
         ),

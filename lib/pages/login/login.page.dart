@@ -81,7 +81,7 @@ class LoginPage extends StatelessWidget {
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      FlatButton(
+                      TextButton(
                         onPressed: () {
                           Navigator.push(
                             context,
@@ -97,7 +97,7 @@ class LoginPage extends StatelessWidget {
                           ),
                         ),
                       ),
-                      FlatButton(
+                      TextButton(
                         onPressed: () {
                           Navigator.push(
                             context,
