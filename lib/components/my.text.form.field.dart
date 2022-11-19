@@ -53,7 +53,7 @@ class MyTextFormField extends StatelessWidget {
         obscureText: hidden ?? false,
         readOnly: disabled ?? false,
         style: TextStyle(
-          fontSize: fontSize ?? 15.0,
+          fontSize: fontSize ?? 13.0,
         ),
         textAlign: textAlign ?? TextAlign.left,
         maxLength: maxLength ?? null,
@@ -89,13 +89,13 @@ class MyTextFormField extends StatelessWidget {
               : null,
           labelText: label,
           labelStyle: TextStyle(
-            fontSize: 14.0,
+            fontSize: 13.0,
             fontStyle: FontStyle.italic,
             color: Colors.black87,
           ),
           hintText: hint,
           hintStyle: TextStyle(
-            fontSize: 12.0,
+            fontSize: 13.0,
             fontStyle: FontStyle.italic,
             color: Colors.black45,
           ),

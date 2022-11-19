@@ -80,7 +80,7 @@ class LoginPage extends StatelessWidget {
                       _labelForgotPsw,
                       style: TextStyle(
                         color: Colors.white,
-                        fontSize: 10.0,
+                        fontSize: 12.0,
                       ),
                     ),
                   ),
@@ -106,7 +106,7 @@ class LoginPage extends StatelessWidget {
                     _labelFirstAcc,
                     style: TextStyle(
                       color: Colors.white,
-                      fontSize: 10.0,
+                      fontSize: 12.0,
                     ),
                   ),
                 ),
