@@ -134,7 +134,7 @@ class LoginPage extends StatelessWidget {
             );
           } else {
             Token _t = token;
-            print(_t.token);
+            debugPrint(_t.token);
             Associated associated = Template().loadAssociated();
             _controller.setTokenToDevice(_t.token);
             _controller.setUserToDevice(_controller.userLoginCtrl.text);
