@@ -13,8 +13,6 @@ void main() async {
   Firebase.initializeApp();
   await AppController.instance.loadTheme();
   runApp(HCSlzApp());
-  FirebaseFirestore.instance.collection('teste').add({'descricao': 'testando o Firebase'});
-  print('OK');
 }
 
 class HCSlzApp extends StatelessWidget {
