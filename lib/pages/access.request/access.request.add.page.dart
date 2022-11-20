@@ -5,6 +5,7 @@ import 'package:hcslzapp/common/labels.and.hints.dart';
 import 'package:hcslzapp/components/my.bottom.appbar.dart';
 import 'package:hcslzapp/components/my.text.form.field.dart';
 import 'package:hcslzapp/controllers/access.request.controller.dart';
+import '../../components/button.dart';
 import '../../components/my.appbar.dart';
 
 const String _title = 'Solicitar acesso';
@@ -27,9 +28,7 @@ class _AccessRequestAddPageState extends State<AccessRequestAddPage> {
   Widget build(BuildContext context) => Observer(
         builder: (_) => Scaffold(
           appBar: MyAppBar(_title),
-          bottomNavigationBar: MyBottomAppBar(
-            icon: Icon(Icons.save),
-          ),
+          bottomNavigationBar: MyBottomAppBar(),
           body: _widgets(),
 /*          bottomNavigationBar: BottomNavigationBar(
             backgroundColor: Colors.deepOrange[300],
@@ -57,8 +56,8 @@ class _AccessRequestAddPageState extends State<AccessRequestAddPage> {
               )
             ],
           ),*/
-/*          floatingActionButtonLocation:
-              FloatingActionButtonLocation.centerFloat,
+          floatingActionButtonLocation:
+              FloatingActionButtonLocation.centerDocked,
           floatingActionButton: Button(
             icon: Icons.save,
             onClick: () {
@@ -67,7 +66,7 @@ class _AccessRequestAddPageState extends State<AccessRequestAddPage> {
               else
                 AsukaSnackbar.alert('Corrija os erros informados').show();
             },
-          ),*/
+          ),
         ),
       );
 

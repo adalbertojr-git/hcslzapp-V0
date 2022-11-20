@@ -34,16 +34,14 @@ class _ForgotPasswordPageState extends State<ForgotPasswordPage> {
   Widget build(BuildContext context) => Observer(
         builder: (_) => Scaffold(
           appBar: MyAppBar(_title),
-          bottomNavigationBar: MyBottomAppBar(
-            icon: Icon(Icons.email),
-          ),
+          bottomNavigationBar: MyBottomAppBar(),
           body: _widgets(),
-/*          floatingActionButtonLocation:
-              FloatingActionButtonLocation.centerFloat,
+          floatingActionButtonLocation:
+              FloatingActionButtonLocation.centerDocked,
           floatingActionButton: Button(
             icon: Icons.email,
             onClick: () => _forgotPassword(),
-          ),*/
+          ),
         ),
       );
 
