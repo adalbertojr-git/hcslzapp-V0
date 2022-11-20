@@ -3,7 +3,6 @@ import 'package:flutter/material.dart' hide showDialog;
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:hcslzapp/common/labels.and.hints.dart';
 import 'package:hcslzapp/components/button.dart';
-import 'package:hcslzapp/components/degradee.background.dart';
 import 'package:hcslzapp/components/my.appbar.dart';
 import 'package:hcslzapp/components/my.text.form.field.dart';
 import 'package:hcslzapp/controllers/forgot.password.controller.dart';
@@ -33,7 +32,7 @@ class _ForgotPasswordPageState extends State<ForgotPasswordPage> {
   Widget build(BuildContext context) => Observer(
       builder: (_) => Scaffold(
             appBar: MyAppBar(_title),
-            body: DegradeBackground(_widgets()),
+            body: _widgets(),
             floatingActionButtonLocation:
                 FloatingActionButtonLocation.centerFloat,
             floatingActionButton: Button(
@@ -62,7 +61,7 @@ class _ForgotPasswordPageState extends State<ForgotPasswordPage> {
               height: 60.0,
             ),
             Container(
-              padding: const EdgeInsets.symmetric(horizontal: 5),
+              padding: const EdgeInsets.symmetric(horizontal: 20),
               child: RichText(
                 text: const TextSpan(
                   text: 'Atenção: Você receberá um email em nome do Harley Club ' +
@@ -113,78 +112,80 @@ class _ForgotPasswordPageState extends State<ForgotPasswordPage> {
 
   _showCodedDialog(PasswordDTO password) async {
     await Asuka.showDialog(
-        builder: (context) => Dialog(
-            backgroundColor: Colors.deepOrange[200],
-            child: Stack(
-              alignment: Alignment.center,
-              children: <Widget>[
-                Container(
-                  width: double.infinity,
-                  height: 310,
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(15),
-                    color: Colors.deepOrange[200],
+      builder: (context) => Dialog(
+        backgroundColor: Colors.deepOrange[200],
+        child: Stack(
+          alignment: Alignment.center,
+          children: <Widget>[
+            Container(
+              width: double.infinity,
+              height: 310,
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(15),
+                color: Colors.deepOrange[200],
+              ),
+              padding: EdgeInsets.fromLTRB(50, 20, 50, 20),
+              child: Column(
+                children: [
+                  MyTextFormField(
+                    textEditingController: _controller.codeCtrl,
+                    label: labelCode,
+                    hint: hintCode,
+                    fontSize: 30,
+                    inputType: TextInputType.number,
+                    maskTextInputFormatter:
+                        MaskTextInputFormatter(mask: "######"),
+                    textAlign: TextAlign.center,
                   ),
-                  padding: EdgeInsets.fromLTRB(50, 20, 50, 20),
-                  child: Column(
+                  Divider(height: 20),
+                  showCountdown(context),
+                  Divider(height: 10),
+                  Row(
                     children: [
-                      MyTextFormField(
-                        textEditingController: _controller.codeCtrl,
-                        label: labelCode,
-                        hint: hintCode,
-                        fontSize: 30,
-                        inputType: TextInputType.number,
-                        maskTextInputFormatter:
-                            MaskTextInputFormatter(mask: "######"),
-                        textAlign: TextAlign.center,
+                      Container(
+                        padding: EdgeInsets.only(top: 20.0),
+                        child: FloatingActionButton(
+                          heroTag: 'btnCancel',
+                          mini: true,
+                          backgroundColor: Colors.black,
+                          child: Icon(
+                            Icons.cancel_outlined,
+                            color: Colors.deepOrangeAccent[100],
+                          ),
+                          onPressed: () {
+                            Navigator.pop(context);
+                          },
+                        ),
                       ),
-                      Divider(height: 20),
-                      showCountdown(context),
-                      Divider(height: 10),
-                      Row(
-                        children: [
-                          Container(
-                            padding: EdgeInsets.only(top: 20.0),
-                            child: FloatingActionButton(
-                              heroTag: 'btnCancel',
-                              mini: true,
-                              backgroundColor: Colors.black,
-                              child: Icon(
-                                Icons.cancel_outlined,
-                                color: Colors.deepOrangeAccent[100],
-                              ),
-                              onPressed: () {
-                                Navigator.pop(context);
-                              },
-                            ),
+                      Container(
+                        padding: EdgeInsets.only(top: 20.0),
+                        child: FloatingActionButton(
+                          heroTag: 'btnSend',
+                          mini: true,
+                          backgroundColor: Colors.black,
+                          child: Icon(
+                            Icons.arrow_forward,
+                            color: Colors.deepOrangeAccent[100],
                           ),
-                          Container(
-                            padding: EdgeInsets.only(top: 20.0),
-                            child: FloatingActionButton(
-                              heroTag: 'btnSend',
-                              mini: true,
-                              backgroundColor: Colors.black,
-                              child: Icon(
-                                Icons.arrow_forward,
-                                color: Colors.deepOrangeAccent[100],
-                              ),
-                              onPressed: () {
-                                _validateCode(
-                                    context,
-                                    PasswordDTO(
-                                      associatedId: password.associatedId,
-                                      aux: _controller.codeCtrl.text,
-                                    ));
-                              },
-                            ),
-                          ),
-                        ],
-                      )
+                          onPressed: () {
+                            _validateCode(
+                                context,
+                                PasswordDTO(
+                                  associatedId: password.associatedId,
+                                  aux: _controller.codeCtrl.text,
+                                ));
+                          },
+                        ),
+                      ),
                     ],
-                  ),
-                ),
-              ],
-            )));
+                  )
+                ],
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
   }
 
   Center showCountdown(BuildContext c) => Center(

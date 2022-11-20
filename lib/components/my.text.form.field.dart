@@ -54,17 +54,11 @@ class MyTextFormField extends StatelessWidget {
         textAlign: textAlign ?? TextAlign.left,
         maxLength: maxLength ?? null,
         decoration: InputDecoration(
-          focusedBorder: OutlineInputBorder(
-            borderSide: BorderSide(
-              //color: Colors.orangeAccent,
-              color: Colors.white,
-            ),
+        border: OutlineInputBorder(
+          borderSide: BorderSide(
+            color: Colors.white,
           ),
-          enabledBorder: OutlineInputBorder(
-            borderSide: BorderSide(
-              color: Colors.white,
-            ),
-          ),
+        ),
           errorBorder: OutlineInputBorder(
             borderSide: BorderSide(
               color: Colors.red,
@@ -77,6 +71,7 @@ class MyTextFormField extends StatelessWidget {
           ),
           fillColor: Colors.black26,
           filled: disabled ?? false,
+
           icon: icon != null
               ? Icon(
                   icon,

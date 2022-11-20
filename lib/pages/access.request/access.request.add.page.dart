@@ -5,7 +5,6 @@ import 'package:hcslzapp/common/labels.and.hints.dart';
 import 'package:hcslzapp/components/button.dart';
 import 'package:hcslzapp/components/my.text.form.field.dart';
 import 'package:hcslzapp/controllers/access.request.controller.dart';
-import '../../components/degradee.background.dart';
 import '../../components/my.appbar.dart';
 
 const String _title = 'Solicitar acesso';
@@ -28,11 +27,11 @@ class _AccessRequestAddPageState extends State<AccessRequestAddPage> {
   Widget build(BuildContext context) => Observer(
         builder: (_) => Scaffold(
           appBar: MyAppBar(_title),
-          body: DegradeBackground(_widgets(context)),
+          body: _widgets(),
         ),
       );
 
-  _widgets(BuildContext context) => ListView(
+  _widgets() => ListView(
         children: <Widget>[
           MyTextFormField(
             textEditingController: _controller.nameCtrl,
