@@ -428,7 +428,7 @@ class _DashboardPageState extends State<DashboardPage> {
                 builder: (_) => CircleAvatar(
                   backgroundColor: Colors.white,
                   radius: 30.0,
-                  backgroundImage: _controller.photoUrl != null
+                  backgroundImage: _controller.photoUrl != ''
                       ? NetworkImage(_controller.photoUrl)
                       : PhotoImageProvider().getImageProvider(
                           File(_pathNoImage),
