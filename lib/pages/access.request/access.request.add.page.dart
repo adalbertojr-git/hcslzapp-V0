@@ -2,6 +2,7 @@ import 'package:asuka/asuka.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:hcslzapp/common/labels.and.hints.dart';
+import 'package:hcslzapp/components/my.bottom.appbar.dart';
 import 'package:hcslzapp/components/my.text.form.field.dart';
 import 'package:hcslzapp/controllers/access.request.controller.dart';
 import '../../components/my.appbar.dart';
@@ -28,8 +29,9 @@ class _AccessRequestAddPageState extends State<AccessRequestAddPage> {
   Widget build(BuildContext context) => Observer(
         builder: (_) => Scaffold(
           appBar: MyAppBar(_title),
+          bottomNavigationBar: MyBottomAppBar(),
           body: _widgets(),
-          bottomNavigationBar: BottomNavigationBar(
+/*          bottomNavigationBar: BottomNavigationBar(
             backgroundColor: Colors.deepOrange[300],
             currentIndex: _selectedIndex,
             onTap: _onItemTapped,
@@ -54,7 +56,7 @@ class _AccessRequestAddPageState extends State<AccessRequestAddPage> {
                 label: 'Tema',
               )
             ],
-          ),
+          ),*/
 /*          floatingActionButtonLocation:
               FloatingActionButtonLocation.centerFloat,
           floatingActionButton: Button(
@@ -75,8 +77,10 @@ class _AccessRequestAddPageState extends State<AccessRequestAddPage> {
     });
     if (index == 0)
       Navigator.of(context).pop();
-    else if (index == 1) _save();
-    else AppController.instance.changeTheme();
+    else if (index == 1)
+      _save();
+    else
+      AppController.instance.changeTheme();
   }
 
   _widgets() => ListView(
@@ -147,7 +151,8 @@ class _AccessRequestAddPageState extends State<AccessRequestAddPage> {
       _controller.save().then(
         (value) {
           if (value != null) {
-            AsukaSnackbar.success('Solicitação de acesso enviada com sucesso').show();
+            AsukaSnackbar.success('Solicitação de acesso enviada com sucesso')
+                .show();
             Navigator.of(context).pop();
           } else {
             AsukaSnackbar.alert(_controller.errorMsg).show();

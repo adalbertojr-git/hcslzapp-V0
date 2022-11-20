@@ -11,6 +11,8 @@ import 'package:hcslzapp/pages/password/change.password.page.dart';
 import 'package:mask_text_input_formatter/mask_text_input_formatter.dart';
 import 'package:circular_countdown_timer/circular_countdown_timer.dart';
 
+import '../../components/my.bottom.appbar.dart';
+
 const String _title = 'Esqueci minha senha';
 
 class ForgotPasswordPage extends StatefulWidget {
@@ -32,13 +34,14 @@ class _ForgotPasswordPageState extends State<ForgotPasswordPage> {
   Widget build(BuildContext context) => Observer(
         builder: (_) => Scaffold(
           appBar: MyAppBar(_title),
+          bottomNavigationBar: MyBottomAppBar(),
           body: _widgets(),
-          floatingActionButtonLocation:
+/*          floatingActionButtonLocation:
               FloatingActionButtonLocation.centerFloat,
           floatingActionButton: Button(
             icon: Icons.email,
             onClick: () => _forgotPassword(),
-          ),
+          ),*/
         ),
       );
 
@@ -68,9 +71,6 @@ class _ForgotPasswordPageState extends State<ForgotPasswordPage> {
                   text: 'Atenção: Você receberá um email em nome do Harley Club ' +
                       'contendo um código de segurança (numérico de 6 dígitos). ' +
                       'Caso não encontre o email na Caixa de Entrada, verifique sua caixa de Spam.',
-                  style: const TextStyle(
-                    fontSize: 12.0,
-                  ),
                 ),
               ),
             ),
