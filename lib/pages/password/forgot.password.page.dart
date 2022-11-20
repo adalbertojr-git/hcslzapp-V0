@@ -4,12 +4,15 @@ import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:hcslzapp/common/labels.and.hints.dart';
 import 'package:hcslzapp/components/button.dart';
 import 'package:hcslzapp/components/degradee.background.dart';
+import 'package:hcslzapp/components/my.appbar.dart';
 import 'package:hcslzapp/components/my.text.form.field.dart';
 import 'package:hcslzapp/controllers/forgot.password.controller.dart';
 import 'package:hcslzapp/models/password.dto.dart';
 import 'package:hcslzapp/pages/password/change.password.page.dart';
 import 'package:mask_text_input_formatter/mask_text_input_formatter.dart';
 import 'package:circular_countdown_timer/circular_countdown_timer.dart';
+
+const String _title = 'Esqueci minha senha';
 
 class ForgotPasswordPage extends StatefulWidget {
   @override
@@ -27,61 +30,52 @@ class _ForgotPasswordPageState extends State<ForgotPasswordPage> {
   }
 
   @override
-  Widget build(BuildContext context) {
-    return Observer(
-      builder: (_) {
-        return Scaffold(
-          appBar: AppBar(),
-          body: DegradeBackground(_widgets()),
-          //body: _widgets(context),
-          floatingActionButtonLocation:
-              FloatingActionButtonLocation.centerFloat,
-          floatingActionButton: Button(
-            icon: Icons.email,
-            onClick: () => _forgotPassword(),
-          ),
-        );
-      },
-    );
-  }
+  Widget build(BuildContext context) => Observer(
+      builder: (_) => Scaffold(
+            appBar: MyAppBar(_title),
+            body: DegradeBackground(_widgets()),
+            floatingActionButtonLocation:
+                FloatingActionButtonLocation.centerFloat,
+            floatingActionButton: Button(
+              icon: Icons.email,
+              onClick: () => _forgotPassword(),
+            ),
+          ));
 
   _widgets() => Center(
-        child: Card(
-          margin: const EdgeInsets.symmetric(horizontal: 16),
-          child: ListView(
-            shrinkWrap: true,
-            children: <Widget>[
-              SizedBox(
-                height: 10.0,
-              ),
-              MyTextFormField(
-                textEditingController: _controller.emailForgotPswCtrl,
-                hint: hintEmail,
-                label: labelEmail + " *",
-                icon: Icons.email,
-                inputType: TextInputType.emailAddress,
-                onChanged: _controller.formController.changeEmail,
-                errorText: _controller.validateEmail(),
-              ),
-              SizedBox(
-                height: 60.0,
-              ),
-              Container(
-                padding: const EdgeInsets.symmetric(horizontal: 5),
-                child: RichText(
-                  text: const TextSpan(
-                    text: 'Atenção: Você receberá um email em nome do Harley Club ' +
-                        'contendo um código de segurança (numérico de 6 dígitos). ' +
-                        'Caso não encontre o email na Caixa de Entrada, verifique sua caixa de Spam.',
-                    style: const TextStyle(
-                      fontSize: 12.0,
-                      color: Colors.black87,
-                    ),
+        child: ListView(
+          shrinkWrap: true,
+          children: <Widget>[
+            SizedBox(
+              height: 10.0,
+            ),
+            MyTextFormField(
+              textEditingController: _controller.emailForgotPswCtrl,
+              hint: hintEmail,
+              label: labelEmail + " *",
+              icon: Icons.email,
+              inputType: TextInputType.emailAddress,
+              onChanged: _controller.formController.changeEmail,
+              errorText: _controller.validateEmail(),
+            ),
+            SizedBox(
+              height: 60.0,
+            ),
+            Container(
+              padding: const EdgeInsets.symmetric(horizontal: 5),
+              child: RichText(
+                text: const TextSpan(
+                  text: 'Atenção: Você receberá um email em nome do Harley Club ' +
+                      'contendo um código de segurança (numérico de 6 dígitos). ' +
+                      'Caso não encontre o email na Caixa de Entrada, verifique sua caixa de Spam.',
+                  style: const TextStyle(
+                    fontSize: 12.0,
+                    color: Colors.black87,
                   ),
                 ),
               ),
-            ],
-          ),
+            ),
+          ],
         ),
       );
 

@@ -15,7 +15,7 @@ import '../dashboard/dashboard.page.dart';
 import '../access.request/access.request.add.page.dart';
 
 const String _pathLogoImage = 'assets/imgs/logo.png';
-const String _labelForgotPsw = 'Esqueceu a senha?';
+const String _labelForgotPsw = 'Esqueci minha senha';
 const String _labelFirstAcc = 'Não tem conta? Solicite acesso';
 
 class LoginPage extends StatefulWidget {
