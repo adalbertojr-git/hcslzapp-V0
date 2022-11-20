@@ -9,6 +9,8 @@ import '../../common/labels.and.hints.dart';
 import '../../common/photo.image.provider.dart';
 import '../../components/button.dart';
 import '../../components/centered.message.dart';
+import '../../components/my.appbar.dart';
+import '../../components/my.bottom.appbar.dart';
 import '../../components/my.text.form.field.dart';
 import '../../components/progress.dart';
 import '../../components/top.bar.dart';
@@ -42,25 +44,23 @@ class AssociatedUpdatePage extends StatefulWidget {
 }
 
 class _AssociatedUpdatePageState extends State<AssociatedUpdatePage> {
-  AssociatedUpdateController _controller = AssociatedUpdateController();
-
-  //late AssociatedUpdateController _controller;
+  final AssociatedUpdateController _controller = AssociatedUpdateController();
 
   @override
   void initState() {
-    //_controller = AssociatedUpdateController();
     _controller.getFuture(widget._associatedId).then((value) {
       if (value.isNotEmpty) {
         _controller.setButtonVisibilty();
       }
     });
-
     super.initState();
   }
 
   @override
   Widget build(BuildContext context) => Observer(
         builder: (_) => Scaffold(
+          appBar: MyAppBar(_title),
+          bottomNavigationBar: MyBottomAppBar(),
           body: FutureBuilder<List<Associated>>(
             future: _controller.future,
             builder: (context, snapshot) {
@@ -99,275 +99,263 @@ class _AssociatedUpdatePageState extends State<AssociatedUpdatePage> {
             },
           ),
           floatingActionButtonLocation:
-              FloatingActionButtonLocation.centerFloat,
+              FloatingActionButtonLocation.centerDocked,
           floatingActionButton: _controller.isHidedButton
               ? null
               : Button(icon: Icons.save, onClick: () => _update()),
         ),
       );
 
-  _widgets(BuildContext context) => Container(
-        padding: EdgeInsets.fromLTRB(5.0, 5.0, 5.0, 0.0),
-        decoration: BoxDecoration(
-          gradient: LinearGradient(
-            colors: [Colors.white30, Colors.deepOrange],
-            begin: FractionalOffset.topLeft,
-            end: FractionalOffset.bottomRight,
+  _widgets(BuildContext context) => ListView(
+        children: <Widget>[
+          SizedBox(
+            height: 10.0,
           ),
-        ),
-        height: MediaQuery.of(context).size.height,
-        child: SingleChildScrollView(
-          child: Column(
-            children: <Widget>[
-              TopBar(
-                title: _title,
-              ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                children: [
-                  IconButton(
-                    icon: Icon(
-                      Icons.add_photo_alternate,
-                      color: Colors.black,
-                      size: 28.0,
-                    ),
-                    onPressed: _controller.getImageFromGallery,
-                  ),
-                  _photo(),
-                  IconButton(
-                    icon: Icon(
-                      Icons.add_a_photo,
-                      color: Colors.black,
-                      size: 25.0,
-                    ),
-                    onPressed: _controller.getImageFromCamera,
-                  ),
-                ],
-              ),
-              SizedBox(
-                height: 5.0,
-              ),
-              Observer(
-                builder: (_) {
-                  return MyTextFormField(
-                    textEditingController: _controller.nameCtrl,
-                    label: labelName,
-                    hint: hintName,
-                    icon: Icons.person,
-                    inputType: TextInputType.text,
-                    onChanged: _controller.formController.changeName,
-                    errorText: _controller.validateName(),
-                  );
-                },
-              ),
-              Observer(
-                builder: (_) {
-                  return MyTextFormField(
-                    textEditingController: _controller.emailCtrl,
-                    label: labelEmail,
-                    hint: hintEmail,
-                    icon: Icons.email,
-                    inputType: TextInputType.emailAddress,
-                    onChanged: _controller.formController.changeEmail,
-                    errorText: _controller.validateEmail(),
-                  );
-                },
-              ),
-              MyTextFormField(
-                textEditingController: _controller.phoneCtrl,
-                label: labelPhone,
-                hint: hintPhone,
-                icon: Icons.phone,
-                inputType: TextInputType.phone,
-                maskTextInputFormatter:
-                    MaskTextInputFormatter(mask: "(##) #####-####"),
-              ),
-              MyTextFormField(
-                textEditingController: _controller.sponsorCtrl,
-                label: labelSponsor,
-                hint: hintSponsor,
-                icon: Icons.person_pin,
-                inputType: TextInputType.text,
-              ),
-              Padding(
-                padding: const EdgeInsets.fromLTRB(0.0, 3.0, 2.0, 3.0),
-                child: Row(
-                  children: <Widget>[
-                    Expanded(
-                      child: const Text(
-                        'Tipo Sanguíneo:',
-                        textAlign: TextAlign.center,
-                      ),
-                    ),
-                    Expanded(
-                      child: Container(
-                        height: 55.0,
-                        child: DropdownButtonFormField(
-                          decoration: const InputDecoration(
-                            enabledBorder: OutlineInputBorder(
-                              borderSide: BorderSide(
-                                color: Colors.white70,
-                              ),
-                            ),
-                          ),
-                          value: _controller.currentBloodType,
-                          items: getBloodTypes(),
-                          onChanged: _controller.changedBloodTypesDropDownItem,
-                        ),
-                      ),
-                    ),
-                  ],
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            children: [
+              IconButton(
+                icon: Icon(
+                  Icons.add_photo_alternate,
+                  color: Colors.black,
+                  size: 28.0,
                 ),
+                onPressed: _controller.getImageFromGallery,
               ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                children: <Widget>[
-                  Expanded(
-                    child: MyTextFormField(
-                      textEditingController: _controller.cnhCtrl,
-                      label: labelCNH,
-                      hint: hintCNH,
-                      inputType: TextInputType.number,
-                    ),
-                  ),
-                  SizedBox(
-                    width: 5.0,
-                  ),
-                  Expanded(
-                    child: MyTextFormField(
-                      textEditingController: _controller.cpfCtrl,
-                      label: labelCPF,
-                      hint: hintCPF,
-                      inputType: TextInputType.number,
-                      maskTextInputFormatter:
-                          MaskTextInputFormatter(mask: "###.###.###-##"),
-                    ),
-                  ),
-                ],
-              ),
-              Padding(
-                padding: const EdgeInsets.fromLTRB(0.0, 3.0, 2.0, 3.0),
-                child: Row(
-                  children: <Widget>[
-                    Expanded(
-                      child: const Text(
-                        'Tipo de Associado:',
-                        textAlign: TextAlign.center,
-                      ),
-                    ),
-                    Expanded(
-                      child: Container(
-                        height: 55.0,
-                        child: widget._selectedProfile == ADMIN
-                            ? DropdownButtonFormField(
-                                decoration: const InputDecoration(
-                                  enabledBorder: OutlineInputBorder(
-                                    borderSide: BorderSide(
-                                      color: Colors.white70,
-                                    ),
-                                  ),
-                                ),
-                                value: _controller.currentAssociatedType,
-                                items: getAssociatedTypes(),
-                                onChanged: _controller
-                                    .changedAssociatedTypesDropDownItem,
-                              )
-                            : MyTextFormField(
-                                textEditingController:
-                                    _controller.associatedTypeCtrl,
-                                disabled: true,
-                              ),
-                      ),
-                    ),
-                  ],
+              _photo(),
+              IconButton(
+                icon: Icon(
+                  Icons.add_a_photo,
+                  color: Colors.black,
+                  size: 25.0,
                 ),
-              ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                children: <Widget>[
-                  Expanded(
-                    child: MyTextFormField(
-                      textEditingController: _controller.dateBirthCtrl,
-                      label: labelDateBirth,
-                      hint: hintDate,
-                      icon: Icons.calendar_today,
-                      inputType: TextInputType.datetime,
-                      maskTextInputFormatter:
-                          MaskTextInputFormatter(mask: "##/##/####"),
-                    ),
-                  ),
-                  SizedBox(
-                    width: 5.0,
-                  ),
-                  Expanded(
-                    child: MyTextFormField(
-                      textEditingController: _controller.dateShieldCtrl,
-                      label: labelDateShield,
-                      hint: hintDate,
-                      icon: Icons.calendar_today,
-                      inputType: TextInputType.datetime,
-                      maskTextInputFormatter:
-                          MaskTextInputFormatter(mask: "##/##/####"),
-                    ),
-                  ),
-                ],
-              ),
-              Divider(),
-              _dependentsListWidget(),
-              SizedBox(
-                height: 10.0,
-              ),
-              _motorcyclesListWidget(),
-              SizedBox(
-                height: 10.0,
-              ),
-              widget._selectedProfile == ADMIN
-                  ? Container(
-                      child: Padding(
-                        padding: const EdgeInsets.fromLTRB(0.0, 3.0, 2.0, 3.0),
-                        child: Row(
-                          crossAxisAlignment: CrossAxisAlignment.baseline,
-                          textBaseline: TextBaseline.alphabetic,
-                          children: <Widget>[
-                            Expanded(
-                              child: const Text(
-                                'Status:',
-                                textAlign: TextAlign.center,
-                                style: TextStyle(
-                                  fontSize: 18.0,
-                                  fontWeight: FontWeight.bold,
-                                ),
-                              ),
-                            ),
-                            Expanded(
-                              child: Container(
-                                height: 55.0,
-                                child: DropdownButtonFormField(
-                                  decoration: const InputDecoration(
-                                    enabledBorder: OutlineInputBorder(
-                                      borderSide: BorderSide(
-                                        color: Colors.black,
-                                      ),
-                                    ),
-                                  ),
-                                  value: _controller.currentStatus,
-                                  items: getStatus(),
-                                  onChanged:
-                                      _controller.changedStatusDropDownItem,
-                                ),
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
-                    )
-                  : Container(),
-              SizedBox(
-                height: 80.0,
+                onPressed: _controller.getImageFromCamera,
               ),
             ],
           ),
-        ),
+          SizedBox(
+            height: 5.0,
+          ),
+          Observer(
+            builder: (_) {
+              return MyTextFormField(
+                textEditingController: _controller.nameCtrl,
+                label: labelName,
+                hint: hintName,
+                icon: Icons.person,
+                inputType: TextInputType.text,
+                onChanged: _controller.formController.changeName,
+                errorText: _controller.validateName(),
+              );
+            },
+          ),
+          Observer(
+            builder: (_) {
+              return MyTextFormField(
+                textEditingController: _controller.emailCtrl,
+                label: labelEmail,
+                hint: hintEmail,
+                icon: Icons.email,
+                inputType: TextInputType.emailAddress,
+                onChanged: _controller.formController.changeEmail,
+                errorText: _controller.validateEmail(),
+              );
+            },
+          ),
+          MyTextFormField(
+            textEditingController: _controller.phoneCtrl,
+            label: labelPhone,
+            hint: hintPhone,
+            icon: Icons.phone,
+            inputType: TextInputType.phone,
+            maskTextInputFormatter:
+                MaskTextInputFormatter(mask: "(##) #####-####"),
+          ),
+          MyTextFormField(
+            textEditingController: _controller.sponsorCtrl,
+            label: labelSponsor,
+            hint: hintSponsor,
+            icon: Icons.person_pin,
+            inputType: TextInputType.text,
+          ),
+          Padding(
+            padding: const EdgeInsets.fromLTRB(0.0, 3.0, 2.0, 3.0),
+            child: Row(
+              children: <Widget>[
+                Expanded(
+                  child: const Text(
+                    'Tipo Sanguíneo:',
+                    textAlign: TextAlign.center,
+                  ),
+                ),
+                Expanded(
+                  child: Container(
+                    height: 55.0,
+                    child: DropdownButtonFormField(
+                      decoration: const InputDecoration(
+                        enabledBorder: OutlineInputBorder(
+                          borderSide: BorderSide(
+                            color: Colors.white70,
+                          ),
+                        ),
+                      ),
+                      value: _controller.currentBloodType == ''
+                          ? null
+                          : _controller.currentBloodType,
+                      items: getBloodTypes(),
+                      onChanged: _controller.changedBloodTypesDropDownItem,
+                    ),
+                  ),
+                ),
+              ],
+            ),
+          ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            children: <Widget>[
+              Expanded(
+                child: MyTextFormField(
+                  textEditingController: _controller.cnhCtrl,
+                  label: labelCNH,
+                  hint: hintCNH,
+                  inputType: TextInputType.number,
+                ),
+              ),
+              SizedBox(
+                width: 5.0,
+              ),
+              Expanded(
+                child: MyTextFormField(
+                  textEditingController: _controller.cpfCtrl,
+                  label: labelCPF,
+                  hint: hintCPF,
+                  inputType: TextInputType.number,
+                  maskTextInputFormatter:
+                      MaskTextInputFormatter(mask: "###.###.###-##"),
+                ),
+              ),
+            ],
+          ),
+          Padding(
+            padding: const EdgeInsets.fromLTRB(0.0, 3.0, 2.0, 3.0),
+            child: Row(
+              children: <Widget>[
+                Expanded(
+                  child: const Text(
+                    'Tipo de Associado:',
+                    textAlign: TextAlign.center,
+                  ),
+                ),
+                Expanded(
+                  child: Container(
+                    height: 55.0,
+                    child: widget._selectedProfile == ADMIN
+                        ? DropdownButtonFormField(
+                            decoration: const InputDecoration(
+                              enabledBorder: OutlineInputBorder(
+                                borderSide: BorderSide(
+                                  color: Colors.white70,
+                                ),
+                              ),
+                            ),
+                            value: _controller.currentAssociatedType,
+                            items: getAssociatedTypes(),
+                            onChanged:
+                                _controller.changedAssociatedTypesDropDownItem,
+                          )
+                        : MyTextFormField(
+                            textEditingController:
+                                _controller.associatedTypeCtrl,
+                            disabled: true,
+                          ),
+                  ),
+                ),
+              ],
+            ),
+          ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            children: <Widget>[
+              Expanded(
+                child: MyTextFormField(
+                  textEditingController: _controller.dateBirthCtrl,
+                  label: labelDateBirth,
+                  hint: hintDate,
+                  icon: Icons.calendar_today,
+                  inputType: TextInputType.datetime,
+                  maskTextInputFormatter:
+                      MaskTextInputFormatter(mask: "##/##/####"),
+                ),
+              ),
+              SizedBox(
+                width: 5.0,
+              ),
+              Expanded(
+                child: MyTextFormField(
+                  textEditingController: _controller.dateShieldCtrl,
+                  label: labelDateShield,
+                  hint: hintDate,
+                  icon: Icons.calendar_today,
+                  inputType: TextInputType.datetime,
+                  maskTextInputFormatter:
+                      MaskTextInputFormatter(mask: "##/##/####"),
+                ),
+              ),
+            ],
+          ),
+          Divider(),
+          _dependentsListWidget(),
+          SizedBox(
+            height: 10.0,
+          ),
+          _motorcyclesListWidget(),
+          SizedBox(
+            height: 10.0,
+          ),
+          widget._selectedProfile == ADMIN
+              ? Container(
+                  child: Padding(
+                    padding: const EdgeInsets.fromLTRB(0.0, 3.0, 2.0, 3.0),
+                    child: Row(
+                      crossAxisAlignment: CrossAxisAlignment.baseline,
+                      textBaseline: TextBaseline.alphabetic,
+                      children: <Widget>[
+                        Expanded(
+                          child: const Text(
+                            'Status:',
+                            textAlign: TextAlign.center,
+                            style: TextStyle(
+                              fontSize: 18.0,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                        ),
+                        Expanded(
+                          child: Container(
+                            height: 55.0,
+                            child: DropdownButtonFormField(
+                              decoration: const InputDecoration(
+                                enabledBorder: OutlineInputBorder(
+                                  borderSide: BorderSide(
+                                    color: Colors.black,
+                                  ),
+                                ),
+                              ),
+                              value: _controller.currentStatus,
+                              items: getStatus(),
+                              onChanged: _controller.changedStatusDropDownItem,
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                )
+              : Container(),
+          SizedBox(
+            height: 30.0,
+          ),
+        ],
       );
 
   _photo() => Container(
@@ -390,11 +378,11 @@ class _AssociatedUpdatePageState extends State<AssociatedUpdatePage> {
       );
 
   DecorationImage _loadPhoto() => DecorationImage(
-      image: _controller.photoPath != ""
+      image: _controller.photoPath != ''
           ? PhotoImageProvider().getImageProvider(
               File(_controller.photoPath),
             ) as ImageProvider
-          : _controller.photoUrl != null
+          : _controller.photoUrl != ''
               ? NetworkImage(_controller.photoUrl)
               : PhotoImageProvider().getImageProvider(
                   File(_pathNoImage),
