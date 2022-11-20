@@ -142,29 +142,15 @@ class _AccessRequestAddPageState extends State<AccessRequestAddPage> {
 
   _save() {
     if (_controller.hasErrors) {
-      Asuka.showSnackBar(
-        SnackBar(
-          content: const Text('Atenção: Existem erros no formulário que devem '
-              'ser corrigidos antes de efetivar a transação.'),
-        ),
-      );
+      AsukaSnackbar.alert('Corrija os erros informados').show();
     } else {
       _controller.save().then(
         (value) {
           if (value != null) {
-            Asuka.showSnackBar(
-              SnackBar(
-                content:
-                    const Text('Requisição de acesso enviado com sucesso.'),
-              ),
-            );
+            AsukaSnackbar.success('Solicitação de acesso enviada com sucesso').show();
             Navigator.of(context).pop();
           } else {
-            Asuka.showSnackBar(
-              SnackBar(
-                content: Text(_controller.errorMsg),
-              ),
-            );
+            AsukaSnackbar.alert(_controller.errorMsg).show();
           }
         },
       );

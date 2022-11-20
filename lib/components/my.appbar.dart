@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 
-import '../controllers/app.controller.dart';
-
 class MyAppBar extends StatelessWidget with PreferredSizeWidget {
   final String _title;
 
@@ -14,7 +12,7 @@ class MyAppBar extends StatelessWidget with PreferredSizeWidget {
           _title,
         ),
         centerTitle: true,
-        actions: [
+/*        actions: [
           GestureDetector(
             child: Icon(
               AppController.instance.isDarkTheme
@@ -28,7 +26,7 @@ class MyAppBar extends StatelessWidget with PreferredSizeWidget {
               AppController.instance.changeTheme();
             },
           ),
-        ],
+        ],*/
       );
 
   @override
