@@ -43,14 +43,13 @@ class MyTextFormField extends StatelessWidget {
   Widget build(BuildContext context) {
     maskTextInputFormatter = maskTextInputFormatter ?? MaskTextInputFormatter();
     return Padding(
-      padding: const EdgeInsets.fromLTRB(10.0, 3.0, 10.0, 3.0),
+      padding: const EdgeInsets.fromLTRB(10.0, 10.0, 10.0, 0.0),
       child: TextFormField(
         textCapitalization: TextCapitalization.words,
         obscureText: hidden ?? false,
         readOnly: disabled ?? false,
         style: TextStyle(
           fontSize: fontSize ?? 13.0,
-          color: Colors.black,
         ),
         textAlign: textAlign ?? TextAlign.left,
         maxLength: maxLength ?? null,
@@ -82,13 +81,13 @@ class MyTextFormField extends StatelessWidget {
           labelStyle: TextStyle(
             fontSize: 13.0,
             fontStyle: FontStyle.italic,
-            color: Colors.black87,
+            //color: Colors.black87,
           ),
           hintText: hint,
           hintStyle: TextStyle(
             fontSize: 13.0,
             fontStyle: FontStyle.italic,
-            color: Colors.black45,
+            //color: Colors.black45,
           ),
           prefixText: prefix,
           errorText: errorText ?? null,
