@@ -79,34 +79,24 @@ class _ForgotPasswordPageState extends State<ForgotPasswordPage> {
       );
 
   _forgotPassword() {
-    if (_controller.emailForgotPswCtrl.text.length != 0) {
-      Asuka.showSnackBar(
-        SnackBar(
-          content: const Text('Aguarde...'),
-        ),
-      );
-      _controller
-          .forgotPassword(_controller.emailForgotPswCtrl.text)
-          .then((value) {
-        if (value != null) {
-          if (value.aux.startsWith('ERRO'))
-            Asuka.showSnackBar(
-              SnackBar(
-                content: Text(value.aux),
-              ),
-            );
-          else {
-            _controller.initTextFields();
-            _showCodedDialog(value);
+    if (_controller.hasErrors) {
+      AsukaSnackbar.alert('Corrija os erros informados').show();
+    } else {
+      AsukaSnackbar.message('Enviando email...').show();
+      _controller.forgotPassword(_controller.emailForgotPswCtrl.text).then(
+        (value) {
+          if (value != null) {
+            if (value.aux.startsWith('ERRO'))
+              AsukaSnackbar.alert(value.aux).show();
+            else {
+              _controller.initTextFields();
+              _showCodedDialog(value);
+            }
+          } else {
+            AsukaSnackbar.alert(_controller.errorMsg).show();
           }
-        } else {
-          Asuka.showSnackBar(
-            SnackBar(
-              content: Text(_controller.errorMsg),
-            ),
-          );
-        }
-      });
+        },
+      );
     }
   }
 
@@ -167,14 +157,13 @@ class _ForgotPasswordPageState extends State<ForgotPasswordPage> {
                             Icons.arrow_forward,
                             color: Colors.deepOrangeAccent[100],
                           ),
-                          onPressed: () {
-                            _validateCode(
-                                context,
-                                PasswordDTO(
-                                  associatedId: password.associatedId,
-                                  aux: _controller.codeCtrl.text,
-                                ));
-                          },
+                          onPressed: () => _validateCode(
+                            context,
+                            PasswordDTO(
+                              associatedId: password.associatedId,
+                              aux: _controller.codeCtrl.text,
+                            ),
+                          ),
                         ),
                       ),
                     ],
@@ -274,31 +263,26 @@ class _ForgotPasswordPageState extends State<ForgotPasswordPage> {
 
   _validateCode(BuildContext c, PasswordDTO passwordDTO) {
     if (passwordDTO.aux.length != 0) {
-      _controller.validateCode(passwordDTO).then((value) {
-        if (value != null) {
-          if (value.startsWith('OK')) {
-            Navigator.pop(c);
-            Navigator.push(
-              context,
-              MaterialPageRoute(
+      _controller.validateCode(passwordDTO).then(
+        (value) {
+          if (value != null) {
+            if (value.startsWith('OK')) {
+              Navigator.pop(c);
+              Navigator.push(
+                context,
+                MaterialPageRoute(
                   builder: (_) => ChangePasswordPage(
-                        passwordDTO,
-                      )),
-            );
-          } else
-            Asuka.showSnackBar(
-              SnackBar(
-                content: Text('O código informado não é válido.'),
-              ),
-            );
-        } else {
-          Asuka.showSnackBar(
-            SnackBar(
-              content: Text(_controller.errorMsg),
-            ),
-          );
-        }
-      });
+                    passwordDTO,
+                  ),
+                ),
+              );
+            } else
+              AsukaSnackbar.alert('O código informado não é válido.').show();
+          } else {
+            AsukaSnackbar.alert(_controller.errorMsg).show();
+          }
+        },
+      );
     }
   }
 }

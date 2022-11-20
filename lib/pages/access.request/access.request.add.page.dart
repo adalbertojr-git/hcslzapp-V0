@@ -30,42 +30,11 @@ class _AccessRequestAddPageState extends State<AccessRequestAddPage> {
           appBar: MyAppBar(_title),
           bottomNavigationBar: MyBottomAppBar(),
           body: _widgets(),
-/*          bottomNavigationBar: BottomNavigationBar(
-            backgroundColor: Colors.deepOrange[300],
-            currentIndex: _selectedIndex,
-            onTap: _onItemTapped,
-            items: [
-              BottomNavigationBarItem(
-                icon: Icon(Icons.arrow_back),
-                label: 'Voltar',
-              ),
-              BottomNavigationBarItem(
-                icon: Icon(Icons.save),
-                label: 'Salvar',
-              ),
-              BottomNavigationBarItem(
-                icon: Icon(
-                  AppController.instance.isDarkTheme
-                      ? Icons.light_mode
-                      : Icons.dark_mode,
-                  color: AppController.instance.isDarkTheme
-                      ? Colors.white
-                      : Colors.black,
-                ),
-                label: 'Tema',
-              )
-            ],
-          ),*/
           floatingActionButtonLocation:
               FloatingActionButtonLocation.centerDocked,
           floatingActionButton: Button(
             icon: Icons.save,
-            onClick: () {
-              if (!_controller.hasErrors)
-                _save();
-              else
-                AsukaSnackbar.alert('Corrija os erros informados').show();
-            },
+            onClick: () => _save(),
           ),
         ),
       );

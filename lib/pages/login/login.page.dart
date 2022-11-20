@@ -33,13 +33,13 @@ class _LoginPageState extends State<LoginPage> {
   }
 
   @override
-  Widget build(BuildContext context) {
-    return Observer(builder: (_) {
-      return Scaffold(
-        body: DegradeBackground(_widgets(context)),
+  Widget build(BuildContext context) => Observer(
+        builder: (_) => Scaffold(
+          body: DegradeBackground(
+            _widgets(context),
+          ),
+        ),
       );
-    });
-  }
 
   _widgets(BuildContext context) => ListView(
         children: <Widget>[
@@ -74,12 +74,12 @@ class _LoginPageState extends State<LoginPage> {
           Align(
             alignment: Alignment.centerRight,
             child: TextButton(
-              onPressed: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context) => ForgotPasswordPage()),
-                );
-              },
+              onPressed: () => Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => ForgotPasswordPage(),
+                ),
+              ),
               child: Text(
                 _labelForgotPsw,
                 style: TextStyle(
@@ -91,23 +91,18 @@ class _LoginPageState extends State<LoginPage> {
           ),
           Button(
             icon: Icons.arrow_forward,
-            onClick: () {
-              if (!_controller.hasErrors)
-                _login(context);
-              else
-                AsukaSnackbar.alert('Preencha os campos ogrigatórios').show();
-            },
+            onClick: () => _login(context),
           ),
           SizedBox(
             height: 20.0,
           ),
           TextButton(
-            onPressed: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(builder: (context) => AccessRequestAddPage()),
-              );
-            },
+            onPressed: () => Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (context) => AccessRequestAddPage(),
+              ),
+            ),
             child: Text(
               _labelFirstAcc,
               style: TextStyle(
@@ -120,34 +115,38 @@ class _LoginPageState extends State<LoginPage> {
       );
 
   _login(BuildContext context) {
-    AsukaSnackbar.message('Carregando...').show();
-    _controller.authenticate().then(
-      (token) async {
-        if (token == null) {
-          AsukaSnackbar.alert(_controller.errorMsg).show();
-        } else {
-          Token _t = token;
-          debugPrint(_t.token);
-          Associated associated = Template().loadAssociated();
-          _controller.setTokenToDevice(_t.token);
-          _controller.setUserToDevice(_controller.userLoginCtrl.text);
-          TokenDetails _tokenDetails = TokenDetails(_t.token);
-          await _controller.findByIdToList(_tokenDetails.associatedId()).then(
-            (value) {
-              associated = value[0];
-            },
-          );
-          Navigator.pushReplacement(
-            context,
-            MaterialPageRoute(
-              builder: (context) => DashboardPage(
-                associated,
+    if (_controller.hasErrors) {
+      AsukaSnackbar.alert('Preencha os campos ogrigatórios').show();
+    } else {
+      AsukaSnackbar.message('Carregando...').show();
+      _controller.authenticate().then(
+        (token) async {
+          if (token == null) {
+            AsukaSnackbar.alert(_controller.errorMsg).show();
+          } else {
+            Token _t = token;
+            debugPrint(_t.token);
+            Associated associated = Template().loadAssociated();
+            _controller.setTokenToDevice(_t.token);
+            _controller.setUserToDevice(_controller.userLoginCtrl.text);
+            TokenDetails _tokenDetails = TokenDetails(_t.token);
+            await _controller.findByIdToList(_tokenDetails.associatedId()).then(
+              (value) {
+                associated = value[0];
+              },
+            );
+            Navigator.pushReplacement(
+              context,
+              MaterialPageRoute(
+                builder: (context) => DashboardPage(
+                  associated,
+                ),
               ),
-            ),
-          );
-        }
-      },
-    );
+            );
+          }
+        },
+      );
+    }
   }
 }
 
