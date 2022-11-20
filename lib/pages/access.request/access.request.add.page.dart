@@ -6,7 +6,6 @@ import 'package:hcslzapp/components/my.bottom.appbar.dart';
 import 'package:hcslzapp/components/my.text.form.field.dart';
 import 'package:hcslzapp/controllers/access.request.controller.dart';
 import '../../components/my.appbar.dart';
-import '../../controllers/app.controller.dart';
 
 const String _title = 'Solicitar acesso';
 
@@ -17,7 +16,6 @@ class AccessRequestAddPage extends StatefulWidget {
 
 class _AccessRequestAddPageState extends State<AccessRequestAddPage> {
   final AccessRequestController _controller = AccessRequestController();
-  int _selectedIndex = 0;
 
   @override
   void initState() {
@@ -29,7 +27,9 @@ class _AccessRequestAddPageState extends State<AccessRequestAddPage> {
   Widget build(BuildContext context) => Observer(
         builder: (_) => Scaffold(
           appBar: MyAppBar(_title),
-          bottomNavigationBar: MyBottomAppBar(),
+          bottomNavigationBar: MyBottomAppBar(
+            icon: Icon(Icons.save),
+          ),
           body: _widgets(),
 /*          bottomNavigationBar: BottomNavigationBar(
             backgroundColor: Colors.deepOrange[300],
@@ -70,18 +70,6 @@ class _AccessRequestAddPageState extends State<AccessRequestAddPage> {
           ),*/
         ),
       );
-
-  void _onItemTapped(int index) {
-    setState(() {
-      _selectedIndex = index;
-    });
-    if (index == 0)
-      Navigator.of(context).pop();
-    else if (index == 1)
-      _save();
-    else
-      AppController.instance.changeTheme();
-  }
 
   _widgets() => ListView(
         children: <Widget>[

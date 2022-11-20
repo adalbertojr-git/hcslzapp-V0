@@ -3,6 +3,20 @@ import 'package:flutter/material.dart';
 import '../controllers/app.controller.dart';
 
 class MyBottomAppBar extends StatefulWidget with PreferredSizeWidget {
+/*  final Icon icon;
+  final Function onClick;
+
+  const MyBottomAppBar({
+    required this.icon,
+    required this.onClick,
+  });*/
+
+final Icon icon;
+
+  const MyBottomAppBar({
+    required this.icon,
+  });
+
 
   @override
   State<MyBottomAppBar> createState() => _MyBottomAppBarState();
@@ -25,7 +39,7 @@ class _MyBottomAppBarState extends State<MyBottomAppBar> {
             label: 'Voltar',
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.save),
+            icon: widget.icon,
             label: 'Salvar',
           ),
           BottomNavigationBarItem(
@@ -48,7 +62,10 @@ class _MyBottomAppBarState extends State<MyBottomAppBar> {
     });
     if (index == 0)
       Navigator.of(context).pop();
-    else if (index == 1) print('');//_save();
-    else AppController.instance.changeTheme();
+    else if (index == 1)
+      print('');
+    //widget.onClick();
+    else
+      AppController.instance.changeTheme();
   }
 }

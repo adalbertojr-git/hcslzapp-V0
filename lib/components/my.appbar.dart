@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+const String _pathLogo = 'assets/imgs/logo.png';
+
 class MyAppBar extends StatelessWidget with PreferredSizeWidget {
   final String _title;
 
@@ -7,26 +9,17 @@ class MyAppBar extends StatelessWidget with PreferredSizeWidget {
 
   @override
   Widget build(BuildContext context) => AppBar(
-    leading: Container(),
+        leading: Container(),
         title: Text(
           _title,
         ),
         centerTitle: true,
-/*        actions: [
-          GestureDetector(
-            child: Icon(
-              AppController.instance.isDarkTheme
-                  ? Icons.light_mode
-                  : Icons.dark_mode,
-              color: AppController.instance.isDarkTheme
-                  ? Colors.white
-                  : Colors.black,
-            ),
-            onTap: () {
-              AppController.instance.changeTheme();
-            },
+        actions: <Widget>[
+          CircleAvatar(
+            backgroundColor: Colors.white,
+            child: Image.asset(_pathLogo),
           ),
-        ],*/
+        ],
       );
 
   @override
