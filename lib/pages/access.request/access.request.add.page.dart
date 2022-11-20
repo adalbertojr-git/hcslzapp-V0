@@ -41,6 +41,9 @@ class _AccessRequestAddPageState extends State<AccessRequestAddPage> {
 
   _widgets() => ListView(
         children: <Widget>[
+          SizedBox(
+            height: 10.0,
+          ),
           MyTextFormField(
             textEditingController: _controller.nameCtrl,
             hint: hintName,

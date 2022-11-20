@@ -43,7 +43,7 @@ class MyTextFormField extends StatelessWidget {
   Widget build(BuildContext context) {
     maskTextInputFormatter = maskTextInputFormatter ?? MaskTextInputFormatter();
     return Padding(
-      padding: const EdgeInsets.fromLTRB(10.0, 10.0, 10.0, 0.0),
+      padding: const EdgeInsets.fromLTRB(10.0, 5.0, 10.0, 5.0),
       child: TextFormField(
         textCapitalization: TextCapitalization.words,
         obscureText: hidden ?? false,

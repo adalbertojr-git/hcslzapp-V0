@@ -82,7 +82,7 @@ class _ForgotPasswordPageState extends State<ForgotPasswordPage> {
     if (_controller.hasErrors) {
       AsukaSnackbar.alert('Corrija os erros informados').show();
     } else {
-      AsukaSnackbar.message('Enviando email...').show();
+      AsukaSnackbar.message('Aguarde...').show();
       _controller.forgotPassword(_controller.emailForgotPswCtrl.text).then(
         (value) {
           if (value != null) {
