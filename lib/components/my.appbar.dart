@@ -9,9 +9,9 @@ class MyAppBar extends StatelessWidget with PreferredSizeWidget {
 
   @override
   Widget build(BuildContext context) => AppBar(
+    leading: Container(),
         title: Text(
           _title,
-          style: TextStyle(fontSize: 12.0),
         ),
         centerTitle: true,
         actions: [

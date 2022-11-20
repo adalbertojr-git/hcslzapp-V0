@@ -48,9 +48,6 @@ class MyTextFormField extends StatelessWidget {
         textCapitalization: TextCapitalization.words,
         obscureText: hidden ?? false,
         readOnly: disabled ?? false,
-        style: TextStyle(
-          fontSize: fontSize ?? 13.0,
-        ),
         textAlign: textAlign ?? TextAlign.left,
         maxLength: maxLength ?? null,
         decoration: InputDecoration(
@@ -81,13 +78,11 @@ class MyTextFormField extends StatelessWidget {
           labelStyle: TextStyle(
             fontSize: 13.0,
             fontStyle: FontStyle.italic,
-            //color: Colors.black87,
           ),
           hintText: hint,
           hintStyle: TextStyle(
             fontSize: 13.0,
             fontStyle: FontStyle.italic,
-            //color: Colors.black45,
           ),
           prefixText: prefix,
           errorText: errorText ?? null,

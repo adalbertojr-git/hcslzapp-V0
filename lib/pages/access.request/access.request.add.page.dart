@@ -2,10 +2,10 @@ import 'package:asuka/asuka.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:hcslzapp/common/labels.and.hints.dart';
-import 'package:hcslzapp/components/button.dart';
 import 'package:hcslzapp/components/my.text.form.field.dart';
 import 'package:hcslzapp/controllers/access.request.controller.dart';
 import '../../components/my.appbar.dart';
+import '../../controllers/app.controller.dart';
 
 const String _title = 'Solicitar acesso';
 
@@ -16,6 +16,7 @@ class AccessRequestAddPage extends StatefulWidget {
 
 class _AccessRequestAddPageState extends State<AccessRequestAddPage> {
   final AccessRequestController _controller = AccessRequestController();
+  int _selectedIndex = 0;
 
   @override
   void initState() {
@@ -28,7 +29,33 @@ class _AccessRequestAddPageState extends State<AccessRequestAddPage> {
         builder: (_) => Scaffold(
           appBar: MyAppBar(_title),
           body: _widgets(),
-          floatingActionButtonLocation:
+          bottomNavigationBar: BottomNavigationBar(
+            backgroundColor: Colors.deepOrange[300],
+            currentIndex: _selectedIndex,
+            onTap: _onItemTapped,
+            items: [
+              BottomNavigationBarItem(
+                icon: Icon(Icons.arrow_back),
+                label: 'Voltar',
+              ),
+              BottomNavigationBarItem(
+                icon: Icon(Icons.save),
+                label: 'Salvar',
+              ),
+              BottomNavigationBarItem(
+                icon: Icon(
+                  AppController.instance.isDarkTheme
+                      ? Icons.light_mode
+                      : Icons.dark_mode,
+                  color: AppController.instance.isDarkTheme
+                      ? Colors.white
+                      : Colors.black,
+                ),
+                label: 'Tema',
+              )
+            ],
+          ),
+/*          floatingActionButtonLocation:
               FloatingActionButtonLocation.centerFloat,
           floatingActionButton: Button(
             icon: Icons.save,
@@ -38,9 +65,19 @@ class _AccessRequestAddPageState extends State<AccessRequestAddPage> {
               else
                 AsukaSnackbar.alert('Corrija os erros informados').show();
             },
-          ),
+          ),*/
         ),
       );
+
+  void _onItemTapped(int index) {
+    setState(() {
+      _selectedIndex = index;
+    });
+    if (index == 0)
+      Navigator.of(context).pop();
+    else if (index == 1) _save();
+    else AppController.instance.changeTheme();
+  }
 
   _widgets() => ListView(
         children: <Widget>[

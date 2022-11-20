@@ -70,7 +70,6 @@ class _ForgotPasswordPageState extends State<ForgotPasswordPage> {
                       'Caso não encontre o email na Caixa de Entrada, verifique sua caixa de Spam.',
                   style: const TextStyle(
                     fontSize: 12.0,
-                    color: Colors.black87,
                   ),
                 ),
               ),
