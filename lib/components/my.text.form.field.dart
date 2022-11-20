@@ -13,10 +13,10 @@ class MyTextFormField extends StatelessWidget {
   final int? nLines;
   final String? label;
   final double? fontSize;
-  final  Function(String)? onChanged;
-  final  String? errorText;
+  final Function(String)? onChanged;
+  final String? errorText;
   MaskTextInputFormatter? maskTextInputFormatter;
-  final  int? maxLength;
+  final int? maxLength;
   final TextAlign? textAlign;
 
   MyTextFormField({
@@ -50,15 +50,16 @@ class MyTextFormField extends StatelessWidget {
         readOnly: disabled ?? false,
         style: TextStyle(
           fontSize: fontSize ?? 13.0,
+          color: Colors.black,
         ),
         textAlign: textAlign ?? TextAlign.left,
         maxLength: maxLength ?? null,
         decoration: InputDecoration(
-        border: OutlineInputBorder(
-          borderSide: BorderSide(
-            color: Colors.white,
+          border: OutlineInputBorder(
+            borderSide: BorderSide(
+              color: Colors.black,
+            ),
           ),
-        ),
           errorBorder: OutlineInputBorder(
             borderSide: BorderSide(
               color: Colors.red,
@@ -71,7 +72,6 @@ class MyTextFormField extends StatelessWidget {
           ),
           fillColor: Colors.black26,
           filled: disabled ?? false,
-
           icon: icon != null
               ? Icon(
                   icon,

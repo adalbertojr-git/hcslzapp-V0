@@ -28,6 +28,17 @@ class _AccessRequestAddPageState extends State<AccessRequestAddPage> {
         builder: (_) => Scaffold(
           appBar: MyAppBar(_title),
           body: _widgets(),
+          floatingActionButtonLocation:
+              FloatingActionButtonLocation.centerFloat,
+          floatingActionButton: Button(
+            icon: Icons.save,
+            onClick: () {
+              if (!_controller.hasErrors)
+                _save();
+              else
+                AsukaSnackbar.alert('Corrija os erros informados').show();
+            },
+          ),
         ),
       );
 
@@ -88,13 +99,6 @@ class _AccessRequestAddPageState extends State<AccessRequestAddPage> {
             hidden: true,
             onChanged: _controller.formController.changeConfPassword,
             errorText: _controller.validateConfPassword(),
-          ),
-          SizedBox(
-            height: 10.0,
-          ),
-          Button(
-            icon: Icons.send_to_mobile,
-            onClick: () => _save(),
           ),
         ],
       );

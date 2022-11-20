@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-const String _pathLogo = 'assets/imgs/logo.png';
+import '../controllers/app.controller.dart';
 
 class MyAppBar extends StatelessWidget with PreferredSizeWidget {
   final String _title;
@@ -15,9 +15,18 @@ class MyAppBar extends StatelessWidget with PreferredSizeWidget {
         ),
         centerTitle: true,
         actions: [
-          SizedBox(
-            height: 10.0,
-            child: Image.asset(_pathLogo),
+          GestureDetector(
+            child: Icon(
+              AppController.instance.isDarkTheme
+                  ? Icons.light_mode
+                  : Icons.dark_mode,
+              color: AppController.instance.isDarkTheme
+                  ? Colors.white
+                  : Colors.black,
+            ),
+            onTap: () {
+              AppController.instance.changeTheme();
+            },
           ),
         ],
       );

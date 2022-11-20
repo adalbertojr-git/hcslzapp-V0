@@ -44,9 +44,8 @@ class HCSlzApp extends StatelessWidget {
               backgroundColor: Colors.deepOrange[300],
             ),
             primaryColor: Colors.white,
-            primaryColorDark: Colors.black,
             visualDensity: VisualDensity.adaptivePlatformDensity,
-            scaffoldBackgroundColor: Colors.white,
+            //scaffoldBackgroundColor: Colors.white,
             brightness: AppController.instance.isDarkTheme
                 ? Brightness.dark
                 : Brightness.light,

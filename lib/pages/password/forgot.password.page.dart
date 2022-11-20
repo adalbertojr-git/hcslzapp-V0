@@ -30,16 +30,17 @@ class _ForgotPasswordPageState extends State<ForgotPasswordPage> {
 
   @override
   Widget build(BuildContext context) => Observer(
-      builder: (_) => Scaffold(
-            appBar: MyAppBar(_title),
-            body: _widgets(),
-            floatingActionButtonLocation:
-                FloatingActionButtonLocation.centerFloat,
-            floatingActionButton: Button(
-              icon: Icons.email,
-              onClick: () => _forgotPassword(),
-            ),
-          ));
+        builder: (_) => Scaffold(
+          appBar: MyAppBar(_title),
+          body: _widgets(),
+          floatingActionButtonLocation:
+              FloatingActionButtonLocation.centerFloat,
+          floatingActionButton: Button(
+            icon: Icons.email,
+            onClick: () => _forgotPassword(),
+          ),
+        ),
+      );
 
   _widgets() => Center(
         child: ListView(
