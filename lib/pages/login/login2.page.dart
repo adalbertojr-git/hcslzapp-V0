@@ -1,7 +1,12 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import '../../common/labels.and.hints.dart';
 import '../../components/degradee.background.dart';
+import '../../components/my.text.form.field.dart';
+import '../../controllers/login.controller.dart';
+import '../access.request/access.request.add.page.dart';
+import '../password/forgot.password.page.dart';
 //import 'package:fluttertoast/fluttertoast.dart';
 
 const String _pathLogoImage = 'assets/imgs/logo.png';
@@ -17,11 +22,12 @@ class _MyCustomLoginUIState extends State<MyCustomLoginUI>
     with SingleTickerProviderStateMixin {
   late AnimationController _controller;
   late Animation<double> _animation;
+  final LoginController _controllerLogin = LoginController();
 
   @override
   void initState() {
     super.initState();
-
+    _controllerLogin.init();
     _controller = AnimationController(
       vsync: this,
       duration: Duration(seconds: 2),
@@ -84,10 +90,33 @@ class _MyCustomLoginUIState extends State<MyCustomLoginUI>
                           child: Image.asset(_pathLogoImage),
                         ),
                         SizedBox(),
+
+/*                        MyTextFormField(
+                          textEditingController: _controllerLogin.userLoginCtrl,
+                          label: labelUser,
+                          hint: hintUser,
+                          icon: Icons.person,
+                          inputType: TextInputType.text,
+                          onChanged: _controllerLogin.formController.changeUser,
+                          errorText: _controllerLogin.validateUser(),
+                        ),
+                        MyTextFormField(
+                          textEditingController: _controllerLogin.pswLoginCtrl,
+                          label: labelPsw,
+                          hint: hintPsw,
+                          icon: Icons.vpn_key,
+                          inputType: TextInputType.text,
+                          hidden: true,
+                          onChanged: _controllerLogin.formController.changePassword,
+                          errorText: _controllerLogin.validatePassword(),
+                        ),*/
+
                         component1(Icons.account_circle_outlined,
                             'User name...', false, false),
                         component1(
                             Icons.lock_outline, 'Password...', true, false),
+
+
                         Row(
                           mainAxisAlignment: MainAxisAlignment.spaceAround,
                           children: [
@@ -97,6 +126,12 @@ class _MyCustomLoginUIState extends State<MyCustomLoginUI>
                                 recognizer: TapGestureRecognizer()
                                   ..onTap = () {
                                     HapticFeedback.lightImpact();
+                                    Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                        builder: (context) => ForgotPasswordPage(),
+                                      ),
+                                    );
                                   },
                               ),
                             ),
@@ -106,6 +141,12 @@ class _MyCustomLoginUIState extends State<MyCustomLoginUI>
                                 recognizer: TapGestureRecognizer()
                                   ..onTap = () {
                                     HapticFeedback.lightImpact();
+                                    Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                        builder: (context) => AccessRequestAddPage(),
+                                      ),
+                                    );
                                   },
                               ),
                             ),
