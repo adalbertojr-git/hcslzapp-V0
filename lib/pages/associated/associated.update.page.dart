@@ -639,7 +639,6 @@ class _AssociatedUpdatePageState extends State<AssociatedUpdatePage> {
             });
       }
       if (response == true) {
-        AsukaSnackbar.message('Aguarde...').show();
         _controller.update(_controller.associated).then(
           (value) {
             if (value != null) {
