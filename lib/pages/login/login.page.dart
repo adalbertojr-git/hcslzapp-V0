@@ -49,67 +49,76 @@ class _LoginPageState extends State<LoginPage> {
           SizedBox(
             child: Image.asset(_pathLogoImage),
           ),
-          SizedBox(
-            height: 10.0,
+          Card(
+            margin: EdgeInsets.symmetric(horizontal: 10),
+            child: Column(
+              children: [
+                MyTextFormField(
+                  textEditingController: _controller.userLoginCtrl,
+                  label: labelUser,
+                  hint: hintUser,
+                  icon: Icons.person,
+                  inputType: TextInputType.text,
+                  onChanged: _controller.formController.changeUser,
+                  errorText: _controller.validateUser(),
+                ),
+                MyTextFormField(
+                  textEditingController: _controller.pswLoginCtrl,
+                  label: labelPsw,
+                  hint: hintPsw,
+                  icon: Icons.vpn_key,
+                  inputType: TextInputType.text,
+                  hidden: true,
+                  onChanged: _controller.formController.changePassword,
+                  errorText: _controller.validatePassword(),
+                ),
+                SizedBox(
+                  height: 20.0,
+                ),
+                Button(
+                  icon: Icons.arrow_forward,
+                  onClick: () => _login(context),
+                ),
+                SizedBox(
+                  height: 5.0,
+                ),
+              ],
+            ),
           ),
-          MyTextFormField(
-            textEditingController: _controller.userLoginCtrl,
-            label: labelUser,
-            hint: hintUser,
-            icon: Icons.person,
-            inputType: TextInputType.text,
-            onChanged: _controller.formController.changeUser,
-            errorText: _controller.validateUser(),
-          ),
-          MyTextFormField(
-            textEditingController: _controller.pswLoginCtrl,
-            label: labelPsw,
-            hint: hintPsw,
-            icon: Icons.vpn_key,
-            inputType: TextInputType.text,
-            hidden: true,
-            onChanged: _controller.formController.changePassword,
-            errorText: _controller.validatePassword(),
-          ),
-          Align(
-            alignment: Alignment.centerRight,
-            child: TextButton(
-              onPressed: () => Navigator.push(
-                context,
-                MaterialPageRoute(
-                  builder: (context) => ForgotPasswordPage(),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              TextButton(
+                onPressed: () => Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => ForgotPasswordPage(),
+                  ),
+                ),
+                child: Text(
+                  _labelForgotPsw,
+                  style: TextStyle(
+                    color: Colors.white,
+                    fontSize: 12.0,
+                  ),
                 ),
               ),
-              child: Text(
-                _labelForgotPsw,
-                style: TextStyle(
-                  color: Colors.white,
-                  fontSize: 12.0,
+              TextButton(
+                onPressed: () => Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => AccessRequestAddPage(),
+                  ),
+                ),
+                child: Text(
+                  _labelFirstAcc,
+                  style: TextStyle(
+                    color: Colors.white,
+                    fontSize: 12.0,
+                  ),
                 ),
               ),
-            ),
-          ),
-          Button(
-            icon: Icons.arrow_forward,
-            onClick: () => _login(context),
-          ),
-          SizedBox(
-            height: 20.0,
-          ),
-          TextButton(
-            onPressed: () => Navigator.push(
-              context,
-              MaterialPageRoute(
-                builder: (context) => AccessRequestAddPage(),
-              ),
-            ),
-            child: Text(
-              _labelFirstAcc,
-              style: TextStyle(
-                color: Colors.white,
-                fontSize: 12.0,
-              ),
-            ),
+            ],
           ),
         ],
       );
