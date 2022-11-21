@@ -1,11 +1,12 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-
 import '../../components/degradee.background.dart';
 //import 'package:fluttertoast/fluttertoast.dart';
 
 const String _pathLogoImage = 'assets/imgs/logo.png';
+const String _labelForgotPsw = 'Esqueci minha senha';
+const String _labelFirstAcc = 'Solicitar acesso';
 
 class MyCustomLoginUI extends StatefulWidget {
   @override
@@ -31,19 +32,21 @@ class _MyCustomLoginUIState extends State<MyCustomLoginUI>
         parent: _controller,
         curve: Curves.ease,
       ),
-    )..addListener(
-          () {
-        setState(() {});
-      },
-    )..addStatusListener(
-          (status) {
-        if (status == AnimationStatus.completed) {
-          _controller.reverse();
-        } else if (status == AnimationStatus.dismissed) {
-          _controller.forward();
-        }
-      },
-    );
+    )
+      ..addListener(
+        () {
+          setState(() {});
+        },
+      )
+      ..addStatusListener(
+        (status) {
+          if (status == AnimationStatus.completed) {
+            _controller.reverse();
+          } else if (status == AnimationStatus.dismissed) {
+            _controller.forward();
+          }
+        },
+      );
 
     _controller.forward();
   }
@@ -59,7 +62,6 @@ class _MyCustomLoginUIState extends State<MyCustomLoginUI>
     double _width = MediaQuery.of(context).size.width;
     double _height = MediaQuery.of(context).size.height;
     return Scaffold(
-      //backgroundColor: Color(0xff292C31),
       body: DegradeBackground(
         ScrollConfiguration(
           behavior: MyBehavior(),
@@ -78,52 +80,32 @@ class _MyCustomLoginUIState extends State<MyCustomLoginUI>
                           height: 20,
                         ),
                         SizedBox(
-                          height: 250,
+                          height: 230,
                           child: Image.asset(_pathLogoImage),
                         ),
-/*                        Text(
-                          'SIGN IN',
-                          style: TextStyle(
-                            fontSize: 25,
-                            fontWeight: FontWeight.w600,
-                            color: Color(0xffA9DED8),
-                          ),
-                        ),*/
                         SizedBox(),
-                        component1(Icons.account_circle_outlined, 'User name...',
-                            false, false),
-                        component1(Icons.email_outlined, 'Email...', false, true),
+                        component1(Icons.account_circle_outlined,
+                            'User name...', false, false),
                         component1(
                             Icons.lock_outline, 'Password...', true, false),
                         Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
+                          mainAxisAlignment: MainAxisAlignment.spaceAround,
                           children: [
                             RichText(
                               text: TextSpan(
-                                text: 'Forgotten password!',
-                                style: TextStyle(
-                                  color: Color(0xffA9DED8),
-                                ),
+                                text: _labelForgotPsw,
                                 recognizer: TapGestureRecognizer()
                                   ..onTap = () {
                                     HapticFeedback.lightImpact();
-                                    /*Fluttertoast.showToast(
-                                        msg:
-                                        'Forgotten password! button pressed');*/
                                   },
                               ),
                             ),
-                            SizedBox(width: _width / 10),
                             RichText(
                               text: TextSpan(
-                                text: 'Create a new Account',
-                                style: TextStyle(color: Color(0xffA9DED8)),
+                                text: _labelFirstAcc,
                                 recognizer: TapGestureRecognizer()
                                   ..onTap = () {
                                     HapticFeedback.lightImpact();
-                                    /*Fluttertoast.showToast(
-                                      msg: 'Create a new Account button pressed',
-                                    );*/
                                   },
                               ),
                             ),
@@ -163,9 +145,6 @@ class _MyCustomLoginUIState extends State<MyCustomLoginUI>
                               highlightColor: Colors.transparent,
                               onTap: () {
                                 HapticFeedback.lightImpact();
-                               /* Fluttertoast.showToast(
-                                  msg: 'SIGN-IN button pressed',
-                                );*/
                               },
                               child: Container(
                                 height: _width * .2,
@@ -175,12 +154,9 @@ class _MyCustomLoginUIState extends State<MyCustomLoginUI>
                                   color: Color(0xffA9DED8),
                                   shape: BoxShape.circle,
                                 ),
-                                child: Text(
-                                  'SIGN-IN',
-                                  style: TextStyle(
-                                    color: Colors.black,
-                                    fontWeight: FontWeight.w600,
-                                  ),
+                                child: Icon(
+                                  Icons.login,
+                                  size: 40,
                                 ),
                               ),
                             ),
@@ -239,10 +215,3 @@ class MyBehavior extends ScrollBehavior {
     return child;
   }
 }
-
-
-
-
-
-
-
