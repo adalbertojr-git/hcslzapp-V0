@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import 'package:asuka/asuka.dart' as asuka;
+import 'package:asuka/snackbars/asuka_snack_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:hcslzapp/models/template.dart';
@@ -623,12 +624,7 @@ class _AssociatedUpdatePageState extends State<AssociatedUpdatePage> {
 
   _update() async {
     if (_controller.hasErrors) {
-      asuka.showSnackBar(
-        SnackBar(
-          content: const Text('Atenção: Existem erros no formulário que devem '
-              'ser corrigidos antes de efetivar a transação.'),
-        ),
-      );
+      AsukaSnackbar.alert('Corrija os erros informados').show();
     } else {
       var response = true;
       if (_controller.currentStatus == 'Inativo') {
@@ -643,27 +639,14 @@ class _AssociatedUpdatePageState extends State<AssociatedUpdatePage> {
             });
       }
       if (response == true) {
-        asuka.showSnackBar(
-          SnackBar(
-            content: const Text('Aguarde...'),
-          ),
-        );
+        AsukaSnackbar.message('Aguarde...').show();
         _controller.update(_controller.associated).then(
           (value) {
             if (value != null) {
-              asuka.hideCurrentSnackBar();
-              asuka.showSnackBar(
-                SnackBar(
-                  content: const Text('Associado atualizado com sucesso.'),
-                ),
-              );
+              AsukaSnackbar.success('Associado atualizado com sucesso').show();
               Navigator.of(context).pop(_controller.associated.photoUrl);
             } else {
-              asuka.showSnackBar(
-                SnackBar(
-                  content: Text(_controller.errorMsg),
-                ),
-              );
+              AsukaSnackbar.alert(_controller.errorMsg).show();
             }
           },
         );
