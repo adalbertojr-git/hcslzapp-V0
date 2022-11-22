@@ -11,6 +11,8 @@ import 'package:hcslzapp/controllers/digital.identity.controller.dart';
 import 'package:hcslzapp/models/associated.dart';
 import 'package:hcslzapp/models/digital.identity.dart';
 
+import '../../components/my.appbar.dart';
+
 const String _labelNotExists =
     'Dados do associado especificado não foram encontrados.';
 const String _labelUnknown =
@@ -34,8 +36,8 @@ class _DigitalIdentityPageState extends State<DigitalIdentityPage> {
 
   @override
   Widget build(BuildContext context) => Scaffold(
+    appBar: MyAppBar(_title),
         body: FutureBuilder<List<DigitalIdentity>>(
-          // future: _controller.future,
           future: _controller.getFuture(widget._associated.id),
           builder: (context, snapshot) {
             switch (snapshot.connectionState) {
@@ -83,12 +85,10 @@ class _DigitalIdentityPageState extends State<DigitalIdentityPage> {
           ),
         ),
         height: MediaQuery.of(context).size.height,
-        child: SingleChildScrollView(
-          child: Column(
+        child: Center(
+          child: ListView(
+            shrinkWrap: true,
             children: [
-              TopBar(
-                title: _title,
-              ),
               Center(
                 child: _photo(),
               ),
@@ -210,7 +210,7 @@ class _DigitalIdentityPageState extends State<DigitalIdentityPage> {
       );
 
   DecorationImage _loadPhoto() => DecorationImage(
-      image: widget._associated.photoUrl != null
+      image: widget._associated.photoUrl != ''
           ? NetworkImage(widget._associated.photoUrl)
           : PhotoImageProvider().getImageProvider(
               File(_pathNoImage),
