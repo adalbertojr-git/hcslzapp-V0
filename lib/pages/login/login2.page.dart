@@ -116,7 +116,7 @@ class _MyCustomLoginUIState extends State<MyCustomLoginUI>
                         component1(
                             Icons.lock_outline, 'Password...', true, false),*/
 
-
+                        SizedBox(),
                         Row(
                           mainAxisAlignment: MainAxisAlignment.spaceAround,
                           children: [
@@ -135,6 +135,7 @@ class _MyCustomLoginUIState extends State<MyCustomLoginUI>
                                   },
                               ),
                             ),
+                            SizedBox(),
                             RichText(
                               text: TextSpan(
                                 text: _labelFirstAcc,
