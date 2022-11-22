@@ -1,146 +1,241 @@
-import 'package:asuka/asuka.dart';
+import 'package:asuka/snackbars/asuka_snack_bar.dart';
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_mobx/flutter_mobx.dart';
-import 'package:hcslzapp/models/template.dart';
-import 'package:hcslzapp/pages/password/forgot.password.page.dart';
-import '../../components/degradee.background.dart';
-import "../../models/associated.dart";
+import 'package:flutter/services.dart';
 import '../../common/labels.and.hints.dart';
 import '../../common/token.details.dart';
-import '../../components/button.dart';
+import '../../components/degradee.background.dart';
 import '../../components/my.text.form.field.dart';
 import '../../controllers/login.controller.dart';
+import '../../models/associated.dart';
+import '../../models/template.dart';
 import '../../models/token.dart';
-import '../dashboard/dashboard.page.dart';
 import '../access.request/access.request.add.page.dart';
+import '../dashboard/dashboard.page.dart';
+import '../password/forgot.password.page.dart';
 
 const String _pathLogoImage = 'assets/imgs/logo.png';
 const String _labelForgotPsw = 'Esqueci minha senha';
-const String _labelFirstAcc = 'Não tem conta? Solicite acesso';
+const String _labelFirstAcc = 'Solicitar acesso';
 
-class LoginPage extends StatefulWidget {
+class MyCustomLoginUI extends StatefulWidget {
   @override
-  State<LoginPage> createState() => _LoginPageState();
+  _MyCustomLoginUIState createState() => _MyCustomLoginUIState();
 }
 
-class _LoginPageState extends State<LoginPage> {
-  final LoginController _controller = LoginController();
+class _MyCustomLoginUIState extends State<MyCustomLoginUI>
+    with SingleTickerProviderStateMixin {
+  late AnimationController _controller;
+  late Animation<double> _animation;
+  final LoginController _controllerLogin = LoginController();
 
   @override
   void initState() {
-    _controller.init();
     super.initState();
+    _controllerLogin.init();
+    _controller = AnimationController(
+      vsync: this,
+      duration: Duration(seconds: 2),
+    );
+
+    _animation = Tween<double>(begin: .7, end: 1).animate(
+      CurvedAnimation(
+        parent: _controller,
+        curve: Curves.ease,
+      ),
+    )
+      ..addListener(
+        () {
+          setState(() {});
+        },
+      )
+      ..addStatusListener(
+        (status) {
+          if (status == AnimationStatus.completed) {
+            _controller.reverse();
+          } else if (status == AnimationStatus.dismissed) {
+            _controller.forward();
+          }
+        },
+      );
+
+    _controller.forward();
   }
 
   @override
-  Widget build(BuildContext context) => Observer(
-        builder: (_) => Scaffold(
-          body: DegradeBackground(
-            _widgets(context),
-          ),
-        ),
-      );
+  void dispose() {
+    _controller.dispose();
+    super.dispose();
+  }
 
-  _widgets(BuildContext context) => ListView(
-        children: <Widget>[
-          SizedBox(
-            height: 20.0,
-          ),
-          SizedBox(
-            child: Image.asset(_pathLogoImage),
-          ),
-          Card(
-            margin: EdgeInsets.symmetric(horizontal: 10),
-            child: Column(
-              children: [
-                MyTextFormField(
-                  textEditingController: _controller.userLoginCtrl,
-                  label: labelUser,
-                  hint: hintUser,
-                  icon: Icons.person,
-                  inputType: TextInputType.text,
-                  onChanged: _controller.formController.changeUser,
-                  errorText: _controller.validateUser(),
-                ),
-                MyTextFormField(
-                  textEditingController: _controller.pswLoginCtrl,
-                  label: labelPsw,
-                  hint: hintPsw,
-                  icon: Icons.vpn_key,
-                  inputType: TextInputType.text,
-                  hidden: true,
-                  onChanged: _controller.formController.changePassword,
-                  errorText: _controller.validatePassword(),
-                ),
-                SizedBox(
-                  height: 20.0,
-                ),
-                Button(
-                  icon: Icons.arrow_forward,
-                  onClick: () => _login(context),
-                ),
-                SizedBox(
-                  height: 5.0,
-                ),
-              ],
+  @override
+  Widget build(BuildContext context) {
+    double _width = MediaQuery.of(context).size.width;
+    double _height = MediaQuery.of(context).size.height;
+    return Scaffold(
+      body: DegradeBackground(
+        ScrollConfiguration(
+          behavior: MyBehavior(),
+          child: SingleChildScrollView(
+            child: SizedBox(
+              height: _height,
+              child: Column(
+                children: [
+                  //Expanded(child: SizedBox()),
+                  Expanded(
+                    flex: 4,
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                      children: [
+                        SizedBox(
+                          height: 20,
+                        ),
+                        SizedBox(
+                          height: 230,
+                          child: Image.asset(_pathLogoImage),
+                        ),
+                        SizedBox(),
+                        MyTextFormField(
+                          textEditingController: _controllerLogin.userLoginCtrl,
+                          label: labelUser,
+                          hint: hintUser,
+                          icon: Icons.person,
+                          inputType: TextInputType.text,
+                          onChanged: _controllerLogin.formController.changeUser,
+                          errorText: _controllerLogin.validateUser(),
+                        ),
+                        MyTextFormField(
+                          textEditingController: _controllerLogin.pswLoginCtrl,
+                          label: labelPsw,
+                          hint: hintPsw,
+                          icon: Icons.vpn_key,
+                          inputType: TextInputType.text,
+                          hidden: true,
+                          onChanged:
+                              _controllerLogin.formController.changePassword,
+                          errorText: _controllerLogin.validatePassword(),
+                        ),
+                        SizedBox(),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceAround,
+                          children: [
+                            RichText(
+                              text: TextSpan(
+                                text: _labelForgotPsw,
+                                recognizer: TapGestureRecognizer()
+                                  ..onTap = () {
+                                    HapticFeedback.lightImpact();
+                                    Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                        builder: (context) =>
+                                            ForgotPasswordPage(),
+                                      ),
+                                    );
+                                  },
+                              ),
+                            ),
+                            SizedBox(),
+                            RichText(
+                              text: TextSpan(
+                                text: _labelFirstAcc,
+                                recognizer: TapGestureRecognizer()
+                                  ..onTap = () {
+                                    HapticFeedback.lightImpact();
+                                    Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                        builder: (context) =>
+                                            AccessRequestAddPage(),
+                                      ),
+                                    );
+                                  },
+                              ),
+                            ),
+                          ],
+                        ),
+                      ],
+                    ),
+                  ),
+                  Expanded(
+                    flex: 3,
+                    child: Stack(
+                      children: [
+                        Center(
+                          child: Container(
+                            margin: EdgeInsets.only(bottom: _width * .07),
+                            height: _width * .7,
+                            width: _width * .7,
+                            decoration: BoxDecoration(
+                              shape: BoxShape.circle,
+                              gradient: LinearGradient(
+                                colors: [
+                                  Colors.transparent,
+                                  Colors.transparent,
+                                  Color(0xff09090A),
+                                ],
+                                begin: Alignment.topCenter,
+                                end: Alignment.bottomCenter,
+                              ),
+                            ),
+                          ),
+                        ),
+                        Center(
+                          child: Transform.scale(
+                            scale: _animation.value,
+                            child: InkWell(
+                              splashColor: Colors.transparent,
+                              highlightColor: Colors.transparent,
+                              onTap: () {
+                                HapticFeedback.lightImpact();
+                                _login(context);
+                              },
+                              child: Container(
+                                height: _width * .2,
+                                width: _width * .2,
+                                alignment: Alignment.center,
+                                decoration: BoxDecoration(
+                                  color: Color(0xffA9DED8),
+                                  shape: BoxShape.circle,
+                                ),
+                                child: Icon(
+                                  Icons.login_sharp,
+                                  size: 40,
+                                ),
+                              ),
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                ],
+              ),
             ),
           ),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              TextButton(
-                onPressed: () => Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => ForgotPasswordPage(),
-                  ),
-                ),
-                child: Text(
-                  _labelForgotPsw,
-                  style: TextStyle(
-                    color: Colors.white,
-                    fontSize: 12.0,
-                  ),
-                ),
-              ),
-              TextButton(
-                onPressed: () => Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => AccessRequestAddPage(),
-                  ),
-                ),
-                child: Text(
-                  _labelFirstAcc,
-                  style: TextStyle(
-                    color: Colors.white,
-                    fontSize: 12.0,
-                  ),
-                ),
-              ),
-            ],
-          ),
-        ],
-      );
+        ),
+      ),
+    );
+  }
 
   _login(BuildContext context) {
-    if (_controller.hasErrors) {
+    if (_controllerLogin.hasErrors) {
       AsukaSnackbar.alert('Preencha os campos ogrigatórios').show();
     } else {
       AsukaSnackbar.message('Carregando...').show();
-      _controller.authenticate().then(
-        (token) async {
+      _controllerLogin.authenticate().then(
+            (token) async {
           if (token == null) {
-            AsukaSnackbar.alert(_controller.errorMsg).show();
+            AsukaSnackbar.alert(_controllerLogin.errorMsg).show();
           } else {
             Token _t = token;
             debugPrint(_t.token);
             Associated associated = Template().loadAssociated();
-            _controller.setTokenToDevice(_t.token);
-            _controller.setUserToDevice(_controller.userLoginCtrl.text);
+            _controllerLogin.setTokenToDevice(_t.token);
+            _controllerLogin.setUserToDevice(_controllerLogin.userLoginCtrl.text);
             TokenDetails _tokenDetails = TokenDetails(_t.token);
-            await _controller.findByIdToList(_tokenDetails.associatedId()).then(
-              (value) {
+            await _controllerLogin.findByIdToList(_tokenDetails.associatedId()).then(
+                  (value) {
                 associated = value[0];
               },
             );
@@ -156,6 +251,14 @@ class _LoginPageState extends State<LoginPage> {
         },
       );
     }
+  }
+}
+
+class MyBehavior extends ScrollBehavior {
+  @override
+  Widget buildViewportChrome(
+      BuildContext context, Widget child, AxisDirection axisDirection) {
+    return child;
   }
 }
 

@@ -191,7 +191,7 @@ class _DashboardPageState extends State<DashboardPage> {
                         Navigator.of(context).pushAndRemoveUntil(
                           // the new route
                           MaterialPageRoute(
-                            builder: (BuildContext context) => LoginPage(),
+                            builder: (BuildContext context) => MyCustomLoginUI(),
                           ),
 
                           // this function should return true when we're done removing routes
@@ -360,7 +360,7 @@ class _DashboardPageState extends State<DashboardPage> {
                   Navigator.of(context).pushAndRemoveUntil(
                     // the new route
                     MaterialPageRoute(
-                      builder: (BuildContext context) => LoginPage(),
+                      builder: (BuildContext context) => MyCustomLoginUI(),
                     ),
 
                     // this function should return true when we're done removing routes
