@@ -174,8 +174,9 @@ class _AssociatedUpdatePageState extends State<AssociatedUpdatePage> {
             inputType: TextInputType.text,
           ),
           Padding(
-            padding: const EdgeInsets.fromLTRB(0.0, 3.0, 2.0, 3.0),
+            padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 25),
             child: Row(
+              //mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: <Widget>[
                 Expanded(
                   child: const Text(
