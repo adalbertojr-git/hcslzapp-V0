@@ -42,7 +42,8 @@ class MyTextFormField extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     maskTextInputFormatter = maskTextInputFormatter ?? MaskTextInputFormatter();
-    return Padding(
+    double _borderRadius = 15.0;
+    return Container(
       padding: const EdgeInsets.fromLTRB(10.0, 5.0, 10.0, 5.0),
       child: TextFormField(
         textCapitalization: TextCapitalization.words,
@@ -55,16 +56,19 @@ class MyTextFormField extends StatelessWidget {
             borderSide: BorderSide(
               color: Colors.black,
             ),
+            borderRadius: BorderRadius.circular(_borderRadius),
           ),
           errorBorder: OutlineInputBorder(
             borderSide: BorderSide(
               color: Colors.red,
             ),
+            borderRadius: BorderRadius.circular(_borderRadius),
           ),
           focusedErrorBorder: OutlineInputBorder(
             borderSide: BorderSide(
               color: Colors.red,
             ),
+            borderRadius: BorderRadius.circular(_borderRadius),
           ),
           fillColor: Colors.black26,
           filled: disabled ?? false,
