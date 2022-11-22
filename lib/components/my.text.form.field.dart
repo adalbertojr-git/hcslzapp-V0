@@ -72,10 +72,10 @@ class MyTextFormField extends StatelessWidget {
           ),
           fillColor: Colors.black26,
           filled: disabled ?? false,
-          prefixIcon: Icon(
+          prefixIcon: icon != null ? Icon(
             icon,
             color: Colors.deepOrange.withOpacity(.7),
-          ),
+          ) : null,
           labelText: label,
           labelStyle: TextStyle(
             fontStyle: FontStyle.italic,
