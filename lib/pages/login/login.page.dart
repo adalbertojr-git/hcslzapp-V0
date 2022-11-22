@@ -81,14 +81,16 @@ class _MyCustomLoginUIState extends State<MyCustomLoginUI>
               height: _height,
               child: Column(
                 children: [
-                  Expanded(child: SizedBox()),
+                  SizedBox(
+                    height: 40,
+                  ),
                   Expanded(
                     flex: 4,
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                       children: [
                         SizedBox(
-                          height: 200,
+                          height: 230,
                           child: Image.asset(_pathLogoImage),
                         ),
                         SizedBox(),
