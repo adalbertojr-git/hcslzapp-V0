@@ -380,6 +380,7 @@ class _AssociatedUpdatePageState extends State<AssociatedUpdatePage> {
           ),
           Observer(
             builder: (_) => ListView.separated(
+              padding: EdgeInsets.symmetric(horizontal: 15),
               shrinkWrap: true,
               itemCount: _controller.dependents.length,
               itemBuilder: (_, int i) => Container(
@@ -482,6 +483,7 @@ class _AssociatedUpdatePageState extends State<AssociatedUpdatePage> {
           ),
           Observer(
             builder: (_) => ListView.separated(
+              padding: EdgeInsets.symmetric(horizontal: 15),
               shrinkWrap: true,
               itemCount: _controller.motorcycles.length,
               itemBuilder: (_, int i) => Container(
