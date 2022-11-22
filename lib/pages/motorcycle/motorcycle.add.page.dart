@@ -20,7 +20,7 @@ class MotorcycleAddPage extends StatefulWidget {
 }
 
 class _MotorcycleAddPageState extends State<MotorcycleAddPage> {
-  MotorcycleController _controller = MotorcycleController();
+  final MotorcycleController _controller = MotorcycleController();
 
   @override
   void initState() {

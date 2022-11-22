@@ -1,10 +1,7 @@
 import 'dart:io';
-
-import 'package:asuka/asuka.dart' as asuka;
 import 'package:asuka/snackbars/asuka_snack_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
-import 'package:hcslzapp/models/template.dart';
 import '../../common/associated.profiles.dart';
 import '../../common/labels.and.hints.dart';
 import '../../common/photo.image.provider.dart';
@@ -14,15 +11,12 @@ import '../../components/my.appbar.dart';
 import '../../components/my.bottom.appbar.dart';
 import '../../components/my.text.form.field.dart';
 import '../../components/progress.dart';
-import '../../components/top.bar.dart';
 import '../../components/transaction.auth.dialog.dart';
 import '../../controllers/associated.update.controller.dart';
 import '../../enums/associated.status.dart';
 import '../../enums/associated.types.dart';
 import '../../enums/blood.types.dart';
 import '../../models/associated.dart';
-import '../../models/dependent.dart';
-import '../../models/motorcycle.dart';
 import '../dependent/dependent.add.page.dart';
 import '../motorcycle/motorcycle.add.page.dart';
 import 'package:mask_text_input_formatter/mask_text_input_formatter.dart';

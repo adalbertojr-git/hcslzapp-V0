@@ -21,7 +21,7 @@ class DependentAddPage extends StatefulWidget {
 }
 
 class _DependentAddPageState extends State<DependentAddPage> {
-  DependentController _controller = DependentController();
+  final DependentController _controller = DependentController();
 
   @override
   void initState() {
