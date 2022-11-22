@@ -91,7 +91,7 @@ class _MyCustomLoginUIState extends State<MyCustomLoginUI>
                         ),
                         SizedBox(),
 
-/*                        MyTextFormField(
+                        MyTextFormField(
                           textEditingController: _controllerLogin.userLoginCtrl,
                           label: labelUser,
                           hint: hintUser,
@@ -109,12 +109,12 @@ class _MyCustomLoginUIState extends State<MyCustomLoginUI>
                           hidden: true,
                           onChanged: _controllerLogin.formController.changePassword,
                           errorText: _controllerLogin.validatePassword(),
-                        ),*/
+                        ),
 
-                        component1(Icons.account_circle_outlined,
+/*                        component1(Icons.account_circle_outlined,
                             'User name...', false, false),
                         component1(
-                            Icons.lock_outline, 'Password...', true, false),
+                            Icons.lock_outline, 'Password...', true, false),*/
 
 
                         Row(

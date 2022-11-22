@@ -68,26 +68,21 @@ class MyTextFormField extends StatelessWidget {
           ),
           fillColor: Colors.black26,
           filled: disabled ?? false,
-          icon: icon != null
-              ? Icon(
-                  icon,
-                  color: Colors.orange,
-                )
-              : null,
+          prefixIcon: Icon(
+            icon,
+            color: Colors.deepOrange.withOpacity(.7),
+          ),
           labelText: label,
           labelStyle: TextStyle(
-            fontSize: 13.0,
             fontStyle: FontStyle.italic,
           ),
           hintText: hint,
           hintStyle: TextStyle(
-            fontSize: 13.0,
             fontStyle: FontStyle.italic,
           ),
           prefixText: prefix,
           errorText: errorText ?? null,
           errorStyle: TextStyle(
-            fontSize: 11.0,
             color: Colors.red,
           ),
         ),
