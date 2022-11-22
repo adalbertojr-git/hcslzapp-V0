@@ -2,7 +2,7 @@
 Login
 */
 const String labelUser = 'Usuário *';
-const String hintUser = 'Informe o usuário para login';
+const String hintUser = 'Informe o usuário';
 const String labelPsw = 'Senha *';
 const String hintPsw = 'Digite sua senha';
 /*
@@ -27,9 +27,9 @@ const String labelSponsor = 'Padrinho';
 const String hintSponsor = 'Quem é o seu padrinho no Harley Club?';
 const String labelAssociatedType = 'Tipo Associado';
 const String labelCNH = 'CNH';
-const String hintCNH = 'Carteira Nac. de Habilitação';
+const String hintCNH = 'CNH';
 const String labelCPF = 'CPF';
-const String hintCPF = 'Cadastro de Pesssoa Física';
+const String hintCPF = 'CPF';
 const String labelDateBirth = 'Nascimento';
 const String hintDate = 'dd/mm/yyyy';
 const String labelDateShield = 'Escudamento';

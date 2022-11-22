@@ -112,7 +112,6 @@ class _AssociatedUpdatePageState extends State<AssociatedUpdatePage> {
               IconButton(
                 icon: Icon(
                   Icons.add_photo_alternate,
-                  color: Colors.black,
                   size: 28.0,
                 ),
                 onPressed: _controller.getImageFromGallery,
@@ -121,7 +120,6 @@ class _AssociatedUpdatePageState extends State<AssociatedUpdatePage> {
               IconButton(
                 icon: Icon(
                   Icons.add_a_photo,
-                  color: Colors.black,
                   size: 25.0,
                 ),
                 onPressed: _controller.getImageFromCamera,
