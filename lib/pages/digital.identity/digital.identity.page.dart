@@ -11,6 +11,7 @@ import 'package:hcslzapp/controllers/digital.identity.controller.dart';
 import 'package:hcslzapp/models/associated.dart';
 import 'package:hcslzapp/models/digital.identity.dart';
 
+import '../../components/degradee.background.dart';
 import '../../components/my.appbar.dart';
 
 const String _labelNotExists =
@@ -36,7 +37,7 @@ class _DigitalIdentityPageState extends State<DigitalIdentityPage> {
 
   @override
   Widget build(BuildContext context) => Scaffold(
-    appBar: MyAppBar(_title),
+        appBar: MyAppBar(_title),
         body: FutureBuilder<List<DigitalIdentity>>(
           future: _controller.getFuture(widget._associated.id),
           builder: (context, snapshot) {
@@ -76,16 +77,8 @@ class _DigitalIdentityPageState extends State<DigitalIdentityPage> {
         ),
       );
 
-  _widgets() => Container(
-        decoration: BoxDecoration(
-          gradient: LinearGradient(
-            colors: [Colors.white30, Colors.deepOrange],
-            begin: FractionalOffset.topLeft,
-            end: FractionalOffset.bottomRight,
-          ),
-        ),
-        height: MediaQuery.of(context).size.height,
-        child: Center(
+  _widgets() => DegradeBackground(
+        Center(
           child: ListView(
             shrinkWrap: true,
             children: [

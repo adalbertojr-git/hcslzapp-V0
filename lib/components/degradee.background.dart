@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import '../controllers/app.controller.dart';
+
 class DegradeBackground extends StatelessWidget {
   final Widget _widget;
 
@@ -9,7 +11,10 @@ class DegradeBackground extends StatelessWidget {
   Widget build(BuildContext context) => Container(
         decoration: BoxDecoration(
           gradient: LinearGradient(
-            colors: [Colors.white, Colors.deepOrange],
+            colors: [
+              AppController.instance.isDarkTheme ? Colors.black26 : Colors.white,
+              Colors.deepOrange
+            ],
             begin: FractionalOffset.topLeft,
             end: FractionalOffset.bottomRight,
           ),
