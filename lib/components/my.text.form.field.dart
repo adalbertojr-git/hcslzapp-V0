@@ -44,7 +44,7 @@ class MyTextFormField extends StatelessWidget {
     maskTextInputFormatter = maskTextInputFormatter ?? MaskTextInputFormatter();
     double _borderRadius = 15.0;
     return Container(
-      padding: const EdgeInsets.fromLTRB(20.0, 5.0, 20.0, 5.0),
+      padding: const EdgeInsets.all(5.0),
       child: TextFormField(
         textCapitalization: TextCapitalization.words,
         obscureText: hidden ?? false,

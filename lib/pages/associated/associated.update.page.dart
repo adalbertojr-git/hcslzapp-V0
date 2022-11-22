@@ -176,7 +176,6 @@ class _AssociatedUpdatePageState extends State<AssociatedUpdatePage> {
           Padding(
             padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 25),
             child: Row(
-              //mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: <Widget>[
                 Expanded(
                   child: const Text(
@@ -200,7 +199,6 @@ class _AssociatedUpdatePageState extends State<AssociatedUpdatePage> {
             ),
           ),
           Row(
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: <Widget>[
               Expanded(
                 child: MyTextFormField(
@@ -209,9 +207,6 @@ class _AssociatedUpdatePageState extends State<AssociatedUpdatePage> {
                   hint: hintCNH,
                   inputType: TextInputType.number,
                 ),
-              ),
-              SizedBox(
-                width: 5.0,
               ),
               Expanded(
                 child: MyTextFormField(
@@ -263,7 +258,6 @@ class _AssociatedUpdatePageState extends State<AssociatedUpdatePage> {
             ),
           ),
           Row(
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: <Widget>[
               Expanded(
                 child: MyTextFormField(
@@ -275,9 +269,6 @@ class _AssociatedUpdatePageState extends State<AssociatedUpdatePage> {
                   maskTextInputFormatter:
                       MaskTextInputFormatter(mask: "##/##/####"),
                 ),
-              ),
-              SizedBox(
-                width: 5.0,
               ),
               Expanded(
                 child: MyTextFormField(
