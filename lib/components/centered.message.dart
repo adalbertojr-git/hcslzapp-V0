@@ -1,13 +1,17 @@
+import 'package:asuka/snackbars/asuka_snack_bar.dart';
 import 'package:flutter/material.dart';
-import 'package:hcslzapp/components/top.bar.dart';
+import 'degradee.background.dart';
 import 'hc.logo.dart';
-import 'package:asuka/asuka.dart' as asuka;
+import 'my.appbar.dart';
 
 class CenteredMessage extends StatefulWidget {
   final String message;
   final String title;
 
-  CenteredMessage({required this.title, required this.message});
+  CenteredMessage({
+    required this.title,
+    required this.message,
+  });
 
   @override
   _CenteredMessageState createState() => _CenteredMessageState();
@@ -21,40 +25,26 @@ class _CenteredMessageState extends State<CenteredMessage> {
   }
 
   get _showMessage {
-    asuka.showSnackBar(
-      SnackBar(
-        content: Text(widget.message),
-      ),
-    );
+    AsukaSnackbar.message(widget.message).show();
   }
 
   @override
-  Widget build(BuildContext context) {
-    return Container(
-      decoration: BoxDecoration(
-        gradient: LinearGradient(
-          colors: [Colors.white30, Colors.deepOrange],
-          begin: FractionalOffset.topLeft,
-          end: FractionalOffset.bottomRight,
+  Widget build(BuildContext context) => Scaffold(
+        appBar: MyAppBar(widget.title),
+        body: DegradeBackground(
+          Center(
+            child: ListView(
+              shrinkWrap: true,
+              children: <Widget>[
+                HcLogo(0.0),
+                Icon(
+                  Icons.warning_amber_sharp,
+                  size: 80,
+                  color: Colors.black,
+                ),
+              ],
+            ),
+          ),
         ),
-      ),
-      //color: Colors.red[400],
-      child: Column(
-        children: <Widget>[
-          TopBar(
-            title: widget.title,
-          ),
-          SizedBox(
-            height: 50,
-          ),
-          HcLogo(0.0),
-          Icon(
-            Icons.warning_amber_sharp,
-            size: 80,
-            color: Colors.black,
-          ),
-        ],
-      ),
-    );
-  }
+      );
 }
