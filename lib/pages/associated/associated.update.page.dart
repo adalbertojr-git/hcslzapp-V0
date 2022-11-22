@@ -188,13 +188,6 @@ class _AssociatedUpdatePageState extends State<AssociatedUpdatePage> {
                   child: Container(
                     height: 55.0,
                     child: DropdownButtonFormField(
-                      decoration: const InputDecoration(
-                        enabledBorder: OutlineInputBorder(
-                          borderSide: BorderSide(
-                            color: Colors.white70,
-                          ),
-                        ),
-                      ),
                       value: _controller.currentBloodType == ''
                           ? null
                           : _controller.currentBloodType,
