@@ -2,6 +2,7 @@ import 'dart:async';
 import 'dart:convert';
 import 'package:hcslzapp/http/http.exception.dart';
 import 'package:hcslzapp/models/associated.dart';
+import 'package:hcslzapp/models/associated.dto.dart';
 import 'package:hcslzapp/models/month.birthdays.dart';
 import 'package:http/http.dart';
 import '../common/settings.dart';
@@ -9,7 +10,7 @@ import '../common/settings.dart';
 const String _associatedUrl = '/associated';
 
 class AssociatedRepo {
-  Future<List<Associated>> findAll() async {
+  Future<List<AssociatedDTO>> findAll() async {
     final Response response = await client
         .get(
           Uri.parse(mainUrl + _associatedUrl + "/list"),
@@ -21,7 +22,7 @@ class AssociatedRepo {
       final List<dynamic> decodedJson = jsonDecode(response.body);
       return decodedJson
           .map(
-            (dynamic json) => Associated.fromJson(json),
+            (dynamic json) => AssociatedDTO.fromJson(json),
           )
           .toList();
     } else {

@@ -11,6 +11,8 @@ import 'package:hcslzapp/models/associated.dart';
 import 'package:hcslzapp/pages/payment/payment.associated.page.dart';
 import 'package:hcslzapp/pages/payment/payment.table.page.dart';
 
+import '../../models/associated.dto.dart';
+
 const String _labelNotExists =
     'Não existem associados cadastrados. Confira as requisições de acesso.';
 const String _labelUnknown =
@@ -42,7 +44,7 @@ class _PaymentListPageState extends State<PaymentListPage> {
   @override
   Widget build(BuildContext context) => Observer(
       builder: (_) => Scaffold(
-            body: FutureBuilder<List<Associated>>(
+            body: FutureBuilder<List<AssociatedDTO>>(
               future: _controller.future,
               builder: (context, snapshot) {
                 switch (snapshot.connectionState) {

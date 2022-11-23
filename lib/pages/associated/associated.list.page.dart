@@ -10,6 +10,8 @@ import 'package:hcslzapp/controllers/associated.list.controller.dart';
 import 'package:hcslzapp/models/associated.dart';
 import 'package:hcslzapp/pages/associated/associated.update.page.dart';
 
+import '../../models/associated.dto.dart';
+
 const String _labelNotExists =
     'Não existem associados cadastrados. Confira as requisições de acesso.';
 const String _labelUnknown =
@@ -39,7 +41,7 @@ class AssociatedListPageState extends State<AssociatedListPage> {
   @override
   Widget build(BuildContext context) => Observer(
         builder: (_) => Scaffold(
-          body: FutureBuilder<List<Associated>>(
+          body: FutureBuilder<List<AssociatedDTO>>(
             future: _controller.future,
             builder: (context, snapshot) {
               switch (snapshot.connectionState) {

@@ -6,6 +6,8 @@ import 'package:hcslzapp/repositories/associated.repo.dart';
 import 'package:hcslzapp/repositories/payment.table.repo.dart';
 import 'package:mobx/mobx.dart';
 
+import '../models/associated.dto.dart';
+
 part 'payment.list.controller.g.dart';
 
 class PaymentListController = PaymentListControllerBase
@@ -31,7 +33,7 @@ abstract class PaymentListControllerBase with Store {
   String errorMsg = "";
 
   @observable
-  Future<List<Associated>> future = Future<List<Associated>>.value([]);
+  Future<List<AssociatedDTO>> future = Future<List<AssociatedDTO>>.value([]);
 
   @observable
   String filter = '';
@@ -44,7 +46,7 @@ abstract class PaymentListControllerBase with Store {
   bool setButtonVisibilty() => isHidedButton = !isHidedButton;
 
   @action
-  Future<List<Associated>> findAll() =>
+  Future<List<AssociatedDTO>> findAll() =>
       ObservableFuture(_associatedRepo.findAll().then((value) => value))
           .catchError((e) {
         errorMsg = "${e.message}";
@@ -52,7 +54,7 @@ abstract class PaymentListControllerBase with Store {
         errorMsg = "$e";
       }, test: (e) => e is Exception);
 
-  Future<List<Associated>> getFuture() => future = findAll();
+  Future<List<AssociatedDTO>> getFuture() => future = findAll();
 
   @action
   setFilter(String value) => filter = value;

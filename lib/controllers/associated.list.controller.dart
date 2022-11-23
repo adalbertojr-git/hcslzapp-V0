@@ -3,6 +3,7 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:hcslzapp/models/template.dart';
 import '../../models/associated.dart';
+import '../models/associated.dto.dart';
 import '../repositories/associated.repo.dart';
 import 'package:mobx/mobx.dart';
 
@@ -31,7 +32,7 @@ abstract class AssociatedListControllerBase with Store {
   String errorMsg = '';
 
   @observable
-  Future<List<Associated>> future = Future<List<Associated>>.value([]);
+  Future<List<AssociatedDTO>> future = Future<List<AssociatedDTO>>.value([]);
 
   @observable
   String filter = '';
@@ -44,7 +45,7 @@ abstract class AssociatedListControllerBase with Store {
   bool setButtonVisibilty() => isHidedButton = !isHidedButton;
 
   @action
-  Future<List<Associated>> findAll() =>
+  Future<List<AssociatedDTO>> findAll() =>
       ObservableFuture(_associatedRepo.findAll().then((value) => value))
           .catchError((e) {
         errorMsg = "${e.message}";
@@ -52,7 +53,7 @@ abstract class AssociatedListControllerBase with Store {
         errorMsg = "$e";
       }, test: (e) => e is Exception);
 
-  Future<List<Associated>> getFuture() => future = findAll();
+  Future<List<AssociatedDTO>> getFuture() => future = findAll();
 
   @action
   setFilter(String value) => filter = value;

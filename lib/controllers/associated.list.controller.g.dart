@@ -117,13 +117,13 @@ mixin _$AssociatedListController on AssociatedListControllerBase, Store {
       Atom(name: 'AssociatedListControllerBase.future', context: context);
 
   @override
-  Future<List<Associated>> get future {
+  Future<List<AssociatedDTO>> get future {
     _$futureAtom.reportRead();
     return super.future;
   }
 
   @override
-  set future(Future<List<Associated>> value) {
+  set future(Future<List<AssociatedDTO>> value) {
     _$futureAtom.reportWrite(value, super.future, () {
       super.future = value;
     });
@@ -160,7 +160,7 @@ mixin _$AssociatedListController on AssociatedListControllerBase, Store {
   }
 
   @override
-  Future<List<Associated>> findAll() {
+  Future<List<AssociatedDTO>> findAll() {
     final _$actionInfo = _$AssociatedListControllerBaseActionController
         .startAction(name: 'AssociatedListControllerBase.findAll');
     try {

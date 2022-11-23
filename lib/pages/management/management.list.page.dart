@@ -3,14 +3,15 @@ import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:hcslzapp/components/button.dart';
 import 'package:hcslzapp/components/centered.message.dart';
 import 'package:hcslzapp/components/progress.dart';
-import 'package:hcslzapp/components/top.bar.dart';
 import 'package:hcslzapp/components/transaction.auth.dialog.dart';
-import 'package:hcslzapp/controllers/item.model.dart';
 import 'package:hcslzapp/controllers/management.list.controller.dart';
 import 'package:hcslzapp/models/associated.dart';
 import 'package:asuka/asuka.dart' as asuka;
 import 'package:hcslzapp/models/dependent.dart';
 import 'package:hcslzapp/models/motorcycle.dart';
+import '../../components/my.appbar.dart';
+import '../../components/my.bottom.appbar.dart';
+import '../../models/associated.dto.dart';
 import 'management.add.page.dart';
 
 const String _labelNotExists =
@@ -27,7 +28,7 @@ class ManagementListPage extends StatefulWidget {
 }
 
 class ManagementListPageState extends State<ManagementListPage> {
-  ManagementListController _controller = ManagementListController();
+  final ManagementListController _controller = ManagementListController();
 
   @override
   void initState() {
@@ -42,7 +43,9 @@ class ManagementListPageState extends State<ManagementListPage> {
   @override
   Widget build(BuildContext context) => Observer(
         builder: (_) => Scaffold(
-          body: FutureBuilder<List<Associated>>(
+          appBar: MyAppBar(_title),
+          bottomNavigationBar: MyBottomAppBar(),
+          body: FutureBuilder<List<AssociatedDTO>>(
             future: _controller.future,
             builder: (context, snapshot) {
               switch (snapshot.connectionState) {
@@ -83,7 +86,7 @@ class ManagementListPageState extends State<ManagementListPage> {
             },
           ),
           floatingActionButtonLocation:
-              FloatingActionButtonLocation.centerFloat,
+              FloatingActionButtonLocation.centerDocked,
           floatingActionButton: _controller.isHidedButton
               ? null
               : Button(
@@ -131,80 +134,69 @@ class ManagementListPageState extends State<ManagementListPage> {
     );
   }
 
-  _widgets() => Container(
-        decoration: BoxDecoration(
-          gradient: LinearGradient(
-            colors: [Colors.white30, Colors.deepOrange],
-            begin: FractionalOffset.topLeft,
-            end: FractionalOffset.bottomRight,
+  _widgets() => Center(
+    child: ListView(
+      children: [
+        Expanded(
+          child: Observer(
+            builder: (_) => ListView.separated(
+              shrinkWrap: true,
+              itemCount: _controller.associateds.length,
+              itemBuilder: (_, int i) {
+                return Container(
+                  decoration: BoxDecoration(
+                    color: Colors.white30,
+                    shape: BoxShape.rectangle,
+                    borderRadius: BorderRadius.circular(8.0),
+                    boxShadow: <BoxShadow>[
+                      BoxShadow(
+                        color: Colors.black12,
+                        blurRadius: 10.0,
+                        offset: Offset(0.0, 5.0),
+                      ),
+                    ],
+                  ),
+                  child: ListTile(
+                    title: Text(
+                      _controller.associateds[i].name,
+                      style: TextStyle(
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                    subtitle: Text('Tel.: ' +
+                        (_controller.associateds[i].phone != null
+                            ? _controller.associateds[i].phone
+                            : 'Não informado') +
+                        '\n' +
+                        'Status: ' +
+                        _controller.associateds[i].status),
+                    leading: CircleAvatar(
+                      child: Icon(Icons.admin_panel_settings),
+                      backgroundColor: Colors.white,
+                    ),
+                    trailing: Wrap(
+                      spacing: 10, // space between two icons
+                      children: <Widget>[
+                        GestureDetector(
+                          child: Icon(
+                            Icons.delete,
+                          ),
+                          onTap: () {
+                            _delete(_controller.associateds[i]);
+                          },
+                        ),
+                      ],
+                    ),
+                  ),
+                );
+              },
+              separatorBuilder: (_, int index) => const Divider(),
+            ),
           ),
         ),
-        height: MediaQuery.of(context).size.height,
-        child: Column(
-          children: [
-            TopBar(
-              title: _title,
-            ),
-            Expanded(
-              child: Observer(
-                builder: (_) => ListView.separated(
-                  shrinkWrap: true,
-                  itemCount: _controller.associateds.length,
-                  itemBuilder: (_, int i) {
-                    return Container(
-                      decoration: BoxDecoration(
-                        color: Colors.white30,
-                        shape: BoxShape.rectangle,
-                        borderRadius: BorderRadius.circular(8.0),
-                        boxShadow: <BoxShadow>[
-                          BoxShadow(
-                            color: Colors.black12,
-                            blurRadius: 10.0,
-                            offset: Offset(0.0, 5.0),
-                          ),
-                        ],
-                      ),
-                      child: ListTile(
-                        title: Text(
-                          _controller.associateds[i].name,
-                          style: TextStyle(
-                            fontWeight: FontWeight.bold,
-                          ),
-                        ),
-                        subtitle: Text('Tel.: ' +
-                            (_controller.associateds[i].phone != null
-                                ? _controller.associateds[i].phone
-                                : 'Não informado') +
-                            '\n' +
-                            'Status: ' +
-                            _controller.associateds[i].status),
-                        leading: CircleAvatar(
-                          child: Icon(Icons.admin_panel_settings),
-                          backgroundColor: Colors.white,
-                        ),
-                        trailing: Wrap(
-                          spacing: 10, // space between two icons
-                          children: <Widget>[
-                            GestureDetector(
-                              child: Icon(
-                                Icons.delete,
-                              ),
-                              onTap: () {
-                                _delete(_controller.associateds[i]);
-                              },
-                            ),
-                          ],
-                        ),
-                      ),
-                    );
-                  },
-                  separatorBuilder: (_, int index) => const Divider(),
-                ),
-              ),
-            ),
-          ],
-        ),
-      );
+      ],
+    ),
+  );
 
   _delete(Associated associated) async {
     var response = await showDialog(
