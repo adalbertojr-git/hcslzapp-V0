@@ -6,11 +6,9 @@ import 'package:hcslzapp/common/photo.image.provider.dart';
 import 'package:hcslzapp/components/centered.message.dart';
 import 'package:hcslzapp/components/my.text.form.field.dart';
 import 'package:hcslzapp/components/progress.dart';
-import 'package:hcslzapp/components/top.bar.dart';
 import 'package:hcslzapp/controllers/digital.identity.controller.dart';
 import 'package:hcslzapp/models/associated.dart';
 import 'package:hcslzapp/models/digital.identity.dart';
-
 import '../../components/degradee.background.dart';
 import '../../components/my.appbar.dart';
 
@@ -22,24 +20,18 @@ const String _pathIdentity = 'assets/imgs/logo_carteirad.png';
 const String _pathNoImage = 'assets/imgs/noImage.png';
 const String _title = 'Carteira Harley Club';
 
-class DigitalIdentityPage extends StatefulWidget {
+class DigitalIdentityPage extends StatelessWidget {
   final Associated _associated;
+  final DigitalIdentityController _controller = DigitalIdentityController();
+  final double _fontSize = 14.0;
 
   DigitalIdentityPage(this._associated);
-
-  @override
-  _DigitalIdentityPageState createState() => _DigitalIdentityPageState();
-}
-
-class _DigitalIdentityPageState extends State<DigitalIdentityPage> {
-  DigitalIdentityController _controller = DigitalIdentityController();
-  final double _fontSize = 14.0;
 
   @override
   Widget build(BuildContext context) => Scaffold(
         appBar: MyAppBar(_title),
         body: FutureBuilder<List<DigitalIdentity>>(
-          future: _controller.getFuture(widget._associated.id),
+          future: _controller.getFuture(_associated.id),
           builder: (context, snapshot) {
             switch (snapshot.connectionState) {
               case ConnectionState.none:
@@ -203,8 +195,8 @@ class _DigitalIdentityPageState extends State<DigitalIdentityPage> {
       );
 
   DecorationImage _loadPhoto() => DecorationImage(
-      image: widget._associated.photoUrl != ''
-          ? NetworkImage(widget._associated.photoUrl)
+      image: _associated.photoUrl != ''
+          ? NetworkImage(_associated.photoUrl)
           : PhotoImageProvider().getImageProvider(
               File(_pathNoImage),
             ) as ImageProvider,
