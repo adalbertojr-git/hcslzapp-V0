@@ -1,10 +1,9 @@
 import 'dart:async';
 import 'dart:convert';
 import 'package:hcslzapp/http/http.exception.dart';
-import 'package:hcslzapp/models/access.request.dart';
-import 'package:hcslzapp/models/associated.dart';
 import 'package:http/http.dart';
 import '../common/settings.dart';
+import '../models/associated.dto.dart';
 
 const String _managUrl = '/management';
 
@@ -32,10 +31,7 @@ class ManagementRepo {
     }
   }
 
-  Future<Response> deleteById(Associated associated) async {
-    final String encodedJson = jsonEncode(
-      associated.toJson(),
-    );
+  Future<Response> deleteById(AssociatedDTO associated) async {
     final Response response = await client.delete(
       Uri.parse(mainUrl + _managUrl + "/" + associated.id.toString()),
       headers: {

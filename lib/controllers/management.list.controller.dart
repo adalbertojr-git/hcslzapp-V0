@@ -52,18 +52,18 @@ abstract class ManagementListControllerBase with Store {
   bool setButtonVisibilty() => isHidedButton = !isHidedButton;
 
   @action
-  Future<List<AssociatedDTO>> findAll() =>
-      ObservableFuture(_associatedRepo.findAll().then((value) => value))
+  Future<List<AssociatedDTO>> findAllAdminToList() =>
+      ObservableFuture(_associatedRepo.findAllAdminToList().then((value) => value))
           .catchError((e) {
         errorMsg = "${e.message}";
       }, test: (e) => e is HttpException).catchError((e) {
         errorMsg = "$e";
       }, test: (e) => e is Exception);
 
-  Future<List<AssociatedDTO>> getFuture() => future = findAll();
+  Future<List<AssociatedDTO>> getFuture() => future = findAllAdminToList();
 
   @action
-  Future deleteById(Associated associated) => ObservableFuture(
+  Future deleteById(AssociatedDTO associated) => ObservableFuture(
               _managementRepo.deleteById(associated).then((value) => value))
           .catchError((e) {
         errorMsg = "${e.message}";

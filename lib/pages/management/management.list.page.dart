@@ -1,3 +1,4 @@
+import 'package:asuka/snackbars/asuka_snack_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:hcslzapp/components/button.dart';
@@ -6,7 +7,6 @@ import 'package:hcslzapp/components/progress.dart';
 import 'package:hcslzapp/components/transaction.auth.dialog.dart';
 import 'package:hcslzapp/controllers/management.list.controller.dart';
 import 'package:hcslzapp/models/associated.dart';
-import 'package:asuka/asuka.dart' as asuka;
 import 'package:hcslzapp/models/dependent.dart';
 import 'package:hcslzapp/models/motorcycle.dart';
 import '../../components/my.appbar.dart';
@@ -67,7 +67,8 @@ class ManagementListPageState extends State<ManagementListPage> {
                       );
                     if ((snapshot.data?.length)! > 0) {
                       _controller.init();
-                      _controller.loadAdmins(snapshot.data!);
+                      //_controller.loadAdmins(snapshot.data!);
+                      _controller.associateds.addAll(snapshot.data!);
                       _controller.associateds.sort(
                         (a, b) => a.name.compareTo(b.name),
                       );
@@ -135,70 +136,63 @@ class ManagementListPageState extends State<ManagementListPage> {
   }
 
   _widgets() => Center(
-    child: ListView(
-      children: [
-        Expanded(
-          child: Observer(
-            builder: (_) => ListView.separated(
-              shrinkWrap: true,
-              itemCount: _controller.associateds.length,
-              itemBuilder: (_, int i) {
-                return Container(
-                  decoration: BoxDecoration(
-                    color: Colors.white30,
-                    shape: BoxShape.rectangle,
-                    borderRadius: BorderRadius.circular(8.0),
-                    boxShadow: <BoxShadow>[
-                      BoxShadow(
-                        color: Colors.black12,
-                        blurRadius: 10.0,
-                        offset: Offset(0.0, 5.0),
-                      ),
-                    ],
-                  ),
-                  child: ListTile(
-                    title: Text(
-                      _controller.associateds[i].name,
-                      style: TextStyle(
-                        fontWeight: FontWeight.bold,
-                      ),
+        child: ListView(
+          children: [
+            SizedBox(height: 10),
+            Observer(
+              builder: (_) => ListView.separated(
+                padding: EdgeInsets.symmetric(horizontal: 15),
+                shrinkWrap: true,
+                itemCount: _controller.associateds.length,
+                itemBuilder: (_, int i) {
+                  return Container(
+                    decoration: BoxDecoration(
+                      color: Colors.deepOrange[300],
+                      shape: BoxShape.rectangle,
+                      borderRadius: BorderRadius.circular(20.0),
                     ),
-                    subtitle: Text('Tel.: ' +
-                        (_controller.associateds[i].phone != null
-                            ? _controller.associateds[i].phone
-                            : 'Não informado') +
-                        '\n' +
-                        'Status: ' +
-                        _controller.associateds[i].status),
-                    leading: CircleAvatar(
-                      child: Icon(Icons.admin_panel_settings),
-                      backgroundColor: Colors.white,
-                    ),
-                    trailing: Wrap(
-                      spacing: 10, // space between two icons
-                      children: <Widget>[
-                        GestureDetector(
-                          child: Icon(
-                            Icons.delete,
-                          ),
-                          onTap: () {
-                            _delete(_controller.associateds[i]);
-                          },
+                    child: ListTile(
+                      title: Text(
+                        _controller.associateds[i].name,
+                        style: TextStyle(
+                          fontWeight: FontWeight.bold,
                         ),
-                      ],
+                      ),
+                      subtitle: Text('Tel.: ' +
+                          (_controller.associateds[i].phone != null
+                              ? _controller.associateds[i].phone
+                              : 'Não informado') +
+                          '\n' +
+                          'Status: ' +
+                          _controller.associateds[i].status),
+                      leading: CircleAvatar(
+                        child: Icon(Icons.admin_panel_settings),
+                        backgroundColor: Colors.white,
+                      ),
+                      trailing: Wrap(
+                        spacing: 10, // space between two icons
+                        children: <Widget>[
+                          GestureDetector(
+                            child: Icon(
+                              Icons.delete,
+                            ),
+                            onTap: () {
+                              _delete(_controller.associateds[i]);
+                            },
+                          ),
+                        ],
+                      ),
                     ),
-                  ),
-                );
-              },
-              separatorBuilder: (_, int index) => const Divider(),
+                  );
+                },
+                separatorBuilder: (_, int index) => const Divider(),
+              ),
             ),
-          ),
+          ],
         ),
-      ],
-    ),
-  );
+      );
 
-  _delete(Associated associated) async {
+  _delete(AssociatedDTO associated) async {
     var response = await showDialog(
         context: context,
         builder: (context) {
@@ -206,29 +200,18 @@ class ManagementListPageState extends State<ManagementListPage> {
         });
     if (response == true) {
       if (_controller.associateds.length == 1) {
-        asuka.showSnackBar(
-          SnackBar(
-            content: const Text(
-                'Deve haver pelo menos um Administrador cadastrado.'),
-          ),
-        );
+        AsukaSnackbar.alert(
+                'Deve haver pelo menos um Administrador cadastrado.')
+            .show();
       } else {
         _controller.deleteById(associated).then((value) {
           if (value != null) {
-            asuka.showSnackBar(
-              SnackBar(
-                content: const Text('Administrador excluído com sucesso.'),
-              ),
-            );
+            AsukaSnackbar.success('Administrador excluído com sucesso').show();
             _controller.associateds.removeWhere(
               (item) => item.id == associated.id,
             );
           } else {
-            asuka.showSnackBar(
-              SnackBar(
-                content: Text(_controller.errorMsg),
-              ),
-            );
+            AsukaSnackbar.alert(_controller.errorMsg).show();
           }
         });
       }

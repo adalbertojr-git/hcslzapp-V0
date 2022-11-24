@@ -9,6 +9,10 @@ import 'package:hcslzapp/controllers/management.add.controller.dart';
 import 'package:hcslzapp/models/associated.dart';
 import 'package:asuka/asuka.dart' as asuka;
 
+import '../../components/my.appbar.dart';
+import '../../components/my.bottom.appbar.dart';
+import '../../models/associated.dto.dart';
+
 const String _labelNotExists =
     'Não existem associados cadastrados. Confira as requisições de acesso.';
 const String _labelAllAdmins =
@@ -25,7 +29,7 @@ class ManagementAddPage extends StatefulWidget {
 }
 
 class ManagementAddPageState extends State<ManagementAddPage> {
-  ManagementAddController _controller = ManagementAddController();
+  final ManagementAddController _controller = ManagementAddController();
 
   @override
   void initState() {
@@ -40,7 +44,8 @@ class ManagementAddPageState extends State<ManagementAddPage> {
   @override
   Widget build(BuildContext context) => Observer(
         builder: (_) => Scaffold(
-          body: FutureBuilder<List<Associated>>(
+          appBar: MyAppBar(_title),
+          body: FutureBuilder<List<AssociatedDTO>>(
             future: _controller.future,
             builder: (context, snapshot) {
               switch (snapshot.connectionState) {
@@ -62,7 +67,8 @@ class ManagementAddPageState extends State<ManagementAddPage> {
                       );
                     if ((snapshot.data?.length)! > 0) {
                       _controller.init();
-                      _controller.loadNotAdmins(snapshot.data!);
+                      //_controller.loadNotAdmins(snapshot.data!);
+                      _controller.loadListItems(snapshot.data!);
                       if (_controller.listItems.length > 0) {
                         _controller.listItems.sort(
                           (a, b) => a.name!.compareTo(b.name!),
@@ -86,46 +92,37 @@ class ManagementAddPageState extends State<ManagementAddPage> {
               );
             },
           ),
+          bottomNavigationBar: _controller.isHidedButton
+              ? null
+              : MyBottomAppBar(),
           floatingActionButtonLocation:
-              FloatingActionButtonLocation.centerFloat,
+              FloatingActionButtonLocation.centerDocked,
           floatingActionButton: _controller.isHidedButton
               ? null
               : Button(icon: Icons.save, onClick: () => _save(context)),
         ),
       );
 
-  _widgets() => Container(
-        decoration: BoxDecoration(
-          gradient: LinearGradient(
-            colors: [Colors.white30, Colors.deepOrange],
-            begin: FractionalOffset.topLeft,
-            end: FractionalOffset.bottomRight,
+  _widgets() => Center(
+    child: ListView(
+      children: [
+        SizedBox(height: 10),
+        Observer(
+          builder: (_) => ListView.separated(
+            shrinkWrap: true,
+            itemCount: _controller.listItems.length,
+            itemBuilder: (_, int i) {
+              return CheckboxWidget(
+                item: _controller.listItems[i],
+                controller: _controller,
+              );
+            },
+            separatorBuilder: (_, int index) => const Divider(),
           ),
         ),
-        height: MediaQuery.of(context).size.height,
-        child: Column(
-          children: [
-            TopBar(
-              title: _title,
-            ),
-            Expanded(
-              child: Observer(
-                builder: (_) => ListView.separated(
-                  shrinkWrap: true,
-                  itemCount: _controller.listItems.length,
-                  itemBuilder: (_, int i) {
-                    return CheckboxWidget(
-                      item: _controller.listItems[i],
-                      controller: _controller,
-                    );
-                  },
-                  separatorBuilder: (_, int index) => const Divider(),
-                ),
-              ),
-            ),
-          ],
-        ),
-      );
+      ],
+    ),
+  );
 
   _save(BuildContext context) {
     _controller.save().then(

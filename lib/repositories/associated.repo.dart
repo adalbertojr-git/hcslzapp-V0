@@ -30,7 +30,47 @@ class AssociatedRepo {
     }
   }
 
-  Future<List<Associated>> findAllActive() async {
+  Future<List<AssociatedDTO>> findAllAdminToList() async {
+    final Response response = await client
+        .get(
+      Uri.parse(mainUrl + _associatedUrl + "/admin"),
+    )
+        .timeout(
+      Duration(seconds: 10),
+    );
+    if (response.statusCode == 200) {
+      final List<dynamic> decodedJson = jsonDecode(response.body);
+      return decodedJson
+          .map(
+            (dynamic json) => AssociatedDTO.fromJson(json),
+      )
+          .toList();
+    } else {
+      throw HttpException(getMessage(response.statusCode));
+    }
+  }
+
+  Future<List<AssociatedDTO>> findAllNotAdminToList() async {
+    final Response response = await client
+        .get(
+      Uri.parse(mainUrl + _associatedUrl + "/notadmin"),
+    )
+        .timeout(
+      Duration(seconds: 10),
+    );
+    if (response.statusCode == 200) {
+      final List<dynamic> decodedJson = jsonDecode(response.body);
+      return decodedJson
+          .map(
+            (dynamic json) => AssociatedDTO.fromJson(json),
+      )
+          .toList();
+    } else {
+      throw HttpException(getMessage(response.statusCode));
+    }
+  }
+
+  Future<List<AssociatedDTO>> findAllActive() async {
     final Response response = await client
         .get(
       Uri.parse(mainUrl + _associatedUrl + "/active"),
@@ -42,7 +82,7 @@ class AssociatedRepo {
       final List<dynamic> decodedJson = jsonDecode(response.body);
       return decodedJson
           .map(
-            (dynamic json) => Associated.fromJson(json),
+            (dynamic json) => AssociatedDTO.fromJson(json),
       )
           .toList();
     } else {

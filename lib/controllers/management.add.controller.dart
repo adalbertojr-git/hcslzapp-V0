@@ -9,6 +9,8 @@ import 'package:hcslzapp/repositories/associated.repo.dart';
 import 'package:hcslzapp/repositories/management.repo.dart';
 import 'package:mobx/mobx.dart';
 
+import '../models/associated.dto.dart';
+
 part 'management.add.controller.g.dart';
 
 class ManagementAddController = ManagementAddControllerBase
@@ -40,7 +42,7 @@ abstract class ManagementAddControllerBase with Store {
   String errorMsg = '';
 
   @observable
-  Future<List<Associated>> future = Future<List<Associated>>.value([]);
+  Future<List<AssociatedDTO>> future = Future<List<AssociatedDTO>>.value([]);
 
   @observable
   String filter = '';
@@ -55,15 +57,15 @@ abstract class ManagementAddControllerBase with Store {
   bool setButtonVisibilty() => isHidedButton = !isHidedButton;
 
   @action
-  Future<List<Associated>> findAllActive() =>
-      ObservableFuture(_associatedRepo.findAllActive().then((value) => value))
+  Future<List<AssociatedDTO>> findAllNotAdminToList() => ObservableFuture(
+              _associatedRepo.findAllNotAdminToList().then((value) => value))
           .catchError((e) {
         errorMsg = "${e.message}";
       }, test: (e) => e is HttpException).catchError((e) {
         errorMsg = "$e";
       }, test: (e) => e is Exception);
 
-  Future<List<Associated>> getFuture() => future = findAllActive();
+  Future<List<AssociatedDTO>> getFuture() => future = findAllNotAdminToList();
 
   @action
   Future save() => ObservableFuture(
@@ -74,8 +76,26 @@ abstract class ManagementAddControllerBase with Store {
         errorMsg = "$e";
       }, test: (e) => e is Exception);
 
-  loadNotAdmins(List<Associated> list) {
-    for (Associated associated in list) {
+  loadListItems(List<AssociatedDTO> list) {
+    for (AssociatedDTO associated in list) {
+      listItems.add(
+        ItemModel(
+          id: associated.id,
+          name: associated.name,
+          phone: associated.phone,
+          status: associated.status,
+          authenticate: associated.authenticate,
+          check: false,
+          email: '',
+          user: '',
+          password: '',
+        ),
+      );
+    }
+  }
+
+/*  loadNotAdmins(List<AssociatedDTO> list) {
+    for (AssociatedDTO associated in list) {
       if (!associated.authenticate.roles.any((Role r) => r.profile == ADMIN)) {
         listItems.add(
           ItemModel(
@@ -92,5 +112,5 @@ abstract class ManagementAddControllerBase with Store {
         );
       }
     }
-  }
+  }*/
 }

@@ -168,18 +168,18 @@ mixin _$ManagementListController on ManagementListControllerBase, Store {
   }
 
   @override
-  Future<List<AssociatedDTO>> findAll() {
+  Future<List<AssociatedDTO>> findAllAdminToList() {
     final _$actionInfo = _$ManagementListControllerBaseActionController
-        .startAction(name: 'ManagementListControllerBase.findAll');
+        .startAction(name: 'ManagementListControllerBase.findAllAdminToList');
     try {
-      return super.findAll();
+      return super.findAllAdminToList();
     } finally {
       _$ManagementListControllerBaseActionController.endAction(_$actionInfo);
     }
   }
 
   @override
-  Future<dynamic> deleteById(Associated associated) {
+  Future<dynamic> deleteById(AssociatedDTO associated) {
     final _$actionInfo = _$ManagementListControllerBaseActionController
         .startAction(name: 'ManagementListControllerBase.deleteById');
     try {
