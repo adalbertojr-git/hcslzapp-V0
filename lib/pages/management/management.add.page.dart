@@ -1,14 +1,11 @@
+import 'package:asuka/snackbars/asuka_snack_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:hcslzapp/components/button.dart';
 import 'package:hcslzapp/components/centered.message.dart';
 import 'package:hcslzapp/components/progress.dart';
-import 'package:hcslzapp/components/top.bar.dart';
 import 'package:hcslzapp/controllers/item.model.dart';
 import 'package:hcslzapp/controllers/management.add.controller.dart';
-import 'package:hcslzapp/models/associated.dart';
-import 'package:asuka/asuka.dart' as asuka;
-
 import '../../components/my.appbar.dart';
 import '../../components/my.bottom.appbar.dart';
 import '../../models/associated.dto.dart';
@@ -92,9 +89,8 @@ class ManagementAddPageState extends State<ManagementAddPage> {
               );
             },
           ),
-          bottomNavigationBar: _controller.isHidedButton
-              ? null
-              : MyBottomAppBar(),
+          bottomNavigationBar:
+              _controller.isHidedButton ? null : MyBottomAppBar(),
           floatingActionButtonLocation:
               FloatingActionButtonLocation.centerDocked,
           floatingActionButton: _controller.isHidedButton
@@ -104,50 +100,42 @@ class ManagementAddPageState extends State<ManagementAddPage> {
       );
 
   _widgets() => Center(
-    child: ListView(
-      children: [
-        SizedBox(height: 10),
-        Observer(
-          builder: (_) => ListView.separated(
-            padding: EdgeInsets.symmetric(horizontal: 15),
-            shrinkWrap: true,
-            itemCount: _controller.listItems.length,
-            itemBuilder: (_, int i) {
-              return Container(
-                decoration: BoxDecoration(
-                  color: Colors.deepOrange[300],
-                  shape: BoxShape.rectangle,
-                  borderRadius: BorderRadius.circular(20.0),
-                ),
-                child: CheckboxWidget(
-                  item: _controller.listItems[i],
-                  controller: _controller,
-                ),
-              );
-            },
-            separatorBuilder: (_, int index) => const Divider(),
-          ),
+        child: ListView(
+          children: [
+            SizedBox(height: 10),
+            Observer(
+              builder: (_) => ListView.separated(
+                padding: EdgeInsets.symmetric(horizontal: 15),
+                shrinkWrap: true,
+                itemCount: _controller.listItems.length,
+                itemBuilder: (_, int i) {
+                  return Container(
+                    decoration: BoxDecoration(
+                      color: Colors.deepOrange[300],
+                      shape: BoxShape.rectangle,
+                      borderRadius: BorderRadius.circular(20.0),
+                    ),
+                    child: CheckboxWidget(
+                      item: _controller.listItems[i],
+                      controller: _controller,
+                    ),
+                  );
+                },
+                separatorBuilder: (_, int index) => const Divider(),
+              ),
+            ),
+          ],
         ),
-      ],
-    ),
-  );
+      );
 
   _save(BuildContext context) {
     _controller.save().then(
       (value) {
         if (value != null) {
-          asuka.showSnackBar(
-            SnackBar(
-              content: const Text('Admininstradore(s) salvo(s) com sucesso.'),
-            ),
-          );
+          AsukaSnackbar.success('Administrador(es) salvo(s) com sucesso').show();
           Navigator.pop(context, _controller.listItems);
         } else {
-          asuka.showSnackBar(
-            SnackBar(
-              content: Text(_controller.errorMsg),
-            ),
-          );
+          AsukaSnackbar.alert(_controller.errorMsg).show();
         }
       },
     );
@@ -174,11 +162,8 @@ class CheckboxWidget extends StatelessWidget {
             fontWeight: FontWeight.bold,
           ),
         ),
-        subtitle: Text('Tel.: ' +
-            (item.phone ?? 'Não informado') +
-            '\n' +
-            'Status: ' +
-            item.status!),
+        subtitle:
+            Text('Tel.: ' + item.phone! + '\n' + 'Status: ' + item.status!),
         value: item.check,
         onChanged: (bool? value) {
           item.check = value;
