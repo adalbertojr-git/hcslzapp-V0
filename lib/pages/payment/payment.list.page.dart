@@ -11,6 +11,8 @@ import 'package:hcslzapp/models/associated.dart';
 import 'package:hcslzapp/pages/payment/payment.associated.page.dart';
 import 'package:hcslzapp/pages/payment/payment.table.page.dart';
 
+import '../../components/my.appbar.dart';
+import '../../components/my.bottom.appbar.dart';
 import '../../models/associated.dto.dart';
 
 const String _labelNotExists =
@@ -29,7 +31,7 @@ class PaymentListPage extends StatefulWidget {
 }
 
 class _PaymentListPageState extends State<PaymentListPage> {
-  PaymentListController _controller = PaymentListController();
+  final PaymentListController _controller = PaymentListController();
 
   @override
   void initState() {
@@ -44,6 +46,8 @@ class _PaymentListPageState extends State<PaymentListPage> {
   @override
   Widget build(BuildContext context) => Observer(
       builder: (_) => Scaffold(
+            appBar: MyAppBar(_title),
+            bottomNavigationBar: MyBottomAppBar(),
             body: FutureBuilder<List<AssociatedDTO>>(
               future: _controller.future,
               builder: (context, snapshot) {
@@ -85,7 +89,7 @@ class _PaymentListPageState extends State<PaymentListPage> {
               },
             ),
             floatingActionButtonLocation:
-                FloatingActionButtonLocation.centerFloat,
+                FloatingActionButtonLocation.centerDocked,
             floatingActionButton: _controller.isHidedButton
                 ? Container()
                 : Button(
@@ -100,20 +104,10 @@ class _PaymentListPageState extends State<PaymentListPage> {
                   ),
           ));
 
-  _widgets() => Container(
-        decoration: BoxDecoration(
-          gradient: LinearGradient(
-            colors: [Colors.white30, Colors.deepOrange],
-            begin: FractionalOffset.topLeft,
-            end: FractionalOffset.bottomRight,
-          ),
-        ),
-        height: MediaQuery.of(context).size.height,
-        child: Column(
+  _widgets() => Center(
+        child: ListView(
           children: [
-            TopBar(
-              title: _title,
-            ),
+            SizedBox(height: 10),
             MyTextFormField(
               textEditingController: _controller.nameCtrl,
               label: labelNamePayment,
@@ -122,68 +116,61 @@ class _PaymentListPageState extends State<PaymentListPage> {
               inputType: TextInputType.text,
               onChanged: _controller.setFilter,
             ),
-            Expanded(
-              child: Observer(
-                builder: (_) => ListView.separated(
-                  shrinkWrap: true,
-                  itemCount: _controller.listFiltered.length,
-                  itemBuilder: (_, int i) {
-                    return Container(
-                      decoration: BoxDecoration(
-                        color: Colors.white30,
-                        shape: BoxShape.rectangle,
-                        borderRadius: BorderRadius.circular(8.0),
-                        boxShadow: <BoxShadow>[
-                          BoxShadow(
-                            color: Colors.black12,
-                            blurRadius: 10.0,
-                            offset: Offset(0.0, 5.0),
+            Observer(
+              builder: (_) => ListView.separated(
+                padding: EdgeInsets.symmetric(horizontal: 15),
+                shrinkWrap: true,
+                itemCount: _controller.listFiltered.length,
+                itemBuilder: (_, int i) {
+                  return Container(
+                    decoration: BoxDecoration(
+                      color: Colors.deepOrange[300],
+                      shape: BoxShape.rectangle,
+                      borderRadius: BorderRadius.circular(20.0),
+                    ),
+                    child: ListTile(
+                      title: Text(
+                        _controller.listFiltered[i].name,
+                        style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                      subtitle: Text('Tel.: ' +
+                          (_controller.listFiltered[i].phone != null
+                              ? _controller.listFiltered[i].phone
+                              : 'Não informado') +
+                          '\n' +
+                          'Status: ' +
+                          _controller.listFiltered[i].status),
+                      leading: CircleAvatar(
+                        child: Icon(Icons.person),
+                        backgroundColor: Colors.white,
+                      ),
+                      trailing: Wrap(
+                        spacing: 10, // space between two icons
+                        children: <Widget>[
+                          GestureDetector(
+                            child: Icon(
+                              Icons.arrow_forward,
+                            ),
+                            onTap: () {
+/*                                Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) => PaymentAssociatedPage(
+                                    widget._selectedProfile,
+                                    _controller.listFiltered[i],
+                                  ),
+                                ),
+                              );*/
+                            },
                           ),
                         ],
                       ),
-                      child: ListTile(
-                        title: Text(
-                          _controller.listFiltered[i].name,
-                          style: TextStyle(
-                            fontWeight: FontWeight.bold,
-                          ),
-                        ),
-                        subtitle: Text('Tel.: ' +
-                            (_controller.listFiltered[i].phone != null
-                                ? _controller.listFiltered[i].phone
-                                : 'Não informado') +
-                            '\n' +
-                            'Status: ' +
-                            _controller.listFiltered[i].status),
-                        leading: CircleAvatar(
-                          child: Icon(Icons.person),
-                          backgroundColor: Colors.white,
-                        ),
-                        trailing: Wrap(
-                          spacing: 10, // space between two icons
-                          children: <Widget>[
-                            GestureDetector(
-                              child: Icon(
-                                Icons.arrow_forward,
-                              ),
-                              onTap: () {
-                                Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                      builder: (context) =>
-                                          PaymentAssociatedPage(
-                                              widget._selectedProfile,
-                                              _controller.listFiltered[i])),
-                                );
-                              },
-                            ),
-                          ],
-                        ),
-                      ),
-                    );
-                  },
-                  separatorBuilder: (_, int index) => const Divider(),
-                ),
+                    ),
+                  );
+                },
+                separatorBuilder: (_, int index) => const Divider(),
               ),
             ),
           ],

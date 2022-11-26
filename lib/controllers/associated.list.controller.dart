@@ -59,11 +59,11 @@ abstract class AssociatedListControllerBase with Store {
   setFilter(String value) => filter = value;
 
   @computed
-  List<Associated> get listFiltered {
+  List<AssociatedDTO> get listFiltered {
     if (filter.isEmpty) {
-      return List<Associated>.from(associateds);
+      return List<AssociatedDTO>.from(associateds);
     } else {
-      return List<Associated>.from(
+      return List<AssociatedDTO>.from(
           associateds.where((element) => element.name.contains(filter)));
     }
   }
