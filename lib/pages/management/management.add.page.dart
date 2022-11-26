@@ -109,12 +109,20 @@ class ManagementAddPageState extends State<ManagementAddPage> {
         SizedBox(height: 10),
         Observer(
           builder: (_) => ListView.separated(
+            padding: EdgeInsets.symmetric(horizontal: 15),
             shrinkWrap: true,
             itemCount: _controller.listItems.length,
             itemBuilder: (_, int i) {
-              return CheckboxWidget(
-                item: _controller.listItems[i],
-                controller: _controller,
+              return Container(
+                decoration: BoxDecoration(
+                  color: Colors.deepOrange[300],
+                  shape: BoxShape.rectangle,
+                  borderRadius: BorderRadius.circular(20.0),
+                ),
+                child: CheckboxWidget(
+                  item: _controller.listItems[i],
+                  controller: _controller,
+                ),
               );
             },
             separatorBuilder: (_, int index) => const Divider(),
@@ -158,46 +166,32 @@ class CheckboxWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Observer(
-      builder: (_) => Container(
-        decoration: BoxDecoration(
-          color: Colors.white30,
-          shape: BoxShape.rectangle,
-          borderRadius: BorderRadius.circular(8.0),
-          boxShadow: <BoxShadow>[
-            BoxShadow(
-              color: Colors.black12,
-              blurRadius: 10.0,
-              offset: Offset(0.0, 5.0),
-            ),
-          ],
+      builder: (_) => CheckboxListTile(
+        controlAffinity: ListTileControlAffinity.leading,
+        title: Text(
+          item.name!,
+          style: TextStyle(
+            fontWeight: FontWeight.bold,
+          ),
         ),
-        child: CheckboxListTile(
-          controlAffinity: ListTileControlAffinity.leading,
-          title: Text(
-            item.name!,
-            style: TextStyle(
-              fontWeight: FontWeight.bold,
-            ),
-          ),
-          subtitle: Text('Tel.: ' +
-              (item.phone ?? 'Não informado') +
-              '\n' +
-              'Status: ' +
-              item.status!),
-          value: item.check,
-          onChanged: (bool? value) {
-            item.check = value;
-            if (value != null && value) {
-              controller.ids.add(item.id);
-              controller.associateds.add(item);
-            } else {
-              controller.ids.remove(item.id);
-            }
-          },
-          secondary: CircleAvatar(
-            child: Icon(Icons.person),
-            backgroundColor: Colors.white,
-          ),
+        subtitle: Text('Tel.: ' +
+            (item.phone ?? 'Não informado') +
+            '\n' +
+            'Status: ' +
+            item.status!),
+        value: item.check,
+        onChanged: (bool? value) {
+          item.check = value;
+          if (value != null && value) {
+            controller.ids.add(item.id);
+            controller.associateds.add(item);
+          } else {
+            controller.ids.remove(item.id);
+          }
+        },
+        secondary: CircleAvatar(
+          child: Icon(Icons.person),
+          backgroundColor: Colors.white,
         ),
       ),
     );
