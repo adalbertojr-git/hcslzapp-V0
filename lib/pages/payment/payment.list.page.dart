@@ -5,12 +5,8 @@ import 'package:hcslzapp/components/button.dart';
 import 'package:hcslzapp/components/centered.message.dart';
 import 'package:hcslzapp/components/my.text.form.field.dart';
 import 'package:hcslzapp/components/progress.dart';
-import 'package:hcslzapp/components/top.bar.dart';
 import 'package:hcslzapp/controllers/payment.list.controller.dart';
-import 'package:hcslzapp/models/associated.dart';
-import 'package:hcslzapp/pages/payment/payment.associated.page.dart';
 import 'package:hcslzapp/pages/payment/payment.table.page.dart';
-
 import '../../components/my.appbar.dart';
 import '../../components/my.bottom.appbar.dart';
 import '../../models/associated.dto.dart';

@@ -1,7 +1,6 @@
 import 'dart:async';
 import 'dart:io';
 import 'package:flutter/cupertino.dart';
-import 'package:hcslzapp/models/associated.dart';
 import 'package:hcslzapp/repositories/associated.repo.dart';
 import 'package:hcslzapp/repositories/payment.table.repo.dart';
 import 'package:mobx/mobx.dart';
