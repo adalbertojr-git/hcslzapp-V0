@@ -6,6 +6,7 @@ import 'package:hcslzapp/components/centered.message.dart';
 import 'package:hcslzapp/components/my.text.form.field.dart';
 import 'package:hcslzapp/components/progress.dart';
 import 'package:hcslzapp/controllers/payment.list.controller.dart';
+import 'package:hcslzapp/pages/payment/payment.associated.page.dart';
 import 'package:hcslzapp/pages/payment/payment.table.page.dart';
 import '../../components/my.appbar.dart';
 import '../../components/my.bottom.appbar.dart';
@@ -150,7 +151,7 @@ class _PaymentListPageState extends State<PaymentListPage> {
                               Icons.arrow_forward,
                             ),
                             onTap: () {
-/*                                Navigator.push(
+                                Navigator.push(
                                 context,
                                 MaterialPageRoute(
                                   builder: (context) => PaymentAssociatedPage(
@@ -158,7 +159,7 @@ class _PaymentListPageState extends State<PaymentListPage> {
                                     _controller.listFiltered[i],
                                   ),
                                 ),
-                              );*/
+                              );
                             },
                           ),
                         ],

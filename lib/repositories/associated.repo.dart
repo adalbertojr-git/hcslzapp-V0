@@ -90,7 +90,27 @@ class AssociatedRepo {
     }
   }
 
-  Future<List<Associated>> findByIdToList(int id) async {
+  Future<List<AssociatedDTO>> findDTOByIdToList(int id) async {
+    final Response response = await client
+        .get(
+          Uri.parse(mainUrl + _associatedUrl + '/' + id.toString()),
+        )
+        .timeout(
+          Duration(seconds: 10),
+        );
+    if (response.statusCode == 200) {
+      final List<dynamic> decodedJson = jsonDecode(response.body);
+      return decodedJson
+          .map(
+            (dynamic json) => AssociatedDTO.fromJson(json),
+          )
+          .toList();
+    } else {
+      throw HttpException(getMessage(response.statusCode));
+    }
+  }
+
+/*  Future<List<Associated>> findByIdToList(int id) async {
     final Response response = await client
         .get(
           Uri.parse(mainUrl + _associatedUrl + '/list/' + id.toString()),
@@ -108,7 +128,7 @@ class AssociatedRepo {
     } else {
       throw HttpException(getMessage(response.statusCode));
     }
-  }
+  }*/
 
   Future<Associated> update(Associated associated) async {
     final String encodedJson = jsonEncode(

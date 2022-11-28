@@ -7,10 +7,10 @@ import 'package:hcslzapp/components/progress.dart';
 import 'package:hcslzapp/components/top.bar.dart';
 import 'package:hcslzapp/components/transaction.auth.dialog.dart';
 import 'package:hcslzapp/controllers/payment.associated.controller.dart';
-import 'package:hcslzapp/models/associated.dart';
 import 'package:hcslzapp/models/payment.dart';
 import 'package:hcslzapp/pages/payment/payment.add.page.dart';
 import 'package:asuka/asuka.dart' as asuka;
+import '../../models/associated.dto.dart';
 
 const String _labelNotExists = 'Não existem mensalidades registradas.';
 const String _labelUnknown =
@@ -19,7 +19,7 @@ const String _title = 'Mensalidades';
 
 class PaymentAssociatedPage extends StatefulWidget {
   final String _selectedProfile;
-  final Associated _associated;
+  final AssociatedDTO _associated;
 
   const PaymentAssociatedPage(
     this._selectedProfile,

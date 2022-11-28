@@ -1,9 +1,9 @@
+import 'package:hcslzapp/models/associated.dto.dart';
 import 'package:hcslzapp/models/digital.identity.dart';
 import 'package:hcslzapp/models/head.notification.dart';
 import 'package:hcslzapp/models/partnership.dart';
 import 'package:hcslzapp/models/payment.dart';
 import 'package:hcslzapp/models/payment.months.dart';
-
 import 'role.dart';
 import 'associated.dart';
 import 'authenticate.dart';
@@ -11,6 +11,21 @@ import 'dependent.dart';
 import 'motorcycle.dart';
 
 class Template {
+  AssociatedDTO loadAssociatedDTO() =>
+      AssociatedDTO(id: 0,
+        name: '',
+        email: '',
+        phone: '',
+        status: '',
+        dependents: List<Dependent>.from([]),
+        motorcycles: List<Motorcycle>.from([]),
+        authenticate: Authenticate(
+          id: 0,
+          roles: List<Role>.from([]),
+          username: '',
+        ),
+      );
+
   Associated loadAssociated() =>
       Associated(
         id: 0,

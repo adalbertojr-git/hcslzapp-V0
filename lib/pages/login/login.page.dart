@@ -8,6 +8,7 @@ import '../../components/degradee.background.dart';
 import '../../components/my.text.form.field.dart';
 import '../../controllers/login.controller.dart';
 import '../../models/associated.dart';
+import '../../models/associated.dto.dart';
 import '../../models/template.dart';
 import '../../models/token.dart';
 import '../access.request/access.request.add.page.dart';
@@ -229,7 +230,8 @@ class _MyCustomLoginUIState extends State<MyCustomLoginUI>
           } else {
             Token _t = token;
             debugPrint(_t.token);
-            Associated associated = Template().loadAssociated();
+            AssociatedDTO associated = Template().loadAssociatedDTO();
+            //Associated associated = Template().loadAssociated();
             _controllerLogin.setTokenToDevice(_t.token);
             _controllerLogin.setUserToDevice(_controllerLogin.userLoginCtrl.text);
             TokenDetails _tokenDetails = TokenDetails(_t.token);

@@ -22,6 +22,8 @@ import 'package:hcslzapp/models/associated.dart';
 import 'package:hcslzapp/pages/access.request/access.request.list.page.dart';
 import 'package:hcslzapp/pages/associated/associated.list.page.dart';
 
+import '../../models/associated.dto.dart';
+
 const String _labelAppTitle = 'HCSlz App';
 const String _labelTheme = 'Alterar Tema';
 const String _labelChangeProfile = 'Trocar Perfil de Acesso';
@@ -85,9 +87,8 @@ const List<IconData> _listAdmIcons = [
   Icons.wallet_giftcard,
 ];
 
-// ignore: must_be_immutable
 class DashboardPage extends StatefulWidget {
-  final Associated _associated;
+  final AssociatedDTO _associated;
 
   DashboardPage(this._associated);
 

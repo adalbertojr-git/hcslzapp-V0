@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:hcslzapp/pages/event/complex.example.dart';
 import 'package:hcslzapp/pages/partnership/partnership.list.associated.page.dart';
 import 'package:hcslzapp/pages/payment/payment.associated.page.dart';
+import '../models/associated.dto.dart';
 import '../models/role.dart';
 import '../common/associated.profiles.dart';
 import '../models/associated.dart';
@@ -27,7 +28,7 @@ abstract class DashboardControllerBase with Store {
   String photoUrl;
 
   @observable
-  Associated associated;
+  AssociatedDTO associated;
 
   @observable
   String selectedProfile;
