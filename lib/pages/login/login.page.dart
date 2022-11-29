@@ -235,7 +235,7 @@ class _MyCustomLoginUIState extends State<MyCustomLoginUI>
             _controllerLogin.setTokenToDevice(_t.token);
             _controllerLogin.setUserToDevice(_controllerLogin.userLoginCtrl.text);
             TokenDetails _tokenDetails = TokenDetails(_t.token);
-            await _controllerLogin.findByIdToList(_tokenDetails.associatedId()).then(
+            await _controllerLogin.findDTOByIdToList(_tokenDetails.associatedId()).then(
                   (value) {
                 associated = value[0];
               },

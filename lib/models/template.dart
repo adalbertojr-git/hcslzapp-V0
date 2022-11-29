@@ -17,6 +17,7 @@ class Template {
         email: '',
         phone: '',
         status: '',
+        photoUrl: '',
         dependents: List<Dependent>.from([]),
         motorcycles: List<Motorcycle>.from([]),
         authenticate: Authenticate(

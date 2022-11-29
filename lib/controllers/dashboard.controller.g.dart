@@ -29,13 +29,13 @@ mixin _$DashboardController on DashboardControllerBase, Store {
       Atom(name: 'DashboardControllerBase.associated', context: context);
 
   @override
-  Associated get associated {
+  AssociatedDTO get associated {
     _$associatedAtom.reportRead();
     return super.associated;
   }
 
   @override
-  set associated(Associated value) {
+  set associated(AssociatedDTO value) {
     _$associatedAtom.reportWrite(value, super.associated, () {
       super.associated = value;
     });

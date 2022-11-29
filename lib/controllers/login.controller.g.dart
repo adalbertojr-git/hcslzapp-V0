@@ -120,11 +120,11 @@ mixin _$LoginController on LoginControllerBase, Store {
   }
 
   @override
-  Future<List<Associated>> findByIdToList(int id) {
+  Future<List<AssociatedDTO>> findDTOByIdToList(int id) {
     final _$actionInfo = _$LoginControllerBaseActionController.startAction(
-        name: 'LoginControllerBase.findByIdToList');
+        name: 'LoginControllerBase.findDTOByIdToList');
     try {
-      return super.findByIdToList(id);
+      return super.findDTOByIdToList(id);
     } finally {
       _$LoginControllerBaseActionController.endAction(_$actionInfo);
     }

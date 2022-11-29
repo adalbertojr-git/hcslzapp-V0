@@ -8,6 +8,7 @@ class AssociatedDTO {
   String email;
   String phone;
   String status;
+  String photoUrl;
   List<Dependent> dependents;
   List<Motorcycle> motorcycles;
   Authenticate authenticate;
@@ -18,6 +19,7 @@ class AssociatedDTO {
     required this.email,
     required this.phone,
     required this.status,
+    required this.photoUrl,
     required this.dependents,
     required this.motorcycles,
     required this.authenticate,
@@ -29,6 +31,7 @@ class AssociatedDTO {
         email = json['email'],
         phone = json['phone'],
         status = json['status'],
+        photoUrl = json['photoUrl'],
         dependents = List.from((json['dependents'] as List)
             .map((dependents) => Dependent.fromJson(dependents))),
         motorcycles = List.from((json['motorcycles'] as List)
@@ -41,6 +44,7 @@ class AssociatedDTO {
         'email': email,
         'phone': phone,
         'status': status,
+        'photoUrl': photoUrl,
         'dependents': List<dynamic>.from(
             dependents.map((dependents) => dependents.toJson())),
         'motorcycles': List<dynamic>.from(
