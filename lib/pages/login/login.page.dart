@@ -225,35 +225,36 @@ class _MyCustomLoginUIState extends State<MyCustomLoginUI>
     } else {
       AsukaSnackbar.message('Carregando...').show();
       _controllerLogin.authenticate().then(
-        (token) async {
-          if (token == null) {
+        (value) async {
+          if (value == null) {
             AsukaSnackbar.alert(_controllerLogin.errorMsg).show();
           } else {
-            Token _t = token;
-            debugPrint(_t.token);
+            //Token _token = value;
+            debugPrint(value.token);
+            loadTokenSingleton(value);
             //AssociatedDTO associated = Template().loadAssociatedDTO();
             //Associated associated = Template().loadAssociated();
-            _controllerLogin.setTokenToDevice(_t.token);
-            _controllerLogin
-                .setUserToDevice(_controllerLogin.userLoginCtrl.text);
-            TokenDetails _tokenDetails = TokenDetails(_t.token);
+            //_controllerLogin.setTokenToDevice(_t.token);
+/*            _controllerLogin
+                .setUserToDevice(_controllerLogin.userLoginCtrl.text);*/
+            TokenDetails _tokenDetails = TokenDetails(value.token);
             await _controllerLogin
                 .findByIdToList(_tokenDetails.associatedId())
                 .then(
               (value) {
                 loadAssociatedSingleton(value[0]);
 
+                Navigator.pushReplacement(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => DashboardPage(
+                        //associated,
+                        ),
+                  ),
+                );
+
                 //associated = value[0];
               },
-            );
-
-            Navigator.pushReplacement(
-              context,
-              MaterialPageRoute(
-                builder: (context) => DashboardPage(
-                    //associated,
-                    ),
-              ),
             );
           }
         },

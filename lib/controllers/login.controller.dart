@@ -67,15 +67,17 @@ abstract class LoginControllerBase with Store {
         errorMsg = "$e";
       }, test: (e) => e is Exception);
 
+/*
   Future setTokenToDevice(String token) async {
     const String _labelToken = 'token';
     await Glutton.eat(_labelToken, token);
   }
+*/
 
-  Future setUserToDevice(String user) async {
+/*  Future setUserToDevice(String user) async {
     const String _labelUser = 'user';
     await Glutton.eat(_labelUser, user);
-  }
+  }*/
 
   bool get hasErrors => hasErrorUser || hasErrorPassword;
 
