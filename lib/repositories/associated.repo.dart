@@ -90,7 +90,7 @@ class AssociatedRepo {
     }
   }
 
-  Future<List<AssociatedDTO>> findDTOByIdToList(int id) async {
+/*  Future<List<AssociatedDTO>> findDTOByIdToList(int id) async {
     final Response response = await client
         .get(
           Uri.parse(mainUrl + _associatedUrl + '/' + id.toString()),
@@ -108,12 +108,12 @@ class AssociatedRepo {
     } else {
       throw HttpException(getMessage(response.statusCode));
     }
-  }
+  }*/
 
   Future<List<Associated>> findByIdToList(int id) async {
     final Response response = await client
         .get(
-          Uri.parse(mainUrl + _associatedUrl + '/list/' + id.toString()),
+          Uri.parse(mainUrl + _associatedUrl + '/' + id.toString()),
         )
         .timeout(
           Duration(seconds: 10),

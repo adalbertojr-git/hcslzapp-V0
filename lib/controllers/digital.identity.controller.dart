@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import 'package:flutter/cupertino.dart';
+import 'package:hcslzapp/models/associated.dart';
 import 'package:hcslzapp/models/digital.identity.dart';
 import 'package:hcslzapp/models/template.dart';
 import 'package:hcslzapp/repositories/digital.identity.repo.dart';
@@ -49,7 +50,17 @@ abstract class DigitalIdentityControllerBase with Store {
   @observable
   late String errorMsg;
 
-  init() {
+  init(Associated associated) {
+    nameCtrl.text = associated.name;
+    cnhCtrl.text = associated.cnh;
+    cpfCtrl.text = associated.cpf;
+    associatedTypeCtrl.text = associated.associatedType;
+    dateShieldCtrl.text = associated.dateShield;
+    dateBirthCtrl.text = associated.dateBirth;
+    bloodTypeCtrl.text = associated.bloodType;
+  }
+
+  init2() {
     nameCtrl.text = digitalIdentity.name;
     cnhCtrl.text = digitalIdentity.cnh;
     cpfCtrl.text = digitalIdentity.cpf;

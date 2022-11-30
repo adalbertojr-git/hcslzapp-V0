@@ -2,7 +2,7 @@ import 'package:hcslzapp/models/dependent.dart';
 import 'package:hcslzapp/models/motorcycle.dart';
 
 class DigitalIdentity {
-  final int id;
+  int id;
   String name;
   String associatedType;
   String cnh;

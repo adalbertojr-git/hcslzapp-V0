@@ -28,7 +28,7 @@ abstract class DashboardControllerBase with Store {
   String photoUrl;
 
   @observable
-  AssociatedDTO associated;
+  Associated associated;
 
   @observable
   String selectedProfile;
@@ -77,12 +77,23 @@ abstract class DashboardControllerBase with Store {
     );
   }
 
+/*
   loadDigitalIdentityPage(BuildContext context,
       AssociatedDTO associated,) async {
     await Navigator.push(
       context,
       MaterialPageRoute(
         builder: (context) => DigitalIdentityPage(associated),
+      ),
+    );
+  }
+*/
+
+  loadDigitalIdentityPage(BuildContext context) async {
+    await Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (context) => DigitalIdentityPage(),
       ),
     );
   }

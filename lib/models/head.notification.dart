@@ -1,5 +1,5 @@
 class HeadNotification {
-  final int id;
+  int id;
   String title;
   String notification;
   String datePublication;

@@ -90,9 +90,9 @@ const List<IconData> _listAdmIcons = [
 ];
 
 class DashboardPage extends StatefulWidget {
-  final AssociatedDTO _associated;
+/*  final AssociatedDTO _associated;
 
-  DashboardPage(this._associated);
+  DashboardPage(this._associated);*/
 
   @override
   _DashboardPageState createState() => _DashboardPageState();
@@ -102,21 +102,23 @@ class _DashboardPageState extends State<DashboardPage> {
   late DashboardController _controller;
   late BuildContext _gContext;
   late List<Widget> _listAdmWidgets;
+  late Associated _associated;
 
   @override
   void initState() {
     super.initState();
+    _associated = locator.get<Associated>();
+/*    print(_associated.id);
+    print(_associated.name);*/
     _controller = DashboardController(
-      associated: widget._associated,
-      photoUrl: widget._associated.photoUrl,
+      associated: _associated,
+      photoUrl: _associated.photoUrl,
       selectedProfile: ASSOCIATED,
     );
   }
 
   @override
   Widget build(BuildContext context) {
-    print(locator.get<AssociatedDTO>().name);
-
     _gContext = context;
     _listAdmWidgets = [
       AssociatedListPage(),
@@ -232,12 +234,12 @@ class _DashboardPageState extends State<DashboardPage> {
               accountName: Text(
                 _controller.selectedProfile == ADMIN
                     ? _labelAdm
-                    : widget._associated.name,
+                    : _associated.name,
               ),
               accountEmail: Text(
                 _controller.selectedProfile == ADMIN
                     ? _labelAdmEmail
-                    : widget._associated.email,
+                    : _associated.email,
               ),
               decoration: BoxDecoration(
                 image: DecorationImage(
@@ -281,7 +283,7 @@ class _DashboardPageState extends State<DashboardPage> {
                   MaterialPageRoute(
                       builder: (_) => ChangePasswordPage(
                             PasswordDTO(
-                              associatedId: widget._associated.id,
+                              associatedId: _associated.id,
                               aux: '',
                             ),
                           )),
@@ -409,13 +411,13 @@ class _DashboardPageState extends State<DashboardPage> {
         title: Text(
           _controller.selectedProfile == ADMIN
               ? 'Olá, ' + _labelAdm
-              : 'Olá, ${_controller.getFirstName(widget._associated.name)}',
+              : 'Olá, ${_controller.getFirstName(_associated.name)}',
           style: TextStyle(color: Colors.white, fontSize: 18.0),
         ),
         subtitle: Text(
           _controller.selectedProfile == ADMIN
               ? _labelAdmEmail
-              : widget._associated.email,
+              : _associated.email,
           style: TextStyle(color: Colors.white60, fontSize: 12.0),
         ),
         trailing: _controller.selectedProfile == ADMIN
@@ -520,11 +522,11 @@ class _DashboardPageState extends State<DashboardPage> {
                   onClick: () {
                     _controller.loadAssociatedUpdatePage(
                       _gContext,
-                      widget._associated.id,
+                      _associated.id,
                     );
                   },
                 ),
-                GridButton(
+/*                GridButton(
                   title: _labelPayment,
                   image: _pathPaymentImage,
                   context: _gContext,
@@ -532,10 +534,10 @@ class _DashboardPageState extends State<DashboardPage> {
                     _controller.loadPaymentAssociatedPage(
                       _gContext,
                       _controller.isAdmin(),
-                      widget._associated,
+                      _associated,
                     );
                   },
-                ),
+                ),*/
                 GridButton(
                   title: _labelDigitalIdentity,
                   image: _pathDigitalIdentityImage,
@@ -543,7 +545,7 @@ class _DashboardPageState extends State<DashboardPage> {
                   onClick: () {
                     _controller.loadDigitalIdentityPage(
                       _gContext,
-                      widget._associated,
+                      //_associated,
                     );
                   },
                 ),

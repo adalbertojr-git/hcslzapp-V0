@@ -2,7 +2,7 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:glutton/glutton.dart';
 import 'package:hcslzapp/http/http.exception.dart';
-import '../models/associated.dto.dart';
+import '../models/associated.dart';
 import '../models/token.dart';
 import '../repositories/associated.repo.dart';
 import '../repositories/login.repo.dart';
@@ -49,23 +49,23 @@ abstract class LoginControllerBase with Store {
         errorMsg = "$e";
       }, test: (e) => e is Exception);
 
-  @action
+/*  @action
   Future<List<AssociatedDTO>> findDTOByIdToList(int id) => ObservableFuture(
               _associatedRepo.findDTOByIdToList(id).then((value) => value))
           .catchError((e) {
         errorMsg = "${e.message}";
       }, test: (e) => e is HttpException).catchError((e) {
         errorMsg = "$e";
-      }, test: (e) => e is Exception);
+      }, test: (e) => e is Exception);*/
 
-/*  @action
+  @action
   Future<List<Associated>> findByIdToList(int id) => ObservableFuture(
               _associatedRepo.findByIdToList(id).then((value) => value))
           .catchError((e) {
         errorMsg = "${e.message}";
       }, test: (e) => e is HttpException).catchError((e) {
         errorMsg = "$e";
-      }, test: (e) => e is Exception);*/
+      }, test: (e) => e is Exception);
 
   Future setTokenToDevice(String token) async {
     const String _labelToken = 'token';

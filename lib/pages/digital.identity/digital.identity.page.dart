@@ -9,6 +9,7 @@ import 'package:hcslzapp/components/progress.dart';
 import 'package:hcslzapp/controllers/digital.identity.controller.dart';
 import 'package:hcslzapp/models/associated.dart';
 import 'package:hcslzapp/models/digital.identity.dart';
+import '../../common/injection.dart';
 import '../../components/degradee.background.dart';
 import '../../components/my.appbar.dart';
 import '../../models/associated.dto.dart';
@@ -22,14 +23,23 @@ const String _pathNoImage = 'assets/imgs/noImage.png';
 const String _title = 'Carteira Harley Club';
 
 class DigitalIdentityPage extends StatelessWidget {
-  final AssociatedDTO _associated;
+  final Associated _associated = locator.get<Associated>();
   final DigitalIdentityController _controller = DigitalIdentityController();
   final double _fontSize = 14.0;
 
-  DigitalIdentityPage(this._associated);
+  //DigitalIdentityPage(this._associated);
 
   @override
-  Widget build(BuildContext context) => Scaffold(
+  Widget build(BuildContext context) {
+    _controller.init(_associated);
+    return Scaffold(
+      appBar: MyAppBar(_title),
+      body: _widgets(),
+    );
+  }
+
+/*  @override
+  Widget build2(BuildContext context) => Scaffold(
         appBar: MyAppBar(_title),
         body: FutureBuilder<List<DigitalIdentity>>(
           future: _controller.getFuture(_associated.id),
@@ -53,7 +63,7 @@ class DigitalIdentityPage extends StatelessWidget {
                     );
                   if ((snapshot.data?.length)! > 0) {
                     _controller.digitalIdentity = (snapshot.data?.first)!;
-                    _controller.init();
+                    _controller.init2();
                     return _widgets();
                   } else
                     return CenteredMessage(
@@ -68,7 +78,7 @@ class DigitalIdentityPage extends StatelessWidget {
             );
           },
         ),
-      );
+      );*/
 
   _widgets() => DegradeBackground(
         Center(

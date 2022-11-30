@@ -1,5 +1,5 @@
 class Partnership {
-  final int id;
+  int id;
   String partner;
   String phone1;
   String phone2;

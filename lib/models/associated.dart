@@ -5,7 +5,7 @@ import 'motorcycle.dart';
 import 'authenticate.dart';
 
 class Associated extends ChangeNotifier {
-  final int id;
+  int id;
   String name;
   String email;
   String phone;

@@ -8,6 +8,7 @@ import '../../common/token.details.dart';
 import '../../components/degradee.background.dart';
 import '../../components/my.text.form.field.dart';
 import '../../controllers/login.controller.dart';
+import '../../models/associated.dart';
 import '../../models/associated.dto.dart';
 import '../../models/template.dart';
 import '../../models/token.dart';
@@ -188,7 +189,7 @@ class _MyCustomLoginUIState extends State<MyCustomLoginUI>
                               highlightColor: Colors.transparent,
                               onTap: () {
                                 HapticFeedback.lightImpact();
-                                _login(context);
+                                _login();
                               },
                               child: Container(
                                 height: _width * .2,
@@ -218,7 +219,7 @@ class _MyCustomLoginUIState extends State<MyCustomLoginUI>
     );
   }
 
-  _login(BuildContext context) {
+  _login() {
     if (_controllerLogin.hasErrors) {
       AsukaSnackbar.alert('Preencha os campos ogrigatórios').show();
     } else {
@@ -230,18 +231,19 @@ class _MyCustomLoginUIState extends State<MyCustomLoginUI>
           } else {
             Token _t = token;
             debugPrint(_t.token);
-            AssociatedDTO associated = Template().loadAssociatedDTO();
+            //AssociatedDTO associated = Template().loadAssociatedDTO();
             //Associated associated = Template().loadAssociated();
             _controllerLogin.setTokenToDevice(_t.token);
             _controllerLogin
                 .setUserToDevice(_controllerLogin.userLoginCtrl.text);
             TokenDetails _tokenDetails = TokenDetails(_t.token);
             await _controllerLogin
-                .findDTOByIdToList(_tokenDetails.associatedId())
+                .findByIdToList(_tokenDetails.associatedId())
                 .then(
               (value) {
-                associated = value[0];
-                locator.get<AssociatedDTO>().name = value[0].name;
+                loadAssociatedSingleton(value[0]);
+
+                //associated = value[0];
               },
             );
 
@@ -249,8 +251,8 @@ class _MyCustomLoginUIState extends State<MyCustomLoginUI>
               context,
               MaterialPageRoute(
                 builder: (context) => DashboardPage(
-                  associated,
-                ),
+                    //associated,
+                    ),
               ),
             );
           }

@@ -3,7 +3,7 @@ import 'motorcycle.dart';
 import 'authenticate.dart';
 
 class AssociatedDTO {
-  final int id;
+  int id;
   String name;
   String email;
   String phone;
