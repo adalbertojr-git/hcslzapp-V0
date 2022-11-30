@@ -23,6 +23,7 @@ import 'package:hcslzapp/pages/access.request/access.request.list.page.dart';
 import 'package:hcslzapp/pages/associated/associated.list.page.dart';
 
 import '../../common/injection.dart';
+import '../../controllers/login.controller.dart';
 import '../../models/associated.dto.dart';
 
 const String _labelAppTitle = 'HCSlz App';
@@ -104,11 +105,6 @@ class _DashboardPageState extends State<DashboardPage> {
 
   @override
   void initState() {
-
-    AssociatedDTO associated = locator<AssociatedDTO>();
-    print(associated.name);
-
-
     super.initState();
     _controller = DashboardController(
       associated: widget._associated,
@@ -119,6 +115,8 @@ class _DashboardPageState extends State<DashboardPage> {
 
   @override
   Widget build(BuildContext context) {
+    print(locator.get<AssociatedDTO>().name);
+
     _gContext = context;
     _listAdmWidgets = [
       AssociatedListPage(),

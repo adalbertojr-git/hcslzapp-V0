@@ -224,7 +224,7 @@ class _MyCustomLoginUIState extends State<MyCustomLoginUI>
     } else {
       AsukaSnackbar.message('Carregando...').show();
       _controllerLogin.authenticate().then(
-            (token) async {
+        (token) async {
           if (token == null) {
             AsukaSnackbar.alert(_controllerLogin.errorMsg).show();
           } else {
@@ -233,16 +233,18 @@ class _MyCustomLoginUIState extends State<MyCustomLoginUI>
             AssociatedDTO associated = Template().loadAssociatedDTO();
             //Associated associated = Template().loadAssociated();
             _controllerLogin.setTokenToDevice(_t.token);
-            _controllerLogin.setUserToDevice(_controllerLogin.userLoginCtrl.text);
+            _controllerLogin
+                .setUserToDevice(_controllerLogin.userLoginCtrl.text);
             TokenDetails _tokenDetails = TokenDetails(_t.token);
-            await _controllerLogin.findDTOByIdToList(_tokenDetails.associatedId()).then(
-                  (value) {
+            await _controllerLogin
+                .findDTOByIdToList(_tokenDetails.associatedId())
+                .then(
+              (value) {
                 associated = value[0];
-                locator<AssociatedDTO>().name = associated.name;
-                print(associated.name);
-                print(locator<AssociatedDTO>().name);
+                locator.get<AssociatedDTO>().name = value[0].name;
               },
             );
+
             Navigator.pushReplacement(
               context,
               MaterialPageRoute(

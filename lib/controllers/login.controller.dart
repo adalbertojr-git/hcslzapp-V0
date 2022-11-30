@@ -2,7 +2,6 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:glutton/glutton.dart';
 import 'package:hcslzapp/http/http.exception.dart';
-import 'package:hcslzapp/models/associated.dart';
 import '../models/associated.dto.dart';
 import '../models/token.dart';
 import '../repositories/associated.repo.dart';
