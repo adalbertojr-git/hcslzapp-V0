@@ -6,10 +6,11 @@ import 'package:hcslzapp/components/button.dart';
 import 'package:hcslzapp/components/my.text.form.field.dart';
 import 'package:hcslzapp/components/top.bar.dart';
 import 'package:hcslzapp/controllers/payment.add.controller.dart';
-import 'package:hcslzapp/models/associated.dart';
 import 'package:hcslzapp/models/payment.dart';
 import 'package:mask_text_input_formatter/mask_text_input_formatter.dart';
 import 'package:asuka/asuka.dart' as asuka;
+
+import '../../models/associated.dto.dart';
 
 const String _title = 'Adicionar Mensalidade(s)';
 
@@ -17,7 +18,7 @@ class PaymentAddPage extends StatefulWidget {
   final Payment? _payment;
   final List<String> _years;
   final String _selectedProfile;
-  final Associated _associated;
+  final AssociatedDTO _associated;
 
   PaymentAddPage(
     this._selectedProfile,

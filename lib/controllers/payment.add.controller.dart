@@ -9,6 +9,8 @@ import 'package:hcslzapp/models/template.dart';
 import 'package:hcslzapp/repositories/payment.repo.dart';
 import 'package:mobx/mobx.dart';
 
+import '../models/associated.dto.dart';
+
 part 'payment.add.controller.g.dart';
 
 class PaymentAddController = PaymentAddControllerBase
@@ -66,7 +68,7 @@ abstract class PaymentAddControllerBase with Store {
   Payment payment = Template().loadPayment();
 
   @observable
-  Associated associated = Template().loadAssociated();
+  AssociatedDTO associated = Template().loadAssociatedDTO();
 
   @observable
   PaymentRepo _paymentRepo = PaymentRepo();
@@ -171,7 +173,7 @@ abstract class PaymentAddControllerBase with Store {
     return Payment(
         id: payment.id,
         year: yearCtrl.text,
-        associated: associated,
+        associated: Template().loadAssociated(),//associated,
         paymentMonths: _setPaymentMonths());
   }
 

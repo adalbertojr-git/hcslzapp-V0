@@ -11,6 +11,7 @@ import 'package:hcslzapp/models/associated.dart';
 import 'package:hcslzapp/models/digital.identity.dart';
 import '../../components/degradee.background.dart';
 import '../../components/my.appbar.dart';
+import '../../models/associated.dto.dart';
 
 const String _labelNotExists =
     'Dados do associado especificado não foram encontrados.';
@@ -21,7 +22,7 @@ const String _pathNoImage = 'assets/imgs/noImage.png';
 const String _title = 'Carteira Harley Club';
 
 class DigitalIdentityPage extends StatelessWidget {
-  final Associated _associated;
+  final AssociatedDTO _associated;
   final DigitalIdentityController _controller = DigitalIdentityController();
   final double _fontSize = 14.0;
 

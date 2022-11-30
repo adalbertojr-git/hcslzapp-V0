@@ -31,7 +31,7 @@ class PaymentAssociatedPage extends StatefulWidget {
 }
 
 class _PaymentAssociatedPageState extends State<PaymentAssociatedPage> {
-  PaymentAssociatedController _controller = PaymentAssociatedController();
+  final PaymentAssociatedController _controller = PaymentAssociatedController();
 
   @override
   void initState() {

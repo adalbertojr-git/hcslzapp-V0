@@ -2,12 +2,12 @@ import 'package:asuka/snackbars/asuka_snack_bar.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import '../../common/injection.dart';
 import '../../common/labels.and.hints.dart';
 import '../../common/token.details.dart';
 import '../../components/degradee.background.dart';
 import '../../components/my.text.form.field.dart';
 import '../../controllers/login.controller.dart';
-import '../../models/associated.dart';
 import '../../models/associated.dto.dart';
 import '../../models/template.dart';
 import '../../models/token.dart';
@@ -238,6 +238,9 @@ class _MyCustomLoginUIState extends State<MyCustomLoginUI>
             await _controllerLogin.findDTOByIdToList(_tokenDetails.associatedId()).then(
                   (value) {
                 associated = value[0];
+                locator<AssociatedDTO>().name = associated.name;
+                print(associated.name);
+                print(locator<AssociatedDTO>().name);
               },
             );
             Navigator.pushReplacement(

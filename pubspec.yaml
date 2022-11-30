@@ -43,7 +43,7 @@ dependencies:
   flutter_native_splash: ^2.1.6
   circular_countdown_timer: ^0.2.0
 
-  provider: any
+  get_it: any
 
 flutter_icons:
   image_path: "assets/icons/logo.png"

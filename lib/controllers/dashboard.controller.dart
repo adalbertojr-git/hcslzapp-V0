@@ -67,7 +67,7 @@ abstract class DashboardControllerBase with Store {
 
   loadPaymentAssociatedPage(BuildContext context,
       bool isAdmin,
-      Associated associated,) async {
+      AssociatedDTO associated,) async {
     await Navigator.push(
       context,
       MaterialPageRoute(
@@ -78,7 +78,7 @@ abstract class DashboardControllerBase with Store {
   }
 
   loadDigitalIdentityPage(BuildContext context,
-      Associated associated,) async {
+      AssociatedDTO associated,) async {
     await Navigator.push(
       context,
       MaterialPageRoute(

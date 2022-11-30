@@ -1,8 +1,10 @@
+import 'package:flutter/foundation.dart';
+
 import 'dependent.dart';
 import 'motorcycle.dart';
 import 'authenticate.dart';
 
-class Associated {
+class Associated extends ChangeNotifier {
   final int id;
   String name;
   String email;

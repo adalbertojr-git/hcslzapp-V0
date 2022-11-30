@@ -269,13 +269,13 @@ mixin _$PaymentAddController on PaymentAddControllerBase, Store {
       Atom(name: 'PaymentAddControllerBase.associated', context: context);
 
   @override
-  Associated get associated {
+  AssociatedDTO get associated {
     _$associatedAtom.reportRead();
     return super.associated;
   }
 
   @override
-  set associated(Associated value) {
+  set associated(AssociatedDTO value) {
     _$associatedAtom.reportWrite(value, super.associated, () {
       super.associated = value;
     });
