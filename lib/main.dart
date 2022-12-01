@@ -18,11 +18,9 @@ void main() async {
 
 class HCSlzApp extends StatelessWidget {
   @override
-  Widget build(BuildContext context) {
-    return AnimatedBuilder(
-      animation: AppController.instance,
-      builder: (context, child) {
-        return MaterialApp(
+  Widget build(BuildContext context) => AnimatedBuilder(
+        animation: AppController.instance,
+        builder: (context, child) => MaterialApp(
           localizationsDelegates: [
             GlobalMaterialLocalizations.delegate,
             GlobalWidgetsLocalizations.delegate,
@@ -53,8 +51,6 @@ class HCSlzApp extends StatelessWidget {
                 ? Brightness.dark
                 : Brightness.light,
           ),
-        );
-      },
-    );
-  }
+        ),
+      );
 }
