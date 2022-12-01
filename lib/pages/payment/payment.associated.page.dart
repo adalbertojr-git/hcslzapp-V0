@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:hcslzapp/common/associated.profiles.dart';
@@ -109,7 +111,7 @@ class _PaymentAssociatedPageState extends State<PaymentAssociatedPage> {
         floatingActionButton: widget._selectedProfile == ADMIN
             ? Observer(
                 builder: (_) => _controller.isHidedButton
-                    ? Container()
+                    ? SizedBox()
                     : Button(
                         icon: Icons.add,
                         onClick: () {
@@ -117,7 +119,7 @@ class _PaymentAssociatedPageState extends State<PaymentAssociatedPage> {
                         },
                       ),
               )
-            : Container(),
+            : SizedBox(),
       );
 
   _add(BuildContext context) {
@@ -140,53 +142,53 @@ class _PaymentAssociatedPageState extends State<PaymentAssociatedPage> {
   }
 
   _widgets() => Center(
-    child: ListView(
-      children: [
-        SizedBox(height: 10),
-        Observer(
-          builder: (_) => ListView.separated(
-            padding: EdgeInsets.symmetric(horizontal: 15),
-            shrinkWrap: true,
-            itemCount: _controller.payments.length,
-            itemBuilder: (_, int i) {
-              return Container(
-                decoration: BoxDecoration(
-                  color: Colors.deepOrange[300],
-                  shape: BoxShape.rectangle,
-                  borderRadius: BorderRadius.circular(20.0),
-                ),
-                child: ListTile(
-                  title: Text(
-                    'Ano: ' + _controller.payments[i].year,
-                    style: TextStyle(
-                      fontWeight: FontWeight.bold,
+        child: ListView(
+          children: [
+            SizedBox(height: 10),
+            Observer(
+              builder: (_) => ListView.separated(
+                padding: EdgeInsets.symmetric(horizontal: 15),
+                shrinkWrap: true,
+                itemCount: _controller.payments.length,
+                itemBuilder: (_, int i) {
+                  return Container(
+                    decoration: BoxDecoration(
+                      color: Colors.deepOrange[300],
+                      shape: BoxShape.rectangle,
+                      borderRadius: BorderRadius.circular(20.0),
                     ),
-                  ),
-                  subtitle: Text('Total pago: R\$ ' +
-                      _controller
-                          .getTotal(_controller.payments[i].year)
-                          .toString()),
-                  leading: CircleAvatar(
-                    child: Icon(Icons.calendar_today),
-                    backgroundColor: Colors.white,
-                  ),
-                  trailing: widget._selectedProfile == ADMIN
-                      ? Wrap(
-                          spacing: 10, // space between two icons
-                          children: <Widget>[
-                            GestureDetector(
-                              child: Icon(
-                                Icons.delete,
-                              ),
-                              onTap: () {
-                                _delete(i);
-                              },
-                            ),
-                            GestureDetector(
-                              child: Icon(
-                                Icons.arrow_forward,
-                              ),
-                              onTap: () {
+                    child: ListTile(
+                      title: Text(
+                        'Ano: ' + _controller.payments[i].year,
+                        style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                      subtitle: Text('Total pago: R\$ ' +
+                          _controller
+                              .getTotal(_controller.payments[i].year)
+                              .toString()),
+                      leading: CircleAvatar(
+                        child: Icon(Icons.calendar_today),
+                        backgroundColor: Colors.white,
+                      ),
+                      trailing: widget._selectedProfile == ADMIN
+                          ? Wrap(
+                              spacing: 10, // space between two icons
+                              children: <Widget>[
+                                GestureDetector(
+                                  child: Icon(
+                                    Icons.delete,
+                                  ),
+                                  onTap: () {
+                                    _delete(i);
+                                  },
+                                ),
+                                GestureDetector(
+                                  child: Icon(
+                                    Icons.arrow_forward,
+                                  ),
+                                  onTap: () {
 /*                                      final Future future = Navigator.push(
                                   context,
                                   MaterialPageRoute(
@@ -207,15 +209,15 @@ class _PaymentAssociatedPageState extends State<PaymentAssociatedPage> {
                                     }
                                   },
                                 );*/
-                              },
-                            ),
-                          ],
-                        )
-                      : GestureDetector(
-                          child: Icon(
-                            Icons.arrow_forward,
-                          ),
-                          onTap: () {
+                                  },
+                                ),
+                              ],
+                            )
+                          : GestureDetector(
+                              child: Icon(
+                                Icons.arrow_forward,
+                              ),
+                              onTap: () {
 /*                                  Navigator.push(
                               context,
                               MaterialPageRoute(
@@ -226,17 +228,17 @@ class _PaymentAssociatedPageState extends State<PaymentAssociatedPage> {
                                     _associated),
                               ),
                             );*/
-                          },
-                        ),
-                ),
-              );
-            },
-            separatorBuilder: (_, int index) => const Divider(),
-          ),
+                              },
+                            ),
+                    ),
+                  );
+                },
+                separatorBuilder: (_, int index) => const Divider(),
+              ),
+            ),
+          ],
         ),
-      ],
-    ),
-  );
+      );
 
   _delete(int i) async {
     var response = await showDialog(
