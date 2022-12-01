@@ -186,22 +186,6 @@ mixin _$AssociatedUpdateController on AssociatedUpdateControllerBase, Store {
     });
   }
 
-  late final _$isHidedButtonAtom = Atom(
-      name: 'AssociatedUpdateControllerBase.isHidedButton', context: context);
-
-  @override
-  bool get isHidedButton {
-    _$isHidedButtonAtom.reportRead();
-    return super.isHidedButton;
-  }
-
-  @override
-  set isHidedButton(bool value) {
-    _$isHidedButtonAtom.reportWrite(value, super.isHidedButton, () {
-      super.isHidedButton = value;
-    });
-  }
-
   late final _$dependentsAtom =
       Atom(name: 'AssociatedUpdateControllerBase.dependents', context: context);
 
@@ -346,22 +330,6 @@ mixin _$AssociatedUpdateController on AssociatedUpdateControllerBase, Store {
     });
   }
 
-  late final _$futureAtom =
-      Atom(name: 'AssociatedUpdateControllerBase.future', context: context);
-
-  @override
-  Future<List<Associated>> get future {
-    _$futureAtom.reportRead();
-    return super.future;
-  }
-
-  @override
-  set future(Future<List<Associated>> value) {
-    _$futureAtom.reportWrite(value, super.future, () {
-      super.future = value;
-    });
-  }
-
   late final _$currentBloodTypeAtom = Atom(
       name: 'AssociatedUpdateControllerBase.currentBloodType',
       context: context);
@@ -441,32 +409,6 @@ mixin _$AssociatedUpdateController on AssociatedUpdateControllerBase, Store {
         .run(() => super.getImageFromGallery());
   }
 
-  late final _$AssociatedUpdateControllerBaseActionController =
-      ActionController(
-          name: 'AssociatedUpdateControllerBase', context: context);
-
-  @override
-  bool setButtonVisibilty() {
-    final _$actionInfo = _$AssociatedUpdateControllerBaseActionController
-        .startAction(name: 'AssociatedUpdateControllerBase.setButtonVisibilty');
-    try {
-      return super.setButtonVisibilty();
-    } finally {
-      _$AssociatedUpdateControllerBaseActionController.endAction(_$actionInfo);
-    }
-  }
-
-  @override
-  Future<List<Associated>> findByIdToList(int id) {
-    final _$actionInfo = _$AssociatedUpdateControllerBaseActionController
-        .startAction(name: 'AssociatedUpdateControllerBase.findByIdToList');
-    try {
-      return super.findByIdToList(id);
-    } finally {
-      _$AssociatedUpdateControllerBaseActionController.endAction(_$actionInfo);
-    }
-  }
-
   @override
   String toString() {
     return '''
@@ -481,7 +423,6 @@ cpfCtrl: ${cpfCtrl},
 dateBirthCtrl: ${dateBirthCtrl},
 dateShieldCtrl: ${dateShieldCtrl},
 statusCtrl: ${statusCtrl},
-isHidedButton: ${isHidedButton},
 dependents: ${dependents},
 motorcycles: ${motorcycles},
 photoPath: ${photoPath},
@@ -490,7 +431,6 @@ photo: ${photo},
 changedPhoto: ${changedPhoto},
 associated: ${associated},
 errorMsg: ${errorMsg},
-future: ${future},
 currentBloodType: ${currentBloodType},
 currentAssociatedType: ${currentAssociatedType},
 currentStatus: ${currentStatus}

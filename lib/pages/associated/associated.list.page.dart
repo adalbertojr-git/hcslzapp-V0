@@ -122,7 +122,7 @@ class AssociatedListPage extends StatelessWidget {
                                 MaterialPageRoute(
                                   builder: (context) => AssociatedUpdatePage(
                                     ADMIN,
-                                    _controller.listFiltered[i].id,
+                                    //_controller.listFiltered[i].id,
                                   ),
                                 ),
                               );

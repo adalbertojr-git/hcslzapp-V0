@@ -29,20 +29,14 @@ const String _labelUnknown =
 const String _pathNoImage = 'assets/imgs/noImage.png';
 const String _title = 'Editar Associado';
 
-class AssociatedUpdatePage extends StatefulWidget {
+class AssociatedUpdatePage extends StatelessWidget {
   final String _selectedProfile;
-  final int _associatedId;
-
-  AssociatedUpdatePage(this._selectedProfile, this._associatedId);
-
-  @override
-  _AssociatedUpdatePageState createState() => _AssociatedUpdatePageState();
-}
-
-class _AssociatedUpdatePageState extends State<AssociatedUpdatePage> {
+  final Associated _associated = locator.get<Associated>();
   final AssociatedUpdateController _controller = AssociatedUpdateController();
 
-  @override
+  AssociatedUpdatePage(this._selectedProfile); //, this._associatedId);
+
+/*  @override
   void initState() {
     _controller.getFuture(widget._associatedId).then((value) {
       if (value.isNotEmpty) {
@@ -50,10 +44,25 @@ class _AssociatedUpdatePageState extends State<AssociatedUpdatePage> {
       }
     });
     super.initState();
+  }*/
+  @override
+  Widget build(BuildContext context) {
+    _controller.associated = _associated;
+    _controller.init();
+    return Scaffold(
+      appBar: MyAppBar(_title),
+      bottomNavigationBar: MyBottomAppBar(),
+      body: _widgets(context),
+      floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
+      floatingActionButton: Button(
+        icon: Icons.save,
+        onClick: () => _update(context),
+      ),
+    );
   }
 
-  @override
-  Widget build(BuildContext context) => Observer(
+/*  @override
+  Widget builds(BuildContext context) => Observer(
         builder: (_) => Scaffold(
           appBar: MyAppBar(_title),
           bottomNavigationBar: MyBottomAppBar(),
@@ -100,8 +109,7 @@ class _AssociatedUpdatePageState extends State<AssociatedUpdatePage> {
               ? null
               : Button(icon: Icons.save, onClick: () => _update()),
         ),
-      );
-
+      );*/
   _widgets(BuildContext context) => ListView(
         children: <Widget>[
           SizedBox(
@@ -232,7 +240,7 @@ class _AssociatedUpdatePageState extends State<AssociatedUpdatePage> {
                 Expanded(
                   child: Container(
                     height: 55.0,
-                    child: widget._selectedProfile == ADMIN
+                    child: _selectedProfile == ADMIN
                         ? DropdownButtonFormField(
                             decoration: const InputDecoration(
                               enabledBorder: OutlineInputBorder(
@@ -283,15 +291,15 @@ class _AssociatedUpdatePageState extends State<AssociatedUpdatePage> {
             ],
           ),
           Divider(),
-          _dependentsListWidget(),
+          _dependentsListWidget(context),
           SizedBox(
             height: 10.0,
           ),
-          _motorcyclesListWidget(),
+          _motorcyclesListWidget(context),
           SizedBox(
             height: 10.0,
           ),
-          widget._selectedProfile == ADMIN
+          _selectedProfile == ADMIN
               ? Container(
                   child: Padding(
                     padding: const EdgeInsets.fromLTRB(0.0, 3.0, 2.0, 3.0),
@@ -368,7 +376,7 @@ class _AssociatedUpdatePageState extends State<AssociatedUpdatePage> {
                 ) as ImageProvider,
       fit: BoxFit.fill);
 
-  _dependentsListWidget() => Column(
+  _dependentsListWidget(BuildContext context) => Column(
         children: [
           const Text(
             'Dependentes',
@@ -471,7 +479,7 @@ class _AssociatedUpdatePageState extends State<AssociatedUpdatePage> {
         ],
       );
 
-  _motorcyclesListWidget() => Column(
+  _motorcyclesListWidget(BuildContext context) => Column(
         children: [
           const Text(
             'Motocicletas',
@@ -575,7 +583,7 @@ class _AssociatedUpdatePageState extends State<AssociatedUpdatePage> {
         ],
       );
 
-  _update() async {
+  _update(BuildContext context) async {
     if (_controller.hasErrors) {
       AsukaSnackbar.alert('Corrija os erros informados').show();
     } else {
@@ -592,7 +600,7 @@ class _AssociatedUpdatePageState extends State<AssociatedUpdatePage> {
             });
       }
       if (response == true) {
-        _controller.update(_controller.associated).then(
+        _controller.update(_associated).then(
           (value) {
             if (value != null) {
               AsukaSnackbar.success('Associado atualizado com sucesso').show();
