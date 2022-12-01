@@ -8,10 +8,6 @@ import '../../common/token.details.dart';
 import '../../components/degradee.background.dart';
 import '../../components/my.text.form.field.dart';
 import '../../controllers/login.controller.dart';
-import '../../models/associated.dart';
-import '../../models/associated.dto.dart';
-import '../../models/template.dart';
-import '../../models/token.dart';
 import '../access.request/access.request.add.page.dart';
 import '../dashboard/dashboard.page.dart';
 import '../password/forgot.password.page.dart';
@@ -229,30 +225,20 @@ class _MyCustomLoginUIState extends State<MyCustomLoginUI>
           if (value == null) {
             AsukaSnackbar.alert(_controllerLogin.errorMsg).show();
           } else {
-            //Token _token = value;
             debugPrint(value.token);
             loadTokenSingleton(value);
-            //AssociatedDTO associated = Template().loadAssociatedDTO();
-            //Associated associated = Template().loadAssociated();
-            //_controllerLogin.setTokenToDevice(_t.token);
-/*            _controllerLogin
-                .setUserToDevice(_controllerLogin.userLoginCtrl.text);*/
             TokenDetails _tokenDetails = TokenDetails(value.token);
             await _controllerLogin
                 .findByIdToList(_tokenDetails.associatedId())
                 .then(
               (value) {
                 loadAssociatedSingleton(value[0]);
-
                 Navigator.pushReplacement(
                   context,
                   MaterialPageRoute(
-                    builder: (context) => DashboardPage(
-                        //associated,
-                        ),
+                    builder: (context) => DashboardPage(),
                   ),
                 );
-
                 //associated = value[0];
               },
             );

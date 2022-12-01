@@ -138,87 +138,6 @@ mixin _$DigitalIdentityController on DigitalIdentityControllerBase, Store {
     });
   }
 
-  late final _$digitalIdentityAtom = Atom(
-      name: 'DigitalIdentityControllerBase.digitalIdentity', context: context);
-
-  @override
-  DigitalIdentity get digitalIdentity {
-    _$digitalIdentityAtom.reportRead();
-    return super.digitalIdentity;
-  }
-
-  @override
-  set digitalIdentity(DigitalIdentity value) {
-    _$digitalIdentityAtom.reportWrite(value, super.digitalIdentity, () {
-      super.digitalIdentity = value;
-    });
-  }
-
-  late final _$_digitalIdentityRepoAtom = Atom(
-      name: 'DigitalIdentityControllerBase._digitalIdentityRepo',
-      context: context);
-
-  @override
-  DigitalIdentityRepo get _digitalIdentityRepo {
-    _$_digitalIdentityRepoAtom.reportRead();
-    return super._digitalIdentityRepo;
-  }
-
-  @override
-  set _digitalIdentityRepo(DigitalIdentityRepo value) {
-    _$_digitalIdentityRepoAtom.reportWrite(value, super._digitalIdentityRepo,
-        () {
-      super._digitalIdentityRepo = value;
-    });
-  }
-
-  late final _$futureAtom =
-      Atom(name: 'DigitalIdentityControllerBase.future', context: context);
-
-  @override
-  Future<List<DigitalIdentity>> get future {
-    _$futureAtom.reportRead();
-    return super.future;
-  }
-
-  @override
-  set future(Future<List<DigitalIdentity>> value) {
-    _$futureAtom.reportWrite(value, super.future, () {
-      super.future = value;
-    });
-  }
-
-  late final _$errorMsgAtom =
-      Atom(name: 'DigitalIdentityControllerBase.errorMsg', context: context);
-
-  @override
-  String get errorMsg {
-    _$errorMsgAtom.reportRead();
-    return super.errorMsg;
-  }
-
-  @override
-  set errorMsg(String value) {
-    _$errorMsgAtom.reportWrite(value, super.errorMsg, () {
-      super.errorMsg = value;
-    });
-  }
-
-  late final _$DigitalIdentityControllerBaseActionController =
-      ActionController(name: 'DigitalIdentityControllerBase', context: context);
-
-  @override
-  Future<List<DigitalIdentity>> findAssociatedByIdToList(int id) {
-    final _$actionInfo =
-        _$DigitalIdentityControllerBaseActionController.startAction(
-            name: 'DigitalIdentityControllerBase.findAssociatedByIdToList');
-    try {
-      return super.findAssociatedByIdToList(id);
-    } finally {
-      _$DigitalIdentityControllerBaseActionController.endAction(_$actionInfo);
-    }
-  }
-
   @override
   String toString() {
     return '''
@@ -229,10 +148,7 @@ cpfCtrl: ${cpfCtrl},
 dateBirthCtrl: ${dateBirthCtrl},
 dateShieldCtrl: ${dateShieldCtrl},
 bloodTypeCtrl: ${bloodTypeCtrl},
-dueDateCtrl: ${dueDateCtrl},
-digitalIdentity: ${digitalIdentity},
-future: ${future},
-errorMsg: ${errorMsg}
+dueDateCtrl: ${dueDateCtrl}
     ''';
   }
 }

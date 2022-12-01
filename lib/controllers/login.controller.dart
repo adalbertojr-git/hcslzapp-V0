@@ -1,6 +1,5 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
-import 'package:glutton/glutton.dart';
 import 'package:hcslzapp/http/http.exception.dart';
 import '../models/associated.dart';
 import '../models/token.dart';
@@ -49,15 +48,6 @@ abstract class LoginControllerBase with Store {
         errorMsg = "$e";
       }, test: (e) => e is Exception);
 
-/*  @action
-  Future<List<AssociatedDTO>> findDTOByIdToList(int id) => ObservableFuture(
-              _associatedRepo.findDTOByIdToList(id).then((value) => value))
-          .catchError((e) {
-        errorMsg = "${e.message}";
-      }, test: (e) => e is HttpException).catchError((e) {
-        errorMsg = "$e";
-      }, test: (e) => e is Exception);*/
-
   @action
   Future<List<Associated>> findByIdToList(int id) => ObservableFuture(
               _associatedRepo.findByIdToList(id).then((value) => value))
@@ -66,18 +56,6 @@ abstract class LoginControllerBase with Store {
       }, test: (e) => e is HttpException).catchError((e) {
         errorMsg = "$e";
       }, test: (e) => e is Exception);
-
-/*
-  Future setTokenToDevice(String token) async {
-    const String _labelToken = 'token';
-    await Glutton.eat(_labelToken, token);
-  }
-*/
-
-/*  Future setUserToDevice(String user) async {
-    const String _labelUser = 'user';
-    await Glutton.eat(_labelUser, user);
-  }*/
 
   bool get hasErrors => hasErrorUser || hasErrorPassword;
 

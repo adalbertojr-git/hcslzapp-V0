@@ -3,21 +3,13 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:hcslzapp/common/labels.and.hints.dart';
 import 'package:hcslzapp/common/photo.image.provider.dart';
-import 'package:hcslzapp/components/centered.message.dart';
 import 'package:hcslzapp/components/my.text.form.field.dart';
-import 'package:hcslzapp/components/progress.dart';
 import 'package:hcslzapp/controllers/digital.identity.controller.dart';
 import 'package:hcslzapp/models/associated.dart';
-import 'package:hcslzapp/models/digital.identity.dart';
 import '../../common/injection.dart';
 import '../../components/degradee.background.dart';
 import '../../components/my.appbar.dart';
-import '../../models/associated.dto.dart';
 
-const String _labelNotExists =
-    'Dados do associado especificado não foram encontrados.';
-const String _labelUnknown =
-    'Houve um erro desconhecido ao executar a transação.';
 const String _pathIdentity = 'assets/imgs/logo_carteirad.png';
 const String _pathNoImage = 'assets/imgs/noImage.png';
 const String _title = 'Carteira Harley Club';
@@ -27,8 +19,6 @@ class DigitalIdentityPage extends StatelessWidget {
   final DigitalIdentityController _controller = DigitalIdentityController();
   final double _fontSize = 14.0;
 
-  //DigitalIdentityPage(this._associated);
-
   @override
   Widget build(BuildContext context) {
     _controller.init(_associated);
@@ -37,48 +27,6 @@ class DigitalIdentityPage extends StatelessWidget {
       body: _widgets(),
     );
   }
-
-/*  @override
-  Widget build2(BuildContext context) => Scaffold(
-        appBar: MyAppBar(_title),
-        body: FutureBuilder<List<DigitalIdentity>>(
-          future: _controller.getFuture(_associated.id),
-          builder: (context, snapshot) {
-            switch (snapshot.connectionState) {
-              case ConnectionState.none:
-                break;
-              case ConnectionState.waiting:
-                return Progress();
-              case ConnectionState.active:
-                break;
-              default:
-                if (snapshot.hasError) {
-                  return CenteredMessage(
-                      title: _title, message: snapshot.error.toString());
-                } else {
-                  if (snapshot.data == null)
-                    return CenteredMessage(
-                      title: _title,
-                      message: _controller.errorMsg,
-                    );
-                  if ((snapshot.data?.length)! > 0) {
-                    _controller.digitalIdentity = (snapshot.data?.first)!;
-                    _controller.init2();
-                    return _widgets();
-                  } else
-                    return CenteredMessage(
-                      title: _title,
-                      message: _labelNotExists,
-                    );
-                }
-            } //switch (snapshot.connectionState)
-            return CenteredMessage(
-              title: _title,
-              message: _labelUnknown,
-            );
-          },
-        ),
-      );*/
 
   _widgets() => DegradeBackground(
         Center(

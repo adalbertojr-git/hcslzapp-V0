@@ -21,10 +21,7 @@ import 'package:hcslzapp/controllers/dashboard.controller.dart';
 import 'package:hcslzapp/models/associated.dart';
 import 'package:hcslzapp/pages/access.request/access.request.list.page.dart';
 import 'package:hcslzapp/pages/associated/associated.list.page.dart';
-
 import '../../common/injection.dart';
-import '../../controllers/login.controller.dart';
-import '../../models/associated.dto.dart';
 
 const String _labelAppTitle = 'HCSlz App';
 const String _labelTheme = 'Alterar Tema';
@@ -90,10 +87,6 @@ const List<IconData> _listAdmIcons = [
 ];
 
 class DashboardPage extends StatefulWidget {
-/*  final AssociatedDTO _associated;
-
-  DashboardPage(this._associated);*/
-
   @override
   _DashboardPageState createState() => _DashboardPageState();
 }
@@ -108,8 +101,6 @@ class _DashboardPageState extends State<DashboardPage> {
   void initState() {
     super.initState();
     _associated = locator.get<Associated>();
-/*    print(_associated.id);
-    print(_associated.name);*/
     _controller = DashboardController(
       associated: _associated,
       photoUrl: _associated.photoUrl,
@@ -197,7 +188,8 @@ class _DashboardPageState extends State<DashboardPage> {
                         Navigator.of(context).pushAndRemoveUntil(
                           // the new route
                           MaterialPageRoute(
-                            builder: (BuildContext context) => MyCustomLoginUI(),
+                            builder: (BuildContext context) =>
+                                MyCustomLoginUI(),
                           ),
 
                           // this function should return true when we're done removing routes
