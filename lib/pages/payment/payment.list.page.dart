@@ -151,12 +151,11 @@ class _PaymentListPageState extends State<PaymentListPage> {
                               Icons.arrow_forward,
                             ),
                             onTap: () {
-                                Navigator.push(
+                              Navigator.push(
                                 context,
                                 MaterialPageRoute(
                                   builder: (context) => PaymentAssociatedPage(
                                     widget._selectedProfile,
-                                    _controller.listFiltered[i],
                                   ),
                                 ),
                               );

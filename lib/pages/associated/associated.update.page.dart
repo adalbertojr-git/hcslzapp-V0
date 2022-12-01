@@ -7,11 +7,9 @@ import '../../common/associated.profiles.dart';
 import '../../common/labels.and.hints.dart';
 import '../../common/photo.image.provider.dart';
 import '../../components/button.dart';
-import '../../components/centered.message.dart';
 import '../../components/my.appbar.dart';
 import '../../components/my.bottom.appbar.dart';
 import '../../components/my.text.form.field.dart';
-import '../../components/progress.dart';
 import '../../components/transaction.auth.dialog.dart';
 import '../../controllers/associated.update.controller.dart';
 import '../../enums/associated.status.dart';
@@ -22,10 +20,6 @@ import '../dependent/dependent.add.page.dart';
 import '../motorcycle/motorcycle.add.page.dart';
 import 'package:mask_text_input_formatter/mask_text_input_formatter.dart';
 
-const String _labelNotExists =
-    'Dados do associado especificado não foram encontrados.';
-const String _labelUnknown =
-    'Houve um erro desconhecido ao executar a transação.';
 const String _pathNoImage = 'assets/imgs/noImage.png';
 const String _title = 'Editar Associado';
 
@@ -34,17 +28,8 @@ class AssociatedUpdatePage extends StatelessWidget {
   final Associated _associated = locator.get<Associated>();
   final AssociatedUpdateController _controller = AssociatedUpdateController();
 
-  AssociatedUpdatePage(this._selectedProfile); //, this._associatedId);
+  AssociatedUpdatePage(this._selectedProfile);
 
-/*  @override
-  void initState() {
-    _controller.getFuture(widget._associatedId).then((value) {
-      if (value.isNotEmpty) {
-        _controller.setButtonVisibilty();
-      }
-    });
-    super.initState();
-  }*/
   @override
   Widget build(BuildContext context) {
     _controller.associated = _associated;
@@ -61,55 +46,6 @@ class AssociatedUpdatePage extends StatelessWidget {
     );
   }
 
-/*  @override
-  Widget builds(BuildContext context) => Observer(
-        builder: (_) => Scaffold(
-          appBar: MyAppBar(_title),
-          bottomNavigationBar: MyBottomAppBar(),
-          body: FutureBuilder<List<Associated>>(
-            future: _controller.future,
-            builder: (context, snapshot) {
-              switch (snapshot.connectionState) {
-                case ConnectionState.none:
-                  break;
-                case ConnectionState.waiting:
-                  return Progress();
-                case ConnectionState.active:
-                  break;
-                default:
-                  if (snapshot.hasError) {
-                    return CenteredMessage(
-                        title: _title, message: snapshot.error.toString());
-                  } else {
-                    if (snapshot.data == null)
-                      return CenteredMessage(
-                        title: _title,
-                        message: _controller.errorMsg,
-                      );
-                    if ((snapshot.data?.length)! > 0) {
-                      _controller.associated = (snapshot.data?.first)!;
-                      _controller.init();
-                      return _widgets(context);
-                    } else
-                      return CenteredMessage(
-                        title: _title,
-                        message: _labelNotExists,
-                      );
-                  }
-              } //switch (snapshot.connectionState)
-              return CenteredMessage(
-                title: _title,
-                message: _labelUnknown,
-              );
-            },
-          ),
-          floatingActionButtonLocation:
-              FloatingActionButtonLocation.centerDocked,
-          floatingActionButton: _controller.isHidedButton
-              ? null
-              : Button(icon: Icons.save, onClick: () => _update()),
-        ),
-      );*/
   _widgets(BuildContext context) => ListView(
         children: <Widget>[
           SizedBox(

@@ -518,7 +518,7 @@ class _DashboardPageState extends State<DashboardPage> {
                     );
                   },
                 ),
-/*                GridButton(
+                GridButton(
                   title: _labelPayment,
                   image: _pathPaymentImage,
                   context: _gContext,
@@ -526,10 +526,9 @@ class _DashboardPageState extends State<DashboardPage> {
                     _controller.loadPaymentAssociatedPage(
                       _gContext,
                       _controller.isAdmin(),
-                      _associated,
                     );
                   },
-                ),*/
+                ),
                 GridButton(
                   title: _labelDigitalIdentity,
                   image: _pathDigitalIdentityImage,

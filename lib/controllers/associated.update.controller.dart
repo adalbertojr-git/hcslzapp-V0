@@ -51,9 +51,6 @@ abstract class AssociatedUpdateControllerBase with Store {
   @observable
   var statusCtrl = TextEditingController();
 
-/*  @observable
-  bool isHidedButton = true;*/
-
   @observable
   ObservableList dependents = [].asObservable();
 
@@ -80,9 +77,6 @@ abstract class AssociatedUpdateControllerBase with Store {
 
   @observable
   String errorMsg = "";
-
-/*  @observable
-  Future<List<Associated>> future = Future<List<Associated>>.value([]);*/
 
   @observable
   String currentBloodType = "";
@@ -122,56 +116,11 @@ abstract class AssociatedUpdateControllerBase with Store {
     );
   }
 
-/*  inits() async {
-    _initLists();
-    _initTextFields();
-    currentBloodType = associated.bloodType;
-    currentAssociatedType = associated.associatedType;
-    currentStatus = associated.status;
-    photoUrl = associated.photoUrl;
-    formController = FormController(
-      name: associated.name,
-      email: associated.email,
-    );
-  }
-
-  _initLists() {
-    dependents.clear();
-    motorcycles.clear();
-    dependents.addAll(associated.dependents);
-    motorcycles.addAll(associated.motorcycles);
-  }
-
-  _initTextFields() {
-    nameCtrl.text = associated.name;
-    emailCtrl.text = associated.email;
-    phoneCtrl.text = associated.phone;
-    sponsorCtrl.text = associated.sponsor;
-    cnhCtrl.text = associated.cnh;
-    cpfCtrl.text = associated.cpf;
-    associatedTypeCtrl.text = associated.associatedType;
-    dateBirthCtrl.text = associated.dateBirth;
-    dateShieldCtrl.text = associated.dateShield;
-    statusCtrl.text = associated.status;
-  }*/
-
-/*  @action
-  bool setButtonVisibiltys() => isHidedButton = !isHidedButton;*/
-
   bool get hasErrors => hasErrorName || hasErrorEmail;
 
   bool get hasErrorName => validateName() != null;
 
   bool get hasErrorEmail => validateEmail() != null;
-
-/*  @action
-  Future<List<Associated>> findByIdToList(int id) => ObservableFuture(
-              _associatedRepo.findByIdToList(id).then((value) => value))
-          .catchError((e) {
-        errorMsg = "${e.message}";
-      }, test: (e) => e is HttpException).catchError((e) {
-        errorMsg = "$e";
-      }, test: (e) => e is Exception);*/
 
   @action
   Future update(Associated associated) async =>
@@ -180,11 +129,6 @@ abstract class AssociatedUpdateControllerBase with Store {
       }, test: (e) => e is HttpException).catchError((e) {
         errorMsg = "$e";
       }, test: (e) => e is Exception);
-
-/*
-  Future<List<Associated>> getFuture(int _associatedId) =>
-      future = findByIdToList(_associatedId);
-*/
 
   Future<Associated> _setValues() async {
     associated.name = nameCtrl.text;
