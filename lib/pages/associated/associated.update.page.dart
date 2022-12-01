@@ -2,6 +2,7 @@ import 'dart:io';
 import 'package:asuka/snackbars/asuka_snack_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
+import 'package:hcslzapp/common/injection.dart';
 import '../../common/associated.profiles.dart';
 import '../../common/labels.and.hints.dart';
 import '../../common/photo.image.provider.dart';
@@ -596,6 +597,7 @@ class _AssociatedUpdatePageState extends State<AssociatedUpdatePage> {
             if (value != null) {
               AsukaSnackbar.success('Associado atualizado com sucesso').show();
               Navigator.of(context).pop(_controller.associated.photoUrl);
+              loadAssociatedSingleton(value);
             } else {
               AsukaSnackbar.alert(_controller.errorMsg).show();
             }

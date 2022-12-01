@@ -5,7 +5,7 @@ import '../models/token.dart';
 
 final locator = GetIt.instance;
 
-void setupLocator() {
+setupLocator() {
   locator.registerLazySingleton<Associated>(() => Template().loadAssociated());
   locator.registerLazySingleton<Token>(() => Token(token: ''));
 }
