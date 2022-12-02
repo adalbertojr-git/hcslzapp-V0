@@ -143,16 +143,9 @@ class CheckboxWidget extends StatelessWidget {
   Widget build(BuildContext context) => Observer(
         builder: (_) => Container(
           decoration: BoxDecoration(
-            color: Colors.white30,
+            color: Colors.deepOrange[300],
             shape: BoxShape.rectangle,
-            borderRadius: BorderRadius.circular(8.0),
-            boxShadow: <BoxShadow>[
-              BoxShadow(
-                color: Colors.black12,
-                blurRadius: 10.0,
-                offset: Offset(0.0, 5.0),
-              ),
-            ],
+            borderRadius: BorderRadius.circular(20.0),
           ),
           child: CheckboxListTile(
             controlAffinity: ListTileControlAffinity.leading,
