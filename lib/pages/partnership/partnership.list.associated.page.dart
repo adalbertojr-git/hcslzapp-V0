@@ -4,11 +4,9 @@ import 'package:hcslzapp/common/photo.image.provider.dart';
 import 'package:hcslzapp/components/centered.message.dart';
 import 'package:hcslzapp/components/progress.dart';
 import 'dart:math';
-import 'package:hcslzapp/components/top.bar.dart';
 import 'package:hcslzapp/controllers/partnership.list.controller.dart';
 import 'package:hcslzapp/models/partnership.dart';
 import 'dart:io';
-
 import '../../components/my.appbar.dart';
 import '../../components/my.bottom.appbar.dart';
 
@@ -32,8 +30,8 @@ class PartnershipListAssociatedPage extends StatefulWidget {
 
 class _PartnershipListAssociatedPageState
     extends State<PartnershipListAssociatedPage> {
-  PartnershipListController _controller = PartnershipListController();
-  double viewPortFraction = 0.5;
+  final PartnershipListController _controller = PartnershipListController();
+  final double viewPortFraction = 0.5;
 
   @override
   void initState() {
