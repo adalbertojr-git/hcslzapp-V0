@@ -177,19 +177,34 @@ class _PartnershipListAssociatedPageState
   Widget buildDetail() => Observer(
         builder: (_) => Container(
           height: MediaQuery.of(context).size.height,
-          //color: Colors.deepOrange[300],
+          color: Colors.deepOrange[100],
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: <Widget>[
-              buildUserInfo(),
+              SizedBox(height: 10),
+              buildPartnerInfo(),
+              SizedBox(height: 20),
+              Center(
+                child: Text(
+                  'Oferta do Parceiro ao Harley Club:',
+                  style: TextStyle(
+                    fontSize: 17.0,
+                    color: Colors.black,
+                  ),
+                ),
+              ),
               Padding(
                 padding: EdgeInsets.symmetric(
-                  vertical: 15,
+                  vertical: 30,
                   horizontal: 15,
                 ),
                 child: Text(
                   _controller
                       .activePartnerships[_controller.currentPage].promotion,
+                  style: TextStyle(
+                    fontSize: 20.0,
+                    color: Colors.black,
+                  ),
                 ),
               ),
             ],
@@ -197,28 +212,40 @@ class _PartnershipListAssociatedPageState
         ),
       );
 
-  Widget buildUserInfo() => ListTile(
-        isThreeLine: true,
-        title: Text(
-          _controller.activePartnerships[_controller.currentPage].partner,
-        ),
-        subtitle: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Text(
-              'Endereço: ' +
-                  _controller
-                      .activePartnerships[_controller.currentPage].address,
+  Widget buildPartnerInfo() => Container(
+        color: Colors.white54,
+        child: ListTile(
+          isThreeLine: true,
+          title: Text(
+            _controller.activePartnerships[_controller.currentPage].partner,
+            style: TextStyle(
+              color: Colors.black,
             ),
-            Text(
-              'Telefone(s): ' +
-                  _controller
-                      .activePartnerships[_controller.currentPage].phone1 +
-                  ' - ' +
-                  _controller
-                      .activePartnerships[_controller.currentPage].phone2,
-            ),
-          ],
+          ),
+          subtitle: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(
+                'Endereço: ' +
+                    _controller
+                        .activePartnerships[_controller.currentPage].address,
+                style: TextStyle(
+                  color: Colors.black,
+                ),
+              ),
+              Text(
+                'Telefone(s): ' +
+                    _controller
+                        .activePartnerships[_controller.currentPage].phone1 +
+                    ' - ' +
+                    _controller
+                        .activePartnerships[_controller.currentPage].phone2,
+                style: TextStyle(
+                  color: Colors.black,
+                ),
+              ),
+            ],
+          ),
         ),
       );
 }
