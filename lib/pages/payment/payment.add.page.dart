@@ -8,10 +8,8 @@ import 'package:hcslzapp/components/my.text.form.field.dart';
 import 'package:hcslzapp/controllers/payment.add.controller.dart';
 import 'package:hcslzapp/models/payment.dart';
 import 'package:mask_text_input_formatter/mask_text_input_formatter.dart';
-import '../../common/injection.dart';
 import '../../components/my.appbar.dart';
 import '../../components/my.bottom.appbar.dart';
-import '../../models/associated.dart';
 
 const String _title = 'Adicionar Mensalidades';
 
@@ -33,12 +31,9 @@ class PaymentAddPage extends StatefulWidget {
 class _PaymentAddAddState extends State<PaymentAddPage> {
   final PaymentAddController _controller = PaymentAddController();
 
-  //final Associated _associated = locator.get<Associated>();
-
   @override
   void initState() {
     _controller.payment = widget._payment ?? _controller.payment;
-    //_controller.associated = _associated;
     _controller.init();
     _controller.setYears(widget._years);
     super.initState();

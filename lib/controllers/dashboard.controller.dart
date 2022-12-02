@@ -69,27 +69,16 @@ abstract class DashboardControllerBase with Store {
   loadPaymentAssociatedPage(
     BuildContext context,
     bool isAdmin,
-      Associated associated,
+    Associated associated,
   ) async {
     await Navigator.push(
       context,
       MaterialPageRoute(
-        builder: (context) => PaymentAssociatedPage(selectedProfile, associated),
+        builder: (context) =>
+            PaymentAssociatedPage(selectedProfile, associated),
       ),
     );
   }
-
-/*
-  loadDigitalIdentityPage(BuildContext context,
-      AssociatedDTO associated,) async {
-    await Navigator.push(
-      context,
-      MaterialPageRoute(
-        builder: (context) => DigitalIdentityPage(associated),
-      ),
-    );
-  }
-*/
 
   loadDigitalIdentityPage(BuildContext context) async {
     await Navigator.push(

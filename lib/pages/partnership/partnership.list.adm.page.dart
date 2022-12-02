@@ -10,15 +10,20 @@ import 'package:hcslzapp/models/partnership.dart';
 import 'package:hcslzapp/pages/partnership/partnership.add.page.dart';
 import 'package:asuka/asuka.dart' as asuka;
 
+import '../../components/my.appbar.dart';
+import '../../components/my.bottom.appbar.dart';
+
 const String _labelUnknown =
     'Houve um erro desconhecido ao executar a transação.';
 const String _title = 'Parcerias';
 
 class PartnershipListAdmPage extends StatelessWidget {
-  PartnershipListController _controller = PartnershipListController();
+  final PartnershipListController _controller = PartnershipListController();
 
   @override
   Widget build(BuildContext context) => Scaffold(
+        appBar: MyAppBar(_title),
+        bottomNavigationBar: MyBottomAppBar(),
         body: FutureBuilder<List<Partnership>>(
           future: _controller.getFuture(),
           builder: (context, snapshot) {
@@ -55,7 +60,7 @@ class PartnershipListAdmPage extends StatelessWidget {
             );
           },
         ),
-        floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
+        floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
         floatingActionButton: Button(
             icon: Icons.add,
             onClick: () {
@@ -74,93 +79,73 @@ class PartnershipListAdmPage extends StatelessWidget {
             }),
       );
 
-  _widgets(BuildContext context) => Container(
-        decoration: BoxDecoration(
-          gradient: LinearGradient(
-            colors: [Colors.white30, Colors.deepOrange],
-            begin: FractionalOffset.topLeft,
-            end: FractionalOffset.bottomRight,
+  _widgets(BuildContext context) => Center(
+    child: ListView(
+      children: [
+        Observer(
+          builder: (_) => ListView.separated(
+            padding: EdgeInsets.symmetric(horizontal: 15),
+            shrinkWrap: true,
+            itemCount: _controller.partnerships.length,
+            itemBuilder: (_, int i) {
+              return Container(
+                decoration: BoxDecoration(
+                  color: Colors.deepOrange[300],
+                  shape: BoxShape.rectangle,
+                  borderRadius: BorderRadius.circular(20.0),
+                ),
+                child: ListTile(
+                    title: Text(
+                      _controller.partnerships[i].partner,
+                      style: TextStyle(
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                    subtitle: Text(
+                        'Status: ' + _controller.partnerships[i].status),
+                    leading: CircleAvatar(
+                      child: Icon(Icons.emoji_people),
+                      backgroundColor: Colors.white,
+                    ),
+                    trailing: Wrap(
+                      spacing: 10,
+                      children: [
+                        GestureDetector(
+                          child: Icon(
+                            Icons.delete,
+                          ),
+                          onTap: () {
+                            _delete(context, i);
+                          },
+                        ),
+                        GestureDetector(
+                            child: Icon(Icons.arrow_forward),
+                            onTap: () {
+                              final Future future = Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) =>
+                                        PartnershipAddPage(
+                                            _controller.partnerships[i])),
+                              );
+                              future.then((partnership) {
+                                if (partnership != null) {
+                                  _controller.partnerships.removeAt(i);
+                                  _controller.partnerships
+                                      .insert(i, partnership);
+                                }
+                              });
+                            }),
+                      ],
+                    )),
+              );
+            },
+            separatorBuilder: (_, int index) => const Divider(),
           ),
         ),
-        height: MediaQuery.of(context).size.height,
-        child: Column(
-          children: [
-            TopBar(
-              title: _title,
-            ),
-            Expanded(
-              child: Observer(
-                builder: (_) => ListView.separated(
-                  shrinkWrap: true,
-                  itemCount: _controller.partnerships.length,
-                  itemBuilder: (_, int i) {
-                    return Container(
-                      decoration: BoxDecoration(
-                        color: Colors.white30,
-                        shape: BoxShape.rectangle,
-                        borderRadius: BorderRadius.circular(8.0),
-                        boxShadow: <BoxShadow>[
-                          BoxShadow(
-                            color: Colors.black12,
-                            blurRadius: 10.0,
-                            offset: Offset(0.0, 5.0),
-                          ),
-                        ],
-                      ),
-                      child: ListTile(
-                          title: Text(
-                            _controller.partnerships[i].partner,
-                            style: TextStyle(
-                              fontWeight: FontWeight.bold,
-                            ),
-                          ),
-                          subtitle: Text(
-                              'Status: ' + _controller.partnerships[i].status),
-                          leading: CircleAvatar(
-                            child: Icon(Icons.emoji_people),
-                            backgroundColor: Colors.white,
-                          ),
-                          trailing: Wrap(
-                            spacing: 10,
-                            children: [
-                              GestureDetector(
-                                child: Icon(
-                                  Icons.delete,
-                                ),
-                                onTap: () {
-                                  _delete(context, i);
-                                },
-                              ),
-                              GestureDetector(
-                                  child: Icon(Icons.arrow_forward),
-                                  onTap: () {
-                                    final Future future =
-                                        Navigator.push(
-                                      context,
-                                      MaterialPageRoute(
-                                          builder: (context) =>
-                                              PartnershipAddPage(
-                                                  _controller.partnerships[i])),
-                                    );
-                                    future.then((partnership) {
-                                      if (partnership != null) {
-                                        _controller.partnerships.removeAt(i);
-                                        _controller.partnerships
-                                            .insert(i, partnership);
-                                      }
-                                    });
-                                  }),
-                            ],
-                          )),
-                    );
-                  },
-                  separatorBuilder: (_, int index) => const Divider(),
-                ),
-              ),
-            ),
-          ],
-        ),
-      );
+      ],
+    ),
+  );
 
   _delete(BuildContext context, int i) async {
     var response = await showDialog(
