@@ -154,56 +154,48 @@ class _DashboardPageState extends State<DashboardPage> {
         centerTitle: true,
         toolbarHeight: 40.0,
         actions: <Widget>[
-          PopupMenuButton<String?>(
-            itemBuilder: (BuildContext context) {
-              return [
-                PopupMenuItem(
-                  child: ListTile(
-                    leading: Icon(
-                      AppController.instance.isDarkTheme
-                          ? Icons.light_mode
-                          : Icons.dark_mode,
-                      color: AppController.instance.isDarkTheme
-                          ? Colors.white
-                          : Colors.black,
-                    ),
-                    title: Text(_labelTheme),
-                    onTap: () {
-                      AppController.instance.changeTheme();
-                      Navigator.pop(context);
-                    },
-                  ),
-                ),
-                PopupMenuItem(
-                  child: ListTile(
-                    leading: Icon(Icons.power_settings_new),
-                    title: Text(_labelLogout),
-                    onTap: () async {
-                      var response = await showDialog(
-                          context: context,
-                          builder: (context) {
-                            return TransactionAuthDialog(msg: _labelLogoutConf);
-                          });
-                      if (response) {
-                        Navigator.of(context).pushAndRemoveUntil(
-                          // the new route
-                          MaterialPageRoute(
-                            builder: (BuildContext context) =>
-                                MyCustomLoginUI(),
-                          ),
-
-                          // this function should return true when we're done removing routes
-                          // but because we want to remove all other screens, we make it
-                          // always return false
-                          (Route route) => false,
-                        );
-                      }
-                    },
-                  ),
-                )
-              ];
+          GestureDetector(
+            child: Icon(
+              AppController.instance.isDarkTheme
+                  ? Icons.light_mode
+                  : Icons.dark_mode,
+              color: AppController.instance.isDarkTheme
+                  ? Colors.white
+                  : Colors.black,
+            ),
+            onTap: () {
+              setState(() {
+                AppController.instance.changeTheme();
+              });
             },
-          )
+          ),
+          SizedBox(
+            width: 10,
+          ),
+          GestureDetector(
+            child: Icon(Icons.power_settings_new),
+            onTap: () async {
+              var response = await showDialog(
+                  context: context,
+                  builder: (context) {
+                    return TransactionAuthDialog(msg: _labelLogoutConf);
+                  });
+              if (response) {
+                Navigator.of(context).pushAndRemoveUntil(
+                  // the new route
+                  MaterialPageRoute(
+                    builder: (BuildContext context) =>
+                        MyCustomLoginUI(),
+                  ),
+
+                  // this function should return true when we're done removing routes
+                  // but because we want to remove all other screens, we make it
+                  // always return false
+                      (Route route) => false,
+                );
+              }
+            },
+          ),
         ],
         backgroundColor: Colors.deepOrange[300],
       );
