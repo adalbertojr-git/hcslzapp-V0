@@ -1,150 +1,101 @@
+import 'package:asuka/snackbars/asuka_snack_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:hcslzapp/common/labels.and.hints.dart';
 import 'package:hcslzapp/components/button.dart';
 import 'package:hcslzapp/components/my.text.form.field.dart';
-import 'package:hcslzapp/components/top.bar.dart';
 import 'package:hcslzapp/controllers/head.notification.add.controller.dart';
 import 'package:hcslzapp/models/head.notification.dart';
-import 'package:asuka/asuka.dart' as asuka;
+import '../../components/my.appbar.dart';
+import '../../components/my.bottom.appbar.dart';
 
 const String _title = 'Avisos da Diretoria';
 
-class HeadNotificationAddPage extends StatefulWidget {
+class HeadNotificationAddPage extends StatelessWidget {
   final HeadNotification? _headNotification;
+  final HeadNotificationAddController _controller =
+      HeadNotificationAddController();
 
   HeadNotificationAddPage(this._headNotification);
 
   @override
-  _HeadNotificationAddPageState createState() =>
-      _HeadNotificationAddPageState();
-}
-
-class _HeadNotificationAddPageState extends State<HeadNotificationAddPage> {
-  final HeadNotificationAddController _controller = HeadNotificationAddController();
-
-  @override
-  void initState() {
-    _controller.headNotification =
-        widget._headNotification ?? _controller.headNotification;
-    _controller.init();
-    super.initState();
-  }
-
-  @override
   Widget build(BuildContext context) {
+    _controller.headNotification =
+        _headNotification ?? _controller.headNotification;
+    _controller.init();
     return Scaffold(
-      body: Container(
-        padding: EdgeInsets.fromLTRB(5.0, 0.0, 5.0, 0.0),
-        decoration: BoxDecoration(
-          gradient: LinearGradient(
-            colors: [Colors.white30, Colors.deepOrange],
-            begin: FractionalOffset.topLeft,
-            end: FractionalOffset.bottomRight,
-          ),
-        ),
-        height: MediaQuery.of(context).size.height,
-        child: SingleChildScrollView(
-          child: Column(
-            children: <Widget>[
-              TopBar(
-                title: widget._headNotification == null
-                    ? 'Adicionar ' + _title
-                    : 'Editar ' + _title,
-              ),
-              Observer(
-                builder: (_) {
-                  return MyTextFormField(
-                    textEditingController: _controller.titleCtrl,
-                    label: labelNotificationTitle,
-                    hint: hintNotificationTitle,
-                    icon: Icons.title,
-                    inputType: TextInputType.text,
-                    onChanged: _controller.formController.changeTitle,
-                    errorText: _controller.validateTitle(),
-                  );
-                },
-              ),
-              Observer(
-                builder: (_) {
-                  return MyTextFormField(
-                    textEditingController: _controller.notificationCtrl,
-                    label: labelNotification,
-                    hint: hintNotification,
-                    icon: Icons.message,
-                    inputType: TextInputType.text,
-                    nLines: 5,
-                    onChanged: _controller.formController.changeNotification,
-                    errorText: _controller.validateNotification(),
-                  );
-                },
-              ),
-            ],
-          ),
-        ),
+      appBar: MyAppBar(
+        _headNotification == null ? 'Adicionar ' + _title : 'Editar ' + _title,
       ),
-      floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
+      bottomNavigationBar: MyBottomAppBar(),
+      body: ListView(
+        children: <Widget>[
+          Observer(
+            builder: (_) {
+              return MyTextFormField(
+                textEditingController: _controller.titleCtrl,
+                label: labelNotificationTitle,
+                hint: hintNotificationTitle,
+                icon: Icons.title,
+                inputType: TextInputType.text,
+                onChanged: _controller.formController.changeTitle,
+                errorText: _controller.validateTitle(),
+              );
+            },
+          ),
+          Observer(
+            builder: (_) {
+              return MyTextFormField(
+                textEditingController: _controller.notificationCtrl,
+                label: labelNotification,
+                hint: hintNotification,
+                icon: Icons.message,
+                inputType: TextInputType.text,
+                nLines: 5,
+                onChanged: _controller.formController.changeNotification,
+                errorText: _controller.validateNotification(),
+              );
+            },
+          ),
+        ],
+      ),
+      floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
       floatingActionButton: Button(
-          icon: Icons.save,
-          onClick: () =>
-              widget._headNotification == null ? _save() : _update()),
+        icon: Icons.save,
+        onClick: () =>
+            _headNotification == null ? _save(context) : _update(context),
+      ),
     );
   }
 
-  _save() {
+  _save(BuildContext context) {
     if (_controller.hasErrors) {
-      asuka.showSnackBar(
-        SnackBar(
-          content: const Text('Atenção: Existem erros no formulário que devem '
-              'ser corrigidos antes de efetivar a transação.'),
-        ),
-      );
+      AsukaSnackbar.alert('Corrija os erros informados').show();
     } else {
       _controller.save().then(
         (value) {
           if (value != null) {
-            asuka.showSnackBar(
-              SnackBar(
-                content: const Text('Aviso cadastrado com sucesso.'),
-              ),
-            );
+            AsukaSnackbar.success('Aviso cadastrado com sucesso').show();
             Navigator.of(context).pop(value);
           } else {
-            asuka.showSnackBar(
-              SnackBar(
-                content: Text(_controller.errorMsg),
-              ),
-            );
+            AsukaSnackbar.alert(_controller.errorMsg).show();
           }
         },
       );
     }
   }
 
-  _update() {
+  _update(BuildContext context) {
     if (_controller.hasErrors) {
-      asuka.showSnackBar(
-        SnackBar(
-          content: const Text('Atenção: Existem erros no formulário que devem '
-              'ser corrigidos antes de efetivar a transação.'),
-        ),
-      );
+      AsukaSnackbar.alert('Corrija os erros informados').show();
     } else {
       _controller.update().then(
         (value) {
           if (value != null) {
-            asuka.showSnackBar(
-              SnackBar(
-                content: const Text('Aviso atualizado com sucesso.'),
-              ),
-            );
+            AsukaSnackbar.success('Aviso atualizado com sucesso').show();
             Navigator.of(context).pop(value);
           } else {
-            asuka.showSnackBar(
-              SnackBar(
-                content: Text(_controller.errorMsg),
-              ),
-            );
+            AsukaSnackbar.alert(_controller.errorMsg).show();
           }
         },
       );

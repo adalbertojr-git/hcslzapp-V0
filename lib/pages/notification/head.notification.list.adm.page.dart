@@ -126,12 +126,12 @@ class HeadNotificationListAdmPage extends StatelessWidget {
       );
 
   _add(BuildContext context, int i) {
-    HeadNotification headNotification =
-        i.isNegative ? null : _controller.headNotifications[i];
+/*    HeadNotification headNotification =
+        i.isNegative ? null : _controller.headNotifications[i];*/
     final Future future = Navigator.push(
       context,
       MaterialPageRoute(
-          builder: (context) => HeadNotificationAddPage(headNotification)),
+          builder: (context) => HeadNotificationAddPage(null)),
     );
     future.then((value) {
       if (value != null) {
