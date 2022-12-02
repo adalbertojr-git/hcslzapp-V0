@@ -82,6 +82,9 @@ class PartnershipListAdmPage extends StatelessWidget {
   _widgets(BuildContext context) => Center(
     child: ListView(
       children: [
+        SizedBox(
+          height: 10.0,
+        ),
         Observer(
           builder: (_) => ListView.separated(
             padding: EdgeInsets.symmetric(horizontal: 15),

@@ -9,20 +9,20 @@ import 'package:hcslzapp/controllers/partnership.list.controller.dart';
 import 'package:hcslzapp/models/partnership.dart';
 import 'dart:io';
 
+import '../../components/my.appbar.dart';
+import '../../components/my.bottom.appbar.dart';
+
 const SCALE_FRACTION = 0.2;
 const FULL_SCALE = 0.9;
 const PAGER_HEIGHT = 200.0;
 
-const String _labelNotExists =
-    'Não existem parceiros cadastrados.';
+const String _labelNotExists = 'Não existem parceiros cadastrados.';
 const String _labelUnknown =
     'Houve um erro desconhecido ao executar a transação.';
 const String _pathNoImage = 'assets/imgs/noImage.png';
 const String _title = 'Parcerias';
 
-
 class PartnershipListAssociatedPage extends StatefulWidget {
-
   PartnershipListAssociatedPage();
 
   @override
@@ -47,6 +47,8 @@ class _PartnershipListAssociatedPageState
 
   @override
   Widget build(BuildContext context) => Scaffold(
+        appBar: MyAppBar(_title),
+        bottomNavigationBar: MyBottomAppBar(),
         body: FutureBuilder<List<Partnership>>(
           future: _controller.future,
           builder: (context, snapshot) {
@@ -59,8 +61,8 @@ class _PartnershipListAssociatedPageState
                 break;
               default:
                 if (snapshot.hasError) {
-                  return CenteredMessage(title: _title,
-                      message: snapshot.error.toString());
+                  return CenteredMessage(
+                      title: _title, message: snapshot.error.toString());
                 } else {
                   if (snapshot.data == null)
                     return CenteredMessage(
@@ -90,71 +92,59 @@ class _PartnershipListAssociatedPageState
         ),
       );
 
-  _widgets() => Container(
-        padding: EdgeInsets.fromLTRB(5.0, 0.0, 5.0, 0.0),
-        decoration: BoxDecoration(
-          gradient: LinearGradient(
-            colors: [Colors.white30, Colors.deepOrange],
-            begin: FractionalOffset.topLeft,
-            end: FractionalOffset.bottomRight,
-          ),
-        ),
-        height: MediaQuery.of(context).size.height,
-        child: Column(
-          children: [
-            TopBar(title: 'Parcerias',),
-            Expanded(
-              child: Observer(
-                builder: (_) => ListView(
-                  children: <Widget>[
-                    Container(
-                      height: PAGER_HEIGHT,
-                      child: NotificationListener<ScrollNotification>(
-                        onNotification: (ScrollNotification notification) {
-                          if (notification is ScrollUpdateNotification) {
-                            setState(() {
-                              _controller.notificationListener();
-                            });
-                          }
-                          return false;
+  _widgets() => Column(
+        children: [
+          Expanded(
+            child: Observer(
+              builder: (_) => ListView(
+                children: <Widget>[
+                  Container(
+                    height: PAGER_HEIGHT,
+                    child: NotificationListener<ScrollNotification>(
+                      onNotification: (ScrollNotification notification) {
+                        if (notification is ScrollUpdateNotification) {
+                          setState(() {
+                            _controller.notificationListener();
+                          });
+                        }
+                        return false;
+                      },
+                      child: PageView.builder(
+                        onPageChanged: (pos) {
+                          _controller.onPageChanged(pos);
                         },
-                        child: PageView.builder(
-                          onPageChanged: (pos) {
-                            _controller.onPageChanged(pos);
-                          },
-                          physics: BouncingScrollPhysics(),
-                          controller: _controller.pageController,
-                          itemCount: _controller.activePartnerships.length,
-                          itemBuilder: (context, index) {
-                            final scale = max(
-                              SCALE_FRACTION,
-                              (FULL_SCALE - (index - _controller.page).abs()) +
-                                  viewPortFraction,
-                            );
-                            return circleOffer(index, scale);
-                          },
-                        ),
+                        physics: BouncingScrollPhysics(),
+                        controller: _controller.pageController,
+                        itemCount: _controller.activePartnerships.length,
+                        itemBuilder: (context, index) {
+                          final scale = max(
+                            SCALE_FRACTION,
+                            (FULL_SCALE - (index - _controller.page).abs()) +
+                                viewPortFraction,
+                          );
+                          return circleOffer(index, scale);
+                        },
                       ),
                     ),
-                    Padding(
-                      padding: const EdgeInsets.all(5.0),
-                      child: Text(
-                        _controller.activePartnerships[_controller.currentPage]
-                            .partner,
-                        textAlign: TextAlign.center,
-                        style: TextStyle(
-                          fontSize: 25,
-                          fontWeight: FontWeight.bold,
-                        ),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.all(5.0),
+                    child: Text(
+                      _controller
+                          .activePartnerships[_controller.currentPage].partner,
+                      textAlign: TextAlign.center,
+                      style: TextStyle(
+                        fontSize: 25,
+                        fontWeight: FontWeight.bold,
                       ),
                     ),
-                    buildDetail()
-                  ],
-                ),
+                  ),
+                  buildDetail()
+                ],
               ),
             ),
-          ],
-        ),
+          ),
+        ],
       );
 
   Widget circleOffer(int index, double scale) => Observer(
@@ -189,7 +179,7 @@ class _PartnershipListAssociatedPageState
   Widget buildDetail() => Observer(
         builder: (_) => Container(
           height: MediaQuery.of(context).size.height,
-          color: Colors.white70,
+          //color: Colors.deepOrange[300],
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: <Widget>[
@@ -202,10 +192,6 @@ class _PartnershipListAssociatedPageState
                 child: Text(
                   _controller
                       .activePartnerships[_controller.currentPage].promotion,
-                  style: TextStyle(
-                    color: Colors.black,
-                    fontSize: 15,
-                  ),
                 ),
               ),
             ],
@@ -217,10 +203,6 @@ class _PartnershipListAssociatedPageState
         isThreeLine: true,
         title: Text(
           _controller.activePartnerships[_controller.currentPage].partner,
-          style: TextStyle(
-            color: Colors.black,
-            fontSize: 15,
-          ),
         ),
         subtitle: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -229,10 +211,6 @@ class _PartnershipListAssociatedPageState
               'Endereço: ' +
                   _controller
                       .activePartnerships[_controller.currentPage].address,
-              style: TextStyle(
-                color: Colors.black,
-                fontSize: 15,
-              ),
             ),
             Text(
               'Telefone(s): ' +
@@ -241,10 +219,6 @@ class _PartnershipListAssociatedPageState
                   ' - ' +
                   _controller
                       .activePartnerships[_controller.currentPage].phone2,
-              style: TextStyle(
-                color: Colors.black,
-                fontSize: 15,
-              ),
             ),
           ],
         ),
