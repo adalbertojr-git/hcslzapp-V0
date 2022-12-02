@@ -12,7 +12,7 @@ import '../../components/my.bottom.appbar.dart';
 
 const SCALE_FRACTION = 0.2;
 const FULL_SCALE = 0.9;
-const PAGER_HEIGHT = 200.0;
+const PAGER_HEIGHT = 300.0;
 
 const String _labelNotExists = 'Não existem parceiros cadastrados.';
 const String _labelUnknown =
