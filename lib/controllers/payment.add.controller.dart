@@ -132,10 +132,6 @@ abstract class PaymentAddControllerBase with Store {
     });
   }
 
-/*  Future<String> getUserFromDevice() async {
-    return await Glutton.vomit("user");
-  }*/
-
   @action
   Future<List<Payment>> findByAssociatedIdToList(int id) => ObservableFuture(
               _paymentRepo.findByAssociatedIdToList(id).then((value) => value))
