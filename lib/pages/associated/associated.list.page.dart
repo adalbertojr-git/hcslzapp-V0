@@ -5,12 +5,11 @@ import 'package:hcslzapp/common/labels.and.hints.dart';
 import 'package:hcslzapp/components/centered.message.dart';
 import 'package:hcslzapp/components/my.text.form.field.dart';
 import 'package:hcslzapp/components/progress.dart';
-import 'package:hcslzapp/components/top.bar.dart';
 import 'package:hcslzapp/controllers/associated.list.controller.dart';
 import 'package:hcslzapp/pages/associated/associated.update.page.dart';
 import '../../components/my.appbar.dart';
 import '../../components/my.bottom.appbar.dart';
-import '../../models/associated.dto.dart';
+import '../../models/associated.dart';
 
 const String _labelNotExists =
     'Não existem associados cadastrados. Confira as requisições de acesso.';
@@ -25,7 +24,7 @@ class AssociatedListPage extends StatelessWidget {
   Widget build(BuildContext context) => Scaffold(
         appBar: MyAppBar(_title),
         bottomNavigationBar: MyBottomAppBar(),
-        body: FutureBuilder<List<AssociatedDTO>>(
+        body: FutureBuilder<List<Associated>>(
           future: _controller.getFuture(),
           builder: (context, snapshot) {
             switch (snapshot.connectionState) {

@@ -8,7 +8,7 @@ import 'package:hcslzapp/controllers/item.model.dart';
 import 'package:hcslzapp/controllers/management.add.controller.dart';
 import '../../components/my.appbar.dart';
 import '../../components/my.bottom.appbar.dart';
-import '../../models/associated.dto.dart';
+import '../../models/associated.dart';
 
 const String _labelNotExists =
     'Não existem associados cadastrados. Confira as requisições de acesso.';
@@ -42,7 +42,7 @@ class ManagementAddPageState extends State<ManagementAddPage> {
   Widget build(BuildContext context) => Observer(
         builder: (_) => Scaffold(
           appBar: MyAppBar(_title),
-          body: FutureBuilder<List<AssociatedDTO>>(
+          body: FutureBuilder<List<Associated>>(
             future: _controller.future,
             builder: (context, snapshot) {
               switch (snapshot.connectionState) {

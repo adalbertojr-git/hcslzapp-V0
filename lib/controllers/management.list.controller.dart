@@ -9,8 +9,6 @@ import 'package:hcslzapp/repositories/associated.repo.dart';
 import 'package:hcslzapp/repositories/management.repo.dart';
 import 'package:mobx/mobx.dart';
 
-import '../models/associated.dto.dart';
-
 part 'management.list.controller.g.dart';
 
 class ManagementListController = ManagementListControllerBase
@@ -39,7 +37,7 @@ abstract class ManagementListControllerBase with Store {
   String errorMsg = '';
 
   @observable
-  Future<List<AssociatedDTO>> future = Future<List<AssociatedDTO>>.value([]);
+  Future<List<Associated>> future = Future<List<Associated>>.value([]);
 
   @observable
   String filter = '';
@@ -52,7 +50,7 @@ abstract class ManagementListControllerBase with Store {
   bool setButtonVisibilty() => isHidedButton = !isHidedButton;
 
   @action
-  Future<List<AssociatedDTO>> findAllAdminToList() =>
+  Future<List<Associated>> findAllAdminToList() =>
       ObservableFuture(_associatedRepo.findAllAdminToList().then((value) => value))
           .catchError((e) {
         errorMsg = "${e.message}";
@@ -60,10 +58,10 @@ abstract class ManagementListControllerBase with Store {
         errorMsg = "$e";
       }, test: (e) => e is Exception);
 
-  Future<List<AssociatedDTO>> getFuture() => future = findAllAdminToList();
+  Future<List<Associated>> getFuture() => future = findAllAdminToList();
 
   @action
-  Future deleteById(AssociatedDTO associated) => ObservableFuture(
+  Future deleteById(Associated associated) => ObservableFuture(
               _managementRepo.deleteById(associated).then((value) => value))
           .catchError((e) {
         errorMsg = "${e.message}";
@@ -71,8 +69,8 @@ abstract class ManagementListControllerBase with Store {
         errorMsg = "$e";
       }, test: (e) => e is Exception);
 
-  loadAdmins(List<AssociatedDTO> list) {
-    for (AssociatedDTO associated in list) {
+  loadAdmins(List<Associated> list) {
+    for (Associated associated in list) {
       if (associated.authenticate.roles.any((Role r) => r.profile == ADMIN)) {
         associateds.add(associated);
       }

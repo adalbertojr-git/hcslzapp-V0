@@ -11,7 +11,6 @@ import 'package:hcslzapp/models/dependent.dart';
 import 'package:hcslzapp/models/motorcycle.dart';
 import '../../components/my.appbar.dart';
 import '../../components/my.bottom.appbar.dart';
-import '../../models/associated.dto.dart';
 import 'management.add.page.dart';
 
 const String _labelNotExists =
@@ -45,7 +44,7 @@ class ManagementListPageState extends State<ManagementListPage> {
         builder: (_) => Scaffold(
           appBar: MyAppBar(_title),
           bottomNavigationBar: MyBottomAppBar(),
-          body: FutureBuilder<List<AssociatedDTO>>(
+          body: FutureBuilder<List<Associated>>(
             future: _controller.future,
             builder: (context, snapshot) {
               switch (snapshot.connectionState) {
@@ -192,7 +191,7 @@ class ManagementListPageState extends State<ManagementListPage> {
         ),
       );
 
-  _delete(AssociatedDTO associated) async {
+  _delete(Associated associated) async {
     var response = await showDialog(
         context: context,
         builder: (context) {

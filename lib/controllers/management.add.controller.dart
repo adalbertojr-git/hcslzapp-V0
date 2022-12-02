@@ -9,8 +9,6 @@ import 'package:hcslzapp/repositories/associated.repo.dart';
 import 'package:hcslzapp/repositories/management.repo.dart';
 import 'package:mobx/mobx.dart';
 
-import '../models/associated.dto.dart';
-
 part 'management.add.controller.g.dart';
 
 class ManagementAddController = ManagementAddControllerBase
@@ -42,7 +40,7 @@ abstract class ManagementAddControllerBase with Store {
   String errorMsg = '';
 
   @observable
-  Future<List<AssociatedDTO>> future = Future<List<AssociatedDTO>>.value([]);
+  Future<List<Associated>> future = Future<List<Associated>>.value([]);
 
   @observable
   String filter = '';
@@ -57,7 +55,7 @@ abstract class ManagementAddControllerBase with Store {
   bool setButtonVisibilty() => isHidedButton = !isHidedButton;
 
   @action
-  Future<List<AssociatedDTO>> findAllNotAdminToList() => ObservableFuture(
+  Future<List<Associated>> findAllNotAdminToList() => ObservableFuture(
               _associatedRepo.findAllNotAdminToList().then((value) => value))
           .catchError((e) {
         errorMsg = "${e.message}";
@@ -65,7 +63,7 @@ abstract class ManagementAddControllerBase with Store {
         errorMsg = "$e";
       }, test: (e) => e is Exception);
 
-  Future<List<AssociatedDTO>> getFuture() => future = findAllNotAdminToList();
+  Future<List<Associated>> getFuture() => future = findAllNotAdminToList();
 
   @action
   Future save() => ObservableFuture(
@@ -76,8 +74,8 @@ abstract class ManagementAddControllerBase with Store {
         errorMsg = "$e";
       }, test: (e) => e is Exception);
 
-  loadListItems(List<AssociatedDTO> list) {
-    for (AssociatedDTO associated in list) {
+  loadListItems(List<Associated> list) {
+    for (Associated associated in list) {
       listItems.add(
         ItemModel(
           id: associated.id,

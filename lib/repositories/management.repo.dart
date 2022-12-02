@@ -3,7 +3,7 @@ import 'dart:convert';
 import 'package:hcslzapp/http/http.exception.dart';
 import 'package:http/http.dart';
 import '../common/settings.dart';
-import '../models/associated.dto.dart';
+import '../models/associated.dart';
 
 const String _managUrl = '/management';
 
@@ -31,7 +31,7 @@ class ManagementRepo {
     }
   }
 
-  Future<Response> deleteById(AssociatedDTO associated) async {
+  Future<Response> deleteById(Associated associated) async {
     final Response response = await client.delete(
       Uri.parse(mainUrl + _managUrl + "/" + associated.id.toString()),
       headers: {

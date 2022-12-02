@@ -2,7 +2,6 @@ import 'dart:async';
 import 'dart:convert';
 import 'package:hcslzapp/http/http.exception.dart';
 import 'package:hcslzapp/models/associated.dart';
-import 'package:hcslzapp/models/associated.dto.dart';
 import 'package:hcslzapp/models/month.birthdays.dart';
 import 'package:http/http.dart';
 import '../common/settings.dart';
@@ -10,7 +9,7 @@ import '../common/settings.dart';
 const String _associatedUrl = '/associated';
 
 class AssociatedRepo {
-  Future<List<AssociatedDTO>> findAll() async {
+  Future<List<Associated>> findAll() async {
     final Response response = await client
         .get(
           Uri.parse(mainUrl + _associatedUrl + "/list"),
@@ -22,7 +21,7 @@ class AssociatedRepo {
       final List<dynamic> decodedJson = jsonDecode(response.body);
       return decodedJson
           .map(
-            (dynamic json) => AssociatedDTO.fromJson(json),
+            (dynamic json) => Associated.fromJson(json),
           )
           .toList();
     } else {
@@ -30,7 +29,7 @@ class AssociatedRepo {
     }
   }
 
-  Future<List<AssociatedDTO>> findAllAdminToList() async {
+  Future<List<Associated>> findAllAdminToList() async {
     final Response response = await client
         .get(
       Uri.parse(mainUrl + _associatedUrl + "/admin"),
@@ -42,7 +41,7 @@ class AssociatedRepo {
       final List<dynamic> decodedJson = jsonDecode(response.body);
       return decodedJson
           .map(
-            (dynamic json) => AssociatedDTO.fromJson(json),
+            (dynamic json) => Associated.fromJson(json),
       )
           .toList();
     } else {
@@ -50,7 +49,7 @@ class AssociatedRepo {
     }
   }
 
-  Future<List<AssociatedDTO>> findAllNotAdminToList() async {
+  Future<List<Associated>> findAllNotAdminToList() async {
     final Response response = await client
         .get(
       Uri.parse(mainUrl + _associatedUrl + "/notadmin"),
@@ -62,7 +61,7 @@ class AssociatedRepo {
       final List<dynamic> decodedJson = jsonDecode(response.body);
       return decodedJson
           .map(
-            (dynamic json) => AssociatedDTO.fromJson(json),
+            (dynamic json) => Associated.fromJson(json),
       )
           .toList();
     } else {
@@ -70,7 +69,7 @@ class AssociatedRepo {
     }
   }
 
-  Future<List<AssociatedDTO>> findAllActive() async {
+  Future<List<Associated>> findAllActive() async {
     final Response response = await client
         .get(
       Uri.parse(mainUrl + _associatedUrl + "/active"),
@@ -82,7 +81,7 @@ class AssociatedRepo {
       final List<dynamic> decodedJson = jsonDecode(response.body);
       return decodedJson
           .map(
-            (dynamic json) => AssociatedDTO.fromJson(json),
+            (dynamic json) => Associated.fromJson(json),
       )
           .toList();
     } else {

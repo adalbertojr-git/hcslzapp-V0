@@ -10,7 +10,7 @@ import 'package:hcslzapp/pages/payment/payment.associated.page.dart';
 import 'package:hcslzapp/pages/payment/payment.table.page.dart';
 import '../../components/my.appbar.dart';
 import '../../components/my.bottom.appbar.dart';
-import '../../models/associated.dto.dart';
+import '../../models/associated.dart';
 
 const String _labelNotExists =
     'Não existem associados cadastrados. Confira as requisições de acesso.';
@@ -32,7 +32,6 @@ class _PaymentListPageState extends State<PaymentListPage> {
 
   @override
   void initState() {
-    //_controller = Provider.of<AssociatedController>(context, listen: false);
     _controller.init();
     _controller.getFuture().then((value) {
       _controller.setButtonVisibilty();
@@ -45,7 +44,7 @@ class _PaymentListPageState extends State<PaymentListPage> {
       builder: (_) => Scaffold(
             appBar: MyAppBar(_title),
             bottomNavigationBar: MyBottomAppBar(),
-            body: FutureBuilder<List<AssociatedDTO>>(
+            body: FutureBuilder<List<Associated>>(
               future: _controller.future,
               builder: (context, snapshot) {
                 switch (snapshot.connectionState) {
@@ -151,7 +150,7 @@ class _PaymentListPageState extends State<PaymentListPage> {
                               Icons.arrow_forward,
                             ),
                             onTap: () {
-/*                              Navigator.push(
+                              Navigator.push(
                                 context,
                                 MaterialPageRoute(
                                   builder: (context) => PaymentAssociatedPage(
@@ -159,7 +158,7 @@ class _PaymentListPageState extends State<PaymentListPage> {
                                     _controller.listFiltered[i],
                                   ),
                                 ),
-                              );*/
+                              );
                             },
                           ),
                         ],
