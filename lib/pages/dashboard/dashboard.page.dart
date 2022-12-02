@@ -526,6 +526,7 @@ class _DashboardPageState extends State<DashboardPage> {
                     _controller.loadPaymentAssociatedPage(
                       _gContext,
                       _controller.isAdmin(),
+                      _controller.associated,
                     );
                   },
                 ),

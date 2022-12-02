@@ -70,11 +70,12 @@ abstract class DashboardControllerBase with Store {
   loadPaymentAssociatedPage(
     BuildContext context,
     bool isAdmin,
+      Associated associated,
   ) async {
     await Navigator.push(
       context,
       MaterialPageRoute(
-        builder: (context) => PaymentAssociatedPage(selectedProfile),
+        builder: (context) => PaymentAssociatedPage(selectedProfile, associated),
       ),
     );
   }

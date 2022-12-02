@@ -6,13 +6,11 @@ import 'package:hcslzapp/common/associated.profiles.dart';
 import 'package:hcslzapp/components/button.dart';
 import 'package:hcslzapp/components/centered.message.dart';
 import 'package:hcslzapp/components/progress.dart';
-import 'package:hcslzapp/components/top.bar.dart';
 import 'package:hcslzapp/components/transaction.auth.dialog.dart';
 import 'package:hcslzapp/controllers/payment.associated.controller.dart';
 import 'package:hcslzapp/models/payment.dart';
 import 'package:hcslzapp/pages/payment/payment.add.page.dart';
 import 'package:asuka/asuka.dart' as asuka;
-import '../../common/injection.dart';
 import '../../components/my.appbar.dart';
 import '../../components/my.bottom.appbar.dart';
 import '../../models/associated.dart';
@@ -24,49 +22,33 @@ const String _title = 'Mensalidades';
 
 class PaymentAssociatedPage extends StatefulWidget {
   final String _selectedProfile;
+  final Associated _associated;
 
-  PaymentAssociatedPage(
-    this._selectedProfile,
-  );
-
+  const PaymentAssociatedPage(
+      this._selectedProfile,
+      this._associated,
+      );
   @override
   _PaymentAssociatedPageState createState() => _PaymentAssociatedPageState();
 }
 
 class _PaymentAssociatedPageState extends State<PaymentAssociatedPage> {
   final PaymentAssociatedController _controller = PaymentAssociatedController();
-  final Associated _associated = locator.get<Associated>();
 
   @override
   void initState() {
-    _controller.getFuture(_associated.id).then((value) {
+    _controller.getFuture(widget._associated.id).then((value) {
       _controller.setButtonVisibilty();
     });
     super.initState();
   }
-
-/*  @override
-  Widget build(BuildContext context) {
-    _controller.associated = _associated;
-    _controller.init();
-    return Scaffold(
-      appBar: MyAppBar(_title),
-      bottomNavigationBar: MyBottomAppBar(),
-      body: _widgets(context),
-      floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
-      floatingActionButton: Button(
-        icon: Icons.save,
-        onClick: () => _update(context),
-      ),
-    );
-  }*/
 
   @override
   Widget build(BuildContext context) => Scaffold(
         appBar: MyAppBar(_title),
         bottomNavigationBar: MyBottomAppBar(),
         body: FutureBuilder<List<Payment>>(
-          future: _controller.getFuture(_associated.id),
+          future: _controller.getFuture(widget._associated.id),
           builder: (context, snapshot) {
             switch (snapshot.connectionState) {
               case ConnectionState.none:

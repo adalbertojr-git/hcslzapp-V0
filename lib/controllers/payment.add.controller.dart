@@ -64,8 +64,8 @@ abstract class PaymentAddControllerBase with Store {
   @observable
   Payment payment = Template().loadPayment();
 
-  @observable
-  Associated associated = Template().loadAssociated();
+/*  @observable
+  Associated associated = Template().loadAssociated();*/
 
   @observable
   PaymentRepo _paymentRepo = PaymentRepo();
@@ -73,8 +73,8 @@ abstract class PaymentAddControllerBase with Store {
   @observable
   String errorMsg = "";
 
-  @observable
-  Future<List<Payment>> future = Future<List<Payment>>.value([]);
+/*  @observable
+  Future<List<Payment>> future = Future<List<Payment>>.value([]);*/
 
   @observable
   List<String> years = List.filled(0, '', growable: true);
@@ -132,6 +132,7 @@ abstract class PaymentAddControllerBase with Store {
     });
   }
 
+/*
   @action
   Future<List<Payment>> findByAssociatedIdToList(int id) => ObservableFuture(
               _paymentRepo.findByAssociatedIdToList(id).then((value) => value))
@@ -141,8 +142,9 @@ abstract class PaymentAddControllerBase with Store {
         errorMsg = "$e";
       }, test: (e) => e is Exception);
 
-  Future<List<Payment>> getFuture(int _paymentId) =>
+  Future<List<Payment>> getFutures(int _paymentId) =>
       future = findByAssociatedIdToList(_paymentId);
+*/
 
   @action
   Future update() =>

@@ -265,22 +265,6 @@ mixin _$PaymentAddController on PaymentAddControllerBase, Store {
     });
   }
 
-  late final _$associatedAtom =
-      Atom(name: 'PaymentAddControllerBase.associated', context: context);
-
-  @override
-  AssociatedDTO get associated {
-    _$associatedAtom.reportRead();
-    return super.associated;
-  }
-
-  @override
-  set associated(AssociatedDTO value) {
-    _$associatedAtom.reportWrite(value, super.associated, () {
-      super.associated = value;
-    });
-  }
-
   late final _$_paymentRepoAtom =
       Atom(name: 'PaymentAddControllerBase._paymentRepo', context: context);
 
@@ -313,22 +297,6 @@ mixin _$PaymentAddController on PaymentAddControllerBase, Store {
     });
   }
 
-  late final _$futureAtom =
-      Atom(name: 'PaymentAddControllerBase.future', context: context);
-
-  @override
-  Future<List<Payment>> get future {
-    _$futureAtom.reportRead();
-    return super.future;
-  }
-
-  @override
-  set future(Future<List<Payment>> value) {
-    _$futureAtom.reportWrite(value, super.future, () {
-      super.future = value;
-    });
-  }
-
   late final _$yearsAtom =
       Atom(name: 'PaymentAddControllerBase.years', context: context);
 
@@ -347,17 +315,6 @@ mixin _$PaymentAddController on PaymentAddControllerBase, Store {
 
   late final _$PaymentAddControllerBaseActionController =
       ActionController(name: 'PaymentAddControllerBase', context: context);
-
-  @override
-  Future<List<Payment>> findByAssociatedIdToList(int id) {
-    final _$actionInfo = _$PaymentAddControllerBaseActionController.startAction(
-        name: 'PaymentAddControllerBase.findByAssociatedIdToList');
-    try {
-      return super.findByAssociatedIdToList(id);
-    } finally {
-      _$PaymentAddControllerBaseActionController.endAction(_$actionInfo);
-    }
-  }
 
   @override
   Future<dynamic> update() {
@@ -411,9 +368,7 @@ novCtrl: ${novCtrl},
 decCtrl: ${decCtrl},
 payments: ${payments},
 payment: ${payment},
-associated: ${associated},
 errorMsg: ${errorMsg},
-future: ${future},
 years: ${years}
     ''';
   }
