@@ -181,9 +181,9 @@ class _PartnershipListAssociatedPageState
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: <Widget>[
-              SizedBox(height: 15),
-              buildPartnerInfo(),
               SizedBox(height: 5),
+              buildPartnerInfo(),
+              SizedBox(height: 2),
               Container(
                 alignment: Alignment.center,
                 color: Colors.white54,
