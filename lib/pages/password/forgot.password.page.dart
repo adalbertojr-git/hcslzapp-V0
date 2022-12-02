@@ -121,7 +121,6 @@ class _ForgotPasswordPageState extends State<ForgotPasswordPage> {
                     textEditingController: _controller.codeCtrl,
                     label: labelCode,
                     hint: hintCode,
-                    fontSize: 30,
                     inputType: TextInputType.number,
                     maskTextInputFormatter:
                         MaskTextInputFormatter(mask: "######"),

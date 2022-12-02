@@ -9,11 +9,11 @@ part of 'payment.list.controller.dart';
 // ignore_for_file: non_constant_identifier_names, unnecessary_brace_in_string_interps, unnecessary_lambdas, prefer_expression_function_bodies, lines_longer_than_80_chars, avoid_as, avoid_annotating_with_dynamic, no_leading_underscores_for_local_identifiers
 
 mixin _$PaymentListController on PaymentListControllerBase, Store {
-  Computed<List<AssociatedDTO>>? _$listFilteredComputed;
+  Computed<List<Associated>>? _$listFilteredComputed;
 
   @override
-  List<AssociatedDTO> get listFiltered => (_$listFilteredComputed ??=
-          Computed<List<AssociatedDTO>>(() => super.listFiltered,
+  List<Associated> get listFiltered => (_$listFilteredComputed ??=
+          Computed<List<Associated>>(() => super.listFiltered,
               name: 'PaymentListControllerBase.listFiltered'))
       .value;
 
@@ -117,13 +117,13 @@ mixin _$PaymentListController on PaymentListControllerBase, Store {
       Atom(name: 'PaymentListControllerBase.future', context: context);
 
   @override
-  Future<List<AssociatedDTO>> get future {
+  Future<List<Associated>> get future {
     _$futureAtom.reportRead();
     return super.future;
   }
 
   @override
-  set future(Future<List<AssociatedDTO>> value) {
+  set future(Future<List<Associated>> value) {
     _$futureAtom.reportWrite(value, super.future, () {
       super.future = value;
     });
@@ -160,7 +160,7 @@ mixin _$PaymentListController on PaymentListControllerBase, Store {
   }
 
   @override
-  Future<List<AssociatedDTO>> findAll() {
+  Future<List<Associated>> findAll() {
     final _$actionInfo = _$PaymentListControllerBaseActionController
         .startAction(name: 'PaymentListControllerBase.findAll');
     try {

@@ -12,7 +12,6 @@ class MyTextFormField extends StatelessWidget {
   final String? prefix;
   final int? nLines;
   final String? label;
-  final double? fontSize;
   final Function(String)? onChanged;
   final String? errorText;
   MaskTextInputFormatter? maskTextInputFormatter;
@@ -30,8 +29,6 @@ class MyTextFormField extends StatelessWidget {
     this.prefix,
     this.label,
     this.nLines,
-    this.fontSize,
-    //this.text,
     this.onChanged,
     this.errorText,
     this.maskTextInputFormatter,

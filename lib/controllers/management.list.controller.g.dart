@@ -125,13 +125,13 @@ mixin _$ManagementListController on ManagementListControllerBase, Store {
       Atom(name: 'ManagementListControllerBase.future', context: context);
 
   @override
-  Future<List<AssociatedDTO>> get future {
+  Future<List<Associated>> get future {
     _$futureAtom.reportRead();
     return super.future;
   }
 
   @override
-  set future(Future<List<AssociatedDTO>> value) {
+  set future(Future<List<Associated>> value) {
     _$futureAtom.reportWrite(value, super.future, () {
       super.future = value;
     });
@@ -168,7 +168,7 @@ mixin _$ManagementListController on ManagementListControllerBase, Store {
   }
 
   @override
-  Future<List<AssociatedDTO>> findAllAdminToList() {
+  Future<List<Associated>> findAllAdminToList() {
     final _$actionInfo = _$ManagementListControllerBaseActionController
         .startAction(name: 'ManagementListControllerBase.findAllAdminToList');
     try {
@@ -179,7 +179,7 @@ mixin _$ManagementListController on ManagementListControllerBase, Store {
   }
 
   @override
-  Future<dynamic> deleteById(AssociatedDTO associated) {
+  Future<dynamic> deleteById(Associated associated) {
     final _$actionInfo = _$ManagementListControllerBaseActionController
         .startAction(name: 'ManagementListControllerBase.deleteById');
     try {

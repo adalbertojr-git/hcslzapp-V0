@@ -17,7 +17,6 @@ const String _title = 'Carteira Harley Club';
 class DigitalIdentityPage extends StatelessWidget {
   final Associated _associated = locator.get<Associated>();
   final DigitalIdentityController _controller = DigitalIdentityController();
-  final double _fontSize = 14.0;
 
   @override
   Widget build(BuildContext context) {
@@ -43,7 +42,6 @@ class DigitalIdentityPage extends StatelessWidget {
                 textEditingController: _controller.nameCtrl,
                 label: labelNameDigitalPayment,
                 disabled: true,
-                fontSize: _fontSize,
               ),
               Row(
                 children: <Widget>[
@@ -52,7 +50,6 @@ class DigitalIdentityPage extends StatelessWidget {
                       textEditingController: _controller.associatedTypeCtrl,
                       label: labelAssociatedType,
                       disabled: true,
-                      fontSize: _fontSize,
                       textAlign: TextAlign.center,
                     ),
                   ),
@@ -61,7 +58,6 @@ class DigitalIdentityPage extends StatelessWidget {
                       textEditingController: _controller.cnhCtrl,
                       label: labelCNH,
                       disabled: true,
-                      fontSize: _fontSize,
                       textAlign: TextAlign.center,
                     ),
                   ),
@@ -70,7 +66,6 @@ class DigitalIdentityPage extends StatelessWidget {
                       textEditingController: _controller.cpfCtrl,
                       label: labelCPF,
                       disabled: true,
-                      fontSize: _fontSize,
                       textAlign: TextAlign.center,
                     ),
                   ),
@@ -83,7 +78,6 @@ class DigitalIdentityPage extends StatelessWidget {
                       textEditingController: _controller.dateBirthCtrl,
                       label: labelDateBirth,
                       disabled: true,
-                      fontSize: _fontSize,
                       textAlign: TextAlign.center,
                     ),
                   ),
@@ -92,7 +86,6 @@ class DigitalIdentityPage extends StatelessWidget {
                       textEditingController: _controller.dateShieldCtrl,
                       label: labelDateShield,
                       disabled: true,
-                      fontSize: _fontSize,
                       textAlign: TextAlign.center,
                     ),
                   ),
@@ -101,7 +94,6 @@ class DigitalIdentityPage extends StatelessWidget {
                       textEditingController: _controller.bloodTypeCtrl,
                       label: labelBloodType,
                       disabled: true,
-                      fontSize: _fontSize,
                       textAlign: TextAlign.center,
                     ),
                   ),
