@@ -209,7 +209,7 @@ class CheckboxWidget extends StatelessWidget {
           AsukaSnackbar.success('Requisição de acesso excluída com sucesso');
           controller.listItems.remove(item);
         } else {
-          AsukaSnackbar.alert(_controller.errorMsg).show();
+          AsukaSnackbar.alert(controller.errorMsg).show();
         }
       });
     }
