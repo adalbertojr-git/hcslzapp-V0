@@ -12,7 +12,7 @@ const String _labelUnknown =
 const String _title = 'Avisos da Diretoria';
 
 class HeadNotificationListAssociatedPage extends StatelessWidget {
-  HeadNotificationListController _controller = HeadNotificationListController();
+  final HeadNotificationListController _controller = HeadNotificationListController();
 
   @override
   Widget build(BuildContext context) => Scaffold(

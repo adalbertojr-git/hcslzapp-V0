@@ -1,13 +1,14 @@
+import 'package:asuka/snackbars/asuka_snack_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:hcslzapp/components/button.dart';
 import 'package:hcslzapp/components/centered.message.dart';
 import 'package:hcslzapp/components/progress.dart';
-import 'package:hcslzapp/components/top.bar.dart';
 import 'package:hcslzapp/components/transaction.auth.dialog.dart';
 import 'package:hcslzapp/controllers/head.notification.list.controller.dart';
 import 'package:hcslzapp/models/head.notification.dart';
-import 'package:asuka/asuka.dart' as asuka;
+import '../../components/my.appbar.dart';
+import '../../components/my.bottom.appbar.dart';
 import 'head.notification.add.page.dart';
 
 const String _labelUnknown =
@@ -15,10 +16,13 @@ const String _labelUnknown =
 const String _title = 'Avisos da Diretoria';
 
 class HeadNotificationListAdmPage extends StatelessWidget {
-  HeadNotificationListController _controller = HeadNotificationListController();
+  final HeadNotificationListController _controller =
+      HeadNotificationListController();
 
   @override
   Widget build(BuildContext context) => Scaffold(
+        appBar: MyAppBar(_title),
+        bottomNavigationBar: MyBottomAppBar(),
         body: FutureBuilder<List<HeadNotification>>(
           future: _controller.getFuture(),
           builder: (context, snapshot) {
@@ -55,7 +59,7 @@ class HeadNotificationListAdmPage extends StatelessWidget {
             );
           },
         ),
-        floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
+        floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
         floatingActionButton: Button(
             icon: Icons.add,
             onClick: () {
@@ -63,82 +67,61 @@ class HeadNotificationListAdmPage extends StatelessWidget {
             }),
       );
 
-  _widgets(BuildContext context) => Container(
-        decoration: BoxDecoration(
-          gradient: LinearGradient(
-            colors: [Colors.white30, Colors.deepOrange],
-            begin: FractionalOffset.topLeft,
-            end: FractionalOffset.bottomRight,
+  _widgets(BuildContext context) => ListView(
+        children: [
+          SizedBox(height: 10),
+          Observer(
+            builder: (_) => ListView.separated(
+              shrinkWrap: true,
+              itemCount: _controller.headNotifications.length,
+              itemBuilder: (_, int i) {
+                return Container(
+                  decoration: BoxDecoration(
+                    color: Colors.deepOrange[300],
+                    shape: BoxShape.rectangle,
+                    borderRadius: BorderRadius.circular(20.0),
+                  ),
+                  child: ListTile(
+                    title: Text(
+                      _controller.headNotifications[i].title,
+                      style: TextStyle(
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                    subtitle: Text('Data de Publicação: ' +
+                        (_controller.headNotifications[i].datePublication)),
+                    leading: CircleAvatar(
+                      child: Icon(Icons.message),
+                      backgroundColor: Colors.white,
+                    ),
+                    trailing: Wrap(
+                      spacing: 10, // space between two icons
+                      children: <Widget>[
+                        GestureDetector(
+                          child: Icon(
+                            Icons.delete,
+                          ),
+                          onTap: () {
+                            _delete(context, i);
+                          },
+                        ),
+                        GestureDetector(
+                          child: Icon(
+                            Icons.arrow_forward,
+                          ),
+                          onTap: () {
+                            _add(context, i);
+                          },
+                        ),
+                      ],
+                    ),
+                  ),
+                );
+              },
+              separatorBuilder: (_, int index) => const Divider(),
+            ),
           ),
-        ),
-        height: MediaQuery.of(context).size.height,
-        child: Column(
-          children: [
-            TopBar(
-              title: _title,
-            ),
-            Expanded(
-              child: Observer(
-                builder: (_) => ListView.separated(
-                  shrinkWrap: true,
-                  itemCount: _controller.headNotifications.length,
-                  itemBuilder: (_, int i) {
-                    return Container(
-                      decoration: BoxDecoration(
-                        color: Colors.white30,
-                        shape: BoxShape.rectangle,
-                        borderRadius: BorderRadius.circular(8.0),
-                        boxShadow: <BoxShadow>[
-                          BoxShadow(
-                            color: Colors.black12,
-                            blurRadius: 10.0,
-                            offset: Offset(0.0, 5.0),
-                          ),
-                        ],
-                      ),
-                      child: ListTile(
-                        title: Text(
-                          _controller.headNotifications[i].title,
-                          style: TextStyle(
-                            fontWeight: FontWeight.bold,
-                          ),
-                        ),
-                        subtitle: Text('Data de Publicação: ' +
-                            (_controller.headNotifications[i].datePublication)),
-                        leading: CircleAvatar(
-                          child: Icon(Icons.message),
-                          backgroundColor: Colors.white,
-                        ),
-                        trailing: Wrap(
-                          spacing: 10, // space between two icons
-                          children: <Widget>[
-                            GestureDetector(
-                              child: Icon(
-                                Icons.delete,
-                              ),
-                              onTap: () {
-                                _delete(context, i);
-                              },
-                            ),
-                            GestureDetector(
-                              child: Icon(
-                                Icons.arrow_forward,
-                              ),
-                              onTap: () {
-                                _add(context, i);
-                              },
-                            ),
-                          ],
-                        ),
-                      ),
-                    );
-                  },
-                  separatorBuilder: (_, int index) => const Divider(),
-                ),
-              ),
-            ),
-          ],
-        ),
+        ],
       );
 
   _add(BuildContext context, int i) {
@@ -170,18 +153,10 @@ class HeadNotificationListAdmPage extends StatelessWidget {
       _controller.deleteById(_controller.headNotifications[i]).then(
         (value) {
           if (value != null) {
-            asuka.showSnackBar(
-              SnackBar(
-                content: const Text('Aviso excluido com sucesso.'),
-              ),
-            );
+            AsukaSnackbar.success('Aviso excluído com sucesso');
             _controller.headNotifications.removeAt(i);
           } else {
-            asuka.showSnackBar(
-              SnackBar(
-                content: Text(_controller.errorMsg),
-              ),
-            );
+            AsukaSnackbar.alert(_controller.errorMsg).show();
           }
         },
       );

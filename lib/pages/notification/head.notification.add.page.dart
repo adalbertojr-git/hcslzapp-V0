@@ -21,7 +21,7 @@ class HeadNotificationAddPage extends StatefulWidget {
 }
 
 class _HeadNotificationAddPageState extends State<HeadNotificationAddPage> {
-  HeadNotificationAddController _controller = HeadNotificationAddController();
+  final HeadNotificationAddController _controller = HeadNotificationAddController();
 
   @override
   void initState() {
