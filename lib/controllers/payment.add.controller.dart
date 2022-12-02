@@ -1,15 +1,12 @@
 import 'dart:async';
 import 'dart:io';
 import 'package:flutter/material.dart';
-import 'package:glutton/glutton.dart';
 import 'package:hcslzapp/models/associated.dart';
 import 'package:hcslzapp/models/payment.dart';
 import 'package:hcslzapp/models/payment.months.dart';
 import 'package:hcslzapp/models/template.dart';
 import 'package:hcslzapp/repositories/payment.repo.dart';
 import 'package:mobx/mobx.dart';
-
-import '../models/associated.dto.dart';
 
 part 'payment.add.controller.g.dart';
 
@@ -68,7 +65,7 @@ abstract class PaymentAddControllerBase with Store {
   Payment payment = Template().loadPayment();
 
   @observable
-  AssociatedDTO associated = Template().loadAssociatedDTO();
+  Associated associated = Template().loadAssociated();
 
   @observable
   PaymentRepo _paymentRepo = PaymentRepo();

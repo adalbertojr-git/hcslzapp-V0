@@ -123,14 +123,13 @@ class _PaymentAssociatedPageState extends State<PaymentAssociatedPage> {
       );
 
   _add(BuildContext context) {
-/*    final Future future = Navigator.push(
+    final Future future = Navigator.push(
       context,
       MaterialPageRoute(
         builder: (_) => PaymentAddPage(
           widget._selectedProfile,
           null,
           _controller.loadYears(),
-          _associated,
         ),
       ),
     );
@@ -138,7 +137,7 @@ class _PaymentAssociatedPageState extends State<PaymentAssociatedPage> {
       if (value != null) {
         _controller.payments.add(value);
       }
-    });*/
+    });
   }
 
   _widgets() => Center(
@@ -189,26 +188,25 @@ class _PaymentAssociatedPageState extends State<PaymentAssociatedPage> {
                                     Icons.arrow_forward,
                                   ),
                                   onTap: () {
-/*                                      final Future future = Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                    builder: (context) => PaymentAddPage(
-                                      widget._selectedProfile,
-                                      _controller.payments[i],
-                                      _controller.loadYears(),
-                                      _associated,
-                                    ),
-                                  ),
-                                );
-                                future.then(
-                                  (payment) {
-                                    if (payment != null) {
-                                      _controller.payments.removeAt(i);
-                                      _controller.payments
-                                          .insert(i, payment);
-                                    }
-                                  },
-                                );*/
+                                    final Future future = Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                        builder: (context) => PaymentAddPage(
+                                          widget._selectedProfile,
+                                          _controller.payments[i],
+                                          _controller.loadYears(),
+                                        ),
+                                      ),
+                                    );
+                                    future.then(
+                                      (payment) {
+                                        if (payment != null) {
+                                          _controller.payments.removeAt(i);
+                                          _controller.payments
+                                              .insert(i, payment);
+                                        }
+                                      },
+                                    );
                                   },
                                 ),
                               ],
@@ -218,16 +216,16 @@ class _PaymentAssociatedPageState extends State<PaymentAssociatedPage> {
                                 Icons.arrow_forward,
                               ),
                               onTap: () {
-/*                                  Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                builder: (context) => PaymentAddPage(
-                                    widget._selectedProfile,
-                                    _controller.payments[i],
-                                    _controller.loadYears(),
-                                    _associated),
-                              ),
-                            );*/
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (context) => PaymentAddPage(
+                                      widget._selectedProfile,
+                                      _controller.payments[i],
+                                      _controller.loadYears(),
+                                    ),
+                                  ),
+                                );
                               },
                             ),
                     ),
