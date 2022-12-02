@@ -72,6 +72,7 @@ class HeadNotificationListAdmPage extends StatelessWidget {
           SizedBox(height: 10),
           Observer(
             builder: (_) => ListView.separated(
+              padding: EdgeInsets.symmetric(horizontal: 15),
               shrinkWrap: true,
               itemCount: _controller.headNotifications.length,
               itemBuilder: (_, int i) {

@@ -1,14 +1,15 @@
+import 'package:asuka/snackbars/asuka_snack_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:hcslzapp/components/button.dart';
 import 'package:hcslzapp/components/centered.message.dart';
 import 'package:hcslzapp/components/progress.dart';
-import 'package:hcslzapp/components/top.bar.dart';
 import 'package:hcslzapp/components/transaction.auth.dialog.dart';
 import 'package:hcslzapp/controllers/access.request.controller.dart';
 import 'package:hcslzapp/controllers/item.model.dart';
 import 'package:hcslzapp/models/access.request.dart';
-import 'package:asuka/asuka.dart' as asuka;
+import '../../components/my.appbar.dart';
+import '../../components/my.bottom.appbar.dart';
 
 const String _labelNotExists =
     'Não existem requisições de acesso a serem aprovadas.';
@@ -24,7 +25,7 @@ class AccessRequestListPage extends StatefulWidget {
 }
 
 class AccessRequestListPageState extends State<AccessRequestListPage> {
-  AccessRequestController _controller = AccessRequestController();
+  final AccessRequestController _controller = AccessRequestController();
 
   @override
   void initState() {
@@ -39,6 +40,8 @@ class AccessRequestListPageState extends State<AccessRequestListPage> {
   @override
   Widget build(BuildContext context) => Observer(
         builder: (_) => Scaffold(
+          appBar: MyAppBar(_title),
+          bottomNavigationBar: MyBottomAppBar(),
           body: FutureBuilder<List<AccessRequest>>(
             future: _controller.future,
             builder: (context, snapshot) {
@@ -79,62 +82,48 @@ class AccessRequestListPageState extends State<AccessRequestListPage> {
             },
           ),
           floatingActionButtonLocation:
-              FloatingActionButtonLocation.centerFloat,
+              FloatingActionButtonLocation.centerDocked,
           floatingActionButton: _controller.isHidedButton
-              ? null
+              ? SizedBox()
               : Button(icon: Icons.save, onClick: () => _allow()),
         ),
       );
 
-  _widgets() => Container(
-        decoration: BoxDecoration(
-          gradient: LinearGradient(
-            colors: [Colors.white30, Colors.deepOrange],
-            begin: FractionalOffset.topLeft,
-            end: FractionalOffset.bottomRight,
+  _widgets() => ListView(
+        children: [
+          SizedBox(height: 10),
+          Observer(
+            builder: (_) => ListView.separated(
+              padding: EdgeInsets.symmetric(horizontal: 15),
+              shrinkWrap: true,
+              itemCount: _controller.listItems.length,
+              itemBuilder: (_, int i) {
+                return Container(
+                  decoration: BoxDecoration(
+                    color: Colors.deepOrange[300],
+                    shape: BoxShape.rectangle,
+                    borderRadius: BorderRadius.circular(20.0),
+                  ),
+                  child: CheckboxWidget(
+                    item: _controller.listItems[i],
+                    controller: _controller,
+                  ),
+                );
+              },
+              separatorBuilder: (_, int index) => const Divider(),
+            ),
           ),
-        ),
-        height: MediaQuery.of(context).size.height,
-        child: Column(
-          children: [
-            TopBar(
-              title: _title,
-            ),
-            Expanded(
-              child: Observer(
-                builder: (_) => ListView.separated(
-                  shrinkWrap: true,
-                  itemCount: _controller.listItems.length,
-                  itemBuilder: (_, int i) {
-                    return CheckboxWidget(
-                      item: _controller.listItems[i],
-                      controller: _controller,
-                    );
-                  },
-                  separatorBuilder: (_, int index) => const Divider(),
-                ),
-              ),
-            ),
-          ],
-        ),
+        ],
       );
 
   _allow() {
     _controller.allow().then(
       (value) {
         if (value != null) {
-          asuka.showSnackBar(
-            SnackBar(
-              content: Text('Requisições de acesso autorizadas com sucesso.'),
-            ),
-          );
+          AsukaSnackbar.success('Requisições de acesso liberadas com sucesso');
           Navigator.of(context).pop();
         } else {
-          asuka.showSnackBar(
-            SnackBar(
-              content: Text(_controller.errorMsg),
-            ),
-          );
+          AsukaSnackbar.alert(_controller.errorMsg).show();
         }
       },
     );
@@ -151,44 +140,42 @@ class CheckboxWidget extends StatelessWidget {
   final AccessRequestController controller;
 
   @override
-  Widget build(BuildContext context) {
-    return Observer(
-      builder: (_) => Container(
-        decoration: BoxDecoration(
-          color: Colors.white30,
-          shape: BoxShape.rectangle,
-          borderRadius: BorderRadius.circular(8.0),
-          boxShadow: <BoxShadow>[
-            BoxShadow(
-              color: Colors.black12,
-              blurRadius: 10.0,
-              offset: Offset(0.0, 5.0),
+  Widget build(BuildContext context) => Observer(
+        builder: (_) => Container(
+          decoration: BoxDecoration(
+            color: Colors.white30,
+            shape: BoxShape.rectangle,
+            borderRadius: BorderRadius.circular(8.0),
+            boxShadow: <BoxShadow>[
+              BoxShadow(
+                color: Colors.black12,
+                blurRadius: 10.0,
+                offset: Offset(0.0, 5.0),
+              ),
+            ],
+          ),
+          child: CheckboxListTile(
+            controlAffinity: ListTileControlAffinity.leading,
+            title: Text(
+              item.name!,
+              style: TextStyle(
+                fontWeight: FontWeight.bold,
+              ),
             ),
-          ],
-        ),
-        child: CheckboxListTile(
-          controlAffinity: ListTileControlAffinity.leading,
-          title: Text(
-            item.name!,
-            style: TextStyle(
-              fontWeight: FontWeight.bold,
+            subtitle: Text(item.email!),
+            value: item.check,
+            onChanged: _onChanged,
+            secondary: GestureDetector(
+              child: Icon(
+                Icons.delete,
+              ),
+              onTap: () {
+                _delete(item, context);
+              },
             ),
           ),
-          subtitle: Text(item.email!),
-          value: item.check,
-          onChanged: _onChanged,
-          secondary: GestureDetector(
-            child: Icon(
-              Icons.delete,
-            ),
-            onTap: () {
-              _delete(item, context);
-            },
-          ),
         ),
-      ),
-    );
-  }
+      );
 
   _onChanged(bool? value) {
     item.check = value;
@@ -219,18 +206,10 @@ class CheckboxWidget extends StatelessWidget {
     if (response == true) {
       controller.deleteById(item.id).then((value) {
         if (value != null) {
-          asuka.showSnackBar(
-            SnackBar(
-              content: const Text('Requisição de acesso excluída com sucesso.'),
-            ),
-          );
+          AsukaSnackbar.success('Requisição de acesso excluída com sucesso');
           controller.listItems.remove(item);
         } else {
-          asuka.showSnackBar(
-            SnackBar(
-              content: Text(controller.errorMsg),
-            ),
-          );
+          AsukaSnackbar.alert(_controller.errorMsg).show();
         }
       });
     }
