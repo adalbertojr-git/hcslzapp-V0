@@ -196,6 +196,9 @@ class _DashboardPageState extends State<DashboardPage> {
               }
             },
           ),
+          SizedBox(
+            width: 10,
+          ),
         ],
         backgroundColor: Colors.deepOrange[300],
       );
