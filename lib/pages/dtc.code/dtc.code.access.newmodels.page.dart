@@ -1,46 +1,35 @@
 import 'package:flutter/material.dart';
-import 'package:hcslzapp/components/top.bar.dart';
+import '../../components/my.appbar.dart';
+import '../../components/my.bottom.appbar.dart';
+
+const String _title = 'Códigos DTC a partir de 2005';
 
 class DtcCodeAccessNewModelsPage extends StatelessWidget {
   //@override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      body: Container(
-        padding: EdgeInsets.fromLTRB(5.0, 0.0, 5.0, 0.0),
-        decoration: BoxDecoration(
-          gradient: LinearGradient(
-            colors: [Colors.white30, Colors.deepOrange],
-            begin: FractionalOffset.topLeft,
-            end: FractionalOffset.bottomRight,
-          ),
-        ),
-        height: MediaQuery.of(context).size.height,
-        child: Form(
-          child: SingleChildScrollView(
-            child: Column(
-              children: <Widget>[
-                TopBar(title: 'Códigos DTC a partir de 2005',),
-                Container(
-                  color: Colors.white,
-                  padding: EdgeInsets.all(20.0),
-                  child: _disclaimer(),
-                ),
-                Container(
-                  padding: EdgeInsets.all(20.0),
-                  child: _paragraphs(),
-                ),
-              ],
+  Widget build(BuildContext context) => Scaffold(
+        appBar: MyAppBar(_title),
+        bottomNavigationBar: MyBottomAppBar(),
+        body: ListView(
+          children: <Widget>[
+            Container(
+              //color: Colors.white,
+              padding: EdgeInsets.all(20.0),
+              child: _disclaimer(),
             ),
-          ),
+            Container(
+              padding: EdgeInsets.all(20.0),
+              child: _paragraphs(),
+            ),
+          ],
         ),
-      ),
-    );
-  }
+      );
 
   _disclaimer() => RichText(
         textAlign: TextAlign.justify,
         text: const TextSpan(
-            style: TextStyle(color: Colors.black, fontWeight: FontWeight.bold),
+            style: TextStyle(
+              fontWeight: FontWeight.bold,
+            ),
             text: 'AVISO: as informações abaixo são apenas para referência.  '
                 'Este aplicativo não pretende sugerir quaisquer soluções técnicas '
                 'para códigos de problemas de diagnóstico.  O procedimento a '
@@ -53,7 +42,6 @@ class DtcCodeAccessNewModelsPage extends StatelessWidget {
   _paragraphs() => RichText(
         textAlign: TextAlign.justify,
         text: const TextSpan(
-          style: TextStyle(color: Colors.black),
           text:
               '1- Gire a chave de ignição para OFF e veja se a chave Run/Stop está '
               'na posição Run.\n\n',
@@ -129,8 +117,7 @@ class DtcCodeAccessNewModelsPage extends StatelessWidget {
                     'resposta) aparecerá quando o identificador do tacômetro '
                     'for selecionado.\n\n'),
             const TextSpan(
-                text:
-                    '"NO RSP" também aparecerá se a chave ON/OFF estiver '
+                text: '"NO RSP" também aparecerá se a chave ON/OFF estiver '
                     'na posição OFF ao executar este procedimento.'),
           ],
         ),

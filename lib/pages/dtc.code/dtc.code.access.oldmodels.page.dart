@@ -1,46 +1,34 @@
 import 'package:flutter/material.dart';
-import 'package:hcslzapp/components/top.bar.dart';
+import '../../components/my.appbar.dart';
+import '../../components/my.bottom.appbar.dart';
+
+const String _title = 'Códigos DTC até 2004';
 
 class DtcCodeAccessOldModelsPage extends StatelessWidget {
   //@override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      body: Container(
-        padding: EdgeInsets.fromLTRB(5.0, 0.0, 5.0, 0.0),
-        decoration: BoxDecoration(
-          gradient: LinearGradient(
-            colors: [Colors.white30, Colors.deepOrange],
-            begin: FractionalOffset.topLeft,
-            end: FractionalOffset.bottomRight,
-          ),
-        ),
-        height: MediaQuery.of(context).size.height,
-        child: Form(
-          child: SingleChildScrollView(
-            child: Column(
-              children: <Widget>[
-                TopBar(title: 'Códigos DTC até 2004',),
-                Container(
-                  color: Colors.white,
-                  padding: EdgeInsets.all(20.0),
-                  child: _disclaimer(),
-                ),
-                Container(
-                  padding: EdgeInsets.all(20.0),
-                  child: _paragraphs(),
-                ),
-              ],
+  Widget build(BuildContext context) => Scaffold(
+        appBar: MyAppBar(_title),
+        bottomNavigationBar: MyBottomAppBar(),
+        body: ListView(
+          children: <Widget>[
+            Container(
+              padding: EdgeInsets.all(20.0),
+              child: _disclaimer(),
             ),
-          ),
+            Container(
+              padding: EdgeInsets.all(20.0),
+              child: _paragraphs(),
+            ),
+          ],
         ),
-      ),
-    );
-  }
+      );
 
   _disclaimer() => RichText(
         textAlign: TextAlign.justify,
         text: const TextSpan(
-            style: TextStyle(color: Colors.black, fontWeight: FontWeight.bold),
+            style: TextStyle(
+              fontWeight: FontWeight.bold,
+            ),
             text: 'AVISO: as informações abaixo são apenas para referência.  '
                 'Este aplicativo não pretende sugerir quaisquer soluções técnicas '
                 'para códigos de problemas de diagnóstico.  O procedimento a '
@@ -53,7 +41,6 @@ class DtcCodeAccessOldModelsPage extends StatelessWidget {
   _paragraphs() => RichText(
         textAlign: TextAlign.justify,
         text: const TextSpan(
-          style: TextStyle(color: Colors.black),
           text: 'Entre na área de diagnóstico girando a ignição de OFF para '
               'ON enquanto mantém o botão de reinicialização pressionado. '
               'A sequência normal de inicialização ocorrerá antes de entrar no '
