@@ -106,7 +106,7 @@ const String hintDescription = 'Digite a descrição do evento';
 Forgot Password
 */
 const String labelCode = 'Código de 6 dígitos';
-const String hintCode = 'Informe o código recebido no email';
+const String hintCode = 'Código recebido no email';
 /*
 Change Password
 */

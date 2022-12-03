@@ -93,7 +93,6 @@ class ForgotPasswordPage extends StatelessWidget {
   _showCodedDialog(PasswordDTO password) async {
     await Asuka.showDialog(
       builder: (context) => Dialog(
-        backgroundColor: Colors.deepOrange[200],
         child: Stack(
           alignment: Alignment.center,
           children: <Widget>[
@@ -101,10 +100,12 @@ class ForgotPasswordPage extends StatelessWidget {
               width: double.infinity,
               height: 310,
               decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(15),
-                color: Colors.deepOrange[200],
+                border: Border.all(
+                  color: Colors.deepOrange,
+                  width: 2,
+                ),
               ),
-              padding: EdgeInsets.fromLTRB(50, 20, 50, 20),
+              padding: EdgeInsets.fromLTRB(20, 20, 20, 20),
               child: Column(
                 children: [
                   MyTextFormField(
@@ -169,7 +170,7 @@ class ForgotPasswordPage extends StatelessWidget {
   Center showCountdown(BuildContext c) => Center(
         child: CircularCountDownTimer(
           // Countdown duration in Seconds.
-          duration: 120,
+          duration: 180,
 
           // Countdown initial elapsed Duration in Seconds.
           initialDuration: 0,
