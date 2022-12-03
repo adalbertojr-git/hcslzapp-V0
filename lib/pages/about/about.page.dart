@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/painting.dart';
 import '../../components/my.appbar.dart';
+import '../../components/my.bottom.appbar.dart';
 
 const String _title = 'Sobre o Harley Club';
 const String _pathLogoImage = 'assets/imgs/logo.png';
@@ -11,18 +11,19 @@ class AboutPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: MyAppBar(_title),
+      bottomNavigationBar: MyBottomAppBar(),
       body: _widgets(),
     );
   }
 
-  _widgets() => Column(
+  _widgets() => ListView(
     children: <Widget>[
       SizedBox(
-        height: 180.0,
+        height: 200.0,
         child: Image.asset(_pathLogoImage),
       ),
       Padding(
-        padding: EdgeInsets.fromLTRB(00.0, 00.0, 00.0, 10.0),
+        padding: EdgeInsets.fromLTRB(00.0, 10.0, 00.0, 10.0),
         child: Image.asset(_pathAboutImage),
       ),
       _buildText(),
@@ -40,7 +41,6 @@ class AboutPage extends StatelessWidget {
             'da Newroad Fortaleza (Concessionária Harley Davidson localizada em '
             'Fortaleza-CE), onde a primeira revisão aconteceu na residência do '
             'Harleyro Ruy Palhano.\n\n',
-        style: const TextStyle(color: Colors.black87),
         children: <TextSpan>[
           const TextSpan(
               text: 'Dessa maneira a turma foi crescendo, e com as revisões, '
