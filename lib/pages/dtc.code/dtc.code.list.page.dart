@@ -4,9 +4,10 @@ import 'package:hcslzapp/common/labels.and.hints.dart';
 import 'package:hcslzapp/components/centered.message.dart';
 import 'package:hcslzapp/components/my.text.form.field.dart';
 import 'package:hcslzapp/components/progress.dart';
-import 'package:hcslzapp/components/top.bar.dart';
 import 'package:hcslzapp/controllers/dtc.code.list.controller.dart';
 import 'package:hcslzapp/models/dtc.code.dart';
+import '../../components/my.appbar.dart';
+import '../../components/my.bottom.appbar.dart';
 
 const String _labelNotExists = 'Não existem códigos DTC cadastrados.';
 const String _labelUnknown =
@@ -22,7 +23,7 @@ class DtcCodeListPage extends StatefulWidget {
 }
 
 class DtcCodeListPageState extends State<DtcCodeListPage> {
-  DtcCodeListController _controller = DtcCodeListController();
+  final DtcCodeListController _controller = DtcCodeListController();
 
   @override
   void initState() {
@@ -37,6 +38,8 @@ class DtcCodeListPageState extends State<DtcCodeListPage> {
   @override
   Widget build(BuildContext context) => Observer(
         builder: (_) => Scaffold(
+          appBar: MyAppBar(_title),
+          bottomNavigationBar: MyBottomAppBar(),
           body: FutureBuilder<List<DtcCode>>(
             future: _controller.future,
             builder: (context, snapshot) {
@@ -77,85 +80,67 @@ class DtcCodeListPageState extends State<DtcCodeListPage> {
         ),
       );
 
-  _widgets() => Container(
-        decoration: BoxDecoration(
-          gradient: LinearGradient(
-            colors: [Colors.white30, Colors.deepOrange],
-            begin: FractionalOffset.topLeft,
-            end: FractionalOffset.bottomRight,
-          ),
-        ),
-        height: MediaQuery.of(context).size.height,
-        child: Column(
-          children: [
-            TopBar(),
-            MyTextFormField(
-              textEditingController: _controller.codeCtrl,
-              label: labelDtcCode,
-              hint: hintDtcCode,
-              icon: Icons.search,
-              inputType: TextInputType.text,
-              onChanged: _controller.setFilter,
-            ),
-            Expanded(
-              child: Observer(
-                builder: (_) => ListView.separated(
-                  shrinkWrap: true,
-                  itemCount: _controller.listFiltered.length,
-                  itemBuilder: (_, int i) {
-                    return Container(
-                      decoration: BoxDecoration(
-                        color: Colors.white30,
-                        shape: BoxShape.rectangle,
-                        borderRadius: BorderRadius.circular(8.0),
-                        boxShadow: <BoxShadow>[
-                          BoxShadow(
-                            color: Colors.black12,
-                            blurRadius: 10.0,
-                            offset: Offset(0.0, 5.0),
-                          ),
-                        ],
+  _widgets() => ListView(
+    children: [
+      SizedBox(height: 10),
+      MyTextFormField(
+        textEditingController: _controller.codeCtrl,
+        label: labelDtcCode,
+        hint: hintDtcCode,
+        icon: Icons.search,
+        inputType: TextInputType.text,
+        onChanged: _controller.setFilter,
+      ),
+      Observer(
+        builder: (_) => ListView.separated(
+          padding: EdgeInsets.symmetric(horizontal: 15),
+          shrinkWrap: true,
+          itemCount: _controller.listFiltered.length,
+          itemBuilder: (_, int i) {
+            return Container(
+              decoration: BoxDecoration(
+                color: Colors.deepOrange[300],
+                shape: BoxShape.rectangle,
+                borderRadius: BorderRadius.circular(20.0),
+              ),
+              child: ListTile(
+                title: Text(
+                  _controller.listFiltered[i].code,
+                  style: TextStyle(
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+                subtitle: Column(
+                  children: [
+                    Container(
+                      alignment: Alignment.centerLeft,
+                      child: Text(
+                        _controller.listFiltered[i].description,
+                        textAlign: TextAlign.justify,
                       ),
-                      child: ListTile(
-                        title: Text(
-                          _controller.listFiltered[i].code,
-                          style: TextStyle(
-                            fontWeight: FontWeight.bold,
-                          ),
-                        ),
-                        subtitle: Column(
-                          children: [
-                            Container(
-                              alignment: Alignment.centerLeft,
-                              child: Text(
-                                _controller.listFiltered[i].description,
-                                textAlign: TextAlign.justify,
-                              ),
-                            ),
-                            Container(
-                              alignment: Alignment.centerRight,
-                              child: Text(
-                                '\n' +
-                                    _getGroup(_controller.listFiltered[i].code),
-                                textAlign: TextAlign.left,
-                              ),
-                            ),
-                          ],
-                        ),
-                        leading: CircleAvatar(
-                          child: Icon(Icons.error_outline_rounded),
-                          backgroundColor: Colors.red,
-                        ),
+                    ),
+                    Container(
+                      alignment: Alignment.centerRight,
+                      child: Text(
+                        '\n' +
+                            _getGroup(_controller.listFiltered[i].code),
+                        textAlign: TextAlign.left,
                       ),
-                    );
-                  },
-                  separatorBuilder: (_, int index) => const Divider(),
+                    ),
+                  ],
+                ),
+                leading: CircleAvatar(
+                  child: Icon(Icons.error_outline_rounded),
+                  backgroundColor: Colors.red,
                 ),
               ),
-            ),
-          ],
+            );
+          },
+          separatorBuilder: (_, int index) => const Divider(),
         ),
-      );
+      ),
+    ],
+  );
 
   String _getGroup(String code) {
     if (code.startsWith('P'))

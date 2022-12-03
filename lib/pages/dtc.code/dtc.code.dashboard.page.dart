@@ -18,7 +18,7 @@ const List<String> _listAdmScreensDesc = [
 
 const List<IconData> _listAdmIcons = [
   Icons.error_outline_rounded,
-  Icons.list_rounded,
+  Icons.abc_outlined,
 ];
 
 // ignore: must_be_immutable

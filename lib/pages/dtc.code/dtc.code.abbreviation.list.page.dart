@@ -8,12 +8,13 @@ import 'package:hcslzapp/components/top.bar.dart';
 import 'package:hcslzapp/controllers/dtc.code.abbreviation.list.controller.dart';
 import 'package:hcslzapp/models/dtc.code.abbreviation.dart';
 
-const String _labelNotExists =
-    'Não existem abreviaturas cadastradas.';
+import '../../components/my.appbar.dart';
+import '../../components/my.bottom.appbar.dart';
+
+const String _labelNotExists = 'Não existem abreviaturas cadastradas.';
 const String _labelUnknown =
     'Houve um erro desconhecido ao executar a transação.';
 const String _title = 'Abreviaturas';
-
 
 class DtcCodeAbbreviationListPage extends StatefulWidget {
   @override
@@ -24,7 +25,7 @@ class DtcCodeAbbreviationListPage extends StatefulWidget {
 
 class DtcCodeAbbreviationListPageState
     extends State<DtcCodeAbbreviationListPage> {
-  DtcCodeAbbreviationListController _controller =
+  final DtcCodeAbbreviationListController _controller =
       DtcCodeAbbreviationListController();
 
   @override
@@ -39,108 +40,92 @@ class DtcCodeAbbreviationListPageState
 
   @override
   Widget build(BuildContext context) => Observer(
-    builder: (_) => Scaffold(
-      body: FutureBuilder<List<DtcCodeAbbreviation>>(
-        future: _controller.future,
-        builder: (context, snapshot) {
-          switch (snapshot.connectionState) {
-            case ConnectionState.none:
-              break;
-            case ConnectionState.waiting:
-              return Progress();
-            case ConnectionState.active:
-              break;
-            default:
-              if (snapshot.hasError) {
-                return CenteredMessage(title: _title,
-                    message: snapshot.error.toString());
-              } else {
-                if (snapshot.data == null)
-                  return CenteredMessage(
-                    title: _title,
-                    message: _controller.errorMsg,
-                  );
-                if ((snapshot.data?.length)! > 0) {
-                  _controller.init();
-                  _controller.abbreviations.addAll(snapshot.data!);
-                  return _widgets();
-                } else
-                  return CenteredMessage(
-                    title: _title,
-                    message: _labelNotExists,
-                  );
-              }
-          } //switch (snapshot.connectionState)
-          return CenteredMessage(
-            title: _title,
-            message: _labelUnknown,
-          );
-        },
-      ),
-    ),
-  );
-
-  _widgets() => Container(
-        decoration: BoxDecoration(
-          gradient: LinearGradient(
-            colors: [Colors.white30, Colors.deepOrange],
-            begin: FractionalOffset.topLeft,
-            end: FractionalOffset.bottomRight,
+        builder: (_) => Scaffold(
+          appBar: MyAppBar(_title),
+          bottomNavigationBar: MyBottomAppBar(),
+          body: FutureBuilder<List<DtcCodeAbbreviation>>(
+            future: _controller.future,
+            builder: (context, snapshot) {
+              switch (snapshot.connectionState) {
+                case ConnectionState.none:
+                  break;
+                case ConnectionState.waiting:
+                  return Progress();
+                case ConnectionState.active:
+                  break;
+                default:
+                  if (snapshot.hasError) {
+                    return CenteredMessage(
+                        title: _title, message: snapshot.error.toString());
+                  } else {
+                    if (snapshot.data == null)
+                      return CenteredMessage(
+                        title: _title,
+                        message: _controller.errorMsg,
+                      );
+                    if ((snapshot.data?.length)! > 0) {
+                      _controller.init();
+                      _controller.abbreviations.addAll(snapshot.data!);
+                      return _widgets();
+                    } else
+                      return CenteredMessage(
+                        title: _title,
+                        message: _labelNotExists,
+                      );
+                  }
+              } //switch (snapshot.connectionState)
+              return CenteredMessage(
+                title: _title,
+                message: _labelUnknown,
+              );
+            },
           ),
         ),
-        height: MediaQuery.of(context).size.height,
-        child: Column(
-          children: [
-            TopBar(),
-            MyTextFormField(
-              textEditingController: _controller.codeCtrl,
-              label: labelAbbreviation,
-              hint: hintAbbreviation,
-              icon: Icons.search,
-              inputType: TextInputType.text,
-              onChanged: _controller.setFilter,
-            ),
-            Expanded(
-              child: Observer(
-                builder: (_) => ListView.separated(
-                  shrinkWrap: true,
-                  itemCount: _controller.listFiltered.length,
-                  itemBuilder: (_, int i) {
-                    return Container(
-                      decoration: BoxDecoration(
-                        color: Colors.white30,
-                        shape: BoxShape.rectangle,
-                        borderRadius: BorderRadius.circular(8.0),
-                        boxShadow: <BoxShadow>[
-                          BoxShadow(
-                            color: Colors.black12,
-                            blurRadius: 10.0,
-                            offset: Offset(0.0, 5.0),
-                          ),
-                        ],
-                      ),
-                      child: ListTile(
-                        title: Text(
-                          _controller.listFiltered[i].code,
-                          style: TextStyle(
-                            fontWeight: FontWeight.bold,
-                          ),
-                        ),
-                        subtitle: Text(
-                          _controller.listFiltered[i].description,
-                        ),
-                        leading: CircleAvatar(
-                          child: Icon(Icons.check),
-                          backgroundColor: Colors.white,
-                        ),
-                      ),
-                    );
-                  },
-                  separatorBuilder: (_, int index) => const Divider(),
+      );
+
+  _widgets() => ListView(
+    children: [
+      SizedBox(height: 10),
+      MyTextFormField(
+        textEditingController: _controller.codeCtrl,
+        label: labelAbbreviation,
+        hint: hintAbbreviation,
+        icon: Icons.search,
+        inputType: TextInputType.text,
+        onChanged: _controller.setFilter,
+      ),
+      Observer(
+        builder: (_) => ListView.separated(
+          padding: EdgeInsets.symmetric(horizontal: 15),
+          shrinkWrap: true,
+          itemCount: _controller.listFiltered.length,
+          itemBuilder: (_, int i) {
+            return Container(
+              decoration: BoxDecoration(
+                color: Colors.deepOrange[300],
+                shape: BoxShape.rectangle,
+                borderRadius: BorderRadius.circular(20.0),
+              ),
+              child: ListTile(
+                title: Text(
+                  _controller.listFiltered[i].code,
+                  style: TextStyle(
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+                subtitle: Text(
+                  _controller.listFiltered[i].description,
+                ),
+                leading: CircleAvatar(
+                  child: Icon(Icons.abc_outlined),
+                  backgroundColor: Colors.white,
                 ),
               ),
-            ),
-          ],
+            );
+          },
+          separatorBuilder: (_, int index) => const Divider(),
         ),
-      );
+      ),
+    ],
+  );
 }
