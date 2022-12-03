@@ -399,13 +399,13 @@ class _DashboardPageState extends State<DashboardPage> {
           _controller.selectedProfile == ADMIN
               ? 'Olá, ' + _labelAdm
               : 'Olá, ${_controller.getFirstName(_associated.name)}',
-          style: TextStyle(color: Colors.white, fontSize: 20.0),
+          style: TextStyle(color: Colors.white, fontSize: 25.0),
         ),
         subtitle: Text(
           _controller.selectedProfile == ADMIN
               ? _labelAdmEmail
               : _associated.email,
-          style: TextStyle(color: Colors.white60, fontSize: 12.0),
+          style: TextStyle(color: Colors.white60, fontSize: 14.0),
         ),
         trailing: _controller.selectedProfile == ADMIN
             ? CircleAvatar(
