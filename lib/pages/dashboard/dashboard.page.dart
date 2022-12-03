@@ -70,11 +70,11 @@ const List<String> _listAdmScreens = [
 
 const List<String> _listAdmScreensDesc = [
   "Harleyros associados ao Harley Club",
-  "Registro de pagamento das mensalidades dos associados",
-  "Informações sobre viagens, encontros, passeios, etc.",
-  "Empresas com promoções oferecidas ao Harley Club",
+  "Pagamento das mensalidades dos associados",
+  "Viagens, encontros, passeios, etc.",
+  "Empresas parceiras do Harley Club",
   "Avisos da Diretoria aos harleyros associados",
-  "Produtos da marca Harley Club (camisas, bonés, etc)",
+  "Produtos da marca Harley Club",
 ];
 
 const List<IconData> _listAdmIcons = [
@@ -399,7 +399,7 @@ class _DashboardPageState extends State<DashboardPage> {
           _controller.selectedProfile == ADMIN
               ? 'Olá, ' + _labelAdm
               : 'Olá, ${_controller.getFirstName(_associated.name)}',
-          style: TextStyle(color: Colors.white, fontSize: 18.0),
+          style: TextStyle(color: Colors.white, fontSize: 20.0),
         ),
         subtitle: Text(
           _controller.selectedProfile == ADMIN
@@ -658,10 +658,13 @@ class _DashboardPageState extends State<DashboardPage> {
           padding: EdgeInsets.only(left: 16, right: 16, bottom: 16),
           child: ListView.builder(
             itemCount: _listAdmScreens.length,
-            itemBuilder: (BuildContext context, int index) => Card(
-              color: Colors.deepOrange[100],
-              shadowColor: Colors.black,
-              child: _listItem(context, index),
+            itemBuilder: (BuildContext context, int index) => Container(
+              height: 80,
+              child: Card(
+                color: Colors.deepOrange[100],
+                shadowColor: Colors.black,
+                child: _listItem(context, index),
+              ),
             ),
           ),
         ),
@@ -678,24 +681,15 @@ class _DashboardPageState extends State<DashboardPage> {
             title: Text(
               _listAdmScreens[index],
               style: TextStyle(
-                fontSize: 14.0,
-                //color: Colors.black,
                 fontWeight: FontWeight.bold,
               ),
             ),
-            subtitle: Column(
-              mainAxisAlignment: MainAxisAlignment.start,
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: <Widget>[
-                Text(
-                  _listAdmScreensDesc[index],
-                  style: TextStyle(
-                    fontSize: 11.0,
-                    //color: Colors.black,
-                    fontWeight: FontWeight.normal,
-                  ),
-                ),
-              ],
+            subtitle: Text(
+              _listAdmScreensDesc[index],
+              style: TextStyle(
+                fontSize: 12.0,
+                fontWeight: FontWeight.normal,
+              ),
             ),
             onTap: () {
               Navigator.push(

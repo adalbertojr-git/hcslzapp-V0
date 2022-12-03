@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:hcslzapp/components/button.dart';
 import 'package:hcslzapp/pages/dtc.code/dtc.code.access.oldmodels.page.dart';
 import 'package:hcslzapp/pages/dtc.code/dtc.code.list.page.dart';
-
+import '../../components/my.bottom.appbar.dart';
 import 'dtc.code.abbreviation.list.page.dart';
 import 'dtc.code.access.newmodels.page.dart';
 
@@ -34,13 +33,9 @@ class DtcCodeDashboardPage extends StatelessWidget {
   Widget build(BuildContext context) {
     _gContext = context;
     return Scaffold(
+      bottomNavigationBar: MyBottomAppBar(),
       body: Stack(
         children: <Widget>[_dashBg(), _content()],
-      ),
-      floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
-      floatingActionButton: Button(
-        icon: Icons.arrow_back,
-        onClick: () => Navigator.of(context).pop(),
       ),
     );
   }
@@ -147,7 +142,6 @@ class DtcCodeDashboardPage extends StatelessWidget {
               title: Text(
                 _listAdmScreens[index],
                 style: TextStyle(
-                  fontSize: 14.0,
                   fontWeight: FontWeight.bold,
                 ),
               ),
@@ -158,7 +152,7 @@ class DtcCodeDashboardPage extends StatelessWidget {
                   Text(
                     _listAdmScreensDesc[index],
                     style: TextStyle(
-                      fontSize: 11.0,
+                      fontSize: 12.0,
                       fontWeight: FontWeight.normal,
                     ),
                   ),
@@ -211,22 +205,14 @@ class _BarButton extends StatelessWidget {
               children: <Widget>[
                 Icon(
                   icon,
-                  color: iconColor, //Colors.orange,
+                  color: iconColor,
                   size: 50.0,
                 ),
                 Text(
                   title,
                   style: TextStyle(
                     color: Colors.black,
-                    fontSize: 14.0,
                     fontWeight: FontWeight.bold,
-                  ),
-                ),
-                Text(
-                  subtitle,
-                  style: TextStyle(
-                    color: Colors.black,
-                    fontSize: 11.0,
                   ),
                 ),
               ],

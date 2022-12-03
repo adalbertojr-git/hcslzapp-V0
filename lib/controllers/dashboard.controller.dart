@@ -169,7 +169,6 @@ class GridButton extends StatelessWidget {
               title,
               textAlign: TextAlign.center,
               style: TextStyle(
-                fontSize: 12,
                 fontWeight: FontWeight.bold,
               ),
             ),
@@ -215,16 +214,13 @@ class BarButton extends StatelessWidget {
                 Text(
                   title,
                   style: TextStyle(
-                    //color: Colors.black,
-                    fontSize: 14.0,
                     fontWeight: FontWeight.bold,
                   ),
                 ),
                 Text(
                   subtitle,
                   style: TextStyle(
-                    //color: Colors.black,
-                    fontSize: 11.0,
+                    fontSize: 12.0,
                   ),
                 ),
               ],
