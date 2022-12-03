@@ -12,7 +12,6 @@ class DtcCodeAccessNewModelsPage extends StatelessWidget {
         body: ListView(
           children: <Widget>[
             Container(
-              //color: Colors.white,
               padding: EdgeInsets.all(20.0),
               child: _disclaimer(),
             ),
@@ -24,9 +23,8 @@ class DtcCodeAccessNewModelsPage extends StatelessWidget {
         ),
       );
 
-  _disclaimer() => RichText(
-        textAlign: TextAlign.justify,
-        text: const TextSpan(
+  _disclaimer() => Text.rich(
+        const TextSpan(
             style: TextStyle(
               fontWeight: FontWeight.bold,
             ),
@@ -39,9 +37,8 @@ class DtcCodeAccessNewModelsPage extends StatelessWidget {
                 'feedback .'),
       );
 
-  _paragraphs() => RichText(
-        textAlign: TextAlign.justify,
-        text: const TextSpan(
+  _paragraphs() => Text.rich(
+        const TextSpan(
           text:
               '1- Gire a chave de ignição para OFF e veja se a chave Run/Stop está '
               'na posição Run.\n\n',

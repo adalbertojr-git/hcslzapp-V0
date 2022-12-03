@@ -56,8 +56,8 @@ class ForgotPasswordPage extends StatelessWidget {
             ),
             Container(
               padding: const EdgeInsets.symmetric(horizontal: 20),
-              child: RichText(
-                text: const TextSpan(
+              child: Text.rich(
+                const TextSpan(
                   text: 'Atenção: Você receberá um email em nome do Harley Club ' +
                       'contendo um código de segurança (numérico de 6 dígitos). ' +
                       'Caso não encontre o email na Caixa de Entrada, verifique sua caixa de Spam.',

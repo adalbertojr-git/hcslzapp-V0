@@ -23,9 +23,8 @@ class DtcCodeAccessOldModelsPage extends StatelessWidget {
         ),
       );
 
-  _disclaimer() => RichText(
-        textAlign: TextAlign.justify,
-        text: const TextSpan(
+  _disclaimer() => Text.rich(
+        const TextSpan(
             style: TextStyle(
               fontWeight: FontWeight.bold,
             ),
@@ -38,9 +37,8 @@ class DtcCodeAccessOldModelsPage extends StatelessWidget {
                 'feedback .'),
       );
 
-  _paragraphs() => RichText(
-        textAlign: TextAlign.justify,
-        text: const TextSpan(
+  _paragraphs() => Text.rich(
+        const TextSpan(
           text: 'Entre na área de diagnóstico girando a ignição de OFF para '
               'ON enquanto mantém o botão de reinicialização pressionado. '
               'A sequência normal de inicialização ocorrerá antes de entrar no '
