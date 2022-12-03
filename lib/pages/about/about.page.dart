@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/painting.dart';
-import '../../components/top.bar.dart';
+import '../../components/my.appbar.dart';
 
+const String _title = 'Sobre o Harley Club';
 const String _pathLogoImage = 'assets/imgs/logo.png';
 const String _pathAboutImage = 'assets/imgs/sobre.jpeg';
 
@@ -9,36 +10,24 @@ class AboutPage extends StatelessWidget {
   //@override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Container(
-        padding: EdgeInsets.fromLTRB(5.0, 0.0, 5.0, 0.0),
-        decoration: BoxDecoration(
-          gradient: LinearGradient(
-            colors: [Colors.white30, Colors.deepOrange],
-            begin: FractionalOffset.topLeft,
-            end: FractionalOffset.bottomRight,
-          ),
-        ),
-        height: MediaQuery.of(context).size.height,
-        child: Form(
-          child: SingleChildScrollView(
-              child: Column(
-            children: <Widget>[
-              TopBar(),
-              SizedBox(
-                height: 180.0,
-                child: Image.asset(_pathLogoImage),
-              ),
-              Padding(
-                padding: EdgeInsets.fromLTRB(00.0, 00.0, 00.0, 10.0),
-                child: Image.asset(_pathAboutImage),
-              ),
-              _buildText(),
-            ],
-          )),
-        ),
-      ),
+      appBar: MyAppBar(_title),
+      body: _widgets(),
     );
   }
+
+  _widgets() => Column(
+    children: <Widget>[
+      SizedBox(
+        height: 180.0,
+        child: Image.asset(_pathLogoImage),
+      ),
+      Padding(
+        padding: EdgeInsets.fromLTRB(00.0, 00.0, 00.0, 10.0),
+        child: Image.asset(_pathAboutImage),
+      ),
+      _buildText(),
+    ],
+  );
 
   Widget _buildText() {
     return RichText(

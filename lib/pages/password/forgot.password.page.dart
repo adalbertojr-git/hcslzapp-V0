@@ -10,40 +10,30 @@ import 'package:hcslzapp/models/password.dto.dart';
 import 'package:hcslzapp/pages/password/change.password.page.dart';
 import 'package:mask_text_input_formatter/mask_text_input_formatter.dart';
 import 'package:circular_countdown_timer/circular_countdown_timer.dart';
-
 import '../../components/my.bottom.appbar.dart';
 
 const String _title = 'Esqueci minha senha';
 
-class ForgotPasswordPage extends StatefulWidget {
-  @override
-  _ForgotPasswordPageState createState() => _ForgotPasswordPageState();
-}
-
-class _ForgotPasswordPageState extends State<ForgotPasswordPage> {
+class ForgotPasswordPage extends StatelessWidget {
   final ForgotPasswordController _controller = ForgotPasswordController();
   final CountDownController _controllerCountDown = CountDownController();
 
   @override
-  void initState() {
+  Widget build(BuildContext context) {
     _controller.init();
-    super.initState();
-  }
-
-  @override
-  Widget build(BuildContext context) => Observer(
-        builder: (_) => Scaffold(
-          appBar: MyAppBar(_title),
-          bottomNavigationBar: MyBottomAppBar(),
-          body: _widgets(),
-          floatingActionButtonLocation:
-              FloatingActionButtonLocation.centerDocked,
-          floatingActionButton: Button(
-            icon: Icons.email,
-            onClick: () => _forgotPassword(),
-          ),
+    return Observer(
+      builder: (_) => Scaffold(
+        appBar: MyAppBar(_title),
+        bottomNavigationBar: MyBottomAppBar(),
+        body: _widgets(),
+        floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
+        floatingActionButton: Button(
+          icon: Icons.email,
+          onClick: () => _forgotPassword(),
         ),
-      );
+      ),
+    );
+  }
 
   _widgets() => Center(
         child: ListView(
@@ -260,13 +250,13 @@ class _ForgotPasswordPageState extends State<ForgotPasswordPage> {
         ),
       );
 
-  _validateCode(BuildContext c, PasswordDTO passwordDTO) {
+  _validateCode(BuildContext context, PasswordDTO passwordDTO) {
     if (passwordDTO.aux.length != 0) {
       _controller.validateCode(passwordDTO).then(
         (value) {
           if (value != null) {
             if (value.startsWith('OK')) {
-              Navigator.pop(c);
+              Navigator.pop(context);
               Navigator.push(
                 context,
                 MaterialPageRoute(

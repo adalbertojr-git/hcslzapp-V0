@@ -1,4 +1,3 @@
-import 'package:asuka/asuka.dart' as asuka;
 import 'package:asuka/snackbars/asuka_snack_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
