@@ -17,7 +17,7 @@ class Button extends StatelessWidget {
   Widget build(BuildContext context) => FloatingActionButton(
         mini: mini,
         heroTag: heroTag,
-        backgroundColor: Colors.deepOrange[200],
+        backgroundColor: Colors.grey[500],
         child: Icon(
           icon,
           color: Colors.black,
