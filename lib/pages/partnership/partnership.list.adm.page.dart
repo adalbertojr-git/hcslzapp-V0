@@ -79,13 +79,13 @@ class PartnershipListAdmPage extends StatelessWidget {
             }),
       );
 
-  _widgets(BuildContext context) => Center(
-    child: ListView(
-      children: [
-        SizedBox(
-          height: 10.0,
-        ),
-        Observer(
+  _widgets(BuildContext context) => Column(
+    children: [
+      SizedBox(
+        height: 10.0,
+      ),
+      Expanded(
+        child: Observer(
           builder: (_) => ListView.separated(
             padding: EdgeInsets.symmetric(horizontal: 15),
             shrinkWrap: true,
@@ -146,8 +146,8 @@ class PartnershipListAdmPage extends StatelessWidget {
             separatorBuilder: (_, int index) => const Divider(),
           ),
         ),
-      ],
-    ),
+      ),
+    ],
   );
 
   _delete(BuildContext context, int i) async {

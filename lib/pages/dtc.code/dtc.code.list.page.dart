@@ -80,7 +80,7 @@ class DtcCodeListPageState extends State<DtcCodeListPage> {
         ),
       );
 
-  _widgets() => ListView(
+  _widgets() => Column(
     children: [
       SizedBox(height: 10),
       MyTextFormField(
@@ -91,52 +91,54 @@ class DtcCodeListPageState extends State<DtcCodeListPage> {
         inputType: TextInputType.text,
         onChanged: _controller.setFilter,
       ),
-      Observer(
-        builder: (_) => ListView.separated(
-          padding: EdgeInsets.symmetric(horizontal: 15),
-          shrinkWrap: true,
-          itemCount: _controller.listFiltered.length,
-          itemBuilder: (_, int i) {
-            return Container(
-              decoration: BoxDecoration(
-                color: Colors.deepOrange[300],
-                shape: BoxShape.rectangle,
-                borderRadius: BorderRadius.circular(20.0),
-              ),
-              child: ListTile(
-                title: Text(
-                  _controller.listFiltered[i].code,
-                  style: TextStyle(
-                    fontWeight: FontWeight.bold,
+      Expanded(
+        child: Observer(
+          builder: (_) => ListView.separated(
+            padding: EdgeInsets.symmetric(horizontal: 15),
+            shrinkWrap: true,
+            itemCount: _controller.listFiltered.length,
+            itemBuilder: (_, int i) {
+              return Container(
+                decoration: BoxDecoration(
+                  color: Colors.deepOrange[300],
+                  shape: BoxShape.rectangle,
+                  borderRadius: BorderRadius.circular(20.0),
+                ),
+                child: ListTile(
+                  title: Text(
+                    _controller.listFiltered[i].code,
+                    style: TextStyle(
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                  subtitle: Column(
+                    children: [
+                      Container(
+                        alignment: Alignment.centerLeft,
+                        child: Text(
+                          _controller.listFiltered[i].description,
+                          textAlign: TextAlign.justify,
+                        ),
+                      ),
+                      Container(
+                        alignment: Alignment.centerRight,
+                        child: Text(
+                          '\n' +
+                              _getGroup(_controller.listFiltered[i].code),
+                          textAlign: TextAlign.left,
+                        ),
+                      ),
+                    ],
+                  ),
+                  leading: CircleAvatar(
+                    child: Icon(Icons.error_outline_rounded),
+                    backgroundColor: Colors.red,
                   ),
                 ),
-                subtitle: Column(
-                  children: [
-                    Container(
-                      alignment: Alignment.centerLeft,
-                      child: Text(
-                        _controller.listFiltered[i].description,
-                        textAlign: TextAlign.justify,
-                      ),
-                    ),
-                    Container(
-                      alignment: Alignment.centerRight,
-                      child: Text(
-                        '\n' +
-                            _getGroup(_controller.listFiltered[i].code),
-                        textAlign: TextAlign.left,
-                      ),
-                    ),
-                  ],
-                ),
-                leading: CircleAvatar(
-                  child: Icon(Icons.error_outline_rounded),
-                  backgroundColor: Colors.red,
-                ),
-              ),
-            );
-          },
-          separatorBuilder: (_, int index) => const Divider(),
+              );
+            },
+            separatorBuilder: (_, int index) => const Divider(),
+          ),
         ),
       ),
     ],
