@@ -22,8 +22,6 @@ const List<IconData> _listAdmIcons = [
 
 // ignore: must_be_immutable
 class DtcCodeDashboardPage extends StatelessWidget {
-  late BuildContext _gContext;
-
   List<Widget> _listAdmWidgets = [
     DtcCodeListPage(),
     DtcCodeAbbreviationListPage(),
@@ -31,17 +29,15 @@ class DtcCodeDashboardPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    _gContext = context;
     return Scaffold(
       bottomNavigationBar: MyBottomAppBar(),
       body: Stack(
-        children: <Widget>[_dashBg(), _content()],
+        children: <Widget>[_dashBg(), _content(context)],
       ),
     );
   }
 
-  _dashBg() =>
-      Column(
+  _dashBg() => Column(
         children: <Widget>[
           Expanded(
             child: Container(color: Colors.deepOrange[300]),
@@ -54,27 +50,39 @@ class DtcCodeDashboardPage extends StatelessWidget {
         ],
       );
 
-  _content() =>
-      Container(
+  _content(BuildContext context) => Container(
         child: Column(
           children: <Widget>[
-            _header(),
-            _bar(),
+            _header(context),
+            _bar(context),
             _grid(),
           ],
         ),
       );
 
-  _header() =>
-      ListTile(
-        contentPadding: EdgeInsets.only(left: 40, right: 20, top: 30),
+  _header(BuildContext context) => ListTile(
+        leading: IconButton(
+          icon: Icon(
+            Icons.arrow_back,
+            color: Colors.white,
+          ),
+          onPressed: () {
+            Navigator.of(context).pop();
+          },
+        ),
+        contentPadding: EdgeInsets.only(left: 10, right: 10, top: 30),
         title: const Text(
           'Códigos DTC',
-          style: TextStyle(color: Colors.white, fontSize: 22.0),
+          style: TextStyle(
+            color: Colors.white,
+            fontSize: 22.0,
+          ),
+          textAlign: TextAlign.center,
         ),
         subtitle: const Text(
           'Diagnostic Trouble Codes',
           style: TextStyle(color: Colors.white60),
+          textAlign: TextAlign.center,
         ),
         trailing: CircleAvatar(
           backgroundColor: Colors.lightBlueAccent,
@@ -83,8 +91,7 @@ class DtcCodeDashboardPage extends StatelessWidget {
         ),
       );
 
-  _bar() =>
-      Row(
+  _bar(BuildContext context) => Row(
         mainAxisAlignment: MainAxisAlignment.center,
         children: <Widget>[
           _BarButton(
@@ -94,7 +101,7 @@ class DtcCodeDashboardPage extends StatelessWidget {
             Colors.orange,
             onClick: () {
               Navigator.push(
-                _gContext,
+                context,
                 MaterialPageRoute(
                     builder: (_gContext) => DtcCodeAccessOldModelsPage()),
               );
@@ -107,7 +114,7 @@ class DtcCodeDashboardPage extends StatelessWidget {
             Colors.white,
             onClick: () {
               Navigator.push(
-                _gContext,
+                context,
                 MaterialPageRoute(
                     builder: (_gContext) => DtcCodeAccessNewModelsPage()),
               );
@@ -116,8 +123,7 @@ class DtcCodeDashboardPage extends StatelessWidget {
         ],
       );
 
-  _grid() =>
-      Expanded(
+  _grid() => Expanded(
         child: Container(
           padding: EdgeInsets.only(left: 16, right: 16, bottom: 16),
           child: ListView.builder(
@@ -127,8 +133,7 @@ class DtcCodeDashboardPage extends StatelessWidget {
         ),
       );
 
-  Widget _listItem(BuildContext context, int index) =>
-      Card(
+  Widget _listItem(BuildContext context, int index) => Card(
         color: Colors.deepOrange[100],
         shadowColor: Colors.black,
         child: Column(
@@ -160,7 +165,7 @@ class DtcCodeDashboardPage extends StatelessWidget {
               ),
               onTap: () {
                 Navigator.push(
-                  _gContext,
+                  context,
                   MaterialPageRoute(
                       builder: (_gContext) => _listAdmWidgets[index]),
                 );
@@ -194,10 +199,7 @@ class _BarButton extends StatelessWidget {
           child: Container(
             padding: EdgeInsets.all(8),
             height: 100,
-            width: MediaQuery
-                .of(context)
-                .size
-                .width / 2 - 15,
+            width: MediaQuery.of(context).size.width / 2 - 15,
             //width: 150,
             child: Column(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
