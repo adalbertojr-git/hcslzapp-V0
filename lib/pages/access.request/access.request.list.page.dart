@@ -99,16 +99,9 @@ class AccessRequestListPageState extends State<AccessRequestListPage> {
                 shrinkWrap: true,
                 itemCount: _controller.listItems.length,
                 itemBuilder: (_, int i) {
-                  return Container(
-                    decoration: BoxDecoration(
-                      color: Colors.deepOrange[300],
-                      shape: BoxShape.rectangle,
-                      borderRadius: BorderRadius.circular(20.0),
-                    ),
-                    child: CheckboxWidget(
-                      item: _controller.listItems[i],
-                      controller: _controller,
-                    ),
+                  return CheckboxWidget(
+                    item: _controller.listItems[i],
+                    controller: _controller,
                   );
                 },
                 separatorBuilder: (_, int index) => const Divider(),

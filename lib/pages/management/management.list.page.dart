@@ -134,62 +134,62 @@ class ManagementListPageState extends State<ManagementListPage> {
     );
   }
 
-  _widgets() => Center(
-        child: ListView(
-          children: [
-            SizedBox(height: 10),
-            Observer(
-              builder: (_) => ListView.separated(
-                padding: EdgeInsets.symmetric(horizontal: 15),
-                shrinkWrap: true,
-                itemCount: _controller.associateds.length,
-                itemBuilder: (_, int i) {
-                  return Container(
-                    decoration: BoxDecoration(
-                      color: Colors.deepOrange[300],
-                      shape: BoxShape.rectangle,
-                      borderRadius: BorderRadius.circular(20.0),
+  _widgets() => Column(
+    children: [
+      SizedBox(height: 10),
+      Expanded(
+        child: Observer(
+          builder: (_) => ListView.separated(
+            padding: EdgeInsets.symmetric(horizontal: 15),
+            shrinkWrap: true,
+            itemCount: _controller.associateds.length,
+            itemBuilder: (_, int i) {
+              return Container(
+                decoration: BoxDecoration(
+                  color: Colors.deepOrange[300],
+                  shape: BoxShape.rectangle,
+                  borderRadius: BorderRadius.circular(20.0),
+                ),
+                child: ListTile(
+                  title: Text(
+                    _controller.associateds[i].name,
+                    style: TextStyle(
+                      fontWeight: FontWeight.bold,
                     ),
-                    child: ListTile(
-                      title: Text(
-                        _controller.associateds[i].name,
-                        style: TextStyle(
-                          fontWeight: FontWeight.bold,
+                  ),
+                  subtitle: Text('Tel.: ' +
+                      (_controller.associateds[i].phone != null
+                          ? _controller.associateds[i].phone
+                          : 'Não informado') +
+                      '\n' +
+                      'Status: ' +
+                      _controller.associateds[i].status),
+                  leading: CircleAvatar(
+                    child: Icon(Icons.admin_panel_settings),
+                    backgroundColor: Colors.white,
+                  ),
+                  trailing: Wrap(
+                    spacing: 10, // space between two icons
+                    children: <Widget>[
+                      GestureDetector(
+                        child: Icon(
+                          Icons.delete,
                         ),
+                        onTap: () {
+                          _delete(_controller.associateds[i]);
+                        },
                       ),
-                      subtitle: Text('Tel.: ' +
-                          (_controller.associateds[i].phone != null
-                              ? _controller.associateds[i].phone
-                              : 'Não informado') +
-                          '\n' +
-                          'Status: ' +
-                          _controller.associateds[i].status),
-                      leading: CircleAvatar(
-                        child: Icon(Icons.admin_panel_settings),
-                        backgroundColor: Colors.white,
-                      ),
-                      trailing: Wrap(
-                        spacing: 10, // space between two icons
-                        children: <Widget>[
-                          GestureDetector(
-                            child: Icon(
-                              Icons.delete,
-                            ),
-                            onTap: () {
-                              _delete(_controller.associateds[i]);
-                            },
-                          ),
-                        ],
-                      ),
-                    ),
-                  );
-                },
-                separatorBuilder: (_, int index) => const Divider(),
-              ),
-            ),
-          ],
+                    ],
+                  ),
+                ),
+              );
+            },
+            separatorBuilder: (_, int index) => const Divider(),
+          ),
         ),
-      );
+      ),
+    ],
+  );
 
   _delete(Associated associated) async {
     var response = await showDialog(
