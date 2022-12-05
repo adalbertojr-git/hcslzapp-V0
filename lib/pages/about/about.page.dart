@@ -31,8 +31,8 @@ class AboutPage extends StatelessWidget {
   );
 
   Widget _buildText() {
-    return RichText(
-      text: const TextSpan(
+    return Text.rich(
+      const TextSpan(
         text:
             'A história do Harley Club começou em 2012 pela necessidade de se fazer '
             'revisões em nossas máquinas, pois até hoje, São Luís não dispõe de '
@@ -58,11 +58,11 @@ class AboutPage extends StatelessWidget {
                 'os mesmos cursos na cidade de São Luís-MA para os interessados.\n\n',
           ),
           const TextSpan(
-            text: 'Assim, bem de mansinho, formou-se um Moto Grupo.\n\n ',
+            text: 'Assim, bem de mansinho, formou-se um Moto Grupo.\n\n',
           ),
           const TextSpan(
             text:
-                'Já no ano de 2014 o nome passou a ser ‘Harley Club São Luís’.\n\n',
+                'Já no ano de 2014 o nome passou a ser ‘Harley Club São Luís.\n\n',
           ),
           const TextSpan(
               text: 'Com todo esse pessoal rodando pela cidade, encheram-se de '
@@ -97,7 +97,7 @@ class AboutPage extends StatelessWidget {
             ),
           ),
           const TextSpan(
-            text: '"..."\n\n',
+            text: '...\n\n',
             style: TextStyle(
               color: Colors.blueGrey,
               fontStyle: FontStyle.italic,
