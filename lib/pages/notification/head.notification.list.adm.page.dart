@@ -67,59 +67,61 @@ class HeadNotificationListAdmPage extends StatelessWidget {
             }),
       );
 
-  _widgets(BuildContext context) => ListView(
+  _widgets(BuildContext context) => Column(
         children: [
           SizedBox(height: 10),
-          Observer(
-            builder: (_) => ListView.separated(
-              padding: EdgeInsets.symmetric(horizontal: 15),
-              shrinkWrap: true,
-              itemCount: _controller.headNotifications.length,
-              itemBuilder: (_, int i) {
-                return Container(
-                  decoration: BoxDecoration(
-                    color: Colors.deepOrange[300],
-                    shape: BoxShape.rectangle,
-                    borderRadius: BorderRadius.circular(20.0),
-                  ),
-                  child: ListTile(
-                    title: Text(
-                      _controller.headNotifications[i].title,
-                      style: TextStyle(
-                        fontWeight: FontWeight.bold,
+          Expanded(
+            child: Observer(
+              builder: (_) => ListView.separated(
+                padding: EdgeInsets.symmetric(horizontal: 15),
+                shrinkWrap: true,
+                itemCount: _controller.headNotifications.length,
+                itemBuilder: (_, int i) {
+                  return Container(
+                    decoration: BoxDecoration(
+                      color: Colors.deepOrange[300],
+                      shape: BoxShape.rectangle,
+                      borderRadius: BorderRadius.circular(20.0),
+                    ),
+                    child: ListTile(
+                      title: Text(
+                        _controller.headNotifications[i].title,
+                        style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                      subtitle: Text('Publicação: ' +
+                          (_controller.headNotifications[i].datePublication)),
+                      leading: CircleAvatar(
+                        child: Icon(Icons.message),
+                        backgroundColor: Colors.white,
+                      ),
+                      trailing: Wrap(
+                        spacing: 10, // space between two icons
+                        children: <Widget>[
+                          GestureDetector(
+                            child: Icon(
+                              Icons.delete,
+                            ),
+                            onTap: () {
+                              _delete(context, i);
+                            },
+                          ),
+                          GestureDetector(
+                            child: Icon(
+                              Icons.arrow_forward,
+                            ),
+                            onTap: () {
+                              _add(context, i);
+                            },
+                          ),
+                        ],
                       ),
                     ),
-                    subtitle: Text('Data de Publicação: ' +
-                        (_controller.headNotifications[i].datePublication)),
-                    leading: CircleAvatar(
-                      child: Icon(Icons.message),
-                      backgroundColor: Colors.white,
-                    ),
-                    trailing: Wrap(
-                      spacing: 10, // space between two icons
-                      children: <Widget>[
-                        GestureDetector(
-                          child: Icon(
-                            Icons.delete,
-                          ),
-                          onTap: () {
-                            _delete(context, i);
-                          },
-                        ),
-                        GestureDetector(
-                          child: Icon(
-                            Icons.arrow_forward,
-                          ),
-                          onTap: () {
-                            _add(context, i);
-                          },
-                        ),
-                      ],
-                    ),
-                  ),
-                );
-              },
-              separatorBuilder: (_, int index) => const Divider(),
+                  );
+                },
+                separatorBuilder: (_, int index) => const Divider(),
+              ),
             ),
           ),
         ],
