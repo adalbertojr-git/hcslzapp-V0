@@ -122,83 +122,55 @@ class _PaymentAssociatedPageState extends State<PaymentAssociatedPage> {
     });
   }
 
-  _widgets() => Center(
-        child: ListView(
-          children: [
-            SizedBox(height: 10),
-            Observer(
-              builder: (_) => ListView.separated(
-                padding: EdgeInsets.symmetric(horizontal: 15),
-                shrinkWrap: true,
-                itemCount: _controller.payments.length,
-                itemBuilder: (_, int i) {
-                  return Container(
-                    decoration: BoxDecoration(
-                      color: Colors.deepOrange[300],
-                      shape: BoxShape.rectangle,
-                      borderRadius: BorderRadius.circular(20.0),
+  _widgets() => Column(
+    children: [
+      SizedBox(height: 10),
+      Expanded(
+        child: Observer(
+          builder: (_) => ListView.separated(
+            padding: EdgeInsets.symmetric(horizontal: 15),
+            shrinkWrap: true,
+            itemCount: _controller.payments.length,
+            itemBuilder: (_, int i) {
+              return Container(
+                decoration: BoxDecoration(
+                  color: Colors.deepOrange[300],
+                  shape: BoxShape.rectangle,
+                  borderRadius: BorderRadius.circular(20.0),
+                ),
+                child: ListTile(
+                  title: Text(
+                    'Ano: ' + _controller.payments[i].year,
+                    style: TextStyle(
+                      fontWeight: FontWeight.bold,
                     ),
-                    child: ListTile(
-                      title: Text(
-                        'Ano: ' + _controller.payments[i].year,
-                        style: TextStyle(
-                          fontWeight: FontWeight.bold,
-                        ),
-                      ),
-                      subtitle: Text('Total pago: R\$ ' +
-                          _controller
-                              .getTotal(_controller.payments[i].year)
-                              .toString()),
-                      leading: CircleAvatar(
-                        child: Icon(Icons.calendar_today),
-                        backgroundColor: Colors.white,
-                      ),
-                      trailing: widget._selectedProfile == ADMIN
-                          ? Wrap(
-                              spacing: 10, // space between two icons
-                              children: <Widget>[
-                                GestureDetector(
-                                  child: Icon(
-                                    Icons.delete,
-                                  ),
-                                  onTap: () {
-                                    _delete(i);
-                                  },
-                                ),
-                                GestureDetector(
-                                  child: Icon(
-                                    Icons.arrow_forward,
-                                  ),
-                                  onTap: () {
-                                    final Future future = Navigator.push(
-                                      context,
-                                      MaterialPageRoute(
-                                        builder: (context) => PaymentAddPage(
-                                          widget._selectedProfile,
-                                          _controller.payments[i],
-                                          _controller.loadYears(),
-                                        ),
-                                      ),
-                                    );
-                                    future.then(
-                                      (payment) {
-                                        if (payment != null) {
-                                          _controller.payments.removeAt(i);
-                                          _controller.payments
-                                              .insert(i, payment);
-                                        }
-                                      },
-                                    );
-                                  },
-                                ),
-                              ],
-                            )
-                          : GestureDetector(
+                  ),
+                  subtitle: Text('Total pago: R\$ ' +
+                      _controller
+                          .getTotal(_controller.payments[i].year)
+                          .toString()),
+                  leading: CircleAvatar(
+                    child: Icon(Icons.calendar_today),
+                    backgroundColor: Colors.white,
+                  ),
+                  trailing: widget._selectedProfile == ADMIN
+                      ? Wrap(
+                          spacing: 10, // space between two icons
+                          children: <Widget>[
+                            GestureDetector(
+                              child: Icon(
+                                Icons.delete,
+                              ),
+                              onTap: () {
+                                _delete(i);
+                              },
+                            ),
+                            GestureDetector(
                               child: Icon(
                                 Icons.arrow_forward,
                               ),
                               onTap: () {
-                                Navigator.push(
+                                final Future future = Navigator.push(
                                   context,
                                   MaterialPageRoute(
                                     builder: (context) => PaymentAddPage(
@@ -208,17 +180,45 @@ class _PaymentAssociatedPageState extends State<PaymentAssociatedPage> {
                                     ),
                                   ),
                                 );
+                                future.then(
+                                  (payment) {
+                                    if (payment != null) {
+                                      _controller.payments.removeAt(i);
+                                      _controller.payments
+                                          .insert(i, payment);
+                                    }
+                                  },
+                                );
                               },
                             ),
-                    ),
-                  );
-                },
-                separatorBuilder: (_, int index) => const Divider(),
-              ),
-            ),
-          ],
+                          ],
+                        )
+                      : GestureDetector(
+                          child: Icon(
+                            Icons.arrow_forward,
+                          ),
+                          onTap: () {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => PaymentAddPage(
+                                  widget._selectedProfile,
+                                  _controller.payments[i],
+                                  _controller.loadYears(),
+                                ),
+                              ),
+                            );
+                          },
+                        ),
+                ),
+              );
+            },
+            separatorBuilder: (_, int index) => const Divider(),
+          ),
         ),
-      );
+      ),
+    ],
+  );
 
   _delete(int i) async {
     var response = await showDialog(
