@@ -176,6 +176,7 @@ class _PartnershipListAssociatedPageState
 
   Widget buildDetail() => Observer(
         builder: (_) => Container(
+          padding: EdgeInsets.symmetric(horizontal: 5),
           height: MediaQuery.of(context).size.height,
           color: Colors.deepOrange[100],
           child: Column(
@@ -186,7 +187,6 @@ class _PartnershipListAssociatedPageState
               Padding(
                 padding: EdgeInsets.symmetric(
                   vertical: 50,
-                  horizontal: 15,
                 ),
                 child: Text(
                   _controller
