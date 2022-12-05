@@ -538,12 +538,13 @@ class AssociatedUpdatePage extends StatelessWidget {
             });
       }
       if (response == true) {
-        _controller.update(_associated!).then(
+        _controller.update(_controller.associated).then(
           (value) {
             if (value != null) {
               AsukaSnackbar.success('Associado atualizado com sucesso').show();
               Navigator.of(context).pop(_controller.associated.photoUrl);
-              loadAssociatedSingleton(value);
+              if (_controller.associated == locator.get<Associated>())
+                loadAssociatedSingleton(value);
             } else {
               AsukaSnackbar.alert(_controller.errorMsg).show();
             }
