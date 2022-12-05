@@ -183,19 +183,6 @@ class _PartnershipListAssociatedPageState
             children: <Widget>[
               SizedBox(height: 5),
               buildPartnerInfo(),
-              SizedBox(height: 2),
-              Container(
-                alignment: Alignment.center,
-                color: Colors.white54,
-                height: 40,
-                child: Text(
-                  'Oferta do Parceiro ao Harley Club:',
-                  style: TextStyle(
-                    fontSize: 17.0,
-                    color: Colors.black,
-                  ),
-                ),
-              ),
               Padding(
                 padding: EdgeInsets.symmetric(
                   vertical: 50,
