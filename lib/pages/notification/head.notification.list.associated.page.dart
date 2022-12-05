@@ -46,7 +46,7 @@ class HeadNotificationListAssociatedPage extends StatelessWidget {
                     _controller.headNotifications.sort(
                       (a, b) => b.datePublication.compareTo(a.datePublication),
                     );
-                    return _widgets(context);
+                    return _widgets();
                   } else
                     return CenteredMessage(
                       title: _title,
@@ -62,73 +62,69 @@ class HeadNotificationListAssociatedPage extends StatelessWidget {
         ),
       );
 
-  _widgets(BuildContext context) => ListView(
-    children: [
-      SizedBox(height: 10),
-      Observer(
-        builder: (_) => ListView.separated(
-          padding: EdgeInsets.symmetric(horizontal: 15),
-          shrinkWrap: true,
-          itemCount: _controller.headNotifications.length,
-          itemBuilder: (_, int i) {
-            return Column(
-              children: [
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.start,
+  _widgets() => ListView(
+        children: [
+          SizedBox(height: 10),
+          Observer(
+            builder: (_) => ListView.separated(
+              padding: EdgeInsets.symmetric(horizontal: 15),
+              shrinkWrap: true,
+              itemCount: _controller.headNotifications.length,
+              itemBuilder: (_, int i) {
+                return Column(
                   children: [
-                    Icon(Icons.message_outlined),
-                    Text('Publicado em: ' +
-                        _controller
-                            .headNotifications[i].datePublication)
-                  ],
-                ),
-                Container(
-                  height: 450,
-                  child: Card(
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(10.0),
-                    ),
-                    elevation: 1.0,
-                    child: Column(
-                      children: <Widget>[
-                        Center(
-                          heightFactor: 1.1,
-                          child: Image.asset(
-                            'assets/imgs/logo.png',
-                            fit: BoxFit.cover,
-                            width: 300.0,
-                          ),
-                        ),
-                        Container(
-                          color: Colors.black26,
-                          height: 200,
-                          child: ListTile(
-                            contentPadding:
-                                EdgeInsets.fromLTRB(10, 0, 10, 0),
-                            dense: true,
-                            title: Text(
-                              _controller.headNotifications[i].title +
-                                  '\n',
-                              style: TextStyle(
-                                  fontWeight: FontWeight.bold,
-                                  fontSize: 20.0),
-                            ),
-                            subtitle: Text(
-                                _controller
-                                    .headNotifications[i].notification,
-                                style: TextStyle(fontSize: 17.0)),
-                          ),
-                        ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      children: [
+                        Icon(Icons.message_outlined),
+                        Text('Publicado em: ' +
+                            _controller.headNotifications[i].datePublication)
                       ],
                     ),
-                  ),
-                ),
-              ],
-            );
-          },
-          separatorBuilder: (_, int index) => const Divider(),
-        ),
-      ),
-    ],
-  );
+                    Container(
+                      height: 450,
+                      color: Colors.black,
+                      child: Card(
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(10.0),
+                        ),
+                        elevation: 1.0,
+                        child: Column(
+                          children: <Widget>[
+                            Container(
+                              child: Image.asset(
+                                'assets/imgs/logo.png',
+                                fit: BoxFit.cover,
+                                width: 300.0,
+                              ),
+                            ),
+                            Container(
+                              child: ListTile(
+                                contentPadding:
+                                    EdgeInsets.fromLTRB(10, 10, 10, 0),
+                                dense: true,
+                                title: Text(
+                                  _controller.headNotifications[i].title + '\n',
+                                  style: TextStyle(
+                                      fontWeight: FontWeight.bold,
+                                      fontSize: 20.0),
+                                ),
+                                subtitle: Text(
+                                    _controller
+                                        .headNotifications[i].notification,
+                                    style: TextStyle(fontSize: 17.0)),
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ),
+                  ],
+                );
+              },
+              separatorBuilder: (_, int index) => const Divider(),
+            ),
+          ),
+        ],
+      );
 }
