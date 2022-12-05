@@ -68,7 +68,7 @@ class AssociatedListPage extends StatelessWidget {
         ),
       );
 
-  _widgets(BuildContext context) => ListView(
+  _widgets(BuildContext context) => Column(
     children: [
       SizedBox(height: 10),
       MyTextFormField(
@@ -80,58 +80,60 @@ class AssociatedListPage extends StatelessWidget {
         onChanged: _controller.setFilter,
       ),
       Observer(
-        builder: (_) => ListView.separated(
-          padding: EdgeInsets.symmetric(horizontal: 15),
-          shrinkWrap: true,
-          itemCount: _controller.listFiltered.length,
-          itemBuilder: (_, int i) {
-            return Container(
-              decoration: BoxDecoration(
-                color: Colors.deepOrange[300],
-                shape: BoxShape.rectangle,
-                borderRadius: BorderRadius.circular(20.0),
-              ),
-              child: ListTile(
-                title: Text(
-                  _controller.listFiltered[i].name,
-                  style: TextStyle(
-                    fontWeight: FontWeight.bold,
+        builder: (_) => Expanded(
+          child: ListView.separated(
+            padding: EdgeInsets.symmetric(horizontal: 15),
+            shrinkWrap: true,
+            itemCount: _controller.listFiltered.length,
+            itemBuilder: (_, int i) {
+              return Container(
+                decoration: BoxDecoration(
+                  color: Colors.deepOrange[300],
+                  shape: BoxShape.rectangle,
+                  borderRadius: BorderRadius.circular(20.0),
+                ),
+                child: ListTile(
+                  title: Text(
+                    _controller.listFiltered[i].name,
+                    style: TextStyle(
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                  subtitle: Text('Tel.: ' +
+                      _controller.listFiltered[i].phone +
+                      '\n' +
+                      'Status: ' +
+                      _controller.listFiltered[i].status),
+                  leading: CircleAvatar(
+                    child: Icon(Icons.person),
+                    backgroundColor: Colors.white,
+                  ),
+                  trailing: Wrap(
+                    spacing: 10, // space between two icons
+                    children: <Widget>[
+                      GestureDetector(
+                        child: Icon(
+                          Icons.arrow_forward,
+                        ),
+                        onTap: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => AssociatedUpdatePage(
+                                ADMIN,
+                                //_controller.listFiltered[i].id,
+                              ),
+                            ),
+                          );
+                        },
+                      ),
+                    ],
                   ),
                 ),
-                subtitle: Text('Tel.: ' +
-                    _controller.listFiltered[i].phone +
-                    '\n' +
-                    'Status: ' +
-                    _controller.listFiltered[i].status),
-                leading: CircleAvatar(
-                  child: Icon(Icons.person),
-                  backgroundColor: Colors.white,
-                ),
-                trailing: Wrap(
-                  spacing: 10, // space between two icons
-                  children: <Widget>[
-                    GestureDetector(
-                      child: Icon(
-                        Icons.arrow_forward,
-                      ),
-                      onTap: () {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) => AssociatedUpdatePage(
-                              ADMIN,
-                              //_controller.listFiltered[i].id,
-                            ),
-                          ),
-                        );
-                      },
-                    ),
-                  ],
-                ),
-              ),
-            );
-          },
-          separatorBuilder: (_, int index) => const Divider(),
+              );
+            },
+            separatorBuilder: (_, int index) => const Divider(),
+          ),
         ),
       ),
     ],

@@ -89,28 +89,30 @@ class AccessRequestListPageState extends State<AccessRequestListPage> {
         ),
       );
 
-  _widgets() => ListView(
+  _widgets() => Column(
         children: [
           SizedBox(height: 10),
-          Observer(
-            builder: (_) => ListView.separated(
-              padding: EdgeInsets.symmetric(horizontal: 15),
-              shrinkWrap: true,
-              itemCount: _controller.listItems.length,
-              itemBuilder: (_, int i) {
-                return Container(
-                  decoration: BoxDecoration(
-                    color: Colors.deepOrange[300],
-                    shape: BoxShape.rectangle,
-                    borderRadius: BorderRadius.circular(20.0),
-                  ),
-                  child: CheckboxWidget(
-                    item: _controller.listItems[i],
-                    controller: _controller,
-                  ),
-                );
-              },
-              separatorBuilder: (_, int index) => const Divider(),
+          Expanded(
+            child: Observer(
+              builder: (_) => ListView.separated(
+                padding: EdgeInsets.symmetric(horizontal: 15),
+                shrinkWrap: true,
+                itemCount: _controller.listItems.length,
+                itemBuilder: (_, int i) {
+                  return Container(
+                    decoration: BoxDecoration(
+                      color: Colors.deepOrange[300],
+                      shape: BoxShape.rectangle,
+                      borderRadius: BorderRadius.circular(20.0),
+                    ),
+                    child: CheckboxWidget(
+                      item: _controller.listItems[i],
+                      controller: _controller,
+                    ),
+                  );
+                },
+                separatorBuilder: (_, int index) => const Divider(),
+              ),
             ),
           ),
         ],
