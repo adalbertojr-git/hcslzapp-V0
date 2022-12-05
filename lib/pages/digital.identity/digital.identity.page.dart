@@ -1,5 +1,4 @@
 import 'dart:io';
-
 import 'package:flutter/material.dart';
 import 'package:hcslzapp/common/labels.and.hints.dart';
 import 'package:hcslzapp/common/photo.image.provider.dart';
@@ -7,8 +6,8 @@ import 'package:hcslzapp/components/my.text.form.field.dart';
 import 'package:hcslzapp/controllers/digital.identity.controller.dart';
 import 'package:hcslzapp/models/associated.dart';
 import '../../common/injection.dart';
-import '../../components/degradee.background.dart';
 import '../../components/my.appbar.dart';
+import '../../components/my.bottom.appbar.dart';
 
 const String _pathIdentity = 'assets/imgs/logo_carteirad.png';
 const String _pathNoImage = 'assets/imgs/noImage.png';
@@ -23,109 +22,106 @@ class DigitalIdentityPage extends StatelessWidget {
     _controller.init(_associated);
     return Scaffold(
       appBar: MyAppBar(_title),
+      bottomNavigationBar: MyBottomAppBar(),
       body: _widgets(),
     );
   }
 
-  _widgets() => DegradeBackground(
-        Center(
-          child: ListView(
-            shrinkWrap: true,
+  _widgets() => ListView(
+        shrinkWrap: true,
+        children: [
+          SizedBox(
+            height: 10.0,
+          ),
+          Center(
+            child: _photo(),
+          ),
+          MyTextFormField(
+            textEditingController: _controller.nameCtrl,
+            label: labelNameDigitalPayment,
+            disabled: true,
+          ),
+          Row(
+            children: <Widget>[
+/*              Expanded(
+                child: MyTextFormField(
+                  textEditingController: _controller.associatedTypeCtrl,
+                  label: labelAssociatedType,
+                  disabled: true,
+                  textAlign: TextAlign.center,
+                ),
+              ),*/
+              Expanded(
+                child: MyTextFormField(
+                  textEditingController: _controller.cnhCtrl,
+                  label: labelCNH,
+                  disabled: true,
+                  textAlign: TextAlign.center,
+                ),
+              ),
+              Expanded(
+                child: MyTextFormField(
+                  textEditingController: _controller.cpfCtrl,
+                  label: labelCPF,
+                  disabled: true,
+                  textAlign: TextAlign.center,
+                ),
+              ),
+            ],
+          ),
+          Row(
+            children: <Widget>[
+              Expanded(
+                child: MyTextFormField(
+                  textEditingController: _controller.dateBirthCtrl,
+                  label: labelDateBirth,
+                  disabled: true,
+                  textAlign: TextAlign.center,
+                ),
+              ),
+              Expanded(
+                child: MyTextFormField(
+                  textEditingController: _controller.dateShieldCtrl,
+                  label: labelDateShield,
+                  disabled: true,
+                  textAlign: TextAlign.center,
+                ),
+              ),
+              Expanded(
+                child: MyTextFormField(
+                  textEditingController: _controller.bloodTypeCtrl,
+                  label: labelBloodType,
+                  disabled: true,
+                  textAlign: TextAlign.center,
+                ),
+              ),
+            ],
+          ),
+          Stack(
             children: [
               Center(
-                child: _photo(),
+                child: SizedBox(
+                  height: 100.0,
+                  child: Image.asset(_pathIdentity),
+                ),
               ),
-              SizedBox(
-                height: 5.0,
-              ),
-              MyTextFormField(
-                textEditingController: _controller.nameCtrl,
-                label: labelNameDigitalPayment,
-                disabled: true,
-              ),
-              Row(
-                children: <Widget>[
-                  Expanded(
-                    child: MyTextFormField(
-                      textEditingController: _controller.associatedTypeCtrl,
-                      label: labelAssociatedType,
-                      disabled: true,
-                      textAlign: TextAlign.center,
-                    ),
-                  ),
-                  Expanded(
-                    child: MyTextFormField(
-                      textEditingController: _controller.cnhCtrl,
-                      label: labelCNH,
-                      disabled: true,
-                      textAlign: TextAlign.center,
-                    ),
-                  ),
-                  Expanded(
-                    child: MyTextFormField(
-                      textEditingController: _controller.cpfCtrl,
-                      label: labelCPF,
-                      disabled: true,
-                      textAlign: TextAlign.center,
-                    ),
-                  ),
-                ],
-              ),
-              Row(
-                children: <Widget>[
-                  Expanded(
-                    child: MyTextFormField(
-                      textEditingController: _controller.dateBirthCtrl,
-                      label: labelDateBirth,
-                      disabled: true,
-                      textAlign: TextAlign.center,
-                    ),
-                  ),
-                  Expanded(
-                    child: MyTextFormField(
-                      textEditingController: _controller.dateShieldCtrl,
-                      label: labelDateShield,
-                      disabled: true,
-                      textAlign: TextAlign.center,
-                    ),
-                  ),
-                  Expanded(
-                    child: MyTextFormField(
-                      textEditingController: _controller.bloodTypeCtrl,
-                      label: labelBloodType,
-                      disabled: true,
-                      textAlign: TextAlign.center,
-                    ),
-                  ),
-                ],
-              ),
-              Stack(
+              Column(
                 children: [
-                  Center(
-                    child: SizedBox(
-                      height: 100.0,
-                      child: Image.asset(_pathIdentity),
-                    ),
+                  SizedBox(
+                    height: 120.0,
                   ),
-                  Column(
-                    children: [
-                      SizedBox(
-                        height: 90.0,
-                      ),
-                      Center(
-                        child: const Text(
-                          'Carteira digital de associado do Harley Club de São Luis - MA',
-                          style: TextStyle(
-                              fontSize: 10.0, fontWeight: FontWeight.bold),
-                        ),
-                      ),
-                    ],
+                  Center(
+                    child: const Text(
+                      'Carteira digital de associado do Harley Club de São Luis - MA',
+                      style: TextStyle(
+                          fontSize: 10.0, fontWeight: FontWeight.bold),
+                    ),
                   ),
                 ],
               ),
             ],
           ),
-        ),
+        ],
       );
 
   _photo() => Container(
