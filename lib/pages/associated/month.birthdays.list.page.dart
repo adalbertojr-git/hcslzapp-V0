@@ -20,8 +20,8 @@ class MonthBirthdaysListPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) => Scaffold(
-    appBar: MyAppBar(_title),
-    bottomNavigationBar: MyBottomAppBar(),
+        appBar: MyAppBar(_title),
+        bottomNavigationBar: MyBottomAppBar(),
         body: FutureBuilder<List<MonthBirthdays>>(
           future: _controller.getFuture(),
           builder: (context, snapshot) {
@@ -77,7 +77,9 @@ class MonthBirthdaysListPage extends StatelessWidget {
                 itemBuilder: (_, int i) {
                   return Container(
                     decoration: BoxDecoration(
-                      color: Colors.deepOrange[300],
+                      color: isToday(_controller.associateds[i].date_birth)
+                          ? Colors.green[800]
+                          : Colors.deepOrange[300],
                       shape: BoxShape.rectangle,
                       borderRadius: BorderRadius.circular(20.0),
                     ),
@@ -96,14 +98,9 @@ class MonthBirthdaysListPage extends StatelessWidget {
                       leading: CircleAvatar(
                         child: Icon(
                           Icons.cake,
-                          color: isToday(_controller.associateds[i].date_birth)
-                              ? Colors.deepOrange
-                              : Colors.blue,
+                          color: Colors.blue,
                         ),
-                        backgroundColor:
-                            isToday(_controller.associateds[i].date_birth)
-                                ? Colors.green
-                                : Colors.white,
+                        backgroundColor: Colors.white,
                       ),
                     ),
                   );

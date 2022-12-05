@@ -25,14 +25,16 @@ const String _title = 'Editar Associado';
 
 class AssociatedUpdatePage extends StatelessWidget {
   final String _selectedProfile;
-  final Associated _associated = locator.get<Associated>();
+  late Associated? _associated;
   final AssociatedUpdateController _controller = AssociatedUpdateController();
 
-  AssociatedUpdatePage(this._selectedProfile);
+  AssociatedUpdatePage(this._selectedProfile, this._associated);
 
   @override
   Widget build(BuildContext context) {
-    _controller.associated = _associated;
+    _controller.associated = (this._associated == null
+        ? locator.get<Associated>()
+        : this._associated)!;
     _controller.init();
     return Scaffold(
       appBar: MyAppBar(_title),
@@ -536,7 +538,7 @@ class AssociatedUpdatePage extends StatelessWidget {
             });
       }
       if (response == true) {
-        _controller.update(_associated).then(
+        _controller.update(_associated!).then(
           (value) {
             if (value != null) {
               AsukaSnackbar.success('Associado atualizado com sucesso').show();
