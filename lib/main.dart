@@ -37,7 +37,6 @@ class HCSlzApp extends StatelessWidget {
           ],
           debugShowCheckedModeBanner: false,
           home: MyCustomLoginUI(),
-          //home: TableEventsExample(),
           title: _titleAppBar,
           theme: ThemeData(
             appBarTheme: AppBarTheme(

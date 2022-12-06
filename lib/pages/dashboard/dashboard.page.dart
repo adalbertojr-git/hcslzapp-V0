@@ -5,7 +5,7 @@ import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:hcslzapp/components/centered.message.dart';
 import 'package:hcslzapp/models/password.dto.dart';
 import 'package:hcslzapp/pages/associated/month.birthdays.list.page.dart';
-import 'package:hcslzapp/pages/event/event.calendar.page.dart';
+import 'package:hcslzapp/pages/event/event.calendar.page2.dart';
 import 'package:hcslzapp/pages/login/login.page.dart';
 import 'package:hcslzapp/pages/management/management.list.page.dart';
 import 'package:hcslzapp/pages/notification/head.notification.list.adm.page.dart';
@@ -546,7 +546,7 @@ class _DashboardPageState extends State<DashboardPage> {
                     );
                   },
                 ),
-/*                GridButton(
+                GridButton(
                   title: _labelEvent,
                   image: _pathEventImage,
                   context: _gContext,
@@ -556,7 +556,7 @@ class _DashboardPageState extends State<DashboardPage> {
                       _controller.selectedProfile,
                     );
                   },
-                ),*/
+                ),
 /*
                 GridButton(
                   title: "Documentos",
