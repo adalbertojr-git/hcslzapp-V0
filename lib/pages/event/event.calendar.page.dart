@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:hcslzapp/pages/event/utils.dart';
 import 'package:table_calendar/table_calendar.dart';
-
 import '../../components/my.appbar.dart';
 import '../../components/my.bottom.appbar.dart';
+import '../../controllers/event.calendar.controller.dart';
 
 const String _title = 'Eventos';
 
@@ -21,11 +21,13 @@ class _EventCalendarPageState extends State<EventCalendarPage> {
   DateTime? _selectedDay;
   DateTime? _rangeStart;
   DateTime? _rangeEnd;
+  final EventCalendarController _controller = EventCalendarController();
 
   @override
   void initState() {
     super.initState();
-
+    _controller.init();
+    print(kEvents);
     _selectedDay = _focusedDay;
     _selectedEvents = ValueNotifier(_getEventsForDay(_selectedDay!));
   }
@@ -39,6 +41,7 @@ class _EventCalendarPageState extends State<EventCalendarPage> {
   List<Event> _getEventsForDay(DateTime day) {
     // Implementation example
     return kEvents[day] ?? [];
+    //return _controller.events[day] ?? [];
   }
 
   List<Event> _getEventsForRange(DateTime start, DateTime end) {
