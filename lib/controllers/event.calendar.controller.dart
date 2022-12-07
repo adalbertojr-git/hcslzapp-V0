@@ -26,9 +26,7 @@ abstract class EventCalendarControllerBase with Store {
   late Future<String> future;
 
   @observable
-  Map<DateTime, List> events = {};
-
-  late var kEvents = LinkedHashMap<DateTime, List<Event>>();
+  var events = LinkedHashMap<DateTime, List<Event>>();
 
   @observable
   List selectedEvents = List.filled(0, 0, growable: true);
@@ -38,8 +36,7 @@ abstract class EventCalendarControllerBase with Store {
     selectedEvents.clear();
     findAll().then((value) {
       events = _convertJsonToDateMap(value);
-      kEvents = LinkedHashMap<DateTime, List<Event>>(
-      )..addAll(_convertJsonToDateMap(value));
+      print(events);
       selectedEvents = events[DateTime.now()] ?? [];
     });
   }
@@ -84,9 +81,9 @@ abstract class EventCalendarControllerBase with Store {
   @action
   setSelectedEvents(List e) => selectedEvents = e;
 
-  Map<DateTime, List<Event>> _convertJsonToDateMap(String jsonSource) {
+  LinkedHashMap<DateTime, List<Event>> _convertJsonToDateMap(String jsonSource) {
     var json = jsonDecode(jsonSource);
-    Map<DateTime, List<Event>> ev = {};
+    var ev = LinkedHashMap<DateTime, List<Event>>();
     for (var event in json) {
       var date = _parseDate(event['date']);
       ev.putIfAbsent(date, () => <Event>[]);

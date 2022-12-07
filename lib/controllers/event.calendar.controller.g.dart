@@ -77,13 +77,13 @@ mixin _$EventCalendarController on EventCalendarControllerBase, Store {
       Atom(name: 'EventCalendarControllerBase.events', context: context);
 
   @override
-  Map<DateTime, List<dynamic>> get events {
+  LinkedHashMap<DateTime, List<Event>> get events {
     _$eventsAtom.reportRead();
     return super.events;
   }
 
   @override
-  set events(Map<DateTime, List<dynamic>> value) {
+  set events(LinkedHashMap<DateTime, List<Event>> value) {
     _$eventsAtom.reportWrite(value, super.events, () {
       super.events = value;
     });

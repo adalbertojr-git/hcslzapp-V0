@@ -27,7 +27,6 @@ class _EventCalendarPageState extends State<EventCalendarPage> {
   void initState() {
     super.initState();
     _controller.init();
-    print(kEvents);
     _selectedDay = _focusedDay;
     _selectedEvents = ValueNotifier(_getEventsForDay(_selectedDay!));
   }
@@ -67,7 +66,7 @@ class _EventCalendarPageState extends State<EventCalendarPage> {
     }
   }
 
-  void _onRangeSelected(DateTime? start, DateTime? end, DateTime focusedDay) {
+/*  void _onRangeSelected(DateTime? start, DateTime? end, DateTime focusedDay) {
     setState(() {
       _selectedDay = null;
       _focusedDay = focusedDay;
@@ -84,7 +83,7 @@ class _EventCalendarPageState extends State<EventCalendarPage> {
     } else if (end != null) {
       _selectedEvents.value = _getEventsForDay(end);
     }
-  }
+  }*/
 
   @override
   Widget build(BuildContext context) => Scaffold(
@@ -108,7 +107,7 @@ class _EventCalendarPageState extends State<EventCalendarPage> {
                 outsideDaysVisible: false,
               ),
               onDaySelected: _onDaySelected,
-              onRangeSelected: _onRangeSelected,
+              //onRangeSelected: _onRangeSelected,
               onFormatChanged: (format) {
                 if (_calendarFormat != format) {
                   setState(() {
