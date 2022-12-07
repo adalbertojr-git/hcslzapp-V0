@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:hcslzapp/pages/event/utils.dart';
 import 'package:table_calendar/table_calendar.dart';
+import '../../common/associated.profiles.dart';
+import '../../components/button.dart';
 import '../../components/my.appbar.dart';
 import '../../components/my.bottom.appbar.dart';
 import '../../controllers/event.calendar.controller.dart';
@@ -8,8 +10,9 @@ import '../../controllers/event.calendar.controller.dart';
 const String _title = 'Eventos';
 
 class EventCalendarPage extends StatefulWidget {
+  final String _selectedProfile;
 
-  EventCalendarPage(String selectedProfile);
+  EventCalendarPage(this._selectedProfile);
 
   @override
   _EventCalendarPageState createState() => _EventCalendarPageState();
@@ -151,5 +154,15 @@ class _EventCalendarPageState extends State<EventCalendarPage> {
             ),
           ],
         ),
+        floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
+        floatingActionButton: widget._selectedProfile == ADMIN
+            ? Button(
+                icon: Icons.add,
+                onClick: () {
+                  //_controller.titleCtrl.clear();
+                  //_showAddDialog(null, 0);
+                },
+              )
+            : SizedBox(),
       );
 }
