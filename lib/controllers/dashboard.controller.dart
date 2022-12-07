@@ -100,13 +100,15 @@ abstract class DashboardControllerBase with Store {
     );
   }
 
-  loadEventCalendarPage(BuildContext context,
-      String user,) async {
+  loadEventCalendarPage(
+    BuildContext context,
+    String selectedProfile,
+  ) async {
     await Navigator.push(
       context,
       MaterialPageRoute(
-        builder: (context) => EventCalendarPage(),
-            //EventCalendarPage(user),
+        builder: (context) => EventCalendarPage(selectedProfile),
+        //EventCalendarPage(user),
       ),
     );
   }

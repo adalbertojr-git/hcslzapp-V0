@@ -22,6 +22,7 @@ import 'package:hcslzapp/models/associated.dart';
 import 'package:hcslzapp/pages/access.request/access.request.list.page.dart';
 import 'package:hcslzapp/pages/associated/associated.list.page.dart';
 import '../../common/injection.dart';
+import '../event/event.calendar.page.dart';
 
 const String _labelAppTitle = 'HCSlz App';
 const String _labelTheme = 'Alterar Tema';
@@ -114,7 +115,7 @@ class _DashboardPageState extends State<DashboardPage> {
     _listAdmWidgets = [
       AssociatedListPage(),
       PaymentListPage(_controller.selectedProfile),
-      //EventCalendarPage(_controller.selectedProfile),
+      EventCalendarPage(_controller.selectedProfile),
       CenteredMessage(
         title: 'Boutique Harley Club',
         message: 'Funcionalidade em contrução. Aguarde nova versão do App',

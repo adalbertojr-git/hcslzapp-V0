@@ -8,6 +8,9 @@ import '../../controllers/event.calendar.controller.dart';
 const String _title = 'Eventos';
 
 class EventCalendarPage extends StatefulWidget {
+
+  EventCalendarPage(String selectedProfile);
+
   @override
   _EventCalendarPageState createState() => _EventCalendarPageState();
 }
