@@ -98,6 +98,7 @@ class _EventCalendarPageState extends State<EventCalendarPage> {
         body: Column(
           children: [
             TableCalendar<Event>(
+              locale: 'pt_BR',
               firstDay: kFirstDay,
               lastDay: kLastDay,
               focusedDay: _focusedDay,
