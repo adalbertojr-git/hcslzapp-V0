@@ -155,7 +155,9 @@ class _EventCalendarPageState extends State<EventCalendarPage> {
             ),
           ],
         ),
-        floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
+        floatingActionButtonLocation: widget._selectedProfile == ADMIN
+            ? FloatingActionButtonLocation.centerDocked
+            : null,
         floatingActionButton: widget._selectedProfile == ADMIN
             ? Button(
                 icon: Icons.add,

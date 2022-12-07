@@ -44,7 +44,9 @@ class _PaymentAddAddState extends State<PaymentAddPage> {
         appBar: MyAppBar(_title),
         bottomNavigationBar: MyBottomAppBar(),
         body: _widgets(),
-        floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
+        floatingActionButtonLocation: widget._selectedProfile == ADMIN
+            ? FloatingActionButtonLocation.centerDocked
+            : null,
         floatingActionButton: widget._selectedProfile == ADMIN
             ? Button(
                 icon: Icons.save,

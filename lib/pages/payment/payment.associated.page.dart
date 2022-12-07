@@ -89,7 +89,9 @@ class _PaymentAssociatedPageState extends State<PaymentAssociatedPage> {
             );
           },
         ),
-        floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
+    floatingActionButtonLocation: widget._selectedProfile == ADMIN
+        ? FloatingActionButtonLocation.centerDocked
+        : null,
         floatingActionButton: widget._selectedProfile == ADMIN
             ? Observer(
                 builder: (_) => _controller.isHidedButton
