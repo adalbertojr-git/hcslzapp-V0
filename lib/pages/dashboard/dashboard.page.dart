@@ -116,10 +116,6 @@ class _DashboardPageState extends State<DashboardPage> {
       AssociatedListPage(),
       PaymentListPage(_controller.selectedProfile),
       EventCalendarPage(_controller.selectedProfile),
-      CenteredMessage(
-        title: 'Boutique Harley Club',
-        message: 'Funcionalidade em contrução. Aguarde nova versão do App',
-      ),
       PartnershipListAdmPage(),
       HeadNotificationListAdmPage(),
       CenteredMessage(
