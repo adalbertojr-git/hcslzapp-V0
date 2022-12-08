@@ -51,7 +51,6 @@ class EventAddPage extends StatelessWidget {
               IconButton(
                 icon: Icon(
                   Icons.add_photo_alternate,
-                  color: Colors.black,
                   size: 28.0,
                 ),
                 onPressed: _controller.getImageFromGallery,
@@ -59,7 +58,6 @@ class EventAddPage extends StatelessWidget {
               IconButton(
                 icon: Icon(
                   Icons.add_a_photo,
-                  color: Colors.black,
                   size: 25.0,
                 ),
                 onPressed: _controller.getImageFromCamera,
@@ -99,6 +97,7 @@ class EventAddPage extends StatelessWidget {
   _photo(BuildContext context) => Container(
         height: MediaQuery.of(context).size.height / 2.5,
         width: MediaQuery.of(context).size.width,
+        padding: EdgeInsets.symmetric(horizontal: 5),
         child: Card(
           elevation: 2,
           shape: RoundedRectangleBorder(
