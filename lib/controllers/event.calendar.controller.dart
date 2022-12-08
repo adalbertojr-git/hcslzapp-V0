@@ -51,7 +51,13 @@ abstract class EventCalendarControllerBase with Store {
 
   @action
   Future save(String title, String date) => ObservableFuture(_eventRepo
-          .save(_setValues(0, title, date))
+          .save(_setValues(
+            0,
+            title,
+            date,
+            '',
+            '',
+          ))
           .then((value) => value)).catchError((e) {
         errorMsg = "${e.message}";
       }, test: (e) => e is HttpException).catchError((e) {
@@ -60,7 +66,13 @@ abstract class EventCalendarControllerBase with Store {
 
   @action
   Future update(Event event) => ObservableFuture(_eventRepo
-          .update(_setValues(event.id, event.title, event.date))
+          .update(_setValues(
+            event.id,
+            event.title,
+            event.date,
+            '',
+            '',
+          ))
           .then((value) => value)).catchError((e) {
         errorMsg = "${e.message}";
       }, test: (e) => e is HttpException).catchError((e) {
@@ -69,29 +81,51 @@ abstract class EventCalendarControllerBase with Store {
 
   @action
   Future deleteById(Event event) => ObservableFuture(_eventRepo
-          .deleteById(_setValues(event.id, event.title, event.date))
+          .deleteById(_setValues(
+            event.id,
+            event.title,
+            event.date,
+            '',
+            '',
+          ))
           .then((value) => value)).catchError((e) {
         errorMsg = "${e.message}";
       }, test: (e) => e is HttpException).catchError((e) {
         errorMsg = "$e";
       }, test: (e) => e is Exception);
 
-  Event _setValues(int id, String title, String date) {
-    return Event(id: id, date: date, title: title);
+  Event _setValues(
+    int id,
+    String title,
+    String date,
+    String description,
+    String photoUrl,
+  ) {
+    return Event(
+      id: id,
+      date: date,
+      title: title,
+      description: description,
+      photoUrl: photoUrl,
+    );
   }
 
 /*  @action
   setSelectedEvents(List e) => selectedEvents = e;*/
 
-  LinkedHashMap<DateTime, List<Event>> convertJsonToDateMap(
-      String jsonSource) {
+  LinkedHashMap<DateTime, List<Event>> convertJsonToDateMap(String jsonSource) {
     var json = jsonDecode(jsonSource);
     var ev = LinkedHashMap<DateTime, List<Event>>();
     for (var event in json) {
       var date = _parseDate(event['date']);
       ev.putIfAbsent(date, () => <Event>[]);
-      var e =
-          Event(id: event['id'], date: event['date'], title: event['title']);
+      var e = Event(
+        id: event['id'],
+        date: event['date'],
+        title: event['title'],
+        description: '',
+        photoUrl: '',
+      );
       ev[date]?.add(e);
     }
     return ev;
@@ -102,7 +136,6 @@ abstract class EventCalendarControllerBase with Store {
     int y = parts[0] ?? 0;
     int m = parts[1] ?? 0;
     int d = parts[2] ?? 0;
-    //return DateTime(y, m, d, 0, 0, 0, 0, 0).toUtc();
     return DateTime.utc(y, m, d);
   }
 
