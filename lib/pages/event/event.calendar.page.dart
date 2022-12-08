@@ -56,7 +56,6 @@ class _EventCalendarPageState extends State<EventCalendarPage> {
   }
 
   List<Event> _getEventsForDay(DateTime day) {
-    print('_getEventsForDay');
     if (_controller.events[day] == null)
       return [];
     else
@@ -103,8 +102,10 @@ class _EventCalendarPageState extends State<EventCalendarPage> {
                       );
 
                     _controller.init();
-                    _controller.events = _controller.convertJsonToDateMap(snapshot.data!);
-                    _controller.selectedEvents = ValueNotifier(_getEventsForDay(_selectedDay!));
+                    _controller.events =
+                        _controller.convertJsonToDateMap(snapshot.data!);
+                    _controller.selectedEvents =
+                        ValueNotifier(_getEventsForDay(_selectedDay!));
 
                     return _widgets();
                   }
@@ -168,24 +169,58 @@ class _EventCalendarPageState extends State<EventCalendarPage> {
             child: ValueListenableBuilder<List<Event>>(
               valueListenable: _controller.selectedEvents,
               builder: (context, value, _) {
-                return ListView.builder(
+                return ListView.separated(
+                  padding: EdgeInsets.symmetric(horizontal: 15),
+                  shrinkWrap: true,
                   itemCount: value.length,
                   itemBuilder: (context, index) {
                     return Container(
-                      margin: const EdgeInsets.symmetric(
-                        horizontal: 12.0,
-                        vertical: 4.0,
-                      ),
                       decoration: BoxDecoration(
-                        border: Border.all(),
-                        borderRadius: BorderRadius.circular(12.0),
+                        color: Colors.deepOrange[300],
+                        shape: BoxShape.rectangle,
+                        borderRadius: BorderRadius.circular(20.0),
                       ),
                       child: ListTile(
-                        onTap: () => print('${value[index]}'),
-                        title: Text('${value[index]}'),
+                        leading: Container(
+                          width: 40,
+                          height: 40,
+                          alignment: Alignment.center,
+                          child: CircleAvatar(
+                            child: Icon(Icons.event),
+                            backgroundColor: Colors.white,
+                          ),
+                        ),
+                        trailing: widget._selectedProfile == ADMIN
+                            ? Wrap(
+                                spacing: 10, // space between two icons
+                                children: <Widget>[
+                                  GestureDetector(
+                                    child: Icon(
+                                      Icons.delete,
+                                    ),
+                                    onTap: () {
+                                      //_delete(i);
+                                    },
+                                  ),
+                                  GestureDetector(
+                                    child: Icon(
+                                      Icons.edit,
+                                    ),
+                                    onTap: () {
+                                      //_controller.setEventTitle(event.title);
+                                      //_showAddDialog(event, i);
+                                    },
+                                  ),
+                                ],
+                              )
+                            : null,
+                        title: Text(
+                          value[index].title,
+                        ),
                       ),
                     );
                   },
+                  separatorBuilder: (_, int index) => const Divider(),
                 );
               },
             ),

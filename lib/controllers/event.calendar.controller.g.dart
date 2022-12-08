@@ -57,19 +57,19 @@ mixin _$EventCalendarController on EventCalendarControllerBase, Store {
     });
   }
 
-  late final _$futureAtom =
-      Atom(name: 'EventCalendarControllerBase.future', context: context);
+  late final _$isHidedButtonAtom =
+      Atom(name: 'EventCalendarControllerBase.isHidedButton', context: context);
 
   @override
-  Future<String> get future {
-    _$futureAtom.reportRead();
-    return super.future;
+  bool get isHidedButton {
+    _$isHidedButtonAtom.reportRead();
+    return super.isHidedButton;
   }
 
   @override
-  set future(Future<String> value) {
-    _$futureAtom.reportWrite(value, super.future, () {
-      super.future = value;
+  set isHidedButton(bool value) {
+    _$isHidedButtonAtom.reportWrite(value, super.isHidedButton, () {
+      super.isHidedButton = value;
     });
   }
 
@@ -105,8 +105,35 @@ mixin _$EventCalendarController on EventCalendarControllerBase, Store {
     });
   }
 
+  late final _$futureAtom =
+      Atom(name: 'EventCalendarControllerBase.future', context: context);
+
+  @override
+  Future<String> get future {
+    _$futureAtom.reportRead();
+    return super.future;
+  }
+
+  @override
+  set future(Future<String> value) {
+    _$futureAtom.reportWrite(value, super.future, () {
+      super.future = value;
+    });
+  }
+
   late final _$EventCalendarControllerBaseActionController =
       ActionController(name: 'EventCalendarControllerBase', context: context);
+
+  @override
+  bool setButtonVisibilty() {
+    final _$actionInfo = _$EventCalendarControllerBaseActionController
+        .startAction(name: 'EventCalendarControllerBase.setButtonVisibilty');
+    try {
+      return super.setButtonVisibilty();
+    } finally {
+      _$EventCalendarControllerBaseActionController.endAction(_$actionInfo);
+    }
+  }
 
   @override
   Future<String> findAll() {
@@ -168,9 +195,10 @@ mixin _$EventCalendarController on EventCalendarControllerBase, Store {
     return '''
 titleCtrl: ${titleCtrl},
 errorMsg: ${errorMsg},
-future: ${future},
+isHidedButton: ${isHidedButton},
 events: ${events},
-selectedEvents: ${selectedEvents}
+selectedEvents: ${selectedEvents},
+future: ${future}
     ''';
   }
 }
