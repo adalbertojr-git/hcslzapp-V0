@@ -88,7 +88,8 @@ abstract class EventCalendarControllerBase with Store {
 /*  @action
   setSelectedEvents(List e) => selectedEvents = e;*/
 
-  LinkedHashMap<DateTime, List<Event>> _convertJsonToDateMap(String jsonSource) {
+  LinkedHashMap<DateTime, List<Event>> _convertJsonToDateMap(
+      String jsonSource) {
     var json = jsonDecode(jsonSource);
     var ev = LinkedHashMap<DateTime, List<Event>>();
     for (var event in json) {
@@ -134,9 +135,7 @@ abstract class EventCalendarControllerBase with Store {
     final dayCount = last.difference(first).inDays + 1;
     return List.generate(
       dayCount,
-          (index) => DateTime.utc(first.year, first.month, first.day + index),
+      (index) => DateTime.utc(first.year, first.month, first.day + index),
     );
   }
-
-
 }

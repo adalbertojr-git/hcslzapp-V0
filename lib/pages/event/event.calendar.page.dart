@@ -19,6 +19,7 @@ class EventCalendarPage extends StatefulWidget {
 }
 
 class _EventCalendarPageState extends State<EventCalendarPage> {
+  final EventCalendarController _controller = EventCalendarController();
   CalendarFormat _calendarFormat = CalendarFormat.month;
   RangeSelectionMode _rangeSelectionMode = RangeSelectionMode
       .toggledOff; // Can be toggled on/off by longpressing a date
@@ -26,7 +27,6 @@ class _EventCalendarPageState extends State<EventCalendarPage> {
   DateTime? _selectedDay;
   DateTime? _rangeStart;
   DateTime? _rangeEnd;
-  final EventCalendarController _controller = EventCalendarController();
   final kToday = DateTime.now();
   late var kFirstDay;
   late var kLastDay;
@@ -48,16 +48,11 @@ class _EventCalendarPageState extends State<EventCalendarPage> {
   }
 
   List<Event> _getEventsForDay(DateTime day) {
-    // Implementation example
-    //return kEvents[day] ?? [];
-    print(_controller.events);
-    print(day.toString() + ': ' + _controller.events[day].toString());
-    return (_controller.events[day] as List<Event>) ?? [];
-    //return [];
+    if (_controller.events[day] == null) return [];
+    else return _controller.events[day] as List<Event>;
   }
 
   List<Event> _getEventsForRange(DateTime start, DateTime end) {
-    // Implementation example
     final days = _controller.daysInRange(start, end);
 
     return [
@@ -131,6 +126,7 @@ class _EventCalendarPageState extends State<EventCalendarPage> {
               },
               onPageChanged: (focusedDay) {
                 _focusedDay = focusedDay;
+                _controller.selectedEvents.value = [];
               },
             ),
             const SizedBox(height: 8.0),
