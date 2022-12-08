@@ -97,7 +97,7 @@ class EventAddPage extends StatelessWidget {
       );
 
   _photo(BuildContext context) => Container(
-        height: 300.0,
+        height: MediaQuery.of(context).size.height / 2.5,
         width: MediaQuery.of(context).size.width,
         child: Card(
           elevation: 2,
