@@ -128,6 +128,7 @@ class _EventCalendarPageState extends State<EventCalendarPage> {
                 _focusedDay = focusedDay;
                 _controller.selectedEvents.value = [];
               },
+              rowHeight: 60,
             ),
             const SizedBox(height: 8.0),
             Expanded(
