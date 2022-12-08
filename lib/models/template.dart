@@ -1,4 +1,5 @@
 import 'package:hcslzapp/models/digital.identity.dart';
+import 'package:hcslzapp/models/event.dart';
 import 'package:hcslzapp/models/head.notification.dart';
 import 'package:hcslzapp/models/partnership.dart';
 import 'package:hcslzapp/models/payment.dart';
@@ -10,8 +11,7 @@ import 'dependent.dart';
 import 'motorcycle.dart';
 
 class Template {
-  Associated loadAssociated() =>
-      Associated(
+  Associated loadAssociated() => Associated(
         id: 0,
         name: '',
         email: '',
@@ -34,8 +34,7 @@ class Template {
         ),
       );
 
-  Dependent loadDependent() =>
-      Dependent(
+  Dependent loadDependent() => Dependent(
         id: 0,
         name: '',
         email: '',
@@ -46,8 +45,7 @@ class Template {
         isAssociated: '',
       );
 
-  Motorcycle loadMotorcycle() =>
-      Motorcycle(
+  Motorcycle loadMotorcycle() => Motorcycle(
         id: 0,
         model: '',
         year: '',
@@ -58,8 +56,7 @@ class Template {
         renavam: '',
       );
 
-  DigitalIdentity loadDigitalIdentity() =>
-      DigitalIdentity(
+  DigitalIdentity loadDigitalIdentity() => DigitalIdentity(
         id: 0,
         name: '',
         cnh: '',
@@ -73,23 +70,20 @@ class Template {
         motorcycles: List<Motorcycle>.from([]),
       );
 
-  Payment loadPayment() =>
-      Payment(
+  Payment loadPayment() => Payment(
         id: 0,
         year: '',
         associated: this.loadAssociated(),
         paymentMonths: List<PaymentMonths>.from([]),
       );
 
-  PaymentMonths loadPaymentMonths() =>
-      PaymentMonths(
+  PaymentMonths loadPaymentMonths() => PaymentMonths(
         id: 0,
         month: 0,
         value: 0.0,
       );
 
-  Partnership loadPartnership() =>
-      Partnership(
+  Partnership loadPartnership() => Partnership(
         id: 0,
         partner: '',
         phone1: '',
@@ -100,6 +94,18 @@ class Template {
         photoUrl: '',
       );
 
-  HeadNotification loadHeadNotification() =>
-      HeadNotification(id: 0, title: '', notification: '', datePublication: '');
+  HeadNotification loadHeadNotification() => HeadNotification(
+        id: 0,
+        title: '',
+        notification: '',
+        datePublication: '',
+      );
+
+  Event loadEvent() => Event(
+        id: 0,
+        title: '',
+        date: '',
+        description: '',
+        photoUrl: '',
+      );
 }

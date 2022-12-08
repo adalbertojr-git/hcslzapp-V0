@@ -9,6 +9,7 @@ import '../../components/my.appbar.dart';
 import '../../components/my.bottom.appbar.dart';
 import '../../components/progress.dart';
 import '../../controllers/event.calendar.controller.dart';
+import 'event.add.page.dart';
 
 const String _title = 'Eventos';
 const String _labelUnknown =
@@ -123,8 +124,12 @@ class _EventCalendarPageState extends State<EventCalendarPage> {
               ? Button(
                   icon: Icons.add,
                   onClick: () {
-                    //_controller.titleCtrl.clear();
-                    //_showAddDialog(null, 0);
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => EventAddPage(null),
+                      ),
+                    );
                   },
                 )
               : SizedBox(),
