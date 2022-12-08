@@ -31,10 +31,10 @@ abstract class EventCalendarControllerBase with Store {
   @observable
   List selectedEvents = List.filled(0, 0, growable: true);
 
-  init() {
+  init() async {
     events.clear();
     selectedEvents.clear();
-    findAll().then((value) {
+    await findAll().then((value) {
       events = _convertJsonToDateMap(value);
       print(events);
       selectedEvents = events[DateTime.now()] ?? [];

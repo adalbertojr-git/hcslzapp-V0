@@ -45,8 +45,9 @@ class _EventCalendarPageState extends State<EventCalendarPage> {
 
   List<Event> _getEventsForDay(DateTime day) {
     // Implementation example
-    return kEvents[day] ?? [];
-    //return _controller.events[day] ?? [];
+    //return kEvents[day] ?? [];
+    print(_controller.events[day]);
+    return (_controller.events[day] as List<Event>) ?? [];
   }
 
   List<Event> _getEventsForRange(DateTime start, DateTime end) {
