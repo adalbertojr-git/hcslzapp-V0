@@ -33,7 +33,7 @@ class PartnershipAddPage extends StatelessWidget {
         partnership == null ? 'Adicionar ' + _title : 'Editar ' + _title,
       ),
       bottomNavigationBar: MyBottomAppBar(),
-      body: _widgets(),
+      body: _widgets(context),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
       floatingActionButton: Button(
         icon: Icons.save,
@@ -42,27 +42,25 @@ class PartnershipAddPage extends StatelessWidget {
     );
   }
 
-  _widgets() => ListView(
+  _widgets(BuildContext context) => ListView(
         children: <Widget>[
           SizedBox(
             height: 10.0,
           ),
+          _photo(context),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
               IconButton(
                 icon: Icon(
                   Icons.add_photo_alternate,
-                  color: Colors.black,
                   size: 28.0,
                 ),
                 onPressed: _controller.getImageFromGallery,
               ),
-              _photo(),
               IconButton(
                 icon: Icon(
                   Icons.add_a_photo,
-                  color: Colors.black,
                   size: 25.0,
                 ),
                 onPressed: _controller.getImageFromCamera,
@@ -167,23 +165,26 @@ class PartnershipAddPage extends StatelessWidget {
                     ),
                   ),
                 ),
+          SizedBox(
+            height: 40,
+          )
         ],
       );
 
-  _photo() => Container(
-        height: 200.0,
-        width: 200.0,
-        padding: EdgeInsets.all(10.0),
-        decoration: BoxDecoration(
-          color: Colors.black.withOpacity(0.2),
-          borderRadius: BorderRadius.circular(100.0),
-        ),
-        child: Observer(
-          builder: (_) => Container(
-            decoration: BoxDecoration(
-              color: Colors.white,
-              borderRadius: BorderRadius.circular(150.0),
-              image: _loadPhoto(),
+  _photo(BuildContext context) => Container(
+        height: MediaQuery.of(context).size.height / 2.5,
+        width: MediaQuery.of(context).size.width,
+        padding: EdgeInsets.symmetric(horizontal: 5),
+        child: Card(
+          elevation: 2,
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(10.0),
+          ),
+          child: Observer(
+            builder: (_) => Container(
+              decoration: BoxDecoration(
+                image: _loadPhoto(),
+              ),
             ),
           ),
         ),
