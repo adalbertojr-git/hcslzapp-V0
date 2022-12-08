@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:hcslzapp/pages/event/utils.dart';
+import 'package:hcslzapp/models/event.dart';
 import 'package:table_calendar/table_calendar.dart';
 import '../../common/associated.profiles.dart';
 import '../../components/button.dart';
@@ -19,7 +19,6 @@ class EventCalendarPage extends StatefulWidget {
 }
 
 class _EventCalendarPageState extends State<EventCalendarPage> {
-  late final ValueNotifier<List<Event>> _selectedEvents;
   CalendarFormat _calendarFormat = CalendarFormat.month;
   RangeSelectionMode _rangeSelectionMode = RangeSelectionMode
       .toggledOff; // Can be toggled on/off by longpressing a date
@@ -28,31 +27,38 @@ class _EventCalendarPageState extends State<EventCalendarPage> {
   DateTime? _rangeStart;
   DateTime? _rangeEnd;
   final EventCalendarController _controller = EventCalendarController();
+  final kToday = DateTime.now();
+  late var kFirstDay;
+  late var kLastDay;
 
   @override
   void initState() {
     super.initState();
     _controller.init();
     _selectedDay = _focusedDay;
-    _selectedEvents = ValueNotifier(_getEventsForDay(_selectedDay!));
+    _controller.selectedEvents = ValueNotifier(_getEventsForDay(_selectedDay!));
+    kFirstDay = DateTime(kToday.year, kToday.month - 3, kToday.day);
+    kLastDay = DateTime(kToday.year, kToday.month + 3, kToday.day);
   }
 
   @override
   void dispose() {
-    _selectedEvents.dispose();
+    _controller.selectedEvents.dispose();
     super.dispose();
   }
 
   List<Event> _getEventsForDay(DateTime day) {
     // Implementation example
     //return kEvents[day] ?? [];
-    print(_controller.events[day]);
+    print(_controller.events);
+    print(day.toString() + ': ' + _controller.events[day].toString());
     return (_controller.events[day] as List<Event>) ?? [];
+    //return [];
   }
 
   List<Event> _getEventsForRange(DateTime start, DateTime end) {
     // Implementation example
-    final days = daysInRange(start, end);
+    final days = _controller.daysInRange(start, end);
 
     return [
       for (final d in days) ..._getEventsForDay(d),
@@ -69,7 +75,7 @@ class _EventCalendarPageState extends State<EventCalendarPage> {
         _rangeSelectionMode = RangeSelectionMode.toggledOff;
       });
 
-      _selectedEvents.value = _getEventsForDay(selectedDay);
+      _controller.selectedEvents.value = _getEventsForDay(selectedDay);
     }
   }
 
@@ -130,7 +136,7 @@ class _EventCalendarPageState extends State<EventCalendarPage> {
             const SizedBox(height: 8.0),
             Expanded(
               child: ValueListenableBuilder<List<Event>>(
-                valueListenable: _selectedEvents,
+                valueListenable: _controller.selectedEvents,
                 builder: (context, value, _) {
                   return ListView.builder(
                     itemCount: value.length,

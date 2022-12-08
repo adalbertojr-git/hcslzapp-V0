@@ -29,16 +29,23 @@ abstract class EventCalendarControllerBase with Store {
   var events = LinkedHashMap<DateTime, List<Event>>();
 
   @observable
-  List selectedEvents = List.filled(0, 0, growable: true);
+  ValueNotifier<List<Event>> selectedEvents = ValueNotifier<List<Event>>([]);
 
   init() async {
     events.clear();
-    selectedEvents.clear();
+    //selectedEvents.clear();
     await findAll().then((value) {
+      events = _convertJsonToDateMap(value);
+      print(events);
+    });
+
+/*
+    findAll().then((value) {
       events = _convertJsonToDateMap(value);
       print(events);
       selectedEvents = events[DateTime.now()] ?? [];
     });
+*/
   }
 
   @action
@@ -78,8 +85,8 @@ abstract class EventCalendarControllerBase with Store {
     return Event(id: id, date: date, title: title);
   }
 
-  @action
-  setSelectedEvents(List e) => selectedEvents = e;
+/*  @action
+  setSelectedEvents(List e) => selectedEvents = e;*/
 
   LinkedHashMap<DateTime, List<Event>> _convertJsonToDateMap(String jsonSource) {
     var json = jsonDecode(jsonSource);
@@ -99,19 +106,37 @@ abstract class EventCalendarControllerBase with Store {
     int y = parts[0] ?? 0;
     int m = parts[1] ?? 0;
     int d = parts[2] ?? 0;
-    return DateTime(y, m, d, 12, 0, 0, 0, 0);
+    //return DateTime(y, m, d, 0, 0, 0, 0, 0).toUtc();
+    return DateTime.utc(y, m, d);
   }
 
+/*
   @action
   editEvent(int i) {
     if (titleCtrl.text.isEmpty) return;
     selectedEvents[i] = titleCtrl.text;
     titleCtrl.clear();
   }
+*/
 
-  @action
-  removeSelectedEvent(int i) => selectedEvents.removeAt(i);
+/*  @action
+  removeSelectedEvent(int i) => selectedEvents.removeAt(i);*/
 
   @action
   setEventTitle(String value) => titleCtrl.text = value;
+
+  int getHashCode(DateTime key) {
+    return key.day * 1000000 + key.month * 10000 + key.year;
+  }
+
+  /// Returns a list of [DateTime] objects from [first] to [last], inclusive.
+  List<DateTime> daysInRange(DateTime first, DateTime last) {
+    final dayCount = last.difference(first).inDays + 1;
+    return List.generate(
+      dayCount,
+          (index) => DateTime.utc(first.year, first.month, first.day + index),
+    );
+  }
+
+
 }

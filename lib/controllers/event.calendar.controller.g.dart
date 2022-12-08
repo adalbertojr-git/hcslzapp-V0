@@ -93,13 +93,13 @@ mixin _$EventCalendarController on EventCalendarControllerBase, Store {
       name: 'EventCalendarControllerBase.selectedEvents', context: context);
 
   @override
-  List<dynamic> get selectedEvents {
+  ValueNotifier<List<Event>> get selectedEvents {
     _$selectedEventsAtom.reportRead();
     return super.selectedEvents;
   }
 
   @override
-  set selectedEvents(List<dynamic> value) {
+  set selectedEvents(ValueNotifier<List<Event>> value) {
     _$selectedEventsAtom.reportWrite(value, super.selectedEvents, () {
       super.selectedEvents = value;
     });
@@ -147,39 +147,6 @@ mixin _$EventCalendarController on EventCalendarControllerBase, Store {
         .startAction(name: 'EventCalendarControllerBase.deleteById');
     try {
       return super.deleteById(event);
-    } finally {
-      _$EventCalendarControllerBaseActionController.endAction(_$actionInfo);
-    }
-  }
-
-  @override
-  dynamic setSelectedEvents(List<dynamic> e) {
-    final _$actionInfo = _$EventCalendarControllerBaseActionController
-        .startAction(name: 'EventCalendarControllerBase.setSelectedEvents');
-    try {
-      return super.setSelectedEvents(e);
-    } finally {
-      _$EventCalendarControllerBaseActionController.endAction(_$actionInfo);
-    }
-  }
-
-  @override
-  dynamic editEvent(int i) {
-    final _$actionInfo = _$EventCalendarControllerBaseActionController
-        .startAction(name: 'EventCalendarControllerBase.editEvent');
-    try {
-      return super.editEvent(i);
-    } finally {
-      _$EventCalendarControllerBaseActionController.endAction(_$actionInfo);
-    }
-  }
-
-  @override
-  dynamic removeSelectedEvent(int i) {
-    final _$actionInfo = _$EventCalendarControllerBaseActionController
-        .startAction(name: 'EventCalendarControllerBase.removeSelectedEvent');
-    try {
-      return super.removeSelectedEvent(i);
     } finally {
       _$EventCalendarControllerBaseActionController.endAction(_$actionInfo);
     }
