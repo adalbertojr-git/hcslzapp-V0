@@ -48,6 +48,7 @@ class _EventCalendarPageState extends State<EventCalendarPage> {
   }
 
   List<Event> _getEventsForDay(DateTime day) {
+    print('_getEventsForDay');
     if (_controller.events[day] == null) return [];
     else return _controller.events[day] as List<Event>;
   }

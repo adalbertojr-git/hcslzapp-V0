@@ -176,9 +176,9 @@ class _PartnershipListAssociatedPageState
 
   Widget buildDetail() => Observer(
         builder: (_) => Container(
-          padding: EdgeInsets.symmetric(horizontal: 5),
+          padding: EdgeInsets.symmetric(horizontal: 10),
           height: MediaQuery.of(context).size.height,
-          color: Colors.deepOrange[100],
+          color: Colors.white,
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: <Widget>[
@@ -203,7 +203,7 @@ class _PartnershipListAssociatedPageState
       );
 
   Widget buildPartnerInfo() => Container(
-        color: Colors.white54,
+        color: Colors.deepOrange[200],
         child: ListTile(
           isThreeLine: true,
           title: Text(

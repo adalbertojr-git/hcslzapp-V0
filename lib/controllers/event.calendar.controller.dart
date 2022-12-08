@@ -33,19 +33,9 @@ abstract class EventCalendarControllerBase with Store {
 
   init() async {
     events.clear();
-    //selectedEvents.clear();
-    await findAll().then((value) {
-      events = _convertJsonToDateMap(value);
-      print(events);
-    });
-
-/*
-    findAll().then((value) {
-      events = _convertJsonToDateMap(value);
-      print(events);
-      selectedEvents = events[DateTime.now()] ?? [];
-    });
-*/
+    final String value = await findAll();
+    events = _convertJsonToDateMap(value);
+    print(events);
   }
 
   @action
