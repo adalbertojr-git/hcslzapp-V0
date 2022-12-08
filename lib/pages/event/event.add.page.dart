@@ -30,7 +30,7 @@ class EventAddPage extends StatelessWidget {
         event == null ? 'Adicionar ' + _title : 'Editar ' + _title,
       ),
       bottomNavigationBar: MyBottomAppBar(),
-      body: _widgets(),
+      body: _widgets(context),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
       floatingActionButton: Button(
         icon: Icons.save,
@@ -39,11 +39,12 @@ class EventAddPage extends StatelessWidget {
     );
   }
 
-  _widgets() => ListView(
+  _widgets(BuildContext context) => ListView(
         children: <Widget>[
           SizedBox(
             height: 10.0,
           ),
+          _photo(context),
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
@@ -55,7 +56,6 @@ class EventAddPage extends StatelessWidget {
                 ),
                 onPressed: _controller.getImageFromGallery,
               ),
-              _photo(),
               IconButton(
                 icon: Icon(
                   Icons.add_a_photo,
@@ -88,7 +88,7 @@ class EventAddPage extends StatelessWidget {
               label: labelDescription,
               hint: hintDescription,
               inputType: TextInputType.text,
-              nLines: 4,
+              nLines: 3,
               onChanged: _controller.formController.changeDescription,
               errorText: _controller.validateDescription(),
             );
@@ -96,20 +96,19 @@ class EventAddPage extends StatelessWidget {
         ],
       );
 
-  _photo() => Container(
-        height: 250.0,
-        width: 250.0,
-        //padding: EdgeInsets.all(10.0),
-/*        decoration: BoxDecoration(
-          color: Colors.black.withOpacity(0.2),
-          borderRadius: BorderRadius.circular(100.0),
-        ),*/
-        child: Observer(
-          builder: (_) => Container(
-            decoration: BoxDecoration(
-              //color: Colors.white,
-              //borderRadius: BorderRadius.circular(150.0),
-              image: _loadPhoto(),
+  _photo(BuildContext context) => Container(
+        height: 300.0,
+        width: MediaQuery.of(context).size.width,
+        child: Card(
+          elevation: 2,
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(10.0),
+          ),
+          child: Observer(
+            builder: (_) => Container(
+              decoration: BoxDecoration(
+                image: _loadPhoto(),
+              ),
             ),
           ),
         ),
