@@ -23,7 +23,7 @@ abstract class EventCalendarControllerBase with Store {
   late String errorMsg;
 
   @observable
-  late Future<String> future;
+  bool isHidedButton = true;
 
   @observable
   var events = LinkedHashMap<DateTime, List<Event>>();
@@ -31,18 +31,23 @@ abstract class EventCalendarControllerBase with Store {
   @observable
   ValueNotifier<List<Event>> selectedEvents = ValueNotifier<List<Event>>([]);
 
-  init() async {
+  @observable
+  Future<String> future = Future<String>.value('');
+
+  init() {
     events.clear();
-    final String value = await findAll();
-    events = _convertJsonToDateMap(value);
-    print(events);
   }
+
+  @action
+  bool setButtonVisibilty() => isHidedButton = !isHidedButton;
 
   @action
   Future<String> findAll() =>
       _eventRepo.findAll().then((value) => value).catchError((e) {
         errorMsg = "$e";
       }, test: (e) => e is Exception);
+
+  Future<String> getFuture() => future = findAll();
 
   @action
   Future save(String title, String date) => ObservableFuture(_eventRepo
@@ -78,7 +83,7 @@ abstract class EventCalendarControllerBase with Store {
 /*  @action
   setSelectedEvents(List e) => selectedEvents = e;*/
 
-  LinkedHashMap<DateTime, List<Event>> _convertJsonToDateMap(
+  LinkedHashMap<DateTime, List<Event>> convertJsonToDateMap(
       String jsonSource) {
     var json = jsonDecode(jsonSource);
     var ev = LinkedHashMap<DateTime, List<Event>>();
