@@ -222,9 +222,6 @@ class _EventCalendarPageState extends State<EventCalendarPage> {
                         title: Text(
                           value[index].title,
                         ),
-                        subtitle: Text(
-                          value[index].description,
-                        ),
                       ),
                     );
                   },
