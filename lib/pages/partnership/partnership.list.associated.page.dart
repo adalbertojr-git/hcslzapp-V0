@@ -178,60 +178,54 @@ class _PartnershipListAssociatedPageState
         builder: (_) => Container(
           padding: EdgeInsets.symmetric(horizontal: 10),
           height: MediaQuery.of(context).size.height,
-          color: Colors.white,
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
+          child: ListView(
             children: <Widget>[
-              SizedBox(height: 5),
-              buildPartnerInfo(),
-              Padding(
-                padding: EdgeInsets.symmetric(
-                  vertical: 50,
-                ),
-                child: Text(
-                  _controller
-                      .activePartnerships[_controller.currentPage].promotion,
-                  style: TextStyle(
-                    fontSize: 20.0,
-                    color: Colors.black,
+              Card(
+                elevation: 5,
+                color: Colors.deepOrange[300],
+                child: ListTile(
+                  isThreeLine: true,
+                  title: Text(
+                    _controller
+                        .activePartnerships[_controller.currentPage].partner,
+                  ),
+                  subtitle: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        'Endereço: ' +
+                            _controller
+                                .activePartnerships[_controller.currentPage]
+                                .address,
+                      ),
+                      Text(
+                        'Telefone(s): ' +
+                            _controller
+                                .activePartnerships[_controller.currentPage]
+                                .phone1 +
+                            ' - ' +
+                            _controller
+                                .activePartnerships[_controller.currentPage]
+                                .phone2,
+                      ),
+                    ],
                   ),
                 ),
               ),
-            ],
-          ),
-        ),
-      );
-
-  Widget buildPartnerInfo() => Container(
-        color: Colors.deepOrange[200],
-        child: ListTile(
-          isThreeLine: true,
-          title: Text(
-            _controller.activePartnerships[_controller.currentPage].partner,
-            style: TextStyle(
-              color: Colors.black,
-            ),
-          ),
-          subtitle: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Text(
-                'Endereço: ' +
-                    _controller
-                        .activePartnerships[_controller.currentPage].address,
-                style: TextStyle(
-                  color: Colors.black,
-                ),
-              ),
-              Text(
-                'Telefone(s): ' +
-                    _controller
-                        .activePartnerships[_controller.currentPage].phone1 +
-                    ' - ' +
-                    _controller
-                        .activePartnerships[_controller.currentPage].phone2,
-                style: TextStyle(
-                  color: Colors.black,
+              Container(
+                height: MediaQuery.of(context).size.height - 570,
+                child: Card(
+                  elevation: 5,
+                  color: Colors.deepOrange[300],
+                  child: Center(
+                    child: Text(
+                      _controller.activePartnerships[_controller.currentPage]
+                          .promotion,
+                      style: TextStyle(
+                        fontSize: 20.0,
+                      ),
+                    ),
+                  ),
                 ),
               ),
             ],
