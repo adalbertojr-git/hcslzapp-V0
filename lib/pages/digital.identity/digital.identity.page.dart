@@ -97,27 +97,22 @@ class DigitalIdentityPage extends StatelessWidget {
               ),
             ],
           ),
-          Stack(
+          Column(
             children: [
               Center(
                 child: SizedBox(
-                  height: 100.0,
+                  height: 130.0,
                   child: Image.asset(_pathIdentity),
                 ),
               ),
-              Column(
-                children: [
-                  SizedBox(
-                    height: 120.0,
+              Center(
+                child: const Text(
+                  'Carteira digital de associado do Harley Club de São Luis - MA',
+                  style: TextStyle(
+                    fontSize: 11.0,
+                    fontWeight: FontWeight.bold,
                   ),
-                  Center(
-                    child: const Text(
-                      'Carteira digital de associado do Harley Club de São Luis - MA',
-                      style: TextStyle(
-                          fontSize: 10.0, fontWeight: FontWeight.bold),
-                    ),
-                  ),
-                ],
+                ),
               ),
             ],
           ),
@@ -125,8 +120,8 @@ class DigitalIdentityPage extends StatelessWidget {
       );
 
   _photo() => Container(
-        height: 250.0,
-        width: 250.0,
+        height: 270.0,
+        width: 270.0,
         padding: EdgeInsets.all(5.0),
         decoration: BoxDecoration(
           color: Colors.black.withOpacity(0.2),
