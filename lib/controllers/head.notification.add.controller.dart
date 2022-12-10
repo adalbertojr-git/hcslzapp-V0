@@ -1,9 +1,11 @@
 import 'dart:io';
 
+import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:hcslzapp/models/head.notification.dart';
 import 'package:hcslzapp/models/template.dart';
 import 'package:hcslzapp/repositories/head.notification.repo.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:mobx/mobx.dart';
 
 part 'head.notification.add.controller.g.dart';
@@ -28,6 +30,18 @@ abstract class HeadNotificationAddControllerBase with Store {
 
   @observable
   HeadNotificationRepo _headNotificationRepo = HeadNotificationRepo();
+
+  @observable
+  String photoUrl = '';
+
+  @observable
+  String photoPath = '';
+
+  @observable
+  File photo = File('');
+
+  @observable
+  bool changedPhoto = false;
 
   @observable
   String errorMsg = '';
@@ -94,6 +108,41 @@ abstract class HeadNotificationAddControllerBase with Store {
       return _labelNotificationRequired;
     }
     return null;
+  }
+
+  @action
+  Future getImageFromCamera() async {
+    final pickedFile = await ImagePicker().getImage(
+      source: ImageSource.camera,
+    );
+    if (pickedFile != null) {
+      photo = File(pickedFile.path);
+      changedPhoto = true;
+      photoPath = photo.path.toString();
+    }
+  }
+
+  @action
+  Future getImageFromGallery() async {
+    final pickedFile = await ImagePicker().getImage(
+      source: ImageSource.gallery,
+    );
+    if (pickedFile != null) {
+      photo = File(pickedFile.path);
+      changedPhoto = true;
+      photoPath = photo.path.toString();
+    }
+  }
+
+  Future<String> _uploadPhoto() async {
+    FirebaseStorage storage = FirebaseStorage.instance;
+    Reference reference = storage.ref().child(
+      'eventPhotos/${titleCtrl.text}',
+    );
+    await reference.putFile(photo);
+    return await reference.getDownloadURL().catchError((e) {
+      errorMsg = "${e.message}";
+    });
   }
 }
 

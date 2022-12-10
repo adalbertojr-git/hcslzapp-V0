@@ -2,12 +2,9 @@ import 'dart:io';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:hcslzapp/models/event.dart';
-import 'package:hcslzapp/models/partnership.dart';
 import 'package:hcslzapp/models/template.dart';
-import 'package:hcslzapp/repositories/partnership.repo.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:mobx/mobx.dart';
-
 import '../repositories/event.repo.dart';
 
 part 'event.add.controller.g.dart';

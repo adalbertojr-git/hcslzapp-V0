@@ -1,3 +1,4 @@
+import 'dart:io';
 import 'package:asuka/snackbars/asuka_snack_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
@@ -6,10 +7,12 @@ import 'package:hcslzapp/components/button.dart';
 import 'package:hcslzapp/components/my.text.form.field.dart';
 import 'package:hcslzapp/controllers/head.notification.add.controller.dart';
 import 'package:hcslzapp/models/head.notification.dart';
+import '../../common/photo.image.provider.dart';
 import '../../components/my.appbar.dart';
 import '../../components/my.bottom.appbar.dart';
 
 const String _title = 'Avisos da Diretoria';
+const String _pathNoImage = 'assets/imgs/noImage.png';
 
 class HeadNotificationAddPage extends StatelessWidget {
   final HeadNotification? _headNotification;
@@ -28,8 +31,38 @@ class HeadNotificationAddPage extends StatelessWidget {
         _headNotification == null ? 'Adicionar ' + _title : 'Editar ' + _title,
       ),
       bottomNavigationBar: MyBottomAppBar(),
-      body: ListView(
+      body: _widgets(context),
+      floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
+      floatingActionButton: Button(
+        icon: Icons.save,
+        onClick: () =>
+            _headNotification == null ? _save(context) : _update(context),
+      ),
+    );
+  }
+
+  _widgets(BuildContext context) => ListView(
         children: <Widget>[
+          _photo(context),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              IconButton(
+                icon: Icon(
+                  Icons.add_photo_alternate,
+                  size: 28.0,
+                ),
+                onPressed: _controller.getImageFromGallery,
+              ),
+              IconButton(
+                icon: Icon(
+                  Icons.add_a_photo,
+                  size: 25.0,
+                ),
+                onPressed: _controller.getImageFromCamera,
+              ),
+            ],
+          ),
           Observer(
             builder: (_) {
               return MyTextFormField(
@@ -58,15 +91,38 @@ class HeadNotificationAddPage extends StatelessWidget {
             },
           ),
         ],
-      ),
-      floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
-      floatingActionButton: Button(
-        icon: Icons.save,
-        onClick: () =>
-            _headNotification == null ? _save(context) : _update(context),
-      ),
-    );
-  }
+      );
+
+  _photo(BuildContext context) => Container(
+        height: MediaQuery.of(context).size.height / 2.5,
+        width: MediaQuery.of(context).size.width,
+        padding: EdgeInsets.symmetric(horizontal: 5),
+        child: Card(
+          elevation: 2,
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(10.0),
+          ),
+          child: Observer(
+            builder: (_) => Container(
+              decoration: BoxDecoration(
+                image: _loadPhoto(),
+              ),
+            ),
+          ),
+        ),
+      );
+
+  DecorationImage _loadPhoto() => DecorationImage(
+      image: _controller.changedPhoto
+          ? PhotoImageProvider().getImageProvider(
+              File(_controller.photoPath),
+            ) as ImageProvider
+          : _controller.photoUrl != ""
+              ? NetworkImage(_controller.photoUrl)
+              : PhotoImageProvider().getImageProvider(
+                  File(_pathNoImage),
+                ) as ImageProvider,
+      fit: BoxFit.fill);
 
   _save(BuildContext context) {
     if (_controller.hasErrors) {

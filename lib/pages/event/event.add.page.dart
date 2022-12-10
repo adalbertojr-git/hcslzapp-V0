@@ -64,9 +64,6 @@ class EventAddPage extends StatelessWidget {
               ),
             ],
           ),
-          SizedBox(
-            height: 5.0,
-          ),
           Observer(
             builder: (_) {
               return MyTextFormField(
