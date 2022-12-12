@@ -169,6 +169,22 @@ mixin _$EventAddController on EventAddControllerBase, Store {
     });
   }
 
+  late final _$eventDateAtom =
+      Atom(name: 'EventAddControllerBase.eventDate', context: context);
+
+  @override
+  String get eventDate {
+    _$eventDateAtom.reportRead();
+    return super.eventDate;
+  }
+
+  @override
+  set eventDate(String value) {
+    _$eventDateAtom.reportWrite(value, super.eventDate, () {
+      super.eventDate = value;
+    });
+  }
+
   late final _$saveAsyncAction =
       AsyncAction('EventAddControllerBase.save', context: context);
 
@@ -216,7 +232,8 @@ photoPath: ${photoPath},
 photo: ${photo},
 changedPhoto: ${changedPhoto},
 event: ${event},
-errorMsg: ${errorMsg}
+errorMsg: ${errorMsg},
+eventDate: ${eventDate}
     ''';
   }
 }

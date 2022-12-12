@@ -129,6 +129,7 @@ class EventAddPage extends StatelessWidget {
       (value) {
         if (value != null) {
           AsukaSnackbar.success('Evento cadastrado com sucesso');
+          Navigator.pop(context, value);
         } else {
           AsukaSnackbar.alert(_controller.errorMsg).show();
         }
