@@ -139,7 +139,7 @@ abstract class HeadNotificationAddControllerBase with Store {
   Future<String> _uploadPhoto() async {
     FirebaseStorage storage = FirebaseStorage.instance;
     Reference reference = storage.ref().child(
-      'headNotificationPhotos/${titleCtrl.text}',
+      'headNotificationPhotos/${headNotification.id}',
     );
     await reference.putFile(photo);
     return await reference.getDownloadURL().catchError((e) {
