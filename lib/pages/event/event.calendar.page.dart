@@ -138,36 +138,39 @@ class _EventCalendarPageState extends State<EventCalendarPage> {
 
   _widgets() => Column(
         children: [
-          TableCalendar<Event>(
-            locale: 'pt_BR',
-            firstDay: kFirstDay,
-            lastDay: kLastDay,
-            focusedDay: _focusedDay,
-            selectedDayPredicate: (day) => isSameDay(_selectedDay, day),
-            rangeStartDay: _rangeStart,
-            rangeEndDay: _rangeEnd,
-            calendarFormat: _calendarFormat,
-            rangeSelectionMode: _rangeSelectionMode,
-            eventLoader: _getEventsForDay,
-            startingDayOfWeek: StartingDayOfWeek.monday,
-            calendarStyle: CalendarStyle(
-              // Use `CalendarStyle` to customize the UI
-              outsideDaysVisible: false,
+          Card(
+            elevation: 5,
+            child: TableCalendar<Event>(
+              locale: 'pt_BR',
+              firstDay: kFirstDay,
+              lastDay: kLastDay,
+              focusedDay: _focusedDay,
+              selectedDayPredicate: (day) => isSameDay(_selectedDay, day),
+              rangeStartDay: _rangeStart,
+              rangeEndDay: _rangeEnd,
+              calendarFormat: _calendarFormat,
+              rangeSelectionMode: _rangeSelectionMode,
+              eventLoader: _getEventsForDay,
+              startingDayOfWeek: StartingDayOfWeek.monday,
+              calendarStyle: CalendarStyle(
+                // Use `CalendarStyle` to customize the UI
+                outsideDaysVisible: false,
+              ),
+              onDaySelected: _onDaySelected,
+              //onRangeSelected: _onRangeSelected,
+              onFormatChanged: (format) {
+                if (_calendarFormat != format) {
+                  setState(() {
+                    _calendarFormat = format;
+                  });
+                }
+              },
+              onPageChanged: (focusedDay) {
+                _focusedDay = focusedDay;
+                _controller.selectedEvents.value = [];
+              },
+              rowHeight: 60,
             ),
-            onDaySelected: _onDaySelected,
-            //onRangeSelected: _onRangeSelected,
-            onFormatChanged: (format) {
-              if (_calendarFormat != format) {
-                setState(() {
-                  _calendarFormat = format;
-                });
-              }
-            },
-            onPageChanged: (focusedDay) {
-              _focusedDay = focusedDay;
-              _controller.selectedEvents.value = [];
-            },
-            rowHeight: 60,
           ),
           const SizedBox(height: 8.0),
           Expanded(
