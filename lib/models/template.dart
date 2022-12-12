@@ -99,6 +99,7 @@ class Template {
         title: '',
         notification: '',
         datePublication: '',
+        photoUrl: '',
       );
 
   Event loadEvent() => Event(

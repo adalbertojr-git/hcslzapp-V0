@@ -94,6 +94,70 @@ mixin _$HeadNotificationAddController
     });
   }
 
+  late final _$photoUrlAtom = Atom(
+      name: 'HeadNotificationAddControllerBase.photoUrl', context: context);
+
+  @override
+  String get photoUrl {
+    _$photoUrlAtom.reportRead();
+    return super.photoUrl;
+  }
+
+  @override
+  set photoUrl(String value) {
+    _$photoUrlAtom.reportWrite(value, super.photoUrl, () {
+      super.photoUrl = value;
+    });
+  }
+
+  late final _$photoPathAtom = Atom(
+      name: 'HeadNotificationAddControllerBase.photoPath', context: context);
+
+  @override
+  String get photoPath {
+    _$photoPathAtom.reportRead();
+    return super.photoPath;
+  }
+
+  @override
+  set photoPath(String value) {
+    _$photoPathAtom.reportWrite(value, super.photoPath, () {
+      super.photoPath = value;
+    });
+  }
+
+  late final _$photoAtom =
+      Atom(name: 'HeadNotificationAddControllerBase.photo', context: context);
+
+  @override
+  File get photo {
+    _$photoAtom.reportRead();
+    return super.photo;
+  }
+
+  @override
+  set photo(File value) {
+    _$photoAtom.reportWrite(value, super.photo, () {
+      super.photo = value;
+    });
+  }
+
+  late final _$changedPhotoAtom = Atom(
+      name: 'HeadNotificationAddControllerBase.changedPhoto', context: context);
+
+  @override
+  bool get changedPhoto {
+    _$changedPhotoAtom.reportRead();
+    return super.changedPhoto;
+  }
+
+  @override
+  set changedPhoto(bool value) {
+    _$changedPhotoAtom.reportWrite(value, super.changedPhoto, () {
+      super.changedPhoto = value;
+    });
+  }
+
   late final _$errorMsgAtom = Atom(
       name: 'HeadNotificationAddControllerBase.errorMsg', context: context);
 
@@ -126,6 +190,26 @@ mixin _$HeadNotificationAddController
     return _$updateAsyncAction.run(() => super.update());
   }
 
+  late final _$getImageFromCameraAsyncAction = AsyncAction(
+      'HeadNotificationAddControllerBase.getImageFromCamera',
+      context: context);
+
+  @override
+  Future<dynamic> getImageFromCamera() {
+    return _$getImageFromCameraAsyncAction
+        .run(() => super.getImageFromCamera());
+  }
+
+  late final _$getImageFromGalleryAsyncAction = AsyncAction(
+      'HeadNotificationAddControllerBase.getImageFromGallery',
+      context: context);
+
+  @override
+  Future<dynamic> getImageFromGallery() {
+    return _$getImageFromGalleryAsyncAction
+        .run(() => super.getImageFromGallery());
+  }
+
   @override
   String toString() {
     return '''
@@ -133,6 +217,10 @@ idCtrl: ${idCtrl},
 titleCtrl: ${titleCtrl},
 notificationCtrl: ${notificationCtrl},
 headNotification: ${headNotification},
+photoUrl: ${photoUrl},
+photoPath: ${photoPath},
+photo: ${photo},
+changedPhoto: ${changedPhoto},
 errorMsg: ${errorMsg}
     ''';
   }

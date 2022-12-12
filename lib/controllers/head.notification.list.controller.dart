@@ -31,14 +31,21 @@ abstract class HeadNotificationListControllerBase with Store {
   String errorMsg = '';
 
   @observable
+  String photoPath = "";
+
+  @observable
+  String photoUrl = "";
+
+  @observable
   Future<List<HeadNotification>> future =
-  Future<List<HeadNotification>>.value([]);
+      Future<List<HeadNotification>>.value([]);
 
   @observable
   String filter = '';
 
   init() {
     headNotifications.clear();
+    photoUrl = headNotification.photoUrl;
     setButtonVisibilty();
   }
 
@@ -59,24 +66,10 @@ abstract class HeadNotificationListControllerBase with Store {
   @action
   Future deleteById(HeadNotification headNotification) =>
       ObservableFuture(_headNotificationRepo
-          .deleteById(_setValues(
-        headNotification.id,
-        headNotification.title,
-        headNotification.notification,
-      ))
+          .deleteById(headNotification)
           .then((value) => value)).catchError((e) {
         errorMsg = "${e.message}";
       }, test: (e) => e is HttpException).catchError((e) {
         errorMsg = "$e";
       }, test: (e) => e is Exception);
-
-  HeadNotification _setValues(int id, String title, String notification) {
-    return HeadNotification(
-      id: id,
-      title: title,
-      notification: notification,
-      datePublication: '',
-    );
-  }
-
 }

@@ -56,6 +56,7 @@ abstract class HeadNotificationAddControllerBase with Store {
   _initTextFields() {
     titleCtrl.text = headNotification.title;
     notificationCtrl.text = headNotification.notification;
+    photoUrl = headNotification.photoUrl;
   }
 
   @action
@@ -82,6 +83,7 @@ abstract class HeadNotificationAddControllerBase with Store {
       title: titleCtrl.text,
       notification: notificationCtrl.text,
       datePublication: '',
+      photoUrl: photo.path.length != 0 ? await _uploadPhoto() : photoUrl,
     );
   }
 
@@ -137,7 +139,7 @@ abstract class HeadNotificationAddControllerBase with Store {
   Future<String> _uploadPhoto() async {
     FirebaseStorage storage = FirebaseStorage.instance;
     Reference reference = storage.ref().child(
-      'eventPhotos/${titleCtrl.text}',
+      'headNotificationPhotos/${titleCtrl.text}',
     );
     await reference.putFile(photo);
     return await reference.getDownloadURL().catchError((e) {

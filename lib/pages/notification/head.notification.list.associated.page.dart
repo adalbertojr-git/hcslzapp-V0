@@ -1,9 +1,11 @@
+import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:hcslzapp/components/centered.message.dart';
 import 'package:hcslzapp/components/progress.dart';
 import 'package:hcslzapp/controllers/head.notification.list.controller.dart';
 import 'package:hcslzapp/models/head.notification.dart';
+import '../../common/photo.image.provider.dart';
 import '../../components/my.appbar.dart';
 import '../../components/my.bottom.appbar.dart';
 
@@ -11,6 +13,7 @@ const String _labelNotExists = 'Não existem avisos cadastrados.';
 const String _labelUnknown =
     'Houve um erro desconhecido ao executar a transação.';
 const String _title = 'Avisos da Diretoria';
+const String _pathLogoImage = 'assets/imgs/logo.png';
 
 class HeadNotificationListAssociatedPage extends StatelessWidget {
   final HeadNotificationListController _controller =
@@ -46,7 +49,7 @@ class HeadNotificationListAssociatedPage extends StatelessWidget {
                     _controller.headNotifications.sort(
                       (a, b) => b.datePublication.compareTo(a.datePublication),
                     );
-                    return _widgets();
+                    return _widgets(context);
                   } else
                     return CenteredMessage(
                       title: _title,
@@ -62,7 +65,7 @@ class HeadNotificationListAssociatedPage extends StatelessWidget {
         ),
       );
 
-  _widgets() => Column(
+  _widgets(BuildContext context) => Column(
         children: [
           SizedBox(height: 10),
           Observer(
@@ -83,7 +86,7 @@ class HeadNotificationListAssociatedPage extends StatelessWidget {
                         ],
                       ),
                       Container(
-                        height: 450,
+                        height: MediaQuery.of(context).size.height / 1.6,
                         color: Colors.black,
                         child: Card(
                           shape: RoundedRectangleBorder(
@@ -92,20 +95,15 @@ class HeadNotificationListAssociatedPage extends StatelessWidget {
                           elevation: 1.0,
                           child: Column(
                             children: <Widget>[
-                              Container(
-                                child: Image.asset(
-                                  'assets/imgs/logo.png',
-                                  fit: BoxFit.cover,
-                                  width: 300.0,
-                                ),
-                              ),
+                              _photo(context, i),
                               Container(
                                 child: ListTile(
                                   contentPadding:
                                       EdgeInsets.fromLTRB(10, 10, 10, 0),
                                   dense: true,
                                   title: Text(
-                                    _controller.headNotifications[i].title + '\n',
+                                    _controller.headNotifications[i].title +
+                                        '\n',
                                     style: TextStyle(
                                         fontWeight: FontWeight.bold,
                                         fontSize: 20.0),
@@ -129,4 +127,29 @@ class HeadNotificationListAssociatedPage extends StatelessWidget {
           ),
         ],
       );
+
+  _photo(BuildContext context, int i) => Container(
+        height: MediaQuery.of(context).size.height / 3,
+        width: MediaQuery.of(context).size.width,
+        padding: EdgeInsets.symmetric(horizontal: 5),
+        child: Card(
+          elevation: 2,
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(10.0),
+          ),
+          child: Container(
+            decoration: BoxDecoration(
+              image: _loadPhoto(i),
+            ),
+          ),
+        ),
+      );
+
+  DecorationImage _loadPhoto(int i) => DecorationImage(
+      image: _controller.headNotifications[i].photoUrl != ''
+          ? NetworkImage(_controller.headNotifications[i].photoUrl)
+          : PhotoImageProvider().getImageProvider(
+              File(_pathLogoImage),
+            ) as ImageProvider,
+      fit: BoxFit.fill);
 }

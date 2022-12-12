@@ -111,6 +111,38 @@ mixin _$HeadNotificationListController
     });
   }
 
+  late final _$photoPathAtom = Atom(
+      name: 'HeadNotificationListControllerBase.photoPath', context: context);
+
+  @override
+  String get photoPath {
+    _$photoPathAtom.reportRead();
+    return super.photoPath;
+  }
+
+  @override
+  set photoPath(String value) {
+    _$photoPathAtom.reportWrite(value, super.photoPath, () {
+      super.photoPath = value;
+    });
+  }
+
+  late final _$photoUrlAtom = Atom(
+      name: 'HeadNotificationListControllerBase.photoUrl', context: context);
+
+  @override
+  String get photoUrl {
+    _$photoUrlAtom.reportRead();
+    return super.photoUrl;
+  }
+
+  @override
+  set photoUrl(String value) {
+    _$photoUrlAtom.reportWrite(value, super.photoUrl, () {
+      super.photoUrl = value;
+    });
+  }
+
   late final _$futureAtom =
       Atom(name: 'HeadNotificationListControllerBase.future', context: context);
 
@@ -192,6 +224,8 @@ isHidedButton: ${isHidedButton},
 headNotifications: ${headNotifications},
 headNotification: ${headNotification},
 errorMsg: ${errorMsg},
+photoPath: ${photoPath},
+photoUrl: ${photoUrl},
 future: ${future},
 filter: ${filter}
     ''';
