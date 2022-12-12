@@ -76,12 +76,9 @@ class AccessRequestRepo {
     }
   }
 
-  Future<Response> deleteById(int id) async {
-/*    final String encodedJson = jsonEncode(
-      accessRequest.toJson(),
-    );*/
+  Future<Response> deleteById(AccessRequest accessRequest) async {
     final Response response = await client.delete(
-      Uri.parse(mainUrl + _accReqUrl + "/" + id.toString()),
+      Uri.parse(mainUrl + _accReqUrl + "/" + accessRequest.id.toString()),
       headers: {
         'Content-type': 'application/json',
       },

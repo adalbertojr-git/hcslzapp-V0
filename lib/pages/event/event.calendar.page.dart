@@ -41,6 +41,7 @@ class _EventCalendarPageState extends State<EventCalendarPage> {
   void initState() {
     super.initState();
     _controller.getFuture().then((value) {
+      print(value);
       if (value.isNotEmpty) {
         _controller.setButtonVisibilty();
       }

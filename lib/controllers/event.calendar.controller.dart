@@ -20,7 +20,7 @@ abstract class EventCalendarControllerBase with Store {
   EventRepo _eventRepo = EventRepo();
 
   @observable
-  late String errorMsg;
+  String errorMsg = '';
 
   @observable
   bool isHidedButton = true;
@@ -43,7 +43,10 @@ abstract class EventCalendarControllerBase with Store {
 
   @action
   Future<String> findAll() =>
-      _eventRepo.findAll().then((value) => value).catchError((e) {
+      ObservableFuture(_eventRepo.findAll().then((value) => value))
+          .catchError((e) {
+        errorMsg = "${e.message}";
+      }, test: (e) => e is HttpException).catchError((e) {
         errorMsg = "$e";
       }, test: (e) => e is Exception);
 

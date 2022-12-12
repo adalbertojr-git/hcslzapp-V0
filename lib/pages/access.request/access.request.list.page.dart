@@ -84,7 +84,7 @@ class AccessRequestListPageState extends State<AccessRequestListPage> {
           floatingActionButtonLocation:
               FloatingActionButtonLocation.centerDocked,
           floatingActionButton: _controller.isHidedButton
-              ? SizedBox()
+              ? null
               : Button(icon: Icons.save, onClick: () => _allow()),
         ),
       );
@@ -171,13 +171,7 @@ class CheckboxWidget extends StatelessWidget {
       controller.ids.add(item.id);
       controller.accessRequests.addAll(
         [
-          AccessRequest(
-            id: item.id,
-            name: item.name!,
-            user: item.user!,
-            email: item.email!,
-            password: item.password!,
-          ),
+          loadAccessRequest(item),
         ],
       );
     } else {
@@ -192,7 +186,7 @@ class CheckboxWidget extends StatelessWidget {
           return TransactionAuthDialog(msg: 'Confirma a exclusão?');
         });
     if (response == true) {
-      controller.deleteById(item.id).then((value) {
+      controller.deleteById(loadAccessRequest(item)).then((value) {
         if (value != null) {
           AsukaSnackbar.success('Requisição de acesso excluída com sucesso');
           controller.listItems.remove(item);
@@ -202,4 +196,12 @@ class CheckboxWidget extends StatelessWidget {
       });
     }
   }
+
+  AccessRequest loadAccessRequest(ItemModel item) => AccessRequest(
+    id: item.id,
+    name: item.name!,
+    user: item.user!,
+    email: item.email!,
+    password: item.password!,
+  );
 }

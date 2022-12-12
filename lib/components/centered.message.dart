@@ -2,7 +2,6 @@ import 'package:asuka/snackbars/asuka_snack_bar.dart';
 import 'package:flutter/material.dart';
 import 'degradee.background.dart';
 import 'hc.logo.dart';
-import 'my.appbar.dart';
 
 class CenteredMessage extends StatefulWidget {
   final String message;
@@ -30,7 +29,6 @@ class _CenteredMessageState extends State<CenteredMessage> {
 
   @override
   Widget build(BuildContext context) => Scaffold(
-        appBar: MyAppBar(widget.title),
         body: DegradeBackground(
           Center(
             child: ListView(

@@ -87,7 +87,7 @@ class _PaymentListPageState extends State<PaymentListPage> {
             floatingActionButtonLocation:
                 FloatingActionButtonLocation.centerDocked,
             floatingActionButton: _controller.isHidedButton
-                ? Container()
+                ? null
                 : Button(
                     icon: Icons.apps,
                     onClick: () {
