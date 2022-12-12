@@ -41,7 +41,6 @@ class _EventCalendarPageState extends State<EventCalendarPage> {
   void initState() {
     super.initState();
     _controller.getFuture().then((value) {
-      print(value);
       if (value.isNotEmpty) {
         _controller.setButtonVisibilty();
       }
@@ -128,12 +127,15 @@ class _EventCalendarPageState extends State<EventCalendarPage> {
                     Navigator.push(
                       context,
                       MaterialPageRoute(
-                        builder: (context) => EventAddPage(null),
+                        builder: (context) => EventAddPage(
+                          null,
+                          _selectedDay.toString().substring(0, 10),
+                        ),
                       ),
                     );
                   },
                 )
-              : SizedBox(),
+              : null,
         ),
       );
 

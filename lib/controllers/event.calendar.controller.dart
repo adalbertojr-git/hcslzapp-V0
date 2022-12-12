@@ -53,14 +53,15 @@ abstract class EventCalendarControllerBase with Store {
   Future<String> getFuture() => future = findAll();
 
   @action
-  Future save(String title, String date) => ObservableFuture(_eventRepo
+  Future save(String title, String date) =>
+      ObservableFuture(_eventRepo
           .save(_setValues(
-            0,
-            title,
-            date,
-            '',
-            '',
-          ))
+        0,
+        title,
+        date,
+        '',
+        '',
+      ))
           .then((value) => value)).catchError((e) {
         errorMsg = "${e.message}";
       }, test: (e) => e is HttpException).catchError((e) {
@@ -68,14 +69,15 @@ abstract class EventCalendarControllerBase with Store {
       }, test: (e) => e is Exception);
 
   @action
-  Future update(Event event) => ObservableFuture(_eventRepo
+  Future update(Event event) =>
+      ObservableFuture(_eventRepo
           .update(_setValues(
-            event.id,
-            event.title,
-            event.date,
-            '',
-            '',
-          ))
+        event.id,
+        event.title,
+        event.date,
+        '',
+        '',
+      ))
           .then((value) => value)).catchError((e) {
         errorMsg = "${e.message}";
       }, test: (e) => e is HttpException).catchError((e) {
@@ -83,27 +85,26 @@ abstract class EventCalendarControllerBase with Store {
       }, test: (e) => e is Exception);
 
   @action
-  Future deleteById(Event event) => ObservableFuture(_eventRepo
+  Future deleteById(Event event) =>
+      ObservableFuture(_eventRepo
           .deleteById(_setValues(
-            event.id,
-            event.title,
-            event.date,
-            '',
-            '',
-          ))
+        event.id,
+        event.title,
+        event.date,
+        '',
+        '',
+      ))
           .then((value) => value)).catchError((e) {
         errorMsg = "${e.message}";
       }, test: (e) => e is HttpException).catchError((e) {
         errorMsg = "$e";
       }, test: (e) => e is Exception);
 
-  Event _setValues(
-    int id,
-    String title,
-    String date,
-    String description,
-    String photoUrl,
-  ) {
+  Event _setValues(int id,
+      String title,
+      String date,
+      String description,
+      String photoUrl,) {
     return Event(
       id: id,
       date: date,
@@ -163,10 +164,12 @@ abstract class EventCalendarControllerBase with Store {
 
   /// Returns a list of [DateTime] objects from [first] to [last], inclusive.
   List<DateTime> daysInRange(DateTime first, DateTime last) {
-    final dayCount = last.difference(first).inDays + 1;
+    final dayCount = last
+        .difference(first)
+        .inDays + 1;
     return List.generate(
       dayCount,
-      (index) => DateTime.utc(first.year, first.month, first.day + index),
+          (index) => DateTime.utc(first.year, first.month, first.day + index),
     );
   }
 }

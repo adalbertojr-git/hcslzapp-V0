@@ -16,25 +16,26 @@ const String _pathNoImage = 'assets/imgs/noImage.png';
 const String _title = 'Evento';
 
 class EventAddPage extends StatelessWidget {
-  final Event? event;
+  final Event? _event;
+  final String _eventDate;
   final EventAddController _controller = EventAddController();
 
-  EventAddPage(this.event);
+  EventAddPage(this._event, this._eventDate);
 
   @override
   Widget build(BuildContext context) {
-    _controller.event = event ?? _controller.event;
+    _controller.event = _event ?? _controller.event;
     _controller.init();
     return Scaffold(
       appBar: MyAppBar(
-        event == null ? 'Adicionar ' + _title : 'Editar ' + _title,
+        _event == null ? 'Adicionar ' + _title : 'Editar ' + _title,
       ),
       bottomNavigationBar: MyBottomAppBar(),
       body: _widgets(context),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
       floatingActionButton: Button(
         icon: Icons.save,
-        onClick: () => event == null ? _save(context) : _update(context),
+        onClick: () => _event == null ? _save(context) : _update(context),
       ),
     );
   }
