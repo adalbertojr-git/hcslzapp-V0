@@ -199,7 +199,7 @@ class PartnershipAddPage extends StatelessWidget {
                 ) as ImageProvider,
       fit: BoxFit.fill);
 
-  _save(BuildContext context) async {
+  _save(BuildContext context) {
     if (_controller.hasErrors) {
       AsukaSnackbar.alert('Corrija os erros informados').show();
     } else {

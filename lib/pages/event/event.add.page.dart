@@ -25,6 +25,7 @@ class EventAddPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     _controller.event = _event ?? _controller.event;
+    _controller.eventDate = _eventDate;
     _controller.init();
     return Scaffold(
       appBar: MyAppBar(
@@ -123,21 +124,16 @@ class EventAddPage extends StatelessWidget {
                 ) as ImageProvider,
       fit: BoxFit.fill);
 
-  _save(BuildContext context) async {
-/*    if (_controller.hasErrors) {
-      AsukaSnackbar.alert('Corrija os erros informados').show();
-    } else {
-      _controller.save().then(
-        (value) {
-          if (value != null) {
-            AsukaSnackbar.success('Parceiro salvo com sucesso');
-            Navigator.of(context).pop(value);
-          } else {
-            AsukaSnackbar.alert(_controller.errorMsg).show();
-          }
-        },
-      );
-    }*/
+  _save(BuildContext context) {
+    _controller.save().then(
+      (value) {
+        if (value != null) {
+          AsukaSnackbar.success('Evento cadastrado com sucesso');
+        } else {
+          AsukaSnackbar.alert(_controller.errorMsg).show();
+        }
+      },
+    );
   }
 
   _update(BuildContext context) async {

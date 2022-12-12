@@ -44,6 +44,9 @@ abstract class EventAddControllerBase with Store {
   @observable
   String errorMsg = '';
 
+  @observable
+  String eventDate = '';
+
   init() {
     _initTextFields();
     photoUrl = event.photoUrl;
@@ -80,7 +83,7 @@ abstract class EventAddControllerBase with Store {
     return Event(
       id: event.id,
       title: titleCtrl.text,
-      date: '',
+      date: eventDate,
       description: descriptionCtrl.text,
       photoUrl: photo.path.length != 0 ? await _uploadPhoto() : photoUrl,
     );
