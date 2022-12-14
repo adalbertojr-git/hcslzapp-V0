@@ -18,29 +18,41 @@ import '../../components/my.bottom.appbar.dart';
 const String _pathNoImage = 'assets/imgs/noImage.png';
 const String _title = 'Parceria';
 
-class PartnershipAddPage extends StatelessWidget {
+class PartnershipAddPage extends StatefulWidget {
   final Partnership? partnership;
-  final PartnershipAddController _controller = PartnershipAddController();
 
   PartnershipAddPage(this.partnership);
 
   @override
-  Widget build(BuildContext context) {
-    _controller.partnership = partnership ?? _controller.partnership;
+  State<PartnershipAddPage> createState() => _PartnershipAddPageState();
+}
+
+class _PartnershipAddPageState extends State<PartnershipAddPage> {
+  final PartnershipAddController _controller = PartnershipAddController();
+
+  @override
+  void initState() {
+    _controller.partnership = widget.partnership ?? _controller.partnership;
     _controller.init();
-    return Scaffold(
-      appBar: MyAppBar(
-        partnership == null ? 'Adicionar ' + _title : 'Editar ' + _title,
-      ),
-      bottomNavigationBar: MyBottomAppBar(),
-      body: _widgets(context),
-      floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
-      floatingActionButton: Button(
-        icon: Icons.save,
-        onClick: () => partnership == null ? _save(context) : _update(context),
-      ),
-    );
+    super.initState();
   }
+
+  @override
+  Widget build(BuildContext context) => Scaffold(
+        appBar: MyAppBar(
+          widget.partnership == null
+              ? 'Adicionar ' + _title
+              : 'Editar ' + _title,
+        ),
+        bottomNavigationBar: MyBottomAppBar(),
+        body: _widgets(context),
+        floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
+        floatingActionButton: Button(
+          icon: Icons.save,
+          onClick: () =>
+              widget.partnership == null ? _save(context) : _update(context),
+        ),
+      );
 
   _widgets(BuildContext context) => ListView(
         children: <Widget>[
@@ -122,7 +134,7 @@ class PartnershipAddPage extends StatelessWidget {
             inputType: TextInputType.text,
             nLines: 4,
           ),
-          partnership == null
+          widget.partnership == null
               ? Container()
               : Container(
                   child: Padding(

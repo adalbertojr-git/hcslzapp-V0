@@ -15,31 +15,41 @@ import '../../controllers/event.add.controller.dart';
 const String _pathNoImage = 'assets/imgs/noImage.png';
 const String _title = 'Evento';
 
-class EventAddPage extends StatelessWidget {
+class EventAddPage extends StatefulWidget {
   final Event? _event;
   final String _eventDate;
-  final EventAddController _controller = EventAddController();
 
   EventAddPage(this._event, this._eventDate);
 
   @override
-  Widget build(BuildContext context) {
-    _controller.event = _event ?? _controller.event;
-    _controller.eventDate = _eventDate;
+  State<EventAddPage> createState() => _EventAddPageState();
+}
+
+class _EventAddPageState extends State<EventAddPage> {
+  final EventAddController _controller = EventAddController();
+
+  @override
+  void initState() {
+    _controller.event = widget._event ?? _controller.event;
+    _controller.eventDate = widget._eventDate;
     _controller.init();
-    return Scaffold(
-      appBar: MyAppBar(
-        _event == null ? 'Adicionar ' + _title : 'Editar ' + _title,
-      ),
-      bottomNavigationBar: MyBottomAppBar(),
-      body: _widgets(context),
-      floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
-      floatingActionButton: Button(
-        icon: Icons.save,
-        onClick: () => _event == null ? _save(context) : _update(context),
-      ),
-    );
+    super.initState();
   }
+
+  @override
+  Widget build(BuildContext context) => Scaffold(
+        appBar: MyAppBar(
+          widget._event == null ? 'Adicionar ' + _title : 'Editar ' + _title,
+        ),
+        bottomNavigationBar: MyBottomAppBar(),
+        body: _widgets(context),
+        floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
+        floatingActionButton: Button(
+          icon: Icons.save,
+          onClick: () =>
+              widget._event == null ? _save(context) : _update(context),
+        ),
+      );
 
   _widgets(BuildContext context) => ListView(
         children: <Widget>[

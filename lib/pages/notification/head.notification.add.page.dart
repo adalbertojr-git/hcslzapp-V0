@@ -14,32 +14,45 @@ import '../../components/my.bottom.appbar.dart';
 const String _title = 'Avisos da Diretoria';
 const String _pathNoImage = 'assets/imgs/noImage.png';
 
-class HeadNotificationAddPage extends StatelessWidget {
+class HeadNotificationAddPage extends StatefulWidget {
   final HeadNotification? _headNotification;
-  final HeadNotificationAddController _controller =
-      HeadNotificationAddController();
 
   HeadNotificationAddPage(this._headNotification);
 
   @override
-  Widget build(BuildContext context) {
+  State<HeadNotificationAddPage> createState() =>
+      _HeadNotificationAddPageState();
+}
+
+class _HeadNotificationAddPageState extends State<HeadNotificationAddPage> {
+  final HeadNotificationAddController _controller =
+      HeadNotificationAddController();
+
+  @override
+  void initState() {
     _controller.headNotification =
-        _headNotification ?? _controller.headNotification;
+        widget._headNotification ?? _controller.headNotification;
     _controller.init();
-    return Scaffold(
-      appBar: MyAppBar(
-        _headNotification == null ? 'Adicionar ' + _title : 'Editar ' + _title,
-      ),
-      bottomNavigationBar: MyBottomAppBar(),
-      body: _widgets(context),
-      floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
-      floatingActionButton: Button(
-        icon: Icons.save,
-        onClick: () =>
-            _headNotification == null ? _save(context) : _update(context),
-      ),
-    );
+    super.initState();
   }
+
+  @override
+  Widget build(BuildContext context) => Scaffold(
+        appBar: MyAppBar(
+          widget._headNotification == null
+              ? 'Adicionar ' + _title
+              : 'Editar ' + _title,
+        ),
+        bottomNavigationBar: MyBottomAppBar(),
+        body: _widgets(context),
+        floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
+        floatingActionButton: Button(
+          icon: Icons.save,
+          onClick: () => widget._headNotification == null
+              ? _save(context)
+              : _update(context),
+        ),
+      );
 
   _widgets(BuildContext context) => ListView(
         children: <Widget>[

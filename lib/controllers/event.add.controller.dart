@@ -89,10 +89,11 @@ abstract class EventAddControllerBase with Store {
     );
   }
 
-  bool get hasErrors => hasErrorPartner;
+  bool get hasErrors => hasErrorPartner || hasErrorDescription;
 
-  bool get hasErrorPartner =>
-      validateTitle() != null || validateDescription() != null;
+  bool get hasErrorPartner => validateTitle() != null;
+
+  bool get hasErrorDescription => validateDescription() != null;
 
   String? validateTitle() {
     const String _labelTitleRequired = 'Título do evento é obrigatório!!!';
