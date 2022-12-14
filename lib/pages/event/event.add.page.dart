@@ -135,47 +135,36 @@ class _EventAddPageState extends State<EventAddPage> {
       fit: BoxFit.fill);
 
   _save(BuildContext context) {
-    _controller.save().then(
-      (value) {
-        if (value != null) {
-          AsukaSnackbar.success('Evento cadastrado com sucesso');
-          Navigator.pop(context, value);
-        } else {
-          AsukaSnackbar.alert(_controller.errorMsg).show();
-        }
-      },
-    );
-  }
-
-  _update(BuildContext context) async {
-/*    if (_controller.hasErrors) {
+    if (_controller.hasErrors) {
       AsukaSnackbar.alert('Corrija os erros informados').show();
     } else {
-      var response = true;
-      if (_controller.currentStatus == 'Inativo') {
-        response = await showDialog(
-            context: context,
-            builder: (context) {
-              return TransactionAuthDialog(
-                  msg:
-                      'O parceiro inativado não será mais visto pelos associados no App. ' +
-                          '\n\n' +
-                          'Confirma?');
-            });
-      }
-      if (response == true) {
-        AsukaSnackbar.message('Aguarde...').show();
-        _controller.update().then(
-          (value) {
-            if (value != null) {
-              AsukaSnackbar.success('Parceiro atualizado com sucesso');
-              Navigator.pop(context, value);
-            } else {
-              AsukaSnackbar.alert(_controller.errorMsg).show();
-            }
-          },
-        );
-      }
-    }*/
+      _controller.save().then(
+        (value) {
+          if (value != null) {
+            AsukaSnackbar.success('Evento cadastrado com sucesso');
+            Navigator.pop(context, value);
+          } else {
+            AsukaSnackbar.alert(_controller.errorMsg).show();
+          }
+        },
+      );
+    }
+  }
+
+  _update(BuildContext context) {
+    if (_controller.hasErrors) {
+      AsukaSnackbar.alert('Corrija os erros informados').show();
+    } else {
+      _controller.update().then(
+            (value) {
+          if (value != null) {
+            AsukaSnackbar.success('Evento atualizado com sucesso');
+            Navigator.pop(context, value);
+          } else {
+            AsukaSnackbar.alert(_controller.errorMsg).show();
+          }
+        },
+      );
+    }
   }
 }

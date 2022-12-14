@@ -9,22 +9,6 @@ part of 'event.calendar.controller.dart';
 // ignore_for_file: non_constant_identifier_names, unnecessary_brace_in_string_interps, unnecessary_lambdas, prefer_expression_function_bodies, lines_longer_than_80_chars, avoid_as, avoid_annotating_with_dynamic, no_leading_underscores_for_local_identifiers
 
 mixin _$EventCalendarController on EventCalendarControllerBase, Store {
-  late final _$titleCtrlAtom =
-      Atom(name: 'EventCalendarControllerBase.titleCtrl', context: context);
-
-  @override
-  TextEditingController get titleCtrl {
-    _$titleCtrlAtom.reportRead();
-    return super.titleCtrl;
-  }
-
-  @override
-  set titleCtrl(TextEditingController value) {
-    _$titleCtrlAtom.reportWrite(value, super.titleCtrl, () {
-      super.titleCtrl = value;
-    });
-  }
-
   late final _$_eventRepoAtom =
       Atom(name: 'EventCalendarControllerBase._eventRepo', context: context);
 
@@ -180,20 +164,8 @@ mixin _$EventCalendarController on EventCalendarControllerBase, Store {
   }
 
   @override
-  dynamic setEventTitle(String value) {
-    final _$actionInfo = _$EventCalendarControllerBaseActionController
-        .startAction(name: 'EventCalendarControllerBase.setEventTitle');
-    try {
-      return super.setEventTitle(value);
-    } finally {
-      _$EventCalendarControllerBaseActionController.endAction(_$actionInfo);
-    }
-  }
-
-  @override
   String toString() {
     return '''
-titleCtrl: ${titleCtrl},
 errorMsg: ${errorMsg},
 isHidedButton: ${isHidedButton},
 events: ${events},
