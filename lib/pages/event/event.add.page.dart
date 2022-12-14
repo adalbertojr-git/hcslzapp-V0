@@ -5,7 +5,6 @@ import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:hcslzapp/common/labels.and.hints.dart';
 import 'package:hcslzapp/common/photo.image.provider.dart';
 import 'package:hcslzapp/components/button.dart';
-import 'package:hcslzapp/components/transaction.auth.dialog.dart';
 import 'package:hcslzapp/components/my.text.form.field.dart';
 import 'package:hcslzapp/models/event.dart';
 import '../../common/associated.profiles.dart';
@@ -53,14 +52,10 @@ class _EventAddPageState extends State<EventAddPage> {
         floatingActionButton: widget._selectedProfile == ADMIN
             ? Button(
                 icon: Icons.save,
-                onClick: () => widget._event == null ? _save(context) : _update(context),
+                onClick: () =>
+                    widget._event == null ? _save(context) : _update(context),
               )
             : null,
-/*        floatingActionButton: Button(
-          icon: Icons.save,
-          onClick: () =>
-              widget._event == null ? _save(context) : _update(context),
-        ),*/
       );
 
   _widgets(BuildContext context) => ListView(
