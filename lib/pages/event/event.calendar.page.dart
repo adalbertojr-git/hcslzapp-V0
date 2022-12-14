@@ -81,76 +81,72 @@ class _EventCalendarPageState extends State<EventCalendarPage> {
   }
 
   @override
-  Widget build(BuildContext context) =>
-      Observer(
-        builder: (_) =>
-            Scaffold(
-              appBar: MyAppBar(_title),
-              bottomNavigationBar: MyBottomAppBar(),
-              body: FutureBuilder<String>(
-                future: _controller.future,
-                builder: (context, snapshot) {
-                  switch (snapshot.connectionState) {
-                    case ConnectionState.none:
-                      break;
-                    case ConnectionState.waiting:
-                      return Progress();
-                    case ConnectionState.active:
-                      break;
-                    default:
-                      if (snapshot.hasError) {
-                        return CenteredMessage(
-                            title: _title, message: snapshot.error.toString());
-                      } else {
-                        if (snapshot.data == null)
-                          return CenteredMessage(
-                            title: _title,
-                            message: _controller.errorMsg,
-                          );
+  Widget build(BuildContext context) => Observer(
+        builder: (_) => Scaffold(
+          appBar: MyAppBar(_title),
+          bottomNavigationBar: MyBottomAppBar(),
+          body: FutureBuilder<String>(
+            future: _controller.future,
+            builder: (context, snapshot) {
+              switch (snapshot.connectionState) {
+                case ConnectionState.none:
+                  break;
+                case ConnectionState.waiting:
+                  return Progress();
+                case ConnectionState.active:
+                  break;
+                default:
+                  if (snapshot.hasError) {
+                    return CenteredMessage(
+                        title: _title, message: snapshot.error.toString());
+                  } else {
+                    if (snapshot.data == null)
+                      return CenteredMessage(
+                        title: _title,
+                        message: _controller.errorMsg,
+                      );
 
-                        _controller.init();
-                        _controller.events =
-                            _controller.convertJsonToDateMap(snapshot.data!);
-                        _controller.selectedEvents =
-                            ValueNotifier(_getEventsForDay(_selectedDay!));
+                    _controller.init();
+                    _controller.events =
+                        _controller.convertJsonToDateMap(snapshot.data!);
+                    _controller.selectedEvents =
+                        ValueNotifier(_getEventsForDay(_selectedDay!));
 
-                        return _widgets();
-                      }
-                  } //switch (snapshot.connectionState)
-                  return CenteredMessage(
-                    title: _title,
-                    message: _labelUnknown,
-                  );
-                },
-              ),
-              floatingActionButtonLocation: widget._selectedProfile == ADMIN
-                  ? FloatingActionButtonLocation.centerDocked
-                  : null,
-              floatingActionButton: widget._selectedProfile == ADMIN
-                  ? Button(
-                icon: Icons.add,
-                onClick: () {
-                  Future future = Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) =>
-                          EventAddPage(
-                            null,
-                            _selectedDay.toString().substring(0, 10),
-                          ),
-                    ),
-                  );
-                  future.then((value) {
-                    if (value != null) _loadAllEvents();
-                  });
-                },
-              )
-                  : null,
-            ),
+                    return _widgets();
+                  }
+              } //switch (snapshot.connectionState)
+              return CenteredMessage(
+                title: _title,
+                message: _labelUnknown,
+              );
+            },
+          ),
+          floatingActionButtonLocation: widget._selectedProfile == ADMIN
+              ? FloatingActionButtonLocation.centerDocked
+              : null,
+          floatingActionButton: widget._selectedProfile == ADMIN
+              ? Button(
+                  icon: Icons.add,
+                  onClick: () {
+                    Future future = Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => EventAddPage(
+                          null,
+                          _selectedDay.toString().substring(0, 10),
+                        ),
+                      ),
+                    );
+                    future.then((value) {
+                      if (value != null) _loadAllEvents();
+                    });
+                  },
+                )
+              : null,
+        ),
       );
 
-  _widgets() =>
-      Column(
+  _widgets() => Column(
         children: [
           Card(
             elevation: 5,
@@ -214,27 +210,37 @@ class _EventCalendarPageState extends State<EventCalendarPage> {
                         ),
                         trailing: widget._selectedProfile == ADMIN
                             ? Wrap(
-                          spacing: 10, // space between two icons
-                          children: <Widget>[
-                            GestureDetector(
-                              child: Icon(
-                                Icons.delete,
-                              ),
-                              onTap: () {
-                                //_delete(i);
-                              },
-                            ),
-                            GestureDetector(
-                              child: Icon(
-                                Icons.edit,
-                              ),
-                              onTap: () {
-                                //_controller.setEventTitle(event.title);
-                                //_showAddDialog(event, i);
-                              },
-                            ),
-                          ],
-                        )
+                                spacing: 10, // space between two icons
+                                children: <Widget>[
+                                  GestureDetector(
+                                    child: Icon(
+                                      Icons.delete,
+                                    ),
+                                    onTap: () {
+                                      //_delete(i);
+                                    },
+                                  ),
+                                  GestureDetector(
+                                    child: Icon(
+                                      Icons.edit,
+                                    ),
+                                    onTap: () {
+                                      Future future = Navigator.push(
+                                        context,
+                                        MaterialPageRoute(
+                                          builder: (context) => EventAddPage(
+                                            value[index],
+                                            _selectedDay.toString().substring(0, 10),
+                                          ),
+                                        ),
+                                      );
+                                      future.then((value) {
+                                        if (value != null) _loadAllEvents();
+                                      });
+                                    },
+                                  ),
+                                ],
+                              )
                             : null,
                         title: Text(
                           value[index].title,

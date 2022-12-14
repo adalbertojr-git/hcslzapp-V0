@@ -13,8 +13,8 @@ class EventCalendarController = EventCalendarControllerBase
     with _$EventCalendarController;
 
 abstract class EventCalendarControllerBase with Store {
-  @observable
-  var titleCtrl = TextEditingController();
+/*  @observable
+  var titleCtrl = TextEditingController();*/
 
   @observable
   EventRepo _eventRepo = EventRepo();
@@ -114,9 +114,6 @@ abstract class EventCalendarControllerBase with Store {
     );
   }
 
-/*  @action
-  setSelectedEvents(List e) => selectedEvents = e;*/
-
   LinkedHashMap<DateTime, List<Event>> convertJsonToDateMap(String jsonSource) {
     var json = jsonDecode(jsonSource);
     var ev = LinkedHashMap<DateTime, List<Event>>();
@@ -127,8 +124,8 @@ abstract class EventCalendarControllerBase with Store {
         id: event['id'],
         date: event['date'],
         title: event['title'],
-        description: '',
-        photoUrl: '',
+        description: event['description'],
+        photoUrl: event['photoUrl'],
       );
       ev[date]?.add(e);
     }
@@ -155,8 +152,8 @@ abstract class EventCalendarControllerBase with Store {
 /*  @action
   removeSelectedEvent(int i) => selectedEvents.removeAt(i);*/
 
-  @action
-  setEventTitle(String value) => titleCtrl.text = value;
+/*  @action
+  setEventTitle(String value) => titleCtrl.text = value;*/
 
   int getHashCode(DateTime key) {
     return key.day * 1000000 + key.month * 10000 + key.year;
