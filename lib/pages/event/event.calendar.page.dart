@@ -132,6 +132,7 @@ class _EventCalendarPageState extends State<EventCalendarPage> {
                       context,
                       MaterialPageRoute(
                         builder: (context) => EventAddPage(
+                          widget._selectedProfile,
                           null,
                           _selectedDay.toString().substring(0, 10),
                         ),
@@ -229,8 +230,11 @@ class _EventCalendarPageState extends State<EventCalendarPage> {
                                         context,
                                         MaterialPageRoute(
                                           builder: (context) => EventAddPage(
+                                            widget._selectedProfile,
                                             value[index],
-                                            _selectedDay.toString().substring(0, 10),
+                                            _selectedDay
+                                                .toString()
+                                                .substring(0, 10),
                                           ),
                                         ),
                                       );
@@ -241,7 +245,25 @@ class _EventCalendarPageState extends State<EventCalendarPage> {
                                   ),
                                 ],
                               )
-                            : null,
+                            : GestureDetector(
+                                child: Icon(
+                                  Icons.arrow_forward,
+                                ),
+                                onTap: () {
+                                  Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                      builder: (context) => EventAddPage(
+                                        widget._selectedProfile,
+                                        value[index],
+                                        _selectedDay
+                                            .toString()
+                                            .substring(0, 10),
+                                      ),
+                                    ),
+                                  );
+                                },
+                              ),
                         title: Text(
                           value[index].title,
                         ),

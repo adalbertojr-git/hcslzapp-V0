@@ -8,6 +8,7 @@ import 'package:hcslzapp/components/button.dart';
 import 'package:hcslzapp/components/transaction.auth.dialog.dart';
 import 'package:hcslzapp/components/my.text.form.field.dart';
 import 'package:hcslzapp/models/event.dart';
+import '../../common/associated.profiles.dart';
 import '../../components/my.appbar.dart';
 import '../../components/my.bottom.appbar.dart';
 import '../../controllers/event.add.controller.dart';
@@ -18,8 +19,13 @@ const String _title = 'Evento';
 class EventAddPage extends StatefulWidget {
   final Event? _event;
   final String _eventDate;
+  final String _selectedProfile;
 
-  EventAddPage(this._event, this._eventDate);
+  EventAddPage(
+    this._selectedProfile,
+    this._event,
+    this._eventDate,
+  );
 
   @override
   State<EventAddPage> createState() => _EventAddPageState();
@@ -44,11 +50,17 @@ class _EventAddPageState extends State<EventAddPage> {
         bottomNavigationBar: MyBottomAppBar(),
         body: _widgets(context),
         floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
-        floatingActionButton: Button(
+        floatingActionButton: widget._selectedProfile == ADMIN
+            ? Button(
+                icon: Icons.save,
+                onClick: () => widget._event == null ? _save(context) : _update(context),
+              )
+            : null,
+/*        floatingActionButton: Button(
           icon: Icons.save,
           onClick: () =>
               widget._event == null ? _save(context) : _update(context),
-        ),
+        ),*/
       );
 
   _widgets(BuildContext context) => ListView(
@@ -156,7 +168,7 @@ class _EventAddPageState extends State<EventAddPage> {
       AsukaSnackbar.alert('Corrija os erros informados').show();
     } else {
       _controller.update().then(
-            (value) {
+        (value) {
           if (value != null) {
             AsukaSnackbar.success('Evento atualizado com sucesso');
             Navigator.pop(context, value);

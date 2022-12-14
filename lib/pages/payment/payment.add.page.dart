@@ -52,7 +52,7 @@ class _PaymentAddAddState extends State<PaymentAddPage> {
                 icon: Icons.save,
                 onClick: () => widget._payment == null ? _save() : _update(),
               )
-            : SizedBox(),
+            : null,
       );
 
   _widgets() => Column(
