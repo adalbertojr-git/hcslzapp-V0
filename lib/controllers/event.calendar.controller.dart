@@ -13,9 +13,6 @@ class EventCalendarController = EventCalendarControllerBase
     with _$EventCalendarController;
 
 abstract class EventCalendarControllerBase with Store {
-/*  @observable
-  var titleCtrl = TextEditingController();*/
-
   @observable
   EventRepo _eventRepo = EventRepo();
 
@@ -140,20 +137,6 @@ abstract class EventCalendarControllerBase with Store {
     return DateTime.utc(y, m, d);
   }
 
-/*
-  @action
-  editEvent(int i) {
-    if (titleCtrl.text.isEmpty) return;
-    selectedEvents[i] = titleCtrl.text;
-    titleCtrl.clear();
-  }
-*/
-
-/*  @action
-  removeSelectedEvent(int i) => selectedEvents.removeAt(i);*/
-
-/*  @action
-  setEventTitle(String value) => titleCtrl.text = value;*/
 
   int getHashCode(DateTime key) {
     return key.day * 1000000 + key.month * 10000 + key.year;
