@@ -12,6 +12,7 @@ import 'package:hcslzapp/pages/payment/payment.add.page.dart';
 import '../../components/my.appbar.dart';
 import '../../components/my.bottom.appbar.dart';
 import '../../models/associated.dart';
+import '../../models/template.dart';
 
 const String _labelNotExists = 'Não existem mensalidades registradas.';
 const String _labelUnknown =
@@ -105,12 +106,14 @@ class _PaymentAssociatedPageState extends State<PaymentAssociatedPage> {
       );
 
   _add(BuildContext context) {
+    Payment _payment = Template().loadPayment();
+    _payment.associated = widget._associated;
     final Future future = Navigator.push(
       context,
       MaterialPageRoute(
         builder: (_) => PaymentAddPage(
           widget._selectedProfile,
-          null,
+          _payment,
           _controller.loadYears(),
         ),
       ),

@@ -1,7 +1,6 @@
 import 'dart:async';
 import 'dart:io';
 import 'package:flutter/material.dart';
-import 'package:hcslzapp/models/associated.dart';
 import 'package:hcslzapp/models/payment.dart';
 import 'package:hcslzapp/models/payment.months.dart';
 import 'package:hcslzapp/models/template.dart';
@@ -64,17 +63,11 @@ abstract class PaymentAddControllerBase with Store {
   @observable
   Payment payment = Template().loadPayment();
 
-/*  @observable
-  Associated associated = Template().loadAssociated();*/
-
   @observable
   PaymentRepo _paymentRepo = PaymentRepo();
 
   @observable
   String errorMsg = "";
-
-/*  @observable
-  Future<List<Payment>> future = Future<List<Payment>>.value([]);*/
 
   @observable
   List<String> years = List.filled(0, '', growable: true);
@@ -132,20 +125,6 @@ abstract class PaymentAddControllerBase with Store {
     });
   }
 
-/*
-  @action
-  Future<List<Payment>> findByAssociatedIdToList(int id) => ObservableFuture(
-              _paymentRepo.findByAssociatedIdToList(id).then((value) => value))
-          .catchError((e) {
-        errorMsg = "${e.message}";
-      }, test: (e) => e is HttpException).catchError((e) {
-        errorMsg = "$e";
-      }, test: (e) => e is Exception);
-
-  Future<List<Payment>> getFutures(int _paymentId) =>
-      future = findByAssociatedIdToList(_paymentId);
-*/
-
   @action
   Future update() =>
       ObservableFuture(_paymentRepo.update(_setValues()).then((value) => value))
@@ -168,7 +147,7 @@ abstract class PaymentAddControllerBase with Store {
     return Payment(
         id: payment.id,
         year: yearCtrl.text,
-        associated: Template().loadAssociated(),//associated,
+        associated: payment.associated,
         paymentMonths: _setPaymentMonths());
   }
 

@@ -14,7 +14,7 @@ import '../../components/my.bottom.appbar.dart';
 const String _title = 'Adicionar Mensalidades';
 
 class PaymentAddPage extends StatefulWidget {
-  final Payment? _payment;
+  final Payment _payment;
   final List<String> _years;
   final String _selectedProfile;
 
@@ -33,7 +33,8 @@ class _PaymentAddAddState extends State<PaymentAddPage> {
 
   @override
   void initState() {
-    _controller.payment = widget._payment ?? _controller.payment;
+    _controller.payment = widget._payment;
+    print(_controller.payment);
     _controller.init();
     _controller.setYears(widget._years);
     super.initState();
@@ -50,7 +51,7 @@ class _PaymentAddAddState extends State<PaymentAddPage> {
         floatingActionButton: widget._selectedProfile == ADMIN
             ? Button(
                 icon: Icons.save,
-                onClick: () => widget._payment == null ? _save() : _update(),
+                onClick: () => widget._payment.id == 0 ? _save() : _update(),
               )
             : null,
       );
@@ -67,7 +68,7 @@ class _PaymentAddAddState extends State<PaymentAddPage> {
                 textEditingController: _controller.yearCtrl,
                 label: labelYear,
                 inputType: TextInputType.number,
-                disabled: widget._payment == null ? false : true,
+                disabled: widget._payment.id == 0 ? false : true,
                 onChanged: _controller.formController.changeYear,
                 errorText: _controller.validateYear(),
                 maxLength: 4,
