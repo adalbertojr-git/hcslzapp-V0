@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:hcslzapp/models/payment.table.dart';
+import '../../common/labels.and.hints.dart';
 import '../../components/centered.message.dart';
 import '../../components/my.appbar.dart';
 import '../../components/my.bottom.appbar.dart';
+import '../../components/my.text.form.field.dart';
 import '../../components/progress.dart';
 import '../../controllers/payment.table.controller.dart';
 
@@ -56,7 +59,9 @@ class _PaymentsTablePageState extends State<PaymentsTablePage> {
 
                   _controller.init();
                   _controller.payments.addAll(snapshot.data!);
-                  print(_controller.payments);
+                  _controller.payments.sort(
+                        (a, b) => a.name.compareTo(b.name),
+                  );
                   return _widgets();
                 }
             } //switch (snapshot.connectionState)
@@ -69,24 +74,34 @@ class _PaymentsTablePageState extends State<PaymentsTablePage> {
       );
 
   _widgets() => ListView(
-    children: [
-      PaginatedDataTable(
-            rowsPerPage: _rowsPerPage,
-            availableRowsPerPage: <int>[5, 10, 20],
-            onRowsPerPageChanged: (int? value) {
-              setState(() {
-                _rowsPerPage = value ?? 0;
-              });
-            },
-            columnSpacing: 10.0,
-            dataRowHeight: 40.0,
-            columns: kTableColumns,
-            source: PaymentDataSource(
-              List<PaymentTable>.from(_controller.payments),
+        children: [
+          MyTextFormField(
+            textEditingController: _controller.nameCtrl,
+            label: labelNamePayment,
+            hint: hintNamePayment,
+            icon: Icons.search,
+            inputType: TextInputType.text,
+            onChanged: _controller.setFilter,
+          ),
+          Observer(
+            builder: (_) => PaginatedDataTable(
+              rowsPerPage: _rowsPerPage,
+              availableRowsPerPage: <int>[5, 10, 20],
+              onRowsPerPageChanged: (int? value) {
+                setState(() {
+                  _rowsPerPage = value ?? 0;
+                });
+              },
+              columnSpacing: 10.0,
+              dataRowHeight: 40.0,
+              columns: kTableColumns,
+              source: PaymentDataSource(
+                List<PaymentTable>.from(_controller.listFiltered),
+              ),
             ),
           ),
-    ],
-  );
+        ],
+      );
 }
 
 ////// Columns in table.

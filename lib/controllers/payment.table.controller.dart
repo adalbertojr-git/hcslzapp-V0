@@ -14,7 +14,7 @@ class PaymentTableController = PaymentTableControllerBase
 
 abstract class PaymentTableControllerBase with Store {
   @observable
-  var codeCtrl = TextEditingController();
+  var nameCtrl = TextEditingController();
 
   @observable
   bool isHidedButton = true;
@@ -53,16 +53,16 @@ abstract class PaymentTableControllerBase with Store {
 
   Future<List<PaymentTable>> getFuture() => future = findAll();
 
-/*  @action
+  @action
   setFilter(String value) => filter = value.toUpperCase();
 
   @computed
-  List<DtcCodeAbbreviation> get listFiltered {
+  List<PaymentTable> get listFiltered {
     if (filter.isEmpty) {
-      return List<DtcCodeAbbreviation>.from(abbreviations);
+      return List<PaymentTable>.from(payments);
     } else {
-      return List<DtcCodeAbbreviation>.from(
-          abbreviations.where((element) => element.code.contains(filter)));
+      return List<PaymentTable>.from(
+          payments.where((element) => element.name.contains(filter)));
     }
-  }*/
+  }
 }

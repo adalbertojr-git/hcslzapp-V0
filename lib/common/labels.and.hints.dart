@@ -59,7 +59,7 @@ const String hintRenavam = 'Informe o codigo Renavam da sua Harley';
 Payments
 */
 const String labelNamePayment = 'Nome';
-const String hintNamePayment = 'Digite qualquer parte do nome para pesquisar';
+const String hintNamePayment = 'Digite qualquer parte do nome';
 const String labelJan = 'Jan (R\$)';
 const String labelFeb = 'Fev (R\$)';
 const String labelMar = 'Mar (R\$)';
@@ -81,7 +81,7 @@ const String labelBloodType = 'Tipo Sanguíneo';
 DTC Codes
 */
 const String labelDtcCode = 'Código DTC';
-const String hintDtcCode = 'Digite qualquer parte do código para pesquisar';
+const String hintDtcCode = 'Digite qualquer parte do código';
 const String labelAbbreviation = 'Abreviatura';
 const String hintAbbreviation =
     'Digite qualquer parte da abreviatura para pesquisar';
