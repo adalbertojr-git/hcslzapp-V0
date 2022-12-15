@@ -73,18 +73,18 @@ class _PaymentsTablePageState extends State<PaymentsTablePage> {
         ),
       );
 
-  _widgets() => ListView(
-        children: [
-          MyTextFormField(
-            textEditingController: _controller.nameCtrl,
-            label: labelNamePayment,
-            hint: hintNamePayment,
-            icon: Icons.search,
-            inputType: TextInputType.text,
-            onChanged: _controller.setFilter,
-          ),
-          Observer(
-            builder: (_) => PaginatedDataTable(
+  _widgets() => Observer(
+        builder: (_) => ListView(
+          children: [
+            MyTextFormField(
+              textEditingController: _controller.nameCtrl,
+              label: labelYearPayment,
+              hint: hintYearPayment,
+              icon: Icons.search,
+              inputType: TextInputType.number,
+              onChanged: _controller.setFilter,
+            ),
+            PaginatedDataTable(
               rowsPerPage: _rowsPerPage,
               availableRowsPerPage: <int>[5, 10, 20],
               onRowsPerPageChanged: (int? value) {
@@ -99,8 +99,28 @@ class _PaymentsTablePageState extends State<PaymentsTablePage> {
                 List<PaymentTable>.from(_controller.listFiltered),
               ),
             ),
-          ),
-        ],
+            Row(
+              mainAxisAlignment: MainAxisAlignment.end,
+              children: [
+                Text(
+                  'Total no período:',
+                  style: TextStyle(
+                    fontSize: 20,
+                  ),
+                ),
+                SizedBox(
+                  width: 5,
+                ),
+                Text(
+                  'R\$ ' + _controller.getTotal().toString(),
+                  style: TextStyle(
+                    fontSize: 20,
+                  ),
+                ),
+              ],
+            ),
+          ],
+        ),
       );
 }
 
@@ -192,7 +212,7 @@ class PaymentDataSource extends DataTableSource {
       DataCell(Text('${_payment.out}')),
       DataCell(Text('${_payment.nov}')),
       DataCell(Text('${_payment.dez}')),
-      DataCell(Text('${_payment.total}')),
+      DataCell(Text('${_payment.total}'),),
     ]);
   }
 

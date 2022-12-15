@@ -32,6 +32,9 @@ abstract class PaymentTableControllerBase with Store {
   @observable
   String filter = '';
 
+  @observable
+  double total = 0;
+
   init() {
     payments.clear();
   }
@@ -51,6 +54,15 @@ abstract class PaymentTableControllerBase with Store {
   Future<List<PaymentTable>> getFuture() => future = findAll();
 
   @action
+  double getTotal() {
+    double total = 0;
+    for(var item in listFiltered) {
+      total = total + item.total;
+    }
+    return total;
+  }
+
+  @action
   setFilter(String value) => filter = value;
 
   @computed
@@ -59,7 +71,7 @@ abstract class PaymentTableControllerBase with Store {
       return List<PaymentTable>.from(payments);
     } else {
       return List<PaymentTable>.from(
-          payments.where((element) => element.name.contains(filter)));
+          payments.where((element) => element.year.contains(filter)));
     }
   }
 }

@@ -72,6 +72,8 @@ const String labelSep = 'Set (R\$)';
 const String labelOct = 'Out (R\$)';
 const String labelNov = 'Nov (R\$)';
 const String labelDec = 'Dez (R\$)';
+const String labelYearPayment = 'Ano';
+const String hintYearPayment = 'Digite o ano para pesquisa';
 /*
 DigitalIdentity
 */
