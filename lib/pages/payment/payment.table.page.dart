@@ -178,7 +178,7 @@ class PaymentDataSource extends DataTableSource {
     assert(index >= 0);
     final PaymentTable _payment = _table[index];
     return DataRow.byIndex(index: index, selected: false, cells: <DataCell>[
-      DataCell(Text('${_payment.year}')),
+      DataCell(Text('${_payment.year == 'YYYY' ? '' : _payment.year}')),
       DataCell(Text('${_payment.name}')),
       DataCell(Text('${_payment.jan}')),
       DataCell(Text('${_payment.fev}')),
