@@ -54,10 +54,10 @@ class _PaymentsTablePageState extends State<PaymentsTablePage> {
                       message: _controller.errorMsg,
                     );
 
-                    _controller.init();
-                    _controller.payments.addAll(snapshot.data!);
-                    print(_controller.payments);
-                    return _widgets();
+                  _controller.init();
+                  _controller.payments.addAll(snapshot.data!);
+                  print(_controller.payments);
+                  return _widgets();
                 }
             } //switch (snapshot.connectionState)
             return CenteredMessage(
@@ -68,23 +68,32 @@ class _PaymentsTablePageState extends State<PaymentsTablePage> {
         ),
       );
 
-  _widgets() => PaginatedDataTable(
-        rowsPerPage: _rowsPerPage,
-        availableRowsPerPage: <int>[5, 10, 20],
-        onRowsPerPageChanged: (int? value) {
-          setState(() {
-            _rowsPerPage = value ?? 0;
-          });
-        },
-        columnSpacing: 10.0,
-        dataRowHeight: 40.0,
-        columns: kTableColumns,
-        source: DessertDataSource(),
-      );
+  _widgets() => ListView(
+    children: [
+      PaginatedDataTable(
+            rowsPerPage: _rowsPerPage,
+            availableRowsPerPage: <int>[5, 10, 20],
+            onRowsPerPageChanged: (int? value) {
+              setState(() {
+                _rowsPerPage = value ?? 0;
+              });
+            },
+            columnSpacing: 10.0,
+            dataRowHeight: 40.0,
+            columns: kTableColumns,
+            source: PaymentDataSource(
+              List<PaymentTable>.from(_controller.payments),
+            ),
+          ),
+    ],
+  );
 }
 
 ////// Columns in table.
 const kTableColumns = <DataColumn>[
+  DataColumn(
+    label: const Text('Ano'),
+  ),
   DataColumn(
     label: const Text('Associado'),
   ),
@@ -116,7 +125,83 @@ const kTableColumns = <DataColumn>[
     label: const Text('Jul'),
     numeric: true,
   ),
+  DataColumn(
+    label: const Text('Ago'),
+    numeric: true,
+  ),
+  DataColumn(
+    label: const Text('Set'),
+    numeric: true,
+  ),
+  DataColumn(
+    label: const Text('Out'),
+    numeric: true,
+  ),
+  DataColumn(
+    label: const Text('Nov'),
+    numeric: true,
+  ),
+  DataColumn(
+    label: const Text('Dez'),
+    numeric: true,
+  ),
+  DataColumn(
+    label: const Text('Total'),
+    numeric: true,
+  ),
 ];
+
+////// Data source class for obtaining row data for PaginatedDataTable.
+class PaymentDataSource extends DataTableSource {
+  int _selectedCount = 0;
+  final List<PaymentTable> _table;
+
+  PaymentDataSource(this._table);
+
+  @override
+  DataRow getRow(int index) {
+    assert(index >= 0);
+    //if (index >= _desserts.length) return null;
+    final PaymentTable _payment = _table[index];
+    return DataRow.byIndex(index: index, selected: false,
+/*        onSelectChanged: (bool value) {
+          if (dessert.selected != value) {
+            _selectedCount += value ? 1 : -1;
+            assert(_selectedCount >= 0);
+            dessert.selected = value;
+            notifyListeners();
+          }
+        },*/
+        cells: <DataCell>[
+          DataCell(Text('${_payment.year}')),
+          DataCell(Text('${_payment.name}')),
+          DataCell(Text('${_payment.jan}')),
+          DataCell(Text('${_payment.fev}')),
+          DataCell(Text('${_payment.mar}')),
+          DataCell(Text('${_payment.abr}')),
+          DataCell(Text('${_payment.mai}')),
+          DataCell(Text('${_payment.jun}')),
+          DataCell(Text('${_payment.jul}')),
+          DataCell(Text('${_payment.ago}')),
+          DataCell(Text('${_payment.set}')),
+          DataCell(Text('${_payment.out}')),
+          DataCell(Text('${_payment.nov}')),
+          DataCell(Text('${_payment.dez}')),
+          DataCell(Text('${_payment.total}')),
+        ]);
+  }
+
+  @override
+  int get rowCount => _table.length;
+
+  @override
+  bool get isRowCountApproximate => false;
+
+  @override
+  int get selectedRowCount => _selectedCount;
+}
+
+/*
 
 ////// Data class.
 class Dessert {
@@ -163,6 +248,7 @@ class DessertDataSource extends DataTableSource {
     //if (index >= _desserts.length) return null;
     final Dessert dessert = _desserts[index];
     return DataRow.byIndex(index: index, selected: dessert.selected,
+*/
 /*        onSelectChanged: (bool value) {
           if (dessert.selected != value) {
             _selectedCount += value ? 1 : -1;
@@ -170,7 +256,8 @@ class DessertDataSource extends DataTableSource {
             dessert.selected = value;
             notifyListeners();
           }
-        },*/
+        },*/ /*
+
         cells: <DataCell>[
           DataCell(Text('${dessert.name}')),
           DataCell(Text('${dessert.calories}')),
@@ -192,3 +279,4 @@ class DessertDataSource extends DataTableSource {
   @override
   int get selectedRowCount => _selectedCount;
 }
+*/
