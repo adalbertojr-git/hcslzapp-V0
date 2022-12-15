@@ -70,7 +70,7 @@ class _EventCalendarPageState extends State<EventCalendarPage> {
   }
 
   void _onDaySelected(DateTime selectedDay, DateTime focusedDay) {
-    if (!isSameDay(_selectedDay, selectedDay)) {
+    //if (!isSameDay(_selectedDay, selectedDay)) {
       setState(() {
         _selectedDay = selectedDay;
         _focusedDay = focusedDay;
@@ -79,7 +79,7 @@ class _EventCalendarPageState extends State<EventCalendarPage> {
         _rangeSelectionMode = RangeSelectionMode.toggledOff;
       });
       _controller.selectedEvents.value = _getEventsForDay(selectedDay);
-    }
+    //}
   }
 
   @override
@@ -168,6 +168,7 @@ class _EventCalendarPageState extends State<EventCalendarPage> {
               calendarStyle: CalendarStyle(
                 // Use `CalendarStyle` to customize the UI
                 outsideDaysVisible: false,
+                isTodayHighlighted: true,
               ),
               onDaySelected: _onDaySelected,
               //onRangeSelected: _onRangeSelected,

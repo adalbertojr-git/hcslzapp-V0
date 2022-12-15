@@ -129,6 +129,22 @@ mixin _$PaymentTableController on PaymentTableControllerBase, Store {
     });
   }
 
+  late final _$totalAtom =
+      Atom(name: 'PaymentTableControllerBase.total', context: context);
+
+  @override
+  double get total {
+    _$totalAtom.reportRead();
+    return super.total;
+  }
+
+  @override
+  set total(double value) {
+    _$totalAtom.reportWrite(value, super.total, () {
+      super.total = value;
+    });
+  }
+
   late final _$PaymentTableControllerBaseActionController =
       ActionController(name: 'PaymentTableControllerBase', context: context);
 
@@ -155,6 +171,17 @@ mixin _$PaymentTableController on PaymentTableControllerBase, Store {
   }
 
   @override
+  double getTotal() {
+    final _$actionInfo = _$PaymentTableControllerBaseActionController
+        .startAction(name: 'PaymentTableControllerBase.getTotal');
+    try {
+      return super.getTotal();
+    } finally {
+      _$PaymentTableControllerBaseActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
   dynamic setFilter(String value) {
     final _$actionInfo = _$PaymentTableControllerBaseActionController
         .startAction(name: 'PaymentTableControllerBase.setFilter');
@@ -174,6 +201,7 @@ payments: ${payments},
 errorMsg: ${errorMsg},
 future: ${future},
 filter: ${filter},
+total: ${total},
 listFiltered: ${listFiltered}
     ''';
   }
