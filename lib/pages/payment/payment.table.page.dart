@@ -1,5 +1,14 @@
 import 'package:flutter/material.dart';
-import 'package:hcslzapp/components/top.bar.dart';
+import 'package:hcslzapp/models/payment.table.dart';
+import '../../components/centered.message.dart';
+import '../../components/my.appbar.dart';
+import '../../components/my.bottom.appbar.dart';
+import '../../components/progress.dart';
+import '../../controllers/payment.table.controller.dart';
+
+const String _labelUnknown =
+    'Houve um erro desconhecido ao executar a transação.';
+const String _title = 'Tabela de Pagamentos';
 
 class PaymentsTablePage extends StatefulWidget {
   @override
@@ -7,46 +16,71 @@ class PaymentsTablePage extends StatefulWidget {
 }
 
 class _PaymentsTablePageState extends State<PaymentsTablePage> {
+  final PaymentTableController _controller = PaymentTableController();
   int _rowsPerPage = PaginatedDataTable.defaultRowsPerPage;
 
   @override
-  Widget build(BuildContext context) {
-    return Container(
-      decoration: BoxDecoration(
-        gradient: LinearGradient(
-          colors: [Colors.white30, Colors.deepOrange],
-          begin: FractionalOffset.topLeft,
-          end: FractionalOffset.bottomRight,
-        ),
-      ),
-      height: MediaQuery.of(context).size.height,
-      child: Theme(
-        data: Theme.of(context).copyWith(
-          cardColor: Colors.black12.withOpacity(0.1),
-          dividerColor: Colors.deepOrange,
-        ),
-        child: ListView(
-          children: [
-            TopBar(),
-            PaginatedDataTable(
-              header: Center(child: const Text('Tabela de Pagamentos')),
-              rowsPerPage: _rowsPerPage,
-              availableRowsPerPage: <int>[5, 10, 20],
-              onRowsPerPageChanged: (int? value) {
-                setState(() {
-                  _rowsPerPage = value ?? 0;
-                });
-              },
-              columnSpacing: 10.0,
-              dataRowHeight: 40.0,
-              columns: kTableColumns,
-              source: DessertDataSource(),
-            ),
-          ],
-        ),
-      ),
-    );
+  void initState() {
+    _controller.getFuture().then((value) {
+      if (value.isNotEmpty) {
+        _controller.setButtonVisibilty();
+      }
+    });
+    super.initState();
   }
+
+  @override
+  Widget build(BuildContext context) => Scaffold(
+        appBar: MyAppBar(_title),
+        bottomNavigationBar: MyBottomAppBar(),
+        body: FutureBuilder<List<PaymentTable>>(
+          future: _controller.future,
+          builder: (context, snapshot) {
+            switch (snapshot.connectionState) {
+              case ConnectionState.none:
+                break;
+              case ConnectionState.waiting:
+                return Progress();
+              case ConnectionState.active:
+                break;
+              default:
+                if (snapshot.hasError) {
+                  return CenteredMessage(
+                      title: _title, message: snapshot.error.toString());
+                } else {
+                  if (snapshot.data == null)
+                    return CenteredMessage(
+                      title: _title,
+                      message: _controller.errorMsg,
+                    );
+
+                    _controller.init();
+                    _controller.payments.addAll(snapshot.data!);
+                    print(_controller.payments);
+                    return _widgets();
+                }
+            } //switch (snapshot.connectionState)
+            return CenteredMessage(
+              title: _title,
+              message: _labelUnknown,
+            );
+          },
+        ),
+      );
+
+  _widgets() => PaginatedDataTable(
+        rowsPerPage: _rowsPerPage,
+        availableRowsPerPage: <int>[5, 10, 20],
+        onRowsPerPageChanged: (int? value) {
+          setState(() {
+            _rowsPerPage = value ?? 0;
+          });
+        },
+        columnSpacing: 10.0,
+        dataRowHeight: 40.0,
+        columns: kTableColumns,
+        source: DessertDataSource(),
+      );
 }
 
 ////// Columns in table.

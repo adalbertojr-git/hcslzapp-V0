@@ -4,7 +4,7 @@ import 'package:http/http.dart';
 import '../common/settings.dart';
 import 'package:hcslzapp/http/http.exception.dart';
 
-const String _paymentUrl = '/tablepayment';
+const String _paymentUrl = '/paymentstable';
 
 class PaymentTableRepo {
   Future<List<PaymentTable>> findAll() async {

@@ -2,9 +2,7 @@ import 'dart:async';
 import 'dart:io';
 import 'package:flutter/cupertino.dart';
 import 'package:hcslzapp/repositories/associated.repo.dart';
-import 'package:hcslzapp/repositories/payment.table.repo.dart';
 import 'package:mobx/mobx.dart';
-
 import '../models/associated.dart';
 
 part 'payment.list.controller.g.dart';
@@ -21,9 +19,6 @@ abstract class PaymentListControllerBase with Store {
 
   @observable
   ObservableList associateds = [].asObservable();
-
-  @observable
-  PaymentTableRepo _paymentTableRepo = PaymentTableRepo();
 
   @observable
   AssociatedRepo _associatedRepo = AssociatedRepo();

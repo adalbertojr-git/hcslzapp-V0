@@ -65,22 +65,6 @@ mixin _$PaymentListController on PaymentListControllerBase, Store {
     });
   }
 
-  late final _$_paymentTableRepoAtom = Atom(
-      name: 'PaymentListControllerBase._paymentTableRepo', context: context);
-
-  @override
-  PaymentTableRepo get _paymentTableRepo {
-    _$_paymentTableRepoAtom.reportRead();
-    return super._paymentTableRepo;
-  }
-
-  @override
-  set _paymentTableRepo(PaymentTableRepo value) {
-    _$_paymentTableRepoAtom.reportWrite(value, super._paymentTableRepo, () {
-      super._paymentTableRepo = value;
-    });
-  }
-
   late final _$_associatedRepoAtom =
       Atom(name: 'PaymentListControllerBase._associatedRepo', context: context);
 
