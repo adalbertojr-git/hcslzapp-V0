@@ -9,7 +9,6 @@ import '../pages/about/about.page.dart';
 import '../pages/associated/associated.update.page.dart';
 import 'package:hcslzapp/pages/digital.identity/digital.identity.page.dart';
 import 'package:hcslzapp/pages/dtc.code/dtc.code.dashboard.page.dart';
-import 'package:hcslzapp/pages/event/event.calendar.page2.dart';
 import 'package:mobx/mobx.dart';
 
 part 'dashboard.controller.g.dart';

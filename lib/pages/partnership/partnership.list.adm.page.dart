@@ -1,15 +1,13 @@
+import 'package:asuka/snackbars/asuka_snack_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:hcslzapp/components/button.dart';
 import 'package:hcslzapp/components/centered.message.dart';
 import 'package:hcslzapp/components/progress.dart';
-import 'package:hcslzapp/components/top.bar.dart';
 import 'package:hcslzapp/components/transaction.auth.dialog.dart';
 import 'package:hcslzapp/controllers/partnership.list.controller.dart';
 import 'package:hcslzapp/models/partnership.dart';
 import 'package:hcslzapp/pages/partnership/partnership.add.page.dart';
-import 'package:asuka/asuka.dart' as asuka;
-
 import '../../components/my.appbar.dart';
 import '../../components/my.bottom.appbar.dart';
 
@@ -159,18 +157,10 @@ class PartnershipListAdmPage extends StatelessWidget {
     if (response == true) {
       _controller.deleteById(_controller.partnerships[i]).then((value) {
         if (value != null) {
-          asuka.showSnackBar(
-            SnackBar(
-              content: const Text('Parceiro excluído com sucesso.'),
-            ),
-          );
+          AsukaSnackbar.success('Parceiro excluído com sucesso');
           _controller.partnerships.removeAt(i);
         } else {
-          asuka.showSnackBar(
-            SnackBar(
-              content: Text(_controller.errorMsg),
-            ),
-          );
+          AsukaSnackbar.alert(_controller.errorMsg).show();
         }
       });
     }

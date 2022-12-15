@@ -131,28 +131,6 @@ mixin _$EventCalendarController on EventCalendarControllerBase, Store {
   }
 
   @override
-  Future<dynamic> save(String title, String date) {
-    final _$actionInfo = _$EventCalendarControllerBaseActionController
-        .startAction(name: 'EventCalendarControllerBase.save');
-    try {
-      return super.save(title, date);
-    } finally {
-      _$EventCalendarControllerBaseActionController.endAction(_$actionInfo);
-    }
-  }
-
-  @override
-  Future<dynamic> update(Event event) {
-    final _$actionInfo = _$EventCalendarControllerBaseActionController
-        .startAction(name: 'EventCalendarControllerBase.update');
-    try {
-      return super.update(event);
-    } finally {
-      _$EventCalendarControllerBaseActionController.endAction(_$actionInfo);
-    }
-  }
-
-  @override
   Future<dynamic> deleteById(Event event) {
     final _$actionInfo = _$EventCalendarControllerBaseActionController
         .startAction(name: 'EventCalendarControllerBase.deleteById');

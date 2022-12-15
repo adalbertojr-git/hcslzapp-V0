@@ -1,5 +1,4 @@
-import 'dart:convert';
-
+import 'package:asuka/snackbars/asuka_snack_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:hcslzapp/common/associated.profiles.dart';
@@ -10,7 +9,6 @@ import 'package:hcslzapp/components/transaction.auth.dialog.dart';
 import 'package:hcslzapp/controllers/payment.associated.controller.dart';
 import 'package:hcslzapp/models/payment.dart';
 import 'package:hcslzapp/pages/payment/payment.add.page.dart';
-import 'package:asuka/asuka.dart' as asuka;
 import '../../components/my.appbar.dart';
 import '../../components/my.bottom.appbar.dart';
 import '../../models/associated.dart';
@@ -231,18 +229,10 @@ class _PaymentAssociatedPageState extends State<PaymentAssociatedPage> {
     if (response == true) {
       _controller.deleteById(_controller.payments[i]).then((value) {
         if (value != null) {
-          asuka.showSnackBar(
-            SnackBar(
-              content: const Text('Mensalidade excluída com sucesso.'),
-            ),
-          );
+          AsukaSnackbar.success('Mensalidade excluída com sucesso');
           _controller.payments.removeAt(i);
         } else {
-          asuka.showSnackBar(
-            SnackBar(
-              content: Text(_controller.errorMsg),
-            ),
-          );
+          AsukaSnackbar.alert(_controller.errorMsg).show();
         }
       });
     }
