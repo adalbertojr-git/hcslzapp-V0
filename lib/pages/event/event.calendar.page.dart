@@ -1,3 +1,4 @@
+import 'package:asuka/snackbars/asuka_snack_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:hcslzapp/models/event.dart';
@@ -8,6 +9,7 @@ import '../../components/centered.message.dart';
 import '../../components/my.appbar.dart';
 import '../../components/my.bottom.appbar.dart';
 import '../../components/progress.dart';
+import '../../components/transaction.auth.dialog.dart';
 import '../../controllers/event.calendar.controller.dart';
 import 'event.add.page.dart';
 
@@ -218,7 +220,7 @@ class _EventCalendarPageState extends State<EventCalendarPage> {
                                       Icons.delete,
                                     ),
                                     onTap: () {
-                                      //_delete(i);
+                                      _delete(value[index]);
                                     },
                                   ),
                                   GestureDetector(
@@ -277,4 +279,22 @@ class _EventCalendarPageState extends State<EventCalendarPage> {
           ),
         ],
       );
+
+  _delete(Event event) async {
+    var response = await showDialog(
+        context: context,
+        builder: (context) {
+          return TransactionAuthDialog(msg: 'Confirma a exclusão?');
+        });
+    if (response == true) {
+      _controller.deleteById(event).then((value) {
+        if (value != null) {
+          AsukaSnackbar.success('Evento excluído com sucesso');
+          _loadAllEvents();
+        } else {
+          AsukaSnackbar.alert(_controller.errorMsg).show();
+        }
+      });
+    }
+  }
 }
