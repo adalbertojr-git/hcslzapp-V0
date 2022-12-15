@@ -57,6 +57,9 @@ class _PaymentAddAddState extends State<PaymentAddPage> {
 
   _widgets() => Column(
         children: <Widget>[
+          SizedBox(
+            height: 10,
+          ),
           Container(
             width: 250,
             child: Observer(
@@ -72,155 +75,182 @@ class _PaymentAddAddState extends State<PaymentAddPage> {
               ),
             ),
           ),
-          Container(
-            alignment: Alignment.topLeft,
-            padding: EdgeInsets.all(5.0),
-            child: Text('1º Semestre:'),
+          Card(
+            elevation: 5,
+            child: Column(
+              children: [
+                Container(
+                  alignment: Alignment.topLeft,
+                  padding: EdgeInsets.all(5.0),
+                  child: Text('1º Semestre:'),
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: <Widget>[
+                    Expanded(
+                      child: MyTextFormField(
+                        textEditingController: _controller.janCtrl,
+                        label: labelJan,
+                        inputType: TextInputType.number,
+                        disabled:
+                            widget._selectedProfile == ADMIN ? false : true,
+                        maskTextInputFormatter:
+                            MaskTextInputFormatter(mask: "###.##"),
+                      ),
+                    ),
+                    Expanded(
+                      child: MyTextFormField(
+                        textEditingController: _controller.febCtrl,
+                        label: labelFeb,
+                        inputType: TextInputType.number,
+                        disabled:
+                            widget._selectedProfile == ADMIN ? false : true,
+                        maskTextInputFormatter:
+                            MaskTextInputFormatter(mask: "###.##"),
+                      ),
+                    ),
+                    Expanded(
+                      child: MyTextFormField(
+                        textEditingController: _controller.marCtrl,
+                        label: labelMar,
+                        inputType: TextInputType.number,
+                        disabled:
+                            widget._selectedProfile == ADMIN ? false : true,
+                        maskTextInputFormatter:
+                            MaskTextInputFormatter(mask: "###.##"),
+                      ),
+                    ),
+                  ],
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: <Widget>[
+                    Expanded(
+                      child: MyTextFormField(
+                        textEditingController: _controller.aprCtrl,
+                        label: labelApr,
+                        inputType: TextInputType.number,
+                        disabled:
+                            widget._selectedProfile == ADMIN ? false : true,
+                        maskTextInputFormatter:
+                            MaskTextInputFormatter(mask: "###.##"),
+                      ),
+                    ),
+                    Expanded(
+                      child: MyTextFormField(
+                        textEditingController: _controller.mayCtrl,
+                        label: labelMay,
+                        inputType: TextInputType.number,
+                        disabled:
+                            widget._selectedProfile == ADMIN ? false : true,
+                        maskTextInputFormatter:
+                            MaskTextInputFormatter(mask: "###.##"),
+                      ),
+                    ),
+                    Expanded(
+                      child: MyTextFormField(
+                        textEditingController: _controller.junCtrl,
+                        label: labelJun,
+                        inputType: TextInputType.number,
+                        disabled:
+                            widget._selectedProfile == ADMIN ? false : true,
+                        maskTextInputFormatter:
+                            MaskTextInputFormatter(mask: "###.##"),
+                      ),
+                    ),
+                  ],
+                ),
+              ],
+            ),
           ),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            children: <Widget>[
-              Expanded(
-                child: MyTextFormField(
-                  textEditingController: _controller.janCtrl,
-                  label: labelJan,
-                  inputType: TextInputType.number,
-                  disabled: widget._selectedProfile == ADMIN ? false : true,
-                  maskTextInputFormatter:
-                      MaskTextInputFormatter(mask: "###.##"),
+          Card(
+            margin: EdgeInsets.only(top: 10),
+            elevation: 5,
+            child: Column(
+              children: [
+                Container(
+                  alignment: Alignment.topLeft,
+                  padding: EdgeInsets.all(5.0),
+                  child: Text('2º Semestre:'),
                 ),
-              ),
-              Expanded(
-                child: MyTextFormField(
-                  textEditingController: _controller.febCtrl,
-                  label: labelFeb,
-                  inputType: TextInputType.number,
-                  disabled: widget._selectedProfile == ADMIN ? false : true,
-                  maskTextInputFormatter:
-                      MaskTextInputFormatter(mask: "###.##"),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: <Widget>[
+                    Expanded(
+                      child: MyTextFormField(
+                        textEditingController: _controller.julCtrl,
+                        label: labelJul,
+                        inputType: TextInputType.number,
+                        disabled:
+                            widget._selectedProfile == ADMIN ? false : true,
+                        maskTextInputFormatter:
+                            MaskTextInputFormatter(mask: "###.##"),
+                      ),
+                    ),
+                    Expanded(
+                      child: MyTextFormField(
+                        textEditingController: _controller.augCtrl,
+                        label: labelAug,
+                        inputType: TextInputType.number,
+                        disabled:
+                            widget._selectedProfile == ADMIN ? false : true,
+                        maskTextInputFormatter:
+                            MaskTextInputFormatter(mask: "###.##"),
+                      ),
+                    ),
+                    Expanded(
+                      child: MyTextFormField(
+                        textEditingController: _controller.sepCtrl,
+                        label: labelSep,
+                        inputType: TextInputType.number,
+                        disabled:
+                            widget._selectedProfile == ADMIN ? false : true,
+                        maskTextInputFormatter:
+                            MaskTextInputFormatter(mask: "###.##"),
+                      ),
+                    ),
+                  ],
                 ),
-              ),
-              Expanded(
-                child: MyTextFormField(
-                  textEditingController: _controller.marCtrl,
-                  label: labelMar,
-                  inputType: TextInputType.number,
-                  disabled: widget._selectedProfile == ADMIN ? false : true,
-                  maskTextInputFormatter:
-                      MaskTextInputFormatter(mask: "###.##"),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: <Widget>[
+                    Expanded(
+                      child: MyTextFormField(
+                        textEditingController: _controller.octCtrl,
+                        label: labelOct,
+                        inputType: TextInputType.number,
+                        disabled:
+                            widget._selectedProfile == ADMIN ? false : true,
+                        maskTextInputFormatter:
+                            MaskTextInputFormatter(mask: "###.##"),
+                      ),
+                    ),
+                    Expanded(
+                      child: MyTextFormField(
+                        textEditingController: _controller.novCtrl,
+                        label: labelNov,
+                        inputType: TextInputType.number,
+                        disabled:
+                            widget._selectedProfile == ADMIN ? false : true,
+                        maskTextInputFormatter:
+                            MaskTextInputFormatter(mask: "###.##"),
+                      ),
+                    ),
+                    Expanded(
+                      child: MyTextFormField(
+                        textEditingController: _controller.decCtrl,
+                        label: labelDec,
+                        inputType: TextInputType.number,
+                        disabled:
+                            widget._selectedProfile == ADMIN ? false : true,
+                        maskTextInputFormatter:
+                            MaskTextInputFormatter(mask: "###.##"),
+                      ),
+                    ),
+                  ],
                 ),
-              ),
-            ],
-          ),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            children: <Widget>[
-              Expanded(
-                child: MyTextFormField(
-                  textEditingController: _controller.aprCtrl,
-                  label: labelApr,
-                  inputType: TextInputType.number,
-                  disabled: widget._selectedProfile == ADMIN ? false : true,
-                  maskTextInputFormatter:
-                      MaskTextInputFormatter(mask: "###.##"),
-                ),
-              ),
-              Expanded(
-                child: MyTextFormField(
-                  textEditingController: _controller.mayCtrl,
-                  label: labelMay,
-                  inputType: TextInputType.number,
-                  disabled: widget._selectedProfile == ADMIN ? false : true,
-                  maskTextInputFormatter:
-                      MaskTextInputFormatter(mask: "###.##"),
-                ),
-              ),
-              Expanded(
-                child: MyTextFormField(
-                  textEditingController: _controller.junCtrl,
-                  label: labelJun,
-                  inputType: TextInputType.number,
-                  disabled: widget._selectedProfile == ADMIN ? false : true,
-                  maskTextInputFormatter:
-                      MaskTextInputFormatter(mask: "###.##"),
-                ),
-              ),
-            ],
-          ),
-          Container(
-            alignment: Alignment.topLeft,
-            padding: EdgeInsets.all(5.0),
-            child: Text('2º Semestre:'),
-          ),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            children: <Widget>[
-              Expanded(
-                child: MyTextFormField(
-                  textEditingController: _controller.julCtrl,
-                  label: labelJul,
-                  inputType: TextInputType.number,
-                  disabled: widget._selectedProfile == ADMIN ? false : true,
-                  maskTextInputFormatter:
-                      MaskTextInputFormatter(mask: "###.##"),
-                ),
-              ),
-              Expanded(
-                child: MyTextFormField(
-                  textEditingController: _controller.augCtrl,
-                  label: labelAug,
-                  inputType: TextInputType.number,
-                  disabled: widget._selectedProfile == ADMIN ? false : true,
-                  maskTextInputFormatter:
-                      MaskTextInputFormatter(mask: "###.##"),
-                ),
-              ),
-              Expanded(
-                child: MyTextFormField(
-                  textEditingController: _controller.sepCtrl,
-                  label: labelSep,
-                  inputType: TextInputType.number,
-                  disabled: widget._selectedProfile == ADMIN ? false : true,
-                  maskTextInputFormatter:
-                      MaskTextInputFormatter(mask: "###.##"),
-                ),
-              ),
-            ],
-          ),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            children: <Widget>[
-              Expanded(
-                child: MyTextFormField(
-                  textEditingController: _controller.octCtrl,
-                  label: labelOct,
-                  inputType: TextInputType.number,
-                  disabled: widget._selectedProfile == ADMIN ? false : true,
-                  maskTextInputFormatter:
-                      MaskTextInputFormatter(mask: "###.##"),
-                ),
-              ),
-              Expanded(
-                child: MyTextFormField(
-                  textEditingController: _controller.novCtrl,
-                  label: labelNov,
-                  inputType: TextInputType.number,
-                  disabled: widget._selectedProfile == ADMIN ? false : true,
-                  maskTextInputFormatter:
-                      MaskTextInputFormatter(mask: "###.##"),
-                ),
-              ),
-              Expanded(
-                child: MyTextFormField(
-                  textEditingController: _controller.decCtrl,
-                  label: labelDec,
-                  inputType: TextInputType.number,
-                  disabled: widget._selectedProfile == ADMIN ? false : true,
-                  maskTextInputFormatter:
-                      MaskTextInputFormatter(mask: "###.##"),
-                ),
-              ),
-            ],
+              ],
+            ),
           ),
         ],
       );
