@@ -1,10 +1,7 @@
 import 'dart:io';
 import 'package:flutter/cupertino.dart';
-import 'package:hcslzapp/models/dtc.code.abbreviation.dart';
-import 'package:hcslzapp/repositories/dtc.code.abbreviation.repo.dart';
 import 'package:hcslzapp/repositories/payment.table.repo.dart';
 import 'package:mobx/mobx.dart';
-
 import '../models/payment.table.dart';
 
 part 'payment.table.controller.g.dart';
@@ -54,7 +51,7 @@ abstract class PaymentTableControllerBase with Store {
   Future<List<PaymentTable>> getFuture() => future = findAll();
 
   @action
-  setFilter(String value) => filter = value.toUpperCase();
+  setFilter(String value) => filter = value;
 
   @computed
   List<PaymentTable> get listFiltered {

@@ -60,7 +60,7 @@ class _PaymentsTablePageState extends State<PaymentsTablePage> {
                   _controller.init();
                   _controller.payments.addAll(snapshot.data!);
                   _controller.payments.sort(
-                        (a, b) => a.name.compareTo(b.name),
+                    (a, b) => a.name.compareTo(b.name),
                   );
                   return _widgets();
                 }
@@ -176,34 +176,24 @@ class PaymentDataSource extends DataTableSource {
   @override
   DataRow getRow(int index) {
     assert(index >= 0);
-    //if (index >= _desserts.length) return null;
     final PaymentTable _payment = _table[index];
-    return DataRow.byIndex(index: index, selected: false,
-/*        onSelectChanged: (bool value) {
-          if (dessert.selected != value) {
-            _selectedCount += value ? 1 : -1;
-            assert(_selectedCount >= 0);
-            dessert.selected = value;
-            notifyListeners();
-          }
-        },*/
-        cells: <DataCell>[
-          DataCell(Text('${_payment.year}')),
-          DataCell(Text('${_payment.name}')),
-          DataCell(Text('${_payment.jan}')),
-          DataCell(Text('${_payment.fev}')),
-          DataCell(Text('${_payment.mar}')),
-          DataCell(Text('${_payment.abr}')),
-          DataCell(Text('${_payment.mai}')),
-          DataCell(Text('${_payment.jun}')),
-          DataCell(Text('${_payment.jul}')),
-          DataCell(Text('${_payment.ago}')),
-          DataCell(Text('${_payment.set}')),
-          DataCell(Text('${_payment.out}')),
-          DataCell(Text('${_payment.nov}')),
-          DataCell(Text('${_payment.dez}')),
-          DataCell(Text('${_payment.total}')),
-        ]);
+    return DataRow.byIndex(index: index, selected: false, cells: <DataCell>[
+      DataCell(Text('${_payment.year}')),
+      DataCell(Text('${_payment.name}')),
+      DataCell(Text('${_payment.jan}')),
+      DataCell(Text('${_payment.fev}')),
+      DataCell(Text('${_payment.mar}')),
+      DataCell(Text('${_payment.abr}')),
+      DataCell(Text('${_payment.mai}')),
+      DataCell(Text('${_payment.jun}')),
+      DataCell(Text('${_payment.jul}')),
+      DataCell(Text('${_payment.ago}')),
+      DataCell(Text('${_payment.set}')),
+      DataCell(Text('${_payment.out}')),
+      DataCell(Text('${_payment.nov}')),
+      DataCell(Text('${_payment.dez}')),
+      DataCell(Text('${_payment.total}')),
+    ]);
   }
 
   @override

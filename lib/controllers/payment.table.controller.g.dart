@@ -9,19 +9,27 @@ part of 'payment.table.controller.dart';
 // ignore_for_file: non_constant_identifier_names, unnecessary_brace_in_string_interps, unnecessary_lambdas, prefer_expression_function_bodies, lines_longer_than_80_chars, avoid_as, avoid_annotating_with_dynamic, no_leading_underscores_for_local_identifiers
 
 mixin _$PaymentTableController on PaymentTableControllerBase, Store {
-  late final _$codeCtrlAtom =
-      Atom(name: 'PaymentTableControllerBase.codeCtrl', context: context);
+  Computed<List<PaymentTable>>? _$listFilteredComputed;
 
   @override
-  TextEditingController get codeCtrl {
-    _$codeCtrlAtom.reportRead();
-    return super.codeCtrl;
+  List<PaymentTable> get listFiltered => (_$listFilteredComputed ??=
+          Computed<List<PaymentTable>>(() => super.listFiltered,
+              name: 'PaymentTableControllerBase.listFiltered'))
+      .value;
+
+  late final _$nameCtrlAtom =
+      Atom(name: 'PaymentTableControllerBase.nameCtrl', context: context);
+
+  @override
+  TextEditingController get nameCtrl {
+    _$nameCtrlAtom.reportRead();
+    return super.nameCtrl;
   }
 
   @override
-  set codeCtrl(TextEditingController value) {
-    _$codeCtrlAtom.reportWrite(value, super.codeCtrl, () {
-      super.codeCtrl = value;
+  set nameCtrl(TextEditingController value) {
+    _$nameCtrlAtom.reportWrite(value, super.nameCtrl, () {
+      super.nameCtrl = value;
     });
   }
 
@@ -147,14 +155,26 @@ mixin _$PaymentTableController on PaymentTableControllerBase, Store {
   }
 
   @override
+  dynamic setFilter(String value) {
+    final _$actionInfo = _$PaymentTableControllerBaseActionController
+        .startAction(name: 'PaymentTableControllerBase.setFilter');
+    try {
+      return super.setFilter(value);
+    } finally {
+      _$PaymentTableControllerBaseActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
   String toString() {
     return '''
-codeCtrl: ${codeCtrl},
+nameCtrl: ${nameCtrl},
 isHidedButton: ${isHidedButton},
 payments: ${payments},
 errorMsg: ${errorMsg},
 future: ${future},
-filter: ${filter}
+filter: ${filter},
+listFiltered: ${listFiltered}
     ''';
   }
 }
