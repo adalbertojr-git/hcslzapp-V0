@@ -196,7 +196,7 @@ abstract class PaymentAddControllerBase with Store {
       return _labelYearRequired;
     } else if (int.parse(formController.year) < 2018) {
       return _labelYearGreaterThan;
-    } else if (idCtrl.text == '' && this.years.contains(formController.year)) {
+    } else if (idCtrl.text == '0' && this.years.contains(formController.year)) {
       return _labelYearExists;
     }
     return null;

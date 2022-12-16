@@ -34,7 +34,6 @@ class _PaymentAddAddState extends State<PaymentAddPage> {
   @override
   void initState() {
     _controller.payment = widget._payment;
-    print(_controller.payment);
     _controller.init();
     _controller.setYears(widget._years);
     super.initState();
@@ -83,7 +82,12 @@ class _PaymentAddAddState extends State<PaymentAddPage> {
                 Container(
                   alignment: Alignment.topLeft,
                   padding: EdgeInsets.all(5.0),
-                  child: Text('1º Semestre:'),
+                  child: Text(
+                    '1º Semestre:',
+                    style: TextStyle(
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
                 ),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -172,7 +176,12 @@ class _PaymentAddAddState extends State<PaymentAddPage> {
                 Container(
                   alignment: Alignment.topLeft,
                   padding: EdgeInsets.all(5.0),
-                  child: Text('2º Semestre:'),
+                  child: Text(
+                    '2º Semestre:',
+                    style: TextStyle(
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
                 ),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
