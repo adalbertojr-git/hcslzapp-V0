@@ -203,8 +203,8 @@ class _EventCalendarPageState extends State<EventCalendarPage> {
                     itemCount: value.length,
                     itemBuilder: (context, index) {
                       return Container(
-                        width: 320,
-                        margin: EdgeInsets.symmetric(horizontal: 5),
+                        width: 350,
+                        margin: EdgeInsets.symmetric(horizontal: 10),
                         decoration: BoxDecoration(
                           color: Colors.deepOrange[300],
                           shape: BoxShape.rectangle,
@@ -366,18 +366,16 @@ class _EventCalendarPageState extends State<EventCalendarPage> {
       );
 
   _photo(BuildContext context, Event event) => Container(
-        height: 150,
+        height: 170,
         padding: EdgeInsets.all(5),
         child: Card(
           elevation: 5,
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(10.0),
           ),
-          child: Observer(
-            builder: (_) => Container(
-              decoration: BoxDecoration(
-                image: _loadPhoto(event),
-              ),
+          child: Container(
+            decoration: BoxDecoration(
+              image: _loadPhoto(event),
             ),
           ),
         ),
