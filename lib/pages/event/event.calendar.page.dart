@@ -1,5 +1,6 @@
 import 'package:asuka/snackbars/asuka_snack_bar.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/rendering.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:hcslzapp/models/event.dart';
 import 'package:table_calendar/table_calendar.dart';
@@ -187,7 +188,38 @@ class _EventCalendarPageState extends State<EventCalendarPage> {
             ),
           ),
           const SizedBox(height: 8.0),
-          Expanded(
+
+          Container(
+            height: MediaQuery.of(context).size.height / 3,
+            width: double.infinity,
+            child: ValueListenableBuilder<List<Event>>(
+              valueListenable: _controller.selectedEvents,
+              builder: (context, value, _) {
+
+                return ListView.builder(
+                  scrollDirection: Axis.horizontal,
+                  itemCount: value.length,
+                  itemBuilder: (context, index) {
+                    return Container(
+                      width: 300,
+                      margin: EdgeInsets.symmetric(horizontal: 10),
+                      decoration: BoxDecoration(
+                        color: Colors.deepOrange[300],
+                        shape: BoxShape.rectangle,
+                        borderRadius: BorderRadius.circular(20.0),
+                      ),
+                      child: Text(
+                          value[index].title,
+                        ),
+                      );
+                    }
+                );
+
+              },
+            ),
+          ),
+
+/*          Expanded(
             child: ValueListenableBuilder<List<Event>>(
               valueListenable: _controller.selectedEvents,
               builder: (context, value, _) {
@@ -277,7 +309,7 @@ class _EventCalendarPageState extends State<EventCalendarPage> {
                 );
               },
             ),
-          ),
+          ),*/
         ],
       );
 
