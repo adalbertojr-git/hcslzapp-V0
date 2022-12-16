@@ -1,8 +1,6 @@
 import 'dart:io';
-
 import 'package:asuka/snackbars/asuka_snack_bar.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/rendering.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:hcslzapp/models/event.dart';
 import 'package:table_calendar/table_calendar.dart';
@@ -215,6 +213,25 @@ class _EventCalendarPageState extends State<EventCalendarPage> {
                             SizedBox(
                               height: 5,
                             ),
+                            _photo(context, value[index]),
+                            Text(
+                              value[index].title,
+                              style: TextStyle(
+                                fontWeight: FontWeight.bold,
+                                fontSize: 16,
+                              ),
+                            ),
+                            Container(
+                              padding: EdgeInsets.all(5),
+                              width: double.infinity,
+                              height: MediaQuery.of(context).size.height / 7,
+                              child: Card(
+                                elevation: 5,
+                                child: Text(
+                                  value[index].description,
+                                ),
+                              ),
+                            ),
                             Row(
                               mainAxisAlignment: MainAxisAlignment.end,
                               children: [
@@ -259,25 +276,6 @@ class _EventCalendarPageState extends State<EventCalendarPage> {
                                     : Container(),
                               ],
                             ),
-                            _photo(context, value[index]),
-                            Text(
-                              value[index].title,
-                              style: TextStyle(
-                                fontWeight: FontWeight.bold,
-                                fontSize: 16,
-                              ),
-                            ),
-                            Container(
-                              padding: EdgeInsets.all(5),
-                              width: double.infinity,
-                              height: MediaQuery.of(context).size.height / 6.5,
-                              child: Card(
-                                elevation: 5,
-                                child: Text(
-                                  value[index].description,
-                                ),
-                              ),
-                            )
                           ],
                         ),
                       );
@@ -285,103 +283,11 @@ class _EventCalendarPageState extends State<EventCalendarPage> {
               },
             ),
           ),
-
-/*          Expanded(
-            child: ValueListenableBuilder<List<Event>>(
-              valueListenable: _controller.selectedEvents,
-              builder: (context, value, _) {
-                return ListView.separated(
-                  padding: EdgeInsets.symmetric(horizontal: 15),
-                  shrinkWrap: true,
-                  itemCount: value.length,
-                  itemBuilder: (context, index) {
-                    return Container(
-                      decoration: BoxDecoration(
-                        color: Colors.deepOrange[300],
-                        shape: BoxShape.rectangle,
-                        borderRadius: BorderRadius.circular(20.0),
-                      ),
-                      child: ListTile(
-                        leading: Container(
-                          width: 40,
-                          height: 40,
-                          alignment: Alignment.center,
-                          child: CircleAvatar(
-                            child: Icon(Icons.event),
-                            backgroundColor: Colors.white,
-                          ),
-                        ),
-                        trailing: widget._selectedProfile == ADMIN
-                            ? Wrap(
-                                spacing: 10, // space between two icons
-                                children: <Widget>[
-                                  GestureDetector(
-                                    child: Icon(
-                                      Icons.delete,
-                                    ),
-                                    onTap: () {
-                                      _delete(value[index]);
-                                    },
-                                  ),
-                                  GestureDetector(
-                                    child: Icon(
-                                      Icons.edit,
-                                    ),
-                                    onTap: () {
-                                      Future future = Navigator.push(
-                                        context,
-                                        MaterialPageRoute(
-                                          builder: (context) => EventAddPage(
-                                            widget._selectedProfile,
-                                            value[index],
-                                            _selectedDay
-                                                .toString()
-                                                .substring(0, 10),
-                                          ),
-                                        ),
-                                      );
-                                      future.then((value) {
-                                        if (value != null) _loadAllEvents();
-                                      });
-                                    },
-                                  ),
-                                ],
-                              )
-                            : GestureDetector(
-                                child: Icon(
-                                  Icons.arrow_forward,
-                                ),
-                                onTap: () {
-                                  Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                      builder: (context) => EventAddPage(
-                                        widget._selectedProfile,
-                                        value[index],
-                                        _selectedDay
-                                            .toString()
-                                            .substring(0, 10),
-                                      ),
-                                    ),
-                                  );
-                                },
-                              ),
-                        title: Text(
-                          value[index].title,
-                        ),
-                      ),
-                    );
-                  },
-                  separatorBuilder: (_, int index) => const Divider(),
-                );
-              },
-            ),
-          ),*/
         ],
       );
 
   _photo(BuildContext context, Event event) => Container(
-        height: 170,
+        height: 150,
         padding: EdgeInsets.all(5),
         child: Card(
           elevation: 5,
