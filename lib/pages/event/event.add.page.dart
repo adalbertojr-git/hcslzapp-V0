@@ -108,6 +108,9 @@ class _EventAddPageState extends State<EventAddPage> {
               errorText: _controller.validateDescription(),
             );
           }),
+          SizedBox(
+            height: 80,
+          )
         ],
       );
 

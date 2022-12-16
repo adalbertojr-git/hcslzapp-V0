@@ -103,6 +103,9 @@ class _HeadNotificationAddPageState extends State<HeadNotificationAddPage> {
               );
             },
           ),
+          SizedBox(
+            height: 80,
+          )
         ],
       );
 

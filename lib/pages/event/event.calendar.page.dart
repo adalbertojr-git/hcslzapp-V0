@@ -152,7 +152,7 @@ class _EventCalendarPageState extends State<EventCalendarPage> {
         ),
       );
 
-  _widgets() => Column(
+  _widgets() => ListView(
         children: [
           Card(
             elevation: 5,
@@ -189,7 +189,7 @@ class _EventCalendarPageState extends State<EventCalendarPage> {
               rowHeight: 50,
             ),
           ),
-          const SizedBox(height: 10.0),
+          const SizedBox(height: 5.0),
           Container(
             height: MediaQuery.of(context).size.height / 2.5,
             width: double.infinity,

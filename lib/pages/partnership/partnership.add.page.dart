@@ -175,7 +175,7 @@ class _PartnershipAddPageState extends State<PartnershipAddPage> {
                   ),
                 ),
           SizedBox(
-            height: 40,
+            height: 80,
           )
         ],
       );

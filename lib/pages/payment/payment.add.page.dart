@@ -55,7 +55,7 @@ class _PaymentAddAddState extends State<PaymentAddPage> {
             : null,
       );
 
-  _widgets() => Column(
+  _widgets() => ListView(
         children: <Widget>[
           SizedBox(
             height: 10,
@@ -262,6 +262,9 @@ class _PaymentAddAddState extends State<PaymentAddPage> {
               ],
             ),
           ),
+          SizedBox(
+            height: 80,
+          )
         ],
       );
 
