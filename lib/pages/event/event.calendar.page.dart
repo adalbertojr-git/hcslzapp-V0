@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:asuka/snackbars/asuka_snack_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
@@ -5,6 +7,7 @@ import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:hcslzapp/models/event.dart';
 import 'package:table_calendar/table_calendar.dart';
 import '../../common/associated.profiles.dart';
+import '../../common/photo.image.provider.dart';
 import '../../components/button.dart';
 import '../../components/centered.message.dart';
 import '../../components/my.appbar.dart';
@@ -17,6 +20,7 @@ import 'event.add.page.dart';
 const String _title = 'Eventos';
 const String _labelUnknown =
     'Houve um erro desconhecido ao executar a transação.';
+const String _pathNoImage = 'assets/imgs/noImage.png';
 
 class EventCalendarPage extends StatefulWidget {
   final String _selectedProfile;
@@ -72,14 +76,14 @@ class _EventCalendarPageState extends State<EventCalendarPage> {
 
   void _onDaySelected(DateTime selectedDay, DateTime focusedDay) {
     //if (!isSameDay(_selectedDay, selectedDay)) {
-      setState(() {
-        _selectedDay = selectedDay;
-        _focusedDay = focusedDay;
-        _rangeStart = null; // Important to clean those
-        _rangeEnd = null;
-        _rangeSelectionMode = RangeSelectionMode.toggledOff;
-      });
-      _controller.selectedEvents.value = _getEventsForDay(selectedDay);
+    setState(() {
+      _selectedDay = selectedDay;
+      _focusedDay = focusedDay;
+      _rangeStart = null; // Important to clean those
+      _rangeEnd = null;
+      _rangeSelectionMode = RangeSelectionMode.toggledOff;
+    });
+    _controller.selectedEvents.value = _getEventsForDay(selectedDay);
     //}
   }
 
@@ -184,37 +188,85 @@ class _EventCalendarPageState extends State<EventCalendarPage> {
                 _focusedDay = focusedDay;
                 _controller.selectedEvents.value = [];
               },
-              rowHeight: 60,
+              rowHeight: 50,
             ),
           ),
-          const SizedBox(height: 8.0),
-
+          const SizedBox(height: 10.0),
           Container(
-            height: MediaQuery.of(context).size.height / 3,
+            height: MediaQuery.of(context).size.height / 2.5,
             width: double.infinity,
             child: ValueListenableBuilder<List<Event>>(
               valueListenable: _controller.selectedEvents,
               builder: (context, value, _) {
-
                 return ListView.builder(
-                  scrollDirection: Axis.horizontal,
-                  itemCount: value.length,
-                  itemBuilder: (context, index) {
-                    return Container(
-                      width: 300,
-                      margin: EdgeInsets.symmetric(horizontal: 10),
-                      decoration: BoxDecoration(
-                        color: Colors.deepOrange[300],
-                        shape: BoxShape.rectangle,
-                        borderRadius: BorderRadius.circular(20.0),
-                      ),
-                      child: Text(
-                          value[index].title,
+                    scrollDirection: Axis.horizontal,
+                    itemCount: value.length,
+                    itemBuilder: (context, index) {
+                      return Container(
+                        width: 320,
+                        margin: EdgeInsets.symmetric(horizontal: 5),
+                        decoration: BoxDecoration(
+                          color: Colors.deepOrange[300],
+                          shape: BoxShape.rectangle,
+                          borderRadius: BorderRadius.circular(10.0),
+                        ),
+                        child: Column(
+                          children: [
+                            SizedBox(
+                              height: 5,
+                            ),
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.end,
+                              children: [
+                                widget._selectedProfile == ADMIN
+                                    ? Wrap(
+                                        spacing: 10, // space between two icons
+                                        children: <Widget>[
+                                          GestureDetector(
+                                            child: Icon(
+                                              Icons.delete,
+                                            ),
+                                            onTap: () {
+                                              _delete(value[index]);
+                                            },
+                                          ),
+                                          GestureDetector(
+                                            child: Icon(
+                                              Icons.edit,
+                                            ),
+                                            onTap: () {
+                                              Future future = Navigator.push(
+                                                context,
+                                                MaterialPageRoute(
+                                                  builder: (context) =>
+                                                      EventAddPage(
+                                                    widget._selectedProfile,
+                                                    value[index],
+                                                    _selectedDay
+                                                        .toString()
+                                                        .substring(0, 10),
+                                                  ),
+                                                ),
+                                              );
+                                              future.then((value) {
+                                                if (value != null)
+                                                  _loadAllEvents();
+                                              });
+                                            },
+                                          ),
+                                        ],
+                                      )
+                                    : Container(),
+                              ],
+                            ),
+                            _photo(context, value[index]),
+                            Text(
+                              value[index].title,
+                            ),
+                          ],
                         ),
                       );
-                    }
-                );
-
+                    });
               },
             ),
           ),
@@ -312,6 +364,32 @@ class _EventCalendarPageState extends State<EventCalendarPage> {
           ),*/
         ],
       );
+
+  _photo(BuildContext context, Event event) => Container(
+        height: 150,
+        padding: EdgeInsets.all(5),
+        child: Card(
+          elevation: 5,
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(10.0),
+          ),
+          child: Observer(
+            builder: (_) => Container(
+              decoration: BoxDecoration(
+                image: _loadPhoto(event),
+              ),
+            ),
+          ),
+        ),
+      );
+
+  DecorationImage _loadPhoto(Event event) => DecorationImage(
+      image: event.photoUrl != ""
+          ? NetworkImage(event.photoUrl)
+          : PhotoImageProvider().getImageProvider(
+              File(_pathNoImage),
+            ) as ImageProvider,
+      fit: BoxFit.fill);
 
   _delete(Event event) async {
     var response = await showDialog(
