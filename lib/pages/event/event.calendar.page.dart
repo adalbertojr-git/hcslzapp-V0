@@ -262,7 +262,22 @@ class _EventCalendarPageState extends State<EventCalendarPage> {
                             _photo(context, value[index]),
                             Text(
                               value[index].title,
+                              style: TextStyle(
+                                fontWeight: FontWeight.bold,
+                                fontSize: 16,
+                              ),
                             ),
+                            Container(
+                              padding: EdgeInsets.all(5),
+                              width: double.infinity,
+                              height: MediaQuery.of(context).size.height / 6.5,
+                              child: Card(
+                                elevation: 5,
+                                child: Text(
+                                  value[index].description,
+                                ),
+                              ),
+                            )
                           ],
                         ),
                       );
