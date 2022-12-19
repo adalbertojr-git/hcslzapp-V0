@@ -109,17 +109,6 @@ mixin _$LoginController on LoginControllerBase, Store {
       ActionController(name: 'LoginControllerBase', context: context);
 
   @override
-  Future<Token> authenticate() {
-    final _$actionInfo = _$LoginControllerBaseActionController.startAction(
-        name: 'LoginControllerBase.authenticate');
-    try {
-      return super.authenticate();
-    } finally {
-      _$LoginControllerBaseActionController.endAction(_$actionInfo);
-    }
-  }
-
-  @override
   Future<List<Associated>> findByIdToList(int id) {
     final _$actionInfo = _$LoginControllerBaseActionController.startAction(
         name: 'LoginControllerBase.findByIdToList');
