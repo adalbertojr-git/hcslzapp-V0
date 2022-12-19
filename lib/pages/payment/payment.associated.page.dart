@@ -232,7 +232,7 @@ class _PaymentAssociatedPageState extends State<PaymentAssociatedPage> {
     if (response == true) {
       _controller.deleteById(_controller.payments[i]).then((value) {
         if (value != null) {
-          AsukaSnackbar.success('Mensalidade excluída com sucesso');
+          AsukaSnackbar.success('Mensalidade excluída com sucesso').show();
           _controller.payments.removeAt(i);
         } else {
           AsukaSnackbar.alert(_controller.errorMsg).show();

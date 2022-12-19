@@ -147,12 +147,12 @@ class _EventAddPageState extends State<EventAddPage> {
 
   _save(BuildContext context) {
     if (_controller.hasErrors) {
-      AsukaSnackbar.alert('Corrija os erros informados').show();
+      AsukaSnackbar.alert('Preencha os campos ogrigatórios').show();
     } else {
       _controller.save().then(
         (value) {
           if (value != null) {
-            AsukaSnackbar.success('Evento cadastrado com sucesso');
+            AsukaSnackbar.success('Evento cadastrado com sucesso').show();
             Navigator.pop(context, value);
           } else {
             AsukaSnackbar.alert(_controller.errorMsg).show();
@@ -164,12 +164,12 @@ class _EventAddPageState extends State<EventAddPage> {
 
   _update(BuildContext context) {
     if (_controller.hasErrors) {
-      AsukaSnackbar.alert('Corrija os erros informados').show();
+      AsukaSnackbar.alert('Preencha os campos ogrigatórios').show();
     } else {
       _controller.update().then(
         (value) {
           if (value != null) {
-            AsukaSnackbar.success('Evento atualizado com sucesso');
+            AsukaSnackbar.success('Evento atualizado com sucesso').show();
             Navigator.pop(context, value);
           } else {
             AsukaSnackbar.alert(_controller.errorMsg).show();

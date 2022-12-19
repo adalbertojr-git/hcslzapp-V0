@@ -115,7 +115,7 @@ class AccessRequestListPageState extends State<AccessRequestListPage> {
     _controller.allow().then(
       (value) {
         if (value != null) {
-          AsukaSnackbar.success('Requisições de acesso liberadas com sucesso');
+          AsukaSnackbar.success('Requisições de acesso liberadas com sucesso').show();
           Navigator.of(context).pop();
         } else {
           AsukaSnackbar.alert(_controller.errorMsg).show();
@@ -188,7 +188,7 @@ class CheckboxWidget extends StatelessWidget {
     if (response == true) {
       controller.deleteById(loadAccessRequest(item)).then((value) {
         if (value != null) {
-          AsukaSnackbar.success('Requisição de acesso excluída com sucesso');
+          AsukaSnackbar.success('Requisição de acesso excluída com sucesso').show();
           controller.listItems.remove(item);
         } else {
           AsukaSnackbar.alert(controller.errorMsg).show();

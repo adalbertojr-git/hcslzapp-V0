@@ -67,7 +67,7 @@ class ChangePasswordPage extends StatelessWidget {
 
   _update(BuildContext context) {
     if (_controller.hasErrors) {
-      AsukaSnackbar.alert('Corrija os erros informados').show();
+      AsukaSnackbar.alert('Preencha os campos ogrigatórios').show();
     } else {
       _controller
           .update(

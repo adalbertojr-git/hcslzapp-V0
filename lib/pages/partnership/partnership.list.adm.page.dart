@@ -157,7 +157,7 @@ class PartnershipListAdmPage extends StatelessWidget {
     if (response == true) {
       _controller.deleteById(_controller.partnerships[i]).then((value) {
         if (value != null) {
-          AsukaSnackbar.success('Parceiro excluído com sucesso');
+          AsukaSnackbar.success('Parceiro excluído com sucesso').show();
           _controller.partnerships.removeAt(i);
         } else {
           AsukaSnackbar.alert(_controller.errorMsg).show();

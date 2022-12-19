@@ -319,7 +319,7 @@ class _EventCalendarPageState extends State<EventCalendarPage> {
     if (response == true) {
       _controller.deleteById(event).then((value) {
         if (value != null) {
-          AsukaSnackbar.success('Evento excluído com sucesso');
+          AsukaSnackbar.success('Evento excluído com sucesso').show();
           _loadAllEvents();
         } else {
           AsukaSnackbar.alert(_controller.errorMsg).show();

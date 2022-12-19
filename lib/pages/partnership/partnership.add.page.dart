@@ -213,12 +213,12 @@ class _PartnershipAddPageState extends State<PartnershipAddPage> {
 
   _save(BuildContext context) {
     if (_controller.hasErrors) {
-      AsukaSnackbar.alert('Corrija os erros informados').show();
+      AsukaSnackbar.alert('Preencha os campos ogrigatórios').show();
     } else {
       _controller.save().then(
         (value) {
           if (value != null) {
-            AsukaSnackbar.success('Parceiro salvo com sucesso');
+            AsukaSnackbar.success('Parceiro salvo com sucesso').show();
             Navigator.of(context).pop(value);
           } else {
             AsukaSnackbar.alert(_controller.errorMsg).show();
@@ -230,7 +230,7 @@ class _PartnershipAddPageState extends State<PartnershipAddPage> {
 
   _update(BuildContext context) async {
     if (_controller.hasErrors) {
-      AsukaSnackbar.alert('Corrija os erros informados').show();
+      AsukaSnackbar.alert('Preencha os campos ogrigatórios').show();
     } else {
       var response = true;
       if (_controller.currentStatus == 'Inativo') {
@@ -249,7 +249,7 @@ class _PartnershipAddPageState extends State<PartnershipAddPage> {
         _controller.update().then(
           (value) {
             if (value != null) {
-              AsukaSnackbar.success('Parceiro atualizado com sucesso');
+              AsukaSnackbar.success('Parceiro atualizado com sucesso').show();
               Navigator.pop(context, value);
             } else {
               AsukaSnackbar.alert(_controller.errorMsg).show();

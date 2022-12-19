@@ -142,7 +142,7 @@ class _HeadNotificationAddPageState extends State<HeadNotificationAddPage> {
 
   _save(BuildContext context) {
     if (_controller.hasErrors) {
-      AsukaSnackbar.alert('Corrija os erros informados').show();
+      AsukaSnackbar.alert('Preencha os campos ogrigatórios').show();
     } else {
       _controller.save().then(
         (value) {
@@ -159,7 +159,7 @@ class _HeadNotificationAddPageState extends State<HeadNotificationAddPage> {
 
   _update(BuildContext context) {
     if (_controller.hasErrors) {
-      AsukaSnackbar.alert('Corrija os erros informados').show();
+      AsukaSnackbar.alert('Preencha os campos ogrigatórios').show();
     } else {
       _controller.update().then(
         (value) {

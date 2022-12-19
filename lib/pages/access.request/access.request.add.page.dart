@@ -105,7 +105,7 @@ class _AccessRequestAddPageState extends State<AccessRequestAddPage> {
 
   _save() {
     if (_controller.hasErrors) {
-      AsukaSnackbar.alert('Corrija os erros informados').show();
+      AsukaSnackbar.alert('Preencha os campos ogrigatórios').show();
     } else {
       _controller.save().then(
         (value) {

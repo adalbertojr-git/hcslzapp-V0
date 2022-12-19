@@ -70,7 +70,7 @@ class ForgotPasswordPage extends StatelessWidget {
 
   _forgotPassword() {
     if (_controller.hasErrors) {
-      AsukaSnackbar.alert('Corrija os erros informados').show();
+      AsukaSnackbar.alert('Preencha os campos ogrigatórios').show();
     } else {
       AsukaSnackbar.message('Aguarde...').show();
       _controller.forgotPassword(_controller.emailForgotPswCtrl.text).then(

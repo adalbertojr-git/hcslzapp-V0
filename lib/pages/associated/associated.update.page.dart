@@ -523,7 +523,7 @@ class AssociatedUpdatePage extends StatelessWidget {
 
   _update(BuildContext context) async {
     if (_controller.hasErrors) {
-      AsukaSnackbar.alert('Corrija os erros informados').show();
+      AsukaSnackbar.alert('Preencha os campos ogrigatórios').show();
     } else {
       var response = true;
       if (_controller.currentStatus == 'Inativo') {
