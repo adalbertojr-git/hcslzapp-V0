@@ -43,14 +43,32 @@ abstract class AssociatedListControllerBase with Store {
   @action
   bool setButtonVisibilty() => isHidedButton = !isHidedButton;
 
-  @action
-  Future<List<Associated>> findAll() =>
+/*  @action
+  Future<List<Associated>> findAll2() =>
       ObservableFuture(_associatedRepo.findAll().then((value) => value))
           .catchError((e) {
         errorMsg = "${e.message}";
+        return Future.error(e);
       }, test: (e) => e is HttpException).catchError((e) {
         errorMsg = "$e";
-      }, test: (e) => e is Exception);
+        return Future.error(e);
+      }, test: (e) => e is Exception);*/
+
+  Future<List<Associated>> findAll() {
+    try {
+      return ObservableFuture(_associatedRepo.findAll().then((value) => value));
+    } on HttpException catch (e) {
+      print(e);
+      errorMsg = "$e";
+    } on Exception catch (e) {
+      print(e);
+      errorMsg = "$e";
+    } catch (e) {
+      print(e);
+      errorMsg = "$e";
+    }
+    return Future.error(errorMsg);
+  }
 
   Future<List<Associated>> getFuture() => future = findAll();
 

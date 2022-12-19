@@ -24,7 +24,7 @@ class _CenteredMessageState extends State<CenteredMessage> {
   }
 
   get _showMessage {
-    AsukaSnackbar.message(widget.message).show();
+    AsukaSnackbar.alert(widget.message).show();
   }
 
   @override

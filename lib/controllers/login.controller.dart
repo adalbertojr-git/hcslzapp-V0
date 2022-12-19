@@ -37,7 +37,7 @@ abstract class LoginControllerBase with Store {
   }
 
   @action
-  Future<Token> authenticate() => token = ObservableFuture(_loginRepo
+  Future<Token> authenticate2() => token = ObservableFuture(_loginRepo
           .authenticate(
             userLoginCtrl.text,
             pswLoginCtrl.text,
@@ -47,6 +47,27 @@ abstract class LoginControllerBase with Store {
       }, test: (e) => e is HttpException).catchError((e) {
         errorMsg = "$e";
       }, test: (e) => e is Exception);
+
+  Future<Token> authenticate() {
+    try {
+      return ObservableFuture(_loginRepo
+          .authenticate(
+            userLoginCtrl.text,
+            pswLoginCtrl.text,
+          )
+          .then((value) => value));
+    } on HttpException catch (e) {
+      print(e);
+      errorMsg = "$e";
+    } on Exception catch (e) {
+      print(e);
+      errorMsg = "$e";
+    } catch (e) {
+      print(e);
+      errorMsg = "$e";
+    }
+    return Future.error(errorMsg);
+  }
 
   @action
   Future<List<Associated>> findByIdToList(int id) => ObservableFuture(
