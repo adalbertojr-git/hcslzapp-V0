@@ -216,7 +216,7 @@ class _MyCustomLoginUIState extends State<MyCustomLoginUI>
     );
   }
 
-  _login2() {
+/*  _login2() {
     if (_controllerLogin.hasErrors) {
       AsukaSnackbar.alert('Preencha os campos ogrigatórios').show();
     } else {
@@ -247,7 +247,7 @@ class _MyCustomLoginUIState extends State<MyCustomLoginUI>
         },
       );
     }
-  }
+  }*/
 
   _login() async {
     if (_controllerLogin.hasErrors) {
@@ -262,7 +262,16 @@ class _MyCustomLoginUIState extends State<MyCustomLoginUI>
         debugPrint(value.token);
         loadTokenSingleton(value);
         TokenDetails _tokenDetails = TokenDetails(value.token);
-        await _controllerLogin
+        Navigator.pushReplacement(
+          context,
+          MaterialPageRoute(
+            builder: (context) => DashboardPage(
+              _tokenDetails.associatedId(),
+            ),
+          ),
+        );
+
+/*        await _controllerLogin
             .findByIdToList(_tokenDetails.associatedId())
             .then(
           (value) {
@@ -275,7 +284,7 @@ class _MyCustomLoginUIState extends State<MyCustomLoginUI>
             );
             //associated = value[0];
           },
-        );
+        );*/
       }
     }
   }

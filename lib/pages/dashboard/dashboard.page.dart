@@ -20,6 +20,7 @@ import 'package:hcslzapp/models/associated.dart';
 import 'package:hcslzapp/pages/access.request/access.request.list.page.dart';
 import 'package:hcslzapp/pages/associated/associated.list.page.dart';
 import '../../common/injection.dart';
+import '../../components/progress.dart';
 import '../event/event.calendar.page.dart';
 
 const String _labelAppTitle = 'HCSlz App';
@@ -58,6 +59,12 @@ const String _pathDTCImage = 'assets/imgs/codigosdtc.png';
 const String _labelAboutHarleyClub = 'O Harley Club';
 const String _pathAboutHarleyClubImage = 'assets/imgs/logo.png';
 
+const String _labelNotExists =
+    'Erro ao obter dados do associado.';
+const String _labelUnknown =
+    'Houve um erro desconhecido ao executar a transação.';
+const String _title = '';
+
 const List<String> _listAdmScreens = [
   "Associados",
   "Mensalidades",
@@ -86,6 +93,10 @@ const List<IconData> _listAdmIcons = [
 ];
 
 class DashboardPage extends StatefulWidget {
+  final int associatedId;
+
+  DashboardPage(this.associatedId);
+
   @override
   _DashboardPageState createState() => _DashboardPageState();
 }
@@ -126,9 +137,94 @@ class _DashboardPageState extends State<DashboardPage> {
       drawer: _drawr(),
       drawerEdgeDragWidth: 50,
       drawerScrimColor: Colors.black87,
-      body: _widgets(),
+      // body: _widgets(),
+      body: FutureBuilder<List<Associated>>(
+        future: _controller.getFuture(widget.associatedId),
+        builder: (context, snapshot) {
+          switch (snapshot.connectionState) {
+            case ConnectionState.none:
+              break;
+            case ConnectionState.waiting:
+              return Progress();
+            case ConnectionState.active:
+              break;
+            default:
+              if (snapshot.hasError) {
+                return CenteredMessage(
+                  title: _title,
+                  message: snapshot.error.toString(),
+                );
+              } else {
+                if (snapshot.data == null)
+                  return CenteredMessage(
+                    title: _title,
+                    message: _controller.errorMsg,
+                  );
+                if ((snapshot.data?.length)! > 0) {
+                  loadAssociatedSingleton(snapshot.data!.first);
+                  return _widgets();
+                } else
+                  return CenteredMessage(
+                    title: _title,
+                    message: _labelNotExists,
+                  );
+              }
+          } //switch (snapshot.connectionState)
+          return CenteredMessage(
+            title: _title,
+            message: _labelUnknown,
+          );
+        },
+      ),
     );
   }
+
+/*
+  @override
+  Widget build(BuildContext context) => Scaffold(
+    body: FutureBuilder<List<Associated>>(
+      future: _controller.getFuture(),
+      builder: (context, snapshot) {
+        switch (snapshot.connectionState) {
+          case ConnectionState.none:
+            break;
+          case ConnectionState.waiting:
+            return Progress();
+          case ConnectionState.active:
+            break;
+          default:
+            if (snapshot.hasError) {
+              return CenteredMessage(
+                title: _title,
+                message: snapshot.error.toString(),
+              );
+            } else {
+              if (snapshot.data == null)
+                return CenteredMessage(
+                  title: _title,
+                  message: _controller.errorMsg,
+                );
+              if ((snapshot.data?.length)! > 0) {
+                _controller.init();
+                _controller.associateds.addAll((snapshot.data)!);
+                _controller.associateds.sort(
+                      (a, b) => a.name.compareTo(b.name),
+                );
+                return _widgets(context);
+              } else
+                return CenteredMessage(
+                  title: _title,
+                  message: _labelNotExists,
+                );
+            }
+        } //switch (snapshot.connectionState)
+        return CenteredMessage(
+          title: _title,
+          message: _labelUnknown,
+        );
+      },
+    ),
+  );*/
 
   AppBar _appBar() => AppBar(
         elevation: 1.0,
@@ -179,14 +275,13 @@ class _DashboardPageState extends State<DashboardPage> {
                 Navigator.of(context).pushAndRemoveUntil(
                   // the new route
                   MaterialPageRoute(
-                    builder: (BuildContext context) =>
-                        MyCustomLoginUI(),
+                    builder: (BuildContext context) => MyCustomLoginUI(),
                   ),
 
                   // this function should return true when we're done removing routes
                   // but because we want to remove all other screens, we make it
                   // always return false
-                      (Route route) => false,
+                  (Route route) => false,
                 );
               }
             },

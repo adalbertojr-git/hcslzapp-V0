@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:hcslzapp/pages/event/event.calendar.page.dart';
 import 'package:hcslzapp/pages/partnership/partnership.list.associated.page.dart';
@@ -10,6 +12,8 @@ import '../pages/associated/associated.update.page.dart';
 import 'package:hcslzapp/pages/digital.identity/digital.identity.page.dart';
 import 'package:hcslzapp/pages/dtc.code/dtc.code.dashboard.page.dart';
 import 'package:mobx/mobx.dart';
+
+import '../repositories/associated.repo.dart';
 
 part 'dashboard.controller.g.dart';
 
@@ -30,6 +34,33 @@ abstract class DashboardControllerBase with Store {
 
   @observable
   String selectedProfile;
+
+  @observable
+  Future<List<Associated>> future = Future<List<Associated>>.value([]);
+
+  @observable
+  AssociatedRepo _associatedRepo = AssociatedRepo();
+
+  @observable
+  String errorMsg = "";
+
+  Future<List<Associated>> findByIdToList(int id) {
+    try {
+      return ObservableFuture(_associatedRepo.findByIdToList(id).then((value) => value));
+    } on HttpException catch (e) {
+      print(e);
+      errorMsg = "$e";
+    } on Exception catch (e) {
+      print(e);
+      errorMsg = "$e";
+    } catch (e) {
+      print(e);
+      errorMsg = "$e";
+    }
+    return Future.error(errorMsg);
+  }
+
+  Future<List<Associated>> getFuture(int id) => future = findByIdToList(id);
 
   @action
   setPhoto(String value) {

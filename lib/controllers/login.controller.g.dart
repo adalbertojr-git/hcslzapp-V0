@@ -89,36 +89,6 @@ mixin _$LoginController on LoginControllerBase, Store {
     });
   }
 
-  late final _$_associatedRepoAtom =
-      Atom(name: 'LoginControllerBase._associatedRepo', context: context);
-
-  @override
-  AssociatedRepo get _associatedRepo {
-    _$_associatedRepoAtom.reportRead();
-    return super._associatedRepo;
-  }
-
-  @override
-  set _associatedRepo(AssociatedRepo value) {
-    _$_associatedRepoAtom.reportWrite(value, super._associatedRepo, () {
-      super._associatedRepo = value;
-    });
-  }
-
-  late final _$LoginControllerBaseActionController =
-      ActionController(name: 'LoginControllerBase', context: context);
-
-  @override
-  Future<List<Associated>> findByIdToList(int id) {
-    final _$actionInfo = _$LoginControllerBaseActionController.startAction(
-        name: 'LoginControllerBase.findByIdToList');
-    try {
-      return super.findByIdToList(id);
-    } finally {
-      _$LoginControllerBaseActionController.endAction(_$actionInfo);
-    }
-  }
-
   @override
   String toString() {
     return '''
