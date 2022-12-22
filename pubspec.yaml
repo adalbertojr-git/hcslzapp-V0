@@ -33,6 +33,7 @@ dependencies:
   jwt_decode: ^0.3.1
   glutton: ^2.0.0
   image_picker: ^0.8.4+4
+  flare_flutter: ^3.0.2
 
   firebase_storage: ^11.0.6
   firebase_core: ^2.3.0
@@ -106,6 +107,7 @@ flutter:
     - assets/imgs/sobre.jpeg
     - assets/imgs/dependentes.png
     - assets/imgs/motocicletas.png
+    - assets/anims/splash.flr
 
 #    #
 #    - assets/icons/digital-logo.png
@@ -133,7 +135,6 @@ flutter:
 #    - assets/icons/logo.png
 #
 #    #
-#    - assets/anims/splash.flr
 
 
 

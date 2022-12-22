@@ -59,11 +59,9 @@ const String _pathDTCImage = 'assets/imgs/codigosdtc.png';
 const String _labelAboutHarleyClub = 'O Harley Club';
 const String _pathAboutHarleyClubImage = 'assets/imgs/logo.png';
 
-const String _labelNotExists =
-    'Erro ao obter dados do associado.';
+const String _labelNotExists = 'Erro ao obter dados do associado.';
 const String _labelUnknown =
     'Houve um erro desconhecido ao executar a transação.';
-const String _title = '';
 
 const List<String> _listAdmScreens = [
   "Associados",
@@ -102,20 +100,25 @@ class DashboardPage extends StatefulWidget {
 }
 
 class _DashboardPageState extends State<DashboardPage> {
-  late DashboardController _controller;
+  final DashboardController _controller = DashboardController();
   late BuildContext _gContext;
   late List<Widget> _listAdmWidgets;
-  late Associated _associated;
+  //late Associated _associated;
 
   @override
   void initState() {
     super.initState();
-    _associated = locator.get<Associated>();
-    _controller = DashboardController(
-      associated: _associated,
-      photoUrl: _associated.photoUrl,
-      selectedProfile: ASSOCIATED,
-    );
+    _controller.getFuture(widget.associatedId).then((value) {
+      loadAssociatedSingleton(value.first);
+      //_associated = locator.get<Associated>();
+      _controller.init( locator.get<Associated>());
+/*      _controller = DashboardController(
+        associated: _associated,
+        photoUrl: _associated.photoUrl,
+        selectedProfile: ASSOCIATED,
+      );*/
+    });
+
   }
 
   @override
@@ -137,9 +140,31 @@ class _DashboardPageState extends State<DashboardPage> {
       drawer: _drawr(),
       drawerEdgeDragWidth: 50,
       drawerScrimColor: Colors.black87,
-      // body: _widgets(),
+      body: _widgets(),
+    );
+  }
+/*
+  @override
+  Widget build(BuildContext context) {
+    _gContext = context;
+    _listAdmWidgets = [
+      AssociatedListPage(),
+      PaymentListPage(_controller.selectedProfile),
+      EventCalendarPage(_controller.selectedProfile),
+      PartnershipListAdmPage(),
+      HeadNotificationListAdmPage(),
+      CenteredMessage(
+        title: 'Boutique Harley Club',
+        message: 'Funcionalidade em contrução. Aguarde nova versão do App',
+      ),
+    ];
+    return Scaffold(
+      appBar: _appBar(),
+      drawer: _drawr(),
+      drawerEdgeDragWidth: 50,
+      drawerScrimColor: Colors.black87,
       body: FutureBuilder<List<Associated>>(
-        future: _controller.getFuture(widget.associatedId),
+        future: _controller.future,
         builder: (context, snapshot) {
           switch (snapshot.connectionState) {
             case ConnectionState.none:
@@ -151,80 +176,33 @@ class _DashboardPageState extends State<DashboardPage> {
             default:
               if (snapshot.hasError) {
                 return CenteredMessage(
-                  title: _title,
+                  title: _labelAppTitle,
                   message: snapshot.error.toString(),
                 );
               } else {
                 if (snapshot.data == null)
                   return CenteredMessage(
-                    title: _title,
+                    title: _labelAppTitle,
                     message: _controller.errorMsg,
                   );
                 if ((snapshot.data?.length)! > 0) {
-                  loadAssociatedSingleton(snapshot.data!.first);
+                  //loadAssociatedSingleton(snapshot.data!.first);
                   return _widgets();
                 } else
                   return CenteredMessage(
-                    title: _title,
+                    title: _labelAppTitle,
                     message: _labelNotExists,
                   );
               }
           } //switch (snapshot.connectionState)
           return CenteredMessage(
-            title: _title,
+            title: _labelAppTitle,
             message: _labelUnknown,
           );
         },
       ),
     );
-  }
-
-/*
-  @override
-  Widget build(BuildContext context) => Scaffold(
-    body: FutureBuilder<List<Associated>>(
-      future: _controller.getFuture(),
-      builder: (context, snapshot) {
-        switch (snapshot.connectionState) {
-          case ConnectionState.none:
-            break;
-          case ConnectionState.waiting:
-            return Progress();
-          case ConnectionState.active:
-            break;
-          default:
-            if (snapshot.hasError) {
-              return CenteredMessage(
-                title: _title,
-                message: snapshot.error.toString(),
-              );
-            } else {
-              if (snapshot.data == null)
-                return CenteredMessage(
-                  title: _title,
-                  message: _controller.errorMsg,
-                );
-              if ((snapshot.data?.length)! > 0) {
-                _controller.init();
-                _controller.associateds.addAll((snapshot.data)!);
-                _controller.associateds.sort(
-                      (a, b) => a.name.compareTo(b.name),
-                );
-                return _widgets(context);
-              } else
-                return CenteredMessage(
-                  title: _title,
-                  message: _labelNotExists,
-                );
-            }
-        } //switch (snapshot.connectionState)
-        return CenteredMessage(
-          title: _title,
-          message: _labelUnknown,
-        );
-      },
-    ),
-  );*/
+  }*/
 
   AppBar _appBar() => AppBar(
         elevation: 1.0,
@@ -311,12 +289,12 @@ class _DashboardPageState extends State<DashboardPage> {
               accountName: Text(
                 _controller.selectedProfile == ADMIN
                     ? _labelAdm
-                    : _associated.name,
+                    : _controller.associated.name,
               ),
               accountEmail: Text(
                 _controller.selectedProfile == ADMIN
                     ? _labelAdmEmail
-                    : _associated.email,
+                    : _controller.associated.email,
               ),
               decoration: BoxDecoration(
                 image: DecorationImage(
@@ -360,7 +338,7 @@ class _DashboardPageState extends State<DashboardPage> {
                   MaterialPageRoute(
                       builder: (_) => ChangePasswordPage(
                             PasswordDTO(
-                              associatedId: _associated.id,
+                              associatedId: _controller.associated.id,
                               aux: '',
                             ),
                           )),
@@ -488,13 +466,13 @@ class _DashboardPageState extends State<DashboardPage> {
         title: Text(
           _controller.selectedProfile == ADMIN
               ? 'Olá, ' + _labelAdm
-              : 'Olá, ${_controller.getFirstName(_associated.name)}',
+              : 'Olá, ${_controller.getFirstName(_controller.associated.name)}',
           style: TextStyle(color: Colors.white, fontSize: 25.0),
         ),
         subtitle: Text(
           _controller.selectedProfile == ADMIN
               ? _labelAdmEmail
-              : _associated.email,
+              : _controller.associated.email,
           style: TextStyle(color: Colors.white60, fontSize: 14.0),
         ),
         trailing: _controller.selectedProfile == ADMIN
@@ -599,7 +577,7 @@ class _DashboardPageState extends State<DashboardPage> {
                   onClick: () {
                     _controller.loadAssociatedUpdatePage(
                       _gContext,
-                      _associated.id,
+                      _controller.associated.id,
                     );
                   },
                 ),

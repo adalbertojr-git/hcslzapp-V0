@@ -1,9 +1,7 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:hcslzapp/http/http.exception.dart';
-import '../models/associated.dart';
 import '../models/token.dart';
-import '../repositories/associated.repo.dart';
 import '../repositories/login.repo.dart';
 import 'package:mobx/mobx.dart';
 
@@ -29,9 +27,6 @@ abstract class LoginControllerBase with Store {
   @observable
   LoginRepo _loginRepo = LoginRepo();
 
-/*  @observable
-  AssociatedRepo _associatedRepo = AssociatedRepo();*/
-
   init() {
     formController = FormController(user: '', password: '');
   }
@@ -56,15 +51,6 @@ abstract class LoginControllerBase with Store {
     }
     return Future.error(errorMsg);
   }
-
-/*  @action
-  Future<List<Associated>> findByIdToList(int id) => ObservableFuture(
-              _associatedRepo.findByIdToList(id).then((value) => value))
-          .catchError((e) {
-        errorMsg = "${e.message}";
-      }, test: (e) => e is HttpException).catchError((e) {
-        errorMsg = "$e";
-      }, test: (e) => e is Exception);*/
 
   bool get hasErrors => hasErrorUser || hasErrorPassword;
 

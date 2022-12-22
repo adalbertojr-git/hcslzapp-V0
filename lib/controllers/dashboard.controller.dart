@@ -1,5 +1,4 @@
 import 'dart:io';
-
 import 'package:flutter/material.dart';
 import 'package:hcslzapp/pages/event/event.calendar.page.dart';
 import 'package:hcslzapp/pages/partnership/partnership.list.associated.page.dart';
@@ -7,6 +6,7 @@ import 'package:hcslzapp/pages/payment/payment.associated.page.dart';
 import '../models/role.dart';
 import '../common/associated.profiles.dart';
 import '../models/associated.dart';
+import '../models/template.dart';
 import '../pages/about/about.page.dart';
 import '../pages/associated/associated.update.page.dart';
 import 'package:hcslzapp/pages/digital.identity/digital.identity.page.dart';
@@ -20,20 +20,20 @@ part 'dashboard.controller.g.dart';
 class DashboardController = DashboardControllerBase with _$DashboardController;
 
 abstract class DashboardControllerBase with Store {
-  DashboardControllerBase({
+/*  DashboardControllerBase({
     required this.associated,
     required this.photoUrl,
     required this.selectedProfile,
-  });
+  });*/
 
   @observable
-  String photoUrl;
+  String photoUrl = '';
 
   @observable
-  Associated associated;
+  Associated associated = Template().loadAssociated();
 
   @observable
-  String selectedProfile;
+  String selectedProfile = '';
 
   @observable
   Future<List<Associated>> future = Future<List<Associated>>.value([]);
@@ -44,9 +44,17 @@ abstract class DashboardControllerBase with Store {
   @observable
   String errorMsg = "";
 
+  init(Associated associated) {
+    this.associated = associated;
+    print(associated);
+    photoUrl = associated.photoUrl;
+    selectedProfile = ASSOCIATED;
+  }
+
   Future<List<Associated>> findByIdToList(int id) {
     try {
-      return ObservableFuture(_associatedRepo.findByIdToList(id).then((value) => value));
+      return ObservableFuture(
+          _associatedRepo.findByIdToList(id).then((value) => value));
     } on HttpException catch (e) {
       print(e);
       errorMsg = "$e";

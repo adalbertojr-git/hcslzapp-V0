@@ -2,7 +2,7 @@ import 'package:asuka/snackbars/asuka_snack_bar.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:hcslzapp/models/token.dart';
+import 'package:hcslzapp/components/progress.dart';
 import '../../common/injection.dart';
 import '../../common/labels.and.hints.dart';
 import '../../common/token.details.dart';
@@ -255,36 +255,26 @@ class _MyCustomLoginUIState extends State<MyCustomLoginUI>
     } else {
       AsukaSnackbar.message('Carregando...').show();
       var value = await _controllerLogin.authenticate();
-
       if (value == null) {
         AsukaSnackbar.alert(_controllerLogin.errorMsg).show();
       } else {
         debugPrint(value.token);
         loadTokenSingleton(value);
         TokenDetails _tokenDetails = TokenDetails(value.token);
-        Navigator.pushReplacement(
+/*        Navigator.pushReplacement(
           context,
           MaterialPageRoute(
             builder: (context) => DashboardPage(
               _tokenDetails.associatedId(),
             ),
           ),
-        );
-
-/*        await _controllerLogin
-            .findByIdToList(_tokenDetails.associatedId())
-            .then(
-          (value) {
-            loadAssociatedSingleton(value[0]);
-            Navigator.pushReplacement(
-              context,
-              MaterialPageRoute(
-                builder: (context) => DashboardPage(),
-              ),
-            );
-            //associated = value[0];
-          },
         );*/
+        Navigator.pushReplacement(
+          context,
+          MaterialPageRoute(
+            builder: (context) => Progress(),
+          ),
+        );
       }
     }
   }
