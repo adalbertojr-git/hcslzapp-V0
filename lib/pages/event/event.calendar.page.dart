@@ -3,6 +3,7 @@ import 'package:asuka/snackbars/asuka_snack_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:hcslzapp/models/event.dart';
+import 'package:intl/intl.dart';
 import 'package:table_calendar/table_calendar.dart';
 import '../../common/associated.profiles.dart';
 import '../../common/photo.image.provider.dart';
@@ -187,6 +188,24 @@ class _EventCalendarPageState extends State<EventCalendarPage> {
                 _controller.selectedEvents.value = [];
               },
               rowHeight: 50,
+/*              calendarBuilders: CalendarBuilders(
+                dowBuilder: (context, day) {
+                  if (day.weekday == DateTime.sunday) {
+                    final text = DateFormat.E().format(day);
+
+                    return Center(
+                      child: Text(
+                        text,
+                        style: TextStyle(color: Colors.red),
+                      ),
+                    );
+                  }
+                },
+                markerBuilder: (context, day, selectedEvents) {
+
+                }
+              ),*/
+
             ),
           ),
           const SizedBox(height: 5.0),
