@@ -113,7 +113,6 @@ class _DashboardPageState extends State<DashboardPage> {
 
   @override
   Widget build(BuildContext context) {
-    //_gContext = context;
     _listAdmWidgets = [
       AssociatedListPage(),
       PaymentListPage(_controller.selectedProfile),
