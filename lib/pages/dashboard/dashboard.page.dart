@@ -101,10 +101,7 @@ class DashboardPage extends StatefulWidget {
 
 class _DashboardPageState extends State<DashboardPage> {
   final DashboardController _controller = DashboardController();
-  late BuildContext _gContext;
   late List<Widget> _listAdmWidgets;
-
-  //late Associated _associated;
 
   @override
   void initState() {
@@ -116,7 +113,7 @@ class _DashboardPageState extends State<DashboardPage> {
 
   @override
   Widget build(BuildContext context) {
-    _gContext = context;
+    //_gContext = context;
     _listAdmWidgets = [
       AssociatedListPage(),
       PaymentListPage(_controller.selectedProfile),
@@ -298,7 +295,7 @@ class _DashboardPageState extends State<DashboardPage> {
                   _controller.changeProfile();
                   print(_controller.selectedProfile);
                   _widgets();
-                  Navigator.pop(_gContext);
+                  Navigator.pop(context);
                 });
               },
             ),
@@ -481,7 +478,7 @@ class _DashboardPageState extends State<DashboardPage> {
               Icons.cake,
               onClick: () {
                 Navigator.push(
-                  _gContext,
+                  context,
                   MaterialPageRoute(
                       builder: (_gContext) => MonthBirthdaysListPage()),
                 );
@@ -493,7 +490,7 @@ class _DashboardPageState extends State<DashboardPage> {
               Icons.announcement,
               onClick: () {
                 Navigator.push(
-                  _gContext,
+                  context,
                   MaterialPageRoute(
                       builder: (_gContext) =>
                           HeadNotificationListAssociatedPage()),
@@ -511,7 +508,7 @@ class _DashboardPageState extends State<DashboardPage> {
               Icons.send_to_mobile,
               onClick: () {
                 Navigator.push(
-                  _gContext,
+                  context,
                   MaterialPageRoute(
                       builder: (_gContext) => AccessRequestListPage()),
                 );
@@ -523,7 +520,7 @@ class _DashboardPageState extends State<DashboardPage> {
               Icons.admin_panel_settings,
               onClick: () {
                 Navigator.push(
-                  _gContext,
+                  context,
                   MaterialPageRoute(
                       builder: (_gContext) => ManagementListPage()),
                 );
@@ -546,10 +543,10 @@ class _DashboardPageState extends State<DashboardPage> {
                 GridButton(
                   title: _labelAssociated,
                   image: _pathAssociatedImage,
-                  context: _gContext,
+                  context: context,
                   onClick: () {
                     _controller.loadAssociatedUpdatePage(
-                      _gContext,
+                      context,
                       _controller.associated.id,
                     );
                   },
@@ -557,10 +554,10 @@ class _DashboardPageState extends State<DashboardPage> {
                 GridButton(
                   title: _labelPayment,
                   image: _pathPaymentImage,
-                  context: _gContext,
+                  context: context,
                   onClick: () {
                     _controller.loadPaymentAssociatedPage(
-                      _gContext,
+                      context,
                       _controller.isAdmin(),
                       _controller.associated,
                     );
@@ -569,10 +566,10 @@ class _DashboardPageState extends State<DashboardPage> {
                 GridButton(
                   title: _labelDigitalIdentity,
                   image: _pathDigitalIdentityImage,
-                  context: _gContext,
+                  context: context,
                   onClick: () {
                     _controller.loadDigitalIdentityPage(
-                      _gContext,
+                      context,
                       //_associated,
                     );
                   },
@@ -580,20 +577,20 @@ class _DashboardPageState extends State<DashboardPage> {
                 GridButton(
                   title: _labelPartnership,
                   image: _pathPartnershipImage,
-                  context: _gContext,
+                  context: context,
                   onClick: () {
                     _controller.loadPartnershipListAssociatedPage(
-                      _gContext,
+                      context,
                     );
                   },
                 ),
                 GridButton(
                   title: _labelEvent,
                   image: _pathEventImage,
-                  context: _gContext,
+                  context: context,
                   onClick: () {
                     _controller.loadEventCalendarPage(
-                      _gContext,
+                      context,
                       _controller.selectedProfile,
                     );
                   },
@@ -614,9 +611,9 @@ class _DashboardPageState extends State<DashboardPage> {
                 GridButton(
                   title: _labelDTC,
                   image: _pathDTCImage,
-                  context: _gContext,
+                  context: context,
                   onClick: () {
-                    _controller.loadDtcCodeDashboardPage(_gContext);
+                    _controller.loadDtcCodeDashboardPage(context);
                   },
                 ),
 /*
@@ -683,9 +680,9 @@ class _DashboardPageState extends State<DashboardPage> {
                 GridButton(
                   title: _labelAboutHarleyClub,
                   image: _pathAboutHarleyClubImage,
-                  context: _gContext,
+                  context: context,
                   onClick: () {
-                    _controller.loadAboutPage(_gContext);
+                    _controller.loadAboutPage(context);
                   },
                 ),
               ],
@@ -734,9 +731,9 @@ class _DashboardPageState extends State<DashboardPage> {
             ),
             onTap: () {
               Navigator.push(
-                _gContext,
+                context,
                 MaterialPageRoute(
-                    builder: (_gContext) => _listAdmWidgets[index]),
+                    builder: (context) => _listAdmWidgets[index]),
               );
             },
           )
