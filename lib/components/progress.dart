@@ -7,9 +7,10 @@ const String _pathFlareActor = 'assets/anims/splash.flr';
 class Progress extends StatelessWidget {
   @override
   Widget build(BuildContext context) => Container(
-          child: DegradeBackground(
-        _animation(),
-      ));
+        child: DegradeBackground(
+          _animation(),
+        ),
+      );
 
   _animation() => Container(
         child: FlareActor(

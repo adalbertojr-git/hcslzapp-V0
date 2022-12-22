@@ -103,6 +103,7 @@ class _DashboardPageState extends State<DashboardPage> {
   final DashboardController _controller = DashboardController();
   late BuildContext _gContext;
   late List<Widget> _listAdmWidgets;
+
   //late Associated _associated;
 
   @override
@@ -110,15 +111,7 @@ class _DashboardPageState extends State<DashboardPage> {
     super.initState();
     _controller.getFuture(widget.associatedId).then((value) {
       loadAssociatedSingleton(value.first);
-      //_associated = locator.get<Associated>();
-      _controller.init( locator.get<Associated>());
-/*      _controller = DashboardController(
-        associated: _associated,
-        photoUrl: _associated.photoUrl,
-        selectedProfile: ASSOCIATED,
-      );*/
     });
-
   }
 
   @override
@@ -132,77 +125,57 @@ class _DashboardPageState extends State<DashboardPage> {
       HeadNotificationListAdmPage(),
       CenteredMessage(
         title: 'Boutique Harley Club',
-        message: 'Funcionalidade em contrução. Aguarde nova versão do App',
+        message: 'Funcionalidade em construção. Aguarde nova versão do App',
       ),
     ];
-    return Scaffold(
-      appBar: _appBar(),
-      drawer: _drawr(),
-      drawerEdgeDragWidth: 50,
-      drawerScrimColor: Colors.black87,
-      body: _widgets(),
+    return Observer(
+      builder: (_) => Scaffold(
+        appBar: _appBar(),
+        drawer: _drawr(),
+        drawerEdgeDragWidth: 50,
+        drawerScrimColor: Colors.black87,
+        body: FutureBuilder<List<Associated>>(
+          future: _controller.future,
+          builder: (context, snapshot) {
+            switch (snapshot.connectionState) {
+              case ConnectionState.none:
+                break;
+              case ConnectionState.waiting:
+                return Progress();
+              case ConnectionState.active:
+                break;
+              default:
+                if (snapshot.hasError) {
+                  return CenteredMessage(
+                    title: _labelAppTitle,
+                    message: snapshot.error.toString(),
+                  );
+                } else {
+                  if (snapshot.data == null)
+                    return CenteredMessage(
+                      title: _labelAppTitle,
+                      message: _controller.errorMsg,
+                    );
+                  if ((snapshot.data?.length)! > 0) {
+                    _controller.setAssociated(locator.get<Associated>());
+                    _controller.setPhotoURL();
+                    return _widgets();
+                  } else
+                    return CenteredMessage(
+                      title: _labelAppTitle,
+                      message: _labelNotExists,
+                    );
+                }
+            } //switch (snapshot.connectionState)
+            return CenteredMessage(
+              title: _labelAppTitle,
+              message: _labelUnknown,
+            );
+          },
+        ),
+      ),
     );
   }
-/*
-  @override
-  Widget build(BuildContext context) {
-    _gContext = context;
-    _listAdmWidgets = [
-      AssociatedListPage(),
-      PaymentListPage(_controller.selectedProfile),
-      EventCalendarPage(_controller.selectedProfile),
-      PartnershipListAdmPage(),
-      HeadNotificationListAdmPage(),
-      CenteredMessage(
-        title: 'Boutique Harley Club',
-        message: 'Funcionalidade em contrução. Aguarde nova versão do App',
-      ),
-    ];
-    return Scaffold(
-      appBar: _appBar(),
-      drawer: _drawr(),
-      drawerEdgeDragWidth: 50,
-      drawerScrimColor: Colors.black87,
-      body: FutureBuilder<List<Associated>>(
-        future: _controller.future,
-        builder: (context, snapshot) {
-          switch (snapshot.connectionState) {
-            case ConnectionState.none:
-              break;
-            case ConnectionState.waiting:
-              return Progress();
-            case ConnectionState.active:
-              break;
-            default:
-              if (snapshot.hasError) {
-                return CenteredMessage(
-                  title: _labelAppTitle,
-                  message: snapshot.error.toString(),
-                );
-              } else {
-                if (snapshot.data == null)
-                  return CenteredMessage(
-                    title: _labelAppTitle,
-                    message: _controller.errorMsg,
-                  );
-                if ((snapshot.data?.length)! > 0) {
-                  //loadAssociatedSingleton(snapshot.data!.first);
-                  return _widgets();
-                } else
-                  return CenteredMessage(
-                    title: _labelAppTitle,
-                    message: _labelNotExists,
-                  );
-              }
-          } //switch (snapshot.connectionState)
-          return CenteredMessage(
-            title: _labelAppTitle,
-            message: _labelUnknown,
-          );
-        },
-      ),
-    );
-  }*/
 
   AppBar _appBar() => AppBar(
         elevation: 1.0,

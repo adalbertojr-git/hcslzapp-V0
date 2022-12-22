@@ -20,12 +20,6 @@ part 'dashboard.controller.g.dart';
 class DashboardController = DashboardControllerBase with _$DashboardController;
 
 abstract class DashboardControllerBase with Store {
-/*  DashboardControllerBase({
-    required this.associated,
-    required this.photoUrl,
-    required this.selectedProfile,
-  });*/
-
   @observable
   String photoUrl = '';
 
@@ -43,13 +37,6 @@ abstract class DashboardControllerBase with Store {
 
   @observable
   String errorMsg = "";
-
-  init(Associated associated) {
-    this.associated = associated;
-    print(associated);
-    photoUrl = associated.photoUrl;
-    selectedProfile = ASSOCIATED;
-  }
 
   Future<List<Associated>> findByIdToList(int id) {
     try {
@@ -69,6 +56,12 @@ abstract class DashboardControllerBase with Store {
   }
 
   Future<List<Associated>> getFuture(int id) => future = findByIdToList(id);
+
+  @action
+  setAssociated(Associated associated) => this.associated = associated;
+
+  @action
+  setPhotoURL() => this.photoUrl = associated.photoUrl;
 
   @action
   setPhoto(String value) {
