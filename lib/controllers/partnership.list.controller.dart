@@ -1,5 +1,3 @@
-import 'dart:io';
-
 import 'package:flutter/cupertino.dart';
 import 'package:hcslzapp/models/partnership.dart';
 import 'package:hcslzapp/models/template.dart';
@@ -31,9 +29,6 @@ abstract class PartnershipListControllerBase with Store {
   Future<List<Partnership>> future = Future<List<Partnership>>.value([]);
 
   @observable
-  String errorMsg = "";
-
-  @observable
   PageController pageController = PageController();
 
   @observable
@@ -61,23 +56,13 @@ abstract class PartnershipListControllerBase with Store {
 
   @action
   Future<List<Partnership>> findAll() =>
-      ObservableFuture(_partnershipRepo.findAll().then((value) => value))
-          .catchError((e) {
-        errorMsg = "${e.message}";
-      }, test: (e) => e is HttpException).catchError((e) {
-        errorMsg = "$e";
-      }, test: (e) => e is Exception);
+      ObservableFuture(_partnershipRepo.findAll().then((value) => value));
 
   Future<List<Partnership>> getFuture() => future = findAll();
 
   @action
   Future deleteById(Partnership partnership) => ObservableFuture(
-              _partnershipRepo.deleteById(partnership).then((value) => value))
-          .catchError((e) {
-        errorMsg = "${e.message}";
-      }, test: (e) => e is HttpException).catchError((e) {
-        errorMsg = "$e";
-      }, test: (e) => e is Exception);
+      _partnershipRepo.deleteById(partnership).then((value) => value));
 
   get getActivePartnerships => activePartnerships.addAll(
       partnerships.where((element) => element.status.contains('Ativo')));

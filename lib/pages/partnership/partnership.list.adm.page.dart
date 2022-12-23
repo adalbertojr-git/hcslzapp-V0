@@ -10,6 +10,7 @@ import 'package:hcslzapp/models/partnership.dart';
 import 'package:hcslzapp/pages/partnership/partnership.add.page.dart';
 import '../../components/my.appbar.dart';
 import '../../components/my.bottom.appbar.dart';
+import '../../http/http.exception.dart';
 
 const String _labelUnknown =
     'Houve um erro desconhecido ao executar a transação.';
@@ -37,11 +38,6 @@ class PartnershipListAdmPage extends StatelessWidget {
                   return CenteredMessage(
                       title: _title, message: snapshot.error.toString());
                 } else {
-                  if (snapshot.data == null)
-                    return CenteredMessage(
-                      title: _title,
-                      message: _controller.errorMsg,
-                    );
                   if ((snapshot.data?.length)! > 0) {
                     _controller.init();
                     _controller.partnerships.addAll(snapshot.data!);
@@ -78,75 +74,75 @@ class PartnershipListAdmPage extends StatelessWidget {
       );
 
   _widgets(BuildContext context) => Column(
-    children: [
-      SizedBox(
-        height: 10.0,
-      ),
-      Expanded(
-        child: Observer(
-          builder: (_) => ListView.separated(
-            padding: EdgeInsets.symmetric(horizontal: 15),
-            shrinkWrap: true,
-            itemCount: _controller.partnerships.length,
-            itemBuilder: (_, int i) {
-              return Container(
-                decoration: BoxDecoration(
-                  color: Colors.deepOrange[300],
-                  shape: BoxShape.rectangle,
-                  borderRadius: BorderRadius.circular(20.0),
-                ),
-                child: ListTile(
-                    title: Text(
-                      _controller.partnerships[i].partner,
-                      style: TextStyle(
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
-                    subtitle: Text(
-                        'Status: ' + _controller.partnerships[i].status),
-                    leading: CircleAvatar(
-                      child: Icon(Icons.emoji_people),
-                      backgroundColor: Colors.white,
-                    ),
-                    trailing: Wrap(
-                      spacing: 10,
-                      children: [
-                        GestureDetector(
-                          child: Icon(
-                            Icons.delete,
-                          ),
-                          onTap: () {
-                            _delete(context, i);
-                          },
-                        ),
-                        GestureDetector(
-                            child: Icon(Icons.arrow_forward),
-                            onTap: () {
-                              final Future future = Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (context) =>
-                                        PartnershipAddPage(
-                                            _controller.partnerships[i])),
-                              );
-                              future.then((partnership) {
-                                if (partnership != null) {
-                                  _controller.partnerships.removeAt(i);
-                                  _controller.partnerships
-                                      .insert(i, partnership);
-                                }
-                              });
-                            }),
-                      ],
-                    )),
-              );
-            },
-            separatorBuilder: (_, int index) => const Divider(),
+        children: [
+          SizedBox(
+            height: 10.0,
           ),
-        ),
-      ),
-    ],
-  );
+          Expanded(
+            child: Observer(
+              builder: (_) => ListView.separated(
+                padding: EdgeInsets.symmetric(horizontal: 15),
+                shrinkWrap: true,
+                itemCount: _controller.partnerships.length,
+                itemBuilder: (_, int i) {
+                  return Container(
+                    decoration: BoxDecoration(
+                      color: Colors.deepOrange[300],
+                      shape: BoxShape.rectangle,
+                      borderRadius: BorderRadius.circular(20.0),
+                    ),
+                    child: ListTile(
+                        title: Text(
+                          _controller.partnerships[i].partner,
+                          style: TextStyle(
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                        subtitle: Text(
+                            'Status: ' + _controller.partnerships[i].status),
+                        leading: CircleAvatar(
+                          child: Icon(Icons.emoji_people),
+                          backgroundColor: Colors.white,
+                        ),
+                        trailing: Wrap(
+                          spacing: 10,
+                          children: [
+                            GestureDetector(
+                              child: Icon(
+                                Icons.delete,
+                              ),
+                              onTap: () {
+                                _delete(context, i);
+                              },
+                            ),
+                            GestureDetector(
+                                child: Icon(Icons.arrow_forward),
+                                onTap: () {
+                                  final Future future = Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (context) =>
+                                            PartnershipAddPage(
+                                                _controller.partnerships[i])),
+                                  );
+                                  future.then((partnership) {
+                                    if (partnership != null) {
+                                      _controller.partnerships.removeAt(i);
+                                      _controller.partnerships
+                                          .insert(i, partnership);
+                                    }
+                                  });
+                                }),
+                          ],
+                        )),
+                  );
+                },
+                separatorBuilder: (_, int index) => const Divider(),
+              ),
+            ),
+          ),
+        ],
+      );
 
   _delete(BuildContext context, int i) async {
     var response = await showDialog(
@@ -155,14 +151,17 @@ class PartnershipListAdmPage extends StatelessWidget {
           return TransactionAuthDialog(msg: 'Confirma a exclusão?');
         });
     if (response == true) {
-      _controller.deleteById(_controller.partnerships[i]).then((value) {
-        if (value != null) {
-          AsukaSnackbar.success('Parceiro excluído com sucesso').show();
-          _controller.partnerships.removeAt(i);
-        } else {
-          AsukaSnackbar.alert(_controller.errorMsg).show();
-        }
-      });
+      try {
+        _controller.deleteById(_controller.partnerships[i]);
+        AsukaSnackbar.success('Parceiro excluído com sucesso').show();
+        _controller.partnerships.removeAt(i);
+      } on HttpException catch (e) {
+        AsukaSnackbar.alert(e.message.toString()).show();
+      } on Exception catch (e) {
+        AsukaSnackbar.alert(e.toString()).show();
+      } catch (e) {
+        AsukaSnackbar.alert(e.toString()).show();
+      } finally {}
     }
   }
 }

@@ -1,5 +1,4 @@
 import 'dart:async';
-import 'dart:io';
 import 'package:hcslzapp/models/payment.dart';
 import 'package:hcslzapp/models/template.dart';
 import 'package:hcslzapp/repositories/payment.repo.dart';
@@ -24,9 +23,6 @@ abstract class PaymentAssociatedControllerBase with Store {
   PaymentRepo _paymentRepo = PaymentRepo();
 
   @observable
-  String errorMsg = "";
-
-  @observable
   Future<List<Payment>> future = Future<List<Payment>>.value([]);
 
   @observable
@@ -41,12 +37,7 @@ abstract class PaymentAssociatedControllerBase with Store {
 
   @action
   Future<List<Payment>> findByAssociatedIdToList(int id) => ObservableFuture(
-              _paymentRepo.findByAssociatedIdToList(id).then((value) => value))
-          .catchError((e) {
-        errorMsg = "${e.message}";
-      }, test: (e) => e is HttpException).catchError((e) {
-        errorMsg = "$e";
-      }, test: (e) => e is Exception);
+              _paymentRepo.findByAssociatedIdToList(id).then((value) => value));
 
   @action
   Future<List<Payment>> getFuture(int id) =>
@@ -54,12 +45,7 @@ abstract class PaymentAssociatedControllerBase with Store {
 
   @action
   Future deleteById(Payment payment) =>
-      ObservableFuture(_paymentRepo.deleteById(payment).then((value) => value))
-          .catchError((e) {
-        errorMsg = "${e.message}";
-      }, test: (e) => e is HttpException).catchError((e) {
-        errorMsg = "$e";
-      }, test: (e) => e is Exception);
+      ObservableFuture(_paymentRepo.deleteById(payment).then((value) => value));
 
   List<String> loadYears() {
     List<String> years = List.filled(0, '', growable: true);

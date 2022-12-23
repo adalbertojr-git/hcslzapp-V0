@@ -106,18 +106,11 @@ class _EventCalendarPageState extends State<EventCalendarPage> {
                     return CenteredMessage(
                         title: _title, message: snapshot.error.toString());
                   } else {
-                    if (snapshot.data == null)
-                      return CenteredMessage(
-                        title: _title,
-                        message: _controller.errorMsg,
-                      );
-
                     _controller.init();
                     _controller.events =
                         _controller.convertJsonToDateMap(snapshot.data!);
                     _controller.selectedEvents =
                         ValueNotifier(_getEventsForDay(_selectedDay!));
-
                     return _widgets();
                   }
               } //switch (snapshot.connectionState)
@@ -205,7 +198,6 @@ class _EventCalendarPageState extends State<EventCalendarPage> {
 
                 }
               ),*/
-
             ),
           ),
           const SizedBox(height: 5.0),
@@ -336,14 +328,17 @@ class _EventCalendarPageState extends State<EventCalendarPage> {
           return TransactionAuthDialog(msg: 'Confirma a exclusão?');
         });
     if (response == true) {
-      _controller.deleteById(event).then((value) {
-        if (value != null) {
-          AsukaSnackbar.success('Evento excluído com sucesso').show();
-          _loadAllEvents();
-        } else {
-          AsukaSnackbar.alert(_controller.errorMsg).show();
-        }
-      });
+      try {
+        _controller.deleteById(event);
+        AsukaSnackbar.success('Evento excluído com sucesso').show();
+        _loadAllEvents();
+      } on HttpException catch (e) {
+        AsukaSnackbar.alert(e.message.toString()).show();
+      } on Exception catch (e) {
+        AsukaSnackbar.alert(e.toString()).show();
+      } catch (e) {
+        AsukaSnackbar.alert(e.toString()).show();
+      } finally {}
     }
   }
 }

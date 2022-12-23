@@ -1,7 +1,6 @@
 import 'dart:async';
 import 'dart:collection';
 import 'dart:convert';
-import 'dart:io';
 import 'package:flutter/cupertino.dart';
 import 'package:hcslzapp/models/event.dart';
 import 'package:hcslzapp/repositories/event.repo.dart';
@@ -15,9 +14,6 @@ class EventCalendarController = EventCalendarControllerBase
 abstract class EventCalendarControllerBase with Store {
   @observable
   EventRepo _eventRepo = EventRepo();
-
-  @observable
-  String errorMsg = '';
 
   @observable
   bool isHidedButton = true;
@@ -40,23 +36,13 @@ abstract class EventCalendarControllerBase with Store {
 
   @action
   Future<String> findAll() =>
-      ObservableFuture(_eventRepo.findAll().then((value) => value)).catchError(
-          (e) {
-        errorMsg = "${e.message}";
-      }, test: (e) => e is HttpException).catchError((e) {
-        errorMsg = "$e";
-      }, test: (e) => e is Exception);
+      ObservableFuture(_eventRepo.findAll().then((value) => value));
 
   Future<String> getFuture() => future = findAll();
 
   @action
   Future deleteById(Event event) =>
-      ObservableFuture(_eventRepo.deleteById(event).then((value) => value))
-          .catchError((e) {
-        errorMsg = "${e.message}";
-      }, test: (e) => e is HttpException).catchError((e) {
-        errorMsg = "$e";
-      }, test: (e) => e is Exception);
+      ObservableFuture(_eventRepo.deleteById(event).then((value) => value));
 
   LinkedHashMap<DateTime, List<Event>> convertJsonToDateMap(String jsonSource) {
     var json = jsonDecode(jsonSource);

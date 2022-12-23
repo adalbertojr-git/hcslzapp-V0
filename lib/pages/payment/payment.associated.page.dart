@@ -11,6 +11,7 @@ import 'package:hcslzapp/models/payment.dart';
 import 'package:hcslzapp/pages/payment/payment.add.page.dart';
 import '../../components/my.appbar.dart';
 import '../../components/my.bottom.appbar.dart';
+import '../../http/http.exception.dart';
 import '../../models/associated.dart';
 import '../../models/template.dart';
 
@@ -24,9 +25,10 @@ class PaymentAssociatedPage extends StatefulWidget {
   final Associated _associated;
 
   const PaymentAssociatedPage(
-      this._selectedProfile,
-      this._associated,
-      );
+    this._selectedProfile,
+    this._associated,
+  );
+
   @override
   _PaymentAssociatedPageState createState() => _PaymentAssociatedPageState();
 }
@@ -61,11 +63,6 @@ class _PaymentAssociatedPageState extends State<PaymentAssociatedPage> {
                   return CenteredMessage(
                       title: _title, message: snapshot.error.toString());
                 } else {
-                  if (snapshot.data == null)
-                    return CenteredMessage(
-                      title: _title,
-                      message: _controller.errorMsg,
-                    );
                   if ((snapshot.data?.length)! > 0) {
                     _controller.init();
                     _controller.payments.addAll(snapshot.data!);
@@ -88,9 +85,9 @@ class _PaymentAssociatedPageState extends State<PaymentAssociatedPage> {
             );
           },
         ),
-    floatingActionButtonLocation: widget._selectedProfile == ADMIN
-        ? FloatingActionButtonLocation.centerDocked
-        : null,
+        floatingActionButtonLocation: widget._selectedProfile == ADMIN
+            ? FloatingActionButtonLocation.centerDocked
+            : null,
         floatingActionButton: widget._selectedProfile == ADMIN
             ? Observer(
                 builder: (_) => _controller.isHidedButton
@@ -126,54 +123,82 @@ class _PaymentAssociatedPageState extends State<PaymentAssociatedPage> {
   }
 
   _widgets() => Column(
-    children: [
-      SizedBox(height: 10),
-      Expanded(
-        child: Observer(
-          builder: (_) => ListView.separated(
-            padding: EdgeInsets.symmetric(horizontal: 15),
-            shrinkWrap: true,
-            itemCount: _controller.payments.length,
-            itemBuilder: (_, int i) {
-              return Container(
-                decoration: BoxDecoration(
-                  color: Colors.deepOrange[300],
-                  shape: BoxShape.rectangle,
-                  borderRadius: BorderRadius.circular(20.0),
-                ),
-                child: ListTile(
-                  title: Text(
-                    'Ano: ' + _controller.payments[i].year,
-                    style: TextStyle(
-                      fontWeight: FontWeight.bold,
+        children: [
+          SizedBox(height: 10),
+          Expanded(
+            child: Observer(
+              builder: (_) => ListView.separated(
+                padding: EdgeInsets.symmetric(horizontal: 15),
+                shrinkWrap: true,
+                itemCount: _controller.payments.length,
+                itemBuilder: (_, int i) {
+                  return Container(
+                    decoration: BoxDecoration(
+                      color: Colors.deepOrange[300],
+                      shape: BoxShape.rectangle,
+                      borderRadius: BorderRadius.circular(20.0),
                     ),
-                  ),
-                  subtitle: Text('Total pago: R\$ ' +
-                      _controller
-                          .getTotal(_controller.payments[i].year)
-                          .toString()),
-                  leading: CircleAvatar(
-                    child: Icon(Icons.calendar_today),
-                    backgroundColor: Colors.white,
-                  ),
-                  trailing: widget._selectedProfile == ADMIN
-                      ? Wrap(
-                          spacing: 10, // space between two icons
-                          children: <Widget>[
-                            GestureDetector(
-                              child: Icon(
-                                Icons.delete,
-                              ),
-                              onTap: () {
-                                _delete(i);
-                              },
-                            ),
-                            GestureDetector(
+                    child: ListTile(
+                      title: Text(
+                        'Ano: ' + _controller.payments[i].year,
+                        style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                      subtitle: Text('Total pago: R\$ ' +
+                          _controller
+                              .getTotal(_controller.payments[i].year)
+                              .toString()),
+                      leading: CircleAvatar(
+                        child: Icon(Icons.calendar_today),
+                        backgroundColor: Colors.white,
+                      ),
+                      trailing: widget._selectedProfile == ADMIN
+                          ? Wrap(
+                              spacing: 10, // space between two icons
+                              children: <Widget>[
+                                GestureDetector(
+                                  child: Icon(
+                                    Icons.delete,
+                                  ),
+                                  onTap: () {
+                                    _delete(i);
+                                  },
+                                ),
+                                GestureDetector(
+                                  child: Icon(
+                                    Icons.arrow_forward,
+                                  ),
+                                  onTap: () {
+                                    final Future future = Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                        builder: (context) => PaymentAddPage(
+                                          widget._selectedProfile,
+                                          _controller.payments[i],
+                                          _controller.loadYears(),
+                                        ),
+                                      ),
+                                    );
+                                    future.then(
+                                      (payment) {
+                                        if (payment != null) {
+                                          _controller.payments.removeAt(i);
+                                          _controller.payments
+                                              .insert(i, payment);
+                                        }
+                                      },
+                                    );
+                                  },
+                                ),
+                              ],
+                            )
+                          : GestureDetector(
                               child: Icon(
                                 Icons.arrow_forward,
                               ),
                               onTap: () {
-                                final Future future = Navigator.push(
+                                Navigator.push(
                                   context,
                                   MaterialPageRoute(
                                     builder: (context) => PaymentAddPage(
@@ -183,45 +208,17 @@ class _PaymentAssociatedPageState extends State<PaymentAssociatedPage> {
                                     ),
                                   ),
                                 );
-                                future.then(
-                                  (payment) {
-                                    if (payment != null) {
-                                      _controller.payments.removeAt(i);
-                                      _controller.payments
-                                          .insert(i, payment);
-                                    }
-                                  },
-                                );
                               },
                             ),
-                          ],
-                        )
-                      : GestureDetector(
-                          child: Icon(
-                            Icons.arrow_forward,
-                          ),
-                          onTap: () {
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                builder: (context) => PaymentAddPage(
-                                  widget._selectedProfile,
-                                  _controller.payments[i],
-                                  _controller.loadYears(),
-                                ),
-                              ),
-                            );
-                          },
-                        ),
-                ),
-              );
-            },
-            separatorBuilder: (_, int index) => const Divider(),
+                    ),
+                  );
+                },
+                separatorBuilder: (_, int index) => const Divider(),
+              ),
+            ),
           ),
-        ),
-      ),
-    ],
-  );
+        ],
+      );
 
   _delete(int i) async {
     var response = await showDialog(
@@ -230,14 +227,17 @@ class _PaymentAssociatedPageState extends State<PaymentAssociatedPage> {
           return TransactionAuthDialog(msg: 'Confirma a exclusão?');
         });
     if (response == true) {
-      _controller.deleteById(_controller.payments[i]).then((value) {
-        if (value != null) {
-          AsukaSnackbar.success('Mensalidade excluída com sucesso').show();
-          _controller.payments.removeAt(i);
-        } else {
-          AsukaSnackbar.alert(_controller.errorMsg).show();
-        }
-      });
+      try {
+        _controller.deleteById(_controller.payments[i]);
+        AsukaSnackbar.success('Mensalidade excluída com sucesso').show();
+        _controller.payments.removeAt(i);
+      } on HttpException catch (e) {
+        AsukaSnackbar.alert(e.message.toString()).show();
+      } on Exception catch (e) {
+        AsukaSnackbar.alert(e.toString()).show();
+      } catch (e) {
+        AsukaSnackbar.alert(e.toString()).show();
+      } finally {}
     }
   }
 }
