@@ -1,5 +1,3 @@
-import 'dart:io';
-
 import 'package:asuka/snackbars/asuka_snack_bar.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
@@ -10,6 +8,7 @@ import '../../common/token.details.dart';
 import '../../components/degradee.background.dart';
 import '../../components/my.text.form.field.dart';
 import '../../controllers/login.controller.dart';
+import '../../http/http.exception.dart';
 import '../access.request/access.request.add.page.dart';
 import '../dashboard/dashboard.page.dart';
 import '../password/forgot.password.page.dart';
@@ -220,41 +219,23 @@ class _MyCustomLoginUIState extends State<MyCustomLoginUI>
   _login() async {
     try {
       final value = await _controllerLogin.authenticate();
-      if (value == null) {
-        AsukaSnackbar.alert(_controllerLogin.errorMsg).show();
-      } else {
-        print('ok');
-      }
-    } catch (err) {
-      if (err is HttpException) {
-        AsukaSnackbar.alert(err.message).show();
-      } else {
-        AsukaSnackbar.alert(err.toString()).show();
-      }
-    }
-  }
-
-  _login2() async {
-    if (_controllerLogin.hasErrors) {
-      AsukaSnackbar.alert('Preencha os campos ogrigatórios').show();
-    } else {
-      AsukaSnackbar.message('Carregando...').show();
-      var value = await _controllerLogin.authenticate();
-      if (value == null) {
-        AsukaSnackbar.alert(_controllerLogin.errorMsg).show();
-      } else {
-        debugPrint(value.token);
-        loadTokenSingleton(value);
-        TokenDetails _tokenDetails = TokenDetails(value.token);
-        Navigator.pushReplacement(
-          context,
-          MaterialPageRoute(
-            builder: (context) => DashboardPage(
-              _tokenDetails.associatedId(),
-            ),
+      debugPrint(value.token);
+      loadTokenSingleton(value);
+      TokenDetails _tokenDetails = TokenDetails(value.token);
+      Navigator.pushReplacement(
+        context,
+        MaterialPageRoute(
+          builder: (context) => DashboardPage(
+            _tokenDetails.associatedId(),
           ),
-        );
-      }
+        ),
+      );
+    } on HttpException catch (e) {
+      AsukaSnackbar.alert(e.message.toString()).show();
+    } on Exception catch (e) {
+      AsukaSnackbar.alert(e.toString()).show();
+    } catch (e) {
+      AsukaSnackbar.alert(e.toString()).show();
     }
   }
 }

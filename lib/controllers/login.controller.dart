@@ -1,6 +1,5 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
-import 'package:hcslzapp/http/http.exception.dart';
 import '../models/token.dart';
 import '../repositories/login.repo.dart';
 import 'package:mobx/mobx.dart';
