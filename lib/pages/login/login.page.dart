@@ -193,12 +193,11 @@ class _MyCustomLoginUIState extends State<MyCustomLoginUI>
                                 width: _width * .2,
                                 alignment: Alignment.center,
                                 decoration: BoxDecoration(
-                                  color: Color(0xffA9DED8),
                                   shape: BoxShape.circle,
                                 ),
                                 child: Icon(
                                   Icons.login_sharp,
-                                  size: 40,
+                                  size: 60,
                                 ),
                               ),
                             ),
