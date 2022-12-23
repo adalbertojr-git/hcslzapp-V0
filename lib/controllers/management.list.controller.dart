@@ -1,5 +1,4 @@
 import 'dart:async';
-import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:hcslzapp/common/associated.profiles.dart';
 import 'package:hcslzapp/models/associated.dart';
@@ -34,9 +33,6 @@ abstract class ManagementListControllerBase with Store {
   ManagementRepo _managementRepo = ManagementRepo();
 
   @observable
-  String errorMsg = '';
-
-  @observable
   Future<List<Associated>> future = Future<List<Associated>>.value([]);
 
   @observable
@@ -50,24 +46,14 @@ abstract class ManagementListControllerBase with Store {
   bool setButtonVisibilty() => isHidedButton = !isHidedButton;
 
   @action
-  Future<List<Associated>> findAllAdminToList() =>
-      ObservableFuture(_associatedRepo.findAllAdminToList().then((value) => value))
-          .catchError((e) {
-        errorMsg = "${e.message}";
-      }, test: (e) => e is HttpException).catchError((e) {
-        errorMsg = "$e";
-      }, test: (e) => e is Exception);
+  Future<List<Associated>> findAllAdminToList() => ObservableFuture(
+      _associatedRepo.findAllAdminToList().then((value) => value));
 
   Future<List<Associated>> getFuture() => future = findAllAdminToList();
 
   @action
   Future deleteById(Associated associated) => ObservableFuture(
-              _managementRepo.deleteById(associated).then((value) => value))
-          .catchError((e) {
-        errorMsg = "${e.message}";
-      }, test: (e) => e is HttpException).catchError((e) {
-        errorMsg = "$e";
-      }, test: (e) => e is Exception);
+      _managementRepo.deleteById(associated).then((value) => value));
 
   loadAdmins(List<Associated> list) {
     for (Associated associated in list) {

@@ -11,6 +11,7 @@ import 'package:hcslzapp/models/dependent.dart';
 import 'package:hcslzapp/models/motorcycle.dart';
 import '../../components/my.appbar.dart';
 import '../../components/my.bottom.appbar.dart';
+import '../../http/http.exception.dart';
 import 'management.add.page.dart';
 
 const String _labelNotExists =
@@ -59,11 +60,6 @@ class ManagementListPageState extends State<ManagementListPage> {
                     return CenteredMessage(
                         title: _title, message: snapshot.error.toString());
                   } else {
-                    if (snapshot.data == null)
-                      return CenteredMessage(
-                        title: _title,
-                        message: _controller.errorMsg,
-                      );
                     if ((snapshot.data?.length)! > 0) {
                       _controller.init();
                       //_controller.loadAdmins(snapshot.data!);
@@ -135,61 +131,61 @@ class ManagementListPageState extends State<ManagementListPage> {
   }
 
   _widgets() => Column(
-    children: [
-      SizedBox(height: 10),
-      Expanded(
-        child: Observer(
-          builder: (_) => ListView.separated(
-            padding: EdgeInsets.symmetric(horizontal: 15),
-            shrinkWrap: true,
-            itemCount: _controller.associateds.length,
-            itemBuilder: (_, int i) {
-              return Container(
-                decoration: BoxDecoration(
-                  color: Colors.deepOrange[300],
-                  shape: BoxShape.rectangle,
-                  borderRadius: BorderRadius.circular(20.0),
-                ),
-                child: ListTile(
-                  title: Text(
-                    _controller.associateds[i].name,
-                    style: TextStyle(
-                      fontWeight: FontWeight.bold,
+        children: [
+          SizedBox(height: 10),
+          Expanded(
+            child: Observer(
+              builder: (_) => ListView.separated(
+                padding: EdgeInsets.symmetric(horizontal: 15),
+                shrinkWrap: true,
+                itemCount: _controller.associateds.length,
+                itemBuilder: (_, int i) {
+                  return Container(
+                    decoration: BoxDecoration(
+                      color: Colors.deepOrange[300],
+                      shape: BoxShape.rectangle,
+                      borderRadius: BorderRadius.circular(20.0),
                     ),
-                  ),
-                  subtitle: Text('Tel.: ' +
-                      (_controller.associateds[i].phone != null
-                          ? _controller.associateds[i].phone
-                          : 'Não informado') +
-                      '\n' +
-                      'Status: ' +
-                      _controller.associateds[i].status),
-                  leading: CircleAvatar(
-                    child: Icon(Icons.admin_panel_settings),
-                    backgroundColor: Colors.white,
-                  ),
-                  trailing: Wrap(
-                    spacing: 10, // space between two icons
-                    children: <Widget>[
-                      GestureDetector(
-                        child: Icon(
-                          Icons.delete,
+                    child: ListTile(
+                      title: Text(
+                        _controller.associateds[i].name,
+                        style: TextStyle(
+                          fontWeight: FontWeight.bold,
                         ),
-                        onTap: () {
-                          _delete(_controller.associateds[i]);
-                        },
                       ),
-                    ],
-                  ),
-                ),
-              );
-            },
-            separatorBuilder: (_, int index) => const Divider(),
+                      subtitle: Text('Tel.: ' +
+                          (_controller.associateds[i].phone != null
+                              ? _controller.associateds[i].phone
+                              : 'Não informado') +
+                          '\n' +
+                          'Status: ' +
+                          _controller.associateds[i].status),
+                      leading: CircleAvatar(
+                        child: Icon(Icons.admin_panel_settings),
+                        backgroundColor: Colors.white,
+                      ),
+                      trailing: Wrap(
+                        spacing: 10, // space between two icons
+                        children: <Widget>[
+                          GestureDetector(
+                            child: Icon(
+                              Icons.delete,
+                            ),
+                            onTap: () {
+                              _delete(_controller.associateds[i]);
+                            },
+                          ),
+                        ],
+                      ),
+                    ),
+                  );
+                },
+                separatorBuilder: (_, int index) => const Divider(),
+              ),
+            ),
           ),
-        ),
-      ),
-    ],
-  );
+        ],
+      );
 
   _delete(Associated associated) async {
     var response = await showDialog(
@@ -203,16 +199,19 @@ class ManagementListPageState extends State<ManagementListPage> {
                 'Deve haver pelo menos um Administrador cadastrado.')
             .show();
       } else {
-        _controller.deleteById(associated).then((value) {
-          if (value != null) {
-            AsukaSnackbar.success('Administrador excluído com sucesso').show();
-            _controller.associateds.removeWhere(
-              (item) => item.id == associated.id,
-            );
-          } else {
-            AsukaSnackbar.alert(_controller.errorMsg).show();
-          }
-        });
+        try {
+          _controller.deleteById(associated);
+          AsukaSnackbar.success('Administrador excluído com sucesso').show();
+          _controller.associateds.removeWhere(
+            (item) => item.id == associated.id,
+          );
+        } on HttpException catch (e) {
+          AsukaSnackbar.alert(e.message.toString()).show();
+        } on Exception catch (e) {
+          AsukaSnackbar.alert(e.toString()).show();
+        } catch (e) {
+          AsukaSnackbar.alert(e.toString()).show();
+        } finally {}
       }
     }
   }
