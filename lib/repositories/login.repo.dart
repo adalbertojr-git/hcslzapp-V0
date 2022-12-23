@@ -9,7 +9,6 @@ const String _authUrl = '/authenticate';
 
 class LoginRepo {
   Future<Token> authenticate(String username, String password) async {
-    String errorMsg = '';
     try {
       Map params = {"username": username, "password": password};
       final Response response = await client
@@ -30,13 +29,8 @@ class LoginRepo {
       } else {
         throw HttpException(getMessage(response.statusCode));
       }
-    } on Exception catch (e) {
-      print(e);
-      errorMsg = "$e";
-    } catch (e) {
-      print(e);
-      errorMsg = "$e";
+    } catch (_) {
+      rethrow;
     }
-    return Future.error(errorMsg);
   }
 }

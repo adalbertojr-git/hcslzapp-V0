@@ -32,24 +32,12 @@ abstract class LoginControllerBase with Store {
   }
 
   Future<Token> authenticate() {
-    try {
-      return ObservableFuture(_loginRepo
-          .authenticate(
-            userLoginCtrl.text,
-            pswLoginCtrl.text,
-          )
-          .then((value) => value));
-    } on HttpException catch (e) {
-      print(e);
-      errorMsg = "$e";
-    } on Exception catch (e) {
-      print(e);
-      errorMsg = "$e";
-    } catch (e) {
-      print(e);
-      errorMsg = "$e";
-    }
-    return Future.error(errorMsg);
+    return ObservableFuture(_loginRepo
+        .authenticate(
+          userLoginCtrl.text,
+          pswLoginCtrl.text,
+        )
+        .then((value) => value));
   }
 
   bool get hasErrors => hasErrorUser || hasErrorPassword;

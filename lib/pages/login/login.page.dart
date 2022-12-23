@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:asuka/snackbars/asuka_snack_bar.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
@@ -216,6 +218,23 @@ class _MyCustomLoginUIState extends State<MyCustomLoginUI>
   }
 
   _login() async {
+    try {
+      final value = await _controllerLogin.authenticate();
+      if (value == null) {
+        AsukaSnackbar.alert(_controllerLogin.errorMsg).show();
+      } else {
+        print('ok');
+      }
+    } catch (err) {
+      if (err is HttpException) {
+        AsukaSnackbar.alert(err.message).show();
+      } else {
+        AsukaSnackbar.alert(err.toString()).show();
+      }
+    }
+  }
+
+  _login2() async {
     if (_controllerLogin.hasErrors) {
       AsukaSnackbar.alert('Preencha os campos ogrigatórios').show();
     } else {
