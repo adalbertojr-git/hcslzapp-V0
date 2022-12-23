@@ -81,22 +81,6 @@ mixin _$DtcCodeListController on DtcCodeListControllerBase, Store {
     });
   }
 
-  late final _$errorMsgAtom =
-      Atom(name: 'DtcCodeListControllerBase.errorMsg', context: context);
-
-  @override
-  String get errorMsg {
-    _$errorMsgAtom.reportRead();
-    return super.errorMsg;
-  }
-
-  @override
-  set errorMsg(String value) {
-    _$errorMsgAtom.reportWrite(value, super.errorMsg, () {
-      super.errorMsg = value;
-    });
-  }
-
   late final _$futureAtom =
       Atom(name: 'DtcCodeListControllerBase.future', context: context);
 
@@ -171,7 +155,6 @@ mixin _$DtcCodeListController on DtcCodeListControllerBase, Store {
 codeCtrl: ${codeCtrl},
 isHidedButton: ${isHidedButton},
 codes: ${codes},
-errorMsg: ${errorMsg},
 future: ${future},
 filter: ${filter},
 listFiltered: ${listFiltered}

@@ -10,6 +10,7 @@ import 'package:hcslzapp/controllers/item.model.dart';
 import 'package:hcslzapp/models/access.request.dart';
 import '../../components/my.appbar.dart';
 import '../../components/my.bottom.appbar.dart';
+import '../../http/http.exception.dart';
 
 const String _labelNotExists =
     'Não existem requisições de acesso a serem aprovadas.';
@@ -59,11 +60,6 @@ class AccessRequestListPageState extends State<AccessRequestListPage> {
                       message: snapshot.error.toString(),
                     );
                   } else {
-                    if (snapshot.data == null)
-                      return CenteredMessage(
-                        title: _title,
-                        message: _controller.errorMsg,
-                      );
                     if ((snapshot.data?.length)! > 0) {
                       _controller.init();
                       _controller.loadRequests((snapshot.data)!);
@@ -112,16 +108,18 @@ class AccessRequestListPageState extends State<AccessRequestListPage> {
       );
 
   _allow() {
-    _controller.allow().then(
-      (value) {
-        if (value != null) {
-          AsukaSnackbar.success('Requisições de acesso liberadas com sucesso').show();
-          Navigator.of(context).pop();
-        } else {
-          AsukaSnackbar.alert(_controller.errorMsg).show();
-        }
-      },
-    );
+    try {
+      _controller.allow();
+      AsukaSnackbar.success('Requisições de acesso liberadas com sucesso')
+          .show();
+      Navigator.of(context).pop();
+    } on HttpException catch (e) {
+      AsukaSnackbar.alert(e.message.toString()).show();
+    } on Exception catch (e) {
+      AsukaSnackbar.alert(e.toString()).show();
+    } catch (e) {
+      AsukaSnackbar.alert(e.toString()).show();
+    } finally {}
   }
 }
 
@@ -186,22 +184,26 @@ class CheckboxWidget extends StatelessWidget {
           return TransactionAuthDialog(msg: 'Confirma a exclusão?');
         });
     if (response == true) {
-      controller.deleteById(loadAccessRequest(item)).then((value) {
-        if (value != null) {
-          AsukaSnackbar.success('Requisição de acesso excluída com sucesso').show();
-          controller.listItems.remove(item);
-        } else {
-          AsukaSnackbar.alert(controller.errorMsg).show();
-        }
-      });
+      try {
+        controller.deleteById(loadAccessRequest(item));
+        AsukaSnackbar.success('Requisição de acesso excluída com sucesso')
+            .show();
+        controller.listItems.remove(item);
+      } on HttpException catch (e) {
+        AsukaSnackbar.alert(e.message.toString()).show();
+      } on Exception catch (e) {
+        AsukaSnackbar.alert(e.toString()).show();
+      } catch (e) {
+        AsukaSnackbar.alert(e.toString()).show();
+      } finally {}
     }
   }
 
   AccessRequest loadAccessRequest(ItemModel item) => AccessRequest(
-    id: item.id,
-    name: item.name!,
-    user: item.user!,
-    email: item.email!,
-    password: item.password!,
-  );
+        id: item.id,
+        name: item.name!,
+        user: item.user!,
+        email: item.email!,
+        password: item.password!,
+      );
 }

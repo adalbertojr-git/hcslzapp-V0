@@ -1,10 +1,9 @@
 import 'dart:async';
-import 'dart:io';
 import 'package:flutter/material.dart';
+import 'package:http/http.dart';
 import '../models/access.request.dart';
 import '../repositories/access.request.repo.dart';
 import 'package:mobx/mobx.dart';
-
 import 'item.model.dart';
 
 part 'access.request.controller.g.dart';
@@ -55,9 +54,6 @@ abstract class AccessRequestControllerBase with Store {
   var ids = ObservableList<int>();
 
   @observable
-  late String errorMsg = '';
-
-  @observable
   Future<List<AccessRequest>> future = Future<List<AccessRequest>>.value([]);
 
   @observable
@@ -76,39 +72,20 @@ abstract class AccessRequestControllerBase with Store {
 
   @action
   Future<List<AccessRequest>> findAll() => accessRequestListFuture =
-          ObservableFuture(_accessRequestRepo.findAll().then((value) => value))
-              .catchError((e) {
-        errorMsg = "${e.message}";
-      }, test: (e) => e is HttpException).catchError((e) {
-        errorMsg = "$e";
-      }, test: (e) => e is Exception);
+      ObservableFuture(_accessRequestRepo.findAll().then((value) => value));
 
   @action
-  Future save() => accessRequestPosst = ObservableFuture(
-              _accessRequestRepo.save(_setValues()).then((value) => value))
-          .catchError((e) {
-        errorMsg = "${e.message}";
-      }, test: (e) => e is HttpException).catchError((e) {
-        errorMsg = "$e";
-      }, test: (e) => e is Exception);
+  Future<AccessRequest> save() => accessRequestPosst = ObservableFuture(
+      _accessRequestRepo.save(_setValues()).then((value) => value));
 
   @action
-  Future allow() => ObservableFuture(_accessRequestRepo
-          .allow(List<AccessRequest>.from(accessRequests))
-          .then((value) => value)).catchError((e) {
-        errorMsg = "${e.message}";
-      }, test: (e) => e is HttpException).catchError((e) {
-        errorMsg = "$e";
-      }, test: (e) => e is Exception);
+  Future<Response> allow() => ObservableFuture(_accessRequestRepo
+      .allow(List<AccessRequest>.from(accessRequests))
+      .then((value) => value));
 
   @action
-  Future deleteById(AccessRequest accessRequest) =>
-      ObservableFuture(_accessRequestRepo.deleteById(accessRequest).then((value) => value))
-          .catchError((e) {
-        errorMsg = "${e.message}";
-      }, test: (e) => e is HttpException).catchError((e) {
-        errorMsg = "$e";
-      }, test: (e) => e is Exception);
+  Future<Response> deleteById(AccessRequest accessRequest) => ObservableFuture(
+      _accessRequestRepo.deleteById(accessRequest).then((value) => value));
 
   @action
   bool setButtonVisibilty() => isHidedButton = !isHidedButton;

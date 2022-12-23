@@ -106,22 +106,6 @@ mixin _$PartnershipListController on PartnershipListControllerBase, Store {
     });
   }
 
-  late final _$errorMsgAtom =
-      Atom(name: 'PartnershipListControllerBase.errorMsg', context: context);
-
-  @override
-  String get errorMsg {
-    _$errorMsgAtom.reportRead();
-    return super.errorMsg;
-  }
-
-  @override
-  set errorMsg(String value) {
-    _$errorMsgAtom.reportWrite(value, super.errorMsg, () {
-      super.errorMsg = value;
-    });
-  }
-
   late final _$pageControllerAtom = Atom(
       name: 'PartnershipListControllerBase.pageController', context: context);
 
@@ -253,7 +237,6 @@ partnership: ${partnership},
 partnerships: ${partnerships},
 activePartnerships: ${activePartnerships},
 future: ${future},
-errorMsg: ${errorMsg},
 pageController: ${pageController},
 currentPage: ${currentPage},
 page: ${page},

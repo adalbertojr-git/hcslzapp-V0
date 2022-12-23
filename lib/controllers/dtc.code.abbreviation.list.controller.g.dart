@@ -86,22 +86,6 @@ mixin _$DtcCodeAbbreviationListController
     });
   }
 
-  late final _$errorMsgAtom = Atom(
-      name: 'DtcCodeAbbreviationListControllerBase.errorMsg', context: context);
-
-  @override
-  String get errorMsg {
-    _$errorMsgAtom.reportRead();
-    return super.errorMsg;
-  }
-
-  @override
-  set errorMsg(String value) {
-    _$errorMsgAtom.reportWrite(value, super.errorMsg, () {
-      super.errorMsg = value;
-    });
-  }
-
   late final _$futureAtom = Atom(
       name: 'DtcCodeAbbreviationListControllerBase.future', context: context);
 
@@ -181,7 +165,6 @@ mixin _$DtcCodeAbbreviationListController
 codeCtrl: ${codeCtrl},
 isHidedButton: ${isHidedButton},
 abbreviations: ${abbreviations},
-errorMsg: ${errorMsg},
 future: ${future},
 filter: ${filter},
 listFiltered: ${listFiltered}

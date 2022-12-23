@@ -219,22 +219,6 @@ mixin _$AccessRequestController on AccessRequestControllerBase, Store {
     });
   }
 
-  late final _$errorMsgAtom =
-      Atom(name: 'AccessRequestControllerBase.errorMsg', context: context);
-
-  @override
-  String get errorMsg {
-    _$errorMsgAtom.reportRead();
-    return super.errorMsg;
-  }
-
-  @override
-  set errorMsg(String value) {
-    _$errorMsgAtom.reportWrite(value, super.errorMsg, () {
-      super.errorMsg = value;
-    });
-  }
-
   late final _$futureAtom =
       Atom(name: 'AccessRequestControllerBase.future', context: context);
 
@@ -282,7 +266,7 @@ mixin _$AccessRequestController on AccessRequestControllerBase, Store {
   }
 
   @override
-  Future<dynamic> save() {
+  Future<AccessRequest> save() {
     final _$actionInfo = _$AccessRequestControllerBaseActionController
         .startAction(name: 'AccessRequestControllerBase.save');
     try {
@@ -293,7 +277,7 @@ mixin _$AccessRequestController on AccessRequestControllerBase, Store {
   }
 
   @override
-  Future<dynamic> allow() {
+  Future<Response> allow() {
     final _$actionInfo = _$AccessRequestControllerBaseActionController
         .startAction(name: 'AccessRequestControllerBase.allow');
     try {
@@ -304,7 +288,7 @@ mixin _$AccessRequestController on AccessRequestControllerBase, Store {
   }
 
   @override
-  Future<dynamic> deleteById(AccessRequest accessRequest) {
+  Future<Response> deleteById(AccessRequest accessRequest) {
     final _$actionInfo = _$AccessRequestControllerBaseActionController
         .startAction(name: 'AccessRequestControllerBase.deleteById');
     try {
@@ -341,7 +325,6 @@ checkFuture: ${checkFuture},
 accessRequests: ${accessRequests},
 listItems: ${listItems},
 ids: ${ids},
-errorMsg: ${errorMsg},
 future: ${future}
     ''';
   }

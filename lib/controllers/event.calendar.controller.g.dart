@@ -25,22 +25,6 @@ mixin _$EventCalendarController on EventCalendarControllerBase, Store {
     });
   }
 
-  late final _$errorMsgAtom =
-      Atom(name: 'EventCalendarControllerBase.errorMsg', context: context);
-
-  @override
-  String get errorMsg {
-    _$errorMsgAtom.reportRead();
-    return super.errorMsg;
-  }
-
-  @override
-  set errorMsg(String value) {
-    _$errorMsgAtom.reportWrite(value, super.errorMsg, () {
-      super.errorMsg = value;
-    });
-  }
-
   late final _$isHidedButtonAtom =
       Atom(name: 'EventCalendarControllerBase.isHidedButton', context: context);
 
@@ -144,7 +128,6 @@ mixin _$EventCalendarController on EventCalendarControllerBase, Store {
   @override
   String toString() {
     return '''
-errorMsg: ${errorMsg},
 isHidedButton: ${isHidedButton},
 events: ${events},
 selectedEvents: ${selectedEvents},
