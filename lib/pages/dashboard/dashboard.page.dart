@@ -151,22 +151,9 @@ class _DashboardPageState extends State<DashboardPage> {
               case ConnectionState.active:
                 break;
               default:
-                if (snapshot.hasError) {
-                  return CenteredMessage(
-                    title: _labelAppTitle,
-                    message: snapshot.error.toString(),
-                  );
-                } else {
-                  if ((snapshot.data?.length)! > 0) {
-                    _controller.setAssociated(locator.get<Associated>());
-                    _controller.setPhotoURL();
-                    return _widgets();
-                  } else
-                    return CenteredMessage(
-                      title: _labelAppTitle,
-                      message: _labelNotExists,
-                    );
-                }
+                _controller.setAssociated(locator.get<Associated>());
+                _controller.setPhotoURL();
+                return _widgets();
             } //switch (snapshot.connectionState)
             return CenteredMessage(
               title: _labelAppTitle,

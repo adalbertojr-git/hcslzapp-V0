@@ -89,22 +89,6 @@ mixin _$DashboardController on DashboardControllerBase, Store {
     });
   }
 
-  late final _$errorMsgAtom =
-      Atom(name: 'DashboardControllerBase.errorMsg', context: context);
-
-  @override
-  String get errorMsg {
-    _$errorMsgAtom.reportRead();
-    return super.errorMsg;
-  }
-
-  @override
-  set errorMsg(String value) {
-    _$errorMsgAtom.reportWrite(value, super.errorMsg, () {
-      super.errorMsg = value;
-    });
-  }
-
   late final _$DashboardControllerBaseActionController =
       ActionController(name: 'DashboardControllerBase', context: context);
 
@@ -158,8 +142,7 @@ mixin _$DashboardController on DashboardControllerBase, Store {
 photoUrl: ${photoUrl},
 associated: ${associated},
 selectedProfile: ${selectedProfile},
-future: ${future},
-errorMsg: ${errorMsg}
+future: ${future}
     ''';
   }
 }

@@ -57,22 +57,6 @@ mixin _$LoginController on LoginControllerBase, Store {
     });
   }
 
-  late final _$errorMsgAtom =
-      Atom(name: 'LoginControllerBase.errorMsg', context: context);
-
-  @override
-  String get errorMsg {
-    _$errorMsgAtom.reportRead();
-    return super.errorMsg;
-  }
-
-  @override
-  set errorMsg(String value) {
-    _$errorMsgAtom.reportWrite(value, super.errorMsg, () {
-      super.errorMsg = value;
-    });
-  }
-
   late final _$_loginRepoAtom =
       Atom(name: 'LoginControllerBase._loginRepo', context: context);
 
@@ -94,8 +78,7 @@ mixin _$LoginController on LoginControllerBase, Store {
     return '''
 userLoginCtrl: ${userLoginCtrl},
 pswLoginCtrl: ${pswLoginCtrl},
-token: ${token},
-errorMsg: ${errorMsg}
+token: ${token}
     ''';
   }
 }
