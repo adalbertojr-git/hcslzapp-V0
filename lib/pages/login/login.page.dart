@@ -197,7 +197,7 @@ class _MyCustomLoginUIState extends State<MyCustomLoginUI>
                                 ),
                                 child: Icon(
                                   Icons.login_sharp,
-                                  size: 80,
+                                  size: 60,
                                 ),
                               ),
                             ),

@@ -108,17 +108,9 @@ class _DashboardPageState extends State<DashboardPage> {
   @override
   void initState() {
     super.initState();
-    try {
-      _controller.getFuture(widget.associatedId).then((value) {
-        loadAssociatedSingleton(value.first);
-      });
-    } on HttpException catch (e) {
-      AsukaSnackbar.alert(e.message.toString()).show();
-    } on Exception catch (e) {
-      AsukaSnackbar.alert(e.toString()).show();
-    } catch (e) {
-      AsukaSnackbar.alert(e.toString()).show();
-    }
+    _controller.getFuture(widget.associatedId).then((value) {
+      loadAssociatedSingleton(value.first);
+    });
   }
 
   @override
@@ -151,9 +143,16 @@ class _DashboardPageState extends State<DashboardPage> {
               case ConnectionState.active:
                 break;
               default:
-                _controller.setAssociated(locator.get<Associated>());
-                _controller.setPhotoURL();
-                return _widgets();
+                if (snapshot.hasError) {
+                  return CenteredMessage(
+                    title: _labelAppTitle,
+                    message: snapshot.error.toString(),
+                  );
+                } else {
+                  _controller.setAssociated(locator.get<Associated>());
+                  _controller.setPhotoURL();
+                  return _widgets();
+                }
             } //switch (snapshot.connectionState)
             return CenteredMessage(
               title: _labelAppTitle,
