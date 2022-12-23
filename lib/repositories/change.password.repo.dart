@@ -9,25 +9,29 @@ const String _changelUrl = '/changepassword';
 
 class ChangePasswordRepo {
   Future<String> update(PasswordDTO passwordDTO) async {
-    final String encodedJson = jsonEncode(
-      passwordDTO.toJson(),
-    );
-    final Response response = await client
-        .put(
-          Uri.parse(mainUrl + _changelUrl),
-          headers: {
-            'Content-type': 'application/json',
-            'Accept': 'application/json'
-          },
-          body: encodedJson,
-        )
-        .timeout(
-          Duration(seconds: 10),
-        );
-    if (response.statusCode == 200) {
-      return response.body;
-    } else {
-      throw HttpException(getMessage(response.statusCode));
+    try {
+      final String encodedJson = jsonEncode(
+        passwordDTO.toJson(),
+      );
+      final Response response = await client
+          .put(
+            Uri.parse(mainUrl + _changelUrl),
+            headers: {
+              'Content-type': 'application/json',
+              'Accept': 'application/json'
+            },
+            body: encodedJson,
+          )
+          .timeout(
+            Duration(seconds: 10),
+          );
+      if (response.statusCode == 200) {
+        return response.body;
+      } else {
+        throw HttpException(getMessage(response.statusCode));
+      }
+    } catch (_) {
+      rethrow;
     }
   }
 }

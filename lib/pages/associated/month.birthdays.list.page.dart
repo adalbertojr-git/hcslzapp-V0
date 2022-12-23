@@ -39,11 +39,6 @@ class MonthBirthdaysListPage extends StatelessWidget {
                     message: snapshot.error.toString(),
                   );
                 } else {
-                  if (snapshot.data == null)
-                    return CenteredMessage(
-                      title: _title,
-                      message: _controller.errorMsg,
-                    );
                   if ((snapshot.data?.length)! > 0) {
                     _controller.associateds.addAll((snapshot.data)!);
                     _controller.associateds.sort(

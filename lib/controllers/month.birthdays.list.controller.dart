@@ -1,5 +1,4 @@
 import 'dart:async';
-import 'dart:io';
 import 'package:hcslzapp/models/month.birthdays.dart';
 import '../repositories/associated.repo.dart';
 import 'package:mobx/mobx.dart';
@@ -20,9 +19,6 @@ abstract class MonthBirthdaysListControllerBase with Store {
   AssociatedRepo _associatedRepo = AssociatedRepo();
 
   @observable
-  String errorMsg = '';
-
-  @observable
   Future<List<MonthBirthdays>> future = Future<List<MonthBirthdays>>.value([]);
 
   @action
@@ -30,12 +26,7 @@ abstract class MonthBirthdaysListControllerBase with Store {
 
   @action
   Future<List<MonthBirthdays>> findBirthdays() =>
-      ObservableFuture(_associatedRepo.findBirthdays().then((value) => value))
-          .catchError((e) {
-        errorMsg = "${e.message}";
-      }, test: (e) => e is HttpException).catchError((e) {
-        errorMsg = "$e";
-      }, test: (e) => e is Exception);
+      ObservableFuture(_associatedRepo.findBirthdays().then((value) => value));
 
   Future<List<MonthBirthdays>> getFuture() => future = findBirthdays();
 }

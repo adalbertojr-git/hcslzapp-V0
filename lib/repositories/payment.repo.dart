@@ -8,109 +8,130 @@ const String _paymentUrl = '/payment';
 
 class PaymentRepo {
   Future<List<Payment>> findAll() async {
-    final Response response = await client
-        .get(
-          Uri.parse(mainUrl + _paymentUrl + "/list"),
-        )
-        .timeout(
-          Duration(seconds: 10),
-        );
-    if (response.statusCode == 200) {
-      final List<dynamic> decodedJson = jsonDecode(response.body);
-      return decodedJson
-          .map(
-            (dynamic json) => Payment.fromJson(json),
+    try {
+      final Response response = await client
+          .get(
+            Uri.parse(mainUrl + _paymentUrl + "/list"),
           )
-          .toList();
-    } else {
-      throw HttpException(getMessage(response.statusCode));
+          .timeout(
+            Duration(seconds: 10),
+          );
+      if (response.statusCode == 200) {
+        final List<dynamic> decodedJson = jsonDecode(response.body);
+        return decodedJson
+            .map(
+              (dynamic json) => Payment.fromJson(json),
+            )
+            .toList();
+      } else {
+        throw HttpException(getMessage(response.statusCode));
+      }
+    } catch (_) {
+      rethrow;
     }
   }
 
   Future<List<Payment>> findByAssociatedIdToList(int id) async {
-    final Response response = await client
-        .get(
-          Uri.parse(mainUrl + _paymentUrl + '/list/' + id.toString()),
-        )
-        .timeout(
-          Duration(seconds: 10),
-        );
-    if (response.statusCode == 200) {
-      final List<dynamic> decodedJson = jsonDecode(response.body);
-      return decodedJson
-          .map(
-            (dynamic json) => Payment.fromJson(json),
+    try {
+      final Response response = await client
+          .get(
+            Uri.parse(mainUrl + _paymentUrl + '/list/' + id.toString()),
           )
-          .toList();
-    } else {
-      throw HttpException(getMessage(response.statusCode));
+          .timeout(
+            Duration(seconds: 10),
+          );
+      if (response.statusCode == 200) {
+        final List<dynamic> decodedJson = jsonDecode(response.body);
+        return decodedJson
+            .map(
+              (dynamic json) => Payment.fromJson(json),
+            )
+            .toList();
+      } else {
+        throw HttpException(getMessage(response.statusCode));
+      }
+    } catch (_) {
+      rethrow;
     }
   }
 
   Future<Payment> save(Payment payment) async {
-    final String encodedJson = jsonEncode(
-      payment.toJson(),
-    );
-    final Response response = await client
-        .post(
-          Uri.parse(mainUrl + _paymentUrl),
-          headers: {
-            'Content-type': 'application/json',
-          },
-          body: encodedJson,
-        )
-        .timeout(
-          Duration(seconds: 10),
-        );
-    if (response.statusCode == 200) {
-      return Payment.fromJson(
-        jsonDecode(response.body),
+    try {
+      final String encodedJson = jsonEncode(
+        payment.toJson(),
       );
-    } else {
-      throw HttpException(getMessage(response.statusCode));
+      final Response response = await client
+          .post(
+            Uri.parse(mainUrl + _paymentUrl),
+            headers: {
+              'Content-type': 'application/json',
+            },
+            body: encodedJson,
+          )
+          .timeout(
+            Duration(seconds: 10),
+          );
+      if (response.statusCode == 200) {
+        return Payment.fromJson(
+          jsonDecode(response.body),
+        );
+      } else {
+        throw HttpException(getMessage(response.statusCode));
+      }
+    } catch (_) {
+      rethrow;
     }
   }
 
   Future<Payment> update(Payment payment) async {
-    final String encodedJson = jsonEncode(
-      payment.toJson(),
-    );
-    final Response response = await client
-        .put(
-          Uri.parse(mainUrl + _paymentUrl + "/update/" + payment.id.toString()),
-          headers: {
-            'Content-type': 'application/json',
-          },
-          body: encodedJson,
-        )
-        .timeout(
-          Duration(seconds: 10),
-        );
-    if (response.statusCode == 200) {
-      return Payment.fromJson(
-        jsonDecode(response.body),
+    try {
+      final String encodedJson = jsonEncode(
+        payment.toJson(),
       );
-    } else {
-      throw HttpException(getMessage(response.statusCode));
+      final Response response = await client
+          .put(
+            Uri.parse(
+                mainUrl + _paymentUrl + "/update/" + payment.id.toString()),
+            headers: {
+              'Content-type': 'application/json',
+            },
+            body: encodedJson,
+          )
+          .timeout(
+            Duration(seconds: 10),
+          );
+      if (response.statusCode == 200) {
+        return Payment.fromJson(
+          jsonDecode(response.body),
+        );
+      } else {
+        throw HttpException(getMessage(response.statusCode));
+      }
+    } catch (_) {
+      rethrow;
     }
   }
 
   Future<Response> deleteById(Payment payment) async {
-    final String encodedJson = jsonEncode(
-      payment.toJson(),
-    );
-    final Response response = await client.delete(
-      Uri.parse(mainUrl + _paymentUrl + "/" + payment.id.toString()),
-      headers: {
-        'Content-type': 'application/json',
-      },
-    ).timeout(
-      Duration(seconds: 10),
-    );
-    if (response.statusCode == 204) {
-      return response;
-    } else {
-      throw HttpException(getMessage(response.statusCode));
+    try {
+      final String encodedJson = jsonEncode(
+        payment.toJson(),
+      );
+      final Response response = await client.delete(
+        Uri.parse(mainUrl + _paymentUrl + "/" + payment.id.toString()),
+        headers: {
+          'Content-type': 'application/json',
+        },
+      ).timeout(
+        Duration(seconds: 10),
+      );
+      if (response.statusCode == 204) {
+        return response;
+      } else {
+        throw HttpException(getMessage(response.statusCode));
+      }
+    } catch (_) {
+      rethrow;
     }
   }
 }

@@ -9,6 +9,7 @@ const String _dtcCodeAbbreviationUrl = '/dtccodeabbreviation';
 
 class DtcCodeAbbreviationRepo {
   Future<List<DtcCodeAbbreviation>> findAll() async {
+    try {
     final Response response = await client
         .get(
           Uri.parse(mainUrl + _dtcCodeAbbreviationUrl + "/list"),
@@ -25,6 +26,9 @@ class DtcCodeAbbreviationRepo {
           .toList();
     } else {
       throw HttpException(getMessage(response.statusCode));
+    }
+    } catch (_) {
+      rethrow;
     }
   }
 }

@@ -126,14 +126,6 @@ abstract class AssociatedUpdateControllerBase with Store {
   Future<Associated> update(Associated associated) =>
       _associatedRepo.update(_setValues());
 
-/*  @action
-  Future update2(Associated associated) async =>
-      await _associatedRepo.update(await _setValues()).catchError((e) {
-        errorMsg = "${e.message}";
-      }, test: (e) => e is HttpException).catchError((e) {
-        errorMsg = "$e";
-      }, test: (e) => e is Exception);*/
-
   Associated _setValues() {
     associated.name = nameCtrl.text;
     associated.phone = phoneCtrl.text;

@@ -9,22 +9,26 @@ const String _dtcCodeUrl = '/dtccode';
 
 class DtcCodeRepo {
   Future<List<DtcCode>> findAll() async {
-    final Response response = await client
-        .get(
-          Uri.parse(mainUrl + _dtcCodeUrl + "/list"),
-        )
-        .timeout(
-          Duration(seconds: 10),
-        );
-    if (response.statusCode == 200) {
-      final List<dynamic> decodedJson = jsonDecode(response.body);
-      return decodedJson
-          .map(
-            (dynamic json) => DtcCode.fromJson(json),
+    try {
+      final Response response = await client
+          .get(
+            Uri.parse(mainUrl + _dtcCodeUrl + "/list"),
           )
-          .toList();
-    } else {
-      throw HttpException(getMessage(response.statusCode));
+          .timeout(
+            Duration(seconds: 10),
+          );
+      if (response.statusCode == 200) {
+        final List<dynamic> decodedJson = jsonDecode(response.body);
+        return decodedJson
+            .map(
+              (dynamic json) => DtcCode.fromJson(json),
+            )
+            .toList();
+      } else {
+        throw HttpException(getMessage(response.statusCode));
+      }
+    } catch (_) {
+      rethrow;
     }
   }
 }
