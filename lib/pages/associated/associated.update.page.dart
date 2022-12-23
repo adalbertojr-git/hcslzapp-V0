@@ -538,18 +538,20 @@ class AssociatedUpdatePage extends StatelessWidget {
             });
       }
       if (response == true) {
-        _controller.update(_controller.associated).then(
-          (value) {
-            if (value != null) {
-              AsukaSnackbar.success('Associado atualizado com sucesso').show();
-              Navigator.of(context).pop(_controller.associated.photoUrl);
-              if (_controller.associated == locator.get<Associated>())
-                loadAssociatedSingleton(value);
-            } else {
-              AsukaSnackbar.alert(_controller.errorMsg).show();
-            }
-          },
-        );
+        try {
+          final value = await _controller.update(_controller.associated);
+          AsukaSnackbar.success('Associado atualizado com sucesso').show();
+          if (_controller.associated == locator.get<Associated>()) {
+            loadAssociatedSingleton(value);
+          }
+          Navigator.of(context).pop(_controller.associated.photoUrl);
+        } on HttpException catch (e) {
+          AsukaSnackbar.alert(e.message.toString()).show();
+        } on Exception catch (e) {
+          AsukaSnackbar.alert(e.toString()).show();
+        } catch (e) {
+          AsukaSnackbar.alert(e.toString()).show();
+        } finally {}
       }
     }
   }

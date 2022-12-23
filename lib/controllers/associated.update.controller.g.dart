@@ -381,14 +381,6 @@ mixin _$AssociatedUpdateController on AssociatedUpdateControllerBase, Store {
     });
   }
 
-  late final _$updateAsyncAction =
-      AsyncAction('AssociatedUpdateControllerBase.update', context: context);
-
-  @override
-  Future<dynamic> update(Associated associated) {
-    return _$updateAsyncAction.run(() => super.update(associated));
-  }
-
   late final _$getImageFromCameraAsyncAction = AsyncAction(
       'AssociatedUpdateControllerBase.getImageFromCamera',
       context: context);
@@ -407,6 +399,21 @@ mixin _$AssociatedUpdateController on AssociatedUpdateControllerBase, Store {
   Future<dynamic> getImageFromGallery() {
     return _$getImageFromGalleryAsyncAction
         .run(() => super.getImageFromGallery());
+  }
+
+  late final _$AssociatedUpdateControllerBaseActionController =
+      ActionController(
+          name: 'AssociatedUpdateControllerBase', context: context);
+
+  @override
+  Future<Associated> update(Associated associated) {
+    final _$actionInfo = _$AssociatedUpdateControllerBaseActionController
+        .startAction(name: 'AssociatedUpdateControllerBase.update');
+    try {
+      return super.update(associated);
+    } finally {
+      _$AssociatedUpdateControllerBaseActionController.endAction(_$actionInfo);
+    }
   }
 
   @override

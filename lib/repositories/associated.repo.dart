@@ -118,26 +118,31 @@ class AssociatedRepo {
   }
 
   Future<Associated> update(Associated associated) async {
-    final String encodedJson = jsonEncode(
-      associated.toJson(),
-    );
-    final Response response = await client
-        .put(
-          Uri.parse(mainUrl + _associatedUrl + "/" + associated.id.toString()),
-          headers: {
-            'Content-type': 'application/json',
-          },
-          body: encodedJson,
-        )
-        .timeout(
-          Duration(seconds: 10),
-        );
-    if (response.statusCode == 200) {
-      return Associated.fromJson(
-        jsonDecode(response.body),
+    try {
+      final String encodedJson = jsonEncode(
+        associated.toJson(),
       );
-    } else {
-      throw HttpException(getMessage(response.statusCode));
+      final Response response = await client
+          .put(
+            Uri.parse(
+                mainUrl + _associatedUrl + "/" + associated.id.toString()),
+            headers: {
+              'Content-type': 'application/json',
+            },
+            body: encodedJson,
+          )
+          .timeout(
+            Duration(seconds: 10),
+          );
+      if (response.statusCode == 200) {
+        return Associated.fromJson(
+          jsonDecode(response.body),
+        );
+      } else {
+        throw HttpException(getMessage(response.statusCode));
+      }
+    } catch (_) {
+      rethrow;
     }
   }
 

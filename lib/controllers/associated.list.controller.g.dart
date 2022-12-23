@@ -97,22 +97,6 @@ mixin _$AssociatedListController on AssociatedListControllerBase, Store {
     });
   }
 
-  late final _$errorMsgAtom =
-      Atom(name: 'AssociatedListControllerBase.errorMsg', context: context);
-
-  @override
-  String get errorMsg {
-    _$errorMsgAtom.reportRead();
-    return super.errorMsg;
-  }
-
-  @override
-  set errorMsg(String value) {
-    _$errorMsgAtom.reportWrite(value, super.errorMsg, () {
-      super.errorMsg = value;
-    });
-  }
-
   late final _$futureAtom =
       Atom(name: 'AssociatedListControllerBase.future', context: context);
 
@@ -177,7 +161,6 @@ nameCtrl: ${nameCtrl},
 isHidedButton: ${isHidedButton},
 associateds: ${associateds},
 associated: ${associated},
-errorMsg: ${errorMsg},
 future: ${future},
 filter: ${filter},
 listFiltered: ${listFiltered}
