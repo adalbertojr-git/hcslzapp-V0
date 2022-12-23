@@ -1,5 +1,4 @@
 import 'dart:async';
-import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:hcslzapp/models/head.notification.dart';
 import 'package:hcslzapp/models/template.dart';
@@ -28,9 +27,6 @@ abstract class HeadNotificationListControllerBase with Store {
   HeadNotificationRepo _headNotificationRepo = HeadNotificationRepo();
 
   @observable
-  String errorMsg = '';
-
-  @observable
   String photoPath = "";
 
   @observable
@@ -54,12 +50,7 @@ abstract class HeadNotificationListControllerBase with Store {
 
   @action
   Future<List<HeadNotification>> findAll() =>
-      ObservableFuture(_headNotificationRepo.findAll().then((value) => value))
-          .catchError((e) {
-        errorMsg = "${e.message}";
-      }, test: (e) => e is HttpException).catchError((e) {
-        errorMsg = "$e";
-      }, test: (e) => e is Exception);
+      ObservableFuture(_headNotificationRepo.findAll().then((value) => value));
 
   Future<List<HeadNotification>> getFuture() => future = findAll();
 
@@ -67,9 +58,5 @@ abstract class HeadNotificationListControllerBase with Store {
   Future deleteById(HeadNotification headNotification) =>
       ObservableFuture(_headNotificationRepo
           .deleteById(headNotification)
-          .then((value) => value)).catchError((e) {
-        errorMsg = "${e.message}";
-      }, test: (e) => e is HttpException).catchError((e) {
-        errorMsg = "$e";
-      }, test: (e) => e is Exception);
+          .then((value) => value));
 }
