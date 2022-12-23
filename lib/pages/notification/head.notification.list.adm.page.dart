@@ -9,6 +9,7 @@ import 'package:hcslzapp/controllers/head.notification.list.controller.dart';
 import 'package:hcslzapp/models/head.notification.dart';
 import '../../components/my.appbar.dart';
 import '../../components/my.bottom.appbar.dart';
+import '../../http/http.exception.dart';
 import 'head.notification.add.page.dart';
 
 const String _labelUnknown =
@@ -148,16 +149,18 @@ class HeadNotificationListAdmPage extends StatelessWidget {
           return TransactionAuthDialog(msg: 'Confirma a exclusão?');
         });
     if (response == true) {
-      _controller.deleteById(_controller.headNotifications[i]).then(
-        (value) {
-          if (value != null) {
-            AsukaSnackbar.success('Aviso excluído com sucesso').show();
-            _controller.headNotifications.removeAt(i);
-          } else {
-            AsukaSnackbar.alert(_controller.errorMsg).show();
-          }
-        },
-      );
+      try {
+        final value =
+            await _controller.deleteById(_controller.headNotifications[i]);
+        AsukaSnackbar.success('Aviso excluído com sucesso').show();
+        _controller.headNotifications.removeAt(i);
+      } on HttpException catch (e) {
+        AsukaSnackbar.alert(e.message.toString()).show();
+      } on Exception catch (e) {
+        AsukaSnackbar.alert(e.toString()).show();
+      } catch (e) {
+        AsukaSnackbar.alert(e.toString()).show();
+      } finally {}
     }
   }
 }
