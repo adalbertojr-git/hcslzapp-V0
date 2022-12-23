@@ -21,9 +21,6 @@ abstract class LoginControllerBase with Store {
   ObservableFuture<Token>? token;
 
   @observable
-  String errorMsg = "";
-
-  @observable
   LoginRepo _loginRepo = LoginRepo();
 
   init() {

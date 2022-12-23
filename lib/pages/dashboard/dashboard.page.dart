@@ -1,4 +1,6 @@
 import 'dart:io';
+import '../../http/http.exception.dart';
+import 'package:asuka/snackbars/asuka_snack_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:hcslzapp/components/centered.message.dart';
@@ -106,9 +108,17 @@ class _DashboardPageState extends State<DashboardPage> {
   @override
   void initState() {
     super.initState();
-    _controller.getFuture(widget.associatedId).then((value) {
-      loadAssociatedSingleton(value.first);
-    });
+    try {
+      _controller.getFuture(widget.associatedId).then((value) {
+        loadAssociatedSingleton(value.first);
+      });
+    } on HttpException catch (e) {
+      AsukaSnackbar.alert(e.message.toString()).show();
+    } on Exception catch (e) {
+      AsukaSnackbar.alert(e.toString()).show();
+    } catch (e) {
+      AsukaSnackbar.alert(e.toString()).show();
+    }
   }
 
   @override
@@ -147,11 +157,6 @@ class _DashboardPageState extends State<DashboardPage> {
                     message: snapshot.error.toString(),
                   );
                 } else {
-                  if (snapshot.data == null)
-                    return CenteredMessage(
-                      title: _labelAppTitle,
-                      message: _controller.errorMsg,
-                    );
                   if ((snapshot.data?.length)! > 0) {
                     _controller.setAssociated(locator.get<Associated>());
                     _controller.setPhotoURL();
@@ -731,8 +736,7 @@ class _DashboardPageState extends State<DashboardPage> {
             onTap: () {
               Navigator.push(
                 context,
-                MaterialPageRoute(
-                    builder: (context) => _listAdmWidgets[index]),
+                MaterialPageRoute(builder: (context) => _listAdmWidgets[index]),
               );
             },
           )

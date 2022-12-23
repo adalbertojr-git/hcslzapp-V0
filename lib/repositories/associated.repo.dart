@@ -32,67 +32,7 @@ class AssociatedRepo {
   Future<List<Associated>> findAllAdminToList() async {
     final Response response = await client
         .get(
-      Uri.parse(mainUrl + _associatedUrl + "/admin"),
-    )
-        .timeout(
-      Duration(seconds: 10),
-    );
-    if (response.statusCode == 200) {
-      final List<dynamic> decodedJson = jsonDecode(response.body);
-      return decodedJson
-          .map(
-            (dynamic json) => Associated.fromJson(json),
-      )
-          .toList();
-    } else {
-      throw HttpException(getMessage(response.statusCode));
-    }
-  }
-
-  Future<List<Associated>> findAllNotAdminToList() async {
-    final Response response = await client
-        .get(
-      Uri.parse(mainUrl + _associatedUrl + "/notadmin"),
-    )
-        .timeout(
-      Duration(seconds: 10),
-    );
-    if (response.statusCode == 200) {
-      final List<dynamic> decodedJson = jsonDecode(response.body);
-      return decodedJson
-          .map(
-            (dynamic json) => Associated.fromJson(json),
-      )
-          .toList();
-    } else {
-      throw HttpException(getMessage(response.statusCode));
-    }
-  }
-
-  Future<List<Associated>> findAllActive() async {
-    final Response response = await client
-        .get(
-      Uri.parse(mainUrl + _associatedUrl + "/active"),
-    )
-        .timeout(
-      Duration(seconds: 10),
-    );
-    if (response.statusCode == 200) {
-      final List<dynamic> decodedJson = jsonDecode(response.body);
-      return decodedJson
-          .map(
-            (dynamic json) => Associated.fromJson(json),
-      )
-          .toList();
-    } else {
-      throw HttpException(getMessage(response.statusCode));
-    }
-  }
-
-  Future<List<Associated>> findByIdToList(int id) async {
-    final Response response = await client
-        .get(
-          Uri.parse(mainUrl + _associatedUrl + '/' + id.toString()),
+          Uri.parse(mainUrl + _associatedUrl + "/admin"),
         )
         .timeout(
           Duration(seconds: 10),
@@ -106,6 +46,70 @@ class AssociatedRepo {
           .toList();
     } else {
       throw HttpException(getMessage(response.statusCode));
+    }
+  }
+
+  Future<List<Associated>> findAllNotAdminToList() async {
+    final Response response = await client
+        .get(
+          Uri.parse(mainUrl + _associatedUrl + "/notadmin"),
+        )
+        .timeout(
+          Duration(seconds: 10),
+        );
+    if (response.statusCode == 200) {
+      final List<dynamic> decodedJson = jsonDecode(response.body);
+      return decodedJson
+          .map(
+            (dynamic json) => Associated.fromJson(json),
+          )
+          .toList();
+    } else {
+      throw HttpException(getMessage(response.statusCode));
+    }
+  }
+
+  Future<List<Associated>> findAllActive() async {
+    final Response response = await client
+        .get(
+          Uri.parse(mainUrl + _associatedUrl + "/active"),
+        )
+        .timeout(
+          Duration(seconds: 10),
+        );
+    if (response.statusCode == 200) {
+      final List<dynamic> decodedJson = jsonDecode(response.body);
+      return decodedJson
+          .map(
+            (dynamic json) => Associated.fromJson(json),
+          )
+          .toList();
+    } else {
+      throw HttpException(getMessage(response.statusCode));
+    }
+  }
+
+  Future<List<Associated>> findByIdToList(int id) async {
+    try {
+      final Response response = await client
+          .get(
+            Uri.parse(mainUrl + _associatedUrl + '/' + id.toString()),
+          )
+          .timeout(
+            Duration(seconds: 10),
+          );
+      if (response.statusCode == 200) {
+        final List<dynamic> decodedJson = jsonDecode(response.body);
+        return decodedJson
+            .map(
+              (dynamic json) => Associated.fromJson(json),
+            )
+            .toList();
+      } else {
+        throw HttpException(getMessage(response.statusCode));
+      }
+    } catch (_) {
+      rethrow;
     }
   }
 
@@ -136,17 +140,17 @@ class AssociatedRepo {
   Future<List<MonthBirthdays>> findBirthdays() async {
     final Response response = await client
         .get(
-      Uri.parse(mainUrl + '/monthbirthdays/list'),
-    )
+          Uri.parse(mainUrl + '/monthbirthdays/list'),
+        )
         .timeout(
-      Duration(seconds: 10),
-    );
+          Duration(seconds: 10),
+        );
     if (response.statusCode == 200) {
       final List<dynamic> decodedJson = jsonDecode(response.body);
       return decodedJson
           .map(
             (dynamic json) => MonthBirthdays.fromJson(json),
-      )
+          )
           .toList();
     } else {
       throw HttpException(getMessage(response.statusCode));

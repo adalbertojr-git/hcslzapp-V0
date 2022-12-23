@@ -35,24 +35,9 @@ abstract class DashboardControllerBase with Store {
   @observable
   AssociatedRepo _associatedRepo = AssociatedRepo();
 
-  @observable
-  String errorMsg = "";
-
   Future<List<Associated>> findByIdToList(int id) {
-    try {
-      return ObservableFuture(
-          _associatedRepo.findByIdToList(id).then((value) => value));
-    } on HttpException catch (e) {
-      print(e);
-      errorMsg = "$e";
-    } on Exception catch (e) {
-      print(e);
-      errorMsg = "$e";
-    } catch (e) {
-      print(e);
-      errorMsg = "$e";
-    }
-    return Future.error(errorMsg);
+    return ObservableFuture(
+        _associatedRepo.findByIdToList(id).then((value) => value));
   }
 
   Future<List<Associated>> getFuture(int id) => future = findByIdToList(id);
