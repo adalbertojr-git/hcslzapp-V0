@@ -1,6 +1,4 @@
 import 'dart:io';
-import '../../http/http.exception.dart';
-import 'package:asuka/snackbars/asuka_snack_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:hcslzapp/components/centered.message.dart';
@@ -149,9 +147,15 @@ class _DashboardPageState extends State<DashboardPage> {
                     message: snapshot.error.toString(),
                   );
                 } else {
-                  _controller.setAssociated(locator.get<Associated>());
-                  _controller.setPhotoURL();
-                  return _widgets();
+                  if ((snapshot.data?.length)! > 0) {
+                    _controller.setAssociated(locator.get<Associated>());
+                    _controller.setPhotoURL();
+                    return _widgets();
+                  } else
+                    return CenteredMessage(
+                      title: _labelAppTitle,
+                      message: _labelNotExists,
+                    );
                 }
             } //switch (snapshot.connectionState)
             return CenteredMessage(
