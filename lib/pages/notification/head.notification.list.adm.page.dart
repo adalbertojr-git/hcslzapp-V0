@@ -150,8 +150,7 @@ class HeadNotificationListAdmPage extends StatelessWidget {
         });
     if (response == true) {
       try {
-        final value =
-            await _controller.deleteById(_controller.headNotifications[i]);
+        _controller.deleteById(_controller.headNotifications[i]);
         AsukaSnackbar.success('Aviso excluído com sucesso').show();
         _controller.headNotifications.removeAt(i);
       } on HttpException catch (e) {

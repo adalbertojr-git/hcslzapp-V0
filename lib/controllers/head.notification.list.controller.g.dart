@@ -95,22 +95,6 @@ mixin _$HeadNotificationListController
     });
   }
 
-  late final _$errorMsgAtom = Atom(
-      name: 'HeadNotificationListControllerBase.errorMsg', context: context);
-
-  @override
-  String get errorMsg {
-    _$errorMsgAtom.reportRead();
-    return super.errorMsg;
-  }
-
-  @override
-  set errorMsg(String value) {
-    _$errorMsgAtom.reportWrite(value, super.errorMsg, () {
-      super.errorMsg = value;
-    });
-  }
-
   late final _$photoPathAtom = Atom(
       name: 'HeadNotificationListControllerBase.photoPath', context: context);
 
@@ -223,7 +207,6 @@ titleCtrl: ${titleCtrl},
 isHidedButton: ${isHidedButton},
 headNotifications: ${headNotifications},
 headNotification: ${headNotification},
-errorMsg: ${errorMsg},
 photoPath: ${photoPath},
 photoUrl: ${photoUrl},
 future: ${future},
