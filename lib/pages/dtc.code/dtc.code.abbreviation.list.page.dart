@@ -56,11 +56,6 @@ class DtcCodeAbbreviationListPageState
                     return CenteredMessage(
                         title: _title, message: snapshot.error.toString());
                   } else {
-                    if (snapshot.data == null)
-                      return CenteredMessage(
-                        title: _title,
-                        message: _controller.errorMsg,
-                      );
                     if ((snapshot.data?.length)! > 0) {
                       _controller.init();
                       _controller.abbreviations.addAll(snapshot.data!);

@@ -1,5 +1,3 @@
-import 'dart:io';
-
 import 'package:flutter/cupertino.dart';
 import 'package:hcslzapp/models/dtc.code.abbreviation.dart';
 import 'package:hcslzapp/repositories/dtc.code.abbreviation.repo.dart';
@@ -24,9 +22,6 @@ abstract class DtcCodeAbbreviationListControllerBase with Store {
   DtcCodeAbbreviationRepo _dtcCodeAbbreviationRepo = DtcCodeAbbreviationRepo();
 
   @observable
-  late String errorMsg;
-
-  @observable
   Future<List<DtcCodeAbbreviation>> future =
       Future<List<DtcCodeAbbreviation>>.value([]);
 
@@ -42,12 +37,7 @@ abstract class DtcCodeAbbreviationListControllerBase with Store {
 
   @action
   Future<List<DtcCodeAbbreviation>> findAll() => ObservableFuture(
-              _dtcCodeAbbreviationRepo.findAll().then((value) => value))
-          .catchError((e) {
-        errorMsg = "${e.message}";
-      }, test: (e) => e is HttpException).catchError((e) {
-        errorMsg = "$e";
-      }, test: (e) => e is Exception);
+      _dtcCodeAbbreviationRepo.findAll().then((value) => value));
 
   Future<List<DtcCodeAbbreviation>> getFuture() => future = findAll();
 

@@ -1,5 +1,3 @@
-import 'dart:io';
-
 import 'package:flutter/material.dart';
 import 'package:hcslzapp/models/dtc.code.dart';
 import 'package:hcslzapp/repositories/dtc.code.repo.dart';
@@ -24,9 +22,6 @@ abstract class DtcCodeListControllerBase with Store {
   DtcCodeRepo _dtcCodeRepo = DtcCodeRepo();
 
   @observable
-  late String errorMsg;
-
-  @observable
   Future<List<DtcCode>> future = Future<List<DtcCode>>.value([]);
 
   @observable
@@ -41,12 +36,7 @@ abstract class DtcCodeListControllerBase with Store {
 
   @action
   Future<List<DtcCode>> findAll() =>
-      ObservableFuture(_dtcCodeRepo.findAll().then((value) => value))
-          .catchError((e) {
-        errorMsg = "${e.message}";
-      }, test: (e) => e is HttpException).catchError((e) {
-        errorMsg = "$e";
-      }, test: (e) => e is Exception);
+      ObservableFuture(_dtcCodeRepo.findAll().then((value) => value));
 
   Future<List<DtcCode>> getFuture() => future = findAll();
 
