@@ -216,25 +216,29 @@ class _MyCustomLoginUIState extends State<MyCustomLoginUI>
   }
 
   _login() async {
-    try {
-      final value = await _controllerLogin.authenticate();
-      debugPrint(value.token);
-      loadTokenSingleton(value);
-      TokenDetails _tokenDetails = TokenDetails(value.token);
-      Navigator.pushReplacement(
-        context,
-        MaterialPageRoute(
-          builder: (context) => DashboardPage(
-            _tokenDetails.associatedId(),
+    if (_controllerLogin.hasErrors) {
+      AsukaSnackbar.alert('Preencha os campos obrigatórios.').show();
+    } else {
+      try {
+        final value = await _controllerLogin.authenticate();
+        debugPrint(value.token);
+        loadTokenSingleton(value);
+        TokenDetails _tokenDetails = TokenDetails(value.token);
+        Navigator.pushReplacement(
+          context,
+          MaterialPageRoute(
+            builder: (context) => DashboardPage(
+              _tokenDetails.associatedId(),
+            ),
           ),
-        ),
-      );
-    } on HttpException catch (e) {
-      AsukaSnackbar.alert(e.message.toString()).show();
-    } on Exception catch (e) {
-      AsukaSnackbar.alert(e.toString()).show();
-    } catch (e) {
-      AsukaSnackbar.alert(e.toString()).show();
+        );
+      } on HttpException catch (e) {
+        AsukaSnackbar.alert(e.message.toString()).show();
+      } on Exception catch (e) {
+        AsukaSnackbar.alert(e.toString()).show();
+      } catch (e) {
+        AsukaSnackbar.alert(e.toString()).show();
+      }
     }
   }
 }
