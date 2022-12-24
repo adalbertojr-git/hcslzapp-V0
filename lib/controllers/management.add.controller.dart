@@ -4,6 +4,7 @@ import 'package:hcslzapp/controllers/item.model.dart';
 import 'package:hcslzapp/models/associated.dart';
 import 'package:hcslzapp/repositories/associated.repo.dart';
 import 'package:hcslzapp/repositories/management.repo.dart';
+import 'package:http/http.dart';
 import 'package:mobx/mobx.dart';
 
 part 'management.add.controller.g.dart';
@@ -55,7 +56,7 @@ abstract class ManagementAddControllerBase with Store {
   Future<List<Associated>> getFuture() => future = findAllNotAdminToList();
 
   @action
-  Future save() => ObservableFuture(
+  Future<Response> save() => ObservableFuture(
               _managementRepo.save(List<int>.from(ids)).then((value) => value));
 
   loadListItems(List<Associated> list) {

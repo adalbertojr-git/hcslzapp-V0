@@ -83,17 +83,17 @@ abstract class PartnershipAddControllerBase with Store {
   }
 
   @action
-  Future findAll() =>
+  Future<List<Partnership>> findAll() =>
       _partnershipRepo.findAll().then((value) => value);
 
   @action
-  Future save() =>
+  Future<Partnership>  save() =>
       _partnershipRepo
           .save(_setValues())
           .then((value) => value);
 
   @action
-  Future update() =>
+  Future<Partnership>  update() =>
       _partnershipRepo.update(_setValues());
 
   Partnership _setValues() {

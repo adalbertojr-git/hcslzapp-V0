@@ -2,6 +2,7 @@ import 'dart:async';
 import 'package:hcslzapp/models/payment.dart';
 import 'package:hcslzapp/models/template.dart';
 import 'package:hcslzapp/repositories/payment.repo.dart';
+import 'package:http/http.dart';
 import 'package:mobx/mobx.dart';
 
 part 'payment.associated.controller.g.dart';
@@ -44,7 +45,7 @@ abstract class PaymentAssociatedControllerBase with Store {
       future = findByAssociatedIdToList(id);
 
   @action
-  Future deleteById(Payment payment) =>
+  Future<Response> deleteById(Payment payment) =>
       ObservableFuture(_paymentRepo.deleteById(payment).then((value) => value));
 
   List<String> loadYears() {

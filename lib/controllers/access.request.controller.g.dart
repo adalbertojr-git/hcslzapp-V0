@@ -121,56 +121,6 @@ mixin _$AccessRequestController on AccessRequestControllerBase, Store {
     });
   }
 
-  late final _$accessRequestListFutureAtom = Atom(
-      name: 'AccessRequestControllerBase.accessRequestListFuture',
-      context: context);
-
-  @override
-  ObservableFuture<List<AccessRequest>>? get accessRequestListFuture {
-    _$accessRequestListFutureAtom.reportRead();
-    return super.accessRequestListFuture;
-  }
-
-  @override
-  set accessRequestListFuture(ObservableFuture<List<AccessRequest>>? value) {
-    _$accessRequestListFutureAtom
-        .reportWrite(value, super.accessRequestListFuture, () {
-      super.accessRequestListFuture = value;
-    });
-  }
-
-  late final _$accessRequestPosstAtom = Atom(
-      name: 'AccessRequestControllerBase.accessRequestPosst', context: context);
-
-  @override
-  ObservableFuture<AccessRequest>? get accessRequestPosst {
-    _$accessRequestPosstAtom.reportRead();
-    return super.accessRequestPosst;
-  }
-
-  @override
-  set accessRequestPosst(ObservableFuture<AccessRequest>? value) {
-    _$accessRequestPosstAtom.reportWrite(value, super.accessRequestPosst, () {
-      super.accessRequestPosst = value;
-    });
-  }
-
-  late final _$checkFutureAtom =
-      Atom(name: 'AccessRequestControllerBase.checkFuture', context: context);
-
-  @override
-  ObservableFuture<AccessRequest>? get checkFuture {
-    _$checkFutureAtom.reportRead();
-    return super.checkFuture;
-  }
-
-  @override
-  set checkFuture(ObservableFuture<AccessRequest>? value) {
-    _$checkFutureAtom.reportWrite(value, super.checkFuture, () {
-      super.checkFuture = value;
-    });
-  }
-
   late final _$accessRequestsAtom = Atom(
       name: 'AccessRequestControllerBase.accessRequests', context: context);
 
@@ -319,9 +269,6 @@ confEmailCtrl: ${confEmailCtrl},
 pswCtrl: ${pswCtrl},
 confPswCtrl: ${confPswCtrl},
 isHidedButton: ${isHidedButton},
-accessRequestListFuture: ${accessRequestListFuture},
-accessRequestPosst: ${accessRequestPosst},
-checkFuture: ${checkFuture},
 accessRequests: ${accessRequests},
 listItems: ${listItems},
 ids: ${ids},

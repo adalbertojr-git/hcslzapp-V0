@@ -179,7 +179,7 @@ mixin _$ManagementAddController on ManagementAddControllerBase, Store {
   }
 
   @override
-  Future<dynamic> save() {
+  Future<Response> save() {
     final _$actionInfo = _$ManagementAddControllerBaseActionController
         .startAction(name: 'ManagementAddControllerBase.save');
     try {

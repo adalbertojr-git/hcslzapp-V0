@@ -284,7 +284,7 @@ mixin _$PartnershipAddController on PartnershipAddControllerBase, Store {
   }
 
   @override
-  Future<dynamic> findAll() {
+  Future<List<Partnership>> findAll() {
     final _$actionInfo = _$PartnershipAddControllerBaseActionController
         .startAction(name: 'PartnershipAddControllerBase.findAll');
     try {
@@ -295,7 +295,7 @@ mixin _$PartnershipAddController on PartnershipAddControllerBase, Store {
   }
 
   @override
-  Future<dynamic> save() {
+  Future<Partnership> save() {
     final _$actionInfo = _$PartnershipAddControllerBaseActionController
         .startAction(name: 'PartnershipAddControllerBase.save');
     try {
@@ -306,7 +306,7 @@ mixin _$PartnershipAddController on PartnershipAddControllerBase, Store {
   }
 
   @override
-  Future<dynamic> update() {
+  Future<Partnership> update() {
     final _$actionInfo = _$PartnershipAddControllerBaseActionController
         .startAction(name: 'PartnershipAddControllerBase.update');
     try {

@@ -185,22 +185,6 @@ mixin _$EventAddController on EventAddControllerBase, Store {
     });
   }
 
-  late final _$saveAsyncAction =
-      AsyncAction('EventAddControllerBase.save', context: context);
-
-  @override
-  Future<dynamic> save() {
-    return _$saveAsyncAction.run(() => super.save());
-  }
-
-  late final _$updateAsyncAction =
-      AsyncAction('EventAddControllerBase.update', context: context);
-
-  @override
-  Future<dynamic> update() {
-    return _$updateAsyncAction.run(() => super.update());
-  }
-
   late final _$getImageFromCameraAsyncAction = AsyncAction(
       'EventAddControllerBase.getImageFromCamera',
       context: context);
@@ -219,6 +203,31 @@ mixin _$EventAddController on EventAddControllerBase, Store {
   Future<dynamic> getImageFromGallery() {
     return _$getImageFromGalleryAsyncAction
         .run(() => super.getImageFromGallery());
+  }
+
+  late final _$EventAddControllerBaseActionController =
+      ActionController(name: 'EventAddControllerBase', context: context);
+
+  @override
+  Future<Event> save() {
+    final _$actionInfo = _$EventAddControllerBaseActionController.startAction(
+        name: 'EventAddControllerBase.save');
+    try {
+      return super.save();
+    } finally {
+      _$EventAddControllerBaseActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
+  Future<Event> update() {
+    final _$actionInfo = _$EventAddControllerBaseActionController.startAction(
+        name: 'EventAddControllerBase.update');
+    try {
+      return super.update();
+    } finally {
+      _$EventAddControllerBaseActionController.endAction(_$actionInfo);
+    }
   }
 
   @override

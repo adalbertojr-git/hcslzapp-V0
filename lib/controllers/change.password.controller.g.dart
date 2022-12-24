@@ -78,7 +78,7 @@ mixin _$ChangePasswordController on ChangePasswordControllerBase, Store {
       ActionController(name: 'ChangePasswordControllerBase', context: context);
 
   @override
-  Future<dynamic> update(PasswordDTO passwordDTO) {
+  Future<String> update(PasswordDTO passwordDTO) {
     final _$actionInfo = _$ChangePasswordControllerBaseActionController
         .startAction(name: 'ChangePasswordControllerBase.update');
     try {

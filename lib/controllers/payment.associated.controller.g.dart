@@ -145,7 +145,7 @@ mixin _$PaymentAssociatedController on PaymentAssociatedControllerBase, Store {
   }
 
   @override
-  Future<dynamic> deleteById(Payment payment) {
+  Future<Response> deleteById(Payment payment) {
     final _$actionInfo = _$PaymentAssociatedControllerBaseActionController
         .startAction(name: 'PaymentAssociatedControllerBase.deleteById');
     try {

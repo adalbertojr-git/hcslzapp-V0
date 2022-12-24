@@ -62,31 +62,24 @@ abstract class EventAddControllerBase with Store {
   }
 
   @action
-  Future save() async => await _eventRepo
-          .save(await _setValues())
-          .then((value) => value)
-          .catchError((e) {
-        errorMsg = "${e.message}";
-      }, test: (e) => e is HttpException).catchError((e) {
-        errorMsg = "$e";
-      }, test: (e) => e is Exception);
+  Future<Event> save() => _eventRepo.save(_setValues()).then((value) => value);
 
   @action
-  Future update() async =>
-      await _eventRepo.update(await _setValues()).catchError((e) {
-        errorMsg = "${e.message}";
-      }, test: (e) => e is HttpException).catchError((e) {
-        errorMsg = "$e";
-      }, test: (e) => e is Exception);
+  Future<Event> update() => _eventRepo.update(_setValues());
 
-  Future<Event> _setValues() async {
+  Event _setValues() {
+    String _lPhotoUrl = '';
+    if (photo.path != '') {
+      //se houve alteração de foto
+      _uploadPhoto().then((value) => _lPhotoUrl = value);
+    } else
+      _lPhotoUrl = photoUrl;
     return Event(
-      id: event.id,
-      title: titleCtrl.text,
-      date: eventDate,
-      description: descriptionCtrl.text,
-      photoUrl: photo.path.length != 0 ? await _uploadPhoto() : photoUrl,
-    );
+        id: event.id,
+        title: titleCtrl.text,
+        date: eventDate,
+        description: descriptionCtrl.text,
+        photoUrl: _lPhotoUrl);
   }
 
   bool get hasErrors => hasErrorPartner || hasErrorDescription;

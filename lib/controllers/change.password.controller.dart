@@ -1,5 +1,4 @@
 import 'dart:async';
-import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:hcslzapp/models/password.dto.dart';
 import 'package:hcslzapp/repositories/change.password.repo.dart';
@@ -31,13 +30,8 @@ abstract class ChangePasswordControllerBase with Store {
   }
 
   @action
-  Future update(PasswordDTO passwordDTO) => ObservableFuture(
-              _changePasswordRepo.update(passwordDTO).then((value) => value))
-          .catchError((e) {
-        errorMsg = "${e.message}";
-      }, test: (e) => e is HttpException).catchError((e) {
-        errorMsg = "$e";
-      }, test: (e) => e is Exception);
+  Future<String> update(PasswordDTO passwordDTO) => ObservableFuture(
+              _changePasswordRepo.update(passwordDTO).then((value) => value));
 
   bool get hasErrors => hasErrorNewPassword || hasErrorConfNewPassword;
 
