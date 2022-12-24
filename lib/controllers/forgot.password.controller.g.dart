@@ -59,22 +59,6 @@ mixin _$ForgotPasswordController on ForgotPasswordControllerBase, Store {
     });
   }
 
-  late final _$errorMsgAtom =
-      Atom(name: 'ForgotPasswordControllerBase.errorMsg', context: context);
-
-  @override
-  String get errorMsg {
-    _$errorMsgAtom.reportRead();
-    return super.errorMsg;
-  }
-
-  @override
-  set errorMsg(String value) {
-    _$errorMsgAtom.reportWrite(value, super.errorMsg, () {
-      super.errorMsg = value;
-    });
-  }
-
   late final _$ForgotPasswordControllerBaseActionController =
       ActionController(name: 'ForgotPasswordControllerBase', context: context);
 
@@ -104,8 +88,7 @@ mixin _$ForgotPasswordController on ForgotPasswordControllerBase, Store {
   String toString() {
     return '''
 emailForgotPswCtrl: ${emailForgotPswCtrl},
-codeCtrl: ${codeCtrl},
-errorMsg: ${errorMsg}
+codeCtrl: ${codeCtrl}
     ''';
   }
 }

@@ -97,7 +97,7 @@ class _PaymentAssociatedPageState extends State<PaymentAssociatedPage> {
                         },
                       ),
               )
-            : SizedBox(),
+            : null,
       );
 
   _add(BuildContext context) {

@@ -219,7 +219,7 @@ mixin _$PartnershipListController on PartnershipListControllerBase, Store {
   }
 
   @override
-  Future<dynamic> deleteById(Partnership partnership) {
+  Future<Response> deleteById(Partnership partnership) {
     final _$actionInfo = _$PartnershipListControllerBaseActionController
         .startAction(name: 'PartnershipListControllerBase.deleteById');
     try {
