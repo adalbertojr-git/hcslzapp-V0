@@ -314,22 +314,6 @@ mixin _$AssociatedUpdateController on AssociatedUpdateControllerBase, Store {
     });
   }
 
-  late final _$errorMsgAtom =
-      Atom(name: 'AssociatedUpdateControllerBase.errorMsg', context: context);
-
-  @override
-  String get errorMsg {
-    _$errorMsgAtom.reportRead();
-    return super.errorMsg;
-  }
-
-  @override
-  set errorMsg(String value) {
-    _$errorMsgAtom.reportWrite(value, super.errorMsg, () {
-      super.errorMsg = value;
-    });
-  }
-
   late final _$currentBloodTypeAtom = Atom(
       name: 'AssociatedUpdateControllerBase.currentBloodType',
       context: context);
@@ -437,7 +421,6 @@ photoUrl: ${photoUrl},
 photo: ${photo},
 changedPhoto: ${changedPhoto},
 associated: ${associated},
-errorMsg: ${errorMsg},
 currentBloodType: ${currentBloodType},
 currentAssociatedType: ${currentAssociatedType},
 currentStatus: ${currentStatus}

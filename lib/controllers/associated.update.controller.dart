@@ -76,9 +76,6 @@ abstract class AssociatedUpdateControllerBase with Store {
   AssociatedRepo _associatedRepo = AssociatedRepo();
 
   @observable
-  String errorMsg = "";
-
-  @observable
   String currentBloodType = "";
 
   @observable
@@ -209,7 +206,7 @@ abstract class AssociatedUpdateControllerBase with Store {
         );
     await reference.putFile(photo);
     return await reference.getDownloadURL().catchError((e) {
-      errorMsg = "${e.message}";
+      //errorMsg = "${e.message}";
     });
   }
 }

@@ -48,18 +48,18 @@ class _EventAddPageState extends State<EventAddPage> {
           widget._event == null ? 'Adicionar ' + _title : 'Editar ' + _title,
         ),
         bottomNavigationBar: MyBottomAppBar(),
-        body: _widgets(context),
+        body: _widgets(),
         floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
         floatingActionButton: widget._selectedProfile == ADMIN
             ? Button(
                 icon: Icons.save,
                 onClick: () =>
-                    widget._event == null ? _save(context) : _update(context),
+                    widget._event == null ? _save() : _update(),
               )
             : null,
       );
 
-  _widgets(BuildContext context) => ListView(
+  _widgets() => ListView(
         children: <Widget>[
           SizedBox(
             height: 10.0,
@@ -146,37 +146,41 @@ class _EventAddPageState extends State<EventAddPage> {
                 ) as ImageProvider,
       fit: BoxFit.fill);
 
-  _save(BuildContext context) {
+  _save() {
     if (_controller.hasErrors) {
       AsukaSnackbar.alert(REQUIRED).show();
     } else {
-      _controller.save().then(
-        (value) {
-          if (value != null) {
-            AsukaSnackbar.success(SUCCESS).show();
-            Navigator.pop(context, value);
-          } else {
-            AsukaSnackbar.alert(_controller.errorMsg).show();
-          }
-        },
-      );
+      try {
+        _controller.save().then((value) {
+          AsukaSnackbar.success(SUCCESS).show();
+          Navigator.pop(context, value);
+        });
+      } on HttpException catch (e) {
+        AsukaSnackbar.alert(e.message.toString()).show();
+      } on Exception catch (e) {
+        AsukaSnackbar.alert(e.toString()).show();
+      } catch (e) {
+        AsukaSnackbar.alert(e.toString()).show();
+      } finally {}
     }
   }
 
-  _update(BuildContext context) {
+  _update() {
     if (_controller.hasErrors) {
       AsukaSnackbar.alert(REQUIRED).show();
     } else {
-      _controller.update().then(
-        (value) {
-          if (value != null) {
-            AsukaSnackbar.success(SUCCESS).show();
-            Navigator.pop(context, value);
-          } else {
-            AsukaSnackbar.alert(_controller.errorMsg).show();
-          }
-        },
-      );
+      try {
+        _controller.update().then((value) {
+          AsukaSnackbar.success(SUCCESS).show();
+          Navigator.pop(context, value);
+        });
+      } on HttpException catch (e) {
+        AsukaSnackbar.alert(e.message.toString()).show();
+      } on Exception catch (e) {
+        AsukaSnackbar.alert(e.toString()).show();
+      } catch (e) {
+        AsukaSnackbar.alert(e.toString()).show();
+      } finally {}
     }
   }
 }

@@ -42,9 +42,6 @@ abstract class EventAddControllerBase with Store {
   EventRepo _eventRepo = EventRepo();
 
   @observable
-  String errorMsg = '';
-
-  @observable
   String eventDate = '';
 
   init() {
@@ -138,7 +135,7 @@ abstract class EventAddControllerBase with Store {
         );
     await reference.putFile(photo);
     return await reference.getDownloadURL().catchError((e) {
-      errorMsg = "${e.message}";
+      //errorMsg = "${e.message}";
     });
   }
 }
