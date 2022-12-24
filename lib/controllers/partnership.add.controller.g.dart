@@ -249,46 +249,6 @@ mixin _$PartnershipAddController on PartnershipAddControllerBase, Store {
     });
   }
 
-  late final _$errorMsgAtom =
-      Atom(name: 'PartnershipAddControllerBase.errorMsg', context: context);
-
-  @override
-  String get errorMsg {
-    _$errorMsgAtom.reportRead();
-    return super.errorMsg;
-  }
-
-  @override
-  set errorMsg(String value) {
-    _$errorMsgAtom.reportWrite(value, super.errorMsg, () {
-      super.errorMsg = value;
-    });
-  }
-
-  late final _$findAllAsyncAction =
-      AsyncAction('PartnershipAddControllerBase.findAll', context: context);
-
-  @override
-  Future<dynamic> findAll() {
-    return _$findAllAsyncAction.run(() => super.findAll());
-  }
-
-  late final _$saveAsyncAction =
-      AsyncAction('PartnershipAddControllerBase.save', context: context);
-
-  @override
-  Future<dynamic> save() {
-    return _$saveAsyncAction.run(() => super.save());
-  }
-
-  late final _$updateAsyncAction =
-      AsyncAction('PartnershipAddControllerBase.update', context: context);
-
-  @override
-  Future<dynamic> update() {
-    return _$updateAsyncAction.run(() => super.update());
-  }
-
   late final _$getImageFromCameraAsyncAction = AsyncAction(
       'PartnershipAddControllerBase.getImageFromCamera',
       context: context);
@@ -324,6 +284,39 @@ mixin _$PartnershipAddController on PartnershipAddControllerBase, Store {
   }
 
   @override
+  Future<dynamic> findAll() {
+    final _$actionInfo = _$PartnershipAddControllerBaseActionController
+        .startAction(name: 'PartnershipAddControllerBase.findAll');
+    try {
+      return super.findAll();
+    } finally {
+      _$PartnershipAddControllerBaseActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
+  Future<dynamic> save() {
+    final _$actionInfo = _$PartnershipAddControllerBaseActionController
+        .startAction(name: 'PartnershipAddControllerBase.save');
+    try {
+      return super.save();
+    } finally {
+      _$PartnershipAddControllerBaseActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
+  Future<dynamic> update() {
+    final _$actionInfo = _$PartnershipAddControllerBaseActionController
+        .startAction(name: 'PartnershipAddControllerBase.update');
+    try {
+      return super.update();
+    } finally {
+      _$PartnershipAddControllerBaseActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
   String toString() {
     return '''
 idCtrl: ${idCtrl},
@@ -339,8 +332,7 @@ photo: ${photo},
 changedPhoto: ${changedPhoto},
 isActive: ${isActive},
 currentStatus: ${currentStatus},
-partnership: ${partnership},
-errorMsg: ${errorMsg}
+partnership: ${partnership}
     ''';
   }
 }
