@@ -59,16 +59,20 @@ abstract class EventAddControllerBase with Store {
   }
 
   @action
-  Future<Event> save() => _eventRepo.save(_setValues()).then((value) => value);
+  Future<Event> save() async => _eventRepo.save(
+        await _setValues(),
+      );
 
   @action
-  Future<Event> update() => _eventRepo.update(_setValues());
+  Future<Event> update() async => _eventRepo.update(
+        await _setValues(),
+      );
 
-  Event _setValues() {
+  Future<Event> _setValues() async {
     String _lPhotoUrl = '';
     if (photo.path != '') {
       //se houve alteração de foto
-      _uploadPhoto().then((value) => _lPhotoUrl = value);
+      await _uploadPhoto().then((value) => _lPhotoUrl = value);
     } else
       _lPhotoUrl = photoUrl;
     return Event(

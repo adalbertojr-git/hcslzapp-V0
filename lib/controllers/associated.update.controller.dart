@@ -120,10 +120,12 @@ abstract class AssociatedUpdateControllerBase with Store {
   bool get hasErrorEmail => validateEmail() != null;
 
   @action
-  Future<Associated> update(Associated associated) =>
-      _associatedRepo.update(_setValues());
+  Future<Associated> update(Associated associated) async =>
+      _associatedRepo.update(
+        await _setValues(),
+      );
 
-  Associated _setValues() {
+  Future<Associated> _setValues() async {
     associated.name = nameCtrl.text;
     associated.phone = phoneCtrl.text;
     associated.email = emailCtrl.text;
@@ -140,7 +142,7 @@ abstract class AssociatedUpdateControllerBase with Store {
     associated.motorcycles = List<Motorcycle>.from(motorcycles);
     if (photo.path != '') {
       //se houve alteração de foto
-      _uploadPhoto().then((value) => associated.photoUrl = value);
+      await _uploadPhoto().then((value) => associated.photoUrl = value);
     }
     return associated;
   }

@@ -43,9 +43,6 @@ abstract class HeadNotificationAddControllerBase with Store {
   @observable
   bool changedPhoto = false;
 
-  @observable
-  String errorMsg = '';
-
   init() {
     _initTextFields();
     formController = FormController(
@@ -60,30 +57,28 @@ abstract class HeadNotificationAddControllerBase with Store {
   }
 
   @action
-  Future save() async => await _headNotificationRepo
-          .save(await _setValues())
-          .then((value) => value)
-          .catchError((e) {
-        errorMsg = "${e.message}";
-      }, test: (e) => e is HttpException).catchError((e) {
-        errorMsg = "$e";
-      }, test: (e) => e is Exception);
+  Future<HeadNotification> save() async => await _headNotificationRepo.save(
+        await _setValues(),
+      );
 
   @action
-  Future update() async =>
-      await _headNotificationRepo.update(await _setValues()).catchError((e) {
-        errorMsg = "${e.message}";
-      }, test: (e) => e is HttpException).catchError((e) {
-        errorMsg = "$e";
-      }, test: (e) => e is Exception);
+  Future<HeadNotification> update() async => await _headNotificationRepo.update(
+        await _setValues(),
+      );
 
   Future<HeadNotification> _setValues() async {
+    String _lPhotoUrl = '';
+    if (photo.path != '') {
+      //se houve alteração de foto
+      await _uploadPhoto().then((value) => _lPhotoUrl = value);
+    } else
+      _lPhotoUrl = photoUrl;
     return HeadNotification(
       id: headNotification.id,
       title: titleCtrl.text,
       notification: notificationCtrl.text,
       datePublication: '',
-      photoUrl: photo.path.length != 0 ? await _uploadPhoto() : photoUrl,
+      photoUrl: _lPhotoUrl,
     );
   }
 
@@ -139,11 +134,11 @@ abstract class HeadNotificationAddControllerBase with Store {
   Future<String> _uploadPhoto() async {
     FirebaseStorage storage = FirebaseStorage.instance;
     Reference reference = storage.ref().child(
-      'headNotificationPhotos/${headNotification.id}',
-    );
+          'headNotificationPhotos/${headNotification.id}',
+        );
     await reference.putFile(photo);
     return await reference.getDownloadURL().catchError((e) {
-      errorMsg = "${e.message}";
+      //errorMsg = "${e.message}";
     });
   }
 }

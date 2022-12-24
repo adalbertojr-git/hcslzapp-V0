@@ -79,39 +79,38 @@ abstract class PartnershipAddControllerBase with Store {
     addressCtrl.text = partnership.address;
     promotionCtrl.text = partnership.promotion;
     statusCtrl.text =
-    partnership.status.length > 0 ? partnership.status : 'Ativo';
+        partnership.status.length > 0 ? partnership.status : 'Ativo';
   }
 
   @action
-  Future<List<Partnership>> findAll() =>
-      _partnershipRepo.findAll().then((value) => value);
+  Future<List<Partnership>> findAll() => _partnershipRepo.findAll();
 
   @action
-  Future<Partnership>  save() =>
-      _partnershipRepo
-          .save(_setValues())
-          .then((value) => value);
+  Future<Partnership> save() async => _partnershipRepo.save(
+        await _setValues(),
+      );
 
   @action
-  Future<Partnership>  update() =>
-      _partnershipRepo.update(_setValues());
+  Future<Partnership> update() async => _partnershipRepo.update(
+        await _setValues(),
+      );
 
-  Partnership _setValues() {
+  Future<Partnership> _setValues() async {
     String _lPhotoUrl = '';
     if (photo.path != '') {
       //se houve alteração de foto
-      _uploadPhoto().then((value) => _lPhotoUrl = value);
+      await _uploadPhoto().then((value) => _lPhotoUrl = value);
     } else
       _lPhotoUrl = photoUrl;
     return Partnership(
-        id: partnership.id,
-        partner: partnerCtrl.text,
-        phone1: phone1Ctrl.text,
-        phone2: phone2Ctrl.text,
-        address: addressCtrl.text,
-        promotion: promotionCtrl.text,
-        status: currentStatus,
-        photoUrl: _lPhotoUrl,
+      id: partnership.id,
+      partner: partnerCtrl.text,
+      phone1: phone1Ctrl.text,
+      phone2: phone2Ctrl.text,
+      address: addressCtrl.text,
+      promotion: promotionCtrl.text,
+      status: currentStatus,
+      photoUrl: _lPhotoUrl,
     );
   }
 
@@ -157,8 +156,8 @@ abstract class PartnershipAddControllerBase with Store {
   Future<String> _uploadPhoto() async {
     FirebaseStorage storage = FirebaseStorage.instance;
     Reference reference = storage.ref().child(
-      'partnerPhotos/${partnership.id}',
-    );
+          'partnerPhotos/${partnership.id}',
+        );
     await reference.putFile(photo);
     return await reference.getDownloadURL().catchError((e) {
       //errorMsg = "${e.message}";

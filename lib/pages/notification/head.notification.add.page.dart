@@ -141,37 +141,41 @@ class _HeadNotificationAddPageState extends State<HeadNotificationAddPage> {
                 ) as ImageProvider,
       fit: BoxFit.fill);
 
-  _save(BuildContext context) {
+  _save() {
     if (_controller.hasErrors) {
       AsukaSnackbar.alert(REQUIRED).show();
     } else {
-      _controller.save().then(
-        (value) {
-          if (value != null) {
-            AsukaSnackbar.success(SUCCESS).show();
-            Navigator.of(context).pop(value);
-          } else {
-            AsukaSnackbar.alert(_controller.errorMsg).show();
-          }
-        },
-      );
+      try {
+        _controller.save().then((value) {
+          AsukaSnackbar.success(SUCCESS).show();
+          Navigator.pop(context, value);
+        });
+      } on HttpException catch (e) {
+        AsukaSnackbar.alert(e.message.toString()).show();
+      } on Exception catch (e) {
+        AsukaSnackbar.alert(e.toString()).show();
+      } catch (e) {
+        AsukaSnackbar.alert(e.toString()).show();
+      } finally {}
     }
   }
 
-  _update(BuildContext context) {
+  _update() {
     if (_controller.hasErrors) {
       AsukaSnackbar.alert(REQUIRED).show();
     } else {
-      _controller.update().then(
-        (value) {
-          if (value != null) {
-            AsukaSnackbar.success(SUCCESS).show();
-            Navigator.of(context).pop(value);
-          } else {
-            AsukaSnackbar.alert(_controller.errorMsg).show();
-          }
-        },
-      );
+      try {
+        _controller.update().then((value) {
+          AsukaSnackbar.success(SUCCESS).show();
+          Navigator.pop(context, value);
+        });
+      } on HttpException catch (e) {
+        AsukaSnackbar.alert(e.message.toString()).show();
+      } on Exception catch (e) {
+        AsukaSnackbar.alert(e.toString()).show();
+      } catch (e) {
+        AsukaSnackbar.alert(e.toString()).show();
+      } finally {}
     }
   }
 }
