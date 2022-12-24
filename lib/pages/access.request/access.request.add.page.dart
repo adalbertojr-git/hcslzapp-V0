@@ -2,6 +2,7 @@ import 'package:asuka/asuka.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:hcslzapp/common/labels.and.hints.dart';
+import 'package:hcslzapp/common/messages.dart';
 import 'package:hcslzapp/components/my.bottom.appbar.dart';
 import 'package:hcslzapp/components/my.text.form.field.dart';
 import 'package:hcslzapp/controllers/access.request.controller.dart';
@@ -106,12 +107,11 @@ class _AccessRequestAddPageState extends State<AccessRequestAddPage> {
 
   _save() {
     if (_controller.hasErrors) {
-      AsukaSnackbar.alert('Preencha os campos ogrigatórios').show();
+      AsukaSnackbar.alert(REQUIRED).show();
     } else {
       try {
         _controller.save();
-        AsukaSnackbar.success('Requisições de acesso liberadas com sucesso')
-            .show();
+        AsukaSnackbar.success(SUCCESS).show();
         Navigator.of(context).pop();
       } on HttpException catch (e) {
         AsukaSnackbar.alert(e.message.toString()).show();

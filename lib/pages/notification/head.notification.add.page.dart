@@ -3,6 +3,7 @@ import 'package:asuka/snackbars/asuka_snack_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:hcslzapp/common/labels.and.hints.dart';
+import 'package:hcslzapp/common/messages.dart';
 import 'package:hcslzapp/components/button.dart';
 import 'package:hcslzapp/components/my.text.form.field.dart';
 import 'package:hcslzapp/controllers/head.notification.add.controller.dart';
@@ -142,12 +143,12 @@ class _HeadNotificationAddPageState extends State<HeadNotificationAddPage> {
 
   _save(BuildContext context) {
     if (_controller.hasErrors) {
-      AsukaSnackbar.alert('Preencha os campos ogrigatórios').show();
+      AsukaSnackbar.alert(REQUIRED).show();
     } else {
       _controller.save().then(
         (value) {
           if (value != null) {
-            AsukaSnackbar.success('Aviso cadastrado com sucesso').show();
+            AsukaSnackbar.success(SUCCESS).show();
             Navigator.of(context).pop(value);
           } else {
             AsukaSnackbar.alert(_controller.errorMsg).show();
@@ -159,12 +160,12 @@ class _HeadNotificationAddPageState extends State<HeadNotificationAddPage> {
 
   _update(BuildContext context) {
     if (_controller.hasErrors) {
-      AsukaSnackbar.alert('Preencha os campos ogrigatórios').show();
+      AsukaSnackbar.alert(REQUIRED).show();
     } else {
       _controller.update().then(
         (value) {
           if (value != null) {
-            AsukaSnackbar.success('Aviso atualizado com sucesso').show();
+            AsukaSnackbar.success(SUCCESS).show();
             Navigator.of(context).pop(value);
           } else {
             AsukaSnackbar.alert(_controller.errorMsg).show();

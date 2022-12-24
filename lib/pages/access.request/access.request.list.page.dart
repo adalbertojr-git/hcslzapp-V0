@@ -1,6 +1,7 @@
 import 'package:asuka/snackbars/asuka_snack_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
+import 'package:hcslzapp/common/messages.dart';
 import 'package:hcslzapp/components/button.dart';
 import 'package:hcslzapp/components/centered.message.dart';
 import 'package:hcslzapp/components/progress.dart';
@@ -110,8 +111,7 @@ class AccessRequestListPageState extends State<AccessRequestListPage> {
   _allow() {
     try {
       _controller.allow();
-      AsukaSnackbar.success('Requisições de acesso liberadas com sucesso')
-          .show();
+      AsukaSnackbar.success(SUCCESS).show();
       Navigator.of(context).pop();
     } on HttpException catch (e) {
       AsukaSnackbar.alert(e.message.toString()).show();
@@ -186,8 +186,7 @@ class CheckboxWidget extends StatelessWidget {
     if (response == true) {
       try {
         controller.deleteById(loadAccessRequest(item));
-        AsukaSnackbar.success('Requisição de acesso excluída com sucesso')
-            .show();
+        AsukaSnackbar.success(SUCCESS).show();
         controller.listItems.remove(item);
       } on HttpException catch (e) {
         AsukaSnackbar.alert(e.message.toString()).show();

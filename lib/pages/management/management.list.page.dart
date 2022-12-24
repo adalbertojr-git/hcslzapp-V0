@@ -1,6 +1,7 @@
 import 'package:asuka/snackbars/asuka_snack_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
+import 'package:hcslzapp/common/messages.dart';
 import 'package:hcslzapp/components/button.dart';
 import 'package:hcslzapp/components/centered.message.dart';
 import 'package:hcslzapp/components/progress.dart';
@@ -202,7 +203,7 @@ class ManagementListPageState extends State<ManagementListPage> {
       } else {
         try {
           _controller.deleteById(associated);
-          AsukaSnackbar.success('Administrador excluído com sucesso').show();
+          AsukaSnackbar.success(SUCCESS).show();
           _controller.associateds.removeWhere(
             (item) => item.id == associated.id,
           );

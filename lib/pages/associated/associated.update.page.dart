@@ -5,6 +5,7 @@ import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:hcslzapp/common/injection.dart';
 import '../../common/associated.profiles.dart';
 import '../../common/labels.and.hints.dart';
+import '../../common/messages.dart';
 import '../../common/photo.image.provider.dart';
 import '../../components/button.dart';
 import '../../components/my.appbar.dart';
@@ -523,7 +524,7 @@ class AssociatedUpdatePage extends StatelessWidget {
 
   _update(BuildContext context) async {
     if (_controller.hasErrors) {
-      AsukaSnackbar.alert('Preencha os campos ogrigatórios').show();
+      AsukaSnackbar.alert(REQUIRED).show();
     } else {
       var response = true;
       if (_controller.currentStatus == 'Inativo') {
@@ -540,7 +541,7 @@ class AssociatedUpdatePage extends StatelessWidget {
       if (response == true) {
         try {
           _controller.update(_controller.associated).then((value) {
-            AsukaSnackbar.success('Associado atualizado com sucesso').show();
+            AsukaSnackbar.success(SUCCESS).show();
             if (_controller.associated == locator.get<Associated>()) {
               loadAssociatedSingleton(value);
             }

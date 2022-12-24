@@ -3,6 +3,7 @@ import 'package:asuka/snackbars/asuka_snack_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:hcslzapp/common/labels.and.hints.dart';
+import 'package:hcslzapp/common/messages.dart';
 import 'package:hcslzapp/common/photo.image.provider.dart';
 import 'package:hcslzapp/components/button.dart';
 import 'package:hcslzapp/components/transaction.auth.dialog.dart';
@@ -214,11 +215,11 @@ class _PartnershipAddPageState extends State<PartnershipAddPage> {
 
   _save() {
     if (_controller.hasErrors) {
-      AsukaSnackbar.alert('Preencha os campos ogrigatórios').show();
+      AsukaSnackbar.alert(REQUIRED).show();
     } else {
       try {
         final value = _controller.save();
-        AsukaSnackbar.success('Parceiro cadastrado com sucesso').show();
+        AsukaSnackbar.success(SUCCESS).show();
         Navigator.of(context).pop(value);
       } on HttpException catch (e) {
         AsukaSnackbar.alert(e.message.toString()).show();
@@ -250,7 +251,7 @@ class _PartnershipAddPageState extends State<PartnershipAddPage> {
 
         try {
           final value = await _controller.update();
-          AsukaSnackbar.success('Parceiro atualizado com sucesso').show();
+          AsukaSnackbar.success(SUCCESS).show();
           Navigator.pop(context, value);
         } on HttpException catch (e) {
           AsukaSnackbar.alert(e.message.toString()).show();

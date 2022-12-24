@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:hcslzapp/common/associated.profiles.dart';
 import 'package:hcslzapp/common/labels.and.hints.dart';
+import 'package:hcslzapp/common/messages.dart';
 import 'package:hcslzapp/components/button.dart';
 import 'package:hcslzapp/components/my.text.form.field.dart';
 import 'package:hcslzapp/controllers/payment.add.controller.dart';
@@ -271,11 +272,11 @@ class _PaymentAddAddState extends State<PaymentAddPage> {
 
   _save() {
     if (_controller.hasErrors) {
-      AsukaSnackbar.alert('Preencha os campos ogrigatórios').show();
+      AsukaSnackbar.alert(REQUIRED).show();
     } else {
       try {
         _controller.save();
-        AsukaSnackbar.success('Mensalidades cadastradas com sucesso').show();
+        AsukaSnackbar.success(SUCCESS).show();
         Navigator.of(context).pop();
       } on HttpException catch (e) {
         AsukaSnackbar.alert(e.message.toString()).show();
@@ -289,11 +290,11 @@ class _PaymentAddAddState extends State<PaymentAddPage> {
 
   _update() {
     if (_controller.hasErrors) {
-      AsukaSnackbar.alert('Preencha os campos ogrigatórios').show();
+      AsukaSnackbar.alert(REQUIRED).show();
     } else {
       try {
         final value = _controller.save();
-        AsukaSnackbar.success('Mensalidades atualizadas com sucesso').show();
+        AsukaSnackbar.success(SUCCESS).show();
         Navigator.of(context).pop(value);
       } on HttpException catch (e) {
         AsukaSnackbar.alert(e.message.toString()).show();

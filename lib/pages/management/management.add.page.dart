@@ -1,6 +1,7 @@
 import 'package:asuka/snackbars/asuka_snack_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
+import 'package:hcslzapp/common/messages.dart';
 import 'package:hcslzapp/components/button.dart';
 import 'package:hcslzapp/components/centered.message.dart';
 import 'package:hcslzapp/components/progress.dart';
@@ -126,7 +127,7 @@ class ManagementAddPageState extends State<ManagementAddPage> {
   _save(BuildContext context) {
     try {
       _controller.save();
-      AsukaSnackbar.success('Administrador(es) cadastrado(s) com sucesso').show();
+      AsukaSnackbar.success(SUCCESS).show();
       Navigator.pop(context, _controller.listItems);
     } on HttpException catch (e) {
       AsukaSnackbar.alert(e.message.toString()).show();

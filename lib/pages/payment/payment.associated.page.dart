@@ -9,6 +9,7 @@ import 'package:hcslzapp/components/transaction.auth.dialog.dart';
 import 'package:hcslzapp/controllers/payment.associated.controller.dart';
 import 'package:hcslzapp/models/payment.dart';
 import 'package:hcslzapp/pages/payment/payment.add.page.dart';
+import '../../common/messages.dart';
 import '../../components/my.appbar.dart';
 import '../../components/my.bottom.appbar.dart';
 import '../../http/http.exception.dart';
@@ -229,7 +230,7 @@ class _PaymentAssociatedPageState extends State<PaymentAssociatedPage> {
     if (response == true) {
       try {
         _controller.deleteById(_controller.payments[i]);
-        AsukaSnackbar.success('Mensalidade excluída com sucesso').show();
+        AsukaSnackbar.success(SUCCESS).show();
         _controller.payments.removeAt(i);
       } on HttpException catch (e) {
         AsukaSnackbar.alert(e.message.toString()).show();

@@ -1,6 +1,7 @@
 import 'package:asuka/snackbars/asuka_snack_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
+import 'package:hcslzapp/common/messages.dart';
 import 'package:hcslzapp/components/button.dart';
 import 'package:hcslzapp/components/centered.message.dart';
 import 'package:hcslzapp/components/progress.dart';
@@ -151,7 +152,7 @@ class HeadNotificationListAdmPage extends StatelessWidget {
     if (response == true) {
       try {
         _controller.deleteById(_controller.headNotifications[i]);
-        AsukaSnackbar.success('Aviso excluído com sucesso').show();
+        AsukaSnackbar.success(SUCCESS).show();
         _controller.headNotifications.removeAt(i);
       } on HttpException catch (e) {
         AsukaSnackbar.alert(e.message.toString()).show();

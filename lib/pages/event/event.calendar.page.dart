@@ -2,6 +2,7 @@ import 'dart:io';
 import 'package:asuka/snackbars/asuka_snack_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
+import 'package:hcslzapp/common/messages.dart';
 import 'package:hcslzapp/models/event.dart';
 import 'package:intl/intl.dart';
 import 'package:table_calendar/table_calendar.dart';
@@ -330,7 +331,7 @@ class _EventCalendarPageState extends State<EventCalendarPage> {
     if (response == true) {
       try {
         _controller.deleteById(event);
-        AsukaSnackbar.success('Evento excluído com sucesso').show();
+        AsukaSnackbar.success(SUCCESS).show();
         _loadAllEvents();
       } on HttpException catch (e) {
         AsukaSnackbar.alert(e.message.toString()).show();
