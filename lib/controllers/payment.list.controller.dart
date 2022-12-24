@@ -24,9 +24,6 @@ abstract class PaymentListControllerBase with Store {
   AssociatedRepo _associatedRepo = AssociatedRepo();
 
   @observable
-  String errorMsg = "";
-
-  @observable
   Future<List<Associated>> future = Future<List<Associated>>.value([]);
 
   @observable
@@ -41,12 +38,7 @@ abstract class PaymentListControllerBase with Store {
 
   @action
   Future<List<Associated>> findAll() =>
-      ObservableFuture(_associatedRepo.findAll().then((value) => value))
-          .catchError((e) {
-        errorMsg = "${e.message}";
-      }, test: (e) => e is HttpException).catchError((e) {
-        errorMsg = "$e";
-      }, test: (e) => e is Exception);
+      ObservableFuture(_associatedRepo.findAll().then((value) => value));
 
   Future<List<Associated>> getFuture() => future = findAll();
 

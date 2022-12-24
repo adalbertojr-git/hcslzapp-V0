@@ -1,5 +1,4 @@
 import 'dart:async';
-import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:hcslzapp/models/payment.dart';
 import 'package:hcslzapp/models/payment.months.dart';
@@ -67,9 +66,6 @@ abstract class PaymentAddControllerBase with Store {
   PaymentRepo _paymentRepo = PaymentRepo();
 
   @observable
-  String errorMsg = "";
-
-  @observable
   List<String> years = List.filled(0, '', growable: true);
 
   init() {
@@ -126,22 +122,12 @@ abstract class PaymentAddControllerBase with Store {
   }
 
   @action
-  Future update() =>
-      ObservableFuture(_paymentRepo.update(_setValues()).then((value) => value))
-          .catchError((e) {
-        errorMsg = "${e.message}";
-      }, test: (e) => e is HttpException).catchError((e) {
-        errorMsg = "$e";
-      }, test: (e) => e is Exception);
+  Future<Payment> update() =>
+      ObservableFuture(_paymentRepo.update(_setValues()).then((value) => value));
 
   @action
-  Future save() =>
-      ObservableFuture(_paymentRepo.save(_setValues()).then((value) => value))
-          .catchError((e) {
-        errorMsg = "${e.message}";
-      }, test: (e) => e is HttpException).catchError((e) {
-        errorMsg = "$e";
-      }, test: (e) => e is Exception);
+  Future<Payment> save() =>
+      ObservableFuture(_paymentRepo.save(_setValues()).then((value) => value));
 
   Payment _setValues() {
     return Payment(

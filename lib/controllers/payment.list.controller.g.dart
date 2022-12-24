@@ -81,22 +81,6 @@ mixin _$PaymentListController on PaymentListControllerBase, Store {
     });
   }
 
-  late final _$errorMsgAtom =
-      Atom(name: 'PaymentListControllerBase.errorMsg', context: context);
-
-  @override
-  String get errorMsg {
-    _$errorMsgAtom.reportRead();
-    return super.errorMsg;
-  }
-
-  @override
-  set errorMsg(String value) {
-    _$errorMsgAtom.reportWrite(value, super.errorMsg, () {
-      super.errorMsg = value;
-    });
-  }
-
   late final _$futureAtom =
       Atom(name: 'PaymentListControllerBase.future', context: context);
 
@@ -171,7 +155,6 @@ mixin _$PaymentListController on PaymentListControllerBase, Store {
 nameCtrl: ${nameCtrl},
 isHidedButton: ${isHidedButton},
 associateds: ${associateds},
-errorMsg: ${errorMsg},
 future: ${future},
 filter: ${filter},
 listFiltered: ${listFiltered}

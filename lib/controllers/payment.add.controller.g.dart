@@ -281,22 +281,6 @@ mixin _$PaymentAddController on PaymentAddControllerBase, Store {
     });
   }
 
-  late final _$errorMsgAtom =
-      Atom(name: 'PaymentAddControllerBase.errorMsg', context: context);
-
-  @override
-  String get errorMsg {
-    _$errorMsgAtom.reportRead();
-    return super.errorMsg;
-  }
-
-  @override
-  set errorMsg(String value) {
-    _$errorMsgAtom.reportWrite(value, super.errorMsg, () {
-      super.errorMsg = value;
-    });
-  }
-
   late final _$yearsAtom =
       Atom(name: 'PaymentAddControllerBase.years', context: context);
 
@@ -317,7 +301,7 @@ mixin _$PaymentAddController on PaymentAddControllerBase, Store {
       ActionController(name: 'PaymentAddControllerBase', context: context);
 
   @override
-  Future<dynamic> update() {
+  Future<Payment> update() {
     final _$actionInfo = _$PaymentAddControllerBaseActionController.startAction(
         name: 'PaymentAddControllerBase.update');
     try {
@@ -328,7 +312,7 @@ mixin _$PaymentAddController on PaymentAddControllerBase, Store {
   }
 
   @override
-  Future<dynamic> save() {
+  Future<Payment> save() {
     final _$actionInfo = _$PaymentAddControllerBaseActionController.startAction(
         name: 'PaymentAddControllerBase.save');
     try {
@@ -368,7 +352,6 @@ novCtrl: ${novCtrl},
 decCtrl: ${decCtrl},
 payments: ${payments},
 payment: ${payment},
-errorMsg: ${errorMsg},
 years: ${years}
     ''';
   }

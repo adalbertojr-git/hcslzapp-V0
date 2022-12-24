@@ -10,6 +10,7 @@ import 'package:hcslzapp/models/payment.dart';
 import 'package:mask_text_input_formatter/mask_text_input_formatter.dart';
 import '../../components/my.appbar.dart';
 import '../../components/my.bottom.appbar.dart';
+import '../../http/http.exception.dart';
 
 const String _title = 'Adicionar Mensalidades';
 
@@ -272,17 +273,17 @@ class _PaymentAddAddState extends State<PaymentAddPage> {
     if (_controller.hasErrors) {
       AsukaSnackbar.alert('Preencha os campos ogrigatórios').show();
     } else {
-      _controller.save().then(
-        (payment) {
-          if (payment != null) {
-            AsukaSnackbar.success('Mensalidades cadastradas com sucesso')
-                .show();
-            Navigator.of(context).pop(payment);
-          } else {
-            AsukaSnackbar.alert(_controller.errorMsg).show();
-          }
-        },
-      );
+      try {
+        _controller.save();
+        AsukaSnackbar.success('Mensalidades cadastradas com sucesso').show();
+        Navigator.of(context).pop();
+      } on HttpException catch (e) {
+        AsukaSnackbar.alert(e.message.toString()).show();
+      } on Exception catch (e) {
+        AsukaSnackbar.alert(e.toString()).show();
+      } catch (e) {
+        AsukaSnackbar.alert(e.toString()).show();
+      } finally {}
     }
   }
 
@@ -290,17 +291,17 @@ class _PaymentAddAddState extends State<PaymentAddPage> {
     if (_controller.hasErrors) {
       AsukaSnackbar.alert('Preencha os campos ogrigatórios').show();
     } else {
-      _controller.update().then(
-        (payment) {
-          if (payment != null) {
-            AsukaSnackbar.success('Mensalidades atualizadas com sucesso')
-                .show();
-            Navigator.of(context).pop(payment);
-          } else {
-            AsukaSnackbar.alert(_controller.errorMsg).show();
-          }
-        },
-      );
+      try {
+        final value = _controller.save();
+        AsukaSnackbar.success('Mensalidades atualizadas com sucesso').show();
+        Navigator.of(context).pop(value);
+      } on HttpException catch (e) {
+        AsukaSnackbar.alert(e.message.toString()).show();
+      } on Exception catch (e) {
+        AsukaSnackbar.alert(e.toString()).show();
+      } catch (e) {
+        AsukaSnackbar.alert(e.toString()).show();
+      } finally {}
     }
   }
 }
