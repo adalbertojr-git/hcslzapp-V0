@@ -11,6 +11,7 @@ import 'package:hcslzapp/enums/associated.status.dart';
 import 'package:hcslzapp/components/my.text.form.field.dart';
 import 'package:hcslzapp/models/partnership.dart';
 import 'package:mask_text_input_formatter/mask_text_input_formatter.dart';
+import '../../http/http.exception.dart';
 
 import '../../components/my.appbar.dart';
 import '../../components/my.bottom.appbar.dart';
@@ -50,7 +51,7 @@ class _PartnershipAddPageState extends State<PartnershipAddPage> {
         floatingActionButton: Button(
           icon: Icons.save,
           onClick: () =>
-              widget.partnership == null ? _save(context) : _update(context),
+              widget.partnership == null ? _save() : _update(),
         ),
       );
 
@@ -211,24 +212,25 @@ class _PartnershipAddPageState extends State<PartnershipAddPage> {
                 ) as ImageProvider,
       fit: BoxFit.fill);
 
-  _save(BuildContext context) {
+  _save() {
     if (_controller.hasErrors) {
       AsukaSnackbar.alert('Preencha os campos ogrigatórios').show();
     } else {
-      _controller.save().then(
-        (value) {
-          if (value != null) {
-            AsukaSnackbar.success('Parceiro salvo com sucesso').show();
-            Navigator.of(context).pop(value);
-          } else {
-            AsukaSnackbar.alert(_controller.errorMsg).show();
-          }
-        },
-      );
+      try {
+        final value = _controller.save();
+        AsukaSnackbar.success('Parceiro cadastrado com sucesso').show();
+        Navigator.of(context).pop(value);
+      } on HttpException catch (e) {
+        AsukaSnackbar.alert(e.message.toString()).show();
+      } on Exception catch (e) {
+        AsukaSnackbar.alert(e.toString()).show();
+      } catch (e) {
+        AsukaSnackbar.alert(e.toString()).show();
+      } finally {}
     }
   }
 
-  _update(BuildContext context) async {
+  _update() async {
     if (_controller.hasErrors) {
       AsukaSnackbar.alert('Preencha os campos ogrigatórios').show();
     } else {
@@ -245,17 +247,18 @@ class _PartnershipAddPageState extends State<PartnershipAddPage> {
             });
       }
       if (response == true) {
-        AsukaSnackbar.message('Aguarde...').show();
-        _controller.update().then(
-          (value) {
-            if (value != null) {
-              AsukaSnackbar.success('Parceiro atualizado com sucesso').show();
-              Navigator.pop(context, value);
-            } else {
-              AsukaSnackbar.alert(_controller.errorMsg).show();
-            }
-          },
-        );
+
+        try {
+          final value = await _controller.update();
+          AsukaSnackbar.success('Parceiro atualizado com sucesso').show();
+          Navigator.pop(context, value);
+        } on HttpException catch (e) {
+          AsukaSnackbar.alert(e.message.toString()).show();
+        } on Exception catch (e) {
+          AsukaSnackbar.alert(e.toString()).show();
+        } catch (e) {
+          AsukaSnackbar.alert(e.toString()).show();
+        } finally {}
       }
     }
   }

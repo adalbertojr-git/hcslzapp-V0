@@ -60,9 +60,6 @@ abstract class PartnershipAddControllerBase with Store {
   @observable
   PartnershipRepo _partnershipRepo = PartnershipRepo();
 
-  @observable
-  String errorMsg = '';
-
   @action
   setStatus() => isActive = !isActive;
 
@@ -82,45 +79,39 @@ abstract class PartnershipAddControllerBase with Store {
     addressCtrl.text = partnership.address;
     promotionCtrl.text = partnership.promotion;
     statusCtrl.text =
-        partnership.status.length > 0 ? partnership.status : 'Ativo';
+    partnership.status.length > 0 ? partnership.status : 'Ativo';
   }
 
   @action
-  Future findAll() async =>
-      await _partnershipRepo.findAll().then((value) => value).catchError((e) {
-        errorMsg = "${e.message}";
-      }, test: (e) => e is HttpException).catchError((e) {
-        errorMsg = "$e";
-      }, test: (e) => e is Exception);
+  Future findAll() =>
+      _partnershipRepo.findAll().then((value) => value);
 
   @action
-  Future save() async => await _partnershipRepo
-          .save(await _setValues())
-          .then((value) => value)
-          .catchError((e) {
-        errorMsg = "${e.message}";
-      }, test: (e) => e is HttpException).catchError((e) {
-        errorMsg = "$e";
-      }, test: (e) => e is Exception);
+  Future save() =>
+      _partnershipRepo
+          .save(_setValues())
+          .then((value) => value);
 
   @action
-  Future update() async =>
-      await _partnershipRepo.update(await _setValues()).catchError((e) {
-        errorMsg = "${e.message}";
-      }, test: (e) => e is HttpException).catchError((e) {
-        errorMsg = "$e";
-      }, test: (e) => e is Exception);
+  Future update() =>
+      _partnershipRepo.update(_setValues());
 
-  Future<Partnership> _setValues() async {
+  Partnership _setValues() {
+    String _lPhotoUrl = '';
+    if (photo.path != '') {
+      //se houve alteração de foto
+      _uploadPhoto().then((value) => _lPhotoUrl = value);
+    } else
+      _lPhotoUrl = photoUrl;
     return Partnership(
-      id: partnership.id,
-      partner: partnerCtrl.text,
-      phone1: phone1Ctrl.text,
-      phone2: phone2Ctrl.text,
-      address: addressCtrl.text,
-      promotion: promotionCtrl.text,
-      status: currentStatus,
-      photoUrl: photo.path.length != 0 ? await _uploadPhoto() : photoUrl,
+        id: partnership.id,
+        partner: partnerCtrl.text,
+        phone1: phone1Ctrl.text,
+        phone2: phone2Ctrl.text,
+        address: addressCtrl.text,
+        promotion: promotionCtrl.text,
+        status: currentStatus,
+        photoUrl: _lPhotoUrl,
     );
   }
 
@@ -166,11 +157,11 @@ abstract class PartnershipAddControllerBase with Store {
   Future<String> _uploadPhoto() async {
     FirebaseStorage storage = FirebaseStorage.instance;
     Reference reference = storage.ref().child(
-          'partnerPhotos/${partnership.id}',
-        );
+      'partnerPhotos/${partnership.id}',
+    );
     await reference.putFile(photo);
     return await reference.getDownloadURL().catchError((e) {
-      errorMsg = "${e.message}";
+      //errorMsg = "${e.message}";
     });
   }
 }
