@@ -35,11 +35,6 @@ class _CenteredMessageState extends State<CenteredMessage> {
               shrinkWrap: true,
               children: <Widget>[
                 HcLogo(0.0),
-                Icon(
-                  Icons.warning_amber_sharp,
-                  size: 80,
-                  color: Colors.black,
-                ),
               ],
             ),
           ),
