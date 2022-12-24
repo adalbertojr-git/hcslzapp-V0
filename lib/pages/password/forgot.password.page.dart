@@ -2,6 +2,7 @@ import 'package:asuka/asuka.dart';
 import 'package:flutter/material.dart' hide showDialog;
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:hcslzapp/common/labels.and.hints.dart';
+import 'package:hcslzapp/common/messages.dart';
 import 'package:hcslzapp/components/button.dart';
 import 'package:hcslzapp/components/my.appbar.dart';
 import 'package:hcslzapp/components/my.text.form.field.dart';
@@ -70,7 +71,7 @@ class ForgotPasswordPage extends StatelessWidget {
 
   _forgotPassword() {
     if (_controller.hasErrors) {
-      AsukaSnackbar.alert('Preencha os campos ogrigatórios').show();
+      AsukaSnackbar.alert(REQUIRED).show();
     } else {
       AsukaSnackbar.message('Aguarde...').show();
       _controller.forgotPassword(_controller.emailForgotPswCtrl.text).then(

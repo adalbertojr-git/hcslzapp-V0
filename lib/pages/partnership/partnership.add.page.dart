@@ -233,7 +233,7 @@ class _PartnershipAddPageState extends State<PartnershipAddPage> {
 
   _update() async {
     if (_controller.hasErrors) {
-      AsukaSnackbar.alert('Preencha os campos ogrigatórios').show();
+      AsukaSnackbar.alert(REQUIRED).show();
     } else {
       var response = true;
       if (_controller.currentStatus == 'Inativo') {

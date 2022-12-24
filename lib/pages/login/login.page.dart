@@ -2,6 +2,7 @@ import 'package:asuka/snackbars/asuka_snack_bar.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:hcslzapp/common/messages.dart';
 import '../../common/injection.dart';
 import '../../common/labels.and.hints.dart';
 import '../../common/token.details.dart';
@@ -217,7 +218,7 @@ class _MyCustomLoginUIState extends State<MyCustomLoginUI>
 
   _login() async {
     if (_controllerLogin.hasErrors) {
-      AsukaSnackbar.alert('Preencha os campos obrigatórios.').show();
+      AsukaSnackbar.alert(REQUIRED).show();
     } else {
       try {
         final value = await _controllerLogin.authenticate();
