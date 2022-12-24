@@ -27,14 +27,10 @@ abstract class LoginControllerBase with Store {
     formController = FormController(user: '', password: '');
   }
 
-  Future<Token> authenticate() {
-    return ObservableFuture(_loginRepo
-        .authenticate(
-          userLoginCtrl.text,
-          pswLoginCtrl.text,
-        )
-        .then((value) => value));
-  }
+  Future<Token> authenticate() => _loginRepo.authenticate(
+        userLoginCtrl.text,
+        pswLoginCtrl.text,
+      );
 
   bool get hasErrors => hasErrorUser || hasErrorPassword;
 

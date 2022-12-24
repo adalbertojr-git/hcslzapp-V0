@@ -1,4 +1,3 @@
-import 'dart:io';
 import 'package:flutter/cupertino.dart';
 import 'package:hcslzapp/repositories/payment.table.repo.dart';
 import 'package:mobx/mobx.dart';
@@ -23,11 +22,7 @@ abstract class PaymentTableControllerBase with Store {
   PaymentTableRepo _paymentTableRepo = PaymentTableRepo();
 
   @observable
-  late String errorMsg;
-
-  @observable
-  Future<List<PaymentTable>> future =
-      Future<List<PaymentTable>>.value([]);
+  Future<List<PaymentTable>> future = Future<List<PaymentTable>>.value([]);
 
   @observable
   String filter = '';
@@ -43,20 +38,14 @@ abstract class PaymentTableControllerBase with Store {
   bool setButtonVisibilty() => isHidedButton = !isHidedButton;
 
   @action
-  Future<List<PaymentTable>> findAll() => ObservableFuture(
-      _paymentTableRepo.findAll().then((value) => value))
-          .catchError((e) {
-        errorMsg = "${e.message}";
-      }, test: (e) => e is HttpException).catchError((e) {
-        errorMsg = "$e";
-      }, test: (e) => e is Exception);
+  Future<List<PaymentTable>> findAll() => _paymentTableRepo.findAll();
 
   Future<List<PaymentTable>> getFuture() => future = findAll();
 
   @action
   double getTotal() {
     double total = 0;
-    for(var item in listFiltered) {
+    for (var item in listFiltered) {
       total = total + item.total;
     }
     return total;

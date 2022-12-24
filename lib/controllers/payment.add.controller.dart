@@ -122,12 +122,10 @@ abstract class PaymentAddControllerBase with Store {
   }
 
   @action
-  Future<Payment> update() =>
-      ObservableFuture(_paymentRepo.update(_setValues()).then((value) => value));
+  Future<Payment> update() => _paymentRepo.update(_setValues());
 
   @action
-  Future<Payment> save() =>
-      ObservableFuture(_paymentRepo.save(_setValues()).then((value) => value));
+  Future<Payment> save() => _paymentRepo.save(_setValues());
 
   Payment _setValues() {
     return Payment(

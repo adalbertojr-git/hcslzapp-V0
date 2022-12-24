@@ -44,12 +44,12 @@ abstract class ManagementListControllerBase with Store {
   bool setButtonVisibilty() => isHidedButton = !isHidedButton;
 
   @action
-  Future<List<Associated>> findAllAdminToList() => ObservableFuture(
-      _associatedRepo.findAllAdminToList().then((value) => value));
+  Future<List<Associated>> findAllAdminToList() =>
+      _associatedRepo.findAllAdminToList();
 
   Future<List<Associated>> getFuture() => future = findAllAdminToList();
 
   @action
-  Future deleteById(Associated associated) => ObservableFuture(
-      _managementRepo.deleteById(associated).then((value) => value));
+  Future deleteById(Associated associated) =>
+      _managementRepo.deleteById(associated);
 }

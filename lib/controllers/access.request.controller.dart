@@ -62,21 +62,21 @@ abstract class AccessRequestControllerBase with Store {
   }
 
   @action
-  Future<List<AccessRequest>> findAll() =>
-      ObservableFuture(_accessRequestRepo.findAll().then((value) => value));
+  Future<List<AccessRequest>> findAll() => _accessRequestRepo.findAll();
 
   @action
-  Future<AccessRequest> save() => ObservableFuture(
-      _accessRequestRepo.save(_setValues()).then((value) => value));
+  Future<AccessRequest> save() => _accessRequestRepo.save(
+        _setValues(),
+      );
 
   @action
-  Future<Response> allow() => ObservableFuture(_accessRequestRepo
-      .allow(List<AccessRequest>.from(accessRequests))
-      .then((value) => value));
+  Future<Response> allow() => _accessRequestRepo.allow(
+        List<AccessRequest>.from(accessRequests),
+      );
 
   @action
-  Future<Response> deleteById(AccessRequest accessRequest) => ObservableFuture(
-      _accessRequestRepo.deleteById(accessRequest).then((value) => value));
+  Future<Response> deleteById(AccessRequest accessRequest) =>
+      _accessRequestRepo.deleteById(accessRequest);
 
   @action
   bool setButtonVisibilty() => isHidedButton = !isHidedButton;

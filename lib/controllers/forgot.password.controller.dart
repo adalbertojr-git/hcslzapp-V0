@@ -1,5 +1,3 @@
-import 'dart:io';
-
 import 'package:flutter/material.dart';
 import 'package:hcslzapp/models/password.dto.dart';
 import 'package:hcslzapp/repositories/forgot.password.repo.dart';
@@ -22,9 +20,6 @@ abstract class ForgotPasswordControllerBase with Store {
   @observable
   ForgotPasswordRepo _forgotPasswordRepo = ForgotPasswordRepo();
 
-  @observable
-  String errorMsg = '';
-
   init() {
     formController = FormController(email: '');
   }
@@ -35,23 +30,12 @@ abstract class ForgotPasswordControllerBase with Store {
   }
 
   @action
-  Future<PasswordDTO> forgotPassword(String email) => ObservableFuture(
-              _forgotPasswordRepo.sendEmail(email).then((value) => value))
-          .catchError((e) {
-        errorMsg = "${e.message}";
-      }, test: (e) => e is HttpException).catchError((e) {
-        errorMsg = "$e";
-      }, test: (e) => e is Exception);
+  Future<PasswordDTO> forgotPassword(String email) =>
+      _forgotPasswordRepo.sendEmail(email);
 
   @action
   Future<String> validateCode(PasswordDTO passwordDTO) =>
-      ObservableFuture(_forgotPasswordRepo
-          .validateCode(passwordDTO)
-          .then((value) => value)).catchError((e) {
-        errorMsg = "${e.message}";
-      }, test: (e) => e is HttpException).catchError((e) {
-        errorMsg = "$e";
-      }, test: (e) => e is Exception);
+      _forgotPasswordRepo.validateCode(passwordDTO);
 
   bool get hasErrors => hasErrorEmail;
 

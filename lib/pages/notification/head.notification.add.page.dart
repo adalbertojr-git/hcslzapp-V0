@@ -45,17 +45,17 @@ class _HeadNotificationAddPageState extends State<HeadNotificationAddPage> {
               : 'Editar ' + _title,
         ),
         bottomNavigationBar: MyBottomAppBar(),
-        body: _widgets(context),
+        body: _widgets(),
         floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
         floatingActionButton: Button(
           icon: Icons.save,
           onClick: () => widget._headNotification == null
-              ? _save(context)
-              : _update(context),
+              ? _save()
+              : _update(),
         ),
       );
 
-  _widgets(BuildContext context) => ListView(
+  _widgets() => ListView(
         children: <Widget>[
           _photo(context),
           Row(

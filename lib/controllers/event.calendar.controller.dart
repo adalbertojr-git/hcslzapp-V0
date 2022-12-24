@@ -35,14 +35,12 @@ abstract class EventCalendarControllerBase with Store {
   bool setButtonVisibilty() => isHidedButton = !isHidedButton;
 
   @action
-  Future<String> findAll() =>
-      ObservableFuture(_eventRepo.findAll().then((value) => value));
+  Future<String> findAll() => _eventRepo.findAll();
 
   Future<String> getFuture() => future = findAll();
 
   @action
-  Future deleteById(Event event) =>
-      ObservableFuture(_eventRepo.deleteById(event).then((value) => value));
+  Future deleteById(Event event) => _eventRepo.deleteById(event);
 
   LinkedHashMap<DateTime, List<Event>> convertJsonToDateMap(String jsonSource) {
     var json = jsonDecode(jsonSource);

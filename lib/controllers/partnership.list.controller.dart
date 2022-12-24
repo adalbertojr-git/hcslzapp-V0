@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:hcslzapp/models/partnership.dart';
 import 'package:hcslzapp/models/template.dart';
 import 'package:hcslzapp/repositories/partnership.repo.dart';
+import 'package:http/http.dart';
 import 'package:mobx/mobx.dart';
 
 part 'partnership.list.controller.g.dart';
@@ -55,14 +56,13 @@ abstract class PartnershipListControllerBase with Store {
   }
 
   @action
-  Future<List<Partnership>> findAll() =>
-      ObservableFuture(_partnershipRepo.findAll().then((value) => value));
+  Future<List<Partnership>> findAll() => _partnershipRepo.findAll();
 
   Future<List<Partnership>> getFuture() => future = findAll();
 
   @action
-  Future deleteById(Partnership partnership) => ObservableFuture(
-      _partnershipRepo.deleteById(partnership).then((value) => value));
+  Future<Response> deleteById(Partnership partnership) =>
+      _partnershipRepo.deleteById(partnership);
 
   get getActivePartnerships => activePartnerships.addAll(
       partnerships.where((element) => element.status.contains('Ativo')));

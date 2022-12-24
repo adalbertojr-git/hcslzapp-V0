@@ -26,7 +26,7 @@ abstract class MonthBirthdaysListControllerBase with Store {
 
   @action
   Future<List<MonthBirthdays>> findBirthdays() =>
-      ObservableFuture(_associatedRepo.findBirthdays().then((value) => value));
+      _associatedRepo.findBirthdays();
 
   Future<List<MonthBirthdays>> getFuture() => future = findBirthdays();
 }

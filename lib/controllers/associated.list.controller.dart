@@ -39,9 +39,7 @@ abstract class AssociatedListControllerBase with Store {
   @action
   bool setButtonVisibilty() => isHidedButton = !isHidedButton;
 
-  Future<List<Associated>> findAll() {
-    return ObservableFuture(_associatedRepo.findAll().then((value) => value));
-  }
+  Future<List<Associated>> findAll() => _associatedRepo.findAll();
 
   Future<List<Associated>> getFuture() => future = findAll();
 

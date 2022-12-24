@@ -35,8 +35,7 @@ abstract class DtcCodeListControllerBase with Store {
   bool setButtonVisibilty() => isHidedButton = !isHidedButton;
 
   @action
-  Future<List<DtcCode>> findAll() =>
-      ObservableFuture(_dtcCodeRepo.findAll().then((value) => value));
+  Future<List<DtcCode>> findAll() => _dtcCodeRepo.findAll();
 
   Future<List<DtcCode>> getFuture() => future = findAll();
 

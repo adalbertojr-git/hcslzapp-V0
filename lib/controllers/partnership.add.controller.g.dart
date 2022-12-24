@@ -249,6 +249,22 @@ mixin _$PartnershipAddController on PartnershipAddControllerBase, Store {
     });
   }
 
+  late final _$saveAsyncAction =
+      AsyncAction('PartnershipAddControllerBase.save', context: context);
+
+  @override
+  Future<Partnership> save() {
+    return _$saveAsyncAction.run(() => super.save());
+  }
+
+  late final _$updateAsyncAction =
+      AsyncAction('PartnershipAddControllerBase.update', context: context);
+
+  @override
+  Future<Partnership> update() {
+    return _$updateAsyncAction.run(() => super.update());
+  }
+
   late final _$getImageFromCameraAsyncAction = AsyncAction(
       'PartnershipAddControllerBase.getImageFromCamera',
       context: context);
@@ -289,28 +305,6 @@ mixin _$PartnershipAddController on PartnershipAddControllerBase, Store {
         .startAction(name: 'PartnershipAddControllerBase.findAll');
     try {
       return super.findAll();
-    } finally {
-      _$PartnershipAddControllerBaseActionController.endAction(_$actionInfo);
-    }
-  }
-
-  @override
-  Future<Partnership> save() {
-    final _$actionInfo = _$PartnershipAddControllerBaseActionController
-        .startAction(name: 'PartnershipAddControllerBase.save');
-    try {
-      return super.save();
-    } finally {
-      _$PartnershipAddControllerBaseActionController.endAction(_$actionInfo);
-    }
-  }
-
-  @override
-  Future<Partnership> update() {
-    final _$actionInfo = _$PartnershipAddControllerBaseActionController
-        .startAction(name: 'PartnershipAddControllerBase.update');
-    try {
-      return super.update();
     } finally {
       _$PartnershipAddControllerBaseActionController.endAction(_$actionInfo);
     }

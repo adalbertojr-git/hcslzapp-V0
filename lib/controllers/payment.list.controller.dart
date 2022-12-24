@@ -1,5 +1,4 @@
 import 'dart:async';
-import 'dart:io';
 import 'package:flutter/cupertino.dart';
 import 'package:hcslzapp/repositories/associated.repo.dart';
 import 'package:mobx/mobx.dart';
@@ -37,8 +36,7 @@ abstract class PaymentListControllerBase with Store {
   bool setButtonVisibilty() => isHidedButton = !isHidedButton;
 
   @action
-  Future<List<Associated>> findAll() =>
-      ObservableFuture(_associatedRepo.findAll().then((value) => value));
+  Future<List<Associated>> findAll() => _associatedRepo.findAll();
 
   Future<List<Associated>> getFuture() => future = findAll();
 

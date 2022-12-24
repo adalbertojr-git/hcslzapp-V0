@@ -34,10 +34,8 @@ abstract class DashboardControllerBase with Store {
   @observable
   AssociatedRepo _associatedRepo = AssociatedRepo();
 
-  Future<List<Associated>> findByIdToList(int id) {
-    return ObservableFuture(
-        _associatedRepo.findByIdToList(id).then((value) => value));
-  }
+  Future<List<Associated>> findByIdToList(int id) =>
+      _associatedRepo.findByIdToList(id);
 
   Future<List<Associated>> getFuture(int id) => future = findByIdToList(id);
 

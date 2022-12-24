@@ -158,27 +158,11 @@ mixin _$HeadNotificationAddController
     });
   }
 
-  late final _$errorMsgAtom = Atom(
-      name: 'HeadNotificationAddControllerBase.errorMsg', context: context);
-
-  @override
-  String get errorMsg {
-    _$errorMsgAtom.reportRead();
-    return super.errorMsg;
-  }
-
-  @override
-  set errorMsg(String value) {
-    _$errorMsgAtom.reportWrite(value, super.errorMsg, () {
-      super.errorMsg = value;
-    });
-  }
-
   late final _$saveAsyncAction =
       AsyncAction('HeadNotificationAddControllerBase.save', context: context);
 
   @override
-  Future<dynamic> save() {
+  Future<HeadNotification> save() {
     return _$saveAsyncAction.run(() => super.save());
   }
 
@@ -186,7 +170,7 @@ mixin _$HeadNotificationAddController
       AsyncAction('HeadNotificationAddControllerBase.update', context: context);
 
   @override
-  Future<dynamic> update() {
+  Future<HeadNotification> update() {
     return _$updateAsyncAction.run(() => super.update());
   }
 
@@ -220,8 +204,7 @@ headNotification: ${headNotification},
 photoUrl: ${photoUrl},
 photoPath: ${photoPath},
 photo: ${photo},
-changedPhoto: ${changedPhoto},
-errorMsg: ${errorMsg}
+changedPhoto: ${changedPhoto}
     ''';
   }
 }

@@ -36,8 +36,8 @@ abstract class DtcCodeAbbreviationListControllerBase with Store {
   bool setButtonVisibilty() => isHidedButton = !isHidedButton;
 
   @action
-  Future<List<DtcCodeAbbreviation>> findAll() => ObservableFuture(
-      _dtcCodeAbbreviationRepo.findAll().then((value) => value));
+  Future<List<DtcCodeAbbreviation>> findAll() =>
+      _dtcCodeAbbreviationRepo.findAll();
 
   Future<List<DtcCodeAbbreviation>> getFuture() => future = findAll();
 

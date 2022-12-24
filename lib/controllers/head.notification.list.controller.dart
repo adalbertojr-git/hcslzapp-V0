@@ -49,14 +49,11 @@ abstract class HeadNotificationListControllerBase with Store {
   bool setButtonVisibilty() => isHidedButton = !isHidedButton;
 
   @action
-  Future<List<HeadNotification>> findAll() =>
-      ObservableFuture(_headNotificationRepo.findAll().then((value) => value));
+  Future<List<HeadNotification>> findAll() => _headNotificationRepo.findAll();
 
   Future<List<HeadNotification>> getFuture() => future = findAll();
 
   @action
   Future deleteById(HeadNotification headNotification) =>
-      ObservableFuture(_headNotificationRepo
-          .deleteById(headNotification)
-          .then((value) => value));
+      _headNotificationRepo.deleteById(headNotification);
 }

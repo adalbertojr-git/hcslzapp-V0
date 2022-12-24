@@ -37,8 +37,8 @@ abstract class PaymentAssociatedControllerBase with Store {
   bool setButtonVisibilty() => isHidedButton = !isHidedButton;
 
   @action
-  Future<List<Payment>> findByAssociatedIdToList(int id) => ObservableFuture(
-              _paymentRepo.findByAssociatedIdToList(id).then((value) => value));
+  Future<List<Payment>> findByAssociatedIdToList(int id) =>
+      _paymentRepo.findByAssociatedIdToList(id);
 
   @action
   Future<List<Payment>> getFuture(int id) =>
@@ -46,7 +46,7 @@ abstract class PaymentAssociatedControllerBase with Store {
 
   @action
   Future<Response> deleteById(Payment payment) =>
-      ObservableFuture(_paymentRepo.deleteById(payment).then((value) => value));
+      _paymentRepo.deleteById(payment);
 
   List<String> loadYears() {
     List<String> years = List.filled(0, '', growable: true);

@@ -50,12 +50,6 @@ class _PaymentsTablePageState extends State<PaymentsTablePage> {
                   return CenteredMessage(
                       title: _title, message: snapshot.error.toString());
                 } else {
-                  if (snapshot.data == null)
-                    return CenteredMessage(
-                      title: _title,
-                      message: _controller.errorMsg,
-                    );
-
                   _controller.init();
                   _controller.payments.addAll(snapshot.data!);
                   _controller.payments.sort(

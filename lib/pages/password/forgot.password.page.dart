@@ -84,7 +84,7 @@ class ForgotPasswordPage extends StatelessWidget {
               _showCodedDialog(value);
             }
           } else {
-            AsukaSnackbar.alert(_controller.errorMsg).show();
+            //AsukaSnackbar.alert(_controller.errorMsg).show();
           }
         },
       );
@@ -270,7 +270,7 @@ class ForgotPasswordPage extends StatelessWidget {
             } else
               AsukaSnackbar.alert('O código informado não é válido.').show();
           } else {
-            AsukaSnackbar.alert(_controller.errorMsg).show();
+           // AsukaSnackbar.alert(_controller.errorMsg).show();
           }
         },
       );
