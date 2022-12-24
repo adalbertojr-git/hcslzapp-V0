@@ -13,10 +13,6 @@ import '../../components/my.appbar.dart';
 import '../../components/my.bottom.appbar.dart';
 import '../../http/http.exception.dart';
 
-const String _labelNotExists =
-    'Não existem requisições de acesso a serem aprovadas.';
-const String _labelUnknown =
-    'Houve um erro desconhecido ao executar a transação.';
 const String _title = 'Requisições de Acesso';
 
 class AccessRequestListPage extends StatefulWidget {
@@ -68,13 +64,13 @@ class AccessRequestListPageState extends State<AccessRequestListPage> {
                     } else
                       return CenteredMessage(
                         title: _title,
-                        message: _labelNotExists,
+                        message: NOTEXIST,
                       );
                   }
               } //switch (snapshot.connectionState)
               return CenteredMessage(
                 title: _title,
-                message: _labelUnknown,
+                message: UNKNOWN,
               );
             },
           ),

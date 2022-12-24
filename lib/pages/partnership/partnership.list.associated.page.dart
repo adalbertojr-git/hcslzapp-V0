@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
+import 'package:hcslzapp/common/messages.dart';
 import 'package:hcslzapp/common/photo.image.provider.dart';
 import 'package:hcslzapp/components/centered.message.dart';
 import 'package:hcslzapp/components/progress.dart';
@@ -14,9 +15,6 @@ const SCALE_FRACTION = 0.2;
 const FULL_SCALE = 0.9;
 const PAGER_HEIGHT = 300.0;
 
-const String _labelNotExists = 'Não existem parceiros cadastrados.';
-const String _labelUnknown =
-    'Houve um erro desconhecido ao executar a transação.';
 const String _pathNoImage = 'assets/imgs/noImage.png';
 const String _title = 'Parcerias';
 
@@ -73,13 +71,13 @@ class _PartnershipListAssociatedPageState
                   } else
                     return CenteredMessage(
                       title: _title,
-                      message: _labelNotExists,
+                      message: NOTEXIST,
                     );
                 }
             } //switch (snapshot.connectionState)
             return CenteredMessage(
               title: _title,
-              message: _labelUnknown,
+              message: UNKNOWN,
             );
           },
         ),

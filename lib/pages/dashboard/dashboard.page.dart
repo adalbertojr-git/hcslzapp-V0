@@ -1,6 +1,7 @@
 import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
+import 'package:hcslzapp/common/messages.dart';
 import 'package:hcslzapp/components/centered.message.dart';
 import 'package:hcslzapp/models/password.dto.dart';
 import 'package:hcslzapp/pages/associated/month.birthdays.list.page.dart';
@@ -58,10 +59,6 @@ const String _labelDTC = 'Codigos DTC';
 const String _pathDTCImage = 'assets/imgs/codigosdtc.png';
 const String _labelAboutHarleyClub = 'O Harley Club';
 const String _pathAboutHarleyClubImage = 'assets/imgs/logo.png';
-
-const String _labelNotExists = 'Erro ao obter dados do associado.';
-const String _labelUnknown =
-    'Houve um erro desconhecido ao executar a transação.';
 
 const List<String> _listAdmScreens = [
   "Associados",
@@ -154,13 +151,13 @@ class _DashboardPageState extends State<DashboardPage> {
                   } else
                     return CenteredMessage(
                       title: _labelAppTitle,
-                      message: _labelNotExists,
+                      message: NOTEXIST,
                     );
                 }
             } //switch (snapshot.connectionState)
             return CenteredMessage(
               title: _labelAppTitle,
-              message: _labelUnknown,
+              message: UNKNOWN,
             );
           },
         ),

@@ -15,10 +15,6 @@ import '../../components/my.bottom.appbar.dart';
 import '../../http/http.exception.dart';
 import 'management.add.page.dart';
 
-const String _labelNotExists =
-    'Não existem associados cadastrados. Confira as requisições de acesso.';
-const String _labelUnknown =
-    'Houve um erro desconhecido ao executar a transação.';
 const String _title = 'Administradores';
 
 class ManagementListPage extends StatefulWidget {
@@ -73,13 +69,13 @@ class ManagementListPageState extends State<ManagementListPage> {
                     } else
                       return CenteredMessage(
                         title: _title,
-                        message: _labelNotExists,
+                        message: NOTEXIST,
                       );
                   }
               } //switch (snapshot.connectionState)
               return CenteredMessage(
                 title: _title,
-                message: _labelUnknown,
+                message: UNKNOWN,
               );
             },
           ),

@@ -16,9 +16,6 @@ import '../../http/http.exception.dart';
 import '../../models/associated.dart';
 import '../../models/template.dart';
 
-const String _labelNotExists = 'Não existem mensalidades registradas.';
-const String _labelUnknown =
-    'Houve um erro desconhecido ao executar a transação.';
 const String _title = 'Mensalidades';
 
 class PaymentAssociatedPage extends StatefulWidget {
@@ -76,13 +73,13 @@ class _PaymentAssociatedPageState extends State<PaymentAssociatedPage> {
                         ? _widgets()
                         : CenteredMessage(
                             title: _title,
-                            message: _labelNotExists,
+                            message: NOTEXIST,
                           );
                 }
             } //switch (snapshot.connectionState)
             return CenteredMessage(
               title: _title,
-              message: _labelUnknown,
+              message: UNKNOWN,
             );
           },
         ),

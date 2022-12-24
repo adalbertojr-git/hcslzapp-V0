@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
+import 'package:hcslzapp/common/messages.dart';
 import 'package:hcslzapp/models/payment.table.dart';
 import '../../common/labels.and.hints.dart';
 import '../../components/centered.message.dart';
@@ -9,8 +10,6 @@ import '../../components/my.text.form.field.dart';
 import '../../components/progress.dart';
 import '../../controllers/payment.table.controller.dart';
 
-const String _labelUnknown =
-    'Houve um erro desconhecido ao executar a transação.';
 const String _title = 'Tabela de Pagamentos';
 
 class PaymentsTablePage extends StatefulWidget {
@@ -67,7 +66,7 @@ class _PaymentsTablePageState extends State<PaymentsTablePage> {
             } //switch (snapshot.connectionState)
             return CenteredMessage(
               title: _title,
-              message: _labelUnknown,
+              message: UNKNOWN,
             );
           },
         ),

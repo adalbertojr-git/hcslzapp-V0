@@ -1,6 +1,7 @@
 import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
+import 'package:hcslzapp/common/messages.dart';
 import 'package:hcslzapp/components/centered.message.dart';
 import 'package:hcslzapp/components/progress.dart';
 import 'package:hcslzapp/controllers/head.notification.list.controller.dart';
@@ -9,9 +10,6 @@ import '../../common/photo.image.provider.dart';
 import '../../components/my.appbar.dart';
 import '../../components/my.bottom.appbar.dart';
 
-const String _labelNotExists = 'Não existem avisos cadastrados.';
-const String _labelUnknown =
-    'Houve um erro desconhecido ao executar a transação.';
 const String _title = 'Avisos da Diretoria';
 const String _pathLogoImage = 'assets/imgs/logo.png';
 
@@ -48,13 +46,13 @@ class HeadNotificationListAssociatedPage extends StatelessWidget {
                   } else
                     return CenteredMessage(
                       title: _title,
-                      message: _labelNotExists,
+                      message: NOTEXIST,
                     );
                 }
             } //switch (snapshot.connectionState)
             return CenteredMessage(
               title: _title,
-              message: _labelUnknown,
+              message: UNKNOWN,
             );
           },
         ),

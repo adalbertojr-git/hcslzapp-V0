@@ -18,8 +18,6 @@ import '../../controllers/event.calendar.controller.dart';
 import 'event.add.page.dart';
 
 const String _title = 'Eventos';
-const String _labelUnknown =
-    'Houve um erro desconhecido ao executar a transação.';
 const String _pathNoImage = 'assets/imgs/noImage.png';
 
 class EventCalendarPage extends StatefulWidget {
@@ -117,7 +115,7 @@ class _EventCalendarPageState extends State<EventCalendarPage> {
               } //switch (snapshot.connectionState)
               return CenteredMessage(
                 title: _title,
-                message: _labelUnknown,
+                message: UNKNOWN,
               );
             },
           ),

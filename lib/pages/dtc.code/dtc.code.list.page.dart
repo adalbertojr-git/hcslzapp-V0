@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:hcslzapp/common/labels.and.hints.dart';
+import 'package:hcslzapp/common/messages.dart';
 import 'package:hcslzapp/components/centered.message.dart';
 import 'package:hcslzapp/components/my.text.form.field.dart';
 import 'package:hcslzapp/components/progress.dart';
@@ -9,9 +10,6 @@ import 'package:hcslzapp/models/dtc.code.dart';
 import '../../components/my.appbar.dart';
 import '../../components/my.bottom.appbar.dart';
 
-const String _labelNotExists = 'Não existem códigos DTC cadastrados.';
-const String _labelUnknown =
-    'Houve um erro desconhecido ao executar a transação.';
 const String _title = 'Códigos DTC';
 
 class DtcCodeListPage extends StatefulWidget {
@@ -61,13 +59,13 @@ class DtcCodeListPageState extends State<DtcCodeListPage> {
                     } else
                       return CenteredMessage(
                         title: _title,
-                        message: _labelNotExists,
+                        message: NOTEXIST,
                       );
                   }
               } //switch (snapshot.connectionState)
               return CenteredMessage(
                 title: _title,
-                message: _labelUnknown,
+                message: UNKNOWN,
               );
             },
           ),

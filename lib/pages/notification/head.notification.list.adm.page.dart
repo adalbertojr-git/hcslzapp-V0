@@ -13,8 +13,6 @@ import '../../components/my.bottom.appbar.dart';
 import '../../http/http.exception.dart';
 import 'head.notification.add.page.dart';
 
-const String _labelUnknown =
-    'Houve um erro desconhecido ao executar a transação.';
 const String _title = 'Avisos da Diretoria';
 
 class HeadNotificationListAdmPage extends StatelessWidget {
@@ -52,7 +50,7 @@ class HeadNotificationListAdmPage extends StatelessWidget {
             } //switch (snapshot.connectionState)
             return CenteredMessage(
               title: _title,
-              message: _labelUnknown,
+              message: UNKNOWN,
             );
           },
         ),

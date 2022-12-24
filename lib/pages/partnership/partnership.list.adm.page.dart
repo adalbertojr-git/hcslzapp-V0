@@ -13,8 +13,6 @@ import '../../components/my.appbar.dart';
 import '../../components/my.bottom.appbar.dart';
 import '../../http/http.exception.dart';
 
-const String _labelUnknown =
-    'Houve um erro desconhecido ao executar a transação.';
 const String _title = 'Parcerias';
 
 class PartnershipListAdmPage extends StatelessWidget {
@@ -51,7 +49,7 @@ class PartnershipListAdmPage extends StatelessWidget {
             } //switch (snapshot.connectionState)
             return CenteredMessage(
               title: _title,
-              message: _labelUnknown,
+              message: UNKNOWN,
             );
           },
         ),
