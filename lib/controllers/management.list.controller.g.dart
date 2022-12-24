@@ -105,22 +105,6 @@ mixin _$ManagementListController on ManagementListControllerBase, Store {
     });
   }
 
-  late final _$errorMsgAtom =
-      Atom(name: 'ManagementListControllerBase.errorMsg', context: context);
-
-  @override
-  String get errorMsg {
-    _$errorMsgAtom.reportRead();
-    return super.errorMsg;
-  }
-
-  @override
-  set errorMsg(String value) {
-    _$errorMsgAtom.reportWrite(value, super.errorMsg, () {
-      super.errorMsg = value;
-    });
-  }
-
   late final _$futureAtom =
       Atom(name: 'ManagementListControllerBase.future', context: context);
 
@@ -196,7 +180,6 @@ nameCtrl: ${nameCtrl},
 isHidedButton: ${isHidedButton},
 associateds: ${associateds},
 associated: ${associated},
-errorMsg: ${errorMsg},
 future: ${future},
 filter: ${filter}
     ''';

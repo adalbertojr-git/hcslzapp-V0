@@ -8,6 +8,7 @@ import 'package:hcslzapp/controllers/item.model.dart';
 import 'package:hcslzapp/controllers/management.add.controller.dart';
 import '../../components/my.appbar.dart';
 import '../../components/my.bottom.appbar.dart';
+import '../../http/http.exception.dart';
 import '../../models/associated.dart';
 
 const String _labelNotExists =
@@ -57,14 +58,8 @@ class ManagementAddPageState extends State<ManagementAddPage> {
                     return CenteredMessage(
                         title: _title, message: snapshot.error.toString());
                   } else {
-                    if (snapshot.data == null)
-                      return CenteredMessage(
-                        title: _title,
-                        message: _controller.errorMsg,
-                      );
                     if ((snapshot.data?.length)! > 0) {
                       _controller.init();
-                      //_controller.loadNotAdmins(snapshot.data!);
                       _controller.loadListItems(snapshot.data!);
                       if (_controller.listItems.length > 0) {
                         _controller.listItems.sort(
@@ -100,45 +95,46 @@ class ManagementAddPageState extends State<ManagementAddPage> {
       );
 
   _widgets() => Column(
-    children: [
-      SizedBox(height: 10),
-      Expanded(
-        child: Observer(
-          builder: (_) => ListView.separated(
-            padding: EdgeInsets.symmetric(horizontal: 15),
-            shrinkWrap: true,
-            itemCount: _controller.listItems.length,
-            itemBuilder: (_, int i) {
-              return Container(
-                decoration: BoxDecoration(
-                  color: Colors.deepOrange[300],
-                  shape: BoxShape.rectangle,
-                  borderRadius: BorderRadius.circular(20.0),
-                ),
-                child: CheckboxWidget(
-                  item: _controller.listItems[i],
-                  controller: _controller,
-                ),
-              );
-            },
-            separatorBuilder: (_, int index) => const Divider(),
+        children: [
+          SizedBox(height: 10),
+          Expanded(
+            child: Observer(
+              builder: (_) => ListView.separated(
+                padding: EdgeInsets.symmetric(horizontal: 15),
+                shrinkWrap: true,
+                itemCount: _controller.listItems.length,
+                itemBuilder: (_, int i) {
+                  return Container(
+                    decoration: BoxDecoration(
+                      color: Colors.deepOrange[300],
+                      shape: BoxShape.rectangle,
+                      borderRadius: BorderRadius.circular(20.0),
+                    ),
+                    child: CheckboxWidget(
+                      item: _controller.listItems[i],
+                      controller: _controller,
+                    ),
+                  );
+                },
+                separatorBuilder: (_, int index) => const Divider(),
+              ),
+            ),
           ),
-        ),
-      ),
-    ],
-  );
+        ],
+      );
 
   _save(BuildContext context) {
-    _controller.save().then(
-      (value) {
-        if (value != null) {
-          AsukaSnackbar.success('Administrador(es) salvo(s) com sucesso').show();
-          Navigator.pop(context, _controller.listItems);
-        } else {
-          AsukaSnackbar.alert(_controller.errorMsg).show();
-        }
-      },
-    );
+    try {
+      _controller.save();
+      AsukaSnackbar.success('Administrador(es) cadastrado(s) com sucesso').show();
+      Navigator.pop(context, _controller.listItems);
+    } on HttpException catch (e) {
+      AsukaSnackbar.alert(e.message.toString()).show();
+    } on Exception catch (e) {
+      AsukaSnackbar.alert(e.toString()).show();
+    } catch (e) {
+      AsukaSnackbar.alert(e.toString()).show();
+    } finally {}
   }
 }
 

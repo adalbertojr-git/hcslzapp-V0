@@ -1,10 +1,7 @@
 import 'dart:async';
-import 'dart:io';
 import 'package:flutter/material.dart';
-import 'package:hcslzapp/common/associated.profiles.dart';
 import 'package:hcslzapp/controllers/item.model.dart';
 import 'package:hcslzapp/models/associated.dart';
-import 'package:hcslzapp/models/role.dart';
 import 'package:hcslzapp/repositories/associated.repo.dart';
 import 'package:hcslzapp/repositories/management.repo.dart';
 import 'package:mobx/mobx.dart';
@@ -37,9 +34,6 @@ abstract class ManagementAddControllerBase with Store {
   ManagementRepo _managementRepo = ManagementRepo();
 
   @observable
-  String errorMsg = '';
-
-  @observable
   Future<List<Associated>> future = Future<List<Associated>>.value([]);
 
   @observable
@@ -56,23 +50,13 @@ abstract class ManagementAddControllerBase with Store {
 
   @action
   Future<List<Associated>> findAllNotAdminToList() => ObservableFuture(
-              _associatedRepo.findAllNotAdminToList().then((value) => value))
-          .catchError((e) {
-        errorMsg = "${e.message}";
-      }, test: (e) => e is HttpException).catchError((e) {
-        errorMsg = "$e";
-      }, test: (e) => e is Exception);
+              _associatedRepo.findAllNotAdminToList().then((value) => value));
 
   Future<List<Associated>> getFuture() => future = findAllNotAdminToList();
 
   @action
   Future save() => ObservableFuture(
-              _managementRepo.save(List<int>.from(ids)).then((value) => value))
-          .catchError((e) {
-        errorMsg = "${e.message}";
-      }, test: (e) => e is HttpException).catchError((e) {
-        errorMsg = "$e";
-      }, test: (e) => e is Exception);
+              _managementRepo.save(List<int>.from(ids)).then((value) => value));
 
   loadListItems(List<Associated> list) {
     for (Associated associated in list) {
@@ -91,24 +75,4 @@ abstract class ManagementAddControllerBase with Store {
       );
     }
   }
-
-/*  loadNotAdmins(List<AssociatedDTO> list) {
-    for (AssociatedDTO associated in list) {
-      if (!associated.authenticate.roles.any((Role r) => r.profile == ADMIN)) {
-        listItems.add(
-          ItemModel(
-            id: associated.id,
-            name: associated.name,
-            phone: associated.phone,
-            status: associated.status,
-            authenticate: associated.authenticate,
-            check: false,
-            email: '',
-            user: '',
-            password: '',
-          ),
-        );
-      }
-    }
-  }*/
 }

@@ -1,8 +1,6 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
-import 'package:hcslzapp/common/associated.profiles.dart';
 import 'package:hcslzapp/models/associated.dart';
-import 'package:hcslzapp/models/role.dart';
 import 'package:hcslzapp/models/template.dart';
 import 'package:hcslzapp/repositories/associated.repo.dart';
 import 'package:hcslzapp/repositories/management.repo.dart';
@@ -54,12 +52,4 @@ abstract class ManagementListControllerBase with Store {
   @action
   Future deleteById(Associated associated) => ObservableFuture(
       _managementRepo.deleteById(associated).then((value) => value));
-
-  loadAdmins(List<Associated> list) {
-    for (Associated associated in list) {
-      if (associated.authenticate.roles.any((Role r) => r.profile == ADMIN)) {
-        associateds.add(associated);
-      }
-    }
-  }
 }

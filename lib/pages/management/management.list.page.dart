@@ -58,11 +58,12 @@ class ManagementListPageState extends State<ManagementListPage> {
                 default:
                   if (snapshot.hasError) {
                     return CenteredMessage(
-                        title: _title, message: snapshot.error.toString());
+                      title: _title,
+                      message: snapshot.error.toString(),
+                    );
                   } else {
                     if ((snapshot.data?.length)! > 0) {
                       _controller.init();
-                      //_controller.loadAdmins(snapshot.data!);
                       _controller.associateds.addAll(snapshot.data!);
                       _controller.associateds.sort(
                         (a, b) => a.name.compareTo(b.name),
