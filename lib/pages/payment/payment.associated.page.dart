@@ -45,7 +45,8 @@ class _PaymentAssociatedPageState extends State<PaymentAssociatedPage> {
   @override
   Widget build(BuildContext context) => Scaffold(
         appBar: MyAppBar(_title),
-        bottomNavigationBar: MyBottomAppBar(),
+        bottomNavigationBar:
+            _controller.isHidedButton ? null : MyBottomAppBar(),
         body: FutureBuilder<List<Payment>>(
           future: _controller.getFuture(widget._associated.id),
           builder: (context, snapshot) {

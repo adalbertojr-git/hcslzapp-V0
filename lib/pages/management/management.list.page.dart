@@ -41,7 +41,8 @@ class ManagementListPageState extends State<ManagementListPage> {
   Widget build(BuildContext context) => Observer(
         builder: (_) => Scaffold(
           appBar: MyAppBar(_title),
-          bottomNavigationBar: MyBottomAppBar(),
+          bottomNavigationBar:
+          _controller.isHidedButton ? null : MyBottomAppBar(),
           body: FutureBuilder<List<Associated>>(
             future: _controller.future,
             builder: (context, snapshot) {

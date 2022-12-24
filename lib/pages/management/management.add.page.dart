@@ -12,12 +12,8 @@ import '../../components/my.bottom.appbar.dart';
 import '../../http/http.exception.dart';
 import '../../models/associated.dart';
 
-const String _labelNotExists =
-    'Não existem associados cadastrados. Confira as requisições de acesso.';
 const String _labelAllAdmins =
     'Todos os associados já estão com perfil de Administrador.';
-const String _labelUnknown =
-    'Houve um erro desconhecido ao executar a transação.';
 const String _title = 'Adicionar Administrador';
 
 class ManagementAddPage extends StatefulWidget {
@@ -44,6 +40,8 @@ class ManagementAddPageState extends State<ManagementAddPage> {
   Widget build(BuildContext context) => Observer(
         builder: (_) => Scaffold(
           appBar: MyAppBar(_title),
+          bottomNavigationBar:
+              _controller.isHidedButton ? null : MyBottomAppBar(),
           body: FutureBuilder<List<Associated>>(
             future: _controller.future,
             builder: (context, snapshot) {
@@ -75,18 +73,16 @@ class ManagementAddPageState extends State<ManagementAddPage> {
                     } else
                       return CenteredMessage(
                         title: _title,
-                        message: _labelNotExists,
+                        message: NOTEXIST,
                       );
                   }
               } //switch (snapshot.connectionState)
               return CenteredMessage(
                 title: _title,
-                message: _labelUnknown,
+                message: UNKNOWN,
               );
             },
           ),
-          bottomNavigationBar:
-              _controller.isHidedButton ? null : MyBottomAppBar(),
           floatingActionButtonLocation:
               FloatingActionButtonLocation.centerDocked,
           floatingActionButton: _controller.isHidedButton
