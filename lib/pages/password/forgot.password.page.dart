@@ -74,7 +74,11 @@ class ForgotPasswordPage extends StatelessWidget {
       AsukaSnackbar.alert(REQUIRED).show();
     } else {
       try {
-        _controller.forgotPassword(_controller.emailForgotPswCtrl.text).then(
+        _controller
+            .forgotPassword(
+          _controller.emailForgotPswCtrl.text,
+        )
+            .then(
           (value) {
             if (value.aux.startsWith('ERRO'))
               AsukaSnackbar.alert(value.aux).show();
@@ -255,22 +259,18 @@ class ForgotPasswordPage extends StatelessWidget {
     if (passwordDTO.aux.length != 0) {
       _controller.validateCode(passwordDTO).then(
         (value) {
-          if (value != null) {
-            if (value.startsWith('OK')) {
-              Navigator.pop(context);
-              Navigator.push(
-                context,
-                MaterialPageRoute(
-                  builder: (_) => ChangePasswordPage(
-                    passwordDTO,
-                  ),
+          if (value.startsWith('OK')) {
+            Navigator.pop(context);
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (_) => ChangePasswordPage(
+                  passwordDTO,
                 ),
-              );
-            } else
-              AsukaSnackbar.alert('O código informado não é válido.').show();
-          } else {
-            // AsukaSnackbar.alert(_controller.errorMsg).show();
-          }
+              ),
+            );
+          } else
+            AsukaSnackbar.alert('O código informado não é válido.').show();
         },
       );
     }
