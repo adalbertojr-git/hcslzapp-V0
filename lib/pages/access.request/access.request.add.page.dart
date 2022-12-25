@@ -109,9 +109,10 @@ class _AccessRequestAddPageState extends State<AccessRequestAddPage> {
       AsukaSnackbar.alert(REQUIRED).show();
     } else {
       try {
-        _controller.save();
-        AsukaSnackbar.success(SUCCESS).show();
-        Navigator.of(context).pop();
+        _controller.save().then((value) {
+          AsukaSnackbar.success(SUCCESS).show();
+          Navigator.of(context).pop();
+        });
       } catch (e) {
         AsukaSnackbar.alert(e.toString()).show();
       } finally {}
