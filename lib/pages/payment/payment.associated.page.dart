@@ -12,7 +12,6 @@ import 'package:hcslzapp/pages/payment/payment.add.page.dart';
 import '../../common/messages.dart';
 import '../../components/my.appbar.dart';
 import '../../components/my.bottom.appbar.dart';
-import '../../http/http.exception.dart';
 import '../../models/associated.dart';
 import '../../models/template.dart';
 
@@ -230,10 +229,6 @@ class _PaymentAssociatedPageState extends State<PaymentAssociatedPage> {
         _controller.deleteById(_controller.payments[i]);
         AsukaSnackbar.success(SUCCESS).show();
         _controller.payments.removeAt(i);
-      } on HttpException catch (e) {
-        AsukaSnackbar.alert(e.message.toString()).show();
-      } on Exception catch (e) {
-        AsukaSnackbar.alert(e.toString()).show();
       } catch (e) {
         AsukaSnackbar.alert(e.toString()).show();
       } finally {}

@@ -150,10 +150,6 @@ class _HeadNotificationAddPageState extends State<HeadNotificationAddPage> {
           AsukaSnackbar.success(SUCCESS).show();
           Navigator.pop(context, value);
         });
-      } on HttpException catch (e) {
-        AsukaSnackbar.alert(e.message.toString()).show();
-      } on Exception catch (e) {
-        AsukaSnackbar.alert(e.toString()).show();
       } catch (e) {
         AsukaSnackbar.alert(e.toString()).show();
       } finally {}
@@ -169,10 +165,6 @@ class _HeadNotificationAddPageState extends State<HeadNotificationAddPage> {
           AsukaSnackbar.success(SUCCESS).show();
           Navigator.pop(context, value);
         });
-      } on HttpException catch (e) {
-        AsukaSnackbar.alert(e.message.toString()).show();
-      } on Exception catch (e) {
-        AsukaSnackbar.alert(e.toString()).show();
       } catch (e) {
         AsukaSnackbar.alert(e.toString()).show();
       } finally {}

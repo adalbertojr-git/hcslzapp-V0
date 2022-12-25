@@ -9,7 +9,6 @@ import '../../common/token.details.dart';
 import '../../components/degradee.background.dart';
 import '../../components/my.text.form.field.dart';
 import '../../controllers/login.controller.dart';
-import '../../http/http.exception.dart';
 import '../access.request/access.request.add.page.dart';
 import '../dashboard/dashboard.page.dart';
 import '../password/forgot.password.page.dart';
@@ -233,10 +232,6 @@ class _MyCustomLoginUIState extends State<MyCustomLoginUI>
             ),
           ),
         );
-      } on HttpException catch (e) {
-        AsukaSnackbar.alert(e.message.toString()).show();
-      } on Exception catch (e) {
-        AsukaSnackbar.alert(e.toString()).show();
       } catch (e) {
         AsukaSnackbar.alert(e.toString()).show();
       }

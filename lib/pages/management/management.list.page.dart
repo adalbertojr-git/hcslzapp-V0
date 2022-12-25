@@ -12,7 +12,6 @@ import 'package:hcslzapp/models/dependent.dart';
 import 'package:hcslzapp/models/motorcycle.dart';
 import '../../components/my.appbar.dart';
 import '../../components/my.bottom.appbar.dart';
-import '../../http/http.exception.dart';
 import 'management.add.page.dart';
 
 const String _title = 'Administradores';
@@ -204,10 +203,6 @@ class ManagementListPageState extends State<ManagementListPage> {
           _controller.associateds.removeWhere(
             (item) => item.id == associated.id,
           );
-        } on HttpException catch (e) {
-          AsukaSnackbar.alert(e.message.toString()).show();
-        } on Exception catch (e) {
-          AsukaSnackbar.alert(e.toString()).show();
         } catch (e) {
           AsukaSnackbar.alert(e.toString()).show();
         } finally {}

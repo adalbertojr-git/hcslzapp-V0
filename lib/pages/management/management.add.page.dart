@@ -9,7 +9,6 @@ import 'package:hcslzapp/controllers/item.model.dart';
 import 'package:hcslzapp/controllers/management.add.controller.dart';
 import '../../components/my.appbar.dart';
 import '../../components/my.bottom.appbar.dart';
-import '../../http/http.exception.dart';
 import '../../models/associated.dart';
 
 const String _labelAllAdmins =
@@ -125,10 +124,6 @@ class ManagementAddPageState extends State<ManagementAddPage> {
       _controller.save();
       AsukaSnackbar.success(SUCCESS).show();
       Navigator.pop(context, _controller.listItems);
-    } on HttpException catch (e) {
-      AsukaSnackbar.alert(e.message.toString()).show();
-    } on Exception catch (e) {
-      AsukaSnackbar.alert(e.toString()).show();
     } catch (e) {
       AsukaSnackbar.alert(e.toString()).show();
     } finally {}

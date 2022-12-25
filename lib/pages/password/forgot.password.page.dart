@@ -53,10 +53,10 @@ class ForgotPasswordPage extends StatelessWidget {
               errorText: _controller.validateEmail(),
             ),
             SizedBox(
-              height: 60.0,
+              height: 20.0,
             ),
             Container(
-              padding: const EdgeInsets.symmetric(horizontal: 20),
+              padding: const EdgeInsets.symmetric(horizontal: 10),
               child: Text.rich(
                 const TextSpan(
                   text: 'Atenção: Você receberá um email em nome do Harley Club ' +
@@ -73,21 +73,20 @@ class ForgotPasswordPage extends StatelessWidget {
     if (_controller.hasErrors) {
       AsukaSnackbar.alert(REQUIRED).show();
     } else {
-      AsukaSnackbar.message('Aguarde...').show();
-      _controller.forgotPassword(_controller.emailForgotPswCtrl.text).then(
-        (value) {
-          if (value != null) {
+      try {
+        _controller.forgotPassword(_controller.emailForgotPswCtrl.text).then(
+          (value) {
             if (value.aux.startsWith('ERRO'))
               AsukaSnackbar.alert(value.aux).show();
             else {
               _controller.initTextFields();
               _showCodedDialog(value);
             }
-          } else {
-            //AsukaSnackbar.alert(_controller.errorMsg).show();
-          }
-        },
-      );
+          },
+        );
+      } catch (e) {
+        AsukaSnackbar.alert(e.toString()).show();
+      } finally {}
     }
   }
 
@@ -270,7 +269,7 @@ class ForgotPasswordPage extends StatelessWidget {
             } else
               AsukaSnackbar.alert('O código informado não é válido.').show();
           } else {
-           // AsukaSnackbar.alert(_controller.errorMsg).show();
+            // AsukaSnackbar.alert(_controller.errorMsg).show();
           }
         },
       );

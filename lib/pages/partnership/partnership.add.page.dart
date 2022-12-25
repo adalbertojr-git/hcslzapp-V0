@@ -12,8 +12,6 @@ import 'package:hcslzapp/enums/associated.status.dart';
 import 'package:hcslzapp/components/my.text.form.field.dart';
 import 'package:hcslzapp/models/partnership.dart';
 import 'package:mask_text_input_formatter/mask_text_input_formatter.dart';
-import '../../http/http.exception.dart';
-
 import '../../components/my.appbar.dart';
 import '../../components/my.bottom.appbar.dart';
 
@@ -221,10 +219,6 @@ class _PartnershipAddPageState extends State<PartnershipAddPage> {
         final value = _controller.save();
         AsukaSnackbar.success(SUCCESS).show();
         Navigator.of(context).pop(value);
-      } on HttpException catch (e) {
-        AsukaSnackbar.alert(e.message.toString()).show();
-      } on Exception catch (e) {
-        AsukaSnackbar.alert(e.toString()).show();
       } catch (e) {
         AsukaSnackbar.alert(e.toString()).show();
       } finally {}
@@ -253,10 +247,6 @@ class _PartnershipAddPageState extends State<PartnershipAddPage> {
           final value = await _controller.update();
           AsukaSnackbar.success(SUCCESS).show();
           Navigator.pop(context, value);
-        } on HttpException catch (e) {
-          AsukaSnackbar.alert(e.message.toString()).show();
-        } on Exception catch (e) {
-          AsukaSnackbar.alert(e.toString()).show();
         } catch (e) {
           AsukaSnackbar.alert(e.toString()).show();
         } finally {}

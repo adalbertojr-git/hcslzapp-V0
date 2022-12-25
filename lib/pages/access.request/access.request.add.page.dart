@@ -8,7 +8,6 @@ import 'package:hcslzapp/components/my.text.form.field.dart';
 import 'package:hcslzapp/controllers/access.request.controller.dart';
 import '../../components/button.dart';
 import '../../components/my.appbar.dart';
-import '../../http/http.exception.dart';
 
 const String _title = 'Solicitar acesso';
 
@@ -113,10 +112,6 @@ class _AccessRequestAddPageState extends State<AccessRequestAddPage> {
         _controller.save();
         AsukaSnackbar.success(SUCCESS).show();
         Navigator.of(context).pop();
-      } on HttpException catch (e) {
-        AsukaSnackbar.alert(e.message.toString()).show();
-      } on Exception catch (e) {
-        AsukaSnackbar.alert(e.toString()).show();
       } catch (e) {
         AsukaSnackbar.alert(e.toString()).show();
       } finally {}
