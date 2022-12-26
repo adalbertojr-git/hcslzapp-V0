@@ -69,25 +69,20 @@ class ForgotPasswordPage extends StatelessWidget {
         ),
       );
 
-  _forgotPassword() {
+  _forgotPassword() async {
     if (_controller.hasErrors) {
       AsukaSnackbar.alert(REQUIRED).show();
     } else {
       try {
-        _controller
-            .forgotPassword(
+        final value = await _controller.forgotPassword(
           _controller.emailForgotPswCtrl.text,
-        )
-            .then(
-          (value) {
-            if (value.aux.startsWith('ERRO'))
-              AsukaSnackbar.alert(value.aux).show();
-            else {
-              _controller.initTextFields();
-              _showCodedDialog(value);
-            }
-          },
         );
+        if (value.aux.startsWith('ERRO'))
+          AsukaSnackbar.alert(value.aux).show();
+        else {
+          _controller.initTextFields();
+          _showCodedDialog(value);
+        }
       } catch (e) {
         AsukaSnackbar.alert(e.toString()).show();
       } finally {}
