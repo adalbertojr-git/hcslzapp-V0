@@ -540,13 +540,12 @@ class AssociatedUpdatePage extends StatelessWidget {
       }
       if (response == true) {
         try {
-          _controller.update(_controller.associated).then((value) {
-            AsukaSnackbar.success(SUCCESS).show();
-            if (_controller.associated == locator.get<Associated>()) {
-              loadAssociatedSingleton(value);
-            }
-            Navigator.of(context).pop(_controller.associated.photoUrl);
-          });
+          final value = await _controller.update(_controller.associated);
+          if (_controller.associated == locator.get<Associated>()) {
+            loadAssociatedSingleton(value);
+          }
+          AsukaSnackbar.success(SUCCESS).show();
+          Navigator.of(context).pop(_controller.associated.photoUrl);
         } catch (e) {
           AsukaSnackbar.alert(e.toString()).show();
         } finally {}
