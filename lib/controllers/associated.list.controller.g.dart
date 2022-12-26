@@ -144,6 +144,17 @@ mixin _$AssociatedListController on AssociatedListControllerBase, Store {
   }
 
   @override
+  Future<List<Associated>> findAll() {
+    final _$actionInfo = _$AssociatedListControllerBaseActionController
+        .startAction(name: 'AssociatedListControllerBase.findAll');
+    try {
+      return super.findAll();
+    } finally {
+      _$AssociatedListControllerBaseActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
   dynamic setFilter(String value) {
     final _$actionInfo = _$AssociatedListControllerBaseActionController
         .startAction(name: 'AssociatedListControllerBase.setFilter');

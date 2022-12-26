@@ -269,26 +269,26 @@ class _PaymentAddAddState extends State<PaymentAddPage> {
         ],
       );
 
-  _save() {
+  _save() async {
     if (_controller.hasErrors) {
       AsukaSnackbar.alert(REQUIRED).show();
     } else {
       try {
-        _controller.save();
+        final value = await _controller.save();
         AsukaSnackbar.success(SUCCESS).show();
-        Navigator.of(context).pop();
+        Navigator.of(context).pop(value);
       } catch (e) {
         AsukaSnackbar.alert(e.toString()).show();
       } finally {}
     }
   }
 
-  _update() {
+  _update() async {
     if (_controller.hasErrors) {
       AsukaSnackbar.alert(REQUIRED).show();
     } else {
       try {
-        final value = _controller.save();
+        final value = await _controller.save();
         AsukaSnackbar.success(SUCCESS).show();
         Navigator.of(context).pop(value);
       } catch (e) {
