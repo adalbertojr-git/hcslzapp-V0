@@ -1,3 +1,4 @@
+import 'package:asuka/snackbars/asuka_snack_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:hcslzapp/common/labels.and.hints.dart';
@@ -32,6 +33,8 @@ class _PaymentListPageState extends State<PaymentListPage> {
     _controller.init();
     _controller.getFuture().then((value) {
       _controller.setButtonVisibilty();
+    }).catchError((e) {
+      AsukaSnackbar.alert(e.toString()).show();
     });
     super.initState();
   }
