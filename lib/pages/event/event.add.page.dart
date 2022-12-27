@@ -53,8 +53,7 @@ class _EventAddPageState extends State<EventAddPage> {
         floatingActionButton: widget._selectedProfile == ADMIN
             ? Button(
                 icon: Icons.save,
-                onClick: () =>
-                    widget._event == null ? _save() : _update(),
+                onClick: () => widget._event == null ? _save() : _update(),
               )
             : null,
       );
@@ -146,30 +145,28 @@ class _EventAddPageState extends State<EventAddPage> {
                 ) as ImageProvider,
       fit: BoxFit.fill);
 
-  _save() {
+  _save() async {
     if (_controller.hasErrors) {
       AsukaSnackbar.alert(REQUIRED).show();
     } else {
       try {
-        _controller.save().then((value) {
-          AsukaSnackbar.success(SUCCESS).show();
-          Navigator.pop(context, value);
-        });
+        final value = await _controller.save();
+        AsukaSnackbar.success(SUCCESS).show();
+        Navigator.pop(context, value);
       } catch (e) {
         AsukaSnackbar.alert(e.toString()).show();
       } finally {}
     }
   }
 
-  _update() {
+  _update() async {
     if (_controller.hasErrors) {
       AsukaSnackbar.alert(REQUIRED).show();
     } else {
       try {
-        _controller.update().then((value) {
-          AsukaSnackbar.success(SUCCESS).show();
-          Navigator.pop(context, value);
-        });
+        final value = await _controller.update();
+        AsukaSnackbar.success(SUCCESS).show();
+        Navigator.pop(context, value);
       } catch (e) {
         AsukaSnackbar.alert(e.toString()).show();
       } finally {}
