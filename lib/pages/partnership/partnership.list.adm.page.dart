@@ -14,61 +14,80 @@ import '../../components/my.bottom.appbar.dart';
 
 const String _title = 'Parcerias';
 
-class PartnershipListAdmPage extends StatelessWidget {
+class PartnershipListAdmPage extends StatefulWidget {
+  @override
+  State<PartnershipListAdmPage> createState() => _PartnershipListAdmPageState();
+}
+
+class _PartnershipListAdmPageState extends State<PartnershipListAdmPage> {
   final PartnershipListController _controller = PartnershipListController();
 
   @override
-  Widget build(BuildContext context) => Scaffold(
-        appBar: MyAppBar(_title),
-        bottomNavigationBar: MyBottomAppBar(),
-        body: FutureBuilder<List<Partnership>>(
-          future: _controller.getFuture(),
-          builder: (context, snapshot) {
-            switch (snapshot.connectionState) {
-              case ConnectionState.none:
-                break;
-              case ConnectionState.waiting:
-                return Progress();
-              case ConnectionState.active:
-                break;
-              default:
-                if (snapshot.hasError) {
-                  return CenteredMessage(
-                      title: _title, message: snapshot.error.toString());
-                } else {
-                  if ((snapshot.data?.length)! > 0) {
-                    _controller.init();
-                    _controller.partnerships.addAll(snapshot.data!);
-                    _controller.partnerships.sort(
-                      (a, b) => a.partner.compareTo(b.partner),
+  void initState() {
+    _controller.getFuture().then((value) {
+      _controller.setButtonVisibilty();
+    }).catchError((e) {});
+    super.initState();
+  }
+
+  @override
+  Widget build(BuildContext context) => Observer(
+        builder: (_) => Scaffold(
+          appBar: MyAppBar(_title),
+          bottomNavigationBar:
+              _controller.isHidedButton ? null : MyBottomAppBar(),
+          body: FutureBuilder<List<Partnership>>(
+            future: _controller.future,
+            builder: (context, snapshot) {
+              switch (snapshot.connectionState) {
+                case ConnectionState.none:
+                  break;
+                case ConnectionState.waiting:
+                  return Progress();
+                case ConnectionState.active:
+                  break;
+                default:
+                  if (snapshot.hasError) {
+                    return CenteredMessage(
+                        title: _title, message: snapshot.error.toString());
+                  } else {
+                    if ((snapshot.data?.length)! > 0) {
+                      _controller.init();
+                      _controller.partnerships.addAll(snapshot.data!);
+                      _controller.partnerships.sort(
+                        (a, b) => a.partner.compareTo(b.partner),
+                      );
+                    }
+                    return _widgets(context);
+                  }
+              } //switch (snapshot.connectionState)
+              return CenteredMessage(
+                title: _title,
+                message: UNKNOWN,
+              );
+            },
+          ),
+          floatingActionButtonLocation:
+              FloatingActionButtonLocation.centerDocked,
+          floatingActionButton: _controller.isHidedButton
+              ? null
+              : Button(
+                  icon: Icons.add,
+                  onClick: () {
+                    final Future future = Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => PartnershipAddPage(null)),
                     );
-                  }
-                  return _widgets(context);
-                }
-            } //switch (snapshot.connectionState)
-            return CenteredMessage(
-              title: _title,
-              message: UNKNOWN,
-            );
-          },
+                    future.then(
+                      (partnership) {
+                        if (partnership != null) {
+                          _controller.partnerships.add(partnership);
+                        }
+                      },
+                    );
+                  }),
         ),
-        floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
-        floatingActionButton: Button(
-            icon: Icons.add,
-            onClick: () {
-              final Future future = Navigator.push(
-                context,
-                MaterialPageRoute(
-                    builder: (context) => PartnershipAddPage(null)),
-              );
-              future.then(
-                (partnership) {
-                  if (partnership != null) {
-                    _controller.partnerships.add(partnership);
-                  }
-                },
-              );
-            }),
       );
 
   _widgets(BuildContext context) => Column(
