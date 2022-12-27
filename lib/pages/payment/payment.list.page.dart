@@ -1,3 +1,4 @@
+import 'package:asuka/snackbars/asuka_snack_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:hcslzapp/common/labels.and.hints.dart';
@@ -30,11 +31,9 @@ class _PaymentListPageState extends State<PaymentListPage> {
   @override
   void initState() {
     _controller.init();
-/*    _controller.getFuture().then((value) {
+    _controller.getFuture().then((value) {
       _controller.setButtonVisibilty();
-    }).catchError((e) {
-      AsukaSnackbar.alert(e.toString()).show();
-    });*/
+    }).catchError((e) {});
     super.initState();
   }
 
@@ -45,8 +44,7 @@ class _PaymentListPageState extends State<PaymentListPage> {
             bottomNavigationBar:
                 _controller.isHidedButton ? null : MyBottomAppBar(),
             body: FutureBuilder<List<Associated>>(
-              // future: _controller.future,
-              future: _controller.findAll(),
+              future: _controller.future,
               builder: (context, snapshot) {
                 switch (snapshot.connectionState) {
                   case ConnectionState.none:

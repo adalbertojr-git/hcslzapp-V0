@@ -27,14 +27,15 @@ class _PaymentsTablePageState extends State<PaymentsTablePage> {
       if (value.isNotEmpty) {
         _controller.setButtonVisibilty();
       }
-    });
+    }).catchError((e) {});
     super.initState();
   }
 
   @override
   Widget build(BuildContext context) => Scaffold(
         appBar: MyAppBar(_title),
-        bottomNavigationBar: MyBottomAppBar(),
+        bottomNavigationBar:
+            _controller.isHidedButton ? null : MyBottomAppBar(),
         body: FutureBuilder<List<PaymentTable>>(
           future: _controller.future,
           builder: (context, snapshot) {
@@ -205,7 +206,9 @@ class PaymentDataSource extends DataTableSource {
       DataCell(Text('${_payment.out}')),
       DataCell(Text('${_payment.nov}')),
       DataCell(Text('${_payment.dez}')),
-      DataCell(Text('${_payment.total}'),),
+      DataCell(
+        Text('${_payment.total}'),
+      ),
     ]);
   }
 
