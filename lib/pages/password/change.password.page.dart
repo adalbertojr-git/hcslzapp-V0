@@ -66,27 +66,22 @@ class ChangePasswordPage extends StatelessWidget {
         ],
       );
 
-  _update(BuildContext context) {
+  _update(BuildContext context) async {
     if (_controller.hasErrors) {
       AsukaSnackbar.alert(REQUIRED).show();
     } else {
-      _controller
-          .update(
-        PasswordDTO(
-          associatedId: _passwordDTO.associatedId,
-          aux: _controller.pswCtrl.text,
-        ),
-      )
-          .then(
-        (value) {
-          if (value != null) {
-            AsukaSnackbar.success(SUCCESS).show();
-            Navigator.of(context).pop();
-          } else {
-            AsukaSnackbar.alert(_controller.errorMsg).show();
-          }
-        },
-      );
+      try {
+        await _controller.update(
+          PasswordDTO(
+            associatedId: _passwordDTO.associatedId,
+            aux: _controller.pswCtrl.text,
+          ),
+        );
+        AsukaSnackbar.success(SUCCESS).show();
+        Navigator.of(context).pop();
+      } catch (e) {
+        AsukaSnackbar.alert(e.toString()).show();
+      } finally {}
     }
   }
 }
