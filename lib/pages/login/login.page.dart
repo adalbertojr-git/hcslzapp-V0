@@ -68,147 +68,148 @@ class _MyCustomLoginUIState extends State<MyCustomLoginUI>
   }
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context) => Scaffold(
+        body: DegradeBackground(
+          _widgets(),
+          isError: false,
+        ),
+      );
+
+  _widgets() {
     double _width = MediaQuery.of(context).size.width;
     double _height = MediaQuery.of(context).size.height;
-    return Scaffold(
-      body: DegradeBackground(
-        ScrollConfiguration(
-          behavior: MyBehavior(),
-          child: SingleChildScrollView(
-            child: SizedBox(
-              height: _height,
-              child: Column(
-                children: [
-                  SizedBox(
-                    height: 40,
-                  ),
-                  Expanded(
-                    flex: 4,
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+    return ScrollConfiguration(
+      behavior: MyBehavior(),
+      child: SingleChildScrollView(
+        child: SizedBox(
+          height: _height,
+          child: Column(
+            children: [
+              SizedBox(
+                height: 40,
+              ),
+              Expanded(
+                flex: 4,
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: [
+                    SizedBox(
+                      height: 230,
+                      child: Image.asset(_pathLogoImage),
+                    ),
+                    SizedBox(),
+                    MyTextFormField(
+                      textEditingController: _controllerLogin.userLoginCtrl,
+                      label: labelUser,
+                      hint: hintUser,
+                      icon: Icons.person,
+                      inputType: TextInputType.text,
+                      onChanged: _controllerLogin.formController.changeUser,
+                      errorText: _controllerLogin.validateUser(),
+                    ),
+                    MyTextFormField(
+                      textEditingController: _controllerLogin.pswLoginCtrl,
+                      label: labelPsw,
+                      hint: hintPsw,
+                      icon: Icons.vpn_key,
+                      inputType: TextInputType.text,
+                      hidden: true,
+                      onChanged: _controllerLogin.formController.changePassword,
+                      errorText: _controllerLogin.validatePassword(),
+                    ),
+                    SizedBox(),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceAround,
                       children: [
-                        SizedBox(
-                          height: 230,
-                          child: Image.asset(_pathLogoImage),
+                        RichText(
+                          text: TextSpan(
+                            text: _labelForgotPsw,
+                            recognizer: TapGestureRecognizer()
+                              ..onTap = () {
+                                HapticFeedback.lightImpact();
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (context) => ForgotPasswordPage(),
+                                  ),
+                                );
+                              },
+                          ),
                         ),
                         SizedBox(),
-                        MyTextFormField(
-                          textEditingController: _controllerLogin.userLoginCtrl,
-                          label: labelUser,
-                          hint: hintUser,
-                          icon: Icons.person,
-                          inputType: TextInputType.text,
-                          onChanged: _controllerLogin.formController.changeUser,
-                          errorText: _controllerLogin.validateUser(),
-                        ),
-                        MyTextFormField(
-                          textEditingController: _controllerLogin.pswLoginCtrl,
-                          label: labelPsw,
-                          hint: hintPsw,
-                          icon: Icons.vpn_key,
-                          inputType: TextInputType.text,
-                          hidden: true,
-                          onChanged:
-                              _controllerLogin.formController.changePassword,
-                          errorText: _controllerLogin.validatePassword(),
-                        ),
-                        SizedBox(),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceAround,
-                          children: [
-                            RichText(
-                              text: TextSpan(
-                                text: _labelForgotPsw,
-                                recognizer: TapGestureRecognizer()
-                                  ..onTap = () {
-                                    HapticFeedback.lightImpact();
-                                    Navigator.push(
-                                      context,
-                                      MaterialPageRoute(
-                                        builder: (context) =>
-                                            ForgotPasswordPage(),
-                                      ),
-                                    );
-                                  },
-                              ),
-                            ),
-                            SizedBox(),
-                            RichText(
-                              text: TextSpan(
-                                text: _labelFirstAcc,
-                                recognizer: TapGestureRecognizer()
-                                  ..onTap = () {
-                                    HapticFeedback.lightImpact();
-                                    Navigator.push(
-                                      context,
-                                      MaterialPageRoute(
-                                        builder: (context) =>
-                                            AccessRequestAddPage(),
-                                      ),
-                                    );
-                                  },
-                              ),
-                            ),
-                          ],
+                        RichText(
+                          text: TextSpan(
+                            text: _labelFirstAcc,
+                            recognizer: TapGestureRecognizer()
+                              ..onTap = () {
+                                HapticFeedback.lightImpact();
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (context) =>
+                                        AccessRequestAddPage(),
+                                  ),
+                                );
+                              },
+                          ),
                         ),
                       ],
                     ),
-                  ),
-                  Expanded(
-                    flex: 3,
-                    child: Stack(
-                      children: [
-                        Center(
+                  ],
+                ),
+              ),
+              Expanded(
+                flex: 3,
+                child: Stack(
+                  children: [
+                    Center(
+                      child: Container(
+                        margin: EdgeInsets.only(bottom: _width * .07),
+                        height: _width * .7,
+                        width: _width * .7,
+                        decoration: BoxDecoration(
+                          shape: BoxShape.circle,
+                          gradient: LinearGradient(
+                            colors: [
+                              Colors.transparent,
+                              Colors.transparent,
+                              Color(0xff09090A),
+                            ],
+                            begin: Alignment.topCenter,
+                            end: Alignment.bottomCenter,
+                          ),
+                        ),
+                      ),
+                    ),
+                    Center(
+                      child: Transform.scale(
+                        scale: _animation.value,
+                        child: InkWell(
+                          splashColor: Colors.transparent,
+                          highlightColor: Colors.transparent,
+                          onTap: () {
+                            HapticFeedback.lightImpact();
+                            _login();
+                          },
                           child: Container(
-                            margin: EdgeInsets.only(bottom: _width * .07),
-                            height: _width * .7,
-                            width: _width * .7,
+                            height: _width * .2,
+                            width: _width * .2,
+                            alignment: Alignment.center,
                             decoration: BoxDecoration(
                               shape: BoxShape.circle,
-                              gradient: LinearGradient(
-                                colors: [
-                                  Colors.transparent,
-                                  Colors.transparent,
-                                  Color(0xff09090A),
-                                ],
-                                begin: Alignment.topCenter,
-                                end: Alignment.bottomCenter,
-                              ),
+                            ),
+                            child: Icon(
+                              Icons.login_sharp,
+                              size: 60,
                             ),
                           ),
                         ),
-                        Center(
-                          child: Transform.scale(
-                            scale: _animation.value,
-                            child: InkWell(
-                              splashColor: Colors.transparent,
-                              highlightColor: Colors.transparent,
-                              onTap: () {
-                                HapticFeedback.lightImpact();
-                                _login();
-                              },
-                              child: Container(
-                                height: _width * .2,
-                                width: _width * .2,
-                                alignment: Alignment.center,
-                                decoration: BoxDecoration(
-                                  shape: BoxShape.circle,
-                                ),
-                                child: Icon(
-                                  Icons.login_sharp,
-                                  size: 60,
-                                ),
-                              ),
-                            ),
-                          ),
-                        ),
-                      ],
+                      ),
                     ),
-                  ),
-                ],
+                  ],
+                ),
               ),
-            ),
+            ],
           ),
         ),
       ),

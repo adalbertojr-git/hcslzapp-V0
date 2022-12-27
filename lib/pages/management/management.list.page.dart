@@ -32,7 +32,7 @@ class ManagementListPageState extends State<ManagementListPage> {
       if (value.isNotEmpty) {
         _controller.setButtonVisibilty();
       }
-    });
+    }).catchError((e) {});
     super.initState();
   }
 
@@ -41,7 +41,7 @@ class ManagementListPageState extends State<ManagementListPage> {
         builder: (_) => Scaffold(
           appBar: MyAppBar(_title),
           bottomNavigationBar:
-          _controller.isHidedButton ? null : MyBottomAppBar(),
+              _controller.isHidedButton ? null : MyBottomAppBar(),
           body: FutureBuilder<List<Associated>>(
             future: _controller.future,
             builder: (context, snapshot) {
@@ -198,7 +198,7 @@ class ManagementListPageState extends State<ManagementListPage> {
             .show();
       } else {
         try {
-          _controller.deleteById(associated);
+          await _controller.deleteById(associated);
           AsukaSnackbar.success(SUCCESS).show();
           _controller.associateds.removeWhere(
             (item) => item.id == associated.id,

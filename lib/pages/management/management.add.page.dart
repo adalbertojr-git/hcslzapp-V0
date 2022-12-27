@@ -31,7 +31,7 @@ class ManagementAddPageState extends State<ManagementAddPage> {
       if (value.isNotEmpty) {
         _controller.setButtonVisibilty();
       }
-    });
+    }).catchError((e) {});
     super.initState();
   }
 
@@ -119,11 +119,15 @@ class ManagementAddPageState extends State<ManagementAddPage> {
         ],
       );
 
-  _save(BuildContext context) {
+  _save(BuildContext context) async {
     try {
-      _controller.save();
-      AsukaSnackbar.success(SUCCESS).show();
-      Navigator.pop(context, _controller.listItems);
+      if (_controller.ids.isEmpty) {
+        AsukaSnackbar.alert(SELECT).show();
+      } else {
+        await _controller.save();
+        AsukaSnackbar.success(SUCCESS).show();
+        Navigator.pop(context, _controller.listItems);
+      }
     } catch (e) {
       AsukaSnackbar.alert(e.toString()).show();
     } finally {}

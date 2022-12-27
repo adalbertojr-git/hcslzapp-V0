@@ -9,6 +9,7 @@ class Progress extends StatelessWidget {
   Widget build(BuildContext context) => Container(
         child: DegradeBackground(
           _animation(),
+          isError: false,
         ),
       );
 
