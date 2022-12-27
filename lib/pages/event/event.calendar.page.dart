@@ -50,10 +50,8 @@ class _EventCalendarPageState extends State<EventCalendarPage> {
 
   _loadAllEvents() {
     _controller.getFuture().then((value) {
-      if (value.isNotEmpty) {
-        _controller.setButtonVisibilty();
-      }
-    });
+      _controller.setButtonVisibilty();
+    }).catchError((e) {});
     _selectedDay = _focusedDay;
     kFirstDay = DateTime(kToday.year, kToday.month - 3, kToday.day);
     kLastDay = DateTime(kToday.year, kToday.month + 3, kToday.day);
@@ -89,7 +87,8 @@ class _EventCalendarPageState extends State<EventCalendarPage> {
   Widget build(BuildContext context) => Observer(
         builder: (_) => Scaffold(
           appBar: MyAppBar(_title),
-          bottomNavigationBar: MyBottomAppBar(),
+          bottomNavigationBar:
+              _controller.isHidedButton ? null : MyBottomAppBar(),
           body: FutureBuilder<String>(
             future: _controller.future,
             builder: (context, snapshot) {
@@ -123,7 +122,7 @@ class _EventCalendarPageState extends State<EventCalendarPage> {
               ? FloatingActionButtonLocation.centerDocked
               : null,
           floatingActionButton: widget._selectedProfile == ADMIN
-              ? Button(
+              ? _controller.isHidedButton ? null : Button(
                   icon: Icons.add,
                   onClick: () {
                     Future future = Navigator.push(

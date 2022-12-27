@@ -24,9 +24,7 @@ class _PaymentsTablePageState extends State<PaymentsTablePage> {
   @override
   void initState() {
     _controller.getFuture().then((value) {
-      if (value.isNotEmpty) {
-        _controller.setButtonVisibilty();
-      }
+      _controller.setButtonVisibilty();
     }).catchError((e) {});
     super.initState();
   }

@@ -37,68 +37,70 @@ class _PaymentAssociatedPageState extends State<PaymentAssociatedPage> {
   void initState() {
     _controller.getFuture(widget._associated.id).then((value) {
       _controller.setButtonVisibilty();
-    });
+    }).catchError((e) {});
     super.initState();
   }
 
   @override
-  Widget build(BuildContext context) => Scaffold(
-        appBar: MyAppBar(_title),
-        bottomNavigationBar:
-            _controller.isHidedButton ? null : MyBottomAppBar(),
-        body: FutureBuilder<List<Payment>>(
-          future: _controller.getFuture(widget._associated.id),
-          builder: (context, snapshot) {
-            switch (snapshot.connectionState) {
-              case ConnectionState.none:
-                break;
-              case ConnectionState.waiting:
-                return Progress();
-              case ConnectionState.active:
-                break;
-              default:
-                if (snapshot.hasError) {
-                  return CenteredMessage(
-                      title: _title, message: snapshot.error.toString());
-                } else {
-                  if ((snapshot.data?.length)! > 0) {
-                    _controller.init();
-                    _controller.payments.addAll(snapshot.data!);
-                    _controller.payments.sort(
-                      (a, b) => b.year.compareTo(a.year),
-                    );
-                    return _widgets();
-                  } else
-                    return widget._selectedProfile == ADMIN
-                        ? _widgets()
-                        : CenteredMessage(
-                            title: _title,
-                            message: NOTEXIST,
-                          );
-                }
-            } //switch (snapshot.connectionState)
-            return CenteredMessage(
-              title: _title,
-              message: UNKNOWN,
-            );
-          },
+  Widget build(BuildContext context) => Observer(
+    builder: (_) => Scaffold(
+          appBar: MyAppBar(_title),
+          bottomNavigationBar:
+              _controller.isHidedButton ? null : MyBottomAppBar(),
+          body: FutureBuilder<List<Payment>>(
+            future: _controller.future,
+            builder: (context, snapshot) {
+              switch (snapshot.connectionState) {
+                case ConnectionState.none:
+                  break;
+                case ConnectionState.waiting:
+                  return Progress();
+                case ConnectionState.active:
+                  break;
+                default:
+                  if (snapshot.hasError) {
+                    return CenteredMessage(
+                        title: _title, message: snapshot.error.toString());
+                  } else {
+                    if ((snapshot.data?.length)! > 0) {
+                      _controller.init();
+                      _controller.payments.addAll(snapshot.data!);
+                      _controller.payments.sort(
+                        (a, b) => b.year.compareTo(a.year),
+                      );
+                      return _widgets();
+                    } else
+                      return widget._selectedProfile == ADMIN
+                          ? _widgets()
+                          : CenteredMessage(
+                              title: _title,
+                              message: NOTEXIST,
+                            );
+                  }
+              } //switch (snapshot.connectionState)
+              return CenteredMessage(
+                title: _title,
+                message: UNKNOWN,
+              );
+            },
+          ),
+          floatingActionButtonLocation: widget._selectedProfile == ADMIN
+              ? FloatingActionButtonLocation.centerDocked
+              : null,
+          floatingActionButton: widget._selectedProfile == ADMIN
+              ? Observer(
+                  builder: (_) => _controller.isHidedButton
+                      ? SizedBox()
+                      : Button(
+                          icon: Icons.add,
+                          onClick: () {
+                            _add(context);
+                          },
+                        ),
+                )
+              : null,
         ),
-        floatingActionButtonLocation: widget._selectedProfile == ADMIN
-            ? FloatingActionButtonLocation.centerDocked
-            : null,
-        floatingActionButton: widget._selectedProfile == ADMIN
-            ? Observer(
-                builder: (_) => _controller.isHidedButton
-                    ? SizedBox()
-                    : Button(
-                        icon: Icons.add,
-                        onClick: () {
-                          _add(context);
-                        },
-                      ),
-              )
-            : null,
-      );
+  );
 
   _add(BuildContext context) {
     Payment _payment = Template().loadPayment();

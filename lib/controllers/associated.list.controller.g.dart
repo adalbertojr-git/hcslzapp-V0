@@ -97,22 +97,6 @@ mixin _$AssociatedListController on AssociatedListControllerBase, Store {
     });
   }
 
-  late final _$futureAtom =
-      Atom(name: 'AssociatedListControllerBase.future', context: context);
-
-  @override
-  Future<List<Associated>> get future {
-    _$futureAtom.reportRead();
-    return super.future;
-  }
-
-  @override
-  set future(Future<List<Associated>> value) {
-    _$futureAtom.reportWrite(value, super.future, () {
-      super.future = value;
-    });
-  }
-
   late final _$filterAtom =
       Atom(name: 'AssociatedListControllerBase.filter', context: context);
 
@@ -172,7 +156,6 @@ nameCtrl: ${nameCtrl},
 isHidedButton: ${isHidedButton},
 associateds: ${associateds},
 associated: ${associated},
-future: ${future},
 filter: ${filter},
 listFiltered: ${listFiltered}
     ''';
