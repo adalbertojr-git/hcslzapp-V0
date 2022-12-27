@@ -23,7 +23,7 @@ class AssociatedListPage extends StatelessWidget {
         bottomNavigationBar:
             _controller.isHidedButton ? null : MyBottomAppBar(),
         body: FutureBuilder<List<Associated>>(
-          future: _controller.getFuture(),
+          future: _controller.findAll(),
           builder: (context, snapshot) {
             switch (snapshot.connectionState) {
               case ConnectionState.none:

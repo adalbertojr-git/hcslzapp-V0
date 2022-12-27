@@ -23,9 +23,6 @@ abstract class PaymentListControllerBase with Store {
   AssociatedRepo _associatedRepo = AssociatedRepo();
 
   @observable
-  Future<List<Associated>> future = Future<List<Associated>>.value([]);
-
-  @observable
   String filter = '';
 
   init() {
@@ -37,8 +34,6 @@ abstract class PaymentListControllerBase with Store {
 
   @action
   Future<List<Associated>> findAll() => _associatedRepo.findAll();
-
-  Future<List<Associated>> getFuture() => future = findAll();
 
   @action
   setFilter(String value) => filter = value;
