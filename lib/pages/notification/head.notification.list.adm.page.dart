@@ -14,51 +14,74 @@ import 'head.notification.add.page.dart';
 
 const String _title = 'Avisos da Diretoria';
 
-class HeadNotificationListAdmPage extends StatelessWidget {
+class HeadNotificationListAdmPage extends StatefulWidget {
+  @override
+  State<HeadNotificationListAdmPage> createState() =>
+      _HeadNotificationListAdmPageState();
+}
+
+class _HeadNotificationListAdmPageState
+    extends State<HeadNotificationListAdmPage> {
   final HeadNotificationListController _controller =
       HeadNotificationListController();
 
   @override
-  Widget build(BuildContext context) => Scaffold(
-        appBar: MyAppBar(_title),
-        bottomNavigationBar: MyBottomAppBar(),
-        body: FutureBuilder<List<HeadNotification>>(
-          future: _controller.getFuture(),
-          builder: (context, snapshot) {
-            switch (snapshot.connectionState) {
-              case ConnectionState.none:
-                break;
-              case ConnectionState.waiting:
-                return Progress();
-              case ConnectionState.active:
-                break;
-              default:
-                if (snapshot.hasError) {
-                  return CenteredMessage(
-                      title: _title, message: snapshot.error.toString());
-                } else {
-                  if ((snapshot.data?.length)! > 0) {
-                    _controller.init();
-                    _controller.headNotifications.addAll(snapshot.data!);
-                    _controller.headNotifications.sort(
-                      (a, b) => b.datePublication.compareTo(a.datePublication),
-                    );
+  void initState() {
+    _controller.init();
+    _controller.getFuture().then((value) {
+      _controller.setButtonVisibilty();
+    }).catchError((e) {});
+    super.initState();
+  }
+
+  @override
+  Widget build(BuildContext context) => Observer(
+        builder: (_) => Scaffold(
+          appBar: MyAppBar(_title),
+          bottomNavigationBar:
+              _controller.isHidedButton ? null : MyBottomAppBar(),
+          body: FutureBuilder<List<HeadNotification>>(
+            future: _controller.future,
+            builder: (context, snapshot) {
+              switch (snapshot.connectionState) {
+                case ConnectionState.none:
+                  break;
+                case ConnectionState.waiting:
+                  return Progress();
+                case ConnectionState.active:
+                  break;
+                default:
+                  if (snapshot.hasError) {
+                    return CenteredMessage(
+                        title: _title, message: snapshot.error.toString());
+                  } else {
+                    if ((snapshot.data?.length)! > 0) {
+                      _controller.init();
+                      _controller.headNotifications.addAll(snapshot.data!);
+                      _controller.headNotifications.sort(
+                        (a, b) =>
+                            b.datePublication.compareTo(a.datePublication),
+                      );
+                    }
+                    return _widgets(context);
                   }
-                  return _widgets(context);
-                }
-            } //switch (snapshot.connectionState)
-            return CenteredMessage(
-              title: _title,
-              message: UNKNOWN,
-            );
-          },
+              } //switch (snapshot.connectionState)
+              return CenteredMessage(
+                title: _title,
+                message: UNKNOWN,
+              );
+            },
+          ),
+          floatingActionButtonLocation:
+              FloatingActionButtonLocation.centerDocked,
+          floatingActionButton: _controller.isHidedButton
+              ? null
+              : Button(
+                  icon: Icons.add,
+                  onClick: () {
+                    _add(context, -1);
+                  }),
         ),
-        floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
-        floatingActionButton: Button(
-            icon: Icons.add,
-            onClick: () {
-              _add(context, -1);
-            }),
       );
 
   _widgets(BuildContext context) => Column(
@@ -148,7 +171,7 @@ class HeadNotificationListAdmPage extends StatelessWidget {
         });
     if (response == true) {
       try {
-        _controller.deleteById(_controller.headNotifications[i]);
+        await _controller.deleteById(_controller.headNotifications[i]);
         AsukaSnackbar.success(SUCCESS).show();
         _controller.headNotifications.removeAt(i);
       } catch (e) {

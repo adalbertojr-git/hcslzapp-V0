@@ -18,7 +18,8 @@ class MonthBirthdaysListPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) => Scaffold(
         appBar: MyAppBar(_title),
-        bottomNavigationBar: MyBottomAppBar(),
+        bottomNavigationBar:
+            _controller.isHidedButton ? null : MyBottomAppBar(),
         body: FutureBuilder<List<MonthBirthdays>>(
           future: _controller.getFuture(),
           builder: (context, snapshot) {

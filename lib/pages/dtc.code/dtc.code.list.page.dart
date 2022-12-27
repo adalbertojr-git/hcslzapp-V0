@@ -25,10 +25,10 @@ class DtcCodeListPageState extends State<DtcCodeListPage> {
   @override
   void initState() {
     _controller.getFuture().then((value) {
-      if (value != null && value.isNotEmpty) {
+      if (value.isNotEmpty) {
         _controller.setButtonVisibilty();
       }
-    });
+    }).catchError((e) {});
     super.initState();
   }
 
@@ -36,7 +36,8 @@ class DtcCodeListPageState extends State<DtcCodeListPage> {
   Widget build(BuildContext context) => Observer(
         builder: (_) => Scaffold(
           appBar: MyAppBar(_title),
-          bottomNavigationBar: MyBottomAppBar(),
+          bottomNavigationBar:
+              _controller.isHidedButton ? null : MyBottomAppBar(),
           body: FutureBuilder<List<DtcCode>>(
             future: _controller.future,
             builder: (context, snapshot) {

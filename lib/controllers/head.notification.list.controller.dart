@@ -42,7 +42,6 @@ abstract class HeadNotificationListControllerBase with Store {
   init() {
     headNotifications.clear();
     photoUrl = headNotification.photoUrl;
-    setButtonVisibilty();
   }
 
   @action

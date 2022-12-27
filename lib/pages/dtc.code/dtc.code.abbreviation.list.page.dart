@@ -30,7 +30,7 @@ class DtcCodeAbbreviationListPageState
       if (value.isNotEmpty) {
         _controller.setButtonVisibilty();
       }
-    });
+    }).catchError((e) {});
     super.initState();
   }
 
@@ -38,7 +38,8 @@ class DtcCodeAbbreviationListPageState
   Widget build(BuildContext context) => Observer(
         builder: (_) => Scaffold(
           appBar: MyAppBar(_title),
-          bottomNavigationBar: MyBottomAppBar(),
+          bottomNavigationBar:
+              _controller.isHidedButton ? null : MyBottomAppBar(),
           body: FutureBuilder<List<DtcCodeAbbreviation>>(
             future: _controller.future,
             builder: (context, snapshot) {

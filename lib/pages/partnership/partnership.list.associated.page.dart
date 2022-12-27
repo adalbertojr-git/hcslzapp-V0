@@ -44,7 +44,8 @@ class _PartnershipListAssociatedPageState
   @override
   Widget build(BuildContext context) => Scaffold(
         appBar: MyAppBar(_title),
-        bottomNavigationBar: MyBottomAppBar(),
+        bottomNavigationBar:
+            _controller.isHidedButton ? null : MyBottomAppBar(),
         body: FutureBuilder<List<Partnership>>(
           future: _controller.future,
           builder: (context, snapshot) {
