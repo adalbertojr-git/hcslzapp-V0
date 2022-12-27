@@ -27,10 +27,8 @@ class AccessRequestListPageState extends State<AccessRequestListPage> {
   @override
   void initState() {
     _controller.getFuture().then((value) {
-      if (value.isNotEmpty) {
-        _controller.setButtonVisibilty();
-      }
-    });
+      if (value.isNotEmpty) _controller.setButtonVisibilty();
+    }).catchError((e) {});
     super.initState();
   }
 
@@ -104,9 +102,9 @@ class AccessRequestListPageState extends State<AccessRequestListPage> {
         ],
       );
 
-  _allow() {
+  _allow() async {
     try {
-      _controller.allow();
+      await _controller.allow();
       AsukaSnackbar.success(SUCCESS).show();
       Navigator.of(context).pop();
     } catch (e) {
