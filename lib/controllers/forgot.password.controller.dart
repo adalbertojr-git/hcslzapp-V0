@@ -29,13 +29,13 @@ abstract class ForgotPasswordControllerBase with Store {
   Future<String> update(PasswordDTO passwordDTO) =>
       _changePasswordRepo.update(passwordDTO);
 
-  bool get hasErrors => hasErrorNewPassword || hasErrorConfNewPassword;
+  bool get hasErrors => hasErrorPassword || hasErrorConfPassword;
 
-  bool get hasErrorNewPassword => validateNewPassword() != null;
+  bool get hasErrorPassword => validatePassword() != null;
 
-  bool get hasErrorConfNewPassword => validateConfNewPassword() != null;
+  bool get hasErrorConfPassword => validateConfPassword() != null;
 
-  String? validateNewPassword() {
+  String? validatePassword() {
     const String _labelPswRequired = 'Nova senha é obrigatória!!!';
     const String _labelPswLenght = 'Senha deve ter no mínimo 6 caracteres!!!';
 
@@ -47,7 +47,7 @@ abstract class ForgotPasswordControllerBase with Store {
     return null;
   }
 
-  String? validateConfNewPassword() {
+  String? validateConfPassword() {
     const String _labelConfPswRequired =
         'Confirmação da nova senha é obrigatória!!!';
     const String _labelPswNotValid = 'Senhas informadas não conferem!!!';

@@ -15,15 +15,23 @@ import '../../components/my.bottom.appbar.dart';
 
 const String _title = 'Esqueci minha senha';
 
-class SendEmailPage extends StatelessWidget {
+class SendEmailPage extends StatefulWidget {
+  @override
+  State<SendEmailPage> createState() => _SendEmailPageState();
+}
+
+class _SendEmailPageState extends State<SendEmailPage> {
   final SendEmailController _controller = SendEmailController();
   final CountDownController _controllerCountDown = CountDownController();
 
   @override
-  Widget build(BuildContext context) {
+  void initState() {
     _controller.init();
-    return Observer(
-      builder: (_) => Scaffold(
+    super.initState();
+  }
+
+  @override
+  Widget build(BuildContext context) => Scaffold(
         appBar: MyAppBar(_title),
         bottomNavigationBar: MyBottomAppBar(),
         body: _widgets(),
@@ -32,9 +40,7 @@ class SendEmailPage extends StatelessWidget {
           icon: Icons.email,
           onClick: () => _send(),
         ),
-      ),
-    );
-  }
+      );
 
   _widgets() => Center(
         child: ListView(
@@ -43,14 +49,16 @@ class SendEmailPage extends StatelessWidget {
             SizedBox(
               height: 10.0,
             ),
-            MyTextFormField(
-              textEditingController: _controller.emailForgotPswCtrl,
-              hint: hintEmail,
-              label: labelEmail + " *",
-              icon: Icons.email,
-              inputType: TextInputType.emailAddress,
-              onChanged: _controller.formController.changeEmail,
-              errorText: _controller.validateEmail(),
+            Observer(
+              builder: (_) => MyTextFormField(
+                textEditingController: _controller.emailForgotPswCtrl,
+                hint: hintEmail,
+                label: labelEmail + " *",
+                icon: Icons.email,
+                inputType: TextInputType.emailAddress,
+                onChanged: _controller.formController.changeEmail,
+                errorText: _controller.validateEmail(),
+              ),
             ),
             SizedBox(
               height: 20.0,
