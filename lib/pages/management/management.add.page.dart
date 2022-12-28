@@ -77,7 +77,7 @@ class ManagementAddPageState extends State<ManagementAddPage> {
                   }
               } //switch (snapshot.connectionState)
               return CenteredMessage(
-                title: _title,
+                title: ERROR,
                 message: UNKNOWN,
               );
             },

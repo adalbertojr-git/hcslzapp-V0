@@ -74,7 +74,7 @@ class ManagementListPageState extends State<ManagementListPage> {
                   }
               } //switch (snapshot.connectionState)
               return CenteredMessage(
-                title: _title,
+                title: ERROR,
                 message: UNKNOWN,
               );
             },

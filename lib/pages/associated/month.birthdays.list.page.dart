@@ -33,7 +33,7 @@ class MonthBirthdaysListPage extends StatelessWidget {
               default:
                 if (snapshot.hasError) {
                   return CenteredMessage(
-                    title: _title,
+                    title: ERROR,
                     message: snapshot.error.toString(),
                   );
                 } else {
@@ -45,13 +45,13 @@ class MonthBirthdaysListPage extends StatelessWidget {
                     return _widgets();
                   } else
                     return CenteredMessage(
-                      title: _title,
+                      title: WARNING,
                       message: NOTEXIST,
                     );
                 }
             } //switch (snapshot.connectionState)
             return CenteredMessage(
-              title: _title,
+              title: WARNING,
               message: UNKNOWN,
             );
           },

@@ -140,7 +140,7 @@ class _DashboardPageState extends State<DashboardPage> {
               default:
                 if (snapshot.hasError) {
                   return CenteredMessage(
-                    title: _labelAppTitle,
+                    title: ERROR,
                     message: snapshot.error.toString(),
                   );
                 } else {
@@ -150,13 +150,13 @@ class _DashboardPageState extends State<DashboardPage> {
                     return _widgets();
                   } else
                     return CenteredMessage(
-                      title: _labelAppTitle,
+                      title: WARNING,
                       message: NOTEXIST,
                     );
                 }
             } //switch (snapshot.connectionState)
             return CenteredMessage(
-              title: _labelAppTitle,
+              title: ERROR,
               message: UNKNOWN,
             );
           },

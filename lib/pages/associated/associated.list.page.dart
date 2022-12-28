@@ -35,7 +35,7 @@ class AssociatedListPage extends StatelessWidget {
               default:
                 if (snapshot.hasError) {
                   return CenteredMessage(
-                    title: _title,
+                    title: ERROR,
                     message: snapshot.error.toString(),
                   );
                 } else {
@@ -48,13 +48,13 @@ class AssociatedListPage extends StatelessWidget {
                     return _widgets(context);
                   } else
                     return CenteredMessage(
-                      title: _title,
+                      title: WARNING,
                       message: NOTEXIST,
                     );
                 }
             } //switch (snapshot.connectionState)
             return CenteredMessage(
-              title: _title,
+              title: WARNING,
               message: UNKNOWN,
             );
           },

@@ -51,7 +51,9 @@ class DtcCodeListPageState extends State<DtcCodeListPage> {
                 default:
                   if (snapshot.hasError) {
                     return CenteredMessage(
-                        title: _title, message: snapshot.error.toString());
+                      title: ERROR,
+                      message: snapshot.error.toString(),
+                    );
                   } else {
                     if ((snapshot.data?.length)! > 0) {
                       _controller.init();
@@ -65,7 +67,7 @@ class DtcCodeListPageState extends State<DtcCodeListPage> {
                   }
               } //switch (snapshot.connectionState)
               return CenteredMessage(
-                title: _title,
+                title: ERROR,
                 message: UNKNOWN,
               );
             },

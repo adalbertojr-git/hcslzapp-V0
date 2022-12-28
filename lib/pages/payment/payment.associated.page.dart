@@ -43,7 +43,7 @@ class _PaymentAssociatedPageState extends State<PaymentAssociatedPage> {
 
   @override
   Widget build(BuildContext context) => Observer(
-    builder: (_) => Scaffold(
+        builder: (_) => Scaffold(
           appBar: MyAppBar(_title),
           bottomNavigationBar:
               _controller.isHidedButton ? null : MyBottomAppBar(),
@@ -60,7 +60,9 @@ class _PaymentAssociatedPageState extends State<PaymentAssociatedPage> {
                 default:
                   if (snapshot.hasError) {
                     return CenteredMessage(
-                        title: _title, message: snapshot.error.toString());
+                      title: ERROR,
+                      message: snapshot.error.toString(),
+                    );
                   } else {
                     if ((snapshot.data?.length)! > 0) {
                       _controller.init();
@@ -73,13 +75,13 @@ class _PaymentAssociatedPageState extends State<PaymentAssociatedPage> {
                       return widget._selectedProfile == ADMIN
                           ? _widgets()
                           : CenteredMessage(
-                              title: _title,
+                              title: WARNING,
                               message: NOTEXIST,
                             );
                   }
               } //switch (snapshot.connectionState)
               return CenteredMessage(
-                title: _title,
+                title: ERROR,
                 message: UNKNOWN,
               );
             },
@@ -100,7 +102,7 @@ class _PaymentAssociatedPageState extends State<PaymentAssociatedPage> {
                 )
               : null,
         ),
-  );
+      );
 
   _add(BuildContext context) {
     Payment _payment = Template().loadPayment();

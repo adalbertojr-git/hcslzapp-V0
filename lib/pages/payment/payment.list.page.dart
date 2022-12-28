@@ -56,7 +56,9 @@ class _PaymentListPageState extends State<PaymentListPage> {
                   default:
                     if (snapshot.hasError) {
                       return CenteredMessage(
-                          title: _title, message: snapshot.error.toString());
+                        title: ERROR,
+                        message: snapshot.error.toString(),
+                      );
                     } else {
                       if ((snapshot.data?.length)! > 0) {
                         _controller.init();
@@ -67,13 +69,13 @@ class _PaymentListPageState extends State<PaymentListPage> {
                         return _widgets();
                       } else
                         return CenteredMessage(
-                          title: _title,
+                          title: WARNING,
                           message: NOTEXIST,
                         );
                     }
                 } //switch (snapshot.connectionState)
                 return CenteredMessage(
-                  title: _title,
+                  title: ERROR,
                   message: UNKNOWN,
                 );
               },

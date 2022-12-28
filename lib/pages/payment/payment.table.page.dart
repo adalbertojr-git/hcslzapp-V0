@@ -47,7 +47,9 @@ class _PaymentsTablePageState extends State<PaymentsTablePage> {
               default:
                 if (snapshot.hasError) {
                   return CenteredMessage(
-                      title: _title, message: snapshot.error.toString());
+                    title: WARNING,
+                    message: snapshot.error.toString(),
+                  );
                 } else {
                   _controller.init();
                   _controller.payments.addAll(snapshot.data!);
@@ -58,7 +60,7 @@ class _PaymentsTablePageState extends State<PaymentsTablePage> {
                 }
             } //switch (snapshot.connectionState)
             return CenteredMessage(
-              title: _title,
+              title: ERROR,
               message: UNKNOWN,
             );
           },

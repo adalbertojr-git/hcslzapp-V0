@@ -67,7 +67,7 @@ class _HeadNotificationListAdmPageState
                   }
               } //switch (snapshot.connectionState)
               return CenteredMessage(
-                title: _title,
+                title: ERROR,
                 message: UNKNOWN,
               );
             },
