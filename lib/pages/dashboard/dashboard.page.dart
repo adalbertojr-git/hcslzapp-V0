@@ -320,7 +320,7 @@ class _DashboardPageState extends State<DashboardPage> {
                       child: const Text(
                         'Este aplicativo é propriedade do Harley Club de São '
                         'Luís-MA.',
-                        style: TextStyle(fontSize: 12.0),
+                        style: TextStyle(fontSize: 14.0),
                       ),
                     ),
                     Padding(
@@ -328,35 +328,35 @@ class _DashboardPageState extends State<DashboardPage> {
                       child: const Text(
                         'Seu conteúdo e utilização são '
                         'restritos a associados.',
-                        style: TextStyle(fontSize: 12.0),
+                        style: TextStyle(fontSize: 14.0),
                       ),
                     ),
                     Padding(
                       padding: EdgeInsets.only(top: 20),
                       child: const Text(
                         'Desenvolvedor: Adalberto Jr.',
-                        style: TextStyle(fontSize: 10.0),
+                        style: TextStyle(fontSize: 12.0),
                       ),
                     ),
                     Padding(
                       padding: EdgeInsets.only(top: 2),
                       child: const Text(
                         'Email: atajr.650@gmail.com',
-                        style: TextStyle(fontSize: 10.0),
+                        style: TextStyle(fontSize: 12.0),
                       ),
                     ),
                     Padding(
                       padding: EdgeInsets.only(top: 2),
                       child: const Text(
                         'Tel: (98) 99120-7728',
-                        style: TextStyle(fontSize: 10.0),
+                        style: TextStyle(fontSize: 12.0),
                       ),
                     ),
                     Padding(
                       padding: EdgeInsets.only(top: 2, bottom: 20),
                       child: const Text(
                         'Copyright 2020-2021 Brasil',
-                        style: TextStyle(fontSize: 10.0),
+                        style: TextStyle(fontSize: 12.0),
                       ),
                     ),
                     SizedBox(
