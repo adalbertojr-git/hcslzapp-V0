@@ -45,7 +45,7 @@ class _CenteredMessageState extends State<CenteredMessage> {
           decoration: BoxDecoration(
               shape: BoxShape.rectangle,
               color: widget.title == WARNING
-                  ? Colors.yellow[500]
+                  ? Colors.yellow[300]
                   : Colors.red[500],
               borderRadius: BorderRadius.circular(padding),
               boxShadow: [
