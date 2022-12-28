@@ -54,7 +54,9 @@ class ManagementAddPageState extends State<ManagementAddPage> {
                 default:
                   if (snapshot.hasError) {
                     return CenteredMessage(
-                        title: _title, message: snapshot.error.toString());
+                      title: ERROR,
+                      message: snapshot.error.toString(),
+                    );
                   } else {
                     if ((snapshot.data?.length)! > 0) {
                       _controller.init();
@@ -66,12 +68,12 @@ class ManagementAddPageState extends State<ManagementAddPage> {
                         return _widgets();
                       } else
                         return CenteredMessage(
-                          title: _title,
+                          title: WARNING,
                           message: _labelAllAdmins,
                         );
                     } else
                       return CenteredMessage(
-                        title: _title,
+                        title: WARNING,
                         message: NOTEXIST,
                       );
                   }

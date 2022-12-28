@@ -63,13 +63,13 @@ class DtcCodeAbbreviationListPageState
                       return _widgets();
                     } else
                       return CenteredMessage(
-                        title: _title,
+                        title: WARNING,
                         message: NOTEXIST,
                       );
                   }
               } //switch (snapshot.connectionState)
               return CenteredMessage(
-                title: WARNING,
+                title: ERROR,
                 message: UNKNOWN,
               );
             },

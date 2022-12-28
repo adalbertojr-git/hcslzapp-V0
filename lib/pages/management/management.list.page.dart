@@ -55,7 +55,7 @@ class ManagementListPageState extends State<ManagementListPage> {
                 default:
                   if (snapshot.hasError) {
                     return CenteredMessage(
-                      title: _title,
+                      title: ERROR,
                       message: snapshot.error.toString(),
                     );
                   } else {
@@ -68,7 +68,7 @@ class ManagementListPageState extends State<ManagementListPage> {
                       return _widgets();
                     } else
                       return CenteredMessage(
-                        title: _title,
+                        title: WARNING,
                         message: NOTEXIST,
                       );
                   }

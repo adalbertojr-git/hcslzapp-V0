@@ -61,7 +61,7 @@ class DtcCodeListPageState extends State<DtcCodeListPage> {
                       return _widgets();
                     } else
                       return CenteredMessage(
-                        title: _title,
+                        title: WARNING,
                         message: NOTEXIST,
                       );
                   }

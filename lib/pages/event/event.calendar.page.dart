@@ -102,7 +102,9 @@ class _EventCalendarPageState extends State<EventCalendarPage> {
                 default:
                   if (snapshot.hasError) {
                     return CenteredMessage(
-                        title: _title, message: snapshot.error.toString());
+                      title: ERROR,
+                      message: snapshot.error.toString(),
+                    );
                   } else {
                     _controller.init();
                     _controller.events =
@@ -122,24 +124,26 @@ class _EventCalendarPageState extends State<EventCalendarPage> {
               ? FloatingActionButtonLocation.centerDocked
               : null,
           floatingActionButton: widget._selectedProfile == ADMIN
-              ? _controller.isHidedButton ? null : Button(
-                  icon: Icons.add,
-                  onClick: () {
-                    Future future = Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => EventAddPage(
-                          widget._selectedProfile,
-                          null,
-                          _selectedDay.toString().substring(0, 10),
-                        ),
-                      ),
-                    );
-                    future.then((value) {
-                      if (value != null) _loadAllEvents();
-                    });
-                  },
-                )
+              ? _controller.isHidedButton
+                  ? null
+                  : Button(
+                      icon: Icons.add,
+                      onClick: () {
+                        Future future = Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => EventAddPage(
+                              widget._selectedProfile,
+                              null,
+                              _selectedDay.toString().substring(0, 10),
+                            ),
+                          ),
+                        );
+                        future.then((value) {
+                          if (value != null) _loadAllEvents();
+                        });
+                      },
+                    )
               : null,
         ),
       );
