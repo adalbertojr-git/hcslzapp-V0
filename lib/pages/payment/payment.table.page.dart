@@ -71,7 +71,7 @@ class _PaymentsTablePageState extends State<PaymentsTablePage> {
         builder: (_) => ListView(
           children: [
             MyTextFormField(
-              textEditingController: _controller.nameCtrl,
+              textEditingController: _controller.yearCtrl,
               label: labelYearPayment,
               hint: hintYearPayment,
               icon: Icons.search,
@@ -93,11 +93,16 @@ class _PaymentsTablePageState extends State<PaymentsTablePage> {
                 List<PaymentTable>.from(_controller.listFiltered),
               ),
             ),
+            SizedBox(
+              height: 10,
+            ),
             Row(
-              mainAxisAlignment: MainAxisAlignment.end,
+              mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Text(
-                  'Total no período:',
+                  _controller.yearCtrl.text.isEmpty
+                      ? 'Total: '
+                      : 'Total no perído: ',
                   style: TextStyle(
                     fontSize: 20,
                   ),

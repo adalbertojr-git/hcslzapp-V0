@@ -10,7 +10,7 @@ class PaymentTableController = PaymentTableControllerBase
 
 abstract class PaymentTableControllerBase with Store {
   @observable
-  var nameCtrl = TextEditingController();
+  var yearCtrl = TextEditingController();
 
   @observable
   bool isHidedButton = true;

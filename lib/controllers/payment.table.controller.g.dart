@@ -17,19 +17,19 @@ mixin _$PaymentTableController on PaymentTableControllerBase, Store {
               name: 'PaymentTableControllerBase.listFiltered'))
       .value;
 
-  late final _$nameCtrlAtom =
-      Atom(name: 'PaymentTableControllerBase.nameCtrl', context: context);
+  late final _$yearCtrlAtom =
+      Atom(name: 'PaymentTableControllerBase.yearCtrl', context: context);
 
   @override
-  TextEditingController get nameCtrl {
-    _$nameCtrlAtom.reportRead();
-    return super.nameCtrl;
+  TextEditingController get yearCtrl {
+    _$yearCtrlAtom.reportRead();
+    return super.yearCtrl;
   }
 
   @override
-  set nameCtrl(TextEditingController value) {
-    _$nameCtrlAtom.reportWrite(value, super.nameCtrl, () {
-      super.nameCtrl = value;
+  set yearCtrl(TextEditingController value) {
+    _$yearCtrlAtom.reportWrite(value, super.yearCtrl, () {
+      super.yearCtrl = value;
     });
   }
 
@@ -179,7 +179,7 @@ mixin _$PaymentTableController on PaymentTableControllerBase, Store {
   @override
   String toString() {
     return '''
-nameCtrl: ${nameCtrl},
+yearCtrl: ${yearCtrl},
 isHidedButton: ${isHidedButton},
 payments: ${payments},
 future: ${future},
