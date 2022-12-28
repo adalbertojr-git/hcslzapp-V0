@@ -1,27 +1,23 @@
 import 'package:flutter/material.dart';
 
 class CustomDialogBox extends StatefulWidget {
-  /*final String title, descriptions, text;
-  final Image img;
-//acc
-  const CustomDialogBox({
-    Key key,
-    this.title,
-    this.descriptions,
-    this.text,
-    this.img,
-  }) : super(key: key);
-*/
+  final String message;
+
+  const CustomDialogBox({required this.message});
+
   @override
   _CustomDialogBoxState createState() => _CustomDialogBoxState();
 }
 
 class _CustomDialogBoxState extends State<CustomDialogBox> {
+  static const double padding = 10;
+  static const double avatarRadius = 100;
+
   @override
   Widget build(BuildContext context) {
     return Dialog(
       shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(Constants.padding),
+        borderRadius: BorderRadius.circular(padding),
       ),
       elevation: 0,
       backgroundColor: Colors.transparent,
@@ -33,64 +29,61 @@ class _CustomDialogBoxState extends State<CustomDialogBox> {
     return Stack(
       children: <Widget>[
         Container(
+          width: MediaQuery.of(context).size.width,
           padding: EdgeInsets.only(
-              left: Constants.padding,
-              top: Constants.avatarRadius + Constants.padding,
-              right: Constants.padding,
-              bottom: Constants.padding),
-          margin: EdgeInsets.only(top: Constants.avatarRadius),
+              left: padding,
+              top: avatarRadius + padding,
+              right: padding,
+              bottom: padding),
+          margin: EdgeInsets.only(top: avatarRadius),
           decoration: BoxDecoration(
               shape: BoxShape.rectangle,
               color: Colors.white,
-              borderRadius: BorderRadius.circular(Constants.padding),
+              borderRadius: BorderRadius.circular(padding),
               boxShadow: [
                 BoxShadow(
-                    color: Colors.black, offset: Offset(0, 10), blurRadius: 10),
+                  color: Colors.black,
+                  offset: Offset(0, 10),
+                  blurRadius: 10,
+                ),
               ]),
           child: Column(
             mainAxisSize: MainAxisSize.min,
             children: <Widget>[
+              SizedBox(
+                height: 20,
+              ),
               Text(
                 // widget.title,
-                'Teste sdaisduasiudasiudyaisudyasiudyais',
-                style: TextStyle(fontSize: 22, fontWeight: FontWeight.w600),
+                'Teste ',
+                style: TextStyle(
+                  fontSize: 22,
+                  fontWeight: FontWeight.w600,
+                ),
               ),
               SizedBox(
-                height: 15,
+                height: 10,
               ),
               Text(
-                // widget.descriptions,
-                'Teste',
+                widget.message,
                 style: TextStyle(fontSize: 14),
                 textAlign: TextAlign.center,
               ),
               SizedBox(
                 height: 30,
               ),
-/*              Align(
-                alignment: Alignment.bottomRight,
-                child: (
-                    onPressed: () {
-                      Navigator.of(context).pop();
-                    },
-                    child: Text(
-                      //widget.text,
-                      'Teste',
-                      style: TextStyle(fontSize: 18),
-                    )),
-              ),*/
             ],
           ),
         ),
         Positioned(
-          left: Constants.padding,
-          right: Constants.padding,
+          left: padding,
+          right: padding,
           child: CircleAvatar(
             backgroundColor: Colors.transparent,
-            radius: Constants.avatarRadius,
+            radius: avatarRadius,
             child: ClipRRect(
                 borderRadius:
-                    BorderRadius.all(Radius.circular(Constants.avatarRadius)),
+                    BorderRadius.all(Radius.circular(avatarRadius)),
                 child: Image.asset('assets/imgs/logo.png')),
           ),
         ),
@@ -98,10 +91,3 @@ class _CustomDialogBoxState extends State<CustomDialogBox> {
     );
   }
 }
-
-class Constants{
-  Constants._();
-  static const double padding = 10;
-  static const double avatarRadius = 100;
-}
-

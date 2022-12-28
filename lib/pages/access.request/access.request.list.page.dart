@@ -51,8 +51,11 @@ class AccessRequestListPageState extends State<AccessRequestListPage> {
                   break;
                 default:
                   if (snapshot.hasError) {
-                    return CenteredMessage(
+/*                    return CenteredMessage(
                       title: _title,
+                      message: snapshot.error.toString(),
+                    );*/
+                    return CustomDialogBox(
                       message: snapshot.error.toString(),
                     );
                   } else {
@@ -65,7 +68,9 @@ class AccessRequestListPageState extends State<AccessRequestListPage> {
                         title: _title,
                         message: NOTEXIST,
                       );*/
-                      return CustomDialogBox();
+                      return CustomDialogBox(
+                        message: NOTEXIST,
+                      );
                   }
               } //switch (snapshot.connectionState)
               return CenteredMessage(
