@@ -12,6 +12,6 @@ URL base de acesso, a partir da qual sao chamadas as demais URls
 // no TRE
 const String mainUrl = 'http://10.11.153.184:8080';
 // em casa
-// const String mainUrl = 'http://192.168.15.154:8080';
+//const String mainUrl = 'http://192.168.15.154:8080';
 // via wifi celular
 //const String mainUrl = 'http://192.168.43.8:8080';
