@@ -16,24 +16,46 @@ abstract class ChangePasswordControllerBase with Store {
   var pswCtrl = TextEditingController();
 
   @observable
+  var newPswCtrl = TextEditingController();
+
+  @observable
   var confPswCtrl = TextEditingController();
 
   @observable
   ChangePasswordRepo _changePasswordRepo = ChangePasswordRepo();
 
   init() {
-    formController = FormController(confPassword: '', password: '');
+    formController = FormController(
+      password: '',
+      newPassword: '',
+      confPassword: '',
+    );
   }
 
   @action
   Future<String> update(PasswordDTO passwordDTO) =>
       _changePasswordRepo.update(passwordDTO);
 
-  bool get hasErrors => hasErrorNewPassword || hasErrorConfNewPassword;
+  bool get hasErrors =>
+      hasErrorPassword || hasErrorNewPassword || hasErrorConfPassword;
+
+  bool get hasErrorPassword => validatePassword() != null;
 
   bool get hasErrorNewPassword => validateNewPassword() != null;
 
-  bool get hasErrorConfNewPassword => validateConfNewPassword() != null;
+  bool get hasErrorConfPassword => validateConfPassword() != null;
+
+  String? validatePassword() {
+    const String _labelPswRequired = 'Senha atual é obrigatória!!!';
+    const String _labelPswLenght = 'Senha deve ter no mínimo 6 caracteres!!!';
+
+    if (formController.password.isEmpty) {
+      return _labelPswRequired;
+    } else if (formController.password.toString().length < 6) {
+      return _labelPswLenght;
+    }
+    return null;
+  }
 
   String? validateNewPassword() {
     const String _labelPswRequired = 'Nova senha é obrigatória!!!';
@@ -47,14 +69,14 @@ abstract class ChangePasswordControllerBase with Store {
     return null;
   }
 
-  String? validateConfNewPassword() {
+  String? validateConfPassword() {
     const String _labelConfPswRequired =
         'Confirmação da nova senha é obrigatória!!!';
     const String _labelPswNotValid = 'Senhas informadas não conferem!!!';
 
     if (formController.confPassword.isEmpty) {
       return _labelConfPswRequired;
-    } else if (formController.confPassword != formController.password) {
+    } else if (formController.confPassword != formController.newPassword) {
       return _labelPswNotValid;
     }
     return null;
@@ -63,10 +85,12 @@ abstract class ChangePasswordControllerBase with Store {
 
 class FormController extends FormControllerBase with _$FormController {
   FormController({
-    String? confPassword,
     String? password,
+    String? newPassword,
+    String? confPassword,
   }) {
     super.password = password;
+    super.newPassword = newPassword;
     super.confPassword = confPassword;
   }
 }
@@ -76,10 +100,16 @@ abstract class FormControllerBase with Store {
   String? password;
 
   @observable
+  String? newPassword;
+
+  @observable
   String? confPassword;
 
   @action
   changePassword(String value) => password = value;
+
+  @action
+  changeNewPassword(String value) => newPassword = value;
 
   @action
   changeConfPassword(String value) => confPassword = value;

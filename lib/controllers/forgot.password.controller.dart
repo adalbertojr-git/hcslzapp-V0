@@ -1,6 +1,7 @@
+import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:hcslzapp/models/password.dto.dart';
-import 'package:hcslzapp/repositories/forgot.password.repo.dart';
+import 'package:hcslzapp/repositories/change.password.repo.dart';
 import 'package:mobx/mobx.dart';
 
 part 'forgot.password.controller.g.dart';
@@ -12,60 +13,74 @@ abstract class ForgotPasswordControllerBase with Store {
   var formController;
 
   @observable
-  var emailForgotPswCtrl = TextEditingController();
+  var pswCtrl = TextEditingController();
 
   @observable
-  var codeCtrl = TextEditingController();
+  var confPswCtrl = TextEditingController();
 
   @observable
-  ForgotPasswordRepo _forgotPasswordRepo = ForgotPasswordRepo();
+  ChangePasswordRepo _changePasswordRepo = ChangePasswordRepo();
 
   init() {
-    formController = FormController(email: '');
-  }
-
-  initTextFields() {
-    emailForgotPswCtrl.text = '';
-    codeCtrl.text = '';
+    formController = FormController(confPassword: '', password: '');
   }
 
   @action
-  Future<PasswordDTO> forgotPassword(String email) =>
-      _forgotPasswordRepo.sendEmail(email);
+  Future<String> update(PasswordDTO passwordDTO) =>
+      _changePasswordRepo.update(passwordDTO);
 
-  @action
-  Future<String> validateCode(PasswordDTO passwordDTO) =>
-      _forgotPasswordRepo.validateCode(passwordDTO);
+  bool get hasErrors => hasErrorNewPassword || hasErrorConfNewPassword;
 
-  bool get hasErrors => hasErrorEmail;
+  bool get hasErrorNewPassword => validateNewPassword() != null;
 
-  bool get hasErrorEmail => validateEmail() != null;
+  bool get hasErrorConfNewPassword => validateConfNewPassword() != null;
 
-  String? validateEmail() {
-    const String _labelEmailRequired = 'Email é obrigatório!!!';
-    const String _labelEmailNotValid = 'Informe um email válido!!!';
+  String? validateNewPassword() {
+    const String _labelPswRequired = 'Nova senha é obrigatória!!!';
+    const String _labelPswLenght = 'Senha deve ter no mínimo 6 caracteres!!!';
 
-    if (formController.email.isEmpty) {
-      return _labelEmailRequired;
-    } else if (!RegExp(
-            r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+")
-        .hasMatch(formController.email)) {
-      return _labelEmailNotValid;
+    if (formController.password.isEmpty) {
+      return _labelPswRequired;
+    } else if (formController.password.toString().length < 6) {
+      return _labelPswLenght;
+    }
+    return null;
+  }
+
+  String? validateConfNewPassword() {
+    const String _labelConfPswRequired =
+        'Confirmação da nova senha é obrigatória!!!';
+    const String _labelPswNotValid = 'Senhas informadas não conferem!!!';
+
+    if (formController.confPassword.isEmpty) {
+      return _labelConfPswRequired;
+    } else if (formController.confPassword != formController.password) {
+      return _labelPswNotValid;
     }
     return null;
   }
 }
 
 class FormController extends FormControllerBase with _$FormController {
-  FormController({String? email}) {
-    super.email = email;
+  FormController({
+    String? confPassword,
+    String? password,
+  }) {
+    super.password = password;
+    super.confPassword = confPassword;
   }
 }
 
 abstract class FormControllerBase with Store {
   @observable
-  String? email;
+  String? password;
+
+  @observable
+  String? confPassword;
 
   @action
-  changeEmail(String value) => email = value;
+  changePassword(String value) => password = value;
+
+  @action
+  changeConfPassword(String value) => confPassword = value;
 }

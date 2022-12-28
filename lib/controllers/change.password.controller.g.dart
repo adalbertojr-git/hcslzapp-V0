@@ -25,6 +25,22 @@ mixin _$ChangePasswordController on ChangePasswordControllerBase, Store {
     });
   }
 
+  late final _$newPswCtrlAtom =
+      Atom(name: 'ChangePasswordControllerBase.newPswCtrl', context: context);
+
+  @override
+  TextEditingController get newPswCtrl {
+    _$newPswCtrlAtom.reportRead();
+    return super.newPswCtrl;
+  }
+
+  @override
+  set newPswCtrl(TextEditingController value) {
+    _$newPswCtrlAtom.reportWrite(value, super.newPswCtrl, () {
+      super.newPswCtrl = value;
+    });
+  }
+
   late final _$confPswCtrlAtom =
       Atom(name: 'ChangePasswordControllerBase.confPswCtrl', context: context);
 
@@ -76,6 +92,7 @@ mixin _$ChangePasswordController on ChangePasswordControllerBase, Store {
   String toString() {
     return '''
 pswCtrl: ${pswCtrl},
+newPswCtrl: ${newPswCtrl},
 confPswCtrl: ${confPswCtrl}
     ''';
   }
@@ -95,6 +112,22 @@ mixin _$FormController on FormControllerBase, Store {
   set password(String? value) {
     _$passwordAtom.reportWrite(value, super.password, () {
       super.password = value;
+    });
+  }
+
+  late final _$newPasswordAtom =
+      Atom(name: 'FormControllerBase.newPassword', context: context);
+
+  @override
+  String? get newPassword {
+    _$newPasswordAtom.reportRead();
+    return super.newPassword;
+  }
+
+  @override
+  set newPassword(String? value) {
+    _$newPasswordAtom.reportWrite(value, super.newPassword, () {
+      super.newPassword = value;
     });
   }
 
@@ -129,6 +162,17 @@ mixin _$FormController on FormControllerBase, Store {
   }
 
   @override
+  dynamic changeNewPassword(String value) {
+    final _$actionInfo = _$FormControllerBaseActionController.startAction(
+        name: 'FormControllerBase.changeNewPassword');
+    try {
+      return super.changeNewPassword(value);
+    } finally {
+      _$FormControllerBaseActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
   dynamic changeConfPassword(String value) {
     final _$actionInfo = _$FormControllerBaseActionController.startAction(
         name: 'FormControllerBase.changeConfPassword');
@@ -143,6 +187,7 @@ mixin _$FormController on FormControllerBase, Store {
   String toString() {
     return '''
 password: ${password},
+newPassword: ${newPassword},
 confPassword: ${confPassword}
     ''';
   }

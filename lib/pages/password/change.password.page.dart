@@ -45,12 +45,22 @@ class ChangePasswordPage extends StatelessWidget {
           ),
           MyTextFormField(
             textEditingController: _controller.pswCtrl,
+            label: labelCurrentPsw,
+            hint: hintCurrentPsw,
+            icon: Icons.password,
+            inputType: TextInputType.text,
+            hidden: true,
+            onChanged: _controller.formController.changePassword,
+            errorText: _controller.validatePassword(),
+          ),
+          MyTextFormField(
+            textEditingController: _controller.newPswCtrl,
             label: labelNewPsw,
             hint: hintNewPsw,
             icon: Icons.password,
             inputType: TextInputType.text,
             hidden: true,
-            onChanged: _controller.formController.changePassword,
+            onChanged: _controller.formController.changeNewPassword,
             errorText: _controller.validateNewPassword(),
           ),
           MyTextFormField(
@@ -61,7 +71,7 @@ class ChangePasswordPage extends StatelessWidget {
             inputType: TextInputType.text,
             hidden: true,
             onChanged: _controller.formController.changeConfPassword,
-            errorText: _controller.validateConfNewPassword(),
+            errorText: _controller.validateConfPassword(),
           ),
         ],
       );

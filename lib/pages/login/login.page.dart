@@ -11,7 +11,7 @@ import '../../components/my.text.form.field.dart';
 import '../../controllers/login.controller.dart';
 import '../access.request/access.request.add.page.dart';
 import '../dashboard/dashboard.page.dart';
-import '../password/forgot.password.page.dart';
+import '../password/send.email.page.dart';
 
 const String _pathLogoImage = 'assets/imgs/logo.png';
 const String _labelForgotPsw = 'Esqueci minha senha';
@@ -130,7 +130,7 @@ class _MyCustomLoginUIState extends State<MyCustomLoginUI>
                                 Navigator.push(
                                   context,
                                   MaterialPageRoute(
-                                    builder: (context) => ForgotPasswordPage(),
+                                    builder: (context) => SendEmailPage(),
                                   ),
                                 );
                               },

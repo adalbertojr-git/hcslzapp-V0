@@ -9,53 +9,52 @@ part of 'forgot.password.controller.dart';
 // ignore_for_file: non_constant_identifier_names, unnecessary_brace_in_string_interps, unnecessary_lambdas, prefer_expression_function_bodies, lines_longer_than_80_chars, avoid_as, avoid_annotating_with_dynamic, no_leading_underscores_for_local_identifiers
 
 mixin _$ForgotPasswordController on ForgotPasswordControllerBase, Store {
-  late final _$emailForgotPswCtrlAtom = Atom(
-      name: 'ForgotPasswordControllerBase.emailForgotPswCtrl',
-      context: context);
+  late final _$pswCtrlAtom =
+      Atom(name: 'ForgotPasswordControllerBase.pswCtrl', context: context);
 
   @override
-  TextEditingController get emailForgotPswCtrl {
-    _$emailForgotPswCtrlAtom.reportRead();
-    return super.emailForgotPswCtrl;
+  TextEditingController get pswCtrl {
+    _$pswCtrlAtom.reportRead();
+    return super.pswCtrl;
   }
 
   @override
-  set emailForgotPswCtrl(TextEditingController value) {
-    _$emailForgotPswCtrlAtom.reportWrite(value, super.emailForgotPswCtrl, () {
-      super.emailForgotPswCtrl = value;
+  set pswCtrl(TextEditingController value) {
+    _$pswCtrlAtom.reportWrite(value, super.pswCtrl, () {
+      super.pswCtrl = value;
     });
   }
 
-  late final _$codeCtrlAtom =
-      Atom(name: 'ForgotPasswordControllerBase.codeCtrl', context: context);
+  late final _$confPswCtrlAtom =
+      Atom(name: 'ForgotPasswordControllerBase.confPswCtrl', context: context);
 
   @override
-  TextEditingController get codeCtrl {
-    _$codeCtrlAtom.reportRead();
-    return super.codeCtrl;
+  TextEditingController get confPswCtrl {
+    _$confPswCtrlAtom.reportRead();
+    return super.confPswCtrl;
   }
 
   @override
-  set codeCtrl(TextEditingController value) {
-    _$codeCtrlAtom.reportWrite(value, super.codeCtrl, () {
-      super.codeCtrl = value;
+  set confPswCtrl(TextEditingController value) {
+    _$confPswCtrlAtom.reportWrite(value, super.confPswCtrl, () {
+      super.confPswCtrl = value;
     });
   }
 
-  late final _$_forgotPasswordRepoAtom = Atom(
-      name: 'ForgotPasswordControllerBase._forgotPasswordRepo',
+  late final _$_changePasswordRepoAtom = Atom(
+      name: 'ForgotPasswordControllerBase._changePasswordRepo',
       context: context);
 
   @override
-  ForgotPasswordRepo get _forgotPasswordRepo {
-    _$_forgotPasswordRepoAtom.reportRead();
-    return super._forgotPasswordRepo;
+  ChangePasswordRepo get _changePasswordRepo {
+    _$_changePasswordRepoAtom.reportRead();
+    return super._changePasswordRepo;
   }
 
   @override
-  set _forgotPasswordRepo(ForgotPasswordRepo value) {
-    _$_forgotPasswordRepoAtom.reportWrite(value, super._forgotPasswordRepo, () {
-      super._forgotPasswordRepo = value;
+  set _changePasswordRepo(ChangePasswordRepo value) {
+    _$_changePasswordRepoAtom.reportWrite(value, super._changePasswordRepo, () {
+      super._changePasswordRepo = value;
     });
   }
 
@@ -63,22 +62,11 @@ mixin _$ForgotPasswordController on ForgotPasswordControllerBase, Store {
       ActionController(name: 'ForgotPasswordControllerBase', context: context);
 
   @override
-  Future<PasswordDTO> forgotPassword(String email) {
+  Future<String> update(PasswordDTO passwordDTO) {
     final _$actionInfo = _$ForgotPasswordControllerBaseActionController
-        .startAction(name: 'ForgotPasswordControllerBase.forgotPassword');
+        .startAction(name: 'ForgotPasswordControllerBase.update');
     try {
-      return super.forgotPassword(email);
-    } finally {
-      _$ForgotPasswordControllerBaseActionController.endAction(_$actionInfo);
-    }
-  }
-
-  @override
-  Future<String> validateCode(PasswordDTO passwordDTO) {
-    final _$actionInfo = _$ForgotPasswordControllerBaseActionController
-        .startAction(name: 'ForgotPasswordControllerBase.validateCode');
-    try {
-      return super.validateCode(passwordDTO);
+      return super.update(passwordDTO);
     } finally {
       _$ForgotPasswordControllerBaseActionController.endAction(_$actionInfo);
     }
@@ -87,26 +75,42 @@ mixin _$ForgotPasswordController on ForgotPasswordControllerBase, Store {
   @override
   String toString() {
     return '''
-emailForgotPswCtrl: ${emailForgotPswCtrl},
-codeCtrl: ${codeCtrl}
+pswCtrl: ${pswCtrl},
+confPswCtrl: ${confPswCtrl}
     ''';
   }
 }
 
 mixin _$FormController on FormControllerBase, Store {
-  late final _$emailAtom =
-      Atom(name: 'FormControllerBase.email', context: context);
+  late final _$passwordAtom =
+      Atom(name: 'FormControllerBase.password', context: context);
 
   @override
-  String? get email {
-    _$emailAtom.reportRead();
-    return super.email;
+  String? get password {
+    _$passwordAtom.reportRead();
+    return super.password;
   }
 
   @override
-  set email(String? value) {
-    _$emailAtom.reportWrite(value, super.email, () {
-      super.email = value;
+  set password(String? value) {
+    _$passwordAtom.reportWrite(value, super.password, () {
+      super.password = value;
+    });
+  }
+
+  late final _$confPasswordAtom =
+      Atom(name: 'FormControllerBase.confPassword', context: context);
+
+  @override
+  String? get confPassword {
+    _$confPasswordAtom.reportRead();
+    return super.confPassword;
+  }
+
+  @override
+  set confPassword(String? value) {
+    _$confPasswordAtom.reportWrite(value, super.confPassword, () {
+      super.confPassword = value;
     });
   }
 
@@ -114,11 +118,22 @@ mixin _$FormController on FormControllerBase, Store {
       ActionController(name: 'FormControllerBase', context: context);
 
   @override
-  dynamic changeEmail(String value) {
+  dynamic changePassword(String value) {
     final _$actionInfo = _$FormControllerBaseActionController.startAction(
-        name: 'FormControllerBase.changeEmail');
+        name: 'FormControllerBase.changePassword');
     try {
-      return super.changeEmail(value);
+      return super.changePassword(value);
+    } finally {
+      _$FormControllerBaseActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
+  dynamic changeConfPassword(String value) {
+    final _$actionInfo = _$FormControllerBaseActionController.startAction(
+        name: 'FormControllerBase.changeConfPassword');
+    try {
+      return super.changeConfPassword(value);
     } finally {
       _$FormControllerBaseActionController.endAction(_$actionInfo);
     }
@@ -127,7 +142,8 @@ mixin _$FormController on FormControllerBase, Store {
   @override
   String toString() {
     return '''
-email: ${email}
+password: ${password},
+confPassword: ${confPassword}
     ''';
   }
 }
