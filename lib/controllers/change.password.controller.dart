@@ -19,9 +19,6 @@ abstract class ChangePasswordControllerBase with Store {
   var confPswCtrl = TextEditingController();
 
   @observable
-  late String errorMsg = '';
-
-  @observable
   ChangePasswordRepo _changePasswordRepo = ChangePasswordRepo();
 
   init() {

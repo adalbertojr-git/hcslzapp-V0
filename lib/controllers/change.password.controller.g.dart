@@ -41,22 +41,6 @@ mixin _$ChangePasswordController on ChangePasswordControllerBase, Store {
     });
   }
 
-  late final _$errorMsgAtom =
-      Atom(name: 'ChangePasswordControllerBase.errorMsg', context: context);
-
-  @override
-  String get errorMsg {
-    _$errorMsgAtom.reportRead();
-    return super.errorMsg;
-  }
-
-  @override
-  set errorMsg(String value) {
-    _$errorMsgAtom.reportWrite(value, super.errorMsg, () {
-      super.errorMsg = value;
-    });
-  }
-
   late final _$_changePasswordRepoAtom = Atom(
       name: 'ChangePasswordControllerBase._changePasswordRepo',
       context: context);
@@ -92,8 +76,7 @@ mixin _$ChangePasswordController on ChangePasswordControllerBase, Store {
   String toString() {
     return '''
 pswCtrl: ${pswCtrl},
-confPswCtrl: ${confPswCtrl},
-errorMsg: ${errorMsg}
+confPswCtrl: ${confPswCtrl}
     ''';
   }
 }
