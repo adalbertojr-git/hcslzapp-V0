@@ -291,6 +291,7 @@ class _DashboardPageState extends State<DashboardPage> {
               },
             ),
             ListTile(
+              enabled: _controller.selectedProfile == ADMIN ? false : true,
               leading: Icon(Icons.password),
               title: Text(_labelChangePassword),
               onTap: () async {
