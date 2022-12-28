@@ -83,6 +83,14 @@ class _CenteredMessageState extends State<CenteredMessage> {
               SizedBox(
                 height: 30,
               ),
+              FloatingActionButton(
+                backgroundColor: Colors.black,
+                child: Icon(
+                  Icons.arrow_back,
+                  color: Colors.deepOrangeAccent[100],
+                ),
+                onPressed: () => Navigator.pop(context),
+              ),
             ],
           ),
         ),

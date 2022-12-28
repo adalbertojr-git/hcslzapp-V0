@@ -8,7 +8,7 @@ import 'package:hcslzapp/components/my.appbar.dart';
 import 'package:hcslzapp/components/my.text.form.field.dart';
 import 'package:hcslzapp/controllers/send.email.controller.dart';
 import 'package:hcslzapp/models/password.dto.dart';
-import 'package:hcslzapp/pages/password/change.password.page.dart';
+import 'package:hcslzapp/pages/password/forgot.password.page.dart';
 import 'package:mask_text_input_formatter/mask_text_input_formatter.dart';
 import 'package:circular_countdown_timer/circular_countdown_timer.dart';
 import '../../components/my.bottom.appbar.dart';
@@ -258,7 +258,7 @@ class SendEmailPage extends StatelessWidget {
         Navigator.push(
           context,
           MaterialPageRoute(
-            builder: (_) => ChangePasswordPage(
+            builder: (_) => ForgotPasswordPage(
               passwordDTO,
             ),
           ),
