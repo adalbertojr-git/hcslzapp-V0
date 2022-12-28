@@ -9,7 +9,6 @@ import 'package:hcslzapp/components/transaction.auth.dialog.dart';
 import 'package:hcslzapp/controllers/access.request.controller.dart';
 import 'package:hcslzapp/controllers/item.model.dart';
 import 'package:hcslzapp/models/access.request.dart';
-import '../../components/custom.dialog.dart';
 import '../../components/my.appbar.dart';
 import '../../components/my.bottom.appbar.dart';
 
@@ -51,11 +50,8 @@ class AccessRequestListPageState extends State<AccessRequestListPage> {
                   break;
                 default:
                   if (snapshot.hasError) {
-/*                    return CenteredMessage(
-                      title: _title,
-                      message: snapshot.error.toString(),
-                    );*/
-                    return CustomDialogBox(
+                    return CenteredMessage(
+                      title: ERROR,
                       message: snapshot.error.toString(),
                     );
                   } else {
@@ -64,17 +60,14 @@ class AccessRequestListPageState extends State<AccessRequestListPage> {
                       _controller.loadRequests((snapshot.data)!);
                       return _widgets();
                     } else
-/*                      return CenteredMessage(
-                        title: _title,
-                        message: NOTEXIST,
-                      );*/
-                      return CustomDialogBox(
+                      return CenteredMessage(
+                        title: WARNING,
                         message: NOTEXIST,
                       );
                   }
               } //switch (snapshot.connectionState)
               return CenteredMessage(
-                title: _title,
+                title: ERROR,
                 message: UNKNOWN,
               );
             },

@@ -1,7 +1,6 @@
-import 'package:asuka/snackbars/asuka_snack_bar.dart';
 import 'package:flutter/material.dart';
-import 'degradee.background.dart';
-import 'hc.logo.dart';
+
+import '../common/messages.dart';
 
 class CenteredMessage extends StatefulWidget {
   final String message;
@@ -17,7 +16,88 @@ class CenteredMessage extends StatefulWidget {
 }
 
 class _CenteredMessageState extends State<CenteredMessage> {
+  static const double padding = 10;
+  static const double avatarRadius = 100;
+
   @override
+  Widget build(BuildContext context) {
+    return Dialog(
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(padding),
+      ),
+      elevation: 0,
+      backgroundColor: Colors.transparent,
+      child: contentBox(context),
+    );
+  }
+
+  contentBox(context) {
+    return Stack(
+      children: <Widget>[
+        Container(
+          width: MediaQuery.of(context).size.width,
+          padding: EdgeInsets.only(
+              left: padding,
+              top: avatarRadius + padding,
+              right: padding,
+              bottom: padding),
+          margin: EdgeInsets.only(top: avatarRadius),
+          decoration: BoxDecoration(
+              shape: BoxShape.rectangle,
+              color: widget.title == WARNING
+                  ? Colors.yellow[300]
+                  : Colors.red[500],
+              borderRadius: BorderRadius.circular(padding),
+              boxShadow: [
+                BoxShadow(
+                  color: Colors.black,
+                  offset: Offset(0, 10),
+                  blurRadius: 10,
+                ),
+              ]),
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: <Widget>[
+              SizedBox(
+                height: 20,
+              ),
+              Text(
+                widget.title,
+                style: TextStyle(
+                  fontSize: 30,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+              SizedBox(
+                height: 10,
+              ),
+              Text(
+                widget.message,
+                style: TextStyle(fontSize: 18),
+                textAlign: TextAlign.center,
+              ),
+              SizedBox(
+                height: 30,
+              ),
+            ],
+          ),
+        ),
+        Positioned(
+          left: padding,
+          right: padding,
+          child: CircleAvatar(
+            backgroundColor: Colors.transparent,
+            radius: avatarRadius,
+            child: ClipRRect(
+                borderRadius: BorderRadius.all(Radius.circular(avatarRadius)),
+                child: Image.asset('assets/imgs/logo.png')),
+          ),
+        ),
+      ],
+    );
+  }
+}
+/*  @override
   void initState() {
     WidgetsBinding.instance?.addPostFrameCallback((_) => _showMessage);
     super.initState();
@@ -40,4 +120,4 @@ class _CenteredMessageState extends State<CenteredMessage> {
           ),
         ),
       );
-}
+}*/
