@@ -3,15 +3,13 @@ import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:hcslzapp/common/messages.dart';
-import '../../common/injection.dart';
 import '../../common/labels.and.hints.dart';
-import '../../common/token.details.dart';
 import '../../components/degradee.background.dart';
 import '../../components/my.text.form.field.dart';
 import '../../controllers/login.controller.dart';
 import '../access.request/access.request.add.page.dart';
-import '../dashboard/dashboard.page.dart';
 import '../password/send.email.page.dart';
+import 'loading.dart';
 
 const String _pathLogoImage = 'assets/imgs/logo.png';
 const String _labelForgotPsw = 'Esqueci minha senha';
@@ -71,7 +69,6 @@ class _MyCustomLoginUIState extends State<MyCustomLoginUI>
   Widget build(BuildContext context) => Scaffold(
         body: DegradeBackground(
           _widgets(),
-          isError: false,
         ),
       );
 
@@ -220,7 +217,16 @@ class _MyCustomLoginUIState extends State<MyCustomLoginUI>
     if (_controllerLogin.hasErrors) {
       AsukaSnackbar.alert(REQUIRED).show();
     } else {
-      try {
+      Navigator.push(
+        context,
+        MaterialPageRoute(
+          builder: (context) => Loading(
+            _controllerLogin.userLoginCtrl.text,
+            _controllerLogin.pswLoginCtrl.text,
+          ),
+        ),
+      );
+/*      try {
         final value = await _controllerLogin.authenticate();
         debugPrint(value.token);
         loadTokenSingleton(value);
@@ -235,7 +241,8 @@ class _MyCustomLoginUIState extends State<MyCustomLoginUI>
         );
       } catch (e) {
         AsukaSnackbar.alert(e.toString()).show();
-      }
+      }*/
+
     }
   }
 }

@@ -47,7 +47,7 @@ class _PaymentsTablePageState extends State<PaymentsTablePage> {
               default:
                 if (snapshot.hasError) {
                   return CenteredMessage(
-                    title: WARNING,
+                    title: ERROR,
                     message: snapshot.error.toString(),
                   );
                 } else {

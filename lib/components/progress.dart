@@ -16,6 +16,5 @@ class Progress extends StatelessWidget {
           isPaused: false,
           animation: 'animation-hc',
         ),
-        isError: false,
       );
 }

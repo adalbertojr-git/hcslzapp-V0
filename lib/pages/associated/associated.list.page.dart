@@ -54,7 +54,7 @@ class AssociatedListPage extends StatelessWidget {
                 }
             } //switch (snapshot.connectionState)
             return CenteredMessage(
-              title: WARNING,
+              title: ERROR,
               message: UNKNOWN,
             );
           },

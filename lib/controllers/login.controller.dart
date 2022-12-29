@@ -27,9 +27,10 @@ abstract class LoginControllerBase with Store {
     formController = FormController(user: '', password: '');
   }
 
-  Future<Token> authenticate() => _loginRepo.authenticate(
-        userLoginCtrl.text,
-        pswLoginCtrl.text,
+  Future<Token> authenticate(String user, String psw) =>
+      _loginRepo.authenticate(
+        user,
+        psw,
       );
 
   bool get hasErrors => hasErrorUser || hasErrorPassword;
