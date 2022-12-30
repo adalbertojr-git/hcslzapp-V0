@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:hcslzapp/components/button.dart';
 import 'package:hcslzapp/components/degradee.background.dart';
 
 import '../common/messages.dart';
@@ -83,13 +84,9 @@ class _CenteredMessageState extends State<CenteredMessage> {
                 SizedBox(
                   height: 30,
                 ),
-                FloatingActionButton(
-                  backgroundColor: Colors.black,
-                  child: Icon(
-                    Icons.arrow_back,
-                    color: Colors.deepOrangeAccent[100],
-                  ),
-                  onPressed: () => Navigator.pop(context),
+                Button(
+                  icon:  Icons.arrow_back,
+                  onClick: () => Navigator.pop(context),
                 ),
               ],
             ),
