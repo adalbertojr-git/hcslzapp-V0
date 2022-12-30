@@ -24,9 +24,6 @@ abstract class AccessRequestControllerBase with Store {
   var emailCtrl = TextEditingController();
 
   @observable
-  var confEmailCtrl = TextEditingController();
-
-  @observable
   var pswCtrl = TextEditingController();
 
   @observable
@@ -56,7 +53,6 @@ abstract class AccessRequestControllerBase with Store {
         name: '',
         user: '',
         email: '',
-        confEmail: '',
         confPassword: '',
         password: '');
   }
@@ -115,7 +111,6 @@ abstract class AccessRequestControllerBase with Store {
       hasErrorName ||
       hasErrorUser ||
       hasErrorEmail ||
-      hasErrorConfEmail ||
       hasErrorPassword ||
       hasErrorConfPassword;
 
@@ -124,8 +119,6 @@ abstract class AccessRequestControllerBase with Store {
   bool get hasErrorUser => validateUser() != null;
 
   bool get hasErrorEmail => validateEmail() != null;
-
-  bool get hasErrorConfEmail => validateConfEmail() != null;
 
   bool get hasErrorPassword => validatePassword() != null;
 
@@ -170,19 +163,6 @@ abstract class AccessRequestControllerBase with Store {
     return null;
   }
 
-  String? validateConfEmail() {
-    const String _labelConfEmailRequired =
-        'Confirmação do email é obrigatória!!!';
-    const String _labelEmailNotValid = 'Emails informados não conferem!!!';
-
-    if (formController.confEmail.isEmpty) {
-      return _labelConfEmailRequired;
-    } else if (formController.confEmail != formController.email) {
-      return _labelEmailNotValid;
-    }
-    return null;
-  }
-
   String? validatePassword() {
     const String _labelPswRequired = 'Senha é obrigatória!!!';
     const String _labelPswLenght = 'Senha deve ter no mínimo 6 caracteres!!!';
@@ -214,14 +194,12 @@ class FormController extends FormControllerBase with _$FormController {
     String? name,
     String? user,
     String? email,
-    String? confEmail,
     String? confPassword,
     String? password,
   }) {
     super.name = name;
     super.user = user;
     super.email = email;
-    super.confEmail = confEmail;
     super.password = password;
     super.confPassword = confPassword;
   }
@@ -238,9 +216,6 @@ abstract class FormControllerBase with Store {
   String? email;
 
   @observable
-  String? confEmail;
-
-  @observable
   String? password;
 
   @observable
@@ -254,9 +229,6 @@ abstract class FormControllerBase with Store {
 
   @action
   changeEmail(String value) => email = value;
-
-  @action
-  changeConfEmail(String value) => confEmail = value;
 
   @action
   changePassword(String value) => password = value;

@@ -73,15 +73,6 @@ class _AccessRequestAddPageState extends State<AccessRequestAddPage> {
             errorText: _controller.validateEmail(),
           ),
           MyTextFormField(
-            textEditingController: _controller.confEmailCtrl,
-            hint: hintConfEmail,
-            label: labelConfEmail,
-            icon: Icons.email,
-            inputType: TextInputType.emailAddress,
-            onChanged: _controller.formController.changeConfEmail,
-            errorText: _controller.validateConfEmail(),
-          ),
-          MyTextFormField(
             textEditingController: _controller.pswCtrl,
             label: labelPswAccessReq,
             hint: hintPswAccessReq,
