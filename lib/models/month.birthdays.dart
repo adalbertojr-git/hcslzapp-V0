@@ -1,13 +1,17 @@
 class MonthBirthdays {
   final String name;
+  // ignore: non_constant_identifier_names
   final String date_birth;
   final String status;
+  // ignore: non_constant_identifier_names
   final String associated_type;
 
   MonthBirthdays({
     required this.name,
+    // ignore: non_constant_identifier_names
     required this.date_birth,
     required this.status,
+    // ignore: non_constant_identifier_names
     required this.associated_type,
   });
 

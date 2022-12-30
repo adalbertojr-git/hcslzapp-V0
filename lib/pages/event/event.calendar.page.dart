@@ -4,7 +4,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:hcslzapp/common/messages.dart';
 import 'package:hcslzapp/models/event.dart';
-import 'package:intl/intl.dart';
 import 'package:table_calendar/table_calendar.dart';
 import '../../common/associated.profiles.dart';
 import '../../common/photo.image.provider.dart';

@@ -92,9 +92,6 @@ class PartnershipRepo {
 
   Future<Response> deleteById(Partnership partnership) async {
     try {
-      final String encodedJson = jsonEncode(
-        partnership.toJson(),
-      );
       final Response response = await client.delete(
         Uri.parse(mainUrl + _partnershipUrl + "/" + partnership.id.toString()),
         headers: {

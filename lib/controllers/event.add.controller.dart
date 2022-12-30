@@ -110,7 +110,7 @@ abstract class EventAddControllerBase with Store {
 
   @action
   Future getImageFromCamera() async {
-    final pickedFile = await ImagePicker().getImage(
+    final pickedFile = await ImagePicker().pickImage(
       source: ImageSource.camera,
     );
     if (pickedFile != null) {
@@ -122,7 +122,7 @@ abstract class EventAddControllerBase with Store {
 
   @action
   Future getImageFromGallery() async {
-    final pickedFile = await ImagePicker().getImage(
+    final pickedFile = await ImagePicker().pickImage(
       source: ImageSource.gallery,
     );
     if (pickedFile != null) {

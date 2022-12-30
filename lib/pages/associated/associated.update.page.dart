@@ -24,6 +24,7 @@ import 'package:mask_text_input_formatter/mask_text_input_formatter.dart';
 const String _pathNoImage = 'assets/imgs/noImage.png';
 const String _title = 'Editar Associado';
 
+// ignore: must_be_immutable
 class AssociatedUpdatePage extends StatelessWidget {
   final String _selectedProfile;
   late Associated? _associated;

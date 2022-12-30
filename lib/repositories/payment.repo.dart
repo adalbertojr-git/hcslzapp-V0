@@ -114,9 +114,6 @@ class PaymentRepo {
 
   Future<Response> deleteById(Payment payment) async {
     try {
-      final String encodedJson = jsonEncode(
-        payment.toJson(),
-      );
       final Response response = await client.delete(
         Uri.parse(mainUrl + _paymentUrl + "/" + payment.id.toString()),
         headers: {
