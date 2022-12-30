@@ -25,7 +25,7 @@ class _LoadingState extends State<Loading> {
 
   @override
   void initState() {
-    WidgetsBinding.instance?.addPostFrameCallback((_) {
+    WidgetsBinding.instance.addPostFrameCallback((_) {
       _callDashboard();
     });
     super.initState();
@@ -62,7 +62,7 @@ class _LoadingState extends State<Loading> {
         context,
         MaterialPageRoute(
           builder: (context) => CenteredMessage(
-            title: ERROR,
+            title: WARNING,
             message: e.message.toString(),
           ),
         ),
