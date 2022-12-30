@@ -12,66 +12,82 @@ import '../../components/my.bottom.appbar.dart';
 
 const String _title = 'Alterar Senha';
 
-class ChangePasswordPage extends StatelessWidget {
+class ChangePasswordPage extends StatefulWidget {
   final PasswordDTO _passwordDTO;
-  final ChangePasswordController _controller = ChangePasswordController();
 
   ChangePasswordPage(this._passwordDTO);
 
   @override
-  Widget build(BuildContext context) {
+  State<ChangePasswordPage> createState() => _ChangePasswordPageState();
+}
+
+class _ChangePasswordPageState extends State<ChangePasswordPage> {
+  final ChangePasswordController _controller = ChangePasswordController();
+
+  @override
+  void initState() {
     _controller.init();
-    return Observer(
-      builder: (_) {
-        return Scaffold(
-          appBar: MyAppBar(_title),
-          bottomNavigationBar: MyBottomAppBar(),
-          body: _widgets(),
-          floatingActionButtonLocation:
-              FloatingActionButtonLocation.centerDocked,
-          floatingActionButton: Button(
-            icon: Icons.save,
-            onClick: () => _update(context),
-          ),
-        );
-      },
-    );
+    super.initState();
   }
+
+  @override
+  Widget build(BuildContext context) => Scaffold(
+        appBar: MyAppBar(_title),
+        bottomNavigationBar: MyBottomAppBar(),
+        body: _widgets(),
+        floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
+        floatingActionButton: Button(
+          icon: Icons.save,
+          onClick: () => _update(context),
+        ),
+      );
 
   _widgets() => ListView(
         children: <Widget>[
           SizedBox(
             height: 10,
           ),
-          MyTextFormField(
-            textEditingController: _controller.pswCtrl,
-            label: labelCurrentPsw,
-            hint: hintCurrentPsw,
-            icon: Icons.password,
-            inputType: TextInputType.text,
-            hidden: true,
-            onChanged: _controller.formController.changePassword,
-            errorText: _controller.validatePassword(),
+          Observer(
+            builder: (_) {
+              return MyTextFormField(
+                textEditingController: _controller.pswCtrl,
+                label: labelCurrentPsw,
+                hint: hintCurrentPsw,
+                icon: Icons.password,
+                inputType: TextInputType.text,
+                hidden: true,
+                onChanged: _controller.formController.changePassword,
+                errorText: _controller.validatePassword(),
+              );
+            }
           ),
-          MyTextFormField(
-            textEditingController: _controller.newPswCtrl,
-            label: labelNewPsw,
-            hint: hintNewPsw,
-            icon: Icons.password,
-            inputType: TextInputType.text,
-            hidden: true,
-            onChanged: _controller.formController.changeNewPassword,
-            errorText: _controller.validateNewPassword(),
+          Observer(
+            builder: (_) {
+              return MyTextFormField(
+                textEditingController: _controller.newPswCtrl,
+                label: labelNewPsw,
+                hint: hintNewPsw,
+                icon: Icons.password,
+                inputType: TextInputType.text,
+                hidden: true,
+                onChanged: _controller.formController.changeNewPassword,
+                errorText: _controller.validateNewPassword(),
+              );
+            }
           ),
-          MyTextFormField(
-            textEditingController: _controller.confPswCtrl,
-            label: labelConfirmNewPsw,
-            hint: hintConfirmNewPsw,
-            icon: Icons.password,
-            inputType: TextInputType.text,
-            hidden: true,
-            onChanged: _controller.formController.changeConfPassword,
-            errorText: _controller.validateConfPassword(),
+          Observer(
+            builder: (_) {
+              return MyTextFormField(
+                textEditingController: _controller.confPswCtrl,
+                label: labelConfirmNewPsw,
+                hint: hintConfirmNewPsw,
+                icon: Icons.password,
+                inputType: TextInputType.text,
+                hidden: true,
+                onChanged: _controller.formController.changeConfPassword,
+                errorText: _controller.validateConfPassword(),
+              );
+            }
           ),
         ],
       );
@@ -83,7 +99,7 @@ class ChangePasswordPage extends StatelessWidget {
       try {
         await _controller.update(
           PasswordDTO(
-            associatedId: _passwordDTO.associatedId,
+            associatedId: widget._passwordDTO.associatedId,
             aux: _controller.pswCtrl.text,
           ),
         );
