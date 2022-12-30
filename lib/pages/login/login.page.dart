@@ -226,23 +226,6 @@ class _MyCustomLoginUIState extends State<MyCustomLoginUI>
           ),
         ),
       );
-/*      try {
-        final value = await _controllerLogin.authenticate();
-        debugPrint(value.token);
-        loadTokenSingleton(value);
-        TokenDetails _tokenDetails = TokenDetails(value.token);
-        Navigator.pushReplacement(
-          context,
-          MaterialPageRoute(
-            builder: (context) => DashboardPage(
-              _tokenDetails.associatedId(),
-            ),
-          ),
-        );
-      } catch (e) {
-        AsukaSnackbar.alert(e.toString()).show();
-      }*/
-
     }
   }
 }

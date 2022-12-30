@@ -57,16 +57,16 @@ class _LoadingState extends State<Loading> {
           ),
         ),
       );
-/*    } catch on HttpException (e) {
+    } on HttpException catch (e) {
       Navigator.pushReplacement(
         context,
         MaterialPageRoute(
           builder: (context) => CenteredMessage(
             title: ERROR,
-            message: e.toString(),
+            message: e.message.toString(),
           ),
         ),
-      );*/
+      );
     } catch (e) {
       Navigator.pushReplacement(
         context,
@@ -78,6 +78,5 @@ class _LoadingState extends State<Loading> {
         ),
       );
     }
-
   }
 }
