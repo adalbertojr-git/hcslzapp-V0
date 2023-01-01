@@ -33,8 +33,8 @@ abstract class ChangePasswordControllerBase with Store {
   }
 
   @action
-  Future<String> update(PasswordDTO passwordDTO) =>
-      _changePasswordRepo.update(passwordDTO);
+  Future<String> change(PasswordDTO passwordDTO) =>
+      _changePasswordRepo.change(passwordDTO);
 
   bool get hasErrors =>
       hasErrorPassword || hasErrorNewPassword || hasErrorConfPassword;

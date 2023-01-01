@@ -78,11 +78,11 @@ mixin _$ChangePasswordController on ChangePasswordControllerBase, Store {
       ActionController(name: 'ChangePasswordControllerBase', context: context);
 
   @override
-  Future<String> update(PasswordDTO passwordDTO) {
+  Future<String> change(PasswordDTO passwordDTO) {
     final _$actionInfo = _$ChangePasswordControllerBaseActionController
-        .startAction(name: 'ChangePasswordControllerBase.update');
+        .startAction(name: 'ChangePasswordControllerBase.change');
     try {
-      return super.update(passwordDTO);
+      return super.change(passwordDTO);
     } finally {
       _$ChangePasswordControllerBaseActionController.endAction(_$actionInfo);
     }

@@ -57,22 +57,6 @@ mixin _$AccessRequestController on AccessRequestControllerBase, Store {
     });
   }
 
-  late final _$confEmailCtrlAtom =
-      Atom(name: 'AccessRequestControllerBase.confEmailCtrl', context: context);
-
-  @override
-  TextEditingController get confEmailCtrl {
-    _$confEmailCtrlAtom.reportRead();
-    return super.confEmailCtrl;
-  }
-
-  @override
-  set confEmailCtrl(TextEditingController value) {
-    _$confEmailCtrlAtom.reportWrite(value, super.confEmailCtrl, () {
-      super.confEmailCtrl = value;
-    });
-  }
-
   late final _$pswCtrlAtom =
       Atom(name: 'AccessRequestControllerBase.pswCtrl', context: context);
 
@@ -265,7 +249,6 @@ mixin _$AccessRequestController on AccessRequestControllerBase, Store {
 nameCtrl: ${nameCtrl},
 userCtrl: ${userCtrl},
 emailCtrl: ${emailCtrl},
-confEmailCtrl: ${confEmailCtrl},
 pswCtrl: ${pswCtrl},
 confPswCtrl: ${confPswCtrl},
 isHidedButton: ${isHidedButton},
@@ -323,22 +306,6 @@ mixin _$FormController on FormControllerBase, Store {
   set email(String? value) {
     _$emailAtom.reportWrite(value, super.email, () {
       super.email = value;
-    });
-  }
-
-  late final _$confEmailAtom =
-      Atom(name: 'FormControllerBase.confEmail', context: context);
-
-  @override
-  String? get confEmail {
-    _$confEmailAtom.reportRead();
-    return super.confEmail;
-  }
-
-  @override
-  set confEmail(String? value) {
-    _$confEmailAtom.reportWrite(value, super.confEmail, () {
-      super.confEmail = value;
     });
   }
 
@@ -411,17 +378,6 @@ mixin _$FormController on FormControllerBase, Store {
   }
 
   @override
-  dynamic changeConfEmail(String value) {
-    final _$actionInfo = _$FormControllerBaseActionController.startAction(
-        name: 'FormControllerBase.changeConfEmail');
-    try {
-      return super.changeConfEmail(value);
-    } finally {
-      _$FormControllerBaseActionController.endAction(_$actionInfo);
-    }
-  }
-
-  @override
   dynamic changePassword(String value) {
     final _$actionInfo = _$FormControllerBaseActionController.startAction(
         name: 'FormControllerBase.changePassword');
@@ -449,7 +405,6 @@ mixin _$FormController on FormControllerBase, Store {
 name: ${name},
 user: ${user},
 email: ${email},
-confEmail: ${confEmail},
 password: ${password},
 confPassword: ${confPassword}
     ''';

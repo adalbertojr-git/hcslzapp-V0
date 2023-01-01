@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:hcslzapp/common/messages.dart';
 import 'package:hcslzapp/components/centered.message.dart';
-import 'package:hcslzapp/models/password.dto.dart';
 import 'package:hcslzapp/pages/associated/month.birthdays.list.page.dart';
 import 'package:hcslzapp/pages/login/login.page.dart';
 import 'package:hcslzapp/pages/management/management.list.page.dart';
@@ -297,13 +296,7 @@ class _DashboardPageState extends State<DashboardPage> {
               onTap: () async {
                 Navigator.push(
                   context,
-                  MaterialPageRoute(
-                      builder: (_) => ChangePasswordPage(
-                            PasswordDTO(
-                              associatedId: _controller.associated.id,
-                              aux: '',
-                            ),
-                          )),
+                  MaterialPageRoute(builder: (_) => ChangePasswordPage()),
                 );
               },
             ),

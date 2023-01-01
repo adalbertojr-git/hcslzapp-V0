@@ -27,7 +27,7 @@ abstract class ForgotPasswordControllerBase with Store {
 
   @action
   Future<String> update(PasswordDTO passwordDTO) =>
-      _changePasswordRepo.update(passwordDTO);
+      _changePasswordRepo.reset(passwordDTO);
 
   bool get hasErrors => hasErrorPassword || hasErrorConfPassword;
 

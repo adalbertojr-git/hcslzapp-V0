@@ -159,6 +159,7 @@ class _SendEmailPageState extends State<SendEmailPage> {
                             PasswordDTO(
                               associatedId: password.associatedId,
                               aux: _controller.codeCtrl.text,
+                              psw: '',
                             ),
                           ),
                         ),

@@ -6,22 +6,21 @@ import 'package:hcslzapp/common/messages.dart';
 import 'package:hcslzapp/components/button.dart';
 import 'package:hcslzapp/components/my.text.form.field.dart';
 import 'package:hcslzapp/controllers/change.password.controller.dart';
-import 'package:hcslzapp/models/password.dto.dart';
+import '../../common/injection.dart';
 import '../../components/my.appbar.dart';
 import '../../components/my.bottom.appbar.dart';
+import '../../models/associated.dart';
 
 const String _title = 'Alterar Senha';
 
 class ChangePasswordPage extends StatefulWidget {
-  final PasswordDTO _passwordDTO;
-
-  ChangePasswordPage(this._passwordDTO);
 
   @override
   State<ChangePasswordPage> createState() => _ChangePasswordPageState();
 }
 
 class _ChangePasswordPageState extends State<ChangePasswordPage> {
+  final Associated _associated = locator.get<Associated>();
   final ChangePasswordController _controller = ChangePasswordController();
 
   @override
@@ -97,14 +96,14 @@ class _ChangePasswordPageState extends State<ChangePasswordPage> {
       AsukaSnackbar.alert(REQUIRED).show();
     } else {
       try {
-        await _controller.update(
+/*        await _controller.update(
           PasswordDTO(
             associatedId: widget._passwordDTO.associatedId,
             aux: _controller.pswCtrl.text,
           ),
         );
         AsukaSnackbar.success(SUCCESS).show();
-        Navigator.of(context).pop();
+        Navigator.of(context).pop();*/
       } catch (e) {
         AsukaSnackbar.alert(e.toString()).show();
       } finally {}

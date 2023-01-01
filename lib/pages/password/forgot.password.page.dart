@@ -82,7 +82,8 @@ class _ForgotPasswordPageState extends State<ForgotPasswordPage> {
         await _controller.update(
           PasswordDTO(
             associatedId: widget._passwordDTO.associatedId,
-            aux: _controller.pswCtrl.text,
+            psw: _controller.pswCtrl.text,
+            aux: '',
           ),
         );
         AsukaSnackbar.success(SUCCESS).show();
