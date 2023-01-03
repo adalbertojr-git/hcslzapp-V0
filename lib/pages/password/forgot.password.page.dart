@@ -38,7 +38,7 @@ class _ForgotPasswordPageState extends State<ForgotPasswordPage> {
         floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
         floatingActionButton: Button(
           icon: Icons.save,
-          onClick: () => _update(context),
+          onClick: () => _reset(),
         ),
       );
 
@@ -74,7 +74,7 @@ class _ForgotPasswordPageState extends State<ForgotPasswordPage> {
         ],
       );
 
-  _update(BuildContext context) async {
+  _reset() async {
     if (_controller.hasErrors) {
       AsukaSnackbar.alert(REQUIRED).show();
     } else {

@@ -207,25 +207,33 @@ class AssociatedUpdatePage extends StatelessWidget {
           Row(
             children: <Widget>[
               Expanded(
-                child: MyTextFormField(
-                  textEditingController: _controller.dateBirthCtrl,
-                  label: labelDateBirth,
-                  hint: hintDate,
-                  icon: Icons.calendar_today,
-                  inputType: TextInputType.datetime,
-                  maskTextInputFormatter:
-                      MaskTextInputFormatter(mask: "##/##/####"),
+                child: Observer(
+                  builder: (_) {
+                    return MyTextFormField(
+                      textEditingController: _controller.dateBirthCtrl,
+                      label: labelDateBirth,
+                      hint: hintDate,
+                      icon: Icons.calendar_today,
+                      inputType: TextInputType.datetime,
+                      onChanged: _controller.formController.changeDateBirth,
+                      errorText: _controller.validateDateBirth(),
+                    );
+                  }
                 ),
               ),
               Expanded(
-                child: MyTextFormField(
-                  textEditingController: _controller.dateShieldCtrl,
-                  label: labelDateShield,
-                  hint: hintDate,
-                  icon: Icons.calendar_today,
-                  inputType: TextInputType.datetime,
-                  maskTextInputFormatter:
-                      MaskTextInputFormatter(mask: "##/##/####"),
+                child: Observer(
+                  builder: (_) {
+                    return MyTextFormField(
+                      textEditingController: _controller.dateShieldCtrl,
+                      label: labelDateShield,
+                      hint: hintDate,
+                      icon: Icons.calendar_today,
+                      inputType: TextInputType.datetime,
+                      onChanged: _controller.formController.changeDateShield,
+                      errorText: _controller.validateDateShield(),
+                    );
+                  }
                 ),
               ),
             ],

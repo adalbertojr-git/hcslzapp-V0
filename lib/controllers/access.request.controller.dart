@@ -140,11 +140,15 @@ abstract class AccessRequestControllerBase with Store {
     const String _labelUserRequired = 'Usuário é obrigatório!!!';
     const String _labelUserLenght =
         'Usuário deve ter no mínimo 4 caracteres!!!';
+    const String _labelUserNotValid = 'Usuário deve possuir !!!';
 
     if (formController.user.isEmpty) {
       return _labelUserRequired;
     } else if (formController.user.toString().length < 4) {
       return _labelUserLenght;
+    }else if (!RegExp(r"^[a-z0-9]+$")
+        .hasMatch(formController.user)) {
+      return _labelUserNotValid;
     }
     return null;
   }

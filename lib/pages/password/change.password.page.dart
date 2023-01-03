@@ -10,6 +10,7 @@ import '../../common/injection.dart';
 import '../../components/my.appbar.dart';
 import '../../components/my.bottom.appbar.dart';
 import '../../models/associated.dart';
+import '../../models/password.dto.dart';
 
 const String _title = 'Alterar Senha';
 
@@ -19,7 +20,7 @@ class ChangePasswordPage extends StatefulWidget {
   State<ChangePasswordPage> createState() => _ChangePasswordPageState();
 }
 
-class _ChangePasswordPageState extends State<ChangePasswordPage> {
+  class _ChangePasswordPageState extends State<ChangePasswordPage> {
   final Associated _associated = locator.get<Associated>();
   final ChangePasswordController _controller = ChangePasswordController();
 
@@ -37,7 +38,7 @@ class _ChangePasswordPageState extends State<ChangePasswordPage> {
         floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
         floatingActionButton: Button(
           icon: Icons.save,
-          onClick: () => _update(context),
+          onClick: () => _change(),
         ),
       );
 
@@ -91,19 +92,20 @@ class _ChangePasswordPageState extends State<ChangePasswordPage> {
         ],
       );
 
-  _update(BuildContext context) async {
+  _change() async {
     if (_controller.hasErrors) {
       AsukaSnackbar.alert(REQUIRED).show();
     } else {
       try {
-/*        await _controller.update(
+        await _controller.change(
           PasswordDTO(
-            associatedId: widget._passwordDTO.associatedId,
-            aux: _controller.pswCtrl.text,
+            associatedId: _associated.id,
+            psw: _controller.pswCtrl.text,
+            aux: _controller.newPswCtrl.text,
           ),
         );
         AsukaSnackbar.success(SUCCESS).show();
-        Navigator.of(context).pop();*/
+        Navigator.of(context).pop();
       } catch (e) {
         AsukaSnackbar.alert(e.toString()).show();
       } finally {}

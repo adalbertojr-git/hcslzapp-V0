@@ -32,9 +32,7 @@ class _DependentAddPageState extends State<DependentAddPage> {
   }
 
   @override
-  Widget build(BuildContext context) {
-    return Observer(
-      builder: (_) => Scaffold(
+  Widget build(BuildContext context) => Scaffold(
         appBar: MyAppBar(widget.dependent == null
             ? 'Adicionar ' + _title
             : 'Editar ' + _title),
@@ -43,9 +41,7 @@ class _DependentAddPageState extends State<DependentAddPage> {
         floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
         floatingActionButton: Button(
             icon: Icons.playlist_add, onClick: () => _controller.add(context)),
-      ),
-    );
-  }
+      );
 
   _widgets() => ListView(
         children: <Widget>[
@@ -87,15 +83,16 @@ class _DependentAddPageState extends State<DependentAddPage> {
                       MaskTextInputFormatter(mask: "(##) #####-####"),
                 ),
               ),
-              Expanded(
-                  child: MyTextFormField(
-                textEditingController: _controller.dateBirthCtrl,
-                label: labelDateBirth,
-                hint: hintDate,
-                inputType: TextInputType.datetime,
-                maskTextInputFormatter:
-                    MaskTextInputFormatter(mask: "##/##/####"),
-              )),
+              Expanded(child: Observer(builder: (_) {
+                return MyTextFormField(
+                  textEditingController: _controller.dateBirthCtrl,
+                  label: labelDateBirth,
+                  hint: hintDate,
+                  inputType: TextInputType.datetime,
+                  onChanged: _controller.formController.changeDateBirth,
+                  errorText: _controller.validateDateBirth(),
+                );
+              })),
             ],
           ),
           Padding(
