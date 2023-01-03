@@ -140,15 +140,23 @@ abstract class AccessRequestControllerBase with Store {
     const String _labelUserRequired = 'Usuário é obrigatório!!!';
     const String _labelUserLenght =
         'Usuário deve ter no mínimo 4 caracteres!!!';
-    const String _labelUserNotValid = 'Usuário deve possuir !!!';
+    const String _labelUserOnlyLettersAndNumbers = 'Usuário deve possuir somente letras e números!!!';
+    const String _labelUserNotOnlyNumbers = 'Usuário não deve conter somente números!!!';
+    const String _labelUserNotRepeated = 'Usuário não deve conter 4 caracteres repetidos!!!';
 
     if (formController.user.isEmpty) {
       return _labelUserRequired;
     } else if (formController.user.toString().length < 4) {
       return _labelUserLenght;
-    }else if (!RegExp(r"^[a-z0-9]+$")
+    } else if (!RegExp(r"^[a-z0-9]+$")
         .hasMatch(formController.user)) {
-      return _labelUserNotValid;
+      return _labelUserOnlyLettersAndNumbers;
+    } else if (RegExp(r"^[0-9]+$")
+        .hasMatch(formController.user)) {
+      return _labelUserNotOnlyNumbers;
+    } else if (RegExp(r"(.)\1{3,}")
+        .hasMatch(formController.user)) {
+      return _labelUserNotRepeated;
     }
     return null;
   }
@@ -170,11 +178,16 @@ abstract class AccessRequestControllerBase with Store {
   String? validatePassword() {
     const String _labelPswRequired = 'Senha é obrigatória!!!';
     const String _labelPswLenght = 'Senha deve ter no mínimo 6 caracteres!!!';
+    const String _labelPswNotValid = 'Informe uma senha válida!!!';
 
     if (formController.password.isEmpty) {
       return _labelPswRequired;
     } else if (formController.password.toString().length < 6) {
       return _labelPswLenght;
+    } else if (!RegExp(
+        r"^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[$*&@#])[0-9a-zA-Z$*&@#]{6,}$")
+        .hasMatch(formController.password)) {
+      return _labelPswNotValid;
     }
     return null;
   }

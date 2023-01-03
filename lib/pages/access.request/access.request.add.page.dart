@@ -82,6 +82,25 @@ class _AccessRequestAddPageState extends State<AccessRequestAddPage> {
             onChanged: _controller.formController.changePassword,
             errorText: _controller.validatePassword(),
           ),
+          SizedBox(
+            height: 5,
+          ),
+          Card(
+            color: Colors.transparent,
+            margin: EdgeInsets.only(left: 20),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text('6 caracteres no mínimo'),
+                Text('1 letra maiúscula no mínimo'),
+                Text('1 letra minúscula no mínimo'),
+                Text('1 caracter espceial no mínimo: \$*&@#'),
+              ],
+            ),
+          ),
+          SizedBox(
+            height: 5,
+          ),
           MyTextFormField(
             textEditingController: _controller.confPswCtrl,
             label: labelConfPswAccessReq,

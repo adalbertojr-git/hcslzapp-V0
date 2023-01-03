@@ -250,6 +250,22 @@ mixin _$FormController on FormControllerBase, Store {
     });
   }
 
+  late final _$dateBirthAtom =
+      Atom(name: 'FormControllerBase.dateBirth', context: context);
+
+  @override
+  String? get dateBirth {
+    _$dateBirthAtom.reportRead();
+    return super.dateBirth;
+  }
+
+  @override
+  set dateBirth(String? value) {
+    _$dateBirthAtom.reportWrite(value, super.dateBirth, () {
+      super.dateBirth = value;
+    });
+  }
+
   late final _$FormControllerBaseActionController =
       ActionController(name: 'FormControllerBase', context: context);
 
@@ -276,10 +292,22 @@ mixin _$FormController on FormControllerBase, Store {
   }
 
   @override
+  dynamic changeDateBirth(String value) {
+    final _$actionInfo = _$FormControllerBaseActionController.startAction(
+        name: 'FormControllerBase.changeDateBirth');
+    try {
+      return super.changeDateBirth(value);
+    } finally {
+      _$FormControllerBaseActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
   String toString() {
     return '''
 name: ${name},
-email: ${email}
+email: ${email},
+dateBirth: ${dateBirth}
     ''';
   }
 }
