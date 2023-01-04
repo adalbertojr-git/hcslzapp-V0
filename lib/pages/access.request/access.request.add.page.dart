@@ -63,6 +63,30 @@ class _AccessRequestAddPageState extends State<AccessRequestAddPage> {
             onChanged: _controller.formController.changeUser,
             errorText: _controller.validateUser(),
           ),
+          SizedBox(
+            height: 5,
+          ),
+          Container(
+            margin: EdgeInsets.only(left: 20),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  'Requisitos:',
+                  style: TextStyle(
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+                Text('* Mínimo de 4 caracteres'),
+                Text('* Não deve conter somente números'),
+                Text('* Não deve conter mais de 3 caracteres repetidos'),
+                Text('* Não pode conter caracter espceial: \$*&@#'),
+              ],
+            ),
+          ),
+          SizedBox(
+            height: 5,
+          ),
           MyTextFormField(
             textEditingController: _controller.emailCtrl,
             hint: hintEmail,
@@ -85,16 +109,21 @@ class _AccessRequestAddPageState extends State<AccessRequestAddPage> {
           SizedBox(
             height: 5,
           ),
-          Card(
-            color: Colors.transparent,
+          Container(
             margin: EdgeInsets.only(left: 20),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text('6 caracteres no mínimo'),
-                Text('1 letra maiúscula no mínimo'),
-                Text('1 letra minúscula no mínimo'),
-                Text('1 caracter espceial no mínimo: \$*&@#'),
+                Text(
+                  'Requisitos:',
+                  style: TextStyle(
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+                Text('* Mínimo de 6 caracteres'),
+                Text('* Pelo menos 1 letra maiúscula'),
+                Text('* Pelo menos 1 letra minúscula'),
+                Text('* Pelo menos 1 caracter espceial: \$*&@#'),
               ],
             ),
           ),
@@ -110,6 +139,9 @@ class _AccessRequestAddPageState extends State<AccessRequestAddPage> {
             hidden: true,
             onChanged: _controller.formController.changeConfPassword,
             errorText: _controller.validateConfPassword(),
+          ),
+          SizedBox(
+            height: 50,
           ),
         ],
       );
