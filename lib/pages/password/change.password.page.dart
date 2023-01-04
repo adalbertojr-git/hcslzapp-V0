@@ -75,6 +75,30 @@ class ChangePasswordPage extends StatefulWidget {
               );
             }
           ),
+          SizedBox(
+            height: 5,
+          ),
+          Container(
+            margin: EdgeInsets.only(left: 20),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  'Requisitos:',
+                  style: TextStyle(
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+                Text('* Mínimo de 6 caracteres'),
+                Text('* Pelo menos 1 letra maiúscula'),
+                Text('* Pelo menos 1 letra minúscula'),
+                Text('* Pelo menos 1 caracter espceial: \$*&@#'),
+              ],
+            ),
+          ),
+          SizedBox(
+            height: 5,
+          ),
           Observer(
             builder: (_) {
               return MyTextFormField(

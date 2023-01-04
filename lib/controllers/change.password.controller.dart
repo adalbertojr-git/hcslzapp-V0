@@ -59,12 +59,17 @@ abstract class ChangePasswordControllerBase with Store {
 
   String? validateNewPassword() {
     const String _labelPswRequired = 'Nova senha é obrigatória!!!';
-    const String _labelPswLenght = 'Senha deve ter no mínimo 6 caracteres!!!';
+    const String _labelPswLenght = 'Nova senha deve ter no mínimo 6 caracteres!!!';
+    const String _labelPswNotValid = 'Informe uma nova senha válida!!!';
 
-    if (formController.password.isEmpty) {
+    if (formController.newPassword.isEmpty) {
       return _labelPswRequired;
-    } else if (formController.password.toString().length < 6) {
+    } else if (formController.newPassword.toString().length < 6) {
       return _labelPswLenght;
+    } else if (!RegExp(
+        r"^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[$*&@#])[0-9a-zA-Z$*&@#]{6,}$")
+        .hasMatch(formController.newPassword)) {
+      return _labelPswNotValid;
     }
     return null;
   }
