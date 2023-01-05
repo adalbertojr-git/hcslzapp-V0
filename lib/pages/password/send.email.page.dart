@@ -12,6 +12,7 @@ import 'package:hcslzapp/pages/password/forgot.password.page.dart';
 import 'package:mask_text_input_formatter/mask_text_input_formatter.dart';
 import 'package:circular_countdown_timer/circular_countdown_timer.dart';
 import '../../components/my.bottom.appbar.dart';
+import '../../http/http.exception.dart';
 
 const String _title = 'Esqueci minha senha';
 
@@ -92,6 +93,8 @@ class _SendEmailPageState extends State<SendEmailPage> {
           _controller.initTextFields();
           _showDialog(value);
         }
+      } on HttpException catch (e) {
+        AsukaSnackbar.alert(e.message.toString()).show();
       } catch (e) {
         AsukaSnackbar.alert(e.toString()).show();
       } finally {}

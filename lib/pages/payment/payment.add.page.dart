@@ -11,6 +11,7 @@ import 'package:hcslzapp/models/payment.dart';
 import 'package:mask_text_input_formatter/mask_text_input_formatter.dart';
 import '../../components/my.appbar.dart';
 import '../../components/my.bottom.appbar.dart';
+import '../../http/http.exception.dart';
 
 const String _title = 'Adicionar Mensalidades';
 
@@ -277,6 +278,8 @@ class _PaymentAddAddState extends State<PaymentAddPage> {
         final value = await _controller.save();
         AsukaSnackbar.success(SUCCESS).show();
         Navigator.of(context).pop(value);
+      } on HttpException catch (e) {
+        AsukaSnackbar.alert(e.message.toString()).show();
       } catch (e) {
         AsukaSnackbar.alert(e.toString()).show();
       } finally {}
@@ -291,6 +294,8 @@ class _PaymentAddAddState extends State<PaymentAddPage> {
         final value = await _controller.save();
         AsukaSnackbar.success(SUCCESS).show();
         Navigator.of(context).pop(value);
+      } on HttpException catch (e) {
+        AsukaSnackbar.alert(e.message.toString()).show();
       } catch (e) {
         AsukaSnackbar.alert(e.toString()).show();
       } finally {}

@@ -10,6 +10,7 @@ import 'package:hcslzapp/controllers/head.notification.list.controller.dart';
 import 'package:hcslzapp/models/head.notification.dart';
 import '../../components/my.appbar.dart';
 import '../../components/my.bottom.appbar.dart';
+import '../../http/http.exception.dart';
 import 'head.notification.add.page.dart';
 
 const String _title = 'Avisos da Diretoria';
@@ -176,6 +177,8 @@ class _HeadNotificationListAdmPageState
         await _controller.deleteById(_controller.headNotifications[i]);
         AsukaSnackbar.success(SUCCESS).show();
         _controller.headNotifications.removeAt(i);
+      } on HttpException catch (e) {
+        AsukaSnackbar.alert(e.message.toString()).show();
       } catch (e) {
         AsukaSnackbar.alert(e.toString()).show();
       } finally {}

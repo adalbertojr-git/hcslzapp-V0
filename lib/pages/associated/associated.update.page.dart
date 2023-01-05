@@ -555,6 +555,8 @@ class AssociatedUpdatePage extends StatelessWidget {
           }
           AsukaSnackbar.success(SUCCESS).show();
           Navigator.of(context).pop(_controller.associated.photoUrl);
+        } on HttpException catch (e) {
+          AsukaSnackbar.alert(e.message.toString()).show();
         } catch (e) {
           AsukaSnackbar.alert(e.toString()).show();
         } finally {}

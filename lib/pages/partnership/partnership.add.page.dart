@@ -219,6 +219,8 @@ class _PartnershipAddPageState extends State<PartnershipAddPage> {
         final value = _controller.save();
         AsukaSnackbar.success(SUCCESS).show();
         Navigator.of(context).pop(value);
+      } on HttpException catch (e) {
+        AsukaSnackbar.alert(e.message.toString()).show();
       } catch (e) {
         AsukaSnackbar.alert(e.toString()).show();
       } finally {}
@@ -247,6 +249,8 @@ class _PartnershipAddPageState extends State<PartnershipAddPage> {
           final value = await _controller.update();
           AsukaSnackbar.success(SUCCESS).show();
           Navigator.pop(context, value);
+        } on HttpException catch (e) {
+          AsukaSnackbar.alert(e.message.toString()).show();
         } catch (e) {
           AsukaSnackbar.alert(e.toString()).show();
         } finally {}

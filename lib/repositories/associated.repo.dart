@@ -1,10 +1,13 @@
 import 'dart:async';
 import 'dart:convert';
+import 'dart:io';
 import 'package:hcslzapp/http/http.exception.dart';
 import 'package:hcslzapp/models/associated.dart';
 import 'package:hcslzapp/models/month.birthdays.dart';
 import 'package:http/http.dart';
+import '../common/injection.dart';
 import '../common/settings.dart';
+import '../models/token.dart';
 
 const String _associatedUrl = '/associated';
 
@@ -107,13 +110,14 @@ class AssociatedRepo {
 
   Future<List<Associated>> findByIdToList(int id) async {
     try {
-      final Response response = await client
-          .get(
-            Uri.parse(mainUrl + _associatedUrl + '/' + id.toString()),
-          )
-          .timeout(
-            Duration(seconds: 10),
-          );
+      final Response response = await client.get(
+        Uri.parse(mainUrl + _associatedUrl + '/' + id.toString()),
+        headers: {
+          HttpHeaders.authorizationHeader: locator.get<Token>().token,
+        },
+      ).timeout(
+        Duration(seconds: 10),
+      );
       if (response.statusCode == 200) {
         final List<dynamic> decodedJson = jsonDecode(response.body);
         return decodedJson

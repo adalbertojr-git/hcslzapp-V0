@@ -11,6 +11,7 @@ import 'package:hcslzapp/pages/partnership/partnership.add.page.dart';
 import '../../common/messages.dart';
 import '../../components/my.appbar.dart';
 import '../../components/my.bottom.appbar.dart';
+import '../../http/http.exception.dart';
 
 const String _title = 'Parcerias';
 
@@ -171,9 +172,11 @@ class _PartnershipListAdmPageState extends State<PartnershipListAdmPage> {
         });
     if (response == true) {
       try {
-        _controller.deleteById(_controller.partnerships[i]);
+        await _controller.deleteById(_controller.partnerships[i]);
         AsukaSnackbar.success(SUCCESS).show();
         _controller.partnerships.removeAt(i);
+      } on HttpException catch (e) {
+        AsukaSnackbar.alert(e.message.toString()).show();
       } catch (e) {
         AsukaSnackbar.alert(e.toString()).show();
       } finally {}

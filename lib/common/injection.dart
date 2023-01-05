@@ -30,5 +30,5 @@ loadAssociatedSingleton(Associated associated) {
 }
 
 loadTokenSingleton(Token token){
-  locator.get<Token>().token = token.token;
+  locator.get<Token>().token = 'Bearer ' + token.token;
 }

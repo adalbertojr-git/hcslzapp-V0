@@ -11,6 +11,7 @@ import 'package:hcslzapp/controllers/item.model.dart';
 import 'package:hcslzapp/models/access.request.dart';
 import '../../components/my.appbar.dart';
 import '../../components/my.bottom.appbar.dart';
+import '../../http/http.exception.dart';
 
 const String _title = 'Requisições de Acesso';
 
@@ -107,6 +108,8 @@ class AccessRequestListPageState extends State<AccessRequestListPage> {
       await _controller.allow();
       AsukaSnackbar.success(SUCCESS).show();
       Navigator.of(context).pop();
+    } on HttpException catch (e) {
+      AsukaSnackbar.alert(e.message.toString()).show();
     } catch (e) {
       AsukaSnackbar.alert(e.toString()).show();
     } finally {}
@@ -178,6 +181,8 @@ class CheckboxWidget extends StatelessWidget {
         controller.deleteById(loadAccessRequest(item));
         AsukaSnackbar.success(SUCCESS).show();
         controller.listItems.remove(item);
+      } on HttpException catch (e) {
+        AsukaSnackbar.alert(e.message.toString()).show();
       } catch (e) {
         AsukaSnackbar.alert(e.toString()).show();
       } finally {}

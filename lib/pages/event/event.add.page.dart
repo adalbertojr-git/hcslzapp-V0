@@ -153,6 +153,8 @@ class _EventAddPageState extends State<EventAddPage> {
         final value = await _controller.save();
         AsukaSnackbar.success(SUCCESS).show();
         Navigator.pop(context, value);
+      } on HttpException catch (e) {
+        AsukaSnackbar.alert(e.message.toString()).show();
       } catch (e) {
         AsukaSnackbar.alert(e.toString()).show();
       } finally {}
@@ -167,6 +169,8 @@ class _EventAddPageState extends State<EventAddPage> {
         final value = await _controller.update();
         AsukaSnackbar.success(SUCCESS).show();
         Navigator.pop(context, value);
+      } on HttpException catch (e) {
+        AsukaSnackbar.alert(e.message.toString()).show();
       } catch (e) {
         AsukaSnackbar.alert(e.toString()).show();
       } finally {}

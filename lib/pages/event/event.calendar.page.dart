@@ -333,6 +333,8 @@ class _EventCalendarPageState extends State<EventCalendarPage> {
         await _controller.deleteById(event);
         AsukaSnackbar.success(SUCCESS).show();
         _loadAllEvents();
+      } on HttpException catch (e) {
+        AsukaSnackbar.alert(e.message.toString()).show();
       } catch (e) {
         AsukaSnackbar.alert(e.toString()).show();
       } finally {}
