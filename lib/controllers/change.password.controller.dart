@@ -68,7 +68,7 @@ abstract class ChangePasswordControllerBase with Store {
       return _labelPswLenght;
     } else if (!RegExp(
         r"^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[$*&@#])[0-9a-zA-Z$*&@#]{6,}$")
-        .hasMatch(formController.newPassword)) {
+    .hasMatch(formController.newPassword)) {
       return _labelPswNotValid;
     }
     return null;

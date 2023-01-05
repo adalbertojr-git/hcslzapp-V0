@@ -82,7 +82,7 @@ class _SendEmailPageState extends State<SendEmailPage> {
       AsukaSnackbar.alert(REQUIRED).show();
     } else {
       try {
-        AsukaSnackbar.alert(WAIT).show();
+        AsukaSnackbar.message(WAIT).show();
         final value = await _controller.sendEmail(
           _controller.emailForgotPswCtrl.text,
         );

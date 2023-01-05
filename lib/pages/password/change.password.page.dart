@@ -90,10 +90,10 @@ class ChangePasswordPage extends StatefulWidget {
                   ),
                 ),
                 Text('* Mínimo de 6 caracteres'),
+                Text('* Pelo menos 1 número'),
                 Text('* Pelo menos 1 letra maiúscula'),
                 Text('* Pelo menos 1 letra minúscula'),
-                Text('* Pelo menos 1 caracter espceial: \$*&@#'),
-              ],
+                Text('* Pelo menos 1 caracter espceial: \$*&@#'),              ],
             ),
           ),
           SizedBox(

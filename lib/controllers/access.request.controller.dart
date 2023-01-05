@@ -140,9 +140,10 @@ abstract class AccessRequestControllerBase with Store {
     const String _labelUserRequired = 'Usuário é obrigatório!!!';
     const String _labelUserLenght =
         'Usuário deve ter no mínimo 4 caracteres!!!';
-    const String _labelUserOnlyLettersAndNumbers = 'Usuário deve possuir somente letras e números!!!';
+    const String _labelUserOnlyLettersAndNumbers = 'Use somente letras minúsculas e números!!!';
     const String _labelUserNotOnlyNumbers = 'Usuário não deve conter somente números!!!';
     const String _labelUserNotRepeated = 'Usuário não deve conter 4 caracteres repetidos!!!';
+    const String _labelUserNotAdmin = 'Usuário não pode conter [admin]!!!';
 
     if (formController.user.isEmpty) {
       return _labelUserRequired;
@@ -157,6 +158,9 @@ abstract class AccessRequestControllerBase with Store {
     } else if (RegExp(r"(.)\1{3,}")
         .hasMatch(formController.user)) {
       return _labelUserNotRepeated;
+    } else if (RegExp(r"(admin)")
+        .hasMatch(formController.user)) {
+      return _labelUserNotAdmin;
     }
     return null;
   }
