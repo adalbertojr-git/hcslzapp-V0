@@ -121,7 +121,6 @@ class AssociatedRepo {
       final Response response = await client.get(
         Uri.parse(mainUrl + _associatedUrl + '/' + id.toString()),
         headers: {
-          'Content-type': 'application/json',
           HttpHeaders.authorizationHeader: locator.get<Token>().token,
         },
       ).timeout(
