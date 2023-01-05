@@ -178,7 +178,7 @@ class CheckboxWidget extends StatelessWidget {
         });
     if (response == true) {
       try {
-        controller.deleteById(loadAccessRequest(item));
+        await controller.deleteById(loadAccessRequest(item));
         AsukaSnackbar.success(SUCCESS).show();
         controller.listItems.remove(item);
       } on HttpException catch (e) {
