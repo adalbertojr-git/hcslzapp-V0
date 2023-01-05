@@ -1,9 +1,12 @@
 import 'dart:async';
 import 'dart:convert';
+import 'dart:io';
 import 'package:hcslzapp/http/http.exception.dart';
 import 'package:hcslzapp/models/partnership.dart';
 import 'package:http/http.dart';
+import '../common/injection.dart';
 import '../common/settings.dart';
+import '../models/token.dart';
 
 const String _partnershipUrl = '/partnership';
 
@@ -15,16 +18,17 @@ class PartnershipRepo {
       );
       final Response response = await client
           .post(
-        Uri.parse(mainUrl + _partnershipUrl),
-        headers: {
-          'Content-type': 'application/json',
-          'Accept': 'application/json'
-        },
-        body: encodedJson,
-      )
+            Uri.parse(mainUrl + _partnershipUrl),
+            headers: {
+              'Content-type': 'application/json',
+              'Accept': 'application/json',
+              HttpHeaders.authorizationHeader: locator.get<Token>().token,
+            },
+            body: encodedJson,
+          )
           .timeout(
-        Duration(seconds: 10),
-      );
+            Duration(seconds: 10),
+          );
       if (response.statusCode == 200) {
         return Partnership.fromJson(
           jsonDecode(response.body),
@@ -39,11 +43,13 @@ class PartnershipRepo {
 
   Future<List<Partnership>> findAll() async {
     try {
-      final Response response = await client
-          .get(
+      final Response response = await client.get(
         Uri.parse(mainUrl + _partnershipUrl + "/list"),
-      )
-          .timeout(
+        headers: {
+          'Content-type': 'application/json',
+          HttpHeaders.authorizationHeader: locator.get<Token>().token,
+        },
+      ).timeout(
         Duration(seconds: 10),
       );
       if (response.statusCode == 200) {
@@ -51,7 +57,7 @@ class PartnershipRepo {
         return decodedJson
             .map(
               (dynamic json) => Partnership.fromJson(json),
-        )
+            )
             .toList();
       } else {
         throw HttpException(getMessage(response.statusCode));
@@ -68,16 +74,17 @@ class PartnershipRepo {
       );
       final Response response = await client
           .put(
-        Uri.parse(
-            mainUrl + _partnershipUrl + "/" + partnership.id.toString()),
-        headers: {
-          'Content-type': 'application/json',
-        },
-        body: encodedJson,
-      )
+            Uri.parse(
+                mainUrl + _partnershipUrl + "/" + partnership.id.toString()),
+            headers: {
+              'Content-type': 'application/json',
+              HttpHeaders.authorizationHeader: locator.get<Token>().token,
+            },
+            body: encodedJson,
+          )
           .timeout(
-        Duration(seconds: 10),
-      );
+            Duration(seconds: 10),
+          );
       if (response.statusCode == 200) {
         return Partnership.fromJson(
           jsonDecode(response.body),
@@ -86,7 +93,7 @@ class PartnershipRepo {
         throw HttpException(getMessage(response.statusCode));
       }
     } catch (_) {
-    rethrow;
+      rethrow;
     }
   }
 
@@ -96,6 +103,7 @@ class PartnershipRepo {
         Uri.parse(mainUrl + _partnershipUrl + "/" + partnership.id.toString()),
         headers: {
           'Content-type': 'application/json',
+          HttpHeaders.authorizationHeader: locator.get<Token>().token,
         },
       ).timeout(
         Duration(seconds: 10),

@@ -1,9 +1,12 @@
 import 'dart:async';
 import 'dart:convert';
+import 'dart:io';
+import '../common/injection.dart';
 import '../http/http.exception.dart';
 import '../models/access.request.dart';
 import 'package:http/http.dart';
 import '../common/settings.dart';
+import '../models/token.dart';
 
 const String _accReqUrl = '/accrequest';
 
@@ -18,7 +21,8 @@ class AccessRequestRepo {
             Uri.parse(mainUrl + _accReqUrl),
             headers: {
               'Content-type': 'application/json',
-              'Accept': 'application/json'
+              'Accept': 'application/json',
+              HttpHeaders.authorizationHeader: locator.get<Token>().token,
             },
             body: encodedJson,
           )
@@ -39,13 +43,15 @@ class AccessRequestRepo {
 
   Future<List<AccessRequest>> findAll() async {
     try {
-      final Response response = await client
-          .get(
-            Uri.parse(mainUrl + _accReqUrl + "/list"),
-          )
-          .timeout(
-            Duration(seconds: 10),
-          );
+      final Response response = await client.get(
+        Uri.parse(mainUrl + _accReqUrl + "/list"),
+        headers: {
+          'Content-type': 'application/json',
+          HttpHeaders.authorizationHeader: locator.get<Token>().token,
+        },
+      ).timeout(
+        Duration(seconds: 10),
+      );
       if (response.statusCode == 200) {
         final List<dynamic> decodedJson = jsonDecode(response.body);
         return decodedJson
@@ -71,7 +77,8 @@ class AccessRequestRepo {
             Uri.parse(mainUrl + _accReqUrl + "/allow"),
             headers: {
               'Content-type': 'application/json',
-              'Accept': 'application/json'
+              'Accept': 'application/json',
+              HttpHeaders.authorizationHeader: locator.get<Token>().token,
             },
             body: encodedJson,
           )
@@ -94,6 +101,7 @@ class AccessRequestRepo {
         Uri.parse(mainUrl + _accReqUrl + "/" + accessRequest.id.toString()),
         headers: {
           'Content-type': 'application/json',
+          HttpHeaders.authorizationHeader: locator.get<Token>().token,
         },
       ).timeout(
         Duration(seconds: 10),

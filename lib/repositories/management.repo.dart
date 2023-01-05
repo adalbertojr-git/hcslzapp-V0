@@ -1,9 +1,12 @@
 import 'dart:async';
 import 'dart:convert';
+import 'dart:io';
 import 'package:hcslzapp/http/http.exception.dart';
 import 'package:http/http.dart';
+import '../common/injection.dart';
 import '../common/settings.dart';
 import '../models/associated.dart';
+import '../models/token.dart';
 
 const String _managUrl = '/management';
 
@@ -18,7 +21,8 @@ class ManagementRepo {
             Uri.parse(mainUrl + _managUrl),
             headers: {
               'Content-type': 'application/json',
-              'Accept': 'application/json'
+              'Accept': 'application/json',
+              HttpHeaders.authorizationHeader: locator.get<Token>().token,
             },
             body: encodedJson,
           )
@@ -41,6 +45,7 @@ class ManagementRepo {
         Uri.parse(mainUrl + _managUrl + "/" + associated.id.toString()),
         headers: {
           'Content-type': 'application/json',
+          HttpHeaders.authorizationHeader: locator.get<Token>().token,
         },
       ).timeout(
         Duration(seconds: 10),

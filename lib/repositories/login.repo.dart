@@ -14,7 +14,9 @@ class LoginRepo {
       final Response response = await client
           .post(
             Uri.parse(mainUrl + _authUrl),
-            headers: {'Content-type': 'application/json'},
+            headers: {
+              'Content-type': 'application/json',
+            },
             body: jsonEncode(
               params,
             ),

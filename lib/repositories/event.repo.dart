@@ -1,18 +1,28 @@
 import 'dart:convert';
+import 'dart:io';
 import 'package:hcslzapp/models/event.dart';
 import 'package:http/http.dart';
+import '../common/injection.dart';
 import '../common/settings.dart';
 import 'package:hcslzapp/http/http.exception.dart';
+
+import '../models/token.dart';
 
 const String _eventUrl = '/event';
 
 class EventRepo {
   Future<String> findAll() async {
     try {
-      final Response response =
-          await client.get(Uri.parse(mainUrl + _eventUrl + "/list")).timeout(
-                Duration(seconds: 10),
-              );
+      final Response response = await client.get(
+        Uri.parse(mainUrl + _eventUrl + "/list"),
+        headers: {
+          'Content-type': 'application/json',
+
+          HttpHeaders.authorizationHeader: locator.get<Token>().token,
+        },
+      ).timeout(
+        Duration(seconds: 10),
+      );
       if (response.statusCode == 200) {
         return response.body;
       } else {
@@ -33,6 +43,7 @@ class EventRepo {
             Uri.parse(mainUrl + _eventUrl + "/save"),
             headers: {
               'Content-type': 'application/json',
+              HttpHeaders.authorizationHeader: locator.get<Token>().token,
             },
             body: encodedJson,
           )
@@ -61,6 +72,7 @@ class EventRepo {
             Uri.parse(mainUrl + _eventUrl + "/" + event.id.toString()),
             headers: {
               'Content-type': 'application/json',
+              HttpHeaders.authorizationHeader: locator.get<Token>().token,
             },
             body: encodedJson,
           )
@@ -85,6 +97,7 @@ class EventRepo {
         Uri.parse(mainUrl + _eventUrl + "/" + event.id.toString()),
         headers: {
           'Content-type': 'application/json',
+          HttpHeaders.authorizationHeader: locator.get<Token>().token,
         },
       ).timeout(
         Duration(seconds: 10),

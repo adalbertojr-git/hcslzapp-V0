@@ -1,22 +1,27 @@
 import 'dart:async';
 import 'dart:convert';
+import 'dart:io';
 import 'package:hcslzapp/http/http.exception.dart';
 import 'package:hcslzapp/models/head.notification.dart';
 import 'package:http/http.dart';
+import '../common/injection.dart';
 import '../common/settings.dart';
+import '../models/token.dart';
 
 const String _notificationUrl = '/notification';
 
 class HeadNotificationRepo {
   Future<List<HeadNotification>> findAll() async {
     try {
-      final Response response = await client
-          .get(
-            Uri.parse(mainUrl + _notificationUrl + "/list"),
-          )
-          .timeout(
-            Duration(seconds: 10),
-          );
+      final Response response = await client.get(
+        Uri.parse(mainUrl + _notificationUrl + "/list"),
+        headers: {
+          'Content-type': 'application/json',
+          HttpHeaders.authorizationHeader: locator.get<Token>().token,
+        },
+      ).timeout(
+        Duration(seconds: 10),
+      );
       if (response.statusCode == 200) {
         final List<dynamic> decodedJson = jsonDecode(response.body);
         return decodedJson
@@ -42,7 +47,8 @@ class HeadNotificationRepo {
             Uri.parse(mainUrl + _notificationUrl),
             headers: {
               'Content-type': 'application/json',
-              'Accept': 'application/json'
+              'Accept': 'application/json',
+              HttpHeaders.authorizationHeader: locator.get<Token>().token,
             },
             body: encodedJson,
           )
@@ -74,6 +80,7 @@ class HeadNotificationRepo {
                 headNotification.id.toString()),
             headers: {
               'Content-type': 'application/json',
+              HttpHeaders.authorizationHeader: locator.get<Token>().token,
             },
             body: encodedJson,
           )
@@ -99,6 +106,7 @@ class HeadNotificationRepo {
             mainUrl + _notificationUrl + "/" + headNotification.id.toString()),
         headers: {
           'Content-type': 'application/json',
+          HttpHeaders.authorizationHeader: locator.get<Token>().token,
         },
       ).timeout(
         Duration(seconds: 10),

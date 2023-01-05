@@ -14,13 +14,15 @@ const String _associatedUrl = '/associated';
 class AssociatedRepo {
   Future<List<Associated>> findAll() async {
     try {
-      final Response response = await client
-          .get(
-            Uri.parse(mainUrl + _associatedUrl + "/list"),
-          )
-          .timeout(
-            Duration(seconds: 10),
-          );
+      final Response response = await client.get(
+        Uri.parse(mainUrl + _associatedUrl + "/list"),
+        headers: {
+          'Content-type': 'application/json',
+          HttpHeaders.authorizationHeader: locator.get<Token>().token,
+        },
+      ).timeout(
+        Duration(seconds: 10),
+      );
       if (response.statusCode == 200) {
         final List<dynamic> decodedJson = jsonDecode(response.body);
         return decodedJson
@@ -38,13 +40,15 @@ class AssociatedRepo {
 
   Future<List<Associated>> findAllAdminToList() async {
     try {
-      final Response response = await client
-          .get(
-            Uri.parse(mainUrl + _associatedUrl + "/admin"),
-          )
-          .timeout(
-            Duration(seconds: 10),
-          );
+      final Response response = await client.get(
+        Uri.parse(mainUrl + _associatedUrl + "/admin"),
+        headers: {
+          'Content-type': 'application/json',
+          HttpHeaders.authorizationHeader: locator.get<Token>().token,
+        },
+      ).timeout(
+        Duration(seconds: 10),
+      );
       if (response.statusCode == 200) {
         final List<dynamic> decodedJson = jsonDecode(response.body);
         return decodedJson
@@ -62,13 +66,15 @@ class AssociatedRepo {
 
   Future<List<Associated>> findAllNotAdminToList() async {
     try {
-      final Response response = await client
-          .get(
-            Uri.parse(mainUrl + _associatedUrl + "/notadmin"),
-          )
-          .timeout(
-            Duration(seconds: 10),
-          );
+      final Response response = await client.get(
+        Uri.parse(mainUrl + _associatedUrl + "/notadmin"),
+        headers: {
+          'Content-type': 'application/json',
+          HttpHeaders.authorizationHeader: locator.get<Token>().token,
+        },
+      ).timeout(
+        Duration(seconds: 10),
+      );
       if (response.statusCode == 200) {
         final List<dynamic> decodedJson = jsonDecode(response.body);
         return decodedJson
@@ -86,13 +92,15 @@ class AssociatedRepo {
 
   Future<List<Associated>> findAllActive() async {
     try {
-      final Response response = await client
-          .get(
-            Uri.parse(mainUrl + _associatedUrl + "/active"),
-          )
-          .timeout(
-            Duration(seconds: 10),
-          );
+      final Response response = await client.get(
+        Uri.parse(mainUrl + _associatedUrl + "/active"),
+        headers: {
+          'Content-type': 'application/json',
+          HttpHeaders.authorizationHeader: locator.get<Token>().token,
+        },
+      ).timeout(
+        Duration(seconds: 10),
+      );
       if (response.statusCode == 200) {
         final List<dynamic> decodedJson = jsonDecode(response.body);
         return decodedJson
@@ -113,6 +121,7 @@ class AssociatedRepo {
       final Response response = await client.get(
         Uri.parse(mainUrl + _associatedUrl + '/' + id.toString()),
         headers: {
+          'Content-type': 'application/json',
           HttpHeaders.authorizationHeader: locator.get<Token>().token,
         },
       ).timeout(
@@ -144,6 +153,7 @@ class AssociatedRepo {
                 mainUrl + _associatedUrl + "/" + associated.id.toString()),
             headers: {
               'Content-type': 'application/json',
+              HttpHeaders.authorizationHeader: locator.get<Token>().token,
             },
             body: encodedJson,
           )
@@ -164,13 +174,15 @@ class AssociatedRepo {
 
   Future<List<MonthBirthdays>> findBirthdays() async {
     try {
-      final Response response = await client
-          .get(
-            Uri.parse(mainUrl + '/monthbirthdays/list'),
-          )
-          .timeout(
-            Duration(seconds: 10),
-          );
+      final Response response = await client.get(
+        Uri.parse(mainUrl + '/monthbirthdays/list'),
+        headers: {
+          'Content-type': 'application/json',
+          HttpHeaders.authorizationHeader: locator.get<Token>().token,
+        },
+      ).timeout(
+        Duration(seconds: 10),
+      );
       if (response.statusCode == 200) {
         final List<dynamic> decodedJson = jsonDecode(response.body);
         return decodedJson
