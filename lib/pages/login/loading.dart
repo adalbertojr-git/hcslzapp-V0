@@ -62,7 +62,7 @@ class _LoadingState extends State<Loading> {
         context,
         MaterialPageRoute(
           builder: (context) => CenteredMessage(
-            title: WARNING,
+            title: ERROR,
             message: e.message.toString(),
           ),
         ),
