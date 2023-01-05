@@ -8,6 +8,7 @@ import 'package:hcslzapp/components/my.text.form.field.dart';
 import 'package:hcslzapp/controllers/access.request.controller.dart';
 import '../../components/button.dart';
 import '../../components/my.appbar.dart';
+import '../../http/http.exception.dart';
 
 const String _title = 'Solicitar acesso';
 
@@ -147,15 +148,17 @@ class _AccessRequestAddPageState extends State<AccessRequestAddPage> {
         ],
       );
 
-  _save() {
+  _save() async {
     if (_controller.hasErrors) {
       AsukaSnackbar.alert(REQUIRED).show();
     } else {
       try {
-        _controller.save().then((value) {
-          AsukaSnackbar.success(SUCCESS).show();
-          Navigator.of(context).pop();
-        });
+        await _controller.save();
+        AsukaSnackbar.success(SUCCESS).show();
+        Navigator.of(context).pop();
+      } on HttpException catch (e) {
+        AsukaSnackbar.alert(e.message.toString() + 'Usuário já cadastrado')
+            .show();
       } catch (e) {
         AsukaSnackbar.alert(e.toString()).show();
       } finally {}

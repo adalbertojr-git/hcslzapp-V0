@@ -8,13 +8,19 @@ String? getMessage(int statusCode) {
   if(_statusCodeResponses.containsKey(statusCode)){
     return _statusCodeResponses[statusCode];
   }
-  return 'unknown error';
+  return 'Erro desconhecido: ' + statusCode.toString();
 }
 
 final Map<int, String> _statusCodeResponses = {
-  400: 'Erro na transação devido a informações inválidas no formulário',
+  400: 'Erro devido a informações inválidas no formulário',
   401: 'Usuário e/ou Senha inválido(s)',
   404: 'Pagina web não encontrada',
-  405: 'Método (GET, POST, etc) requisitado não suportado',
-  409: 'Erro de conflito pois o arquivo já existe'
+  405: 'Método HTTP requisitado não suportado',
+  408: 'Tempo de requisição esgotado (Timeout)',
+  409: 'Erro de conflito: ',
+  500: 'Internal Server Error',
+  502: 'Bad Gateway',
+  503: 'Service Unavailable',
+  504: 'Gateway Time-Out',
+  505: 'HTTP Version not supported',
 };
