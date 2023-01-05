@@ -9,6 +9,7 @@ import 'package:hcslzapp/models/password.dto.dart';
 import '../../components/my.appbar.dart';
 import '../../components/my.bottom.appbar.dart';
 import '../../controllers/forgot.password.controller.dart';
+import '../../http/http.exception.dart';
 
 const String _title = 'Alterar Senha';
 
@@ -112,6 +113,8 @@ class _ForgotPasswordPageState extends State<ForgotPasswordPage> {
         );
         AsukaSnackbar.success(SUCCESS).show();
         Navigator.of(context).pop();
+      } on HttpException catch (e) {
+        AsukaSnackbar.alert(e.message.toString()).show();
       } catch (e) {
         AsukaSnackbar.alert(e.toString()).show();
       } finally {}

@@ -9,18 +9,18 @@ import 'package:hcslzapp/controllers/change.password.controller.dart';
 import '../../common/injection.dart';
 import '../../components/my.appbar.dart';
 import '../../components/my.bottom.appbar.dart';
+import '../../http/http.exception.dart';
 import '../../models/associated.dart';
 import '../../models/password.dto.dart';
 
 const String _title = 'Alterar Senha';
 
 class ChangePasswordPage extends StatefulWidget {
-
   @override
   State<ChangePasswordPage> createState() => _ChangePasswordPageState();
 }
 
-  class _ChangePasswordPageState extends State<ChangePasswordPage> {
+class _ChangePasswordPageState extends State<ChangePasswordPage> {
   final Associated _associated = locator.get<Associated>();
   final ChangePasswordController _controller = ChangePasswordController();
 
@@ -47,34 +47,30 @@ class ChangePasswordPage extends StatefulWidget {
           SizedBox(
             height: 10,
           ),
-          Observer(
-            builder: (_) {
-              return MyTextFormField(
-                textEditingController: _controller.pswCtrl,
-                label: labelCurrentPsw,
-                hint: hintCurrentPsw,
-                icon: Icons.password,
-                inputType: TextInputType.text,
-                hidden: true,
-                onChanged: _controller.formController.changePassword,
-                errorText: _controller.validatePassword(),
-              );
-            }
-          ),
-          Observer(
-            builder: (_) {
-              return MyTextFormField(
-                textEditingController: _controller.newPswCtrl,
-                label: labelNewPsw,
-                hint: hintNewPsw,
-                icon: Icons.password,
-                inputType: TextInputType.text,
-                hidden: true,
-                onChanged: _controller.formController.changeNewPassword,
-                errorText: _controller.validateNewPassword(),
-              );
-            }
-          ),
+          Observer(builder: (_) {
+            return MyTextFormField(
+              textEditingController: _controller.pswCtrl,
+              label: labelCurrentPsw,
+              hint: hintCurrentPsw,
+              icon: Icons.password,
+              inputType: TextInputType.text,
+              hidden: true,
+              onChanged: _controller.formController.changePassword,
+              errorText: _controller.validatePassword(),
+            );
+          }),
+          Observer(builder: (_) {
+            return MyTextFormField(
+              textEditingController: _controller.newPswCtrl,
+              label: labelNewPsw,
+              hint: hintNewPsw,
+              icon: Icons.password,
+              inputType: TextInputType.text,
+              hidden: true,
+              onChanged: _controller.formController.changeNewPassword,
+              errorText: _controller.validateNewPassword(),
+            );
+          }),
           SizedBox(
             height: 5,
           ),
@@ -93,26 +89,25 @@ class ChangePasswordPage extends StatefulWidget {
                 Text('* Pelo menos 1 número'),
                 Text('* Pelo menos 1 letra maiúscula'),
                 Text('* Pelo menos 1 letra minúscula'),
-                Text('* Pelo menos 1 caracter espceial: \$*&@#'),              ],
+                Text('* Pelo menos 1 caracter espceial: \$*&@#'),
+              ],
             ),
           ),
           SizedBox(
             height: 5,
           ),
-          Observer(
-            builder: (_) {
-              return MyTextFormField(
-                textEditingController: _controller.confPswCtrl,
-                label: labelConfirmNewPsw,
-                hint: hintConfirmNewPsw,
-                icon: Icons.password,
-                inputType: TextInputType.text,
-                hidden: true,
-                onChanged: _controller.formController.changeConfPassword,
-                errorText: _controller.validateConfPassword(),
-              );
-            }
-          ),
+          Observer(builder: (_) {
+            return MyTextFormField(
+              textEditingController: _controller.confPswCtrl,
+              label: labelConfirmNewPsw,
+              hint: hintConfirmNewPsw,
+              icon: Icons.password,
+              inputType: TextInputType.text,
+              hidden: true,
+              onChanged: _controller.formController.changeConfPassword,
+              errorText: _controller.validateConfPassword(),
+            );
+          }),
         ],
       );
 
@@ -130,6 +125,8 @@ class ChangePasswordPage extends StatefulWidget {
         );
         AsukaSnackbar.success(SUCCESS).show();
         Navigator.of(context).pop();
+      } on HttpException catch (e) {
+        AsukaSnackbar.alert(e.message.toString()).show();
       } catch (e) {
         AsukaSnackbar.alert(e.toString()).show();
       } finally {}

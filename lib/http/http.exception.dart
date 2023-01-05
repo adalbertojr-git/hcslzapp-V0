@@ -13,7 +13,7 @@ String? getMessage(int statusCode) {
 
 final Map<int, String> _statusCodeResponses = {
   400: 'Erro devido a informações inválidas no formulário',
-  401: 'Usuário e/ou Senha inválido(s)',
+  401: 'Erro na autenticação do usuário',
   404: 'Pagina web não encontrada',
   405: 'Método HTTP requisitado não suportado',
   408: 'Tempo de requisição esgotado (Timeout)',
