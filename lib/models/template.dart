@@ -1,4 +1,3 @@
-import 'package:hcslzapp/models/digital.identity.dart';
 import 'package:hcslzapp/models/event.dart';
 import 'package:hcslzapp/models/head.notification.dart';
 import 'package:hcslzapp/models/partnership.dart';
@@ -54,20 +53,6 @@ class Template {
         nickname: '',
         chassis: '',
         renavam: '',
-      );
-
-  DigitalIdentity loadDigitalIdentity() => DigitalIdentity(
-        id: 0,
-        name: '',
-        cnh: '',
-        cpf: '',
-        bloodType: '',
-        associatedType: '',
-        dateBirth: '',
-        dateShield: '',
-        dueDate: '',
-        dependents: List<Dependent>.from([]),
-        motorcycles: List<Motorcycle>.from([]),
       );
 
   Payment loadPayment() => Payment(
