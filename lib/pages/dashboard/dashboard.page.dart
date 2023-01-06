@@ -1,4 +1,3 @@
-import 'dart:async';
 import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
@@ -99,7 +98,6 @@ class DashboardPage extends StatefulWidget {
 class _DashboardPageState extends State<DashboardPage> {
   final DashboardController _controller = DashboardController();
   late List<Widget> _listAdmWidgets;
-  Timer? timer;
 
   @override
   void initState() {
