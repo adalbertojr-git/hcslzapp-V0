@@ -191,11 +191,11 @@ class AssociatedRepo {
             )
             .toList();
       } else {
-        print(ApiErrors.fromJson(
+/*        print(await ApiErrors.fromJson(
           jsonDecode(response.body),
-        ));
-        //print(response.body);
-        throw HttpException(getMessage(response.statusCode));
+        ));*/
+        throw HttpException(getMessage2(response));
+        // throw HttpException(getMessage(response.statusCode));
       }
     } catch (_) {
       rethrow;
