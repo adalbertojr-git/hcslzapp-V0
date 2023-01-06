@@ -189,14 +189,16 @@ class _MyCustomLoginUIState extends State<MyCustomLoginUI>
                             _login();
                           },
                           child: Container(
-                            height: _width * .2,
-                            width: _width * .2,
+                            height: _width * .3,
+                            width: _width * .3,
                             alignment: Alignment.center,
                             decoration: BoxDecoration(
+                              color: Colors.white,
                               shape: BoxShape.circle,
                             ),
                             child: Icon(
                               Icons.login_sharp,
+                              color: Colors.black,
                               size: 60,
                             ),
                           ),

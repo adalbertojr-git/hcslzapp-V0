@@ -7,9 +7,7 @@ class TokenDetails {
 
   int associatedId() => Jwt.parseJwt(_token)['id'];
 
-//   To get expiry date
   String expiryDate() => Jwt.getExpiryDate(_token).toString();
 
-  // To check if token is expired
   bool isExpired() => Jwt.isExpired(_token);
 }
