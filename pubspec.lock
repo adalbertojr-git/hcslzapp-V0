@@ -490,13 +490,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "4.7.0"
-  jwt_decode:
+  jwt_decoder:
     dependency: "direct main"
     description:
-      name: jwt_decode
+      name: jwt_decoder
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "0.3.1"
+    version: "2.0.1"
   logging:
     dependency: transitive
     description:

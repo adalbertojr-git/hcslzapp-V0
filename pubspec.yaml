@@ -30,7 +30,7 @@ dependencies:
   flutter_mobx: ^2.0.3+2
   asuka: ^2.0.0
   mask_text_input_formatter: ^2.0.0
-  jwt_decode: ^0.3.1
+  jwt_decoder: ^2.0.1
   glutton: ^2.0.0
   image_picker: ^0.8.4+4
   flare_flutter: ^3.0.2

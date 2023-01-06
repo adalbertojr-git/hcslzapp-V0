@@ -1,13 +1,16 @@
-import 'package:jwt_decode/jwt_decode.dart';
+import 'package:jwt_decoder/jwt_decoder.dart';
 
 class TokenDetails {
   String _token;
 
   TokenDetails(this._token);
 
-  int associatedId() => Jwt.parseJwt(_token)['id'];
+  int associatedId() {
+    Map<String, dynamic> decodedToken = JwtDecoder.decode(_token);
+    return decodedToken['id'];
+  }
 
-  String expiryDate() => Jwt.getExpiryDate(_token).toString();
+  String expiryDate() => JwtDecoder.getExpirationDate(_token).toString();
 
-  bool isExpired() => Jwt.isExpired(_token);
+  bool isExpired() => JwtDecoder.isExpired(_token);
 }
