@@ -7,6 +7,7 @@ import 'package:hcslzapp/models/month.birthdays.dart';
 import 'package:http/http.dart';
 import '../common/injection.dart';
 import '../common/settings.dart';
+import '../models/api.errors.dart';
 import '../models/token.dart';
 
 const String _associatedUrl = '/associated';
@@ -190,7 +191,11 @@ class AssociatedRepo {
             )
             .toList();
       } else {
-         throw HttpException(getMessage(response.statusCode));
+        print(ApiErrors.fromJson(
+          jsonDecode(response.body),
+        ));
+        //print(response.body);
+        throw HttpException(getMessage(response.statusCode));
       }
     } catch (_) {
       rethrow;
