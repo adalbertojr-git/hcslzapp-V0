@@ -40,5 +40,5 @@ final Map<int, String> _statusCodeResponses = {
   504: 'Gateway Time-Out',
   505: 'HTTP Version not supported',
   //custom - token expirado
-  999: 'Sua sessão expirou. Reconecte a aplicação'
+  999: 'Sua sessão expirou.\n Reconecte a aplicação'
 };

@@ -37,52 +37,56 @@ class _PartnershipListAssociatedPageState
       initialPage: _controller.currentPage,
       viewportFraction: viewPortFraction,
     );
-    _controller.getFuture();
+    _controller.getFuture().then((value) {
+      _controller.setButtonVisibilty();
+    }).catchError((e) {});
     super.initState();
   }
 
   @override
-  Widget build(BuildContext context) => Scaffold(
-        appBar: MyAppBar(_title),
-        bottomNavigationBar:
-            _controller.isHidedButton ? null : MyBottomAppBar(),
-        body: FutureBuilder<List<Partnership>>(
-          future: _controller.future,
-          builder: (context, snapshot) {
-            switch (snapshot.connectionState) {
-              case ConnectionState.none:
-                break;
-              case ConnectionState.waiting:
-                return Progress();
-              case ConnectionState.active:
-                break;
-              default:
-                if (snapshot.hasError) {
-                  return CenteredMessage(
-                    title: ERROR,
-                    message: snapshot.error.toString(),
-                  );
-                } else {
-                  if ((snapshot.data?.length)! > 0) {
-                    _controller.init();
-                    _controller.partnerships.addAll(snapshot.data!);
-                    _controller.partnerships.sort(
-                      (a, b) => a.partner.compareTo(b.partner),
-                    );
-                    _controller.getActivePartnerships;
-                    return _widgets();
-                  } else
+  Widget build(BuildContext context) => Observer(
+        builder: (_) => Scaffold(
+          appBar: MyAppBar(_title),
+          bottomNavigationBar:
+              _controller.isHidedButton ? null : MyBottomAppBar(),
+          body: FutureBuilder<List<Partnership>>(
+            future: _controller.future,
+            builder: (context, snapshot) {
+              switch (snapshot.connectionState) {
+                case ConnectionState.none:
+                  break;
+                case ConnectionState.waiting:
+                  return Progress();
+                case ConnectionState.active:
+                  break;
+                default:
+                  if (snapshot.hasError) {
                     return CenteredMessage(
-                      title: WARNING,
-                      message: NOTEXIST,
+                      title: ERROR,
+                      message: snapshot.error.toString(),
                     );
-                }
-            } //switch (snapshot.connectionState)
-            return CenteredMessage(
-              title: ERROR,
-              message: UNKNOWN,
-            );
-          },
+                  } else {
+                    if ((snapshot.data?.length)! > 0) {
+                      _controller.init();
+                      _controller.partnerships.addAll(snapshot.data!);
+                      _controller.partnerships.sort(
+                        (a, b) => a.partner.compareTo(b.partner),
+                      );
+                      _controller.getActivePartnerships;
+                      return _widgets();
+                    } else
+                      return CenteredMessage(
+                        title: WARNING,
+                        message: NOTEXIST,
+                      );
+                  }
+              } //switch (snapshot.connectionState)
+              return CenteredMessage(
+                title: ERROR,
+                message: UNKNOWN,
+              );
+            },
+          ),
         ),
       );
 
