@@ -11,13 +11,6 @@ class HttpException implements Exception {
   }
 }
 
-/*String? getMessage2(int statusCode) {
-  if(_statusCodeResponses.containsKey(statusCode)){
-    return _statusCodeResponses[statusCode];
-  }
-  return 'Erro desconhecido: ' + statusCode.toString();
-}*/
-
 String? getMessage(Response response) {
   int code = 0;
   if (response.body.contains('JWT expire', 0))
@@ -46,6 +39,6 @@ final Map<int, String> _statusCodeResponses = {
   503: 'Service Unavailable',
   504: 'Gateway Time-Out',
   505: 'HTTP Version not supported',
-  //custom
+  //custom - token expirado
   999: 'Sua sessão expirou. Reconecte a aplicação'
 };
