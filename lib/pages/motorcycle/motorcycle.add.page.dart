@@ -32,9 +32,7 @@ class _MotorcycleAddPageState extends State<MotorcycleAddPage> {
   }
 
   @override
-  Widget build(BuildContext context) {
-    return Observer(
-      builder: (_) => Scaffold(
+  Widget build(BuildContext context) => Scaffold(
         appBar: MyAppBar(widget.motorcycle == null
             ? 'Adicionar ' + _title
             : 'Editar ' + _title),
@@ -43,12 +41,13 @@ class _MotorcycleAddPageState extends State<MotorcycleAddPage> {
         floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
         floatingActionButton: Button(
             icon: Icons.playlist_add, onClick: () => _controller.add(context)),
-      ),
-    );
-  }
+      );
 
   _widgets() => ListView(
         children: <Widget>[
+          SizedBox(
+            height: 10,
+          ),
           Observer(
             builder: (_) {
               return MyTextFormField(

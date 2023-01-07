@@ -13,15 +13,18 @@ class HttpException implements Exception {
 
 String? getMessage(Response response) {
   int code = 0;
-  if (response.body.contains('JWT expire', 0))
-    code = 999;
+  String err = response.body.substring(1,
+      response.body.indexOf('trace')-2);
+  if (err.contains('JWT expire', 0))
+    code = 4011;
   else
     code = response.statusCode;
   if (_statusCodeResponses.containsKey(code)) {
     return _statusCodeResponses[code];
   }
-  return 'Houve um erro inesperado na aplicação:\n Erro ' +
-      response.statusCode.toString();
+  return 'Erro inesperado na aplicação:\n Código ' +
+      response.statusCode.toString() + '\n\n' +
+      err;
 }
 
 final Map<int, String> _statusCodeResponses = {
@@ -40,5 +43,5 @@ final Map<int, String> _statusCodeResponses = {
   504: 'Gateway Time-Out',
   505: 'HTTP Version not supported',
   //custom - token expirado
-  999: 'Sua sessão expirou.\n Reconecte a aplicação'
+  4011: 'Sua sessão expirou.\n Por favor, reconecte a aplicação'
 };

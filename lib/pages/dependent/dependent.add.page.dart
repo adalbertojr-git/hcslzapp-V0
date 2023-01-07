@@ -45,6 +45,9 @@ class _DependentAddPageState extends State<DependentAddPage> {
 
   _widgets() => ListView(
         children: <Widget>[
+          SizedBox(
+            height: 10,
+          ),
           Observer(
             builder: (_) {
               return MyTextFormField(
