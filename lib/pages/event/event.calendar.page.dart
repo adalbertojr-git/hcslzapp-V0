@@ -209,89 +209,90 @@ class _EventCalendarPageState extends State<EventCalendarPage> {
               valueListenable: _controller.selectedEvents,
               builder: (context, value, _) {
                 return ListView.builder(
-                    scrollDirection: Axis.horizontal,
-                    itemCount: value.length,
-                    itemBuilder: (context, index) {
-                      return Container(
-                        width: 350,
-                        margin: EdgeInsets.symmetric(horizontal: 10),
-                        decoration: BoxDecoration(
-                          color: Colors.deepOrange[300],
-                          shape: BoxShape.rectangle,
-                          borderRadius: BorderRadius.circular(10.0),
-                        ),
-                        child: Column(
-                          children: [
-                            SizedBox(
-                              height: 5,
+                  scrollDirection: Axis.horizontal,
+                  itemCount: value.length,
+                  itemBuilder: (context, index) {
+                    return Container(
+                      width: 350,
+                      margin: EdgeInsets.symmetric(horizontal: 10),
+                      decoration: BoxDecoration(
+                        color: Colors.deepOrange[300],
+                        shape: BoxShape.rectangle,
+                        borderRadius: BorderRadius.circular(10.0),
+                      ),
+                      child: Column(
+                        children: [
+                          SizedBox(
+                            height: 5,
+                          ),
+                          _photo(context, value[index]),
+                          Text(
+                            value[index].title,
+                            style: TextStyle(
+                              fontWeight: FontWeight.bold,
+                              fontSize: 16,
                             ),
-                            _photo(context, value[index]),
-                            Text(
-                              value[index].title,
-                              style: TextStyle(
-                                fontWeight: FontWeight.bold,
-                                fontSize: 16,
+                          ),
+                          Container(
+                            padding: EdgeInsets.all(5),
+                            width: double.infinity,
+                            height: MediaQuery.of(context).size.height / 7,
+                            child: Card(
+                              elevation: 5,
+                              child: Text(
+                                value[index].description,
                               ),
                             ),
-                            Container(
-                              padding: EdgeInsets.all(5),
-                              width: double.infinity,
-                              height: MediaQuery.of(context).size.height / 7,
-                              child: Card(
-                                elevation: 5,
-                                child: Text(
-                                  value[index].description,
-                                ),
-                              ),
-                            ),
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.end,
-                              children: [
-                                widget._selectedProfile == ADMIN
-                                    ? Wrap(
-                                        spacing: 10, // space between two icons
-                                        children: <Widget>[
-                                          GestureDetector(
-                                            child: Icon(
-                                              Icons.delete,
-                                            ),
-                                            onTap: () {
-                                              _delete(value[index]);
-                                            },
+                          ),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.end,
+                            children: [
+                              widget._selectedProfile == ADMIN
+                                  ? Wrap(
+                                      spacing: 10, // space between two icons
+                                      children: <Widget>[
+                                        GestureDetector(
+                                          child: Icon(
+                                            Icons.delete,
                                           ),
-                                          GestureDetector(
-                                            child: Icon(
-                                              Icons.edit,
-                                            ),
-                                            onTap: () {
-                                              Future future = Navigator.push(
-                                                context,
-                                                MaterialPageRoute(
-                                                  builder: (context) =>
-                                                      EventAddPage(
-                                                    widget._selectedProfile,
-                                                    value[index],
-                                                    _selectedDay
-                                                        .toString()
-                                                        .substring(0, 10),
-                                                  ),
+                                          onTap: () {
+                                            _delete(value[index]);
+                                          },
+                                        ),
+                                        GestureDetector(
+                                          child: Icon(
+                                            Icons.edit,
+                                          ),
+                                          onTap: () {
+                                            Future future = Navigator.push(
+                                              context,
+                                              MaterialPageRoute(
+                                                builder: (context) =>
+                                                    EventAddPage(
+                                                  widget._selectedProfile,
+                                                  value[index],
+                                                  _selectedDay
+                                                      .toString()
+                                                      .substring(0, 10),
                                                 ),
-                                              );
-                                              future.then((value) {
-                                                if (value != null)
-                                                  _loadAllEvents();
-                                              });
-                                            },
-                                          ),
-                                        ],
-                                      )
-                                    : Container(),
-                              ],
-                            ),
-                          ],
-                        ),
-                      );
-                    });
+                                              ),
+                                            );
+                                            future.then((value) {
+                                              if (value != null)
+                                                _loadAllEvents();
+                                            });
+                                          },
+                                        ),
+                                      ],
+                                    )
+                                  : Container(),
+                            ],
+                          ),
+                        ],
+                      ),
+                    );
+                  },
+                );
               },
             ),
           ),
