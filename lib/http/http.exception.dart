@@ -11,32 +11,28 @@ class HttpException implements Exception {
   }
 }
 
-String? getMessage(int statusCode) {
+/*String? getMessage2(int statusCode) {
   if(_statusCodeResponses.containsKey(statusCode)){
     return _statusCodeResponses[statusCode];
   }
   return 'Erro desconhecido: ' + statusCode.toString();
-}
+}*/
 
-String? getMessage2(Response response) {
-  String err = response.body.substring(
-      response.body.indexOf('["', 0) + 2,
-      response.body.indexOf(
-        '"]',
-        0,
-      ));
-  print(err);
+String? getMessage(Response response) {
   int code = 0;
-  if (err.contains('JWT', 0)) code = 999;
-  else code = response.statusCode;
+  if (response.body.contains('JWT expire', 0))
+    code = 999;
+  else
+    code = response.statusCode;
   if (_statusCodeResponses.containsKey(code)) {
     return _statusCodeResponses[code];
   }
-  return 'Houve um erro inesperado na aplicação: ' + response.statusCode.toString();
+  return 'Houve um erro inesperado na aplicação:\n Erro ' +
+      response.statusCode.toString();
 }
 
 final Map<int, String> _statusCodeResponses = {
-  //erros no cliente
+  //erros no cliente (browser)
   400: 'Erro devido a informações inválidas no formulário',
   401: 'Erro na autenticação do usuário',
   403: 'Erro na autenticação do usuário',

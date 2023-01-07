@@ -32,7 +32,7 @@ class ChangePasswordRepo {
       if (response.statusCode == 200) {
         return response.body;
       } else {
-        throw HttpException(getMessage(response.statusCode));
+        throw HttpException(getMessage(response));
       }
     } catch (_) {
       rethrow;
@@ -60,7 +60,7 @@ class ChangePasswordRepo {
       if (response.statusCode == 200) {
         return response.body;
       } else {
-        throw HttpException(getMessage(response.statusCode));
+        throw HttpException(getMessage(response));
       }
     } catch (_) {
       rethrow;

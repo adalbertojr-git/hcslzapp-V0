@@ -29,7 +29,7 @@ class LoginRepo {
           jsonDecode(response.body),
         );
       } else {
-        throw HttpException(getMessage(response.statusCode));
+        throw HttpException(getMessage(response));
       }
     } catch (_) {
       rethrow;

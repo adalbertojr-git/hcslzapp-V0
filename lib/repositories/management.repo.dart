@@ -32,7 +32,7 @@ class ManagementRepo {
       if (response.statusCode == 204) {
         return response;
       } else {
-        throw HttpException(getMessage(response.statusCode));
+        throw HttpException(getMessage(response));
       }
     } catch (_) {
       rethrow;
@@ -53,7 +53,7 @@ class ManagementRepo {
       if (response.statusCode == 204) {
         return response;
       } else {
-        throw HttpException(getMessage(response.statusCode));
+        throw HttpException(getMessage(response));
       }
     } catch (_) {
       rethrow;

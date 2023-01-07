@@ -30,7 +30,7 @@ class HeadNotificationRepo {
             )
             .toList();
       } else {
-        throw HttpException(getMessage(response.statusCode));
+        throw HttpException(getMessage(response));
       }
     } catch (_) {
       rethrow;
@@ -60,7 +60,7 @@ class HeadNotificationRepo {
           jsonDecode(response.body),
         );
       } else {
-        throw HttpException(getMessage(response.statusCode));
+        throw HttpException(getMessage(response));
       }
     } catch (_) {
       rethrow;
@@ -92,7 +92,7 @@ class HeadNotificationRepo {
           jsonDecode(response.body),
         );
       } else {
-        throw HttpException(getMessage(response.statusCode));
+        throw HttpException(getMessage(response));
       }
     } catch (_) {
       rethrow;
@@ -114,7 +114,7 @@ class HeadNotificationRepo {
       if (response.statusCode == 204) {
         return response;
       } else {
-        throw HttpException(getMessage(response.statusCode));
+        throw HttpException(getMessage(response));
       }
     } catch (_) {
       rethrow;

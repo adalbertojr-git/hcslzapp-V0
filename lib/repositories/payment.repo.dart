@@ -30,7 +30,7 @@ class PaymentRepo {
             )
             .toList();
       } else {
-        throw HttpException(getMessage(response.statusCode));
+        throw HttpException(getMessage(response));
       }
     } catch (_) {
       rethrow;
@@ -56,7 +56,7 @@ class PaymentRepo {
             )
             .toList();
       } else {
-        throw HttpException(getMessage(response.statusCode));
+        throw HttpException(getMessage(response));
       }
     } catch (_) {
       rethrow;
@@ -85,7 +85,7 @@ class PaymentRepo {
           jsonDecode(response.body),
         );
       } else {
-        throw HttpException(getMessage(response.statusCode));
+        throw HttpException(getMessage(response));
       }
     } catch (_) {
       rethrow;
@@ -115,7 +115,7 @@ class PaymentRepo {
           jsonDecode(response.body),
         );
       } else {
-        throw HttpException(getMessage(response.statusCode));
+        throw HttpException(getMessage(response));
       }
     } catch (_) {
       rethrow;
@@ -136,7 +136,7 @@ class PaymentRepo {
       if (response.statusCode == 204) {
         return response;
       } else {
-        throw HttpException(getMessage(response.statusCode));
+        throw HttpException(getMessage(response));
       }
     } catch (_) {
       rethrow;

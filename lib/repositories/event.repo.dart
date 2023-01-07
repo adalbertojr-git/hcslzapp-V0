@@ -26,7 +26,7 @@ class EventRepo {
       if (response.statusCode == 200) {
         return response.body;
       } else {
-        throw HttpException(getMessage(response.statusCode));
+        throw HttpException(getMessage(response));
       }
     } catch (_) {
       rethrow;
@@ -55,7 +55,7 @@ class EventRepo {
           jsonDecode(response.body),
         );
       } else {
-        throw HttpException(getMessage(response.statusCode));
+        throw HttpException(getMessage(response));
       }
     } catch (_) {
       rethrow;
@@ -84,7 +84,7 @@ class EventRepo {
           jsonDecode(response.body),
         );
       } else {
-        throw HttpException(getMessage(response.statusCode));
+        throw HttpException(getMessage(response));
       }
     } catch (_) {
       rethrow;
@@ -105,7 +105,7 @@ class EventRepo {
       if (response.statusCode == 204) {
         return response;
       } else {
-        throw HttpException(getMessage(response.statusCode));
+        throw HttpException(getMessage(response));
       }
     } catch (_) {
       rethrow;

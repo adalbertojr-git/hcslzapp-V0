@@ -27,7 +27,7 @@ class ForgotPasswordRepo {
           jsonDecode(response.body),
         );
       } else {
-        throw HttpException(getMessage(response.statusCode));
+        throw HttpException(getMessage(response));
       }
     } catch (_) {
       rethrow;
@@ -55,7 +55,7 @@ class ForgotPasswordRepo {
       if (response.statusCode == 200) {
         return response.body;
       } else {
-        throw HttpException(getMessage(response.statusCode));
+        throw HttpException(getMessage(response));
       }
     } catch (_) {
       rethrow;

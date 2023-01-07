@@ -7,7 +7,6 @@ import 'package:hcslzapp/models/month.birthdays.dart';
 import 'package:http/http.dart';
 import '../common/injection.dart';
 import '../common/settings.dart';
-import '../models/api.errors.dart';
 import '../models/token.dart';
 
 const String _associatedUrl = '/associated';
@@ -32,7 +31,7 @@ class AssociatedRepo {
             )
             .toList();
       } else {
-        throw HttpException(getMessage(response.statusCode));
+        throw HttpException(getMessage(response));
       }
     } catch (_) {
       rethrow;
@@ -58,7 +57,7 @@ class AssociatedRepo {
             )
             .toList();
       } else {
-        throw HttpException(getMessage(response.statusCode));
+        throw HttpException(getMessage(response));
       }
     } catch (_) {
       rethrow;
@@ -84,7 +83,7 @@ class AssociatedRepo {
             )
             .toList();
       } else {
-        throw HttpException(getMessage(response.statusCode));
+        throw HttpException(getMessage(response));
       }
     } catch (_) {
       rethrow;
@@ -110,7 +109,7 @@ class AssociatedRepo {
             )
             .toList();
       } else {
-        throw HttpException(getMessage(response.statusCode));
+        throw HttpException(getMessage(response));
       }
     } catch (_) {
       rethrow;
@@ -135,7 +134,7 @@ class AssociatedRepo {
             )
             .toList();
       } else {
-        throw HttpException(getMessage(response.statusCode));
+        throw HttpException(getMessage(response));
       }
     } catch (_) {
       rethrow;
@@ -165,7 +164,7 @@ class AssociatedRepo {
           jsonDecode(response.body),
         );
       } else {
-        throw HttpException(getMessage(response.statusCode));
+        throw HttpException(getMessage(response));
       }
     } catch (_) {
       rethrow;
@@ -191,11 +190,7 @@ class AssociatedRepo {
             )
             .toList();
       } else {
-/*        print(await ApiErrors.fromJson(
-          jsonDecode(response.body),
-        ));*/
-        throw HttpException(getMessage2(response));
-        // throw HttpException(getMessage(response.statusCode));
+        throw HttpException(getMessage(response));
       }
     } catch (_) {
       rethrow;

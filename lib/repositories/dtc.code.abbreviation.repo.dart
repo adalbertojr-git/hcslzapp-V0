@@ -30,7 +30,7 @@ class DtcCodeAbbreviationRepo {
             )
             .toList();
       } else {
-        throw HttpException(getMessage(response.statusCode));
+        throw HttpException(getMessage(response));
       }
     } catch (_) {
       rethrow;
