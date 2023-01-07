@@ -30,7 +30,7 @@ String? getMessage(Response response) {
 final Map<int, String> _statusCodeResponses = {
   //erros no cliente (browser)
   400: 'Erro devido a informações inválidas no formulário',
-  401: 'Erro na autenticação do usuário',
+  401: 'Erro na autenticação.\n Verifique suas credenciais',
   403: 'Cliente sem acesso ao conteúdo do servidor',
   404: 'Pagina web não encontrada',
   405: 'Método HTTP requisitado não suportado',
