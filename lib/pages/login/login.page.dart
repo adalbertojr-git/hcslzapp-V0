@@ -83,36 +83,56 @@ class _MyCustomLoginUIState extends State<MyCustomLoginUI>
           child: Column(
             children: [
               SizedBox(
-                height: 40,
+                height: 100,
               ),
               Expanded(
-                flex: 4,
+                flex: 3,
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
-                    SizedBox(
-                      height: 230,
-                      child: Image.asset(_pathLogoImage),
+                    Container(
+                      child: Text(
+                        'HCSLz App',
+                        style: TextStyle(
+                          fontWeight: FontWeight.normal,
+                          fontSize: 20,
+                        ),
+                      ),
+                      alignment: Alignment.centerLeft,
                     ),
-                    SizedBox(),
-                    MyTextFormField(
-                      textEditingController: _controllerLogin.userLoginCtrl,
-                      label: labelUser,
-                      hint: hintUser,
-                      icon: Icons.person,
-                      inputType: TextInputType.text,
-                      onChanged: _controllerLogin.formController.changeUser,
-                      errorText: _controllerLogin.validateUser(),
+                    Container(
+                      child: Text(
+                        'Seja bem-vindo de volta, harleyro',
+                        style: TextStyle(
+                          fontWeight: FontWeight.normal,
+                          //fontSize: 20,
+                        ),
+                      ),
+                      alignment: Alignment.centerLeft,
                     ),
-                    MyTextFormField(
-                      textEditingController: _controllerLogin.pswLoginCtrl,
-                      label: labelPsw,
-                      hint: hintPsw,
-                      icon: Icons.vpn_key,
-                      inputType: TextInputType.text,
-                      hidden: true,
-                      onChanged: _controllerLogin.formController.changePassword,
-                      errorText: _controllerLogin.validatePassword(),
+                    Column(
+                      children: [
+                        MyTextFormField(
+                          textEditingController: _controllerLogin.userLoginCtrl,
+                          label: labelUser,
+                          hint: hintUser,
+                          icon: Icons.person,
+                          inputType: TextInputType.text,
+                          onChanged: _controllerLogin.formController.changeUser,
+                          errorText: _controllerLogin.validateUser(),
+                        ),
+                        MyTextFormField(
+                          textEditingController: _controllerLogin.pswLoginCtrl,
+                          label: labelPsw,
+                          hint: hintPsw,
+                          icon: Icons.vpn_key,
+                          inputType: TextInputType.text,
+                          hidden: true,
+                          onChanged:
+                              _controllerLogin.formController.changePassword,
+                          errorText: _controllerLogin.validatePassword(),
+                        ),
+                      ],
                     ),
                     SizedBox(),
                     Row(
@@ -189,8 +209,8 @@ class _MyCustomLoginUIState extends State<MyCustomLoginUI>
                             _login();
                           },
                           child: Container(
-                            height: _width * .3,
-                            width: _width * .3,
+                            height: _width * .2,
+                            width: _width * .2,
                             alignment: Alignment.center,
                             decoration: BoxDecoration(
                               color: Colors.white,
@@ -199,7 +219,7 @@ class _MyCustomLoginUIState extends State<MyCustomLoginUI>
                             child: Icon(
                               Icons.login_sharp,
                               color: Colors.black,
-                              size: 60,
+                              size: 50,
                             ),
                           ),
                         ),

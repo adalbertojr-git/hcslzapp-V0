@@ -55,7 +55,7 @@ class _MonthBirthdaysListPageState extends State<MonthBirthdaysListPage> {
                     );
                   } else {
                     if ((snapshot.data?.length)! > 0) {
-                      //_controller.associateds.clear();
+                      _controller.associateds.clear();
                       _controller.associateds.addAll((snapshot.data)!);
                       _controller.associateds.sort(
                         (a, b) => a.date_birth.compareTo(b.date_birth),
@@ -81,7 +81,7 @@ class _MonthBirthdaysListPageState extends State<MonthBirthdaysListPage> {
         children: [
           SizedBox(height: 10),
           Container(
-            height: MediaQuery.of(context).size.height - 150,
+            height: MediaQuery.of(context).size.height - 160,
             child: ListView.builder(
               scrollDirection: Axis.horizontal,
               itemCount: _controller.associateds.length,
@@ -100,21 +100,25 @@ class _MonthBirthdaysListPageState extends State<MonthBirthdaysListPage> {
                         height: 5,
                       ),
                       _photo(_controller.associateds[index]),
-                      Text(
-                        _controller.associateds[index].name,
-                        style: TextStyle(
-                          fontWeight: FontWeight.bold,
-                          fontSize: 16,
-                        ),
-                      ),
                       Container(
                         padding: EdgeInsets.all(5),
                         width: double.infinity,
                         height: MediaQuery.of(context).size.height / 3,
                         child: Card(
                           elevation: 5,
-                          child: Text(
-                            _controller.associateds[index].status,
+                          child: Column(
+                            children: [
+                              Text(
+                                _controller.associateds[index].name,
+                                style: TextStyle(
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 20,
+                                ),
+                              ),
+                              Text(
+                                _controller.associateds[index].status,
+                              ),
+                            ],
                           ),
                         ),
                       ),
