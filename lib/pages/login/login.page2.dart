@@ -2,6 +2,9 @@ import 'package:flutter/material.dart';
 import 'dart:ui';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/services.dart';
+import '../../controllers/login.controller.dart';
+import '../access.request/access.request.add.page.dart';
+import '../password/send.email.page.dart';
 
 class MyHomePage extends StatefulWidget {
   @override
@@ -9,6 +12,14 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
+  final LoginController _controller = LoginController();
+
+  @override
+  void initState() {
+    _controller.init();
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
@@ -23,7 +34,7 @@ class _MyHomePageState extends State<MyHomePage> {
                 SizedBox(
                   height: size.height,
                   child: Image.asset(
-                    'assets/imgs/noite.jpg',
+                    _whatTimeIs(),
                     fit: BoxFit.fill,
                   ),
                 ),
@@ -43,7 +54,7 @@ class _MyHomePageState extends State<MyHomePage> {
                               width: size.width * .9,
                               child: Column(
                                 mainAxisAlignment:
-                                MainAxisAlignment.spaceBetween,
+                                    MainAxisAlignment.spaceBetween,
                                 children: [
                                   Padding(
                                     padding: EdgeInsets.only(
@@ -61,55 +72,54 @@ class _MyHomePageState extends State<MyHomePage> {
                                   ),
                                   component(
                                     Icons.account_circle_outlined,
-                                    'User name...',
+                                    'Usuário...',
                                     false,
                                     false,
-                                  ),
-                                  component(
-                                    Icons.email_outlined,
-                                    'Email...',
-                                    false,
-                                    true,
                                   ),
                                   component(
                                     Icons.lock_outline,
-                                    'Password...',
+                                    'Senha...',
                                     true,
                                     false,
                                   ),
                                   Row(
                                     mainAxisAlignment:
-                                    MainAxisAlignment.spaceAround,
+                                        MainAxisAlignment.spaceAround,
                                     children: [
                                       RichText(
                                         text: TextSpan(
-                                          text: 'Forgotten password!',
+                                          text: 'Esqueci minha senha!',
                                           style: TextStyle(
                                             color: Colors.white,
                                           ),
                                           recognizer: TapGestureRecognizer()
                                             ..onTap = () {
                                               HapticFeedback.lightImpact();
-/*                                              Fluttertoast.showToast(
-                                                msg:
-                                                'Forgotten password! button pressed',
-                                              );*/
+                                              Navigator.push(
+                                                context,
+                                                MaterialPageRoute(
+                                                  builder: (context) => SendEmailPage(),
+                                                ),
+                                              );
                                             },
                                         ),
                                       ),
                                       RichText(
                                         text: TextSpan(
-                                          text: 'Create a new Account',
+                                          text: 'Solicitar acesso',
                                           style: TextStyle(
                                             color: Colors.white,
                                           ),
                                           recognizer: TapGestureRecognizer()
                                             ..onTap = () {
                                               HapticFeedback.lightImpact();
-/*                                              Fluttertoast.showToast(
-                                                msg:
-                                                'Create a new Account button pressed',
-                                              );*/
+                                              Navigator.push(
+                                                context,
+                                                MaterialPageRoute(
+                                                  builder: (context) =>
+                                                      AccessRequestAddPage(),
+                                                ),
+                                              );
                                             },
                                         ),
                                       ),
@@ -166,6 +176,17 @@ class _MyHomePageState extends State<MyHomePage> {
     );
   }
 
+  String _whatTimeIs() {
+    var hour = DateTime.now().hour;
+    if (hour < 12) {
+      return 'assets/imgs/manha.jpg';
+    }
+    if (hour < 17) {
+      return 'assets/imgs/tarde.jpg';
+    }
+    return 'assets/imgs/noite.jpg';
+  }
+
   Widget component(
       IconData icon, String hintText, bool isPassword, bool isEmail) {
     Size size = MediaQuery.of(context).size;
@@ -205,10 +226,10 @@ class _MyHomePageState extends State<MyHomePage> {
 class MyBehavior extends ScrollBehavior {
   @override
   Widget buildViewportChrome(
-      BuildContext context,
-      Widget child,
-      AxisDirection axisDirection,
-      ) {
+    BuildContext context,
+    Widget child,
+    AxisDirection axisDirection,
+  ) {
     return child;
   }
 }
