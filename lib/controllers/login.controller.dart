@@ -35,11 +35,22 @@ abstract class LoginControllerBase with Store {
 
   bool get hasErrors => hasErrorUser || hasErrorPassword;
 
-  bool get hasErrorUser => validateUser() != null;
+  bool get hasErrorUser => validateUser();
 
-  bool get hasErrorPassword => validatePassword() != null;
+  bool get hasErrorPassword => validatePassword();
 
-  String? validateUser() {
+  bool validateUser() {
+    if (userLoginCtrl.text.isEmpty) return true;
+    return false;
+  }
+
+  bool validatePassword() {
+    if (pswLoginCtrl.text.isEmpty) return true;
+    return false;
+  }
+
+
+/*  String? validateUser() {
     const String _labelUserRequired = 'Usuário é obrigatório!!!';
     const String _labelUserLenght =
         'Usuário deve ter no mínimo 4 caracteres!!!';
@@ -62,7 +73,7 @@ abstract class LoginControllerBase with Store {
       return _labelPswLenght;
     }
     return null;
-  }
+  }*/
 }
 
 class FormController extends FormControllerBase with _$FormController {

@@ -105,8 +105,8 @@ class _MyCustomLoginUIState extends State<MyCustomLoginUI>
                           hint: hintUser,
                           icon: Icons.person,
                           inputType: TextInputType.text,
-                          onChanged: _controllerLogin.formController.changeUser,
-                          errorText: _controllerLogin.validateUser(),
+                          //onChanged: _controllerLogin.formController.changeUser,
+                          //errorText: _controllerLogin.validateUser(),
                         ),
                         MyTextFormField(
                           textEditingController: _controllerLogin.pswLoginCtrl,
@@ -115,9 +115,9 @@ class _MyCustomLoginUIState extends State<MyCustomLoginUI>
                           icon: Icons.vpn_key,
                           inputType: TextInputType.text,
                           hidden: true,
-                          onChanged:
-                              _controllerLogin.formController.changePassword,
-                          errorText: _controllerLogin.validatePassword(),
+                          //onChanged:
+                          //    _controllerLogin.formController.changePassword,
+                          //errorText: _controllerLogin.validatePassword(),
                         ),
                       ],
                     ),

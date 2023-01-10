@@ -1,10 +1,13 @@
+import 'package:asuka/snackbars/asuka_snack_bar.dart';
 import 'package:flutter/material.dart';
 import 'dart:ui';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/services.dart';
+import '../../common/messages.dart';
 import '../../controllers/login.controller.dart';
 import '../access.request/access.request.add.page.dart';
 import '../password/send.email.page.dart';
+import 'loading.dart';
 
 class MyHomePage extends StatefulWidget {
   @override
@@ -13,10 +16,12 @@ class MyHomePage extends StatefulWidget {
 
 class _MyHomePageState extends State<MyHomePage> {
   final LoginController _controller = LoginController();
+  List<String> _greeting = [];
 
   @override
   void initState() {
     _controller.init();
+    _greeting = _whatTimeIs();
     super.initState();
   }
 
@@ -34,7 +39,7 @@ class _MyHomePageState extends State<MyHomePage> {
                 SizedBox(
                   height: size.height,
                   child: Image.asset(
-                    _whatTimeIs(),
+                    _greeting[0],
                     fit: BoxFit.fill,
                   ),
                 ),
@@ -62,7 +67,7 @@ class _MyHomePageState extends State<MyHomePage> {
                                       bottom: size.width * .1,
                                     ),
                                     child: Text(
-                                      'SIGN IN',
+                                        _greeting[1] + ', Harleyro!!!',
                                       style: TextStyle(
                                         fontSize: 25,
                                         fontWeight: FontWeight.w600,
@@ -70,17 +75,17 @@ class _MyHomePageState extends State<MyHomePage> {
                                       ),
                                     ),
                                   ),
-                                  component(
+                                  _component(
                                     Icons.account_circle_outlined,
                                     'Usuário...',
                                     false,
-                                    false,
+                                    _controller.userLoginCtrl,
                                   ),
-                                  component(
+                                  _component(
                                     Icons.lock_outline,
                                     'Senha...',
                                     true,
-                                    false,
+                                    _controller.pswLoginCtrl,
                                   ),
                                   Row(
                                     mainAxisAlignment:
@@ -98,7 +103,8 @@ class _MyHomePageState extends State<MyHomePage> {
                                               Navigator.push(
                                                 context,
                                                 MaterialPageRoute(
-                                                  builder: (context) => SendEmailPage(),
+                                                  builder: (context) =>
+                                                      SendEmailPage(),
                                                 ),
                                               );
                                             },
@@ -126,32 +132,30 @@ class _MyHomePageState extends State<MyHomePage> {
                                     ],
                                   ),
                                   SizedBox(height: size.width * .3),
-                                  InkWell(
-                                    splashColor: Colors.transparent,
-                                    highlightColor: Colors.transparent,
-                                    onTap: () {
-                                      HapticFeedback.lightImpact();
-/*                                      Fluttertoast.showToast(
-                                        msg: 'Sign-In button pressed',
-                                      );*/
-                                    },
-                                    child: Container(
-                                      margin: EdgeInsets.only(
-                                        bottom: size.width * .05,
-                                      ),
-                                      height: size.width / 8,
-                                      width: size.width / 1.25,
-                                      alignment: Alignment.center,
-                                      decoration: BoxDecoration(
-                                        color: Colors.black.withOpacity(.1),
-                                        borderRadius: BorderRadius.circular(20),
-                                      ),
-                                      child: Text(
-                                        'Sing-In',
-                                        style: TextStyle(
+                                  Center(
+                                    child: InkWell(
+                                      splashColor: Colors.transparent,
+                                      highlightColor: Colors.transparent,
+                                      onTap: () {
+                                        HapticFeedback.lightImpact();
+                                        _login();
+                                      },
+                                      child: Container(
+                                        height:
+                                            MediaQuery.of(context).size.width *
+                                                .2,
+                                        width:
+                                            MediaQuery.of(context).size.width *
+                                                .2,
+                                        alignment: Alignment.center,
+                                        decoration: BoxDecoration(
                                           color: Colors.white,
-                                          fontSize: 20,
-                                          fontWeight: FontWeight.w600,
+                                          shape: BoxShape.circle,
+                                        ),
+                                        child: Icon(
+                                          Icons.login_sharp,
+                                          color: Colors.black,
+                                          size: 40,
                                         ),
                                       ),
                                     ),
@@ -176,19 +180,39 @@ class _MyHomePageState extends State<MyHomePage> {
     );
   }
 
-  String _whatTimeIs() {
+  List<String> _whatTimeIs() {
     var hour = DateTime.now().hour;
     if (hour < 12) {
-      return 'assets/imgs/manha.jpg';
+      return ['assets/imgs/manha.jpg', 'Bom dia'];
     }
     if (hour < 17) {
-      return 'assets/imgs/tarde.jpg';
+      return ['assets/imgs/tarde.jpg', 'Boa tarde'];
     }
-    return 'assets/imgs/noite.jpg';
+    return ['assets/imgs/noite.jpg', 'Boa noite'];
   }
 
-  Widget component(
-      IconData icon, String hintText, bool isPassword, bool isEmail) {
+  _login() async {
+    if (_controller.hasErrors) {
+      AsukaSnackbar.alert(REQUIRED).show();
+    } else {
+      Navigator.push(
+        context,
+        MaterialPageRoute(
+          builder: (context) => Loading(
+            _controller.userLoginCtrl.text,
+            _controller.pswLoginCtrl.text,
+          ),
+        ),
+      );
+    }
+  }
+
+  Widget _component(
+    IconData icon,
+    String hintText,
+    bool isPassword,
+    TextEditingController controller,
+  ) {
     Size size = MediaQuery.of(context).size;
     return Container(
       height: size.width / 8,
@@ -204,7 +228,7 @@ class _MyHomePageState extends State<MyHomePage> {
           color: Colors.white.withOpacity(.9),
         ),
         obscureText: isPassword,
-        keyboardType: isEmail ? TextInputType.emailAddress : TextInputType.text,
+        keyboardType: TextInputType.text,
         decoration: InputDecoration(
           prefixIcon: Icon(
             icon,
@@ -218,6 +242,7 @@ class _MyHomePageState extends State<MyHomePage> {
             color: Colors.white.withOpacity(.5),
           ),
         ),
+        controller: controller,
       ),
     );
   }
