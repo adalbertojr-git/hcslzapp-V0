@@ -11,6 +11,7 @@ import '../access.request/access.request.add.page.dart';
 import '../password/send.email.page.dart';
 import 'loading.dart';
 
+const String _labelAppTitle = 'HCSlz App';
 const String _pathLogoImage = 'assets/imgs/logo.png';
 const String _labelForgotPsw = 'Esqueci minha senha';
 const String _labelFirstAcc = 'Solicitar acesso';
@@ -83,35 +84,21 @@ class _MyCustomLoginUIState extends State<MyCustomLoginUI>
           child: Column(
             children: [
               SizedBox(
-                height: 100,
+                height: 10,
               ),
               Expanded(
-                flex: 3,
+                flex: 2,
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
-                    Container(
-                      child: Text(
-                        'HCSLz App',
-                        style: TextStyle(
-                          fontWeight: FontWeight.normal,
-                          fontSize: 20,
-                        ),
-                      ),
-                      alignment: Alignment.centerLeft,
-                    ),
-                    Container(
-                      child: Text(
-                        'Seja bem-vindo de volta, harleyro',
-                        style: TextStyle(
-                          fontWeight: FontWeight.normal,
-                          //fontSize: 20,
-                        ),
-                      ),
-                      alignment: Alignment.centerLeft,
-                    ),
                     Column(
                       children: [
+                        Center(
+                          child: SizedBox(
+                            height: 180.0,
+                            child: Image.asset(_pathLogoImage),
+                          ),
+                        ),
                         MyTextFormField(
                           textEditingController: _controllerLogin.userLoginCtrl,
                           label: labelUser,
@@ -134,7 +121,6 @@ class _MyCustomLoginUIState extends State<MyCustomLoginUI>
                         ),
                       ],
                     ),
-                    SizedBox(),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceAround,
                       children: [
@@ -176,7 +162,7 @@ class _MyCustomLoginUIState extends State<MyCustomLoginUI>
                 ),
               ),
               Expanded(
-                flex: 3,
+                flex: 2,
                 child: Stack(
                   children: [
                     Center(
