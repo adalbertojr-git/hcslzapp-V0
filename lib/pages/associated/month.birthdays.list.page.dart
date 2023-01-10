@@ -87,7 +87,7 @@ class _MonthBirthdaysListPageState extends State<MonthBirthdaysListPage> {
               itemCount: _controller.associateds.length,
               itemBuilder: (context, index) {
                 return Container(
-                  width: 320,
+                  width: MediaQuery.of(context).size.width - 50,
                   margin: EdgeInsets.symmetric(horizontal: 10),
                   decoration: BoxDecoration(
                     color: Colors.deepOrange[300],
@@ -109,19 +109,42 @@ class _MonthBirthdaysListPageState extends State<MonthBirthdaysListPage> {
                           child: Column(
                             children: [
                               Text(
-                                _controller.associateds[index].name,
+                                'O Harley Club deseja a você,\n',
                                 style: TextStyle(
                                   fontWeight: FontWeight.bold,
                                   fontSize: 20,
                                 ),
                               ),
                               Text(
-                                _controller.associateds[index].status,
+                                _controller.associateds[index].name,
+                                style: TextStyle(
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 25,
+                                ),
+                              ),
+                              Text(
+                                '\nMuita saúde e kms de felicidades!!!',
+                                style: TextStyle(
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 20,
+                                ),
                               ),
                             ],
                           ),
                         ),
                       ),
+                      Container(
+                        child: Text(
+                          'Dia: ' +
+                              _controller.associateds[index].date_birth
+                                  .toString()
+                                  .substring(0, 2),
+                          style: TextStyle(
+                            fontWeight: FontWeight.bold,
+                            fontSize: 17,
+                          ),
+                        ),
+                      )
                     ],
                   ),
                 );
@@ -155,53 +178,6 @@ class _MonthBirthdaysListPageState extends State<MonthBirthdaysListPage> {
               File(_pathNoImage),
             ) as ImageProvider,
       fit: BoxFit.fill);
-
-  _widgets2() => Column(
-        children: [
-          SizedBox(height: 10),
-          Expanded(
-            child: Observer(
-              builder: (_) => ListView.separated(
-                padding: EdgeInsets.symmetric(horizontal: 15),
-                shrinkWrap: true,
-                itemCount: _controller.associateds.length,
-                itemBuilder: (_, int i) {
-                  return Container(
-                    decoration: BoxDecoration(
-                      color: isToday(_controller.associateds[i].date_birth)
-                          ? Colors.green[800]
-                          : Colors.deepOrange[300],
-                      shape: BoxShape.rectangle,
-                      borderRadius: BorderRadius.circular(20.0),
-                    ),
-                    child: ListTile(
-                      title: Text(
-                        _controller.associateds[i].name,
-                        style: TextStyle(
-                          fontWeight: FontWeight.bold,
-                        ),
-                      ),
-                      subtitle: Text('Data de Nascimento: ' +
-                          (_controller.associateds[i].date_birth) +
-                          '\n' +
-                          'Status: ' +
-                          _controller.associateds[i].status),
-                      leading: CircleAvatar(
-                        child: Icon(
-                          Icons.cake,
-                          color: Colors.blue,
-                        ),
-                        backgroundColor: Colors.white,
-                      ),
-                    ),
-                  );
-                },
-                separatorBuilder: (_, int index) => const Divider(),
-              ),
-            ),
-          ),
-        ],
-      );
 
   bool isToday(String dateBirth) {
     var now = DateTime.now();

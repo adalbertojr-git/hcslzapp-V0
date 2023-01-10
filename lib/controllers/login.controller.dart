@@ -9,23 +9,17 @@ part 'login.controller.g.dart';
 class LoginController = LoginControllerBase with _$LoginController;
 
 abstract class LoginControllerBase with Store {
-  var formController;
+  @observable
+  var userCtrl = TextEditingController();
 
   @observable
-  var userLoginCtrl = TextEditingController();
-
-  @observable
-  var pswLoginCtrl = TextEditingController();
+  var pswCtrl = TextEditingController();
 
   @observable
   ObservableFuture<Token>? token;
 
   @observable
   LoginRepo _loginRepo = LoginRepo();
-
-  init() {
-    formController = FormController(user: '', password: '');
-  }
 
   Future<Token> authenticate(String user, String psw) =>
       _loginRepo.authenticate(
@@ -40,62 +34,12 @@ abstract class LoginControllerBase with Store {
   bool get hasErrorPassword => validatePassword();
 
   bool validateUser() {
-    if (userLoginCtrl.text.isEmpty) return true;
+    if (userCtrl.text.isEmpty) return true;
     return false;
   }
 
   bool validatePassword() {
-    if (pswLoginCtrl.text.isEmpty) return true;
+    if (pswCtrl.text.isEmpty) return true;
     return false;
   }
-
-
-/*  String? validateUser() {
-    const String _labelUserRequired = 'Usuário é obrigatório!!!';
-    const String _labelUserLenght =
-        'Usuário deve ter no mínimo 4 caracteres!!!';
-
-    if (formController.user.isEmpty) {
-      return _labelUserRequired;
-    } else if (formController.user.toString().length < 4) {
-      return _labelUserLenght;
-    }
-    return null;
-  }
-
-  String? validatePassword() {
-    const String _labelPswRequired = 'Senha é obrigatória!!!';
-    const String _labelPswLenght = 'Senha deve ter no mínimo 6 caracteres!!!';
-
-    if (formController.password.isEmpty) {
-      return _labelPswRequired;
-    } else if (formController.password.toString().length < 6) {
-      return _labelPswLenght;
-    }
-    return null;
-  }*/
-}
-
-class FormController extends FormControllerBase with _$FormController {
-  FormController({
-    String? user,
-    String? password,
-  }) {
-    super.user = user;
-    super.password = password;
-  }
-}
-
-abstract class FormControllerBase with Store {
-  @observable
-  String? user;
-
-  @observable
-  String? password;
-
-  @action
-  changeUser(String value) => user = value;
-
-  @action
-  changePassword(String value) => password = value;
 }

@@ -9,35 +9,35 @@ part of 'login.controller.dart';
 // ignore_for_file: non_constant_identifier_names, unnecessary_brace_in_string_interps, unnecessary_lambdas, prefer_expression_function_bodies, lines_longer_than_80_chars, avoid_as, avoid_annotating_with_dynamic, no_leading_underscores_for_local_identifiers
 
 mixin _$LoginController on LoginControllerBase, Store {
-  late final _$userLoginCtrlAtom =
-      Atom(name: 'LoginControllerBase.userLoginCtrl', context: context);
+  late final _$userCtrlAtom =
+      Atom(name: 'LoginControllerBase.userCtrl', context: context);
 
   @override
-  TextEditingController get userLoginCtrl {
-    _$userLoginCtrlAtom.reportRead();
-    return super.userLoginCtrl;
+  TextEditingController get userCtrl {
+    _$userCtrlAtom.reportRead();
+    return super.userCtrl;
   }
 
   @override
-  set userLoginCtrl(TextEditingController value) {
-    _$userLoginCtrlAtom.reportWrite(value, super.userLoginCtrl, () {
-      super.userLoginCtrl = value;
+  set userCtrl(TextEditingController value) {
+    _$userCtrlAtom.reportWrite(value, super.userCtrl, () {
+      super.userCtrl = value;
     });
   }
 
-  late final _$pswLoginCtrlAtom =
-      Atom(name: 'LoginControllerBase.pswLoginCtrl', context: context);
+  late final _$pswCtrlAtom =
+      Atom(name: 'LoginControllerBase.pswCtrl', context: context);
 
   @override
-  TextEditingController get pswLoginCtrl {
-    _$pswLoginCtrlAtom.reportRead();
-    return super.pswLoginCtrl;
+  TextEditingController get pswCtrl {
+    _$pswCtrlAtom.reportRead();
+    return super.pswCtrl;
   }
 
   @override
-  set pswLoginCtrl(TextEditingController value) {
-    _$pswLoginCtrlAtom.reportWrite(value, super.pswLoginCtrl, () {
-      super.pswLoginCtrl = value;
+  set pswCtrl(TextEditingController value) {
+    _$pswCtrlAtom.reportWrite(value, super.pswCtrl, () {
+      super.pswCtrl = value;
     });
   }
 
@@ -76,76 +76,9 @@ mixin _$LoginController on LoginControllerBase, Store {
   @override
   String toString() {
     return '''
-userLoginCtrl: ${userLoginCtrl},
-pswLoginCtrl: ${pswLoginCtrl},
+userCtrl: ${userCtrl},
+pswCtrl: ${pswCtrl},
 token: ${token}
-    ''';
-  }
-}
-
-mixin _$FormController on FormControllerBase, Store {
-  late final _$userAtom =
-      Atom(name: 'FormControllerBase.user', context: context);
-
-  @override
-  String? get user {
-    _$userAtom.reportRead();
-    return super.user;
-  }
-
-  @override
-  set user(String? value) {
-    _$userAtom.reportWrite(value, super.user, () {
-      super.user = value;
-    });
-  }
-
-  late final _$passwordAtom =
-      Atom(name: 'FormControllerBase.password', context: context);
-
-  @override
-  String? get password {
-    _$passwordAtom.reportRead();
-    return super.password;
-  }
-
-  @override
-  set password(String? value) {
-    _$passwordAtom.reportWrite(value, super.password, () {
-      super.password = value;
-    });
-  }
-
-  late final _$FormControllerBaseActionController =
-      ActionController(name: 'FormControllerBase', context: context);
-
-  @override
-  dynamic changeUser(String value) {
-    final _$actionInfo = _$FormControllerBaseActionController.startAction(
-        name: 'FormControllerBase.changeUser');
-    try {
-      return super.changeUser(value);
-    } finally {
-      _$FormControllerBaseActionController.endAction(_$actionInfo);
-    }
-  }
-
-  @override
-  dynamic changePassword(String value) {
-    final _$actionInfo = _$FormControllerBaseActionController.startAction(
-        name: 'FormControllerBase.changePassword');
-    try {
-      return super.changePassword(value);
-    } finally {
-      _$FormControllerBaseActionController.endAction(_$actionInfo);
-    }
-  }
-
-  @override
-  String toString() {
-    return '''
-user: ${user},
-password: ${password}
     ''';
   }
 }
