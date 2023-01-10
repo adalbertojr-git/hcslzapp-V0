@@ -184,7 +184,7 @@ class _MyCustomLoginUIState extends State<MyCustomLoginUI> {
     if (hour < 12) {
       return ['assets/imgs/manha.jpg', 'Bom dia'];
     }
-    if (hour < 17) {
+    if (hour < 18) {
       return ['assets/imgs/tarde.jpg', 'Boa tarde'];
     }
     return ['assets/imgs/noite.jpg', 'Boa noite'];

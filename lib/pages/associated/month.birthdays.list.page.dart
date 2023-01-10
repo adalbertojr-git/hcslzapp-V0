@@ -91,8 +91,8 @@ class _MonthBirthdaysListPageState extends State<MonthBirthdaysListPage> {
                   margin: EdgeInsets.symmetric(horizontal: 10),
                   decoration: BoxDecoration(
                     color: _isToday(_controller.associateds[index].date_birth)
-                        ? Colors.blue[300]
-                        : Colors.deepOrange[300],
+                        ? Colors.deepOrange[300]
+                        : Colors.deepOrange[100],
                     shape: BoxShape.rectangle,
                     borderRadius: BorderRadius.circular(10.0),
                   ),
@@ -114,7 +114,7 @@ class _MonthBirthdaysListPageState extends State<MonthBirthdaysListPage> {
                                 _isToday(_controller
                                         .associateds[index].date_birth)
                                     ? 'O Harley Club deseja a você,\n'
-                                    : 'Está chagando o dia de celebrar \n',
+                                    : 'Está chegando o dia de celebrar\n',
                                 style: TextStyle(
                                   fontWeight: FontWeight.bold,
                                   fontSize: 18,
