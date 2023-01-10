@@ -107,6 +107,11 @@ flutter:
     - assets/imgs/sobre.jpeg
     - assets/imgs/dependentes.png
     - assets/imgs/motocicletas.png
+
+    - assets/imgs/manha.jpg
+    - assets/imgs/tarde.jpg
+    - assets/imgs/noite.jpg
+
     - assets/anims/splash.flr
 
 #    #

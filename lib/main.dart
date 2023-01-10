@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:hcslzapp/controllers/app.controller.dart';
 import 'package:hcslzapp/pages/login/login.page.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:hcslzapp/pages/login/login.page2.dart';
 import 'common/injection.dart';
 
 const _titleAppBar = 'HCSlz App';
@@ -36,7 +37,7 @@ class HCSlzApp extends StatelessWidget {
             //This line is needed for the Hero widget to work
           ],
           debugShowCheckedModeBanner: false,
-          home: MyCustomLoginUI(),
+          home: MyHomePage(), //MyCustomLoginUI(),
           title: _titleAppBar,
           theme: ThemeData(
             appBarTheme: AppBarTheme(
