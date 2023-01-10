@@ -90,7 +90,9 @@ class _MonthBirthdaysListPageState extends State<MonthBirthdaysListPage> {
                   width: MediaQuery.of(context).size.width - 50,
                   margin: EdgeInsets.symmetric(horizontal: 10),
                   decoration: BoxDecoration(
-                    color: Colors.deepOrange[300],
+                    color: _isToday(_controller.associateds[index].date_birth)
+                        ? Colors.blue[300]
+                        : Colors.deepOrange[300],
                     shape: BoxShape.rectangle,
                     borderRadius: BorderRadius.circular(10.0),
                   ),
@@ -109,7 +111,10 @@ class _MonthBirthdaysListPageState extends State<MonthBirthdaysListPage> {
                           child: Column(
                             children: [
                               Text(
-                                'O Harley Club deseja a você,\n',
+                                _isToday(_controller
+                                        .associateds[index].date_birth)
+                                    ? 'O Harley Club deseja a você,\n'
+                                    : 'Está chagando o dia de celebrar \n',
                                 style: TextStyle(
                                   fontWeight: FontWeight.bold,
                                   fontSize: 18,
@@ -123,7 +128,12 @@ class _MonthBirthdaysListPageState extends State<MonthBirthdaysListPage> {
                                 ),
                               ),
                               Text(
-                                '\nMuita saúde e kms de felicidades!!!',
+                                _controller.associateds[index].ndays == 0
+                                    ? '\nMuita saúde e kms de felicidades!!!'
+                                    : '\n' +
+                                        _controller.associateds[index].ndays
+                                            .toString() +
+                                        'dia(s)',
                                 style: TextStyle(
                                   fontWeight: FontWeight.bold,
                                   fontSize: 18,
@@ -179,7 +189,7 @@ class _MonthBirthdaysListPageState extends State<MonthBirthdaysListPage> {
             ) as ImageProvider,
       fit: BoxFit.fill);
 
-  bool isToday(String dateBirth) {
+  bool _isToday(String dateBirth) {
     var now = DateTime.now();
     var formatter = DateFormat('dd/MM');
     String formattedDate = formatter.format(now);

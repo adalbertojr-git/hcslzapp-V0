@@ -8,6 +8,7 @@ class MonthBirthdays {
   // ignore: non_constant_identifier_names
   final String associated_type;
   final String photoUrl;
+  final int ndays;
 
   MonthBirthdays({
     required this.name,
@@ -17,6 +18,7 @@ class MonthBirthdays {
     // ignore: non_constant_identifier_names
     required this.associated_type,
     required this.photoUrl,
+    required this.ndays,
   });
 
   MonthBirthdays.fromJson(Map<String, dynamic> json)
@@ -24,7 +26,8 @@ class MonthBirthdays {
         date_birth = json['date_birth'],
         status = json['status'],
         associated_type = json['associated_type'],
-        photoUrl = json['photoUrl'];
+        photoUrl = json['photoUrl'],
+        ndays = json['ndays'];
 
   Map<String, dynamic> toJson() => {
         'name': name,
@@ -32,5 +35,6 @@ class MonthBirthdays {
         'status': status,
         'associated_type': associated_type,
         'photoUrl': photoUrl,
+        'ndays': ndays,
       };
 }
