@@ -112,7 +112,7 @@ class _MonthBirthdaysListPageState extends State<MonthBirthdaysListPage> {
                                 'O Harley Club deseja a você,\n',
                                 style: TextStyle(
                                   fontWeight: FontWeight.bold,
-                                  fontSize: 20,
+                                  fontSize: 18,
                                 ),
                               ),
                               Text(
@@ -126,7 +126,7 @@ class _MonthBirthdaysListPageState extends State<MonthBirthdaysListPage> {
                                 '\nMuita saúde e kms de felicidades!!!',
                                 style: TextStyle(
                                   fontWeight: FontWeight.bold,
-                                  fontSize: 20,
+                                  fontSize: 18,
                                 ),
                               ),
                             ],
