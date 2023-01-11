@@ -66,7 +66,7 @@ class _MyCustomLoginUIState extends State<MyCustomLoginUI> {
                                       bottom: size.width * .1,
                                     ),
                                     child: Text(
-                                        _greeting[1] + ', Harleyro!!!',
+                                      _greeting[1] + ', Harleyro!!!',
                                       style: TextStyle(
                                         fontSize: 25,
                                         fontWeight: FontWeight.w300,
@@ -166,7 +166,9 @@ class _MyCustomLoginUIState extends State<MyCustomLoginUI> {
                         ),
                       ),
                       Expanded(
-                        child: SizedBox(),
+                        child: SizedBox(
+                          height: 10,
+                        ),
                       ),
                     ],
                   ),
@@ -182,7 +184,7 @@ class _MyCustomLoginUIState extends State<MyCustomLoginUI> {
   List<String> _whatTimeIs() {
     var hour = DateTime.now().hour;
     if (hour < 12) {
-       return ['assets/imgs/manha.jpg', 'Bom dia'];
+      return ['assets/imgs/manha.jpg', 'Bom dia'];
     }
     if (hour < 18) {
       return ['assets/imgs/tarde.jpg', 'Boa tarde'];

@@ -90,59 +90,106 @@ class _PartnershipListAssociatedPageState
         ),
       );
 
-  _widgets() => Column(
-        children: [
-          Expanded(
-            child: Observer(
-              builder: (_) => ListView(
-                children: <Widget>[
-                  Container(
-                    height: PAGER_HEIGHT,
-                    child: NotificationListener<ScrollNotification>(
-                      onNotification: (ScrollNotification notification) {
-                        if (notification is ScrollUpdateNotification) {
-                          setState(() {
-                            _controller.notificationListener();
-                          });
-                        }
-                        return false;
-                      },
-                      child: PageView.builder(
-                        onPageChanged: (pos) {
-                          _controller.onPageChanged(pos);
-                        },
-                        physics: BouncingScrollPhysics(),
-                        controller: _controller.pageController,
-                        itemCount: _controller.activePartnerships.length,
-                        itemBuilder: (context, index) {
-                          final scale = max(
-                            SCALE_FRACTION,
-                            (FULL_SCALE - (index - _controller.page).abs()) +
-                                viewPortFraction,
-                          );
-                          return circleOffer(index, scale);
-                        },
-                      ),
-                    ),
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.all(5.0),
-                    child: Text(
-                      _controller
-                          .activePartnerships[_controller.currentPage].partner,
-                      textAlign: TextAlign.center,
-                      style: TextStyle(
-                        fontSize: 25,
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
-                  ),
-                  buildDetail()
-                ],
+  _widgets() => Observer(
+        builder: (_) => ListView(
+          children: <Widget>[
+            Container(
+              height: PAGER_HEIGHT,
+              child: NotificationListener<ScrollNotification>(
+                onNotification: (ScrollNotification notification) {
+                  if (notification is ScrollUpdateNotification) {
+                    setState(() {
+                      _controller.notificationListener();
+                    });
+                  }
+                  return false;
+                },
+                child: PageView.builder(
+                  onPageChanged: (pos) {
+                    _controller.onPageChanged(pos);
+                  },
+                  physics: BouncingScrollPhysics(),
+                  controller: _controller.pageController,
+                  itemCount: _controller.activePartnerships.length,
+                  itemBuilder: (context, index) {
+                    final scale = max(
+                      SCALE_FRACTION,
+                      (FULL_SCALE - (index - _controller.page).abs()) +
+                          viewPortFraction,
+                    );
+                    return circleOffer(index, scale);
+                  },
+                ),
               ),
             ),
-          ),
-        ],
+            Padding(
+              padding: const EdgeInsets.all(5.0),
+              child: Text(
+                _controller.activePartnerships[_controller.currentPage].partner,
+                textAlign: TextAlign.center,
+                style: TextStyle(
+                  fontSize: 25,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+            ),
+            Card(
+              elevation: 5,
+              color: Colors.deepOrange[300],
+              margin: EdgeInsets.symmetric(
+                horizontal: 20,
+              ),
+              child: ListTile(
+                isThreeLine: true,
+                title: Text(
+                  _controller
+                      .activePartnerships[_controller.currentPage].partner,
+                ),
+                subtitle: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      'Endereço: ' +
+                          _controller
+                              .activePartnerships[_controller.currentPage]
+                              .address,
+                    ),
+                    Text(
+                      'Telefone(s): ' +
+                          _controller
+                              .activePartnerships[_controller.currentPage]
+                              .phone1 +
+                          ' - ' +
+                          _controller
+                              .activePartnerships[_controller.currentPage]
+                              .phone2,
+                    ),
+                  ],
+                ),
+              ),
+            ),
+            SizedBox(
+              height: 10,
+            ),
+            Center(
+              child: Text(
+                'Promoção:',
+                style: TextStyle(
+                  fontSize: 16.0,
+                ),
+              ),
+            ),
+            Center(
+              child: Text(
+                _controller
+                    .activePartnerships[_controller.currentPage].promotion,
+                style: TextStyle(
+                  fontSize: 16.0,
+                ),
+              ),
+            ),
+          ],
+        ),
       );
 
   Widget circleOffer(int index, double scale) => Observer(
@@ -173,63 +220,4 @@ class _PartnershipListAssociatedPageState
               File(_pathNoImage),
             ) as ImageProvider,
       fit: BoxFit.contain);
-
-  Widget buildDetail() => Observer(
-        builder: (_) => Container(
-          padding: EdgeInsets.symmetric(horizontal: 10),
-          height: MediaQuery.of(context).size.height,
-          child: ListView(
-            children: <Widget>[
-              Card(
-                elevation: 5,
-                color: Colors.deepOrange[300],
-                child: ListTile(
-                  isThreeLine: true,
-                  title: Text(
-                    _controller
-                        .activePartnerships[_controller.currentPage].partner,
-                  ),
-                  subtitle: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(
-                        'Endereço: ' +
-                            _controller
-                                .activePartnerships[_controller.currentPage]
-                                .address,
-                      ),
-                      Text(
-                        'Telefone(s): ' +
-                            _controller
-                                .activePartnerships[_controller.currentPage]
-                                .phone1 +
-                            ' - ' +
-                            _controller
-                                .activePartnerships[_controller.currentPage]
-                                .phone2,
-                      ),
-                    ],
-                  ),
-                ),
-              ),
-              Container(
-                height: MediaQuery.of(context).size.height - 570,
-                child: Card(
-                  elevation: 5,
-                  color: Colors.deepOrange[300],
-                  child: Center(
-                    child: Text(
-                      _controller.activePartnerships[_controller.currentPage]
-                          .promotion,
-                      style: TextStyle(
-                        fontSize: 20.0,
-                      ),
-                    ),
-                  ),
-                ),
-              ),
-            ],
-          ),
-        ),
-      );
 }
