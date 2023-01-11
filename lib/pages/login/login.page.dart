@@ -39,7 +39,7 @@ class _MyCustomLoginUIState extends State<MyCustomLoginUI> {
                   height: size.height,
                   child: Image.asset(
                     _greeting[0],
-                    fit: BoxFit.fill,
+                    fit: BoxFit.fitHeight,
                   ),
                 ),
                 Center(
@@ -182,7 +182,7 @@ class _MyCustomLoginUIState extends State<MyCustomLoginUI> {
   List<String> _whatTimeIs() {
     var hour = DateTime.now().hour;
     if (hour < 12) {
-      return ['assets/imgs/manha.jpg', 'Bom dia'];
+       return ['assets/imgs/manha.jpg', 'Bom dia'];
     }
     if (hour < 18) {
       return ['assets/imgs/tarde.jpg', 'Boa tarde'];
