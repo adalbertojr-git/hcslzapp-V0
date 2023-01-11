@@ -28,153 +28,157 @@ class _MyCustomLoginUIState extends State<MyCustomLoginUI> {
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
-    return Scaffold(
-      body: ScrollConfiguration(
-        behavior: MyBehavior(),
-        child: SingleChildScrollView(
-          child: SizedBox(
-            height: size.height,
-            child: Stack(
-              children: [
-                SizedBox(
-                  height: size.height,
-                  child: Image.asset(
-                    _greeting[0],
-                    fit: BoxFit.fitHeight,
+    return Observer(
+      builder: (_) => Scaffold(
+        body: ScrollConfiguration(
+          behavior: MyBehavior(),
+          child: SingleChildScrollView(
+            child: SizedBox(
+              height: size.height,
+              child: Stack(
+                children: [
+                  SizedBox(
+                    height: size.height,
+                    child: Image.asset(
+                      _greeting[0],
+                      fit: BoxFit.fitHeight,
+                    ),
                   ),
-                ),
-                Center(
-                  child: Column(
-                    children: [
-                      Expanded(
-                        child: SizedBox(),
-                      ),
-                      Expanded(
-                        flex: 7,
-                        child: ClipRRect(
-                          borderRadius: BorderRadius.circular(30),
-                          child: BackdropFilter(
-                            filter: ImageFilter.blur(sigmaY: 25, sigmaX: 25),
-                            child: SizedBox(
-                              width: size.width * .9,
-                              child: Column(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
-                                children: [
-                                  Padding(
-                                    padding: EdgeInsets.only(
-                                      top: size.width * .15,
-                                      bottom: size.width * .1,
-                                    ),
-                                    child: Text(
-                                      _greeting[1] + ', Harleyro!!!',
-                                      style: TextStyle(
-                                        fontSize: 25,
-                                        fontWeight: FontWeight.w300,
-                                        color: Colors.white.withOpacity(.8),
+                  Center(
+                    child: Column(
+                      children: [
+                        Expanded(
+                          child: SizedBox(),
+                        ),
+                        Expanded(
+                          flex: 7,
+                          child: ClipRRect(
+                            borderRadius: BorderRadius.circular(30),
+                            child: BackdropFilter(
+                              filter: ImageFilter.blur(sigmaY: 25, sigmaX: 25),
+                              child: SizedBox(
+                                width: size.width * .9,
+                                child: Column(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
+                                  children: [
+                                    Padding(
+                                      padding: EdgeInsets.only(
+                                        top: size.width * .15,
+                                        bottom: size.width * .1,
+                                      ),
+                                      child: Text(
+                                        _greeting[1] + ', Harleyro!!!',
+                                        style: TextStyle(
+                                          fontSize: 25,
+                                          fontWeight: FontWeight.w300,
+                                          color: Colors.white.withOpacity(.8),
+                                        ),
                                       ),
                                     ),
-                                  ),
-                                  _component(
-                                    Icons.account_circle_outlined,
-                                    'Usuário...',
-                                    false,
-                                    _controller.userCtrl,
-                                  ),
-                                  _component(
-                                    Icons.lock_outline,
-                                    'Senha...',
-                                    true,
-                                    _controller.pswCtrl,
-                                  ),
-                                  Row(
-                                    mainAxisAlignment:
-                                        MainAxisAlignment.spaceAround,
-                                    children: [
-                                      RichText(
-                                        text: TextSpan(
-                                          text: 'Esqueci minha senha!',
-                                          style: TextStyle(
-                                            color: Colors.white,
+                                    _component(
+                                      Icons.account_circle_outlined,
+                                      'Usuário...',
+                                      false,
+                                      _controller.userCtrl,
+                                    ),
+                                    _component(
+                                      Icons.lock_outline,
+                                      'Senha...',
+                                      true,
+                                      _controller.pswCtrl,
+                                    ),
+                                    Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.spaceAround,
+                                      children: [
+                                        RichText(
+                                          text: TextSpan(
+                                            text: 'Esqueci minha senha!',
+                                            style: TextStyle(
+                                              color: Colors.white,
+                                            ),
+                                            recognizer: TapGestureRecognizer()
+                                              ..onTap = () {
+                                                HapticFeedback.lightImpact();
+                                                Navigator.push(
+                                                  context,
+                                                  MaterialPageRoute(
+                                                    builder: (context) =>
+                                                        SendEmailPage(),
+                                                  ),
+                                                );
+                                              },
                                           ),
-                                          recognizer: TapGestureRecognizer()
-                                            ..onTap = () {
-                                              HapticFeedback.lightImpact();
-                                              Navigator.push(
-                                                context,
-                                                MaterialPageRoute(
-                                                  builder: (context) =>
-                                                      SendEmailPage(),
-                                                ),
-                                              );
-                                            },
                                         ),
-                                      ),
-                                      RichText(
-                                        text: TextSpan(
-                                          text: 'Solicitar acesso',
-                                          style: TextStyle(
-                                            color: Colors.white,
+                                        RichText(
+                                          text: TextSpan(
+                                            text: 'Solicitar acesso',
+                                            style: TextStyle(
+                                              color: Colors.white,
+                                            ),
+                                            recognizer: TapGestureRecognizer()
+                                              ..onTap = () {
+                                                HapticFeedback.lightImpact();
+                                                Navigator.push(
+                                                  context,
+                                                  MaterialPageRoute(
+                                                    builder: (context) =>
+                                                        AccessRequestAddPage(),
+                                                  ),
+                                                );
+                                              },
                                           ),
-                                          recognizer: TapGestureRecognizer()
-                                            ..onTap = () {
-                                              HapticFeedback.lightImpact();
-                                              Navigator.push(
-                                                context,
-                                                MaterialPageRoute(
-                                                  builder: (context) =>
-                                                      AccessRequestAddPage(),
-                                                ),
-                                              );
-                                            },
                                         ),
-                                      ),
-                                    ],
-                                  ),
-                                  SizedBox(height: size.width * .3),
-                                  Center(
-                                    child: InkWell(
-                                      splashColor: Colors.transparent,
-                                      highlightColor: Colors.transparent,
-                                      onTap: () {
-                                        HapticFeedback.lightImpact();
-                                        _login();
-                                      },
-                                      child: Container(
-                                        height:
-                                            MediaQuery.of(context).size.width *
-                                                .2,
-                                        width:
-                                            MediaQuery.of(context).size.width *
-                                                .2,
-                                        alignment: Alignment.center,
-                                        decoration: BoxDecoration(
-                                          color: Colors.white,
-                                          shape: BoxShape.circle,
-                                        ),
-                                        child: Icon(
-                                          Icons.login_sharp,
-                                          color: Colors.black,
-                                          size: 40,
+                                      ],
+                                    ),
+                                    SizedBox(height: size.width * .3),
+                                    Center(
+                                      child: InkWell(
+                                        splashColor: Colors.transparent,
+                                        highlightColor: Colors.transparent,
+                                        onTap: () {
+                                          HapticFeedback.lightImpact();
+                                          _login();
+                                        },
+                                        child: Container(
+                                          height: MediaQuery.of(context)
+                                                  .size
+                                                  .width *
+                                              .2,
+                                          width: MediaQuery.of(context)
+                                                  .size
+                                                  .width *
+                                              .2,
+                                          alignment: Alignment.center,
+                                          decoration: BoxDecoration(
+                                            color: Colors.white,
+                                            shape: BoxShape.circle,
+                                          ),
+                                          child: Icon(
+                                            Icons.login_sharp,
+                                            color: Colors.black,
+                                            size: 40,
+                                          ),
                                         ),
                                       ),
                                     ),
-                                  ),
-                                ],
+                                  ],
+                                ),
                               ),
                             ),
                           ),
                         ),
-                      ),
-                      Expanded(
-                        child: SizedBox(
-                          height: 10,
+                        Expanded(
+                          child: SizedBox(
+                            height: 10,
+                          ),
                         ),
-                      ),
-                    ],
+                      ],
+                    ),
                   ),
-                ),
-              ],
+                ],
+              ),
             ),
           ),
         ),
@@ -225,41 +229,39 @@ class _MyCustomLoginUIState extends State<MyCustomLoginUI> {
         color: Colors.black.withOpacity(.1),
         borderRadius: BorderRadius.circular(20),
       ),
-      child: Observer(
-        builder: (_) => TextField(
-          style: TextStyle(
-            color: Colors.white.withOpacity(.9),
-          ),
-          obscureText:
-              isPassword ? (_controller.isPassVisible ? true : false) : false,
-          keyboardType: TextInputType.text,
-          decoration: InputDecoration(
-            prefixIcon: Icon(
-              icon,
-              color: Colors.white.withOpacity(.8),
-            ),
-            suffixIcon: isPassword
-                ? IconButton(
-                    icon: Icon(
-                      _controller.isPassVisible
-                          ? Icons.visibility
-                          : Icons.visibility_off,
-                    ),
-                    onPressed: () {
-                      _controller.setPassVisibility();
-                    },
-                  )
-                : null,
-            border: InputBorder.none,
-            hintMaxLines: 1,
-            hintText: hintText,
-            hintStyle: TextStyle(
-              fontSize: 14,
-              color: Colors.white.withOpacity(.5),
-            ),
-          ),
-          controller: controller,
+      child: TextField(
+        style: TextStyle(
+          color: Colors.white.withOpacity(.9),
         ),
+        obscureText:
+            isPassword ? (_controller.isPassVisible ? true : false) : false,
+        keyboardType: TextInputType.text,
+        decoration: InputDecoration(
+          prefixIcon: Icon(
+            icon,
+            color: Colors.white.withOpacity(.8),
+          ),
+          suffixIcon: isPassword
+              ? IconButton(
+                  icon: Icon(
+                    _controller.isPassVisible
+                        ? Icons.visibility_off
+                        : Icons.visibility,
+                  ),
+                  onPressed: () {
+                    _controller.setPassVisibility();
+                  },
+                )
+              : null,
+          border: InputBorder.none,
+          hintMaxLines: 1,
+          hintText: hintText,
+          hintStyle: TextStyle(
+            fontSize: 14,
+            color: Colors.white.withOpacity(.5),
+          ),
+        ),
+        controller: controller,
       ),
     );
   }
