@@ -234,7 +234,7 @@ class _MyCustomLoginUIState extends State<MyCustomLoginUI> {
           color: Colors.white.withOpacity(.9),
         ),
         obscureText:
-            isPassword ? (_controller.isPassVisible ? true : false) : false,
+            isPassword ? (_controller.isPassVisible ? false : true) : false,
         keyboardType: TextInputType.text,
         decoration: InputDecoration(
           prefixIcon: Icon(
