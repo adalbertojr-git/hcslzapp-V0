@@ -73,12 +73,43 @@ mixin _$LoginController on LoginControllerBase, Store {
     });
   }
 
+  late final _$isPassVisibleAtom =
+      Atom(name: 'LoginControllerBase.isPassVisible', context: context);
+
+  @override
+  bool get isPassVisible {
+    _$isPassVisibleAtom.reportRead();
+    return super.isPassVisible;
+  }
+
+  @override
+  set isPassVisible(bool value) {
+    _$isPassVisibleAtom.reportWrite(value, super.isPassVisible, () {
+      super.isPassVisible = value;
+    });
+  }
+
+  late final _$LoginControllerBaseActionController =
+      ActionController(name: 'LoginControllerBase', context: context);
+
+  @override
+  bool setPassVisibility() {
+    final _$actionInfo = _$LoginControllerBaseActionController.startAction(
+        name: 'LoginControllerBase.setPassVisibility');
+    try {
+      return super.setPassVisibility();
+    } finally {
+      _$LoginControllerBaseActionController.endAction(_$actionInfo);
+    }
+  }
+
   @override
   String toString() {
     return '''
 userCtrl: ${userCtrl},
 pswCtrl: ${pswCtrl},
-token: ${token}
+token: ${token},
+isPassVisible: ${isPassVisible}
     ''';
   }
 }

@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'dart:ui';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_mobx/flutter_mobx.dart';
 import '../../common/messages.dart';
 import '../../controllers/login.controller.dart';
 import '../access.request/access.request.add.page.dart';
@@ -224,26 +225,41 @@ class _MyCustomLoginUIState extends State<MyCustomLoginUI> {
         color: Colors.black.withOpacity(.1),
         borderRadius: BorderRadius.circular(20),
       ),
-      child: TextField(
-        style: TextStyle(
-          color: Colors.white.withOpacity(.9),
-        ),
-        obscureText: isPassword,
-        keyboardType: TextInputType.text,
-        decoration: InputDecoration(
-          prefixIcon: Icon(
-            icon,
-            color: Colors.white.withOpacity(.8),
+      child: Observer(
+        builder: (_) => TextField(
+          style: TextStyle(
+            color: Colors.white.withOpacity(.9),
           ),
-          border: InputBorder.none,
-          hintMaxLines: 1,
-          hintText: hintText,
-          hintStyle: TextStyle(
-            fontSize: 14,
-            color: Colors.white.withOpacity(.5),
+          obscureText:
+              isPassword ? (_controller.isPassVisible ? true : false) : false,
+          keyboardType: TextInputType.text,
+          decoration: InputDecoration(
+            prefixIcon: Icon(
+              icon,
+              color: Colors.white.withOpacity(.8),
+            ),
+            suffixIcon: isPassword
+                ? IconButton(
+                    icon: Icon(
+                      _controller.isPassVisible
+                          ? Icons.visibility
+                          : Icons.visibility_off,
+                    ),
+                    onPressed: () {
+                      _controller.setPassVisibility();
+                    },
+                  )
+                : null,
+            border: InputBorder.none,
+            hintMaxLines: 1,
+            hintText: hintText,
+            hintStyle: TextStyle(
+              fontSize: 14,
+              color: Colors.white.withOpacity(.5),
+            ),
           ),
+          controller: controller,
         ),
-        controller: controller,
       ),
     );
   }

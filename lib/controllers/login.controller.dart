@@ -21,6 +21,9 @@ abstract class LoginControllerBase with Store {
   @observable
   LoginRepo _loginRepo = LoginRepo();
 
+  @observable
+  bool isPassVisible = false;
+
   Future<Token> authenticate(String user, String psw) =>
       _loginRepo.authenticate(
         user,
@@ -42,4 +45,8 @@ abstract class LoginControllerBase with Store {
     if (pswCtrl.text.isEmpty) return true;
     return false;
   }
+
+  @action
+  bool setPassVisibility() => isPassVisible = !isPassVisible;
+
 }
