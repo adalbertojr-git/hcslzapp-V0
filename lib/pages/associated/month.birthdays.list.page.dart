@@ -102,44 +102,46 @@ class _MonthBirthdaysListPageState extends State<MonthBirthdaysListPage> {
                         height: 5,
                       ),
                       _photo(_controller.associateds[index]),
-                      Container(
-                        padding: EdgeInsets.all(5),
-                        width: double.infinity,
-                        height: MediaQuery.of(context).size.height / 3,
-                        child: Card(
-                          elevation: 5,
-                          child: Column(
-                            children: [
-                              Text(
-                                _isToday(_controller
-                                        .associateds[index].date_birth)
-                                    ? 'O Harley Club deseja a você,\n'
-                                    : 'Está chegando o dia de celebrar\n',
-                                style: TextStyle(
-                                  fontWeight: FontWeight.bold,
-                                  fontSize: 18,
+                      Expanded(
+                        child: Container(
+                          padding: EdgeInsets.all(5),
+                          width: double.infinity,
+                          //height: MediaQuery.of(context).size.height / 3,
+                          child: Card(
+                            elevation: 5,
+                            child: Column(
+                              children: [
+                                Text(
+                                  _isToday(_controller
+                                          .associateds[index].date_birth)
+                                      ? 'O Harley Club deseja a você,\n'
+                                      : 'Está chegando o dia de celebrar\n',
+                                  style: TextStyle(
+                                    fontWeight: FontWeight.bold,
+                                    fontSize: 18,
+                                  ),
                                 ),
-                              ),
-                              Text(
-                                _controller.associateds[index].name,
-                                style: TextStyle(
-                                  fontWeight: FontWeight.bold,
-                                  fontSize: 25,
+                                Text(
+                                  _controller.associateds[index].name,
+                                  style: TextStyle(
+                                    fontWeight: FontWeight.bold,
+                                    fontSize: 25,
+                                  ),
                                 ),
-                              ),
-                              Text(
-                                _controller.associateds[index].ndays == 0
-                                    ? '\nMuita saúde e kms de felicidades!!!'
-                                    : '\n' +
-                                        _controller.associateds[index].ndays
-                                            .toString() +
-                                        'dia(s)',
-                                style: TextStyle(
-                                  fontWeight: FontWeight.bold,
-                                  fontSize: 18,
+                                Text(
+                                  _controller.associateds[index].ndays == 0
+                                      ? '\nMuita saúde e kms de felicidades!!!'
+                                      : '\n' +
+                                          _controller.associateds[index].ndays
+                                              .toString() +
+                                          'dia(s)',
+                                  style: TextStyle(
+                                    fontWeight: FontWeight.bold,
+                                    fontSize: 18,
+                                  ),
                                 ),
-                              ),
-                            ],
+                              ],
+                            ),
                           ),
                         ),
                       ),
@@ -151,7 +153,7 @@ class _MonthBirthdaysListPageState extends State<MonthBirthdaysListPage> {
                                   .substring(0, 2),
                           style: TextStyle(
                             fontWeight: FontWeight.bold,
-                            fontSize: 17,
+                            fontSize: 20,
                           ),
                         ),
                       )
