@@ -66,7 +66,8 @@ dev_dependencies:
 flutter_native_splash:
   image: assets/imgs/splash.png
 #  color: "#fea285"
-  color: "#000000"
+#  color: "#000000"
+  background_image: assets/imgs/background.png
   android: true
   ios: true
   android_12:
@@ -108,6 +109,7 @@ flutter:
     - assets/imgs/noite.jpg
 
     - assets/imgs/splash.png
+    - assets/imgs/background.png
     - assets/anims/splash.flr
 
 #    #
