@@ -187,7 +187,7 @@ class _PartnershipListAssociatedPageState
                 _controller
                     .activePartnerships[_controller.currentPage].promotion,
                 style: TextStyle(
-                  fontSize: 14.0,
+                  fontSize: 16.0,
                 ),
               ),
             ),
