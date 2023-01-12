@@ -54,7 +54,7 @@ class _ChangePasswordPageState extends State<ChangePasswordPage> {
               hint: hintCurrentPsw,
               icon: Icons.password,
               inputType: TextInputType.text,
-              hidden: true,
+              isPassword: true,
               onChanged: _controller.formController.changePassword,
               errorText: _controller.validatePassword(),
             );
@@ -66,7 +66,7 @@ class _ChangePasswordPageState extends State<ChangePasswordPage> {
               hint: hintNewPsw,
               icon: Icons.password,
               inputType: TextInputType.text,
-              hidden: true,
+              isPassword: true,
               onChanged: _controller.formController.changeNewPassword,
               errorText: _controller.validateNewPassword(),
             );
@@ -103,7 +103,7 @@ class _ChangePasswordPageState extends State<ChangePasswordPage> {
               hint: hintConfirmNewPsw,
               icon: Icons.password,
               inputType: TextInputType.text,
-              hidden: true,
+              isPassword: true,
               onChanged: _controller.formController.changeConfPassword,
               errorText: _controller.validateConfPassword(),
             );

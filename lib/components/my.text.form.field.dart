@@ -8,7 +8,7 @@ class MyTextFormField extends StatelessWidget {
   final String? hint;
   final IconData? icon;
   final TextInputType? inputType;
-  final bool? hidden;
+  final bool? isPassword;
   final bool? disabled;
   final String? prefix;
   final int? nLines;
@@ -25,7 +25,7 @@ class MyTextFormField extends StatelessWidget {
     this.hint,
     this.icon,
     this.inputType,
-    this.hidden,
+    this.isPassword,
     this.disabled,
     this.prefix,
     this.label,
@@ -45,7 +45,7 @@ class MyTextFormField extends StatelessWidget {
       padding: const EdgeInsets.all(5.0),
       child: TextFormField(
         textCapitalization: TextCapitalization.words,
-        obscureText: hidden ?? false,
+        obscureText: isPassword ?? false,
         readOnly: disabled ?? false,
         textAlign: textAlign ?? TextAlign.left,
         maxLength: maxLength ?? null,
@@ -70,10 +70,12 @@ class MyTextFormField extends StatelessWidget {
           ),
           fillColor: Colors.black26,
           filled: disabled ?? false,
-          prefixIcon: icon != null ? Icon(
-            icon,
-            color: Colors.deepOrange.withOpacity(.7),
-          ) : null,
+          prefixIcon: icon != null
+              ? Icon(
+                  icon,
+                  color: Colors.deepOrange.withOpacity(.7),
+                )
+              : null,
           labelText: label,
           labelStyle: TextStyle(
             fontStyle: FontStyle.italic,

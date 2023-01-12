@@ -24,6 +24,9 @@ abstract class ChangePasswordControllerBase with Store {
   @observable
   ChangePasswordRepo _changePasswordRepo = ChangePasswordRepo();
 
+  @observable
+  bool isPasswordVisible = false;
+
   init() {
     formController = FormController(
       password: '',
@@ -86,6 +89,9 @@ abstract class ChangePasswordControllerBase with Store {
     }
     return null;
   }
+
+  @action
+  bool setPasswordVisibility() => isPasswordVisible = !isPasswordVisible;
 }
 
 class FormController extends FormControllerBase with _$FormController {

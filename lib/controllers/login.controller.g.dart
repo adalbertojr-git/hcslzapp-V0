@@ -73,19 +73,19 @@ mixin _$LoginController on LoginControllerBase, Store {
     });
   }
 
-  late final _$isPassVisibleAtom =
-      Atom(name: 'LoginControllerBase.isPassVisible', context: context);
+  late final _$isPasswordVisibleAtom =
+      Atom(name: 'LoginControllerBase.isPasswordVisible', context: context);
 
   @override
-  bool get isPassVisible {
-    _$isPassVisibleAtom.reportRead();
-    return super.isPassVisible;
+  bool get isPasswordVisible {
+    _$isPasswordVisibleAtom.reportRead();
+    return super.isPasswordVisible;
   }
 
   @override
-  set isPassVisible(bool value) {
-    _$isPassVisibleAtom.reportWrite(value, super.isPassVisible, () {
-      super.isPassVisible = value;
+  set isPasswordVisible(bool value) {
+    _$isPasswordVisibleAtom.reportWrite(value, super.isPasswordVisible, () {
+      super.isPasswordVisible = value;
     });
   }
 
@@ -93,11 +93,11 @@ mixin _$LoginController on LoginControllerBase, Store {
       ActionController(name: 'LoginControllerBase', context: context);
 
   @override
-  bool setPassVisibility() {
+  bool setPasswordVisibility() {
     final _$actionInfo = _$LoginControllerBaseActionController.startAction(
-        name: 'LoginControllerBase.setPassVisibility');
+        name: 'LoginControllerBase.setPasswordVisibility');
     try {
-      return super.setPassVisibility();
+      return super.setPasswordVisibility();
     } finally {
       _$LoginControllerBaseActionController.endAction(_$actionInfo);
     }
@@ -109,7 +109,7 @@ mixin _$LoginController on LoginControllerBase, Store {
 userCtrl: ${userCtrl},
 pswCtrl: ${pswCtrl},
 token: ${token},
-isPassVisible: ${isPassVisible}
+isPasswordVisible: ${isPasswordVisible}
     ''';
   }
 }

@@ -22,7 +22,7 @@ abstract class LoginControllerBase with Store {
   LoginRepo _loginRepo = LoginRepo();
 
   @observable
-  bool isPassVisible = false;
+  bool isPasswordVisible = false;
 
   Future<Token> authenticate(String user, String psw) =>
       _loginRepo.authenticate(
@@ -47,6 +47,6 @@ abstract class LoginControllerBase with Store {
   }
 
   @action
-  bool setPassVisibility() => isPassVisible = !isPassVisible;
+  bool setPasswordVisibility() => isPasswordVisible = !isPasswordVisible;
 
 }
