@@ -13,53 +13,69 @@ import '../../components/my.bottom.appbar.dart';
 const String _title = 'Avisos da Diretoria';
 const String _pathLogoImage = 'assets/imgs/logo.png';
 
-class HeadNotificationListAssociatedPage extends StatelessWidget {
+class HeadNotificationListAssociatedPage extends StatefulWidget {
+  @override
+  State<HeadNotificationListAssociatedPage> createState() => _HeadNotificationListAssociatedPageState();
+}
+
+class _HeadNotificationListAssociatedPageState extends State<HeadNotificationListAssociatedPage> {
   final HeadNotificationListController _controller =
       HeadNotificationListController();
 
   @override
-  Widget build(BuildContext context) => Scaffold(
-        appBar: MyAppBar(_title),
-        bottomNavigationBar:
-            _controller.isHidedButton ? null : MyBottomAppBar(),
-        body: FutureBuilder<List<HeadNotification>>(
-          future: _controller.getFuture(),
-          builder: (context, snapshot) {
-            switch (snapshot.connectionState) {
-              case ConnectionState.none:
-                break;
-              case ConnectionState.waiting:
-                return Progress();
-              case ConnectionState.active:
-                break;
-              default:
-                if (snapshot.hasError) {
-                  return CenteredMessage(
-                    title: ERROR,
-                    message: snapshot.error.toString(),
-                  );
-                } else {
-                  if ((snapshot.data?.length)! > 0) {
-                    _controller.init();
-                    _controller.headNotifications.addAll(snapshot.data!);
-                    _controller.headNotifications.sort(
-                      (a, b) => b.datePublication.compareTo(a.datePublication),
-                    );
-                    return _widgets(context);
-                  } else
-                    return CenteredMessage(
-                      title: WARNING,
-                      message: NOTEXIST,
-                    );
-                }
-            } //switch (snapshot.connectionState)
-            return CenteredMessage(
-              title: ERROR,
-              message: UNKNOWN,
-            );
-          },
-        ),
-      );
+  void initState() {
+    _controller.getFuture().then((value) {
+      _controller.setButtonVisibilty();
+    }).catchError((e) {});
+    super.initState();
+  }
+  @override
+  Widget build(BuildContext context) => Observer(
+    builder: (_) {
+      return Scaffold(
+            appBar: MyAppBar(_title),
+            bottomNavigationBar:
+                _controller.isHidedButton ? null : MyBottomAppBar(),
+            body: FutureBuilder<List<HeadNotification>>(
+              future: _controller.future,
+              builder: (context, snapshot) {
+                switch (snapshot.connectionState) {
+                  case ConnectionState.none:
+                    break;
+                  case ConnectionState.waiting:
+                    return Progress();
+                  case ConnectionState.active:
+                    break;
+                  default:
+                    if (snapshot.hasError) {
+                      return CenteredMessage(
+                        title: ERROR,
+                        message: snapshot.error.toString(),
+                      );
+                    } else {
+                      if ((snapshot.data?.length)! > 0) {
+                        _controller.init();
+                        _controller.headNotifications.addAll(snapshot.data!);
+                        _controller.headNotifications.sort(
+                          (a, b) => b.datePublication.compareTo(a.datePublication),
+                        );
+                        return _widgets(context);
+                      } else
+                        return CenteredMessage(
+                          title: WARNING,
+                          message: NOTEXIST,
+                        );
+                    }
+                } //switch (snapshot.connectionState)
+                return CenteredMessage(
+                  title: ERROR,
+                  message: UNKNOWN,
+                );
+              },
+            ),
+          );
+    }
+  );
 
   _widgets(BuildContext context) => Column(
         children: [
