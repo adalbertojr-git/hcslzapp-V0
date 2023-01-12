@@ -84,7 +84,7 @@ class _MyCustomLoginUIState extends State<MyCustomLoginUI> {
                                       ),
                                     ),
                                     SizedBox(
-                                      height: size.width * .1,
+                                      height: size.width * .05,
                                     ),
                                     _component(
                                       Icons.account_circle_outlined,
