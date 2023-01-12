@@ -74,22 +74,6 @@ mixin _$ChangePasswordController on ChangePasswordControllerBase, Store {
     });
   }
 
-  late final _$isPasswordVisibleAtom = Atom(
-      name: 'ChangePasswordControllerBase.isPasswordVisible', context: context);
-
-  @override
-  bool get isPasswordVisible {
-    _$isPasswordVisibleAtom.reportRead();
-    return super.isPasswordVisible;
-  }
-
-  @override
-  set isPasswordVisible(bool value) {
-    _$isPasswordVisibleAtom.reportWrite(value, super.isPasswordVisible, () {
-      super.isPasswordVisible = value;
-    });
-  }
-
   late final _$ChangePasswordControllerBaseActionController =
       ActionController(name: 'ChangePasswordControllerBase', context: context);
 
@@ -105,24 +89,11 @@ mixin _$ChangePasswordController on ChangePasswordControllerBase, Store {
   }
 
   @override
-  bool setPasswordVisibility() {
-    final _$actionInfo =
-        _$ChangePasswordControllerBaseActionController.startAction(
-            name: 'ChangePasswordControllerBase.setPasswordVisibility');
-    try {
-      return super.setPasswordVisibility();
-    } finally {
-      _$ChangePasswordControllerBaseActionController.endAction(_$actionInfo);
-    }
-  }
-
-  @override
   String toString() {
     return '''
 pswCtrl: ${pswCtrl},
 newPswCtrl: ${newPswCtrl},
-confPswCtrl: ${confPswCtrl},
-isPasswordVisible: ${isPasswordVisible}
+confPswCtrl: ${confPswCtrl}
     ''';
   }
 }

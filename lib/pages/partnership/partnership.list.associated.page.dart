@@ -13,7 +13,6 @@ import '../../components/my.bottom.appbar.dart';
 
 const SCALE_FRACTION = 0.2;
 const FULL_SCALE = 0.9;
-const PAGER_HEIGHT = 300.0;
 
 const String _pathNoImage = 'assets/imgs/noImage.png';
 const String _title = 'Parcerias';
@@ -30,6 +29,7 @@ class _PartnershipListAssociatedPageState
     extends State<PartnershipListAssociatedPage> {
   final PartnershipListController _controller = PartnershipListController();
   final double viewPortFraction = 0.5;
+  double pagerHeight = 0;
 
   @override
   void initState() {
@@ -44,57 +44,60 @@ class _PartnershipListAssociatedPageState
   }
 
   @override
-  Widget build(BuildContext context) => Observer(
-        builder: (_) => Scaffold(
-          appBar: MyAppBar(_title),
-          bottomNavigationBar:
-              _controller.isHidedButton ? null : MyBottomAppBar(),
-          body: FutureBuilder<List<Partnership>>(
-            future: _controller.future,
-            builder: (context, snapshot) {
-              switch (snapshot.connectionState) {
-                case ConnectionState.none:
-                  break;
-                case ConnectionState.waiting:
-                  return Progress();
-                case ConnectionState.active:
-                  break;
-                default:
-                  if (snapshot.hasError) {
-                    return CenteredMessage(
-                      title: ERROR,
-                      message: snapshot.error.toString(),
+  Widget build(BuildContext context) {
+    pagerHeight = MediaQuery.of(context).size.height / 3;
+    return Observer(
+      builder: (_) => Scaffold(
+        appBar: MyAppBar(_title),
+        bottomNavigationBar:
+            _controller.isHidedButton ? null : MyBottomAppBar(),
+        body: FutureBuilder<List<Partnership>>(
+          future: _controller.future,
+          builder: (context, snapshot) {
+            switch (snapshot.connectionState) {
+              case ConnectionState.none:
+                break;
+              case ConnectionState.waiting:
+                return Progress();
+              case ConnectionState.active:
+                break;
+              default:
+                if (snapshot.hasError) {
+                  return CenteredMessage(
+                    title: ERROR,
+                    message: snapshot.error.toString(),
+                  );
+                } else {
+                  if ((snapshot.data?.length)! > 0) {
+                    _controller.init();
+                    _controller.partnerships.addAll(snapshot.data!);
+                    _controller.partnerships.sort(
+                      (a, b) => a.partner.compareTo(b.partner),
                     );
-                  } else {
-                    if ((snapshot.data?.length)! > 0) {
-                      _controller.init();
-                      _controller.partnerships.addAll(snapshot.data!);
-                      _controller.partnerships.sort(
-                        (a, b) => a.partner.compareTo(b.partner),
-                      );
-                      _controller.getActivePartnerships;
-                      return _widgets();
-                    } else
-                      return CenteredMessage(
-                        title: WARNING,
-                        message: NOTEXIST,
-                      );
-                  }
-              } //switch (snapshot.connectionState)
-              return CenteredMessage(
-                title: ERROR,
-                message: UNKNOWN,
-              );
-            },
-          ),
+                    _controller.getActivePartnerships;
+                    return _widgets();
+                  } else
+                    return CenteredMessage(
+                      title: WARNING,
+                      message: NOTEXIST,
+                    );
+                }
+            } //switch (snapshot.connectionState)
+            return CenteredMessage(
+              title: ERROR,
+              message: UNKNOWN,
+            );
+          },
         ),
-      );
+      ),
+    );
+  }
 
   _widgets() => Observer(
         builder: (_) => ListView(
           children: <Widget>[
             Container(
-              height: PAGER_HEIGHT,
+              height: pagerHeight,
               child: NotificationListener<ScrollNotification>(
                 onNotification: (ScrollNotification notification) {
                   if (notification is ScrollUpdateNotification) {
@@ -173,9 +176,9 @@ class _PartnershipListAssociatedPageState
             ),
             Center(
               child: Text(
-                'Promoção:',
+                'Promoção:\n',
                 style: TextStyle(
-                  fontSize: 16.0,
+                  fontSize: 18.0,
                 ),
               ),
             ),
@@ -184,7 +187,7 @@ class _PartnershipListAssociatedPageState
                 _controller
                     .activePartnerships[_controller.currentPage].promotion,
                 style: TextStyle(
-                  fontSize: 16.0,
+                  fontSize: 14.0,
                 ),
               ),
             ),
@@ -196,8 +199,8 @@ class _PartnershipListAssociatedPageState
         builder: (_) => Align(
           alignment: Alignment.bottomCenter,
           child: Container(
-            height: PAGER_HEIGHT * scale,
-            width: PAGER_HEIGHT * scale,
+            height: pagerHeight * scale,
+            width: pagerHeight * scale,
             child: Card(
               elevation: 15,
               clipBehavior: Clip.antiAlias,
