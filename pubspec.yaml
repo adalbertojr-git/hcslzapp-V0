@@ -64,7 +64,7 @@ dev_dependencies:
 
 # Splash Screen Settings
 flutter_native_splash:
-  image: assets/imgs/logo.png
+  image: assets/imgs/splash.png
 #  color: "#fea285"
   color: "#000000"
   android: true
@@ -89,9 +89,6 @@ flutter:
     - assets/imgs/user.png
     - assets/imgs/logo.png
     - assets/imgs/logo_carteirad.png
-    - assets/imgs/logo_login.png
-    - assets/imgs/backlogo.png
-    - assets/imgs/hdlogo.png
     - assets/imgs/docs.png
     - assets/imgs/eventos.png
     - assets/imgs/financeiro.png
@@ -105,12 +102,12 @@ flutter:
     - assets/imgs/maps.png
     - assets/imgs/sobre.jpeg
     - assets/imgs/dependentes.png
-    - assets/imgs/motocicletas.png
 
     - assets/imgs/manha.jpg
     - assets/imgs/tarde.jpg
     - assets/imgs/noite.jpg
 
+    - assets/imgs/splash.png
     - assets/anims/splash.flr
 
 #    #
