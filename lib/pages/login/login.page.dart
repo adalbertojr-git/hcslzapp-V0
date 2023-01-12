@@ -65,16 +65,26 @@ class _MyCustomLoginUIState extends State<MyCustomLoginUI> {
                                     Padding(
                                       padding: EdgeInsets.only(
                                         top: size.width * .15,
-                                        bottom: size.width * .1,
                                       ),
                                       child: Text(
-                                        _greeting[1] + ', Harleyro!!!',
+                                        _greeting[1] + ', Harleyro(a)',
                                         style: TextStyle(
                                           fontSize: 25,
                                           fontWeight: FontWeight.w300,
                                           color: Colors.white.withOpacity(.8),
                                         ),
                                       ),
+                                    ),
+                                    Text(
+                                      'Bem-vindo(a) de volta',
+                                      style: TextStyle(
+                                        //fontSize: 25,
+                                        fontWeight: FontWeight.w300,
+                                        color: Colors.white.withOpacity(.8),
+                                      ),
+                                    ),
+                                    SizedBox(
+                                      height: size.width * .1,
                                     ),
                                     _component(
                                       Icons.account_circle_outlined,
@@ -145,14 +155,14 @@ class _MyCustomLoginUIState extends State<MyCustomLoginUI> {
                                           height: MediaQuery.of(context)
                                                   .size
                                                   .width *
-                                              .2,
+                                              .3,
                                           width: MediaQuery.of(context)
                                                   .size
                                                   .width *
-                                              .2,
+                                              .3,
                                           alignment: Alignment.center,
                                           decoration: BoxDecoration(
-                                            color: Colors.white,
+                                            color: Colors.white70,
                                             shape: BoxShape.circle,
                                           ),
                                           child: Icon(

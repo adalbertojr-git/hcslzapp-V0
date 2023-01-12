@@ -41,7 +41,7 @@ dependencies:
 
   flutter_localizations:
     sdk: flutter
-  flutter_native_splash: ^2.1.6
+  flutter_native_splash: ^2.2.6
   circular_countdown_timer: ^0.2.0
 
   get_it: any
@@ -64,14 +64,13 @@ dev_dependencies:
 
 # Splash Screen Settings
 flutter_native_splash:
-  #general
-  #background_image: assets/imgs/logo.png
-  color: "#fea285"
+  image: assets/imgs/logo.png
+#  color: "#fea285"
+  color: "#000000"
   android: true
   ios: true
   android_12:
     image: assets/imgs/logo.png
-    # icon_background_color: "#FFD1A6"
 
 
 # For information on the generic Dart part of this file, see the
@@ -82,7 +81,7 @@ flutter:
 
   # The following line ensures that the Material Icons font is
   # included with your application, so that you can use the icons in
-  # the material Icons class.
+  # the material Icons class.flutter pub run flutter_native_splash:create
   uses-material-design: true
 
   assets:
