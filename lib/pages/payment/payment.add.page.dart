@@ -13,7 +13,7 @@ import '../../components/my.appbar.dart';
 import '../../components/my.bottom.appbar.dart';
 import '../../http/http.exception.dart';
 
-const String _title = 'Adicionar Mensalidades';
+const String _title = 'Mensalidades';
 
 class PaymentAddPage extends StatefulWidget {
   final Payment _payment;
@@ -43,7 +43,9 @@ class _PaymentAddAddState extends State<PaymentAddPage> {
 
   @override
   Widget build(BuildContext context) => Scaffold(
-        appBar: MyAppBar(_title),
+        appBar: MyAppBar(
+          widget._selectedProfile == ADMIN ? 'Adicionar ' + _title : _title,
+        ),
         bottomNavigationBar: MyBottomAppBar(),
         body: _widgets(),
         floatingActionButtonLocation: widget._selectedProfile == ADMIN
