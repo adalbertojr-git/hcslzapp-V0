@@ -221,8 +221,11 @@ class _EventCalendarPageState extends State<EventCalendarPage> {
                       ),
                       child: Column(
                         children: [
+                          SizedBox(
+                            height: 10,
+                          ),
                           ListTile(
-                            leading: _photo(context, value[index]),
+                            leading: _photo(value[index]),
                             title: Text(
                               value[index].title,
                               style: TextStyle(
@@ -286,7 +289,10 @@ class _EventCalendarPageState extends State<EventCalendarPage> {
                                     },
                                   ),
                             visualDensity: VisualDensity(vertical: 4),
-                          )
+                          ),
+                          SizedBox(
+                            height: 10,
+                          ),
                         ],
                       ),
                     );
@@ -298,16 +304,18 @@ class _EventCalendarPageState extends State<EventCalendarPage> {
         ],
       );
 
-  _photo(BuildContext context, Event event) => Container(
-        width: 100,
-        child: Card(
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(10.0),
-          ),
-          child: Container(
-            decoration: BoxDecoration(
-              image: _loadPhoto(event),
-            ),
+  _photo(Event event) => Container(
+        width: 150.0,
+        padding: EdgeInsets.all(5.0),
+        decoration: BoxDecoration(
+          color: Colors.black.withOpacity(0.2),
+          borderRadius: BorderRadius.circular(10.0),
+        ),
+        child: Container(
+          decoration: BoxDecoration(
+            color: Colors.white,
+            borderRadius: BorderRadius.circular(5.0),
+            image: _loadPhoto(event),
           ),
         ),
       );
