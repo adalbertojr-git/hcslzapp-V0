@@ -222,7 +222,7 @@ class _EventCalendarPageState extends State<EventCalendarPage> {
                       child: Column(
                         children: [
                           SizedBox(
-                            height: 10,
+                            height: 5,
                           ),
                           ListTile(
                             leading: _photo(value[index]),
@@ -291,7 +291,7 @@ class _EventCalendarPageState extends State<EventCalendarPage> {
                             visualDensity: VisualDensity(vertical: 4),
                           ),
                           SizedBox(
-                            height: 10,
+                            height: 5,
                           ),
                         ],
                       ),
@@ -305,7 +305,7 @@ class _EventCalendarPageState extends State<EventCalendarPage> {
       );
 
   _photo(Event event) => Container(
-        width: 150.0,
+        width: 100.0,
         padding: EdgeInsets.all(5.0),
         decoration: BoxDecoration(
           color: Colors.black.withOpacity(0.2),
