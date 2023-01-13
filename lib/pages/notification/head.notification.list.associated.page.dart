@@ -99,12 +99,8 @@ class _HeadNotificationListAssociatedPageState extends State<HeadNotificationLis
                       ),
                       Container(
                         height: MediaQuery.of(context).size.height / 1.6,
-                        color: Colors.black,
+                        color: Colors.black26,
                         child: Card(
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(10.0),
-                          ),
-                          elevation: 1.0,
                           child: Column(
                             children: <Widget>[
                               _photo(context, i),
