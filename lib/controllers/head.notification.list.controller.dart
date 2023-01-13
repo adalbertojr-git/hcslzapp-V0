@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:hcslzapp/models/head.notification.dart';
 import 'package:hcslzapp/models/template.dart';
@@ -55,4 +56,10 @@ abstract class HeadNotificationListControllerBase with Store {
   @action
   Future deleteById(HeadNotification headNotification) =>
       _headNotificationRepo.deleteById(headNotification);
+
+  Future<void> deletePhoto(HeadNotification headNotification) async {
+    FirebaseStorage storage = FirebaseStorage.instance;
+    Reference reference = storage.refFromURL(headNotification.photoUrl);
+    await reference.delete();
+  }
 }

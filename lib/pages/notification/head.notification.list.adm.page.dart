@@ -174,6 +174,9 @@ class _HeadNotificationListAdmPageState
         });
     if (response == true) {
       try {
+        if(_controller.headNotifications[i].photoUrl != '') {
+          await _controller.deletePhoto(_controller.headNotifications[i]);
+        }
         await _controller.deleteById(_controller.headNotifications[i]);
         AsukaSnackbar.success(SUCCESS).show();
         _controller.headNotifications.removeAt(i);

@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'dart:collection';
 import 'dart:convert';
+import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:hcslzapp/models/event.dart';
 import 'package:hcslzapp/repositories/event.repo.dart';
@@ -41,6 +42,12 @@ abstract class EventCalendarControllerBase with Store {
 
   @action
   Future deleteById(Event event) => _eventRepo.deleteById(event);
+
+  Future<void> deletePhoto(Event event) async {
+    FirebaseStorage storage = FirebaseStorage.instance;
+    Reference reference = storage.refFromURL(event.photoUrl);
+    await reference.delete();
+  }
 
   LinkedHashMap<DateTime, List<Event>> convertJsonToDateMap(String jsonSource) {
     var json = jsonDecode(jsonSource);

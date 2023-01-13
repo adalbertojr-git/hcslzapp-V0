@@ -336,6 +336,9 @@ class _EventCalendarPageState extends State<EventCalendarPage> {
         });
     if (response == true) {
       try {
+        if(event.photoUrl != '') {
+          await _controller.deletePhoto(event);
+        }
         await _controller.deleteById(event);
         AsukaSnackbar.success(SUCCESS).show();
         _loadAllEvents();
