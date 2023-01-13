@@ -15,3 +15,5 @@ const String mainUrl = 'http://10.11.153.184:8080';
 // const String mainUrl = 'http://192.168.15.154:8080';
 // via wifi celular
 //const String mainUrl = 'http://192.168.43.8:8080';
+
+const String APP_VERSION = 'Versão 1.0.0';

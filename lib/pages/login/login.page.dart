@@ -5,6 +5,7 @@ import 'package:flutter/gestures.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import '../../common/messages.dart';
+import '../../common/settings.dart';
 import '../../controllers/login.controller.dart';
 import '../access.request/access.request.add.page.dart';
 import '../password/send.email.page.dart';
@@ -69,7 +70,7 @@ class _MyCustomLoginUIState extends State<MyCustomLoginUI> {
                                       child: Text(
                                         _greeting[1] + ', Harleyro(a)',
                                         style: TextStyle(
-                                          fontSize: 25,
+                                          fontSize: 20,
                                           fontWeight: FontWeight.w300,
                                           color: Colors.white.withOpacity(.8),
                                         ),
@@ -78,7 +79,6 @@ class _MyCustomLoginUIState extends State<MyCustomLoginUI> {
                                     Text(
                                       'Bem-vindo(a) de volta',
                                       style: TextStyle(
-                                        //fontSize: 25,
                                         fontWeight: FontWeight.w300,
                                         color: Colors.white.withOpacity(.8),
                                       ),
@@ -173,6 +173,18 @@ class _MyCustomLoginUIState extends State<MyCustomLoginUI> {
                                         ),
                                       ),
                                     ),
+                                    SizedBox(
+                                      height: 5,
+                                    ),
+                                    Text(APP_VERSION,
+                                      style: TextStyle(
+                                        color: Colors.white,
+                                        fontSize: 8,
+                                      ),
+                                    ),
+                                    SizedBox(
+                                      height: 10,
+                                    ),
                                   ],
                                 ),
                               ),
@@ -181,7 +193,7 @@ class _MyCustomLoginUIState extends State<MyCustomLoginUI> {
                         ),
                         Expanded(
                           child: SizedBox(
-                            height: 10,
+                            //height: 10,
                           ),
                         ),
                       ],

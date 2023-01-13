@@ -20,6 +20,7 @@ import 'package:hcslzapp/models/associated.dart';
 import 'package:hcslzapp/pages/access.request/access.request.list.page.dart';
 import 'package:hcslzapp/pages/associated/associated.list.page.dart';
 import '../../common/injection.dart';
+import '../../common/settings.dart';
 import '../../components/progress.dart';
 import '../event/event.calendar.page.dart';
 
@@ -33,7 +34,6 @@ const String _labelLadiesHC = 'Ladies Harley Club';
 const String _labelAdm = 'Administrador';
 const String _labelAdmEmail = 'harleyclubslz@gmail.com';
 const String _labelAboutApp = 'Sobre o HCSlz App';
-const String _labelAppVersion = '1.0.0';
 const String _pathLadiesImage = 'assets/imgs/ladies.jpg';
 const String _pathNoImage = 'assets/imgs/noImage.png';
 const String _labelBirthdaysMonth = 'Aniversariantes';
@@ -307,7 +307,7 @@ class _DashboardPageState extends State<DashboardPage> {
               onTap: () {
                 showAboutDialog(
                   context: context,
-                  applicationVersion: _labelAppVersion,
+                  applicationVersion: APP_VERSION,
                   applicationName: _labelAppTitle,
                   children: <Widget>[
                     Padding(
