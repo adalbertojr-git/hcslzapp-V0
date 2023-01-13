@@ -58,21 +58,25 @@ class AssociatedUpdatePage extends StatelessWidget {
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
-              IconButton(
-                icon: Icon(
-                  Icons.add_photo_alternate,
-                  size: 28.0,
-                ),
-                onPressed: _controller.getImageFromGallery,
-              ),
+              _selectedProfile == ASSOCIATED
+                  ? IconButton(
+                      icon: Icon(
+                        Icons.add_photo_alternate,
+                        size: 28.0,
+                      ),
+                      onPressed: _controller.getImageFromGallery,
+                    )
+                  : Container(),
               _photo(),
-              IconButton(
-                icon: Icon(
-                  Icons.add_a_photo,
-                  size: 25.0,
-                ),
-                onPressed: _controller.getImageFromCamera,
-              ),
+              _selectedProfile == ASSOCIATED
+                  ? IconButton(
+                      icon: Icon(
+                        Icons.add_a_photo,
+                        size: 25.0,
+                      ),
+                      onPressed: _controller.getImageFromCamera,
+                    )
+                  : Container(),
             ],
           ),
           SizedBox(
@@ -207,34 +211,30 @@ class AssociatedUpdatePage extends StatelessWidget {
           Row(
             children: <Widget>[
               Expanded(
-                child: Observer(
-                  builder: (_) {
-                    return MyTextFormField(
-                      textEditingController: _controller.dateBirthCtrl,
-                      label: labelDateBirth,
-                      hint: hintDate,
-                      icon: Icons.calendar_today,
-                      inputType: TextInputType.datetime,
-                      onChanged: _controller.formController.changeDateBirth,
-                      errorText: _controller.validateDateBirth(),
-                    );
-                  }
-                ),
+                child: Observer(builder: (_) {
+                  return MyTextFormField(
+                    textEditingController: _controller.dateBirthCtrl,
+                    label: labelDateBirth,
+                    hint: hintDate,
+                    icon: Icons.calendar_today,
+                    inputType: TextInputType.datetime,
+                    onChanged: _controller.formController.changeDateBirth,
+                    errorText: _controller.validateDateBirth(),
+                  );
+                }),
               ),
               Expanded(
-                child: Observer(
-                  builder: (_) {
-                    return MyTextFormField(
-                      textEditingController: _controller.dateShieldCtrl,
-                      label: labelDateShield,
-                      hint: hintDate,
-                      icon: Icons.calendar_today,
-                      inputType: TextInputType.datetime,
-                      onChanged: _controller.formController.changeDateShield,
-                      errorText: _controller.validateDateShield(),
-                    );
-                  }
-                ),
+                child: Observer(builder: (_) {
+                  return MyTextFormField(
+                    textEditingController: _controller.dateShieldCtrl,
+                    label: labelDateShield,
+                    hint: hintDate,
+                    icon: Icons.calendar_today,
+                    inputType: TextInputType.datetime,
+                    onChanged: _controller.formController.changeDateShield,
+                    errorText: _controller.validateDateShield(),
+                  );
+                }),
               ),
             ],
           ),
