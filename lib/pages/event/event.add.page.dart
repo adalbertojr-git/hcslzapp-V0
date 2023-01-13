@@ -64,7 +64,7 @@ class _EventAddPageState extends State<EventAddPage> {
             height: 10.0,
           ),
           _photo(context),
-          Row(
+          widget._selectedProfile == ADMIN ? Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               IconButton(
@@ -82,7 +82,7 @@ class _EventAddPageState extends State<EventAddPage> {
                 onPressed: _controller.getImageFromCamera,
               ),
             ],
-          ),
+          ) : Container(),
           Observer(
             builder: (_) {
               return MyTextFormField(
