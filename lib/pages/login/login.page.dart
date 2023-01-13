@@ -155,11 +155,11 @@ class _MyCustomLoginUIState extends State<MyCustomLoginUI> {
                                           height: MediaQuery.of(context)
                                                   .size
                                                   .width *
-                                              .3,
+                                              .2,
                                           width: MediaQuery.of(context)
                                                   .size
                                                   .width *
-                                              .3,
+                                              .2,
                                           alignment: Alignment.center,
                                           decoration: BoxDecoration(
                                             color: Colors.white70,

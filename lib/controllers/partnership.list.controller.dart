@@ -1,3 +1,4 @@
+import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:hcslzapp/models/partnership.dart';
 import 'package:hcslzapp/models/template.dart';
@@ -63,6 +64,14 @@ abstract class PartnershipListControllerBase with Store {
   @action
   Future<Response> deleteById(Partnership partnership) =>
       _partnershipRepo.deleteById(partnership);
+
+  Future<void> deletePhoto(Partnership partnership) async {
+    FirebaseStorage storage = FirebaseStorage.instance;
+    Reference reference = storage.ref().child(
+      'partnerPhotos/${partnership.id}',
+    );
+    await reference.delete();
+  }
 
   get getActivePartnerships => activePartnerships.addAll(
       partnerships.where((element) => element.status.contains('Ativo')));
