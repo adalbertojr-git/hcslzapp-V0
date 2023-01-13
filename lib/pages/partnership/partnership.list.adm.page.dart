@@ -172,7 +172,9 @@ class _PartnershipListAdmPageState extends State<PartnershipListAdmPage> {
         });
     if (response == true) {
       try {
-        await _controller.deletePhoto(_controller.partnerships[i]);
+        if(_controller.partnerships[i].photoUrl != '') {
+          await _controller.deletePhoto(_controller.partnerships[i]);
+        }
         await _controller.deleteById(_controller.partnerships[i]);
         AsukaSnackbar.success(SUCCESS).show();
         _controller.partnerships.removeAt(i);
