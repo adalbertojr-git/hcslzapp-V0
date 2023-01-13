@@ -45,7 +45,11 @@ class _EventAddPageState extends State<EventAddPage> {
   @override
   Widget build(BuildContext context) => Scaffold(
         appBar: MyAppBar(
-          widget._event == null ? 'Adicionar ' + _title : 'Editar ' + _title,
+          widget._selectedProfile == ASSOCIATED
+              ? _title
+              : widget._event == null
+                  ? 'Adicionar ' + _title
+                  : 'Editar ' + _title,
         ),
         bottomNavigationBar: MyBottomAppBar(),
         body: _widgets(),
@@ -64,25 +68,27 @@ class _EventAddPageState extends State<EventAddPage> {
             height: 10.0,
           ),
           _photo(context),
-          widget._selectedProfile == ADMIN ? Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              IconButton(
-                icon: Icon(
-                  Icons.add_photo_alternate,
-                  size: 28.0,
-                ),
-                onPressed: _controller.getImageFromGallery,
-              ),
-              IconButton(
-                icon: Icon(
-                  Icons.add_a_photo,
-                  size: 25.0,
-                ),
-                onPressed: _controller.getImageFromCamera,
-              ),
-            ],
-          ) : Container(),
+          widget._selectedProfile == ADMIN
+              ? Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    IconButton(
+                      icon: Icon(
+                        Icons.add_photo_alternate,
+                        size: 28.0,
+                      ),
+                      onPressed: _controller.getImageFromGallery,
+                    ),
+                    IconButton(
+                      icon: Icon(
+                        Icons.add_a_photo,
+                        size: 25.0,
+                      ),
+                      onPressed: _controller.getImageFromCamera,
+                    ),
+                  ],
+                )
+              : Container(),
           Observer(
             builder: (_) {
               return MyTextFormField(
