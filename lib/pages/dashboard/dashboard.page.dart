@@ -105,6 +105,7 @@ class _DashboardPageState extends State<DashboardPage> {
     _controller.getFuture(widget.associatedId).then((value) {
       loadAssociatedSingleton(value.first);
     });
+    _controller.selectedProfile = ASSOCIATED;
   }
 
   @override
