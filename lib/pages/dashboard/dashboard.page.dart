@@ -70,10 +70,10 @@ const List<String> _listAdmScreens = [
 
 const List<String> _listAdmScreensDesc = [
   "Harleyros associados ao Harley Club",
-  "Pagamento das mensalidades dos associados",
+  "Registro das mensalidades pagas",
   "Viagens, encontros, passeios, etc.",
   "Empresas parceiras do Harley Club",
-  "Avisos da Diretoria aos harleyros associados",
+  "Avisos da Diretoria aos harleyros",
   "Produtos da marca Harley Club",
 ];
 
@@ -403,7 +403,7 @@ class _DashboardPageState extends State<DashboardPage> {
           ),
           Expanded(
             child: Container(color: Colors.transparent),
-            flex: 2,
+            flex: 1,
           ),
         ],
       );
@@ -684,7 +684,7 @@ class _DashboardPageState extends State<DashboardPage> {
           child: ListView.builder(
             itemCount: _listAdmScreens.length,
             itemBuilder: (BuildContext context, int index) => Container(
-              height: 80,
+              height: 90,
               child: Card(
                 color: Colors.deepOrange[100],
                 shadowColor: Colors.black,
