@@ -351,7 +351,7 @@ class _DashboardPageState extends State<DashboardPage> {
                     Padding(
                       padding: EdgeInsets.only(top: 2, bottom: 20),
                       child: const Text(
-                        'Copyright 2020-2021 Brasil',
+                        'Copyright 2023 Brasil',
                         style: TextStyle(fontSize: 12.0),
                       ),
                     ),
