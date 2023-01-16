@@ -93,7 +93,7 @@ class _MonthBirthdaysListPageState extends State<MonthBirthdaysListPage> {
                   decoration: BoxDecoration(
                     color: _isToday(_controller.associateds[index].date_birth)
                         ? Colors.deepOrange[300]
-                        : Colors.deepOrange[100],
+                        : Colors.black26,
                     shape: BoxShape.rectangle,
                     borderRadius: BorderRadius.circular(10.0),
                   ),
@@ -178,8 +178,8 @@ class _MonthBirthdaysListPageState extends State<MonthBirthdaysListPage> {
       );
 
   _photo(MonthBirthdays birthdays) => Container(
-        height: _isToday(birthdays.date_birth) ? 80.0 : 230.0,
-        width: _isToday(birthdays.date_birth) ? 80.0 : 230.0,
+        height: _isToday(birthdays.date_birth) ? 90.0 : 230.0,
+        width: _isToday(birthdays.date_birth) ? 90.0 : 230.0,
         padding: EdgeInsets.all(5.0),
         decoration: BoxDecoration(
           color: Colors.black.withOpacity(0.2),
