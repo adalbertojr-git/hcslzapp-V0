@@ -13,6 +13,7 @@ import '../../components/my.bottom.appbar.dart';
 
 const String _title = 'Aniversariantes do Mês';
 const String _pathNoImage = 'assets/imgs/noImage.png';
+const String _pathCakeImage = 'assets/imgs/bolo2.png';
 
 class MonthBirthdaysListPage extends StatefulWidget {
   @override
@@ -101,12 +102,22 @@ class _MonthBirthdaysListPageState extends State<MonthBirthdaysListPage> {
                       SizedBox(
                         height: 5,
                       ),
-                      _photo(_controller.associateds[index]),
+                      _isToday(_controller.associateds[index].date_birth)
+                          ? Stack(
+                              alignment: Alignment.bottomRight,
+                              children: [
+                                CircleAvatar(
+                                  foregroundImage: AssetImage(_pathCakeImage),
+                                  radius: 120,
+                                ),
+                                _photo(_controller.associateds[index]),
+                              ],
+                            )
+                          : _photo(_controller.associateds[index]),
                       Expanded(
                         child: Container(
                           padding: EdgeInsets.all(5),
                           width: double.infinity,
-                          //height: MediaQuery.of(context).size.height / 3,
                           child: Card(
                             elevation: 5,
                             child: Column(
@@ -167,8 +178,8 @@ class _MonthBirthdaysListPageState extends State<MonthBirthdaysListPage> {
       );
 
   _photo(MonthBirthdays birthdays) => Container(
-        height: 270.0,
-        width: 270.0,
+        height: _isToday(birthdays.date_birth) ? 80.0 : 230.0,
+        width: _isToday(birthdays.date_birth) ? 80.0 : 230.0,
         padding: EdgeInsets.all(5.0),
         decoration: BoxDecoration(
           color: Colors.black.withOpacity(0.2),
