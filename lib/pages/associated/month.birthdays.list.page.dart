@@ -13,7 +13,7 @@ import '../../components/my.bottom.appbar.dart';
 
 const String _title = 'Aniversariantes do Mês';
 const String _pathNoImage = 'assets/imgs/noImage.png';
-const String _pathCakeImage = 'assets/imgs/bolo2.png';
+const String _pathCakeImage = 'assets/imgs/bolo.png';
 
 class MonthBirthdaysListPage extends StatefulWidget {
   @override
