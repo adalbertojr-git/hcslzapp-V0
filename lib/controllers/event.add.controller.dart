@@ -134,8 +134,13 @@ abstract class EventAddControllerBase with Store {
 
   Future<String> _uploadPhoto() async {
     FirebaseStorage storage = FirebaseStorage.instance;
-    Reference reference = storage.ref().child(
-          'eventPhotos/${event.id}',
+    late Reference reference;
+    if (event.photoUrl.isNotEmpty) {
+      reference = storage.refFromURL(event.photoUrl);
+      await reference.delete();
+    }
+    reference = storage.ref().child(
+          'eventPhotos/${DateTime.now().millisecondsSinceEpoch}',
         );
     await reference.putFile(photo);
     return await reference.getDownloadURL().catchError((e) {
