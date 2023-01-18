@@ -143,9 +143,7 @@ abstract class EventAddControllerBase with Store {
           'eventPhotos/${DateTime.now().millisecondsSinceEpoch}',
         );
     await reference.putFile(photo);
-    return await reference.getDownloadURL().catchError((e) {
-      //errorMsg = "${e.message}";
-    });
+    return await reference.getDownloadURL();
   }
 }
 
