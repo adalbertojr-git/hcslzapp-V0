@@ -549,6 +549,7 @@ class AssociatedUpdatePage extends StatelessWidget {
       }
       if (response == true) {
         try {
+          AsukaSnackbar.message(WAIT).show();
           final value = await _controller.update(_controller.associated);
           if (_controller.associated == locator.get<Associated>()) {
             loadAssociatedSingleton(value);

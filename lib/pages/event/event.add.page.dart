@@ -156,6 +156,7 @@ class _EventAddPageState extends State<EventAddPage> {
       AsukaSnackbar.alert(REQUIRED).show();
     } else {
       try {
+        AsukaSnackbar.message(WAIT).show();
         final value = await _controller.save();
         AsukaSnackbar.success(SUCCESS).show();
         Navigator.pop(context, value);
@@ -172,6 +173,7 @@ class _EventAddPageState extends State<EventAddPage> {
       AsukaSnackbar.alert(REQUIRED).show();
     } else {
       try {
+        AsukaSnackbar.message(WAIT).show();
         final value = await _controller.update();
         AsukaSnackbar.success(SUCCESS).show();
         Navigator.pop(context, value);

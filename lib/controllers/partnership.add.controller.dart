@@ -155,13 +155,16 @@ abstract class PartnershipAddControllerBase with Store {
 
   Future<String> _uploadPhoto() async {
     FirebaseStorage storage = FirebaseStorage.instance;
-    Reference reference = storage.ref().child(
-          'partnerPhotos/${partnership.id}',
-        );
+    late Reference reference;
+    if (partnership.photoUrl.isNotEmpty) {
+      reference = storage.refFromURL(partnership.photoUrl);
+      await reference.delete();
+    }
+    reference = storage.ref().child(
+      'partnerPhotos/${DateTime.now().millisecondsSinceEpoch}',
+    );
     await reference.putFile(photo);
-    return await reference.getDownloadURL().catchError((e) {
-      //errorMsg = "${e.message}";
-    });
+    return await reference.getDownloadURL();
   }
 }
 

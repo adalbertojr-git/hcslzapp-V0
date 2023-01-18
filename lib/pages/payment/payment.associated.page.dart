@@ -231,6 +231,7 @@ class _PaymentAssociatedPageState extends State<PaymentAssociatedPage> {
         });
     if (response == true) {
       try {
+        AsukaSnackbar.message(WAIT).show();
         await _controller.deleteById(_controller.payments[i]);
         AsukaSnackbar.success(SUCCESS).show();
         _controller.payments.removeAt(i);

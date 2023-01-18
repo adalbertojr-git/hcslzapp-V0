@@ -127,6 +127,7 @@ class ManagementAddPageState extends State<ManagementAddPage> {
       if (_controller.ids.isEmpty) {
         AsukaSnackbar.alert(SELECT).show();
       } else {
+        AsukaSnackbar.message(WAIT).show();
         await _controller.save();
         AsukaSnackbar.success(SUCCESS).show();
         Navigator.pop(context, _controller.listItems);

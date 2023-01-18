@@ -199,6 +199,7 @@ class ManagementListPageState extends State<ManagementListPage> {
             .show();
       } else {
         try {
+          AsukaSnackbar.message(WAIT).show();
           await _controller.deleteById(associated);
           AsukaSnackbar.success(SUCCESS).show();
           _controller.associateds.removeWhere(

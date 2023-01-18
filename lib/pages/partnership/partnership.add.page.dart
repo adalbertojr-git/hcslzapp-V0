@@ -49,8 +49,7 @@ class _PartnershipAddPageState extends State<PartnershipAddPage> {
         floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
         floatingActionButton: Button(
           icon: Icons.save,
-          onClick: () =>
-              widget.partnership == null ? _save() : _update(),
+          onClick: () => widget.partnership == null ? _save() : _update(),
         ),
       );
 
@@ -216,6 +215,7 @@ class _PartnershipAddPageState extends State<PartnershipAddPage> {
       AsukaSnackbar.alert(REQUIRED).show();
     } else {
       try {
+        AsukaSnackbar.message(WAIT).show();
         final value = _controller.save();
         AsukaSnackbar.success(SUCCESS).show();
         Navigator.of(context).pop(value);
@@ -244,8 +244,8 @@ class _PartnershipAddPageState extends State<PartnershipAddPage> {
             });
       }
       if (response == true) {
-
         try {
+          AsukaSnackbar.message(WAIT).show();
           final value = await _controller.update();
           AsukaSnackbar.success(SUCCESS).show();
           Navigator.pop(context, value);

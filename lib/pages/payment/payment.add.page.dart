@@ -277,6 +277,7 @@ class _PaymentAddAddState extends State<PaymentAddPage> {
       AsukaSnackbar.alert(REQUIRED).show();
     } else {
       try {
+        AsukaSnackbar.message(WAIT).show();
         final value = await _controller.save();
         AsukaSnackbar.success(SUCCESS).show();
         Navigator.of(context).pop(value);
@@ -293,7 +294,8 @@ class _PaymentAddAddState extends State<PaymentAddPage> {
       AsukaSnackbar.alert(REQUIRED).show();
     } else {
       try {
-        final value = await _controller.save();
+        AsukaSnackbar.message(WAIT).show();
+        final value = await _controller.update();
         AsukaSnackbar.success(SUCCESS).show();
         Navigator.of(context).pop(value);
       } on HttpException catch (e) {
