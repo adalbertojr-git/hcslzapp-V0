@@ -158,10 +158,12 @@ class _MonthBirthdaysListPageState extends State<MonthBirthdaysListPage> {
                       ),
                       Container(
                         child: Text(
-                          'Dia: ' +
-                              _controller.associateds[index].date_birth
-                                  .toString()
-                                  .substring(0, 2),
+                          _isToday(_controller.associateds[index].date_birth)
+                              ? 'É HOJE!!!'
+                              : 'Dia: ' +
+                                  _controller.associateds[index].date_birth
+                                      .toString()
+                                      .substring(0, 2),
                           style: TextStyle(
                             fontWeight: FontWeight.bold,
                             fontSize: 20,
