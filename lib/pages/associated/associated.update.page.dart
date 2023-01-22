@@ -105,6 +105,7 @@ class AssociatedUpdatePage extends StatelessWidget {
                 inputType: TextInputType.emailAddress,
                 onChanged: _controller.formController.changeEmail,
                 errorText: _controller.validateEmail(),
+                isPassword: _selectedProfile == ASSOCIATED ? false : true,
               );
             },
           ),
@@ -116,6 +117,7 @@ class AssociatedUpdatePage extends StatelessWidget {
             inputType: TextInputType.phone,
             maskTextInputFormatter:
                 MaskTextInputFormatter(mask: "(##) #####-####"),
+            isPassword: _selectedProfile == ASSOCIATED ? false : true,
           ),
           MyTextFormField(
             textEditingController: _controller.sponsorCtrl,
@@ -157,6 +159,7 @@ class AssociatedUpdatePage extends StatelessWidget {
                   label: labelCNH,
                   hint: hintCNH,
                   inputType: TextInputType.number,
+                  isPassword: _selectedProfile == ASSOCIATED ? false : true,
                 ),
               ),
               Expanded(
@@ -167,6 +170,7 @@ class AssociatedUpdatePage extends StatelessWidget {
                   inputType: TextInputType.number,
                   maskTextInputFormatter:
                       MaskTextInputFormatter(mask: "###.###.###-##"),
+                  isPassword: _selectedProfile == ASSOCIATED ? false : true,
                 ),
               ),
             ],
