@@ -65,7 +65,7 @@ class _MonthBirthdaysListPageState extends State<MonthBirthdaysListPage> {
                     } else
                       return CenteredMessage(
                         title: WARNING,
-                        message: NOTEXIST,
+                        message: NOTEXISTBIRTH,
                       );
                   }
               } //switch (snapshot.connectionState)

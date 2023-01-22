@@ -121,7 +121,7 @@ class _DependentAddPageState extends State<DependentAddPage> {
               ],
             ),
           ),
-          Padding(
+/*          Padding(
             padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 25),
             child: Row(
               children: <Widget>[
@@ -142,7 +142,7 @@ class _DependentAddPageState extends State<DependentAddPage> {
                 ),
               ],
             ),
-          ),
+          ),*/
         ],
       );
 }

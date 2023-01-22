@@ -90,7 +90,8 @@ abstract class DependentControllerBase with Store {
           cpf: cpf,
           bloodType: bloodType,
           dateBirth: dateBirth,
-          isAssociated: (isAssociated ? 'S' : 'N'));
+          isAssociated: 'N');
+          // isAssociated: (isAssociated ? 'S' : 'N'));
 
       /*
       pop = manda resposta para o push (then)
