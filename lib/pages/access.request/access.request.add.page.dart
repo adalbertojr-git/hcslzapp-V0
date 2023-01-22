@@ -57,7 +57,7 @@ class _AccessRequestAddPageState extends State<AccessRequestAddPage> {
           ),
           MyTextFormField(
             textEditingController: _controller.userCtrl,
-            hint: hintUser,
+            hint: hintUserAccessReq,
             label: labelUser,
             icon: Icons.account_circle_outlined,
             inputType: TextInputType.text,

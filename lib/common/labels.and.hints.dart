@@ -10,6 +10,7 @@ Access Request
 */
 const String labelName = 'Nome *';
 const String hintName = 'Informe seu nome completo, harleyro';
+const String hintUserAccessReq = 'Usuário para acesso ao App';
 const String labelEmail = 'Email';
 const String hintEmail = 'Informe o email (ex: hc@email.com) *';
 const String labelConfEmail = 'Confirme o email *';
