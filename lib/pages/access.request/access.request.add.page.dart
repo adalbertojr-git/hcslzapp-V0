@@ -158,7 +158,7 @@ class _AccessRequestAddPageState extends State<AccessRequestAddPage> {
         AsukaSnackbar.success(SUCCESS).show();
         Navigator.of(context).pop();
       } on HttpException catch (e) {
-        AsukaSnackbar.alert(e.message.toString() + 'Usuário já cadastrado')
+        AsukaSnackbar.alert(e.message.toString())
             .show();
       } catch (e) {
         AsukaSnackbar.alert(e.toString()).show();

@@ -13,17 +13,21 @@ class HttpException implements Exception {
 
 String? getMessage(Response response) {
   int code = 0;
-  String err = response.body.substring(1,
-      response.body.indexOf('trace')-2);
+  String err = response.body.substring(1, response.body.indexOf(']}'));
   if (err.contains('JWT expire', 0))
     code = 4011;
+  else if (response.statusCode == 409 && err.contains('User', 0))
+    code = 4091;
+  else if (response.statusCode == 409 && err.contains('Email', 0))
+    code = 4092;
   else
     code = response.statusCode;
   if (_statusCodeResponses.containsKey(code)) {
     return _statusCodeResponses[code];
   }
   return 'Erro inesperado na aplicação:\n Código ' +
-      response.statusCode.toString() + '\n\n' +
+      response.statusCode.toString() +
+      '\n\n' +
       err;
 }
 
@@ -35,7 +39,6 @@ final Map<int, String> _statusCodeResponses = {
   404: 'Pagina web não encontrada',
   405: 'Método HTTP requisitado não suportado',
   408: 'Tempo de requisição esgotado (Timeout)',
-  409: 'Erro de conflito: ',
   //erros no servidor
   500: 'Internal Server Error',
   502: 'Bad Gateway',
@@ -43,5 +46,7 @@ final Map<int, String> _statusCodeResponses = {
   504: 'Gateway Time-Out',
   505: 'HTTP Version not supported',
   //custom - token expirado
-  4011: 'Sua sessão expirou.\n Por favor, reconecte a aplicação'
+  4011: 'Sua sessão expirou.\n Por favor, reconecte a aplicação',
+  4091: 'Usuário já cadastrado',
+  4092: 'Email já cadastrado',
 };

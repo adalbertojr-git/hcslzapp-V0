@@ -28,7 +28,9 @@ class _MonthBirthdaysListPageState extends State<MonthBirthdaysListPage> {
   void initState() {
     _controller.getFuture().then((value) {
       _controller.setButtonVisibilty();
-    }).catchError((e) {});
+    }).catchError((e) {
+      print(e.toString());
+    });
     super.initState();
   }
 

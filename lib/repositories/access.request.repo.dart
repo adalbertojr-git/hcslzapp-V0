@@ -22,7 +22,6 @@ class AccessRequestRepo {
             headers: {
               'Content-type': 'application/json',
               'Accept': 'application/json',
-              HttpHeaders.authorizationHeader: locator.get<Token>().token,
             },
             body: encodedJson,
           )
