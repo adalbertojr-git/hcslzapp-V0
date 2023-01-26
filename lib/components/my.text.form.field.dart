@@ -14,6 +14,7 @@ class MyTextFormField extends StatelessWidget {
   final int? nLines;
   final String? label;
   final Function(String)? onChanged;
+  final Function()? onTap;
   final String? errorText;
   MaskTextInputFormatter? maskTextInputFormatter;
   final int? maxLength;
@@ -31,6 +32,7 @@ class MyTextFormField extends StatelessWidget {
     this.label,
     this.nLines,
     this.onChanged,
+    this.onTap,
     this.errorText,
     this.maskTextInputFormatter,
     this.maxLength,
@@ -94,6 +96,7 @@ class MyTextFormField extends StatelessWidget {
         maxLines: nLines ?? 1,
         controller: textEditingController,
         onChanged: onChanged,
+        onTap: onTap,
         inputFormatters: [maskTextInputFormatter!],
       ),
     );

@@ -118,8 +118,9 @@ class _EventAddPageState extends State<EventAddPage> {
           Row(
             children: <Widget>[
               Expanded(
-                child: Observer(builder: (_) {
-/*                  return MyTextFormField(
+                child: Observer(
+                  builder: (_) {
+                  return MyTextFormField(
                     textEditingController: _controller.iniDateCtrl,
                     label: labelInitialDate,
                     hint: hintDate,
@@ -127,42 +128,42 @@ class _EventAddPageState extends State<EventAddPage> {
                     inputType: TextInputType.datetime,
                     //onChanged: _controller.formController.changeDateBirth,
                     //errorText: _controller.validateDateBirth(),
-                  );*/
-                  return TextField(
+                    disabled: true,
+                    onTap: () async {
+                      DateTime? pickedDate = await showDatePicker(
+                          context: context,
+                          initialDate: DateTime.now(),
+                          firstDate: DateTime(2000),
+                          lastDate: DateTime(2101));
+                      if (pickedDate != null) {
+                        String formattedDate =
+                        DateFormat('dd/MM/yyyy').format(pickedDate);
+                        _controller.iniDateCtrl.text = formattedDate;
+                      }
+                    },
+                  );
+/*                    return TextFormField(
                       controller: _controller.iniDateCtrl,
-                      //editing controller of this TextField
                       decoration: const InputDecoration(
-                          icon: Icon(Icons.calendar_today), //icon of text field
-                          labelText: "Enter Date" //label text of field
-                          ),
+                        prefixIcon: Icon(Icons.calendar_today),
+                        labelText: labelInitialDate,
+                      ),
                       readOnly: true,
-                      // when true user cannot edit text
                       onTap: () async {
                         DateTime? pickedDate = await showDatePicker(
                             context: context,
                             initialDate: DateTime.now(),
-                            //get today's date
                             firstDate: DateTime(2000),
-                            //DateTime.now() - not to allow to choose before today.
                             lastDate: DateTime(2101));
                         if (pickedDate != null) {
-                          print(
-                              pickedDate); //get the picked date in the format => 2022-07-04 00:00:00.000
-                          String formattedDate = DateFormat('yyyy-MM-dd').format(
-                              pickedDate); // format date in required form here we use yyyy-MM-dd that means time is removed
-                          print(
-                              formattedDate); //formatted date output using intl package =>  2022-07-04
-                          //You can format date as per your need
-
-                          setState(() {
-                            _controller.iniDateCtrl.text =
-                                formattedDate; //set foratted date to TextField value.
-                          });
-                        } else {
-                          print("Date is not selected");
+                          String formattedDate =
+                              DateFormat('dd/MM/yyyy').format(pickedDate);
+                          _controller.iniDateCtrl.text = formattedDate;
                         }
-                      });
-                }),
+                      },
+                    );*/
+                  },
+                ),
               ),
               Expanded(
                 child: Observer(builder: (_) {
