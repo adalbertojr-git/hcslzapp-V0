@@ -120,35 +120,15 @@ class _EventAddPageState extends State<EventAddPage> {
               Expanded(
                 child: Observer(
                   builder: (_) {
-                  return MyTextFormField(
-                    textEditingController: _controller.iniDateCtrl,
-                    label: labelInitialDate,
-                    hint: hintDate,
-                    icon: Icons.calendar_today,
-                    inputType: TextInputType.datetime,
-                    //onChanged: _controller.formController.changeDateBirth,
-                    //errorText: _controller.validateDateBirth(),
-                    disabled: true,
-                    onTap: () async {
-                      DateTime? pickedDate = await showDatePicker(
-                          context: context,
-                          initialDate: DateTime.now(),
-                          firstDate: DateTime(2000),
-                          lastDate: DateTime(2101));
-                      if (pickedDate != null) {
-                        String formattedDate =
-                        DateFormat('dd/MM/yyyy').format(pickedDate);
-                        _controller.iniDateCtrl.text = formattedDate;
-                      }
-                    },
-                  );
-/*                    return TextFormField(
-                      controller: _controller.iniDateCtrl,
-                      decoration: const InputDecoration(
-                        prefixIcon: Icon(Icons.calendar_today),
-                        labelText: labelInitialDate,
-                      ),
-                      readOnly: true,
+                    return MyTextFormField(
+                      textEditingController: _controller.iniDateCtrl,
+                      label: labelInitialDate,
+                      hint: hintDate,
+                      icon: Icons.calendar_today,
+                      inputType: TextInputType.datetime,
+                      //onChanged: _controller.formController.changeDateBirth,
+                      //errorText: _controller.validateDateBirth(),
+                      disabled: true,
                       onTap: () async {
                         DateTime? pickedDate = await showDatePicker(
                             context: context,
@@ -161,23 +141,36 @@ class _EventAddPageState extends State<EventAddPage> {
                           _controller.iniDateCtrl.text = formattedDate;
                         }
                       },
-                    );*/
+                    );
                   },
                 ),
               ),
               Expanded(
-                child: Observer(builder: (_) {
-                  return MyTextFormField(
-                    textEditingController: _controller.endDateCtrl,
-                    label: labelEndDate,
-                    hint: hintDate,
-                    icon: Icons.calendar_today,
-                    inputType: TextInputType.datetime,
-
-                    //onChanged: _controller.formController.changeDateShield,
-                    //errorText: _controller.validateDateShield(),
-                  );
-                }),
+                child: Observer(
+                  builder: (_) {
+                    return MyTextFormField(
+                      textEditingController: _controller.endDateCtrl,
+                      label: labelEndDate,
+                      hint: hintDate,
+                      icon: Icons.calendar_today,
+                      inputType: TextInputType.datetime,
+                      //onChanged: _controller.formController.changeDateBirth,
+                      //errorText: _controller.validateDateBirth(),
+                      disabled: true,
+                      onTap: () async {
+                        DateTime? pickedDate = await showDatePicker(
+                            context: context,
+                            initialDate: DateTime.now(),
+                            firstDate: DateTime(2000),
+                            lastDate: DateTime(2101));
+                        if (pickedDate != null) {
+                          _controller.endDateCtrl.text =
+                              _controller.formatDate(pickedDate);
+                        }
+                      },
+                    );
+                  },
+                ),
               ),
             ],
           ),

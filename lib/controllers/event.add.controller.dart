@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:hcslzapp/models/event.dart';
 import 'package:hcslzapp/models/template.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:intl/intl.dart';
 import 'package:mobx/mobx.dart';
 import '../repositories/event.repo.dart';
 
@@ -62,6 +63,7 @@ abstract class EventAddControllerBase with Store {
   _initTextFields() {
     titleCtrl.text = event.title;
     descriptionCtrl.text = event.description;
+    iniDateCtrl.text = formatDate(DateTime.parse(eventDate));
   }
 
   @action
@@ -151,6 +153,8 @@ abstract class EventAddControllerBase with Store {
     await reference.putFile(photo);
     return await reference.getDownloadURL();
   }
+
+  String formatDate(DateTime date) => DateFormat('dd/MM/yyyy').format(date);
 }
 
 class FormController extends FormControllerBase with _$FormController {

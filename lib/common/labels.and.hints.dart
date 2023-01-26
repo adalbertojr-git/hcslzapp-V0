@@ -105,8 +105,8 @@ const String labelTitle = 'Título';
 const String hintTitle = 'Digite o título do evento';
 const String labelDescription = 'Descrição';
 const String hintDescription = 'Digite a descrição do evento';
-const String labelInitialDate = 'Início';
-const String labelEndDate = 'Fim';
+const String labelInitialDate = 'Data Incial';
+const String labelEndDate = 'Data Final';
 /*
 Forgot Password
 */

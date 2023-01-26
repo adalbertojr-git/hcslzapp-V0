@@ -70,7 +70,7 @@ class MyTextFormField extends StatelessWidget {
             ),
             borderRadius: BorderRadius.circular(_borderRadius),
           ),
-          fillColor: Colors.black26,
+          fillColor: Colors.black12,
           filled: disabled ?? false,
           prefixIcon: icon != null
               ? Icon(
