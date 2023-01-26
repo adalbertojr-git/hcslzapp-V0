@@ -126,8 +126,6 @@ class _EventAddPageState extends State<EventAddPage> {
                       hint: hintDate,
                       icon: Icons.calendar_today,
                       inputType: TextInputType.datetime,
-                      //onChanged: _controller.formController.changeDateBirth,
-                      //errorText: _controller.validateDateBirth(),
                       disabled: true,
                       onTap: () async {
                         DateTime? pickedDate = await showDatePicker(
@@ -154,8 +152,6 @@ class _EventAddPageState extends State<EventAddPage> {
                       hint: hintDate,
                       icon: Icons.calendar_today,
                       inputType: TextInputType.datetime,
-                      //onChanged: _controller.formController.changeDateBirth,
-                      //errorText: _controller.validateDateBirth(),
                       disabled: true,
                       onTap: () async {
                         DateTime? pickedDate = await showDatePicker(

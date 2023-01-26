@@ -42,7 +42,7 @@ class MyTextFormField extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     maskTextInputFormatter = maskTextInputFormatter ?? MaskTextInputFormatter();
-    double _borderRadius = 15.0;
+    double _borderRadius = 10.0;
     return Container(
       padding: const EdgeInsets.all(5.0),
       child: TextFormField(
