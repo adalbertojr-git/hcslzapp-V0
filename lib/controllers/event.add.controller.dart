@@ -24,6 +24,12 @@ abstract class EventAddControllerBase with Store {
   var descriptionCtrl = TextEditingController();
 
   @observable
+  var iniDateCtrl = TextEditingController();
+
+  @observable
+  var endDateCtrl = TextEditingController();
+
+  @observable
   String photoUrl = '';
 
   @observable

@@ -8,6 +8,7 @@ import 'package:hcslzapp/common/photo.image.provider.dart';
 import 'package:hcslzapp/components/button.dart';
 import 'package:hcslzapp/components/my.text.form.field.dart';
 import 'package:hcslzapp/models/event.dart';
+import 'package:intl/intl.dart';
 import '../../common/associated.profiles.dart';
 import '../../components/my.appbar.dart';
 import '../../components/my.bottom.appbar.dart';
@@ -114,6 +115,71 @@ class _EventAddPageState extends State<EventAddPage> {
               errorText: _controller.validateDescription(),
             );
           }),
+          Row(
+            children: <Widget>[
+              Expanded(
+                child: Observer(builder: (_) {
+/*                  return MyTextFormField(
+                    textEditingController: _controller.iniDateCtrl,
+                    label: labelInitialDate,
+                    hint: hintDate,
+                    icon: Icons.calendar_today,
+                    inputType: TextInputType.datetime,
+                    //onChanged: _controller.formController.changeDateBirth,
+                    //errorText: _controller.validateDateBirth(),
+                  );*/
+                  return TextField(
+                      controller: _controller.iniDateCtrl,
+                      //editing controller of this TextField
+                      decoration: const InputDecoration(
+                          icon: Icon(Icons.calendar_today), //icon of text field
+                          labelText: "Enter Date" //label text of field
+                          ),
+                      readOnly: true,
+                      // when true user cannot edit text
+                      onTap: () async {
+                        DateTime? pickedDate = await showDatePicker(
+                            context: context,
+                            initialDate: DateTime.now(),
+                            //get today's date
+                            firstDate: DateTime(2000),
+                            //DateTime.now() - not to allow to choose before today.
+                            lastDate: DateTime(2101));
+                        if (pickedDate != null) {
+                          print(
+                              pickedDate); //get the picked date in the format => 2022-07-04 00:00:00.000
+                          String formattedDate = DateFormat('yyyy-MM-dd').format(
+                              pickedDate); // format date in required form here we use yyyy-MM-dd that means time is removed
+                          print(
+                              formattedDate); //formatted date output using intl package =>  2022-07-04
+                          //You can format date as per your need
+
+                          setState(() {
+                            _controller.iniDateCtrl.text =
+                                formattedDate; //set foratted date to TextField value.
+                          });
+                        } else {
+                          print("Date is not selected");
+                        }
+                      });
+                }),
+              ),
+              Expanded(
+                child: Observer(builder: (_) {
+                  return MyTextFormField(
+                    textEditingController: _controller.endDateCtrl,
+                    label: labelEndDate,
+                    hint: hintDate,
+                    icon: Icons.calendar_today,
+                    inputType: TextInputType.datetime,
+
+                    //onChanged: _controller.formController.changeDateShield,
+                    //errorText: _controller.validateDateShield(),
+                  );
+                }),
+              ),
+            ],
+          ),
           SizedBox(
             height: 80,
           )
