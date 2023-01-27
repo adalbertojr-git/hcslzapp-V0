@@ -29,13 +29,13 @@ mixin _$MotorcycleController on MotorcycleControllerBase, Store {
       Atom(name: 'MotorcycleControllerBase.modelCtrl', context: context);
 
   @override
-  TextEditingController? get modelCtrl {
+  TextEditingController get modelCtrl {
     _$modelCtrlAtom.reportRead();
     return super.modelCtrl;
   }
 
   @override
-  set modelCtrl(TextEditingController? value) {
+  set modelCtrl(TextEditingController value) {
     _$modelCtrlAtom.reportWrite(value, super.modelCtrl, () {
       super.modelCtrl = value;
     });
@@ -45,13 +45,13 @@ mixin _$MotorcycleController on MotorcycleControllerBase, Store {
       Atom(name: 'MotorcycleControllerBase.yearCtrl', context: context);
 
   @override
-  TextEditingController? get yearCtrl {
+  TextEditingController get yearCtrl {
     _$yearCtrlAtom.reportRead();
     return super.yearCtrl;
   }
 
   @override
-  set yearCtrl(TextEditingController? value) {
+  set yearCtrl(TextEditingController value) {
     _$yearCtrlAtom.reportWrite(value, super.yearCtrl, () {
       super.yearCtrl = value;
     });
@@ -61,13 +61,13 @@ mixin _$MotorcycleController on MotorcycleControllerBase, Store {
       Atom(name: 'MotorcycleControllerBase.colorCtrl', context: context);
 
   @override
-  TextEditingController? get colorCtrl {
+  TextEditingController get colorCtrl {
     _$colorCtrlAtom.reportRead();
     return super.colorCtrl;
   }
 
   @override
-  set colorCtrl(TextEditingController? value) {
+  set colorCtrl(TextEditingController value) {
     _$colorCtrlAtom.reportWrite(value, super.colorCtrl, () {
       super.colorCtrl = value;
     });
@@ -77,13 +77,13 @@ mixin _$MotorcycleController on MotorcycleControllerBase, Store {
       Atom(name: 'MotorcycleControllerBase.licencePlateCtrl', context: context);
 
   @override
-  TextEditingController? get licencePlateCtrl {
+  TextEditingController get licencePlateCtrl {
     _$licencePlateCtrlAtom.reportRead();
     return super.licencePlateCtrl;
   }
 
   @override
-  set licencePlateCtrl(TextEditingController? value) {
+  set licencePlateCtrl(TextEditingController value) {
     _$licencePlateCtrlAtom.reportWrite(value, super.licencePlateCtrl, () {
       super.licencePlateCtrl = value;
     });
@@ -93,13 +93,13 @@ mixin _$MotorcycleController on MotorcycleControllerBase, Store {
       Atom(name: 'MotorcycleControllerBase.nicknameCtrl', context: context);
 
   @override
-  TextEditingController? get nicknameCtrl {
+  TextEditingController get nicknameCtrl {
     _$nicknameCtrlAtom.reportRead();
     return super.nicknameCtrl;
   }
 
   @override
-  set nicknameCtrl(TextEditingController? value) {
+  set nicknameCtrl(TextEditingController value) {
     _$nicknameCtrlAtom.reportWrite(value, super.nicknameCtrl, () {
       super.nicknameCtrl = value;
     });
@@ -109,13 +109,13 @@ mixin _$MotorcycleController on MotorcycleControllerBase, Store {
       Atom(name: 'MotorcycleControllerBase.chassisCtrl', context: context);
 
   @override
-  TextEditingController? get chassisCtrl {
+  TextEditingController get chassisCtrl {
     _$chassisCtrlAtom.reportRead();
     return super.chassisCtrl;
   }
 
   @override
-  set chassisCtrl(TextEditingController? value) {
+  set chassisCtrl(TextEditingController value) {
     _$chassisCtrlAtom.reportWrite(value, super.chassisCtrl, () {
       super.chassisCtrl = value;
     });
@@ -125,13 +125,13 @@ mixin _$MotorcycleController on MotorcycleControllerBase, Store {
       Atom(name: 'MotorcycleControllerBase.renavamCtrl', context: context);
 
   @override
-  TextEditingController? get renavamCtrl {
+  TextEditingController get renavamCtrl {
     _$renavamCtrlAtom.reportRead();
     return super.renavamCtrl;
   }
 
   @override
-  set renavamCtrl(TextEditingController? value) {
+  set renavamCtrl(TextEditingController value) {
     _$renavamCtrlAtom.reportWrite(value, super.renavamCtrl, () {
       super.renavamCtrl = value;
     });

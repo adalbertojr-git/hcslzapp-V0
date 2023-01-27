@@ -57,6 +57,38 @@ mixin _$EventAddController on EventAddControllerBase, Store {
     });
   }
 
+  late final _$iniDateCtrlAtom =
+      Atom(name: 'EventAddControllerBase.iniDateCtrl', context: context);
+
+  @override
+  TextEditingController get iniDateCtrl {
+    _$iniDateCtrlAtom.reportRead();
+    return super.iniDateCtrl;
+  }
+
+  @override
+  set iniDateCtrl(TextEditingController value) {
+    _$iniDateCtrlAtom.reportWrite(value, super.iniDateCtrl, () {
+      super.iniDateCtrl = value;
+    });
+  }
+
+  late final _$endDateCtrlAtom =
+      Atom(name: 'EventAddControllerBase.endDateCtrl', context: context);
+
+  @override
+  TextEditingController get endDateCtrl {
+    _$endDateCtrlAtom.reportRead();
+    return super.endDateCtrl;
+  }
+
+  @override
+  set endDateCtrl(TextEditingController value) {
+    _$endDateCtrlAtom.reportWrite(value, super.endDateCtrl, () {
+      super.endDateCtrl = value;
+    });
+  }
+
   late final _$photoUrlAtom =
       Atom(name: 'EventAddControllerBase.photoUrl', context: context);
 
@@ -211,6 +243,8 @@ mixin _$EventAddController on EventAddControllerBase, Store {
 idCtrl: ${idCtrl},
 titleCtrl: ${titleCtrl},
 descriptionCtrl: ${descriptionCtrl},
+iniDateCtrl: ${iniDateCtrl},
+endDateCtrl: ${endDateCtrl},
 photoUrl: ${photoUrl},
 photoPath: ${photoPath},
 photo: ${photo},
