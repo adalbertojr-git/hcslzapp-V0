@@ -90,7 +90,8 @@ class Template {
   Event loadEvent() => Event(
         id: 0,
         title: '',
-        date: '',
+        initialDate: '',
+        endDate: '',
         description: '',
         photoUrl: '',
       );

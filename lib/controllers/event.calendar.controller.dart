@@ -57,7 +57,8 @@ abstract class EventCalendarControllerBase with Store {
       ev.putIfAbsent(date, () => <Event>[]);
       var e = Event(
         id: event['id'],
-        date: event['date'],
+        initialDate: event['initialDate'],
+        endDate: event['endDate'],
         title: event['title'],
         description: event['description'],
         photoUrl: event['photoUrl'],

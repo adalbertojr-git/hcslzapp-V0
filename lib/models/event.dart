@@ -1,14 +1,16 @@
 class Event {
   int id;
   String title;
-  String date;
+  String initialDate;
+  String endDate;
   String description;
   String photoUrl;
 
   Event({
     required this.id,
     required this.title,
-    required this.date,
+    required this.initialDate,
+    required this.endDate,
     required this.description,
     required this.photoUrl,
   });
@@ -16,7 +18,8 @@ class Event {
   Event.fromJson(Map<String, dynamic> json)
       : id = json['id'],
         title = json['title'],
-        date = json['date'],
+        initialDate = json['initialDate'],
+        endDate = json['endDate'],
         description = json['description'],
         photoUrl = json['photoUrl'];
 
@@ -24,7 +27,8 @@ class Event {
     final Map<String, dynamic> data = new Map<String, dynamic>();
     data['id'] = this.id;
     data['title'] = this.title;
-    data['date'] = this.date;
+    data['initialDate'] = this.initialDate;
+    data['endDate'] = this.endDate;
     data['description'] = this.description;
     data['photoUrl'] = this.photoUrl;
     return data;
@@ -32,6 +36,7 @@ class Event {
 
   @override
   String toString() {
-    return 'Event:[{id: $id, title: $title, date: $date, description: $description, photoUrl: $photoUrl}]';
+    return 'Event:[{id: $id, title: $title, initialDate: $initialDate, '
+        'endDate: $endDate, description: $description, photoUrl: $photoUrl}]';
   }
 }

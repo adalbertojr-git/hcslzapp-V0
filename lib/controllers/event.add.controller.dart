@@ -86,7 +86,8 @@ abstract class EventAddControllerBase with Store {
     return Event(
         id: event.id,
         title: titleCtrl.text,
-        date: eventDate,
+        initialDate: eventDate,
+        endDate: eventDate,
         description: descriptionCtrl.text,
         photoUrl: _lPhotoUrl);
   }
