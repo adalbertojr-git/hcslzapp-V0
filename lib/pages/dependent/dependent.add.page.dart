@@ -92,8 +92,19 @@ class _DependentAddPageState extends State<DependentAddPage> {
                   label: labelDateBirth,
                   hint: hintDate,
                   inputType: TextInputType.datetime,
-                  onChanged: _controller.formController.changeDateBirth,
-                  errorText: _controller.validateDateBirth(),
+                  disabled: true,
+                  onTap: () async {
+                    DateTime? pickedDate = await showDatePicker(
+                      context: context,
+                      initialDate: DateTime.now(),
+                      firstDate: DateTime(1923),
+                      lastDate: DateTime(DateTime.now().year + 1),
+                    );
+                    if (pickedDate != null) {
+                      _controller.dateBirthCtrl.text =
+                          _controller.formatDate(pickedDate);
+                    }
+                  },
                 );
               })),
             ],

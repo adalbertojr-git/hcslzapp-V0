@@ -12,28 +12,28 @@ abstract class MotorcycleControllerBase with Store {
   var formController;
 
   @observable
-  late TextEditingController idCtrl = TextEditingController();
+  var idCtrl = TextEditingController();
 
   @observable
-  late TextEditingController? modelCtrl = TextEditingController();
+  var modelCtrl = TextEditingController();
 
   @observable
-  late TextEditingController? yearCtrl = TextEditingController();
+  var yearCtrl = TextEditingController();
 
   @observable
-  late TextEditingController? colorCtrl = TextEditingController();
+  var colorCtrl = TextEditingController();
 
   @observable
-  late TextEditingController? licencePlateCtrl = TextEditingController();
+  var licencePlateCtrl = TextEditingController();
 
   @observable
-  late TextEditingController? nicknameCtrl = TextEditingController();
+  var nicknameCtrl = TextEditingController();
 
   @observable
-  late TextEditingController? chassisCtrl = TextEditingController();
+  var chassisCtrl = TextEditingController();
 
   @observable
-  late TextEditingController? renavamCtrl = TextEditingController();
+  var renavamCtrl = TextEditingController();
 
   @observable
   Motorcycle motorcycle = Template().loadMotorcycle();
@@ -46,25 +46,25 @@ abstract class MotorcycleControllerBase with Store {
   }
 
   _initTextFields() {
-    modelCtrl?.text = motorcycle.model;
-    yearCtrl?.text = motorcycle.year;
-    colorCtrl?.text = motorcycle.color;
-    licencePlateCtrl?.text = motorcycle.licencePlate;
-    nicknameCtrl?.text = motorcycle.nickname;
-    chassisCtrl?.text = motorcycle.chassis;
-    renavamCtrl?.text = motorcycle.renavam;
+    modelCtrl.text = motorcycle.model;
+    yearCtrl.text = motorcycle.year;
+    colorCtrl.text = motorcycle.color;
+    licencePlateCtrl.text = motorcycle.licencePlate;
+    nicknameCtrl.text = motorcycle.nickname;
+    chassisCtrl.text = motorcycle.chassis;
+    renavamCtrl.text = motorcycle.renavam;
   }
 
   add(BuildContext context) {
     idCtrl.text = "0";
     final int id = int.parse(idCtrl.text);
-    final String model = modelCtrl!.text;
-    final String year = yearCtrl!.text;
-    final String color = colorCtrl!.text;
-    final String licencePlate = licencePlateCtrl!.text;
-    final String nickname = nicknameCtrl!.text;
-    final String chassis = chassisCtrl!.text;
-    final String renavam = renavamCtrl!.text;
+    final String model = modelCtrl.text;
+    final String year = yearCtrl.text;
+    final String color = colorCtrl.text;
+    final String licencePlate = licencePlateCtrl.text;
+    final String nickname = nicknameCtrl.text;
+    final String chassis = chassisCtrl.text;
+    final String renavam = renavamCtrl.text;
     if (model != '') {
       final motorcycle = Motorcycle(
         id: id,

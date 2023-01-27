@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:hcslzapp/models/template.dart';
+import 'package:intl/intl.dart';
 import '../enums/blood.types.dart';
 import '../models/dependent.dart';
 import 'package:mobx/mobx.dart';
@@ -12,28 +13,28 @@ abstract class DependentControllerBase with Store {
   var formController;
 
   @observable
-  late TextEditingController idCtrl = TextEditingController();
+  var idCtrl = TextEditingController();
 
   @observable
-  late TextEditingController? nameCtrl = TextEditingController();
+  var nameCtrl = TextEditingController();
 
   @observable
-  late TextEditingController? phoneCtrl = TextEditingController();
+  var phoneCtrl = TextEditingController();
 
   @observable
-  late TextEditingController? emailCtrl = TextEditingController();
+  var emailCtrl = TextEditingController();
 
   @observable
-  late TextEditingController? cpfCtrl = TextEditingController();
+  var cpfCtrl = TextEditingController();
 
   @observable
-  late TextEditingController? bloodTypeCtrl = TextEditingController();
+  var bloodTypeCtrl = TextEditingController();
 
   @observable
-  late TextEditingController? dateBirthCtrl = TextEditingController();
+  var dateBirthCtrl = TextEditingController();
 
   @observable
-  late TextEditingController? isAssociatedCtrl = TextEditingController();
+  var isAssociatedCtrl = TextEditingController();
 
   @observable
   bool isAssociated = false;
@@ -58,16 +59,15 @@ abstract class DependentControllerBase with Store {
     formController = FormController(
       name: dependent.name,
       email: dependent.email,
-      dateBirth: dependent.dateBirth,
     );
   }
 
   _initTextFields() {
-    nameCtrl?.text = dependent.name;
-    emailCtrl?.text = dependent.email;
-    phoneCtrl?.text = dependent.phone;
-    cpfCtrl?.text = dependent.cpf;
-    dateBirthCtrl?.text = dependent.dateBirth;
+    nameCtrl.text = dependent.name;
+    emailCtrl.text = dependent.email;
+    phoneCtrl.text = dependent.phone;
+    cpfCtrl.text = dependent.cpf;
+    dateBirthCtrl.text = dependent.dateBirth;
   }
 
   String changedDropDownItem(selected) => currentBloodType = selected;
@@ -75,12 +75,12 @@ abstract class DependentControllerBase with Store {
   add(BuildContext context) {
     idCtrl.text = "0";
     final int id = int.parse(idCtrl.text);
-    final String name = nameCtrl!.text;
-    final String email = emailCtrl!.text;
-    final String phone = phoneCtrl!.text;
-    final String cpf = cpfCtrl!.text;
+    final String name = nameCtrl.text;
+    final String email = emailCtrl.text;
+    final String phone = phoneCtrl.text;
+    final String cpf = cpfCtrl.text;
     final String bloodType = currentBloodType;
-    final String dateBirth = dateBirthCtrl!.text;
+    final String dateBirth = dateBirthCtrl.text;
     if (name != '') {
       final dependent = Dependent(
           id: id,
@@ -91,7 +91,7 @@ abstract class DependentControllerBase with Store {
           bloodType: bloodType,
           dateBirth: dateBirth,
           isAssociated: 'N');
-          // isAssociated: (isAssociated ? 'S' : 'N'));
+      // isAssociated: (isAssociated ? 'S' : 'N'));
 
       /*
       pop = manda resposta para o push (then)
@@ -122,33 +122,16 @@ abstract class DependentControllerBase with Store {
     return null;
   }
 
-  String? validateDateBirth() {
-    const String _labelDatelNotValid = 'Informe uma data válida!!!';
-
-    if (!RegExp(
-        r"^(?:(?:31(\/)(?:0?[13578]|1[02]))\1|(?:(?:29|30)(\/)"
-        r"(?:0?[13-9]|1[0-2])\2))(?:(?:1[6-9]|[2-9]\d)?\d{2})$|^"
-        r"(?:29(\/)0?2\3(?:(?:(?:1[6-9]|[2-9]\d)?(?:0[48]|[2468][048]|"
-        r"[13579][26])|(?:(?:16|[2468][048]|[3579][26])00))))$|^"
-        r"(?:0?[1-9]|1\d|2[0-8])(\/)(?:(?:0?[1-9])|"
-        r"(?:1[0-2]))\4(?:(?:1[6-9]|[2-9]\d)?\d{2})$")
-        .hasMatch(formController.dateBirth)) {
-      return _labelDatelNotValid;
-    }
-    return null;
-  }
-
+  String formatDate(DateTime date) => DateFormat('dd/MM/yyyy').format(date);
 }
 
 class FormController extends FormControllerBase with _$FormController {
   FormController({
     String? name,
     String? email,
-    String? dateBirth,
   }) {
     super.name = name;
     super.email = email;
-    super.dateBirth = dateBirth;
   }
 }
 
@@ -159,15 +142,9 @@ abstract class FormControllerBase with Store {
   @observable
   String? email;
 
-  @observable
-  String? dateBirth;
-
   @action
   changeName(String value) => name = value;
 
   @action
   changeEmail(String value) => email = value;
-
-  @action
-  changeDateBirth(String value) => dateBirth = value;
 }
