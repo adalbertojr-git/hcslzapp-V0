@@ -2,6 +2,7 @@ import 'dart:async';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:hcslzapp/models/template.dart';
+import 'package:intl/intl.dart';
 import '../models/associated.dart';
 import '../models/dependent.dart';
 import '../models/motorcycle.dart';
@@ -110,21 +111,14 @@ abstract class AssociatedUpdateControllerBase with Store {
     formController = FormController(
       name: associated.name,
       email: associated.email,
-      dateBirth: associated.dateBirth,
-      dateShield: associated.dateShield,
     );
   }
 
-  bool get hasErrors =>
-      hasErrorName || hasErrorEmail || hasErrorDateBirth || hasErrorDateShield;
+  bool get hasErrors => hasErrorName || hasErrorEmail;
 
   bool get hasErrorName => validateName() != null;
 
   bool get hasErrorEmail => validateEmail() != null;
-
-  bool get hasErrorDateBirth => validateDateBirth() != null;
-
-  bool get hasErrorDateShield => validateDateShield() != null;
 
   @action
   Future<Associated> update(Associated associated) async =>
@@ -159,40 +153,6 @@ abstract class AssociatedUpdateControllerBase with Store {
 
     if (formController.name.isEmpty) {
       return _labelNameRequired;
-    }
-    return null;
-  }
-
-  String? validateDateBirth() {
-    const String _labelDatelNotValid = 'Informe uma data válida!!!';
-
-    if (formController.dateBirth.isNotEmpty) {
-      if (!RegExp(r"^(?:(?:31(\/)(?:0?[13578]|1[02]))\1|(?:(?:29|30)(\/)"
-              r"(?:0?[13-9]|1[0-2])\2))(?:(?:1[6-9]|[2-9]\d)?\d{2})$|^"
-              r"(?:29(\/)0?2\3(?:(?:(?:1[6-9]|[2-9]\d)?(?:0[48]|[2468][048]|"
-              r"[13579][26])|(?:(?:16|[2468][048]|[3579][26])00))))$|^"
-              r"(?:0?[1-9]|1\d|2[0-8])(\/)(?:(?:0?[1-9])|"
-              r"(?:1[0-2]))\4(?:(?:1[6-9]|[2-9]\d)?\d{2})$")
-          .hasMatch(formController.dateBirth)) {
-        return _labelDatelNotValid;
-      }
-    }
-    return null;
-  }
-
-  String? validateDateShield() {
-    const String _labelDatelNotValid = 'Informe uma data válida!!!';
-
-    if (formController.dateShield.isNotEmpty) {
-      if (!RegExp(r"^(?:(?:31(\/)(?:0?[13578]|1[02]))\1|(?:(?:29|30)(\/)"
-              r"(?:0?[13-9]|1[0-2])\2))(?:(?:1[6-9]|[2-9]\d)?\d{2})$|^"
-              r"(?:29(\/)0?2\3(?:(?:(?:1[6-9]|[2-9]\d)?(?:0[48]|[2468][048]|"
-              r"[13579][26])|(?:(?:16|[2468][048]|[3579][26])00))))$|^"
-              r"(?:0?[1-9]|1\d|2[0-8])(\/)(?:(?:0?[1-9])|"
-              r"(?:1[0-2]))\4(?:(?:1[6-9]|[2-9]\d)?\d{2})$")
-          .hasMatch(formController.dateShield)) {
-        return _labelDatelNotValid;
-      }
     }
     return null;
   }
@@ -252,19 +212,17 @@ abstract class AssociatedUpdateControllerBase with Store {
       //errorMsg = "${e.message}";
     });
   }
+
+  String formatDate(DateTime date) => DateFormat('dd/MM/yyyy').format(date);
 }
 
 class FormController extends FormControllerBase with _$FormController {
   FormController({
     String? name,
     String? email,
-    String? dateBirth,
-    String? dateShield,
   }) {
     super.name = name;
     super.email = email;
-    super.dateBirth = dateBirth;
-    super.dateShield = dateShield;
   }
 }
 
@@ -275,21 +233,9 @@ abstract class FormControllerBase with Store {
   @observable
   String? email;
 
-  @observable
-  String? dateBirth;
-
-  @observable
-  String? dateShield;
-
   @action
   changeName(String value) => name = value;
 
   @action
   changeEmail(String value) => email = value;
-
-  @action
-  changeDateBirth(String value) => dateBirth = value;
-
-  @action
-  changeDateShield(String value) => dateShield = value;
 }
