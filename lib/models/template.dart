@@ -92,6 +92,7 @@ class Template {
         title: '',
         initialDate: '',
         endDate: '',
+        date: '',
         description: '',
         photoUrl: '',
       );

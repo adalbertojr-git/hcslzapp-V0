@@ -59,6 +59,7 @@ abstract class EventCalendarControllerBase with Store {
         id: event['id'],
         initialDate: event['initialDate'],
         endDate: event['endDate'],
+        date: event['date'],
         title: event['title'],
         description: event['description'],
         photoUrl: event['photoUrl'],

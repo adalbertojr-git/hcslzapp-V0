@@ -3,6 +3,7 @@ class Event {
   String title;
   String initialDate;
   String endDate;
+  String date;
   String description;
   String photoUrl;
 
@@ -11,6 +12,7 @@ class Event {
     required this.title,
     required this.initialDate,
     required this.endDate,
+    required this.date,
     required this.description,
     required this.photoUrl,
   });
@@ -20,6 +22,7 @@ class Event {
         title = json['title'],
         initialDate = json['initialDate'],
         endDate = json['endDate'],
+        date = json['date'],
         description = json['description'],
         photoUrl = json['photoUrl'];
 
@@ -29,6 +32,7 @@ class Event {
     data['title'] = this.title;
     data['initialDate'] = this.initialDate;
     data['endDate'] = this.endDate;
+    data['date'] = this.date;
     data['description'] = this.description;
     data['photoUrl'] = this.photoUrl;
     return data;
@@ -37,6 +41,6 @@ class Event {
   @override
   String toString() {
     return 'Event:[{id: $id, title: $title, initialDate: $initialDate, '
-        'endDate: $endDate, description: $description, photoUrl: $photoUrl}]';
+        'endDate: $endDate, date: $date, description: $description, photoUrl: $photoUrl}]';
   }
 }

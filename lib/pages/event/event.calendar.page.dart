@@ -232,6 +232,9 @@ class _EventCalendarPageState extends State<EventCalendarPage> {
                                 fontWeight: FontWeight.bold,
                               ),
                             ),
+                            subtitle: Text(value[index].initialDate +
+                                ' a ' +
+                                value[index].endDate),
                             trailing: widget._selectedProfile == ADMIN
                                 ? Wrap(
                                     spacing: 10, // space between two icons
@@ -337,7 +340,7 @@ class _EventCalendarPageState extends State<EventCalendarPage> {
     if (response == true) {
       try {
         AsukaSnackbar.message(WAIT).show();
-        if(event.photoUrl != '') {
+        if (event.photoUrl != '') {
           await _controller.deletePhoto(event);
         }
         await _controller.deleteById(event);

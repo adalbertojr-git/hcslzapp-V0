@@ -8,7 +8,6 @@ import 'package:hcslzapp/common/photo.image.provider.dart';
 import 'package:hcslzapp/components/button.dart';
 import 'package:hcslzapp/components/my.text.form.field.dart';
 import 'package:hcslzapp/models/event.dart';
-import 'package:intl/intl.dart';
 import '../../common/associated.profiles.dart';
 import '../../components/my.appbar.dart';
 import '../../components/my.bottom.appbar.dart';
@@ -134,9 +133,8 @@ class _EventAddPageState extends State<EventAddPage> {
                             firstDate: DateTime(2000),
                             lastDate: DateTime(2101));
                         if (pickedDate != null) {
-                          String formattedDate =
-                              DateFormat('dd/MM/yyyy').format(pickedDate);
-                          _controller.iniDateCtrl.text = formattedDate;
+                          _controller.iniDateCtrl.text =
+                              _controller.formatDate(pickedDate);
                         }
                       },
                     );

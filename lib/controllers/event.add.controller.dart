@@ -51,6 +51,12 @@ abstract class EventAddControllerBase with Store {
   @observable
   String eventDate = '';
 
+  @observable
+  String pickedInitialDate = '';
+
+  @observable
+  String pickedEndDate = '';
+
   init() {
     _initTextFields();
     photoUrl = event.photoUrl;
@@ -64,6 +70,7 @@ abstract class EventAddControllerBase with Store {
     titleCtrl.text = event.title;
     descriptionCtrl.text = event.description;
     iniDateCtrl.text = formatDate(DateTime.parse(eventDate));
+    endDateCtrl.text = formatDate(DateTime.parse(eventDate));
   }
 
   @action
@@ -81,13 +88,21 @@ abstract class EventAddControllerBase with Store {
     if (photo.path != '') {
       //se houve alteração de foto
       await _uploadPhoto().then((value) => _lPhotoUrl = value);
-    } else
+    } else {
       _lPhotoUrl = photoUrl;
+    }
+    pickedInitialDate = formatDateYMD(
+      DateFormat('dd/MM/yyyy').parse(iniDateCtrl.text),
+    );
+    pickedEndDate = formatDateYMD(
+      DateFormat('dd/MM/yyyy').parse(endDateCtrl.text),
+    );
     return Event(
         id: event.id,
         title: titleCtrl.text,
-        initialDate: eventDate,
-        endDate: eventDate,
+        initialDate: pickedInitialDate,
+        endDate: pickedEndDate,
+        date: '',
         description: descriptionCtrl.text,
         photoUrl: _lPhotoUrl);
   }
@@ -156,6 +171,8 @@ abstract class EventAddControllerBase with Store {
   }
 
   String formatDate(DateTime date) => DateFormat('dd/MM/yyyy').format(date);
+
+  String formatDateYMD(DateTime date) => DateFormat('yyyy-MM-dd').format(date);
 }
 
 class FormController extends FormControllerBase with _$FormController {
