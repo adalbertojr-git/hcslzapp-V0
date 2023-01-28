@@ -384,6 +384,7 @@ class AssociatedUpdatePage extends StatelessWidget {
                       backgroundColor: Colors.white,
                     ),
                   ),
+                  dense: true,
                   trailing: Wrap(
                     spacing: 10, // space between two icons
                     children: <Widget>[
@@ -491,6 +492,7 @@ class AssociatedUpdatePage extends StatelessWidget {
                       backgroundColor: Colors.white,
                     ),
                   ),
+                  dense: true,
                   trailing: Wrap(
                     spacing: 10, // space between two icons
                     children: <Widget>[
