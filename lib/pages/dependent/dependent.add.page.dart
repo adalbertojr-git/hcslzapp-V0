@@ -7,6 +7,7 @@ import 'package:hcslzapp/enums/blood.types.dart';
 import 'package:hcslzapp/components/my.text.form.field.dart';
 import 'package:hcslzapp/models/dependent.dart';
 import 'package:mask_text_input_formatter/mask_text_input_formatter.dart';
+import '../../common/associated.profiles.dart';
 import '../../components/my.appbar.dart';
 import '../../components/my.bottom.appbar.dart';
 
@@ -14,8 +15,9 @@ const String _title = 'Dependente';
 
 class DependentAddPage extends StatefulWidget {
   final Dependent? dependent;
+  final String _selectedProfile;
 
-  DependentAddPage(this.dependent);
+  DependentAddPage(this._selectedProfile, this.dependent);
 
   @override
   _DependentAddPageState createState() => _DependentAddPageState();
@@ -69,7 +71,8 @@ class _DependentAddPageState extends State<DependentAddPage> {
                 hint: hintEmail,
                 icon: Icons.email,
                 inputType: TextInputType.emailAddress,
-                isPassword: true,
+                isPassword:
+                    widget._selectedProfile == ASSOCIATED ? false : true,
                 onChanged: _controller.formController.changeEmail,
                 errorText: _controller.validateEmail(),
               );
@@ -83,7 +86,8 @@ class _DependentAddPageState extends State<DependentAddPage> {
                   label: labelPhone,
                   hint: hintPhone,
                   inputType: TextInputType.phone,
-                  isPassword: true,
+                  isPassword:
+                      widget._selectedProfile == ASSOCIATED ? false : true,
                   maskTextInputFormatter:
                       MaskTextInputFormatter(mask: "(##) #####-####"),
                 ),
@@ -94,8 +98,8 @@ class _DependentAddPageState extends State<DependentAddPage> {
                   label: labelDateBirth,
                   hint: hintDate,
                   inputType: TextInputType.datetime,
-                  disabled: true,
-                  isPassword: true,
+                  isPassword:
+                      widget._selectedProfile == ASSOCIATED ? false : true,
                   onTap: () async {
                     DateTime? pickedDate = await showDatePicker(
                       context: context,

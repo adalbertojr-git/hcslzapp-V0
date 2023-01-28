@@ -117,7 +117,6 @@ class AssociatedUpdatePage extends StatelessWidget {
             inputType: TextInputType.phone,
             maskTextInputFormatter:
                 MaskTextInputFormatter(mask: "(##) #####-####"),
-            isPassword: _selectedProfile == ASSOCIATED ? false : true,
           ),
           MyTextFormField(
             textEditingController: _controller.sponsorCtrl,
@@ -224,18 +223,20 @@ class AssociatedUpdatePage extends StatelessWidget {
                     inputType: TextInputType.datetime,
                     disabled: true,
                     isPassword: true,
-                    onTap: _selectedProfile == ASSOCIATED ? () async {
-                      DateTime? pickedDate = await showDatePicker(
-                        context: context,
-                        initialDate: DateTime.now(),
-                        firstDate: DateTime(1923),
-                        lastDate: DateTime(DateTime.now().year + 1),
-                      );
-                      if (pickedDate != null) {
-                        _controller.dateBirthCtrl.text =
-                            _controller.formatDate(pickedDate);
-                      }
-                    } : null,
+                    onTap: _selectedProfile == ASSOCIATED
+                        ? () async {
+                            DateTime? pickedDate = await showDatePicker(
+                              context: context,
+                              initialDate: DateTime.now(),
+                              firstDate: DateTime(1923),
+                              lastDate: DateTime(DateTime.now().year + 1),
+                            );
+                            if (pickedDate != null) {
+                              _controller.dateBirthCtrl.text =
+                                  _controller.formatDate(pickedDate);
+                            }
+                          }
+                        : null,
                   );
                 }),
               ),
@@ -402,8 +403,10 @@ class AssociatedUpdatePage extends StatelessWidget {
                           final Future future = Navigator.push(
                             context,
                             MaterialPageRoute(
-                              builder: (context) =>
-                                  DependentAddPage(_controller.dependents[i]),
+                              builder: (context) => DependentAddPage(
+                                _selectedProfile,
+                                _controller.dependents[i],
+                              ),
                             ),
                           );
                           future.then(
@@ -439,7 +442,10 @@ class AssociatedUpdatePage extends StatelessWidget {
                 final Future future = Navigator.push(
                   context,
                   MaterialPageRoute(
-                      builder: (context) => DependentAddPage(null)),
+                      builder: (context) => DependentAddPage(
+                            _selectedProfile,
+                            null,
+                          )),
                 );
                 future.then(
                   (dependent) {
