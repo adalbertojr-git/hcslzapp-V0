@@ -126,7 +126,7 @@ class _EventAddPageState extends State<EventAddPage> {
                       icon: Icons.calendar_today,
                       inputType: TextInputType.datetime,
                       disabled: true,
-                      onTap: () async {
+                      onTap: widget._selectedProfile == ADMIN ? () async {
                         DateTime? pickedDate = await showDatePicker(
                             context: context,
                             initialDate: DateTime.now(),
@@ -136,7 +136,7 @@ class _EventAddPageState extends State<EventAddPage> {
                           _controller.iniDateCtrl.text =
                               _controller.formatDate(pickedDate);
                         }
-                      },
+                      } : null,
                     );
                   },
                 ),
@@ -151,7 +151,7 @@ class _EventAddPageState extends State<EventAddPage> {
                       icon: Icons.calendar_today,
                       inputType: TextInputType.datetime,
                       disabled: true,
-                      onTap: () async {
+                      onTap: widget._selectedProfile == ADMIN ? () async {
                         DateTime? pickedDate = await showDatePicker(
                             context: context,
                             initialDate: DateTime.now(),
@@ -161,7 +161,7 @@ class _EventAddPageState extends State<EventAddPage> {
                           _controller.endDateCtrl.text =
                               _controller.formatDate(pickedDate);
                         }
-                      },
+                      } : null,
                     );
                   },
                 ),
