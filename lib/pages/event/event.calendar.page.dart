@@ -242,7 +242,7 @@ class _EventCalendarPageState extends State<EventCalendarPage> {
                                         value[index].endDate.substring(8, 10),
                                   )
                                 : Text(
-                                    'Dia: ' +
+                                    'Período: dia ' +
                                         value[index]
                                             .initialDate
                                             .substring(8, 10),
