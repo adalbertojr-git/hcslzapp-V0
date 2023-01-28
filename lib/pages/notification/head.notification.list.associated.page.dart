@@ -104,6 +104,7 @@ class _HeadNotificationListAssociatedPageState
                       Container(
                         padding: EdgeInsets.all(5),
                         width: double.infinity,
+                        height: 190,
                         child: Card(
                           elevation: 5,
                           child: Column(
@@ -127,10 +128,18 @@ class _HeadNotificationListAssociatedPageState
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
-                            Icon(Icons.message_outlined),
-                            Text('Publicado em: ' +
-                                _controller
-                                    .headNotifications[index].datePublication)
+                            Icon(
+                              Icons.message_outlined,
+                              size: 20,
+                            ),
+                            Text(
+                              ' Publicado em: ' +
+                                  _controller
+                                      .headNotifications[index].datePublication,
+                              style: TextStyle(
+                                fontSize: 12,
+                              ),
+                            )
                           ],
                         ),
                       )
