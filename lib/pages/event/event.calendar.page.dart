@@ -247,7 +247,6 @@ class _EventCalendarPageState extends State<EventCalendarPage> {
                                             .initialDate
                                             .substring(8, 10),
                                   ),
-                            isThreeLine: true,
                             trailing: widget._selectedProfile == ADMIN
                                 ? Wrap(
                                     spacing: 10, // space between two icons
