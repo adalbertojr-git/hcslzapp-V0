@@ -52,8 +52,8 @@ class _EventCalendarPageState extends State<EventCalendarPage> {
       _controller.setButtonVisibilty();
     }).catchError((e) {});
     _selectedDay = _focusedDay;
-    kFirstDay = DateTime(kToday.year, kToday.month - 3, kToday.day);
-    kLastDay = DateTime(kToday.year, kToday.month + 3, kToday.day);
+    kFirstDay = DateTime(2023, 01, 01);
+    kLastDay = DateTime(2101, 12, 31);
   }
 
   @override
