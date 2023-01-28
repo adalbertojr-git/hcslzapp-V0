@@ -105,9 +105,13 @@ class AccessRequestListPageState extends State<AccessRequestListPage> {
 
   _allow() async {
     try {
-      await _controller.allow();
-      AsukaSnackbar.success(SUCCESS).show();
-      Navigator.of(context).pop();
+      if (_controller.accessRequests.isEmpty) {
+        AsukaSnackbar.alert(NOTSELECTED).show();
+      } else {
+        await _controller.allow();
+        AsukaSnackbar.success(SUCCESS).show();
+        Navigator.of(context).pop();
+      }
     } on HttpException catch (e) {
       AsukaSnackbar.alert(e.message.toString()).show();
     } catch (e) {

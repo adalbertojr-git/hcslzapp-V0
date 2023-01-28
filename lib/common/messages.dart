@@ -7,3 +7,4 @@ const String SELECT = 'Selecione pelo menos um item na lista';
 const String ERROR = 'Oops!';
 const String WARNING = 'Atenção!';
 const String WAIT = 'Aguarde...';
+const String NOTSELECTED = 'Nenhum item selecionado na lista';

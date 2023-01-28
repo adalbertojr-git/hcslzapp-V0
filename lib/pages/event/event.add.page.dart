@@ -18,13 +18,13 @@ const String _title = 'Evento';
 
 class EventAddPage extends StatefulWidget {
   final Event? _event;
-  final String _eventDate;
+  //final String _eventDate;
   final String _selectedProfile;
 
   EventAddPage(
     this._selectedProfile,
     this._event,
-    this._eventDate,
+    //this._eventDate,
   );
 
   @override
@@ -37,7 +37,7 @@ class _EventAddPageState extends State<EventAddPage> {
   @override
   void initState() {
     _controller.event = widget._event ?? _controller.event;
-    _controller.eventDate = widget._eventDate;
+    //_controller.eventDate = widget._eventDate;
     _controller.init();
     super.initState();
   }

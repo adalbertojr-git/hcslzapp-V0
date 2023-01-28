@@ -134,7 +134,7 @@ class _EventCalendarPageState extends State<EventCalendarPage> {
                             builder: (context) => EventAddPage(
                               widget._selectedProfile,
                               null,
-                              _selectedDay.toString().substring(0, 10),
+                              //_selectedDay.toString().substring(0, 10),
                             ),
                           ),
                         );
@@ -258,9 +258,9 @@ class _EventCalendarPageState extends State<EventCalendarPage> {
                                                   EventAddPage(
                                                 widget._selectedProfile,
                                                 value[index],
-                                                _selectedDay
+/*                                                _selectedDay
                                                     .toString()
-                                                    .substring(0, 10),
+                                                    .substring(0, 10),*/
                                               ),
                                             ),
                                           );
@@ -282,9 +282,9 @@ class _EventCalendarPageState extends State<EventCalendarPage> {
                                           builder: (context) => EventAddPage(
                                             widget._selectedProfile,
                                             value[index],
-                                            _selectedDay
+/*                                            _selectedDay
                                                 .toString()
-                                                .substring(0, 10),
+                                                .substring(0, 10),*/
                                           ),
                                         ),
                                       );
