@@ -317,7 +317,7 @@ class _EventCalendarPageState extends State<EventCalendarPage> {
       );
 
   _photo(Event event) => Container(
-        width: 70.0,
+        width: 60.0,
         padding: EdgeInsets.all(2.0),
         decoration: BoxDecoration(
           color: Colors.black.withOpacity(0.2),
