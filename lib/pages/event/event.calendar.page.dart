@@ -30,7 +30,7 @@ class EventCalendarPage extends StatefulWidget {
 
 class _EventCalendarPageState extends State<EventCalendarPage> {
   final EventCalendarController _controller = EventCalendarController();
-  CalendarFormat _calendarFormat = CalendarFormat.month;
+  CalendarFormat _calendarFormat = CalendarFormat.twoWeeks;
   RangeSelectionMode _rangeSelectionMode = RangeSelectionMode
       .toggledOff; // Can be toggled on/off by longpressing a date
   DateTime _focusedDay = DateTime.now();
