@@ -84,8 +84,7 @@ class _HeadNotificationListAssociatedPageState
           SizedBox(height: 10),
           Container(
             height: MediaQuery.of(context).size.height - 160,
-            child: ListView.builder(
-              scrollDirection: Axis.horizontal,
+            child: ListView.separated(
               itemCount: _controller.headNotifications.length,
               itemBuilder: (context, index) {
                 return Container(
@@ -102,27 +101,25 @@ class _HeadNotificationListAssociatedPageState
                         height: 5,
                       ),
                       _photo(index),
-                      Expanded(
-                        child: Container(
-                          padding: EdgeInsets.all(5),
-                          width: double.infinity,
-                          child: Card(
-                            elevation: 5,
-                            child: Column(
-                              children: [
-                                Text(
-                                  _controller.headNotifications[index].title +
-                                      '\n',
-                                  style: TextStyle(
-                                      fontWeight: FontWeight.bold,
-                                      fontSize: 18.0),
-                                ),
-                                Text(
-                                    _controller
-                                        .headNotifications[index].notification,
-                                    style: TextStyle(fontSize: 14.0)),
-                              ],
-                            ),
+                      Container(
+                        padding: EdgeInsets.all(5),
+                        width: double.infinity,
+                        child: Card(
+                          elevation: 5,
+                          child: Column(
+                            children: [
+                              Text(
+                                _controller.headNotifications[index].title +
+                                    '\n',
+                                style: TextStyle(
+                                    fontWeight: FontWeight.bold,
+                                    fontSize: 18.0),
+                              ),
+                              Text(
+                                  _controller
+                                      .headNotifications[index].notification,
+                                  style: TextStyle(fontSize: 14.0)),
+                            ],
                           ),
                         ),
                       ),
@@ -141,6 +138,7 @@ class _HeadNotificationListAssociatedPageState
                   ),
                 );
               },
+              separatorBuilder: (_, int index) => const Divider(),
             ),
           ),
         ],
