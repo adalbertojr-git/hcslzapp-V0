@@ -229,9 +229,11 @@ class _EventCalendarPageState extends State<EventCalendarPage> {
                                 fontWeight: FontWeight.bold,
                               ),
                             ),
-                            subtitle: Text('Início: ' + value[index].initialDate +
+                            subtitle: Text('Início: ' +
+                                value[index].initialDate +
                                 '\n' +
-                                'Fim: ' + value[index].endDate),
+                                'Fim: ' +
+                                value[index].endDate),
                             isThreeLine: true,
                             // dense: true,
                             trailing: widget._selectedProfile == ADMIN
@@ -290,7 +292,6 @@ class _EventCalendarPageState extends State<EventCalendarPage> {
                                       );
                                     },
                                   ),
-                            visualDensity: VisualDensity(vertical: 4),
                           ),
                         ],
                       ),
