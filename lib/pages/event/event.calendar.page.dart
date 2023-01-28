@@ -212,7 +212,7 @@ class _EventCalendarPageState extends State<EventCalendarPage> {
                     return Container(
                       margin: EdgeInsets.symmetric(
                         horizontal: 10,
-                        vertical: 5,
+                        vertical: 2,
                       ),
                       decoration: BoxDecoration(
                         color: Colors.deepOrange[300],
@@ -221,9 +221,6 @@ class _EventCalendarPageState extends State<EventCalendarPage> {
                       ),
                       child: Column(
                         children: [
-                          SizedBox(
-                            height: 5,
-                          ),
                           ListTile(
                             leading: _photo(value[index]),
                             title: Text(
@@ -232,9 +229,11 @@ class _EventCalendarPageState extends State<EventCalendarPage> {
                                 fontWeight: FontWeight.bold,
                               ),
                             ),
-                            subtitle: Text(value[index].initialDate +
-                                ' a ' +
-                                value[index].endDate),
+                            subtitle: Text('Início: ' + value[index].initialDate +
+                                '\n' +
+                                'Fim: ' + value[index].endDate),
+                            isThreeLine: true,
+                            // dense: true,
                             trailing: widget._selectedProfile == ADMIN
                                 ? Wrap(
                                     spacing: 10, // space between two icons
@@ -293,9 +292,6 @@ class _EventCalendarPageState extends State<EventCalendarPage> {
                                   ),
                             visualDensity: VisualDensity(vertical: 4),
                           ),
-                          SizedBox(
-                            height: 5,
-                          ),
                         ],
                       ),
                     );
@@ -308,16 +304,16 @@ class _EventCalendarPageState extends State<EventCalendarPage> {
       );
 
   _photo(Event event) => Container(
-        width: 100.0,
-        padding: EdgeInsets.all(5.0),
+        width: 70.0,
+        padding: EdgeInsets.all(2.0),
         decoration: BoxDecoration(
           color: Colors.black.withOpacity(0.2),
-          borderRadius: BorderRadius.circular(10.0),
+          borderRadius: BorderRadius.circular(130.0),
         ),
         child: Container(
           decoration: BoxDecoration(
             color: Colors.white,
-            borderRadius: BorderRadius.circular(5.0),
+            borderRadius: BorderRadius.circular(130.0),
             image: _loadPhoto(event),
           ),
         ),
