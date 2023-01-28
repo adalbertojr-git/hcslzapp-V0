@@ -69,8 +69,8 @@ abstract class EventAddControllerBase with Store {
   _initTextFields() {
     titleCtrl.text = event.title;
     descriptionCtrl.text = event.description;
-    iniDateCtrl.text = formatDate(DateTime.parse(eventDate));
-    endDateCtrl.text = formatDate(DateTime.parse(eventDate));
+    iniDateCtrl.text = formatDate(DateTime.parse(event.initialDate));
+    endDateCtrl.text = formatDate(DateTime.parse(event.endDate));
   }
 
   @action
