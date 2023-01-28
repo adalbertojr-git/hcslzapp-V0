@@ -130,7 +130,7 @@ class _EventAddPageState extends State<EventAddPage> {
                         DateTime? pickedDate = await showDatePicker(
                             context: context,
                             initialDate: DateTime.now(),
-                            firstDate: DateTime(2000),
+                            firstDate: DateTime(2023),
                             lastDate: DateTime(2101));
                         if (pickedDate != null) {
                           _controller.iniDateCtrl.text =
@@ -155,7 +155,7 @@ class _EventAddPageState extends State<EventAddPage> {
                         DateTime? pickedDate = await showDatePicker(
                             context: context,
                             initialDate: DateTime.now(),
-                            firstDate: DateTime(2000),
+                            firstDate: DateTime(2023),
                             lastDate: DateTime(2101));
                         if (pickedDate != null) {
                           _controller.endDateCtrl.text =

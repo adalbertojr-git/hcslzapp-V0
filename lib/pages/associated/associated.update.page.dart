@@ -222,7 +222,7 @@ class AssociatedUpdatePage extends StatelessWidget {
                     icon: Icons.calendar_today,
                     inputType: TextInputType.datetime,
                     disabled: true,
-                    isPassword: true,
+                    isPassword: _selectedProfile == ASSOCIATED ? false : true,
                     onTap: _selectedProfile == ASSOCIATED
                         ? () async {
                             DateTime? pickedDate = await showDatePicker(
