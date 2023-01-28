@@ -49,7 +49,7 @@ abstract class EventAddControllerBase with Store {
   EventRepo _eventRepo = EventRepo();
 
   @observable
-  String eventDate = '';
+  String selectedDate = '';
 
   @observable
   String pickedInitialDate = '';
@@ -69,8 +69,12 @@ abstract class EventAddControllerBase with Store {
   _initTextFields() {
     titleCtrl.text = event.title;
     descriptionCtrl.text = event.description;
-    iniDateCtrl.text = formatDate(DateTime.parse(event.initialDate));
-    endDateCtrl.text = formatDate(DateTime.parse(event.endDate));
+    iniDateCtrl.text = event.id != 0
+        ? formatDate(DateTime.parse(event.initialDate))
+        : formatDate(DateTime.parse(selectedDate));
+    endDateCtrl.text = event.id != 0
+        ? formatDate(DateTime.parse(event.endDate))
+        : formatDate(DateTime.parse(selectedDate));
   }
 
   @action

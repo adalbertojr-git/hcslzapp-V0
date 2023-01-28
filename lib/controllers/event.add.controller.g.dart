@@ -185,19 +185,51 @@ mixin _$EventAddController on EventAddControllerBase, Store {
     });
   }
 
-  late final _$eventDateAtom =
-      Atom(name: 'EventAddControllerBase.eventDate', context: context);
+  late final _$selectedDateAtom =
+      Atom(name: 'EventAddControllerBase.selectedDate', context: context);
 
   @override
-  String get eventDate {
-    _$eventDateAtom.reportRead();
-    return super.eventDate;
+  String get selectedDate {
+    _$selectedDateAtom.reportRead();
+    return super.selectedDate;
   }
 
   @override
-  set eventDate(String value) {
-    _$eventDateAtom.reportWrite(value, super.eventDate, () {
-      super.eventDate = value;
+  set selectedDate(String value) {
+    _$selectedDateAtom.reportWrite(value, super.selectedDate, () {
+      super.selectedDate = value;
+    });
+  }
+
+  late final _$pickedInitialDateAtom =
+      Atom(name: 'EventAddControllerBase.pickedInitialDate', context: context);
+
+  @override
+  String get pickedInitialDate {
+    _$pickedInitialDateAtom.reportRead();
+    return super.pickedInitialDate;
+  }
+
+  @override
+  set pickedInitialDate(String value) {
+    _$pickedInitialDateAtom.reportWrite(value, super.pickedInitialDate, () {
+      super.pickedInitialDate = value;
+    });
+  }
+
+  late final _$pickedEndDateAtom =
+      Atom(name: 'EventAddControllerBase.pickedEndDate', context: context);
+
+  @override
+  String get pickedEndDate {
+    _$pickedEndDateAtom.reportRead();
+    return super.pickedEndDate;
+  }
+
+  @override
+  set pickedEndDate(String value) {
+    _$pickedEndDateAtom.reportWrite(value, super.pickedEndDate, () {
+      super.pickedEndDate = value;
     });
   }
 
@@ -250,7 +282,9 @@ photoPath: ${photoPath},
 photo: ${photo},
 changedPhoto: ${changedPhoto},
 event: ${event},
-eventDate: ${eventDate}
+selectedDate: ${selectedDate},
+pickedInitialDate: ${pickedInitialDate},
+pickedEndDate: ${pickedEndDate}
     ''';
   }
 }

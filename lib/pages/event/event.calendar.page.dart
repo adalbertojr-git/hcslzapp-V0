@@ -134,7 +134,7 @@ class _EventCalendarPageState extends State<EventCalendarPage> {
                             builder: (context) => EventAddPage(
                               widget._selectedProfile,
                               null,
-                              //_selectedDay.toString().substring(0, 10),
+                              _selectedDay.toString().substring(0, 10),
                             ),
                           ),
                         );
@@ -229,13 +229,25 @@ class _EventCalendarPageState extends State<EventCalendarPage> {
                                 fontWeight: FontWeight.bold,
                               ),
                             ),
-                            subtitle: Text('Início: ' +
-                                value[index].initialDate +
-                                '\n' +
-                                'Fim: ' +
-                                value[index].endDate),
+                            subtitle: value[index]
+                                        .initialDate
+                                        .compareTo(value[index].endDate) !=
+                                    0
+                                ? Text(
+                                    'Período: de ' +
+                                        value[index]
+                                            .initialDate
+                                            .substring(8, 10) +
+                                        ' a ' +
+                                        value[index].endDate.substring(8, 10),
+                                  )
+                                : Text(
+                                    'Dia: ' +
+                                        value[index]
+                                            .initialDate
+                                            .substring(8, 10),
+                                  ),
                             isThreeLine: true,
-                            // dense: true,
                             trailing: widget._selectedProfile == ADMIN
                                 ? Wrap(
                                     spacing: 10, // space between two icons
@@ -260,9 +272,9 @@ class _EventCalendarPageState extends State<EventCalendarPage> {
                                                   EventAddPage(
                                                 widget._selectedProfile,
                                                 value[index],
-/*                                                _selectedDay
+                                                _selectedDay
                                                     .toString()
-                                                    .substring(0, 10),*/
+                                                    .substring(0, 10),
                                               ),
                                             ),
                                           );
@@ -284,9 +296,9 @@ class _EventCalendarPageState extends State<EventCalendarPage> {
                                           builder: (context) => EventAddPage(
                                             widget._selectedProfile,
                                             value[index],
-/*                                            _selectedDay
+                                            _selectedDay
                                                 .toString()
-                                                .substring(0, 10),*/
+                                                .substring(0, 10),
                                           ),
                                         ),
                                       );
