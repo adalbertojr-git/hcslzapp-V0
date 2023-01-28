@@ -223,7 +223,8 @@ class AssociatedUpdatePage extends StatelessWidget {
                     icon: Icons.calendar_today,
                     inputType: TextInputType.datetime,
                     disabled: true,
-                    onTap: () async {
+                    isPassword: true,
+                    onTap: _selectedProfile == ASSOCIATED ? () async {
                       DateTime? pickedDate = await showDatePicker(
                         context: context,
                         initialDate: DateTime.now(),
@@ -234,7 +235,7 @@ class AssociatedUpdatePage extends StatelessWidget {
                         _controller.dateBirthCtrl.text =
                             _controller.formatDate(pickedDate);
                       }
-                    },
+                    } : null,
                   );
                 }),
               ),

@@ -69,6 +69,7 @@ class _DependentAddPageState extends State<DependentAddPage> {
                 hint: hintEmail,
                 icon: Icons.email,
                 inputType: TextInputType.emailAddress,
+                isPassword: true,
                 onChanged: _controller.formController.changeEmail,
                 errorText: _controller.validateEmail(),
               );
@@ -82,6 +83,7 @@ class _DependentAddPageState extends State<DependentAddPage> {
                   label: labelPhone,
                   hint: hintPhone,
                   inputType: TextInputType.phone,
+                  isPassword: true,
                   maskTextInputFormatter:
                       MaskTextInputFormatter(mask: "(##) #####-####"),
                 ),
@@ -93,6 +95,7 @@ class _DependentAddPageState extends State<DependentAddPage> {
                   hint: hintDate,
                   inputType: TextInputType.datetime,
                   disabled: true,
+                  isPassword: true,
                   onTap: () async {
                     DateTime? pickedDate = await showDatePicker(
                       context: context,
