@@ -350,7 +350,7 @@ class _EventCalendarPageState extends State<EventCalendarPage> {
         AsukaSnackbar.message(WAIT).show();
         await _controller.deleteById(event);
         if (event.photoUrl != '') {
-          await _controller.deletePhoto(event);
+          await _controller.deletePhoto(event.photoUrl);
         }
         AsukaSnackbar.success(SUCCESS).show();
         _loadAllEvents();

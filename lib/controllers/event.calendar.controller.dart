@@ -43,9 +43,9 @@ abstract class EventCalendarControllerBase with Store {
   @action
   Future deleteById(Event event) => _eventRepo.deleteById(event);
 
-  Future<void> deletePhoto(Event event) async {
+  Future<void> deletePhoto(String photoUrl) async {
     FirebaseStorage storage = FirebaseStorage.instance;
-    Reference reference = storage.refFromURL(event.photoUrl);
+    Reference reference = storage.refFromURL(photoUrl);
     await reference.delete();
   }
 

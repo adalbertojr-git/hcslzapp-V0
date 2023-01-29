@@ -173,10 +173,10 @@ class _PartnershipListAdmPageState extends State<PartnershipListAdmPage> {
     if (response == true) {
       try {
         AsukaSnackbar.message(WAIT).show();
-        if(_controller.partnerships[i].photoUrl != '') {
-          await _controller.deletePhoto(_controller.partnerships[i]);
-        }
         await _controller.deleteById(_controller.partnerships[i]);
+        if(_controller.partnerships[i].photoUrl != '') {
+          await _controller.deletePhoto(_controller.partnerships[i].photoUrl);
+        }
         AsukaSnackbar.success(SUCCESS).show();
         _controller.partnerships.removeAt(i);
       } on HttpException catch (e) {

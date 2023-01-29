@@ -57,9 +57,9 @@ abstract class HeadNotificationListControllerBase with Store {
   Future deleteById(HeadNotification headNotification) =>
       _headNotificationRepo.deleteById(headNotification);
 
-  Future<void> deletePhoto(HeadNotification headNotification) async {
+  Future<void> deletePhoto(String photoUrl) async {
     FirebaseStorage storage = FirebaseStorage.instance;
-    Reference reference = storage.refFromURL(headNotification.photoUrl);
+    Reference reference = storage.refFromURL(photoUrl);
     await reference.delete();
   }
 }

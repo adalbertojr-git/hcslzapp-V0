@@ -65,9 +65,9 @@ abstract class PartnershipListControllerBase with Store {
   Future<Response> deleteById(Partnership partnership) =>
       _partnershipRepo.deleteById(partnership);
 
-  Future<void> deletePhoto(Partnership partnership) async {
+  Future<void> deletePhoto(String photoUrl) async {
     FirebaseStorage storage = FirebaseStorage.instance;
-    Reference reference = storage.refFromURL(partnership.photoUrl);
+    Reference reference = storage.refFromURL(photoUrl);
     await reference.delete();
   }
 

@@ -174,11 +174,11 @@ class _HeadNotificationListAdmPageState
         });
     if (response == true) {
       try {
-        if(_controller.headNotifications[i].photoUrl != '') {
-          await _controller.deletePhoto(_controller.headNotifications[i]);
-        }
         AsukaSnackbar.message(WAIT).show();
         await _controller.deleteById(_controller.headNotifications[i]);
+        if(_controller.headNotifications[i].photoUrl != '') {
+          await _controller.deletePhoto(_controller.headNotifications[i].photoUrl);
+        }
         AsukaSnackbar.success(SUCCESS).show();
         _controller.headNotifications.removeAt(i);
       } on HttpException catch (e) {

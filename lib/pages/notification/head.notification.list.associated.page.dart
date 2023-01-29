@@ -91,7 +91,7 @@ class _HeadNotificationListAssociatedPageState
                   width: MediaQuery.of(context).size.width - 50,
                   margin: EdgeInsets.symmetric(horizontal: 10),
                   decoration: BoxDecoration(
-                    color: Colors.deepOrange[300],
+                    //color: Colors.deepOrange[300],
                     shape: BoxShape.rectangle,
                     borderRadius: BorderRadius.circular(10.0),
                   ),
@@ -100,11 +100,30 @@ class _HeadNotificationListAssociatedPageState
                       SizedBox(
                         height: 5,
                       ),
+                      Row(
+                        children: [
+                          SizedBox(
+                            width: 10,
+                          ),
+                          Icon(
+                            Icons.message_outlined,
+                            size: 20,
+                          ),
+                          Text(
+                            ' Publicado em: ' +
+                                _controller
+                                    .headNotifications[index].datePublication,
+                            style: TextStyle(
+                              fontSize: 12,
+                            ),
+                          )
+                        ],
+                      ),
                       _photo(index),
                       Container(
                         padding: EdgeInsets.all(5),
                         width: double.infinity,
-                        height: 190,
+                        height: 150,
                         child: Card(
                           elevation: 5,
                           child: Column(
@@ -124,25 +143,6 @@ class _HeadNotificationListAssociatedPageState
                           ),
                         ),
                       ),
-                      Center(
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            Icon(
-                              Icons.message_outlined,
-                              size: 20,
-                            ),
-                            Text(
-                              ' Publicado em: ' +
-                                  _controller
-                                      .headNotifications[index].datePublication,
-                              style: TextStyle(
-                                fontSize: 12,
-                              ),
-                            )
-                          ],
-                        ),
-                      )
                     ],
                   ),
                 );
@@ -154,7 +154,7 @@ class _HeadNotificationListAssociatedPageState
       );
 
   _photo(int i) => Container(
-        height: MediaQuery.of(context).size.height / 3,
+        height: MediaQuery.of(context).size.height / 4,
         width: MediaQuery.of(context).size.width,
         padding: EdgeInsets.symmetric(horizontal: 5),
         child: Card(
