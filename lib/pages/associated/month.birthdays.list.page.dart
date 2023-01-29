@@ -93,9 +93,9 @@ class _MonthBirthdaysListPageState extends State<MonthBirthdaysListPage> {
                   width: MediaQuery.of(context).size.width - 50,
                   margin: EdgeInsets.symmetric(horizontal: 10),
                   decoration: BoxDecoration(
-                    color: _isToday(_controller.associateds[index].date_birth)
+/*                    color: _isToday(_controller.associateds[index].date_birth)
                         ? Colors.deepOrange[300]
-                        : Colors.black26,
+                        : Colors.black26,*/
                     shape: BoxShape.rectangle,
                     borderRadius: BorderRadius.circular(10.0),
                   ),
@@ -118,8 +118,8 @@ class _MonthBirthdaysListPageState extends State<MonthBirthdaysListPage> {
                           : _photo(_controller.associateds[index]),
                       Expanded(
                         child: Container(
-                          padding: EdgeInsets.all(5),
                           width: double.infinity,
+                          color: Colors.deepOrange[300],
                           child: Card(
                             elevation: 5,
                             child: Column(
@@ -182,9 +182,9 @@ class _MonthBirthdaysListPageState extends State<MonthBirthdaysListPage> {
       );
 
   _photo(MonthBirthdays birthdays) => Container(
-        height: _isToday(birthdays.date_birth) ? 70.0 : 230.0,
-        width: _isToday(birthdays.date_birth) ? 70.0 : 230.0,
-        padding: EdgeInsets.all(5.0),
+        height: _isToday(birthdays.date_birth) ? 80.0 : 240.0,
+        width: _isToday(birthdays.date_birth) ? 80.0 : 240.0,
+        padding: EdgeInsets.all(2.0),
         decoration: BoxDecoration(
           color: Colors.black.withOpacity(0.2),
           borderRadius: BorderRadius.circular(130.0),
