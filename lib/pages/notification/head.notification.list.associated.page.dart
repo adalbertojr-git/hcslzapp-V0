@@ -122,11 +122,14 @@ class _HeadNotificationListAssociatedPageState
                       Container(
                         padding: EdgeInsets.all(5),
                         width: double.infinity,
-                        height: 150,
+                        height: 190,
                         child: Card(
-                          elevation: 5,
+                          color: Colors.black12,
                           child: Column(
                             children: [
+                              SizedBox(
+                                height: 5,
+                              ),
                               Text(
                                 _controller.headNotifications[index].title +
                                     '\n',
