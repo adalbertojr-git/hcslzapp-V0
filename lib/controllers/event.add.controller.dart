@@ -102,13 +102,15 @@ abstract class EventAddControllerBase with Store {
       DateFormat('dd/MM/yyyy').parse(endDateCtrl.text),
     );
     return Event(
-        id: event.id,
-        title: titleCtrl.text,
-        initialDate: pickedInitialDate,
-        endDate: pickedEndDate,
-        date: '',
-        description: descriptionCtrl.text,
-        photoUrl: _lPhotoUrl);
+      id: event.id,
+      title: titleCtrl.text,
+      initialDate: pickedInitialDate,
+      endDate: pickedEndDate,
+      date: '',
+      description: descriptionCtrl.text,
+      photoUrl: _lPhotoUrl,
+      idEventReference: event.idEventReference
+    );
   }
 
   bool get hasErrors => hasErrorPartner || hasErrorDescription;

@@ -93,12 +93,16 @@ class EventRepo {
 
   Future<Response> deleteById(Event event) async {
     try {
+      final String encodedJson = jsonEncode(
+        event.toJson(),
+      );
       final Response response = await client.delete(
-        Uri.parse(mainUrl + _eventUrl + "/" + event.id.toString()),
+        Uri.parse(mainUrl + _eventUrl),
         headers: {
           'Content-type': 'application/json',
           HttpHeaders.authorizationHeader: locator.get<Token>().token,
         },
+        body: encodedJson,
       ).timeout(
         Duration(seconds: 10),
       );

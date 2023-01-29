@@ -139,6 +139,7 @@ class CheckboxWidget extends StatelessWidget {
           ),
           child: CheckboxListTile(
             controlAffinity: ListTileControlAffinity.leading,
+
             title: Text(
               item.name!,
               style: TextStyle(

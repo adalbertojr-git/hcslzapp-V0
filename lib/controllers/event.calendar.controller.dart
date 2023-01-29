@@ -63,6 +63,7 @@ abstract class EventCalendarControllerBase with Store {
         title: event['title'],
         description: event['description'],
         photoUrl: event['photoUrl'],
+        idEventReference: event['idEventReference'],
       );
       ev[date]?.add(e);
     }

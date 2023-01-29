@@ -95,5 +95,6 @@ class Template {
         date: '',
         description: '',
         photoUrl: '',
+        idEventReference: 0,
       );
 }
