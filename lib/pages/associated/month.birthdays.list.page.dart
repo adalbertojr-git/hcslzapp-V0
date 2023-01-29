@@ -119,11 +119,13 @@ class _MonthBirthdaysListPageState extends State<MonthBirthdaysListPage> {
                       Expanded(
                         child: Container(
                           width: double.infinity,
-                          color: Colors.deepOrange[300],
                           child: Card(
-                            elevation: 5,
+                            color: Colors.black12,
                             child: Column(
                               children: [
+                                SizedBox(
+                                  height: 5,
+                                ),
                                 Text(
                                   _isToday(_controller
                                           .associateds[index].date_birth)
