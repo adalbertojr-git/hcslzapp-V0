@@ -116,6 +116,9 @@ class _MonthBirthdaysListPageState extends State<MonthBirthdaysListPage> {
                               ],
                             )
                           : _photo(_controller.associateds[index]),
+                      SizedBox(
+                        height: 5,
+                      ),
                       Expanded(
                         child: Container(
                           width: double.infinity,
