@@ -91,7 +91,6 @@ class _HeadNotificationListAssociatedPageState
                   width: MediaQuery.of(context).size.width - 50,
                   margin: EdgeInsets.symmetric(horizontal: 10),
                   decoration: BoxDecoration(
-                    //color: Colors.deepOrange[300],
                     shape: BoxShape.rectangle,
                     borderRadius: BorderRadius.circular(10.0),
                   ),
@@ -156,7 +155,7 @@ class _HeadNotificationListAssociatedPageState
   _photo(int i) => Container(
         height: MediaQuery.of(context).size.height / 4,
         width: MediaQuery.of(context).size.width,
-        padding: EdgeInsets.symmetric(horizontal: 5),
+        padding: EdgeInsets.symmetric(horizontal: 25),
         child: Card(
           elevation: 2,
           shape: RoundedRectangleBorder(
