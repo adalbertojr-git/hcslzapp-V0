@@ -93,9 +93,6 @@ class _MonthBirthdaysListPageState extends State<MonthBirthdaysListPage> {
                   width: MediaQuery.of(context).size.width - 50,
                   margin: EdgeInsets.symmetric(horizontal: 10),
                   decoration: BoxDecoration(
-/*                    color: _isToday(_controller.associateds[index].date_birth)
-                        ? Colors.deepOrange[300]
-                        : Colors.black26,*/
                     shape: BoxShape.rectangle,
                     borderRadius: BorderRadius.circular(10.0),
                   ),
