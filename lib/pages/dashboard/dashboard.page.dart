@@ -56,6 +56,8 @@ const String _labelEvent = 'Eventos';
 const String _pathEventImage = 'assets/imgs/eventos.png';
 const String _labelDTC = 'Codigos DTC';
 const String _pathDTCImage = 'assets/imgs/codigosdtc.png';
+const String _labelBoutique = 'Boutique';
+const String _pathBoutiqueImage = 'assets/imgs/boutique.png';
 const String _labelAboutHarleyClub = 'O Harley Club';
 const String _pathAboutHarleyClubImage = 'assets/imgs/logo.png';
 
@@ -117,7 +119,7 @@ class _DashboardPageState extends State<DashboardPage> {
       PartnershipListAdmPage(),
       HeadNotificationListAdmPage(),
       CenteredMessage(
-        title: 'Boutique Harley Club',
+        title: WARNING,
         message: 'Funcionalidade em construção. Aguarde nova versão do App',
       ),
     ];
@@ -603,35 +605,24 @@ class _DashboardPageState extends State<DashboardPage> {
                     _controller.loadDtcCodeDashboardPage(context);
                   },
                 ),
-/*
                 GridButton(
-                  title: "Oficina",
-                  image: "assets/imgs/oficina.png",
-                  context: gContext,
+                  title: _labelBoutique,
+                  image: _pathBoutiqueImage,
+                  context: context,
                   onClick: () {
+                    //_controller.loadBoutiquePage(context);
                     Navigator.push(
-                      gContext,
-                      MaterialPageRoute(builder: (gContext) => DefectList()),
+                      context,
+                      MaterialPageRoute(
+                        builder: (gContext) => CenteredMessage(
+                          title: WARNING,
+                          message:
+                              'Funcionalidade em contrução. Aguarde nova versão do App',
+                        ),
+                      ),
                     );
                   },
                 ),
-*/
-/*                GridButton(
-                  title: "Boutique",
-                  image: "assets/imgs/boutique.png",
-                  context: _gContext,
-                  onClick: () {
-                    Navigator.push(
-                      _gContext,
-                      MaterialPageRoute(
-                          builder: (gContext) => CenteredMessage(
-                                title: 'Boutique Harley Club',
-                                message:
-                                    'Funcionalidade em contrução. Aguarde nova versão do App',
-                              )),
-                    );
-                  },
-                ),*/
 /*
                 GridButton(
                   title: "Classificados",
@@ -648,19 +639,6 @@ class _DashboardPageState extends State<DashboardPage> {
                                 ),
                               );*/ /*
 
-                  },
-                ),
-*/
-/*
-                GridButton(
-                  title: "Meu Role",
-                  image: "assets/imgs/maps.png",
-                  context: gContext,
-                  onClick: () {
-                    Navigator.push(
-                      gContext,
-                      MaterialPageRoute(builder: (gContext) => MyRide()),
-                    );
                   },
                 ),
 */

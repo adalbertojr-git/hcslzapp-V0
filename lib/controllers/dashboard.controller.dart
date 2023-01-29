@@ -137,6 +137,17 @@ abstract class DashboardControllerBase with Store {
     );
   }
 
+  loadBoutiquePage(
+      BuildContext context,
+      ) async {
+/*    await Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (context) => BoutiquePage(),
+      ),
+    );*/
+  }
+
   loadAboutPage(
     BuildContext context,
   ) async {
