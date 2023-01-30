@@ -7,6 +7,7 @@ import 'package:flutter_mobx/flutter_mobx.dart';
 import '../../common/messages.dart';
 import '../../common/settings.dart';
 import '../../controllers/login.controller.dart';
+import '../../firebase/product.manager.dart';
 import '../access.request/access.request.add.page.dart';
 import '../password/send.email.page.dart';
 import 'loading.dart';
@@ -29,6 +30,10 @@ class _MyCustomLoginUIState extends State<MyCustomLoginUI> {
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
+
+    ProductManager p = ProductManager();
+    p.loadAll();
+
     return Observer(
       builder: (_) => Scaffold(
         body: ScrollConfiguration(
