@@ -12,6 +12,7 @@ import 'package:hcslzapp/pages/digital.identity/digital.identity.page.dart';
 import 'package:hcslzapp/pages/dtc.code/dtc.code.dashboard.page.dart';
 import 'package:mobx/mobx.dart';
 
+import '../pages/boutique/boutique.page.dart';
 import '../repositories/associated.repo.dart';
 
 part 'dashboard.controller.g.dart';
@@ -140,12 +141,12 @@ abstract class DashboardControllerBase with Store {
   loadBoutiquePage(
       BuildContext context,
       ) async {
-/*    await Navigator.push(
+    await Navigator.push(
       context,
       MaterialPageRoute(
         builder: (context) => BoutiquePage(),
       ),
-    );*/
+    );
   }
 
   loadAboutPage(

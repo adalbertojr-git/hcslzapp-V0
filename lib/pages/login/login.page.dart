@@ -32,7 +32,7 @@ class _MyCustomLoginUIState extends State<MyCustomLoginUI> {
     Size size = MediaQuery.of(context).size;
 
     ProductManager p = ProductManager();
-    p.loadAll();
+    p.loadAll2();
 
     return Observer(
       builder: (_) => Scaffold(

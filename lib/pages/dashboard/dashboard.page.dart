@@ -610,8 +610,8 @@ class _DashboardPageState extends State<DashboardPage> {
                   image: _pathBoutiqueImage,
                   context: context,
                   onClick: () {
-                    //_controller.loadBoutiquePage(context);
-                    Navigator.push(
+                    _controller.loadBoutiquePage(context);
+/*                    Navigator.push(
                       context,
                       MaterialPageRoute(
                         builder: (gContext) => CenteredMessage(
@@ -620,7 +620,7 @@ class _DashboardPageState extends State<DashboardPage> {
                               'Funcionalidade em contrução. Aguarde nova versão do App',
                         ),
                       ),
-                    );
+                    );*/
                   },
                 ),
 /*
