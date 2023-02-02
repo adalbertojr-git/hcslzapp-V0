@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:hcslzapp/repositories/product.firebase.repo.dart';
 import '../../components/my.appbar.dart';
 import '../../components/my.bottom.appbar.dart';
 
@@ -7,6 +8,10 @@ const String _title = 'Boutique Harley Club';
 class BoutiquePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+
+    ProductFirebaseRepo firebaseRepo = ProductFirebaseRepo();
+    firebaseRepo.loadAll2();
+
     return Scaffold(
       appBar: MyAppBar(_title),
       bottomNavigationBar: MyBottomAppBar(),

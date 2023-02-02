@@ -1,14 +1,14 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import '../models/product.dart';
 
-class ProductManager {
+class ProductFirebaseRepo {
   final FirebaseFirestore db = FirebaseFirestore.instance;
 
   Future<void> loadAll() async {
     final query = db.collection("products").doc('sdksdjksj').withConverter(
-          fromFirestore: Products.fromFirestore,
-          toFirestore: (Products product, _) => product.toFirestore(),
-        );
+      fromFirestore: Products.fromFirestore,
+      toFirestore: (Products product, _) => product.toFirestore(),
+    );
     final docSnap = await query.get();
     final product = docSnap.data(); // Convert to City object
     if (product != null) {
