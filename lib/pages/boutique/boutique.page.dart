@@ -8,7 +8,6 @@ const String _title = 'Boutique Harley Club';
 class BoutiquePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-
     ProductFirebaseRepo firebaseRepo = ProductFirebaseRepo();
     firebaseRepo.loadAll2();
 
@@ -22,12 +21,6 @@ class BoutiquePage extends StatelessWidget {
   _widgets() => Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 20),
-            child: Text(
-              "Categorias",
-            ),
-          ),
           Categories(),
           Expanded(
             child: Padding(
@@ -58,7 +51,6 @@ class BoutiquePage extends StatelessWidget {
       );
 }
 
-
 class Categories extends StatefulWidget {
   @override
   _CategoriesState createState() => _CategoriesState();
@@ -66,6 +58,7 @@ class Categories extends StatefulWidget {
 
 class _CategoriesState extends State<Categories> {
   List<String> categories = ["Hand bag", "Jewellery", "Footwear", "Dresses"];
+
   // By default our first item will be selected
   int selectedIndex = 0;
   final kTextColor = Color(0xFF535353);
@@ -120,6 +113,7 @@ class _CategoriesState extends State<Categories> {
 
 class ItemCard extends StatelessWidget {
   final Product product;
+
   // final Function press;
   ItemCard({
     required this.product,
@@ -174,6 +168,7 @@ class Product {
   final String image, title, description;
   final int price, size, id;
   final Color color;
+
   Product({
     required this.id,
     required this.image,
@@ -192,7 +187,7 @@ List<Product> products = [
       price: 234,
       size: 12,
       description: dummyText,
-      image: "assets/images/bag_1.png",
+      image: 'assets/imgs/boutique.png',
       color: Color(0xFF3D82AE)),
   Product(
       id: 2,
@@ -200,7 +195,7 @@ List<Product> products = [
       price: 234,
       size: 8,
       description: dummyText,
-      image: "assets/images/bag_2.png",
+      image: 'assets/imgs/boutique.png',
       color: Color(0xFFD3A984)),
   Product(
       id: 3,
@@ -208,7 +203,7 @@ List<Product> products = [
       price: 234,
       size: 10,
       description: dummyText,
-      image: "assets/images/bag_3.png",
+      image: 'assets/imgs/boutique.png',
       color: Color(0xFF989493)),
   Product(
       id: 4,
@@ -216,7 +211,7 @@ List<Product> products = [
       price: 234,
       size: 11,
       description: dummyText,
-      image: "assets/images/bag_4.png",
+      image: 'assets/imgs/boutique.png',
       color: Color(0xFFE6B398)),
   Product(
       id: 5,
@@ -224,7 +219,7 @@ List<Product> products = [
       price: 234,
       size: 12,
       description: dummyText,
-      image: "assets/images/bag_5.png",
+      image: 'assets/imgs/boutique.png',
       color: Color(0xFFFB7883)),
   Product(
     id: 6,
@@ -232,7 +227,7 @@ List<Product> products = [
     price: 234,
     size: 12,
     description: dummyText,
-    image: "assets/images/bag_6.png",
+    image: 'assets/imgs/boutique.png',
     color: Color(0xFFAEAEAE),
   ),
 ];

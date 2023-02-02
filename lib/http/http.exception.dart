@@ -13,6 +13,7 @@ class HttpException implements Exception {
 
 String? getMessage(Response response) {
   int code = 0;
+  print(response.body);
   String err = response.body.substring(1, response.body.indexOf(']}'));
   if (err.contains('JWT expire', 0))
     code = 4011;

@@ -149,7 +149,7 @@ class _MonthBirthdaysListPageState extends State<MonthBirthdaysListPage> {
                                       : '\n' +
                                           _controller.associateds[index].ndays
                                               .toString() +
-                                          'dia(s)',
+                                          ' dia(s)',
                                   style: TextStyle(
                                     fontWeight: FontWeight.bold,
                                     fontSize: 18,
