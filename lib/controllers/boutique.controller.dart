@@ -12,7 +12,6 @@ abstract class BoutiqueControllerBase with Store {
   bool isHidedButton = true;
 
   @observable
-  // ObservableList categories = [].asObservable();
   List<String> categories = [];
 
   @observable
@@ -33,8 +32,8 @@ abstract class BoutiqueControllerBase with Store {
   @action
   bool setButtonVisibilty() => isHidedButton = !isHidedButton;
 
-  @action
-  Future<List<String>> getCategories() => firebaseRepo.getCategories();
+/*  @action
+  Future<List<String>> getCategories() => firebaseRepo.getCategories();*/
 
   @action
   // Future<void> getAll() => firebaseRepo.getAll();
@@ -51,7 +50,8 @@ abstract class BoutiqueControllerBase with Store {
   setSelectedIndex(int index) => selectedIndex = index;
 
   @action
-  List<String> getCategories2() {
+  List<String> getCategories() {
+    categories.add('Todas');
     products.forEach((element) {
       categories.add(element.category!);
     });

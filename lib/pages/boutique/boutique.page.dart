@@ -52,7 +52,7 @@ class _BoutiquePageState extends State<BoutiquePage> {
                   } else {
                     if ((snapshot.data?.length)! > 0) {
                       _controller.products.addAll(snapshot.data!);
-                      _controller.getCategories2();
+                      _controller.getCategories();
                       print(_controller.categories);
                       return _widgets();
                     } else
