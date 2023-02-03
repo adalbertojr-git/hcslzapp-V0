@@ -110,6 +110,28 @@ mixin _$BoutiqueController on BoutiqueControllerBase, Store {
   }
 
   @override
+  Future<void> getOne() {
+    final _$actionInfo = _$BoutiqueControllerBaseActionController.startAction(
+        name: 'BoutiqueControllerBase.getOne');
+    try {
+      return super.getOne();
+    } finally {
+      _$BoutiqueControllerBaseActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
+  Future<List<String>> getProductsByCategory() {
+    final _$actionInfo = _$BoutiqueControllerBaseActionController.startAction(
+        name: 'BoutiqueControllerBase.getProductsByCategory');
+    try {
+      return super.getProductsByCategory();
+    } finally {
+      _$BoutiqueControllerBaseActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
   dynamic setSelectedIndex(int index) {
     final _$actionInfo = _$BoutiqueControllerBaseActionController.startAction(
         name: 'BoutiqueControllerBase.setSelectedIndex');

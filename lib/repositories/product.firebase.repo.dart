@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import '../models/product.dart';
 
@@ -6,6 +8,31 @@ class ProductFirebaseRepo {
 
   Future<List<Products>> getAll() async {
     final query = db.collection("products").withConverter(
+          fromFirestore: Products.fromFirestore,
+          toFirestore: (Products product, _) => product.toFirestore(),
+        );
+    final docSnap = await query.get();
+    List<Products> products = [];
+    docSnap.docs.forEach((element) {
+/*      print(element
+          .data()
+          .name);*/
+      products.add(
+        Products(
+          name: element.data().name,
+          description: element.data().description,
+          images: [],
+        ),
+      );
+    });
+    print(products);
+    return products;
+  }
+
+/*
+  Future<void> getAll() async {
+    // Future<List<Products>> getAll() async {
+    final query = db.collection("products").withConverter(
       fromFirestore: Products.fromFirestore,
       toFirestore: (Products product, _) => product.toFirestore(),
     );
@@ -13,14 +40,15 @@ class ProductFirebaseRepo {
     docSnap.docs.forEach((element) {
       print(element.data().name);
     });
-    return List<Products>.from(docSnap.docs);
-  }
+    // return List<Products>.from(docSnap.docs);
+  }*/
 
   Future<void> getOne() async {
-    final query = db.collection("products").doc('id tal').withConverter(
-      fromFirestore: Products.fromFirestore,
-      toFirestore: (Products product, _) => product.toFirestore(),
-    );
+    final query =
+        db.collection("products").doc('Mn4naavwjeUWxVn7yLhz').withConverter(
+              fromFirestore: Products.fromFirestore,
+              toFirestore: (Products product, _) => product.toFirestore(),
+            );
     final docSnap = await query.get();
     final product = docSnap.data(); // Convert to City object
     if (product != null) {
@@ -31,9 +59,7 @@ class ProductFirebaseRepo {
   }
 
   Future<List<String>> getCategories() async {
-    final query = await db
-        .collection("products")
-        .get();
+    final query = await db.collection("products").get();
     List<String> categories = [];
     categories.add('Todas');
     query.docs.forEach((element) {

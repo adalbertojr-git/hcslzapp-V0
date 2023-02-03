@@ -23,7 +23,7 @@ abstract class BoutiqueControllerBase with Store {
 
   init() async {
     categories.clear();
-    // await getAll();
+    await getAll();
   }
 
   @action
@@ -33,7 +33,14 @@ abstract class BoutiqueControllerBase with Store {
   Future<List<String>> getCategories() => firebaseRepo.getCategories();
 
   @action
+  // Future<void> getAll() => firebaseRepo.getAll();
   Future<List<Products>> getAll() => firebaseRepo.getAll();
+
+  @action
+  Future<void> getOne() => firebaseRepo.getOne();
+
+  @action
+  Future<List<String>> getProductsByCategory() => firebaseRepo.getProductsByCategory('Camisas');
 
   @action
   setSelectedIndex(int index) => selectedIndex = index;
