@@ -14,9 +14,14 @@ class MyAppBar extends StatelessWidget with PreferredSizeWidget {
         ),
         centerTitle: true,
         actions: <Widget>[
-          CircleAvatar(
-            backgroundColor: Colors.white,
-            child: Image.asset(_pathLogo),
+          Padding(
+            padding: const EdgeInsets.only(
+              right: 10,
+            ),
+            child: CircleAvatar(
+              backgroundColor: Colors.white,
+              child: Image.asset(_pathLogo),
+            ),
           ),
         ],
       );
