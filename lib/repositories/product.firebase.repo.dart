@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'dart:developer';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import '../models/product.dart';
@@ -21,11 +22,12 @@ class ProductFirebaseRepo {
         Products(
           name: element.data().name,
           description: element.data().description,
-          images: [],
+          images: element.data().images as List<String>,
+          // images: [],
         ),
       );
     });
-    print(products);
+    log(products.toString());
     return products;
   }
 
