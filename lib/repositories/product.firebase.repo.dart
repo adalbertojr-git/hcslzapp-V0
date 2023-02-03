@@ -5,16 +5,16 @@ import '../models/product.dart';
 class ProductFirebaseRepo {
   final FirebaseFirestore db = FirebaseFirestore.instance;
 
-  Future<List<Products>> getAll() async {
+  Future<List<Product>> getAll() async {
     final query = db.collection("products").withConverter(
-          fromFirestore: Products.fromFirestore,
-          toFirestore: (Products product, _) => product.toFirestore(),
+          fromFirestore: Product.fromFirestore,
+          toFirestore: (Product product, _) => product.toFirestore(),
         );
     final docSnap = await query.get();
-    List<Products> products = [];
+    List<Product> products = [];
     docSnap.docs.forEach((element) {
       products.add(
-        Products(
+        Product(
           id: element.id,
           category: element.data().category,
           name: element.data().name,
@@ -23,7 +23,7 @@ class ProductFirebaseRepo {
         ),
       );
     });
-    log(products.toString());
+    //log(products.toString());
     return products;
   }
 
@@ -44,8 +44,8 @@ class ProductFirebaseRepo {
   Future<void> getOne() async {
     final query =
         db.collection("products").doc('Mn4naavwjeUWxVn7yLhz').withConverter(
-              fromFirestore: Products.fromFirestore,
-              toFirestore: (Products product, _) => product.toFirestore(),
+              fromFirestore: Product.fromFirestore,
+              toFirestore: (Product product, _) => product.toFirestore(),
             );
     final docSnap = await query.get();
     final product = docSnap.data(); // Convert to City object

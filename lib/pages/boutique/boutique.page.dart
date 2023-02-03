@@ -19,6 +19,7 @@ class _BoutiquePageState extends State<BoutiquePage> {
   final BoutiqueController _controller = BoutiqueController();
   final kTextColor = Color(0xFF535353);
   final kTextLightColor = Color(0xFFACACAC);
+
   //List<Products> products = [];
 
   @override
@@ -33,7 +34,7 @@ class _BoutiquePageState extends State<BoutiquePage> {
           appBar: MyAppBar(_title),
           bottomNavigationBar:
               _controller.isHidedButton ? null : MyBottomAppBar(),
-          body: FutureBuilder<List<Products>>(
+          body: FutureBuilder<List<Product>>(
             future: _controller.getAll(),
             builder: (context, snapshot) {
               switch (snapshot.connectionState) {
@@ -74,31 +75,7 @@ class _BoutiquePageState extends State<BoutiquePage> {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
           _loadCategories(),
-          Expanded(
-            child: Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 20),
-              child: GridView.builder(
-                itemCount: _controller.products.length,
-                gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                  crossAxisCount: 2,
-                  mainAxisSpacing: 20,
-                  crossAxisSpacing: 20,
-                  childAspectRatio: 0.75,
-                ),
-                itemBuilder: (context, index) => ItemCard(
-                  product: _controller.products[index],
-/*                  press: () => Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => DetailsScreen(
-                        product: products[index],
-                      ),
-                    ),
-                  ),*/
-                ),
-              ),
-            ),
-          ),
+          _loadProducts(),
         ],
       );
 
@@ -118,6 +95,8 @@ class _BoutiquePageState extends State<BoutiquePage> {
         builder: (context) => GestureDetector(
           onTap: () {
             _controller.setSelectedIndex(index);
+            print(_controller.categories[index]);
+            _controller.setFilter(_controller.categories[index]);
           },
           child: Padding(
             padding: const EdgeInsets.symmetric(horizontal: 20),
@@ -146,10 +125,42 @@ class _BoutiquePageState extends State<BoutiquePage> {
           ),
         ),
       );
+
+  _loadProducts() => Expanded(
+        child: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 20),
+          child: Observer(
+            builder: (_) {
+              return GridView.builder(
+                itemCount: _controller.listFiltered.length,
+                // itemCount: _controller.products.length,
+                gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                  crossAxisCount: 2,
+                  mainAxisSpacing: 20,
+                  crossAxisSpacing: 20,
+                  childAspectRatio: 0.75,
+                ),
+                itemBuilder: (context, index) => ItemCard(
+                  product: _controller.listFiltered[index],
+                  // product: _controller.products[index],
+/*                  press: () => Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => DetailsScreen(
+                            product: products[index],
+                          ),
+                        ),
+                      ),*/
+                ),
+              );
+            }
+          ),
+        ),
+      );
 }
 
 class ItemCard extends StatelessWidget {
-  final Products product;
+  final Product product;
 
   // final Function press;
   ItemCard({
@@ -169,10 +180,6 @@ class ItemCard extends StatelessWidget {
           Expanded(
             child: Container(
               padding: EdgeInsets.all(20),
-              // For  demo we use fixed height  and width
-              // Now we dont need them
-              // height: 180,
-              // width: 160,
               decoration: BoxDecoration(
                 color: Colors.deepOrange[300],
                 // color: product.color,
@@ -180,7 +187,7 @@ class ItemCard extends StatelessWidget {
               ),
               child: Hero(
                 tag: "${product.id}",
-                child: Image.asset( 'assets/imgs/boutique.png'),
+                child: Image.asset('assets/imgs/boutique.png'),
                 // child: Image.asset(product.image),
               ),
             ),
@@ -188,89 +195,19 @@ class ItemCard extends StatelessWidget {
           Padding(
             padding: const EdgeInsets.symmetric(vertical: 20 / 4),
             child: Text(
-              // products is out demo list
               product.name!,
-              style: TextStyle(color: kTextLightColor),
             ),
           ),
           Text(
             "200,00",
             // "\$${product.price}",
-            style: TextStyle(fontWeight: FontWeight.bold),
+            style: TextStyle(
+              fontWeight: FontWeight.bold,
+              color: kTextLightColor,
+            ),
           )
         ],
       ),
     );
   }
 }
-
-class Product {
-  final String image, title, description;
-  final int price, size, id;
-  final Color color;
-
-  Product({
-    required this.id,
-    required this.image,
-    required this.title,
-    required this.price,
-    required this.description,
-    required this.size,
-    required this.color,
-  });
-}
-
-List<Product> products = [
-  Product(
-      id: 1,
-      title: "Office Code",
-      price: 234,
-      size: 12,
-      description: dummyText,
-      image: 'assets/imgs/boutique.png',
-      color: Color(0xFF3D82AE)),
-  Product(
-      id: 2,
-      title: "Belt Bag",
-      price: 234,
-      size: 8,
-      description: dummyText,
-      image: 'assets/imgs/boutique.png',
-      color: Color(0xFFD3A984)),
-  Product(
-      id: 3,
-      title: "Hang Top",
-      price: 234,
-      size: 10,
-      description: dummyText,
-      image: 'assets/imgs/boutique.png',
-      color: Color(0xFF989493)),
-  Product(
-      id: 4,
-      title: "Old Fashion",
-      price: 234,
-      size: 11,
-      description: dummyText,
-      image: 'assets/imgs/boutique.png',
-      color: Color(0xFFE6B398)),
-  Product(
-      id: 5,
-      title: "Office Code",
-      price: 234,
-      size: 12,
-      description: dummyText,
-      image: 'assets/imgs/boutique.png',
-      color: Color(0xFFFB7883)),
-  Product(
-    id: 6,
-    title: "Office Code",
-    price: 234,
-    size: 12,
-    description: dummyText,
-    image: 'assets/imgs/boutique.png',
-    color: Color(0xFFAEAEAE),
-  ),
-];
-
-String dummyText =
-    "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since. When an unknown printer took a galley.";

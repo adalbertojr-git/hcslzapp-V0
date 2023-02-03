@@ -15,7 +15,7 @@ abstract class BoutiqueControllerBase with Store {
   List<String> categories = [];
 
   @observable
-  List<Products> products = [];
+  List<Product> products = [];
 
   @observable
   ProductFirebaseRepo firebaseRepo = ProductFirebaseRepo();
@@ -23,6 +23,9 @@ abstract class BoutiqueControllerBase with Store {
   @observable
   // By default our first item will be selected
   int selectedIndex = 0;
+
+  @observable
+  String filter = '';
 
   init() async {
     categories.clear();
@@ -37,7 +40,7 @@ abstract class BoutiqueControllerBase with Store {
 
   @action
   // Future<void> getAll() => firebaseRepo.getAll();
-  Future<List<Products>> getAll() => firebaseRepo.getAll();
+  Future<List<Product>> getAll() => firebaseRepo.getAll();
 
   @action
   Future<void> getOne() => firebaseRepo.getOne();
@@ -56,5 +59,18 @@ abstract class BoutiqueControllerBase with Store {
       categories.add(element.category!);
     });
     return categories;
+  }
+
+  @action
+  setFilter(String value) => filter = value;
+
+  @computed
+  List<Product> get listFiltered {
+    if (filter == 'Todas') {
+      return List<Product>.from(products);
+    } else {
+      return List<Product>.from(
+          products.where((element) => element.category!.contains(filter)));
+    }
   }
 }

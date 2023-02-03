@@ -1,14 +1,14 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 
-class Products {
+class Product {
   String? id;
   String? category;
   String? name;
   String? description;
   List<String>? images;
 
-  Products({
+  Product({
     required this.id,
     required this.category,
     required this.name,
@@ -16,12 +16,12 @@ class Products {
     required this.images,
   });
 
-  factory Products.fromFirestore(
+  factory Product.fromFirestore(
     DocumentSnapshot<Map<String, dynamic>> snapshot,
     SnapshotOptions? options,
   ) {
     final data = snapshot.data();
-    return Products(
+    return Product(
       id:  data?['id'],
       category:  data?['category'],
       name: data?['name'],
@@ -42,7 +42,7 @@ class Products {
 
   @override
   String toString() {
-    return 'Products{id: $id,, category: $category, name: $name, description: $description}';
+    return 'Product{id: $id, category: $category, name: $name, description: $description}';
     // return 'Products{name: $name, description: $description, images: $images}';
   }
 

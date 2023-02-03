@@ -9,6 +9,14 @@ part of 'boutique.controller.dart';
 // ignore_for_file: non_constant_identifier_names, unnecessary_brace_in_string_interps, unnecessary_lambdas, prefer_expression_function_bodies, lines_longer_than_80_chars, avoid_as, avoid_annotating_with_dynamic, no_leading_underscores_for_local_identifiers
 
 mixin _$BoutiqueController on BoutiqueControllerBase, Store {
+  Computed<List<Product>>? _$listFilteredComputed;
+
+  @override
+  List<Product> get listFiltered => (_$listFilteredComputed ??=
+          Computed<List<Product>>(() => super.listFiltered,
+              name: 'BoutiqueControllerBase.listFiltered'))
+      .value;
+
   late final _$isHidedButtonAtom =
       Atom(name: 'BoutiqueControllerBase.isHidedButton', context: context);
 
@@ -45,13 +53,13 @@ mixin _$BoutiqueController on BoutiqueControllerBase, Store {
       Atom(name: 'BoutiqueControllerBase.products', context: context);
 
   @override
-  List<Products> get products {
+  List<Product> get products {
     _$productsAtom.reportRead();
     return super.products;
   }
 
   @override
-  set products(List<Products> value) {
+  set products(List<Product> value) {
     _$productsAtom.reportWrite(value, super.products, () {
       super.products = value;
     });
@@ -89,6 +97,22 @@ mixin _$BoutiqueController on BoutiqueControllerBase, Store {
     });
   }
 
+  late final _$filterAtom =
+      Atom(name: 'BoutiqueControllerBase.filter', context: context);
+
+  @override
+  String get filter {
+    _$filterAtom.reportRead();
+    return super.filter;
+  }
+
+  @override
+  set filter(String value) {
+    _$filterAtom.reportWrite(value, super.filter, () {
+      super.filter = value;
+    });
+  }
+
   late final _$BoutiqueControllerBaseActionController =
       ActionController(name: 'BoutiqueControllerBase', context: context);
 
@@ -104,7 +128,7 @@ mixin _$BoutiqueController on BoutiqueControllerBase, Store {
   }
 
   @override
-  Future<List<Products>> getAll() {
+  Future<List<Product>> getAll() {
     final _$actionInfo = _$BoutiqueControllerBaseActionController.startAction(
         name: 'BoutiqueControllerBase.getAll');
     try {
@@ -159,13 +183,26 @@ mixin _$BoutiqueController on BoutiqueControllerBase, Store {
   }
 
   @override
+  dynamic setFilter(String value) {
+    final _$actionInfo = _$BoutiqueControllerBaseActionController.startAction(
+        name: 'BoutiqueControllerBase.setFilter');
+    try {
+      return super.setFilter(value);
+    } finally {
+      _$BoutiqueControllerBaseActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
   String toString() {
     return '''
 isHidedButton: ${isHidedButton},
 categories: ${categories},
 products: ${products},
 firebaseRepo: ${firebaseRepo},
-selectedIndex: ${selectedIndex}
+selectedIndex: ${selectedIndex},
+filter: ${filter},
+listFiltered: ${listFiltered}
     ''';
   }
 }
