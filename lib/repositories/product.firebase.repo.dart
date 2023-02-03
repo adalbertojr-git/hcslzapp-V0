@@ -18,13 +18,17 @@ class ProductFirebaseRepo {
     }
   }
 
-  Future<void> loadAll2() async {
+  Future<List<String>> getCategories() async {
     final query = await db
         .collection("products")
-        .where("category", isEqualTo: "bonés")
+        // .where("category", isEqualTo: "bonés")
         .get();
+    List<String> categories = [];
+    categories.add('Todas');
     query.docs.forEach((element) {
       print(element.get('name'));
+      categories.add(element.get('category'));
     });
+    return categories;
   }
 }

@@ -1,27 +1,76 @@
 import 'package:flutter/material.dart';
-import 'package:hcslzapp/repositories/product.firebase.repo.dart';
+import 'package:flutter_mobx/flutter_mobx.dart';
+import '../../common/messages.dart';
+import '../../components/centered.message.dart';
 import '../../components/my.appbar.dart';
 import '../../components/my.bottom.appbar.dart';
+import '../../components/progress.dart';
+import '../../controllers/boutique.controller.dart';
 
 const String _title = 'Boutique Harley Club';
 
-class BoutiquePage extends StatelessWidget {
+class BoutiquePage extends StatefulWidget {
   @override
-  Widget build(BuildContext context) {
-    ProductFirebaseRepo firebaseRepo = ProductFirebaseRepo();
-    firebaseRepo.loadAll2();
+  State<BoutiquePage> createState() => _BoutiquePageState();
+}
 
-    return Scaffold(
-      appBar: MyAppBar(_title),
-      bottomNavigationBar: MyBottomAppBar(),
-      body: _widgets(),
-    );
+class _BoutiquePageState extends State<BoutiquePage> {
+  final BoutiqueController _controller = BoutiqueController();
+  final kTextColor = Color(0xFF535353);
+  final kTextLightColor = Color(0xFFACACAC);
+
+  @override
+  void initState() {
+    _controller.init();
+    super.initState();
   }
+
+  @override
+  Widget build(BuildContext context) => Observer(builder: (_) {
+        return Scaffold(
+          appBar: MyAppBar(_title),
+          bottomNavigationBar:
+              _controller.isHidedButton ? null : MyBottomAppBar(),
+          body: FutureBuilder<List<String>>(
+            future: _controller.getCategories(),
+            builder: (context, snapshot) {
+              switch (snapshot.connectionState) {
+                case ConnectionState.none:
+                  break;
+                case ConnectionState.waiting:
+                  return Progress();
+                case ConnectionState.active:
+                  break;
+                default:
+                  if (snapshot.hasError) {
+                    return CenteredMessage(
+                      title: ERROR,
+                      message: snapshot.error.toString(),
+                    );
+                  } else {
+                    if ((snapshot.data?.length)! > 0) {
+                      _controller.categories.addAll(snapshot.data!);
+                      return _widgets();
+                    } else
+                      return CenteredMessage(
+                        title: WARNING,
+                        message: NOTEXIST,
+                      );
+                  }
+              } //switch (snapshot.connectionState)
+              return CenteredMessage(
+                title: ERROR,
+                message: UNKNOWN,
+              );
+            },
+          ),
+        );
+      });
 
   _widgets() => Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
-          Categories(),
+          _loadCategories(),
           Expanded(
             child: Padding(
               padding: const EdgeInsets.symmetric(horizontal: 20),
@@ -49,66 +98,51 @@ class BoutiquePage extends StatelessWidget {
           ),
         ],
       );
-}
 
-class Categories extends StatefulWidget {
-  @override
-  _CategoriesState createState() => _CategoriesState();
-}
-
-class _CategoriesState extends State<Categories> {
-  List<String> categories = ["Hand bag", "Jewellery", "Footwear", "Dresses"];
-
-  // By default our first item will be selected
-  int selectedIndex = 0;
-  final kTextColor = Color(0xFF535353);
-  final kTextLightColor = Color(0xFFACACAC);
-
-  @override
-  Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(vertical: 20),
-      child: SizedBox(
-        height: 25,
-        child: ListView.builder(
-          scrollDirection: Axis.horizontal,
-          itemCount: categories.length,
-          itemBuilder: (context, index) => buildCategory(index),
+  _loadCategories() => Padding(
+        padding: const EdgeInsets.symmetric(vertical: 20),
+        child: SizedBox(
+          height: 25,
+          child: ListView.builder(
+            scrollDirection: Axis.horizontal,
+            itemCount: _controller.categories.length,
+            itemBuilder: (context, index) => buildCategory(index),
+          ),
         ),
-      ),
-    );
-  }
+      );
 
-  Widget buildCategory(int index) {
-    return GestureDetector(
-      onTap: () {
-        setState(() {
-          selectedIndex = index;
-        });
-      },
-      child: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 20),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: <Widget>[
-            Text(
-              categories[index],
-              style: TextStyle(
-                fontWeight: FontWeight.bold,
-                color: selectedIndex == index ? kTextColor : kTextLightColor,
-              ),
+  Widget buildCategory(int index) => Observer(
+        builder: (context) => GestureDetector(
+          onTap: () {
+            _controller.setSelectedIndex(index);
+          },
+          child: Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 20),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: <Widget>[
+                Text(
+                  _controller.categories[index],
+                  style: TextStyle(
+                    fontWeight: FontWeight.bold,
+                    color: _controller.selectedIndex == index
+                        ? kTextColor
+                        : kTextLightColor,
+                  ),
+                ),
+                Container(
+                  margin: EdgeInsets.only(top: 20 / 4), //top padding 5
+                  height: 2,
+                  width: 30,
+                  color: _controller.selectedIndex == index
+                      ? Colors.black
+                      : Colors.transparent,
+                )
+              ],
             ),
-            Container(
-              margin: EdgeInsets.only(top: 20 / 4), //top padding 5
-              height: 2,
-              width: 30,
-              color: selectedIndex == index ? Colors.black : Colors.transparent,
-            )
-          ],
+          ),
         ),
-      ),
-    );
-  }
+      );
 }
 
 class ItemCard extends StatelessWidget {
