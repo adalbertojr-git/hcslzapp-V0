@@ -29,15 +29,31 @@ mixin _$BoutiqueController on BoutiqueControllerBase, Store {
       Atom(name: 'BoutiqueControllerBase.categories', context: context);
 
   @override
-  ObservableList<dynamic> get categories {
+  List<String> get categories {
     _$categoriesAtom.reportRead();
     return super.categories;
   }
 
   @override
-  set categories(ObservableList<dynamic> value) {
+  set categories(List<String> value) {
     _$categoriesAtom.reportWrite(value, super.categories, () {
       super.categories = value;
+    });
+  }
+
+  late final _$productsAtom =
+      Atom(name: 'BoutiqueControllerBase.products', context: context);
+
+  @override
+  List<Products> get products {
+    _$productsAtom.reportRead();
+    return super.products;
+  }
+
+  @override
+  set products(List<Products> value) {
+    _$productsAtom.reportWrite(value, super.products, () {
+      super.products = value;
     });
   }
 
@@ -143,10 +159,22 @@ mixin _$BoutiqueController on BoutiqueControllerBase, Store {
   }
 
   @override
+  List<String> getCategories2() {
+    final _$actionInfo = _$BoutiqueControllerBaseActionController.startAction(
+        name: 'BoutiqueControllerBase.getCategories2');
+    try {
+      return super.getCategories2();
+    } finally {
+      _$BoutiqueControllerBaseActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
   String toString() {
     return '''
 isHidedButton: ${isHidedButton},
 categories: ${categories},
+products: ${products},
 firebaseRepo: ${firebaseRepo},
 selectedIndex: ${selectedIndex}
     ''';

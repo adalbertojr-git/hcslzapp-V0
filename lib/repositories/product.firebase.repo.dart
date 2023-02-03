@@ -1,6 +1,4 @@
-import 'dart:convert';
 import 'dart:developer';
-
 import 'package:cloud_firestore/cloud_firestore.dart';
 import '../models/product.dart';
 
@@ -15,15 +13,12 @@ class ProductFirebaseRepo {
     final docSnap = await query.get();
     List<Products> products = [];
     docSnap.docs.forEach((element) {
-/*      print(element
-          .data()
-          .name);*/
       products.add(
         Products(
+          category: element.data().category,
           name: element.data().name,
           description: element.data().description,
           images: element.data().images as List<String>,
-          // images: [],
         ),
       );
     });

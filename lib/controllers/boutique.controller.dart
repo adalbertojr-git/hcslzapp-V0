@@ -12,7 +12,11 @@ abstract class BoutiqueControllerBase with Store {
   bool isHidedButton = true;
 
   @observable
-  ObservableList categories = [].asObservable();
+  // ObservableList categories = [].asObservable();
+  List<String> categories = [];
+
+  @observable
+  List<Products> products = [];
 
   @observable
   ProductFirebaseRepo firebaseRepo = ProductFirebaseRepo();
@@ -23,7 +27,7 @@ abstract class BoutiqueControllerBase with Store {
 
   init() async {
     categories.clear();
-    await getAll();
+    products.clear();
   }
 
   @action
@@ -40,8 +44,17 @@ abstract class BoutiqueControllerBase with Store {
   Future<void> getOne() => firebaseRepo.getOne();
 
   @action
-  Future<List<String>> getProductsByCategory() => firebaseRepo.getProductsByCategory('Camisas');
+  Future<List<String>> getProductsByCategory() =>
+      firebaseRepo.getProductsByCategory('Camisas');
 
   @action
   setSelectedIndex(int index) => selectedIndex = index;
+
+  @action
+  List<String> getCategories2() {
+    products.forEach((element) {
+      categories.add(element.category!);
+    });
+    return categories;
+  }
 }

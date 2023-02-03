@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
+import 'package:hcslzapp/models/product.dart';
 import '../../common/messages.dart';
 import '../../components/centered.message.dart';
 import '../../components/my.appbar.dart';
 import '../../components/my.bottom.appbar.dart';
 import '../../components/progress.dart';
 import '../../controllers/boutique.controller.dart';
-import '../../models/product.dart';
 
 const String _title = 'Boutique Harley Club';
 
@@ -33,8 +33,8 @@ class _BoutiquePageState extends State<BoutiquePage> {
           appBar: MyAppBar(_title),
           bottomNavigationBar:
               _controller.isHidedButton ? null : MyBottomAppBar(),
-          body: FutureBuilder<List<String>>(
-            future: _controller.getCategories(),
+          body: FutureBuilder<List<Products>>(
+            future: _controller.getAll(),
             builder: (context, snapshot) {
               switch (snapshot.connectionState) {
                 case ConnectionState.none:
@@ -51,7 +51,9 @@ class _BoutiquePageState extends State<BoutiquePage> {
                     );
                   } else {
                     if ((snapshot.data?.length)! > 0) {
-                      _controller.categories.addAll(snapshot.data!);
+                      _controller.products.addAll(snapshot.data!);
+                      _controller.getCategories2();
+                      print(_controller.categories);
                       return _widgets();
                     } else
                       return CenteredMessage(
@@ -77,7 +79,7 @@ class _BoutiquePageState extends State<BoutiquePage> {
             child: Padding(
               padding: const EdgeInsets.symmetric(horizontal: 20),
               child: GridView.builder(
-                itemCount: products.length,
+                itemCount: _controller.products.length,
                 gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                   crossAxisCount: 2,
                   mainAxisSpacing: 20,
@@ -85,7 +87,7 @@ class _BoutiquePageState extends State<BoutiquePage> {
                   childAspectRatio: 0.75,
                 ),
                 itemBuilder: (context, index) => ItemCard(
-                  product: products[index],
+                  product: _controller.products[index],
 /*                  press: () => Navigator.push(
                     context,
                     MaterialPageRoute(
@@ -148,7 +150,7 @@ class _BoutiquePageState extends State<BoutiquePage> {
 }
 
 class ItemCard extends StatelessWidget {
-  final Product product;
+  final Products product;
 
   // final Function press;
   ItemCard({
@@ -178,9 +180,9 @@ class ItemCard extends StatelessWidget {
                 borderRadius: BorderRadius.circular(16),
               ),
               child: Hero(
-                tag: "${product.id}",
-                // child: Image.asset(product.images![0]),
-                child: Image.asset(product.image),
+                tag: "${product.name}",
+                child: Image.asset( 'assets/imgs/boutique.png'),
+                // child: Image.asset(product.image),
               ),
             ),
           ),
@@ -188,7 +190,7 @@ class ItemCard extends StatelessWidget {
             padding: const EdgeInsets.symmetric(vertical: 20 / 4),
             child: Text(
               // products is out demo list
-              product.title,
+              product.name!,
               style: TextStyle(color: kTextLightColor),
             ),
           ),
