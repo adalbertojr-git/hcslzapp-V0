@@ -6,6 +6,7 @@ import '../../components/my.appbar.dart';
 import '../../components/my.bottom.appbar.dart';
 import '../../components/progress.dart';
 import '../../controllers/boutique.controller.dart';
+import '../../models/product.dart';
 
 const String _title = 'Boutique Harley Club';
 
@@ -18,6 +19,7 @@ class _BoutiquePageState extends State<BoutiquePage> {
   final BoutiqueController _controller = BoutiqueController();
   final kTextColor = Color(0xFF535353);
   final kTextLightColor = Color(0xFFACACAC);
+  //List<Products> products = [];
 
   @override
   void initState() {
@@ -26,8 +28,8 @@ class _BoutiquePageState extends State<BoutiquePage> {
   }
 
   @override
-  Widget build(BuildContext context) => Observer(builder: (_) {
-        return Scaffold(
+  Widget build(BuildContext context) => Observer(
+        builder: (_) => Scaffold(
           appBar: MyAppBar(_title),
           bottomNavigationBar:
               _controller.isHidedButton ? null : MyBottomAppBar(),
@@ -64,8 +66,8 @@ class _BoutiquePageState extends State<BoutiquePage> {
               );
             },
           ),
-        );
-      });
+        ),
+      );
 
   _widgets() => Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -171,11 +173,14 @@ class ItemCard extends StatelessWidget {
               // height: 180,
               // width: 160,
               decoration: BoxDecoration(
-                color: product.color,
+                color: Colors.deepOrange[300],
+                // color: product.color,
                 borderRadius: BorderRadius.circular(16),
               ),
               child: Hero(
-                tag: "${product.id}",
+                // tag: "${product.id}",
+                tag: "0",
+                // child: Image.asset(product.images![0]),
                 child: Image.asset(product.image),
               ),
             ),
@@ -189,7 +194,8 @@ class ItemCard extends StatelessWidget {
             ),
           ),
           Text(
-            "\$${product.price}",
+            "200,00",
+            // "\$${product.price}",
             style: TextStyle(fontWeight: FontWeight.bold),
           )
         ],

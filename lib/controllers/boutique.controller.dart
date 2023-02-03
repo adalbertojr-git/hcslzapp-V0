@@ -1,5 +1,6 @@
 import 'dart:async';
 import 'package:mobx/mobx.dart';
+import '../models/product.dart';
 import '../repositories/product.firebase.repo.dart';
 
 part 'boutique.controller.g.dart';
@@ -20,8 +21,9 @@ abstract class BoutiqueControllerBase with Store {
   // By default our first item will be selected
   int selectedIndex = 0;
 
-  init() {
+  init() async {
     categories.clear();
+    // await getAll();
   }
 
   @action
@@ -29,6 +31,9 @@ abstract class BoutiqueControllerBase with Store {
 
   @action
   Future<List<String>> getCategories() => firebaseRepo.getCategories();
+
+  @action
+  Future<List<Products>> getAll() => firebaseRepo.getAll();
 
   @action
   setSelectedIndex(int index) => selectedIndex = index;
