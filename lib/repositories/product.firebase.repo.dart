@@ -15,6 +15,7 @@ class ProductFirebaseRepo {
     docSnap.docs.forEach((element) {
       products.add(
         Products(
+          id: element.id,
           category: element.data().category,
           name: element.data().name,
           description: element.data().description,
@@ -55,7 +56,7 @@ class ProductFirebaseRepo {
     }
   }
 
-  Future<List<String>> getCategories() async {
+/*  Future<List<String>> getCategories() async {
     final query = await db.collection("products").get();
     List<String> categories = [];
     categories.add('Todas');
@@ -63,7 +64,7 @@ class ProductFirebaseRepo {
       categories.add(element.get('category'));
     });
     return categories;
-  }
+  }*/
 
   Future<List<String>> getProductsByCategory(String category) async {
     final query = await db

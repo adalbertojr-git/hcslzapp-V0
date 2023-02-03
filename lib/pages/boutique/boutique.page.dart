@@ -53,7 +53,6 @@ class _BoutiquePageState extends State<BoutiquePage> {
                     if ((snapshot.data?.length)! > 0) {
                       _controller.products.addAll(snapshot.data!);
                       _controller.getCategories();
-                      print(_controller.categories);
                       return _widgets();
                     } else
                       return CenteredMessage(
@@ -180,7 +179,7 @@ class ItemCard extends StatelessWidget {
                 borderRadius: BorderRadius.circular(16),
               ),
               child: Hero(
-                tag: "${product.name}",
+                tag: "${product.id}",
                 child: Image.asset( 'assets/imgs/boutique.png'),
                 // child: Image.asset(product.image),
               ),

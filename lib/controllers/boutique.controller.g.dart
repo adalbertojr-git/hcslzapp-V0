@@ -104,17 +104,6 @@ mixin _$BoutiqueController on BoutiqueControllerBase, Store {
   }
 
   @override
-  Future<List<String>> getCategories() {
-    final _$actionInfo = _$BoutiqueControllerBaseActionController.startAction(
-        name: 'BoutiqueControllerBase.getCategories');
-    try {
-      return super.getCategories();
-    } finally {
-      _$BoutiqueControllerBaseActionController.endAction(_$actionInfo);
-    }
-  }
-
-  @override
   Future<List<Products>> getAll() {
     final _$actionInfo = _$BoutiqueControllerBaseActionController.startAction(
         name: 'BoutiqueControllerBase.getAll');
@@ -159,11 +148,11 @@ mixin _$BoutiqueController on BoutiqueControllerBase, Store {
   }
 
   @override
-  List<String> getCategories2() {
+  List<String> getCategories() {
     final _$actionInfo = _$BoutiqueControllerBaseActionController.startAction(
-        name: 'BoutiqueControllerBase.getCategories2');
+        name: 'BoutiqueControllerBase.getCategories');
     try {
-      return super.getCategories2();
+      return super.getCategories();
     } finally {
       _$BoutiqueControllerBaseActionController.endAction(_$actionInfo);
     }
