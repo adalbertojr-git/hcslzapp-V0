@@ -93,6 +93,7 @@ class _HeadNotificationListAssociatedPageState
                   decoration: BoxDecoration(
                     shape: BoxShape.rectangle,
                     borderRadius: BorderRadius.circular(10.0),
+                    color: Colors.deepOrange[300],
                   ),
                   child: Column(
                     children: [
@@ -124,7 +125,6 @@ class _HeadNotificationListAssociatedPageState
                         width: double.infinity,
                         height: 190,
                         child: Card(
-                          color: Colors.black12,
                           child: Column(
                             children: [
                               SizedBox(
