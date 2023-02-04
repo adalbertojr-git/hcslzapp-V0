@@ -54,7 +54,7 @@ abstract class BoutiqueControllerBase with Store {
 
   @action
   List<String> getCategories() {
-    categories.add('Todas');
+    categories.add('Todos');
     products.forEach((element) {
       categories.add(element.category!);
     });
@@ -66,7 +66,7 @@ abstract class BoutiqueControllerBase with Store {
 
   @computed
   List<Product> get listFiltered {
-    if (filter == 'Todas') {
+    if (filter == 'Todos') {
       return List<Product>.from(products);
     } else {
       return List<Product>.from(

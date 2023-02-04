@@ -20,8 +20,6 @@ class _BoutiquePageState extends State<BoutiquePage> {
   final kTextColor = Color(0xFF535353);
   final kTextLightColor = Color(0xFFACACAC);
 
-  //List<Products> products = [];
-
   @override
   void initState() {
     super.initState();
@@ -128,20 +126,19 @@ class _BoutiquePageState extends State<BoutiquePage> {
   _loadProducts() => Expanded(
         child: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 10),
-          child: Observer(
-            builder: (_) {
-              return GridView.builder(
-                itemCount: _controller.listFiltered.length,
-                // itemCount: _controller.products.length,
-                gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                  crossAxisCount: 2,
-                  mainAxisSpacing: 20,
-                  crossAxisSpacing: 20,
-                  childAspectRatio: 0.75,
-                ),
-                itemBuilder: (context, index) => ItemCard(
-                  product: _controller.listFiltered[index],
-                  // product: _controller.products[index],
+          child: Observer(builder: (_) {
+            return GridView.builder(
+              itemCount: _controller.listFiltered.length,
+              // itemCount: _controller.products.length,
+              gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                crossAxisCount: 2,
+                mainAxisSpacing: 20,
+                crossAxisSpacing: 20,
+                childAspectRatio: 0.75,
+              ),
+              itemBuilder: (context, index) => ItemCard(
+                product: _controller.listFiltered[index],
+                // product: _controller.products[index],
 /*                  press: () => Navigator.push(
                         context,
                         MaterialPageRoute(
@@ -150,10 +147,9 @@ class _BoutiquePageState extends State<BoutiquePage> {
                           ),
                         ),
                       ),*/
-                ),
-              );
-            }
-          ),
+              ),
+            );
+          }),
         ),
       );
 }
