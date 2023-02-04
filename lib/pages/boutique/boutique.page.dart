@@ -24,7 +24,6 @@ class _BoutiquePageState extends State<BoutiquePage> {
 
   @override
   void initState() {
-    _controller.init();
     super.initState();
   }
 
@@ -52,6 +51,7 @@ class _BoutiquePageState extends State<BoutiquePage> {
                     );
                   } else {
                     if ((snapshot.data?.length)! > 0) {
+                      _controller.init();
                       _controller.products.addAll(snapshot.data!);
                       _controller.getCategories();
                       return _widgets();
@@ -95,11 +95,10 @@ class _BoutiquePageState extends State<BoutiquePage> {
         builder: (context) => GestureDetector(
           onTap: () {
             _controller.setSelectedIndex(index);
-            print(_controller.categories[index]);
             _controller.setFilter(_controller.categories[index]);
           },
           child: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 20),
+            padding: const EdgeInsets.symmetric(horizontal: 10),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: <Widget>[
@@ -128,7 +127,7 @@ class _BoutiquePageState extends State<BoutiquePage> {
 
   _loadProducts() => Expanded(
         child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 20),
+          padding: const EdgeInsets.symmetric(horizontal: 10),
           child: Observer(
             builder: (_) {
               return GridView.builder(
@@ -179,7 +178,7 @@ class ItemCard extends StatelessWidget {
         children: <Widget>[
           Expanded(
             child: Container(
-              padding: EdgeInsets.all(20),
+              padding: EdgeInsets.all(10),
               decoration: BoxDecoration(
                 color: Colors.deepOrange[300],
                 // color: product.color,
