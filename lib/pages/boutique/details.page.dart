@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:hcslzapp/components/my.appbar.dart';
 import '../../components/my.bottom.appbar.dart';
+import '../../controllers/app.controller.dart';
 import '../../models/product.dart';
+
+const String _title = 'Detalhes';
 
 class DetailsPage extends StatelessWidget {
   final Product product;
@@ -14,36 +17,11 @@ class DetailsPage extends StatelessWidget {
       // each product have a color
       backgroundColor: Colors.deepOrange[300],
       // backgroundColor: product.color,
-      appBar: MyAppBar(''),
+      appBar: MyAppBar(_title),
       bottomNavigationBar: MyBottomAppBar(),
       body: Body(product: product),
     );
   }
-
-/*  AppBar buildAppBar(BuildContext context) {
-    return AppBar(
-      backgroundColor: product.color,
-      elevation: 0,
-      leading: IconButton(
-        icon: SvgPicture.asset(
-          'assets/icons/back.svg',
-          color: Colors.white,
-        ),
-        onPressed: () => Navigator.pop(context),
-      ),
-      actions: <Widget>[
-        IconButton(
-          icon: SvgPicture.asset("assets/icons/search.svg"),
-          onPressed: () {},
-        ),
-        IconButton(
-          icon: SvgPicture.asset("assets/icons/cart.svg"),
-          onPressed: () {},
-        ),
-        SizedBox(width: kDefaultPaddin / 2)
-      ],
-    );
-  }*/
 }
 
 class Body extends StatelessWidget {
@@ -69,7 +47,6 @@ class Body extends StatelessWidget {
                     left: 10,
                     right: 10,
                   ),
-                  // height: 500,
                   decoration: BoxDecoration(
                     color: Colors.white,
                     borderRadius: BorderRadius.only(
@@ -80,9 +57,9 @@ class Body extends StatelessWidget {
                   child: Column(
                     children: <Widget>[
                       // ColorAndSize(product: product),
-                      // SizedBox(height: 10 / 2),
+                      SizedBox(height: 20 / 2),
                       Description(product: product),
-                      SizedBox(height: 10 / 2),
+                      SizedBox(height: 20 / 2),
                       CounterWithFavBtn(),
                       // SizedBox(height: 10 / 2),
                       // AddToCart(product: product)
@@ -112,7 +89,10 @@ class Description extends StatelessWidget {
       padding: const EdgeInsets.symmetric(vertical: 10),
       child: Text(
         product.description!,
-        style: TextStyle(height: 1.5),
+        style: TextStyle(
+          height: 1.5,
+          color: Colors.black,
+        ),
       ),
     );
   }
@@ -134,11 +114,11 @@ class ProductTitleWithImage extends StatelessWidget {
         children: <Widget>[
           Text(
             product.name!,
-            // product.title,
-            style: Theme.of(context)
-                .textTheme
-                .headline4
-                ?.copyWith(color: Colors.white, fontWeight: FontWeight.bold),
+            style: TextStyle(
+              fontSize: 20,
+              fontWeight: FontWeight.bold,
+              color: Colors.white,
+            ),
           ),
           SizedBox(height: 10),
           Row(
@@ -181,7 +161,6 @@ class ProductTitleWithImage extends StatelessWidget {
 }
 
 class CounterWithFavBtn extends StatelessWidget {
-
   @override
   Widget build(BuildContext context) {
     return Row(
@@ -193,7 +172,8 @@ class CounterWithFavBtn extends StatelessWidget {
           height: 32,
           width: 32,
           decoration: BoxDecoration(
-            color: Color(0xFFFF6464),
+            // color: Color(0xFFFF6464),
+            color: Colors.white,
             shape: BoxShape.circle,
           ),
           child: Icon(Icons.favorite),
@@ -210,6 +190,7 @@ class CartCounter extends StatefulWidget {
 
 class _CartCounterState extends State<CartCounter> {
   int numOfItems = 1;
+
   @override
   Widget build(BuildContext context) {
     return Row(
@@ -229,7 +210,10 @@ class _CartCounterState extends State<CartCounter> {
           child: Text(
             // if our item is less  then 10 then  it shows 01 02 like that
             numOfItems.toString().padLeft(2, "0"),
-            style: Theme.of(context).textTheme.headline6,
+            style: TextStyle(
+              color: Colors.black,
+            ),
+            // style: Theme.of(context).textTheme.headline6,
           ),
         ),
         buildOutlineButton(
@@ -243,12 +227,16 @@ class _CartCounterState extends State<CartCounter> {
     );
   }
 
-  SizedBox buildOutlineButton({required IconData icon, required Function()? press}) {
+  SizedBox buildOutlineButton({
+    required IconData icon,
+    required Function()? press,
+  }) {
     return SizedBox(
       width: 40,
       height: 32,
       child: OutlinedButton(
         style: OutlinedButton.styleFrom(
+          backgroundColor: Colors.deepOrange[100],
           padding: EdgeInsets.zero,
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(13),
