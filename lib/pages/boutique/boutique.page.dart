@@ -7,6 +7,7 @@ import '../../components/my.appbar.dart';
 import '../../components/my.bottom.appbar.dart';
 import '../../components/progress.dart';
 import '../../controllers/boutique.controller.dart';
+import 'details.page.dart';
 
 const String _title = 'Boutique Harley Club';
 
@@ -129,7 +130,6 @@ class _BoutiquePageState extends State<BoutiquePage> {
           child: Observer(builder: (_) {
             return GridView.builder(
               itemCount: _controller.listFiltered.length,
-              // itemCount: _controller.products.length,
               gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                 crossAxisCount: 2,
                 mainAxisSpacing: 20,
@@ -138,15 +138,14 @@ class _BoutiquePageState extends State<BoutiquePage> {
               ),
               itemBuilder: (context, index) => ItemCard(
                 product: _controller.listFiltered[index],
-                // product: _controller.products[index],
-/*                  press: () => Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => DetailsScreen(
-                            product: products[index],
-                          ),
-                        ),
-                      ),*/
+                onTap: () => Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => DetailsPage(
+                      product: _controller.listFiltered[index],
+                    ),
+                  ),
+                ),
               ),
             );
           }),
@@ -156,11 +155,11 @@ class _BoutiquePageState extends State<BoutiquePage> {
 
 class ItemCard extends StatelessWidget {
   final Product product;
+  final Function() onTap;
 
-  // final Function press;
   ItemCard({
     required this.product,
-    //this.press,
+    required this.onTap,
   });
 
   final kTextLightColor = Color(0xFFACACAC);
@@ -168,7 +167,7 @@ class ItemCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      //onTap: press,
+      onTap: onTap,
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
