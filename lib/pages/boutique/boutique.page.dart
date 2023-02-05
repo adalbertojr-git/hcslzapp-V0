@@ -24,7 +24,19 @@ class _BoutiquePageState extends State<BoutiquePage> {
 
   @override
   void initState() {
+    addListener();
     super.initState();
+  }
+
+  addListener() {
+    _controller.firebaseRepo.db
+        .collection('products')
+        .snapshots()
+        .listen((event) {
+      setState(() {
+        _controller.getAll();
+      });
+    });
   }
 
   @override
@@ -51,7 +63,8 @@ class _BoutiquePageState extends State<BoutiquePage> {
                     );
                   } else {
                     if ((snapshot.data?.length)! > 0) {
-                      _controller.init();
+                      _controller.products.clear();
+                      _controller.categories.clear();
                       _controller.products.addAll(snapshot.data!);
                       _controller.getCategories();
                       return _widgets();

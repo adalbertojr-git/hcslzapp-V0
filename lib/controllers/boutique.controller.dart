@@ -27,11 +27,6 @@ abstract class BoutiqueControllerBase with Store {
   @observable
   String filter = '';
 
-  init() async {
-    categories.clear();
-    products.clear();
-  }
-
   @action
   bool setButtonVisibilty() => isHidedButton = !isHidedButton;
 
