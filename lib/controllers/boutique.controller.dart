@@ -21,6 +21,9 @@ abstract class BoutiqueControllerBase with Store {
   ProductFirebaseRepo firebaseRepo = ProductFirebaseRepo();
 
   @observable
+  Future<List<Product>> future = Future<List<Product>>.value([]);
+
+  @observable
   // By default our first item will be selected
   int selectedIndex = 0;
 
@@ -30,19 +33,17 @@ abstract class BoutiqueControllerBase with Store {
   @action
   bool setButtonVisibilty() => isHidedButton = !isHidedButton;
 
-/*  @action
-  Future<List<String>> getCategories() => firebaseRepo.getCategories();*/
-
   @action
-  // Future<void> getAll() => firebaseRepo.getAll();
   Future<List<Product>> getAll() => firebaseRepo.getAll();
 
-  @action
+  Future<List<Product>> getFuture() => future = getAll();
+
+/*  @action
   Future<void> getOne() => firebaseRepo.getOne();
 
   @action
   Future<List<String>> getProductsByCategory() =>
-      firebaseRepo.getProductsByCategory('Camisas');
+      firebaseRepo.getProductsByCategory('Camisas');*/
 
   @action
   setSelectedIndex(int index) => selectedIndex = index;

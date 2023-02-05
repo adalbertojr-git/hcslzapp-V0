@@ -81,6 +81,22 @@ mixin _$BoutiqueController on BoutiqueControllerBase, Store {
     });
   }
 
+  late final _$futureAtom =
+      Atom(name: 'BoutiqueControllerBase.future', context: context);
+
+  @override
+  Future<List<Product>> get future {
+    _$futureAtom.reportRead();
+    return super.future;
+  }
+
+  @override
+  set future(Future<List<Product>> value) {
+    _$futureAtom.reportWrite(value, super.future, () {
+      super.future = value;
+    });
+  }
+
   late final _$selectedIndexAtom =
       Atom(name: 'BoutiqueControllerBase.selectedIndex', context: context);
 
@@ -139,28 +155,6 @@ mixin _$BoutiqueController on BoutiqueControllerBase, Store {
   }
 
   @override
-  Future<void> getOne() {
-    final _$actionInfo = _$BoutiqueControllerBaseActionController.startAction(
-        name: 'BoutiqueControllerBase.getOne');
-    try {
-      return super.getOne();
-    } finally {
-      _$BoutiqueControllerBaseActionController.endAction(_$actionInfo);
-    }
-  }
-
-  @override
-  Future<List<String>> getProductsByCategory() {
-    final _$actionInfo = _$BoutiqueControllerBaseActionController.startAction(
-        name: 'BoutiqueControllerBase.getProductsByCategory');
-    try {
-      return super.getProductsByCategory();
-    } finally {
-      _$BoutiqueControllerBaseActionController.endAction(_$actionInfo);
-    }
-  }
-
-  @override
   dynamic setSelectedIndex(int index) {
     final _$actionInfo = _$BoutiqueControllerBaseActionController.startAction(
         name: 'BoutiqueControllerBase.setSelectedIndex');
@@ -200,6 +194,7 @@ isHidedButton: ${isHidedButton},
 categories: ${categories},
 products: ${products},
 firebaseRepo: ${firebaseRepo},
+future: ${future},
 selectedIndex: ${selectedIndex},
 filter: ${filter},
 listFiltered: ${listFiltered}

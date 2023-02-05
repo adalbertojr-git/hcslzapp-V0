@@ -34,7 +34,9 @@ class _BoutiquePageState extends State<BoutiquePage> {
         .snapshots()
         .listen((event) {
       setState(() {
-        _controller.getAll();
+        _controller.getFuture().then((value) {
+          _controller.setButtonVisibilty();
+        });
       });
     });
   }
@@ -46,7 +48,7 @@ class _BoutiquePageState extends State<BoutiquePage> {
           bottomNavigationBar:
               _controller.isHidedButton ? null : MyBottomAppBar(),
           body: FutureBuilder<List<Product>>(
-            future: _controller.getAll(),
+            future: _controller.future,
             builder: (context, snapshot) {
               switch (snapshot.connectionState) {
                 case ConnectionState.none:
