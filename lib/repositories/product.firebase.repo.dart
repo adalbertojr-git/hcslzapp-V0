@@ -1,4 +1,3 @@
-import 'dart:developer';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import '../models/product.dart';
 
@@ -19,6 +18,7 @@ class ProductFirebaseRepo {
           category: element.data().category,
           name: element.data().name,
           description: element.data().description,
+          color: element.data().color,
           images: element.data().images as List<String>,
         ),
       );

@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:hcslzapp/components/my.appbar.dart';
 import '../../components/my.bottom.appbar.dart';
-import '../../controllers/app.controller.dart';
 import '../../models/product.dart';
+import 'color.map.dart';
 
 const String _title = 'Detalhes';
 
@@ -15,8 +15,7 @@ class DetailsPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       // each product have a color
-      backgroundColor: Colors.deepOrange[300],
-      // backgroundColor: product.color,
+      backgroundColor: getColor(product.color!),
       appBar: MyAppBar(_title),
       bottomNavigationBar: MyBottomAppBar(),
       body: Body(product: product),
@@ -61,8 +60,8 @@ class Body extends StatelessWidget {
                       Description(product: product),
                       SizedBox(height: 20 / 2),
                       CounterWithFavBtn(),
-                      // SizedBox(height: 10 / 2),
-                      // AddToCart(product: product)
+                      SizedBox(height: 20 / 2),
+                      AddToCart(product: product)
                     ],
                   ),
                 ),
@@ -172,7 +171,6 @@ class CounterWithFavBtn extends StatelessWidget {
           height: 32,
           width: 32,
           decoration: BoxDecoration(
-            // color: Color(0xFFFF6464),
             color: Colors.white,
             shape: BoxShape.circle,
           ),
@@ -244,6 +242,68 @@ class _CartCounterState extends State<CartCounter> {
         ),
         onPressed: press,
         child: Icon(icon),
+      ),
+    );
+  }
+}
+
+class AddToCart extends StatelessWidget {
+  const AddToCart({
+    required this.product,
+  });
+
+  final Product product;
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.symmetric(vertical: 10),
+      child: Row(
+        children: <Widget>[
+          Container(
+            margin: EdgeInsets.only(right: 10),
+            height: 50,
+            width: 58,
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(18),
+              border: Border.all(
+                color: Colors.black,
+                // color: product.color,
+              ),
+            ),
+            child: IconButton(
+              icon: Icon(
+                Icons.add_shopping_cart,
+                color: Colors.black,
+                // color: product.color,
+              ),
+              onPressed: () {},
+            ),
+          ),
+          Expanded(
+            child: SizedBox(
+              height: 50,
+              child: Container(
+                decoration: BoxDecoration(
+                  color: getColor(product.color!),
+                  borderRadius: BorderRadius.circular(10),
+                ),
+                child: TextButton(
+                  onPressed: () {},
+                  child: Container(
+                      child: Text(
+                    "Comprar".toUpperCase(),
+                    style: TextStyle(
+                      fontSize: 18,
+                      fontWeight: FontWeight.bold,
+                      color: Colors.white,
+                    ),
+                  )),
+                ),
+              ),
+            ),
+          ),
+        ],
       ),
     );
   }

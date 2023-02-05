@@ -6,6 +6,7 @@ class Product {
   String? category;
   String? name;
   String? description;
+  String? color;
   List<String>? images;
 
   Product({
@@ -13,6 +14,7 @@ class Product {
     required this.category,
     required this.name,
     required this.description,
+    required this.color,
     required this.images,
   });
 
@@ -26,6 +28,7 @@ class Product {
       category:  data?['category'],
       name: data?['name'],
       description: data?['description'],
+      color: data?['color'],
       images: data?['images'] is Iterable ? List.from(data?['images']) : null,
     );
   }
@@ -36,13 +39,16 @@ class Product {
       if (category != null) "category": category,
       if (name != null) "name": name,
       if (description != null) "description": description,
+      if (color != null) "color": color,
       if (images != null) "images": images,
     };
   }
 
   @override
   String toString() {
-    return 'Product{id: $id, category: $category, name: $name, description: $description}';
+    return 'Product{id: $id, category: $category, '
+        'name: $name, description: $description,'
+        'color: $color,}';
     // return 'Products{name: $name, description: $description, images: $images}';
   }
 

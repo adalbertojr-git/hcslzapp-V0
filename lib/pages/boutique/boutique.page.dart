@@ -7,6 +7,7 @@ import '../../components/my.appbar.dart';
 import '../../components/my.bottom.appbar.dart';
 import '../../components/progress.dart';
 import '../../controllers/boutique.controller.dart';
+import 'color.map.dart';
 import 'details.page.dart';
 
 const String _title = 'Boutique Harley Club';
@@ -175,8 +176,7 @@ class ItemCard extends StatelessWidget {
             child: Container(
               padding: EdgeInsets.all(10),
               decoration: BoxDecoration(
-                color: Colors.deepOrange[300],
-                // color: product.color,
+                color: getColor(product.color!),
                 borderRadius: BorderRadius.circular(16),
               ),
               child: Hero(
