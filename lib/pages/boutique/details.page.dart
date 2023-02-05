@@ -111,6 +111,9 @@ class ProductTitleWithImage extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
+          SizedBox(
+            height: 10,
+          ),
           Text(
             product.name!,
             style: TextStyle(

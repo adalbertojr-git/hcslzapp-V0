@@ -34,55 +34,49 @@ class _BoutiquePageState extends State<BoutiquePage> {
         .snapshots()
         .listen((event) {
       setState(() {
-        _controller.getFuture().then((value) {
-          _controller.setButtonVisibilty();
-        });
+        _controller.getFuture().catchError((e) {});
       });
     });
   }
 
   @override
-  Widget build(BuildContext context) => Observer(
-        builder: (_) => Scaffold(
-          appBar: MyAppBar(_title),
-          bottomNavigationBar:
-              _controller.isHidedButton ? null : MyBottomAppBar(),
-          body: FutureBuilder<List<Product>>(
-            future: _controller.future,
-            builder: (context, snapshot) {
-              switch (snapshot.connectionState) {
-                case ConnectionState.none:
-                  break;
-                case ConnectionState.waiting:
-                  return Progress();
-                case ConnectionState.active:
-                  break;
-                default:
-                  if (snapshot.hasError) {
+  Widget build(BuildContext context) => Scaffold(
+        appBar: MyAppBar(_title),
+        body: FutureBuilder<List<Product>>(
+          future: _controller.future,
+          builder: (context, snapshot) {
+            switch (snapshot.connectionState) {
+              case ConnectionState.none:
+                break;
+              case ConnectionState.waiting:
+                return Progress();
+              case ConnectionState.active:
+                break;
+              default:
+                if (snapshot.hasError) {
+                  return CenteredMessage(
+                    title: ERROR,
+                    message: snapshot.error.toString(),
+                  );
+                } else {
+                  if ((snapshot.data?.length)! > 0) {
+                    _controller.products.clear();
+                    _controller.categories.clear();
+                    _controller.products.addAll(snapshot.data!);
+                    _controller.getCategories();
+                    return _widgets();
+                  } else
                     return CenteredMessage(
-                      title: ERROR,
-                      message: snapshot.error.toString(),
+                      title: WARNING,
+                      message: NOTEXIST,
                     );
-                  } else {
-                    if ((snapshot.data?.length)! > 0) {
-                      _controller.products.clear();
-                      _controller.categories.clear();
-                      _controller.products.addAll(snapshot.data!);
-                      _controller.getCategories();
-                      return _widgets();
-                    } else
-                      return CenteredMessage(
-                        title: WARNING,
-                        message: NOTEXIST,
-                      );
-                  }
-              } //switch (snapshot.connectionState)
-              return CenteredMessage(
-                title: ERROR,
-                message: UNKNOWN,
-              );
-            },
-          ),
+                }
+            } //switch (snapshot.connectionState)
+            return CenteredMessage(
+              title: ERROR,
+              message: UNKNOWN,
+            );
+          },
         ),
       );
 
