@@ -42,7 +42,7 @@ class ProductFirebaseRepo {
     // return List<Products>.from(docSnap.docs);
   }*/
 
-  Future<void> getOne() async {
+/*  Future<void> getOne() async {
     final query =
         db.collection("products").doc('Mn4naavwjeUWxVn7yLhz').withConverter(
               fromFirestore: Product.fromFirestore,
@@ -55,7 +55,7 @@ class ProductFirebaseRepo {
     } else {
       print("No such document.");
     }
-  }
+  }*/
 
 /*  Future<List<String>> getCategories() async {
     final query = await db.collection("products").get();
@@ -67,7 +67,7 @@ class ProductFirebaseRepo {
     return categories;
   }*/
 
-  Future<List<String>> getProductsByCategory(String category) async {
+/*  Future<List<String>> getProductsByCategory(String category) async {
     final query = await db
         .collection("products")
         .where("category", isEqualTo: category)
@@ -77,5 +77,5 @@ class ProductFirebaseRepo {
       products.add(element.get('name'));
     });
     return products;
-  }
+  }*/
 }
