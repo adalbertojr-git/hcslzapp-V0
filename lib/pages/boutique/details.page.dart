@@ -234,7 +234,7 @@ class _CartCounterState extends State<CartCounter> {
       height: 32,
       child: OutlinedButton(
         style: OutlinedButton.styleFrom(
-          backgroundColor: Colors.deepOrange[100],
+          // backgroundColor: getColor(product.color!),
           padding: EdgeInsets.zero,
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(13),
@@ -265,17 +265,13 @@ class AddToCart extends StatelessWidget {
             height: 50,
             width: 58,
             decoration: BoxDecoration(
+              color: getColor(product.color!),
               borderRadius: BorderRadius.circular(18),
-              border: Border.all(
-                color: Colors.black,
-                // color: product.color,
-              ),
             ),
             child: IconButton(
               icon: Icon(
                 Icons.add_shopping_cart,
-                color: Colors.black,
-                // color: product.color,
+                color: Colors.white,
               ),
               onPressed: () {},
             ),
