@@ -114,7 +114,7 @@ class ProductTitleWithImage extends StatelessWidget {
           Text(
             product.name!,
             style: TextStyle(
-              fontSize: 20,
+              fontSize: 15,
               fontWeight: FontWeight.bold,
               color: Colors.white,
             ),

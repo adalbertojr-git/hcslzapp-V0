@@ -10,4 +10,5 @@ Color? getColor(String color) {
 final Map<String, Color> colorMap = {
   'preta': Colors.black87,
   'azul': Colors.blue,
+  'rosa': Colors.pinkAccent,
 };
