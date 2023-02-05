@@ -56,7 +56,9 @@ abstract class BoutiqueControllerBase with Store {
   List<String> getCategories() {
     categories.add('Todos');
     products.forEach((element) {
-      categories.add(element.category!);
+      if (!categories.contains(element.category)) {
+        categories.add(element.category!);
+      }
     });
     return categories;
   }
