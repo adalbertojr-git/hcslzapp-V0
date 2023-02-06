@@ -129,6 +129,14 @@ mixin _$BoutiqueController on BoutiqueControllerBase, Store {
     });
   }
 
+  late final _$findAllAsyncAction =
+      AsyncAction('BoutiqueControllerBase.findAll', context: context);
+
+  @override
+  Future<List<Product>> findAll() {
+    return _$findAllAsyncAction.run(() => super.findAll());
+  }
+
   late final _$BoutiqueControllerBaseActionController =
       ActionController(name: 'BoutiqueControllerBase', context: context);
 
@@ -138,17 +146,6 @@ mixin _$BoutiqueController on BoutiqueControllerBase, Store {
         name: 'BoutiqueControllerBase.setButtonVisibilty');
     try {
       return super.setButtonVisibilty();
-    } finally {
-      _$BoutiqueControllerBaseActionController.endAction(_$actionInfo);
-    }
-  }
-
-  @override
-  Future<List<Product>> getAll() {
-    final _$actionInfo = _$BoutiqueControllerBaseActionController.startAction(
-        name: 'BoutiqueControllerBase.getAll');
-    try {
-      return super.getAll();
     } finally {
       _$BoutiqueControllerBaseActionController.endAction(_$actionInfo);
     }

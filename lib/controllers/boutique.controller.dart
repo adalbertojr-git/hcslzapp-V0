@@ -34,9 +34,9 @@ abstract class BoutiqueControllerBase with Store {
   bool setButtonVisibilty() => isHidedButton = !isHidedButton;
 
   @action
-  Future<List<Product>> getAll() => firebaseRepo.getAll();
+  Future<List<Product>> findAll() async => await firebaseRepo.findAll();
 
-  Future<List<Product>> getFuture() => future = getAll();
+  Future<List<Product>> getFuture() => future = findAll();
 
 /*  @action
   Future<void> getOne() => firebaseRepo.getOne();

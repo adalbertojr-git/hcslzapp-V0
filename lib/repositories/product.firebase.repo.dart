@@ -4,7 +4,7 @@ import '../models/product.dart';
 class ProductFirebaseRepo {
   final FirebaseFirestore db = FirebaseFirestore.instance;
 
-  Future<List<Product>> getAll() async {
+  Future<List<Product>> findAll() async {
     final query = db.collection("products").withConverter(
           fromFirestore: Product.fromFirestore,
           toFirestore: (Product product, _) => product.toFirestore(),

@@ -52,7 +52,7 @@ class _BoutiquePageState extends State<BoutiquePage> {
                 return Progress();
               case ConnectionState.active:
                 break;
-              default:
+              case ConnectionState.done:
                 if (snapshot.hasError) {
                   return CenteredMessage(
                     title: ERROR,
