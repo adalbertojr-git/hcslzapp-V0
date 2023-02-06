@@ -139,7 +139,7 @@ abstract class HeadNotificationAddControllerBase with Store {
       await reference.delete();
     }
     reference = storage.ref().child(
-      'headNotificationPhotos/${DateTime.now().millisecondsSinceEpoch}',
+      'photos/notifications/${DateTime.now().millisecondsSinceEpoch}',
     );
     await reference.putFile(photo);
     return await reference.getDownloadURL();

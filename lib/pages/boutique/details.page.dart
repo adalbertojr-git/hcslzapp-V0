@@ -14,7 +14,6 @@ class DetailsPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      // each product have a color
       backgroundColor: getColor(product.color!),
       appBar: MyAppBar(_title),
       bottomNavigationBar: MyBottomAppBar(),
@@ -30,7 +29,6 @@ class Body extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // It provide us total height and width
     Size size = MediaQuery.of(context).size;
     return SingleChildScrollView(
       child: Column(

@@ -205,7 +205,7 @@ abstract class AssociatedUpdateControllerBase with Store {
   Future<String> _uploadPhoto() async {
     FirebaseStorage storage = FirebaseStorage.instance;
     Reference reference = storage.ref().child(
-          'profilePhotos/${associated.id}',
+          'photos/profiles/${associated.id}',
         );
     await reference.putFile(photo);
     return await reference.getDownloadURL().catchError((e) {

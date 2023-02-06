@@ -170,7 +170,7 @@ abstract class EventAddControllerBase with Store {
       await reference.delete();
     }
     reference = storage.ref().child(
-          'eventPhotos/${DateTime.now().millisecondsSinceEpoch}',
+          'photos/events/${DateTime.now().millisecondsSinceEpoch}',
         );
     await reference.putFile(photo);
     return await reference.getDownloadURL();
