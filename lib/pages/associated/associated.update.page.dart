@@ -464,8 +464,8 @@ class AssociatedUpdatePage extends StatelessWidget {
       );
 
   _motorcyclesListWidget(BuildContext context) => Card(
-    elevation: 5,
-    child: Column(
+        elevation: 5,
+        child: Column(
           children: [
             const Text(
               'Motocicletas',
@@ -517,8 +517,8 @@ class AssociatedUpdatePage extends StatelessWidget {
                             final Future future = Navigator.push(
                               context,
                               MaterialPageRoute(
-                                builder: (context) =>
-                                    MotorcycleAddPage(_controller.motorcycles[i]),
+                                builder: (context) => MotorcycleAddPage(
+                                    _controller.motorcycles[i]),
                               ),
                             );
                             future.then(
@@ -568,7 +568,7 @@ class AssociatedUpdatePage extends StatelessWidget {
             ),
           ],
         ),
-  );
+      );
 
   _update(BuildContext context) async {
     if (_controller.hasErrors) {
