@@ -85,8 +85,7 @@ class _MonthBirthdaysListPageState extends State<MonthBirthdaysListPage> {
           SizedBox(height: 10),
           Container(
             height: MediaQuery.of(context).size.height - 160,
-            child: ListView.builder(
-              scrollDirection: Axis.horizontal,
+            child: ListView.separated(
               itemCount: _controller.associateds.length,
               itemBuilder: (context, index) {
                 return Container(
@@ -95,6 +94,7 @@ class _MonthBirthdaysListPageState extends State<MonthBirthdaysListPage> {
                   decoration: BoxDecoration(
                     shape: BoxShape.rectangle,
                     borderRadius: BorderRadius.circular(10.0),
+                    color: Colors.deepOrange[300],
                   ),
                   child: Column(
                     children: [
@@ -107,85 +107,80 @@ class _MonthBirthdaysListPageState extends State<MonthBirthdaysListPage> {
                               children: [
                                 CircleAvatar(
                                   foregroundImage: AssetImage(_pathCakeImage),
-                                  radius: 120,
+                                  radius: 90,
                                 ),
                                 _photo(_controller.associateds[index]),
                               ],
                             )
                           : _photo(_controller.associateds[index]),
-                      SizedBox(
-                        height: 5,
-                      ),
-                      Expanded(
-                        child: Container(
-                          width: double.infinity,
-                          child: Card(
-                            color: Colors.black12,
-                            child: Column(
-                              children: [
-                                SizedBox(
-                                  height: 5,
-                                ),
-                                Text(
-                                  _isToday(_controller
-                                          .associateds[index].date_birth)
-                                      ? 'O Harley Club deseja a você,\n'
-                                      : 'Está chegando o dia de celebrar\n',
-                                  style: TextStyle(
-                                    fontWeight: FontWeight.bold,
-                                    fontSize: 18,
-                                  ),
-                                ),
-                                Text(
-                                  _controller.associateds[index].name,
-                                  style: TextStyle(
-                                    fontWeight: FontWeight.bold,
-                                    fontSize: 25,
-                                  ),
-                                ),
-                                Text(
-                                  _controller.associateds[index].ndays == 0
-                                      ? '\nMuita saúde e kms de felicidades!!!'
-                                      : '\n' +
-                                          _controller.associateds[index].ndays
-                                              .toString() +
-                                          ' dia(s)',
-                                  style: TextStyle(
-                                    fontWeight: FontWeight.bold,
-                                    fontSize: 18,
-                                  ),
-                                ),
-                              ],
-                            ),
-                          ),
-                        ),
-                      ),
                       Container(
-                        child: Text(
-                          _isToday(_controller.associateds[index].date_birth)
-                              ? 'É HOJE!!!'
-                              : 'Dia: ' +
-                                  _controller.associateds[index].date_birth
-                                      .toString()
-                                      .substring(0, 2),
-                          style: TextStyle(
-                            fontWeight: FontWeight.bold,
-                            fontSize: 20,
+                        padding: EdgeInsets.all(5),
+                        width: double.infinity,
+                        height: 170,
+                        child: Card(
+                          child: Column(
+                            children: [
+                              SizedBox(
+                                height: 5,
+                              ),
+                              Text(
+                                _isToday(_controller
+                                        .associateds[index].date_birth)
+                                    ? 'O Harley Club deseja a você,\n'
+                                    : 'Está chegando o dia de celebrar\n',
+                                style: TextStyle(
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 16,
+                                ),
+                              ),
+                              Text(
+                                _controller.associateds[index].name,
+                                style: TextStyle(
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 25,
+                                ),
+                              ),
+                              Text(
+                                _controller.associateds[index].ndays == 0
+                                    ? '\nMuita saúde e kms de felicidades!!!'
+                                    : '\n Falta(m) ' +
+                                        _controller.associateds[index].ndays
+                                            .toString() +
+                                        ' dia(s)',
+                                style: TextStyle(
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 16,
+                                ),
+                              ),
+                              Text(
+                                _isToday(_controller.associateds[index].date_birth)
+                                    ? '\nÉ HOJE!!!'
+                                    : '\nAniversário: ' +
+                                    _controller.associateds[index].date_birth
+                                        .toString()
+                                        .substring(0, 5),
+                                style: TextStyle(
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 16,
+                                ),
+                              ),
+                            ],
                           ),
                         ),
-                      )
+                      ),
                     ],
                   ),
                 );
               },
+              separatorBuilder: (_, int index) => const Divider(),
             ),
           ),
         ],
       );
 
   _photo(MonthBirthdays birthdays) => Container(
-        height: _isToday(birthdays.date_birth) ? 80.0 : 240.0,
-        width: _isToday(birthdays.date_birth) ? 80.0 : 240.0,
+        height: _isToday(birthdays.date_birth) ? 80.0 : 150.0,
+        width: _isToday(birthdays.date_birth) ? 80.0 : 150.0,
         padding: EdgeInsets.all(2.0),
         decoration: BoxDecoration(
           color: Colors.black.withOpacity(0.2),

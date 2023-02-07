@@ -64,12 +64,15 @@ class _BoutiquePageState extends State<BoutiquePage> {
                     _controller.categories.clear();
                     _controller.products.addAll(snapshot.data!);
                     _controller.getCategories();
-                    return _widgets();
-                  } else
+                    // return _widgets();
+                  }
+/*                  else
                     return CenteredMessage(
                       title: WARNING,
                       message: NOTEXIST,
-                    );
+                    );*/
+
+                  return _widgets();
                 }
             } //switch (snapshot.connectionState)
             return CenteredMessage(
