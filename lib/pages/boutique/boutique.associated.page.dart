@@ -4,9 +4,8 @@ import 'package:hcslzapp/models/product.dart';
 import '../../common/messages.dart';
 import '../../components/centered.message.dart';
 import '../../components/my.appbar.dart';
-import '../../components/my.bottom.appbar.dart';
 import '../../components/progress.dart';
-import '../../controllers/boutique.controller.dart';
+import '../../controllers/boutique.associated.controller.dart';
 import 'color.map.dart';
 import 'details.page.dart';
 
@@ -18,7 +17,7 @@ class BoutiquePage extends StatefulWidget {
 }
 
 class _BoutiquePageState extends State<BoutiquePage> {
-  final BoutiqueController _controller = BoutiqueController();
+  final BoutiqueAssociatedController _controller = BoutiqueAssociatedController();
   final kTextColor = Color(0xFF535353);
   final kTextLightColor = Color(0xFFACACAC);
 

@@ -3,11 +3,11 @@ import 'package:mobx/mobx.dart';
 import '../models/product.dart';
 import '../repositories/product.firebase.repo.dart';
 
-part 'boutique.controller.g.dart';
+part 'boutique.associated.controller.g.dart';
 
-class BoutiqueController = BoutiqueControllerBase with _$BoutiqueController;
+class BoutiqueAssociatedController = BoutiqueAssociatedControllerBase with _$BoutiqueAssociatedController;
 
-abstract class BoutiqueControllerBase with Store {
+abstract class BoutiqueAssociatedControllerBase with Store {
   @observable
   bool isHidedButton = true;
 

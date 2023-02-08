@@ -128,3 +128,8 @@ const String labelNotificationTitle = 'Título';
 const String hintNotificationTitle = 'Informe o título da aviso';
 const String labelNotification = 'Aviso';
 const String hintNotification = 'Descreva aqui o aviso aos associados';
+/*
+Products
+*/
+const String labelNameProduct = 'Nome do produto';
+const String hintNameProduct = 'Digite qualquer parte do nome';
