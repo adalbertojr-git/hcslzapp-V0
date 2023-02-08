@@ -58,10 +58,7 @@ class _BoutiqueAdmPageState extends State<BoutiqueAdmPage> {
                     } else {
                       if ((snapshot.data?.length)! > 0) {
                         _controller.products.clear();
-                        // _controller.categories.clear();
                         _controller.products.addAll(snapshot.data!);
-                        // _controller.getCategories();
-                        // return _widgets();
                       }
 
                       return _widgets();
