@@ -2,7 +2,7 @@ import 'dart:async';
 import 'dart:collection';
 import 'dart:convert';
 import 'package:firebase_storage/firebase_storage.dart';
-import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 import 'package:hcslzapp/models/event.dart';
 import 'package:hcslzapp/repositories/event.repo.dart';
 import 'package:mobx/mobx.dart';

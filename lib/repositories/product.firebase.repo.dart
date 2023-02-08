@@ -24,6 +24,7 @@ class ProductFirebaseRepo {
         ),
       );
     });
+    print('foi no firebase');
     //log(products.toString());
     return products;
   }

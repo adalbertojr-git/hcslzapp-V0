@@ -26,73 +26,67 @@ class _BoutiqueAdmPageState extends State<BoutiqueAdmPage> {
 
   @override
   void initState() {
-    addListener();
+    _controller.getFuture().then((value) {
+      _controller.setButtonVisibilty();
+    }).catchError((e) {});
     super.initState();
   }
 
-  addListener() {
-    _controller.firebaseRepo.db
-        .collection('products')
-        .snapshots()
-        .listen((event) {
-      setState(() {
-        _controller.getFuture().catchError((e) {});
-        _controller.setButtonVisibilty();
-      });
-    });
-  }
-
   @override
-  Widget build(BuildContext context) => Scaffold(
-        appBar: MyAppBar(_title),
-        bottomNavigationBar:
-            _controller.isHidedButton ? null : MyBottomAppBar(),
-        body: FutureBuilder<List<Product>>(
-          future: _controller.future,
-          builder: (context, snapshot) {
-            switch (snapshot.connectionState) {
-              case ConnectionState.none:
-                break;
-              case ConnectionState.waiting:
-                return Progress();
-              case ConnectionState.active:
-                break;
-              case ConnectionState.done:
-                if (snapshot.hasError) {
-                  return CenteredMessage(
-                    title: ERROR,
-                    message: snapshot.error.toString(),
-                  );
-                } else {
-                  if ((snapshot.data?.length)! > 0) {
-                    _controller.products.clear();
-                    // _controller.categories.clear();
-                    _controller.products.addAll(snapshot.data!);
-                    // _controller.getCategories();
-                    // return _widgets();
-                  }
+  Widget build(BuildContext context) => Observer(
+    builder: (_) {
+      return Scaffold(
+            appBar: MyAppBar(_title),
+            bottomNavigationBar:
+                _controller.isHidedButton ? null : MyBottomAppBar(),
+            body: FutureBuilder<List<Product>>(
+              future: _controller.future,
+              builder: (context, snapshot) {
+                switch (snapshot.connectionState) {
+                  case ConnectionState.none:
+                    break;
+                  case ConnectionState.waiting:
+                    return Progress();
+                  case ConnectionState.active:
+                    break;
+                  case ConnectionState.done:
+                    if (snapshot.hasError) {
+                      return CenteredMessage(
+                        title: ERROR,
+                        message: snapshot.error.toString(),
+                      );
+                    } else {
+                      if ((snapshot.data?.length)! > 0) {
+                        _controller.products.clear();
+                        // _controller.categories.clear();
+                        _controller.products.addAll(snapshot.data!);
+                        // _controller.getCategories();
+                        // return _widgets();
+                      }
 
-                  return _widgets();
-                }
-            } //switch (snapshot.connectionState)
-            return CenteredMessage(
-              title: ERROR,
-              message: UNKNOWN,
-            );
-          },
-        ),
-        floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
-        floatingActionButton: Observer(
-          builder: (_) => _controller.isHidedButton
-              ? SizedBox()
-              : Button(
-                  icon: Icons.add,
-                  onClick: () {
-                    //_add(context);
-                  },
-                ),
-        ),
-      );
+                      return _widgets();
+                    }
+                } //switch (snapshot.connectionState)
+                return CenteredMessage(
+                  title: ERROR,
+                  message: UNKNOWN,
+                );
+              },
+            ),
+            floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
+            floatingActionButton: Observer(
+              builder: (_) => _controller.isHidedButton
+                  ? SizedBox()
+                  : Button(
+                      icon: Icons.add,
+                      onClick: () {
+                        //_add(context);
+                      },
+                    ),
+            ),
+          );
+    }
+  );
 
   _widgets() => Column(
         children: [

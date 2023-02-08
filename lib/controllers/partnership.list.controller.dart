@@ -1,5 +1,5 @@
 import 'package:firebase_storage/firebase_storage.dart';
-import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 import 'package:hcslzapp/models/partnership.dart';
 import 'package:hcslzapp/models/template.dart';
 import 'package:hcslzapp/repositories/partnership.repo.dart';

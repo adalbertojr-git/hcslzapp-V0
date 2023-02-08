@@ -1,5 +1,5 @@
 import 'dart:async';
-import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 import 'package:hcslzapp/repositories/associated.repo.dart';
 import 'package:mobx/mobx.dart';
 import '../models/associated.dart';
