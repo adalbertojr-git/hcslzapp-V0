@@ -9,24 +9,27 @@ class ProductFirebaseRepo {
           fromFirestore: Product.fromFirestore,
           toFirestore: (Product product, _) => product.toFirestore(),
         );
-    final docSnap = await query.get();
-    List<Product> products = [];
-    docSnap.docs.forEach((element) {
-      products.add(
-        Product(
-          id: element.id,
-          category: element.data().category,
-          name: element.data().name,
-          description: element.data().description,
-          color: element.data().color,
-          price: element.data().price,
-          images: element.data().images as List<String>,
-        ),
-      );
-    });
-    print('foi no firebase');
-    //log(products.toString());
-    return products;
+    try {
+      final docSnap = await query.get();
+      List<Product> products = [];
+      docSnap.docs.forEach((element) {
+        products.add(
+          Product(
+            id: element.id,
+            category: element.data().category,
+            name: element.data().name,
+            description: element.data().description,
+            color: element.data().color,
+            price: element.data().price,
+            images: element.data().images as List<String>,
+          ),
+        );
+      });
+      //log(products.toString());
+      return products;
+    } on FirebaseException catch (e) {
+      rethrow;
+    }
   }
 
 /*
