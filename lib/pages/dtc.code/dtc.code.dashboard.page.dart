@@ -41,11 +41,10 @@ class DtcCodeDashboardPage extends StatelessWidget {
         children: <Widget>[
           Expanded(
             child: Container(color: Colors.deepOrange[300]),
-            //flex: 3,
           ),
           Expanded(
             child: Container(color: Colors.transparent),
-            flex: 2,
+            flex: 1,
           ),
         ],
       );
