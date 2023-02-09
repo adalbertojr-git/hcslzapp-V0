@@ -11,8 +11,8 @@ const List<String> _listAdmScreens = [
 ];
 
 const List<String> _listAdmScreensDesc = [
-  "Lista de códigos de erro catalogados pela HD",
-  "Lista de siglas utilizadas",
+  "Códigos de erro catalogados pela HD",
+  "Siglas utilizadas",
 ];
 
 const List<IconData> _listAdmIcons = [
