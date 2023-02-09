@@ -4,11 +4,11 @@ import 'package:mobx/mobx.dart';
 import '../models/category.dart';
 import '../repositories/product.firebase.repo.dart';
 
-part 'categories.list.controller.g.dart';
+part 'category.list.controller.g.dart';
 
-class CategoriesListController = CategoriesListControllerBase with _$CategoriesListController;
+class CategoryListController = CategoryListControllerBase with _$CategoryListController;
 
-abstract class CategoriesListControllerBase with Store {
+abstract class CategoryListControllerBase with Store {
   @observable
   var titleCtrl = TextEditingController();
 

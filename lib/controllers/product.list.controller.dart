@@ -4,11 +4,11 @@ import 'package:mobx/mobx.dart';
 import '../models/product.dart';
 import '../repositories/product.firebase.repo.dart';
 
-part 'boutique.adm.controller.g.dart';
+part 'product.list.controller.g.dart';
 
-class BoutiqueAdmController = BoutiqueAdmControllerBase with _$BoutiqueAdmController;
+class ProductListController = ProductListControllerBase with _$ProductListController;
 
-abstract class BoutiqueAdmControllerBase with Store {
+abstract class ProductListControllerBase with Store {
   @observable
   var nameCtrl = TextEditingController();
 

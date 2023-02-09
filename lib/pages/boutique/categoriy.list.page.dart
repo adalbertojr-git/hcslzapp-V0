@@ -8,18 +8,18 @@ import '../../components/button.dart';
 import '../../components/my.appbar.dart';
 import '../../components/my.bottom.appbar.dart';
 import '../../components/my.text.form.field.dart';
-import '../../controllers/categories.list.controller.dart';
+import '../../controllers/category.list.controller.dart';
 import '../../models/category.dart';
 
 const String _title = 'Categorias';
 
-class BoutiqueAdmPage extends StatefulWidget {
+class CategoryListPage extends StatefulWidget {
   @override
-  State<BoutiqueAdmPage> createState() => _BoutiqueAdmPageState();
+  State<CategoryListPage> createState() => _CategoryListPageState();
 }
 
-class _BoutiqueAdmPageState extends State<BoutiqueAdmPage> {
-  final CategoriesListController _controller = CategoriesListController();
+class _CategoryListPageState extends State<CategoryListPage> {
+  final CategoryListController _controller = CategoryListController();
 
   @override
   void initState() {
@@ -108,6 +108,7 @@ class _BoutiqueAdmPageState extends State<BoutiqueAdmPage> {
                     child: ListTile(
                       leading: CircleAvatar(
                         child: Icon(Icons.category),
+                        backgroundColor: Colors.white,
                       ),
                       title: Text(
                         _controller.listFiltered[i].title!,

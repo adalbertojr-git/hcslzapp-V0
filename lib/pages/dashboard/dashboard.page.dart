@@ -22,7 +22,7 @@ import 'package:hcslzapp/pages/associated/associated.list.page.dart';
 import '../../common/injection.dart';
 import '../../common/settings.dart';
 import '../../components/progress.dart';
-import '../boutique/boutique.adm.page.dart';
+import '../boutique/boutique.dashboard.page.dart';
 import '../event/event.calendar.page.dart';
 
 const String _labelAppTitle = 'HCSlz App';
@@ -119,7 +119,7 @@ class _DashboardPageState extends State<DashboardPage> {
       EventCalendarPage(_controller.selectedProfile),
       PartnershipListAdmPage(),
       HeadNotificationListAdmPage(),
-      BoutiqueAdmPage(),
+      BoutiqueDashboardPage(),
     ];
 
     return Observer(

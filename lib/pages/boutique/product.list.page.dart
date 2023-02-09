@@ -10,19 +10,19 @@ import '../../components/button.dart';
 import '../../components/my.appbar.dart';
 import '../../components/my.bottom.appbar.dart';
 import '../../components/my.text.form.field.dart';
-import '../../controllers/boutique.adm.controller.dart';
+import '../../controllers/product.list.controller.dart';
 import '../../models/product.dart';
 
 const String _title = 'Boutique Harley Club';
 const String _pathNoImage = 'assets/imgs/noImage.png';
 
-class BoutiqueAdmPage extends StatefulWidget {
+class ProductListPage extends StatefulWidget {
   @override
-  State<BoutiqueAdmPage> createState() => _BoutiqueAdmPageState();
+  State<ProductListPage> createState() => _ProductListPageState();
 }
 
-class _BoutiqueAdmPageState extends State<BoutiqueAdmPage> {
-  final BoutiqueAdmController _controller = BoutiqueAdmController();
+class _ProductListPageState extends State<ProductListPage> {
+  final ProductListController _controller = ProductListController();
 
   @override
   void initState() {

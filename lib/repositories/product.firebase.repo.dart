@@ -28,7 +28,7 @@ class ProductFirebaseRepo {
       });
       //log(products.toString());
       return products;
-    } on FirebaseException catch (e) {
+    } on FirebaseException {
       rethrow;
     }
   }
@@ -50,7 +50,7 @@ class ProductFirebaseRepo {
         );
       });
       return categories;
-    } on FirebaseException catch (e) {
+    } on FirebaseException {
       rethrow;
     }
   }
