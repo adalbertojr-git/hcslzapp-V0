@@ -5,17 +5,18 @@ import '../repositories/product.firebase.repo.dart';
 
 part 'boutique.associated.controller.g.dart';
 
-class BoutiqueAssociatedController = BoutiqueAssociatedControllerBase with _$BoutiqueAssociatedController;
+class BoutiqueAssociatedController = BoutiqueAssociatedControllerBase
+    with _$BoutiqueAssociatedController;
 
 abstract class BoutiqueAssociatedControllerBase with Store {
   @observable
   bool isHidedButton = true;
 
   @observable
-  List<String> categories = [];
+  List<Product> products = [];
 
   @observable
-  List<Product> products = [];
+  List<String> categories = [];
 
   @observable
   ProductFirebaseRepo firebaseRepo = ProductFirebaseRepo();
@@ -34,16 +35,10 @@ abstract class BoutiqueAssociatedControllerBase with Store {
   bool setButtonVisibilty() => isHidedButton = !isHidedButton;
 
   @action
-  Future<List<Product>> findAll() async => await firebaseRepo.findProducts();
+  Future<List<Product>> findProducts() async =>
+      await firebaseRepo.findProducts();
 
-  Future<List<Product>> getFuture() => future = findAll();
-
-/*  @action
-  Future<void> getOne() => firebaseRepo.getOne();
-
-  @action
-  Future<List<String>> getProductsByCategory() =>
-      firebaseRepo.getProductsByCategory('Camisas');*/
+  Future<List<Product>> getFuture() => future = findProducts();
 
   @action
   setSelectedIndex(int index) => selectedIndex = index;

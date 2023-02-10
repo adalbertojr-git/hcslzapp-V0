@@ -17,13 +17,17 @@ class BoutiquePage extends StatefulWidget {
 }
 
 class _BoutiquePageState extends State<BoutiquePage> {
-  final BoutiqueAssociatedController _controller = BoutiqueAssociatedController();
+  final BoutiqueAssociatedController _controller =
+      BoutiqueAssociatedController();
   final kTextColor = Color(0xFF535353);
   final kTextLightColor = Color(0xFFACACAC);
 
   @override
   void initState() {
-    addListener();
+    // addListener();
+    _controller.getFuture().then((value) {
+      _controller.setButtonVisibilty();
+    }).catchError((e) {});
     super.initState();
   }
 
@@ -39,48 +43,53 @@ class _BoutiquePageState extends State<BoutiquePage> {
   }
 
   @override
-  Widget build(BuildContext context) => Scaffold(
-        appBar: MyAppBar(_title),
-        body: FutureBuilder<List<Product>>(
-          future: _controller.future,
-          builder: (context, snapshot) {
-            switch (snapshot.connectionState) {
-              case ConnectionState.none:
-                break;
-              case ConnectionState.waiting:
-                return Progress();
-              case ConnectionState.active:
-                break;
-              case ConnectionState.done:
-                if (snapshot.hasError) {
-                  return CenteredMessage(
-                    title: ERROR,
-                    message: snapshot.error.toString(),
-                  );
-                } else {
-                  if ((snapshot.data?.length)! > 0) {
-                    _controller.products.clear();
-                    _controller.categories.clear();
-                    _controller.products.addAll(snapshot.data!);
-                    _controller.getCategories();
-                    // return _widgets();
-                  }
-/*                  else
-                    return CenteredMessage(
-                      title: WARNING,
-                      message: NOTEXIST,
-                    );*/
+  Widget build(BuildContext context) => Observer(
+    builder: (_) {
+      return Scaffold(
+            appBar: MyAppBar(_title),
+            body: FutureBuilder<List<Product>>(
+              future: _controller.future,
+              builder: (context, snapshot) {
+                switch (snapshot.connectionState) {
+                  case ConnectionState.none:
+                    break;
+                  case ConnectionState.waiting:
+                    return Progress();
+                  case ConnectionState.active:
+                    break;
+                  case ConnectionState.done:
+                    if (snapshot.hasError) {
+                      return CenteredMessage(
+                        title: ERROR,
+                        message: snapshot.error.toString(),
+                      );
+                    } else {
+                      if ((snapshot.data?.length)! > 0) {
+                        _controller.products.clear();
+                        _controller.categories.clear();
+                        _controller.products.addAll(snapshot.data!);
+                        _controller.getCategories();
 
-                  return _widgets();
-                }
-            } //switch (snapshot.connectionState)
-            return CenteredMessage(
-              title: ERROR,
-              message: UNKNOWN,
-            );
-          },
-        ),
-      );
+                        // return _widgets();
+                      }
+/*                  else
+                        return CenteredMessage(
+                          title: WARNING,
+                          message: NOTEXIST,
+                        );*/
+
+                      return _widgets();
+                    }
+                } //switch (snapshot.connectionState)
+                return CenteredMessage(
+                  title: ERROR,
+                  message: UNKNOWN,
+                );
+              },
+            ),
+          );
+    }
+  );
 
   _widgets() => Column(
         crossAxisAlignment: CrossAxisAlignment.start,

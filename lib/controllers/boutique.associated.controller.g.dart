@@ -34,22 +34,6 @@ mixin _$BoutiqueAssociatedController
     });
   }
 
-  late final _$categoriesAtom = Atom(
-      name: 'BoutiqueAssociatedControllerBase.categories', context: context);
-
-  @override
-  List<String> get categories {
-    _$categoriesAtom.reportRead();
-    return super.categories;
-  }
-
-  @override
-  set categories(List<String> value) {
-    _$categoriesAtom.reportWrite(value, super.categories, () {
-      super.categories = value;
-    });
-  }
-
   late final _$productsAtom =
       Atom(name: 'BoutiqueAssociatedControllerBase.products', context: context);
 
@@ -63,6 +47,22 @@ mixin _$BoutiqueAssociatedController
   set products(List<Product> value) {
     _$productsAtom.reportWrite(value, super.products, () {
       super.products = value;
+    });
+  }
+
+  late final _$categoriesAtom = Atom(
+      name: 'BoutiqueAssociatedControllerBase.categories', context: context);
+
+  @override
+  List<String> get categories {
+    _$categoriesAtom.reportRead();
+    return super.categories;
+  }
+
+  @override
+  set categories(List<String> value) {
+    _$categoriesAtom.reportWrite(value, super.categories, () {
+      super.categories = value;
     });
   }
 
@@ -130,12 +130,13 @@ mixin _$BoutiqueAssociatedController
     });
   }
 
-  late final _$findAllAsyncAction =
-      AsyncAction('BoutiqueAssociatedControllerBase.findAll', context: context);
+  late final _$findProductsAsyncAction = AsyncAction(
+      'BoutiqueAssociatedControllerBase.findProducts',
+      context: context);
 
   @override
-  Future<List<Product>> findAll() {
-    return _$findAllAsyncAction.run(() => super.findAll());
+  Future<List<Product>> findProducts() {
+    return _$findProductsAsyncAction.run(() => super.findProducts());
   }
 
   late final _$BoutiqueAssociatedControllerBaseActionController =
@@ -195,8 +196,8 @@ mixin _$BoutiqueAssociatedController
   String toString() {
     return '''
 isHidedButton: ${isHidedButton},
-categories: ${categories},
 products: ${products},
+categories: ${categories},
 firebaseRepo: ${firebaseRepo},
 future: ${future},
 selectedIndex: ${selectedIndex},

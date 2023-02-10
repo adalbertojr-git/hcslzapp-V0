@@ -1,5 +1,4 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import '../models/category.dart';
 import '../models/product.dart';
 
 class ProductFirebaseRepo {
@@ -28,28 +27,6 @@ class ProductFirebaseRepo {
       });
       //log(products.toString());
       return products;
-    } on FirebaseException {
-      rethrow;
-    }
-  }
-
-  Future<List<Category>> findCategories() async {
-    final query = db.collection("categories").withConverter(
-          fromFirestore: Category.fromFirestore,
-          toFirestore: (Category category, _) => category.toFirestore(),
-        );
-    try {
-      final docSnap = await query.get();
-      List<Category> categories = [];
-      docSnap.docs.forEach((element) {
-        categories.add(
-          Category(
-            id: element.id,
-            title: element.data().title,
-          ),
-        );
-      });
-      return categories;
     } on FirebaseException {
       rethrow;
     }

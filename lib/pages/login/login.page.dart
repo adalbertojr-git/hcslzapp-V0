@@ -180,7 +180,7 @@ class _MyCustomLoginUIState extends State<MyCustomLoginUI> {
                                       APP_VERSION,
                                       style: TextStyle(
                                         color: Colors.white,
-                                        fontSize: 8,
+                                        fontSize: 9,
                                       ),
                                     ),
                                     SizedBox(

@@ -4,6 +4,7 @@ import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:hcslzapp/common/messages.dart';
 import 'package:hcslzapp/components/centered.message.dart';
 import 'package:hcslzapp/pages/associated/month.birthdays.list.page.dart';
+import 'package:hcslzapp/pages/boutique/product.list.page.dart';
 import 'package:hcslzapp/pages/login/login.page.dart';
 import 'package:hcslzapp/pages/management/management.list.page.dart';
 import 'package:hcslzapp/pages/notification/head.notification.list.adm.page.dart';
@@ -22,7 +23,6 @@ import 'package:hcslzapp/pages/associated/associated.list.page.dart';
 import '../../common/injection.dart';
 import '../../common/settings.dart';
 import '../../components/progress.dart';
-import '../boutique/boutique.dashboard.page.dart';
 import '../event/event.calendar.page.dart';
 
 const String _labelAppTitle = 'HCSlz App';
@@ -119,7 +119,7 @@ class _DashboardPageState extends State<DashboardPage> {
       EventCalendarPage(_controller.selectedProfile),
       PartnershipListAdmPage(),
       HeadNotificationListAdmPage(),
-      BoutiqueDashboardPage(),
+      ProductListPage(),
     ];
 
     return Observer(
