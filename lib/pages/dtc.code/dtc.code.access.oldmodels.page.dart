@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import '../../components/my.appbar.dart';
 import '../../components/my.bottom.appbar.dart';
 
-const String _title = 'Códigos DTC até 2004';
+const String _title = 'Até 2004';
 
 class DtcCodeAccessOldModelsPage extends StatelessWidget {
   //@override

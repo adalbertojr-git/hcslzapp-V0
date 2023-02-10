@@ -28,45 +28,54 @@ class DtcCodeKnowMorePage extends StatelessWidget {
             style: TextStyle(
               fontWeight: FontWeight.bold,
             ),
-            text: 'AVISO: as informações abaixo são apenas para referência.  '
-                'Este aplicativo não pretende sugerir quaisquer soluções técnicas '
-                'para códigos de problemas de diagnóstico.  O procedimento a '
-                'seguir instruirá na recuperação e eliminação dos códigos de '
-                'diagnóstico de problemas de alguns modelos HD, mas'
-                ' pode não funcionar no seu.  Caso contrário, envie-nos um '
-                'feedback .'),
+            text:
+                'Oh não!!! Todos nós já sentimos essa angústia. A luz do mecanismo de '
+                'verificação (CEL) em seu painel acende e sua Harley-Davidson não '
+                'está funcionando corretamente. Ou, o que pode ser ainda mais confuso, '
+                'a luz acende, mas a moto parece estar bem. O que você deve fazer, '
+                'o que isso significa? Isso é motivo para reboque? A moto pode operar '
+                'normalmente até que você possa colocá-la em uma oficina?'),
       );
 
   _paragraphs() => Text.rich(
         const TextSpan(
           text:
-              '1- Gire a chave de ignição para OFF e veja se a chave Run/Stop está '
-              'na posição Run.\n\n',
+              'Essas perguntas são muito comuns quando a luz do motor de verificação '
+              'da Harley-Davidson permanece acesa. Continue lendo abaixo para saber um pouco '
+              'mais sobre os códigos de problema associados ao CEL.\n\n',
           children: <TextSpan>[
             const TextSpan(
-                text:
-                    '2- Pressione o botão de reset do hodômetro e mantenha-o pressionado.'
-                    'Para os modelos de 2014 ou mais recentes, pressione'
-                    'o botão TRIP este é o botão de alternância e de seleção.\n\n'),
+                style: TextStyle(
+                  fontWeight: FontWeight.bold,
+                ),
+                text: 'O que significa uma luz de verificação do motor?\n\n'),
             const TextSpan(
                 text:
-                    '3- Gire o interruptor de ignição para Ignition e solte o '
-                    'botão de reset do odômetro ou o TRIP. A iluminação de fundo deve '
-                    'acender, a agulha do velocímetro deve percorrer todo o seu '
-                    'alcance e as lâmpadas indicadoras (bateria, segurança, '
-                    'combustível baixo, verificar motor e cruzeiro) devem acender.  '
-                    'A palavra "DIAG" deve aparecer.\n\n '),
+                    'Uma luz acesa do mecanismo de verificação é uma indicação de '
+                    'que o sistema de diagnóstico a bordo da motocicleta detecta '
+                    'um código de problema atual ou histórico, conhecido como '
+                    'códigos de diagnóstico de problemas '
+                    '(Diagnostic Trouble Codes - DTC)\n\n'),
             const TextSpan(
                 text:
-                    '4 - Pressione o botão de reset do hodômetro ou o TRIP uma vez e você '
-                    'verá o menu de seleção "PSSP +" com o primeiro P piscando.\n\n '),
+                    'Antes exclusivas da indústria automotiva, fabricantes de '
+                    'motocicletas como a Harley-Davidson contam com diagnósticos a '
+                    'bordo para auxiliar proprietários e técnicos quando ocorre uma falha.\n\n'),
             const TextSpan(
                 text:
-                    '5 - Cada letra representa uma área do módulo de diagnóstico.  '
-                    'O módulo que está piscando é o que você vai verificar. Para '
-                    'passar de uma letra (módulo) para a próxima, pressione '
-                    'o botão de reset do hodômetro ou o TRIP uma vez.  '
-                    '(de P para S, para SP, para T e de volta para P, etc.) \n\n'),
+                    'Se o módulo de controle eletrônico do veículo detectar um erro '
+                    'no sistema, ele “lança um código”, fazendo com que a luz do '
+                    'mecanismo de verificação acenda. Um DTC é uma informação direcional '
+                    'para um proprietário ou técnico iniciar o trabalho de diagnóstico. '
+                    'A presença de um código não significa que você deve começar a '
+                    'substituir as peças. Um departamento de serviço da concessionária Harley-Davidson '
+                    'ou outro técnico qualificado é sua melhor aposta se você não se sentir '
+                    'confortável ou experiente em diagnosticar problemas elétricos.\n\n'),
+            const TextSpan(
+                style: TextStyle(
+                  fontWeight: FontWeight.bold,
+                ),
+                text: 'Categorias de códigos DTC Harley:\n\n'),
             const TextSpan(
                 text: '* P \n'
                     'ECM/ICM (Módulo de Controle Eletrônico [EFI]/'
