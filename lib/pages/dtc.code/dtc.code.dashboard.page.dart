@@ -1,23 +1,27 @@
 import 'package:flutter/material.dart';
 import 'package:hcslzapp/pages/dtc.code/dtc.code.access.oldmodels.page.dart';
+import 'package:hcslzapp/pages/dtc.code/dtc.code.know.more.page.dart';
 import 'package:hcslzapp/pages/dtc.code/dtc.code.list.page.dart';
 import '../../components/my.bottom.appbar.dart';
 import 'dtc.code.abbreviation.list.page.dart';
 import 'dtc.code.access.newmodels.page.dart';
 
 const List<String> _listAdmScreens = [
-  "Códigos",
-  "Abreviaturas",
+  "Códigos DTC",
+  "Siglas",
+  "Saiba mais",
 ];
 
 const List<String> _listAdmScreensDesc = [
   "Códigos de erro catalogados pela HD",
-  "Siglas utilizadas",
+  "Siglas utilizadas nos erros",
+  "Saiba mais sobre os Códigos DTC",
 ];
 
 const List<IconData> _listAdmIcons = [
   Icons.error_outline_rounded,
   Icons.abc_outlined,
+  Icons.info,
 ];
 
 // ignore: must_be_immutable
@@ -25,6 +29,7 @@ class DtcCodeDashboardPage extends StatelessWidget {
   List<Widget> _listAdmWidgets = [
     DtcCodeListPage(),
     DtcCodeAbbreviationListPage(),
+    DtcCodeKnowMorePage(),
   ];
 
   @override
@@ -214,6 +219,12 @@ class _BarButton extends StatelessWidget {
                   style: TextStyle(
                     color: Colors.black,
                     fontWeight: FontWeight.bold,
+                  ),
+                ),
+                Text(
+                  subtitle,
+                  style: TextStyle(
+                    fontSize: 12.0,
                   ),
                 ),
               ],
