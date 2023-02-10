@@ -77,15 +77,12 @@ class DtcCodeKnowMorePage extends StatelessWidget {
                 ),
                 text: 'Categorias de códigos DTC Harley:\n\n'),
             const TextSpan(
-                text: '* P \n'
-                    'ECM/ICM (Módulo de Controle Eletrônico [EFI]/'
-                    'Módulo de Controle de Ignição [Carburadas])\n\n'
-                    '* S \n'
-                    'TSM/TSSM (Módulo de Sinal (Setas)/Segurança)\n\n'
-                    '* SP \n'
-                    'Velocímetro\n\n'
-                    '* T\n'
-                    'Tacômetro. \n\n'),
+                text: '* Engine Control Module (ECM)\n'
+                    '* Body Control Module (BCM)\n'
+                    '* Speedometer (SPDO)\n'
+                    '* Radio (RAD)\n'
+                    '* Anti-Lock Braking System (ABS)\n'
+                    '* Turn Signal Security Module (TSSM)\n\n'),
             const TextSpan(
                 text: '6 - Para obter o DTC em uma área de diagnóstico, '
                     'pressione e segure o botão de reset do hodômetro ou o TRIP por 5 '
