@@ -8,6 +8,7 @@ class Product {
   String? color;
   String? price;
   List<String>? images;
+  Map<String, String>? stockBySize;
 
   Product({
     required this.id,
@@ -17,6 +18,7 @@ class Product {
     required this.color,
     required this.price,
     required this.images,
+    required this.stockBySize,
   });
 
   factory Product.fromFirestore(
@@ -25,13 +27,16 @@ class Product {
   ) {
     final data = snapshot.data();
     return Product(
-      id:  data?['id'],
-      category:  data?['category'],
+      id: data?['id'],
+      category: data?['category'],
       name: data?['name'],
       description: data?['description'],
       color: data?['color'],
       price: data?['price'],
       images: data?['images'] is Iterable ? List.from(data?['images']) : null,
+      stockBySize: data?['stockBySize'] is Iterable
+          ? Map<String, String>.from(data?['stockBySize'])
+          : null,
     );
   }
 
@@ -44,6 +49,7 @@ class Product {
       if (color != null) "color": color,
       if (price != null) "price": price,
       if (images != null) "images": images,
+      if (stockBySize != null) "stockBySize": stockBySize,
     };
   }
 
@@ -51,8 +57,7 @@ class Product {
   String toString() {
     return 'Product{id: $id, category: $category, '
         'name: $name, description: $description,'
-        'price: $price, color: $color,}';
+        'price: $price, color: $color, stockBySize: $stockBySize}';
     // return 'Products{name: $name, description: $description, images: $images}';
   }
-
 }

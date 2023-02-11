@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import '../models/product.dart';
 
@@ -22,10 +24,11 @@ class ProductFirebaseRepo {
             color: element.data().color,
             price: element.data().price,
             images: element.data().images as List<String>,
+            stockBySize: element.data().stockBySize as Map<String, String>,
           ),
         );
       });
-      //log(products.toString());
+      log(products.toString());
       return products;
     } on FirebaseException {
       rethrow;
