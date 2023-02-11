@@ -84,44 +84,46 @@ class DtcCodeKnowMorePage extends StatelessWidget {
                     '* Anti-Lock Braking System (ABS)\n'
                     '* Turn Signal Security Module (TSSM)\n\n'),
             const TextSpan(
-                text: '6 - Para obter o DTC em uma área de diagnóstico, '
-                    'pressione e segure o botão de reset do hodômetro ou o TRIP por 5 '
-                    'segundos e solte.  Se houver qualquer DTC, o código será '
-                    'exibido ou a palavra "NONE" aparecerá se não houver DTC.  '
-                    'Pressione o botão de reset do hodômetro ou o TRIP '
+                text: 'Existem basicamente três tipos de códigos:\n\n '
+                    '* Atuais - Os códigos atuais são exibidos quando o sistema '
+                    'detecta uma falha ativa. Simplesmente limpar o código não '
+                    'resolverá o problema, pois o código retornará assim que ocorrerem '
+                    'ciclos de acionamento suficientes nos quais o sistema '
+                    'reconheça a falha novamente. '
                     'novamente para visualizar os códigos adicionais, se houver. \n\n'),
             const TextSpan(
-              text: '7 - Anote os códigos.\n\n',
-            ),
-            const TextSpan(
-                text: '8 - Se os DTCs não forem apagados, pressione e solte o '
-                    'botão de reset do odômetro ou o TRIP.  O número da peça '
-                    '(Part Number) [PNxxxxx-xx] do módulo com problema '
-                    'será exibido.\n\n'),
+                text:
+                    '* Históricos - Os códigos históricos permanecem salvos até que '
+                    'sejam intencionalmente apagados ou cerca de 40 ciclos de ignição '
+                    '(ligar/desligar) sem recorrência. Os códigos históricos ajudam '
+                    'com problemas ou falhas intermitentes.\n\n'),
             const TextSpan(
                 text:
-                    'NOTA: Para determinar se um código é atual ou histórico, '
-                    'limpe o código exibido pressionando e segurando o botão de '
-                    'reset do hodômetro ou o TRIP (mais de 5 segundos) até '
-                    'a palavra "CLEAR" aparecer.  Solte o botão de reset do '
-                    'odômetro ou o TRIP. Desligui a chave de ignição.  Ligue sua'
-                    'motocicleta e desligue-a. Em seguida, verifique novamente os '
-                    'DTCs, repetindo as etapas 1 a 9. Se o código for atual, '
-                    'ele reaparecerá.\n\n'),
+                    '* Pendentes - Os códigos pendentes registram quando o sistema '
+                    'detecta uma falha, mas a falha não ocorreu durante ciclos de '
+                    'acionamento suficientes para definir a corrente. Se a falha for '
+                    'resolvida, o código se tornará um código histórico, '
+                    'ignorando o status atual.\n\n'),
             const TextSpan(
                 text:
-                    '9 - Pressione e solte o botão de reset do odômetro ou o TRIP '
-                    'para passar para o próximo módulo.\n\n'),
+                    'O autodiagnóstico do odômetro exibe todos os códigos e diferencia '
+                    'entre atual e histórico com um designador de letra. Os DTCs atuais '
+                    'residem na memória do ECM, BCM, instrumentos, rádio ou módulo ABS '
+                    '(se equipado) até que o DTC seja resolvido.\n\n'),
             const TextSpan(
-              text: '10 - Gire a chave de ignição para OFF.\n\n',
-            ),
+                text:
+                    'Se um problema específico for resolvido, o problema de status ativo '
+                    'será descartado e se tornará um DTC histórico em vez de um DTC '
+                    'atual. Os DTCs também perderão o status atual quando a '
+                    'ignição for desligada.\n\n'),
             const TextSpan(
-                text: 'Nos modelos não equipados com tacômetro, "NO RSP" (sem '
-                    'resposta) aparecerá quando o identificador do tacômetro '
-                    'for selecionado.\n\n'),
-            const TextSpan(
-                text: '"NO RSP" também aparecerá se a chave ON/OFF estiver '
-                    'na posição OFF ao executar este procedimento.'),
+                style: TextStyle(
+                  fontWeight: FontWeight.bold,
+                ),
+                text:
+                    'Todos os DTCs recebem um número de prioridade para determinar a '
+                    'ordem em que devem ser diagnosticados. Se houver vários DTCs '
+                    'presentes, sempre diagnostique primeiro a prioridade mais alta.\n\n'),
           ],
         ),
       );
