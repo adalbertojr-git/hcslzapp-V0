@@ -154,9 +154,9 @@ class _BoutiquePageState extends State<BoutiquePage> {
               itemCount: _controller.listFiltered.length,
               gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                 crossAxisCount: 2,
-                mainAxisSpacing: 8,
-                crossAxisSpacing: 15,
-                childAspectRatio: 0.75,
+                mainAxisSpacing: 10,
+                crossAxisSpacing: 5,
+                childAspectRatio: 0.85,
               ),
               itemBuilder: (context, index) => ItemCard(
                 product: _controller.listFiltered[index],
