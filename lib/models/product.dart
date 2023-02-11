@@ -37,6 +37,7 @@ class Product {
       stockBySize: data?['stockBySize'] is Iterable
           ? Map<String, String>.from(data?['stockBySize'])
           : null,
+
     );
   }
 
@@ -57,7 +58,7 @@ class Product {
   String toString() {
     return 'Product{id: $id, category: $category, '
         'name: $name, description: $description,'
-        'price: $price, color: $color, stockBySize: $stockBySize}';
-    // return 'Products{name: $name, description: $description, images: $images}';
+        'price: $price, color: $color, '
+        'images: $images, stockBySize: $stockBySize}';
   }
 }

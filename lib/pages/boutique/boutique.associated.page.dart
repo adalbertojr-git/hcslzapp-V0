@@ -4,6 +4,7 @@ import 'package:hcslzapp/models/product.dart';
 import '../../common/messages.dart';
 import '../../components/centered.message.dart';
 import '../../components/my.appbar.dart';
+import '../../components/my.bottom.appbar.dart';
 import '../../components/progress.dart';
 import '../../controllers/boutique.associated.controller.dart';
 import 'color.map.dart';
@@ -43,53 +44,53 @@ class _BoutiquePageState extends State<BoutiquePage> {
   }
 
   @override
-  Widget build(BuildContext context) => Observer(
-    builder: (_) {
-      return Scaffold(
-            appBar: MyAppBar(_title),
-            body: FutureBuilder<List<Product>>(
-              future: _controller.future,
-              builder: (context, snapshot) {
-                switch (snapshot.connectionState) {
-                  case ConnectionState.none:
-                    break;
-                  case ConnectionState.waiting:
-                    return Progress();
-                  case ConnectionState.active:
-                    break;
-                  case ConnectionState.done:
-                    if (snapshot.hasError) {
-                      return CenteredMessage(
-                        title: ERROR,
-                        message: snapshot.error.toString(),
-                      );
-                    } else {
-                      if ((snapshot.data?.length)! > 0) {
-                        _controller.products.clear();
-                        _controller.categories.clear();
-                        _controller.products.addAll(snapshot.data!);
-                        _controller.getCategories();
+  Widget build(BuildContext context) => Observer(builder: (_) {
+        return Scaffold(
+          appBar: MyAppBar(_title),
+          bottomNavigationBar:
+              _controller.isHidedButton ? null : MyBottomAppBar(),
+          body: FutureBuilder<List<Product>>(
+            future: _controller.future,
+            builder: (context, snapshot) {
+              switch (snapshot.connectionState) {
+                case ConnectionState.none:
+                  break;
+                case ConnectionState.waiting:
+                  return Progress();
+                case ConnectionState.active:
+                  break;
+                case ConnectionState.done:
+                  if (snapshot.hasError) {
+                    return CenteredMessage(
+                      title: ERROR,
+                      message: snapshot.error.toString(),
+                    );
+                  } else {
+                    if ((snapshot.data?.length)! > 0) {
+                      _controller.products.clear();
+                      _controller.categories.clear();
+                      _controller.products.addAll(snapshot.data!);
+                      _controller.getCategories();
 
-                        // return _widgets();
-                      }
+                      // return _widgets();
+                    }
 /*                  else
                         return CenteredMessage(
                           title: WARNING,
                           message: NOTEXIST,
                         );*/
 
-                      return _widgets();
-                    }
-                } //switch (snapshot.connectionState)
-                return CenteredMessage(
-                  title: ERROR,
-                  message: UNKNOWN,
-                );
-              },
-            ),
-          );
-    }
-  );
+                    return _widgets();
+                  }
+              } //switch (snapshot.connectionState)
+              return CenteredMessage(
+                title: ERROR,
+                message: UNKNOWN,
+              );
+            },
+          ),
+        );
+      });
 
   _widgets() => Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -100,7 +101,7 @@ class _BoutiquePageState extends State<BoutiquePage> {
       );
 
   _loadCategories() => Padding(
-        padding: const EdgeInsets.symmetric(vertical: 20),
+        padding: const EdgeInsets.symmetric(vertical: 10),
         child: SizedBox(
           height: 25,
           child: ListView.builder(

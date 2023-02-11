@@ -23,8 +23,8 @@ class ProductFirebaseRepo {
             description: element.data().description,
             color: element.data().color,
             price: element.data().price,
-            images: element.data().images as List<String>,
-            stockBySize: element.data().stockBySize as Map<String, String>,
+            images: element.data().images,
+            stockBySize: element.data().stockBySize,
           ),
         );
       });
