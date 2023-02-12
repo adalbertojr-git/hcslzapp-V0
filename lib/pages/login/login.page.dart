@@ -200,6 +200,18 @@ class _MyCustomLoginUIState extends State<MyCustomLoginUI> {
                       ],
                     ),
                   ),
+                  Positioned(
+                    left: 20,
+                    right: 20,
+                    top: 30,
+                    child: CircleAvatar(
+                      backgroundColor: Colors.transparent,
+                      radius: 45,
+                      child: ClipRRect(
+                          borderRadius: BorderRadius.all(Radius.circular(100)),
+                          child: Image.asset('assets/imgs/logo.png')),
+                    ),
+                  ),
                 ],
               ),
             ),
