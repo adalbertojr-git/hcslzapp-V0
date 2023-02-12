@@ -2,7 +2,12 @@ import 'package:flutter/material.dart';
 
 import '../controllers/app.controller.dart';
 
+// ignore: must_be_immutable
 class MyBottomAppBar extends StatefulWidget with PreferredSizeWidget {
+  bool isBoutique;
+
+  MyBottomAppBar({this.isBoutique = false});
+
   @override
   State<MyBottomAppBar> createState() => _MyBottomAppBarState();
 
@@ -25,6 +30,24 @@ class _MyBottomAppBarState extends State<MyBottomAppBar> {
                 Navigator.of(context).pop();
               },
             ),
+            widget.isBoutique
+                ? IconButton(
+                    icon: Icon(Icons.shopping_cart),
+                    onPressed: () {},
+                  )
+                : IconButton(
+                    onPressed: () {},
+                    icon: Container(),
+                  ),
+            widget.isBoutique
+                ? IconButton(
+                    icon: Icon(Icons.favorite),
+                    onPressed: () {},
+                  )
+                : IconButton(
+                    onPressed: () {},
+                    icon: Container(),
+                  ),
             IconButton(
               icon: Icon(
                 AppController.instance.isDarkTheme

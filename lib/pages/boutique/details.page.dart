@@ -16,7 +16,7 @@ class DetailsPage extends StatelessWidget {
     return Scaffold(
       backgroundColor: getColor(product.color!),
       appBar: MyAppBar(_title),
-      bottomNavigationBar: MyBottomAppBar(),
+      bottomNavigationBar: MyBottomAppBar(isBoutique: true),
       body: Body(product: product),
     );
   }
