@@ -8,7 +8,7 @@ class Product {
   String? color;
   String? price;
   List<String>? images;
-  Map<String, String>? stockBySize;
+  Map<String, dynamic>? stockBySize;
 
   Product({
     required this.id,
@@ -34,10 +34,9 @@ class Product {
       color: data?['color'],
       price: data?['price'],
       images: data?['images'] is Iterable ? List.from(data?['images']) : null,
-      stockBySize: data?['stockBySize'] is Iterable
-          ? Map<String, String>.from(data?['stockBySize'])
+      stockBySize: data?['stockBySize'] is Map<String, dynamic>
+          ? Map<String, dynamic>.from(data?['stockBySize'])
           : null,
-
     );
   }
 
