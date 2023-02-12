@@ -65,7 +65,7 @@ class _MyCustomLoginUIState extends State<MyCustomLoginUI> {
                                   children: [
                                     Padding(
                                       padding: EdgeInsets.only(
-                                        top: size.width * .15,
+                                        top: size.width * .17,
                                       ),
                                       child: Text(
                                         _greeting[1] + ', Harleyro(a)',
@@ -92,11 +92,17 @@ class _MyCustomLoginUIState extends State<MyCustomLoginUI> {
                                       false,
                                       _controller.userCtrl,
                                     ),
+                                    SizedBox(
+                                      height: 3,
+                                    ),
                                     _component(
                                       Icons.lock_outline,
                                       'Senha...',
                                       true,
                                       _controller.pswCtrl,
+                                    ),
+                                    SizedBox(
+                                      height: 10,
                                     ),
                                     Row(
                                       mainAxisAlignment:
@@ -203,10 +209,10 @@ class _MyCustomLoginUIState extends State<MyCustomLoginUI> {
                   Positioned(
                     left: 20,
                     right: 20,
-                    top: 30,
+                    top: 25,
                     child: CircleAvatar(
                       backgroundColor: Colors.transparent,
-                      radius: 45,
+                      radius: 50,
                       child: ClipRRect(
                           borderRadius: BorderRadius.all(Radius.circular(100)),
                           child: Image.asset('assets/imgs/logo.png')),
