@@ -65,7 +65,7 @@ class _MyCustomLoginUIState extends State<MyCustomLoginUI> {
                                   children: [
                                     Padding(
                                       padding: EdgeInsets.only(
-                                        top: size.width * .17,
+                                        top: size.width * .20,
                                       ),
                                       child: Text(
                                         _greeting[1] + ', Harleyro(a)',
