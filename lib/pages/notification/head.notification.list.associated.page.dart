@@ -156,8 +156,8 @@ class _HeadNotificationListAssociatedPageState
       );
 
   _photo(int i) => Container(
-        height: MediaQuery.of(context).size.height / 4,
-        width: MediaQuery.of(context).size.width,
+        height: MediaQuery.of(context).size.height / 5,
+        width: MediaQuery.of(context).size.width - 100,
         padding: EdgeInsets.symmetric(horizontal: 25),
         child: Card(
           elevation: 2,
