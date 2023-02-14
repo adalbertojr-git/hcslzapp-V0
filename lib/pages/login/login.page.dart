@@ -209,7 +209,7 @@ class _MyCustomLoginUIState extends State<MyCustomLoginUI> {
                   Positioned(
                     left: 20,
                     right: 20,
-                    top: 25,
+                    top: 40,
                     child: CircleAvatar(
                       backgroundColor: Colors.transparent,
                       radius: 50,
