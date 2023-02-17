@@ -118,7 +118,7 @@ class _ProductListPageState extends State<ProductListPage> {
                         ),
                       ),
                       subtitle:
-                          Text('R\$ ' + _controller.listFiltered[i].price!),
+                          Text('R\$ ' + _controller.listFiltered[i].price!.toString()),
                       trailing: Wrap(
                         spacing: 10, // space between two icons
                         children: <Widget>[

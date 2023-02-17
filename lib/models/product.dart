@@ -6,7 +6,7 @@ class Product {
   String? name;
   String? description;
   String? color;
-  String? price;
+  num? price;
   List<String>? images;
   Map<String, dynamic>? stockBySize;
 
