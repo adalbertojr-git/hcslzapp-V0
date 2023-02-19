@@ -97,7 +97,7 @@ class _EventAddPageState extends State<EventAddPage> {
                 hint: hintTitle,
                 icon: Icons.title,
                 inputType: TextInputType.text,
-                onChanged: _controller.formController.changeTitle,
+                onChanged: _controller.formController.changeName,
                 errorText: _controller.validateTitle(),
               );
             },

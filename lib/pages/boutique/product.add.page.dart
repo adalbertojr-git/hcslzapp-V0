@@ -4,57 +4,54 @@ import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:hcslzapp/common/labels.and.hints.dart';
 import 'package:hcslzapp/common/messages.dart';
+import 'package:hcslzapp/common/photo.image.provider.dart';
 import 'package:hcslzapp/components/button.dart';
 import 'package:hcslzapp/components/my.text.form.field.dart';
-import 'package:hcslzapp/controllers/head.notification.add.controller.dart';
-import 'package:hcslzapp/models/head.notification.dart';
-import '../../common/photo.image.provider.dart';
+import 'package:hcslzapp/models/product.dart';
 import '../../components/my.appbar.dart';
 import '../../components/my.bottom.appbar.dart';
+import '../../controllers/product.add.controller.dart';
 
-const String _title = 'Avisos da Diretoria';
 const String _pathNoImage = 'assets/imgs/noImage.png';
+const String _title = 'Produto';
 
-class HeadNotificationAddPage extends StatefulWidget {
-  final HeadNotification? _headNotification;
+class ProductAddPage extends StatefulWidget {
+  final Product? _product;
 
-  HeadNotificationAddPage(this._headNotification);
+  ProductAddPage(
+    this._product,
+  );
 
   @override
-  State<HeadNotificationAddPage> createState() =>
-      _HeadNotificationAddPageState();
+  State<ProductAddPage> createState() => _ProductAddPageState();
 }
 
-class _HeadNotificationAddPageState extends State<HeadNotificationAddPage> {
-  final HeadNotificationAddController _controller =
-      HeadNotificationAddController();
+class _ProductAddPageState extends State<ProductAddPage> {
+  final ProductAddController _controller = ProductAddController();
 
   @override
   void initState() {
-    _controller.headNotification =
-        widget._headNotification ?? _controller.headNotification;
+    // _controller.event = widget._product ?? _controller.event;
     _controller.init();
     super.initState();
   }
 
   @override
   Widget build(BuildContext context) => Scaffold(
-        appBar: MyAppBar(
-          widget._headNotification == null
-              ? 'Adicionar ' + _title
-              : 'Editar ' + _title,
-        ),
-        bottomNavigationBar: MyBottomAppBar(),
-        body: _widgets(),
-        floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
-        floatingActionButton: Button(
-          icon: Icons.save,
-          onClick: () => widget._headNotification == null ? _save() : _update(),
-        ),
-      );
+      appBar: MyAppBar(_title),
+      bottomNavigationBar: MyBottomAppBar(),
+      body: _widgets(),
+      floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
+      floatingActionButton: Button(
+        icon: Icons.save,
+        onClick: () => widget._product == null ? _save() : _update(),
+      ));
 
   _widgets() => ListView(
         children: <Widget>[
+          SizedBox(
+            height: 10.0,
+          ),
           _photo(context),
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
@@ -78,30 +75,28 @@ class _HeadNotificationAddPageState extends State<HeadNotificationAddPage> {
           Observer(
             builder: (_) {
               return MyTextFormField(
-                textEditingController: _controller.titleCtrl,
-                label: labelNotificationTitle,
-                hint: hintNotificationTitle,
+                textEditingController: _controller.nameCtrl,
+                label: labelTitle,
+                hint: hintTitle,
                 icon: Icons.title,
                 inputType: TextInputType.text,
                 onChanged: _controller.formController.changeName,
-                errorText: _controller.validateTitle(),
+                errorText: _controller.validateName(),
               );
             },
           ),
-          Observer(
-            builder: (_) {
-              return MyTextFormField(
-                textEditingController: _controller.notificationCtrl,
-                label: labelNotification,
-                hint: hintNotification,
-                icon: Icons.message,
-                inputType: TextInputType.text,
-                nLines: 5,
-                onChanged: _controller.formController.changeNotification,
-                errorText: _controller.validateNotification(),
-              );
-            },
-          ),
+          Observer(builder: (_) {
+            return MyTextFormField(
+              textEditingController: _controller.descriptionCtrl,
+              label: labelDescription,
+              hint: hintDescription,
+              icon: Icons.description,
+              inputType: TextInputType.text,
+              nLines: 3,
+              onChanged: _controller.formController.changeDescription,
+              errorText: _controller.validateDescription(),
+            );
+          }),
           SizedBox(
             height: 80,
           )

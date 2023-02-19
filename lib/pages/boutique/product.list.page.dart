@@ -4,6 +4,7 @@ import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:hcslzapp/common/messages.dart';
 import 'package:hcslzapp/components/centered.message.dart';
 import 'package:hcslzapp/components/progress.dart';
+import 'package:hcslzapp/pages/boutique/product.add.page.dart';
 import '../../common/labels.and.hints.dart';
 import '../../common/photo.image.provider.dart';
 import '../../components/button.dart';
@@ -77,7 +78,14 @@ class _ProductListPageState extends State<ProductListPage> {
                   : Button(
                       icon: Icons.add,
                       onClick: () {
-                        //_add(context);
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => ProductAddPage(
+                                null,
+                              ),
+                            ),
+                          );
                       },
                     ),
             ),

@@ -91,7 +91,7 @@ abstract class HeadNotificationAddControllerBase with Store {
   String? validateTitle() {
     const String _labelTitleRequired = 'Título é obrigatório!!!';
 
-    if (formController.title.isEmpty) {
+    if (formController.name.isEmpty) {
       return _labelTitleRequired;
     }
     return null;

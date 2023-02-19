@@ -131,7 +131,7 @@ class _HeadNotificationListAssociatedPageState
                                 height: 5,
                               ),
                               Text(
-                                _controller.headNotifications[index].title +
+                                _controller.headNotifications[index].name +
                                     '\n',
                                 style: TextStyle(
                                     fontWeight: FontWeight.bold,
