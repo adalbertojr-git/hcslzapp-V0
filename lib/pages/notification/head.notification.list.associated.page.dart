@@ -123,7 +123,7 @@ class _HeadNotificationListAssociatedPageState
                       Container(
                         padding: EdgeInsets.all(5),
                         width: double.infinity,
-                        height: 190,
+                        height: 120,
                         child: Card(
                           child: Column(
                             children: [
@@ -156,9 +156,9 @@ class _HeadNotificationListAssociatedPageState
       );
 
   _photo(int i) => Container(
-        height: MediaQuery.of(context).size.height / 5,
+        height: MediaQuery.of(context).size.height / 3,
         width: MediaQuery.of(context).size.width - 20,
-        padding: EdgeInsets.symmetric(horizontal: 25),
+        padding: EdgeInsets.symmetric(horizontal: 20),
         child: Card(
           elevation: 2,
           shape: RoundedRectangleBorder(
@@ -166,6 +166,7 @@ class _HeadNotificationListAssociatedPageState
           ),
           child: Container(
             decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(10.0),
               image: _loadPhoto(i),
             ),
           ),
