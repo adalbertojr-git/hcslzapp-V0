@@ -122,7 +122,7 @@ abstract class EventAddControllerBase with Store {
   String? validateTitle() {
     const String _labelTitleRequired = 'Título do evento é obrigatório!!!';
 
-    if (formController.title.isEmpty) {
+    if (formController.name.isEmpty) {
       return _labelTitleRequired;
     }
     return null;
