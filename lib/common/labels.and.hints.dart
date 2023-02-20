@@ -132,4 +132,7 @@ const String hintNotification = 'Descreva aqui o aviso aos associados';
 Products
 */
 const String labelNameProduct = 'Nome do produto';
-const String hintNameProduct = 'Digite qualquer parte do nome';
+const String hintNameProductSearch = 'Digite qualquer parte do nome';
+const String hintNameProduct = 'Digite o nome do produto';
+const String labelDescriptionProduct = 'Descrição do produto';
+const String hintDescriptionProduct = 'Digite os detalhes do produto';

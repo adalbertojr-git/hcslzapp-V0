@@ -76,8 +76,8 @@ class _ProductAddPageState extends State<ProductAddPage> {
             builder: (_) {
               return MyTextFormField(
                 textEditingController: _controller.nameCtrl,
-                label: labelTitle,
-                hint: hintTitle,
+                label: labelNameProduct,
+                hint: hintNameProduct,
                 icon: Icons.title,
                 inputType: TextInputType.text,
                 onChanged: _controller.formController.changeName,
@@ -88,8 +88,8 @@ class _ProductAddPageState extends State<ProductAddPage> {
           Observer(builder: (_) {
             return MyTextFormField(
               textEditingController: _controller.descriptionCtrl,
-              label: labelDescription,
-              hint: hintDescription,
+              label: labelDescriptionProduct,
+              hint: hintDescriptionProduct,
               icon: Icons.description,
               inputType: TextInputType.text,
               nLines: 3,

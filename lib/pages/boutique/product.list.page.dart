@@ -99,7 +99,7 @@ class _ProductListPageState extends State<ProductListPage> {
           MyTextFormField(
             textEditingController: _controller.nameCtrl,
             label: labelNameProduct,
-            hint: hintNameProduct,
+            hint: hintNameProductSearch,
             icon: Icons.search,
             inputType: TextInputType.text,
             onChanged: _controller.setFilter,
