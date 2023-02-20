@@ -94,7 +94,9 @@ class _MonthBirthdaysListPageState extends State<MonthBirthdaysListPage> {
                   decoration: BoxDecoration(
                     shape: BoxShape.rectangle,
                     borderRadius: BorderRadius.circular(10.0),
-                    color: Colors.deepOrange[300],
+                    color: _isToday(_controller.associateds[index].date_birth)
+                        ? Colors.blue[200]
+                        : Colors.deepOrange[300],
                   ),
                   child: Column(
                     children: [
@@ -153,12 +155,14 @@ class _MonthBirthdaysListPageState extends State<MonthBirthdaysListPage> {
                                 ),
                               ),
                               Text(
-                                _isToday(_controller.associateds[index].date_birth)
+                                _isToday(_controller
+                                        .associateds[index].date_birth)
                                     ? '\nÉ HOJE!!!'
                                     : '\nAniversário: ' +
-                                    _controller.associateds[index].date_birth
-                                        .toString()
-                                        .substring(0, 5),
+                                        _controller
+                                            .associateds[index].date_birth
+                                            .toString()
+                                            .substring(0, 5),
                                 style: TextStyle(
                                   fontWeight: FontWeight.bold,
                                   fontSize: 16,
