@@ -97,6 +97,37 @@ class _ProductAddPageState extends State<ProductAddPage> {
               errorText: _controller.validateDescription(),
             );
           }),
+          Row(
+            children: [
+              Expanded(
+                child: Observer(
+                  builder: (_) {
+                    return MyTextFormField(
+                      textEditingController: _controller.nameCtrl,
+                      label: labelCategoryProduct,
+                      hint: hintCategoryProduct,
+                      icon: Icons.category,
+                      inputType: TextInputType.text,
+                      onChanged: _controller.formController.changeName,
+                      errorText: _controller.validateName(),
+                    );
+                  },
+                ),
+              ),
+              Expanded(
+                child: Observer(builder: (_) {
+                  return MyTextFormField(
+                    label: labelColorProduct,
+                    hint: hintColorProduct,
+                    icon: Icons.color_lens,
+                    inputType: TextInputType.text,
+                    onChanged: _controller.formController.changeName,
+                    errorText: _controller.validateName(),
+                  );
+                }),
+              ),
+            ],
+          ),
           SizedBox(
             height: 80,
           )
