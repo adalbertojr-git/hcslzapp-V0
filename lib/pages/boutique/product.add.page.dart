@@ -103,7 +103,7 @@ class _ProductAddPageState extends State<ProductAddPage> {
                 child: Observer(
                   builder: (_) {
                     return MyTextFormField(
-                      textEditingController: _controller.nameCtrl,
+                      textEditingController: _controller.categoryCtrl,
                       label: labelCategoryProduct,
                       hint: hintCategoryProduct,
                       icon: Icons.category,
@@ -117,6 +117,7 @@ class _ProductAddPageState extends State<ProductAddPage> {
               Expanded(
                 child: Observer(builder: (_) {
                   return MyTextFormField(
+                    textEditingController: _controller.colorCtrl,
                     label: labelColorProduct,
                     hint: hintColorProduct,
                     icon: Icons.color_lens,
