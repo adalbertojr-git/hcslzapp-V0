@@ -137,7 +137,7 @@ class ProductTitleWithImage extends StatelessWidget {
                   ],
                 ),
               ),
-              SizedBox(width: 10),
+              SizedBox(width: 20),
               Expanded(
                 child: Hero(
                   tag: "${product.id}",
