@@ -89,6 +89,86 @@ mixin _$ProductAddController on ProductAddControllerBase, Store {
     });
   }
 
+  late final _$qtdPCtrlAtom =
+      Atom(name: 'ProductAddControllerBase.qtdPCtrl', context: context);
+
+  @override
+  TextEditingController get qtdPCtrl {
+    _$qtdPCtrlAtom.reportRead();
+    return super.qtdPCtrl;
+  }
+
+  @override
+  set qtdPCtrl(TextEditingController value) {
+    _$qtdPCtrlAtom.reportWrite(value, super.qtdPCtrl, () {
+      super.qtdPCtrl = value;
+    });
+  }
+
+  late final _$qtdMCtrlAtom =
+      Atom(name: 'ProductAddControllerBase.qtdMCtrl', context: context);
+
+  @override
+  TextEditingController get qtdMCtrl {
+    _$qtdMCtrlAtom.reportRead();
+    return super.qtdMCtrl;
+  }
+
+  @override
+  set qtdMCtrl(TextEditingController value) {
+    _$qtdMCtrlAtom.reportWrite(value, super.qtdMCtrl, () {
+      super.qtdMCtrl = value;
+    });
+  }
+
+  late final _$qtdGCtrlAtom =
+      Atom(name: 'ProductAddControllerBase.qtdGCtrl', context: context);
+
+  @override
+  TextEditingController get qtdGCtrl {
+    _$qtdGCtrlAtom.reportRead();
+    return super.qtdGCtrl;
+  }
+
+  @override
+  set qtdGCtrl(TextEditingController value) {
+    _$qtdGCtrlAtom.reportWrite(value, super.qtdGCtrl, () {
+      super.qtdGCtrl = value;
+    });
+  }
+
+  late final _$qtdGGCtrlAtom =
+      Atom(name: 'ProductAddControllerBase.qtdGGCtrl', context: context);
+
+  @override
+  TextEditingController get qtdGGCtrl {
+    _$qtdGGCtrlAtom.reportRead();
+    return super.qtdGGCtrl;
+  }
+
+  @override
+  set qtdGGCtrl(TextEditingController value) {
+    _$qtdGGCtrlAtom.reportWrite(value, super.qtdGGCtrl, () {
+      super.qtdGGCtrl = value;
+    });
+  }
+
+  late final _$priceCtrlAtom =
+      Atom(name: 'ProductAddControllerBase.priceCtrl', context: context);
+
+  @override
+  TextEditingController get priceCtrl {
+    _$priceCtrlAtom.reportRead();
+    return super.priceCtrl;
+  }
+
+  @override
+  set priceCtrl(TextEditingController value) {
+    _$priceCtrlAtom.reportWrite(value, super.priceCtrl, () {
+      super.priceCtrl = value;
+    });
+  }
+
   late final _$photoUrlAtom =
       Atom(name: 'ProductAddControllerBase.photoUrl', context: context);
 
@@ -277,6 +357,11 @@ nameCtrl: ${nameCtrl},
 descriptionCtrl: ${descriptionCtrl},
 categoryCtrl: ${categoryCtrl},
 colorCtrl: ${colorCtrl},
+qtdPCtrl: ${qtdPCtrl},
+qtdMCtrl: ${qtdMCtrl},
+qtdGCtrl: ${qtdGCtrl},
+qtdGGCtrl: ${qtdGGCtrl},
+priceCtrl: ${priceCtrl},
 photoUrl: ${photoUrl},
 photoPath: ${photoPath},
 photo: ${photo},

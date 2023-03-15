@@ -91,7 +91,7 @@ class MyTextFormField extends StatelessWidget {
           errorStyle: TextStyle(
             color: Colors.red,
           ),
-          isDense: true
+          isDense: true,
         ),
         keyboardType: inputType,
         maxLines: nLines ?? 1,

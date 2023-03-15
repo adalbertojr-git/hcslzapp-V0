@@ -85,18 +85,20 @@ class _ProductAddPageState extends State<ProductAddPage> {
               );
             },
           ),
-          Observer(builder: (_) {
-            return MyTextFormField(
-              textEditingController: _controller.descriptionCtrl,
-              label: labelDescriptionProduct,
-              hint: hintDescriptionProduct,
-              icon: Icons.description,
-              inputType: TextInputType.text,
-              nLines: 3,
-              onChanged: _controller.formController.changeDescription,
-              errorText: _controller.validateDescription(),
-            );
-          }),
+          Observer(
+            builder: (_) {
+              return MyTextFormField(
+                textEditingController: _controller.descriptionCtrl,
+                label: labelDescriptionProduct,
+                hint: hintDescriptionProduct,
+                icon: Icons.description,
+                inputType: TextInputType.text,
+                nLines: 3,
+                onChanged: _controller.formController.changeDescription,
+                errorText: _controller.validateDescription(),
+              );
+            },
+          ),
           Row(
             children: [
               Expanded(
@@ -130,45 +132,109 @@ class _ProductAddPageState extends State<ProductAddPage> {
             ],
           ),
           SizedBox(
-            height: 5,
+            height: 10,
           ),
           Card(
             elevation: 5,
-            child: Row(
+            child: Column(
               children: [
-                Expanded(
-                  child: Observer(
-                    builder: (_) {
-                      return MyTextFormField(
-                        textEditingController: _controller.categoryCtrl,
-                        label: labelCategoryProduct,
-                        hint: hintCategoryProduct,
-                        icon: Icons.format_size,
-                        inputType: TextInputType.text,
-                        onChanged: _controller.formController.changeName,
-                        errorText: _controller.validateName(),
-                      );
-                    },
+                SizedBox(
+                  height: 10,
+                ),
+                const Text(
+                  'Tamanho x Quantidade',
+                  style: TextStyle(
+                    fontWeight: FontWeight.bold,
                   ),
                 ),
-                Expanded(
-                  child: Observer(builder: (_) {
-                    return MyTextFormField(
-                      textEditingController: _controller.colorCtrl,
-                      label: labelColorProduct,
-                      hint: hintColorProduct,
-                      icon: Icons.onetwothree,
-                      inputType: TextInputType.text,
-                      onChanged: _controller.formController.changeName,
-                      errorText: _controller.validateName(),
-                    );
-                  }),
+                SizedBox(
+                  height: 10,
+                ),
+                Row(
+                  children: [
+                    Expanded(
+                      child: Observer(
+                        builder: (_) {
+                          return MyTextFormField(
+                            textEditingController: _controller.qtdPCtrl,
+                            label: labelQtdTamP,
+                            hint: hintQtdTamP,
+                            icon: Icons.format_size,
+                            inputType: TextInputType.text,
+                            onChanged: _controller.formController.changeName,
+                            errorText: _controller.validateName(),
+                          );
+                        },
+                      ),
+                    ),
+                    Expanded(
+                      child: Observer(builder: (_) {
+                        return MyTextFormField(
+                          textEditingController: _controller.qtdMCtrl,
+                          label: labelQtdTamM,
+                          hint: hintQtdTamM,
+                          icon: Icons.format_size,
+                          inputType: TextInputType.text,
+                          onChanged: _controller.formController.changeName,
+                          errorText: _controller.validateName(),
+                        );
+                      }),
+                    ),
+                  ],
+                ),
+                Row(
+                  children: [
+                    Expanded(
+                      child: Observer(
+                        builder: (_) {
+                          return MyTextFormField(
+                            textEditingController: _controller.qtdGCtrl,
+                            label: labelQtdTamG,
+                            hint: hintQtdTamG,
+                            icon: Icons.format_size,
+                            inputType: TextInputType.text,
+                            onChanged: _controller.formController.changeName,
+                            errorText: _controller.validateName(),
+                          );
+                        },
+                      ),
+                    ),
+                    Expanded(
+                      child: Observer(builder: (_) {
+                        return MyTextFormField(
+                          textEditingController: _controller.qtdGGCtrl,
+                          label: labelQtdTamGG,
+                          hint: hintQtdTamGG,
+                          icon: Icons.format_size,
+                          inputType: TextInputType.text,
+                          onChanged: _controller.formController.changeName,
+                          errorText: _controller.validateName(),
+                        );
+                      }),
+                    ),
+                  ],
                 ),
               ],
             ),
           ),
           SizedBox(
-            height: 80,
+            height: 10,
+          ),
+          Observer(
+            builder: (_) {
+              return MyTextFormField(
+                textEditingController: _controller.priceCtrl,
+                label: labelPrice,
+                hint: hintPrice,
+                icon: Icons.price_change,
+                inputType: TextInputType.number,
+                onChanged: _controller.formController.changeDescription,
+                errorText: _controller.validateDescription(),
+              );
+            },
+          ),
+          SizedBox(
+            height: 50,
           )
         ],
       );

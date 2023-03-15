@@ -31,6 +31,21 @@ abstract class ProductAddControllerBase with Store {
   var colorCtrl = TextEditingController();
 
   @observable
+  var qtdPCtrl = TextEditingController();
+
+  @observable
+  var qtdMCtrl = TextEditingController();
+
+  @observable
+  var qtdGCtrl = TextEditingController();
+
+  @observable
+  var qtdGGCtrl = TextEditingController();
+
+  @observable
+  var priceCtrl = TextEditingController();
+
+  @observable
   String photoUrl = '';
 
   @observable

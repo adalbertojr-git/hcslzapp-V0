@@ -468,6 +468,9 @@ class AssociatedUpdatePage extends StatelessWidget {
         elevation: 5,
         child: Column(
           children: [
+            SizedBox(
+              height: 10,
+            ),
             const Text(
               'Motocicletas',
               style: TextStyle(
