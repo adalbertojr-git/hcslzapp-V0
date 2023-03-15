@@ -41,16 +41,17 @@ class DigitalIdentityPage extends StatelessWidget {
             label: labelNameDigitalPayment,
             disabled: true,
           ),
-          Row(
+
+/*          Row(
             children: <Widget>[
-/*              Expanded(
+*/ /*              Expanded(
                 child: MyTextFormField(
                   textEditingController: _controller.associatedTypeCtrl,
                   label: labelAssociatedType,
                   disabled: true,
                   textAlign: TextAlign.center,
                 ),
-              ),*/
+              ),*/ /*
               Expanded(
                 child: MyTextFormField(
                   textEditingController: _controller.cnhCtrl,
@@ -68,7 +69,8 @@ class DigitalIdentityPage extends StatelessWidget {
                 ),
               ),
             ],
-          ),
+          ),*/
+
           Row(
             children: <Widget>[
               Expanded(

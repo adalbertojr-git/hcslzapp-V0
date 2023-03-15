@@ -150,7 +150,8 @@ class AssociatedUpdatePage extends StatelessWidget {
               ],
             ),
           ),
-          Row(
+
+/*          Row(
             children: <Widget>[
               Expanded(
                 child: MyTextFormField(
@@ -173,7 +174,8 @@ class AssociatedUpdatePage extends StatelessWidget {
                 ),
               ),
             ],
-          ),
+          ),*/
+
           Padding(
             padding: const EdgeInsets.fromLTRB(0.0, 3.0, 2.0, 3.0),
             child: Row(
@@ -266,8 +268,7 @@ class AssociatedUpdatePage extends StatelessWidget {
               ),
             ],
           ),
-          Divider(),
-          _dependentsListWidget(context),
+          // _dependentsListWidget(context),
           SizedBox(
             height: 10.0,
           ),
