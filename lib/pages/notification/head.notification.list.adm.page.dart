@@ -105,7 +105,7 @@ class _HeadNotificationListAdmPageState
                     ),
                     child: ListTile(
                       title: Text(
-                        _controller.headNotifications[i].name,
+                        _controller.headNotifications[i].title,
                         style: TextStyle(
                           fontWeight: FontWeight.bold,
                         ),

@@ -83,7 +83,7 @@ class _HeadNotificationAddPageState extends State<HeadNotificationAddPage> {
                 hint: hintNotificationTitle,
                 icon: Icons.title,
                 inputType: TextInputType.text,
-                onChanged: _controller.formController.changeName,
+                onChanged: _controller.formController.changeTitle,
                 errorText: _controller.validateTitle(),
               );
             },
