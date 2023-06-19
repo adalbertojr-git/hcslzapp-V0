@@ -156,22 +156,21 @@ class _HeadNotificationListAssociatedPageState
       );
 
   _photo(int i) => Container(
-        height: MediaQuery.of(context).size.height / 3,
-        width: MediaQuery.of(context).size.width - 120,
-        padding: EdgeInsets.symmetric(horizontal: 20),
-        child: Card(
-          elevation: 2,
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(130.0),
-          ),
-          child: Container(
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(130.0),
-              image: _loadPhoto(i),
-            ),
-          ),
-        ),
-      );
+    height: 200.0,
+    width: 200.0,
+    padding: EdgeInsets.all(5.0),
+    decoration: BoxDecoration(
+      color: Colors.black.withOpacity(0.2),
+      borderRadius: BorderRadius.circular(130.0),
+    ),
+    child: Container(
+      decoration: BoxDecoration(
+        color: Colors.white,
+        borderRadius: BorderRadius.circular(130.0),
+        image: _loadPhoto(i),
+      ),
+    ),
+  );
 
   DecorationImage _loadPhoto(int i) => DecorationImage(
       image: _controller.headNotifications[i].photoUrl != ''
