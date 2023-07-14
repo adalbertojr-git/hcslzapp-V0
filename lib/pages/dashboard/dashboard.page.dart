@@ -68,7 +68,7 @@ const List<String> _listAdmScreens = [
   "Eventos",
   "Parcerias",
   "Avisos",
-  "Boutique",
+  // "Loja",
 ];
 
 const List<String> _listAdmScreensDesc = [
@@ -77,7 +77,7 @@ const List<String> _listAdmScreensDesc = [
   "Viagens, encontros, passeios, etc.",
   "Empresas parceiras do Harley Club",
   "Avisos da Diretoria aos harleyros",
-  "Produtos da marca Harley Club",
+  // "Produtos da marca Harley Club",
 ];
 
 const List<IconData> _listAdmIcons = [
@@ -86,7 +86,7 @@ const List<IconData> _listAdmIcons = [
   Icons.event,
   Icons.emoji_people,
   Icons.announcement,
-  Icons.wallet_giftcard,
+  // Icons.wallet_giftcard,
 ];
 
 class DashboardPage extends StatefulWidget {
@@ -119,7 +119,7 @@ class _DashboardPageState extends State<DashboardPage> {
       EventCalendarPage(_controller.selectedProfile),
       PartnershipListAdmPage(),
       HeadNotificationListAdmPage(),
-      ProductListPage(),
+      // ProductListPage(),
     ];
 
     return Observer(
@@ -603,24 +603,15 @@ class _DashboardPageState extends State<DashboardPage> {
                     _controller.loadDtcCodeDashboardPage(context);
                   },
                 ),
-                GridButton(
+
+/*                GridButton(
                   title: _labelBoutique,
                   image: _pathBoutiqueImage,
                   context: context,
                   onClick: () {
                     _controller.loadBoutiquePage(context);
-/*                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (gContext) => CenteredMessage(
-                          title: WARNING,
-                          message:
-                              'Funcionalidade em contrução. Aguarde nova versão do App',
-                        ),
-                      ),
-                    );*/
                   },
-                ),
+                ),*/
 /*
                 GridButton(
                   title: "Classificados",
