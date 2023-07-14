@@ -17,18 +17,18 @@ class AboutPage extends StatelessWidget {
   }
 
   _widgets() => ListView(
-    children: <Widget>[
-      SizedBox(
-        height: 200.0,
-        child: Image.asset(_pathLogoImage),
-      ),
-      Padding(
-        padding: EdgeInsets.fromLTRB(00.0, 10.0, 00.0, 10.0),
-        child: Image.asset(_pathAboutImage),
-      ),
-      _buildText(),
-    ],
-  );
+        children: <Widget>[
+          SizedBox(
+            height: 200.0,
+            child: Image.asset(_pathLogoImage),
+          ),
+          Padding(
+            padding: EdgeInsets.fromLTRB(00.0, 10.0, 00.0, 10.0),
+            child: Image.asset(_pathAboutImage),
+          ),
+          _buildText(),
+        ],
+      );
 
   Widget _buildText() {
     return Text.rich(
@@ -74,42 +74,8 @@ class AboutPage extends StatelessWidget {
                   'Assim nasce oficialmente, no ano de 2018, o Harley Club com seu registro '
                   'oficial, cerimônia com o escudamento de 71 membros oficiais que '
                   'receberam seus coletes e fizeram seu juramento numa demonstração '
-                  'de amor pelo grupo. Hoje o Harley Club é o maior grupo de motociclismo '
+                  'de amor pelo grupo. Hoje o Harley Club é um dos maiores grupo de motociclismo '
                   'do Maranhão.\n\n'),
-          const TextSpan(
-            text: 'Localização: São Luís-MA, Brasil\n',
-            style: TextStyle(
-              fontWeight: FontWeight.bold,
-            ),
-          ),
-          const TextSpan(
-            text: 'Email : contato@harleyclubslz.com.br\n\n',
-            style: TextStyle(
-              fontWeight: FontWeight.bold,
-            ),
-          ),
-          const TextSpan(
-            text: 'Palavra do Presidente\n\n',
-            style: TextStyle(
-              color: Colors.blueGrey,
-              fontSize: 25,
-              fontStyle: FontStyle.italic,
-            ),
-          ),
-          const TextSpan(
-            text: '...\n\n',
-            style: TextStyle(
-              color: Colors.blueGrey,
-              fontStyle: FontStyle.italic,
-            ),
-          ),
-          const TextSpan(
-            text: 'Sebba.',
-            style: TextStyle(
-              color: Colors.blueGrey,
-              fontStyle: FontStyle.italic,
-            ),
-          ),
         ],
       ),
     );
