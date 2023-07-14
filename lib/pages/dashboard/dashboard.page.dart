@@ -12,6 +12,7 @@ import 'package:hcslzapp/pages/notification/head.notification.list.associated.pa
 import 'package:hcslzapp/pages/partnership/partnership.list.adm.page.dart';
 import 'package:hcslzapp/pages/password/change.password.page.dart';
 import 'package:hcslzapp/pages/payment/payment.list.page.dart';
+import 'package:hcslzapp/pages/privacy/privacy.page.dart';
 import '../../common/associated.profiles.dart';
 import 'package:hcslzapp/common/photo.image.provider.dart';
 import 'package:hcslzapp/components/transaction.auth.dialog.dart';
@@ -29,6 +30,7 @@ const String _labelAppTitle = 'HCSlz App';
 const String _labelTheme = 'Alterar Tema';
 const String _labelChangeProfile = 'Trocar Perfil de Acesso';
 const String _labelChangePassword = 'Alterar senha';
+const String _labelPrivacy = 'Política de privacidade';
 const String _labelLogout = 'Logout';
 const String _labelLogoutConf = 'Confirma Logout?';
 const String _labelLadiesHC = 'Ladies Harley Club';
@@ -57,7 +59,7 @@ const String _labelEvent = 'Eventos';
 const String _pathEventImage = 'assets/imgs/eventos.png';
 const String _labelDTC = 'Codigos DTC';
 const String _pathDTCImage = 'assets/imgs/codigosdtc.png';
-const String _labelBoutique = 'Boutique';
+const String _labelBoutique = 'Nossa Loja';
 const String _pathBoutiqueImage = 'assets/imgs/boutique.png';
 const String _labelAboutHarleyClub = 'O Harley Club';
 const String _pathAboutHarleyClubImage = 'assets/imgs/logo.png';
@@ -314,8 +316,7 @@ class _DashboardPageState extends State<DashboardPage> {
                     Padding(
                       padding: EdgeInsets.only(top: 5),
                       child: const Text(
-                        'Este aplicativo é propriedade do Harley Club de São '
-                        'Luís-MA.',
+                        'Este aplicativo é propriedade do Harley Club - MA.',
                         style: TextStyle(fontSize: 14.0),
                       ),
                     ),
@@ -342,13 +343,6 @@ class _DashboardPageState extends State<DashboardPage> {
                       ),
                     ),
                     Padding(
-                      padding: EdgeInsets.only(top: 2),
-                      child: const Text(
-                        'Tel: (98) 99120-7728',
-                        style: TextStyle(fontSize: 12.0),
-                      ),
-                    ),
-                    Padding(
                       padding: EdgeInsets.only(top: 2, bottom: 20),
                       child: const Text(
                         'Copyright 2023 Brasil',
@@ -356,12 +350,22 @@ class _DashboardPageState extends State<DashboardPage> {
                       ),
                     ),
                     SizedBox(
-                      height: 70.0,
+                      height: 100.0,
                       child: Container(
                         child: Image.asset(_pathAboutHarleyClubImage),
                       ),
                     ),
                   ],
+                );
+              },
+            ),
+            ListTile(
+              leading: Icon(Icons.privacy_tip),
+              title: Text(_labelPrivacy),
+              onTap: () async {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (_) => PrivacyPage()),
                 );
               },
             ),
