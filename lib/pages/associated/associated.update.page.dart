@@ -105,7 +105,6 @@ class AssociatedUpdatePage extends StatelessWidget {
                 inputType: TextInputType.emailAddress,
                 onChanged: _controller.formController.changeEmail,
                 errorText: _controller.validateEmail(),
-                isPassword: _selectedProfile == ASSOCIATED ? false : true,
               );
             },
           ),
@@ -224,7 +223,6 @@ class AssociatedUpdatePage extends StatelessWidget {
                     icon: Icons.calendar_today,
                     inputType: TextInputType.datetime,
                     disabled: true,
-                    isPassword: _selectedProfile == ASSOCIATED ? false : true,
                     onTap: _selectedProfile == ASSOCIATED
                         ? () async {
                             DateTime? pickedDate = await showDatePicker(
