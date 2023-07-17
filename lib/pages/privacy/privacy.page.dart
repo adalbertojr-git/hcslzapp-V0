@@ -1,6 +1,5 @@
 import 'dart:async';
 import 'dart:io';
-
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -8,11 +7,12 @@ import 'package:flutter_pdfview/flutter_pdfview.dart';
 import 'package:path_provider/path_provider.dart';
 import '../../components/my.appbar.dart';
 import '../../components/my.bottom.appbar.dart';
+import '../../components/progress.dart';
 
 const String _title = 'Política de Privacidade';
 const String _pathLogoImage = 'assets/imgs/logo.png';
 
-class PrivacyPage extends StatefulWidget {
+/*class PrivacyPage extends StatefulWidget {
   @override
   _PrivacyPageState createState() => _PrivacyPageState();
 }
@@ -26,22 +26,6 @@ class _PrivacyPageState extends State<PrivacyPage> {
   @override
   void initState() {
     super.initState();
-/*    fromAsset('assets/corrupted.pdf', 'corrupted.pdf').then((f) {
-      setState(() {
-        corruptedPathPDF = f.path;
-      });
-    });
-    fromAsset('assets/demo-link.pdf', 'demo.pdf').then((f) {
-      setState(() {
-        pathPDF = f.path;
-      });
-    });
-    fromAsset('assets/demo-landscape.pdf', 'landscape.pdf').then((f) {
-      setState(() {
-        landscapePathPdf = f.path;
-      });
-    });*/
-
     createFileOfPdfUrl().then((f) {
       setState(() {
         remotePDFpath = f.path;
@@ -73,24 +57,6 @@ class _PrivacyPageState extends State<PrivacyPage> {
     return completer.future;
   }
 
-/*  Future<File> fromAsset(String asset, String filename) async {
-    // To open from assets, you can copy them to the app storage folder, and the access them "locally"
-    Completer<File> completer = Completer();
-
-    try {
-      var dir = await getApplicationDocumentsDirectory();
-      File file = File("${dir.path}/$filename");
-      var data = await rootBundle.load(asset);
-      var bytes = data.buffer.asUint8List();
-      await file.writeAsBytes(bytes, flush: true);
-      completer.complete(file);
-    } catch (e) {
-      throw Exception('Error parsing asset file!');
-    }
-
-    return completer.future;
-  }*/
-
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -100,7 +66,16 @@ class _PrivacyPageState extends State<PrivacyPage> {
         appBar: AppBar(title: const Text('Plugin example app')),
         body: Center(child: Builder(
           builder: (BuildContext context) {
-            return Column(
+            if (remotePDFpath.isNotEmpty) {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => PDFScreen(path: remotePDFpath),
+                ),
+              );
+            }
+            return Progress();
+*//*            return Column(
               children: <Widget>[
                 TextButton(
                   child: Text("Open PDF"),
@@ -157,13 +132,13 @@ class _PrivacyPageState extends State<PrivacyPage> {
                   },
                 )
               ],
-            );
+            );*//*
           },
         )),
       ),
     );
   }
-}
+}*/
 
 class PDFScreen extends StatefulWidget {
   final String? path;
@@ -184,22 +159,13 @@ class _PDFScreenState extends State<PDFScreen> with WidgetsBindingObserver {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text("Document"),
-        actions: <Widget>[
-          IconButton(
-            icon: Icon(Icons.share),
-            onPressed: () {},
-          ),
-        ],
-      ),
-      backgroundColor: Colors.red,
+      appBar: MyAppBar(_title),
       body: Stack(
         children: <Widget>[
           PDFView(
             filePath: widget.path,
-            enableSwipe: false,
-            swipeHorizontal: true,
+            enableSwipe: true,
+            swipeHorizontal: false,
             autoSpacing: false,
             pageFling: true,
             pageSnap: true,
@@ -211,6 +177,7 @@ class _PDFScreenState extends State<PDFScreen> with WidgetsBindingObserver {
               setState(() {
                 pages = _pages;
                 isReady = true;
+                debugPrint(pages.toString());
               });
             },
             onError: (error) {
@@ -241,7 +208,7 @@ class _PDFScreenState extends State<PDFScreen> with WidgetsBindingObserver {
           errorMessage.isEmpty
               ? !isReady
                   ? Center(
-                      child: CircularProgressIndicator(),
+                      child: Progress(),
                     )
                   : Container()
               : Center(
@@ -249,21 +216,22 @@ class _PDFScreenState extends State<PDFScreen> with WidgetsBindingObserver {
                 )
         ],
       ),
-      floatingActionButton: FutureBuilder<PDFViewController>(
+/*      floatingActionButton: FutureBuilder<PDFViewController>(
         future: _controller.future,
         builder: (context, AsyncSnapshot<PDFViewController> snapshot) {
           if (snapshot.hasData) {
             return FloatingActionButton.extended(
-              label: Text("Go to ${pages! ~/ 2}"),
+              label: Text("Próxima"),
               onPressed: () async {
-                await snapshot.data!.setPage(pages! ~/ 2);
+                currentPage = currentPage! + 1;
+                await snapshot.data!.setPage(currentPage!);
               },
             );
           }
 
           return Container();
         },
-      ),
+      ),*/
     );
   }
 }

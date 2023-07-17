@@ -1,4 +1,6 @@
+import 'dart:async';
 import 'dart:io';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:hcslzapp/common/messages.dart';
@@ -13,6 +15,7 @@ import 'package:hcslzapp/pages/partnership/partnership.list.adm.page.dart';
 import 'package:hcslzapp/pages/password/change.password.page.dart';
 import 'package:hcslzapp/pages/payment/payment.list.page.dart';
 import 'package:hcslzapp/pages/privacy/privacy.page.dart';
+import 'package:path_provider/path_provider.dart';
 import '../../common/associated.profiles.dart';
 import 'package:hcslzapp/common/photo.image.provider.dart';
 import 'package:hcslzapp/components/transaction.auth.dialog.dart';
@@ -63,6 +66,7 @@ const String _labelBoutique = 'Nossa Loja';
 const String _pathBoutiqueImage = 'assets/imgs/boutique.png';
 const String _labelAboutHarleyClub = 'O Harley Club';
 const String _pathAboutHarleyClubImage = 'assets/imgs/logo.png';
+String remotePDFpath = "";
 
 const List<String> _listAdmScreens = [
   "Associados",
@@ -111,6 +115,11 @@ class _DashboardPageState extends State<DashboardPage> {
       loadAssociatedSingleton(value.first);
     });
     _controller.selectedProfile = ASSOCIATED;
+    createFileOfPdfUrl().then((f) {
+      setState(() {
+        remotePDFpath = f.path;
+      });
+    });
   }
 
   @override
@@ -363,10 +372,20 @@ class _DashboardPageState extends State<DashboardPage> {
               leading: Icon(Icons.privacy_tip),
               title: Text(_labelPrivacy),
               onTap: () async {
-                Navigator.push(
+
+                if (remotePDFpath.isNotEmpty) {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => PDFScreen(path: remotePDFpath),
+                    ),
+                  );
+                }
+
+   /*             Navigator.push(
                   context,
                   MaterialPageRoute(builder: (_) => PrivacyPage()),
-                );
+                );*/
               },
             ),
             ListTile(
@@ -696,4 +715,28 @@ class _DashboardPageState extends State<DashboardPage> {
           )
         ],
       );
+
+  Future<File> createFileOfPdfUrl() async {
+    Completer<File> completer = Completer();
+    print("Start download file from internet!");
+    try {
+      final url =
+          "https://firebasestorage.googleapis.com/v0/b/hcslzapp.appspot.com/o/docs%2FPOL%C3%8DTICA%20DE%20PRIVACIDADE.pdf?alt=media&token=7d977af4-9463-4053-a802-e6d1bb4265cb";
+      final filename = url.substring(url.lastIndexOf("/") + 1);
+      var request = await HttpClient().getUrl(Uri.parse(url));
+      var response = await request.close();
+      var bytes = await consolidateHttpClientResponseBytes(response);
+      var dir = await getApplicationDocumentsDirectory();
+      print("Download files");
+      print("${dir.path}/$filename");
+      File file = File("${dir.path}/$filename");
+
+      await file.writeAsBytes(bytes, flush: true);
+      completer.complete(file);
+    } catch (e) {
+      throw Exception('Error parsing asset file!');
+    }
+
+    return completer.future;
+  }
 }
