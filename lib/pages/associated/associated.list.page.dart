@@ -20,8 +20,7 @@ class AssociatedListPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) => Scaffold(
         appBar: MyAppBar(_title),
-        bottomNavigationBar:
-            _controller.isHidedButton ? null : MyBottomAppBar(),
+        bottomNavigationBar: MyBottomAppBar(),
         body: FutureBuilder<List<Associated>>(
           future: _controller.findAll(),
           builder: (context, snapshot) {
